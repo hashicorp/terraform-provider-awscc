@@ -1,29 +1,42 @@
 package main
 
 import (
+	"errors"
 	"flag"
+	"io"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
 
+	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	getter "github.com/hashicorp/go-getter"
 	"github.com/hashicorp/hcl/v2/hclsimple"
 )
 
 type Config struct {
-	Schemas []Schema `hcl:"schema,block"`
+	MetaSchema      MetaSchema       `hcl:"meta_schema,block"`
+	ResourceSchemas []ResourceSchema `hcl:"resource_schema,block"`
 }
 
-type Schema struct {
+type MetaSchema struct {
+	Destination string `hcl:"destination"`
+	Refresh     bool   `hcl:"refresh,optional"`
+	Source      string `hcl:"source"`
+}
+
+type ResourceSchema struct {
+	Refresh      bool   `hcl:"refresh,optional"`
 	ResourceType string `hcl:"resource_type"`
 	Source       string `hcl:"source"`
 }
 
 func main() {
 	var configFilename string
+	var destinationDirectory string
 
 	flag.StringVar(&configFilename, "config", "config.hcl", "configuration file name")
+	flag.StringVar(&destinationDirectory, "dest-dir", ".", "destination directory name")
 	flag.Parse()
 
 	var config Config
@@ -31,6 +44,12 @@ func main() {
 	err := hclsimple.DecodeFile(configFilename, nil, &config)
 	if err != nil {
 		log.Printf("error loading configuration: %s", err)
+		os.Exit(1)
+	}
+
+	baseDir, err := filepath.Abs(filepath.Dir(configFilename))
+	if err != nil {
+		log.Printf("error making absolute path: %s", err)
 		os.Exit(1)
 	}
 
@@ -42,16 +61,84 @@ func main() {
 
 	defer os.RemoveAll(tempDirectory)
 
-	for _, schema := range config.Schemas {
-		src := schema.Source
-		dst := filepath.Join(tempDirectory, schema.ResourceType+".clouformation-resource.json")
-		log.Printf("downloading %s to %s\n", src, dst)
+	metaSchemaFilename := filepath.Join(baseDir, config.MetaSchema.Destination)
+	metaSchemaFileExists := fileExists(metaSchemaFilename)
+	if !metaSchemaFileExists || config.MetaSchema.Refresh {
+		src := config.MetaSchema.Source
+		log.Printf("downloading meta-schema %s to %s", src, metaSchemaFilename)
+		if err := getter.GetFile(metaSchemaFilename, src); err != nil {
+			log.Printf("error downloading: %s", err)
+			os.Exit(1)
+		}
+	}
 
-		if err := getter.GetFile(dst, src); err != nil {
-			log.Printf("error downloading file: %s", err)
+	metaSchema, err := cfschema.NewMetaJsonSchemaPath(metaSchemaFilename)
+	if err != nil {
+		log.Printf("error loading meta-schema: %s", err)
+		os.Exit(1)
+	}
+
+	return
+
+	for _, schema := range config.ResourceSchemas {
+		src := schema.Source
+		tmpResourceSchema := filepath.Join(tempDirectory, schema.ResourceType+".cf-resource-schema.json")
+		log.Printf("downloading %s to %s\n", src, tmpResourceSchema)
+
+		if err := getter.GetFile(tmpResourceSchema, src); err != nil {
+			log.Printf("error downloading: %s", err)
 		}
 
 		// Validate
+		resourceSchema, err := cfschema.NewResourceJsonSchemaPath(tmpResourceSchema)
+		if err != nil {
+			log.Printf("error loading %s: %s", tmpResourceSchema, err)
+		}
+
+		if err := metaSchema.ValidateResourceJsonSchema(resourceSchema); err != nil {
+			log.Printf("error validating %s: %s", tmpResourceSchema, err)
+		}
+
+		dst := filepath.Join(destinationDirectory, schema.ResourceType+".cf-resource-schema.json")
+		log.Printf("copying to %s\n", dst)
+		if err := copyFile(dst, tmpResourceSchema); err != nil {
+			log.Printf("error copying: %s", err)
+		}
+	}
+}
+
+var errCopyFileWithDir = errors.New("dir argument to CopyFile")
+
+// copyFile copies the file with path src to dst. The new file must not exist.
+// It is created with the same permissions as src.
+func copyFile(dst, src string) error {
+	rf, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer rf.Close()
+	rstat, err := rf.Stat()
+	if err != nil {
+		return err
+	}
+	if rstat.IsDir() {
+		return errCopyFileWithDir
 	}
 
+	wf, err := os.OpenFile(dst, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, rstat.Mode())
+	if err != nil {
+		return err
+	}
+	if _, err := io.Copy(wf, rf); err != nil {
+		wf.Close()
+		return err
+	}
+	return wf.Close()
+}
+
+func fileExists(filename string) bool {
+	if _, err := os.Stat(filename); os.IsNotExist(err) {
+		return false
+	}
+	return true
 }
