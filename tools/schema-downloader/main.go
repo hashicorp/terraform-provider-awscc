@@ -26,17 +26,16 @@ type MetaSchema struct {
 }
 
 type ResourceSchema struct {
+	Destination  string `hcl:"destination"`
 	Refresh      bool   `hcl:"refresh,optional"`
-	ResourceType string `hcl:"resource_type"`
+	ResourceName string `hcl:"resource_name"`
 	Source       string `hcl:"source"`
 }
 
 func main() {
 	var configFilename string
-	var destinationDirectory string
 
 	flag.StringVar(&configFilename, "config", "config.hcl", "configuration file name")
-	flag.StringVar(&destinationDirectory, "dest-dir", ".", "destination directory name")
 	flag.Parse()
 
 	var config Config
@@ -47,11 +46,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	baseDir, err := filepath.Abs(filepath.Dir(configFilename))
-	if err != nil {
-		log.Printf("error making absolute path: %s", err)
-		os.Exit(1)
-	}
+	baseDir := filepath.Dir(configFilename)
 
 	tempDirectory, err := ioutil.TempDir("", "*")
 	if err != nil {
@@ -61,8 +56,13 @@ func main() {
 
 	defer os.RemoveAll(tempDirectory)
 
-	metaSchemaFilename := filepath.Join(baseDir, config.MetaSchema.Destination)
+	metaSchemaFilename, err := filepath.Abs(filepath.Join(baseDir, config.MetaSchema.Destination))
+	if err != nil {
+		log.Printf("error making absolute path: %s", err)
+		os.Exit(1)
+	}
 	metaSchemaFileExists := fileExists(metaSchemaFilename)
+
 	if !metaSchemaFileExists || config.MetaSchema.Refresh {
 		src := config.MetaSchema.Source
 		log.Printf("downloading meta-schema %s to %s", src, metaSchemaFilename)
@@ -78,31 +78,39 @@ func main() {
 		os.Exit(1)
 	}
 
-	return
-
 	for _, schema := range config.ResourceSchemas {
-		src := schema.Source
-		tmpResourceSchema := filepath.Join(tempDirectory, schema.ResourceType+".cf-resource-schema.json")
-		log.Printf("downloading %s to %s\n", src, tmpResourceSchema)
-
-		if err := getter.GetFile(tmpResourceSchema, src); err != nil {
-			log.Printf("error downloading: %s", err)
-		}
-
-		// Validate
-		resourceSchema, err := cfschema.NewResourceJsonSchemaPath(tmpResourceSchema)
+		resourceSchemaFilename, err := filepath.Abs(filepath.Join(baseDir, schema.Destination))
 		if err != nil {
-			log.Printf("error loading %s: %s", tmpResourceSchema, err)
+			log.Printf("error making absolute path: %s", err)
+			continue
 		}
+		resourceSchemaFileExists := fileExists(resourceSchemaFilename)
 
-		if err := metaSchema.ValidateResourceJsonSchema(resourceSchema); err != nil {
-			log.Printf("error validating %s: %s", tmpResourceSchema, err)
-		}
+		if !resourceSchemaFileExists || schema.Refresh {
+			src := schema.Source
+			dst := filepath.Join(tempDirectory, filepath.Base(resourceSchemaFilename))
 
-		dst := filepath.Join(destinationDirectory, schema.ResourceType+".cf-resource-schema.json")
-		log.Printf("copying to %s\n", dst)
-		if err := copyFile(dst, tmpResourceSchema); err != nil {
-			log.Printf("error copying: %s", err)
+			log.Printf("downloading resource schema %s to %s", src, dst)
+			if err := getter.GetFile(dst, src); err != nil {
+				log.Printf("error downloading: %s", err)
+				continue
+			}
+
+			resourceSchema, err := cfschema.NewResourceJsonSchemaPath(dst)
+			if err != nil {
+				log.Printf("error loading %s: %s", dst, err)
+				continue
+			}
+
+			if err := metaSchema.ValidateResourceJsonSchema(resourceSchema); err != nil {
+				log.Printf("error validating %s: %s", dst, err)
+				continue
+			}
+
+			if err := copyFile(resourceSchemaFilename, dst); err != nil {
+				log.Printf("error copying: %s", err)
+				continue
+			}
 		}
 	}
 }

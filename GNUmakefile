@@ -21,4 +21,4 @@ testacc:
 	TF_ACC=1 go test ./internal/provider -v -count $(TEST_COUNT) -parallel $(ACCTEST_PARALLELISM) $(TESTARGS) -timeout $(ACCTEST_TIMEOUT)
 
 download-schemas:
-	go run tools/schema-downloader/main.go -config internal/service/cloudformation/schemas-sync/all_schemas.hcl -dest-dir internal/service/cloudformation/schemas-sync
+	go run tools/schema-downloader/main.go -config internal/service/cloudformation/schemas-sync/all_schemas.hcl
