@@ -20,13 +20,13 @@ type Config struct {
 }
 
 type MetaSchema struct {
-	Destination string `hcl:"destination"`
-	Refresh     bool   `hcl:"refresh,optional"`
-	Source      Source `hcl:"source,block"`
+	Local   string `hcl:"local"`
+	Refresh bool   `hcl:"refresh,optional"`
+	Source  Source `hcl:"source,block"`
 }
 
 type ResourceSchema struct {
-	Destination  string `hcl:"destination"`
+	Local        string `hcl:"local"`
 	Refresh      bool   `hcl:"refresh,optional"`
 	ResourceName string `hcl:"resource_name,label"`
 	Source       Source `hcl:"source,block"`
@@ -60,7 +60,7 @@ func main() {
 
 	defer os.RemoveAll(tempDirectory)
 
-	metaSchemaFilename, err := filepath.Abs(filepath.Join(baseDir, config.MetaSchema.Destination))
+	metaSchemaFilename, err := filepath.Abs(filepath.Join(baseDir, config.MetaSchema.Local))
 	if err != nil {
 		log.Printf("error making absolute path: %s", err)
 		os.Exit(1)
@@ -83,7 +83,7 @@ func main() {
 	}
 
 	for _, schema := range config.ResourceSchemas {
-		resourceSchemaFilename, err := filepath.Abs(filepath.Join(baseDir, schema.Destination))
+		resourceSchemaFilename, err := filepath.Abs(filepath.Join(baseDir, schema.Local))
 		if err != nil {
 			log.Printf("error making absolute path: %s", err)
 			continue
