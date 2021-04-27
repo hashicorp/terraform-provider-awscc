@@ -28,7 +28,7 @@ type MetaSchema struct {
 type ResourceSchema struct {
 	Destination  string `hcl:"destination"`
 	Refresh      bool   `hcl:"refresh,optional"`
-	ResourceName string `hcl:"resource_name"`
+	ResourceName string `hcl:"resource_name,label"`
 	Source       string `hcl:"source"`
 }
 
