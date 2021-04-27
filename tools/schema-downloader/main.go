@@ -22,14 +22,18 @@ type Config struct {
 type MetaSchema struct {
 	Destination string `hcl:"destination"`
 	Refresh     bool   `hcl:"refresh,optional"`
-	Source      string `hcl:"source"`
+	Source      Source `hcl:"source,block"`
 }
 
 type ResourceSchema struct {
 	Destination  string `hcl:"destination"`
 	Refresh      bool   `hcl:"refresh,optional"`
 	ResourceName string `hcl:"resource_name,label"`
-	Source       string `hcl:"source"`
+	Source       Source `hcl:"source,block"`
+}
+
+type Source struct {
+	Url string `hcl:"url"`
 }
 
 func main() {
@@ -64,7 +68,7 @@ func main() {
 	metaSchemaFileExists := fileExists(metaSchemaFilename)
 
 	if !metaSchemaFileExists || config.MetaSchema.Refresh {
-		src := config.MetaSchema.Source
+		src := config.MetaSchema.Source.Url
 		log.Printf("downloading meta-schema %s to %s", src, metaSchemaFilename)
 		if err := getter.GetFile(metaSchemaFilename, src); err != nil {
 			log.Printf("error downloading: %s", err)
@@ -87,7 +91,7 @@ func main() {
 		resourceSchemaFileExists := fileExists(resourceSchemaFilename)
 
 		if !resourceSchemaFileExists || schema.Refresh {
-			src := schema.Source
+			src := schema.Source.Url
 			dst := filepath.Join(tempDirectory, filepath.Base(resourceSchemaFilename))
 
 			log.Printf("downloading resource schema %s to %s", src, dst)
