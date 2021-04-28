@@ -6,19 +6,19 @@ import (
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 )
 
-func RootPropertySchema_Test(t *testing.T) {
-	resourceSchema, err := cfschema.NewResourceJsonSchemaPath("aws-logs-loggroup.json")
+func TestRootPropertySchema(t *testing.T) {
+	resourceSchema, err := cfschema.NewResourceJsonSchemaPath("testdata/aws_logs_log_group.cf-resource-schema.json")
 	if err != nil {
-		t.Errorf("error loading test schema: %s", err)
+		t.Fatalf("error loading test schema: %s", err)
 	}
 
 	resource, err := resourceSchema.Resource()
 	if err != nil {
-		t.Errorf("error parsing test schema: %s", err)
+		t.Fatalf("error parsing test schema: %s", err)
 	}
 
 	if err := resource.Expand(); err != nil {
-		t.Errorf("error expanding JSON Pointer references: %s", err)
+		t.Fatalf("error expanding JSON Pointer references: %s", err)
 	}
 
 	for propertyName, property := range resource.Properties {
