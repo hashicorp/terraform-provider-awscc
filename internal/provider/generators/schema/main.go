@@ -7,12 +7,13 @@ import (
 	"flag"
 	"fmt"
 	"go/format"
-	"log"
 	"os"
 	"path/filepath"
 	"text/template"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
+	"github.com/mitchellh/cli"
+
 	//generator "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schema-generator"
 	"github.com/iancoleman/strcase"
 )
@@ -31,7 +32,6 @@ func usage() {
 }
 
 func main() {
-	log.SetFlags(0)
 	flag.Usage = usage
 	flag.Parse()
 
@@ -40,10 +40,52 @@ func main() {
 		os.Exit(2)
 	}
 
-	resource, err := NewResourcePath(*resourceType, *cfTypeSchemaFile)
+	filename := filepath.Join(*outputDirectory, *resourceType+"_schema_gen.go")
+
+	ui := &cli.BasicUi{
+		Reader:      os.Stdin,
+		Writer:      os.Stdout,
+		ErrorWriter: os.Stderr,
+	}
+
+	generator := newGenerator(ui, *resourceType, *cfTypeSchemaFile)
+
+	if err := generator.generate(filename); err != nil {
+		ui.Error(fmt.Sprintf("error generating Terraform resource schema: %s", err))
+		os.Exit(1)
+	}
+}
+
+type generator struct {
+	cfTypeSchemaFile string
+	tfResourceType   string
+	ui               cli.Ui
+}
+
+func newGenerator(ui cli.Ui, tfResourceType, cfTypeSchemaFile string) *generator {
+	return &generator{
+		cfTypeSchemaFile: cfTypeSchemaFile,
+		tfResourceType:   tfResourceType,
+		ui: &cli.BasicUi{
+			Reader:      os.Stdin,
+			Writer:      os.Stdout,
+			ErrorWriter: os.Stderr,
+		},
+	}
+}
+
+func (g *generator) infof(format string, a ...interface{}) {
+	g.ui.Info(fmt.Sprintf(format, a...))
+}
+
+// generate generates the resource's schema definition in the specified file.
+func (g *generator) generate(filename string) error {
+	g.infof("generating Terraform schema for %q from %q into %q", g.tfResourceType, g.cfTypeSchemaFile, filename)
+
+	resource, err := NewResourcePath(g.tfResourceType, g.cfTypeSchemaFile)
 
 	if err != nil {
-		log.Fatalf("error reading CloudFormation resource schema for %s: %s", *resourceType, err)
+		return fmt.Errorf("error reading CloudFormation resource schema for %s: %w", *resourceType, err)
 	}
 
 	templateData := TemplateData{
@@ -53,28 +95,26 @@ func main() {
 	tmpl, err := template.New("function").Parse(templateBody)
 
 	if err != nil {
-		log.Fatalf("error parsing function template: %s", err)
+		return fmt.Errorf("error parsing function template: %w", err)
 	}
 
 	var buffer bytes.Buffer
 	err = tmpl.Execute(&buffer, templateData)
 
 	if err != nil {
-		log.Fatalf("error executing template: %s", err)
+		return fmt.Errorf("error executing template: %w", err)
 	}
 
 	generatedFileContents, err := format.Source(buffer.Bytes())
 
 	if err != nil {
-		log.Fatalf("error formatting generated file: %s", err)
+		return fmt.Errorf("error formatting generated file: %w", err)
 	}
-
-	filename := filepath.Join(*outputDirectory, resource.TfType+"_schema_gen.go")
 
 	f, err := os.Create(filename)
 
 	if err != nil {
-		log.Fatalf("error creating file (%s): %s", filename, err)
+		return fmt.Errorf("error creating file (%s): %w", filename, err)
 	}
 
 	defer f.Close()
@@ -82,12 +122,14 @@ func main() {
 	_, err = f.Write(generatedFileContents)
 
 	if err != nil {
-		log.Fatalf("error writing to file (%s): %s", filename, err)
+		return fmt.Errorf("error writing to file (%s): %w", filename, err)
 	}
 
 	// for propertyName := range resource.CfResource.Properties {
 	// 	log.Printf("%s\n\n%s\n\n", propertyName, generator.RootPropertySchema(resource.CfResource, propertyName))
 	// }
+
+	return nil
 }
 
 var templateBody = `
