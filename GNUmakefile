@@ -11,7 +11,7 @@ build:
 	go install
 
 gen:
-	rm -f internal/provider*_gen.go
+	rm -f internal/provider/*_gen.go
 	go generate ./...
 
 test:
