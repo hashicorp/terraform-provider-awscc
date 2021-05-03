@@ -48,13 +48,50 @@ func TestToSnake(t *testing.T) {
 		{
 			TestName: "trailing digits",
 			Input:    "abCd012",
-			Expected: "ab_cd",
+			Expected: "ab_cd_012",
 		},
 	}
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
 			got := strcase.ToSnake(testCase.Input)
+
+			if testCase.Expected != got {
+				t.Errorf("got %q, expected %q", got, testCase.Expected)
+			}
+		})
+	}
+}
+
+func TestToCamel(t *testing.T) {
+	testCases := []struct {
+		TestName string
+		Input    string
+		Expected string
+	}{
+		{
+			TestName: "empty string",
+		},
+		{
+			TestName: "no caps",
+			Input:    "abc",
+			Expected: "Abc",
+		},
+		{
+			TestName: "all caps",
+			Input:    "ABC",
+			Expected: "ABC",
+		},
+		{
+			TestName: "with underscores",
+			Input:    "aws_vpc",
+			Expected: "AwsVpc",
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.TestName, func(t *testing.T) {
+			got := strcase.ToCamel(testCase.Input)
 
 			if testCase.Expected != got {
 				t.Errorf("got %q, expected %q", got, testCase.Expected)
