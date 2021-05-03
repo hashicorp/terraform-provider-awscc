@@ -2,10 +2,10 @@ package generator
 
 import (
 	"fmt"
-	"regexp"
 	"strings"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
+	"github.com/iancoleman/strcase"
 )
 
 func RootPropertySchema(r *cfschema.Resource, name string) string {
@@ -36,7 +36,7 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 	required := r.IsRequired(name)
 
 	if name != "" {
-		fmt.Fprintf(&b, "\n\n%s\"%s\": {", indentation, ToSnakeCase(name))
+		fmt.Fprintf(&b, "\n\n%s\"%s\": {", indentation, strcase.ToSnake(name))
 	}
 
 	switch property.Type.String() {
@@ -175,14 +175,4 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 	fmt.Fprintf(&b, "\n%s},", indentation)
 
 	return b.String()
-}
-
-// ToSnakeCase converts a string to snake case.
-//
-// For example, AWS schema property names are in PascalCase,
-// while Terraform schema attribute names are in snake_case.
-func ToSnakeCase(str string) string {
-	result := regexp.MustCompile("(.)([A-Z][a-z]+)").ReplaceAllString(str, "${1}_${2}")
-	result = regexp.MustCompile("([a-z0-9])([A-Z])").ReplaceAllString(result, "${1}_${2}")
-	return strings.ToLower(result)
 }

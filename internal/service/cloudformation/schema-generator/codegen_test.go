@@ -2,9 +2,11 @@ package generator
 
 import (
 	"testing"
+
+	"github.com/iancoleman/strcase"
 )
 
-func TestToSnakeCase(t *testing.T) {
+func TestToSnake(t *testing.T) {
 	testCases := []struct {
 		TestName string
 		Input    string
@@ -15,34 +17,44 @@ func TestToSnakeCase(t *testing.T) {
 		},
 		{
 			TestName: "no caps",
-			Input:    "abc0123",
-			Expected: "abc0123",
+			Input:    "abc",
+			Expected: "abc",
 		},
 		{
 			TestName: "first char capitalized",
-			Input:    "Abc0123",
-			Expected: "abc0123",
+			Input:    "Abc",
+			Expected: "abc",
 		},
 		{
 			TestName: "last char capitalized",
-			Input:    "abc0123Z",
-			Expected: "abc0123z",
+			Input:    "abcZ",
+			Expected: "abc_z",
 		},
 		{
 			TestName: "all caps",
 			Input:    "ABCZ",
-			Expected: "a_b_c_z",
+			Expected: "abcz",
 		},
 		{
 			TestName: "mixture",
 			Input:    "abcDeFGh",
 			Expected: "abc_de_f_gh",
 		},
+		{
+			TestName: "leading digits",
+			Input:    "012abCd",
+			Expected: "012_ab_cd",
+		},
+		{
+			TestName: "trailing digits",
+			Input:    "abCd012",
+			Expected: "ab_cd",
+		},
 	}
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			got := ToSnakeCase(testCase.Input)
+			got := strcase.ToSnake(testCase.Input)
 
 			if testCase.Expected != got {
 				t.Errorf("got %q, expected %q", got, testCase.Expected)
