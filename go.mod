@@ -7,4 +7,5 @@ require (
 	github.com/hashicorp/hcl/v2 v2.10.0 // indirect
 	github.com/hashicorp/terraform-plugin-docs v0.3.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.5.0
+	github.com/iancoleman/strcase v0.1.3 // indirect
 )
