@@ -7,21 +7,21 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"regexp"
+	"path/filepath"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/provider/generators"
+	generator "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/clouformation/schema-generator"
 )
 
 var (
-	resourcePattern = flag.String("resource", `^.*$`, "regular expression matching the resources to generate")
-	configFilename  = flag.String("config", "config.hcl", "name of the resource schema configuration file")
-	outputDirectory = flag.String("output", ".", "output directory")
+	resourceType     = flag.String("resource", "", "Terraform resource type; required")
+	cfTypeSchemaFile = flag.String("cfschema", "", "CloudFormation resource type schema file; required")
+	outputDirectory  = flag.String("output", ".", "output directory")
 )
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "Usage:\n")
-	fmt.Fprintf(os.Stderr, "\tmain.go [flags]\n\n")
+	fmt.Fprintf(os.Stderr, "\tmain.go [flags] -resource <resource-type> -cfschema <CF-type-schema-file>\n\n")
 	fmt.Fprintf(os.Stderr, "Flags:\n")
 	flag.PrintDefaults()
 }
@@ -31,53 +31,53 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 
-	resourceRegexp, err := regexp.Compile(*resourcePattern)
-
-	if err != nil {
-		log.Fatalf("error compiling resource matching regular expression: %s", err)
+	if *resourceType == "" || *cfTypeSchemaFile == "" {
+		flag.Usage()
+		os.Exit(2)
 	}
 
-	config, err := generators.NewConfigPath(*configFilename)
+	resource, err := NewResourcePath(*resourceType, *cfTypeSchemaFile)
 
 	if err != nil {
-		log.Fatalf("error reading configuration file: %s", err)
+		log.Fatalf("error reading CloudFormation resource schema for %s: %s", *resourceType, err)
 	}
 
-	for _, resourceSchema := range config.ResourceSchemas {
-		resourceName := resourceSchema.ResourceName
-		if !resourceRegexp.MatchString(resourceName) {
-			continue
-		}
+	filename := filepath.Join(*outputDirectory, resource.TfType+"_schema_gen.go")
 
-		_, err := NewResourcePath(resourceSchema.Local)
+	f, err := os.Create(filename)
 
-		if err != nil {
-			log.Fatalf("error reading resource schema (%s): %s", resourceName, err)
-		}
+	if err != nil {
+		log.Fatalf("error creating file (%s): %s", filename, err)
+	}
 
+	defer f.Close()
+
+	for propertyName := range resource.CfResource.Properties {
+		log.Printf("%s\n\n%s\n\n", propertyName, generator.RootPropertySchema(resource.CfResource, propertyName))
 	}
 }
 
 type Resource struct {
-	inner *cfschema.Resource
+	CfResource *cfschema.Resource
+	TfType     string
 }
 
-func NewResourcePath(path string) (*Resource, error) {
-	resourceSchema, err := cfschema.NewResourceJsonSchemaPath(path)
+func NewResourcePath(resourceType, cfTypeSchemaFile string) (*Resource, error) {
+	resourceSchema, err := cfschema.NewResourceJsonSchemaPath(cfTypeSchemaFile)
 
 	if err != nil {
-		return nil, fmt.Errorf("error reading CloudFormation Resource Schema: %w", err)
+		return nil, fmt.Errorf("error reading CloudFormation Resource Type Schema: %w", err)
 	}
 
 	resource, err := resourceSchema.Resource()
 
 	if err != nil {
-		return nil, fmt.Errorf("error parsing CloudFormation Resource Schema: %w", err)
+		return nil, fmt.Errorf("error parsing CloudFormation Resource Type Schema: %w", err)
 	}
 
 	if err := resource.Expand(); err != nil {
 		return nil, fmt.Errorf("error expanding JSON Pointer references: %w", err)
 	}
 
-	return &Resource{inner: resource}, nil
+	return &Resource{CfResource: resource, TfType: resourceType}, nil
 }
