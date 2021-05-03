@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
-	generator "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/clouformation/schema-generator"
+	generator "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schema-generator"
 )
 
 var (
