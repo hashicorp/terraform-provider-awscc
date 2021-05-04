@@ -93,10 +93,13 @@ func (g *Generator) Generate(packageName, filename string) error {
 		return fmt.Errorf("error reading CloudFormation resource schema for %s: %w", g.tfResourceType, err)
 	}
 
+	var codeFeatures codegen.Features
 	rootPropertySchemas := []string{}
 
 	for propertyName := range resource.CfResource.Properties {
-		rootPropertySchemas = append(rootPropertySchemas, codegen.RootPropertySchema(resource.CfResource, propertyName))
+		rootPropertySchema, features := codegen.RootPropertySchema(resource.CfResource, propertyName)
+		rootPropertySchemas = append(rootPropertySchemas, rootPropertySchema)
+		codeFeatures |= features
 	}
 
 	templateData := TemplateData{
@@ -104,6 +107,13 @@ func (g *Generator) Generate(packageName, filename string) error {
 		ResourceTypeName:    g.tfResourceType,
 		RootPropertySchemas: rootPropertySchemas,
 		VariableName:        resource.SourceCodeNamePrefix + "Schema",
+	}
+
+	if codeFeatures&codegen.UsesRegexp > 0 {
+		templateData.ImportRegexp = true
+	}
+	if codeFeatures&codegen.UsesValidation > 0 {
+		templateData.ImportValidation = true
 	}
 
 	tmpl, err := template.New("function").Parse(templateBody)
@@ -148,10 +158,14 @@ var templateBody = `
 package {{ .PackageName }}
 
 import (
+{{- if .ImportRegexp }}
 	"regexp"
+{{- end }}
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+{{- if .ImportRegexp }}
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+{{- end }}
 )
 
 var (
@@ -165,6 +179,8 @@ var (
 `
 
 type TemplateData struct {
+	ImportRegexp        bool
+	ImportValidation    bool
 	PackageName         string
 	ResourceTypeName    string
 	RootPropertySchemas []string

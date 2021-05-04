@@ -8,23 +8,33 @@ import (
 	"github.com/iancoleman/strcase"
 )
 
-func RootPropertySchema(r *cfschema.Resource, name string) string {
+// Features of the generated code.
+type Features int
+
+const (
+	UsesRegexp Features = 1 << iota
+	UsesValidation
+)
+
+func RootPropertySchema(r *cfschema.Resource, name string) (string, Features) {
 	if r == nil {
-		return ""
+		return "", 0
 	}
 
 	property, ok := r.Properties[name]
 
 	if !ok || property == nil {
-		return ""
+		return "", 0
 	}
 
 	return PropertySchema(r, []string{}, name, property)
 }
 
-func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, property *cfschema.Property) string {
+func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, property *cfschema.Property) (string, Features) {
+	var features Features
+
 	if r == nil {
-		return ""
+		return "", features
 	}
 
 	var b strings.Builder
@@ -65,7 +75,9 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 				fmt.Fprintf(&b, "\n%sElem: &schema.Schema{", indentation)
 			}
 
-			fmt.Fprint(&b, PropertySchema(r, path, "", property.Items))
+			ps, f := PropertySchema(r, path, "", property.Items)
+			fmt.Fprint(&b, ps)
+			features |= f
 
 			if property.Items.Type.String() == cfschema.PropertyTypeObject {
 				fmt.Fprintf(&b, "\n%s\t},", indentation)
@@ -83,6 +95,7 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 		}
 
 		fmt.Fprintf(&b, "\n%sValidateFunc: validation.All(", indentation)
+		features |= UsesValidation
 
 		if len(property.Enum) > 0 {
 			fmt.Fprintf(&b, "\n%s\tvalidation.IntInSlice([]int{", indentation)
@@ -114,7 +127,9 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 		fmt.Fprintf(&b, "\n%sElem: &schema.Resource{", indentation)
 		fmt.Fprintf(&b, "\n%s\tSchema: map[string]schema.Schema{", indentation)
 		for objPropertyName, objProperty := range property.Properties {
-			fmt.Fprint(&b, PropertySchema(r, path, objPropertyName, objProperty))
+			ps, f := PropertySchema(r, path, objPropertyName, objProperty)
+			fmt.Fprint(&b, ps)
+			features |= f
 		}
 		fmt.Fprintf(&b, "\n%s\t},", indentation)
 		fmt.Fprintf(&b, "\n%s},", indentation)
@@ -126,6 +141,7 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 		}
 
 		fmt.Fprintf(&b, "\n%sValidateFunc: validation.All(", indentation)
+		features |= UsesValidation
 
 		if len(property.Enum) > 0 {
 			fmt.Fprintf(&b, "\n%s\tvalidation.StringInSlice([]string{", indentation)
@@ -143,6 +159,7 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 
 		if property.Pattern != nil {
 			fmt.Fprintf(&b, "\n%s\tvalidation.StringMatch(regexp.MustCompile(`%s`), \"\"),", indentation, *property.Pattern)
+			features |= UsesRegexp
 		}
 
 		fmt.Fprintf(&b, "\n%s),", indentation)
@@ -151,7 +168,7 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 	// Array items
 	if name == "" {
 		fmt.Fprintf(&b, "\n%s},", indentation)
-		return b.String()
+		return b.String(), features
 	}
 
 	if required {
@@ -174,5 +191,5 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 
 	fmt.Fprintf(&b, "\n%s},", indentation)
 
-	return b.String()
+	return b.String(), features
 }
