@@ -11,7 +11,7 @@ import (
 	"text/template"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
-	codegen "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schema-generator"
+	schemagen "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schema-generator"
 	"github.com/iancoleman/strcase"
 	"github.com/mitchellh/cli"
 )
@@ -93,11 +93,11 @@ func (g *Generator) Generate(packageName, filename string) error {
 		return fmt.Errorf("error reading CloudFormation resource schema for %s: %w", g.tfResourceType, err)
 	}
 
-	var codeFeatures codegen.Features
+	var codeFeatures schemagen.Features
 	rootPropertySchemas := []string{}
 
 	for propertyName := range resource.CfResource.Properties {
-		rootPropertySchema, features := codegen.RootPropertySchema(resource.CfResource, propertyName)
+		rootPropertySchema, features := schemagen.RootPropertySchema(resource.CfResource, propertyName)
 		rootPropertySchemas = append(rootPropertySchemas, rootPropertySchema)
 		codeFeatures |= features
 	}
@@ -109,10 +109,10 @@ func (g *Generator) Generate(packageName, filename string) error {
 		VariableName:        resource.SourceCodeNamePrefix + "Schema",
 	}
 
-	if codeFeatures&codegen.UsesRegexp > 0 {
+	if codeFeatures&schemagen.UsesRegexp > 0 {
 		templateData.ImportRegexp = true
 	}
-	if codeFeatures&codegen.UsesValidation > 0 {
+	if codeFeatures&schemagen.UsesValidation > 0 {
 		templateData.ImportValidation = true
 	}
 
