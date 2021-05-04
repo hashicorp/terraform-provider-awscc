@@ -6,4 +6,5 @@ require (
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.1.0 // indirect
 	github.com/hashicorp/terraform-plugin-docs v0.4.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.6.1
+	github.com/iancoleman/strcase v0.1.3 // indirect
 )
