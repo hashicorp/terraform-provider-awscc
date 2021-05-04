@@ -41,12 +41,12 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 
 	switch property.Type.String() {
 	default:
-		fmt.Fprintf(&b, "\n%sType: UNKNOWN,", indentation)
+		fmt.Fprintf(&b, "\n%sType: Unknown,", indentation)
 	case cfschema.PropertyTypeArray:
 		if property.InsertionOrder != nil && *property.InsertionOrder {
-			fmt.Fprintf(&b, "\n%sType: TypeList,", indentation)
+			fmt.Fprintf(&b, "\n%sType: schema.TypeList,", indentation)
 		} else {
-			fmt.Fprintf(&b, "\n%sType: TypeSet,", indentation)
+			fmt.Fprintf(&b, "\n%sType: schemaTypeSet,", indentation)
 		}
 
 		if property.MaxItems != nil {
@@ -65,7 +65,7 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 				fmt.Fprintf(&b, "\n%sElem: &schema.Schema{", indentation)
 			}
 
-			fmt.Fprintf(&b, PropertySchema(r, path, "", property.Items))
+			fmt.Fprint(&b, PropertySchema(r, path, "", property.Items))
 
 			if property.Items.Type.String() == cfschema.PropertyTypeObject {
 				fmt.Fprintf(&b, "\n%s\t},", indentation)
@@ -74,9 +74,9 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 			fmt.Fprintf(&b, "\n%s},", indentation)
 		}
 	case cfschema.PropertyTypeBoolean:
-		fmt.Fprintf(&b, "\n%sType: TypeBool,", indentation)
+		fmt.Fprintf(&b, "\n%sType: schema.TypeBool,", indentation)
 	case cfschema.PropertyTypeInteger:
-		fmt.Fprintf(&b, "\n%sType: TypeInt,", indentation)
+		fmt.Fprintf(&b, "\n%sType: schema.TypeInt,", indentation)
 
 		if len(property.Enum) == 0 {
 			break
@@ -87,11 +87,11 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 		if len(property.Enum) > 0 {
 			fmt.Fprintf(&b, "\n%s\tvalidation.IntInSlice([]int{", indentation)
 			for _, enumItem := range property.Enum {
-				switch enumItem.(type) {
+				switch v := enumItem.(type) {
 				case float64:
-					fmt.Fprintf(&b, "\n%s\t\t%d,", indentation, int(enumItem.(float64)))
+					fmt.Fprintf(&b, "\n%s\t\t%d,", indentation, int(v))
 				case int64:
-					fmt.Fprintf(&b, "\n%s\t\t%d,", indentation, enumItem)
+					fmt.Fprintf(&b, "\n%s\t\t%d,", indentation, v)
 				}
 			}
 
@@ -100,7 +100,7 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 
 		fmt.Fprintf(&b, "\n%s),", indentation)
 	case cfschema.PropertyTypeNumber:
-		fmt.Fprintf(&b, "\n%sType: TypeFloat,", indentation)
+		fmt.Fprintf(&b, "\n%sType: schema.TypeFloat,", indentation)
 	case cfschema.PropertyTypeObject:
 		// If there are no underlying Properties, the schema is not defined.
 		// CloudFormation documentation denotes these as Json or Object.
@@ -109,17 +109,17 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 			break
 		}
 
-		fmt.Fprintf(&b, "\n%sType: TypeList,", indentation)
+		fmt.Fprintf(&b, "\n%sType: schema.TypeList,", indentation)
 		fmt.Fprintf(&b, "\n%sMaxItems: 1,", indentation)
 		fmt.Fprintf(&b, "\n%sElem: &schema.Resource{", indentation)
 		fmt.Fprintf(&b, "\n%s\tSchema: map[string]schema.Schema{", indentation)
 		for objPropertyName, objProperty := range property.Properties {
-			fmt.Fprintf(&b, PropertySchema(r, path, objPropertyName, objProperty))
+			fmt.Fprint(&b, PropertySchema(r, path, objPropertyName, objProperty))
 		}
 		fmt.Fprintf(&b, "\n%s\t},", indentation)
 		fmt.Fprintf(&b, "\n%s},", indentation)
 	case cfschema.PropertyTypeString:
-		fmt.Fprintf(&b, "\n%sType: TypeString,", indentation)
+		fmt.Fprintf(&b, "\n%sType: schema.TypeString,", indentation)
 
 		if len(property.Enum) == 0 && property.MaxLength == nil && property.MinLength == nil && property.Pattern == nil {
 			break
