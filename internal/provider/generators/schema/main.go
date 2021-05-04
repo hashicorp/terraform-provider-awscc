@@ -148,12 +148,14 @@ var templateBody = `
 package {{ .PackageName }}
 
 import (
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
-// {{ .VariableName }} is the Terraform {{ .ResourceTypeName }} resource's schema.
 var (
+	// {{ .VariableName }} is the Terraform {{ .ResourceTypeName }} resource's schema.
 	{{ .VariableName }} = map[string]*schema.Schema {
 {{- range .RootPropertySchemas }}
 		{{ . }}

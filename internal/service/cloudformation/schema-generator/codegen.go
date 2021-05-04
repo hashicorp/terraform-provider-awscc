@@ -142,7 +142,7 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 		}
 
 		if property.Pattern != nil {
-			fmt.Fprintf(&b, "\n%s\tvalidation.StringMatch(`%s`, \"\"),", indentation, *property.Pattern)
+			fmt.Fprintf(&b, "\n%s\tvalidation.StringMatch(regexp.MustCompile(`%s`), \"\"),", indentation, *property.Pattern)
 		}
 
 		fmt.Fprintf(&b, "\n%s),", indentation)
