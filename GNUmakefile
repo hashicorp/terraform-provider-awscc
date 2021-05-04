@@ -5,10 +5,14 @@ ACCTEST_PARALLELISM?=20
 
 default: build
 
-.PHONY: build test testacc
+.PHONY: build gen test testacc
 
 build:
 	go install
+
+gen:
+	rm -f internal/provider/*_gen.go
+	go generate ./...
 
 test:
 	go test $(TEST) $(TESTARGS) -timeout=5m -parallel=4
