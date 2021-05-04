@@ -11,10 +11,9 @@ import (
 	"text/template"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
-	"github.com/mitchellh/cli"
-
-	//generator "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schema-generator"
+	codegen "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schema-generator"
 	"github.com/iancoleman/strcase"
+	"github.com/mitchellh/cli"
 )
 
 var (
@@ -80,13 +79,13 @@ func NewGenerator(ui cli.Ui, tfResourceType, cfTypeSchemaFile string) *Generator
 	}
 }
 
-func (g *Generator) infof(format string, a ...interface{}) {
+func (g *Generator) Infof(format string, a ...interface{}) {
 	g.ui.Info(fmt.Sprintf(format, a...))
 }
 
 // generate generates the resource's schema definition in the specified file.
 func (g *Generator) Generate(packageName, filename string) error {
-	g.infof("generating Terraform schema for %q from %q into %q", g.tfResourceType, g.cfTypeSchemaFile, filename)
+	g.Infof("generating Terraform schema for %q from %q into %q", g.tfResourceType, g.cfTypeSchemaFile, filename)
 
 	resource, err := NewResourcePath(g.tfResourceType, g.cfTypeSchemaFile)
 
@@ -94,10 +93,17 @@ func (g *Generator) Generate(packageName, filename string) error {
 		return fmt.Errorf("error reading CloudFormation resource schema for %s: %w", g.tfResourceType, err)
 	}
 
+	rootPropertySchemas := []string{}
+
+	for propertyName := range resource.CfResource.Properties {
+		rootPropertySchemas = append(rootPropertySchemas, codegen.RootPropertySchema(resource.CfResource, propertyName))
+	}
+
 	templateData := TemplateData{
-		FunctionName:     resource.FunctionNamePrefix + "Schema",
-		PackageName:      packageName,
-		ResourceTypeName: g.tfResourceType,
+		PackageName:         packageName,
+		ResourceTypeName:    g.tfResourceType,
+		RootPropertySchemas: rootPropertySchemas,
+		VariableName:        resource.SourceCodeNamePrefix + "Schema",
 	}
 
 	tmpl, err := template.New("function").Parse(templateBody)
@@ -133,10 +139,6 @@ func (g *Generator) Generate(packageName, filename string) error {
 		return fmt.Errorf("error writing to file (%s): %w", filename, err)
 	}
 
-	// for propertyName := range resource.CfResource.Properties {
-	// 	log.Printf("%s\n\n%s\n\n", propertyName, generator.RootPropertySchema(resource.CfResource, propertyName))
-	// }
-
 	return nil
 }
 
@@ -147,26 +149,30 @@ package {{ .PackageName }}
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
-// {{ .FunctionName }} returns the Terraform {{ .ResourceTypeName }} resource's schema.
-func {{ .FunctionName }}() map[string]*schema.Schema {
-	schema := map[string]*schema.Schema{}
-
-	return schema
-}
+// {{ .VariableName }} is the Terraform {{ .ResourceTypeName }} resource's schema.
+var (
+	{{ .VariableName }} = map[string]*schema.Schema {
+{{- range .RootPropertySchemas }}
+		{{ . }}
+{{- end }}
+	}
+)
 `
 
 type TemplateData struct {
-	FunctionName     string
-	PackageName      string
-	ResourceTypeName string
+	PackageName         string
+	ResourceTypeName    string
+	RootPropertySchemas []string
+	VariableName        string
 }
 
 type Resource struct {
-	CfResource         *cfschema.Resource
-	FunctionNamePrefix string
-	TfType             string
+	CfResource           *cfschema.Resource
+	SourceCodeNamePrefix string
+	TfType               string
 }
 
 func NewResourcePath(resourceType, cfTypeSchemaFile string) (*Resource, error) {
@@ -187,8 +193,8 @@ func NewResourcePath(resourceType, cfTypeSchemaFile string) (*Resource, error) {
 	}
 
 	return &Resource{
-		CfResource:         resource,
-		FunctionNamePrefix: "resource" + strcase.ToCamel(resourceType),
-		TfType:             resourceType,
+		CfResource:           resource,
+		SourceCodeNamePrefix: "resource" + strcase.ToCamel(resourceType),
+		TfType:               resourceType,
 	}, nil
 }
