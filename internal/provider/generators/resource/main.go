@@ -151,8 +151,9 @@ func init() {
 
 // {{ .FunctionName }} returns the Terraform {{ .TerraformTypeName }} resource.
 func {{ .FunctionName }}() *schema.Resource {
-	gr := &GeneratedResource{
+	gr := &GenericResource{
 		CloudFormationTypeName: "{{ .CloudFormationTypeName }}",
+		//TerraformSchema:        {{ .NamePrefix }}Schema,
 		TerraformTypeName:      "{{ .TerraformTypeName }}",
 	}
 
@@ -162,7 +163,7 @@ func {{ .FunctionName }}() *schema.Resource {
 		UpdateContext: gr.Update,
 		DeleteContext: gr.Delete,
 
-		// Schema: {{ .NamePrefix }}Schema,
+		Schema: gr.TerraformSchema,
 	}
 }
 `
