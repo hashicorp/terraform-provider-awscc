@@ -141,12 +141,38 @@ var templateBody = `
 package {{ .PackageName }}
 
 import (
+	"context"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 // {{ .FunctionName }} returns the Terraform {{ .ResourceTypeName }} resource.
 func {{ .FunctionName }}() *schema.Resource {
-	return &schema.Resource{}
+	return &schema.Resource{
+		CreateContext: {{.NamePrefix}}Create,
+		ReadContext:   {{.NamePrefix}}Read,
+		UpdateContext: {{.NamePrefix}}Update,
+		DeleteContext: {{.NamePrefix}}Delete,
+
+		// Schema: {{.NamePrefix}}Schema,
+	}
+}
+
+func {{.NamePrefix}}Create(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	return nil
+}
+
+func {{.NamePrefix}}Read(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	return nil
+}
+
+func {{.NamePrefix}}Update(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	return nil
+}
+
+func {{.NamePrefix}}Delete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	return nil
 }
 `
 
