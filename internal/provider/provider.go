@@ -2,6 +2,7 @@ package provider
 
 import (
 	"context"
+	"sync"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -26,8 +27,7 @@ func init() {
 func New(version string) func() *schema.Provider {
 	return func() *schema.Provider {
 		p := &schema.Provider{
-			DataSourcesMap: map[string]*schema.Resource{},
-			ResourcesMap:   map[string]*schema.Resource{},
+			ResourcesMap: resources,
 		}
 
 		p.ConfigureContextFunc = configure(version, p)
@@ -50,4 +50,17 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 
 		return &apiClient{}, nil
 	}
+}
+
+var resources map[string]*schema.Resource
+var resourcesMu sync.Mutex
+
+func registerResource(name string, r *schema.Resource) {
+	resourcesMu.Lock()
+	defer resourcesMu.Unlock()
+
+	if resources == nil {
+		resources = map[string]*schema.Resource{}
+	}
+	resources[name] = r
 }

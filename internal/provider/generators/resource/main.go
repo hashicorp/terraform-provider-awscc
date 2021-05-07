@@ -147,6 +147,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
+func init() {
+	registerResource("{{ .ResourceTypeName }}", {{ .FunctionName }}())
+}
+
 // {{ .FunctionName }} returns the Terraform {{ .ResourceTypeName }} resource.
 func {{ .FunctionName }}() *schema.Resource {
 	return &schema.Resource{
