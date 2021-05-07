@@ -93,10 +93,11 @@ func (g *Generator) Generate(packageName, filename string) error {
 	}
 
 	templateData := TemplateData{
-		FunctionName:     resource.SourceCodeNamePrefix,
-		NamePrefix:       resource.SourceCodeNamePrefix,
-		PackageName:      packageName,
-		ResourceTypeName: g.tfResourceType,
+		CloudFormationTypeName: *resource.CfResource.TypeName,
+		FunctionName:           resource.SourceCodeNamePrefix,
+		NamePrefix:             resource.SourceCodeNamePrefix,
+		PackageName:            packageName,
+		TerraformTypeName:      resource.TfType,
 	}
 
 	tmpl, err := template.New("function").Parse(templateBody)
@@ -141,50 +142,37 @@ var templateBody = `
 package {{ .PackageName }}
 
 import (
-	"context"
-
-	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func init() {
-	registerResource("{{ .ResourceTypeName }}", {{ .FunctionName }}())
+	registerResource("{{ .TerraformTypeName }}", {{ .FunctionName }}())
 }
 
-// {{ .FunctionName }} returns the Terraform {{ .ResourceTypeName }} resource.
+// {{ .FunctionName }} returns the Terraform {{ .TerraformTypeName }} resource.
 func {{ .FunctionName }}() *schema.Resource {
-	return &schema.Resource{
-		CreateContext: {{.NamePrefix}}Create,
-		ReadContext:   {{.NamePrefix}}Read,
-		UpdateContext: {{.NamePrefix}}Update,
-		DeleteContext: {{.NamePrefix}}Delete,
-
-		// Schema: {{.NamePrefix}}Schema,
+	gr := &GeneratedResource{
+		CloudFormationTypeName: "{{ .CloudFormationTypeName }}",
+		TerraformTypeName:      "{{ .TerraformTypeName }}",
 	}
-}
 
-func {{.NamePrefix}}Create(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	return nil
-}
+	return &schema.Resource{
+		CreateContext: gr.Create,
+		ReadContext:   gr.Read,
+		UpdateContext: gr.Update,
+		DeleteContext: gr.Delete,
 
-func {{.NamePrefix}}Read(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	return nil
-}
-
-func {{.NamePrefix}}Update(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	return nil
-}
-
-func {{.NamePrefix}}Delete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	return nil
+		// Schema: {{ .NamePrefix }}Schema,
+	}
 }
 `
 
 type TemplateData struct {
-	FunctionName     string
-	NamePrefix       string
-	PackageName      string
-	ResourceTypeName string
+	CloudFormationTypeName string
+	FunctionName           string
+	NamePrefix             string
+	PackageName            string
+	TerraformTypeName      string
 }
 
 type Resource struct {
