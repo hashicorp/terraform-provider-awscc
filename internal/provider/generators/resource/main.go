@@ -11,6 +11,7 @@ import (
 	"text/template"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
+	schemagen "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schema-generator"
 	"github.com/iancoleman/strcase"
 	"github.com/mitchellh/cli"
 )
@@ -84,7 +85,7 @@ func (g *Generator) Infof(format string, a ...interface{}) {
 
 // Generate generates the resource's definition in the specified file.
 func (g *Generator) Generate(packageName, filename string) error {
-	g.Infof("generating Terraform schema for %q from %q into %q", g.tfResourceType, g.cfTypeSchemaFile, filename)
+	g.Infof("generating Terraform resource for %q from %q into %q", g.tfResourceType, g.cfTypeSchemaFile, filename)
 
 	resource, err := NewResourcePath(g.tfResourceType, g.cfTypeSchemaFile)
 
@@ -92,12 +93,29 @@ func (g *Generator) Generate(packageName, filename string) error {
 		return fmt.Errorf("error reading CloudFormation resource schema for %s: %w", g.tfResourceType, err)
 	}
 
+	var codeFeatures schemagen.Features
+	rootPropertySchemas := []string{}
+
+	for propertyName := range resource.CfResource.Properties {
+		rootPropertySchema, features := schemagen.RootPropertySchema(resource.CfResource, propertyName)
+		rootPropertySchemas = append(rootPropertySchemas, rootPropertySchema)
+		codeFeatures |= features
+	}
+
 	templateData := TemplateData{
 		CloudFormationTypeName: *resource.CfResource.TypeName,
 		FunctionName:           resource.SourceCodeNamePrefix,
 		NamePrefix:             resource.SourceCodeNamePrefix,
 		PackageName:            packageName,
+		RootPropertySchemas:    rootPropertySchemas,
 		TerraformTypeName:      resource.TfType,
+	}
+
+	if codeFeatures&schemagen.UsesRegexp > 0 {
+		templateData.ImportRegexp = true
+	}
+	if codeFeatures&schemagen.UsesValidation > 0 {
+		templateData.ImportValidation = true
 	}
 
 	tmpl, err := template.New("function").Parse(templateBody)
@@ -142,7 +160,14 @@ var templateBody = `
 package {{ .PackageName }}
 
 import (
+	{{- if .ImportRegexp }}
+	"regexp"
+{{- end }}
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+{{- if .ImportRegexp }}
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+{{- end }}
 )
 
 func init() {
@@ -151,9 +176,15 @@ func init() {
 
 // {{ .FunctionName }} returns the Terraform {{ .TerraformTypeName }} resource.
 func {{ .FunctionName }}() *schema.Resource {
+	schema := map[string]*schema.Schema {
+{{- range .RootPropertySchemas }}
+		{{ . }}
+{{- end }}
+	}
+
 	gr := &GenericResource{
 		CloudFormationTypeName: "{{ .CloudFormationTypeName }}",
-		//TerraformSchema:        {{ .NamePrefix }}Schema,
+		TerraformSchema:        schema,
 		TerraformTypeName:      "{{ .TerraformTypeName }}",
 	}
 
@@ -164,8 +195,11 @@ func {{ .FunctionName }}() *schema.Resource {
 type TemplateData struct {
 	CloudFormationTypeName string
 	FunctionName           string
+	ImportRegexp           bool
+	ImportValidation       bool
 	NamePrefix             string
 	PackageName            string
+	RootPropertySchemas    []string
 	TerraformTypeName      string
 }
 
