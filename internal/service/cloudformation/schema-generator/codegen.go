@@ -14,6 +14,7 @@ type Features int
 const (
 	UsesRegexp Features = 1 << iota
 	UsesValidation
+	HasUpdatableProperty
 )
 
 func RootPropertySchema(r *cfschema.Resource, name string) (string, Features) {
@@ -183,6 +184,10 @@ func PropertySchema(r *cfschema.Resource, pathPrefix []string, name string, prop
 
 	if createOnly {
 		fmt.Fprintf(&b, "\n%sForceNew: true,", indentation)
+	}
+
+	if !createOnly && !readOnly {
+		features |= HasUpdatableProperty
 	}
 
 	if property.Description != nil {

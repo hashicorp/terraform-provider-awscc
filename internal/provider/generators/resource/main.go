@@ -104,6 +104,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 
 	templateData := TemplateData{
 		CloudFormationTypeName: *resource.CfResource.TypeName,
+		EmitUpdateMethod:       true,
 		FunctionName:           resource.SourceCodeNamePrefix,
 		NamePrefix:             resource.SourceCodeNamePrefix,
 		PackageName:            packageName,
@@ -111,6 +112,9 @@ func (g *Generator) Generate(packageName, filename string) error {
 		TerraformTypeName:      resource.TfType,
 	}
 
+	if codeFeatures&schemagen.HasUpdatableProperty == 0 {
+		templateData.EmitUpdateMethod = false
+	}
 	if codeFeatures&schemagen.UsesRegexp > 0 {
 		templateData.ImportRegexp = true
 	}
@@ -160,7 +164,7 @@ var templateBody = `
 package {{ .PackageName }}
 
 import (
-	{{- if .ImportRegexp }}
+{{- if .ImportRegexp }}
 	"regexp"
 {{- end }}
 
@@ -188,12 +192,19 @@ func {{ .FunctionName }}() *schema.Resource {
 		TerraformTypeName:      "{{ .TerraformTypeName }}",
 	}
 
-	return gr.GetSchema()
+	resource := gr.GetSchema()
+
+{{- if not .EmitUpdateMethod }}
+	resource.Update = nil
+{{- end }}
+
+	return resource
 }
 `
 
 type TemplateData struct {
 	CloudFormationTypeName string
+	EmitUpdateMethod       bool
 	FunctionName           string
 	ImportRegexp           bool
 	ImportValidation       bool
