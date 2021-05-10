@@ -13,6 +13,22 @@ type GenericResource struct {
 	TerraformTypeName      string
 }
 
+// GetSchema returns the resource's schema (currently the schema.Resource)
+func (g *GenericResource) GetSchema() *schema.Resource {
+	return &schema.Resource{
+		CreateContext: g.Create,
+		ReadContext:   g.Read,
+		UpdateContext: g.Update,
+		DeleteContext: g.Delete,
+
+		Schema: g.TerraformSchema,
+	}
+}
+
+func (g *GenericResource) ResourceInstance() *GenericResourceInstance {
+	return nil
+}
+
 // Create is the generic Create handler for a generated resource.
 func (g *GenericResource) Create(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	instance := GenericResourceInstance{

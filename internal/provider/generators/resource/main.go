@@ -157,14 +157,7 @@ func {{ .FunctionName }}() *schema.Resource {
 		TerraformTypeName:      "{{ .TerraformTypeName }}",
 	}
 
-	return &schema.Resource{
-		CreateContext: gr.Create,
-		ReadContext:   gr.Read,
-		UpdateContext: gr.Update,
-		DeleteContext: gr.Delete,
-
-		Schema: gr.TerraformSchema,
-	}
+	return gr.GetSchema()
 }
 `
 
