@@ -11,3 +11,5 @@ require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.6.1
 	github.com/iancoleman/strcase v0.1.3
 )
+
+replace github.com/aws/aws-sdk-go => github.com/hashicorp/aws-sdk-go-private f-cloudapi-20210420
