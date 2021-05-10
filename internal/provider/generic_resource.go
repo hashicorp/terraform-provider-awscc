@@ -59,7 +59,7 @@ type GenericResourceInstance struct {
 
 // Create is the generic Create handler for a generated resource.
 func (g *GenericResourceInstance) Create(ctx context.Context, d *schema.ResourceData) diag.Diagnostics {
-	return nil
+	return g.Read(ctx, d)
 }
 
 // Read is the generic Read handler for a generated resource.
@@ -69,7 +69,7 @@ func (g *GenericResourceInstance) Read(ctx context.Context, d *schema.ResourceDa
 
 // Update is the generic Update handler for a generated resource.
 func (g *GenericResourceInstance) Update(ctx context.Context, d *schema.ResourceData) diag.Diagnostics {
-	return nil
+	return g.Read(ctx, d)
 }
 
 // Delete is the generic Delete handler for a generated resource.
