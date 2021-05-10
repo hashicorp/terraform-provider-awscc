@@ -2,9 +2,16 @@ package provider
 
 import (
 	"context"
+	"fmt"
+	"log"
 
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/service/cloudformation"
+	"github.com/hashicorp/aws-sdk-go-base/tfawserr"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/waiter"
 )
 
 type GenericResource struct {
@@ -59,11 +66,71 @@ type GenericResourceInstance struct {
 
 // Create is the generic Create handler for a generated resource.
 func (g *GenericResourceInstance) Create(ctx context.Context, d *schema.ResourceData) diag.Diagnostics {
+	conn := g.Meta.(*AWSClient).cfconn
+
+	typeName := g.GenericResource.CloudFormationTypeName
+	input := &cloudformation.CreateResourceInput{
+		ClientToken: aws.String(resource.UniqueId()),
+		//DesiredState: TODO,
+		TypeName: aws.String(typeName),
+	}
+
+	output, err := conn.CreateResourceWithContext(ctx, input)
+
+	if err != nil {
+		return diag.FromErr(fmt.Errorf("error creating CloudFormation Resource (%s): %w", typeName, err))
+	}
+
+	if output == nil || output.ProgressEvent == nil {
+		return diag.FromErr(fmt.Errorf("error creating CloudFormation Resource (%s): empty response", typeName))
+	}
+
+	// Always try to capture the identifier before returning errors
+	d.SetId(aws.StringValue(output.ProgressEvent.Identifier))
+
+	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.StringValue(output.ProgressEvent.RequestToken), d.Timeout(schema.TimeoutCreate))
+
+	if err != nil {
+		return diag.FromErr(fmt.Errorf("error waiting for CloudForamtion Resource (%s) creation: %w", d.Id(), err))
+	}
+
+	// Some resources do not set the identifier until after creation
+	if d.Id() == "" {
+		d.SetId(aws.StringValue(output.ProgressEvent.Identifier))
+	}
+
 	return g.Read(ctx, d)
 }
 
 // Read is the generic Read handler for a generated resource.
 func (g *GenericResourceInstance) Read(ctx context.Context, d *schema.ResourceData) diag.Diagnostics {
+	conn := g.Meta.(*AWSClient).cfconn
+
+	input := &cloudformation.GetResourceInput{
+		Identifier: aws.String(d.Id()),
+		TypeName:   aws.String(g.GenericResource.CloudFormationTypeName),
+	}
+
+	output, err := conn.GetResourceWithContext(ctx, input)
+
+	if tfawserr.ErrCodeEquals(err, cloudformation.ErrCodeResourceNotFoundException) {
+		if d.IsNewResource() {
+			return diag.FromErr(fmt.Errorf("error reading CloudFormation Resource (%s): not found after creation", d.Id()))
+		}
+
+		log.Printf("[WARN] CloudFormation Resource (%s) not found, removing from state", d.Id())
+		d.SetId("")
+		return nil
+	}
+
+	if err != nil {
+		return diag.FromErr(fmt.Errorf("error reading CloudFormation Resource (%s): %w", d.Id(), err))
+	}
+
+	if output == nil || output.ResourceDescription == nil {
+		return diag.FromErr(fmt.Errorf("error reading CloudFormation Resource (%s): empty response", d.Id()))
+	}
+
 	return nil
 }
 
@@ -74,5 +141,33 @@ func (g *GenericResourceInstance) Update(ctx context.Context, d *schema.Resource
 
 // Delete is the generic Delete handler for a generated resource.
 func (g *GenericResourceInstance) Delete(ctx context.Context, d *schema.ResourceData) diag.Diagnostics {
+	conn := g.Meta.(*AWSClient).cfconn
+
+	input := &cloudformation.DeleteResourceInput{
+		ClientToken: aws.String(resource.UniqueId()),
+		Identifier:  aws.String(d.Id()),
+		TypeName:    aws.String(g.GenericResource.CloudFormationTypeName),
+	}
+
+	output, err := conn.DeleteResourceWithContext(ctx, input)
+
+	if err != nil {
+		return diag.FromErr(fmt.Errorf("error deleting CloudFormation Resource (%s): %w", d.Id(), err))
+	}
+
+	if output == nil || output.ProgressEvent == nil {
+		return diag.FromErr(fmt.Errorf("error deleting CloudFormation Resource (%s): empty response", d.Id()))
+	}
+
+	progressEvent, err := waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.StringValue(output.ProgressEvent.RequestToken), d.Timeout(schema.TimeoutDelete))
+
+	if progressEvent != nil && aws.StringValue(progressEvent.ErrorCode) == cloudformation.HandlerErrorCodeNotFound {
+		return nil
+	}
+
+	if err != nil {
+		return diag.FromErr(fmt.Errorf("error waiting for CloudFormation Resource (%s) deletion: %w", d.Id(), err))
+	}
+
 	return nil
 }
