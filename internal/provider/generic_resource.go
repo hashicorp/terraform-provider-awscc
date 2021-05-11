@@ -36,6 +36,7 @@ func (g *GenericResource) ResourceInstance(ctx context.Context, meta interface{}
 	return &GenericResourceInstance{
 		GenericResource: g,
 		Meta:            meta,
+		StateConverter:  NewStateConverter(g.TerraformSchema),
 	}
 }
 
@@ -62,27 +63,35 @@ func (g *GenericResource) Delete(ctx context.Context, d *schema.ResourceData, me
 type GenericResourceInstance struct {
 	GenericResource *GenericResource
 	Meta            interface{}
+	StateConverter  *StateConverter
 }
 
 // Create is the generic Create handler for a generated resource.
 func (g *GenericResourceInstance) Create(ctx context.Context, d *schema.ResourceData) diag.Diagnostics {
 	conn := g.Meta.(*AWSClient).cfconn
 
-	typeName := g.GenericResource.CloudFormationTypeName
+	cfTypeName := g.GenericResource.CloudFormationTypeName
+	tfTypeName := g.GenericResource.TerraformTypeName
+	desiredState, err := g.StateConverter.ToCloudFormation(d)
+
+	if err != nil {
+		return diag.FromErr(fmt.Errorf("error converting Terraform state (%s/%s): %w", tfTypeName, cfTypeName, err))
+	}
+
 	input := &cloudformation.CreateResourceInput{
-		ClientToken: aws.String(resource.UniqueId()),
-		//DesiredState: TODO,
-		TypeName: aws.String(typeName),
+		ClientToken:  aws.String(resource.UniqueId()),
+		DesiredState: aws.String(desiredState),
+		TypeName:     aws.String(cfTypeName),
 	}
 
 	output, err := conn.CreateResourceWithContext(ctx, input)
 
 	if err != nil {
-		return diag.FromErr(fmt.Errorf("error creating CloudFormation Resource (%s): %w", typeName, err))
+		return diag.FromErr(fmt.Errorf("error creating CloudFormation Resource (%s/%s): %w", tfTypeName, cfTypeName, err))
 	}
 
 	if output == nil || output.ProgressEvent == nil {
-		return diag.FromErr(fmt.Errorf("error creating CloudFormation Resource (%s): empty response", typeName))
+		return diag.FromErr(fmt.Errorf("error creating CloudFormation Resource (%s/%s): empty_response", tfTypeName, cfTypeName))
 	}
 
 	// Always try to capture the identifier before returning errors
@@ -91,7 +100,7 @@ func (g *GenericResourceInstance) Create(ctx context.Context, d *schema.Resource
 	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.StringValue(output.ProgressEvent.RequestToken), d.Timeout(schema.TimeoutCreate))
 
 	if err != nil {
-		return diag.FromErr(fmt.Errorf("error waiting for CloudForamtion Resource (%s) creation: %w", d.Id(), err))
+		return diag.FromErr(fmt.Errorf("error waiting for CloudFormation Resource (%s) creation: %w", d.Id(), err))
 	}
 
 	// Some resources do not set the identifier until after creation
@@ -131,6 +140,10 @@ func (g *GenericResourceInstance) Read(ctx context.Context, d *schema.ResourceDa
 		return diag.FromErr(fmt.Errorf("error reading CloudFormation Resource (%s): empty response", d.Id()))
 	}
 
+	if err := g.StateConverter.ToTerraform(aws.StringValue(output.ResourceDescription.ResourceModel), d); err != nil {
+		return diag.FromErr(fmt.Errorf("error converting CloudFormation state (%s/%s): %w", g.GenericResource.TerraformTypeName, g.GenericResource.CloudFormationTypeName, err))
+	}
+
 	return nil
 }
 
@@ -146,7 +159,6 @@ func (g *GenericResourceInstance) Delete(ctx context.Context, d *schema.Resource
 	input := &cloudformation.DeleteResourceInput{
 		ClientToken: aws.String(resource.UniqueId()),
 		Identifier:  aws.String(d.Id()),
-		TypeName:    aws.String(g.GenericResource.CloudFormationTypeName),
 	}
 
 	output, err := conn.DeleteResourceWithContext(ctx, input)
