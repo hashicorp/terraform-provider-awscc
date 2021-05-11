@@ -36,7 +36,9 @@ func (g *GenericResource) ResourceInstance(ctx context.Context, meta interface{}
 	return &GenericResourceInstance{
 		GenericResource: g,
 		Meta:            meta,
-		StateConverter:  NewStateConverter(g.TerraformSchema),
+		StateConverter: &StateConverter{
+			TfSchema: g.TerraformSchema,
+		},
 	}
 }
 
