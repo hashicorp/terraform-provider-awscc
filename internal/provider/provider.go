@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/cloudformation"
 	awsbase "github.com/hashicorp/aws-sdk-go-base"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/logging"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
@@ -94,7 +95,8 @@ type Config struct {
 // Client configures and returns a fully initialized AWSClient.
 func (c *Config) Client() (interface{}, diag.Diagnostics) {
 	awsbaseConfig := &awsbase.Config{
-		Region: c.Region,
+		DebugLogging: logging.IsDebugOrHigher(),
+		Region:       c.Region,
 	}
 
 	sess, _, _, err := awsbase.GetSessionWithAccountIDAndPartition(awsbaseConfig)

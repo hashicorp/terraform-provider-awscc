@@ -48,6 +48,7 @@ func Test_StateConverter_UnsupportedSchema(t *testing.T) {
 
 	d := r.Data(nil)
 	d.Set("required_bool", true)
+	d.Set("optional_list", []string{"Ay", "Bee"})
 
 	if _, err := converter.ToCloudFormation(d); err == nil {
 		t.Error("unexpected success ToCloudFormation")

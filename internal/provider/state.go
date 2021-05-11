@@ -18,7 +18,11 @@ func (c *StateConverter) ToCloudFormation(d *schema.ResourceData) (string, error
 	m := map[string]interface{}{}
 
 	for key, s := range c.TfSchema {
-		v := d.Get(key)
+		v, ok := d.GetOk(key)
+
+		if !ok {
+			continue
+		}
 
 		switch s.Type {
 		case schema.TypeBool:
@@ -30,9 +34,7 @@ func (c *StateConverter) ToCloudFormation(d *schema.ResourceData) (string, error
 			return "", fmt.Errorf("unsupported type (%t) for key %q", v, key)
 		}
 
-		if !s.Computed {
-			m[strcase.ToCamel(key)] = v
-		}
+		m[strcase.ToCamel(key)] = v
 	}
 
 	cfState, err := json.Marshal(m)

@@ -80,6 +80,8 @@ func (g *GenericResourceInstance) Create(ctx context.Context, d *schema.Resource
 		return diag.FromErr(fmt.Errorf("error converting Terraform state (%s/%s): %w", tfTypeName, cfTypeName, err))
 	}
 
+	log.Printf("[DEBUG] CloudFormation desired state:\n%s", desiredState)
+
 	input := &cloudformation.CreateResourceInput{
 		ClientToken:  aws.String(resource.UniqueId()),
 		DesiredState: aws.String(desiredState),
