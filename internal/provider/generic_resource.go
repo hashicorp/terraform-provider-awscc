@@ -163,6 +163,7 @@ func (g *GenericResourceInstance) Delete(ctx context.Context, d *schema.Resource
 	input := &cloudformation.DeleteResourceInput{
 		ClientToken: aws.String(resource.UniqueId()),
 		Identifier:  aws.String(d.Id()),
+		TypeName:    aws.String(g.GenericResource.CloudFormationTypeName),
 	}
 
 	output, err := conn.DeleteResourceWithContext(ctx, input)
