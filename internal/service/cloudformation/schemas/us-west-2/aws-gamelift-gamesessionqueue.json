@@ -1,0 +1,66 @@
+{
+  "typeName" : "AWS::GameLift::GameSessionQueue",
+  "description" : "Resource Type definition for AWS::GameLift::GameSessionQueue",
+  "additionalProperties" : false,
+  "properties" : {
+    "TimeoutInSeconds" : {
+      "type" : "integer"
+    },
+    "PlayerLatencyPolicies" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/PlayerLatencyPolicy"
+      }
+    },
+    "Destinations" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Destination"
+      }
+    },
+    "NotificationTarget" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "CustomEventData" : {
+      "type" : "string"
+    },
+    "Name" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "PlayerLatencyPolicy" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "PolicyDurationSeconds" : {
+          "type" : "integer"
+        },
+        "MaximumIndividualPlayerLatencyMilliseconds" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "Destination" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "DestinationArn" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "required" : [ "Name" ],
+  "createOnlyProperties" : [ "/properties/Name" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id", "/properties/Arn" ]
+}

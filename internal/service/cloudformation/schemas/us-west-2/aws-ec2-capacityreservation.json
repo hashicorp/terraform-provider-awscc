@@ -1,0 +1,88 @@
+{
+  "typeName" : "AWS::EC2::CapacityReservation",
+  "description" : "Resource Type definition for AWS::EC2::CapacityReservation",
+  "additionalProperties" : false,
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "Tenancy" : {
+      "type" : "string"
+    },
+    "AvailableInstanceCount" : {
+      "type" : "integer"
+    },
+    "AvailabilityZone" : {
+      "type" : "string"
+    },
+    "TotalInstanceCount" : {
+      "type" : "integer"
+    },
+    "InstanceType" : {
+      "type" : "string"
+    },
+    "EndDateType" : {
+      "type" : "string"
+    },
+    "InstanceCount" : {
+      "type" : "integer"
+    },
+    "TagSpecifications" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/TagSpecification"
+      }
+    },
+    "InstancePlatform" : {
+      "type" : "string"
+    },
+    "EphemeralStorage" : {
+      "type" : "boolean"
+    },
+    "InstanceMatchCriteria" : {
+      "type" : "string"
+    },
+    "EndDate" : {
+      "type" : "string"
+    },
+    "EbsOptimized" : {
+      "type" : "boolean"
+    }
+  },
+  "definitions" : {
+    "TagSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ResourceType" : {
+          "type" : "string"
+        },
+        "Tags" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Tag"
+          }
+        }
+      }
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Key" : {
+          "type" : "string"
+        },
+        "Value" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    }
+  },
+  "required" : [ "InstanceCount", "AvailabilityZone", "InstancePlatform", "InstanceType" ],
+  "readOnlyProperties" : [ "/properties/AvailableInstanceCount", "/properties/TotalInstanceCount", "/properties/Id" ],
+  "createOnlyProperties" : [ "/properties/Tenancy", "/properties/InstanceMatchCriteria", "/properties/InstancePlatform", "/properties/InstanceType", "/properties/AvailabilityZone", "/properties/TagSpecifications", "/properties/EphemeralStorage", "/properties/EbsOptimized" ],
+  "primaryIdentifier" : [ "/properties/Id" ]
+}

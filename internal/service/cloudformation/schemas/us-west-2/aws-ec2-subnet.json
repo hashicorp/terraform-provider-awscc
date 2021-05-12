@@ -1,0 +1,67 @@
+{
+  "typeName" : "AWS::EC2::Subnet",
+  "description" : "Resource Type definition for AWS::EC2::Subnet",
+  "additionalProperties" : false,
+  "properties" : {
+    "AssignIpv6AddressOnCreation" : {
+      "type" : "boolean"
+    },
+    "VpcId" : {
+      "type" : "string"
+    },
+    "MapPublicIpOnLaunch" : {
+      "type" : "boolean"
+    },
+    "NetworkAclAssociationId" : {
+      "type" : "string"
+    },
+    "OutpostArn" : {
+      "type" : "string"
+    },
+    "AvailabilityZone" : {
+      "type" : "string"
+    },
+    "CidrBlock" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Ipv6CidrBlocks" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "Ipv6CidrBlock" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions" : {
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    }
+  },
+  "required" : [ "VpcId", "CidrBlock" ],
+  "createOnlyProperties" : [ "/properties/OutpostArn", "/properties/VpcId", "/properties/AvailabilityZone", "/properties/CidrBlock" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/NetworkAclAssociationId", "/properties/Id", "/properties/Ipv6CidrBlocks" ]
+}

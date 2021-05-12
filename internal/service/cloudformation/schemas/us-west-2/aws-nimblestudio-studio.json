@@ -1,0 +1,80 @@
+{
+  "typeName" : "AWS::NimbleStudio::Studio",
+  "description" : "Resource schema for AWS::NimbleStudio::Studio.",
+  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-nimblestudio",
+  "definitions" : {
+    "StudioEncryptionConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "KeyArn" : {
+          "type" : "string"
+        },
+        "KeyType" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "KeyType" ],
+      "additionalProperties" : false
+    }
+  },
+  "properties" : {
+    "AdminRoleArn" : {
+      "type" : "string"
+    },
+    "DisplayName" : {
+      "type" : "string"
+    },
+    "StudioName" : {
+      "type" : "string"
+    },
+    "UserRoleArn" : {
+      "type" : "string"
+    },
+    "HomeRegion" : {
+      "type" : "string"
+    },
+    "SsoClientId" : {
+      "type" : "string"
+    },
+    "StudioEncryptionConfiguration" : {
+      "$ref" : "#/definitions/StudioEncryptionConfiguration"
+    },
+    "StudioId" : {
+      "type" : "string"
+    },
+    "StudioUrl" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "object",
+      "patternProperties" : {
+        "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false
+    }
+  },
+  "additionalProperties" : false,
+  "createOnlyProperties" : [ "/properties/StudioName", "/properties/Tags" ],
+  "primaryIdentifier" : [ "/properties/StudioId" ],
+  "required" : [ "DisplayName", "UserRoleArn", "AdminRoleArn", "StudioName" ],
+  "readOnlyProperties" : [ "/properties/StudioId", "/properties/HomeRegion", "/properties/SsoClientId", "/properties/StudioUrl" ],
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "iam:PassRole", "nimble:CreateStudio", "nimble:TagResource", "sso:CreateManagedApplicationInstance" ]
+    },
+    "read" : {
+      "permissions" : [ "nimble:GetStudio" ]
+    },
+    "update" : {
+      "permissions" : [ "iam:PassRole", "nimble:UpdateStudio" ]
+    },
+    "delete" : {
+      "permissions" : [ "nimble:DeleteStudio", "nimble:UntagResource", "sso:DeleteManagedApplicationInstance", "sso:GetManagedApplicationInstance" ]
+    },
+    "list" : {
+      "permissions" : [ "nimble:ListStudios" ]
+    }
+  }
+}

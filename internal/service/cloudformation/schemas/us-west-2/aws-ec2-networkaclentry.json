@@ -1,0 +1,67 @@
+{
+  "typeName" : "AWS::EC2::NetworkAclEntry",
+  "description" : "Resource Type definition for AWS::EC2::NetworkAclEntry",
+  "additionalProperties" : false,
+  "properties" : {
+    "PortRange" : {
+      "$ref" : "#/definitions/PortRange"
+    },
+    "NetworkAclId" : {
+      "type" : "string"
+    },
+    "RuleAction" : {
+      "type" : "string"
+    },
+    "CidrBlock" : {
+      "type" : "string"
+    },
+    "Egress" : {
+      "type" : "boolean"
+    },
+    "RuleNumber" : {
+      "type" : "integer"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Ipv6CidrBlock" : {
+      "type" : "string"
+    },
+    "Protocol" : {
+      "type" : "integer"
+    },
+    "Icmp" : {
+      "$ref" : "#/definitions/Icmp"
+    }
+  },
+  "definitions" : {
+    "PortRange" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "From" : {
+          "type" : "integer"
+        },
+        "To" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "Icmp" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Code" : {
+          "type" : "integer"
+        },
+        "Type" : {
+          "type" : "integer"
+        }
+      }
+    }
+  },
+  "required" : [ "NetworkAclId", "RuleAction", "RuleNumber", "Protocol" ],
+  "createOnlyProperties" : [ "/properties/Egress", "/properties/RuleNumber", "/properties/NetworkAclId" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

@@ -1,0 +1,182 @@
+{
+  "typeName" : "AWS::FSx::FileSystem",
+  "description" : "Resource Type definition for AWS::FSx::FileSystem",
+  "additionalProperties" : false,
+  "properties" : {
+    "StorageType" : {
+      "type" : "string"
+    },
+    "KmsKeyId" : {
+      "type" : "string"
+    },
+    "StorageCapacity" : {
+      "type" : "integer"
+    },
+    "FileSystemType" : {
+      "type" : "string"
+    },
+    "LustreConfiguration" : {
+      "$ref" : "#/definitions/LustreConfiguration"
+    },
+    "BackupId" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "LustreMountName" : {
+      "type" : "string"
+    },
+    "SubnetIds" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "SecurityGroupIds" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "WindowsConfiguration" : {
+      "$ref" : "#/definitions/WindowsConfiguration"
+    }
+  },
+  "definitions" : {
+    "SelfManagedActiveDirectoryConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "FileSystemAdministratorsGroup" : {
+          "type" : "string"
+        },
+        "UserName" : {
+          "type" : "string"
+        },
+        "DomainName" : {
+          "type" : "string"
+        },
+        "OrganizationalUnitDistinguishedName" : {
+          "type" : "string"
+        },
+        "DnsIps" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Password" : {
+          "type" : "string"
+        }
+      }
+    },
+    "LustreConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "DriveCacheType" : {
+          "type" : "string"
+        },
+        "ImportPath" : {
+          "type" : "string"
+        },
+        "WeeklyMaintenanceStartTime" : {
+          "type" : "string"
+        },
+        "AutoImportPolicy" : {
+          "type" : "string"
+        },
+        "ImportedFileChunkSize" : {
+          "type" : "integer"
+        },
+        "DeploymentType" : {
+          "type" : "string"
+        },
+        "DailyAutomaticBackupStartTime" : {
+          "type" : "string"
+        },
+        "CopyTagsToBackups" : {
+          "type" : "boolean"
+        },
+        "ExportPath" : {
+          "type" : "string"
+        },
+        "PerUnitStorageThroughput" : {
+          "type" : "integer"
+        },
+        "AutomaticBackupRetentionDays" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    },
+    "WindowsConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SelfManagedActiveDirectoryConfiguration" : {
+          "$ref" : "#/definitions/SelfManagedActiveDirectoryConfiguration"
+        },
+        "WeeklyMaintenanceStartTime" : {
+          "type" : "string"
+        },
+        "ActiveDirectoryId" : {
+          "type" : "string"
+        },
+        "DeploymentType" : {
+          "type" : "string"
+        },
+        "Aliases" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "ThroughputCapacity" : {
+          "type" : "integer"
+        },
+        "CopyTagsToBackups" : {
+          "type" : "boolean"
+        },
+        "DailyAutomaticBackupStartTime" : {
+          "type" : "string"
+        },
+        "AutomaticBackupRetentionDays" : {
+          "type" : "integer"
+        },
+        "PreferredSubnetId" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "ThroughputCapacity" ]
+    }
+  },
+  "required" : [ "FileSystemType", "SubnetIds" ],
+  "createOnlyProperties" : [ "/properties/KmsKeyId", "/properties/StorageType", "/properties/SecurityGroupIds", "/properties/FileSystemType", "/properties/SubnetIds", "/properties/BackupId" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id", "/properties/LustreMountName" ]
+}

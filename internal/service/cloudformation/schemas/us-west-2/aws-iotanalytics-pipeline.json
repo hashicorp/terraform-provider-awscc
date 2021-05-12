@@ -1,0 +1,255 @@
+{
+  "typeName" : "AWS::IoTAnalytics::Pipeline",
+  "description" : "Resource Type definition for AWS::IoTAnalytics::Pipeline",
+  "additionalProperties" : false,
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "PipelineName" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "PipelineActivities" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Activity"
+      }
+    }
+  },
+  "definitions" : {
+    "Activity" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SelectAttributes" : {
+          "$ref" : "#/definitions/SelectAttributes"
+        },
+        "Datastore" : {
+          "$ref" : "#/definitions/Datastore"
+        },
+        "Filter" : {
+          "$ref" : "#/definitions/Filter"
+        },
+        "AddAttributes" : {
+          "$ref" : "#/definitions/AddAttributes"
+        },
+        "Channel" : {
+          "$ref" : "#/definitions/Channel"
+        },
+        "DeviceShadowEnrich" : {
+          "$ref" : "#/definitions/DeviceShadowEnrich"
+        },
+        "Math" : {
+          "$ref" : "#/definitions/Math"
+        },
+        "Lambda" : {
+          "$ref" : "#/definitions/Lambda"
+        },
+        "DeviceRegistryEnrich" : {
+          "$ref" : "#/definitions/DeviceRegistryEnrich"
+        },
+        "RemoveAttributes" : {
+          "$ref" : "#/definitions/RemoveAttributes"
+        }
+      }
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Key" : {
+          "type" : "string"
+        },
+        "Value" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    },
+    "DeviceShadowEnrich" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Attribute" : {
+          "type" : "string"
+        },
+        "Next" : {
+          "type" : "string"
+        },
+        "ThingName" : {
+          "type" : "string"
+        },
+        "RoleArn" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Filter" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Filter" : {
+          "type" : "string"
+        },
+        "Next" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "RemoveAttributes" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Next" : {
+          "type" : "string"
+        },
+        "Attributes" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Datastore" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "DatastoreName" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Channel" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ChannelName" : {
+          "type" : "string"
+        },
+        "Next" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SelectAttributes" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Next" : {
+          "type" : "string"
+        },
+        "Attributes" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Lambda" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "BatchSize" : {
+          "type" : "integer"
+        },
+        "Next" : {
+          "type" : "string"
+        },
+        "LambdaName" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "DeviceRegistryEnrich" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Attribute" : {
+          "type" : "string"
+        },
+        "Next" : {
+          "type" : "string"
+        },
+        "ThingName" : {
+          "type" : "string"
+        },
+        "RoleArn" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AddAttributes" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Next" : {
+          "type" : "string"
+        },
+        "Attributes" : {
+          "type" : "object"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Math" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Attribute" : {
+          "type" : "string"
+        },
+        "Next" : {
+          "type" : "string"
+        },
+        "Math" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "required" : [ "PipelineActivities" ],
+  "createOnlyProperties" : [ "/properties/PipelineName" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

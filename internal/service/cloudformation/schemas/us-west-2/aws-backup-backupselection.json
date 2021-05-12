@@ -1,0 +1,81 @@
+{
+  "typeName" : "AWS::Backup::BackupSelection",
+  "description" : "Resource Type definition for AWS::Backup::BackupSelection",
+  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "BackupPlanId" : {
+      "type" : "string"
+    },
+    "BackupSelection" : {
+      "$ref" : "#/definitions/BackupSelectionResourceType"
+    },
+    "SelectionId" : {
+      "type" : "string"
+    }
+  },
+  "required" : [ "BackupSelection", "BackupPlanId" ],
+  "createOnlyProperties" : [ "/properties/BackupSelection", "/properties/BackupPlanId" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/SelectionId", "/properties/BackupPlanId", "/properties/Id" ],
+  "additionalProperties" : false,
+  "definitions" : {
+    "BackupSelectionResourceType" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "IamRoleArn" : {
+          "type" : "string"
+        },
+        "ListOfTags" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/ConditionResourceType"
+          }
+        },
+        "Resources" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "SelectionName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "SelectionName", "IamRoleArn" ]
+    },
+    "ConditionResourceType" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ConditionKey" : {
+          "type" : "string"
+        },
+        "ConditionValue" : {
+          "type" : "string"
+        },
+        "ConditionType" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "ConditionValue", "ConditionKey", "ConditionType" ]
+    }
+  },
+  "taggable" : false,
+  "handlers" : {
+    "delete" : {
+      "permissions" : [ "backup:GetBackupSelection", "backup:DeleteBackupSelection" ]
+    },
+    "read" : {
+      "permissions" : [ "backup:GetBackupSelection" ]
+    },
+    "create" : {
+      "permissions" : [ "backup:CreateBackupSelection", "iam:GetRole", "iam:PassRole" ]
+    }
+  }
+}

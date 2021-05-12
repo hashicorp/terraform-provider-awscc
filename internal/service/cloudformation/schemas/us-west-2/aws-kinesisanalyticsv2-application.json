@@ -1,0 +1,389 @@
+{
+  "typeName" : "AWS::KinesisAnalyticsV2::Application",
+  "description" : "Resource Type definition for AWS::KinesisAnalyticsV2::Application",
+  "additionalProperties" : false,
+  "properties" : {
+    "ApplicationName" : {
+      "type" : "string"
+    },
+    "RuntimeEnvironment" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "ApplicationConfiguration" : {
+      "$ref" : "#/definitions/ApplicationConfiguration"
+    },
+    "ApplicationDescription" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "ServiceExecutionRole" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "ApplicationCodeConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "CodeContent" : {
+          "$ref" : "#/definitions/CodeContent"
+        },
+        "CodeContentType" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "CodeContentType", "CodeContent" ]
+    },
+    "EnvironmentProperties" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "PropertyGroups" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/PropertyGroup"
+          }
+        }
+      }
+    },
+    "PropertyGroup" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "PropertyMap" : {
+          "type" : "object"
+        },
+        "PropertyGroupId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "KinesisFirehoseInput" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ResourceARN" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "ResourceARN" ]
+    },
+    "SqlApplicationConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Inputs" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Input"
+          }
+        }
+      }
+    },
+    "JSONMappingParameters" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "RecordRowPath" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "RecordRowPath" ]
+    },
+    "ApplicationSnapshotConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SnapshotsEnabled" : {
+          "type" : "boolean"
+        }
+      },
+      "required" : [ "SnapshotsEnabled" ]
+    },
+    "Input" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "NamePrefix" : {
+          "type" : "string"
+        },
+        "InputSchema" : {
+          "$ref" : "#/definitions/InputSchema"
+        },
+        "KinesisStreamsInput" : {
+          "$ref" : "#/definitions/KinesisStreamsInput"
+        },
+        "KinesisFirehoseInput" : {
+          "$ref" : "#/definitions/KinesisFirehoseInput"
+        },
+        "InputProcessingConfiguration" : {
+          "$ref" : "#/definitions/InputProcessingConfiguration"
+        },
+        "InputParallelism" : {
+          "$ref" : "#/definitions/InputParallelism"
+        }
+      },
+      "required" : [ "NamePrefix", "InputSchema" ]
+    },
+    "InputSchema" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "RecordEncoding" : {
+          "type" : "string"
+        },
+        "RecordColumns" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/RecordColumn"
+          }
+        },
+        "RecordFormat" : {
+          "$ref" : "#/definitions/RecordFormat"
+        }
+      },
+      "required" : [ "RecordColumns", "RecordFormat" ]
+    },
+    "KinesisStreamsInput" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ResourceARN" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "ResourceARN" ]
+    },
+    "S3ContentLocation" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "BucketARN" : {
+          "type" : "string"
+        },
+        "FileKey" : {
+          "type" : "string"
+        },
+        "ObjectVersion" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ParallelismConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ConfigurationType" : {
+          "type" : "string"
+        },
+        "ParallelismPerKPU" : {
+          "type" : "integer"
+        },
+        "Parallelism" : {
+          "type" : "integer"
+        },
+        "AutoScalingEnabled" : {
+          "type" : "boolean"
+        }
+      },
+      "required" : [ "ConfigurationType" ]
+    },
+    "CodeContent" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ZipFileContent" : {
+          "type" : "string"
+        },
+        "S3ContentLocation" : {
+          "$ref" : "#/definitions/S3ContentLocation"
+        },
+        "TextContent" : {
+          "type" : "string"
+        }
+      }
+    },
+    "MappingParameters" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "CSVMappingParameters" : {
+          "$ref" : "#/definitions/CSVMappingParameters"
+        },
+        "JSONMappingParameters" : {
+          "$ref" : "#/definitions/JSONMappingParameters"
+        }
+      }
+    },
+    "InputParallelism" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Count" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "ApplicationConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ApplicationCodeConfiguration" : {
+          "$ref" : "#/definitions/ApplicationCodeConfiguration"
+        },
+        "EnvironmentProperties" : {
+          "$ref" : "#/definitions/EnvironmentProperties"
+        },
+        "FlinkApplicationConfiguration" : {
+          "$ref" : "#/definitions/FlinkApplicationConfiguration"
+        },
+        "SqlApplicationConfiguration" : {
+          "$ref" : "#/definitions/SqlApplicationConfiguration"
+        },
+        "ApplicationSnapshotConfiguration" : {
+          "$ref" : "#/definitions/ApplicationSnapshotConfiguration"
+        }
+      }
+    },
+    "InputProcessingConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "InputLambdaProcessor" : {
+          "$ref" : "#/definitions/InputLambdaProcessor"
+        }
+      }
+    },
+    "RecordFormat" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "RecordFormatType" : {
+          "type" : "string"
+        },
+        "MappingParameters" : {
+          "$ref" : "#/definitions/MappingParameters"
+        }
+      },
+      "required" : [ "RecordFormatType" ]
+    },
+    "MonitoringConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ConfigurationType" : {
+          "type" : "string"
+        },
+        "MetricsLevel" : {
+          "type" : "string"
+        },
+        "LogLevel" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "ConfigurationType" ]
+    },
+    "RecordColumn" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Mapping" : {
+          "type" : "string"
+        },
+        "SqlType" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "SqlType", "Name" ]
+    },
+    "CSVMappingParameters" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "RecordColumnDelimiter" : {
+          "type" : "string"
+        },
+        "RecordRowDelimiter" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "RecordRowDelimiter", "RecordColumnDelimiter" ]
+    },
+    "CheckpointConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ConfigurationType" : {
+          "type" : "string"
+        },
+        "CheckpointInterval" : {
+          "type" : "integer"
+        },
+        "CheckpointingEnabled" : {
+          "type" : "boolean"
+        },
+        "MinPauseBetweenCheckpoints" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "ConfigurationType" ]
+    },
+    "FlinkApplicationConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "MonitoringConfiguration" : {
+          "$ref" : "#/definitions/MonitoringConfiguration"
+        },
+        "CheckpointConfiguration" : {
+          "$ref" : "#/definitions/CheckpointConfiguration"
+        },
+        "ParallelismConfiguration" : {
+          "$ref" : "#/definitions/ParallelismConfiguration"
+        }
+      }
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    },
+    "InputLambdaProcessor" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ResourceARN" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "ResourceARN" ]
+    }
+  },
+  "required" : [ "RuntimeEnvironment", "ServiceExecutionRole" ],
+  "createOnlyProperties" : [ "/properties/ApplicationName", "/properties/RuntimeEnvironment" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

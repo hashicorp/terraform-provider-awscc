@@ -1,0 +1,182 @@
+{
+  "typeName" : "AWS::Amplify::App",
+  "description" : "Resource Type definition for AWS::Amplify::App",
+  "additionalProperties" : false,
+  "properties" : {
+    "AutoBranchCreationConfig" : {
+      "$ref" : "#/definitions/AutoBranchCreationConfig"
+    },
+    "OauthToken" : {
+      "type" : "string"
+    },
+    "Description" : {
+      "type" : "string"
+    },
+    "EnableBranchAutoDeletion" : {
+      "type" : "boolean"
+    },
+    "DefaultDomain" : {
+      "type" : "string"
+    },
+    "AppName" : {
+      "type" : "string"
+    },
+    "Name" : {
+      "type" : "string"
+    },
+    "Repository" : {
+      "type" : "string"
+    },
+    "EnvironmentVariables" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/EnvironmentVariable"
+      }
+    },
+    "AppId" : {
+      "type" : "string"
+    },
+    "AccessToken" : {
+      "type" : "string"
+    },
+    "BuildSpec" : {
+      "type" : "string"
+    },
+    "CustomRules" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/CustomRule"
+      }
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "BasicAuthConfig" : {
+      "$ref" : "#/definitions/BasicAuthConfig"
+    },
+    "CustomHeaders" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "IAMServiceRole" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "AutoBranchCreationConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "EnvironmentVariables" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/EnvironmentVariable"
+          }
+        },
+        "EnableAutoBranchCreation" : {
+          "type" : "boolean"
+        },
+        "PullRequestEnvironmentName" : {
+          "type" : "string"
+        },
+        "AutoBranchCreationPatterns" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "EnablePullRequestPreview" : {
+          "type" : "boolean"
+        },
+        "EnableAutoBuild" : {
+          "type" : "boolean"
+        },
+        "EnablePerformanceMode" : {
+          "type" : "boolean"
+        },
+        "BuildSpec" : {
+          "type" : "string"
+        },
+        "Stage" : {
+          "type" : "string"
+        },
+        "BasicAuthConfig" : {
+          "$ref" : "#/definitions/BasicAuthConfig"
+        }
+      }
+    },
+    "CustomRule" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Condition" : {
+          "type" : "string"
+        },
+        "Status" : {
+          "type" : "string"
+        },
+        "Target" : {
+          "type" : "string"
+        },
+        "Source" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Target", "Source" ]
+    },
+    "EnvironmentVariable" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Name" ]
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    },
+    "BasicAuthConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Username" : {
+          "type" : "string"
+        },
+        "EnableBasicAuth" : {
+          "type" : "boolean"
+        },
+        "Password" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "required" : [ "Name" ],
+  "primaryIdentifier" : [ "/properties/AppId" ],
+  "readOnlyProperties" : [ "/properties/AppId", "/properties/AppName", "/properties/Arn", "/properties/DefaultDomain" ]
+}

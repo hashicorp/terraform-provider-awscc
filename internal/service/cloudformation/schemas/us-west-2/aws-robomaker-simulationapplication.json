@@ -1,0 +1,99 @@
+{
+  "typeName" : "AWS::RoboMaker::SimulationApplication",
+  "description" : "Resource Type definition for AWS::RoboMaker::SimulationApplication",
+  "additionalProperties" : false,
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "CurrentRevisionId" : {
+      "type" : "string"
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "RenderingEngine" : {
+      "$ref" : "#/definitions/RenderingEngine"
+    },
+    "SimulationSoftwareSuite" : {
+      "$ref" : "#/definitions/SimulationSoftwareSuite"
+    },
+    "RobotSoftwareSuite" : {
+      "$ref" : "#/definitions/RobotSoftwareSuite"
+    },
+    "Sources" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/SourceConfig"
+      }
+    },
+    "Tags" : {
+      "type" : "object"
+    },
+    "Name" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "RenderingEngine" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Version" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Version", "Name" ]
+    },
+    "SimulationSoftwareSuite" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Version" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Version", "Name" ]
+    },
+    "RobotSoftwareSuite" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Version" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Version", "Name" ]
+    },
+    "SourceConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "S3Bucket" : {
+          "type" : "string"
+        },
+        "Architecture" : {
+          "type" : "string"
+        },
+        "S3Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "S3Bucket", "Architecture", "S3Key" ]
+    }
+  },
+  "required" : [ "RobotSoftwareSuite", "RenderingEngine", "Sources", "SimulationSoftwareSuite" ],
+  "readOnlyProperties" : [ "/properties/Arn", "/properties/Id" ],
+  "createOnlyProperties" : [ "/properties/SimulationSoftwareSuite", "/properties/Name", "/properties/RenderingEngine", "/properties/RobotSoftwareSuite" ],
+  "primaryIdentifier" : [ "/properties/Id" ]
+}

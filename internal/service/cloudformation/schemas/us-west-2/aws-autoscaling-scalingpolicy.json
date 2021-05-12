@@ -1,0 +1,136 @@
+{
+  "typeName" : "AWS::AutoScaling::ScalingPolicy",
+  "description" : "Resource Type definition for AWS::AutoScaling::ScalingPolicy",
+  "additionalProperties" : false,
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "AdjustmentType" : {
+      "type" : "string"
+    },
+    "AutoScalingGroupName" : {
+      "type" : "string"
+    },
+    "Cooldown" : {
+      "type" : "string"
+    },
+    "EstimatedInstanceWarmup" : {
+      "type" : "integer"
+    },
+    "MetricAggregationType" : {
+      "type" : "string"
+    },
+    "MinAdjustmentMagnitude" : {
+      "type" : "integer"
+    },
+    "PolicyType" : {
+      "type" : "string"
+    },
+    "ScalingAdjustment" : {
+      "type" : "integer"
+    },
+    "StepAdjustments" : {
+      "type" : "array",
+      "uniqueItems" : true,
+      "items" : {
+        "$ref" : "#/definitions/StepAdjustment"
+      }
+    },
+    "TargetTrackingConfiguration" : {
+      "$ref" : "#/definitions/TargetTrackingConfiguration"
+    }
+  },
+  "definitions" : {
+    "StepAdjustment" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "MetricIntervalLowerBound" : {
+          "type" : "number"
+        },
+        "MetricIntervalUpperBound" : {
+          "type" : "number"
+        },
+        "ScalingAdjustment" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "ScalingAdjustment" ]
+    },
+    "TargetTrackingConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "CustomizedMetricSpecification" : {
+          "$ref" : "#/definitions/CustomizedMetricSpecification"
+        },
+        "DisableScaleIn" : {
+          "type" : "boolean"
+        },
+        "PredefinedMetricSpecification" : {
+          "$ref" : "#/definitions/PredefinedMetricSpecification"
+        },
+        "TargetValue" : {
+          "type" : "number"
+        }
+      },
+      "required" : [ "TargetValue" ]
+    },
+    "PredefinedMetricSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "PredefinedMetricType" : {
+          "type" : "string"
+        },
+        "ResourceLabel" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "PredefinedMetricType" ]
+    },
+    "CustomizedMetricSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Dimensions" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/MetricDimension"
+          }
+        },
+        "MetricName" : {
+          "type" : "string"
+        },
+        "Namespace" : {
+          "type" : "string"
+        },
+        "Statistic" : {
+          "type" : "string"
+        },
+        "Unit" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "MetricName", "Statistic", "Namespace" ]
+    },
+    "MetricDimension" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Name" : {
+          "type" : "string"
+        },
+        "Value" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Name" ]
+    }
+  },
+  "required" : [ "AutoScalingGroupName" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

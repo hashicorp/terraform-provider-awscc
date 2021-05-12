@@ -1,0 +1,32 @@
+{
+  "typeName" : "AWS::SES::ConfigurationSet",
+  "description" : "Resource schema for AWS::SES::ConfigurationSet.",
+  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ses.git",
+  "properties" : {
+    "Name" : {
+      "description" : "The name of the configuration set.",
+      "type" : "string",
+      "pattern" : "^[a-zA-Z0-9_-]{1,64}$",
+      "maxLength" : 64,
+      "minLength" : 1
+    }
+  },
+  "createOnlyProperties" : [ "/properties/Name" ],
+  "primaryIdentifier" : [ "/properties/Name" ],
+  "taggable" : false,
+  "additionalProperties" : false,
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "ses:CreateConfigurationSet" ]
+    },
+    "read" : {
+      "permissions" : [ "ses:DescribeConfigurationSet" ]
+    },
+    "delete" : {
+      "permissions" : [ "ses:DeleteConfigurationSet" ]
+    },
+    "list" : {
+      "permissions" : [ "ses:ListConfigurationSets" ]
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "typeName" : "AWS::Backup::BackupVault",
+  "description" : "Resource Type definition for AWS::Backup::BackupVault",
+  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions" : {
+    "NotificationObjectType" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "BackupVaultEvents" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "SNSTopicArn" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "SNSTopicArn", "BackupVaultEvents" ]
+    },
+    "BackupVaultNamePattern" : {
+      "type" : "string",
+      "pattern" : "^[a-zA-Z0-9\\-\\_]{2,50}$"
+    }
+  },
+  "properties" : {
+    "AccessPolicy" : {
+      "type" : [ "object", "string" ]
+    },
+    "BackupVaultName" : {
+      "$ref" : "#/definitions/BackupVaultNamePattern"
+    },
+    "BackupVaultTags" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "patternProperties" : {
+        "^.{1,128}$" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EncryptionKeyArn" : {
+      "type" : "string"
+    },
+    "Notifications" : {
+      "$ref" : "#/definitions/NotificationObjectType"
+    },
+    "BackupVaultArn" : {
+      "type" : "string"
+    }
+  },
+  "additionalProperties" : false,
+  "required" : [ "BackupVaultName" ],
+  "createOnlyProperties" : [ "/properties/BackupVaultName", "/properties/EncryptionKeyArn" ],
+  "readOnlyProperties" : [ "/properties/BackupVaultName", "/properties/BackupVaultArn" ],
+  "primaryIdentifier" : [ "/properties/BackupVaultName" ],
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "backup:CreateBackupVault", "backup:PutBackupVaultAccessPolicy", "backup:PutBackupVaultNotifications", "backup-storage:Mount", "backup-storage:MountCapsule", "kms:CreateGrant", "kms:GenerateDataKey", "kms:Decrypt", "kms:RetireGrant", "kms:DescribeKey" ]
+    },
+    "read" : {
+      "permissions" : [ "backup:DescribeBackupVault", "backup:GetBackupVaultNotifications", "backup:GetBackupVaultAccessPolicy", "backup:ListTags" ]
+    },
+    "update" : {
+      "permissions" : [ "backup:DescribeBackupVault", "backup:DeleteBackupVaultAccessPolicy", "backup:DeleteBackupVaultNotifications", "backup:ListTags", "backup:TagResource", "backup:UntagResource", "backup:PutBackupVaultAccessPolicy", "backup:PutBackupVaultNotifications" ]
+    },
+    "delete" : {
+      "permissions" : [ "backup:DeleteBackupVault" ]
+    }
+  }
+}

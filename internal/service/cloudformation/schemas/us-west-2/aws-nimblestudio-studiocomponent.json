@@ -1,0 +1,214 @@
+{
+  "typeName" : "AWS::NimbleStudio::StudioComponent",
+  "description" : "Resource schema for AWS::NimbleStudio::StudioComponent.",
+  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-nimblestudio",
+  "definitions" : {
+    "ActiveDirectoryComputerAttribute" : {
+      "type" : "object",
+      "properties" : {
+        "Name" : {
+          "type" : "string"
+        },
+        "Value" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "ActiveDirectoryComputerAttributeList" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/ActiveDirectoryComputerAttribute"
+      }
+    },
+    "ActiveDirectoryConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "ComputerAttributes" : {
+          "$ref" : "#/definitions/ActiveDirectoryComputerAttributeList"
+        },
+        "DirectoryId" : {
+          "type" : "string"
+        },
+        "OrganizationalUnitDistinguishedName" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "ComputeFarmConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "ActiveDirectoryUser" : {
+          "type" : "string"
+        },
+        "Endpoint" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "StudioComponentInitializationScriptList" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/StudioComponentInitializationScript"
+      }
+    },
+    "StudioComponentInitializationScript" : {
+      "type" : "object",
+      "properties" : {
+        "LaunchProfileProtocolVersion" : {
+          "type" : "string"
+        },
+        "Platform" : {
+          "type" : "string"
+        },
+        "RunContext" : {
+          "type" : "string"
+        },
+        "Script" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "LicenseServiceConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "Endpoint" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "ScriptParameterKeyValue" : {
+      "type" : "object",
+      "properties" : {
+        "Key" : {
+          "type" : "string"
+        },
+        "Value" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "SecurityGroupId" : {
+      "type" : "string"
+    },
+    "StudioComponentScriptParameterKeyValueList" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/ScriptParameterKeyValue"
+      }
+    },
+    "StudioComponentSecurityGroupIdList" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/SecurityGroupId"
+      }
+    },
+    "StudioComponentConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "ActiveDirectoryConfiguration" : {
+          "$ref" : "#/definitions/ActiveDirectoryConfiguration"
+        },
+        "ComputeFarmConfiguration" : {
+          "$ref" : "#/definitions/ComputeFarmConfiguration"
+        },
+        "LicenseServiceConfiguration" : {
+          "$ref" : "#/definitions/LicenseServiceConfiguration"
+        },
+        "SharedFileSystemConfiguration" : {
+          "$ref" : "#/definitions/SharedFileSystemConfiguration"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "SharedFileSystemConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "Endpoint" : {
+          "type" : "string"
+        },
+        "FileSystemId" : {
+          "type" : "string"
+        },
+        "LinuxMountPoint" : {
+          "type" : "string"
+        },
+        "ShareName" : {
+          "type" : "string"
+        },
+        "WindowsMountDrive" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false
+    }
+  },
+  "properties" : {
+    "Configuration" : {
+      "$ref" : "#/definitions/StudioComponentConfiguration"
+    },
+    "Description" : {
+      "type" : "string"
+    },
+    "InitializationScripts" : {
+      "$ref" : "#/definitions/StudioComponentInitializationScriptList"
+    },
+    "Name" : {
+      "type" : "string"
+    },
+    "ScriptParameters" : {
+      "$ref" : "#/definitions/StudioComponentScriptParameterKeyValueList"
+    },
+    "Ec2SecurityGroupIds" : {
+      "$ref" : "#/definitions/StudioComponentSecurityGroupIdList"
+    },
+    "StudioComponentId" : {
+      "type" : "string"
+    },
+    "StudioId" : {
+      "type" : "string"
+    },
+    "Subtype" : {
+      "type" : "string"
+    },
+    "Type" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "object",
+      "patternProperties" : {
+        "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false
+    }
+  },
+  "additionalProperties" : false,
+  "required" : [ "StudioId", "Name", "Type" ],
+  "readOnlyProperties" : [ "/properties/StudioComponentId" ],
+  "primaryIdentifier" : [ "/properties/StudioComponentId", "/properties/StudioId" ],
+  "createOnlyProperties" : [ "/properties/StudioId", "/properties/Subtype", "/properties/Tags" ],
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "nimble:CreateStudioComponent", "nimble:TagResource", "ds:AuthorizeApplication", "ec2:DescribeSecurityGroups", "fsx:DescribeFilesystems", "ds:DescribeDirectories" ]
+    },
+    "read" : {
+      "permissions" : [ "nimble:GetStudioComponent" ]
+    },
+    "update" : {
+      "permissions" : [ "nimble:UpdateStudioComponent", "ds:AuthorizeApplication", "ec2:DescribeSecurityGroups", "fsx:DescribeFilesystems", "ds:DescribeDirectories" ]
+    },
+    "delete" : {
+      "permissions" : [ "nimble:DeleteStudioComponent", "nimble:UntagResource", "ds:UnauthorizeApplication" ]
+    },
+    "list" : {
+      "permissions" : [ "nimble:ListStudioComponents" ]
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "typeName" : "AWS::CloudWatch::AnomalyDetector",
+  "description" : "Resource Type definition for AWS::CloudWatch::AnomalyDetector",
+  "additionalProperties" : false,
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "MetricName" : {
+      "type" : "string"
+    },
+    "Stat" : {
+      "type" : "string"
+    },
+    "Configuration" : {
+      "$ref" : "#/definitions/Configuration"
+    },
+    "Dimensions" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Dimension"
+      }
+    },
+    "Namespace" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "Configuration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "MetricTimeZone" : {
+          "type" : "string"
+        },
+        "ExcludedTimeRanges" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Range"
+          }
+        }
+      }
+    },
+    "Dimension" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Name" ]
+    },
+    "Range" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "EndTime" : {
+          "type" : "string"
+        },
+        "StartTime" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "EndTime", "StartTime" ]
+    }
+  },
+  "required" : [ "MetricName", "Stat", "Namespace" ],
+  "createOnlyProperties" : [ "/properties/MetricName", "/properties/Dimensions", "/properties/Namespace", "/properties/Stat" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}
