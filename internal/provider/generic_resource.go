@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/cfjsonpatch"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/waiter"
 )
 
@@ -153,6 +154,49 @@ func (g *GenericResourceInstance) Read(ctx context.Context, d *schema.ResourceDa
 
 // Update is the generic Update handler for a generated resource.
 func (g *GenericResourceInstance) Update(ctx context.Context, d *schema.ResourceData) diag.Diagnostics {
+	conn := g.Meta.(*AWSClient).cfconn
+
+	cfTypeName := g.GenericResource.CloudFormationTypeName
+	tfTypeName := g.GenericResource.TerraformTypeName
+	oldState, newState, err := g.StateConverter.ToCloudFormationChanges(d)
+
+	if err != nil {
+		return diag.FromErr(fmt.Errorf("error converting Terraform state (%s/%s): %w", tfTypeName, cfTypeName, err))
+	}
+
+	patchOperations, err := cfjsonpatch.PatchOperations(oldState, newState)
+
+	if err != nil {
+		return diag.Diagnostics{
+			{
+				Severity: diag.Error,
+				Summary:  "JSON Patch Creation Unsuccessful",
+				Detail:   fmt.Sprintf("Creating JSON Patch failed: %s", err),
+			},
+		}
+	}
+
+	input := &cloudformation.UpdateResourceInput{
+		ClientToken:     aws.String(resource.UniqueId()),
+		Identifier:      aws.String(d.Id()),
+		PatchOperations: patchOperations,
+		TypeName:        aws.String(g.GenericResource.CloudFormationTypeName),
+	}
+
+	output, err := conn.UpdateResourceWithContext(ctx, input)
+
+	if err != nil {
+		return diag.FromErr(fmt.Errorf("error updating CloudFormation Resource (%s): %w", d.Id(), err))
+	}
+
+	if output == nil || output.ProgressEvent == nil {
+		return diag.FromErr(fmt.Errorf("error updating CloudFormation Resource (%s): empty reponse", d.Id()))
+	}
+
+	if _, err := waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.StringValue(output.ProgressEvent.RequestToken), d.Timeout(schema.TimeoutDelete)); err != nil {
+		return diag.FromErr(fmt.Errorf("error waiting for CloudFormation Resource (%s) update: %w", d.Id(), err))
+	}
+
 	return g.Read(ctx, d)
 }
 
