@@ -51,13 +51,13 @@ func Test_StateConverter_UnsupportedSchema(t *testing.T) {
 	d.Set("optional_list", []string{"Ay", "Bee"})
 
 	if _, err := converter.ToCloudFormation(d); err == nil {
-		t.Error("unexpected success ToCloudFormation")
+		t.Fatalf("unexpected success ToCloudFormation")
 	}
 
 	d = r.Data(nil)
 
 	if err := converter.ToTerraform(`{"RequiredBool": false}`, d); err != nil {
-		t.Errorf("unexpected failure ToTerraform: %s", err)
+		t.Fatalf("unexpected failure ToTerraform: %s", err)
 	}
 }
 
@@ -76,18 +76,18 @@ func Test_StateConverter_SupportedSchema(t *testing.T) {
 	s, err := converter.ToCloudFormation(d)
 
 	if err != nil {
-		t.Errorf("unexpected failure ToCloudFormation: %s", err)
+		t.Fatalf("unexpected failure ToCloudFormation: %s", err)
 	}
 	if s == "" {
-		t.Error("empty CloudFormation state")
+		t.Fatalf("empty CloudFormation state")
 	}
 
 	//t.Log(s)
 
 	d = r.Data(nil)
 
-	if err := converter.ToTerraform(`{"RequiredString": "New value", "OptionalFloat": 4.2}`, d); err != nil {
-		t.Errorf("unexpected failure ToTerraform: %s", err)
+	if err := converter.ToTerraform(`{"RequiredString": "New value", "OptionalFloat": 4.2, "OptionalInt": -1}`, d); err != nil {
+		t.Fatalf("unexpected failure ToTerraform: %s", err)
 	}
 
 	v := d.Get("required_string")
@@ -106,5 +106,14 @@ func Test_StateConverter_SupportedSchema(t *testing.T) {
 	}
 	if f != 4.2 {
 		t.Errorf("unexpected value for optional_float: %f", f)
+	}
+
+	v = d.Get("optional_int")
+	i, ok := v.(int)
+	if !ok {
+		t.Errorf("unexpected type for optional_int: %T", v)
+	}
+	if i != -1 {
+		t.Errorf("unexpected value for optional_int: %d", i)
 	}
 }
