@@ -93,7 +93,7 @@ func Test_StateConverter_SupportedSchema(t *testing.T) {
 	v := d.Get("required_string")
 	s, ok := v.(string)
 	if !ok {
-		t.Errorf("unexpected type for required_string: %t", v)
+		t.Errorf("unexpected type for required_string: %T", v)
 	}
 	if s != "New value" {
 		t.Errorf("unexpected value for required_string: %s", s)
@@ -102,7 +102,7 @@ func Test_StateConverter_SupportedSchema(t *testing.T) {
 	v = d.Get("optional_float")
 	f, ok := v.(float64)
 	if !ok {
-		t.Errorf("unexpected type for optional_float: %t", v)
+		t.Errorf("unexpected type for optional_float: %T", v)
 	}
 	if f != 4.2 {
 		t.Errorf("unexpected value for optional_float: %f", f)

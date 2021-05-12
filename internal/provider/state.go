@@ -31,7 +31,7 @@ func (c *StateConverter) ToCloudFormation(d *schema.ResourceData) (string, error
 			v = float64(v.(int))
 		case schema.TypeString:
 		default:
-			return "", fmt.Errorf("unsupported type (%t) for key %q", v, key)
+			return "", fmt.Errorf("unsupported type (%T) for key %q", v, key)
 		}
 
 		m[strcase.ToCamel(key)] = v
@@ -69,7 +69,7 @@ func (c *StateConverter) ToTerraform(cfState string, d *schema.ResourceData) err
 			v = int(v.(float64))
 		case schema.TypeString:
 		default:
-			return fmt.Errorf("unsupported type (%t) for key %q", v, key)
+			return fmt.Errorf("unsupported type (%T) for key %q", v, key)
 		}
 
 		if err := d.Set(key, v); err != nil {
