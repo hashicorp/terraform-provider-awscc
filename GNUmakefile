@@ -5,7 +5,7 @@ ACCTEST_PARALLELISM?=20
 
 default: build
 
-.PHONY: build download-schemas gen test testacc
+.PHONY: build gen schemas test testacc
 
 build:
 	go install
@@ -20,5 +20,5 @@ test:
 testacc:
 	TF_ACC=1 go test ./internal/provider -v -count $(TEST_COUNT) -parallel $(ACCTEST_PARALLELISM) $(TESTARGS) -timeout $(ACCTEST_TIMEOUT)
 
-download-schemas:
-	go run tools/schema-downloader/main.go -config internal/service/cloudformation/schemas-sync/all_schemas.hcl
+schemas:
+	go generate internal/provider/schemas.go
