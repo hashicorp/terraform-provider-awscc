@@ -3,32 +3,71 @@ package provider
 import (
 	"context"
 	"fmt"
-	"sync"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/cloudformation"
 	awsbase "github.com/hashicorp/aws-sdk-go-base"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/logging"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+
+	tfsdk "github.com/hashicorp/terraform-plugin-framework"
+	"github.com/hashicorp/terraform-plugin-framework/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 )
 
-func init() {
-	// Set descriptions to support markdown syntax, this will be used in document generation
-	// and the language server.
-	schema.DescriptionKind = schema.StringMarkdown
-
-	// Customize the content of descriptions when output. For example you can add defaults on
-	// to the exported descriptions if present.
-	// schema.SchemaDescriptionBuilder = func(s *schema.Schema) string {
-	// 	desc := s.Description
-	// 	if s.Default != nil {
-	// 		desc += fmt.Sprintf(" Defaults to `%v`.", s.Default)
-	// 	}
-	// 	return strings.TrimSpace(desc)
-	// }
+func New(version string) tfsdk.Provider {
+	return nil
 }
 
+type cloudApiClient struct {
+	cfconn *cloudformation.CloudFormation
+}
+
+type awsCloudApiProvider struct {
+	Client *cloudApiClient
+}
+
+func (p *awsCloudApiProvider) GetSchema(_ context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
+	return schema.Schema{
+		Version: 1,
+		Attributes: map[string]schema.Attribute{
+			"region": {
+				Type:        types.StringType,
+				Description: "The region where AWS operations will take place.",
+				Required:    true,
+			},
+
+			"role_arn": {
+				Type:        types.StringType,
+				Description: "Amazon Resource Name of an IAM Role that is used to do the actual provisioning.",
+				Optional:    true,
+			},
+		},
+	}, nil
+}
+
+func (p *awsCloudApiProvider) Configure(_ context.Context, input *tfsdk.ConfigureProviderRequest, output *tfsdk.ConfigureProviderResponse) {
+	config := config{
+		Region: "us-west-2",
+	}
+
+	client, err := config.CloudApiClient()
+
+	if err != nil {
+		//return nil, appendDiagnostic(nil, fmt.Errorf("error configuring Terraform AWS Provider: %w", err))
+	}
+
+	p.Client = client
+}
+
+func (p *awsCloudApiProvider) GetResources(_ context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
+	return nil, nil
+}
+
+func (p *awsCloudApiProvider) GetDataSources(context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
+	return nil, nil
+}
+
+/*
 func New(version string) func() *schema.Provider {
 	return func() *schema.Provider {
 		p := &schema.Provider{
@@ -59,7 +98,8 @@ func New(version string) func() *schema.Provider {
 		return p
 	}
 }
-
+*/
+/*
 func configure(version string, p *schema.Provider) func(context.Context, *schema.ResourceData) (interface{}, diag.Diagnostics) {
 	return func(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
 		config := Config{
@@ -82,31 +122,46 @@ func registerResource(name string, r *schema.Resource) {
 	}
 	resources[name] = r
 }
-
+*/
 // Minimal AWS client.
-type AWSClient struct {
-	cfconn *cloudformation.CloudFormation
-}
 
-type Config struct {
+type config struct {
 	Region string
 }
 
-// Client configures and returns a fully initialized AWSClient.
-func (c *Config) Client() (interface{}, diag.Diagnostics) {
+// CloudApiClient configures and returns a fully initialized Cloud API client.
+func (c *config) CloudApiClient() (*cloudApiClient, error) {
 	awsbaseConfig := &awsbase.Config{
-		DebugLogging: logging.IsDebugOrHigher(),
-		Region:       c.Region,
+		//DebugLogging: logging.IsDebugOrHigher(),
+		Region: c.Region,
 	}
 
 	sess, _, _, err := awsbase.GetSessionWithAccountIDAndPartition(awsbaseConfig)
 	if err != nil {
-		return nil, diag.FromErr(fmt.Errorf("error configuring Terraform AWS Provider: %w", err))
+		return nil, fmt.Errorf("error getting AWS SDK session: %w", err)
 	}
 
-	client := &AWSClient{
+	client := &cloudApiClient{
 		cfconn: cloudformation.New(sess.Copy(&aws.Config{})),
 	}
 
 	return client, nil
+}
+
+// appendDiagnostic appends an error or warning message to a response's diagnostics.
+func appendDiagnostic(diags []*tfprotov6.Diagnostic, d interface{}) []*tfprotov6.Diagnostic {
+	switch d := d.(type) {
+	case error:
+		diags = append(diags, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  d.Error(),
+		})
+	case string:
+		diags = append(diags, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  d,
+		})
+	}
+
+	return diags
 }
