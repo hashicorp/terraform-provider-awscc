@@ -2,8 +2,14 @@ package provider
 
 import (
 	"context"
+	"fmt"
+	"sync"
 
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/service/cloudformation"
+	awsbase "github.com/hashicorp/aws-sdk-go-base"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/logging"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
@@ -26,8 +32,26 @@ func init() {
 func New(version string) func() *schema.Provider {
 	return func() *schema.Provider {
 		p := &schema.Provider{
-			DataSourcesMap: map[string]*schema.Resource{},
-			ResourcesMap:   map[string]*schema.Resource{},
+			Schema: map[string]*schema.Schema{
+				"region": {
+					Type:     schema.TypeString,
+					Required: true,
+					DefaultFunc: schema.MultiEnvDefaultFunc([]string{
+						"AWS_REGION",
+						"AWS_DEFAULT_REGION",
+					}, nil),
+					Description:  "The region where AWS operations will take place.",
+					InputDefault: "us-east-1",
+				},
+
+				"role_arn": {
+					Type:        schema.TypeString,
+					Optional:    true,
+					Description: "Amazon Resource Name of an IAM Role that is used to do the actual provisioning.",
+				},
+			},
+
+			ResourcesMap: resources,
 		}
 
 		p.ConfigureContextFunc = configure(version, p)
@@ -36,18 +60,53 @@ func New(version string) func() *schema.Provider {
 	}
 }
 
-type apiClient struct {
-	// Add whatever fields, client or connection info, etc. here
-	// you would need to setup to communicate with the upstream
-	// API.
+func configure(version string, p *schema.Provider) func(context.Context, *schema.ResourceData) (interface{}, diag.Diagnostics) {
+	return func(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
+		config := Config{
+			Region: d.Get("region").(string),
+		}
+
+		return config.Client()
+	}
 }
 
-func configure(version string, p *schema.Provider) func(context.Context, *schema.ResourceData) (interface{}, diag.Diagnostics) {
-	return func(context.Context, *schema.ResourceData) (interface{}, diag.Diagnostics) {
-		// Setup a User-Agent for your API client (replace the provider name for yours):
-		// userAgent := p.UserAgent("terraform-provider-scaffolding", version)
-		// TODO: myClient.UserAgent = userAgent
+var resources map[string]*schema.Resource
+var resourcesMu sync.Mutex
 
-		return &apiClient{}, nil
+func registerResource(name string, r *schema.Resource) {
+	resourcesMu.Lock()
+	defer resourcesMu.Unlock()
+
+	if resources == nil {
+		resources = map[string]*schema.Resource{}
 	}
+	resources[name] = r
+}
+
+// Minimal AWS client.
+type AWSClient struct {
+	cfconn *cloudformation.CloudFormation
+}
+
+type Config struct {
+	Region string
+}
+
+// Client configures and returns a fully initialized AWSClient.
+func (c *Config) Client() (interface{}, diag.Diagnostics) {
+	awsbaseConfig := &awsbase.Config{
+		DebugLogging: logging.IsDebugOrHigher(),
+		Region:       c.Region,
+	}
+
+	sess, _, _, err := awsbase.GetSessionWithAccountIDAndPartition(awsbaseConfig)
+	if err != nil {
+		return nil, diag.FromErr(fmt.Errorf("error configuring Terraform AWS Provider: %w", err))
+	}
+
+	client := &AWSClient{
+		cfconn: cloudformation.New(sess.Copy(&aws.Config{})),
+	}
+
+	return client, nil
 }

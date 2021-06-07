@@ -1,0 +1,1 @@
+# CloudAPI Generated Resource Tests
