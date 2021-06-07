@@ -1,0 +1,119 @@
+{
+  "typeName" : "AWS::Transfer::Server",
+  "description" : "Resource Type definition for AWS::Transfer::Server",
+  "additionalProperties" : false,
+  "properties" : {
+    "LoggingRole" : {
+      "type" : "string"
+    },
+    "Protocols" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Protocol"
+      }
+    },
+    "ServerId" : {
+      "type" : "string"
+    },
+    "IdentityProviderDetails" : {
+      "$ref" : "#/definitions/IdentityProviderDetails"
+    },
+    "EndpointType" : {
+      "type" : "string"
+    },
+    "SecurityPolicyName" : {
+      "type" : "string"
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "Domain" : {
+      "type" : "string"
+    },
+    "EndpointDetails" : {
+      "$ref" : "#/definitions/EndpointDetails"
+    },
+    "IdentityProviderType" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "Certificate" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "IdentityProviderDetails" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Url" : {
+          "type" : "string"
+        },
+        "InvocationRole" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "InvocationRole", "Url" ]
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    },
+    "Protocol" : {
+      "type" : "object",
+      "additionalProperties" : false
+    },
+    "EndpointDetails" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "AddressAllocationIds" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "VpcId" : {
+          "type" : "string"
+        },
+        "VpcEndpointId" : {
+          "type" : "string"
+        },
+        "SecurityGroupIds" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "SubnetIds" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  },
+  "createOnlyProperties" : [ "/properties/IdentityProviderType", "/properties/Domain" ],
+  "primaryIdentifier" : [ "/properties/ServerId" ],
+  "readOnlyProperties" : [ "/properties/ServerId", "/properties/Arn" ]
+}

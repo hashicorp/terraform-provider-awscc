@@ -1,0 +1,247 @@
+{
+  "typeName" : "AWS::DataBrew::Job",
+  "description" : "Resource schema for AWS::DataBrew::Job.",
+  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-databrew.git",
+  "properties" : {
+    "DatasetName" : {
+      "description" : "Dataset name",
+      "type" : "string",
+      "minLength" : 1,
+      "maxLength" : 255
+    },
+    "EncryptionKeyArn" : {
+      "description" : "Encryption Key Arn",
+      "type" : "string",
+      "minLength" : 20,
+      "maxLength" : 2048
+    },
+    "EncryptionMode" : {
+      "description" : "Encryption mode",
+      "enum" : [ "SSE-KMS", "SSE-S3" ],
+      "type" : "string"
+    },
+    "Name" : {
+      "description" : "Job name",
+      "type" : "string",
+      "minLength" : 1,
+      "maxLength" : 255
+    },
+    "Type" : {
+      "description" : "Job type",
+      "enum" : [ "PROFILE", "RECIPE" ],
+      "type" : "string"
+    },
+    "LogSubscription" : {
+      "description" : "Log subscription",
+      "enum" : [ "ENABLE", "DISABLE" ],
+      "type" : "string"
+    },
+    "MaxCapacity" : {
+      "description" : "Max capacity",
+      "type" : "integer"
+    },
+    "MaxRetries" : {
+      "description" : "Max retries",
+      "type" : "integer"
+    },
+    "Outputs" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Output"
+      }
+    },
+    "OutputLocation" : {
+      "description" : "Output location",
+      "$ref" : "#/definitions/OutputLocation"
+    },
+    "ProjectName" : {
+      "description" : "Project name",
+      "type" : "string",
+      "minLength" : 1,
+      "maxLength" : 255
+    },
+    "Recipe" : {
+      "type" : "object",
+      "$ref" : "#/definitions/Recipe"
+    },
+    "RoleArn" : {
+      "description" : "Role arn",
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "Timeout" : {
+      "description" : "Timeout",
+      "type" : "integer"
+    },
+    "JobSample" : {
+      "description" : "Job Sample",
+      "$ref" : "#/definitions/JobSample"
+    }
+  },
+  "definitions" : {
+    "S3Location" : {
+      "description" : "S3 Output location",
+      "type" : "object",
+      "properties" : {
+        "Bucket" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false,
+      "required" : [ "Bucket" ]
+    },
+    "CsvOutputOptions" : {
+      "description" : "Output Csv options",
+      "type" : "object",
+      "properties" : {
+        "Delimiter" : {
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 1
+        }
+      },
+      "additionalProperties" : false
+    },
+    "OutputFormatOptions" : {
+      "description" : "Format options for job Output",
+      "type" : "object",
+      "properties" : {
+        "Csv" : {
+          "$ref" : "#/definitions/CsvOutputOptions"
+        }
+      },
+      "additionalProperties" : false
+    },
+    "OutputLocation" : {
+      "description" : "Output location",
+      "type" : "object",
+      "properties" : {
+        "Bucket" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false,
+      "required" : [ "Bucket" ]
+    },
+    "Output" : {
+      "type" : "object",
+      "properties" : {
+        "CompressionFormat" : {
+          "enum" : [ "GZIP", "LZ4", "SNAPPY", "BZIP2", "DEFLATE", "LZO", "BROTLI", "ZSTD", "ZLIB" ],
+          "type" : "string"
+        },
+        "Format" : {
+          "enum" : [ "CSV", "JSON", "PARQUET", "GLUEPARQUET", "AVRO", "ORC", "XML" ],
+          "type" : "string"
+        },
+        "FormatOptions" : {
+          "$ref" : "#/definitions/OutputFormatOptions"
+        },
+        "PartitionColumns" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Location" : {
+          "$ref" : "#/definitions/S3Location"
+        },
+        "Overwrite" : {
+          "type" : "boolean"
+        }
+      },
+      "additionalProperties" : false,
+      "required" : [ "Location" ]
+    },
+    "Recipe" : {
+      "type" : "object",
+      "properties" : {
+        "Name" : {
+          "description" : "Recipe name",
+          "type" : "string"
+        },
+        "Version" : {
+          "description" : "Recipe version",
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false,
+      "required" : [ "Name" ]
+    },
+    "Tag" : {
+      "description" : "A key-value pair to associate with a resource.",
+      "type" : "object",
+      "properties" : {
+        "Key" : {
+          "type" : "string",
+          "minLength" : 1,
+          "maxLength" : 128
+        },
+        "Value" : {
+          "type" : "string",
+          "minLength" : 0,
+          "maxLength" : 256
+        }
+      },
+      "additionalProperties" : false,
+      "required" : [ "Value", "Key" ]
+    },
+    "SampleMode" : {
+      "description" : "Sample configuration mode for profile jobs.",
+      "enum" : [ "FULL_DATASET", "CUSTOM_ROWS" ],
+      "type" : "string"
+    },
+    "JobSize" : {
+      "description" : "Sample configuration size for profile jobs.",
+      "format" : "int64",
+      "type" : "integer"
+    },
+    "JobSample" : {
+      "description" : "Job Sample",
+      "type" : "object",
+      "properties" : {
+        "Mode" : {
+          "$ref" : "#/definitions/SampleMode"
+        },
+        "Size" : {
+          "$ref" : "#/definitions/JobSize"
+        }
+      },
+      "additionalProperties" : false
+    }
+  },
+  "additionalProperties" : false,
+  "required" : [ "Name", "RoleArn", "Type" ],
+  "primaryIdentifier" : [ "/properties/Name" ],
+  "createOnlyProperties" : [ "/properties/Name", "/properties/Type", "/properties/Tags" ],
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "databrew:CreateProfileJob", "databrew:CreateRecipeJob", "databrew:TagResource", "databrew:UntagResource", "iam:PassRole" ]
+    },
+    "read" : {
+      "permissions" : [ "databrew:DescribeJob", "databrew:ListTagsForResource", "iam:ListRoles" ]
+    },
+    "update" : {
+      "permissions" : [ "databrew:UpdateProfileJob", "databrew:UpdateRecipeJob" ]
+    },
+    "delete" : {
+      "permissions" : [ "databrew:DeleteJob" ]
+    },
+    "list" : {
+      "permissions" : [ "databrew:ListJobs", "databrew:ListTagsForResource", "iam:ListRoles" ]
+    }
+  }
+}

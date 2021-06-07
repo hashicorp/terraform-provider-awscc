@@ -1,0 +1,105 @@
+{
+  "typeName" : "AWS::Amplify::Branch",
+  "description" : "Resource Type definition for AWS::Amplify::Branch",
+  "additionalProperties" : false,
+  "properties" : {
+    "Description" : {
+      "type" : "string"
+    },
+    "EnablePerformanceMode" : {
+      "type" : "boolean"
+    },
+    "EnvironmentVariables" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/EnvironmentVariable"
+      }
+    },
+    "AppId" : {
+      "type" : "string"
+    },
+    "PullRequestEnvironmentName" : {
+      "type" : "string"
+    },
+    "EnablePullRequestPreview" : {
+      "type" : "boolean"
+    },
+    "EnableAutoBuild" : {
+      "type" : "boolean"
+    },
+    "BuildSpec" : {
+      "type" : "string"
+    },
+    "Stage" : {
+      "type" : "string"
+    },
+    "BranchName" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "BasicAuthConfig" : {
+      "$ref" : "#/definitions/BasicAuthConfig"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions" : {
+    "EnvironmentVariable" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Name" ]
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    },
+    "BasicAuthConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Username" : {
+          "type" : "string"
+        },
+        "EnableBasicAuth" : {
+          "type" : "boolean"
+        },
+        "Password" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Username", "Password" ]
+    }
+  },
+  "required" : [ "AppId", "BranchName" ],
+  "createOnlyProperties" : [ "/properties/AppId", "/properties/BranchName" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id", "/properties/Arn" ]
+}

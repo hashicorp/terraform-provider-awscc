@@ -1,0 +1,77 @@
+{
+  "typeName" : "AWS::AppSync::FunctionConfiguration",
+  "description" : "Resource Type definition for AWS::AppSync::FunctionConfiguration",
+  "additionalProperties" : false,
+  "properties" : {
+    "FunctionId" : {
+      "type" : "string"
+    },
+    "FunctionArn" : {
+      "type" : "string"
+    },
+    "Description" : {
+      "type" : "string"
+    },
+    "RequestMappingTemplate" : {
+      "type" : "string"
+    },
+    "ResponseMappingTemplate" : {
+      "type" : "string"
+    },
+    "SyncConfig" : {
+      "$ref" : "#/definitions/SyncConfig"
+    },
+    "Name" : {
+      "type" : "string"
+    },
+    "ResponseMappingTemplateS3Location" : {
+      "type" : "string"
+    },
+    "DataSourceName" : {
+      "type" : "string"
+    },
+    "FunctionVersion" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "RequestMappingTemplateS3Location" : {
+      "type" : "string"
+    },
+    "ApiId" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "SyncConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ConflictHandler" : {
+          "type" : "string"
+        },
+        "ConflictDetection" : {
+          "type" : "string"
+        },
+        "LambdaConflictHandlerConfig" : {
+          "$ref" : "#/definitions/LambdaConflictHandlerConfig"
+        }
+      },
+      "required" : [ "ConflictDetection" ]
+    },
+    "LambdaConflictHandlerConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "LambdaConflictHandlerArn" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "required" : [ "DataSourceName", "FunctionVersion", "ApiId", "Name" ],
+  "createOnlyProperties" : [ "/properties/ApiId" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/FunctionArn", "/properties/Id", "/properties/FunctionId" ]
+}

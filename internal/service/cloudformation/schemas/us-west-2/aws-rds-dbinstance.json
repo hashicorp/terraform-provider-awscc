@@ -1,0 +1,240 @@
+{
+  "typeName" : "AWS::RDS::DBInstance",
+  "description" : "Resource Type definition for AWS::RDS::DBInstance",
+  "additionalProperties" : false,
+  "properties" : {
+    "StorageEncrypted" : {
+      "type" : "boolean"
+    },
+    "Timezone" : {
+      "type" : "string"
+    },
+    "Port" : {
+      "type" : "string"
+    },
+    "DBClusterIdentifier" : {
+      "type" : "string"
+    },
+    "MonitoringInterval" : {
+      "type" : "integer"
+    },
+    "DBParameterGroupName" : {
+      "type" : "string"
+    },
+    "MultiAZ" : {
+      "type" : "boolean"
+    },
+    "Engine" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "EndpointAddress" : {
+      "type" : "string"
+    },
+    "PerformanceInsightsKMSKeyId" : {
+      "type" : "string"
+    },
+    "SourceDBInstanceIdentifier" : {
+      "type" : "string"
+    },
+    "EngineVersion" : {
+      "type" : "string"
+    },
+    "StorageType" : {
+      "type" : "string"
+    },
+    "KmsKeyId" : {
+      "type" : "string"
+    },
+    "DBInstanceClass" : {
+      "type" : "string"
+    },
+    "DeleteAutomatedBackups" : {
+      "type" : "boolean"
+    },
+    "PerformanceInsightsRetentionPeriod" : {
+      "type" : "integer"
+    },
+    "AvailabilityZone" : {
+      "type" : "string"
+    },
+    "OptionGroupName" : {
+      "type" : "string"
+    },
+    "EnablePerformanceInsights" : {
+      "type" : "boolean"
+    },
+    "AutoMinorVersionUpgrade" : {
+      "type" : "boolean"
+    },
+    "DBSubnetGroupName" : {
+      "type" : "string"
+    },
+    "DeletionProtection" : {
+      "type" : "boolean"
+    },
+    "DBInstanceIdentifier" : {
+      "type" : "string"
+    },
+    "AllocatedStorage" : {
+      "type" : "string"
+    },
+    "MasterUserPassword" : {
+      "type" : "string"
+    },
+    "DBSecurityGroups" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "MasterUsername" : {
+      "type" : "string"
+    },
+    "MaxAllocatedStorage" : {
+      "type" : "integer"
+    },
+    "PromotionTier" : {
+      "type" : "integer"
+    },
+    "PubliclyAccessible" : {
+      "type" : "boolean"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Domain" : {
+      "type" : "string"
+    },
+    "CharacterSetName" : {
+      "type" : "string"
+    },
+    "MonitoringRoleArn" : {
+      "type" : "string"
+    },
+    "EndpointPort" : {
+      "type" : "string"
+    },
+    "AssociatedRoles" : {
+      "type" : "array",
+      "uniqueItems" : true,
+      "items" : {
+        "$ref" : "#/definitions/DBInstanceRole"
+      }
+    },
+    "ProcessorFeatures" : {
+      "type" : "array",
+      "uniqueItems" : true,
+      "items" : {
+        "$ref" : "#/definitions/ProcessorFeature"
+      }
+    },
+    "PreferredBackupWindow" : {
+      "type" : "string"
+    },
+    "CopyTagsToSnapshot" : {
+      "type" : "boolean"
+    },
+    "DomainIAMRoleName" : {
+      "type" : "string"
+    },
+    "LicenseModel" : {
+      "type" : "string"
+    },
+    "PreferredMaintenanceWindow" : {
+      "type" : "string"
+    },
+    "Iops" : {
+      "type" : "integer"
+    },
+    "SourceRegion" : {
+      "type" : "string"
+    },
+    "CACertificateIdentifier" : {
+      "type" : "string"
+    },
+    "VPCSecurityGroups" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "AllowMajorVersionUpgrade" : {
+      "type" : "boolean"
+    },
+    "DBName" : {
+      "type" : "string"
+    },
+    "EnableIAMDatabaseAuthentication" : {
+      "type" : "boolean"
+    },
+    "BackupRetentionPeriod" : {
+      "type" : "integer"
+    },
+    "DBSnapshotIdentifier" : {
+      "type" : "string"
+    },
+    "EnableCloudwatchLogsExports" : {
+      "type" : "array",
+      "uniqueItems" : true,
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "UseDefaultProcessorFeatures" : {
+      "type" : "boolean"
+    }
+  },
+  "definitions" : {
+    "DBInstanceRole" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "RoleArn" : {
+          "type" : "string"
+        },
+        "FeatureName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "RoleArn", "FeatureName" ]
+    },
+    "ProcessorFeature" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    }
+  },
+  "required" : [ "DBInstanceClass" ],
+  "createOnlyProperties" : [ "/properties/KmsKeyId", "/properties/MasterUsername", "/properties/Port", "/properties/Timezone", "/properties/DBClusterIdentifier", "/properties/DBInstanceIdentifier", "/properties/DBSubnetGroupName", "/properties/SourceDBInstanceIdentifier", "/properties/PubliclyAccessible", "/properties/CharacterSetName", "/properties/DBName", "/properties/SourceRegion", "/properties/AvailabilityZone", "/properties/StorageEncrypted", "/properties/DBSnapshotIdentifier" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id", "/properties/Endpoint.Port", "/properties/Endpoint.Address" ]
+}

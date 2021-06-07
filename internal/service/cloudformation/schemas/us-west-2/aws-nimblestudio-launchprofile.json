@@ -1,0 +1,122 @@
+{
+  "typeName" : "AWS::NimbleStudio::LaunchProfile",
+  "description" : "Resource schema for AWS::NimbleStudio::LaunchProfile",
+  "sourceUrl" : "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-nimblestudio",
+  "definitions" : {
+    "LaunchProfileStudioComponentIdList" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "LaunchProfileProtocolVersion" : {
+      "type" : "string"
+    },
+    "LaunchProfileProtocolVersions" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/LaunchProfileProtocolVersion"
+      }
+    },
+    "StreamingImageId" : {
+      "type" : "string"
+    },
+    "StreamingImageIdList" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/StreamingImageId"
+      }
+    },
+    "StreamingInstanceType" : {
+      "type" : "string"
+    },
+    "StreamingInstanceTypeList" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/StreamingInstanceType"
+      }
+    },
+    "Ec2SubnetIdList" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "StreamConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "ClipboardMode" : {
+          "type" : "string"
+        },
+        "StreamingImageIds" : {
+          "$ref" : "#/definitions/StreamingImageIdList"
+        },
+        "Ec2InstanceTypes" : {
+          "$ref" : "#/definitions/StreamingInstanceTypeList"
+        },
+        "MaxSessionLengthInMinutes" : {
+          "type" : "number"
+        }
+      },
+      "required" : [ "Ec2InstanceTypes", "StreamingImageIds", "ClipboardMode" ],
+      "additionalProperties" : false
+    }
+  },
+  "properties" : {
+    "Description" : {
+      "type" : "string"
+    },
+    "LaunchProfileId" : {
+      "type" : "string"
+    },
+    "Name" : {
+      "type" : "string"
+    },
+    "Ec2SubnetIds" : {
+      "$ref" : "#/definitions/Ec2SubnetIdList"
+    },
+    "StreamConfiguration" : {
+      "$ref" : "#/definitions/StreamConfiguration"
+    },
+    "StudioComponentIds" : {
+      "$ref" : "#/definitions/LaunchProfileStudioComponentIdList"
+    },
+    "LaunchProfileProtocolVersions" : {
+      "$ref" : "#/definitions/LaunchProfileProtocolVersions"
+    },
+    "StudioId" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "object",
+      "patternProperties" : {
+        "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$" : {
+          "type" : "string"
+        }
+      },
+      "additionalProperties" : false
+    }
+  },
+  "additionalProperties" : false,
+  "required" : [ "StudioId", "Name", "StudioComponentIds", "Ec2SubnetIds", "StreamConfiguration", "LaunchProfileProtocolVersions" ],
+  "createOnlyProperties" : [ "/properties/StudioId", "/properties/Tags", "/properties/Ec2SubnetIds" ],
+  "readOnlyProperties" : [ "/properties/LaunchProfileId" ],
+  "primaryIdentifier" : [ "/properties/LaunchProfileId", "/properties/StudioId" ],
+  "handlers" : {
+    "create" : {
+      "permissions" : [ "nimble:CreateLaunchProfile", "nimble:TagResource", "ec2:CreateNetworkInterface", "ec2:CreateNetworkInterfacePermission", "ec2:RunInstances", "ec2:DescribeSubnets" ]
+    },
+    "read" : {
+      "permissions" : [ "nimble:GetLaunchProfile" ]
+    },
+    "update" : {
+      "permissions" : [ "nimble:UpdateLaunchProfile" ]
+    },
+    "delete" : {
+      "permissions" : [ "nimble:DeleteLaunchProfile", "nimble:UntagResource" ]
+    },
+    "list" : {
+      "permissions" : [ "nimble:ListLaunchProfiles" ]
+    }
+  }
+}

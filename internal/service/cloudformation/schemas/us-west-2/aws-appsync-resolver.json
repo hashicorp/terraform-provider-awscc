@@ -1,0 +1,109 @@
+{
+  "typeName" : "AWS::AppSync::Resolver",
+  "description" : "Resource Type definition for AWS::AppSync::Resolver",
+  "additionalProperties" : false,
+  "properties" : {
+    "TypeName" : {
+      "type" : "string"
+    },
+    "PipelineConfig" : {
+      "$ref" : "#/definitions/PipelineConfig"
+    },
+    "RequestMappingTemplate" : {
+      "type" : "string"
+    },
+    "ResponseMappingTemplate" : {
+      "type" : "string"
+    },
+    "ResolverArn" : {
+      "type" : "string"
+    },
+    "SyncConfig" : {
+      "$ref" : "#/definitions/SyncConfig"
+    },
+    "ResponseMappingTemplateS3Location" : {
+      "type" : "string"
+    },
+    "DataSourceName" : {
+      "type" : "string"
+    },
+    "Kind" : {
+      "type" : "string"
+    },
+    "CachingConfig" : {
+      "$ref" : "#/definitions/CachingConfig"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "RequestMappingTemplateS3Location" : {
+      "type" : "string"
+    },
+    "FieldName" : {
+      "type" : "string"
+    },
+    "ApiId" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "PipelineConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Functions" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "CachingConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "CachingKeys" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Ttl" : {
+          "type" : "number"
+        }
+      }
+    },
+    "SyncConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ConflictHandler" : {
+          "type" : "string"
+        },
+        "ConflictDetection" : {
+          "type" : "string"
+        },
+        "LambdaConflictHandlerConfig" : {
+          "$ref" : "#/definitions/LambdaConflictHandlerConfig"
+        }
+      },
+      "required" : [ "ConflictDetection" ]
+    },
+    "LambdaConflictHandlerConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "LambdaConflictHandlerArn" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "required" : [ "TypeName", "ApiId", "FieldName" ],
+  "createOnlyProperties" : [ "/properties/ApiId", "/properties/FieldName", "/properties/TypeName" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id", "/properties/ResolverArn" ]
+}

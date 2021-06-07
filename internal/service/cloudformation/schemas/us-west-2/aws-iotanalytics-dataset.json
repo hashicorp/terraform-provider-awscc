@@ -1,0 +1,363 @@
+{
+  "typeName" : "AWS::IoTAnalytics::Dataset",
+  "description" : "Resource Type definition for AWS::IoTAnalytics::Dataset",
+  "additionalProperties" : false,
+  "properties" : {
+    "Actions" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Action"
+      }
+    },
+    "LateDataRules" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/LateDataRule"
+      }
+    },
+    "DatasetName" : {
+      "type" : "string"
+    },
+    "ContentDeliveryRules" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/DatasetContentDeliveryRule"
+      }
+    },
+    "Triggers" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Trigger"
+      }
+    },
+    "VersioningConfiguration" : {
+      "$ref" : "#/definitions/VersioningConfiguration"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "RetentionPeriod" : {
+      "$ref" : "#/definitions/RetentionPeriod"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions" : {
+    "DatasetContentVersionValue" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "DatasetName" : {
+          "type" : "string"
+        }
+      }
+    },
+    "GlueConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "DatabaseName" : {
+          "type" : "string"
+        },
+        "TableName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "TableName", "DatabaseName" ]
+    },
+    "Action" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ActionName" : {
+          "type" : "string"
+        },
+        "ContainerAction" : {
+          "$ref" : "#/definitions/ContainerAction"
+        },
+        "QueryAction" : {
+          "$ref" : "#/definitions/QueryAction"
+        }
+      },
+      "required" : [ "ActionName" ]
+    },
+    "Variable" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "VariableName" : {
+          "type" : "string"
+        },
+        "DatasetContentVersionValue" : {
+          "$ref" : "#/definitions/DatasetContentVersionValue"
+        },
+        "StringValue" : {
+          "type" : "string"
+        },
+        "DoubleValue" : {
+          "type" : "number"
+        },
+        "OutputFileUriValue" : {
+          "$ref" : "#/definitions/OutputFileUriValue"
+        }
+      },
+      "required" : [ "VariableName" ]
+    },
+    "IotEventsDestinationConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "InputName" : {
+          "type" : "string"
+        },
+        "RoleArn" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "InputName", "RoleArn" ]
+    },
+    "LateDataRule" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "RuleConfiguration" : {
+          "$ref" : "#/definitions/LateDataRuleConfiguration"
+        },
+        "RuleName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "RuleConfiguration" ]
+    },
+    "DeltaTimeSessionWindowConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "TimeoutInMinutes" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "TimeoutInMinutes" ]
+    },
+    "QueryAction" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Filters" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Filter"
+          }
+        },
+        "SqlQuery" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "SqlQuery" ]
+    },
+    "VersioningConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Unlimited" : {
+          "type" : "boolean"
+        },
+        "MaxVersions" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "RetentionPeriod" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "NumberOfDays" : {
+          "type" : "integer"
+        },
+        "Unlimited" : {
+          "type" : "boolean"
+        }
+      },
+      "required" : [ "NumberOfDays", "Unlimited" ]
+    },
+    "ResourceConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "VolumeSizeInGB" : {
+          "type" : "integer"
+        },
+        "ComputeType" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "VolumeSizeInGB", "ComputeType" ]
+    },
+    "DatasetContentDeliveryRule" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Destination" : {
+          "$ref" : "#/definitions/DatasetContentDeliveryRuleDestination"
+        },
+        "EntryName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Destination" ]
+    },
+    "Trigger" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "TriggeringDataset" : {
+          "$ref" : "#/definitions/TriggeringDataset"
+        },
+        "Schedule" : {
+          "$ref" : "#/definitions/Schedule"
+        }
+      }
+    },
+    "DeltaTime" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "OffsetSeconds" : {
+          "type" : "integer"
+        },
+        "TimeExpression" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "TimeExpression", "OffsetSeconds" ]
+    },
+    "ContainerAction" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Variables" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Variable"
+          }
+        },
+        "ExecutionRoleArn" : {
+          "type" : "string"
+        },
+        "Image" : {
+          "type" : "string"
+        },
+        "ResourceConfiguration" : {
+          "$ref" : "#/definitions/ResourceConfiguration"
+        }
+      },
+      "required" : [ "ExecutionRoleArn", "Image", "ResourceConfiguration" ]
+    },
+    "Filter" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "DeltaTime" : {
+          "$ref" : "#/definitions/DeltaTime"
+        }
+      }
+    },
+    "OutputFileUriValue" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "FileName" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Schedule" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ScheduleExpression" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "ScheduleExpression" ]
+    },
+    "S3DestinationConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "GlueConfiguration" : {
+          "$ref" : "#/definitions/GlueConfiguration"
+        },
+        "Bucket" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        },
+        "RoleArn" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Bucket", "Key", "RoleArn" ]
+    },
+    "LateDataRuleConfiguration" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "DeltaTimeSessionWindowConfiguration" : {
+          "$ref" : "#/definitions/DeltaTimeSessionWindowConfiguration"
+        }
+      }
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    },
+    "DatasetContentDeliveryRuleDestination" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "IotEventsDestinationConfiguration" : {
+          "$ref" : "#/definitions/IotEventsDestinationConfiguration"
+        },
+        "S3DestinationConfiguration" : {
+          "$ref" : "#/definitions/S3DestinationConfiguration"
+        }
+      }
+    },
+    "TriggeringDataset" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "DatasetName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "DatasetName" ]
+    }
+  },
+  "required" : [ "Actions" ],
+  "createOnlyProperties" : [ "/properties/DatasetName" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

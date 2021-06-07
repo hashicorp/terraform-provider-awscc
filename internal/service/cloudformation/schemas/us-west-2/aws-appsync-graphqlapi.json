@@ -1,0 +1,107 @@
+{
+  "typeName" : "AWS::AppSync::GraphQLApi",
+  "description" : "Resource Type definition for AWS::AppSync::GraphQLApi",
+  "additionalProperties" : false,
+  "properties" : {
+    "GraphQLUrl" : {
+      "type" : "string"
+    },
+    "OpenIDConnectConfig" : {
+      "$ref" : "#/definitions/OpenIDConnectConfig"
+    },
+    "XrayEnabled" : {
+      "type" : "boolean"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "UserPoolConfig" : {
+      "$ref" : "#/definitions/UserPoolConfig"
+    },
+    "ApiId" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "$ref" : "#/definitions/Tags"
+    },
+    "Name" : {
+      "type" : "string"
+    },
+    "AuthenticationType" : {
+      "type" : "string"
+    },
+    "LogConfig" : {
+      "$ref" : "#/definitions/LogConfig"
+    },
+    "AdditionalAuthenticationProviders" : {
+      "$ref" : "#/definitions/AdditionalAuthenticationProviders"
+    }
+  },
+  "definitions" : {
+    "OpenIDConnectConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ClientId" : {
+          "type" : "string"
+        },
+        "AuthTTL" : {
+          "type" : "number"
+        },
+        "Issuer" : {
+          "type" : "string"
+        },
+        "IatTTL" : {
+          "type" : "number"
+        }
+      }
+    },
+    "UserPoolConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "AppIdClientRegex" : {
+          "type" : "string"
+        },
+        "UserPoolId" : {
+          "type" : "string"
+        },
+        "AwsRegion" : {
+          "type" : "string"
+        },
+        "DefaultAction" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Tags" : {
+      "type" : "object",
+      "additionalProperties" : false
+    },
+    "AdditionalAuthenticationProviders" : {
+      "type" : "object",
+      "additionalProperties" : false
+    },
+    "LogConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ExcludeVerboseContent" : {
+          "type" : "boolean"
+        },
+        "FieldLogLevel" : {
+          "type" : "string"
+        },
+        "CloudWatchLogsRoleArn" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "required" : [ "Name", "AuthenticationType" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/ApiId", "/properties/Id", "/properties/GraphQLUrl", "/properties/Arn" ]
+}

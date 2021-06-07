@@ -1,0 +1,111 @@
+{
+  "typeName" : "AWS::EKS::Cluster",
+  "description" : "Resource Type definition for AWS::EKS::Cluster",
+  "additionalProperties" : false,
+  "properties" : {
+    "EncryptionConfigKeyArn" : {
+      "type" : "string"
+    },
+    "CertificateAuthorityData" : {
+      "type" : "string"
+    },
+    "EncryptionConfig" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/EncryptionConfig"
+      }
+    },
+    "RoleArn" : {
+      "type" : "string"
+    },
+    "KubernetesNetworkConfig" : {
+      "$ref" : "#/definitions/KubernetesNetworkConfig"
+    },
+    "Name" : {
+      "type" : "string"
+    },
+    "Endpoint" : {
+      "type" : "string"
+    },
+    "Version" : {
+      "type" : "string"
+    },
+    "ClusterSecurityGroupId" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "ResourcesVpcConfig" : {
+      "$ref" : "#/definitions/ResourcesVpcConfig"
+    },
+    "OpenIdConnectIssuerUrl" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "EncryptionConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Resources" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Provider" : {
+          "$ref" : "#/definitions/Provider"
+        }
+      }
+    },
+    "ResourcesVpcConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SecurityGroupIds" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "SubnetIds" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "required" : [ "SubnetIds" ]
+    },
+    "KubernetesNetworkConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ServiceIpv4Cidr" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Provider" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "KeyArn" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "required" : [ "RoleArn", "ResourcesVpcConfig" ],
+  "createOnlyProperties" : [ "/properties/RoleArn", "/properties/KubernetesNetworkConfig", "/properties/Name", "/properties/EncryptionConfig", "/properties/ResourcesVpcConfig" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/ClusterSecurityGroupId", "/properties/Id", "/properties/Endpoint", "/properties/CertificateAuthorityData", "/properties/EncryptionConfigKeyArn", "/properties/Arn", "/properties/OpenIdConnectIssuerUrl" ]
+}

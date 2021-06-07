@@ -5,14 +5,19 @@ ACCTEST_PARALLELISM?=20
 
 default: build
 
-.PHONY: build gen test testacc
+.PHONY: all build resources schemas test testacc
+
+all: schemas resources build
 
 build:
 	go install
 
-gen:
+resources:
 	rm -f internal/provider/*_gen.go
-	go generate ./...
+	go generate internal/provider/resources.go
+
+schemas:
+	go generate internal/provider/schemas.go
 
 test:
 	go test $(TEST) $(TESTARGS) -timeout=5m -parallel=4

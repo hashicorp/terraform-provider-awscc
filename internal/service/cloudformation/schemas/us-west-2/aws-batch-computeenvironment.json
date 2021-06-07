@@ -1,0 +1,136 @@
+{
+  "typeName" : "AWS::Batch::ComputeEnvironment",
+  "description" : "Resource Type definition for AWS::Batch::ComputeEnvironment",
+  "additionalProperties" : false,
+  "properties" : {
+    "Type" : {
+      "type" : "string"
+    },
+    "ServiceRole" : {
+      "type" : "string"
+    },
+    "ComputeEnvironmentName" : {
+      "type" : "string"
+    },
+    "ComputeResources" : {
+      "$ref" : "#/definitions/ComputeResources"
+    },
+    "State" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "object"
+    }
+  },
+  "definitions" : {
+    "Ec2ConfigurationObject" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ImageIdOverride" : {
+          "type" : "string"
+        },
+        "ImageType" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "ImageType" ]
+    },
+    "LaunchTemplateSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "LaunchTemplateName" : {
+          "type" : "string"
+        },
+        "LaunchTemplateId" : {
+          "type" : "string"
+        },
+        "Version" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ComputeResources" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SpotIamFleetRole" : {
+          "type" : "string"
+        },
+        "MaxvCpus" : {
+          "type" : "integer"
+        },
+        "Ec2Configuration" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Ec2ConfigurationObject"
+          }
+        },
+        "BidPercentage" : {
+          "type" : "integer"
+        },
+        "SecurityGroupIds" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Subnets" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Type" : {
+          "type" : "string"
+        },
+        "AllocationStrategy" : {
+          "type" : "string"
+        },
+        "MinvCpus" : {
+          "type" : "integer"
+        },
+        "LaunchTemplate" : {
+          "$ref" : "#/definitions/LaunchTemplateSpecification"
+        },
+        "ImageId" : {
+          "type" : "string"
+        },
+        "InstanceRole" : {
+          "type" : "string"
+        },
+        "InstanceTypes" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Ec2KeyPair" : {
+          "type" : "string"
+        },
+        "PlacementGroup" : {
+          "type" : "string"
+        },
+        "Tags" : {
+          "type" : "object"
+        },
+        "DesiredvCpus" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "Subnets", "Type", "MaxvCpus" ]
+    }
+  },
+  "required" : [ "Type" ],
+  "createOnlyProperties" : [ "/properties/ComputeEnvironmentName", "/properties/Type", "/properties/Tags" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

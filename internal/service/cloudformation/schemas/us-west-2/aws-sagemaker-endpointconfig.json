@@ -1,0 +1,136 @@
+{
+  "typeName" : "AWS::SageMaker::EndpointConfig",
+  "description" : "Resource Type definition for AWS::SageMaker::EndpointConfig",
+  "additionalProperties" : false,
+  "properties" : {
+    "DataCaptureConfig" : {
+      "$ref" : "#/definitions/DataCaptureConfig"
+    },
+    "ProductionVariants" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/ProductionVariant"
+      }
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "KmsKeyId" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "EndpointConfigName" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "DataCaptureConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "CaptureOptions" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/CaptureOption"
+          }
+        },
+        "KmsKeyId" : {
+          "type" : "string"
+        },
+        "DestinationS3Uri" : {
+          "type" : "string"
+        },
+        "InitialSamplingPercentage" : {
+          "type" : "integer"
+        },
+        "CaptureContentTypeHeader" : {
+          "$ref" : "#/definitions/CaptureContentTypeHeader"
+        },
+        "EnableCapture" : {
+          "type" : "boolean"
+        }
+      },
+      "required" : [ "CaptureOptions", "DestinationS3Uri", "InitialSamplingPercentage" ]
+    },
+    "ProductionVariant" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ModelName" : {
+          "type" : "string"
+        },
+        "VariantName" : {
+          "type" : "string"
+        },
+        "InitialInstanceCount" : {
+          "type" : "integer"
+        },
+        "InstanceType" : {
+          "type" : "string"
+        },
+        "AcceleratorType" : {
+          "type" : "string"
+        },
+        "InitialVariantWeight" : {
+          "type" : "number"
+        }
+      },
+      "required" : [ "ModelName", "VariantName", "InitialInstanceCount", "InstanceType", "InitialVariantWeight" ]
+    },
+    "CaptureContentTypeHeader" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "CsvContentTypes" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "JsonContentTypes" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "CaptureOption" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "CaptureMode" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "CaptureMode" ]
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    }
+  },
+  "required" : [ "ProductionVariants" ],
+  "createOnlyProperties" : [ "/properties/KmsKeyId", "/properties/ProductionVariants", "/properties/DataCaptureConfig", "/properties/EndpointConfigName" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

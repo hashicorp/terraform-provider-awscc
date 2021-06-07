@@ -1,0 +1,160 @@
+{
+  "typeName" : "AWS::AppMesh::GatewayRoute",
+  "description" : "Resource Type definition for AWS::AppMesh::GatewayRoute",
+  "additionalProperties" : false,
+  "properties" : {
+    "Uid" : {
+      "type" : "string"
+    },
+    "MeshName" : {
+      "type" : "string"
+    },
+    "VirtualGatewayName" : {
+      "type" : "string"
+    },
+    "MeshOwner" : {
+      "type" : "string"
+    },
+    "ResourceOwner" : {
+      "type" : "string"
+    },
+    "GatewayRouteName" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "Spec" : {
+      "$ref" : "#/definitions/GatewayRouteSpec"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions" : {
+    "GrpcGatewayRouteAction" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Target" : {
+          "$ref" : "#/definitions/GatewayRouteTarget"
+        }
+      },
+      "required" : [ "Target" ]
+    },
+    "GatewayRouteVirtualService" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "VirtualServiceName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "VirtualServiceName" ]
+    },
+    "GatewayRouteTarget" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "VirtualService" : {
+          "$ref" : "#/definitions/GatewayRouteVirtualService"
+        }
+      },
+      "required" : [ "VirtualService" ]
+    },
+    "GrpcGatewayRouteMatch" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ServiceName" : {
+          "type" : "string"
+        }
+      }
+    },
+    "GrpcGatewayRoute" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Action" : {
+          "$ref" : "#/definitions/GrpcGatewayRouteAction"
+        },
+        "Match" : {
+          "$ref" : "#/definitions/GrpcGatewayRouteMatch"
+        }
+      },
+      "required" : [ "Action", "Match" ]
+    },
+    "GatewayRouteSpec" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "HttpRoute" : {
+          "$ref" : "#/definitions/HttpGatewayRoute"
+        },
+        "Http2Route" : {
+          "$ref" : "#/definitions/HttpGatewayRoute"
+        },
+        "GrpcRoute" : {
+          "$ref" : "#/definitions/GrpcGatewayRoute"
+        }
+      }
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    },
+    "HttpGatewayRouteMatch" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Prefix" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Prefix" ]
+    },
+    "HttpGatewayRouteAction" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Target" : {
+          "$ref" : "#/definitions/GatewayRouteTarget"
+        }
+      },
+      "required" : [ "Target" ]
+    },
+    "HttpGatewayRoute" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Action" : {
+          "$ref" : "#/definitions/HttpGatewayRouteAction"
+        },
+        "Match" : {
+          "$ref" : "#/definitions/HttpGatewayRouteMatch"
+        }
+      },
+      "required" : [ "Action", "Match" ]
+    }
+  },
+  "required" : [ "MeshName", "VirtualGatewayName", "Spec" ],
+  "createOnlyProperties" : [ "/properties/MeshName", "/properties/VirtualGatewayName", "/properties/MeshOwner", "/properties/GatewayRouteName" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id", "/properties/ResourceOwner", "/properties/Arn", "/properties/Uid" ]
+}

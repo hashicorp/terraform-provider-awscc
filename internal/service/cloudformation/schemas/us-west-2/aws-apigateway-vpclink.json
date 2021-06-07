@@ -1,0 +1,27 @@
+{
+  "typeName" : "AWS::ApiGateway::VpcLink",
+  "description" : "Resource Type definition for AWS::ApiGateway::VpcLink",
+  "additionalProperties" : false,
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "Description" : {
+      "type" : "string"
+    },
+    "TargetArns" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "Name" : {
+      "type" : "string"
+    }
+  },
+  "required" : [ "TargetArns", "Name" ],
+  "createOnlyProperties" : [ "/properties/TargetArns" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

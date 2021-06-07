@@ -1,0 +1,29 @@
+{
+  "typeName" : "AWS::GuardDuty::IPSet",
+  "description" : "Resource Type definition for AWS::GuardDuty::IPSet",
+  "additionalProperties" : false,
+  "properties" : {
+    "Id" : {
+      "type" : "string"
+    },
+    "Format" : {
+      "type" : "string"
+    },
+    "Activate" : {
+      "type" : "boolean"
+    },
+    "DetectorId" : {
+      "type" : "string"
+    },
+    "Name" : {
+      "type" : "string"
+    },
+    "Location" : {
+      "type" : "string"
+    }
+  },
+  "required" : [ "Format", "Activate", "DetectorId", "Location" ],
+  "createOnlyProperties" : [ "/properties/DetectorId", "/properties/Format" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

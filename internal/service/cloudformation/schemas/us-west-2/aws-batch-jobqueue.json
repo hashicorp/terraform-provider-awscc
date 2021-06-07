@@ -1,0 +1,48 @@
+{
+  "typeName" : "AWS::Batch::JobQueue",
+  "description" : "Resource Type definition for AWS::Batch::JobQueue",
+  "additionalProperties" : false,
+  "properties" : {
+    "ComputeEnvironmentOrder" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/ComputeEnvironmentOrder"
+      }
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Priority" : {
+      "type" : "integer"
+    },
+    "State" : {
+      "type" : "string"
+    },
+    "JobQueueName" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "object"
+    }
+  },
+  "definitions" : {
+    "ComputeEnvironmentOrder" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ComputeEnvironment" : {
+          "type" : "string"
+        },
+        "Order" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "ComputeEnvironment", "Order" ]
+    }
+  },
+  "required" : [ "ComputeEnvironmentOrder", "Priority" ],
+  "createOnlyProperties" : [ "/properties/Tags", "/properties/JobQueueName" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

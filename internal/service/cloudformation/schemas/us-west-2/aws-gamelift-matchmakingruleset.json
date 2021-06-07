@@ -1,0 +1,23 @@
+{
+  "typeName" : "AWS::GameLift::MatchmakingRuleSet",
+  "description" : "Resource Type definition for AWS::GameLift::MatchmakingRuleSet",
+  "additionalProperties" : false,
+  "properties" : {
+    "RuleSetBody" : {
+      "type" : "string"
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "Name" : {
+      "type" : "string"
+    }
+  },
+  "required" : [ "RuleSetBody", "Name" ],
+  "createOnlyProperties" : [ "/properties/Name", "/properties/RuleSetBody" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id", "/properties/Arn" ]
+}

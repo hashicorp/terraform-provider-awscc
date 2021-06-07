@@ -1,0 +1,490 @@
+{
+  "typeName" : "AWS::EC2::SpotFleet",
+  "description" : "Resource Type definition for AWS::EC2::SpotFleet",
+  "additionalProperties" : false,
+  "properties" : {
+    "SpotFleetRequestConfigData" : {
+      "$ref" : "#/definitions/SpotFleetRequestConfigData"
+    },
+    "Id" : {
+      "type" : "string"
+    }
+  },
+  "definitions" : {
+    "ClassicLoadBalancersConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ClassicLoadBalancers" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/ClassicLoadBalancer"
+          }
+        }
+      },
+      "required" : [ "ClassicLoadBalancers" ]
+    },
+    "TargetGroupsConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "TargetGroups" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/TargetGroup"
+          }
+        }
+      },
+      "required" : [ "TargetGroups" ]
+    },
+    "SpotCapacityRebalance" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ReplacementStrategy" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SpotFleetRequestConfigData" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SpotMaxTotalPrice" : {
+          "type" : "string"
+        },
+        "ExcessCapacityTerminationPolicy" : {
+          "type" : "string"
+        },
+        "InstancePoolsToUseCount" : {
+          "type" : "integer"
+        },
+        "LaunchTemplateConfigs" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/LaunchTemplateConfig"
+          }
+        },
+        "IamFleetRole" : {
+          "type" : "string"
+        },
+        "SpotMaintenanceStrategies" : {
+          "$ref" : "#/definitions/SpotMaintenanceStrategies"
+        },
+        "TerminateInstancesWithExpiration" : {
+          "type" : "boolean"
+        },
+        "ValidUntil" : {
+          "type" : "string"
+        },
+        "OnDemandMaxTotalPrice" : {
+          "type" : "string"
+        },
+        "OnDemandAllocationStrategy" : {
+          "type" : "string"
+        },
+        "SpotPrice" : {
+          "type" : "string"
+        },
+        "AllocationStrategy" : {
+          "type" : "string"
+        },
+        "OnDemandTargetCapacity" : {
+          "type" : "integer"
+        },
+        "Type" : {
+          "type" : "string"
+        },
+        "LaunchSpecifications" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/SpotFleetLaunchSpecification"
+          }
+        },
+        "InstanceInterruptionBehavior" : {
+          "type" : "string"
+        },
+        "LoadBalancersConfig" : {
+          "$ref" : "#/definitions/LoadBalancersConfig"
+        },
+        "ValidFrom" : {
+          "type" : "string"
+        },
+        "ReplaceUnhealthyInstances" : {
+          "type" : "boolean"
+        },
+        "TargetCapacity" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "IamFleetRole", "TargetCapacity" ]
+    },
+    "SpotFleetTagSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ResourceType" : {
+          "type" : "string"
+        },
+        "Tags" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "$ref" : "#/definitions/Tag"
+          }
+        }
+      }
+    },
+    "SpotFleetLaunchSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SecurityGroups" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/GroupIdentifier"
+          }
+        },
+        "TagSpecifications" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/SpotFleetTagSpecification"
+          }
+        },
+        "UserData" : {
+          "type" : "string"
+        },
+        "BlockDeviceMappings" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/BlockDeviceMapping"
+          }
+        },
+        "IamInstanceProfile" : {
+          "$ref" : "#/definitions/IamInstanceProfileSpecification"
+        },
+        "KernelId" : {
+          "type" : "string"
+        },
+        "SubnetId" : {
+          "type" : "string"
+        },
+        "EbsOptimized" : {
+          "type" : "boolean"
+        },
+        "KeyName" : {
+          "type" : "string"
+        },
+        "RamdiskId" : {
+          "type" : "string"
+        },
+        "SpotPrice" : {
+          "type" : "string"
+        },
+        "WeightedCapacity" : {
+          "type" : "number"
+        },
+        "Placement" : {
+          "$ref" : "#/definitions/SpotPlacement"
+        },
+        "NetworkInterfaces" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/InstanceNetworkInterfaceSpecification"
+          }
+        },
+        "ImageId" : {
+          "type" : "string"
+        },
+        "InstanceType" : {
+          "type" : "string"
+        },
+        "Monitoring" : {
+          "$ref" : "#/definitions/SpotFleetMonitoring"
+        }
+      },
+      "required" : [ "ImageId", "InstanceType" ]
+    },
+    "IamInstanceProfileSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Arn" : {
+          "type" : "string"
+        }
+      }
+    },
+    "InstanceIpv6Address" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Ipv6Address" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Ipv6Address" ]
+    },
+    "LaunchTemplateConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "LaunchTemplateSpecification" : {
+          "$ref" : "#/definitions/FleetLaunchTemplateSpecification"
+        },
+        "Overrides" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/LaunchTemplateOverrides"
+          }
+        }
+      }
+    },
+    "SpotFleetMonitoring" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Enabled" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "InstanceNetworkInterfaceSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Description" : {
+          "type" : "string"
+        },
+        "PrivateIpAddresses" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/PrivateIpAddressSpecification"
+          }
+        },
+        "SecondaryPrivateIpAddressCount" : {
+          "type" : "integer"
+        },
+        "DeviceIndex" : {
+          "type" : "integer"
+        },
+        "Groups" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "Ipv6AddressCount" : {
+          "type" : "integer"
+        },
+        "Ipv6Addresses" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/InstanceIpv6Address"
+          }
+        },
+        "SubnetId" : {
+          "type" : "string"
+        },
+        "AssociatePublicIpAddress" : {
+          "type" : "boolean"
+        },
+        "NetworkInterfaceId" : {
+          "type" : "string"
+        },
+        "DeleteOnTermination" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "SpotMaintenanceStrategies" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "CapacityRebalance" : {
+          "$ref" : "#/definitions/SpotCapacityRebalance"
+        }
+      }
+    },
+    "GroupIdentifier" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "GroupId" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "GroupId" ]
+    },
+    "FleetLaunchTemplateSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "LaunchTemplateName" : {
+          "type" : "string"
+        },
+        "LaunchTemplateId" : {
+          "type" : "string"
+        },
+        "Version" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Version" ]
+    },
+    "PrivateIpAddressSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "PrivateIpAddress" : {
+          "type" : "string"
+        },
+        "Primary" : {
+          "type" : "boolean"
+        }
+      },
+      "required" : [ "PrivateIpAddress" ]
+    },
+    "LaunchTemplateOverrides" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SpotPrice" : {
+          "type" : "string"
+        },
+        "WeightedCapacity" : {
+          "type" : "number"
+        },
+        "Priority" : {
+          "type" : "number"
+        },
+        "AvailabilityZone" : {
+          "type" : "string"
+        },
+        "SubnetId" : {
+          "type" : "string"
+        },
+        "InstanceType" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SpotPlacement" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "GroupName" : {
+          "type" : "string"
+        },
+        "Tenancy" : {
+          "type" : "string"
+        },
+        "AvailabilityZone" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EbsBlockDevice" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "SnapshotId" : {
+          "type" : "string"
+        },
+        "VolumeType" : {
+          "type" : "string"
+        },
+        "Encrypted" : {
+          "type" : "boolean"
+        },
+        "Iops" : {
+          "type" : "integer"
+        },
+        "VolumeSize" : {
+          "type" : "integer"
+        },
+        "DeleteOnTermination" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "LoadBalancersConfig" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ClassicLoadBalancersConfig" : {
+          "$ref" : "#/definitions/ClassicLoadBalancersConfig"
+        },
+        "TargetGroupsConfig" : {
+          "$ref" : "#/definitions/TargetGroupsConfig"
+        }
+      }
+    },
+    "TargetGroup" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Arn" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Arn" ]
+    },
+    "BlockDeviceMapping" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "NoDevice" : {
+          "type" : "string"
+        },
+        "VirtualName" : {
+          "type" : "string"
+        },
+        "Ebs" : {
+          "$ref" : "#/definitions/EbsBlockDevice"
+        },
+        "DeviceName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "DeviceName" ]
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    },
+    "ClassicLoadBalancer" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Name" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Name" ]
+    }
+  },
+  "required" : [ "SpotFleetRequestConfigData" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/Id" ]
+}

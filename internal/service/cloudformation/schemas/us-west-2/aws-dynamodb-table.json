@@ -1,0 +1,266 @@
+{
+  "typeName" : "AWS::DynamoDB::Table",
+  "description" : "Resource Type definition for AWS::DynamoDB::Table",
+  "additionalProperties" : false,
+  "properties" : {
+    "SSESpecification" : {
+      "$ref" : "#/definitions/SSESpecification"
+    },
+    "KinesisStreamSpecification" : {
+      "$ref" : "#/definitions/KinesisStreamSpecification"
+    },
+    "ContributorInsightsSpecification" : {
+      "$ref" : "#/definitions/ContributorInsightsSpecification"
+    },
+    "StreamSpecification" : {
+      "$ref" : "#/definitions/StreamSpecification"
+    },
+    "PointInTimeRecoverySpecification" : {
+      "$ref" : "#/definitions/PointInTimeRecoverySpecification"
+    },
+    "ProvisionedThroughput" : {
+      "$ref" : "#/definitions/ProvisionedThroughput"
+    },
+    "TableName" : {
+      "type" : "string"
+    },
+    "AttributeDefinitions" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/AttributeDefinition"
+      }
+    },
+    "BillingMode" : {
+      "type" : "string"
+    },
+    "GlobalSecondaryIndexes" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/GlobalSecondaryIndex"
+      }
+    },
+    "KeySchema" : {
+      "type" : "array",
+      "uniqueItems" : true,
+      "items" : {
+        "$ref" : "#/definitions/KeySchema"
+      }
+    },
+    "LocalSecondaryIndexes" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/LocalSecondaryIndex"
+      }
+    },
+    "Id" : {
+      "type" : "string"
+    },
+    "Arn" : {
+      "type" : "string"
+    },
+    "StreamArn" : {
+      "type" : "string"
+    },
+    "Tags" : {
+      "type" : "array",
+      "uniqueItems" : false,
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "TimeToLiveSpecification" : {
+      "$ref" : "#/definitions/TimeToLiveSpecification"
+    }
+  },
+  "definitions" : {
+    "LocalSecondaryIndex" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "IndexName" : {
+          "type" : "string"
+        },
+        "Projection" : {
+          "$ref" : "#/definitions/Projection"
+        },
+        "KeySchema" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/KeySchema"
+          }
+        }
+      },
+      "required" : [ "IndexName", "Projection", "KeySchema" ]
+    },
+    "SSESpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "KMSMasterKeyId" : {
+          "type" : "string"
+        },
+        "SSEEnabled" : {
+          "type" : "boolean"
+        },
+        "SSEType" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "SSEEnabled" ]
+    },
+    "KinesisStreamSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "StreamArn" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "StreamArn" ]
+    },
+    "StreamSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "StreamViewType" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "StreamViewType" ]
+    },
+    "ContributorInsightsSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Enabled" : {
+          "type" : "boolean"
+        }
+      },
+      "required" : [ "Enabled" ]
+    },
+    "AttributeDefinition" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "AttributeType" : {
+          "type" : "string"
+        },
+        "AttributeName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "AttributeType", "AttributeName" ]
+    },
+    "Projection" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "ProjectionType" : {
+          "type" : "string"
+        },
+        "NonKeyAttributes" : {
+          "type" : "array",
+          "uniqueItems" : false,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "PointInTimeRecoverySpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "PointInTimeRecoveryEnabled" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "ProvisionedThroughput" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "WriteCapacityUnits" : {
+          "type" : "integer"
+        },
+        "ReadCapacityUnits" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "WriteCapacityUnits", "ReadCapacityUnits" ]
+    },
+    "GlobalSecondaryIndex" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "IndexName" : {
+          "type" : "string"
+        },
+        "Projection" : {
+          "$ref" : "#/definitions/Projection"
+        },
+        "ProvisionedThroughput" : {
+          "$ref" : "#/definitions/ProvisionedThroughput"
+        },
+        "KeySchema" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/KeySchema"
+          }
+        },
+        "ContributorInsightsSpecification" : {
+          "$ref" : "#/definitions/ContributorInsightsSpecification"
+        }
+      },
+      "required" : [ "IndexName", "Projection", "KeySchema" ]
+    },
+    "KeySchema" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "KeyType" : {
+          "type" : "string"
+        },
+        "AttributeName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "KeyType", "AttributeName" ]
+    },
+    "Tag" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Value" : {
+          "type" : "string"
+        },
+        "Key" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Value", "Key" ]
+    },
+    "TimeToLiveSpecification" : {
+      "type" : "object",
+      "additionalProperties" : false,
+      "properties" : {
+        "Enabled" : {
+          "type" : "boolean"
+        },
+        "AttributeName" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "Enabled", "AttributeName" ]
+    }
+  },
+  "required" : [ "KeySchema" ],
+  "createOnlyProperties" : [ "/properties/LocalSecondaryIndexes", "/properties/TableName", "/properties/KeySchema" ],
+  "primaryIdentifier" : [ "/properties/Id" ],
+  "readOnlyProperties" : [ "/properties/StreamArn", "/properties/Id", "/properties/Arn" ]
+}
