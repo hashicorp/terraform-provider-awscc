@@ -7,6 +7,7 @@ require (
 	github.com/evanphx/json-patch v0.5.2 // indirect
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.1.0
 	github.com/hashicorp/aws-sdk-go-base v0.7.1
+	github.com/hashicorp/go-getter v1.5.3
 	github.com/hashicorp/hcl/v2 v2.10.0
 	github.com/hashicorp/terraform-plugin-docs v0.4.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.6.1
