@@ -9,6 +9,7 @@ require (
 	github.com/hashicorp/aws-sdk-go-base v0.7.1
 	github.com/hashicorp/go-getter v1.5.3
 	github.com/hashicorp/hcl/v2 v2.10.0
+	github.com/hashicorp/terraform-plugin-docs v0.4.0 // indirect
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.6.1
 	github.com/iancoleman/strcase v0.1.3
 	github.com/mattbaird/jsonpatch v0.0.0-20200820163806-098863c1fc24
