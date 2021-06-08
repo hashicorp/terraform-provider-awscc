@@ -111,7 +111,7 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 var resources map[string]tfsdk.ResourceType
 var resourcesMu sync.Mutex
 
-func registerResource(name string, r tfsdk.ResourceType) {
+func registerResourceType(name string, r tfsdk.ResourceType) {
 	resourcesMu.Lock()
 	defer resourcesMu.Unlock()
 
