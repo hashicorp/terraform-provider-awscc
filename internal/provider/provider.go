@@ -15,18 +15,18 @@ import (
 )
 
 func New(version string) tfsdk.Provider {
-	return nil
+	return &awsProvider{}
 }
 
-type cloudApiClient struct {
+type awsClient struct {
 	cfconn *cloudformation.CloudFormation
 }
 
-type awsCloudApiProvider struct {
-	Client *cloudApiClient
+type awsProvider struct {
+	Client *awsClient
 }
 
-func (p *awsCloudApiProvider) GetSchema(_ context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
+func (p *awsProvider) GetSchema(_ context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
 	return schema.Schema{
 		Version: 1,
 		Attributes: map[string]schema.Attribute{
@@ -45,12 +45,8 @@ func (p *awsCloudApiProvider) GetSchema(_ context.Context) (schema.Schema, []*tf
 	}, nil
 }
 
-func (p *awsCloudApiProvider) Configure(_ context.Context, input *tfsdk.ConfigureProviderRequest, output *tfsdk.ConfigureProviderResponse) {
-	config := config{
-		Region: "us-west-2",
-	}
-
-	client, err := config.CloudApiClient()
+func (p *awsProvider) Configure(_ context.Context, input *tfsdk.ConfigureProviderRequest, output *tfsdk.ConfigureProviderResponse) {
+	client, err := newAWSClient()
 
 	if err != nil {
 		//return nil, appendDiagnostic(nil, fmt.Errorf("error configuring Terraform AWS Provider: %w", err))
@@ -59,11 +55,11 @@ func (p *awsCloudApiProvider) Configure(_ context.Context, input *tfsdk.Configur
 	p.Client = client
 }
 
-func (p *awsCloudApiProvider) GetResources(_ context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
+func (p *awsProvider) GetResources(_ context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
 	return nil, nil
 }
 
-func (p *awsCloudApiProvider) GetDataSources(context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
+func (p *awsProvider) GetDataSources(context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
 	return nil, nil
 }
 
@@ -123,17 +119,12 @@ func registerResource(name string, r *schema.Resource) {
 	resources[name] = r
 }
 */
-// Minimal AWS client.
 
-type config struct {
-	Region string
-}
-
-// CloudApiClient configures and returns a fully initialized Cloud API client.
-func (c *config) CloudApiClient() (*cloudApiClient, error) {
+// newAWSClient configures and returns a fully initialized AWS client.
+func newAWSClient() (*awsClient, error) {
 	awsbaseConfig := &awsbase.Config{
 		//DebugLogging: logging.IsDebugOrHigher(),
-		Region: c.Region,
+		Region: "us-west-2",
 	}
 
 	sess, _, _, err := awsbase.GetSessionWithAccountIDAndPartition(awsbaseConfig)
@@ -141,7 +132,7 @@ func (c *config) CloudApiClient() (*cloudApiClient, error) {
 		return nil, fmt.Errorf("error getting AWS SDK session: %w", err)
 	}
 
-	client := &cloudApiClient{
+	client := &awsClient{
 		cfconn: cloudformation.New(sess.Copy(&aws.Config{})),
 	}
 
