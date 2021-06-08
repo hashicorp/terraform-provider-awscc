@@ -7,18 +7,19 @@ import (
 )
 
 // Graph implements a simple dependency graph.
+// Inspired by https://github.com/jriecken/dependency-graph.
 type Graph struct {
-	nodes         map[string]struct{}
-	outgoingEdges map[string]map[string]struct{}
-	incomingEdges map[string]map[string]struct{}
+	nodes         []string
+	outgoingEdges map[string][]string
+	incomingEdges map[string][]string
 }
 
 // New returns a new, empty dependency graph.
 func New() *Graph {
 	return &Graph{
-		nodes:         make(map[string]struct{}),
-		outgoingEdges: make(map[string]map[string]struct{}),
-		incomingEdges: make(map[string]map[string]struct{}),
+		nodes:         make([]string, 0),
+		outgoingEdges: make(map[string][]string),
+		incomingEdges: make(map[string][]string),
 	}
 }
 
@@ -29,25 +30,25 @@ func (g *Graph) Len() int {
 
 // AddNode adds the specified string to the graph.
 func (g *Graph) AddNode(s string) {
-	if _, ok := g.nodes[s]; !ok {
-		g.nodes[s] = struct{}{}
-		g.outgoingEdges[s] = make(map[string]struct{})
-		g.incomingEdges[s] = make(map[string]struct{})
+	if !g.HasNode(s) {
+		g.nodes = append(g.nodes, s)
+		g.outgoingEdges[s] = make([]string, 0)
+		g.incomingEdges[s] = make([]string, 0)
 	}
 }
 
 // RemoveNode removes the specified string from the graph if it is present.
 func (g *Graph) RemoveNode(s string) {
-	if _, ok := g.nodes[s]; ok {
-		for _, edges := range g.outgoingEdges {
-			delete(edges, s)
+	if g.HasNode(s) {
+		for n, edges := range g.outgoingEdges {
+			g.outgoingEdges[n] = removeStringFromSlice(edges, s)
 		}
 
-		for _, edges := range g.incomingEdges {
-			delete(edges, s)
+		for n, edges := range g.incomingEdges {
+			g.incomingEdges[n] = removeStringFromSlice(edges, s)
 		}
 
-		delete(g.nodes, s)
+		g.nodes = removeStringFromSlice(g.nodes, s)
 		delete(g.outgoingEdges, s)
 		delete(g.incomingEdges, s)
 	}
@@ -55,9 +56,7 @@ func (g *Graph) RemoveNode(s string) {
 
 // HasNode returns whether the specified string is in the graph.
 func (g *Graph) HasNode(s string) bool {
-	_, ok := g.nodes[s]
-
-	return ok
+	return sliceContainsString(g.nodes, s)
 }
 
 // AddDependency adds a dependency between two nodes.
@@ -70,12 +69,12 @@ func (g *Graph) AddDependency(from, to string) error {
 		return nonExistentNodeError(to)
 	}
 
-	if _, ok := g.outgoingEdges[from][to]; !ok {
-		g.outgoingEdges[from][to] = struct{}{}
+	if !sliceContainsString(g.outgoingEdges[from], to) {
+		g.outgoingEdges[from] = append(g.outgoingEdges[from], to)
 	}
 
-	if _, ok := g.incomingEdges[to][from]; !ok {
-		g.incomingEdges[to][from] = struct{}{}
+	if !sliceContainsString(g.incomingEdges[to], from) {
+		g.incomingEdges[to] = append(g.incomingEdges[to], from)
 	}
 
 	return nil
@@ -85,11 +84,11 @@ func (g *Graph) AddDependency(from, to string) error {
 // If either node doesn't exist no error is returned.
 func (g *Graph) RemoveDependency(from, to string) {
 	if g.HasNode(from) {
-		delete(g.outgoingEdges[from], to)
+		g.outgoingEdges[from] = removeStringFromSlice(g.outgoingEdges[from], to)
 	}
 
 	if g.HasNode(to) {
-		delete(g.incomingEdges[to], from)
+		g.incomingEdges[to] = removeStringFromSlice(g.incomingEdges[to], from)
 	}
 }
 
@@ -100,13 +99,7 @@ func (g *Graph) DirectDependenciesOf(s string) ([]string, error) {
 		return nil, nonExistentNodeError(s)
 	}
 
-	deps := make([]string, 0)
-
-	for k := range g.outgoingEdges[s] {
-		deps = append(deps, k)
-	}
-
-	return deps, nil
+	return g.outgoingEdges[s], nil
 }
 
 // DirectDependentsOf returns the nodes that directly depend on the specified node.
@@ -116,13 +109,7 @@ func (g *Graph) DirectDependentsOf(s string) ([]string, error) {
 		return nil, nonExistentNodeError(s)
 	}
 
-	deps := make([]string, 0)
-
-	for k := range g.incomingEdges[s] {
-		deps = append(deps, k)
-	}
-
-	return deps, nil
+	return g.incomingEdges[s], nil
 }
 
 // DependenciesOf returns the nodes that the specified node depends on (transitively).
@@ -132,15 +119,14 @@ func (g *Graph) DependenciesOf(s string) ([]string, error) {
 		return nil, nonExistentNodeError(s)
 	}
 
-	deps := make([]string, 0)
-	dfs := depthFirstSearch(g.outgoingEdges, deps)
-	err := dfs(s)
+	dfs := depthFirstSearch(g.outgoingEdges)
+	result, err := dfs(s)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return deps, nil
+	return removeStringFromSlice(result, s), nil
 }
 
 // DependentsOf returns the nodes that depend on the specified node (transitively).
@@ -150,25 +136,24 @@ func (g *Graph) DependentsOf(s string) ([]string, error) {
 		return nil, nonExistentNodeError(s)
 	}
 
-	deps := make([]string, 0)
-	dfs := depthFirstSearch(g.incomingEdges, deps)
-	err := dfs(s)
+	dfs := depthFirstSearch(g.incomingEdges)
+	result, err := dfs(s)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return deps, nil
+	return removeStringFromSlice(result, s), nil
 }
 
 // OverallOrder returns the overall processing order for the dependency graph.
 // Returns an error if a dependency cycle is detected.
 func (g *Graph) OverallOrder() ([]string, error) {
 	// Look for cycles.
-	cycleDfs := depthFirstSearch(g.outgoingEdges, make([]string, 0))
+	cycleDfs := depthFirstSearch(g.outgoingEdges)
 
-	for node := range g.nodes {
-		if err := cycleDfs(node); err != nil {
+	for _, node := range g.nodes {
+		if _, err := cycleDfs(node); err != nil {
 			return nil, err
 		}
 	}
@@ -176,15 +161,19 @@ func (g *Graph) OverallOrder() ([]string, error) {
 	order := make([]string, 0)
 
 	if g.Len() != 0 {
-		dfs := depthFirstSearch(g.outgoingEdges, order)
+		dfs := depthFirstSearch(g.outgoingEdges)
 
 		// Find all potential starting points (nodes with nothing depending on them)
 		// and run the DFS starting at each of these points.
-		for node := range g.nodes {
+		for _, node := range g.nodes {
 			if len(g.incomingEdges[node]) == 0 {
-				if err := dfs(node); err != nil {
+				result, err := dfs(node)
+
+				if err != nil {
 					return nil, err
 				}
+
+				order = append(order, result...)
 			}
 		}
 	}
@@ -192,19 +181,43 @@ func (g *Graph) OverallOrder() ([]string, error) {
 	return order, nil
 }
 
+// removeStringFromSlice removes the specified string from a slice.
+func removeStringFromSlice(slice []string, s string) []string {
+	for i, v := range slice {
+		if v == s {
+			return append(slice[:i], slice[i+1:]...)
+		}
+	}
+
+	return slice
+}
+
+// sliceContainsString returns whether a slice contains a specified string.
+func sliceContainsString(slice []string, s string) bool {
+	for _, v := range slice {
+		if v == s {
+			return true
+		}
+	}
+
+	return false
+}
+
 // depthFirstSearch returns a Topological Sort using Depth-First-Search on a set of edges.
 // Returns an error if a dependency cycle is detected.
-func depthFirstSearch(edges map[string]map[string]struct{}, results []string) func(s string) error {
+func depthFirstSearch(edges map[string][]string) func(s string) ([]string, error) {
 	type todoValue struct {
 		node      string
 		processed bool
 	}
 
-	visited := make(map[string]struct{})
+	visited := make([]string, 0)
 
-	return func(s string) error {
-		if _, ok := visited[s]; ok {
-			return nil
+	return func(s string) ([]string, error) {
+		results := make([]string, 0)
+
+		if sliceContainsString(visited, s) {
+			return results, nil
 		}
 
 		inCurrentPath := make(map[string]struct{})
@@ -221,7 +234,9 @@ func depthFirstSearch(edges map[string]map[string]struct{}, results []string) fu
 
 			if !current.processed {
 				// Visit edges.
-				if _, ok := visited[node]; ok {
+				if sliceContainsString(visited, node) {
+					todo.pop()
+
 					continue
 				}
 
@@ -242,25 +257,33 @@ func depthFirstSearch(edges map[string]map[string]struct{}, results []string) fu
 
 					path = append(path, node)
 
-					return dependencyCycleError(path)
+					return nil, dependencyCycleError(path)
 				}
 
 				inCurrentPath[node] = struct{}{}
 				currentPath.push(node)
 
-				//edges[node]
+				nodeEdges := edges[node]
+
+				for i := len(nodeEdges) - 1; i >= 0; i-- {
+					todo.push(&todoValue{
+						node: nodeEdges[i],
+					})
+				}
+
+				current.processed = true
 			} else {
 				// Edges have been visited.
 				// Unroll the stack.
 				todo.pop()
 				currentPath.pop()
 				delete(inCurrentPath, node)
-				visited[node] = struct{}{}
+				visited = append(visited, node)
 				results = append(results, node)
 			}
 		}
 
-		return nil
+		return results, nil
 	}
 }
 
