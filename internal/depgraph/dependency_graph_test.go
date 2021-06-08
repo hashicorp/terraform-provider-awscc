@@ -1,10 +1,11 @@
 package depgraph
 
 import (
+	"reflect"
 	"testing"
 )
 
-func TestDependencyGraphAddRemoveNodes(t *testing.T) {
+func TestDependencyGraphAddAndRemoveNodes(t *testing.T) {
 	g := New()
 
 	if got, expected := g.Len(), 0; got != expected {
@@ -49,5 +50,91 @@ func TestDependencyGraphAddRemoveNodes(t *testing.T) {
 	g.RemoveNode("bar")
 	if got, expected := g.Len(), 1; got != expected {
 		t.Fatalf("incorrect length. Expected: %d, got: %d", expected, got)
+	}
+}
+
+func TestDependencyGraphDirectDependenciesAndDepdendents(t *testing.T) {
+	g := New()
+
+	g.AddNode("a")
+	g.AddNode("b")
+	g.AddNode("c")
+	g.AddNode("d")
+
+	if err := g.AddDependency("a", "d"); err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+	if err := g.AddDependency("a", "b"); err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+	if err := g.AddDependency("b", "c"); err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+	if err := g.AddDependency("d", "b"); err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+
+	got, err := g.DirectDependenciesOf("a")
+	if err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+	if expected := []string{"d", "b"}; !reflect.DeepEqual(got, expected) {
+		t.Fatalf("incorrect direct dependencies. Expected: %v, got: %v", expected, got)
+	}
+
+	got, err = g.DirectDependenciesOf("b")
+	if err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+	if expected := []string{"c"}; !reflect.DeepEqual(got, expected) {
+		t.Fatalf("incorrect direct dependencies. Expected: %v, got: %v", expected, got)
+	}
+
+	got, err = g.DirectDependenciesOf("c")
+	if err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+	if expected := []string{}; !reflect.DeepEqual(got, expected) {
+		t.Fatalf("incorrect direct dependencies. Expected: %v, got: %v", expected, got)
+	}
+
+	got, err = g.DirectDependenciesOf("d")
+	if err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+	if expected := []string{"b"}; !reflect.DeepEqual(got, expected) {
+		t.Fatalf("incorrect direct dependencies. Expected: %v, got: %v", expected, got)
+	}
+
+	got, err = g.DirectDependentsOf("a")
+	if err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+	if expected := []string{}; !reflect.DeepEqual(got, expected) {
+		t.Fatalf("incorrect direct dependents. Expected: %v, got: %v", expected, got)
+	}
+
+	got, err = g.DirectDependentsOf("b")
+	if err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+	if expected := []string{"a", "d"}; !reflect.DeepEqual(got, expected) {
+		t.Fatalf("incorrect direct dependents. Expected: %v, got: %v", expected, got)
+	}
+
+	got, err = g.DirectDependentsOf("c")
+	if err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+	if expected := []string{"b"}; !reflect.DeepEqual(got, expected) {
+		t.Fatalf("incorrect direct dependents. Expected: %v, got: %v", expected, got)
+	}
+
+	got, err = g.DirectDependentsOf("d")
+	if err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+	if expected := []string{"a"}; !reflect.DeepEqual(got, expected) {
+		t.Fatalf("incorrect direct dependents. Expected: %v, got: %v", expected, got)
 	}
 }
