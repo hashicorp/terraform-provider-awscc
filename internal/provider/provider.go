@@ -3,6 +3,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"sync"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/cloudformation"
@@ -56,7 +57,7 @@ func (p *awsProvider) Configure(_ context.Context, input *tfsdk.ConfigureProvide
 }
 
 func (p *awsProvider) GetResources(_ context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
-	return nil, nil
+	return resources, nil
 }
 
 func (p *awsProvider) GetDataSources(context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
@@ -105,20 +106,20 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 		return config.Client()
 	}
 }
+*/
 
-var resources map[string]*schema.Resource
+var resources map[string]tfsdk.ResourceType
 var resourcesMu sync.Mutex
 
-func registerResource(name string, r *schema.Resource) {
+func registerResource(name string, r tfsdk.ResourceType) {
 	resourcesMu.Lock()
 	defer resourcesMu.Unlock()
 
 	if resources == nil {
-		resources = map[string]*schema.Resource{}
+		resources = make(map[string]tfsdk.ResourceType)
 	}
 	resources[name] = r
 }
-*/
 
 // newAWSClient configures and returns a fully initialized AWS client.
 func newAWSClient() (*awsClient, error) {
