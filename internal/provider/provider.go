@@ -56,11 +56,26 @@ func (p *awsProvider) Configure(_ context.Context, input *tfsdk.ConfigureProvide
 	p.Client = client
 }
 
-func (p *awsProvider) GetResources(_ context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
-	return resources, nil
+func (p *awsProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
+	var diags []*tfprotov6.Diagnostic
+	resources := make(map[string]tfsdk.ResourceType, len(resourceRegistry))
+
+	for name, factory := range resourceRegistry {
+		resourceType, err := factory(ctx)
+
+		if err != nil {
+			diags = appendDiagnostic(diags, err)
+
+			continue
+		}
+
+		resources[name] = resourceType
+	}
+
+	return resources, diags
 }
 
-func (p *awsProvider) GetDataSources(context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
+func (p *awsProvider) GetDataSources(_ context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
 	return nil, nil
 }
 
@@ -108,17 +123,18 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 }
 */
 
-var resources map[string]tfsdk.ResourceType
-var resourcesMu sync.Mutex
+var resourceRegistry map[string]func(context.Context) (tfsdk.ResourceType, error)
+var resourceRegistryMu sync.Mutex
 
-func registerResourceType(name string, r tfsdk.ResourceType) {
-	resourcesMu.Lock()
-	defer resourcesMu.Unlock()
+// RegisterResourceType registers the specified resource type name and factory.
+func RegisterResourceType(name string, factory func(context.Context) (tfsdk.ResourceType, error)) {
+	resourceRegistryMu.Lock()
+	defer resourceRegistryMu.Unlock()
 
-	if resources == nil {
-		resources = make(map[string]tfsdk.ResourceType)
+	if resourceRegistry == nil {
+		resourceRegistry = make(map[string]func(context.Context) (tfsdk.ResourceType, error))
 	}
-	resources[name] = r
+	resourceRegistry[name] = factory
 }
 
 // newAWSClient configures and returns a fully initialized AWS client.

@@ -164,41 +164,29 @@ var templateBody = `
 package {{ .PackageName }}
 
 import (
-{{- if .ImportRegexp }}
-	"regexp"
-{{- end }}
+	"context"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-{{- if .ImportRegexp }}
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
-{{- end }}
+    tfsdk "github.com/hashicorp/terraform-plugin-framework"
+	"github.com/hashicorp/terraform-plugin-framework/schema"
 )
 
 func init() {
-	registerResource("{{ .TerraformTypeName }}", {{ .FunctionName }}())
+	RegisterResourceType("{{ .TerraformTypeName }}", {{ .FunctionName }})
 }
 
-// {{ .FunctionName }} returns the Terraform {{ .TerraformTypeName }} resource.
-func {{ .FunctionName }}() *schema.Resource {
-	schema := map[string]*schema.Schema {
-{{- range .RootPropertySchemas }}
-		{{ . }}
-{{- end }}
+// {{ .FunctionName }} returns the Terraform {{ .TerraformTypeName }} resource type.
+func {{ .FunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
+	schema := schema.Schema{
+		Version: 1,
 	}
 
-	gr := &GenericResource{
-		CloudFormationTypeName: "{{ .CloudFormationTypeName }}",
-		TerraformSchema:        schema,
-		TerraformTypeName:      "{{ .TerraformTypeName }}",
-	}
+	resourceType := NewGenericResourceType(
+		"{{ .CloudFormationTypeName }}",
+		"{{ .TerraformTypeName }}",
+		schema,
+	)
 
-	resource := gr.GetSchema()
-
-{{- if not .EmitUpdateMethod }}
-	resource.Update = nil
-{{- end }}
-
-	return resource
+	return resourceType, nil
 }
 `
 
