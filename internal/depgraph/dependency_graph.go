@@ -2,6 +2,8 @@ package depgraph
 
 import (
 	"fmt"
+	"sort"
+	"strings"
 )
 
 // Graph implements a simple dependency graph.
@@ -11,7 +13,7 @@ type Graph struct {
 	incomingEdges map[string]map[string]struct{}
 }
 
-// New returns a new empty dependency graph.
+// New returns a new, empty dependency graph.
 func New() *Graph {
 	return &Graph{
 		nodes:         make(map[string]struct{}),
@@ -121,6 +123,149 @@ func (g *Graph) DirectDependentsOf(s string) ([]string, error) {
 	}
 
 	return deps, nil
+}
+
+// DependenciesOf returns the nodes that the specified node depends on (transitively).
+// Returns an error if the specified node doesn't exist or a dependency cycle is detected.
+func (g *Graph) DependenciesOf(s string) ([]string, error) {
+	if !g.HasNode(s) {
+		return nil, nonExistentNodeError(s)
+	}
+
+	deps := make([]string, 0)
+	dfs := depthFirstSearch(g.outgoingEdges, deps)
+	err := dfs(s)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return deps, nil
+}
+
+// DependentsOf returns the nodes that depend on the specified node (transitively).
+// Returns an error if the specified node doesn't exist or a dependency cycle is detected.
+func (g *Graph) DependentsOf(s string) ([]string, error) {
+	if !g.HasNode(s) {
+		return nil, nonExistentNodeError(s)
+	}
+
+	deps := make([]string, 0)
+	dfs := depthFirstSearch(g.incomingEdges, deps)
+	err := dfs(s)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return deps, nil
+}
+
+// OverallOrder returns the overall processing order for the dependency graph.
+// Returns an error if a dependency cycle is detected.
+func (g *Graph) OverallOrder() ([]string, error) {
+	// Look for cycles.
+	cycleDfs := depthFirstSearch(g.outgoingEdges, make([]string, 0))
+
+	for node := range g.nodes {
+		if err := cycleDfs(node); err != nil {
+			return nil, err
+		}
+	}
+
+	order := make([]string, 0)
+
+	if g.Len() != 0 {
+		dfs := depthFirstSearch(g.outgoingEdges, order)
+
+		// Find all potential starting points (nodes with nothing depending on them)
+		// and run the DFS starting at each of these points.
+		for node := range g.nodes {
+			if len(g.incomingEdges[node]) == 0 {
+				if err := dfs(node); err != nil {
+					return nil, err
+				}
+			}
+		}
+	}
+
+	return order, nil
+}
+
+// depthFirstSearch returns a Topological Sort using Depth-First-Search on a set of edges.
+// Returns an error if a dependency cycle is detected.
+func depthFirstSearch(edges map[string]map[string]struct{}, results []string) func(s string) error {
+	type todoValue struct {
+		node      string
+		processed bool
+	}
+
+	visited := make(map[string]struct{})
+
+	return func(s string) error {
+		if _, ok := visited[s]; ok {
+			return nil
+		}
+
+		inCurrentPath := make(map[string]struct{})
+		currentPath := newStack()
+		todo := newStack()
+
+		todo.push(&todoValue{
+			node: s,
+		})
+
+		for todo.len() > 0 {
+			current := todo.peek().(*todoValue)
+			node := current.node
+
+			if !current.processed {
+				// Visit edges.
+				if _, ok := visited[node]; ok {
+					continue
+				}
+
+				if _, ok := inCurrentPath[node]; ok {
+					path := make([]string, 0)
+
+					for {
+						v := currentPath.pop()
+
+						if v == nil {
+							break
+						}
+
+						path = append(path, v.(string))
+					}
+
+					sort.Sort(sort.Reverse(sort.StringSlice(path)))
+
+					path = append(path, node)
+
+					return dependencyCycleError(path)
+				}
+
+				inCurrentPath[node] = struct{}{}
+				currentPath.push(node)
+
+				//edges[node]
+			} else {
+				// Edges have been visited.
+				// Unroll the stack.
+				todo.pop()
+				currentPath.pop()
+				delete(inCurrentPath, node)
+				visited[node] = struct{}{}
+				results = append(results, node)
+			}
+		}
+
+		return nil
+	}
+}
+
+func dependencyCycleError(path []string) error {
+	return fmt.Errorf("dependency cycle: %s", strings.Join(path, " -> "))
 }
 
 func nonExistentNodeError(s string) error {
