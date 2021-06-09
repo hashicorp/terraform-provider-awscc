@@ -21,20 +21,17 @@ func resourceAwsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Root property definitions.
 
-	// LogGroupName
+	// Arn
 	/*
 	   {
-	     "description": "The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.",
-	     "maxLength": 512,
-	     "minLength": 1,
-	     "pattern": "^[.\\-_/#A-Za-z0-9]{1,512}$",
+	     "description": "The CloudWatch log group ARN.",
 	     "type": "string"
 	   }
 	*/
-	propLogGroupNameAttribute := schema.Attribute{}
-	propLogGroupNameAttribute.Type = types.StringType
-	propLogGroupNameAttribute.Optional = true
-	propLogGroupNameAttribute.Description = `The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.`
+	propArnAttribute := schema.Attribute{}
+	propArnAttribute.Type = types.StringType
+	propArnAttribute.Computed = true
+	propArnAttribute.Description = `The CloudWatch log group ARN.`
 
 	// KmsKeyId
 	/*
@@ -49,6 +46,21 @@ func resourceAwsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	propKmsKeyIdAttribute.Type = types.StringType
 	propKmsKeyIdAttribute.Optional = true
 	propKmsKeyIdAttribute.Description = `The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.`
+
+	// LogGroupName
+	/*
+	   {
+	     "description": "The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.",
+	     "maxLength": 512,
+	     "minLength": 1,
+	     "pattern": "^[.\\-_/#A-Za-z0-9]{1,512}$",
+	     "type": "string"
+	   }
+	*/
+	propLogGroupNameAttribute := schema.Attribute{}
+	propLogGroupNameAttribute.Type = types.StringType
+	propLogGroupNameAttribute.Optional = true
+	propLogGroupNameAttribute.Description = `The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.`
 
 	// RetentionInDays
 	/*
@@ -80,18 +92,6 @@ func resourceAwsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	propRetentionInDaysAttribute.Type = types.NumberType
 	propRetentionInDaysAttribute.Optional = true
 	propRetentionInDaysAttribute.Description = `The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.`
-
-	// Arn
-	/*
-	   {
-	     "description": "The CloudWatch log group ARN.",
-	     "type": "string"
-	   }
-	*/
-	propArnAttribute := schema.Attribute{}
-	propArnAttribute.Type = types.StringType
-	propArnAttribute.Computed = true
-	propArnAttribute.Description = `The CloudWatch log group ARN.`
 
 	attributes := make(map[string]schema.Attribute)
 	attributes["arn"] = propArnAttribute

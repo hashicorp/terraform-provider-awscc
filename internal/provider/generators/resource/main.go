@@ -126,16 +126,18 @@ func (g *Generator) Generate(packageName, filename string) error {
 
 	rootPropertyNames := make([]string, 0)
 
-	for rootPropertyName, rootProperty := range resource.CfResource.Properties {
+	for rootPropertyName := range resource.CfResource.Properties {
 		rootPropertyNames = append(rootPropertyNames, rootPropertyName)
-
-		schemaGenerator.AppendCfRootProperty(rootPropertyName, rootProperty)
 	}
-
-	rootPropertyAttributes := sb.String()
 
 	// Sort the root property names to reduce generated code diffs.
 	sort.Strings(rootPropertyNames)
+
+	for _, rootPropertyName := range rootPropertyNames {
+		schemaGenerator.AppendCfRootProperty(rootPropertyName, resource.CfResource.Properties[rootPropertyName])
+	}
+
+	rootPropertyAttributes := sb.String()
 
 	templateData := TemplateData{
 		CloudFormationTypeName: *resource.CfResource.TypeName,
