@@ -41,14 +41,14 @@ func (g *Graph) AddNode(s string) {
 func (g *Graph) RemoveNode(s string) {
 	if g.HasNode(s) {
 		for n, edges := range g.outgoingEdges {
-			g.outgoingEdges[n] = removeStringFromSlice(edges, s)
+			g.outgoingEdges[n] = sliceRemoveString(edges, s)
 		}
 
 		for n, edges := range g.incomingEdges {
-			g.incomingEdges[n] = removeStringFromSlice(edges, s)
+			g.incomingEdges[n] = sliceRemoveString(edges, s)
 		}
 
-		g.nodes = removeStringFromSlice(g.nodes, s)
+		g.nodes = sliceRemoveString(g.nodes, s)
 		delete(g.outgoingEdges, s)
 		delete(g.incomingEdges, s)
 	}
@@ -84,11 +84,11 @@ func (g *Graph) AddDependency(from, to string) error {
 // If either node doesn't exist no error is returned.
 func (g *Graph) RemoveDependency(from, to string) {
 	if g.HasNode(from) {
-		g.outgoingEdges[from] = removeStringFromSlice(g.outgoingEdges[from], to)
+		g.outgoingEdges[from] = sliceRemoveString(g.outgoingEdges[from], to)
 	}
 
 	if g.HasNode(to) {
-		g.incomingEdges[to] = removeStringFromSlice(g.incomingEdges[to], from)
+		g.incomingEdges[to] = sliceRemoveString(g.incomingEdges[to], from)
 	}
 }
 
@@ -126,7 +126,7 @@ func (g *Graph) DependenciesOf(s string) ([]string, error) {
 		return nil, err
 	}
 
-	return removeStringFromSlice(result, s), nil
+	return sliceRemoveString(result, s), nil
 }
 
 // DependentsOf returns the nodes that depend on the specified node (transitively).
@@ -143,7 +143,7 @@ func (g *Graph) DependentsOf(s string) ([]string, error) {
 		return nil, err
 	}
 
-	return removeStringFromSlice(result, s), nil
+	return sliceRemoveString(result, s), nil
 }
 
 // OverallOrder returns the overall processing order for the dependency graph.
@@ -181,15 +181,17 @@ func (g *Graph) OverallOrder() ([]string, error) {
 	return order, nil
 }
 
-// removeStringFromSlice removes the specified string from a slice.
-func removeStringFromSlice(slice []string, s string) []string {
-	for i, v := range slice {
-		if v == s {
-			return append(slice[:i], slice[i+1:]...)
+// sliceRemoveString removes all occurences of the specified string from a slice.
+func sliceRemoveString(slice []string, s string) []string {
+	result := make([]string, 0)
+
+	for _, v := range slice {
+		if v != s {
+			result = append(result, v)
 		}
 	}
 
-	return slice
+	return result
 }
 
 // sliceContainsString returns whether a slice contains a specified string.
