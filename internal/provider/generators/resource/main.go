@@ -8,6 +8,8 @@ import (
 	"fmt"
 	"go/format"
 	"os"
+	"sort"
+	"strings"
 	"text/template"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
@@ -93,14 +95,24 @@ func (g *Generator) Generate(packageName, filename string) error {
 		return fmt.Errorf("error reading CloudFormation resource schema for %s: %w", g.tfResourceType, err)
 	}
 
-	var codeFeatures schemagen.Features
-	rootPropertySchemas := []string{}
-
-	for propertyName := range resource.CfResource.Properties {
-		rootPropertySchema, features := schemagen.RootPropertySchema(resource.CfResource, propertyName)
-		rootPropertySchemas = append(rootPropertySchemas, rootPropertySchema)
-		codeFeatures |= features
+	sb := strings.Builder{}
+	schemaGenerator := schemagen.Generator{
+		CfResource: resource.CfResource,
+		Writer:     &sb,
 	}
+
+	rootPropertyNames := make([]string, 0)
+
+	for rootPropertyName, rootProperty := range resource.CfResource.Properties {
+		rootPropertyNames = append(rootPropertyNames, rootPropertyName)
+
+		schemaGenerator.AppendCfProperty(rootPropertyName, rootProperty)
+	}
+
+	rootPropertyAttributes := sb.String()
+
+	// Sort the root property names to reduce generated code diffs.
+	sort.Strings(rootPropertyNames)
 
 	templateData := TemplateData{
 		CloudFormationTypeName: *resource.CfResource.TypeName,
@@ -108,21 +120,16 @@ func (g *Generator) Generate(packageName, filename string) error {
 		FunctionName:           resource.SourceCodeNamePrefix,
 		NamePrefix:             resource.SourceCodeNamePrefix,
 		PackageName:            packageName,
-		RootPropertySchemas:    rootPropertySchemas,
+		RootPropertyAttributes: rootPropertyAttributes,
+		RootPropertyNames:      rootPropertyNames,
 		TerraformTypeName:      resource.TfType,
 	}
-
-	if codeFeatures&schemagen.HasUpdatableProperty == 0 {
-		templateData.EmitUpdateMethod = false
-	}
-	if codeFeatures&schemagen.UsesRegexp > 0 {
-		templateData.ImportRegexp = true
-	}
-	if codeFeatures&schemagen.UsesValidation > 0 {
-		templateData.ImportValidation = true
+	templateFuncMap := template.FuncMap{
+		"PropertyAttributeName":         schemagen.CfPropertyTfAttributeName,
+		"PropertyAttributeVariableName": schemagen.CfPropertyTfAttributeVariableName,
 	}
 
-	tmpl, err := template.New("function").Parse(templateBody)
+	tmpl, err := template.New("function").Funcs(templateFuncMap).Parse(templateBody)
 
 	if err != nil {
 		return fmt.Errorf("error parsing function template: %w", err)
@@ -176,8 +183,17 @@ func init() {
 
 // {{ .FunctionName }} returns the Terraform {{ .TerraformTypeName }} resource type.
 func {{ .FunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
+	{{ .RootPropertyAttributes }}
+
+	attributes := make(map[string]schema.Attribute)
+
+{{- range .RootPropertyNames }}
+	attributes["{{ . | PropertyAttributeName }}"] = {{ . | PropertyAttributeVariableName }}
+{{- end }}
+
 	schema := schema.Schema{
-		Version: 1,
+		Version:    1,
+		Attributes: attributes,
 	}
 
 	resourceType := NewGenericResourceType(
@@ -198,7 +214,8 @@ type TemplateData struct {
 	ImportValidation       bool
 	NamePrefix             string
 	PackageName            string
-	RootPropertySchemas    []string
+	RootPropertyAttributes string
+	RootPropertyNames      []string
 	TerraformTypeName      string
 }
 
