@@ -2,7 +2,6 @@ package depgraph
 
 import (
 	"fmt"
-	"sort"
 	"strings"
 )
 
@@ -223,7 +222,7 @@ func depthFirstSearch(edges map[string][]string) func(s string) ([]string, error
 		}
 
 		inCurrentPath := make(map[string]struct{})
-		currentPath := newStack()
+		currentPath := make([]string, 0)
 		todo := newStack()
 
 		todo.push(&todoValue{
@@ -243,27 +242,11 @@ func depthFirstSearch(edges map[string][]string) func(s string) ([]string, error
 				}
 
 				if _, ok := inCurrentPath[node]; ok {
-					path := make([]string, 0)
-
-					for {
-						v := currentPath.pop()
-
-						if v == nil {
-							break
-						}
-
-						path = append(path, v.(string))
-					}
-
-					sort.Sort(sort.Reverse(sort.StringSlice(path)))
-
-					path = append(path, node)
-
-					return nil, dependencyCycleError(path)
+					return nil, dependencyCycleError(append(currentPath, node))
 				}
 
 				inCurrentPath[node] = struct{}{}
-				currentPath.push(node)
+				currentPath = append(currentPath, node)
 
 				nodeEdges := edges[node]
 
@@ -278,7 +261,9 @@ func depthFirstSearch(edges map[string][]string) func(s string) ([]string, error
 				// Edges have been visited.
 				// Unroll the stack.
 				todo.pop()
-				currentPath.pop()
+				if n := len(currentPath); n > 0 {
+					currentPath = currentPath[:n-1]
+				}
 				delete(inCurrentPath, node)
 				visited = append(visited, node)
 				results = append(results, node)
