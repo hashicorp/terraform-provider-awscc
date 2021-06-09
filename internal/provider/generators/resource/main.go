@@ -120,7 +120,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 		schemaGenerator.AppendCfDefinition(definitionName, definition)
 	}
 
-	definitionAttributes := sb.String()
+	subpropertyAttributes := sb.String()
 
 	sb.Reset()
 
@@ -139,7 +139,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 
 	templateData := TemplateData{
 		CloudFormationTypeName: *resource.CfResource.TypeName,
-		DefinitionAttributes:   definitionAttributes,
+		SubpropertyAttributes:  subpropertyAttributes,
 		FunctionName:           resource.SourceCodeNamePrefix,
 		PackageName:            packageName,
 		RootPropertyAttributes: rootPropertyAttributes,
@@ -197,6 +197,7 @@ import (
 
     tfsdk "github.com/hashicorp/terraform-plugin-framework"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
 func init() {
@@ -206,8 +207,10 @@ func init() {
 // {{ .FunctionName }} returns the Terraform {{ .TerraformTypeName }} resource type.
 // This Terraform resource type corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource type.
 func {{ .FunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
-	{{ .DefinitionAttributes }}
+	// Subproperty definitions.
+	{{ .SubpropertyAttributes }}
 
+	// Root property definitions.
 	{{ .RootPropertyAttributes }}
 
 	attributes := make(map[string]schema.Attribute)
@@ -233,11 +236,11 @@ func {{ .FunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
 
 type TemplateData struct {
 	CloudFormationTypeName string
-	DefinitionAttributes   string
 	FunctionName           string
 	PackageName            string
 	RootPropertyAttributes string
 	RootPropertyNames      []string
+	SubpropertyAttributes  string
 	TerraformTypeName      string
 }
 

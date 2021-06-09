@@ -14,13 +14,13 @@ resource_schema "aws_logs_log_group" {
   local = "../service/cloudformation/schemas/us-west-2/aws-logs-loggroup.json"
 }
 
-resource_schema "aws_appmesh_virtual_service" {
-  source {
-    url = "???"
-  }
-
-  local = "../service/cloudformation/schemas/us-west-2/aws-appmesh-virtualservice.json"
-}
+#resource_schema "aws_appmesh_virtual_service" {
+#  source {
+#    url = "???"
+#  }
+#
+#  local = "../service/cloudformation/schemas/us-west-2/aws-appmesh-virtualservice.json"
+#}
 
 #resource_schema "aws_athena_workgroup" {
 #  source {

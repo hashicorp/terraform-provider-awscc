@@ -30,6 +30,35 @@ func (g *Generator) appendCfProperty(name, attributeVariableName string, propert
 	g.printf("%v\n", property)
 	g.printf("*/\n")
 	g.printf("%s := schema.Attribute{}\n", attributeVariableName)
+
+	switch propertyType := property.Type.String(); propertyType {
+	case cfschema.PropertyTypeBoolean:
+		g.printf("%s.Type = types.BoolType\n", attributeVariableName)
+	case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+		g.printf("%s.Type = types.NumberType\n", attributeVariableName)
+	case cfschema.PropertyTypeString:
+		g.printf("%s.Type = types.StringType\n", attributeVariableName)
+	default:
+		g.printf("// Unsupported property type: %s\n", propertyType)
+		return
+	}
+
+	readOnly := g.CfResource.ReadOnlyProperties.ContainsPath([]string{name})
+	required := g.CfResource.IsRequired(name)
+
+	if required {
+		g.printf("%s.Required = true\n", attributeVariableName)
+	} else if !readOnly {
+		g.printf("%s.Optional = true\n", attributeVariableName)
+	}
+
+	if readOnly && !required {
+		g.printf("%s.Computed = true\n", attributeVariableName)
+	}
+
+	if description := property.Description; description != nil {
+		g.printf("%s.Description = `%s`\n", attributeVariableName, *description)
+	}
 }
 
 // printf writes a formatted string to the underlying writer.
