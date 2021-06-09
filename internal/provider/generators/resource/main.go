@@ -13,6 +13,7 @@ import (
 	"text/template"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/depgraph"
 	schemagen "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schema-generator"
 	"github.com/iancoleman/strcase"
 	"github.com/mitchellh/cli"
@@ -89,10 +90,16 @@ func (g *Generator) Infof(format string, a ...interface{}) {
 func (g *Generator) Generate(packageName, filename string) error {
 	g.Infof("generating Terraform resource for %q from %q into %q", g.tfResourceType, g.cfTypeSchemaFile, filename)
 
-	resource, err := NewResourcePath(g.tfResourceType, g.cfTypeSchemaFile)
+	resource, err := NewResource(g.tfResourceType, g.cfTypeSchemaFile)
 
 	if err != nil {
 		return fmt.Errorf("error reading CloudFormation resource schema for %s: %w", g.tfResourceType, err)
+	}
+
+	definitionNames, err := DefinitionNames(resource.CfResource.Definitions)
+
+	if err != nil {
+		return fmt.Errorf("error determining CloudFormation definition names: %w", err)
 	}
 
 	sb := strings.Builder{}
@@ -101,12 +108,28 @@ func (g *Generator) Generate(packageName, filename string) error {
 		Writer:     &sb,
 	}
 
+	for _, definitionName := range definitionNames {
+		definition, ok := resource.CfResource.Definitions[definitionName]
+
+		if !ok {
+			g.Infof("missing CloudFormation definition: %s", definitionName)
+
+			continue
+		}
+
+		schemaGenerator.AppendCfDefinition(definitionName, definition)
+	}
+
+	definitionAttributes := sb.String()
+
+	sb.Reset()
+
 	rootPropertyNames := make([]string, 0)
 
 	for rootPropertyName, rootProperty := range resource.CfResource.Properties {
 		rootPropertyNames = append(rootPropertyNames, rootPropertyName)
 
-		schemaGenerator.AppendCfProperty(rootPropertyName, rootProperty)
+		schemaGenerator.AppendCfRootProperty(rootPropertyName, rootProperty)
 	}
 
 	rootPropertyAttributes := sb.String()
@@ -116,9 +139,8 @@ func (g *Generator) Generate(packageName, filename string) error {
 
 	templateData := TemplateData{
 		CloudFormationTypeName: *resource.CfResource.TypeName,
-		EmitUpdateMethod:       true,
+		DefinitionAttributes:   definitionAttributes,
 		FunctionName:           resource.SourceCodeNamePrefix,
-		NamePrefix:             resource.SourceCodeNamePrefix,
 		PackageName:            packageName,
 		RootPropertyAttributes: rootPropertyAttributes,
 		RootPropertyNames:      rootPropertyNames,
@@ -182,7 +204,10 @@ func init() {
 }
 
 // {{ .FunctionName }} returns the Terraform {{ .TerraformTypeName }} resource type.
+// This Terraform resource type corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource type.
 func {{ .FunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
+	{{ .DefinitionAttributes }}
+
 	{{ .RootPropertyAttributes }}
 
 	attributes := make(map[string]schema.Attribute)
@@ -208,11 +233,8 @@ func {{ .FunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
 
 type TemplateData struct {
 	CloudFormationTypeName string
-	EmitUpdateMethod       bool
+	DefinitionAttributes   string
 	FunctionName           string
-	ImportRegexp           bool
-	ImportValidation       bool
-	NamePrefix             string
 	PackageName            string
 	RootPropertyAttributes string
 	RootPropertyNames      []string
@@ -225,7 +247,7 @@ type Resource struct {
 	TfType               string
 }
 
-func NewResourcePath(resourceType, cfTypeSchemaFile string) (*Resource, error) {
+func NewResource(resourceType, cfTypeSchemaFile string) (*Resource, error) {
 	resourceSchema, err := cfschema.NewResourceJsonSchemaPath(cfTypeSchemaFile)
 
 	if err != nil {
@@ -238,13 +260,64 @@ func NewResourcePath(resourceType, cfTypeSchemaFile string) (*Resource, error) {
 		return nil, fmt.Errorf("error parsing CloudFormation Resource Type Schema: %w", err)
 	}
 
-	if err := resource.Expand(); err != nil {
-		return nil, fmt.Errorf("error expanding JSON Pointer references: %w", err)
-	}
-
 	return &Resource{
 		CfResource:           resource,
 		SourceCodeNamePrefix: "resource" + strcase.ToCamel(resourceType),
 		TfType:               resourceType,
 	}, nil
+}
+
+// DefinitionNames returns the CloudFormation definition names in the order that code should be generated.
+func DefinitionNames(definitions map[string]*cfschema.Property) ([]string, error) {
+	dg := depgraph.New()
+
+	for defName, definition := range definitions {
+		dg.AddNode(defName)
+
+		if ref := definition.Ref; ref != nil {
+			if refDefName := ref.Field(); refDefName != "" {
+				dg.AddNode(refDefName)
+				dg.AddDependency(defName, refDefName)
+			}
+
+			continue
+		}
+
+		switch definition.Type.String() {
+		case cfschema.PropertyTypeArray:
+			if items := definition.Items; items != nil {
+				if ref := items.Ref; ref != nil {
+					if refDefName := ref.Field(); refDefName != "" {
+						dg.AddNode(refDefName)
+						dg.AddDependency(defName, refDefName)
+					}
+				}
+			}
+		case cfschema.PropertyTypeObject:
+			for _, prop := range definition.Properties {
+				if ref := prop.Ref; ref != nil {
+					if refDefName := ref.Field(); refDefName != "" {
+						dg.AddNode(refDefName)
+						dg.AddDependency(defName, refDefName)
+					}
+
+					continue
+				}
+
+				switch prop.Type.String() {
+				case cfschema.PropertyTypeArray:
+					if items := prop.Items; items != nil {
+						if ref := items.Ref; ref != nil {
+							if refDefName := ref.Field(); refDefName != "" {
+								dg.AddNode(refDefName)
+								dg.AddDependency(defName, refDefName)
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return dg.OverallOrder()
 }

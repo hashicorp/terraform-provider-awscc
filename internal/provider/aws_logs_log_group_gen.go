@@ -14,7 +14,17 @@ func init() {
 }
 
 // resourceAwsLogsLogGroup returns the Terraform aws_logs_log_group resource type.
+// This Terraform resource type corresponds to the CloudFormation AWS::Logs::LogGroup resource type.
 func resourceAwsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+
+	// Arn
+	/*
+	   {
+	     "description": "The CloudWatch log group ARN.",
+	     "type": "string"
+	   }
+	*/
+	propArnAttribute := schema.Attribute{}
 
 	// LogGroupName
 	/*
@@ -66,15 +76,6 @@ func resourceAwsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	   }
 	*/
 	propRetentionInDaysAttribute := schema.Attribute{}
-
-	// Arn
-	/*
-	   {
-	     "description": "The CloudWatch log group ARN.",
-	     "type": "string"
-	   }
-	*/
-	propArnAttribute := schema.Attribute{}
 
 	attributes := make(map[string]schema.Attribute)
 	attributes["arn"] = propArnAttribute

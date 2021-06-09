@@ -13,14 +13,23 @@ type Generator struct {
 	Writer     io.Writer
 }
 
-// AppendCfProperty appends the code generated for a CloudFormation property.
-func (g *Generator) AppendCfProperty(name string, property *cfschema.Property) {
+// AppendCfDefinition appends the code generated for a CloudFormation definition.
+func (g *Generator) AppendCfDefinition(name string, property *cfschema.Property) {
+	g.appendCfProperty(name, CfDefinitionTfAttributeVariableName(name), property)
+}
+
+// AppendCfRootProperty appends the code generated for a CloudFormation root property.
+func (g *Generator) AppendCfRootProperty(name string, property *cfschema.Property) {
+	g.appendCfProperty(name, CfPropertyTfAttributeVariableName(name), property)
+}
+
+func (g *Generator) appendCfProperty(name, attributeVariableName string, property *cfschema.Property) {
 	g.printf("\n")
 	g.printf("// %s\n", name)
 	g.printf("/*\n")
 	g.printf("%v\n", property)
 	g.printf("*/\n")
-	g.printf("%s := schema.Attribute{}\n", CfPropertyTfAttributeVariableName(name))
+	g.printf("%s := schema.Attribute{}\n", attributeVariableName)
 }
 
 // printf writes a formatted string to the underlying writer.
