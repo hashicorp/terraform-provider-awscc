@@ -3,6 +3,7 @@ package generator
 import (
 	"fmt"
 	"io"
+	"sort"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/iancoleman/strcase"
@@ -13,19 +14,47 @@ type Generator struct {
 	Writer     io.Writer
 }
 
-// AppendCfDefinition appends the code generated for a CloudFormation definition.
-func (g *Generator) AppendCfDefinition(name string, property *cfschema.Property) {
-	g.appendCfProperty(name, CfDefinitionTfAttributeVariableName(name), property)
+// AppendCfDefinition generates the Terraform Plugin SDK code for a CloudFormation definition
+// and appends the generated to code to the generator's Writer.
+func (g *Generator) AppendCfDefinition(definitionName string, properties map[string]*cfschema.Property) {
+	propertyNames := make([]string, 0)
+
+	for propertyName := range properties {
+		propertyNames = append(propertyNames, propertyName)
+	}
+
+	// Sort the property names to reduce generated code diffs.
+	sort.Strings(propertyNames)
+
+	// Generate and append each property.
+	for _, propertyName := range propertyNames {
+		g.appendCfProperty(definitionName, propertyName, properties[propertyName])
+	}
+
+	g.appendCfPropertyReferences(definitionName, propertyNames)
 }
 
-// AppendCfRootProperty appends the code generated for a CloudFormation root property.
-func (g *Generator) AppendCfRootProperty(name string, property *cfschema.Property) {
-	g.appendCfProperty(name, CfPropertyTfAttributeVariableName(name), property)
-}
+// appendCfPropertyReferences generates Go code that references the code generated for the
+// specified CloudFormation properties and appends the generated to code to the generator's Writer.
+func (g *Generator) appendCfPropertyReferences(definitionName string, propertyNames []string) {
+	attributesVariableName := CfDefinitionTfAttributesVariableName(definitionName)
 
-func (g *Generator) appendCfProperty(name, attributeVariableName string, property *cfschema.Property) {
 	g.printf("\n")
-	g.printf("// %s\n", name)
+	g.printf("%s := make(map[string]schema.Attribute, %d)\n", attributesVariableName, len(propertyNames))
+	for _, propertyName := range propertyNames {
+		g.printf("%s[%q] = %s\n", attributesVariableName, CfPropertyTfAttributeName(propertyName), CfPropertyTfAttributeVariableName(definitionName, propertyName))
+	}
+}
+
+// appendCfProperty generates Go code for a single CloudFormation property
+// and appends the generated to code to the generator's Writer.
+func (g *Generator) appendCfProperty(definitionName, propertyName string, property *cfschema.Property) {
+	attributeVariableName := CfPropertyTfAttributeVariableName(definitionName, propertyName)
+
+	g.printf("\n")
+	g.printf("// Definition: %s\n", definitionName)
+	g.printf("// Property: %s\n", propertyName)
+	g.printf("// CloudFormation Resource Type Schema:\n")
 	g.printf("/*\n")
 	g.printf("%v\n", property)
 	g.printf("*/\n")
@@ -43,8 +72,8 @@ func (g *Generator) appendCfProperty(name, attributeVariableName string, propert
 		return
 	}
 
-	readOnly := g.CfResource.ReadOnlyProperties.ContainsPath([]string{name})
-	required := g.CfResource.IsRequired(name)
+	readOnly := g.CfResource.ReadOnlyProperties.ContainsPath([]string{propertyName})
+	required := g.CfResource.IsRequired(propertyName)
 
 	if required {
 		g.printf("%s.Required = true\n", attributeVariableName)
@@ -66,17 +95,17 @@ func (g *Generator) printf(format string, a ...interface{}) (int, error) {
 	return io.WriteString(g.Writer, fmt.Sprintf(format, a...))
 }
 
-// CfDefinitionTfAttributeVariableName returns a CloudFormation property's Terraform Attribute variable name.
-func CfDefinitionTfAttributeVariableName(name string) string {
-	return fmt.Sprintf("defn%sAttribute", name)
+// CfDefinitionTfAttributesVariableName returns a CloudFormation definition's Terraform map[string]Attribute variable name.
+func CfDefinitionTfAttributesVariableName(definitionName string) string {
+	return strcase.ToLowerCamel(fmt.Sprintf("%sAttributes", definitionName))
 }
 
 // CfPropertyTfAttributeVariableName returns a CloudFormation property's Terraform Attribute variable name.
-func CfPropertyTfAttributeVariableName(name string) string {
-	return fmt.Sprintf("prop%sAttribute", name)
+func CfPropertyTfAttributeVariableName(definitionName, propertyName string) string {
+	return strcase.ToLowerCamel(fmt.Sprintf("%s%sAttribute", definitionName, propertyName))
 }
 
 // TfPropertyAttributeName returns a CloudFormation property's Terraform Attribute name.
-func CfPropertyTfAttributeName(name string) string {
-	return strcase.ToSnake(name)
+func CfPropertyTfAttributeName(propertyName string) string {
+	return strcase.ToSnake(propertyName)
 }

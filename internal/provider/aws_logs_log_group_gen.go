@@ -11,29 +11,33 @@ import (
 )
 
 func init() {
-	RegisterResourceType("aws_logs_log_group", resourceAwsLogsLogGroup)
+	RegisterResourceType("aws_logs_log_group", awsLogsLogGroup)
 }
 
-// resourceAwsLogsLogGroup returns the Terraform aws_logs_log_group resource type.
+// awsLogsLogGroup returns the Terraform aws_logs_log_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Logs::LogGroup resource type.
-func resourceAwsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	// Subproperty definitions.
 
-	// Root property definitions.
+	// Root property definition.
 
-	// Arn
+	// Definition: AwsLogsLogGroup
+	// Property: Arn
+	// CloudFormation Resource Type Schema:
 	/*
 	   {
 	     "description": "The CloudWatch log group ARN.",
 	     "type": "string"
 	   }
 	*/
-	propArnAttribute := schema.Attribute{}
-	propArnAttribute.Type = types.StringType
-	propArnAttribute.Computed = true
-	propArnAttribute.Description = `The CloudWatch log group ARN.`
+	awsLogsLogGroupArnAttribute := schema.Attribute{}
+	awsLogsLogGroupArnAttribute.Type = types.StringType
+	awsLogsLogGroupArnAttribute.Computed = true
+	awsLogsLogGroupArnAttribute.Description = `The CloudWatch log group ARN.`
 
-	// KmsKeyId
+	// Definition: AwsLogsLogGroup
+	// Property: KmsKeyId
+	// CloudFormation Resource Type Schema:
 	/*
 	   {
 	     "description": "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
@@ -42,12 +46,14 @@ func resourceAwsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	propKmsKeyIdAttribute := schema.Attribute{}
-	propKmsKeyIdAttribute.Type = types.StringType
-	propKmsKeyIdAttribute.Optional = true
-	propKmsKeyIdAttribute.Description = `The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.`
+	awsLogsLogGroupKmsKeyIdAttribute := schema.Attribute{}
+	awsLogsLogGroupKmsKeyIdAttribute.Type = types.StringType
+	awsLogsLogGroupKmsKeyIdAttribute.Optional = true
+	awsLogsLogGroupKmsKeyIdAttribute.Description = `The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.`
 
-	// LogGroupName
+	// Definition: AwsLogsLogGroup
+	// Property: LogGroupName
+	// CloudFormation Resource Type Schema:
 	/*
 	   {
 	     "description": "The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.",
@@ -57,12 +63,14 @@ func resourceAwsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	propLogGroupNameAttribute := schema.Attribute{}
-	propLogGroupNameAttribute.Type = types.StringType
-	propLogGroupNameAttribute.Optional = true
-	propLogGroupNameAttribute.Description = `The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.`
+	awsLogsLogGroupLogGroupNameAttribute := schema.Attribute{}
+	awsLogsLogGroupLogGroupNameAttribute.Type = types.StringType
+	awsLogsLogGroupLogGroupNameAttribute.Optional = true
+	awsLogsLogGroupLogGroupNameAttribute.Description = `The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.`
 
-	// RetentionInDays
+	// Definition: AwsLogsLogGroup
+	// Property: RetentionInDays
+	// CloudFormation Resource Type Schema:
 	/*
 	   {
 	     "description": "The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.",
@@ -88,20 +96,20 @@ func resourceAwsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "integer"
 	   }
 	*/
-	propRetentionInDaysAttribute := schema.Attribute{}
-	propRetentionInDaysAttribute.Type = types.NumberType
-	propRetentionInDaysAttribute.Optional = true
-	propRetentionInDaysAttribute.Description = `The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.`
+	awsLogsLogGroupRetentionInDaysAttribute := schema.Attribute{}
+	awsLogsLogGroupRetentionInDaysAttribute.Type = types.NumberType
+	awsLogsLogGroupRetentionInDaysAttribute.Optional = true
+	awsLogsLogGroupRetentionInDaysAttribute.Description = `The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.`
 
-	attributes := make(map[string]schema.Attribute)
-	attributes["arn"] = propArnAttribute
-	attributes["kms_key_id"] = propKmsKeyIdAttribute
-	attributes["log_group_name"] = propLogGroupNameAttribute
-	attributes["retention_in_days"] = propRetentionInDaysAttribute
+	awsLogsLogGroupAttributes := make(map[string]schema.Attribute, 4)
+	awsLogsLogGroupAttributes["arn"] = awsLogsLogGroupArnAttribute
+	awsLogsLogGroupAttributes["kms_key_id"] = awsLogsLogGroupKmsKeyIdAttribute
+	awsLogsLogGroupAttributes["log_group_name"] = awsLogsLogGroupLogGroupNameAttribute
+	awsLogsLogGroupAttributes["retention_in_days"] = awsLogsLogGroupRetentionInDaysAttribute
 
 	schema := schema.Schema{
 		Version:    1,
-		Attributes: attributes,
+		Attributes: awsLogsLogGroupAttributes,
 	}
 
 	resourceType := NewGenericResourceType(

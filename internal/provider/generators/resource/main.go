@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"go/format"
 	"os"
-	"sort"
 	"strings"
 	"text/template"
 
@@ -86,15 +85,17 @@ func (g *Generator) Infof(format string, a ...interface{}) {
 	g.ui.Info(fmt.Sprintf(format, a...))
 }
 
-// Generate generates the resource's definition in the specified file.
+// Generate generates the resource's type factory into the specified file.
 func (g *Generator) Generate(packageName, filename string) error {
-	g.Infof("generating Terraform resource for %q from %q into %q", g.tfResourceType, g.cfTypeSchemaFile, filename)
+	g.Infof("generating Terraform resource code for %q from %q into %q", g.tfResourceType, g.cfTypeSchemaFile, filename)
 
 	resource, err := NewResource(g.tfResourceType, g.cfTypeSchemaFile)
 
 	if err != nil {
 		return fmt.Errorf("error reading CloudFormation resource schema for %s: %w", g.tfResourceType, err)
 	}
+
+	// Generate code for the CloudFormation definitions.
 
 	definitionNames, err := DefinitionNames(resource.CfResource.Definitions)
 
@@ -112,48 +113,43 @@ func (g *Generator) Generate(packageName, filename string) error {
 		definition, ok := resource.CfResource.Definitions[definitionName]
 
 		if !ok {
-			g.Infof("missing CloudFormation definition: %s", definitionName)
-
-			continue
+			return fmt.Errorf("missing CloudFormation definition: %s", definitionName)
 		}
 
-		schemaGenerator.AppendCfDefinition(definitionName, definition)
+		if propertyType := definition.Type.String(); propertyType != cfschema.PropertyTypeObject {
+			return fmt.Errorf("CloudFormation definition (%s) is of unsupported type: %s", definitionName, propertyType)
+		}
+
+		if len(definition.Properties) == 0 {
+			return fmt.Errorf("CloudFormation definition (%s) has no properties", definitionName)
+		}
+
+		schemaGenerator.AppendCfDefinition(definitionName, definition.Properties)
 	}
 
 	subpropertyAttributes := sb.String()
 
+	// Generate code for the CloudFormation root properties.
+
 	sb.Reset()
 
-	rootPropertyNames := make([]string, 0)
+	rootDefinitionName := strcase.ToCamel(resource.TfType)
 
-	for rootPropertyName := range resource.CfResource.Properties {
-		rootPropertyNames = append(rootPropertyNames, rootPropertyName)
-	}
-
-	// Sort the root property names to reduce generated code diffs.
-	sort.Strings(rootPropertyNames)
-
-	for _, rootPropertyName := range rootPropertyNames {
-		schemaGenerator.AppendCfRootProperty(rootPropertyName, resource.CfResource.Properties[rootPropertyName])
-	}
+	schemaGenerator.AppendCfDefinition(rootDefinitionName, resource.CfResource.Properties)
 
 	rootPropertyAttributes := sb.String()
 
 	templateData := TemplateData{
-		CloudFormationTypeName: *resource.CfResource.TypeName,
-		SubpropertyAttributes:  subpropertyAttributes,
-		FunctionName:           resource.SourceCodeNamePrefix,
-		PackageName:            packageName,
-		RootPropertyAttributes: rootPropertyAttributes,
-		RootPropertyNames:      rootPropertyNames,
-		TerraformTypeName:      resource.TfType,
-	}
-	templateFuncMap := template.FuncMap{
-		"PropertyAttributeName":         schemagen.CfPropertyTfAttributeName,
-		"PropertyAttributeVariableName": schemagen.CfPropertyTfAttributeVariableName,
+		CloudFormationTypeName:             *resource.CfResource.TypeName,
+		FactoryFunctionName:                strcase.ToLowerCamel(resource.TfType),
+		PackageName:                        packageName,
+		RootPropertyAttributes:             rootPropertyAttributes,
+		RootPropertyAttributesVariableName: schemagen.CfDefinitionTfAttributesVariableName(rootDefinitionName),
+		SubpropertyAttributes:              subpropertyAttributes,
+		TerraformTypeName:                  resource.TfType,
 	}
 
-	tmpl, err := template.New("function").Funcs(templateFuncMap).Parse(templateBody)
+	tmpl, err := template.New("function").Parse(templateBody)
 
 	if err != nil {
 		return fmt.Errorf("error parsing function template: %w", err)
@@ -203,27 +199,21 @@ import (
 )
 
 func init() {
-	RegisterResourceType("{{ .TerraformTypeName }}", {{ .FunctionName }})
+	RegisterResourceType("{{ .TerraformTypeName }}", {{ .FactoryFunctionName }})
 }
 
-// {{ .FunctionName }} returns the Terraform {{ .TerraformTypeName }} resource type.
+// {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} resource type.
 // This Terraform resource type corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource type.
-func {{ .FunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
+func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
 	// Subproperty definitions.
 	{{ .SubpropertyAttributes }}
 
-	// Root property definitions.
+	// Root property definition.
 	{{ .RootPropertyAttributes }}
-
-	attributes := make(map[string]schema.Attribute)
-
-{{- range .RootPropertyNames }}
-	attributes["{{ . | PropertyAttributeName }}"] = {{ . | PropertyAttributeVariableName }}
-{{- end }}
 
 	schema := schema.Schema{
 		Version:    1,
-		Attributes: attributes,
+		Attributes: {{ .RootPropertyAttributesVariableName }},
 	}
 
 	resourceType := NewGenericResourceType(
@@ -237,19 +227,18 @@ func {{ .FunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
 `
 
 type TemplateData struct {
-	CloudFormationTypeName string
-	FunctionName           string
-	PackageName            string
-	RootPropertyAttributes string
-	RootPropertyNames      []string
-	SubpropertyAttributes  string
-	TerraformTypeName      string
+	CloudFormationTypeName             string
+	FactoryFunctionName                string
+	PackageName                        string
+	RootPropertyAttributes             string
+	RootPropertyAttributesVariableName string
+	SubpropertyAttributes              string
+	TerraformTypeName                  string
 }
 
 type Resource struct {
-	CfResource           *cfschema.Resource
-	SourceCodeNamePrefix string
-	TfType               string
+	CfResource *cfschema.Resource
+	TfType     string
 }
 
 func NewResource(resourceType, cfTypeSchemaFile string) (*Resource, error) {
@@ -266,9 +255,8 @@ func NewResource(resourceType, cfTypeSchemaFile string) (*Resource, error) {
 	}
 
 	return &Resource{
-		CfResource:           resource,
-		SourceCodeNamePrefix: "resource" + strcase.ToCamel(resourceType),
-		TfType:               resourceType,
+		CfResource: resource,
+		TfType:     resourceType,
 	}, nil
 }
 
