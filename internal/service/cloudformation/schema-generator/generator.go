@@ -68,8 +68,12 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 	case cfschema.PropertyTypeString:
 		g.printf("%s.Type = types.StringType\n", attributeVariableName)
 	default:
-		g.printf("// Unsupported property type: %s\n", propertyType)
-		return
+		if ref := property.Ref; ref != nil {
+			g.printf("%s.Attributes = schema.SingleNestedAttributes(%s)\n", attributeVariableName, CfDefinitionTfAttributesVariableName(ref.Field()))
+		} else {
+			g.printf("// Unsupported property type: %s\n", propertyType)
+			return
+		}
 	}
 
 	readOnly := g.CfResource.ReadOnlyProperties.ContainsPath([]string{propertyName})
