@@ -165,7 +165,8 @@ func (g *Generator) Generate(packageName, filename string) error {
 	generatedFileContents, err := format.Source(buffer.Bytes())
 
 	if err != nil {
-		return fmt.Errorf("error formatting generated file: %w", err)
+		g.Infof("%s", buffer.String())
+		return fmt.Errorf("error formatting generated source code: %w", err)
 	}
 
 	f, err := os.Create(filename)

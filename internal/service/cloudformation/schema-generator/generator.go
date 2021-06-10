@@ -67,11 +67,42 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 		g.printf("%s.Type = types.NumberType\n", attributeVariableName)
 	case cfschema.PropertyTypeString:
 		g.printf("%s.Type = types.StringType\n", attributeVariableName)
+	case cfschema.PropertyTypeArray:
+		if ref := property.Items.Ref; ref != nil {
+			nestedAttributesVariableName := CfDefinitionTfAttributesVariableName(ref.Field())
+			nestedAttributesOptionsVariableName := attributeVariableName + "Options"
+
+			if property.UniqueItems != nil && *property.UniqueItems {
+				g.printf("%s := schema.SetNestedAttributesOptions{}\n", nestedAttributesOptionsVariableName)
+				if property.MinItems != nil {
+					g.printf("%s.MinItems = %d\n", nestedAttributesOptionsVariableName, *property.MinItems)
+				}
+				if property.MaxItems != nil {
+					g.printf("%s.MaxItems = %d\n", nestedAttributesOptionsVariableName, *property.MaxItems)
+				}
+				g.printf("%s.Attributes = schema.SetNestedAttributes(%s, %s)\n", attributeVariableName, nestedAttributesVariableName, nestedAttributesOptionsVariableName)
+			} else {
+				g.printf("%s := schema.ListNestedAttributesOptions{}\n", nestedAttributesOptionsVariableName)
+				if property.MinItems != nil {
+					g.printf("%s.MinItems = %d\n", nestedAttributesOptionsVariableName, *property.MinItems)
+				}
+				if property.MaxItems != nil {
+					g.printf("%s.MaxItems = %d\n", nestedAttributesOptionsVariableName, *property.MaxItems)
+				}
+				g.printf("%s.Attributes = schema.ListNestedAttributes(%s, %s)\n", attributeVariableName, nestedAttributesVariableName, nestedAttributesOptionsVariableName)
+			}
+		} else {
+			itemType := property.Items.Type.String()
+			g.printf("// Unsupported array item type: %s\n", itemType)
+
+			return
+		}
 	default:
 		if ref := property.Ref; ref != nil {
 			g.printf("%s.Attributes = schema.SingleNestedAttributes(%s)\n", attributeVariableName, CfDefinitionTfAttributesVariableName(ref.Field()))
 		} else {
 			g.printf("// Unsupported property type: %s\n", propertyType)
+
 			return
 		}
 	}

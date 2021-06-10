@@ -207,7 +207,9 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	   }
 	*/
 	awsAppmeshVirtualServiceTagsAttribute := schema.Attribute{}
-	// Unsupported property type: array
+	awsAppmeshVirtualServiceTagsAttributeOptions := schema.ListNestedAttributesOptions{}
+	awsAppmeshVirtualServiceTagsAttribute.Attributes = schema.ListNestedAttributes(tagAttributes, awsAppmeshVirtualServiceTagsAttributeOptions)
+	awsAppmeshVirtualServiceTagsAttribute.Optional = true
 
 	// Definition: AwsAppmeshVirtualService
 	// Property: Uid
