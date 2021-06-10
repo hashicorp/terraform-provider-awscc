@@ -58,7 +58,7 @@ func main() {
 	generator := NewGenerator(ui, *tfResourceType, *cfTypeSchemaFile)
 
 	if err := generator.Generate(destinationPackage, filename); err != nil {
-		ui.Error(fmt.Sprintf("error generating Terraform resource: %s", err))
+		ui.Error(fmt.Sprintf("error generating Terraform %s resource: %s", *tfResourceType, err))
 		os.Exit(1)
 	}
 }
@@ -124,7 +124,9 @@ func (g *Generator) Generate(packageName, filename string) error {
 			return fmt.Errorf("CloudFormation definition (%s) has no properties", definitionName)
 		}
 
-		schemaGenerator.AppendCfDefinition(definitionName, definition.Properties)
+		if err := schemaGenerator.AppendCfDefinition(definitionName, definition.Properties); err != nil {
+			return err
+		}
 	}
 
 	subpropertyAttributes := sb.String()

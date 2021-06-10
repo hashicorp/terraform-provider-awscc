@@ -16,7 +16,7 @@ type Generator struct {
 
 // AppendCfDefinition generates the Terraform Plugin SDK code for a CloudFormation definition
 // and appends the generated to code to the generator's Writer.
-func (g *Generator) AppendCfDefinition(definitionName string, properties map[string]*cfschema.Property) {
+func (g *Generator) AppendCfDefinition(definitionName string, properties map[string]*cfschema.Property) error {
 	propertyNames := make([]string, 0)
 
 	for propertyName := range properties {
@@ -28,10 +28,14 @@ func (g *Generator) AppendCfDefinition(definitionName string, properties map[str
 
 	// Generate and append each property.
 	for _, propertyName := range propertyNames {
-		g.appendCfProperty(definitionName, propertyName, properties[propertyName])
+		if err := g.appendCfProperty(definitionName, propertyName, properties[propertyName]); err != nil {
+			return err
+		}
 	}
 
 	g.appendCfPropertyReferences(definitionName, propertyNames)
+
+	return nil
 }
 
 // appendCfPropertyReferences generates Go code that references the code generated for the
@@ -48,7 +52,7 @@ func (g *Generator) appendCfPropertyReferences(definitionName string, propertyNa
 
 // appendCfProperty generates Go code for a single CloudFormation property
 // and appends the generated to code to the generator's Writer.
-func (g *Generator) appendCfProperty(definitionName, propertyName string, property *cfschema.Property) {
+func (g *Generator) appendCfProperty(definitionName, propertyName string, property *cfschema.Property) error {
 	attributeVariableName := CfPropertyTfAttributeVariableName(definitionName, propertyName)
 
 	g.printf("\n")
@@ -68,11 +72,13 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 	case cfschema.PropertyTypeString:
 		g.printf("%s.Type = types.StringType\n", attributeVariableName)
 	case cfschema.PropertyTypeArray:
+		isSet := property.UniqueItems != nil && *property.UniqueItems
+
 		if ref := property.Items.Ref; ref != nil {
 			nestedAttributesVariableName := CfDefinitionTfAttributesVariableName(ref.Field())
 			nestedAttributesOptionsVariableName := attributeVariableName + "Options"
 
-			if property.UniqueItems != nil && *property.UniqueItems {
+			if isSet {
 				g.printf("%s := schema.SetNestedAttributesOptions{}\n", nestedAttributesOptionsVariableName)
 				if property.MinItems != nil {
 					g.printf("%s.MinItems = %d\n", nestedAttributesOptionsVariableName, *property.MinItems)
@@ -92,18 +98,29 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 				g.printf("%s.Attributes = schema.ListNestedAttributes(%s, %s)\n", attributeVariableName, nestedAttributesVariableName, nestedAttributesOptionsVariableName)
 			}
 		} else {
-			itemType := property.Items.Type.String()
-			g.printf("// Unsupported array item type: %s\n", itemType)
-
-			return
+			if isSet {
+				return fmt.Errorf("%s/%s is of unsupported type: set of primitive", definitionName, propertyName)
+			} else {
+				switch itemType := property.Items.Type.String(); itemType {
+				case cfschema.PropertyTypeBoolean:
+					g.printf("%s.Type = types.ListType{ElemType:types.BoolType}\n", attributeVariableName)
+				case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+					g.printf("%s.Type = types.ListType{ElemType:types.NumberType}\n", attributeVariableName)
+				case cfschema.PropertyTypeString:
+					g.printf("%s.Type = types.ListType{ElemType:types.StringType}\n", attributeVariableName)
+				default:
+					return fmt.Errorf("%s/%s is of unsupported type: list of %s", definitionName, propertyName, itemType)
+				}
+			}
 		}
+	// case cfschema.PropertyTypeObject:
+	// 	// * Inline subproperties
+	// 	// * Pattern properties == map?
 	default:
 		if ref := property.Ref; ref != nil {
 			g.printf("%s.Attributes = schema.SingleNestedAttributes(%s)\n", attributeVariableName, CfDefinitionTfAttributesVariableName(ref.Field()))
 		} else {
-			g.printf("// Unsupported property type: %s\n", propertyType)
-
-			return
+			return fmt.Errorf("%s/%s is of unsupported type: %s", definitionName, propertyName, propertyType)
 		}
 	}
 
@@ -123,6 +140,8 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 	if description := property.Description; description != nil {
 		g.printf("%s.Description = `%s`\n", attributeVariableName, *description)
 	}
+
+	return nil
 }
 
 // printf writes a formatted string to the underlying writer.
