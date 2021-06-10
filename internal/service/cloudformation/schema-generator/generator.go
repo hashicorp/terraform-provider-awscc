@@ -44,10 +44,12 @@ func (g *Generator) appendCfPropertyReferences(definitionName string, propertyNa
 	attributesVariableName := CfDefinitionTfAttributesVariableName(definitionName)
 
 	g.printf("\n")
+	g.printf("// Property references for %s:\n", definitionName)
 	g.printf("%s := make(map[string]schema.Attribute, %d)\n", attributesVariableName, len(propertyNames))
 	for _, propertyName := range propertyNames {
 		g.printf("%s[%q] = %s\n", attributesVariableName, CfPropertyTfAttributeName(propertyName), CfPropertyTfAttributeVariableName(definitionName, propertyName))
 	}
+	g.printf("\n")
 }
 
 // appendCfProperty generates Go code for a single CloudFormation property
@@ -58,68 +60,79 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 	g.printf("\n")
 	g.printf("// Definition: %s\n", definitionName)
 	g.printf("// Property: %s\n", propertyName)
-	g.printf("// CloudFormation Resource Type Schema:\n")
+	g.printf("// CloudFormation resource type schema:\n")
 	g.printf("/*\n")
 	g.printf("%v\n", property)
 	g.printf("*/\n")
 	g.printf("%s := schema.Attribute{}\n", attributeVariableName)
 
-	switch propertyType := property.Type.String(); propertyType {
-	case cfschema.PropertyTypeBoolean:
-		g.printf("%s.Type = types.BoolType\n", attributeVariableName)
-	case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-		g.printf("%s.Type = types.NumberType\n", attributeVariableName)
-	case cfschema.PropertyTypeString:
-		g.printf("%s.Type = types.StringType\n", attributeVariableName)
-	case cfschema.PropertyTypeArray:
-		isSet := property.UniqueItems != nil && *property.UniqueItems
+	if ref := property.Ref; ref != nil {
+		g.printf("%s.Attributes = schema.SingleNestedAttributes(%s)\n", attributeVariableName, CfDefinitionTfAttributesVariableName(ref.Field()))
+	} else {
+		switch propertyType := property.Type.String(); propertyType {
+		case cfschema.PropertyTypeBoolean:
+			g.printf("%s.Type = types.BoolType\n", attributeVariableName)
+		case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+			g.printf("%s.Type = types.NumberType\n", attributeVariableName)
+		case cfschema.PropertyTypeString:
+			g.printf("%s.Type = types.StringType\n", attributeVariableName)
+		case cfschema.PropertyTypeArray:
+			isSet := property.UniqueItems != nil && *property.UniqueItems
 
-		if ref := property.Items.Ref; ref != nil {
-			nestedAttributesVariableName := CfDefinitionTfAttributesVariableName(ref.Field())
-			nestedAttributesOptionsVariableName := attributeVariableName + "Options"
+			if ref := property.Items.Ref; ref != nil {
+				nestedAttributesVariableName := CfDefinitionTfAttributesVariableName(ref.Field())
+				nestedAttributesOptionsVariableName := attributeVariableName + "Options"
 
-			if isSet {
-				g.printf("%s := schema.SetNestedAttributesOptions{}\n", nestedAttributesOptionsVariableName)
-				if property.MinItems != nil {
-					g.printf("%s.MinItems = %d\n", nestedAttributesOptionsVariableName, *property.MinItems)
+				if isSet {
+					g.printf("%s := schema.SetNestedAttributesOptions{}\n", nestedAttributesOptionsVariableName)
+					if property.MinItems != nil {
+						g.printf("%s.MinItems = %d\n", nestedAttributesOptionsVariableName, *property.MinItems)
+					}
+					if property.MaxItems != nil {
+						g.printf("%s.MaxItems = %d\n", nestedAttributesOptionsVariableName, *property.MaxItems)
+					}
+					g.printf("%s.Attributes = schema.SetNestedAttributes(%s, %s)\n", attributeVariableName, nestedAttributesVariableName, nestedAttributesOptionsVariableName)
+				} else {
+					g.printf("%s := schema.ListNestedAttributesOptions{}\n", nestedAttributesOptionsVariableName)
+					if property.MinItems != nil {
+						g.printf("%s.MinItems = %d\n", nestedAttributesOptionsVariableName, *property.MinItems)
+					}
+					if property.MaxItems != nil {
+						g.printf("%s.MaxItems = %d\n", nestedAttributesOptionsVariableName, *property.MaxItems)
+					}
+					g.printf("%s.Attributes = schema.ListNestedAttributes(%s, %s)\n", attributeVariableName, nestedAttributesVariableName, nestedAttributesOptionsVariableName)
 				}
-				if property.MaxItems != nil {
-					g.printf("%s.MaxItems = %d\n", nestedAttributesOptionsVariableName, *property.MaxItems)
-				}
-				g.printf("%s.Attributes = schema.SetNestedAttributes(%s, %s)\n", attributeVariableName, nestedAttributesVariableName, nestedAttributesOptionsVariableName)
 			} else {
-				g.printf("%s := schema.ListNestedAttributesOptions{}\n", nestedAttributesOptionsVariableName)
-				if property.MinItems != nil {
-					g.printf("%s.MinItems = %d\n", nestedAttributesOptionsVariableName, *property.MinItems)
+				if isSet {
+					return fmt.Errorf("%s/%s is of unsupported type: set of primitive", definitionName, propertyName)
+				} else {
+					switch itemType := property.Items.Type.String(); itemType {
+					case cfschema.PropertyTypeBoolean:
+						g.printf("%s.Type = types.ListType{ElemType:types.BoolType}\n", attributeVariableName)
+					case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+						g.printf("%s.Type = types.ListType{ElemType:types.NumberType}\n", attributeVariableName)
+					case cfschema.PropertyTypeString:
+						g.printf("%s.Type = types.ListType{ElemType:types.StringType}\n", attributeVariableName)
+					default:
+						return fmt.Errorf("%s/%s is of unsupported type: list of %s", definitionName, propertyName, itemType)
+					}
 				}
-				if property.MaxItems != nil {
-					g.printf("%s.MaxItems = %d\n", nestedAttributesOptionsVariableName, *property.MaxItems)
-				}
-				g.printf("%s.Attributes = schema.ListNestedAttributes(%s, %s)\n", attributeVariableName, nestedAttributesVariableName, nestedAttributesOptionsVariableName)
 			}
-		} else {
-			if isSet {
-				return fmt.Errorf("%s/%s is of unsupported type: set of primitive", definitionName, propertyName)
+		case cfschema.PropertyTypeObject:
+			if patternProperties := property.PatternProperties; len(patternProperties) > 0 {
+				return fmt.Errorf("%s/%s is of unsupported type: key-value map", definitionName, propertyName)
 			} else {
-				switch itemType := property.Items.Type.String(); itemType {
-				case cfschema.PropertyTypeBoolean:
-					g.printf("%s.Type = types.ListType{ElemType:types.BoolType}\n", attributeVariableName)
-				case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-					g.printf("%s.Type = types.ListType{ElemType:types.NumberType}\n", attributeVariableName)
-				case cfschema.PropertyTypeString:
-					g.printf("%s.Type = types.ListType{ElemType:types.StringType}\n", attributeVariableName)
-				default:
-					return fmt.Errorf("%s/%s is of unsupported type: list of %s", definitionName, propertyName, itemType)
+				inlineSubpropertyDefinitionName := fmt.Sprintf("%s%s", definitionName, propertyName)
+
+				g.printf("\n")
+				g.printf("// Inline subproperty.\n")
+				if err := g.AppendCfDefinition(inlineSubpropertyDefinitionName, property.Properties); err != nil {
+					return err
 				}
+
+				g.printf("%s.Attributes = schema.SingleNestedAttributes(%s)\n", attributeVariableName, CfDefinitionTfAttributesVariableName(inlineSubpropertyDefinitionName))
 			}
-		}
-	// case cfschema.PropertyTypeObject:
-	// 	// * Inline subproperties
-	// 	// * Pattern properties == map?
-	default:
-		if ref := property.Ref; ref != nil {
-			g.printf("%s.Attributes = schema.SingleNestedAttributes(%s)\n", attributeVariableName, CfDefinitionTfAttributesVariableName(ref.Field()))
-		} else {
+		default:
 			return fmt.Errorf("%s/%s is of unsupported type: %s", definitionName, propertyName, propertyType)
 		}
 	}

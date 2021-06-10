@@ -23,7 +23,7 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsLogsLogGroup
 	// Property: Arn
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "description": "The CloudWatch log group ARN.",
@@ -37,7 +37,7 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsLogsLogGroup
 	// Property: KmsKeyId
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "description": "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
@@ -53,7 +53,7 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsLogsLogGroup
 	// Property: LogGroupName
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "description": "The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.",
@@ -70,7 +70,7 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsLogsLogGroup
 	// Property: RetentionInDays
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "description": "The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.",
@@ -101,6 +101,7 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	awsLogsLogGroupRetentionInDaysAttribute.Optional = true
 	awsLogsLogGroupRetentionInDaysAttribute.Description = `The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.`
 
+	// Property references for AwsLogsLogGroup:
 	awsLogsLogGroupAttributes := make(map[string]schema.Attribute, 4)
 	awsLogsLogGroupAttributes["arn"] = awsLogsLogGroupArnAttribute
 	awsLogsLogGroupAttributes["kms_key_id"] = awsLogsLogGroupKmsKeyIdAttribute

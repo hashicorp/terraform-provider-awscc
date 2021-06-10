@@ -21,7 +21,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: Tag
 	// Property: Key
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "type": "string"
@@ -33,7 +33,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: Tag
 	// Property: Value
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "type": "string"
@@ -43,13 +43,14 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	tagValueAttribute.Type = types.StringType
 	tagValueAttribute.Optional = true
 
+	// Property references for Tag:
 	tagAttributes := make(map[string]schema.Attribute, 2)
 	tagAttributes["key"] = tagKeyAttribute
 	tagAttributes["value"] = tagValueAttribute
 
 	// Definition: VirtualNodeServiceProvider
 	// Property: VirtualNodeName
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "type": "string"
@@ -59,12 +60,13 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	virtualNodeServiceProviderVirtualNodeNameAttribute.Type = types.StringType
 	virtualNodeServiceProviderVirtualNodeNameAttribute.Optional = true
 
+	// Property references for VirtualNodeServiceProvider:
 	virtualNodeServiceProviderAttributes := make(map[string]schema.Attribute, 1)
 	virtualNodeServiceProviderAttributes["virtual_node_name"] = virtualNodeServiceProviderVirtualNodeNameAttribute
 
 	// Definition: VirtualRouterServiceProvider
 	// Property: VirtualRouterName
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "type": "string"
@@ -74,12 +76,13 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	virtualRouterServiceProviderVirtualRouterNameAttribute.Type = types.StringType
 	virtualRouterServiceProviderVirtualRouterNameAttribute.Optional = true
 
+	// Property references for VirtualRouterServiceProvider:
 	virtualRouterServiceProviderAttributes := make(map[string]schema.Attribute, 1)
 	virtualRouterServiceProviderAttributes["virtual_router_name"] = virtualRouterServiceProviderVirtualRouterNameAttribute
 
 	// Definition: VirtualServiceProvider
 	// Property: VirtualNode
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "$ref": "#/definitions/VirtualNodeServiceProvider"
@@ -91,7 +94,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: VirtualServiceProvider
 	// Property: VirtualRouter
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "$ref": "#/definitions/VirtualRouterServiceProvider"
@@ -101,13 +104,14 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	virtualServiceProviderVirtualRouterAttribute.Attributes = schema.SingleNestedAttributes(virtualRouterServiceProviderAttributes)
 	virtualServiceProviderVirtualRouterAttribute.Optional = true
 
+	// Property references for VirtualServiceProvider:
 	virtualServiceProviderAttributes := make(map[string]schema.Attribute, 2)
 	virtualServiceProviderAttributes["virtual_node"] = virtualServiceProviderVirtualNodeAttribute
 	virtualServiceProviderAttributes["virtual_router"] = virtualServiceProviderVirtualRouterAttribute
 
 	// Definition: VirtualServiceSpec
 	// Property: Provider
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "$ref": "#/definitions/VirtualServiceProvider"
@@ -117,6 +121,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	virtualServiceSpecProviderAttribute.Attributes = schema.SingleNestedAttributes(virtualServiceProviderAttributes)
 	virtualServiceSpecProviderAttribute.Optional = true
 
+	// Property references for VirtualServiceSpec:
 	virtualServiceSpecAttributes := make(map[string]schema.Attribute, 1)
 	virtualServiceSpecAttributes["provider"] = virtualServiceSpecProviderAttribute
 
@@ -124,7 +129,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsAppmeshVirtualService
 	// Property: Arn
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "type": "string"
@@ -136,7 +141,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsAppmeshVirtualService
 	// Property: Id
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "type": "string"
@@ -148,7 +153,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsAppmeshVirtualService
 	// Property: MeshName
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "type": "string"
@@ -160,7 +165,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsAppmeshVirtualService
 	// Property: MeshOwner
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "type": "string"
@@ -172,7 +177,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsAppmeshVirtualService
 	// Property: ResourceOwner
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "type": "string"
@@ -184,7 +189,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsAppmeshVirtualService
 	// Property: Spec
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "$ref": "#/definitions/VirtualServiceSpec"
@@ -196,7 +201,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsAppmeshVirtualService
 	// Property: Tags
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "items": {
@@ -213,7 +218,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsAppmeshVirtualService
 	// Property: Uid
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "type": "string"
@@ -225,7 +230,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsAppmeshVirtualService
 	// Property: VirtualServiceName
-	// CloudFormation Resource Type Schema:
+	// CloudFormation resource type schema:
 	/*
 	   {
 	     "type": "string"
@@ -235,6 +240,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	awsAppmeshVirtualServiceVirtualServiceNameAttribute.Type = types.StringType
 	awsAppmeshVirtualServiceVirtualServiceNameAttribute.Required = true
 
+	// Property references for AwsAppmeshVirtualService:
 	awsAppmeshVirtualServiceAttributes := make(map[string]schema.Attribute, 9)
 	awsAppmeshVirtualServiceAttributes["arn"] = awsAppmeshVirtualServiceArnAttribute
 	awsAppmeshVirtualServiceAttributes["id"] = awsAppmeshVirtualServiceIdAttribute
