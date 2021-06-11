@@ -13,7 +13,7 @@ import (
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/depgraph"
-	schemagen "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schema-generator"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/provider/generators/resource/codegen"
 	"github.com/iancoleman/strcase"
 	"github.com/mitchellh/cli"
 )
@@ -104,7 +104,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 	}
 
 	sb := strings.Builder{}
-	schemaGenerator := schemagen.Generator{
+	schemaGenerator := codegen.Generator{
 		CfResource: resource.CfResource,
 		Writer:     &sb,
 	}
@@ -146,7 +146,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 		FactoryFunctionName:                strcase.ToLowerCamel(resource.TfType),
 		PackageName:                        packageName,
 		RootPropertyAttributes:             rootPropertyAttributes,
-		RootPropertyAttributesVariableName: schemagen.CfDefinitionTfAttributesVariableName(rootDefinitionName),
+		RootPropertyAttributesVariableName: codegen.CfDefinitionTfAttributesVariableName(rootDefinitionName),
 		SubpropertyAttributes:              subpropertyAttributes,
 		TerraformTypeName:                  resource.TfType,
 	}
