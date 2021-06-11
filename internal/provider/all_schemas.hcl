@@ -30,10 +30,10 @@ resource_schema "aws_appmesh_virtual_service" {
 #  local = "aws_athena_workgroup.cf-resource-schema.json"
 #}
 
-resource_schema "aws_ecs_task_definition" {
-  source {
-    url = "???"
-  }
-
-  local = "../service/cloudformation/schemas/us-west-2/aws-ecs-taskdefinition.json"
-}
+#resource_schema "aws_ecs_task_definition" {
+#  source {
+#    url = "???"
+#  }
+#
+# local = "../service/cloudformation/schemas/us-west-2/aws-ecs-taskdefinition.json"
+#}
