@@ -11,7 +11,7 @@ import (
 )
 
 func init() {
-	RegisterResourceType("aws_logs_log_group", awsLogsLogGroup)
+	RegisterResourceTypeFactory("aws_logs_log_group", awsLogsLogGroup)
 }
 
 // awsLogsLogGroup returns the Terraform aws_logs_log_group resource type.

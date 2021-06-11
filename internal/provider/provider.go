@@ -127,7 +127,7 @@ var resourceRegistry map[string]func(context.Context) (tfsdk.ResourceType, error
 var resourceRegistryMu sync.Mutex
 
 // RegisterResourceType registers the specified resource type name and factory.
-func RegisterResourceType(name string, factory func(context.Context) (tfsdk.ResourceType, error)) {
+func RegisterResourceTypeFactory(name string, factory func(context.Context) (tfsdk.ResourceType, error)) {
 	resourceRegistryMu.Lock()
 	defer resourceRegistryMu.Unlock()
 

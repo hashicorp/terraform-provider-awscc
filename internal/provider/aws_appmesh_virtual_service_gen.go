@@ -11,13 +11,42 @@ import (
 )
 
 func init() {
-	RegisterResourceType("aws_appmesh_virtual_service", awsAppmeshVirtualService)
+	RegisterResourceTypeFactory("aws_appmesh_virtual_service", awsAppmeshVirtualService)
 }
 
 // awsAppmeshVirtualService returns the Terraform aws_appmesh_virtual_service resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppMesh::VirtualService resource type.
 func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	// Subproperty definitions.
+
+	// Definition: Tag
+	// Property: Key
+	// CloudFormation resource type schema:
+	/*
+	   {
+	     "type": "string"
+	   }
+	*/
+	tagKeyAttribute := schema.Attribute{}
+	tagKeyAttribute.Type = types.StringType
+	tagKeyAttribute.Optional = true
+
+	// Definition: Tag
+	// Property: Value
+	// CloudFormation resource type schema:
+	/*
+	   {
+	     "type": "string"
+	   }
+	*/
+	tagValueAttribute := schema.Attribute{}
+	tagValueAttribute.Type = types.StringType
+	tagValueAttribute.Optional = true
+
+	// Property references for Tag:
+	tagAttributes := make(map[string]schema.Attribute, 2)
+	tagAttributes["key"] = tagKeyAttribute
+	tagAttributes["value"] = tagValueAttribute
 
 	// Definition: VirtualNodeServiceProvider
 	// Property: VirtualNodeName
@@ -95,35 +124,6 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	// Property references for VirtualServiceSpec:
 	virtualServiceSpecAttributes := make(map[string]schema.Attribute, 1)
 	virtualServiceSpecAttributes["provider"] = virtualServiceSpecProviderAttribute
-
-	// Definition: Tag
-	// Property: Key
-	// CloudFormation resource type schema:
-	/*
-	   {
-	     "type": "string"
-	   }
-	*/
-	tagKeyAttribute := schema.Attribute{}
-	tagKeyAttribute.Type = types.StringType
-	tagKeyAttribute.Optional = true
-
-	// Definition: Tag
-	// Property: Value
-	// CloudFormation resource type schema:
-	/*
-	   {
-	     "type": "string"
-	   }
-	*/
-	tagValueAttribute := schema.Attribute{}
-	tagValueAttribute.Type = types.StringType
-	tagValueAttribute.Optional = true
-
-	// Property references for Tag:
-	tagAttributes := make(map[string]schema.Attribute, 2)
-	tagAttributes["key"] = tagKeyAttribute
-	tagAttributes["value"] = tagValueAttribute
 
 	// Root property definition.
 

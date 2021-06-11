@@ -202,7 +202,7 @@ import (
 )
 
 func init() {
-	RegisterResourceType("{{ .TerraformTypeName }}", {{ .FactoryFunctionName }})
+	RegisterResourceTypeFactory("{{ .TerraformTypeName }}", {{ .FactoryFunctionName }})
 }
 
 // {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} resource type.
