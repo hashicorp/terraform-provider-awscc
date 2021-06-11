@@ -121,17 +121,10 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 		case cfschema.PropertyTypeObject:
 			if patternProperties := property.PatternProperties; len(patternProperties) > 0 {
 				return fmt.Errorf("%s/%s is of unsupported type: key-value map", definitionName, propertyName)
-			} else {
-				inlineSubpropertyDefinitionName := fmt.Sprintf("%s%s", definitionName, propertyName)
-
-				g.printf("\n")
-				g.printf("// Inline subproperty.\n")
-				if err := g.AppendCfDefinition(inlineSubpropertyDefinitionName, property.Properties); err != nil {
-					return err
-				}
-
-				g.printf("%s.Attributes = schema.SingleNestedAttributes(%s)\n", attributeVariableName, CfDefinitionTfAttributesVariableName(inlineSubpropertyDefinitionName))
+			} else if len(property.Properties) > 0 {
+				return fmt.Errorf("%s/%s ihas unsupported inline subproperties", definitionName, propertyName)
 			}
+			fallthrough
 		default:
 			return fmt.Errorf("%s/%s is of unsupported type: %s", definitionName, propertyName, propertyType)
 		}
