@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"go/format"
 	"os"
+	"sort"
 	"strings"
 	"text/template"
 
@@ -274,9 +275,20 @@ func NewResource(resourceType, cfTypeSchemaFile string) (*Resource, error) {
 
 // DefinitionNames returns the CloudFormation definition names in the order that code should be generated.
 func DefinitionNames(definitions map[string]*cfschema.Property) ([]string, error) {
+	definitionNames := make([]string, 0)
+
+	for definitionName := range definitions {
+		definitionNames = append(definitionNames, definitionName)
+	}
+
+	// Sort the definition names to reduce generated code diffs.
+	sort.Strings(definitionNames)
+
 	dg := depgraph.New()
 
-	for defName, definition := range definitions {
+	for _, defName := range definitionNames {
+		definition := definitions[defName]
+
 		dg.AddNode(defName)
 
 		if ref := definition.Ref; ref != nil {
