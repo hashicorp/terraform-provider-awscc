@@ -8,10 +8,11 @@ import (
 	tfsdk "github.com/hashicorp/terraform-plugin-framework"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
 )
 
 func init() {
-	RegisterResourceTypeFactory("aws_synthetics_canary", awsSyntheticsCanary)
+	registry.AddResourceTypeFactory("aws_synthetics_canary", awsSyntheticsCanary)
 }
 
 // awsSyntheticsCanary returns the Terraform aws_synthetics_canary resource type.

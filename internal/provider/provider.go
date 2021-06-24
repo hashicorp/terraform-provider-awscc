@@ -3,7 +3,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"sync"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/cloudformation"
@@ -13,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
 )
 
 func New(version string) tfsdk.Provider {
@@ -58,9 +58,9 @@ func (p *awsProvider) Configure(_ context.Context, input *tfsdk.ConfigureProvide
 
 func (p *awsProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
 	var diags []*tfprotov6.Diagnostic
-	resources := make(map[string]tfsdk.ResourceType, len(resourceRegistry))
+	resources := make(map[string]tfsdk.ResourceType)
 
-	for name, factory := range resourceRegistry {
+	for name, factory := range registry.ResourceFactories() {
 		resourceType, err := factory(ctx)
 
 		if err != nil {
@@ -122,20 +122,6 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 	}
 }
 */
-
-var resourceRegistry map[string]func(context.Context) (tfsdk.ResourceType, error)
-var resourceRegistryMu sync.Mutex
-
-// RegisterResourceType registers the specified resource type name and factory.
-func RegisterResourceTypeFactory(name string, factory func(context.Context) (tfsdk.ResourceType, error)) {
-	resourceRegistryMu.Lock()
-	defer resourceRegistryMu.Unlock()
-
-	if resourceRegistry == nil {
-		resourceRegistry = make(map[string]func(context.Context) (tfsdk.ResourceType, error))
-	}
-	resourceRegistry[name] = factory
-}
 
 // newAWSClient configures and returns a fully initialized AWS client.
 func newAWSClient() (*awsClient, error) {

@@ -8,10 +8,11 @@ import (
 	tfsdk "github.com/hashicorp/terraform-plugin-framework"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
 )
 
 func init() {
-	RegisterResourceTypeFactory("aws_logs_log_group", awsLogsLogGroup)
+	registry.AddResourceTypeFactory("aws_logs_log_group", awsLogsLogGroup)
 }
 
 // awsLogsLogGroup returns the Terraform aws_logs_log_group resource type.

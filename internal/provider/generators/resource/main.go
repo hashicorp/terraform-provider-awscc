@@ -210,10 +210,11 @@ import (
     tfsdk "github.com/hashicorp/terraform-plugin-framework"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
 )
 
 func init() {
-	RegisterResourceTypeFactory("{{ .TerraformTypeName }}", {{ .FactoryFunctionName }})
+	registry.AddResourceTypeFactory("{{ .TerraformTypeName }}", {{ .FactoryFunctionName }})
 }
 
 // {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} resource type.
