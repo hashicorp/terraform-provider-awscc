@@ -60,6 +60,9 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 	g.printf("\n")
 	g.printf("// Definition: %s\n", definitionName)
 	g.printf("// Property: %s\n", propertyName)
+	if g.CfResource.PrimaryIdentifier.ContainsPath([]string{propertyName}) {
+		g.printf("// PrimaryIdentifier: %t\n", true)
+	}
 	g.printf("// CloudFormation resource type schema:\n")
 	g.printf("/*\n")
 	g.printf("%v\n", property)
@@ -122,7 +125,7 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 			if patternProperties := property.PatternProperties; len(patternProperties) > 0 {
 				return fmt.Errorf("%s/%s is of unsupported type: key-value map", definitionName, propertyName)
 			} else if len(property.Properties) > 0 {
-				return fmt.Errorf("%s/%s ihas unsupported inline subproperties", definitionName, propertyName)
+				return fmt.Errorf("%s/%s has unsupported inline subproperties", definitionName, propertyName)
 			}
 			fallthrough
 		default:

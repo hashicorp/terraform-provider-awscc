@@ -53,6 +53,7 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsLogsLogGroup
 	// Property: LogGroupName
+	// PrimaryIdentifier: true
 	// CloudFormation resource type schema:
 	/*
 	   {

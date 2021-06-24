@@ -141,6 +141,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Definition: AwsAppmeshVirtualService
 	// Property: Id
+	// PrimaryIdentifier: true
 	// CloudFormation resource type schema:
 	/*
 	   {
