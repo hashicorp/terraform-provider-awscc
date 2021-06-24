@@ -135,7 +135,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 
 	sb.Reset()
 
-	rootDefinitionName := strcase.ToCamel(resource.TfType)
+	rootDefinitionName := "(Root)"
 
 	schemaGenerator.AppendCfDefinition(rootDefinitionName, resource.CfResource.Properties)
 

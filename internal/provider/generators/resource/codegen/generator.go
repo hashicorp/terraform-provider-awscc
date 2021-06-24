@@ -2,6 +2,7 @@ package codegen
 
 import (
 	"fmt"
+	"hash/fnv"
 	"io"
 	"sort"
 
@@ -160,12 +161,17 @@ func (g *Generator) printf(format string, a ...interface{}) (int, error) {
 
 // CfDefinitionTfAttributesVariableName returns a CloudFormation definition's Terraform map[string]Attribute variable name.
 func CfDefinitionTfAttributesVariableName(definitionName string) string {
-	return strcase.ToLowerCamel(fmt.Sprintf("%sAttributes", definitionName))
+	h := fnv.New32a()
+	h.Write([]byte(definitionName))
+	return fmt.Sprintf("attr%d", h.Sum32())
 }
 
 // CfPropertyTfAttributeVariableName returns a CloudFormation property's Terraform Attribute variable name.
 func CfPropertyTfAttributeVariableName(definitionName, propertyName string) string {
-	return strcase.ToLowerCamel(fmt.Sprintf("%s%sAttribute", definitionName, propertyName))
+	h := fnv.New32a()
+	h.Write([]byte(definitionName))
+	h.Write([]byte(propertyName))
+	return fmt.Sprintf("attr%d", h.Sum32())
 }
 
 // TfPropertyAttributeName returns a CloudFormation property's Terraform Attribute name.

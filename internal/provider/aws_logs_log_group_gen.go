@@ -21,7 +21,7 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	// Root property definition.
 
-	// Definition: AwsLogsLogGroup
+	// Definition: (Root)
 	// Property: Arn
 	// CloudFormation resource type schema:
 	/*
@@ -30,12 +30,12 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	awsLogsLogGroupArnAttribute := schema.Attribute{}
-	awsLogsLogGroupArnAttribute.Type = types.StringType
-	awsLogsLogGroupArnAttribute.Computed = true
-	awsLogsLogGroupArnAttribute.Description = `The CloudWatch log group ARN.`
+	attr3018501457 := schema.Attribute{}
+	attr3018501457.Type = types.StringType
+	attr3018501457.Computed = true
+	attr3018501457.Description = `The CloudWatch log group ARN.`
 
-	// Definition: AwsLogsLogGroup
+	// Definition: (Root)
 	// Property: KmsKeyId
 	// CloudFormation resource type schema:
 	/*
@@ -46,12 +46,12 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	awsLogsLogGroupKmsKeyIdAttribute := schema.Attribute{}
-	awsLogsLogGroupKmsKeyIdAttribute.Type = types.StringType
-	awsLogsLogGroupKmsKeyIdAttribute.Optional = true
-	awsLogsLogGroupKmsKeyIdAttribute.Description = `The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.`
+	attr3246801235 := schema.Attribute{}
+	attr3246801235.Type = types.StringType
+	attr3246801235.Optional = true
+	attr3246801235.Description = `The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.`
 
-	// Definition: AwsLogsLogGroup
+	// Definition: (Root)
 	// Property: LogGroupName
 	// PrimaryIdentifier: true
 	// CloudFormation resource type schema:
@@ -64,12 +64,12 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	awsLogsLogGroupLogGroupNameAttribute := schema.Attribute{}
-	awsLogsLogGroupLogGroupNameAttribute.Type = types.StringType
-	awsLogsLogGroupLogGroupNameAttribute.Optional = true
-	awsLogsLogGroupLogGroupNameAttribute.Description = `The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.`
+	attr1050065228 := schema.Attribute{}
+	attr1050065228.Type = types.StringType
+	attr1050065228.Optional = true
+	attr1050065228.Description = `The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.`
 
-	// Definition: AwsLogsLogGroup
+	// Definition: (Root)
 	// Property: RetentionInDays
 	// CloudFormation resource type schema:
 	/*
@@ -97,20 +97,20 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "integer"
 	   }
 	*/
-	awsLogsLogGroupRetentionInDaysAttribute := schema.Attribute{}
-	awsLogsLogGroupRetentionInDaysAttribute.Type = types.NumberType
-	awsLogsLogGroupRetentionInDaysAttribute.Optional = true
-	awsLogsLogGroupRetentionInDaysAttribute.Description = `The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.`
+	attr1962061988 := schema.Attribute{}
+	attr1962061988.Type = types.NumberType
+	attr1962061988.Optional = true
+	attr1962061988.Description = `The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.`
 
-	// Property references for AwsLogsLogGroup:
-	awsLogsLogGroupAttributes := make(map[string]schema.Attribute, 4)
-	awsLogsLogGroupAttributes["arn"] = awsLogsLogGroupArnAttribute
-	awsLogsLogGroupAttributes["kms_key_id"] = awsLogsLogGroupKmsKeyIdAttribute
-	awsLogsLogGroupAttributes["log_group_name"] = awsLogsLogGroupLogGroupNameAttribute
-	awsLogsLogGroupAttributes["retention_in_days"] = awsLogsLogGroupRetentionInDaysAttribute
+	// Property references for (Root):
+	attr1863345718 := make(map[string]schema.Attribute, 4)
+	attr1863345718["arn"] = attr3018501457
+	attr1863345718["kms_key_id"] = attr3246801235
+	attr1863345718["log_group_name"] = attr1050065228
+	attr1863345718["retention_in_days"] = attr1962061988
 
 	// Resource instance unique identifier.
-	awsLogsLogGroupAttributes["identifier"] = schema.Attribute{
+	attr1863345718["identifier"] = schema.Attribute{
 		Type:        types.StringType,
 		Computed:    true,
 		Description: "The resource instance's unique identifier.",
@@ -118,7 +118,7 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	schema := schema.Schema{
 		Version:    1,
-		Attributes: awsLogsLogGroupAttributes,
+		Attributes: attr1863345718,
 	}
 
 	resourceType := NewGenericResourceType(

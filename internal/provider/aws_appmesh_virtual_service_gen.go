@@ -27,9 +27,9 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	tagKeyAttribute := schema.Attribute{}
-	tagKeyAttribute.Type = types.StringType
-	tagKeyAttribute.Optional = true
+	attr2859957898 := schema.Attribute{}
+	attr2859957898.Type = types.StringType
+	attr2859957898.Optional = true
 
 	// Definition: Tag
 	// Property: Value
@@ -39,14 +39,14 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	tagValueAttribute := schema.Attribute{}
-	tagValueAttribute.Type = types.StringType
-	tagValueAttribute.Optional = true
+	attr3708964976 := schema.Attribute{}
+	attr3708964976.Type = types.StringType
+	attr3708964976.Optional = true
 
 	// Property references for Tag:
-	tagAttributes := make(map[string]schema.Attribute, 2)
-	tagAttributes["key"] = tagKeyAttribute
-	tagAttributes["value"] = tagValueAttribute
+	attr4169356339 := make(map[string]schema.Attribute, 2)
+	attr4169356339["key"] = attr2859957898
+	attr4169356339["value"] = attr3708964976
 
 	// Definition: VirtualNodeServiceProvider
 	// Property: VirtualNodeName
@@ -56,13 +56,13 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	virtualNodeServiceProviderVirtualNodeNameAttribute := schema.Attribute{}
-	virtualNodeServiceProviderVirtualNodeNameAttribute.Type = types.StringType
-	virtualNodeServiceProviderVirtualNodeNameAttribute.Optional = true
+	attr1959102114 := schema.Attribute{}
+	attr1959102114.Type = types.StringType
+	attr1959102114.Optional = true
 
 	// Property references for VirtualNodeServiceProvider:
-	virtualNodeServiceProviderAttributes := make(map[string]schema.Attribute, 1)
-	virtualNodeServiceProviderAttributes["virtual_node_name"] = virtualNodeServiceProviderVirtualNodeNameAttribute
+	attr2722040410 := make(map[string]schema.Attribute, 1)
+	attr2722040410["virtual_node_name"] = attr1959102114
 
 	// Definition: VirtualRouterServiceProvider
 	// Property: VirtualRouterName
@@ -72,13 +72,13 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	virtualRouterServiceProviderVirtualRouterNameAttribute := schema.Attribute{}
-	virtualRouterServiceProviderVirtualRouterNameAttribute.Type = types.StringType
-	virtualRouterServiceProviderVirtualRouterNameAttribute.Optional = true
+	attr1625712818 := schema.Attribute{}
+	attr1625712818.Type = types.StringType
+	attr1625712818.Optional = true
 
 	// Property references for VirtualRouterServiceProvider:
-	virtualRouterServiceProviderAttributes := make(map[string]schema.Attribute, 1)
-	virtualRouterServiceProviderAttributes["virtual_router_name"] = virtualRouterServiceProviderVirtualRouterNameAttribute
+	attr1187211989 := make(map[string]schema.Attribute, 1)
+	attr1187211989["virtual_router_name"] = attr1625712818
 
 	// Definition: VirtualServiceProvider
 	// Property: VirtualNode
@@ -88,9 +88,9 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "$ref": "#/definitions/VirtualNodeServiceProvider"
 	   }
 	*/
-	virtualServiceProviderVirtualNodeAttribute := schema.Attribute{}
-	virtualServiceProviderVirtualNodeAttribute.Attributes = schema.SingleNestedAttributes(virtualNodeServiceProviderAttributes)
-	virtualServiceProviderVirtualNodeAttribute.Optional = true
+	attr956383445 := schema.Attribute{}
+	attr956383445.Attributes = schema.SingleNestedAttributes(attr2722040410)
+	attr956383445.Optional = true
 
 	// Definition: VirtualServiceProvider
 	// Property: VirtualRouter
@@ -100,14 +100,14 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "$ref": "#/definitions/VirtualRouterServiceProvider"
 	   }
 	*/
-	virtualServiceProviderVirtualRouterAttribute := schema.Attribute{}
-	virtualServiceProviderVirtualRouterAttribute.Attributes = schema.SingleNestedAttributes(virtualRouterServiceProviderAttributes)
-	virtualServiceProviderVirtualRouterAttribute.Optional = true
+	attr3217696956 := schema.Attribute{}
+	attr3217696956.Attributes = schema.SingleNestedAttributes(attr1187211989)
+	attr3217696956.Optional = true
 
 	// Property references for VirtualServiceProvider:
-	virtualServiceProviderAttributes := make(map[string]schema.Attribute, 2)
-	virtualServiceProviderAttributes["virtual_node"] = virtualServiceProviderVirtualNodeAttribute
-	virtualServiceProviderAttributes["virtual_router"] = virtualServiceProviderVirtualRouterAttribute
+	attr2814324958 := make(map[string]schema.Attribute, 2)
+	attr2814324958["virtual_node"] = attr956383445
+	attr2814324958["virtual_router"] = attr3217696956
 
 	// Definition: VirtualServiceSpec
 	// Property: Provider
@@ -117,17 +117,17 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "$ref": "#/definitions/VirtualServiceProvider"
 	   }
 	*/
-	virtualServiceSpecProviderAttribute := schema.Attribute{}
-	virtualServiceSpecProviderAttribute.Attributes = schema.SingleNestedAttributes(virtualServiceProviderAttributes)
-	virtualServiceSpecProviderAttribute.Optional = true
+	attr2865320949 := schema.Attribute{}
+	attr2865320949.Attributes = schema.SingleNestedAttributes(attr2814324958)
+	attr2865320949.Optional = true
 
 	// Property references for VirtualServiceSpec:
-	virtualServiceSpecAttributes := make(map[string]schema.Attribute, 1)
-	virtualServiceSpecAttributes["provider"] = virtualServiceSpecProviderAttribute
+	attr512434520 := make(map[string]schema.Attribute, 1)
+	attr512434520["provider"] = attr2865320949
 
 	// Root property definition.
 
-	// Definition: AwsAppmeshVirtualService
+	// Definition: (Root)
 	// Property: Arn
 	// CloudFormation resource type schema:
 	/*
@@ -135,11 +135,11 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	awsAppmeshVirtualServiceArnAttribute := schema.Attribute{}
-	awsAppmeshVirtualServiceArnAttribute.Type = types.StringType
-	awsAppmeshVirtualServiceArnAttribute.Computed = true
+	attr3018501457 := schema.Attribute{}
+	attr3018501457.Type = types.StringType
+	attr3018501457.Computed = true
 
-	// Definition: AwsAppmeshVirtualService
+	// Definition: (Root)
 	// Property: Id
 	// PrimaryIdentifier: true
 	// CloudFormation resource type schema:
@@ -148,11 +148,11 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	awsAppmeshVirtualServiceIdAttribute := schema.Attribute{}
-	awsAppmeshVirtualServiceIdAttribute.Type = types.StringType
-	awsAppmeshVirtualServiceIdAttribute.Computed = true
+	attr2710565547 := schema.Attribute{}
+	attr2710565547.Type = types.StringType
+	attr2710565547.Computed = true
 
-	// Definition: AwsAppmeshVirtualService
+	// Definition: (Root)
 	// Property: MeshName
 	// CloudFormation resource type schema:
 	/*
@@ -160,11 +160,11 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	awsAppmeshVirtualServiceMeshNameAttribute := schema.Attribute{}
-	awsAppmeshVirtualServiceMeshNameAttribute.Type = types.StringType
-	awsAppmeshVirtualServiceMeshNameAttribute.Required = true
+	attr3520476156 := schema.Attribute{}
+	attr3520476156.Type = types.StringType
+	attr3520476156.Required = true
 
-	// Definition: AwsAppmeshVirtualService
+	// Definition: (Root)
 	// Property: MeshOwner
 	// CloudFormation resource type schema:
 	/*
@@ -172,11 +172,11 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	awsAppmeshVirtualServiceMeshOwnerAttribute := schema.Attribute{}
-	awsAppmeshVirtualServiceMeshOwnerAttribute.Type = types.StringType
-	awsAppmeshVirtualServiceMeshOwnerAttribute.Optional = true
+	attr1912911946 := schema.Attribute{}
+	attr1912911946.Type = types.StringType
+	attr1912911946.Optional = true
 
-	// Definition: AwsAppmeshVirtualService
+	// Definition: (Root)
 	// Property: ResourceOwner
 	// CloudFormation resource type schema:
 	/*
@@ -184,11 +184,11 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	awsAppmeshVirtualServiceResourceOwnerAttribute := schema.Attribute{}
-	awsAppmeshVirtualServiceResourceOwnerAttribute.Type = types.StringType
-	awsAppmeshVirtualServiceResourceOwnerAttribute.Computed = true
+	attr4099733265 := schema.Attribute{}
+	attr4099733265.Type = types.StringType
+	attr4099733265.Computed = true
 
-	// Definition: AwsAppmeshVirtualService
+	// Definition: (Root)
 	// Property: Spec
 	// CloudFormation resource type schema:
 	/*
@@ -196,11 +196,11 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "$ref": "#/definitions/VirtualServiceSpec"
 	   }
 	*/
-	awsAppmeshVirtualServiceSpecAttribute := schema.Attribute{}
-	awsAppmeshVirtualServiceSpecAttribute.Attributes = schema.SingleNestedAttributes(virtualServiceSpecAttributes)
-	awsAppmeshVirtualServiceSpecAttribute.Required = true
+	attr865609681 := schema.Attribute{}
+	attr865609681.Attributes = schema.SingleNestedAttributes(attr512434520)
+	attr865609681.Required = true
 
-	// Definition: AwsAppmeshVirtualService
+	// Definition: (Root)
 	// Property: Tags
 	// CloudFormation resource type schema:
 	/*
@@ -212,12 +212,12 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "uniqueItems": false
 	   }
 	*/
-	awsAppmeshVirtualServiceTagsAttribute := schema.Attribute{}
-	awsAppmeshVirtualServiceTagsAttributeOptions := schema.ListNestedAttributesOptions{}
-	awsAppmeshVirtualServiceTagsAttribute.Attributes = schema.ListNestedAttributes(tagAttributes, awsAppmeshVirtualServiceTagsAttributeOptions)
-	awsAppmeshVirtualServiceTagsAttribute.Optional = true
+	attr2151425999 := schema.Attribute{}
+	attr2151425999Options := schema.ListNestedAttributesOptions{}
+	attr2151425999.Attributes = schema.ListNestedAttributes(attr4169356339, attr2151425999Options)
+	attr2151425999.Optional = true
 
-	// Definition: AwsAppmeshVirtualService
+	// Definition: (Root)
 	// Property: Uid
 	// CloudFormation resource type schema:
 	/*
@@ -225,11 +225,11 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	awsAppmeshVirtualServiceUidAttribute := schema.Attribute{}
-	awsAppmeshVirtualServiceUidAttribute.Type = types.StringType
-	awsAppmeshVirtualServiceUidAttribute.Computed = true
+	attr1173502620 := schema.Attribute{}
+	attr1173502620.Type = types.StringType
+	attr1173502620.Computed = true
 
-	// Definition: AwsAppmeshVirtualService
+	// Definition: (Root)
 	// Property: VirtualServiceName
 	// CloudFormation resource type schema:
 	/*
@@ -237,24 +237,24 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	     "type": "string"
 	   }
 	*/
-	awsAppmeshVirtualServiceVirtualServiceNameAttribute := schema.Attribute{}
-	awsAppmeshVirtualServiceVirtualServiceNameAttribute.Type = types.StringType
-	awsAppmeshVirtualServiceVirtualServiceNameAttribute.Required = true
+	attr1309939279 := schema.Attribute{}
+	attr1309939279.Type = types.StringType
+	attr1309939279.Required = true
 
-	// Property references for AwsAppmeshVirtualService:
-	awsAppmeshVirtualServiceAttributes := make(map[string]schema.Attribute, 9)
-	awsAppmeshVirtualServiceAttributes["arn"] = awsAppmeshVirtualServiceArnAttribute
-	awsAppmeshVirtualServiceAttributes["id"] = awsAppmeshVirtualServiceIdAttribute
-	awsAppmeshVirtualServiceAttributes["mesh_name"] = awsAppmeshVirtualServiceMeshNameAttribute
-	awsAppmeshVirtualServiceAttributes["mesh_owner"] = awsAppmeshVirtualServiceMeshOwnerAttribute
-	awsAppmeshVirtualServiceAttributes["resource_owner"] = awsAppmeshVirtualServiceResourceOwnerAttribute
-	awsAppmeshVirtualServiceAttributes["spec"] = awsAppmeshVirtualServiceSpecAttribute
-	awsAppmeshVirtualServiceAttributes["tags"] = awsAppmeshVirtualServiceTagsAttribute
-	awsAppmeshVirtualServiceAttributes["uid"] = awsAppmeshVirtualServiceUidAttribute
-	awsAppmeshVirtualServiceAttributes["virtual_service_name"] = awsAppmeshVirtualServiceVirtualServiceNameAttribute
+	// Property references for (Root):
+	attr1863345718 := make(map[string]schema.Attribute, 9)
+	attr1863345718["arn"] = attr3018501457
+	attr1863345718["id"] = attr2710565547
+	attr1863345718["mesh_name"] = attr3520476156
+	attr1863345718["mesh_owner"] = attr1912911946
+	attr1863345718["resource_owner"] = attr4099733265
+	attr1863345718["spec"] = attr865609681
+	attr1863345718["tags"] = attr2151425999
+	attr1863345718["uid"] = attr1173502620
+	attr1863345718["virtual_service_name"] = attr1309939279
 
 	// Resource instance unique identifier.
-	awsAppmeshVirtualServiceAttributes["identifier"] = schema.Attribute{
+	attr1863345718["identifier"] = schema.Attribute{
 		Type:        types.StringType,
 		Computed:    true,
 		Description: "The resource instance's unique identifier.",
@@ -262,7 +262,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	schema := schema.Schema{
 		Version:    1,
-		Attributes: awsAppmeshVirtualServiceAttributes,
+		Attributes: attr1863345718,
 	}
 
 	resourceType := NewGenericResourceType(
