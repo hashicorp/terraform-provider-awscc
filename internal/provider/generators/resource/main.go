@@ -210,6 +210,7 @@ import (
     tfsdk "github.com/hashicorp/terraform-plugin-framework"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
 )
 
@@ -238,7 +239,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 		Attributes: {{ .RootPropertyAttributesVariableName }},
 	}
 
-	resourceType := NewGenericResourceType(
+	resourceType := generic.NewResourceType(
 		"{{ .CloudFormationTypeName }}",
 		"{{ .TerraformTypeName }}",
 		schema,

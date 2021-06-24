@@ -8,6 +8,7 @@ import (
 	tfsdk "github.com/hashicorp/terraform-plugin-framework"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
 )
 
@@ -505,7 +506,7 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 		Attributes: attr1863345718,
 	}
 
-	resourceType := NewGenericResourceType(
+	resourceType := generic.NewResourceType(
 		"AWS::Synthetics::Canary",
 		"aws_synthetics_canary",
 		schema,

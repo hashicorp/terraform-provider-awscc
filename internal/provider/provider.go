@@ -24,7 +24,7 @@ type awsClient struct {
 }
 
 type awsProvider struct {
-	Client *awsClient
+	client *awsClient
 }
 
 func (p *awsProvider) GetSchema(_ context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
@@ -53,7 +53,7 @@ func (p *awsProvider) Configure(_ context.Context, input *tfsdk.ConfigureProvide
 		//return nil, appendDiagnostic(nil, fmt.Errorf("error configuring Terraform AWS Provider: %w", err))
 	}
 
-	p.Client = client
+	p.client = client
 }
 
 func (p *awsProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
@@ -77,6 +77,10 @@ func (p *awsProvider) GetResources(ctx context.Context) (map[string]tfsdk.Resour
 
 func (p *awsProvider) GetDataSources(_ context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
 	return nil, nil
+}
+
+func (p *awsProvider) CloudFormationClient(_ context.Context) (*cloudformation.CloudFormation, error) {
+	return p.client.cfconn, nil
 }
 
 /*

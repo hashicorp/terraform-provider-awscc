@@ -8,6 +8,7 @@ import (
 	tfsdk "github.com/hashicorp/terraform-plugin-framework"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
 )
 
@@ -266,7 +267,7 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 		Attributes: attr1863345718,
 	}
 
-	resourceType := NewGenericResourceType(
+	resourceType := generic.NewResourceType(
 		"AWS::AppMesh::VirtualService",
 		"aws_appmesh_virtual_service",
 		schema,
