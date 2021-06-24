@@ -27,13 +27,13 @@ func NewGenericResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schem
 }
 
 func (rt *genericResourceType) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
-	tflog.Trace(ctx, "GenericResourceType.GetSchema(%s/%s)", rt.cfTypeName, rt.tfTypeName)
+	tflog.Trace(ctx, "GenericResourceType.GetSchema(%s/%s) enter", rt.cfTypeName, rt.tfTypeName)
 
 	return rt.tfSchema, nil
 }
 
 func (rt *genericResourceType) NewResource(ctx context.Context, provider tfsdk.Provider) (tfsdk.Resource, []*tfprotov6.Diagnostic) {
-	tflog.Trace(ctx, "GenericResourceType.NewResource(%s/%s)", rt.cfTypeName, rt.tfTypeName)
+	tflog.Trace(ctx, "GenericResourceType.NewResource(%s/%s) enter", rt.cfTypeName, rt.tfTypeName)
 
 	return newGenericResource(provider.(*awsProvider), rt), nil
 }
@@ -52,13 +52,17 @@ func newGenericResource(provider *awsProvider, resourceType *genericResourceType
 }
 
 func (r *genericResource) Create(ctx context.Context, input *tfsdk.CreateResourceRequest, output *tfsdk.CreateResourceResponse) {
+	tflog.Trace(ctx, "GenericResource.Create(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 }
 
 func (r *genericResource) Read(ctx context.Context, input *tfsdk.ReadResourceRequest, output *tfsdk.ReadResourceResponse) {
+	tflog.Trace(ctx, "GenericResource.Read(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 }
 
 func (r *genericResource) Update(ctx context.Context, input *tfsdk.UpdateResourceRequest, output *tfsdk.UpdateResourceResponse) {
+	tflog.Trace(ctx, "GenericResource.Update(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 }
 
 func (r *genericResource) Delete(ctx context.Context, input *tfsdk.DeleteResourceRequest, output *tfsdk.DeleteResourceResponse) {
+	tflog.Trace(ctx, "GenericResource.Delete(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 }
