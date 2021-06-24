@@ -108,6 +108,13 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	awsLogsLogGroupAttributes["log_group_name"] = awsLogsLogGroupLogGroupNameAttribute
 	awsLogsLogGroupAttributes["retention_in_days"] = awsLogsLogGroupRetentionInDaysAttribute
 
+	// Resource instance unique identifier.
+	awsLogsLogGroupAttributes["identifier"] = schema.Attribute{
+		Type:        types.StringType,
+		Computed:    true,
+		Description: "The resource instance's unique identifier.",
+	}
+
 	schema := schema.Schema{
 		Version:    1,
 		Attributes: awsLogsLogGroupAttributes,

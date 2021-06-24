@@ -252,6 +252,13 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	awsAppmeshVirtualServiceAttributes["uid"] = awsAppmeshVirtualServiceUidAttribute
 	awsAppmeshVirtualServiceAttributes["virtual_service_name"] = awsAppmeshVirtualServiceVirtualServiceNameAttribute
 
+	// Resource instance unique identifier.
+	awsAppmeshVirtualServiceAttributes["identifier"] = schema.Attribute{
+		Type:        types.StringType,
+		Computed:    true,
+		Description: "The resource instance's unique identifier.",
+	}
+
 	schema := schema.Schema{
 		Version:    1,
 		Attributes: awsAppmeshVirtualServiceAttributes,

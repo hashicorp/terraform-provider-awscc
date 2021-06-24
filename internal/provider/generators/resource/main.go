@@ -147,6 +147,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 		PackageName:                        packageName,
 		RootPropertyAttributes:             rootPropertyAttributes,
 		RootPropertyAttributesVariableName: codegen.CfDefinitionTfAttributesVariableName(rootDefinitionName),
+		SchemaVersion:                      1,
 		SubpropertyAttributes:              subpropertyAttributes,
 		TerraformTypeName:                  resource.TfType,
 	}
@@ -214,8 +215,15 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 	// Root property definition.
 	{{ .RootPropertyAttributes }}
 
+	// Resource instance unique identifier.
+	{{ .RootPropertyAttributesVariableName }}["identifier"] = schema.Attribute{
+		Type:        types.StringType,
+		Computed:    true,
+		Description: "The resource instance's unique identifier.",
+	}
+
 	schema := schema.Schema{
-		Version:    1,
+		Version:    {{ .SchemaVersion }},
 		Attributes: {{ .RootPropertyAttributesVariableName }},
 	}
 
@@ -235,6 +243,7 @@ type TemplateData struct {
 	PackageName                        string
 	RootPropertyAttributes             string
 	RootPropertyAttributesVariableName string
+	SchemaVersion                      int64
 	SubpropertyAttributes              string
 	TerraformTypeName                  string
 }
