@@ -9,7 +9,7 @@ require (
 	github.com/hashicorp/aws-sdk-go-base v0.7.1
 	github.com/hashicorp/go-getter v1.5.3
 	github.com/hashicorp/hcl/v2 v2.10.0
-	github.com/hashicorp/terraform-plugin-framework v0.0.0-20210602173129-1ab898feb56e
+	github.com/hashicorp/terraform-plugin-framework v0.0.0-20210624084941-4fc7bd4996a7
 	github.com/hashicorp/terraform-plugin-go v0.3.1-0.20210601164646-1df22172e56a
 	github.com/hashicorp/terraform-plugin-log v0.0.0-20210624094917-d713296dc7e1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.6.1

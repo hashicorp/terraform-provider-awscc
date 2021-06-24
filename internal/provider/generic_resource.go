@@ -32,7 +32,9 @@ func (rt *genericResourceType) GetSchema(ctx context.Context) (schema.Schema, []
 	return rt.tfSchema, nil
 }
 
-func (rt *genericResourceType) NewResource(provider tfsdk.Provider) (tfsdk.Resource, []*tfprotov6.Diagnostic) {
+func (rt *genericResourceType) NewResource(ctx context.Context, provider tfsdk.Provider) (tfsdk.Resource, []*tfprotov6.Diagnostic) {
+	tflog.Trace(ctx, "GenericResourceType.NewResource(%s/%s)", rt.cfTypeName, rt.tfTypeName)
+
 	return newGenericResource(provider.(*awsProvider), rt), nil
 }
 
