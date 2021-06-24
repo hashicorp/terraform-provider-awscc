@@ -4,3 +4,9 @@
 //go:generate go run generators/resource/main.go -resource aws_synthetics_canary -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-synthetics-canary.json -- aws_synthetics_canary_gen.go
 
 package provider
+
+import (
+	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/appmesh"
+	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/logs"
+	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/synthetics"
+)
