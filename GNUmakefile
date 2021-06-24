@@ -13,7 +13,7 @@ build:
 	go install
 
 resources:
-	rm -f internal/provider/*_gen.go
+	rm -f internal/**/*_gen.go
 	go generate internal/provider/resources.go
 
 schemas:

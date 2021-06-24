@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"go/format"
 	"os"
+	"path"
 	"sort"
 	"strings"
 	"text/template"
@@ -89,6 +90,14 @@ func (g *Generator) Infof(format string, a ...interface{}) {
 // Generate generates the resource's type factory into the specified file.
 func (g *Generator) Generate(packageName, filename string) error {
 	g.Infof("generating Terraform resource code for %q from %q into %q", g.tfResourceType, g.cfTypeSchemaFile, filename)
+
+	// Create target directory.
+	dirname := path.Dir(filename)
+	err := os.MkdirAll(dirname, 0755)
+
+	if err != nil {
+		return fmt.Errorf("error creating target directory %s: %w", dirname, err)
+	}
 
 	resource, err := NewResource(g.tfResourceType, g.cfTypeSchemaFile)
 
