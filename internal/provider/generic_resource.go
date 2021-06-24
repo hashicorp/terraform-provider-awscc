@@ -6,6 +6,7 @@ import (
 	tfsdk "github.com/hashicorp/terraform-plugin-framework"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
+	tflog "github.com/hashicorp/terraform-plugin-log"
 )
 
 // Implements tfsdk.ResourceType.
@@ -25,7 +26,9 @@ func NewGenericResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schem
 	}
 }
 
-func (rt *genericResourceType) GetSchema(_ context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
+func (rt *genericResourceType) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
+	tflog.Trace(ctx, "GenericResourceType.GetSchema(%s/%s)", rt.cfTypeName, rt.tfTypeName)
+
 	return rt.tfSchema, nil
 }
 
