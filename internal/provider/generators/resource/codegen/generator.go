@@ -124,7 +124,31 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 			}
 		case cfschema.PropertyTypeObject:
 			if patternProperties := property.PatternProperties; len(patternProperties) > 0 {
-				return fmt.Errorf("%s/%s is of unsupported type: key-value map", definitionName, propertyName)
+				n := 0
+				for pattern, property := range patternProperties {
+					g.printf("// Pattern: %q\n", pattern)
+					if n == 0 {
+						if ref := property.Ref; ref != nil {
+							return fmt.Errorf("%s/%s is of unsupported type: key-value map of complex type (%s)", definitionName, propertyName, ref.Field())
+						}
+
+						switch propertyType := property.Type.String(); propertyType {
+						case cfschema.PropertyTypeBoolean:
+							g.printf("%s.Type = types.MapType{ElemType:types.BoolType}\n", attributeVariableName)
+						case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+							g.printf("%s.Type = types.MapType{ElemType:types.NumberType}\n", attributeVariableName)
+						case cfschema.PropertyTypeString:
+							g.printf("%s.Type = types.MapType{ElemType:types.StringType}\n", attributeVariableName)
+						default:
+							return fmt.Errorf("%s/%s is of unsupported type: key-value map of %s", definitionName, propertyName, propertyType)
+						}
+					} else {
+						g.printf("// Ignored.\n")
+					}
+					n++
+				}
+
+				break
 			} else if len(property.Properties) > 0 {
 				return fmt.Errorf("%s/%s has unsupported inline subproperties", definitionName, propertyName)
 			}

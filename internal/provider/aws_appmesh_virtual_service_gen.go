@@ -19,35 +19,6 @@ func init() {
 func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	// Subproperty definitions.
 
-	// Definition: Tag
-	// Property: Key
-	// CloudFormation resource type schema:
-	/*
-	   {
-	     "type": "string"
-	   }
-	*/
-	attr2859957898 := schema.Attribute{}
-	attr2859957898.Type = types.StringType
-	attr2859957898.Optional = true
-
-	// Definition: Tag
-	// Property: Value
-	// CloudFormation resource type schema:
-	/*
-	   {
-	     "type": "string"
-	   }
-	*/
-	attr3708964976 := schema.Attribute{}
-	attr3708964976.Type = types.StringType
-	attr3708964976.Optional = true
-
-	// Property references for Tag:
-	attr4169356339 := make(map[string]schema.Attribute, 2)
-	attr4169356339["key"] = attr2859957898
-	attr4169356339["value"] = attr3708964976
-
 	// Definition: VirtualNodeServiceProvider
 	// Property: VirtualNodeName
 	// CloudFormation resource type schema:
@@ -124,6 +95,35 @@ func awsAppmeshVirtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	// Property references for VirtualServiceSpec:
 	attr512434520 := make(map[string]schema.Attribute, 1)
 	attr512434520["provider"] = attr2865320949
+
+	// Definition: Tag
+	// Property: Key
+	// CloudFormation resource type schema:
+	/*
+	   {
+	     "type": "string"
+	   }
+	*/
+	attr2859957898 := schema.Attribute{}
+	attr2859957898.Type = types.StringType
+	attr2859957898.Optional = true
+
+	// Definition: Tag
+	// Property: Value
+	// CloudFormation resource type schema:
+	/*
+	   {
+	     "type": "string"
+	   }
+	*/
+	attr3708964976 := schema.Attribute{}
+	attr3708964976.Type = types.StringType
+	attr3708964976.Optional = true
+
+	// Property references for Tag:
+	attr4169356339 := make(map[string]schema.Attribute, 2)
+	attr4169356339["key"] = attr2859957898
+	attr4169356339["value"] = attr3708964976
 
 	// Root property definition.
 
