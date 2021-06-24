@@ -11,6 +11,7 @@ require (
 	github.com/hashicorp/hcl/v2 v2.10.0
 	github.com/hashicorp/terraform-plugin-framework v0.0.0-20210602173129-1ab898feb56e
 	github.com/hashicorp/terraform-plugin-go v0.3.1-0.20210601164646-1df22172e56a
+	github.com/hashicorp/terraform-plugin-log v0.0.0-20210624094917-d713296dc7e1 // indirect
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.6.1
 	github.com/iancoleman/strcase v0.1.3
 	github.com/mattbaird/jsonpatch v0.0.0-20200820163806-098863c1fc24
