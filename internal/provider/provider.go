@@ -50,15 +50,15 @@ type providerData struct {
 	RoleARN types.String `tfsdk:"role_arn"`
 }
 
-func (p *awsCloudAPIProvider) Configure(ctx context.Context, input tfsdk.ConfigureProviderRequest, output *tfsdk.ConfigureProviderResponse) {
+func (p *awsCloudAPIProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
 	tflog.Debug(ctx, "Provider.Configure() enter")
 
 	var config providerData
 
-	err := input.Config.Get(ctx, &config)
+	err := request.Config.Get(ctx, &config)
 
 	if err != nil {
-		output.Diagnostics = append(output.Diagnostics, &tfprotov6.Diagnostic{
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
 			Severity: tfprotov6.DiagnosticSeverityError,
 			Summary:  "Error parsing provider configuration",
 			Detail:   fmt.Sprintf("Error parsing the provider configuration, this is an error in the provider.\n%s\n", err),
@@ -67,8 +67,8 @@ func (p *awsCloudAPIProvider) Configure(ctx context.Context, input tfsdk.Configu
 		return
 	}
 
-	if config.Region.Null || config.Region.Unknown || config.RoleARN.Null || config.RoleARN.Unknown {
-		tflog.Info(ctx, "One or more configuration values is Null or Unknown")
+	if config.Region.Null || config.Region.Unknown {
+		tflog.Info(ctx, "AWS Region is Null or Unknown")
 
 		return
 	}
@@ -76,7 +76,7 @@ func (p *awsCloudAPIProvider) Configure(ctx context.Context, input tfsdk.Configu
 	cfClient, err := newCloudFormationClient(&config)
 
 	if err != nil {
-		output.Diagnostics = append(output.Diagnostics, &tfprotov6.Diagnostic{
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
 			Severity: tfprotov6.DiagnosticSeverityError,
 			Summary:  "Error configuring AWS CloudFormation client",
 			Detail:   fmt.Sprintf("Error configuring the AWS CloudFormation client, this is an error in the provider.\n%s\n", err),

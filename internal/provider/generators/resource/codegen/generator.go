@@ -83,6 +83,10 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 		case cfschema.PropertyTypeArray:
 			isSet := property.UniqueItems != nil && *property.UniqueItems
 
+			// TODO
+			// TODO Worry about InsertionOrder and Sets.
+			// TODO
+
 			if ref := property.Items.Ref; ref != nil {
 				nestedAttributesVariableName := CfDefinitionTfAttributesVariableName(ref.Field())
 				nestedAttributesOptionsVariableName := attributeVariableName + "Options"
