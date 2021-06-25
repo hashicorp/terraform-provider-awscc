@@ -2,6 +2,7 @@ package generic
 
 import (
 	"context"
+	"log"
 
 	"github.com/aws/aws-sdk-go/service/cloudformation"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
@@ -60,16 +61,38 @@ func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfs
 
 func (r *resource) Create(ctx context.Context, input tfsdk.CreateResourceRequest, output *tfsdk.CreateResourceResponse) {
 	tflog.Debug(ctx, "Resource.Create(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+
+	log.Printf("[DEBUG] Resource.Create(%s/%s)\nRaw plan: %v", r.resourceType.cfTypeName, r.resourceType.tfTypeName, input.Plan.Raw)
+
+	output.Diagnostics = append(output.Diagnostics, &tfprotov6.Diagnostic{
+		Severity: tfprotov6.DiagnosticSeverityError,
+		Summary:  "Unimplemented Resource.Create",
+	})
 }
 
 func (r *resource) Read(ctx context.Context, input tfsdk.ReadResourceRequest, output *tfsdk.ReadResourceResponse) {
 	tflog.Debug(ctx, "Resource.Read(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+
+	output.Diagnostics = append(output.Diagnostics, &tfprotov6.Diagnostic{
+		Severity: tfprotov6.DiagnosticSeverityError,
+		Summary:  "Unimplemented Resource.Read",
+	})
 }
 
 func (r *resource) Update(ctx context.Context, input tfsdk.UpdateResourceRequest, output *tfsdk.UpdateResourceResponse) {
 	tflog.Debug(ctx, "Resource.Update(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+
+	output.Diagnostics = append(output.Diagnostics, &tfprotov6.Diagnostic{
+		Severity: tfprotov6.DiagnosticSeverityError,
+		Summary:  "Unimplemented Resource.Update",
+	})
 }
 
 func (r *resource) Delete(ctx context.Context, input tfsdk.DeleteResourceRequest, output *tfsdk.DeleteResourceResponse) {
 	tflog.Debug(ctx, "Resource.Delete(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+
+	output.Diagnostics = append(output.Diagnostics, &tfprotov6.Diagnostic{
+		Severity: tfprotov6.DiagnosticSeverityError,
+		Summary:  "Unimplemented Resource.Delete",
+	})
 }
