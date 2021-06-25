@@ -210,6 +210,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
 )
@@ -244,6 +245,8 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 		"{{ .TerraformTypeName }}",
 		schema,
 	)
+
+	tflog.Debug(ctx, "Generated schema for %s:\n\n%v", "{{ .TerraformTypeName }}", schema)
 
 	return resourceType, nil
 }
