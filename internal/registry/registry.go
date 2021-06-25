@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	tfsdk "github.com/hashicorp/terraform-plugin-framework"
+	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 )
 
 var resourceRegisrationClosed bool

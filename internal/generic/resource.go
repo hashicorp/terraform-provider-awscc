@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go/service/cloudformation"
-	tfsdk "github.com/hashicorp/terraform-plugin-framework"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
+	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 )
@@ -58,18 +58,18 @@ func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfs
 	}
 }
 
-func (r *resource) Create(ctx context.Context, input *tfsdk.CreateResourceRequest, output *tfsdk.CreateResourceResponse) {
+func (r *resource) Create(ctx context.Context, input tfsdk.CreateResourceRequest, output *tfsdk.CreateResourceResponse) {
 	tflog.Trace(ctx, "Resource.Create(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 }
 
-func (r *resource) Read(ctx context.Context, input *tfsdk.ReadResourceRequest, output *tfsdk.ReadResourceResponse) {
+func (r *resource) Read(ctx context.Context, input tfsdk.ReadResourceRequest, output *tfsdk.ReadResourceResponse) {
 	tflog.Trace(ctx, "Resource.Read(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 }
 
-func (r *resource) Update(ctx context.Context, input *tfsdk.UpdateResourceRequest, output *tfsdk.UpdateResourceResponse) {
+func (r *resource) Update(ctx context.Context, input tfsdk.UpdateResourceRequest, output *tfsdk.UpdateResourceResponse) {
 	tflog.Trace(ctx, "Resource.Update(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 }
 
-func (r *resource) Delete(ctx context.Context, input *tfsdk.DeleteResourceRequest, output *tfsdk.DeleteResourceResponse) {
+func (r *resource) Delete(ctx context.Context, input tfsdk.DeleteResourceRequest, output *tfsdk.DeleteResourceResponse) {
 	tflog.Trace(ctx, "Resource.Delete(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 }
