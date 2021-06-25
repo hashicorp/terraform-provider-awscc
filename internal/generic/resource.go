@@ -28,13 +28,13 @@ func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema) tfsd
 }
 
 func (rt *resourceType) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
-	tflog.Trace(ctx, "ResourceType.GetSchema(%s/%s) enter", rt.cfTypeName, rt.tfTypeName)
+	tflog.Debug(ctx, "ResourceType.GetSchema(%s/%s) enter", rt.cfTypeName, rt.tfTypeName)
 
 	return rt.tfSchema, nil
 }
 
 func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider) (tfsdk.Resource, []*tfprotov6.Diagnostic) {
-	tflog.Trace(ctx, "ResourceType.NewResource(%s/%s) enter", rt.cfTypeName, rt.tfTypeName)
+	tflog.Debug(ctx, "ResourceType.NewResource(%s/%s) enter", rt.cfTypeName, rt.tfTypeName)
 
 	return newGenericResource(provider, rt), nil
 }
@@ -59,17 +59,17 @@ func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfs
 }
 
 func (r *resource) Create(ctx context.Context, input tfsdk.CreateResourceRequest, output *tfsdk.CreateResourceResponse) {
-	tflog.Trace(ctx, "Resource.Create(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+	tflog.Debug(ctx, "Resource.Create(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 }
 
 func (r *resource) Read(ctx context.Context, input tfsdk.ReadResourceRequest, output *tfsdk.ReadResourceResponse) {
-	tflog.Trace(ctx, "Resource.Read(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+	tflog.Debug(ctx, "Resource.Read(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 }
 
 func (r *resource) Update(ctx context.Context, input tfsdk.UpdateResourceRequest, output *tfsdk.UpdateResourceResponse) {
-	tflog.Trace(ctx, "Resource.Update(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+	tflog.Debug(ctx, "Resource.Update(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 }
 
 func (r *resource) Delete(ctx context.Context, input tfsdk.DeleteResourceRequest, output *tfsdk.DeleteResourceResponse) {
-	tflog.Trace(ctx, "Resource.Delete(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+	tflog.Debug(ctx, "Resource.Delete(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 }
