@@ -9,6 +9,6 @@ import (
 
 func main() {
 	tfsdk.Serve(context.Background(), provider.New, tfsdk.ServeOpts{
-		Name: "aws-cloudapi",
+		Name: "hashicorp/aws-cloudapi",
 	})
 }
