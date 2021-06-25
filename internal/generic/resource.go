@@ -134,6 +134,8 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
+	response.State.Raw = request.Plan.Raw
+
 	err = setIdentifier(ctx, &response.State, aws.StringValue(output.ProgressEvent.Identifier))
 
 	if err != nil {
