@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/cloudformation"
+	"github.com/hashicorp/aws-sdk-go-base/tfawserr"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
@@ -136,7 +137,8 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	response.State.Raw = request.Plan.Raw
 
-	err = setIdentifier(ctx, &response.State, aws.StringValue(output.ProgressEvent.Identifier))
+	identifier := aws.StringValue(output.ProgressEvent.Identifier)
+	err = setIdentifier(ctx, &response.State, identifier)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -147,6 +149,30 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 		return
 	}
+
+	description, err := r.describe(ctx, conn, identifier)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error describing CloudFormation resource",
+			Detail:   fmt.Sprintf("Error describing AWS CloudFormation resource.\n%s\n", err),
+		})
+
+		return
+	}
+
+	if description == nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error describing CloudFormation resource",
+			Detail:   "Error describing AWS CloudFormation resource.\nEmpty response\n",
+		})
+
+		return
+	}
+
+	log.Printf("[DEBUG] ResourceModel: %s", aws.StringValue(description.ResourceModel))
 
 	// TODO
 	// TODO Populate rest of State.
@@ -245,4 +271,35 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 	}
 
 	response.State.RemoveResource(ctx)
+}
+
+// describe returns the live state of the specified resource.
+// TODO Return NotFoundError when not found.
+func (r *resource) describe(ctx context.Context, conn *cloudformation.CloudFormation, identifier string) (*cloudformation.ResourceDescription, error) {
+	conn, err := r.clientProvider.CloudFormationClient(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	input := &cloudformation.GetResourceInput{
+		Identifier: aws.String(identifier),
+		TypeName:   aws.String(r.resourceType.cfTypeName),
+	}
+
+	output, err := conn.GetResourceWithContext(ctx, input)
+
+	if tfawserr.ErrCodeEquals(err, cloudformation.ErrCodeResourceNotFoundException) {
+		return nil, nil
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	if output == nil || output.ResourceDescription == nil {
+		return nil, nil
+	}
+
+	return output.ResourceDescription, nil
 }
