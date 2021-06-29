@@ -14,7 +14,24 @@ import (
 )
 
 // cloudFormationDesiredState returns the string representing CloudFormation DesiredState from a Terraform Plan.
-func cloudFormationDesiredState(ctx context.Context, plan *tfsdk.Plan) (string, error) {
+func cloudFormationDesiredStateString(ctx context.Context, plan *tfsdk.Plan) (string, error) {
+	m, err := cloudFormationDesiredStateRaw(ctx, plan)
+
+	if err != nil {
+		return "", err
+	}
+
+	desiredState, err := json.Marshal(m)
+
+	if err != nil {
+		return "", err
+	}
+
+	return string(desiredState), nil
+}
+
+// cloudFormationDesiredState returns the raw map[string]interface{} representing CloudFormation DesiredState from a Terraform Plan.
+func cloudFormationDesiredStateRaw(ctx context.Context, plan *tfsdk.Plan) (map[string]interface{}, error) {
 	m := make(map[string]interface{})
 
 	err := tftypes.Walk(plan.Raw, func(ap *tftypes.AttributePath, v tftypes.Value) (bool, error) {
@@ -70,16 +87,10 @@ func cloudFormationDesiredState(ctx context.Context, plan *tfsdk.Plan) (string, 
 	})
 
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	desiredState, err := json.Marshal(m)
-
-	if err != nil {
-		return "", err
-	}
-
-	return string(desiredState), nil
+	return m, nil
 }
 
 var (
