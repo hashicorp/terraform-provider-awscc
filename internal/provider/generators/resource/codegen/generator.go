@@ -191,7 +191,7 @@ func (g *Generator) printf(format string, a ...interface{}) (int, error) {
 func CfDefinitionTfAttributesVariableName(definitionName string) string {
 	h := fnv.New32a()
 	h.Write([]byte(definitionName))
-	return fmt.Sprintf("attr%d", h.Sum32())
+	return fmt.Sprintf("attrs%d", h.Sum32())
 }
 
 // CfPropertyTfAttributeVariableName returns a CloudFormation property's Terraform Attribute variable name.
