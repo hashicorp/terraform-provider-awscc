@@ -174,8 +174,75 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceRequest, response *tfsdk.DeleteResourceResponse) {
 	tflog.Debug(ctx, "Resource.Delete(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 
-	response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-		Severity: tfprotov6.DiagnosticSeverityError,
-		Summary:  "Unimplemented Resource.Delete",
-	})
+	conn, err := r.clientProvider.CloudFormationClient(ctx)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error getting CloudFormation client",
+			Detail:   fmt.Sprintf("Error getting AWS CloudFormation client.\n%s\n", err),
+		})
+
+		return
+	}
+
+	identifier, err := getIdentifier(ctx, &request.State)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error getting identifier",
+			Detail:   fmt.Sprintf("Error getting resource identifier from state.\n%s\n", err),
+		})
+
+		return
+	}
+
+	input := &cloudformation.DeleteResourceInput{
+		ClientToken: aws.String(UniqueId()),
+		Identifier:  aws.String(identifier),
+		TypeName:    aws.String(r.resourceType.cfTypeName),
+	}
+
+	output, err := conn.DeleteResourceWithContext(ctx, input)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error deleting CloudFormation resource",
+			Detail:   fmt.Sprintf("Error deleting AWS CloudFormation resource.\n%s\n", err),
+		})
+
+		return
+	}
+
+	if output == nil || output.ProgressEvent == nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error deleting CloudFormation resource",
+			Detail:   "Error deleting AWS CloudFormation resource.\nEmpty response\n",
+		})
+
+		return
+	}
+
+	progressEvent, err := waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.StringValue(output.ProgressEvent.RequestToken), 5*time.Minute)
+
+	if progressEvent != nil && aws.StringValue(progressEvent.ErrorCode) == cloudformation.HandlerErrorCodeNotFound {
+		response.State.RemoveResource(ctx)
+
+		return
+	}
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error waiting for CloudFormation resource deletion",
+			Detail:   fmt.Sprintf("Error waiting for AWS CloudFormation resource deletion.\n%s\n", err),
+		})
+
+		return
+	}
+
+	response.State.RemoveResource(ctx)
 }
