@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"math/big"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -32,65 +31,17 @@ func cloudFormationDesiredStateString(ctx context.Context, plan *tfsdk.Plan) (st
 
 // cloudFormationDesiredState returns the raw map[string]interface{} representing CloudFormation DesiredState from a Terraform Plan.
 func cloudFormationDesiredStateRaw(ctx context.Context, plan *tfsdk.Plan) (map[string]interface{}, error) {
-	m := make(map[string]interface{})
-
-	err := tftypes.Walk(plan.Raw, func(ap *tftypes.AttributePath, v tftypes.Value) (bool, error) {
-		steps := ap.Steps()
-
-		var name string
-
-		switch n := len(steps); n {
-		case 0:
-			// Top-level.
-			return true, nil
-		case 1:
-			switch typ := steps[0].(type) {
-			case tftypes.AttributeName:
-				name = string(typ)
-			default:
-				return false, fmt.Errorf("AttributePath (%s) has unsupported step type: %T", ap, typ)
-			}
-		default:
-			return false, fmt.Errorf("AttributePath (%s) has unsupported number of steps: %d", ap, n)
-		}
-
-		if v.IsKnown() && !v.IsNull() {
-			typ := v.Type()
-			switch {
-			case typ.Is(tftypes.Bool):
-				var b bool
-				if err := v.As(&b); err != nil {
-					return false, err
-				}
-				m[strcase.ToCamel(name)] = b
-			case typ.Is(tftypes.Number):
-				n := big.NewFloat(0)
-				if err := v.As(&n); err != nil {
-					return false, err
-				}
-				f, _ := n.Float64()
-				m[strcase.ToCamel(name)] = f
-			case typ.Is(tftypes.String):
-				var s string
-				if err := v.As(&s); err != nil {
-					return false, err
-				}
-				m[strcase.ToCamel(name)] = s
-			default:
-				return false, fmt.Errorf("attribute %s has unsupported value type: %s", name, typ)
-			}
-		} else {
-			log.Printf("[DEBUG] %s is Null or not Known", name)
-		}
-
-		return true, nil
-	})
+	v, err := rawValue(ctx, plan.Raw)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return m, nil
+	if v, ok := v.(map[string]interface{}); ok {
+		return v, nil
+	}
+
+	return nil, fmt.Errorf("Plan.Raw value produced unexpected raw type: %T", v)
 }
 
 var (
@@ -115,4 +66,87 @@ func getIdentifier(ctx context.Context, state *tfsdk.State) (string, error) {
 // setIdentifier sets the well-known "identifier" attribute in State.
 func setIdentifier(ctx context.Context, state *tfsdk.State, id string) error {
 	return state.SetAttribute(ctx, identifierAttributePath, id)
+}
+
+// rawValue returns the raw value (suitable for JSON marshalling) of the specified Terraform value.
+// Attribute names are converted to camel case (AWS standard).
+func rawValue(ctx context.Context, val tftypes.Value) (interface{}, error) {
+	if val.IsNull() || !val.IsKnown() {
+		return nil, nil
+	}
+
+	typ := val.Type()
+	switch {
+	//
+	// Primitive types.
+	//
+	case typ.Is(tftypes.Bool):
+		var b bool
+		if err := val.As(&b); err != nil {
+			return nil, err
+		}
+		return b, nil
+
+	case typ.Is(tftypes.Number):
+		n := big.NewFloat(0)
+		if err := val.As(&n); err != nil {
+			return nil, err
+		}
+		f, _ := n.Float64()
+		return f, nil
+
+	case typ.Is(tftypes.String):
+		var s string
+		if err := val.As(&s); err != nil {
+			return nil, err
+		}
+		return s, nil
+
+	//
+	// Complex types.
+	//
+	case typ.Is(tftypes.List{}), typ.Is(tftypes.Set{}), typ.Is(tftypes.Tuple{}):
+		var vals []tftypes.Value
+		if err := val.As(&vals); err != nil {
+			return nil, err
+		}
+		vs := make([]interface{}, 0)
+		for _, val := range vals {
+			v, err := rawValue(ctx, val)
+			if err != nil {
+				return nil, err
+			}
+			if v == nil {
+				continue
+			}
+			vs = append(vs, v)
+		}
+		if len(vs) == 0 {
+			return nil, nil
+		}
+		return vs, nil
+
+	case typ.Is(tftypes.Map{}), typ.Is(tftypes.Object{}):
+		var vals map[string]tftypes.Value
+		if err := val.As(&vals); err != nil {
+			return nil, err
+		}
+		vs := make(map[string]interface{})
+		for name, val := range vals {
+			v, err := rawValue(ctx, val)
+			if err != nil {
+				return nil, err
+			}
+			if v == nil {
+				continue
+			}
+			vs[strcase.ToCamel(name)] = v
+		}
+		if len(vs) == 0 {
+			return nil, nil
+		}
+		return vs, nil
+	}
+
+	return nil, fmt.Errorf("unsupported value type: %s", typ)
 }
