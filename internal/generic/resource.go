@@ -81,7 +81,8 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	log.Printf("[DEBUG] Resource.Create(%s/%s)\nRaw plan: %v", r.resourceType.cfTypeName, r.resourceType.tfTypeName, request.Plan.Raw)
 
-	desiredState, err := cloudFormationDesiredStateString(ctx, &request.Plan)
+	plan := &Plan{inner: &request.Plan}
+	desiredState, err := plan.CloudFormationDesiredState(ctx)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -138,7 +139,8 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	response.State.Raw = request.Plan.Raw
 
 	identifier := aws.StringValue(output.ProgressEvent.Identifier)
-	err = setIdentifier(ctx, &response.State, identifier)
+	state := &State{inner: &response.State}
+	err = state.SetIdentifier(ctx, identifier)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -212,7 +214,10 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	identifier, err := getIdentifier(ctx, &request.State)
+	log.Printf("[DEBUG] Resource.Delete(%s/%s)\nRaw state: %v", r.resourceType.cfTypeName, r.resourceType.tfTypeName, request.State.Raw)
+
+	state := &State{inner: &request.State}
+	identifier, err := state.GetIdentifier(ctx)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -276,12 +281,6 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 // describe returns the live state of the specified resource.
 // TODO Return NotFoundError when not found.
 func (r *resource) describe(ctx context.Context, conn *cloudformation.CloudFormation, identifier string) (*cloudformation.ResourceDescription, error) {
-	conn, err := r.clientProvider.CloudFormationClient(ctx)
-
-	if err != nil {
-		return nil, err
-	}
-
 	input := &cloudformation.GetResourceInput{
 		Identifier: aws.String(identifier),
 		TypeName:   aws.String(r.resourceType.cfTypeName),
