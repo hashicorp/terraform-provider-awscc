@@ -179,6 +179,17 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	// TODO
 	// TODO Populate rest of State.
 	// TODO
+	err = state.SetCloudFormationResourceModel(ctx, aws.StringValue(description.ResourceModel))
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error setting CloudFormation resource model",
+			Detail:   fmt.Sprintf("Error setting AWS CloudFormation resource model.\n%s\n", err),
+		})
+
+		return
+	}
 }
 
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {

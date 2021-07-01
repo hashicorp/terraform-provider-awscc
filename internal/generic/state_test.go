@@ -2,6 +2,7 @@ package generic
 
 import (
 	"context"
+	"strings"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
@@ -102,7 +103,7 @@ func makeSimpleTestState() tfsdk.State {
 				"number":     tftypes.Number,
 			},
 		}, map[string]tftypes.Value{
-			"identifier": tftypes.NewValue(tftypes.String, nil),
+			"identifier": tftypes.NewValue(tftypes.String, "???"),
 			"name":       tftypes.NewValue(tftypes.String, "testing"),
 			"number":     tftypes.NewValue(tftypes.Number, 42),
 		}),
@@ -185,5 +186,56 @@ func TestStateGetSetIdentifier(t *testing.T) {
 
 	if got != identifier {
 		t.Fatalf("got: %s, expected: %s", got, identifier)
+	}
+}
+
+func TestStateSetCloudFormationResourceModel(t *testing.T) {
+	testCases := []struct {
+		TestName      string
+		State         tfsdk.State
+		Raw           map[string]interface{}
+		ExpectedError bool
+		ExpectedState tfsdk.State
+	}{
+		{
+			TestName: "simple State",
+			State:    makeSimpleTestState(),
+			Raw: map[string]interface{}{
+				"Identifier": "???",
+				"Name":       "testing",
+				"Number":     float64(42),
+			},
+			ExpectedState: makeSimpleTestState(),
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.TestName, func(t *testing.T) {
+			state := State{inner: &testCase.State}
+			err := state.SetCloudFormationResourceModelRaw(context.TODO(), testCase.Raw)
+
+			if err == nil && testCase.ExpectedError {
+				t.Fatalf("expected error from SetCloudFormationResourceModelRaw")
+			}
+
+			if err != nil && !testCase.ExpectedError {
+				t.Fatalf("unexpected error from SetCloudFormationResourceModelRaw: %s", err)
+			}
+
+			diffs, err := state.inner.Raw.Diff(testCase.ExpectedState.Raw)
+
+			if err != nil {
+				t.Fatalf("unexpected error from Value.Diff(%s, %s): %s", state.inner.Raw.Type(), testCase.ExpectedState.Raw.Type(), err)
+			}
+
+			if len(diffs) > 0 {
+				var b strings.Builder
+				for _, diff := range diffs {
+					b.WriteString(diff.String())
+					b.WriteString("\n")
+				}
+				t.Errorf("unexpected diff: %s", b.String())
+			}
+		})
 	}
 }

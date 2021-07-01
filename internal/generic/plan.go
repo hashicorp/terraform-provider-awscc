@@ -34,7 +34,7 @@ func (p *Plan) GetCloudFormationDesiredState(ctx context.Context) (string, error
 
 // GetCloudFormationDesiredStateRaw returns the raw map[string]interface{} representing CloudFormation DesiredState from a Terraform Plan.
 func (p *Plan) GetCloudFormationDesiredStateRaw(ctx context.Context) (map[string]interface{}, error) {
-	v, err := rawValue(ctx, p.inner.Raw)
+	v, err := rawFromValue(ctx, p.inner.Raw)
 
 	if err != nil {
 		return nil, err
@@ -47,9 +47,9 @@ func (p *Plan) GetCloudFormationDesiredStateRaw(ctx context.Context) (map[string
 	return nil, fmt.Errorf("Plan.Raw value produced unexpected raw type: %T", v)
 }
 
-// rawValue returns the raw value (suitable for JSON marshalling) of the specified Terraform value.
+// rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
 // Attribute names are converted to camel case (AWS standard).
-func rawValue(ctx context.Context, val tftypes.Value) (interface{}, error) {
+func rawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) {
 	if val.IsNull() || !val.IsKnown() {
 		return nil, nil
 	}
@@ -91,7 +91,7 @@ func rawValue(ctx context.Context, val tftypes.Value) (interface{}, error) {
 		}
 		vs := make([]interface{}, 0)
 		for _, val := range vals {
-			v, err := rawValue(ctx, val)
+			v, err := rawFromValue(ctx, val)
 			if err != nil {
 				return nil, err
 			}
@@ -112,7 +112,7 @@ func rawValue(ctx context.Context, val tftypes.Value) (interface{}, error) {
 		}
 		vs := make(map[string]interface{})
 		for name, val := range vals {
-			v, err := rawValue(ctx, val)
+			v, err := rawFromValue(ctx, val)
 			if err != nil {
 				return nil, err
 			}
