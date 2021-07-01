@@ -139,19 +139,6 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	response.State.Raw = request.Plan.Raw
 
 	identifier := aws.StringValue(output.ProgressEvent.Identifier)
-	state := &State{inner: &response.State}
-	err = state.SetIdentifier(ctx, identifier)
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error setting identifier",
-			Detail:   fmt.Sprintf("Error setting resource identifier in state.\n%s\n", err),
-		})
-
-		return
-	}
-
 	description, err := r.describe(ctx, conn, identifier)
 
 	if err != nil {
@@ -179,6 +166,8 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	// TODO
 	// TODO Populate rest of State.
 	// TODO
+	state := &State{inner: &response.State}
+
 	err = state.SetCloudFormationResourceModel(ctx, aws.StringValue(description.ResourceModel))
 
 	if err != nil {
@@ -190,6 +179,20 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 		return
 	}
+
+	err = state.SetIdentifier(ctx, identifier)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error setting identifier",
+			Detail:   fmt.Sprintf("Error setting resource identifier in state.\n%s\n", err),
+		})
+
+		return
+	}
+
+	log.Printf("[DEBUG] Resource.Create(%s/%s)\nRaw state: %v", r.resourceType.cfTypeName, r.resourceType.tfTypeName, response.State.Raw)
 }
 
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
