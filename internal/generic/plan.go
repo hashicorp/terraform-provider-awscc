@@ -15,9 +15,9 @@ type Plan struct {
 	inner *tfsdk.Plan
 }
 
-// CloudFormationDesiredState returns the string representing CloudFormation DesiredState from a Terraform Plan.
-func (p *Plan) CloudFormationDesiredState(ctx context.Context) (string, error) {
-	m, err := p.CloudFormationDesiredStateRaw(ctx)
+// GetCloudFormationDesiredState returns the string representing CloudFormation DesiredState from a Terraform Plan.
+func (p *Plan) GetCloudFormationDesiredState(ctx context.Context) (string, error) {
+	m, err := p.GetCloudFormationDesiredStateRaw(ctx)
 
 	if err != nil {
 		return "", err
@@ -32,8 +32,8 @@ func (p *Plan) CloudFormationDesiredState(ctx context.Context) (string, error) {
 	return string(desiredState), nil
 }
 
-// CloudFormationDesiredStateEaw returns the raw map[string]interface{} representing CloudFormation DesiredState from a Terraform Plan.
-func (p *Plan) CloudFormationDesiredStateRaw(ctx context.Context) (map[string]interface{}, error) {
+// GetCloudFormationDesiredStateRaw returns the raw map[string]interface{} representing CloudFormation DesiredState from a Terraform Plan.
+func (p *Plan) GetCloudFormationDesiredStateRaw(ctx context.Context) (map[string]interface{}, error) {
 	v, err := rawValue(ctx, p.inner.Raw)
 
 	if err != nil {

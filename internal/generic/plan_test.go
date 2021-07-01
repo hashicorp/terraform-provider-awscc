@@ -92,7 +92,7 @@ func makeComplexTestPlan() tfsdk.Plan {
 	}
 }
 
-func TestPlanCloudFormationDesiredState(t *testing.T) {
+func TestPlanGetCloudFormationDesiredState(t *testing.T) {
 	testCases := []struct {
 		TestName      string
 		Plan          tfsdk.Plan
@@ -145,7 +145,7 @@ func TestPlanCloudFormationDesiredState(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
 			plan := Plan{inner: &testCase.Plan}
-			got, err := plan.CloudFormationDesiredStateRaw(context.TODO())
+			got, err := plan.GetCloudFormationDesiredStateRaw(context.TODO())
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error")
