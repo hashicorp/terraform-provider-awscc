@@ -81,8 +81,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	log.Printf("[DEBUG] Resource.Create(%s/%s)\nRaw plan: %v", r.resourceType.cfTypeName, r.resourceType.tfTypeName, request.Plan.Raw)
 
-	plan := &Plan{inner: &request.Plan}
-	desiredState, err := plan.GetCloudFormationDesiredState(ctx)
+	desiredState, err := GetCloudFormationDesiredState(ctx, &request.Plan)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{

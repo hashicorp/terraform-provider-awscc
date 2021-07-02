@@ -11,13 +11,9 @@ import (
 	"github.com/iancoleman/strcase"
 )
 
-type Plan struct {
-	inner *tfsdk.Plan
-}
-
 // GetCloudFormationDesiredState returns the string representing CloudFormation DesiredState from a Terraform Plan.
-func (p *Plan) GetCloudFormationDesiredState(ctx context.Context) (string, error) {
-	m, err := p.GetCloudFormationDesiredStateRaw(ctx)
+func GetCloudFormationDesiredState(ctx context.Context, plan *tfsdk.Plan) (string, error) {
+	m, err := GetCloudFormationDesiredStateRaw(ctx, plan)
 
 	if err != nil {
 		return "", err
@@ -33,8 +29,8 @@ func (p *Plan) GetCloudFormationDesiredState(ctx context.Context) (string, error
 }
 
 // GetCloudFormationDesiredStateRaw returns the raw map[string]interface{} representing CloudFormation DesiredState from a Terraform Plan.
-func (p *Plan) GetCloudFormationDesiredStateRaw(ctx context.Context) (map[string]interface{}, error) {
-	v, err := rawFromValue(ctx, p.inner.Raw)
+func GetCloudFormationDesiredStateRaw(ctx context.Context, plan *tfsdk.Plan) (map[string]interface{}, error) {
+	v, err := rawFromValue(ctx, plan.Raw)
 
 	if err != nil {
 		return nil, err
