@@ -136,8 +136,6 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	response.State.Raw = request.Plan.Raw
-
 	identifier := aws.StringValue(output.ProgressEvent.Identifier)
 	description, err := r.describe(ctx, conn, identifier)
 
@@ -164,8 +162,10 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	log.Printf("[DEBUG] ResourceModel: %s", aws.StringValue(description.ResourceModel))
 
 	// TODO
-	// TODO Populate rest of State.
+	// TODO Initialize Response.State from Request.Plan.
+	// TODO Update unknown Response.State values.
 	// TODO
+	response.State.Raw = request.Plan.Raw
 	state := &State{inner: &response.State}
 
 	err = state.SetCloudFormationResourceModel(ctx, aws.StringValue(description.ResourceModel))
@@ -198,6 +198,11 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
 	tflog.Debug(ctx, "Resource.Read(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 
+	// TODO
+	// TODO Initialize Response.State from Request.State.
+	// TODO Merge in values from AWS.
+	// TODO
+
 	response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
 		Severity: tfprotov6.DiagnosticSeverityError,
 		Summary:  "Unimplemented Resource.Read",
@@ -206,6 +211,12 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
 	tflog.Debug(ctx, "Resource.Update(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+
+	// TODO
+	// TODO Diff Request.Plan (new) vs. Request.State (old)
+	// TODO Initialize Response.State from Request.Plan.
+	// TODO Update unknown Response.State values.
+	// TODO
 
 	response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
 		Severity: tfprotov6.DiagnosticSeverityError,

@@ -116,8 +116,6 @@ func valueFromRaw(ctx context.Context, v interface{}) (tftypes.Value, error) {
 		}
 		// TODO
 		// TODO Map vs. Object???
-		// TODO What about DynamicPseudoType???
-		// TODO What about OptionalAttributes???
 		// TODO
 		return tftypes.NewValue(tftypes.Object{AttributeTypes: typs}, vals), nil
 	default:
