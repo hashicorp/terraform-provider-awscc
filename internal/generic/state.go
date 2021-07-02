@@ -11,17 +11,13 @@ import (
 	"github.com/iancoleman/strcase"
 )
 
-type State struct {
-	inner *tfsdk.State
-}
-
 var (
 	identifierAttributePath = tftypes.NewAttributePath().WithAttributeName("identifier")
 )
 
 // GetIdentifier gets the well-known "identifier" attribute from State.
-func (s *State) GetIdentifier(ctx context.Context) (string, error) {
-	val, err := s.inner.GetAttribute(ctx, identifierAttributePath)
+func GetIdentifier(ctx context.Context, state *tfsdk.State) (string, error) {
+	val, err := state.GetAttribute(ctx, identifierAttributePath)
 
 	if err != nil {
 		return "", err
@@ -35,12 +31,12 @@ func (s *State) GetIdentifier(ctx context.Context) (string, error) {
 }
 
 // SetIdentifier sets the well-known "identifier" attribute in State.
-func (s *State) SetIdentifier(ctx context.Context, id string) error {
-	return s.inner.SetAttribute(ctx, identifierAttributePath, id)
+func SetIdentifier(ctx context.Context, state *tfsdk.State, id string) error {
+	return state.SetAttribute(ctx, identifierAttributePath, id)
 }
 
 // SetCloudFormationResourceModel sets the string representing CloudFormation ResourceModel in State.
-func (s *State) SetCloudFormationResourceModel(ctx context.Context, resourceModel string) error {
+func SetCloudFormationResourceModel(ctx context.Context, state *tfsdk.State, resourceModel string) error {
 	var v interface{}
 
 	if err := json.Unmarshal([]byte(resourceModel), &v); err != nil {
@@ -48,21 +44,21 @@ func (s *State) SetCloudFormationResourceModel(ctx context.Context, resourceMode
 	}
 
 	if v, ok := v.(map[string]interface{}); ok {
-		return s.SetCloudFormationResourceModelRaw(ctx, v)
+		return SetCloudFormationResourceModelRaw(ctx, state, v)
 	}
 
 	return fmt.Errorf("CloudFormation ResourceModel value produced unexpected raw type: %T", v)
 }
 
 // SetCloudFormationResourceModel sets the raw map[string]interface{} representing CloudFormation ResourceModel in State.
-func (s *State) SetCloudFormationResourceModelRaw(ctx context.Context, v map[string]interface{}) error {
+func SetCloudFormationResourceModelRaw(ctx context.Context, state *tfsdk.State, v map[string]interface{}) error {
 	val, err := valueFromRaw(ctx, v)
 
 	if err != nil {
 		return err
 	}
 
-	s.inner.Raw = val
+	state.Raw = val
 
 	return nil
 }

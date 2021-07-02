@@ -165,9 +165,8 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	// TODO Update unknown Response.State values.
 	// TODO
 	response.State.Raw = request.Plan.Raw
-	state := &State{inner: &response.State}
 
-	err = state.SetCloudFormationResourceModel(ctx, aws.StringValue(description.ResourceModel))
+	err = SetCloudFormationResourceModel(ctx, &response.State, aws.StringValue(description.ResourceModel))
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -179,7 +178,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	err = state.SetIdentifier(ctx, identifier)
+	err = SetIdentifier(ctx, &response.State, identifier)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -240,8 +239,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 
 	log.Printf("[DEBUG] Resource.Delete(%s/%s)\nRaw state: %v", r.resourceType.cfTypeName, r.resourceType.tfTypeName, request.State.Raw)
 
-	state := &State{inner: &request.State}
-	identifier, err := state.GetIdentifier(ctx)
+	identifier, err := GetIdentifier(ctx, &response.State)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{

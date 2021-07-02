@@ -168,17 +168,16 @@ func makeComplexTestState() tfsdk.State {
 }
 
 func TestStateGetSetIdentifier(t *testing.T) {
-	inner := makeSimpleTestState()
-	state := &State{inner: &inner}
+	state := makeSimpleTestState()
 	identifier := "TestID"
 
-	err := state.SetIdentifier(context.TODO(), identifier)
+	err := SetIdentifier(context.TODO(), &state, identifier)
 
 	if err != nil {
 		t.Fatalf("SetIdentifier failed: %s", err)
 	}
 
-	got, err := state.GetIdentifier(context.TODO())
+	got, err := GetIdentifier(context.TODO(), &state)
 
 	if err != nil {
 		t.Fatalf("GetIdentifier failed: %s", err)
@@ -211,8 +210,7 @@ func TestStateSetCloudFormationResourceModel(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			state := State{inner: &testCase.State}
-			err := state.SetCloudFormationResourceModelRaw(context.TODO(), testCase.Raw)
+			err := SetCloudFormationResourceModelRaw(context.TODO(), &testCase.State, testCase.Raw)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error from SetCloudFormationResourceModelRaw")
@@ -222,10 +220,10 @@ func TestStateSetCloudFormationResourceModel(t *testing.T) {
 				t.Fatalf("unexpected error from SetCloudFormationResourceModelRaw: %s", err)
 			}
 
-			diffs, err := state.inner.Raw.Diff(testCase.ExpectedState.Raw)
+			diffs, err := testCase.State.Raw.Diff(testCase.ExpectedState.Raw)
 
 			if err != nil {
-				t.Fatalf("unexpected error from Value.Diff(%s, %s): %s", state.inner.Raw.Type(), testCase.ExpectedState.Raw.Type(), err)
+				t.Fatalf("unexpected error from Value.Diff(%s, %s): %s", testCase.State.Raw.Type(), testCase.ExpectedState.Raw.Type(), err)
 			}
 
 			if len(diffs) > 0 {
