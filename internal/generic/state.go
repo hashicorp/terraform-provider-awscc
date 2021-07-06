@@ -119,61 +119,79 @@ func valueFromRaw(ctx context.Context, v interface{}) (tftypes.Value, error) {
 	}
 }
 
-// GetAttributePathsForUnknownValues returns the AttributePaths for all the unknown (!val.IsKnown())
-// values in the specified value.
-func GetAttributePathsForUnknownValues(ctx context.Context, val tftypes.Value) ([]*tftypes.AttributePath, error) {
-	return getAttributePathsForUnknownValues(ctx, nil, val)
+// UnknownValuePath represents the path to an unknown (!val.IsKnown()) value.
+// It holds paths in both the Terraform State and CloudFormation ResourceModel (raw map[string]interface{}).
+type UnknownValuePath struct {
+	InTerraformState              *tftypes.AttributePath
+	InCloudFormationResourceModel *tftypes.AttributePath
 }
 
-func getAttributePathsForUnknownValues(ctx context.Context, path *tftypes.AttributePath, val tftypes.Value) ([]*tftypes.AttributePath, error) {
+// GetUnknownValuePaths returns all the UnknownValuePaths for the specified value.
+func GetUnknownValuePaths(ctx context.Context, val tftypes.Value) ([]UnknownValuePath, error) {
+	return getAttributePathsForUnknownValues(ctx, nil, nil, val)
+}
+
+func getAttributePathsForUnknownValues(ctx context.Context, inTerraformState, inCloudFormationResourceModel *tftypes.AttributePath, val tftypes.Value) ([]UnknownValuePath, error) {
 	if !val.IsKnown() {
-		return []*tftypes.AttributePath{path}, nil
+		return []UnknownValuePath{
+			{
+				InTerraformState:              inTerraformState,
+				InCloudFormationResourceModel: inCloudFormationResourceModel,
+			},
+		}, nil
 	}
 
-	attributePaths := make([]*tftypes.AttributePath, 0)
+	unknownValuePaths := make([]UnknownValuePath, 0)
 
 	typ := val.Type()
 	switch {
 	case typ.Is(tftypes.List{}), typ.Is(tftypes.Set{}), typ.Is(tftypes.Tuple{}):
 		var vals []tftypes.Value
 		if err := val.As(&vals); err != nil {
-			return nil, path.NewError(err)
+			return nil, inTerraformState.NewError(err)
 		}
 
 		for idx, val := range vals {
 			if typ.Is(tftypes.Set{}) {
-				path = path.WithElementKeyValue(val)
+				inTerraformState = inTerraformState.WithElementKeyValue(val)
+				inCloudFormationResourceModel = inCloudFormationResourceModel.WithElementKeyValue(val)
 			} else {
-				path = path.WithElementKeyInt(int64(idx))
+				inTerraformState = inTerraformState.WithElementKeyInt(int64(idx))
+				inCloudFormationResourceModel = inCloudFormationResourceModel.WithElementKeyInt(int64(idx))
 			}
-			paths, err := getAttributePathsForUnknownValues(ctx, path, val)
+			paths, err := getAttributePathsForUnknownValues(ctx, inTerraformState, inCloudFormationResourceModel, val)
 			if err != nil {
 				return nil, err
 			}
-			attributePaths = append(attributePaths, paths...)
-			path = path.WithoutLastStep()
+			unknownValuePaths = append(unknownValuePaths, paths...)
+			inTerraformState = inTerraformState.WithoutLastStep()
+			inCloudFormationResourceModel = inCloudFormationResourceModel.WithoutLastStep()
 		}
 
 	case typ.Is(tftypes.Map{}), typ.Is(tftypes.Object{}):
 		var vals map[string]tftypes.Value
 		if err := val.As(&vals); err != nil {
-			return nil, path.NewError(err)
+			return nil, inTerraformState.NewError(err)
 		}
 
 		for key, val := range vals {
 			if typ.Is(tftypes.Map{}) {
-				path = path.WithElementKeyString(key)
+				inTerraformState = inTerraformState.WithElementKeyString(key)
+				inCloudFormationResourceModel = inCloudFormationResourceModel.WithElementKeyString(key)
 			} else if typ.Is(tftypes.Object{}) {
-				path = path.WithAttributeName(key)
+				inTerraformState = inTerraformState.WithAttributeName(key)
+				// In the CloudFormation ResourceModel attribute names are camel cased.
+				inCloudFormationResourceModel = inCloudFormationResourceModel.WithAttributeName(strcase.ToCamel(key))
 			}
-			paths, err := getAttributePathsForUnknownValues(ctx, path, val)
+			paths, err := getAttributePathsForUnknownValues(ctx, inTerraformState, inCloudFormationResourceModel, val)
 			if err != nil {
 				return nil, err
 			}
-			attributePaths = append(attributePaths, paths...)
-			path = path.WithoutLastStep()
+			unknownValuePaths = append(unknownValuePaths, paths...)
+			inTerraformState = inTerraformState.WithoutLastStep()
+			inCloudFormationResourceModel = inCloudFormationResourceModel.WithoutLastStep()
 		}
 	}
 
-	return attributePaths, nil
+	return unknownValuePaths, nil
 }
