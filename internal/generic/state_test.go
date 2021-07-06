@@ -5,6 +5,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/google/go-cmp/cmp"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -109,6 +110,22 @@ func makeSimpleTestState() tfsdk.State {
 		}),
 		Schema: testSimpleSchema,
 	}
+}
+
+func makeSimpleValueWithUnknowns() tftypes.Value {
+	return tftypes.NewValue(tftypes.Object{
+		AttributeTypes: map[string]tftypes.Type{
+			"arn":        tftypes.String,
+			"identifier": tftypes.String,
+			"name":       tftypes.String,
+			"number":     tftypes.Number,
+		},
+	}, map[string]tftypes.Value{
+		"arn":        tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		"name":       tftypes.NewValue(tftypes.String, "testing"),
+		"number":     tftypes.NewValue(tftypes.Number, 42),
+	})
 }
 
 // state used for all tests
@@ -233,6 +250,42 @@ func TestStateSetCloudFormationResourceModel(t *testing.T) {
 					b.WriteString("\n")
 				}
 				t.Errorf("unexpected diff: %s", b.String())
+			}
+		})
+	}
+}
+
+func TestGetAttributePathsForUnknownValues(t *testing.T) {
+	testCases := []struct {
+		TestName      string
+		Value         tftypes.Value
+		ExpectedError bool
+		ExpectedPaths []*tftypes.AttributePath
+	}{
+		{
+			TestName: "simple State",
+			Value:    makeSimpleValueWithUnknowns(),
+			ExpectedPaths: []*tftypes.AttributePath{
+				tftypes.NewAttributePath().WithAttributeName("arn"),
+				tftypes.NewAttributePath().WithAttributeName("identifier"),
+			},
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.TestName, func(t *testing.T) {
+			got, err := GetAttributePathsForUnknownValues(context.TODO(), testCase.Value)
+
+			if err == nil && testCase.ExpectedError {
+				t.Fatalf("expected error from GetAttributePathsForUnknownValues")
+			}
+
+			if err != nil && !testCase.ExpectedError {
+				t.Fatalf("unexpected error from GetAttributePathsForUnknownValues: %s", err)
+			}
+
+			if diff := cmp.Diff(got, testCase.ExpectedPaths); diff != "" {
+				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
 			}
 		})
 	}

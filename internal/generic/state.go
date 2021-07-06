@@ -118,3 +118,62 @@ func valueFromRaw(ctx context.Context, v interface{}) (tftypes.Value, error) {
 		return tftypes.Value{}, fmt.Errorf("unsupported raw type: %T", v)
 	}
 }
+
+// GetAttributePathsForUnknownValues returns the AttributePaths for all the unknown (!val.IsKnown())
+// values in the specified value.
+func GetAttributePathsForUnknownValues(ctx context.Context, val tftypes.Value) ([]*tftypes.AttributePath, error) {
+	return getAttributePathsForUnknownValues(ctx, nil, val)
+}
+
+func getAttributePathsForUnknownValues(ctx context.Context, path *tftypes.AttributePath, val tftypes.Value) ([]*tftypes.AttributePath, error) {
+	if !val.IsKnown() {
+		return []*tftypes.AttributePath{path}, nil
+	}
+
+	attributePaths := make([]*tftypes.AttributePath, 0)
+
+	typ := val.Type()
+	switch {
+	case typ.Is(tftypes.List{}), typ.Is(tftypes.Set{}), typ.Is(tftypes.Tuple{}):
+		var vals []tftypes.Value
+		if err := val.As(&vals); err != nil {
+			return nil, path.NewError(err)
+		}
+
+		for idx, val := range vals {
+			if typ.Is(tftypes.Set{}) {
+				path = path.WithElementKeyValue(val)
+			} else {
+				path = path.WithElementKeyInt(int64(idx))
+			}
+			paths, err := getAttributePathsForUnknownValues(ctx, path, val)
+			if err != nil {
+				return nil, err
+			}
+			attributePaths = append(attributePaths, paths...)
+			path = path.WithoutLastStep()
+		}
+
+	case typ.Is(tftypes.Map{}), typ.Is(tftypes.Object{}):
+		var vals map[string]tftypes.Value
+		if err := val.As(&vals); err != nil {
+			return nil, path.NewError(err)
+		}
+
+		for key, val := range vals {
+			if typ.Is(tftypes.Map{}) {
+				path = path.WithElementKeyString(key)
+			} else if typ.Is(tftypes.Object{}) {
+				path = path.WithAttributeName(key)
+			}
+			paths, err := getAttributePathsForUnknownValues(ctx, path, val)
+			if err != nil {
+				return nil, err
+			}
+			attributePaths = append(attributePaths, paths...)
+			path = path.WithoutLastStep()
+		}
+	}
+
+	return attributePaths, nil
+}
