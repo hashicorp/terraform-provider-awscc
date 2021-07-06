@@ -160,24 +160,10 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	log.Printf("[DEBUG] ResourceModel: %s", aws.StringValue(description.ResourceModel))
 
-	// TODO
-	// TODO Initialize Response.State from Request.Plan.
-	// TODO Update unknown Response.State values.
-	// TODO
+	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
-	err = SetCloudFormationResourceModel(ctx, &response.State, aws.StringValue(description.ResourceModel))
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error setting CloudFormation resource model",
-			Detail:   fmt.Sprintf("Error setting AWS CloudFormation resource model.\n%s\n", err),
-		})
-
-		return
-	}
-
+	// Set the well-known "identifier" attribute.
 	err = SetIdentifier(ctx, &response.State, identifier)
 
 	if err != nil {
@@ -185,6 +171,18 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 			Severity: tfprotov6.DiagnosticSeverityError,
 			Summary:  "Error setting identifier",
 			Detail:   fmt.Sprintf("Error setting resource identifier in state.\n%s\n", err),
+		})
+
+		return
+	}
+
+	err = SetUnknownValuesFromCloudFormationResourceModel(ctx, &response.State, aws.StringValue(description.ResourceModel))
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error setting CloudFormation resource model",
+			Detail:   fmt.Sprintf("Error setting AWS CloudFormation resource model.\n%s\n", err),
 		})
 
 		return

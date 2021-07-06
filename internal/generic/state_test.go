@@ -115,16 +115,16 @@ func makeSimpleTestState() tfsdk.State {
 func makeSimpleValueWithUnknowns() tftypes.Value {
 	return tftypes.NewValue(tftypes.Object{
 		AttributeTypes: map[string]tftypes.Type{
-			"arn":        tftypes.String,
-			"identifier": tftypes.String,
-			"name":       tftypes.String,
-			"number":     tftypes.Number,
+			"arn":     tftypes.String,
+			"name":    tftypes.String,
+			"number":  tftypes.Number,
+			"test_id": tftypes.String,
 		},
 	}, map[string]tftypes.Value{
-		"arn":        tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
-		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
-		"name":       tftypes.NewValue(tftypes.String, "testing"),
-		"number":     tftypes.NewValue(tftypes.Number, 42),
+		"arn":     tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		"name":    tftypes.NewValue(tftypes.String, "testing"),
+		"number":  tftypes.NewValue(tftypes.Number, 42),
+		"test_id": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 	})
 }
 
@@ -255,33 +255,39 @@ func TestStateSetCloudFormationResourceModel(t *testing.T) {
 	}
 }
 
-func TestGetAttributePathsForUnknownValues(t *testing.T) {
+func TestGetUnknownValuePaths(t *testing.T) {
 	testCases := []struct {
 		TestName      string
 		Value         tftypes.Value
 		ExpectedError bool
-		ExpectedPaths []*tftypes.AttributePath
+		ExpectedPaths []UnknownValuePath
 	}{
 		{
 			TestName: "simple State",
 			Value:    makeSimpleValueWithUnknowns(),
-			ExpectedPaths: []*tftypes.AttributePath{
-				tftypes.NewAttributePath().WithAttributeName("arn"),
-				tftypes.NewAttributePath().WithAttributeName("identifier"),
+			ExpectedPaths: []UnknownValuePath{
+				{
+					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("arn"),
+					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("Arn"),
+				},
+				{
+					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("test_id"),
+					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("TestId"),
+				},
 			},
 		},
 	}
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			got, err := GetAttributePathsForUnknownValues(context.TODO(), testCase.Value)
+			got, err := GetUnknownValuePaths(context.TODO(), testCase.Value)
 
 			if err == nil && testCase.ExpectedError {
-				t.Fatalf("expected error from GetAttributePathsForUnknownValues")
+				t.Fatalf("expected error from GetUnknownValuePaths")
 			}
 
 			if err != nil && !testCase.ExpectedError {
-				t.Fatalf("unexpected error from GetAttributePathsForUnknownValues: %s", err)
+				t.Fatalf("unexpected error from GetUnknownValuePaths: %s", err)
 			}
 
 			if diff := cmp.Diff(got, testCase.ExpectedPaths); diff != "" {

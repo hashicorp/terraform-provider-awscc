@@ -35,8 +35,8 @@ func SetIdentifier(ctx context.Context, state *tfsdk.State, id string) error {
 	return state.SetAttribute(ctx, identifierAttributePath, id)
 }
 
-// SetCloudFormationResourceModel sets the string representing CloudFormation ResourceModel in State.
-func SetCloudFormationResourceModel(ctx context.Context, state *tfsdk.State, resourceModel string) error {
+// SetUnknownValuesFromCloudFormationResourceModel fills any unknown State values from a CloudFormation ResourceModel.
+func SetUnknownValuesFromCloudFormationResourceModel(ctx context.Context, state *tfsdk.State, resourceModel string) error {
 	var v interface{}
 
 	if err := json.Unmarshal([]byte(resourceModel), &v); err != nil {
@@ -44,7 +44,30 @@ func SetCloudFormationResourceModel(ctx context.Context, state *tfsdk.State, res
 	}
 
 	if v, ok := v.(map[string]interface{}); ok {
-		return SetCloudFormationResourceModelRaw(ctx, state, v)
+		// Get the paths to the state's unknown values.
+		paths, err := GetUnknownValuePaths(ctx, state.Raw)
+
+		if err != nil {
+			return fmt.Errorf("error getting unknown values: %w", err)
+		}
+
+		for _, path := range paths {
+			// Get the value from the CloudFormation ResourceModel.
+			val, _, err := tftypes.WalkAttributePath(v, path.InCloudFormationResourceModel)
+
+			if err != nil {
+				return fmt.Errorf("error getting value at %s: %w", path.InCloudFormationResourceModel, err)
+			}
+
+			// Set it in the Terraform State.
+			err = state.SetAttribute(ctx, path.InTerraformState, val)
+
+			if err != nil {
+				return fmt.Errorf("error setting value at %s: %w", path.InTerraformState, err)
+			}
+		}
+
+		return nil
 	}
 
 	return fmt.Errorf("CloudFormation ResourceModel value produced unexpected raw type: %T", v)
