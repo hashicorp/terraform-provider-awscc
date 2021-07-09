@@ -194,15 +194,81 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
 	tflog.Debug(ctx, "Resource.Read(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 
+	conn, err := r.clientProvider.CloudFormationClient(ctx)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error getting CloudFormation client",
+			Detail:   fmt.Sprintf("Error getting AWS CloudFormation client.\n%s\n", err),
+		})
+
+		return
+	}
+
 	// TODO
 	// TODO Initialize Response.State from Request.State.
 	// TODO Merge in values from AWS.
 	// TODO
 
-	response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-		Severity: tfprotov6.DiagnosticSeverityError,
-		Summary:  "Unimplemented Resource.Read",
-	})
+	currentState := &request.State
+	schema := &currentState.Schema
+	identifier, err := GetIdentifier(ctx, currentState)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error getting identifier",
+			Detail:   fmt.Sprintf("Error getting resource identifier from state.\n%s\n", err),
+		})
+
+		return
+	}
+
+	description, err := r.describe(ctx, conn, identifier)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error describing CloudFormation resource",
+			Detail:   fmt.Sprintf("Error describing AWS CloudFormation resource.\n%s\n", err),
+		})
+
+		return
+	}
+
+	val, err := GetCloudFormationResourceModelValue(ctx, schema, aws.StringValue(description.ResourceModel))
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error getting Value from CloudFormation ResourceModel",
+			Detail:   fmt.Sprintf("Error getting Terraform Value from AWS CloudFormation ResourceModel.\n%s\n", err),
+		})
+
+		return
+	}
+
+	// TODO
+	// TODO Consider write-only values. They can only be in the current state.
+	// TODO
+
+	response.State = tfsdk.State{
+		Schema: *schema,
+		Raw:    val,
+	}
+
+	err = SetIdentifier(ctx, &response.State, identifier)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error setting identifier",
+			Detail:   fmt.Sprintf("Error setting resource identifier in state.\n%s\n", err),
+		})
+
+		return
+	}
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
