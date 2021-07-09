@@ -130,7 +130,7 @@ func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Sch
 	var typ tftypes.Type
 
 	if len(path.Steps()) == 0 {
-		typ = tftypes.Object{}
+		typ = schema.AttributeType().TerraformType(ctx)
 	} else {
 		attrType, err := schema.AttributeTypeAtPath(path)
 
@@ -178,25 +178,34 @@ func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Sch
 		return tftypes.NewValue(typ, vals), nil
 
 	case map[string]interface{}:
+		isObject := typ.Is(tftypes.Object{})
 		vals := make(map[string]tftypes.Value)
 		for key, v := range v {
-			if typ.Is(tftypes.Map{}) {
-				path = path.WithElementKeyString(key)
-			} else {
+			if isObject {
 				// In the Terraform Value attribute names are snake cased.
 				path = path.WithAttributeName(strcase.ToSnake(key))
+			} else {
+				path = path.WithElementKeyString(key)
 			}
 			val, err := getCloudFormationResourceModelValue(ctx, schema, path, v)
 			if err != nil {
 				return tftypes.Value{}, err
 			}
-			if typ.Is(tftypes.Map{}) {
-				vals[key] = val
-			} else {
+			if isObject {
 				// In the Terraform Value attribute names are snake cased.
 				vals[strcase.ToSnake(key)] = val
+			} else {
+				vals[key] = val
 			}
 			path = path.WithoutLastStep()
+		}
+		if isObject {
+			// Set any missing attributes to Null.
+			for k, t := range typ.(tftypes.Object).AttributeTypes {
+				if _, ok := vals[k]; !ok {
+					vals[k] = tftypes.NewValue(t, nil)
+				}
+			}
 		}
 		return tftypes.NewValue(typ, vals), nil
 
