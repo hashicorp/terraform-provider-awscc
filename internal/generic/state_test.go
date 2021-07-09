@@ -2,10 +2,10 @@ package generic
 
 import (
 	"context"
-	"strings"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -15,6 +15,14 @@ import (
 
 var testSimpleSchema = schema.Schema{
 	Attributes: map[string]schema.Attribute{
+		"arn": {
+			Type:     types.StringType,
+			Computed: true,
+		},
+		"identifier": {
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"name": {
 			Type:     types.StringType,
 			Required: true,
@@ -22,10 +30,6 @@ var testSimpleSchema = schema.Schema{
 		"number": {
 			Type:     types.NumberType,
 			Optional: true,
-		},
-		"identifier": {
-			Type:     types.StringType,
-			Computed: true,
 		},
 	},
 }
@@ -99,12 +103,14 @@ func makeSimpleTestState() tfsdk.State {
 	return tfsdk.State{
 		Raw: tftypes.NewValue(tftypes.Object{
 			AttributeTypes: map[string]tftypes.Type{
+				"arn":        tftypes.String,
 				"identifier": tftypes.String,
 				"name":       tftypes.String,
 				"number":     tftypes.Number,
 			},
 		}, map[string]tftypes.Value{
-			"identifier": tftypes.NewValue(tftypes.String, "???"),
+			"arn":        tftypes.NewValue(tftypes.String, nil),
+			"identifier": tftypes.NewValue(tftypes.String, nil),
 			"name":       tftypes.NewValue(tftypes.String, "testing"),
 			"number":     tftypes.NewValue(tftypes.Number, 42),
 		}),
@@ -115,16 +121,16 @@ func makeSimpleTestState() tfsdk.State {
 func makeSimpleValueWithUnknowns() tftypes.Value {
 	return tftypes.NewValue(tftypes.Object{
 		AttributeTypes: map[string]tftypes.Type{
-			"arn":     tftypes.String,
-			"name":    tftypes.String,
-			"number":  tftypes.Number,
-			"test_id": tftypes.String,
+			"arn":        tftypes.String,
+			"name":       tftypes.String,
+			"number":     tftypes.Number,
+			"identifier": tftypes.String,
 		},
 	}, map[string]tftypes.Value{
-		"arn":     tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
-		"name":    tftypes.NewValue(tftypes.String, "testing"),
-		"number":  tftypes.NewValue(tftypes.Number, 42),
-		"test_id": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		"arn":        tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		"name":       tftypes.NewValue(tftypes.String, "testing"),
+		"number":     tftypes.NewValue(tftypes.Number, 42),
+		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 	})
 }
 
@@ -205,55 +211,44 @@ func TestStateGetSetIdentifier(t *testing.T) {
 	}
 }
 
-func TestStateSetCloudFormationResourceModel(t *testing.T) {
+/*
+func TestGetCloudFormationResourceModelValue(t *testing.T) {
 	testCases := []struct {
 		TestName      string
-		State         tfsdk.State
-		Raw           map[string]interface{}
+		Schema        schema.Schema
+		ResourceModel map[string]interface{}
 		ExpectedError bool
-		ExpectedState tfsdk.State
+		ExpectedValue tftypes.Value
 	}{
 		{
 			TestName: "simple State",
-			State:    makeSimpleTestState(),
-			Raw: map[string]interface{}{
-				"Identifier": "???",
-				"Name":       "testing",
-				"Number":     float64(42),
+			Schema:   testSimpleSchema,
+			ResourceModel: map[string]interface{}{
+				"Name":   "testing",
+				"Number": float64(42),
 			},
-			ExpectedState: makeSimpleTestState(),
 		},
 	}
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			err := SetCloudFormationResourceModelRaw(context.TODO(), &testCase.State, testCase.Raw)
+			got, err := GetCloudFormationResourceModelRawValue(context.TODO(), &testCase.Schema, testCase.ResourceModel)
 
 			if err == nil && testCase.ExpectedError {
-				t.Fatalf("expected error from SetCloudFormationResourceModelRaw")
+				t.Fatalf("expected error from GetCloudFormationResourceModelRawValue")
 			}
 
 			if err != nil && !testCase.ExpectedError {
-				t.Fatalf("unexpected error from SetCloudFormationResourceModelRaw: %s", err)
+				t.Fatalf("unexpected error from GetCloudFormationResourceModelRawValue: %s", err)
 			}
 
-			diffs, err := testCase.State.Raw.Diff(testCase.ExpectedState.Raw)
-
-			if err != nil {
-				t.Fatalf("unexpected error from Value.Diff(%s, %s): %s", testCase.State.Raw.Type(), testCase.ExpectedState.Raw.Type(), err)
-			}
-
-			if len(diffs) > 0 {
-				var b strings.Builder
-				for _, diff := range diffs {
-					b.WriteString(diff.String())
-					b.WriteString("\n")
-				}
-				t.Errorf("unexpected diff: %s", b.String())
+			if diff := cmp.Diff(got, testCase.ExpectedValue); diff != "" {
+				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
 			}
 		})
 	}
 }
+*/
 
 func TestGetUnknownValuePaths(t *testing.T) {
 	testCases := []struct {
@@ -271,11 +266,17 @@ func TestGetUnknownValuePaths(t *testing.T) {
 					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("Arn"),
 				},
 				{
-					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("test_id"),
-					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("TestId"),
+					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("identifier"),
+					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("Identifier"),
 				},
 			},
 		},
+	}
+
+	opts := cmp.Options{
+		cmpopts.SortSlices(func(i, j UnknownValuePath) bool {
+			return i.InCloudFormationResourceModel.String() < j.InCloudFormationResourceModel.String()
+		}),
 	}
 
 	for _, testCase := range testCases {
@@ -290,7 +291,62 @@ func TestGetUnknownValuePaths(t *testing.T) {
 				t.Fatalf("unexpected error from GetUnknownValuePaths: %s", err)
 			}
 
-			if diff := cmp.Diff(got, testCase.ExpectedPaths); diff != "" {
+			if diff := cmp.Diff(got, testCase.ExpectedPaths, opts); diff != "" {
+				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+			}
+		})
+	}
+}
+
+func TestSetUnknownValuesFromCloudFormationResourceModel(t *testing.T) {
+	testCases := []struct {
+		TestName      string
+		State         tfsdk.State
+		ResourceModel map[string]interface{}
+		ExpectedError bool
+		ExpectedState tfsdk.State
+	}{
+		{
+			TestName: "simple State",
+			State: tfsdk.State{
+				Raw:    makeSimpleValueWithUnknowns(),
+				Schema: testSimpleSchema,
+			},
+			ResourceModel: map[string]interface{}{
+				"Arn": "arn:aws:test:::test",
+			},
+			ExpectedState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"arn":        tftypes.String,
+						"identifier": tftypes.String,
+						"name":       tftypes.String,
+						"number":     tftypes.Number,
+					},
+				}, map[string]tftypes.Value{
+					"arn":        tftypes.NewValue(tftypes.String, "arn:aws:test:::test"),
+					"identifier": tftypes.NewValue(tftypes.String, nil),
+					"name":       tftypes.NewValue(tftypes.String, "testing"),
+					"number":     tftypes.NewValue(tftypes.Number, 42),
+				}),
+				Schema: testSimpleSchema,
+			},
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.TestName, func(t *testing.T) {
+			err := SetUnknownValuesFromCloudFormationResourceModelRaw(context.TODO(), &testCase.State, testCase.ResourceModel)
+
+			if err == nil && testCase.ExpectedError {
+				t.Fatalf("expected error from SetUnknownValuesFromCloudFormationResourceModelRaw")
+			}
+
+			if err != nil && !testCase.ExpectedError {
+				t.Fatalf("unexpected error from SetUnknownValuesFromCloudFormationResourceModelRaw: %s", err)
+			}
+
+			if diff := cmp.Diff(testCase.State, testCase.ExpectedState); diff != "" {
 				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
 			}
 		})

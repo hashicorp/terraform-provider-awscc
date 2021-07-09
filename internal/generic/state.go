@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -35,7 +36,7 @@ func SetIdentifier(ctx context.Context, state *tfsdk.State, id string) error {
 	return state.SetAttribute(ctx, identifierAttributePath, id)
 }
 
-// SetUnknownValuesFromCloudFormationResourceModel fills any unknown State values from a CloudFormation ResourceModel.
+// SetUnknownValuesFromCloudFormationResourceModel fills any unknown State values from a CloudFormation ResourceModel (string).
 func SetUnknownValuesFromCloudFormationResourceModel(ctx context.Context, state *tfsdk.State, resourceModel string) error {
 	var v interface{}
 
@@ -44,51 +45,102 @@ func SetUnknownValuesFromCloudFormationResourceModel(ctx context.Context, state 
 	}
 
 	if v, ok := v.(map[string]interface{}); ok {
-		// Get the paths to the state's unknown values.
-		paths, err := GetUnknownValuePaths(ctx, state.Raw)
-
-		if err != nil {
-			return fmt.Errorf("error getting unknown values: %w", err)
-		}
-
-		for _, path := range paths {
-			// Get the value from the CloudFormation ResourceModel.
-			val, _, err := tftypes.WalkAttributePath(v, path.InCloudFormationResourceModel)
-
-			if err != nil {
-				return fmt.Errorf("error getting value at %s: %w", path.InCloudFormationResourceModel, err)
-			}
-
-			// Set it in the Terraform State.
-			err = state.SetAttribute(ctx, path.InTerraformState, val)
-
-			if err != nil {
-				return fmt.Errorf("error setting value at %s: %w", path.InTerraformState, err)
-			}
-		}
-
-		return nil
+		return SetUnknownValuesFromCloudFormationResourceModelRaw(ctx, state, v)
 	}
 
 	return fmt.Errorf("CloudFormation ResourceModel value produced unexpected raw type: %T", v)
 }
 
-// SetCloudFormationResourceModel sets the raw map[string]interface{} representing CloudFormation ResourceModel in State.
-func SetCloudFormationResourceModelRaw(ctx context.Context, state *tfsdk.State, v map[string]interface{}) error {
-	val, err := valueFromRaw(ctx, v)
+// SetUnknownValuesFromCloudFormationResourceModelRaw fills any unknown State values from a CloudFormation ResourceModel (raw map[string]interface{}).
+func SetUnknownValuesFromCloudFormationResourceModelRaw(ctx context.Context, state *tfsdk.State, resourceModel map[string]interface{}) error {
+	// Get the paths to the state's unknown values.
+	paths, err := GetUnknownValuePaths(ctx, state.Raw)
 
 	if err != nil {
-		return err
+		return fmt.Errorf("error getting unknown values: %w", err)
 	}
 
-	state.Raw = val
+	for _, path := range paths {
+		// Get the value from the CloudFormation ResourceModel.
+		val, _, err := tftypes.WalkAttributePath(resourceModel, path.InCloudFormationResourceModel)
+
+		if err == tftypes.ErrInvalidStep {
+			// Value not found in CloudFormation ResourceModel. Set to Nil in State.
+
+			// TODO
+			// TODO State.SetAttribute does not support passing `nil` to set a Null value.
+			// TODO
+
+			attrType, err := state.Schema.AttributeTypeAtPath(path.InTerraformState)
+
+			if err != nil {
+				return fmt.Errorf("error getting attribute type at %s: %w", path.InTerraformState, err)
+			}
+
+			state.Raw, err = tftypes.Transform(state.Raw, func(p *tftypes.AttributePath, v tftypes.Value) (tftypes.Value, error) {
+				if p.Equal(path.InTerraformState) {
+					return tftypes.NewValue(attrType.TerraformType(ctx), nil), nil
+				}
+				return v, nil
+			})
+
+			if err != nil {
+				return fmt.Errorf("error setting attribute in state: %w", err)
+			}
+
+			continue
+		}
+
+		if err != nil {
+			return fmt.Errorf("error getting value at %s: %w", path.InCloudFormationResourceModel, err)
+		}
+
+		// Set it in the Terraform State.
+		err = state.SetAttribute(ctx, path.InTerraformState, val)
+
+		if err != nil {
+			return fmt.Errorf("error setting value at %s: %w", path.InTerraformState, err)
+		}
+	}
 
 	return nil
 }
 
-// valueFromRaw returns the Terraform value for the specified raw (from JSON unmarshaling) value.
-// Attribute names are converted to snake case (Terraform standard).
-func valueFromRaw(ctx context.Context, v interface{}) (tftypes.Value, error) {
+// GetCloudFormationResourceModelValue returns the Terraform Value for the specified CloudFormation ResourceModel (string).
+func GetCloudFormationResourceModelValue(ctx context.Context, schema *schema.Schema, resourceModel string) (tftypes.Value, error) {
+	var v interface{}
+
+	if err := json.Unmarshal([]byte(resourceModel), &v); err != nil {
+		return tftypes.Value{}, err
+	}
+
+	if v, ok := v.(map[string]interface{}); ok {
+		return GetCloudFormationResourceModelRawValue(ctx, schema, v)
+	}
+
+	return tftypes.Value{}, fmt.Errorf("CloudFormation ResourceModel value produced unexpected raw type: %T", v)
+}
+
+// GetCloudFormationResourceModelRawValue returns the Terraform Value for the specified CloudFormation ResourceModel (raw map[string]interface{}).
+func GetCloudFormationResourceModelRawValue(ctx context.Context, schema *schema.Schema, resourceModel map[string]interface{}) (tftypes.Value, error) {
+	return getCloudFormationResourceModelValue(ctx, schema, nil, resourceModel)
+}
+
+func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Schema, path *tftypes.AttributePath, v interface{}) (tftypes.Value, error) {
+	var typ tftypes.Type
+
+	if len(path.Steps()) == 0 {
+		typ = tftypes.Object{}
+	} else {
+		attrType, err := schema.AttributeTypeAtPath(path)
+
+		if err != nil {
+			return tftypes.Value{}, fmt.Errorf("error getting attribute type at %s: %w", path, err)
+		}
+
+		typ = attrType.TerraformType(ctx)
+	}
+
 	switch v := v.(type) {
 	//
 	// Primitive types.
@@ -107,36 +159,47 @@ func valueFromRaw(ctx context.Context, v interface{}) (tftypes.Value, error) {
 	//
 	case []interface{}:
 		var vals []tftypes.Value
-		for _, v := range v {
-			val, err := valueFromRaw(ctx, v)
+		for idx, v := range v {
+			if typ.Is(tftypes.Set{}) {
+				// TODO
+				// TODO How to express the path for the element without knowing its value???
+				// TODO
+				path = path.WithElementKeyValue(tftypes.NewValue(typ.(tftypes.Set).ElementType, v))
+			} else {
+				path = path.WithElementKeyInt(int64(idx))
+			}
+			val, err := getCloudFormationResourceModelValue(ctx, schema, path, v)
 			if err != nil {
 				return tftypes.Value{}, err
 			}
 			vals = append(vals, val)
+			path = path.WithoutLastStep()
 		}
-		// TODO
-		// TODO List vs. Set vs. Tuple???
-		// TODO
-		if len(vals) == 0 {
-			return tftypes.Value{}, fmt.Errorf("unsupported raw empty array")
-		}
-		return tftypes.NewValue(tftypes.List{ElementType: vals[0].Type()}, vals), nil
+		return tftypes.NewValue(typ, vals), nil
+
 	case map[string]interface{}:
 		vals := make(map[string]tftypes.Value)
-		typs := make(map[string]tftypes.Type)
-		for name, v := range v {
-			val, err := valueFromRaw(ctx, v)
+		for key, v := range v {
+			if typ.Is(tftypes.Map{}) {
+				path = path.WithElementKeyString(key)
+			} else {
+				// In the Terraform Value attribute names are snake cased.
+				path = path.WithAttributeName(strcase.ToSnake(key))
+			}
+			val, err := getCloudFormationResourceModelValue(ctx, schema, path, v)
 			if err != nil {
 				return tftypes.Value{}, err
 			}
-			name := strcase.ToSnake(name)
-			vals[name] = val
-			typs[name] = val.Type()
+			if typ.Is(tftypes.Map{}) {
+				vals[key] = val
+			} else {
+				// In the Terraform Value attribute names are snake cased.
+				vals[strcase.ToSnake(key)] = val
+			}
+			path = path.WithoutLastStep()
 		}
-		// TODO
-		// TODO Map vs. Object???
-		// TODO
-		return tftypes.NewValue(tftypes.Object{AttributeTypes: typs}, vals), nil
+		return tftypes.NewValue(typ, vals), nil
+
 	default:
 		return tftypes.Value{}, fmt.Errorf("unsupported raw type: %T", v)
 	}
