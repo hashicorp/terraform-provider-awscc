@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	tflog "github.com/hashicorp/terraform-plugin-log"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/cfjsonpatch"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/waiter"
 )
 
@@ -222,6 +223,12 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 	description, err := r.describe(ctx, conn, identifier)
 
+	if NotFound(err) {
+		response.State.RemoveResource(ctx)
+
+		return
+	}
+
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
 			Severity: tfprotov6.DiagnosticSeverityError,
@@ -269,29 +276,117 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
 	tflog.Debug(ctx, "Resource.Update(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 
+	conn, err := r.clientProvider.CloudFormationClient(ctx)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error getting CloudFormation client",
+			Detail:   fmt.Sprintf("Error getting AWS CloudFormation client.\n%s\n", err),
+		})
+
+		return
+	}
+
 	// TODO
 	// TODO Diff Request.Plan (new) vs. Request.State (old)
 	// TODO Initialize Response.State from Request.Plan.
 	// TODO Update unknown Response.State values.
 	// TODO
 
-	// currentState := &request.State
-	// identifier, err := GetIdentifier(ctx, currentState)
+	currentState := &request.State
+	identifier, err := GetIdentifier(ctx, currentState)
 
-	// if err != nil {
-	// 	response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-	// 		Severity: tfprotov6.DiagnosticSeverityError,
-	// 		Summary:  "Error getting identifier",
-	// 		Detail:   fmt.Sprintf("Error getting resource identifier from state.\n%s\n", err),
-	// 	})
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error getting identifier",
+			Detail:   fmt.Sprintf("Error getting resource identifier from state.\n%s\n", err),
+		})
 
-	// 	return
-	// }
+		return
+	}
 
-	response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-		Severity: tfprotov6.DiagnosticSeverityError,
-		Summary:  "Unimplemented Resource.Update",
-	})
+	oldDesiredState, err := GetCloudFormationDesiredState(ctx, currentState.Raw)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error getting CloudFormation old desired state",
+			Detail:   fmt.Sprintf("Error getting AWS CloudFormation old desired state.\n%s\n", err),
+		})
+
+		return
+	}
+
+	newDesiredState, err := GetCloudFormationDesiredState(ctx, request.Plan.Raw)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error getting CloudFormation new desired state",
+			Detail:   fmt.Sprintf("Error getting AWS CloudFormation new desired state.\n%s\n", err),
+		})
+
+		return
+	}
+
+	patchOperations, err := cfjsonpatch.PatchOperations(oldDesiredState, newDesiredState)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "JSON Patch Creation Unsuccessful",
+			Detail:   fmt.Sprintf("Creating JSON Patch failed.\n%s\n", err),
+		})
+
+		return
+	}
+
+	input := &cloudformation.UpdateResourceInput{
+		ClientToken:     aws.String(UniqueId()),
+		Identifier:      aws.String(identifier),
+		PatchOperations: patchOperations,
+		TypeName:        aws.String(r.resourceType.cfTypeName),
+	}
+
+	output, err := conn.UpdateResourceWithContext(ctx, input)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error updating CloudFormation resource",
+			Detail:   fmt.Sprintf("Error updating AWS CloudFormation resource.\n%s\n", err),
+		})
+
+		return
+	}
+
+	if output == nil || output.ProgressEvent == nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error updating CloudFormation resource",
+			Detail:   "Error updating AWS CloudFormation resource.\nEmpty response\n",
+		})
+
+		return
+	}
+
+	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.StringValue(output.ProgressEvent.RequestToken), 5*time.Minute)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error waiting for CloudFormation resource update",
+			Detail:   fmt.Sprintf("Error waiting for AWS CloudFormation resource update.\n%s\n", err),
+		})
+
+		return
+	}
+
+	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
+	// On Update there should be nothing unknown in the planned state...
+	response.State.Raw = request.Plan.Raw
 }
 
 func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceRequest, response *tfsdk.DeleteResourceResponse) {
@@ -311,7 +406,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 
 	log.Printf("[DEBUG] Resource.Delete(%s/%s)\nRaw state: %v", r.resourceType.cfTypeName, r.resourceType.tfTypeName, request.State.Raw)
 
-	identifier, err := GetIdentifier(ctx, &response.State)
+	identifier, err := GetIdentifier(ctx, &request.State)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -373,7 +468,6 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 }
 
 // describe returns the live state of the specified resource.
-// TODO Return NotFoundError when not found.
 func (r *resource) describe(ctx context.Context, conn *cloudformation.CloudFormation, identifier string) (*cloudformation.ResourceDescription, error) {
 	input := &cloudformation.GetResourceInput{
 		Identifier: aws.String(identifier),
@@ -383,7 +477,7 @@ func (r *resource) describe(ctx context.Context, conn *cloudformation.CloudForma
 	output, err := conn.GetResourceWithContext(ctx, input)
 
 	if tfawserr.ErrCodeEquals(err, cloudformation.ErrCodeResourceNotFoundException) {
-		return nil, nil
+		return nil, &NotFoundError{LastError: err}
 	}
 
 	if err != nil {
@@ -391,7 +485,7 @@ func (r *resource) describe(ctx context.Context, conn *cloudformation.CloudForma
 	}
 
 	if output == nil || output.ResourceDescription == nil {
-		return nil, nil
+		return nil, &NotFoundError{Message: "Empty result"}
 	}
 
 	return output.ResourceDescription, nil
