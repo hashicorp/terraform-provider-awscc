@@ -69,6 +69,7 @@ func SetUnknownValuesFromCloudFormationResourceModelRaw(ctx context.Context, sta
 
 			// TODO
 			// TODO State.SetAttribute does not support passing `nil` to set a Null value.
+			// TODO https://github.com/hashicorp/terraform-plugin-framework/issues/66.
 			// TODO
 
 			attrType, err := state.Schema.AttributeTypeAtPath(path.InTerraformState)

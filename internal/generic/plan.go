@@ -6,14 +6,13 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/iancoleman/strcase"
 )
 
-// GetCloudFormationDesiredState returns the string representing CloudFormation DesiredState from a Terraform Plan.
-func GetCloudFormationDesiredState(ctx context.Context, plan *tfsdk.Plan) (string, error) {
-	m, err := GetCloudFormationDesiredStateRaw(ctx, plan)
+// GetCloudFormationDesiredState returns the string representing CloudFormation DesiredState from a Terraform Value.
+func GetCloudFormationDesiredState(ctx context.Context, val tftypes.Value) (string, error) {
+	m, err := GetCloudFormationDesiredStateRaw(ctx, val)
 
 	if err != nil {
 		return "", err
@@ -29,8 +28,8 @@ func GetCloudFormationDesiredState(ctx context.Context, plan *tfsdk.Plan) (strin
 }
 
 // GetCloudFormationDesiredStateRaw returns the raw map[string]interface{} representing CloudFormation DesiredState from a Terraform Plan.
-func GetCloudFormationDesiredStateRaw(ctx context.Context, plan *tfsdk.Plan) (map[string]interface{}, error) {
-	v, err := rawFromValue(ctx, plan.Raw)
+func GetCloudFormationDesiredStateRaw(ctx context.Context, val tftypes.Value) (map[string]interface{}, error) {
+	v, err := rawFromValue(ctx, val)
 
 	if err != nil {
 		return nil, err
@@ -40,7 +39,7 @@ func GetCloudFormationDesiredStateRaw(ctx context.Context, plan *tfsdk.Plan) (ma
 		return v, nil
 	}
 
-	return nil, fmt.Errorf("Plan.Raw value produced unexpected raw type: %T", v)
+	return nil, fmt.Errorf("Terraform Value produced unexpected raw type: %T", v)
 }
 
 // rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.

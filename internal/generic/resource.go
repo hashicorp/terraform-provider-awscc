@@ -81,7 +81,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	log.Printf("[DEBUG] Resource.Create(%s/%s)\nRaw plan: %v", r.resourceType.cfTypeName, r.resourceType.tfTypeName, request.Plan.Raw)
 
-	desiredState, err := GetCloudFormationDesiredState(ctx, &request.Plan)
+	desiredState, err := GetCloudFormationDesiredState(ctx, request.Plan.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -206,11 +206,6 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		return
 	}
 
-	// TODO
-	// TODO Initialize Response.State from Request.State.
-	// TODO Merge in values from AWS.
-	// TODO
-
 	currentState := &request.State
 	schema := &currentState.Schema
 	identifier, err := GetIdentifier(ctx, currentState)
@@ -279,6 +274,19 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	// TODO Initialize Response.State from Request.Plan.
 	// TODO Update unknown Response.State values.
 	// TODO
+
+	// currentState := &request.State
+	// identifier, err := GetIdentifier(ctx, currentState)
+
+	// if err != nil {
+	// 	response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+	// 		Severity: tfprotov6.DiagnosticSeverityError,
+	// 		Summary:  "Error getting identifier",
+	// 		Detail:   fmt.Sprintf("Error getting resource identifier from state.\n%s\n", err),
+	// 	})
+
+	// 	return
+	// }
 
 	response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
 		Severity: tfprotov6.DiagnosticSeverityError,

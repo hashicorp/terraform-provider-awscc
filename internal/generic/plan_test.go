@@ -144,7 +144,7 @@ func TestPlanGetCloudFormationDesiredState(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			got, err := GetCloudFormationDesiredStateRaw(context.TODO(), &testCase.Plan)
+			got, err := GetCloudFormationDesiredStateRaw(context.TODO(), testCase.Plan.Raw)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error")
