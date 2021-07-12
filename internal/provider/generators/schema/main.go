@@ -11,6 +11,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"sort"
+	"strings"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	getter "github.com/hashicorp/go-getter"
@@ -41,13 +43,15 @@ type Source struct {
 }
 
 var (
-	configFile  = flag.String("config", "", "configuration file; required")
-	packageName = flag.String("package", "", "override package name for generated code")
+	configFile        = flag.String("config", "", "configuration file; required")
+	generatedCodeRoot = flag.String("generated-code-root", "", "directory root for generated resource code")
+	importPathRoot    = flag.String("import-path-root", "", "import path root for generated resource code; required")
+	packageName       = flag.String("package", "", "override package name for generated code")
 )
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "Usage:\n")
-	fmt.Fprintf(os.Stderr, "\tmain.go [flags] -config <configuration-file> <generated-file>\n\n")
+	fmt.Fprintf(os.Stderr, "\tmain.go [flags] -config <configuration-file> -import-path-root <import-path-root> <generated-file>\n\n")
 	fmt.Fprintf(os.Stderr, "Flags:\n")
 	flag.PrintDefaults()
 }
@@ -58,7 +62,7 @@ func main() {
 
 	args := flag.Args()
 
-	if len(args) == 0 || *configFile == "" {
+	if len(args) == 0 || *configFile == "" || *importPathRoot == "" {
 		flag.Usage()
 		os.Exit(2)
 	}
@@ -69,6 +73,11 @@ func main() {
 	}
 
 	filename := args[0]
+
+	generatedCodeRootDirectoryName := "."
+	if *generatedCodeRoot != "" {
+		generatedCodeRootDirectoryName = *generatedCodeRoot
+	}
 
 	ui := &cli.BasicUi{
 		Reader:      os.Stdin,
@@ -113,7 +122,7 @@ func main() {
 		ui: ui,
 	}
 
-	if err := generator.Generate(destinationPackage, filename, resources); err != nil {
+	if err := generator.Generate(destinationPackage, filename, generatedCodeRootDirectoryName, *importPathRoot, resources); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform resource generation instructions: %s", err))
 		os.Exit(1)
 	}
@@ -201,15 +210,25 @@ func (d *Downloader) ResourceSchemas() ([]*ResourceData, error) {
 	resources := []*ResourceData{}
 
 	for _, schema := range d.config.ResourceSchemas {
-		resourceSchemaFilename, err := d.ResourceSchema(schema)
+		resourceSchemaFilename, resourceTypeName, err := d.ResourceSchema(schema)
 
 		if err != nil {
 			d.ui.Warn(fmt.Sprintf("error loading CloudFormation Resource Provider Schema for %s: %s", schema.ResourceName, err))
 			continue
 		}
 
+		// https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-typeName
+		parts := strings.Split(resourceTypeName, "::")
+
+		if len(parts) != 3 {
+			d.ui.Warn(fmt.Sprintf("incorrect format for CloudFormation Resource Provider Schema type name: %s", resourceTypeName))
+			continue
+		}
+
 		resources = append(resources, &ResourceData{
 			CloudFormationTypeSchemaFile: resourceSchemaFilename,
+			GeneratedCodePackageName:     strings.ToLower(parts[1]),                                 // e.g. "logs"
+			GeneratedCodePathSuffix:      strings.ToLower(fmt.Sprintf("%s/%s", parts[0], parts[1])), // e.g. "aws/logs"
 			TerraformResourceType:        schema.ResourceName,
 		})
 	}
@@ -217,11 +236,12 @@ func (d *Downloader) ResourceSchemas() ([]*ResourceData, error) {
 	return resources, nil
 }
 
-func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, error) {
+// ResourceSchema returns the local resource schema file name and type name.
+func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, error) {
 	resourceSchemaFilename, err := filepath.Abs(filepath.Join(d.baseDir, schema.Local))
 
 	if err != nil {
-		return "", fmt.Errorf("error making absolute path: %w", err)
+		return "", "", fmt.Errorf("error making absolute path: %w", err)
 	}
 
 	resourceSchemaFileExists := fileExists(resourceSchemaFilename)
@@ -233,27 +253,40 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, error) {
 		d.Infof("downloading CloudFormation Resource Provider Schema %q to %q", src, dst)
 
 		if err := getter.GetFile(dst, src); err != nil {
-			return "", fmt.Errorf("error downloading: %w", err)
+			return "", "", fmt.Errorf("error downloading: %w", err)
 		}
 
 		resourceSchema, err := cfschema.NewResourceJsonSchemaPath(dst)
 
 		if err != nil {
-			return "", fmt.Errorf("error loading %s: %w", dst, err)
+			return "", "", fmt.Errorf("error loading %s: %w", dst, err)
 		}
 
 		if err := d.metaSchema.ValidateResourceJsonSchema(resourceSchema); err != nil {
-			return "", fmt.Errorf("error validating %s: %w", dst, err)
+			return "", "", fmt.Errorf("error validating %s: %w", dst, err)
 		}
 
 		if err := copyFile(resourceSchemaFilename, dst); err != nil {
-			return "", fmt.Errorf("error copying: %w", err)
+			return "", "", fmt.Errorf("error copying: %w", err)
 		}
 	} else {
 		d.Infof("using cached CloudFormation Resource Provider Schema %q", resourceSchemaFilename)
 	}
 
-	return resourceSchemaFilename, nil
+	// Read the resource type name from the schema.
+	resourceSchema, err := cfschema.NewResourceJsonSchemaPath(resourceSchemaFilename)
+
+	if err != nil {
+		return "", "", fmt.Errorf("error loading %s: %w", resourceSchemaFilename, err)
+	}
+
+	resource, err := resourceSchema.Resource()
+
+	if err != nil {
+		return "", "", fmt.Errorf("error parsing %s: %w", resourceSchemaFilename, err)
+	}
+
+	return resourceSchemaFilename, *resource.TypeName, nil
 }
 
 func (d *Downloader) Infof(format string, a ...interface{}) {
@@ -262,6 +295,8 @@ func (d *Downloader) Infof(format string, a ...interface{}) {
 
 type ResourceData struct {
 	CloudFormationTypeSchemaFile string
+	GeneratedCodePackageName     string
+	GeneratedCodePathSuffix      string
 	TerraformResourceType        string
 }
 
@@ -273,12 +308,31 @@ func (g *Generator) Infof(format string, a ...interface{}) {
 	g.ui.Info(fmt.Sprintf(format, a...))
 }
 
-func (g *Generator) Generate(packageName, filename string, resources []*ResourceData) error {
+func (g *Generator) Generate(packageName, filename, generatedCodeRootDirectoryName, importPathRoot string, resources []*ResourceData) error {
 	g.Infof("generating Terraform resource generation instructions into %q", filename)
 
+	importPaths := make(map[string]struct{}) // Set of strings.
+
+	for _, resource := range resources {
+		if _, ok := importPaths[resource.GeneratedCodePathSuffix]; !ok {
+			importPaths[resource.GeneratedCodePathSuffix] = struct{}{}
+		}
+	}
+
+	importPathSuffixes := make([]string, 0)
+
+	for importPathSuffix := range importPaths {
+		importPathSuffixes = append(importPathSuffixes, importPathSuffix)
+	}
+
+	sort.Strings(importPathSuffixes)
+
 	templateData := TemplateData{
-		PackageName: packageName,
-		Resources:   resources,
+		GeneratedCodeRootDirectoryName: generatedCodeRootDirectoryName,
+		ImportPathRoot:                 importPathRoot,
+		ImportPathSuffixes:             importPathSuffixes,
+		PackageName:                    packageName,
+		Resources:                      resources,
 	}
 
 	tmpl, err := template.New("function").Parse(templateBody)
@@ -321,13 +375,22 @@ var templateBody = `
 // Code generated by generators/schema/main.go; DO NOT EDIT.
 
 {{- range .Resources }}
-//go:generate go run generators/resource/main.go -resource {{ .TerraformResourceType }} -cfschema {{ .CloudFormationTypeSchemaFile }} -- {{ .TerraformResourceType }}_gen.go
+//go:generate go run generators/resource/main.go -resource {{ .TerraformResourceType }} -cfschema {{ .CloudFormationTypeSchemaFile }} -package {{ .GeneratedCodePackageName }} -- {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .TerraformResourceType }}_gen.go
 {{- end }}
 
 package {{ .PackageName }}
+
+import (
+{{- range .ImportPathSuffixes }}
+	_ "{{ $.ImportPathRoot }}/{{ . }}"
+{{- end }}
+)
 `
 
 type TemplateData struct {
-	PackageName string
-	Resources   []*ResourceData
+	GeneratedCodeRootDirectoryName string
+	ImportPathRoot                 string
+	ImportPathSuffixes             []string
+	PackageName                    string
+	Resources                      []*ResourceData
 }
