@@ -57,11 +57,12 @@ func (g *Generator) appendCfPropertyReferences(definitionName string, propertyNa
 // and appends the generated to code to the generator's Writer.
 func (g *Generator) appendCfProperty(definitionName, propertyName string, property *cfschema.Property) error {
 	attributeVariableName := CfPropertyTfAttributeVariableName(definitionName, propertyName)
+	path := []string{propertyName}
 
 	g.printf("\n")
 	g.printf("// Definition: %s\n", definitionName)
 	g.printf("// Property: %s\n", propertyName)
-	if g.CfResource.PrimaryIdentifier.ContainsPath([]string{propertyName}) {
+	if g.CfResource.PrimaryIdentifier.ContainsPath(path) {
 		g.printf("// PrimaryIdentifier: %t\n", true)
 	}
 	g.printf("// CloudFormation resource type schema:\n")
@@ -162,8 +163,10 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 		}
 	}
 
-	readOnly := g.CfResource.ReadOnlyProperties.ContainsPath([]string{propertyName})
+	createOnly := g.CfResource.CreateOnlyProperties.ContainsPath(path)
+	readOnly := g.CfResource.ReadOnlyProperties.ContainsPath(path)
 	required := g.CfResource.IsRequired(propertyName)
+	writeOnly := g.CfResource.WriteOnlyProperties.ContainsPath(path)
 
 	if required {
 		g.printf("%s.Required = true\n", attributeVariableName)
@@ -177,6 +180,14 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 
 	if description := property.Description; description != nil {
 		g.printf("%s.Description = `%s`\n", attributeVariableName, *description)
+	}
+
+	if createOnly {
+		g.printf("// %s.ForceNew = true\n", attributeVariableName)
+	}
+
+	if writeOnly {
+		g.printf("// %s is a write-only attribute.\n", propertyName)
 	}
 
 	return nil

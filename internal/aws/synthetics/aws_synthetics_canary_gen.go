@@ -83,12 +83,12 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 	attr1604953967.Optional = true
 
 	// Property references for Code:
-	attr2036185364 := make(map[string]schema.Attribute, 5)
-	attr2036185364["handler"] = attr791084952
-	attr2036185364["s_3_bucket"] = attr130402388
-	attr2036185364["s_3_key"] = attr713593033
-	attr2036185364["s_3_object_version"] = attr1933333155
-	attr2036185364["script"] = attr1604953967
+	attrs2036185364 := make(map[string]schema.Attribute, 5)
+	attrs2036185364["handler"] = attr791084952
+	attrs2036185364["s_3_bucket"] = attr130402388
+	attrs2036185364["s_3_key"] = attr713593033
+	attrs2036185364["s_3_object_version"] = attr1933333155
+	attrs2036185364["script"] = attr1604953967
 
 	// Definition: RunConfig
 	// Property: ActiveTracing
@@ -154,11 +154,11 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 	attr500709785.Description = `Provide maximum canary timeout per run in seconds`
 
 	// Property references for RunConfig:
-	attr3375960452 := make(map[string]schema.Attribute, 4)
-	attr3375960452["active_tracing"] = attr1943719100
-	attr3375960452["environment_variables"] = attr3358771378
-	attr3375960452["memory_in_mb"] = attr781052099
-	attr3375960452["timeout_in_seconds"] = attr500709785
+	attrs3375960452 := make(map[string]schema.Attribute, 4)
+	attrs3375960452["active_tracing"] = attr1943719100
+	attrs3375960452["environment_variables"] = attr3358771378
+	attrs3375960452["memory_in_mb"] = attr781052099
+	attrs3375960452["timeout_in_seconds"] = attr500709785
 
 	// Definition: Schedule
 	// Property: DurationInSeconds
@@ -185,9 +185,9 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 	attr982960382.Optional = true
 
 	// Property references for Schedule:
-	attr2751052524 := make(map[string]schema.Attribute, 2)
-	attr2751052524["duration_in_seconds"] = attr438806832
-	attr2751052524["expression"] = attr982960382
+	attrs2751052524 := make(map[string]schema.Attribute, 2)
+	attrs2751052524["duration_in_seconds"] = attr438806832
+	attrs2751052524["expression"] = attr982960382
 
 	// Definition: Tag
 	// Property: Key
@@ -222,9 +222,9 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 	attr3708964976.Description = `The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. `
 
 	// Property references for Tag:
-	attr4169356339 := make(map[string]schema.Attribute, 2)
-	attr4169356339["key"] = attr2859957898
-	attr4169356339["value"] = attr3708964976
+	attrs4169356339 := make(map[string]schema.Attribute, 2)
+	attrs4169356339["key"] = attr2859957898
+	attrs4169356339["value"] = attr3708964976
 
 	// Definition: VPCConfig
 	// Property: SecurityGroupIds
@@ -269,10 +269,10 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 	attr4286326268.Optional = true
 
 	// Property references for VPCConfig:
-	attr2512402886 := make(map[string]schema.Attribute, 3)
-	attr2512402886["security_group_ids"] = attr634697343
-	attr2512402886["subnet_ids"] = attr2512506947
-	attr2512402886["vpc_id"] = attr4286326268
+	attrs2512402886 := make(map[string]schema.Attribute, 3)
+	attrs2512402886["security_group_ids"] = attr634697343
+	attrs2512402886["subnet_ids"] = attr2512506947
+	attrs2512402886["vpc_id"] = attr4286326268
 
 	// Root property definition.
 
@@ -301,7 +301,7 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 	   }
 	*/
 	attr3077982955 := schema.Attribute{}
-	attr3077982955.Attributes = schema.SingleNestedAttributes(attr2036185364)
+	attr3077982955.Attributes = schema.SingleNestedAttributes(attrs2036185364)
 	attr3077982955.Required = true
 	attr3077982955.Description = `Provide the canary script source`
 
@@ -362,6 +362,7 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 	attr1435824245.Type = types.StringType
 	attr1435824245.Required = true
 	attr1435824245.Description = `Name of the canary.`
+	// attr1435824245.ForceNew = true
 
 	// Definition: (Root)
 	// Property: RunConfig
@@ -373,7 +374,7 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 	   }
 	*/
 	attr2654279805 := schema.Attribute{}
-	attr2654279805.Attributes = schema.SingleNestedAttributes(attr3375960452)
+	attr2654279805.Attributes = schema.SingleNestedAttributes(attrs3375960452)
 	attr2654279805.Optional = true
 	attr2654279805.Description = `Provide canary run configuration`
 
@@ -401,7 +402,7 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 	   }
 	*/
 	attr4051156835 := schema.Attribute{}
-	attr4051156835.Attributes = schema.SingleNestedAttributes(attr2751052524)
+	attr4051156835.Attributes = schema.SingleNestedAttributes(attrs2751052524)
 	attr4051156835.Required = true
 	attr4051156835.Description = `Frequency to run your canaries`
 
@@ -461,7 +462,7 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 	*/
 	attr2151425999 := schema.Attribute{}
 	attr2151425999Options := schema.ListNestedAttributesOptions{}
-	attr2151425999.Attributes = schema.ListNestedAttributes(attr4169356339, attr2151425999Options)
+	attr2151425999.Attributes = schema.ListNestedAttributes(attrs4169356339, attr2151425999Options)
 	attr2151425999.Optional = true
 
 	// Definition: (Root)
@@ -474,29 +475,29 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 	   }
 	*/
 	attr259913979 := schema.Attribute{}
-	attr259913979.Attributes = schema.SingleNestedAttributes(attr2512402886)
+	attr259913979.Attributes = schema.SingleNestedAttributes(attrs2512402886)
 	attr259913979.Optional = true
 	attr259913979.Description = `Provide VPC Configuration if enabled.`
 
 	// Property references for (Root):
-	attr1863345718 := make(map[string]schema.Attribute, 14)
-	attr1863345718["artifact_s_3_location"] = attr3370581841
-	attr1863345718["code"] = attr3077982955
-	attr1863345718["execution_role_arn"] = attr3105035707
-	attr1863345718["failure_retention_period"] = attr2772195751
-	attr1863345718["id"] = attr2710565547
-	attr1863345718["name"] = attr1435824245
-	attr1863345718["run_config"] = attr2654279805
-	attr1863345718["runtime_version"] = attr2015302114
-	attr1863345718["schedule"] = attr4051156835
-	attr1863345718["start_canary_after_creation"] = attr4092632865
-	attr1863345718["state"] = attr902619179
-	attr1863345718["success_retention_period"] = attr3841818316
-	attr1863345718["tags"] = attr2151425999
-	attr1863345718["vpc_config"] = attr259913979
+	attrs1863345718 := make(map[string]schema.Attribute, 14)
+	attrs1863345718["artifact_s_3_location"] = attr3370581841
+	attrs1863345718["code"] = attr3077982955
+	attrs1863345718["execution_role_arn"] = attr3105035707
+	attrs1863345718["failure_retention_period"] = attr2772195751
+	attrs1863345718["id"] = attr2710565547
+	attrs1863345718["name"] = attr1435824245
+	attrs1863345718["run_config"] = attr2654279805
+	attrs1863345718["runtime_version"] = attr2015302114
+	attrs1863345718["schedule"] = attr4051156835
+	attrs1863345718["start_canary_after_creation"] = attr4092632865
+	attrs1863345718["state"] = attr902619179
+	attrs1863345718["success_retention_period"] = attr3841818316
+	attrs1863345718["tags"] = attr2151425999
+	attrs1863345718["vpc_config"] = attr259913979
 
 	// Resource instance unique identifier.
-	attr1863345718["identifier"] = schema.Attribute{
+	attrs1863345718["identifier"] = schema.Attribute{
 		Type:        types.StringType,
 		Computed:    true,
 		Description: "The resource instance's unique identifier.",
@@ -504,7 +505,7 @@ func awsSyntheticsCanary(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	schema := schema.Schema{
 		Version:    1,
-		Attributes: attr1863345718,
+		Attributes: attrs1863345718,
 	}
 
 	resourceType := generic.NewResourceType(

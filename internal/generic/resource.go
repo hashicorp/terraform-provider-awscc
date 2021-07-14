@@ -288,12 +288,6 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	// TODO
-	// TODO Diff Request.Plan (new) vs. Request.State (old)
-	// TODO Initialize Response.State from Request.Plan.
-	// TODO Update unknown Response.State values.
-	// TODO
-
 	currentState := &request.State
 	identifier, err := GetIdentifier(ctx, currentState)
 
