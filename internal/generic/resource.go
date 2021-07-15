@@ -71,11 +71,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	conn, err := r.clientProvider.CloudFormationClient(ctx)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error getting CloudFormation client",
-			Detail:   fmt.Sprintf("Error getting AWS CloudFormation client.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ClientNotFoundDiag(err))
 
 		return
 	}
@@ -85,11 +81,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	desiredState, err := GetCloudFormationDesiredState(ctx, request.Plan.Raw)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error getting CloudFormation desired state",
-			Detail:   fmt.Sprintf("Error getting AWS CloudFormation desired state.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))
 
 		return
 	}
@@ -105,21 +97,13 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	output, err := conn.CreateResourceWithContext(ctx, input)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error creating CloudFormation resource",
-			Detail:   fmt.Sprintf("Error creating AWS CloudFormation resource.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "CreateResource", err))
 
 		return
 	}
 
 	if output == nil || output.ProgressEvent == nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error creating CloudFormation resource",
-			Detail:   "Error creating AWS CloudFormation resource.\nEmpty response\n",
-		})
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "CreateResource"))
 
 		return
 	}
@@ -127,11 +111,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.StringValue(output.ProgressEvent.RequestToken), 5*time.Minute)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error waiting for CloudFormation resource creation",
-			Detail:   fmt.Sprintf("Error waiting for AWS CloudFormation resource creation.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "CreateResource", err))
 
 		return
 	}
@@ -139,22 +119,20 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	identifier := aws.StringValue(output.ProgressEvent.Identifier)
 	description, err := r.describe(ctx, conn, identifier)
 
+	if NotFound(err) {
+		response.Diagnostics = append(response.Diagnostics, ResourceNotFoundAfterCreationDiag(err))
+
+		return
+	}
+
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error describing CloudFormation resource",
-			Detail:   fmt.Sprintf("Error describing AWS CloudFormation resource.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "GetResource", err))
 
 		return
 	}
 
 	if description == nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error describing CloudFormation resource",
-			Detail:   "Error describing AWS CloudFormation resource.\nEmpty response\n",
-		})
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "GetResource"))
 
 		return
 	}
@@ -168,11 +146,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	err = SetIdentifier(ctx, &response.State, identifier)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error setting identifier",
-			Detail:   fmt.Sprintf("Error setting resource identifier in state.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierSetErrorDiag(err))
 
 		return
 	}
@@ -182,8 +156,8 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
 			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error setting CloudFormation resource model",
-			Detail:   fmt.Sprintf("Error setting AWS CloudFormation resource model.\n%s\n", err),
+			Summary:  "Creation Of Terraform State Unsuccessful",
+			Detail:   fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		})
 
 		return
@@ -198,11 +172,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	conn, err := r.clientProvider.CloudFormationClient(ctx)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error getting CloudFormation client",
-			Detail:   fmt.Sprintf("Error getting AWS CloudFormation client.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ClientNotFoundDiag(err))
 
 		return
 	}
@@ -212,11 +182,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	identifier, err := GetIdentifier(ctx, currentState)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error getting identifier",
-			Detail:   fmt.Sprintf("Error getting resource identifier from state.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
 
 		return
 	}
@@ -224,17 +190,14 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	description, err := r.describe(ctx, conn, identifier)
 
 	if NotFound(err) {
+		response.Diagnostics = append(response.Diagnostics, ResourceNotFoundWarningDiag(err))
 		response.State.RemoveResource(ctx)
 
 		return
 	}
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error describing CloudFormation resource",
-			Detail:   fmt.Sprintf("Error describing AWS CloudFormation resource.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "GetResource", err))
 
 		return
 	}
@@ -244,8 +207,8 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
 			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error getting Value from CloudFormation ResourceModel",
-			Detail:   fmt.Sprintf("Error getting Terraform Value from AWS CloudFormation ResourceModel.\n%s\n", err),
+			Summary:  "Creation Of Terraform State Unsuccessful",
+			Detail:   fmt.Sprintf("Unable to create a Terraform State value from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		})
 
 		return
@@ -263,11 +226,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	err = SetIdentifier(ctx, &response.State, identifier)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error setting identifier",
-			Detail:   fmt.Sprintf("Error setting resource identifier in state.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierSetErrorDiag(err))
 
 		return
 	}
@@ -279,11 +238,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	conn, err := r.clientProvider.CloudFormationClient(ctx)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error getting CloudFormation client",
-			Detail:   fmt.Sprintf("Error getting AWS CloudFormation client.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ClientNotFoundDiag(err))
 
 		return
 	}
@@ -292,46 +247,34 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	identifier, err := GetIdentifier(ctx, currentState)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error getting identifier",
-			Detail:   fmt.Sprintf("Error getting resource identifier from state.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
 
 		return
 	}
 
-	oldDesiredState, err := GetCloudFormationDesiredState(ctx, currentState.Raw)
+	currentDesiredState, err := GetCloudFormationDesiredState(ctx, currentState.Raw)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error getting CloudFormation old desired state",
-			Detail:   fmt.Sprintf("Error getting AWS CloudFormation old desired state.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Prior State", err))
 
 		return
 	}
 
-	newDesiredState, err := GetCloudFormationDesiredState(ctx, request.Plan.Raw)
+	plannedDesiredState, err := GetCloudFormationDesiredState(ctx, request.Plan.Raw)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error getting CloudFormation new desired state",
-			Detail:   fmt.Sprintf("Error getting AWS CloudFormation new desired state.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))
 
 		return
 	}
 
-	patchOperations, err := cfjsonpatch.PatchOperations(oldDesiredState, newDesiredState)
+	patchOperations, err := cfjsonpatch.PatchOperations(currentDesiredState, plannedDesiredState)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
 			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "JSON Patch Creation Unsuccessful",
-			Detail:   fmt.Sprintf("Creating JSON Patch failed.\n%s\n", err),
+			Summary:  "Creation Of JSON Patch Unsuccessful",
+			Detail:   fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		})
 
 		return
@@ -347,21 +290,13 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	output, err := conn.UpdateResourceWithContext(ctx, input)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error updating CloudFormation resource",
-			Detail:   fmt.Sprintf("Error updating AWS CloudFormation resource.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "UpdateResource", err))
 
 		return
 	}
 
 	if output == nil || output.ProgressEvent == nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error updating CloudFormation resource",
-			Detail:   "Error updating AWS CloudFormation resource.\nEmpty response\n",
-		})
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "UpdateResource"))
 
 		return
 	}
@@ -369,11 +304,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.StringValue(output.ProgressEvent.RequestToken), 5*time.Minute)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error waiting for CloudFormation resource update",
-			Detail:   fmt.Sprintf("Error waiting for AWS CloudFormation resource update.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "UpdateResource", err))
 
 		return
 	}
@@ -389,25 +320,15 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 	conn, err := r.clientProvider.CloudFormationClient(ctx)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error getting CloudFormation client",
-			Detail:   fmt.Sprintf("Error getting AWS CloudFormation client.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ClientNotFoundDiag(err))
 
 		return
 	}
 
-	log.Printf("[DEBUG] Resource.Delete(%s/%s)\nRaw state: %v", r.resourceType.cfTypeName, r.resourceType.tfTypeName, request.State.Raw)
-
 	identifier, err := GetIdentifier(ctx, &request.State)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error getting identifier",
-			Detail:   fmt.Sprintf("Error getting resource identifier from state.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
 
 		return
 	}
@@ -421,21 +342,13 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 	output, err := conn.DeleteResourceWithContext(ctx, input)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error deleting CloudFormation resource",
-			Detail:   fmt.Sprintf("Error deleting AWS CloudFormation resource.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "DeleteResource", err))
 
 		return
 	}
 
 	if output == nil || output.ProgressEvent == nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error deleting CloudFormation resource",
-			Detail:   "Error deleting AWS CloudFormation resource.\nEmpty response\n",
-		})
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "DeleteResource"))
 
 		return
 	}
@@ -449,11 +362,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 	}
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error waiting for CloudFormation resource deletion",
-			Detail:   fmt.Sprintf("Error waiting for AWS CloudFormation resource deletion.\n%s\n", err),
-		})
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "DeleteResource", err))
 
 		return
 	}
