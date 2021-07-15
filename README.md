@@ -13,7 +13,7 @@
 The Terraform AWS CloudAPI Provider is a plugin for Terraform that allows for the full lifecycle management of AWS resources using the AWS CloudFormation Cloud API.
 This provider is maintained internally by the HashiCorp AWS Provider team.
 
-Please note: We take Terraform's security and our users' trust very seriously. If you believe you have found a security issue in the Terraform AWS Provider, please responsibly disclose by contacting us at security@hashicorp.com.
+Please note: We take Terraform's security and our users' trust very seriously. If you believe you have found a security issue in the Terraform AWS CloudAPI Provider, please responsibly disclose by contacting us at security@hashicorp.com.
 
 ## Quick Starts
 
