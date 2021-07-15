@@ -20,114 +20,102 @@ func init() {
 // awsLogsLogGroup returns the Terraform aws_logs_log_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Logs::LogGroup resource type.
 func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
-	// Subproperty definitions.
+	attributes := map[string]schema.Attribute{
+		// Property: Arn
+		// CloudFormation resource type schema:
+		/*
+		   {
+		     "description": "The CloudWatch log group ARN.",
+		     "type": "string"
+		   }
+		*/
+		"arn": {
+			Description: `The CloudWatch log group ARN.`,
+			Type:        types.StringType,
+			Computed:    true,
+		},
 
-	// Root property definition.
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		/*
+		   {
+		     "description": "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
+		     "maxLength": 256,
+		     "pattern": "^arn:[a-z0-9-]+:kms:[a-z0-9-]+:\\d{12}:(key|alias)/.+$",
+		     "type": "string"
+		   }
+		*/
+		"kms_key_id": {
+			Description: `The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.`,
+			Type:        types.StringType,
+			Optional:    true,
+		},
 
-	// Definition: (Root)
-	// Property: Arn
-	// CloudFormation resource type schema:
-	/*
-	   {
-	     "description": "The CloudWatch log group ARN.",
-	     "type": "string"
-	   }
-	*/
-	attr3018501457 := schema.Attribute{}
-	attr3018501457.Type = types.StringType
-	attr3018501457.Computed = true
-	attr3018501457.Description = `The CloudWatch log group ARN.`
+		// Property: LogGroupName
+		// PrimaryIdentifier: true
+		// CloudFormation resource type schema:
+		/*
+		   {
+		     "description": "The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.",
+		     "maxLength": 512,
+		     "minLength": 1,
+		     "pattern": "^[.\\-_/#A-Za-z0-9]{1,512}$",
+		     "type": "string"
+		   }
+		*/
+		"log_group_name": {
+			Description: `The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.`,
+			Type:        types.StringType,
+			Optional:    true,
+			// LogGroupName is a force-new attribute.
+		},
 
-	// Definition: (Root)
-	// Property: KmsKeyId
-	// CloudFormation resource type schema:
-	/*
-	   {
-	     "description": "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
-	     "maxLength": 256,
-	     "pattern": "^arn:[a-z0-9-]+:kms:[a-z0-9-]+:\\d{12}:(key|alias)/.+$",
-	     "type": "string"
-	   }
-	*/
-	attr3246801235 := schema.Attribute{}
-	attr3246801235.Type = types.StringType
-	attr3246801235.Optional = true
-	attr3246801235.Description = `The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.`
-
-	// Definition: (Root)
-	// Property: LogGroupName
-	// PrimaryIdentifier: true
-	// CloudFormation resource type schema:
-	/*
-	   {
-	     "description": "The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.",
-	     "maxLength": 512,
-	     "minLength": 1,
-	     "pattern": "^[.\\-_/#A-Za-z0-9]{1,512}$",
-	     "type": "string"
-	   }
-	*/
-	attr1050065228 := schema.Attribute{}
-	attr1050065228.Type = types.StringType
-	attr1050065228.Optional = true
-	attr1050065228.Description = `The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.`
-	// attr1050065228.ForceNew = true
-
-	// Definition: (Root)
-	// Property: RetentionInDays
-	// CloudFormation resource type schema:
-	/*
-	   {
-	     "description": "The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.",
-	     "enum": [
-	       1,
-	       3,
-	       5,
-	       7,
-	       14,
-	       30,
-	       60,
-	       90,
-	       120,
-	       150,
-	       180,
-	       365,
-	       400,
-	       545,
-	       731,
-	       1827,
-	       3653
-	     ],
-	     "type": "integer"
-	   }
-	*/
-	attr1962061988 := schema.Attribute{}
-	attr1962061988.Type = types.NumberType
-	attr1962061988.Optional = true
-	attr1962061988.Description = `The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.`
-
-	// Property references for (Root):
-	attrs1863345718 := make(map[string]schema.Attribute, 4)
-	attrs1863345718["arn"] = attr3018501457
-	attrs1863345718["kms_key_id"] = attr3246801235
-	attrs1863345718["log_group_name"] = attr1050065228
-	attrs1863345718["retention_in_days"] = attr1962061988
-
-	// Resource instance unique identifier.
-	attrs1863345718["identifier"] = schema.Attribute{
-		Type:        types.StringType,
-		Computed:    true,
-		Description: "The resource instance's unique identifier.",
+		// Property: RetentionInDays
+		// CloudFormation resource type schema:
+		/*
+		   {
+		     "description": "The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.",
+		     "enum": [
+		       1,
+		       3,
+		       5,
+		       7,
+		       14,
+		       30,
+		       60,
+		       90,
+		       120,
+		       150,
+		       180,
+		       365,
+		       400,
+		       545,
+		       731,
+		       1827,
+		       3653
+		     ],
+		     "type": "integer"
+		   }
+		*/
+		"retention_in_days": {
+			Description: `The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.`,
+			Type:        types.NumberType,
+			Optional:    true,
+		},
 	}
 
 	schema := schema.Schema{
-		Version:    1,
-		Attributes: attrs1863345718,
+		Description: `Resource schema for AWS::Logs::LogGroup`,
+		Version:     1,
+		Attributes:  attributes,
 	}
 
 	resourceType := generic.NewResourceType(
 		"AWS::Logs::LogGroup",
 		"aws_logs_log_group",
+		// TODO Primary identifier path
+		// TODO Write-only property paths
+		// TODO Has Update method?
 		schema,
 	)
 

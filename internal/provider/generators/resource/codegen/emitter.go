@@ -10,9 +10,92 @@ import (
 	"github.com/iancoleman/strcase"
 )
 
+// Features of the emitted code.
+type Features int
+
+const (
+	HasUpdatableProperty Features = 1 << iota // At least one property can be updated.
+)
+
 type Emitter struct {
 	CfResource *cfschema.Resource
 	Writer     io.Writer
+}
+
+// EmitRootPropertyAttribute generates the Terraform Plugin SDK code for a CloudFormation root property
+// and emits the generated code to the emitter's Writer. Code features are returned.
+func (e *Emitter) EmitRootPropertyAttribute(name string) (Features, error) {
+	property, ok := e.CfResource.Properties[name]
+
+	if !ok || property == nil {
+		return 0, fmt.Errorf("root property not found")
+	}
+
+	return e.EmitPropertySchema([]string{}, name, property)
+}
+
+// EmitPropertySchema generates the Terraform Plugin SDK code for a CloudFormation property
+// and emits the generated code to the emitter's Writer. Code features are returned.
+func (e *Emitter) EmitPropertySchema(pathPrefix []string, name string, property *cfschema.Property) (Features, error) {
+	var features Features
+
+	path := append(pathPrefix, name)
+
+	if name != "" {
+		e.printf("// Property: %s\n", name)
+		if e.CfResource.PrimaryIdentifier.ContainsPath(path) {
+			e.printf("// PrimaryIdentifier: %t\n", true)
+		}
+		e.printf("// CloudFormation resource type schema:\n")
+		e.printf("/*\n")
+		e.printf("%v\n", property)
+		e.printf("*/\n")
+		e.printf("%q: {\n", strcase.ToSnake(name))
+	}
+
+	if description := property.Description; description != nil {
+		e.printf("Description: `%s`,\n", *description)
+	}
+
+	switch propertyType := property.Type.String(); propertyType {
+	case cfschema.PropertyTypeBoolean:
+		e.printf("Type: types.BoolType,\n")
+	case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+		e.printf("Type: types.NumberType,\n")
+	case cfschema.PropertyTypeString:
+		e.printf("Type: types.StringType,\n")
+	default:
+		return 0, fmt.Errorf("%s is of unsupported type: %s", name, propertyType)
+	}
+
+	createOnly := e.CfResource.CreateOnlyProperties.ContainsPath(path)
+	readOnly := e.CfResource.ReadOnlyProperties.ContainsPath(path)
+	required := e.CfResource.IsRequired(name)
+	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
+
+	if required {
+		e.printf("Required: true,\n")
+	} else if !readOnly {
+		e.printf("Optional: true,\n")
+	}
+
+	if readOnly && !required {
+		e.printf("Computed: true,\n")
+	}
+
+	if createOnly {
+		e.printf("// %s is a force-new attribute.\n", name)
+	}
+
+	if writeOnly {
+		e.printf("// %s is a write-only attribute.\n", name)
+	}
+
+	if name != "" {
+		e.printf("},\n")
+	}
+
+	return features, nil
 }
 
 // AppendCfDefinition generates the Terraform Plugin SDK code for a CloudFormation definition
