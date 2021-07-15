@@ -17,7 +17,7 @@ Please note: We take Terraform's security and our users' trust very seriously. I
 
 ## Quick Starts
 
-- [Using the provider](docs/index.md)
+- Using the provider
 - [Provider development](docs/DEVELOPMENT.md)
 
 ## Documentation
