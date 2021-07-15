@@ -114,7 +114,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 	}
 
 	sb := strings.Builder{}
-	schemaGenerator := codegen.Generator{
+	codeEmitter := codegen.Emitter{
 		CfResource: resource.CfResource,
 		Writer:     &sb,
 	}
@@ -134,7 +134,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 			return fmt.Errorf("CloudFormation definition (%s) has no properties", definitionName)
 		}
 
-		if err := schemaGenerator.AppendCfDefinition(definitionName, definition.Properties); err != nil {
+		if err := codeEmitter.AppendCfDefinition(definitionName, definition.Properties); err != nil {
 			return err
 		}
 	}
@@ -147,7 +147,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 
 	rootDefinitionName := "(Root)"
 
-	schemaGenerator.AppendCfDefinition(rootDefinitionName, resource.CfResource.Properties)
+	codeEmitter.AppendCfDefinition(rootDefinitionName, resource.CfResource.Properties)
 
 	rootPropertyAttributes := sb.String()
 

@@ -10,14 +10,14 @@ import (
 	"github.com/iancoleman/strcase"
 )
 
-type Generator struct {
+type Emitter struct {
 	CfResource *cfschema.Resource
 	Writer     io.Writer
 }
 
 // AppendCfDefinition generates the Terraform Plugin SDK code for a CloudFormation definition
 // and appends the generated to code to the generator's Writer.
-func (g *Generator) AppendCfDefinition(definitionName string, properties map[string]*cfschema.Property) error {
+func (g *Emitter) AppendCfDefinition(definitionName string, properties map[string]*cfschema.Property) error {
 	propertyNames := make([]string, 0)
 
 	for propertyName := range properties {
@@ -41,7 +41,7 @@ func (g *Generator) AppendCfDefinition(definitionName string, properties map[str
 
 // appendCfPropertyReferences generates Go code that references the code generated for the
 // specified CloudFormation properties and appends the generated to code to the generator's Writer.
-func (g *Generator) appendCfPropertyReferences(definitionName string, propertyNames []string) {
+func (g *Emitter) appendCfPropertyReferences(definitionName string, propertyNames []string) {
 	attributesVariableName := CfDefinitionTfAttributesVariableName(definitionName)
 
 	g.printf("\n")
@@ -55,7 +55,7 @@ func (g *Generator) appendCfPropertyReferences(definitionName string, propertyNa
 
 // appendCfProperty generates Go code for a single CloudFormation property
 // and appends the generated to code to the generator's Writer.
-func (g *Generator) appendCfProperty(definitionName, propertyName string, property *cfschema.Property) error {
+func (g *Emitter) appendCfProperty(definitionName, propertyName string, property *cfschema.Property) error {
 	attributeVariableName := CfPropertyTfAttributeVariableName(definitionName, propertyName)
 	path := []string{propertyName}
 
@@ -194,7 +194,7 @@ func (g *Generator) appendCfProperty(definitionName, propertyName string, proper
 }
 
 // printf writes a formatted string to the underlying writer.
-func (g *Generator) printf(format string, a ...interface{}) (int, error) {
+func (g *Emitter) printf(format string, a ...interface{}) (int, error) {
 	return io.WriteString(g.Writer, fmt.Sprintf(format, a...))
 }
 
