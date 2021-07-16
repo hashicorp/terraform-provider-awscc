@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestCloudFormationPropertyNameToTerraformAttributeName(t *testing.T) {
+func TestCloudFormationPropertyToTerraformAttribute(t *testing.T) {
 	testCases := []struct {
 		TestName      string
 		Value         string
@@ -29,7 +29,7 @@ func TestCloudFormationPropertyNameToTerraformAttributeName(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			got := CloudFormationPropertyNameToTerraformAttributeName(testCase.Value)
+			got := CloudFormationPropertyToTerraformAttribute(testCase.Value)
 
 			if got != testCase.ExpectedValue {
 				t.Errorf("expected: %s, got: %s", testCase.ExpectedValue, got)
@@ -38,7 +38,7 @@ func TestCloudFormationPropertyNameToTerraformAttributeName(t *testing.T) {
 	}
 }
 
-func TestTerraformAttributeNameToCloudFormationPropertyName(t *testing.T) {
+func TestTerraformAttributeToCloudFormationProperty(t *testing.T) {
 	testCases := []struct {
 		TestName      string
 		Value         string
@@ -63,7 +63,7 @@ func TestTerraformAttributeNameToCloudFormationPropertyName(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			got := TerraformAttributeNameToCloudFormationPropertyName(testCase.Value)
+			got := TerraformAttributeToCloudFormationProperty(testCase.Value)
 
 			if got != testCase.ExpectedValue {
 				t.Errorf("expected: %s, got: %s", testCase.ExpectedValue, got)
