@@ -151,7 +151,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 	}
 
 	if description := resource.CfResource.Description; description != nil {
-		templateData.SchemaDescription = "`" + *description + "`"
+		templateData.SchemaDescription = *description
 	}
 
 	for _, path := range resource.CfResource.WriteOnlyProperties {
@@ -237,8 +237,10 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 {{- end }}
 	}
 
+{{ $tick := "` + "`" + `" }}
+
 	schema := schema.Schema{
-		Description: {{ .SchemaDescription }}, 
+		Description: {{ $tick }}{{ .SchemaDescription }}{{ $tick }},
 		Version:     {{ .SchemaVersion }},
 		Attributes:  attributes,
 	}
