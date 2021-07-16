@@ -29,21 +29,43 @@ const (
 
 // Implements tfsdk.ResourceType.
 type resourceType struct {
-	cfTypeName string               // CloudFormation type name for the resource type
-	tfSchema   schema.Schema        // Terraform schema for the resource type
-	tfTypeName string               // Terraform type name for resource type
-	features   ResourceTypeFeatures // Resource type features
+	cfTypeName              string                   // CloudFormation type name for the resource type
+	tfSchema                schema.Schema            // Terraform schema for the resource type
+	tfTypeName              string                   // Terraform type name for resource type
+	features                ResourceTypeFeatures     // Resource type features
+	identifierAttributePath *tftypes.AttributePath   // Path to the resource's primary identifier attribute
+	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
 }
 
 // NewResourceType returns a new ResourceType representing the specified CloudFormation type.
 // It's public as it's called from generated code.
-func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema, primaryIdentifierPath string, writeOnlyPropertyPaths []string, features ResourceTypeFeatures) tfsdk.ResourceType {
-	return &resourceType{
-		features:   features,
-		cfTypeName: cfTypeName,
-		tfSchema:   tfSchema,
-		tfTypeName: tfTypeName,
+func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema, primaryIdentifierPath string, writeOnlyPropertyPaths []string, features ResourceTypeFeatures) (tfsdk.ResourceType, error) {
+	identifierAttributePath, err := propertyPathToAttributePath(primaryIdentifierPath)
+
+	if err != nil {
+		return nil, fmt.Errorf("error creating ResourceType(%s/%s) identifier attribute path (%s): %w", cfTypeName, tfTypeName, primaryIdentifierPath, err)
 	}
+
+	writeOnlyAttributePaths := make([]*tftypes.AttributePath, 0)
+
+	for _, writeOnlyPropertyPath := range writeOnlyPropertyPaths {
+		writeOnlyAttributePath, err := propertyPathToAttributePath(writeOnlyPropertyPath)
+
+		if err != nil {
+			return nil, fmt.Errorf("error creating ResourceType(%s/%s) write-only attribute path (%s): %w", cfTypeName, tfTypeName, writeOnlyPropertyPath, err)
+		}
+
+		writeOnlyAttributePaths = append(writeOnlyAttributePaths, writeOnlyAttributePath)
+	}
+
+	return &resourceType{
+		features:                features,
+		identifierAttributePath: identifierAttributePath,
+		cfTypeName:              cfTypeName,
+		tfSchema:                tfSchema,
+		tfTypeName:              tfTypeName,
+		writeOnlyAttributePaths: writeOnlyAttributePaths,
+	}, nil
 }
 
 func (rt *resourceType) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {

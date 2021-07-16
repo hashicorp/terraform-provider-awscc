@@ -114,7 +114,7 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	features |= ResourceTypeHasUpdatableAttribute
 
-	resourceType := NewResourceType(
+	resourceType, err := NewResourceType(
 		"AWS::Logs::LogGroup",      // CloudFormation type name
 		"aws_logs_log_group",       // Terraform type name
 		schema,                     // Terraform schema
@@ -122,6 +122,10 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 		[]string{},                 // Write-only property paths (JSON Pointer)
 		features,
 	)
+
+	if err != nil {
+		return nil, err
+	}
 
 	tflog.Debug(ctx, "Generated schema for %s:\n\n%v", "aws_logs_log_group", schema)
 

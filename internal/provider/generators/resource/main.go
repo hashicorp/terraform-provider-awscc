@@ -251,7 +251,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 	features |= ResourceTypeHasUpdatableAttribute
 {{- end }}
 
-	resourceType := NewResourceType(
+	resourceType, err := NewResourceType(
 		"{{ .CloudFormationTypeName }}", // CloudFormation type name
 		"{{ .TerraformTypeName }}", // Terraform type name
 		schema, // Terraform schema
@@ -263,6 +263,10 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 		}, // Write-only property paths (JSON Pointer)
 		features,
 	)
+
+	if err != nil {
+		return nil, err
+	}
 
 	tflog.Debug(ctx, "Generated schema for %s:\n\n%v", "{{ .TerraformTypeName }}", schema)
 
