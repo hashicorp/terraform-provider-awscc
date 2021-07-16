@@ -17,17 +17,26 @@ import (
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/waiter"
 )
 
+// Features of the resource type.
+type ResourceTypeFeatures int
+
+const (
+	ResourceTypeHasUpdatableAttribute ResourceTypeFeatures = 1 << iota // At least one attribute can be updated.
+)
+
 // Implements tfsdk.ResourceType.
 type resourceType struct {
-	cfTypeName string        // CloudFormation type name for the resource type
-	tfSchema   schema.Schema // Terraform schema for the resource type
-	tfTypeName string        // Terraform type name for resource type
+	cfTypeName string               // CloudFormation type name for the resource type
+	tfSchema   schema.Schema        // Terraform schema for the resource type
+	tfTypeName string               // Terraform type name for resource type
+	features   ResourceTypeFeatures // Resource type features
 }
 
 // NewResourceType returns a new ResourceType representing the specified CloudFormation type.
 // It's public as it's called from generated code.
-func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema) tfsdk.ResourceType {
+func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema, features ResourceTypeFeatures) tfsdk.ResourceType {
 	return &resourceType{
+		features:   features,
 		cfTypeName: cfTypeName,
 		tfSchema:   tfSchema,
 		tfTypeName: tfTypeName,

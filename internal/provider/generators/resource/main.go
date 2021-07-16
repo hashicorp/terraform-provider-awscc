@@ -138,6 +138,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 	templateData := TemplateData{
 		CloudFormationTypeName: *resource.CfResource.TypeName,
 		FactoryFunctionName:    strcase.ToLowerCamel(resource.TfType),
+		HasUpdateMethod:        true,
 		PackageName:            packageName,
 		PrimaryIdentifierPath:  string(resource.CfResource.PrimaryIdentifier[0]),
 		RootPropertyAttributes: rootPropertyAttributes,
@@ -219,7 +220,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
+	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
 )
 
@@ -242,13 +243,19 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	resourceType := generic.NewResourceType(
+	var features ResourceTypeFeatures
+
+{{ if .HasUpdateMethod }}
+	features |= ResourceTypeHasUpdatableAttribute
+{{- end }}
+
+	resourceType := NewResourceType(
 		"{{ .CloudFormationTypeName }}",
 		"{{ .TerraformTypeName }}",
 		// TODO Primary identifier path
 		// TODO Write-only property paths
-		// TODO Has Update method?
 		schema,
+		features,
 	)
 
 	tflog.Debug(ctx, "Generated schema for %s:\n\n%v", "{{ .TerraformTypeName }}", schema)

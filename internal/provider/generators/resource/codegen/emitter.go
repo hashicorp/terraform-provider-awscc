@@ -91,6 +91,10 @@ func (e *Emitter) EmitPropertySchema(pathPrefix []string, name string, property 
 		e.printf("// %s is a write-only attribute.\n", name)
 	}
 
+	if !createOnly && !readOnly {
+		features |= HasUpdatableProperty
+	}
+
 	if name != "" {
 		e.printf("},\n")
 	}
