@@ -115,11 +115,11 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	features |= ResourceTypeHasUpdatableAttribute
 
 	resourceType := NewResourceType(
-		"AWS::Logs::LogGroup", // CloudFormation type name
-		"aws_logs_log_group",  // Terraform type name
-		// TODO Write-only property paths
+		"AWS::Logs::LogGroup",      // CloudFormation type name
+		"aws_logs_log_group",       // Terraform type name
 		schema,                     // Terraform schema
 		"/properties/LogGroupName", // Primary identifier property path (JSON Pointer)
+		[]string{},                 // Write-only property paths (JSON Pointer)
 		features,
 	)
 
