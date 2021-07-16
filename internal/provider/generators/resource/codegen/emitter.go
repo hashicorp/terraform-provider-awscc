@@ -50,7 +50,7 @@ func (e *Emitter) EmitPropertySchema(pathPrefix []string, name string, property 
 		e.printf("/*\n")
 		e.printf("%v\n", property)
 		e.printf("*/\n")
-		e.printf("%q: {\n", strcase.ToSnake(name))
+		e.printf("%q: {\n", strcase.ToSnake(name)) // Terraform attribute names are snake cased.
 	}
 
 	if description := property.Description; description != nil {

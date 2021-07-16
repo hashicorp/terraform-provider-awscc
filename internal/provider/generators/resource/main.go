@@ -250,11 +250,11 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 {{- end }}
 
 	resourceType := NewResourceType(
-		"{{ .CloudFormationTypeName }}",
-		"{{ .TerraformTypeName }}",
-		// TODO Primary identifier path
+		"{{ .CloudFormationTypeName }}", // CloudFormation type name
+		"{{ .TerraformTypeName }}", // Terraform type name
 		// TODO Write-only property paths
-		schema,
+		schema, // Terraform schema
+		"{{ .PrimaryIdentifierPath }}", // Primary identifier property path (JSON Pointer)
 		features,
 	)
 

@@ -34,7 +34,7 @@ type resourceType struct {
 
 // NewResourceType returns a new ResourceType representing the specified CloudFormation type.
 // It's public as it's called from generated code.
-func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema, features ResourceTypeFeatures) tfsdk.ResourceType {
+func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema, primaryIdentifierPath string, features ResourceTypeFeatures) tfsdk.ResourceType {
 	return &resourceType{
 		features:   features,
 		cfTypeName: cfTypeName,
