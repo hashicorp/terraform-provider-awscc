@@ -242,14 +242,14 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	resourceType := &generic.ResourceType{
-		CfTypeName: "{{ .CloudFormationTypeName }}",
-		TfSchema:   schema,
-		TfTypeName: "{{ .TerraformTypeName }}",
+	resourceType := generic.NewResourceType(
+		"{{ .CloudFormationTypeName }}",
+		"{{ .TerraformTypeName }}",
 		// TODO Primary identifier path
 		// TODO Write-only property paths
 		// TODO Has Update method?
-	}
+		schema,
+	)
 
 	tflog.Debug(ctx, "Generated schema for %s:\n\n%v", "{{ .TerraformTypeName }}", schema)
 
