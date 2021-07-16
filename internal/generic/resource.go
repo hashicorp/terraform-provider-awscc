@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -12,9 +13,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
+	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/cfjsonpatch"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/waiter"
+	"github.com/iancoleman/strcase"
 )
 
 // Features of the resource type.
@@ -34,7 +37,7 @@ type resourceType struct {
 
 // NewResourceType returns a new ResourceType representing the specified CloudFormation type.
 // It's public as it's called from generated code.
-func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema, primaryIdentifierPath string, writeOnlyProertyPaths []string, features ResourceTypeFeatures) tfsdk.ResourceType {
+func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema, primaryIdentifierPath string, writeOnlyPropertyPaths []string, features ResourceTypeFeatures) tfsdk.ResourceType {
 	return &resourceType{
 		features:   features,
 		cfTypeName: cfTypeName,
@@ -401,4 +404,35 @@ func (r *resource) describe(ctx context.Context, conn *cloudformation.CloudForma
 	}
 
 	return output.ResourceDescription, nil
+}
+
+// propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
+func propertyPathToAttributePath(propertyPath string) (*tftypes.AttributePath, error) {
+	segments := strings.Split(propertyPath, "/")
+
+	if got, expected := len(segments), 3; got < expected {
+		return nil, fmt.Errorf("expected at least %d property path segments, got: %d", expected, got)
+	}
+
+	if got, expected := segments[0], ""; got != expected {
+		return nil, fmt.Errorf("expected %q for the initial property path segment, got: %q", expected, got)
+	}
+
+	if got, expected := segments[1], "properties"; got != expected {
+		return nil, fmt.Errorf("expected %q for the second property path segment, got: %q", expected, got)
+	}
+
+	attributePath := tftypes.NewAttributePath()
+
+	for _, segment := range segments[2:] {
+		switch segment {
+		case "", "*":
+			return nil, fmt.Errorf("invalid property path segment: %q", segment)
+
+		default:
+			attributePath = attributePath.WithAttributeName(strcase.ToSnake(segment))
+		}
+	}
+
+	return attributePath, nil
 }
