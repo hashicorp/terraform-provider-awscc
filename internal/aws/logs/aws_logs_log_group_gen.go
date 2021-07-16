@@ -110,14 +110,14 @@ func awsLogsLogGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	resourceType := generic.NewResourceType(
-		"AWS::Logs::LogGroup",
-		"aws_logs_log_group",
+	resourceType := &generic.ResourceType{
+		CfTypeName: "AWS::Logs::LogGroup",
+		TfSchema:   schema,
+		TfTypeName: "aws_logs_log_group",
 		// TODO Primary identifier path
 		// TODO Write-only property paths
 		// TODO Has Update method?
-		schema,
-	)
+	}
 
 	tflog.Debug(ctx, "Generated schema for %s:\n\n%v", "aws_logs_log_group", schema)
 
