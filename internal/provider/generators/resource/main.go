@@ -15,7 +15,6 @@ import (
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/provider/generators/resource/codegen"
-	"github.com/iancoleman/strcase"
 	"github.com/mitchellh/cli"
 )
 
@@ -104,6 +103,17 @@ func (g *Generator) Generate(packageName, filename string) error {
 		return fmt.Errorf("error reading CloudFormation resource schema for %s: %w", g.tfResourceType, err)
 	}
 
+	cfTypeName := *resource.CfResource.TypeName
+	// https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-typeName
+	parts := strings.Split(cfTypeName, "::")
+
+	if len(parts) != 3 || len(parts[2]) < 2 {
+		return fmt.Errorf("incorrect format for CloudFormation Resource Provider Schema type name: %s", cfTypeName)
+	}
+
+	// e.g. "logGroup"
+	factoryFunctionName := string(bytes.ToLower([]byte(parts[2][:1]))) + parts[2][1:]
+
 	sb := strings.Builder{}
 	codeEmitter := codegen.Emitter{
 		CfResource: resource.CfResource,
@@ -136,8 +146,8 @@ func (g *Generator) Generate(packageName, filename string) error {
 	}
 
 	templateData := TemplateData{
-		CloudFormationTypeName: *resource.CfResource.TypeName,
-		FactoryFunctionName:    strcase.ToLowerCamel(resource.TfType),
+		CloudFormationTypeName: cfTypeName,
+		FactoryFunctionName:    factoryFunctionName,
 		HasUpdateMethod:        true,
 		PackageName:            packageName,
 		PrimaryIdentifierPath:  string(resource.CfResource.PrimaryIdentifier[0]),
