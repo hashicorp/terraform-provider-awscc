@@ -1,4 +1,4 @@
-package strcase
+package naming
 
 // CloudFormationPropertyNameToTerraformAttributeName converts a CloudFormation property name to a Terraform attribute name.
 // For example `GlobalReplicationGroupDescription` -> `global_replication_group_description`.
