@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -11,27 +12,61 @@ import (
 	"github.com/hashicorp/aws-sdk-go-base/tfawserr"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
+	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/cfjsonpatch"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/waiter"
 )
 
+// Features of the resource type.
+type ResourceTypeFeatures int
+
+const (
+	ResourceTypeHasUpdatableAttribute ResourceTypeFeatures = 1 << iota // At least one attribute can be updated.
+)
+
 // Implements tfsdk.ResourceType.
 type resourceType struct {
-	cfTypeName string        // CloudFormation type name for the resource type
-	tfSchema   schema.Schema // Terraform schema for the resource type
-	tfTypeName string        // Terraform type name for resource type
+	cfTypeName              string                   // CloudFormation type name for the resource type
+	tfSchema                schema.Schema            // Terraform schema for the resource type
+	tfTypeName              string                   // Terraform type name for resource type
+	features                ResourceTypeFeatures     // Resource type features
+	identifierAttributePath *tftypes.AttributePath   // Path to the resource's primary identifier attribute
+	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
 }
 
 // NewResourceType returns a new ResourceType representing the specified CloudFormation type.
 // It's public as it's called from generated code.
-func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema) tfsdk.ResourceType {
-	return &resourceType{
-		cfTypeName: cfTypeName,
-		tfSchema:   tfSchema,
-		tfTypeName: tfTypeName,
+func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema, primaryIdentifierPath string, writeOnlyPropertyPaths []string, features ResourceTypeFeatures) (tfsdk.ResourceType, error) {
+	identifierAttributePath, err := propertyPathToAttributePath(primaryIdentifierPath)
+
+	if err != nil {
+		return nil, fmt.Errorf("error creating ResourceType(%s/%s) identifier attribute path (%s): %w", cfTypeName, tfTypeName, primaryIdentifierPath, err)
 	}
+
+	writeOnlyAttributePaths := make([]*tftypes.AttributePath, 0)
+
+	for _, writeOnlyPropertyPath := range writeOnlyPropertyPaths {
+		writeOnlyAttributePath, err := propertyPathToAttributePath(writeOnlyPropertyPath)
+
+		if err != nil {
+			return nil, fmt.Errorf("error creating ResourceType(%s/%s) write-only attribute path (%s): %w", cfTypeName, tfTypeName, writeOnlyPropertyPath, err)
+		}
+
+		writeOnlyAttributePaths = append(writeOnlyAttributePaths, writeOnlyAttributePath)
+	}
+
+	return &resourceType{
+		features:                features,
+		identifierAttributePath: identifierAttributePath,
+		cfTypeName:              cfTypeName,
+		tfSchema:                tfSchema,
+		tfTypeName:              tfTypeName,
+		writeOnlyAttributePaths: writeOnlyAttributePaths,
+	}, nil
 }
 
 func (rt *resourceType) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
@@ -142,15 +177,6 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
-	// Set the well-known "identifier" attribute.
-	err = SetIdentifier(ctx, &response.State, identifier)
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierSetErrorDiag(err))
-
-		return
-	}
-
 	err = SetUnknownValuesFromCloudFormationResourceModel(ctx, &response.State, aws.StringValue(description.ResourceModel))
 
 	if err != nil {
@@ -178,8 +204,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	}
 
 	currentState := &request.State
-	schema := &currentState.Schema
-	identifier, err := GetIdentifier(ctx, currentState)
+	identifier, err := r.getIdentifier(ctx, currentState)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
@@ -202,6 +227,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		return
 	}
 
+	schema := &currentState.Schema
 	val, err := GetCloudFormationResourceModelValue(ctx, schema, aws.StringValue(description.ResourceModel))
 
 	if err != nil {
@@ -222,14 +248,6 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		Schema: *schema,
 		Raw:    val,
 	}
-
-	err = SetIdentifier(ctx, &response.State, identifier)
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierSetErrorDiag(err))
-
-		return
-	}
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
@@ -244,7 +262,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	}
 
 	currentState := &request.State
-	identifier, err := GetIdentifier(ctx, currentState)
+	identifier, err := r.getIdentifier(ctx, currentState)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
@@ -325,7 +343,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	identifier, err := GetIdentifier(ctx, &request.State)
+	identifier, err := r.getIdentifier(ctx, &request.State)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
@@ -392,4 +410,50 @@ func (r *resource) describe(ctx context.Context, conn *cloudformation.CloudForma
 	}
 
 	return output.ResourceDescription, nil
+}
+
+// getIdentifier returns the resource's primary identifier value from State.
+func (r *resource) getIdentifier(ctx context.Context, state *tfsdk.State) (string, error) {
+	val, err := state.GetAttribute(ctx, r.resourceType.identifierAttributePath)
+
+	if err != nil {
+		return "", err
+	}
+
+	if val, ok := val.(types.String); ok {
+		return val.Value, nil
+	}
+
+	return "", fmt.Errorf("invalid identifier type %T", val)
+}
+
+// propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
+func propertyPathToAttributePath(propertyPath string) (*tftypes.AttributePath, error) {
+	segments := strings.Split(propertyPath, "/")
+
+	if got, expected := len(segments), 3; got < expected {
+		return nil, fmt.Errorf("expected at least %d property path segments, got: %d", expected, got)
+	}
+
+	if got, expected := segments[0], ""; got != expected {
+		return nil, fmt.Errorf("expected %q for the initial property path segment, got: %q", expected, got)
+	}
+
+	if got, expected := segments[1], "properties"; got != expected {
+		return nil, fmt.Errorf("expected %q for the second property path segment, got: %q", expected, got)
+	}
+
+	attributePath := tftypes.NewAttributePath()
+
+	for _, segment := range segments[2:] {
+		switch segment {
+		case "", "*":
+			return nil, fmt.Errorf("invalid property path segment: %q", segment)
+
+		default:
+			attributePath = attributePath.WithAttributeName(naming.CloudFormationPropertyToTerraformAttribute(segment))
+		}
+	}
+
+	return attributePath, nil
 }

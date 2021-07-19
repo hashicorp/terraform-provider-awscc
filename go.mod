@@ -14,7 +14,6 @@ require (
 	github.com/hashicorp/terraform-plugin-go v0.3.1
 	github.com/hashicorp/terraform-plugin-log v0.1.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.6.1
-	github.com/iancoleman/strcase v0.1.3
 	github.com/mattbaird/jsonpatch v0.0.0-20200820163806-098863c1fc24
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mitchellh/cli v1.1.2

@@ -30,37 +30,37 @@ resource_schema "aws_synthetics_canary" {
   local = "../service/cloudformation/schemas/us-west-2/aws-synthetics-canary.json"
 }
 
-#resource_schema "aws_backup_backup_plan" {
-#  source {
-#    url = "???"
-#  }
-#
-#  local = "../service/cloudformation/schemas/us-west-2/aws-backup-backupplan.json"
-#}
+resource_schema "aws_backup_backup_plan" {
+  source {
+    url = "???"
+  }
 
-#resource_schema "aws_sagemaker_data_quality_job_definition" {
-#  source {
-#    url = "???"
-#  }
-#
-#  local = "../service/cloudformation/schemas/us-west-2/aws-sagemaker-dataqualityjobdefinition.json"
-#}
+  local = "../service/cloudformation/schemas/us-west-2/aws-backup-backupplan.json"
+}
 
-#resource_schema "aws_stepfunctions_state_machine" {
-#  source {
-#    url = "???"
-#  }
-#
-#  local = "../service/cloudformation/schemas/us-west-2/aws-stepfunctions-statemachine.json"
-#}
+resource_schema "aws_sagemaker_data_quality_job_definition" {
+  source {
+    url = "???"
+  }
 
-#resource_schema "aws_xray_sampling_rule" {
-#  source {
-#    url = "???"
-#  }
-#
-#  local = "../service/cloudformation/schemas/us-west-2/aws-xray-samplingrule.json"
-#}
+  local = "../service/cloudformation/schemas/us-west-2/aws-sagemaker-dataqualityjobdefinition.json"
+}
+
+resource_schema "aws_stepfunctions_state_machine" {
+  source {
+    url = "???"
+  }
+
+  local = "../service/cloudformation/schemas/us-west-2/aws-stepfunctions-statemachine.json"
+}
+
+resource_schema "aws_xray_sampling_rule" {
+  source {
+    url = "???"
+  }
+
+  local = "../service/cloudformation/schemas/us-west-2/aws-xray-samplingrule.json"
+}
 
 #resource_schema "aws_athena_workgroup" {
 #  source {

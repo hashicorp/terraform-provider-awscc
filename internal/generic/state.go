@@ -8,34 +8,9 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/iancoleman/strcase"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
 )
-
-var (
-	identifierAttributePath = tftypes.NewAttributePath().WithAttributeName("identifier")
-)
-
-// GetIdentifier gets the well-known "identifier" attribute from State.
-func GetIdentifier(ctx context.Context, state *tfsdk.State) (string, error) {
-	val, err := state.GetAttribute(ctx, identifierAttributePath)
-
-	if err != nil {
-		return "", err
-	}
-
-	if val, ok := val.(types.String); ok {
-		return val.Value, nil
-	}
-
-	return "", fmt.Errorf("invalid identifier type %T", val)
-}
-
-// SetIdentifier sets the well-known "identifier" attribute in State.
-func SetIdentifier(ctx context.Context, state *tfsdk.State, id string) error {
-	return state.SetAttribute(ctx, identifierAttributePath, id)
-}
 
 // SetUnknownValuesFromCloudFormationResourceModel fills any unknown State values from a CloudFormation ResourceModel (string).
 func SetUnknownValuesFromCloudFormationResourceModel(ctx context.Context, state *tfsdk.State, resourceModel string) error {
@@ -185,7 +160,7 @@ func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Sch
 		for key, v := range v {
 			if isObject {
 				// In the Terraform Value attribute names are snake cased.
-				path = path.WithAttributeName(strcase.ToSnake(key))
+				path = path.WithAttributeName(naming.CloudFormationPropertyToTerraformAttribute(key))
 			} else {
 				path = path.WithElementKeyString(key)
 			}
@@ -195,7 +170,7 @@ func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Sch
 			}
 			if isObject {
 				// In the Terraform Value attribute names are snake cased.
-				vals[strcase.ToSnake(key)] = val
+				vals[naming.CloudFormationPropertyToTerraformAttribute(key)] = val
 			} else {
 				vals[key] = val
 			}
@@ -278,7 +253,7 @@ func getAttributePathsForUnknownValues(ctx context.Context, inTerraformState, in
 			} else if typ.Is(tftypes.Object{}) {
 				inTerraformState = inTerraformState.WithAttributeName(key)
 				// In the CloudFormation ResourceModel attribute names are camel cased.
-				inCloudFormationResourceModel = inCloudFormationResourceModel.WithAttributeName(strcase.ToCamel(key))
+				inCloudFormationResourceModel = inCloudFormationResourceModel.WithAttributeName(naming.TerraformAttributeToCloudFormationProperty(key))
 			}
 			paths, err := getAttributePathsForUnknownValues(ctx, inTerraformState, inCloudFormationResourceModel, val)
 			if err != nil {
@@ -397,7 +372,7 @@ func rawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) {
 			if v == nil {
 				continue
 			}
-			vs[strcase.ToCamel(name)] = v
+			vs[naming.TerraformAttributeToCloudFormationProperty(name)] = v
 		}
 		if len(vs) == 0 {
 			return nil, nil

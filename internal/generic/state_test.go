@@ -190,27 +190,6 @@ func makeComplexTestState() tfsdk.State {
 	}
 }
 
-func TestStateGetSetIdentifier(t *testing.T) {
-	state := makeSimpleTestState()
-	identifier := "TestID"
-
-	err := SetIdentifier(context.TODO(), &state, identifier)
-
-	if err != nil {
-		t.Fatalf("SetIdentifier failed: %s", err)
-	}
-
-	got, err := GetIdentifier(context.TODO(), &state)
-
-	if err != nil {
-		t.Fatalf("GetIdentifier failed: %s", err)
-	}
-
-	if got != identifier {
-		t.Fatalf("got: %s, expected: %s", got, identifier)
-	}
-}
-
 func TestGetCloudFormationResourceModelValue(t *testing.T) {
 	testCases := []struct {
 		TestName      string
