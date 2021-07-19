@@ -21,184 +21,179 @@ func init() {
 // This Terraform resource type corresponds to the CloudFormation AWS::AppMesh::VirtualService resource type.
 func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
-		// Property: Arn
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "type": "string"
-		   }
-		*/
 		"arn": {
+			// Property: Arn
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "type": "string"
+			   }
+			*/
 			Type:     types.StringType,
 			Computed: true,
 		},
-
-		// Property: Id
-		// PrimaryIdentifier: true
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "type": "string"
-		   }
-		*/
 		"id": {
+			// Property: Id
+			// PrimaryIdentifier: true
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "type": "string"
+			   }
+			*/
 			Type:     types.StringType,
 			Computed: true,
 		},
-
-		// Property: MeshName
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "type": "string"
-		   }
-		*/
 		"mesh_name": {
+			// Property: MeshName
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "type": "string"
+			   }
+			*/
 			Type:     types.StringType,
 			Required: true,
 			// MeshName is a force-new attribute.
 		},
-
-		// Property: MeshOwner
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "type": "string"
-		   }
-		*/
 		"mesh_owner": {
+			// Property: MeshOwner
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "type": "string"
+			   }
+			*/
 			Type:     types.StringType,
 			Optional: true,
 			// MeshOwner is a force-new attribute.
 		},
-
-		// Property: ResourceOwner
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "type": "string"
-		   }
-		*/
 		"resource_owner": {
+			// Property: ResourceOwner
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "type": "string"
+			   }
+			*/
 			Type:     types.StringType,
 			Computed: true,
 		},
-
-		// Property: Spec
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "additionalProperties": false,
-		     "properties": {
-		       "Provider": {
-		         "additionalProperties": false,
-		         "properties": {
-		           "VirtualNode": {
-		             "additionalProperties": false,
-		             "properties": {
-		               "VirtualNodeName": {
-		                 "type": "string"
-		               }
-		             },
-		             "$ref": "#/definitions/VirtualNodeServiceProvider",
-		             "required": [
-		               "VirtualNodeName"
-		             ],
-		             "type": "object"
-		           },
-		           "VirtualRouter": {
-		             "additionalProperties": false,
-		             "properties": {
-		               "VirtualRouterName": {
-		                 "type": "string"
-		               }
-		             },
-		             "$ref": "#/definitions/VirtualRouterServiceProvider",
-		             "required": [
-		               "VirtualRouterName"
-		             ],
-		             "type": "object"
-		           }
-		         },
-		         "$ref": "#/definitions/VirtualServiceProvider",
-		         "type": "object"
-		       }
-		     },
-		     "$ref": "#/definitions/VirtualServiceSpec",
-		     "type": "object"
-		   }
-		*/
 		"spec": {
+			// Property: Spec
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "additionalProperties": false,
+			     "properties": {
+			       "Provider": {
+			         "additionalProperties": false,
+			         "properties": {
+			           "VirtualNode": {
+			             "additionalProperties": false,
+			             "properties": {
+			               "VirtualNodeName": {
+			                 "type": "string"
+			               }
+			             },
+			             "$ref": "#/definitions/VirtualNodeServiceProvider",
+			             "required": [
+			               "VirtualNodeName"
+			             ],
+			             "type": "object"
+			           },
+			           "VirtualRouter": {
+			             "additionalProperties": false,
+			             "properties": {
+			               "VirtualRouterName": {
+			                 "type": "string"
+			               }
+			             },
+			             "$ref": "#/definitions/VirtualRouterServiceProvider",
+			             "required": [
+			               "VirtualRouterName"
+			             ],
+			             "type": "object"
+			           }
+			         },
+			         "$ref": "#/definitions/VirtualServiceProvider",
+			         "type": "object"
+			       }
+			     },
+			     "$ref": "#/definitions/VirtualServiceSpec",
+			     "type": "object"
+			   }
+			*/
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
-					// Property: Provider
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "additionalProperties": false,
-					     "properties": {
-					       "VirtualNode": {
-					         "additionalProperties": false,
-					         "properties": {
-					           "VirtualNodeName": {
-					             "type": "string"
-					           }
-					         },
-					         "$ref": "#/definitions/VirtualNodeServiceProvider",
-					         "required": [
-					           "VirtualNodeName"
-					         ],
-					         "type": "object"
-					       },
-					       "VirtualRouter": {
-					         "additionalProperties": false,
-					         "properties": {
-					           "VirtualRouterName": {
-					             "type": "string"
-					           }
-					         },
-					         "$ref": "#/definitions/VirtualRouterServiceProvider",
-					         "required": [
-					           "VirtualRouterName"
-					         ],
-					         "type": "object"
-					       }
-					     },
-					     "$ref": "#/definitions/VirtualServiceProvider",
-					     "type": "object"
-					   }
-					*/
 					"provider": {
+						// Property: Provider
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "additionalProperties": false,
+						     "properties": {
+						       "VirtualNode": {
+						         "additionalProperties": false,
+						         "properties": {
+						           "VirtualNodeName": {
+						             "type": "string"
+						           }
+						         },
+						         "$ref": "#/definitions/VirtualNodeServiceProvider",
+						         "required": [
+						           "VirtualNodeName"
+						         ],
+						         "type": "object"
+						       },
+						       "VirtualRouter": {
+						         "additionalProperties": false,
+						         "properties": {
+						           "VirtualRouterName": {
+						             "type": "string"
+						           }
+						         },
+						         "$ref": "#/definitions/VirtualRouterServiceProvider",
+						         "required": [
+						           "VirtualRouterName"
+						         ],
+						         "type": "object"
+						       }
+						     },
+						     "$ref": "#/definitions/VirtualServiceProvider",
+						     "type": "object"
+						   }
+						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
-								// Property: VirtualRouter
-								// CloudFormation resource type schema:
-								/*
-								   {
-								     "additionalProperties": false,
-								     "properties": {
-								       "VirtualRouterName": {
-								         "type": "string"
-								       }
-								     },
-								     "$ref": "#/definitions/VirtualRouterServiceProvider",
-								     "required": [
-								       "VirtualRouterName"
-								     ],
-								     "type": "object"
-								   }
-								*/
-								"virtual_router": {
+								"virtual_node": {
+									// Property: VirtualNode
+									// CloudFormation resource type schema:
+									/*
+									   {
+									     "additionalProperties": false,
+									     "properties": {
+									       "VirtualNodeName": {
+									         "type": "string"
+									       }
+									     },
+									     "$ref": "#/definitions/VirtualNodeServiceProvider",
+									     "required": [
+									       "VirtualNodeName"
+									     ],
+									     "type": "object"
+									   }
+									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
-											// Property: VirtualRouterName
-											// CloudFormation resource type schema:
-											/*
-											   {
-											     "type": "string"
-											   }
-											*/
-											"virtual_router_name": {
+											"virtual_node_name": {
+												// Property: VirtualNodeName
+												// CloudFormation resource type schema:
+												/*
+												   {
+												     "type": "string"
+												   }
+												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -206,34 +201,34 @@ func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 									),
 									Optional: true,
 								},
-								// Property: VirtualNode
-								// CloudFormation resource type schema:
-								/*
-								   {
-								     "additionalProperties": false,
-								     "properties": {
-								       "VirtualNodeName": {
-								         "type": "string"
-								       }
-								     },
-								     "$ref": "#/definitions/VirtualNodeServiceProvider",
-								     "required": [
-								       "VirtualNodeName"
-								     ],
-								     "type": "object"
-								   }
-								*/
-								"virtual_node": {
+								"virtual_router": {
+									// Property: VirtualRouter
+									// CloudFormation resource type schema:
+									/*
+									   {
+									     "additionalProperties": false,
+									     "properties": {
+									       "VirtualRouterName": {
+									         "type": "string"
+									       }
+									     },
+									     "$ref": "#/definitions/VirtualRouterServiceProvider",
+									     "required": [
+									       "VirtualRouterName"
+									     ],
+									     "type": "object"
+									   }
+									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
-											// Property: VirtualNodeName
-											// CloudFormation resource type schema:
-											/*
-											   {
-											     "type": "string"
-											   }
-											*/
-											"virtual_node_name": {
+											"virtual_router_name": {
+												// Property: VirtualRouterName
+												// CloudFormation resource type schema:
+												/*
+												   {
+												     "type": "string"
+												   }
+												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -249,54 +244,53 @@ func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 		},
-
-		// Property: Tags
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "items": {
-		       "additionalProperties": false,
-		       "properties": {
-		         "Key": {
-		           "type": "string"
-		         },
-		         "Value": {
-		           "type": "string"
-		         }
-		       },
-		       "$ref": "#/definitions/Tag",
-		       "required": [
-		         "Value",
-		         "Key"
-		       ],
-		       "type": "object"
-		     },
-		     "type": "array",
-		     "uniqueItems": false
-		   }
-		*/
 		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "items": {
+			       "additionalProperties": false,
+			       "properties": {
+			         "Key": {
+			           "type": "string"
+			         },
+			         "Value": {
+			           "type": "string"
+			         }
+			       },
+			       "$ref": "#/definitions/Tag",
+			       "required": [
+			         "Value",
+			         "Key"
+			       ],
+			       "type": "object"
+			     },
+			     "type": "array",
+			     "uniqueItems": false
+			   }
+			*/
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
-					// Property: Value
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "type": "string"
-					   }
-					*/
-					"value": {
+					"key": {
+						// Property: Key
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "type": "string"
+						   }
+						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
-					// Property: Key
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "type": "string"
-					   }
-					*/
-					"key": {
+					"value": {
+						// Property: Value
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "type": "string"
+						   }
+						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -305,27 +299,25 @@ func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 		},
-
-		// Property: Uid
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "type": "string"
-		   }
-		*/
 		"uid": {
+			// Property: Uid
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "type": "string"
+			   }
+			*/
 			Type:     types.StringType,
 			Computed: true,
 		},
-
-		// Property: VirtualServiceName
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "type": "string"
-		   }
-		*/
 		"virtual_service_name": {
+			// Property: VirtualServiceName
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "type": "string"
+			   }
+			*/
 			Type:     types.StringType,
 			Required: true,
 			// VirtualServiceName is a force-new attribute.

@@ -21,332 +21,324 @@ func init() {
 // This Terraform resource type corresponds to the CloudFormation AWS::Synthetics::Canary resource type.
 func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
-		// Property: ArtifactS3Location
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "Provide the s3 bucket output location for test results",
-		     "pattern": "^(s3|S3)://",
-		     "type": "string"
-		   }
-		*/
 		"artifact_s3_location": {
+			// Property: ArtifactS3Location
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "Provide the s3 bucket output location for test results",
+			     "pattern": "^(s3|S3)://",
+			     "type": "string"
+			   }
+			*/
 			Description: `Provide the s3 bucket output location for test results`,
 			Type:        types.StringType,
 			Required:    true,
 		},
-
-		// Property: Code
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "additionalProperties": false,
-		     "properties": {
-		       "Handler": {
-		         "type": "string"
-		       },
-		       "S3Bucket": {
-		         "type": "string"
-		       },
-		       "S3Key": {
-		         "type": "string"
-		       },
-		       "S3ObjectVersion": {
-		         "type": "string"
-		       },
-		       "Script": {
-		         "type": "string"
-		       }
-		     },
-		     "$ref": "#/definitions/Code",
-		     "required": [
-		       "Handler"
-		     ],
-		     "type": "object"
-		   }
-		*/
 		"code": {
+			// Property: Code
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "additionalProperties": false,
+			     "properties": {
+			       "Handler": {
+			         "type": "string"
+			       },
+			       "S3Bucket": {
+			         "type": "string"
+			       },
+			       "S3Key": {
+			         "type": "string"
+			       },
+			       "S3ObjectVersion": {
+			         "type": "string"
+			       },
+			       "Script": {
+			         "type": "string"
+			       }
+			     },
+			     "$ref": "#/definitions/Code",
+			     "required": [
+			       "Handler"
+			     ],
+			     "type": "object"
+			   }
+			*/
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
-					// Property: S3Bucket
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "type": "string"
-					   }
-					*/
+					"handler": {
+						// Property: Handler
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "type": "string"
+						   }
+						*/
+						Type:     types.StringType,
+						Optional: true,
+					},
 					"s3_bucket": {
+						// Property: S3Bucket
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "type": "string"
+						   }
+						*/
 						Type:     types.StringType,
 						Optional: true,
 						// S3Bucket is a write-only attribute.
 					},
-					// Property: S3Key
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "type": "string"
-					   }
-					*/
 					"s3_key": {
+						// Property: S3Key
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "type": "string"
+						   }
+						*/
 						Type:     types.StringType,
 						Optional: true,
 						// S3Key is a write-only attribute.
 					},
-					// Property: S3ObjectVersion
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "type": "string"
-					   }
-					*/
 					"s3_object_version": {
+						// Property: S3ObjectVersion
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "type": "string"
+						   }
+						*/
 						Type:     types.StringType,
 						Optional: true,
 						// S3ObjectVersion is a write-only attribute.
 					},
-					// Property: Script
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "type": "string"
-					   }
-					*/
 					"script": {
+						// Property: Script
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "type": "string"
+						   }
+						*/
 						Type:     types.StringType,
 						Optional: true,
 						// Script is a write-only attribute.
-					},
-					// Property: Handler
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "type": "string"
-					   }
-					*/
-					"handler": {
-						Type:     types.StringType,
-						Optional: true,
 					},
 				},
 			),
 			Required: true,
 		},
-
-		// Property: ExecutionRoleArn
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "Lambda Execution role used to run your canaries",
-		     "type": "string"
-		   }
-		*/
 		"execution_role_arn": {
+			// Property: ExecutionRoleArn
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "Lambda Execution role used to run your canaries",
+			     "type": "string"
+			   }
+			*/
 			Description: `Lambda Execution role used to run your canaries`,
 			Type:        types.StringType,
 			Required:    true,
 		},
-
-		// Property: FailureRetentionPeriod
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "Retention period of failed canary runs represented in number of days",
-		     "type": "integer"
-		   }
-		*/
 		"failure_retention_period": {
+			// Property: FailureRetentionPeriod
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "Retention period of failed canary runs represented in number of days",
+			     "type": "integer"
+			   }
+			*/
 			Description: `Retention period of failed canary runs represented in number of days`,
 			Type:        types.NumberType,
 			Optional:    true,
 		},
-
-		// Property: Id
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "Id of the canary",
-		     "type": "string"
-		   }
-		*/
 		"id": {
+			// Property: Id
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "Id of the canary",
+			     "type": "string"
+			   }
+			*/
 			Description: `Id of the canary`,
 			Type:        types.StringType,
 			Computed:    true,
 		},
-
-		// Property: Name
-		// PrimaryIdentifier: true
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "Name of the canary.",
-		     "pattern": "^[0-9a-z_\\-]{1,21}$",
-		     "type": "string"
-		   }
-		*/
 		"name": {
+			// Property: Name
+			// PrimaryIdentifier: true
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "Name of the canary.",
+			     "pattern": "^[0-9a-z_\\-]{1,21}$",
+			     "type": "string"
+			   }
+			*/
 			Description: `Name of the canary.`,
 			Type:        types.StringType,
 			Required:    true,
 			// Name is a force-new attribute.
 		},
-
-		// Property: RunConfig
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "additionalProperties": false,
-		     "properties": {
-		       "ActiveTracing": {
-		         "description": "Enable active tracing if set to true",
-		         "type": "boolean"
-		       },
-		       "EnvironmentVariables": {
-		         "additionalProperties": false,
-		         "description": "Environment variable key-value pairs.",
-		         "patternProperties": {
-		           "[a-zA-Z][a-zA-Z0-9_]+": {
-		             "type": "string"
-		           }
-		         },
-		         "type": "object"
-		       },
-		       "MemoryInMB": {
-		         "description": "Provide maximum memory available for canary in MB",
-		         "type": "integer"
-		       },
-		       "TimeoutInSeconds": {
-		         "description": "Provide maximum canary timeout per run in seconds",
-		         "type": "integer"
-		       }
-		     },
-		     "$ref": "#/definitions/RunConfig",
-		     "type": "object"
-		   }
-		*/
 		"run_config": {
+			// Property: RunConfig
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "additionalProperties": false,
+			     "properties": {
+			       "ActiveTracing": {
+			         "description": "Enable active tracing if set to true",
+			         "type": "boolean"
+			       },
+			       "EnvironmentVariables": {
+			         "additionalProperties": false,
+			         "description": "Environment variable key-value pairs.",
+			         "patternProperties": {
+			           "[a-zA-Z][a-zA-Z0-9_]+": {
+			             "type": "string"
+			           }
+			         },
+			         "type": "object"
+			       },
+			       "MemoryInMB": {
+			         "description": "Provide maximum memory available for canary in MB",
+			         "type": "integer"
+			       },
+			       "TimeoutInSeconds": {
+			         "description": "Provide maximum canary timeout per run in seconds",
+			         "type": "integer"
+			       }
+			     },
+			     "$ref": "#/definitions/RunConfig",
+			     "type": "object"
+			   }
+			*/
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
-					// Property: TimeoutInSeconds
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "description": "Provide maximum canary timeout per run in seconds",
-					     "type": "integer"
-					   }
-					*/
-					"timeout_in_seconds": {
-						Description: `Provide maximum canary timeout per run in seconds`,
-						Type:        types.NumberType,
-						Optional:    true,
-					},
-					// Property: MemoryInMB
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "description": "Provide maximum memory available for canary in MB",
-					     "type": "integer"
-					   }
-					*/
-					"memory_in_mb": {
-						Description: `Provide maximum memory available for canary in MB`,
-						Type:        types.NumberType,
-						Optional:    true,
-					},
-					// Property: ActiveTracing
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "description": "Enable active tracing if set to true",
-					     "type": "boolean"
-					   }
-					*/
 					"active_tracing": {
+						// Property: ActiveTracing
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "description": "Enable active tracing if set to true",
+						     "type": "boolean"
+						   }
+						*/
 						Description: `Enable active tracing if set to true`,
 						Type:        types.BoolType,
 						Optional:    true,
 					},
-					// Property: EnvironmentVariables
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "additionalProperties": false,
-					     "description": "Environment variable key-value pairs.",
-					     "patternProperties": {
-					       "[a-zA-Z][a-zA-Z0-9_]+": {
-					         "type": "string"
-					       }
-					     },
-					     "type": "object"
-					   }
-					*/
 					"environment_variables": {
+						// Property: EnvironmentVariables
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "additionalProperties": false,
+						     "description": "Environment variable key-value pairs.",
+						     "patternProperties": {
+						       "[a-zA-Z][a-zA-Z0-9_]+": {
+						         "type": "string"
+						       }
+						     },
+						     "type": "object"
+						   }
+						*/
 						Description: `Environment variable key-value pairs.`,
 						// Pattern: "[a-zA-Z][a-zA-Z0-9_]+"
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
 					},
+					"memory_in_mb": {
+						// Property: MemoryInMB
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "description": "Provide maximum memory available for canary in MB",
+						     "type": "integer"
+						   }
+						*/
+						Description: `Provide maximum memory available for canary in MB`,
+						Type:        types.NumberType,
+						Optional:    true,
+					},
+					"timeout_in_seconds": {
+						// Property: TimeoutInSeconds
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "description": "Provide maximum canary timeout per run in seconds",
+						     "type": "integer"
+						   }
+						*/
+						Description: `Provide maximum canary timeout per run in seconds`,
+						Type:        types.NumberType,
+						Optional:    true,
+					},
 				},
 			),
 			Optional: true,
 		},
-
-		// Property: RuntimeVersion
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "Runtime version of Synthetics Library",
-		     "type": "string"
-		   }
-		*/
 		"runtime_version": {
+			// Property: RuntimeVersion
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "Runtime version of Synthetics Library",
+			     "type": "string"
+			   }
+			*/
 			Description: `Runtime version of Synthetics Library`,
 			Type:        types.StringType,
 			Required:    true,
 		},
-
-		// Property: Schedule
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "additionalProperties": false,
-		     "properties": {
-		       "DurationInSeconds": {
-		         "type": "string"
-		       },
-		       "Expression": {
-		         "type": "string"
-		       }
-		     },
-		     "$ref": "#/definitions/Schedule",
-		     "required": [
-		       "Expression"
-		     ],
-		     "type": "object"
-		   }
-		*/
 		"schedule": {
+			// Property: Schedule
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "additionalProperties": false,
+			     "properties": {
+			       "DurationInSeconds": {
+			         "type": "string"
+			       },
+			       "Expression": {
+			         "type": "string"
+			       }
+			     },
+			     "$ref": "#/definitions/Schedule",
+			     "required": [
+			       "Expression"
+			     ],
+			     "type": "object"
+			   }
+			*/
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
-					// Property: Expression
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "type": "string"
-					   }
-					*/
-					"expression": {
+					"duration_in_seconds": {
+						// Property: DurationInSeconds
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "type": "string"
+						   }
+						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
-					// Property: DurationInSeconds
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "type": "string"
-					   }
-					*/
-					"duration_in_seconds": {
+					"expression": {
+						// Property: Expression
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "type": "string"
+						   }
+						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -354,110 +346,106 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 		},
-
-		// Property: StartCanaryAfterCreation
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "Runs canary if set to True. Default is False",
-		     "type": "boolean"
-		   }
-		*/
 		"start_canary_after_creation": {
+			// Property: StartCanaryAfterCreation
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "Runs canary if set to True. Default is False",
+			     "type": "boolean"
+			   }
+			*/
 			Description: `Runs canary if set to True. Default is False`,
 			Type:        types.BoolType,
 			Required:    true,
 		},
-
-		// Property: State
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "State of the canary",
-		     "type": "string"
-		   }
-		*/
 		"state": {
+			// Property: State
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "State of the canary",
+			     "type": "string"
+			   }
+			*/
 			Description: `State of the canary`,
 			Type:        types.StringType,
 			Computed:    true,
 		},
-
-		// Property: SuccessRetentionPeriod
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "Retention period of successful canary runs represented in number of days",
-		     "type": "integer"
-		   }
-		*/
 		"success_retention_period": {
+			// Property: SuccessRetentionPeriod
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "Retention period of successful canary runs represented in number of days",
+			     "type": "integer"
+			   }
+			*/
 			Description: `Retention period of successful canary runs represented in number of days`,
 			Type:        types.NumberType,
 			Optional:    true,
 		},
-
-		// Property: Tags
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "items": {
-		       "additionalProperties": false,
-		       "description": "A key-value pair to associate with a resource.",
-		       "properties": {
-		         "Key": {
-		           "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		           "maxLength": 128,
-		           "minLength": 1,
-		           "type": "string"
-		         },
-		         "Value": {
-		           "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		           "maxLength": 256,
-		           "minLength": 0,
-		           "type": "string"
-		         }
-		       },
-		       "$ref": "#/definitions/Tag",
-		       "required": [
-		         "Value",
-		         "Key"
-		       ],
-		       "type": "object"
-		     },
-		     "type": "array",
-		     "uniqueItems": false
-		   }
-		*/
 		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "items": {
+			       "additionalProperties": false,
+			       "description": "A key-value pair to associate with a resource.",
+			       "properties": {
+			         "Key": {
+			           "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			           "maxLength": 128,
+			           "minLength": 1,
+			           "type": "string"
+			         },
+			         "Value": {
+			           "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			           "maxLength": 256,
+			           "minLength": 0,
+			           "type": "string"
+			         }
+			       },
+			       "$ref": "#/definitions/Tag",
+			       "required": [
+			         "Value",
+			         "Key"
+			       ],
+			       "type": "object"
+			     },
+			     "type": "array",
+			     "uniqueItems": false
+			   }
+			*/
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
-					// Property: Key
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-					     "maxLength": 128,
-					     "minLength": 1,
-					     "type": "string"
-					   }
-					*/
 					"key": {
+						// Property: Key
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						     "maxLength": 128,
+						     "minLength": 1,
+						     "type": "string"
+						   }
+						*/
 						Description: `The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. `,
 						Type:        types.StringType,
 						Optional:    true,
 					},
-					// Property: Value
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-					     "maxLength": 256,
-					     "minLength": 0,
-					     "type": "string"
-					   }
-					*/
 					"value": {
+						// Property: Value
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						     "maxLength": 256,
+						     "minLength": 0,
+						     "type": "string"
+						   }
+						*/
 						Description: `The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. `,
 						Type:        types.StringType,
 						Optional:    true,
@@ -467,77 +455,76 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 		},
-
-		// Property: VPCConfig
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "additionalProperties": false,
-		     "properties": {
-		       "SecurityGroupIds": {
-		         "items": {
-		           "type": "string"
-		         },
-		         "type": "array"
-		       },
-		       "SubnetIds": {
-		         "items": {
-		           "type": "string"
-		         },
-		         "type": "array"
-		       },
-		       "VpcId": {
-		         "type": "string"
-		       }
-		     },
-		     "$ref": "#/definitions/VPCConfig",
-		     "required": [
-		       "SubnetIds",
-		       "SecurityGroupIds"
-		     ],
-		     "type": "object"
-		   }
-		*/
 		"vpc_config": {
+			// Property: VPCConfig
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "additionalProperties": false,
+			     "properties": {
+			       "SecurityGroupIds": {
+			         "items": {
+			           "type": "string"
+			         },
+			         "type": "array"
+			       },
+			       "SubnetIds": {
+			         "items": {
+			           "type": "string"
+			         },
+			         "type": "array"
+			       },
+			       "VpcId": {
+			         "type": "string"
+			       }
+			     },
+			     "$ref": "#/definitions/VPCConfig",
+			     "required": [
+			       "SubnetIds",
+			       "SecurityGroupIds"
+			     ],
+			     "type": "object"
+			   }
+			*/
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
-					// Property: SecurityGroupIds
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "items": {
-					       "type": "string"
-					     },
-					     "type": "array"
-					   }
-					*/
 					"security_group_ids": {
+						// Property: SecurityGroupIds
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "items": {
+						       "type": "string"
+						     },
+						     "type": "array"
+						   }
+						*/
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
-					// Property: VpcId
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "type": "string"
-					   }
-					*/
-					"vpc_id": {
-						Type:     types.StringType,
-						Optional: true,
-					},
-					// Property: SubnetIds
-					// CloudFormation resource type schema:
-					/*
-					   {
-					     "items": {
-					       "type": "string"
-					     },
-					     "type": "array"
-					   }
-					*/
 					"subnet_ids": {
+						// Property: SubnetIds
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "items": {
+						       "type": "string"
+						     },
+						     "type": "array"
+						   }
+						*/
 						Type:     types.ListType{ElemType: types.StringType},
+						Optional: true,
+					},
+					"vpc_id": {
+						// Property: VpcId
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "type": "string"
+						   }
+						*/
+						Type:     types.StringType,
 						Optional: true,
 					},
 				},

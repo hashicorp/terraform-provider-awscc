@@ -9,7 +9,6 @@ import (
 	"go/format"
 	"os"
 	"path"
-	"sort"
 	"strings"
 	"text/template"
 
@@ -120,30 +119,15 @@ func (g *Generator) Generate(packageName, filename string) error {
 		Writer:     &sb,
 	}
 
-	// Generate code for the CloudFormation root properties.
-	propertyNames := make([]string, 0)
+	// Generate code for the CloudFormation root properties schema.
+	codeFeatures, err := codeEmitter.EmitRootPropertiesSchema()
 
-	for propertyName := range resource.CfResource.Properties {
-		propertyNames = append(propertyNames, propertyName)
+	if err != nil {
+		return fmt.Errorf("error emitting root properties schema code: %w", err)
 	}
 
-	// Sort the property names to reduce generated code diffs.
-	sort.Strings(propertyNames)
-
-	var codeFeatures codegen.Features
-	rootPropertyAttributes := make([]string, 0)
-
-	for _, propertyName := range propertyNames {
-		features, err := codeEmitter.EmitRootPropertyAttribute(propertyName)
-
-		if err != nil {
-			return fmt.Errorf("error emitting root property attribute (%s) code: %w", propertyName, err)
-		}
-
-		rootPropertyAttributes = append(rootPropertyAttributes, sb.String())
-		sb.Reset()
-		codeFeatures |= features
-	}
+	rootPropertiesSchema := sb.String()
+	sb.Reset()
 
 	templateData := TemplateData{
 		CloudFormationTypeName: cfTypeName,
@@ -151,7 +135,7 @@ func (g *Generator) Generate(packageName, filename string) error {
 		HasUpdateMethod:        true,
 		PackageName:            packageName,
 		PrimaryIdentifierPath:  string(resource.CfResource.PrimaryIdentifier[0]),
-		RootPropertyAttributes: rootPropertyAttributes,
+		RootPropertiesSchema:   rootPropertiesSchema,
 		SchemaVersion:          1,
 		TerraformTypeName:      resource.TfType,
 	}
@@ -211,7 +195,7 @@ type TemplateData struct {
 	HasUpdateMethod        bool
 	PackageName            string
 	PrimaryIdentifierPath  string
-	RootPropertyAttributes []string
+	RootPropertiesSchema   string
 	SchemaDescription      string
 	SchemaVersion          int64
 	TerraformTypeName      string
@@ -241,11 +225,7 @@ func init() {
 // {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} resource type.
 // This Terraform resource type corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource type.
 func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
-{{- range .RootPropertyAttributes }}
-		{{ . }}
-{{- end }}
-	}
+	attributes := {{ .RootPropertiesSchema }}
 
 {{ $tick := "` + "`" + `" }}
 

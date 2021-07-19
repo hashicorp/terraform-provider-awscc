@@ -21,83 +21,80 @@ func init() {
 // This Terraform resource type corresponds to the CloudFormation AWS::Logs::LogGroup resource type.
 func logGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
-		// Property: Arn
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "The CloudWatch log group ARN.",
-		     "type": "string"
-		   }
-		*/
 		"arn": {
+			// Property: Arn
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "The CloudWatch log group ARN.",
+			     "type": "string"
+			   }
+			*/
 			Description: `The CloudWatch log group ARN.`,
 			Type:        types.StringType,
 			Computed:    true,
 		},
-
-		// Property: KmsKeyId
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
-		     "maxLength": 256,
-		     "pattern": "^arn:[a-z0-9-]+:kms:[a-z0-9-]+:\\d{12}:(key|alias)/.+$",
-		     "type": "string"
-		   }
-		*/
 		"kms_key_id": {
+			// Property: KmsKeyId
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
+			     "maxLength": 256,
+			     "pattern": "^arn:[a-z0-9-]+:kms:[a-z0-9-]+:\\d{12}:(key|alias)/.+$",
+			     "type": "string"
+			   }
+			*/
 			Description: `The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.`,
 			Type:        types.StringType,
 			Optional:    true,
 		},
-
-		// Property: LogGroupName
-		// PrimaryIdentifier: true
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.",
-		     "maxLength": 512,
-		     "minLength": 1,
-		     "pattern": "^[.\\-_/#A-Za-z0-9]{1,512}$",
-		     "type": "string"
-		   }
-		*/
 		"log_group_name": {
+			// Property: LogGroupName
+			// PrimaryIdentifier: true
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.",
+			     "maxLength": 512,
+			     "minLength": 1,
+			     "pattern": "^[.\\-_/#A-Za-z0-9]{1,512}$",
+			     "type": "string"
+			   }
+			*/
 			Description: `The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.`,
 			Type:        types.StringType,
 			Optional:    true,
 			// LogGroupName is a force-new attribute.
 		},
-
-		// Property: RetentionInDays
-		// CloudFormation resource type schema:
-		/*
-		   {
-		     "description": "The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.",
-		     "enum": [
-		       1,
-		       3,
-		       5,
-		       7,
-		       14,
-		       30,
-		       60,
-		       90,
-		       120,
-		       150,
-		       180,
-		       365,
-		       400,
-		       545,
-		       731,
-		       1827,
-		       3653
-		     ],
-		     "type": "integer"
-		   }
-		*/
 		"retention_in_days": {
+			// Property: RetentionInDays
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.",
+			     "enum": [
+			       1,
+			       3,
+			       5,
+			       7,
+			       14,
+			       30,
+			       60,
+			       90,
+			       120,
+			       150,
+			       180,
+			       365,
+			       400,
+			       545,
+			       731,
+			       1827,
+			       3653
+			     ],
+			     "type": "integer"
+			   }
+			*/
 			Description: `The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.`,
 			Type:        types.NumberType,
 			Optional:    true,
