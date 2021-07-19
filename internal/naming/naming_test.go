@@ -11,6 +11,16 @@ func TestCloudFormationPropertyToTerraformAttribute(t *testing.T) {
 		ExpectedValue string
 	}{
 		{
+			TestName:      "empty string",
+			Value:         "",
+			ExpectedValue: "",
+		},
+		{
+			TestName:      "whitespace string",
+			Value:         "  ",
+			ExpectedValue: "",
+		},
+		{
 			TestName:      "short property name",
 			Value:         "Arn",
 			ExpectedValue: "arn",
@@ -24,6 +34,11 @@ func TestCloudFormationPropertyToTerraformAttribute(t *testing.T) {
 			TestName:      "including digit",
 			Value:         "S3Bucket",
 			ExpectedValue: "s3_bucket",
+		},
+		{
+			TestName:      "including multiple digits",
+			Value:         "AWS99Thing",
+			ExpectedValue: "aws99_thing",
 		},
 	}
 
@@ -45,6 +60,16 @@ func TestTerraformAttributeToCloudFormationProperty(t *testing.T) {
 		ExpectedValue string
 	}{
 		{
+			TestName:      "empty string",
+			Value:         "",
+			ExpectedValue: "",
+		},
+		{
+			TestName:      "whitespace string",
+			Value:         "  ",
+			ExpectedValue: "",
+		},
+		{
 			TestName:      "short property name",
 			Value:         "arn",
 			ExpectedValue: "Arn",
@@ -58,6 +83,11 @@ func TestTerraformAttributeToCloudFormationProperty(t *testing.T) {
 			TestName:      "including digit",
 			Value:         "s3_bucket",
 			ExpectedValue: "S3Bucket",
+		},
+		{
+			TestName:      "including multiple digits",
+			Value:         "aws99_thing",
+			ExpectedValue: "Aws99Thing",
 		},
 	}
 
