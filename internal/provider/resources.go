@@ -2,11 +2,13 @@
 //go:generate go run generators/resource/main.go -resource aws_logs_log_group -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-logs-loggroup.json -package logs -- ../aws/logs/log_group_gen.go
 //go:generate go run generators/resource/main.go -resource aws_appmesh_virtual_service -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-appmesh-virtualservice.json -package appmesh -- ../aws/appmesh/virtual_service_gen.go
 //go:generate go run generators/resource/main.go -resource aws_synthetics_canary -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-synthetics-canary.json -package synthetics -- ../aws/synthetics/canary_gen.go
+//go:generate go run generators/resource/main.go -resource aws_backup_backup_plan -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-backup-backupplan.json -package backup -- ../aws/backup/backup_plan_gen.go
 
 package provider
 
 import (
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/appmesh"
+	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/backup"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/logs"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/synthetics"
 )

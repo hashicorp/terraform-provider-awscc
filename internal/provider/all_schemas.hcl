@@ -30,13 +30,13 @@ resource_schema "aws_synthetics_canary" {
   local = "../service/cloudformation/schemas/us-west-2/aws-synthetics-canary.json"
 }
 
-#resource_schema "aws_backup_backup_plan" {
-#  source {
-#    url = "???"
-#  }
-#
-#  local = "../service/cloudformation/schemas/us-west-2/aws-backup-backupplan.json"
-#}
+resource_schema "aws_backup_backup_plan" {
+  source {
+    url = "???"
+  }
+
+  local = "../service/cloudformation/schemas/us-west-2/aws-backup-backupplan.json"
+}
 
 #resource_schema "aws_sagemaker_data_quality_job_definition" {
 #  source {
