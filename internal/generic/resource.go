@@ -15,9 +15,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/cfjsonpatch"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/waiter"
-	"github.com/iancoleman/strcase"
 )
 
 // Features of the resource type.
@@ -452,7 +452,7 @@ func propertyPathToAttributePath(propertyPath string) (*tftypes.AttributePath, e
 			return nil, fmt.Errorf("invalid property path segment: %q", segment)
 
 		default:
-			attributePath = attributePath.WithAttributeName(strcase.ToSnake(segment))
+			attributePath = attributePath.WithAttributeName(naming.CloudFormationPropertyToTerraformAttribute(segment))
 		}
 	}
 
