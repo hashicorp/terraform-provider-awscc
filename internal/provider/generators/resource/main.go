@@ -241,7 +241,7 @@ func init() {
 // {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} resource type.
 // This Terraform resource type corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource type.
 func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute {
+	attributes := map[string]schema.Attribute{
 {{- range .RootPropertyAttributes }}
 		{{ . }}
 {{- end }}
