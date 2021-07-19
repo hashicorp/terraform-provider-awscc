@@ -8,34 +8,9 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
 )
-
-var (
-	identifierAttributePath = tftypes.NewAttributePath().WithAttributeName("identifier")
-)
-
-// GetIdentifier gets the well-known "identifier" attribute from State.
-func GetIdentifier(ctx context.Context, state *tfsdk.State) (string, error) {
-	val, err := state.GetAttribute(ctx, identifierAttributePath)
-
-	if err != nil {
-		return "", err
-	}
-
-	if val, ok := val.(types.String); ok {
-		return val.Value, nil
-	}
-
-	return "", fmt.Errorf("invalid identifier type %T", val)
-}
-
-// SetIdentifier sets the well-known "identifier" attribute in State.
-func SetIdentifier(ctx context.Context, state *tfsdk.State, id string) error {
-	return state.SetAttribute(ctx, identifierAttributePath, id)
-}
 
 // SetUnknownValuesFromCloudFormationResourceModel fills any unknown State values from a CloudFormation ResourceModel (string).
 func SetUnknownValuesFromCloudFormationResourceModel(ctx context.Context, state *tfsdk.State, resourceModel string) error {

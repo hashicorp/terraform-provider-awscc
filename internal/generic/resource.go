@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/aws-sdk-go-base/tfawserr"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -176,15 +177,6 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
-	// Set the well-known "identifier" attribute.
-	err = SetIdentifier(ctx, &response.State, identifier)
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierSetErrorDiag(err))
-
-		return
-	}
-
 	err = SetUnknownValuesFromCloudFormationResourceModel(ctx, &response.State, aws.StringValue(description.ResourceModel))
 
 	if err != nil {
@@ -212,8 +204,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	}
 
 	currentState := &request.State
-	schema := &currentState.Schema
-	identifier, err := GetIdentifier(ctx, currentState)
+	identifier, err := r.getIdentifier(ctx, currentState)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
@@ -236,6 +227,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		return
 	}
 
+	schema := &currentState.Schema
 	val, err := GetCloudFormationResourceModelValue(ctx, schema, aws.StringValue(description.ResourceModel))
 
 	if err != nil {
@@ -256,14 +248,6 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		Schema: *schema,
 		Raw:    val,
 	}
-
-	err = SetIdentifier(ctx, &response.State, identifier)
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierSetErrorDiag(err))
-
-		return
-	}
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
@@ -278,7 +262,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	}
 
 	currentState := &request.State
-	identifier, err := GetIdentifier(ctx, currentState)
+	identifier, err := r.getIdentifier(ctx, currentState)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
@@ -359,7 +343,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	identifier, err := GetIdentifier(ctx, &request.State)
+	identifier, err := r.getIdentifier(ctx, &request.State)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
@@ -426,6 +410,21 @@ func (r *resource) describe(ctx context.Context, conn *cloudformation.CloudForma
 	}
 
 	return output.ResourceDescription, nil
+}
+
+// getIdentifier returns the resource's primary identifier value from State.
+func (r *resource) getIdentifier(ctx context.Context, state *tfsdk.State) (string, error) {
+	val, err := state.GetAttribute(ctx, r.resourceType.identifierAttributePath)
+
+	if err != nil {
+		return "", err
+	}
+
+	if val, ok := val.(types.String); ok {
+		return val.Value, nil
+	}
+
+	return "", fmt.Errorf("invalid identifier type %T", val)
 }
 
 // propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
