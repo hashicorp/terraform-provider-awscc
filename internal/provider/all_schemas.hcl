@@ -14,21 +14,21 @@ resource_schema "aws_logs_log_group" {
   local = "../service/cloudformation/schemas/us-west-2/aws-logs-loggroup.json"
 }
 
-#resource_schema "aws_appmesh_virtual_service" {
-#  source {
-#    url = "???"
-#  }
-#
-#  local = "../service/cloudformation/schemas/us-west-2/aws-appmesh-virtualservice.json"
-#}
+resource_schema "aws_appmesh_virtual_service" {
+  source {
+    url = "???"
+  }
 
-#resource_schema "aws_synthetics_canary" {
-#  source {
-#    url = "???"
-#  }
-#
-#  local = "../service/cloudformation/schemas/us-west-2/aws-synthetics-canary.json"
-#}
+  local = "../service/cloudformation/schemas/us-west-2/aws-appmesh-virtualservice.json"
+}
+
+resource_schema "aws_synthetics_canary" {
+  source {
+    url = "???"
+  }
+
+  local = "../service/cloudformation/schemas/us-west-2/aws-synthetics-canary.json"
+}
 
 #resource_schema "aws_backup_backup_plan" {
 #  source {
