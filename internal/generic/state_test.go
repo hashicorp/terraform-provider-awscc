@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
 )
 
 var testSimpleSchema = schema.Schema{
@@ -42,10 +43,17 @@ var testComplexSchema = schema.Schema{
 			Required: true,
 		},
 		"machine_type": {
-			Type: types.StringType,
+			Type:     types.StringType,
+			Optional: true,
+		},
+		"ports": {
+			Type: types.ListType{
+				ElemType: types.NumberType,
+			},
+			Required: true,
 		},
 		"tags": {
-			Type: types.ListType{
+			Type: providertypes.SetType{
 				ElemType: types.StringType,
 			},
 			Required: true,
@@ -71,7 +79,8 @@ var testComplexSchema = schema.Schema{
 					Required: true,
 				},
 				"delete_with_instance": {
-					Type: types.BoolType,
+					Type:     types.BoolType,
+					Optional: true,
 				},
 			}),
 		},
@@ -134,7 +143,6 @@ func makeSimpleValueWithUnknowns() tftypes.Value {
 	})
 }
 
-// state used for all tests
 func makeComplexTestState() tfsdk.State {
 	return tfsdk.State{
 		Raw: tftypes.NewValue(tftypes.Object{
@@ -378,7 +386,8 @@ func makeComplexTestPlan() tfsdk.Plan {
 			AttributeTypes: map[string]tftypes.Type{
 				"name":         tftypes.String,
 				"machine_type": tftypes.String,
-				"tags":         tftypes.List{ElementType: tftypes.String},
+				"ports":        tftypes.List{ElementType: tftypes.Number},
+				"tags":         tftypes.Set{ElementType: tftypes.String},
 				"disks": tftypes.List{
 					ElementType: diskElementType,
 				},
@@ -392,7 +401,13 @@ func makeComplexTestPlan() tfsdk.Plan {
 		}, map[string]tftypes.Value{
 			"name":         tftypes.NewValue(tftypes.String, "hello, world"),
 			"machine_type": tftypes.NewValue(tftypes.String, "e2-medium"),
-			"tags": tftypes.NewValue(tftypes.List{
+			"ports": tftypes.NewValue(tftypes.List{
+				ElementType: tftypes.Number,
+			}, []tftypes.Value{
+				tftypes.NewValue(tftypes.Number, 80),
+				tftypes.NewValue(tftypes.Number, 443),
+			}),
+			"tags": tftypes.NewValue(tftypes.Set{
 				ElementType: tftypes.String,
 			}, []tftypes.Value{
 				tftypes.NewValue(tftypes.String, "red"),
@@ -455,6 +470,7 @@ func TestPlanGetCloudFormationDesiredState(t *testing.T) {
 			ExpectedState: map[string]interface{}{
 				"Name":        "hello, world",
 				"MachineType": "e2-medium",
+				"Ports":       []interface{}{float64(80), float64(443)},
 				"Tags":        []interface{}{"red", "blue", "green"},
 				"Disks": []interface{}{
 					map[string]interface{}{
