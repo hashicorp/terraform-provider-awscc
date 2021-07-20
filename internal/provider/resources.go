@@ -6,12 +6,14 @@
 //go:generate go run generators/resource/main.go -resource aws_sagemaker_data_quality_job_definition -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-sagemaker-dataqualityjobdefinition.json -package sagemaker -- ../aws/sagemaker/data_quality_job_definition_gen.go
 //go:generate go run generators/resource/main.go -resource aws_stepfunctions_state_machine -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-stepfunctions-statemachine.json -package stepfunctions -- ../aws/stepfunctions/state_machine_gen.go
 //go:generate go run generators/resource/main.go -resource aws_xray_sampling_rule -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-xray-samplingrule.json -package xray -- ../aws/xray/sampling_rule_gen.go
+//go:generate go run generators/resource/main.go -resource aws_ecs_task_definition -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-ecs-taskdefinition.json -package ecs -- ../aws/ecs/task_definition_gen.go
 
 package provider
 
 import (
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/appmesh"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/backup"
+	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/ecs"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/logs"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/sagemaker"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/stepfunctions"

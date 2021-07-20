@@ -143,6 +143,9 @@ func (g *Generator) Generate(packageName, filename string) error {
 	if codeFeatures&codegen.HasUpdatableProperty == 0 {
 		templateData.HasUpdateMethod = false
 	}
+	if codeFeatures&codegen.UsesInternalTypes > 0 {
+		templateData.ImportInternalTypes = true
+	}
 
 	if description := resource.CfResource.Description; description != nil {
 		templateData.SchemaDescription = *description
@@ -193,6 +196,7 @@ type TemplateData struct {
 	CloudFormationTypeName string
 	FactoryFunctionName    string
 	HasUpdateMethod        bool
+	ImportInternalTypes    bool
 	PackageName            string
 	PrimaryIdentifierPath  string
 	RootPropertiesSchema   string
@@ -216,6 +220,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+{{ if .ImportInternalTypes }}providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"{{- end }}
 )
 
 func init() {

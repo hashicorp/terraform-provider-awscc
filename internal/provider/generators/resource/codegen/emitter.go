@@ -14,6 +14,7 @@ type Features int
 
 const (
 	HasUpdatableProperty Features = 1 << iota // At least one property can be updated.
+	UsesInternalTypes                         // Uses a type from the internal/types package.
 )
 
 type Emitter struct {
@@ -69,6 +70,19 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 			// Set.
 			//
 			switch itemType := property.Items.Type.String(); itemType {
+			// Sets of primitive types use provider-local Set type until tfsdk support is available.
+			case cfschema.PropertyTypeBoolean:
+				features |= UsesInternalTypes
+				e.printf("Type: providertypes.SetType{ElemType:types.BoolType},\n")
+
+			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+				features |= UsesInternalTypes
+				e.printf("Type: providertypes.SetType{ElemType:types.NumberType},\n")
+
+			case cfschema.PropertyTypeString:
+				features |= UsesInternalTypes
+				e.printf("Type: providertypes.SetType{ElemType:types.StringType},\n")
+
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
 					return 0, fmt.Errorf("%s is of unsupported type: set of map", name)
