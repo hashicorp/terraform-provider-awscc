@@ -19,4 +19,4 @@ require (
 	github.com/mitchellh/cli v1.1.2
 )
 
-replace github.com/aws/aws-sdk-go => github.com/hashicorp/aws-sdk-go-private v1.38.23-0.20210420184552-ae24b9862457
+replace github.com/aws/aws-sdk-go => github.com/hashicorp/aws-sdk-go-private v1.39.2-0.20210716172600-daec78152c52

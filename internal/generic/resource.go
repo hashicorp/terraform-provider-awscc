@@ -2,6 +2,7 @@ package generic
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"strings"
@@ -17,8 +18,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/cfjsonpatch"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/waiter"
+	"github.com/mattbaird/jsonpatch"
 )
 
 // Features of the resource type.
@@ -286,7 +287,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	patchOperations, err := cfjsonpatch.PatchOperations(currentDesiredState, plannedDesiredState)
+	patchDocument, err := patchDocument(currentDesiredState, plannedDesiredState)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -298,11 +299,13 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
+	log.Printf("[DEBUG] Resource.Update(%s/%s)\nPatch document: %s", r.resourceType.cfTypeName, r.resourceType.tfTypeName, patchDocument)
+
 	input := &cloudformation.UpdateResourceInput{
-		ClientToken:     aws.String(UniqueId()),
-		Identifier:      aws.String(identifier),
-		PatchOperations: patchOperations,
-		TypeName:        aws.String(r.resourceType.cfTypeName),
+		ClientToken:   aws.String(UniqueId()),
+		Identifier:    aws.String(identifier),
+		PatchDocument: aws.String(patchDocument),
+		TypeName:      aws.String(r.resourceType.cfTypeName),
 	}
 
 	output, err := conn.UpdateResourceWithContext(ctx, input)
@@ -425,6 +428,23 @@ func (r *resource) getIdentifier(ctx context.Context, state *tfsdk.State) (strin
 	}
 
 	return "", fmt.Errorf("invalid identifier type %T", val)
+}
+
+// patchDocument returns a JSON Patch document describing the difference between `old` and `new`.
+func patchDocument(old, new string) (string, error) {
+	patch, err := jsonpatch.CreatePatch([]byte(old), []byte(new))
+
+	if err != nil {
+		return "", err
+	}
+
+	b, err := json.Marshal(patch)
+
+	if err != nil {
+		return "", err
+	}
+
+	return string(b), nil
 }
 
 // propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
