@@ -174,27 +174,33 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				return 0, fmt.Errorf("%s has both Properties and PatternProperties", name)
 			}
 
-			n := 0
-			for pattern, property := range patternProperties {
-				e.printf("// Pattern: %q\n", pattern)
-				if n == 0 {
-					switch propertyType := property.Type.String(); propertyType {
-					case cfschema.PropertyTypeBoolean:
-						e.printf("Type: types.MapType{ElemType:types.BoolType},\n")
+			// Sort the patterns to reduce diffs.
+			patterns := make([]string, 0)
+			for pattern := range patternProperties {
+				patterns = append(patterns, pattern)
+			}
+			sort.Strings(patterns)
 
-					case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-						e.printf("Type: types.MapType{ElemType:types.NumberType},\n")
+			// Ignore all but the first pattern.
+			pattern := patterns[0]
 
-					case cfschema.PropertyTypeString:
-						e.printf("Type: types.MapType{ElemType:types.StringType},\n")
+			e.printf("// Pattern: %q\n", pattern)
+			switch propertyType := patternProperties[pattern].Type.String(); propertyType {
+			case cfschema.PropertyTypeBoolean:
+				e.printf("Type: types.MapType{ElemType:types.BoolType},\n")
 
-					default:
-						return 0, fmt.Errorf("%s is of unsupported type: key-value map of %s", name, propertyType)
-					}
-				} else {
-					e.printf("// Ignored.\n")
-				}
-				n++
+			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+				e.printf("Type: types.MapType{ElemType:types.NumberType},\n")
+
+			case cfschema.PropertyTypeString:
+				e.printf("Type: types.MapType{ElemType:types.StringType},\n")
+
+			default:
+				return 0, fmt.Errorf("%s is of unsupported type: key-value map of %s", name, propertyType)
+			}
+
+			for _, pattern := range patterns[1:] {
+				e.printf("// Pattern %q ignored.\n", pattern)
 			}
 
 			break

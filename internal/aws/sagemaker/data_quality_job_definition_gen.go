@@ -173,8 +173,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: `Sets the environment variables in the Docker container`,
 						// Pattern: "[\\S\\s]*"
 						Type: types.MapType{ElemType: types.StringType},
-						// Pattern: "[a-zA-Z_][a-zA-Z0-9_]*"
-						// Ignored.
+						// Pattern "[a-zA-Z_][a-zA-Z0-9_]*" ignored.
 						Optional: true,
 					},
 					"image_uri": {
