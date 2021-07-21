@@ -22,16 +22,23 @@ type Emitter struct {
 	Writer     io.Writer
 }
 
+type parent struct {
+	path []string
+	reqd interface {
+		IsRequired(name string) bool
+	}
+}
+
 // EmitRootSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // The root schema is the map of root property names to Attributes.
 func (e *Emitter) EmitRootPropertiesSchema() (Features, error) {
-	return e.emitSchema([]string{}, e.CfResource.Properties)
+	return e.emitSchema(parent{reqd: e.CfResource}, e.CfResource.Properties)
 }
 
 // emitAttribute generates the Terraform Plugin SDK code for a CloudFormation property's Attributes
 // and emits the generated code to the emitter's Writer. Code features are returned.
-func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.Property) (Features, error) {
+func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.Property, required bool) (Features, error) {
 	var features Features
 
 	e.printf("{\n")
@@ -94,7 +101,12 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 
 				e.printf("Attributes: schema.SetNestedAttributes(\n")
 
-				f, err := e.emitSchema(path, property.Items.Properties)
+				f, err := e.emitSchema(
+					parent{
+						path: path,
+						reqd: property.Items,
+					},
+					property.Items.Properties)
 
 				if err != nil {
 					return 0, err
@@ -141,7 +153,12 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 
 				e.printf("Attributes: schema.ListNestedAttributes(\n")
 
-				f, err := e.emitSchema(path, property.Items.Properties)
+				f, err := e.emitSchema(
+					parent{
+						path: path,
+						reqd: property.Items,
+					},
+					property.Items.Properties)
 
 				if err != nil {
 					return 0, err
@@ -217,7 +234,12 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 		}
 
 		e.printf("Attributes: schema.SingleNestedAttributes(\n")
-		f, err := e.emitSchema(path, property.Properties)
+		f, err := e.emitSchema(
+			parent{
+				path: path,
+				reqd: property,
+			},
+			property.Properties)
 
 		if err != nil {
 			return 0, err
@@ -234,7 +256,6 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 
 	createOnly := e.CfResource.CreateOnlyProperties.ContainsPath(path)
 	readOnly := e.CfResource.ReadOnlyProperties.ContainsPath(path)
-	required := e.CfResource.IsRequired(name)
 	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
 
 	if required {
@@ -268,7 +289,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // A schema is a map of property names to Attributes.
 // Property names are sorted prior to code generation to reduce diffs.
-func (e *Emitter) emitSchema(pathPrefix []string, properties map[string]*cfschema.Property) (Features, error) {
+func (e *Emitter) emitSchema(parent parent, properties map[string]*cfschema.Property) (Features, error) {
 	names := make([]string, 0)
 	for name := range properties {
 		names = append(names, name)
@@ -281,7 +302,7 @@ func (e *Emitter) emitSchema(pathPrefix []string, properties map[string]*cfschem
 	for _, name := range names {
 		e.printf("%q: ", naming.CloudFormationPropertyToTerraformAttribute(name))
 
-		f, err := e.emitAttribute(append(pathPrefix, name), name, properties[name])
+		f, err := e.emitAttribute(append(parent.path, name), name, properties[name], parent.reqd.IsRequired(name))
 
 		if err != nil {
 			return 0, err

@@ -186,7 +186,7 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.MapType{ElemType: types.StringType},
-									Optional: true,
+									Required: true,
 								},
 								"resource_type": {
 									// Property: ResourceType
@@ -197,7 +197,7 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.StringType,
-									Optional: true,
+									Required: true,
 								},
 							},
 							schema.ListNestedAttributesOptions{},
@@ -213,7 +213,7 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.StringType,
-						Optional: true,
+						Required: true,
 					},
 					"backup_plan_rule": {
 						// Property: BackupPlanRule
@@ -364,7 +364,7 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 												   }
 												*/
 												Type:     types.StringType,
-												Optional: true,
+												Required: true,
 											},
 											"lifecycle": {
 												// Property: Lifecycle
@@ -501,7 +501,7 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.StringType,
-									Optional: true,
+									Required: true,
 								},
 								"schedule_expression": {
 									// Property: ScheduleExpression
@@ -534,12 +534,12 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.StringType,
-									Optional: true,
+									Required: true,
 								},
 							},
 							schema.ListNestedAttributesOptions{},
 						),
-						Optional: true,
+						Required: true,
 					},
 				},
 			),

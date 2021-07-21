@@ -76,7 +76,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.StringType,
-						Optional: true,
+						Required: true,
 					},
 					"s3_bucket": {
 						// Property: S3Bucket
@@ -340,7 +340,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.StringType,
-						Optional: true,
+						Required: true,
 					},
 				},
 			),
@@ -433,7 +433,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 						*/
 						Description: `The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. `,
 						Type:        types.StringType,
-						Optional:    true,
+						Required:    true,
 					},
 					"value": {
 						// Property: Value
@@ -448,7 +448,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 						*/
 						Description: `The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. `,
 						Type:        types.StringType,
-						Optional:    true,
+						Required:    true,
 					},
 				},
 				schema.ListNestedAttributesOptions{},
@@ -500,7 +500,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Required: true,
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
@@ -514,7 +514,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Required: true,
 					},
 					"vpc_id": {
 						// Property: VpcId

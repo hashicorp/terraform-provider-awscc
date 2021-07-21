@@ -83,7 +83,7 @@ func stateMachine(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.StringType,
-						Optional: true,
+						Required: true,
 					},
 					"key": {
 						// Property: Key
@@ -94,7 +94,7 @@ func stateMachine(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.StringType,
-						Optional: true,
+						Required: true,
 					},
 					"version": {
 						// Property: Version
@@ -395,7 +395,7 @@ func stateMachine(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.StringType,
-						Optional: true,
+						Required: true,
 					},
 					"value": {
 						// Property: Value
@@ -408,7 +408,7 @@ func stateMachine(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.StringType,
-						Optional: true,
+						Required: true,
 					},
 				},
 				schema.ListNestedAttributesOptions{},

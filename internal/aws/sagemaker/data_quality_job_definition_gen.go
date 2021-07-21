@@ -189,7 +189,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						*/
 						Description: `The container image to be run by the monitoring job.`,
 						Type:        types.StringType,
-						Optional:    true,
+						Required:    true,
 					},
 					"post_analytics_processor_source_uri": {
 						// Property: PostAnalyticsProcessorSourceUri
@@ -513,7 +513,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									*/
 									Description: `The name of the endpoint used to run the monitoring job.`,
 									Type:        types.StringType,
-									Optional:    true,
+									Required:    true,
 								},
 								"local_path": {
 									// Property: LocalPath
@@ -528,7 +528,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									*/
 									Description: `Path to the filesystem where the endpoint data is available to the container.`,
 									Type:        types.StringType,
-									Optional:    true,
+									Required:    true,
 								},
 								"s3_data_distribution_type": {
 									// Property: S3DataDistributionType
@@ -566,7 +566,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 							},
 						),
-						Optional: true,
+						Required: true,
 					},
 				},
 			),
@@ -772,7 +772,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 												*/
 												Description: `The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.`,
 												Type:        types.StringType,
-												Optional:    true,
+												Required:    true,
 											},
 											"s3_upload_mode": {
 												// Property: S3UploadMode
@@ -804,16 +804,16 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 												*/
 												Description: `A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.`,
 												Type:        types.StringType,
-												Optional:    true,
+												Required:    true,
 											},
 										},
 									),
-									Optional: true,
+									Required: true,
 								},
 							},
 							schema.ListNestedAttributesOptions{},
 						),
-						Optional: true,
+						Required: true,
 					},
 				},
 			),
@@ -949,7 +949,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									*/
 									Description: `The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.`,
 									Type:        types.NumberType,
-									Optional:    true,
+									Required:    true,
 								},
 								"instance_type": {
 									// Property: InstanceType
@@ -962,7 +962,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									*/
 									Description: `The ML compute instance type for the processing job.`,
 									Type:        types.StringType,
-									Optional:    true,
+									Required:    true,
 								},
 								"volume_kms_key_id": {
 									// Property: VolumeKmsKeyId
@@ -988,11 +988,11 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									*/
 									Description: `The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.`,
 									Type:        types.NumberType,
-									Optional:    true,
+									Required:    true,
 								},
 							},
 						),
-						Optional: true,
+						Required: true,
 					},
 				},
 			),
@@ -1143,7 +1143,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									*/
 									Description: `The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.`,
 									Type:        types.ListType{ElemType: types.StringType},
-									Optional:    true,
+									Required:    true,
 								},
 								"subnets": {
 									// Property: Subnets
@@ -1163,7 +1163,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									*/
 									Description: `The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.`,
 									Type:        types.ListType{ElemType: types.StringType},
-									Optional:    true,
+									Required:    true,
 								},
 							},
 						),
@@ -1225,7 +1225,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						*/
 						Description: `The maximum runtime allowed in seconds.`,
 						Type:        types.NumberType,
-						Optional:    true,
+						Required:    true,
 					},
 				},
 			),
@@ -1284,7 +1284,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						*/
 						Description: `The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. `,
 						Type:        types.StringType,
-						Optional:    true,
+						Required:    true,
 					},
 					"value": {
 						// Property: Value
@@ -1299,7 +1299,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						*/
 						Description: `The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. `,
 						Type:        types.StringType,
-						Optional:    true,
+						Required:    true,
 					},
 				},
 				schema.ListNestedAttributesOptions{

@@ -1410,7 +1410,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 												   }
 												*/
 												Type:     types.NumberType,
-												Optional: true,
+												Required: true,
 											},
 										},
 										schema.ListNestedAttributesOptions{},
@@ -1479,7 +1479,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.StringType,
-									Optional: true,
+									Required: true,
 								},
 								"options": {
 									// Property: Options
@@ -1535,7 +1535,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 												   }
 												*/
 												Type:     types.StringType,
-												Optional: true,
+												Required: true,
 											},
 											"value_from": {
 												// Property: ValueFrom
@@ -1546,7 +1546,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 												   }
 												*/
 												Type:     types.StringType,
-												Optional: true,
+												Required: true,
 											},
 										},
 										schema.ListNestedAttributesOptions{},
@@ -1827,7 +1827,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.StringType,
-									Optional: true,
+									Required: true,
 								},
 								"value": {
 									// Property: Value
@@ -1838,7 +1838,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.StringType,
-									Optional: true,
+									Required: true,
 								},
 							},
 							schema.ListNestedAttributesOptions{},
@@ -1881,7 +1881,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.StringType,
-									Optional: true,
+									Required: true,
 								},
 								"value_from": {
 									// Property: ValueFrom
@@ -1892,7 +1892,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.StringType,
-									Optional: true,
+									Required: true,
 								},
 							},
 							schema.ListNestedAttributesOptions{},
@@ -2011,7 +2011,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.NumberType,
-									Optional: true,
+									Required: true,
 								},
 								"name": {
 									// Property: Name
@@ -2022,7 +2022,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.StringType,
-									Optional: true,
+									Required: true,
 								},
 								"soft_limit": {
 									// Property: SoftLimit
@@ -2033,7 +2033,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.NumberType,
-									Optional: true,
+									Required: true,
 								},
 							},
 							schema.ListNestedAttributesOptions{},
@@ -2335,7 +2335,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.StringType,
-						Optional: true,
+						Required: true,
 					},
 				},
 				schema.SetNestedAttributesOptions{},
@@ -2392,7 +2392,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.StringType,
-						Optional: true,
+						Required: true,
 					},
 					"proxy_configuration_properties": {
 						// Property: ProxyConfigurationProperties
@@ -2888,7 +2888,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   }
 									*/
 									Type:     types.StringType,
-									Optional: true,
+									Required: true,
 								},
 								"root_directory": {
 									// Property: RootDirectory
