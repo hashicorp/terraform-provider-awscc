@@ -195,7 +195,7 @@ func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 												   }
 												*/
 												Type:     types.StringType,
-												Optional: true,
+												Required: true,
 											},
 										},
 									),
@@ -230,7 +230,7 @@ func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 												   }
 												*/
 												Type:     types.StringType,
-												Optional: true,
+												Required: true,
 											},
 										},
 									),
@@ -281,7 +281,7 @@ func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.StringType,
-						Optional: true,
+						Required: true,
 					},
 					"value": {
 						// Property: Value
@@ -292,7 +292,7 @@ func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Type:     types.StringType,
-						Optional: true,
+						Required: true,
 					},
 				},
 				schema.ListNestedAttributesOptions{},
