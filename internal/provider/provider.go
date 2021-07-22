@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -19,7 +19,7 @@ func New() tfsdk.Provider {
 }
 
 type awsCloudAPIProvider struct {
-	cfClient *cloudformation.CloudFormation
+	cfClient *cloudformation.Client
 	roleARN  string
 }
 
@@ -78,7 +78,7 @@ func (p *awsCloudAPIProvider) Configure(ctx context.Context, request tfsdk.Confi
 		return
 	}
 
-	cfClient, err := newCloudFormationClient(&config)
+	cfClient, err := newCloudFormationClient(ctx, &config)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -125,7 +125,7 @@ func (p *awsCloudAPIProvider) GetDataSources(ctx context.Context) (map[string]tf
 	return nil, nil
 }
 
-func (p *awsCloudAPIProvider) CloudFormationClient(_ context.Context) *cloudformation.CloudFormation {
+func (p *awsCloudAPIProvider) CloudFormationClient(_ context.Context) *cloudformation.Client {
 	return p.cfClient
 }
 
@@ -134,18 +134,18 @@ func (p *awsCloudAPIProvider) RoleARN(_ context.Context) string {
 }
 
 // newCloudFormationClient configures and returns a fully initialized AWS CloudFormation client.
-func newCloudFormationClient(config *providerData) (*cloudformation.CloudFormation, error) {
-	// awsbaseConfig := &awsbase.Config{
-	// 	//DebugLogging: logging.IsDebugOrHigher(),
-	// 	Region: config.Region.Value,
-	// }
+func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudformation.Client, error) {
+	optFns := make([]func(*config.LoadOptions) error, 0)
 
-	// sess, _, _, err := awsbase.GetSessionWithAccountIDAndPartition(awsbaseConfig)
-	// if err != nil {
-	// 	return nil, fmt.Errorf("error getting AWS SDK session: %w", err)
-	// }
+	if region := pd.Region.Value; region != "" {
+		optFns = append(optFns, config.WithRegion(region))
+	}
 
-	// return cloudformation.New(sess.Copy(&aws.Config{})), nil
+	cfg, err := config.LoadDefaultConfig(ctx, optFns...)
 
-	return nil, nil
+	if err != nil {
+		return nil, err
+	}
+
+	return cloudformation.NewFromConfig(cfg), nil
 }

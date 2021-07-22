@@ -7,25 +7,26 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
+	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
-func ResourceRequestStatusProgressEventOperationStatusSuccess(ctx context.Context, conn *cloudformation.CloudFormation, requestToken string, timeout time.Duration) (*cloudformation.ProgressEvent, error) {
+func ResourceRequestStatusProgressEventOperationStatusSuccess(ctx context.Context, conn *cloudformation.Client, requestToken string, timeout time.Duration) (*cftypes.ProgressEvent, error) {
 	stateConf := &resource.StateChangeConf{
 		Pending: []string{
-			cloudformation.OperationStatusInProgress,
-			cloudformation.OperationStatusPending,
+			string(cftypes.OperationStatusInProgress),
+			string(cftypes.OperationStatusPending),
 		},
-		Target:  []string{cloudformation.OperationStatusSuccess},
+		Target:  []string{string(cftypes.OperationStatusSuccess)},
 		Refresh: ResourceRequestStatusProgressEventOperationStatus(ctx, conn, requestToken),
 		Timeout: timeout,
 	}
 
 	outputRaw, err := stateConf.WaitForStateContext(ctx)
 
-	if output, ok := outputRaw.(*cloudformation.ProgressEvent); ok {
+	if output, ok := outputRaw.(*cftypes.ProgressEvent); ok {
 		if err != nil && output != nil {
-			newErr := fmt.Errorf("%s", output)
+			newErr := fmt.Errorf("%v", output)
 
 			var te *resource.TimeoutError
 			var use *resource.UnexpectedStateError
