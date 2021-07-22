@@ -22,6 +22,7 @@ func New() tfsdk.Provider {
 
 type awsCloudAPIProvider struct {
 	cfClient *cloudformation.CloudFormation
+	roleARN  string
 }
 
 func (p *awsCloudAPIProvider) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
@@ -33,12 +34,12 @@ func (p *awsCloudAPIProvider) GetSchema(ctx context.Context) (schema.Schema, []*
 			"region": {
 				Type:        types.StringType,
 				Description: "The region where AWS operations will take place.",
-				Required:    true,
+				Optional:    true,
 			},
 
 			"role_arn": {
 				Type:        types.StringType,
-				Description: "Amazon Resource Name of an IAM Role that is used to do the actual provisioning.",
+				Description: "Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.",
 				Optional:    true,
 			},
 		},
@@ -67,8 +68,14 @@ func (p *awsCloudAPIProvider) Configure(ctx context.Context, request tfsdk.Confi
 		return
 	}
 
-	if config.Region.Null || config.Region.Unknown {
-		tflog.Info(ctx, "AWS Region is Null or Unknown")
+	if config.Region.Unknown {
+		tflog.Info(ctx, "AWS Region is Unknown")
+
+		return
+	}
+
+	if config.RoleARN.Unknown {
+		tflog.Info(ctx, "Role ARN is Unknown")
 
 		return
 	}
@@ -86,6 +93,7 @@ func (p *awsCloudAPIProvider) Configure(ctx context.Context, request tfsdk.Confi
 	}
 
 	p.cfClient = cfClient
+	p.roleARN = config.RoleARN.Value
 }
 
 func (p *awsCloudAPIProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
@@ -119,8 +127,12 @@ func (p *awsCloudAPIProvider) GetDataSources(ctx context.Context) (map[string]tf
 	return nil, nil
 }
 
-func (p *awsCloudAPIProvider) CloudFormationClient(_ context.Context) (*cloudformation.CloudFormation, error) {
-	return p.cfClient, nil
+func (p *awsCloudAPIProvider) CloudFormationClient(_ context.Context) *cloudformation.CloudFormation {
+	return p.cfClient
+}
+
+func (p *awsCloudAPIProvider) RoleARN(_ context.Context) string {
+	return p.roleARN
 }
 
 // newCloudFormationClient configures and returns a fully initialized AWS CloudFormation client.

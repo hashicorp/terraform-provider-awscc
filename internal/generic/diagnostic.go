@@ -6,14 +6,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 )
 
-func ClientNotFoundDiag(err error) *tfprotov6.Diagnostic {
-	return &tfprotov6.Diagnostic{
-		Severity: tfprotov6.DiagnosticSeverityError,
-		Summary:  "AWS CloudFormation Client Not Found",
-		Detail:   fmt.Sprintf("AWS CloudFormation client not available. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-	}
-}
-
 func DesiredStateErrorDiag(source string, err error) *tfprotov6.Diagnostic {
 	return &tfprotov6.Diagnostic{
 		Severity: tfprotov6.DiagnosticSeverityError,
