@@ -85,32 +85,29 @@ func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider
 // CloudFormationClientProvider is the interface implemented by AWS CloudFormation client providers.
 type CloudFormationClientProvider interface {
 	// CloudFormationClient returns an AWS CloudFormation client.
-	CloudFormationClient(context.Context) (*cloudformation.CloudFormation, error)
+	CloudFormationClient(context.Context) *cloudformation.CloudFormation
+
+	// RoleARN returns an AWS CloudFormation service role ARN.
+	RoleARN(context.Context) string
 }
 
 // Implements tfsdk.Resource.
 type resource struct {
-	clientProvider CloudFormationClientProvider
-	resourceType   *resourceType
+	provider     CloudFormationClientProvider
+	resourceType *resourceType
 }
 
 func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfsdk.Resource {
 	return &resource{
-		clientProvider: provider.(CloudFormationClientProvider),
-		resourceType:   resourceType,
+		provider:     provider.(CloudFormationClientProvider),
+		resourceType: resourceType,
 	}
 }
 
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
 	tflog.Debug(ctx, "Resource.Create(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 
-	conn, err := r.clientProvider.CloudFormationClient(ctx)
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ClientNotFoundDiag(err))
-
-		return
-	}
+	conn := r.provider.CloudFormationClient(ctx)
 
 	log.Printf("[DEBUG] Resource.Create(%s/%s)\nRaw plan: %v", r.resourceType.cfTypeName, r.resourceType.tfTypeName, request.Plan.Raw)
 
@@ -128,6 +125,10 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		ClientToken:  aws.String(UniqueId()),
 		DesiredState: aws.String(desiredState),
 		TypeName:     aws.String(r.resourceType.cfTypeName),
+	}
+
+	if roleARN := r.provider.RoleARN(ctx); roleARN != "" {
+		input.RoleArn = aws.String(roleARN)
 	}
 
 	output, err := conn.CreateResourceWithContext(ctx, input)
@@ -196,13 +197,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
 	tflog.Debug(ctx, "Resource.Read(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 
-	conn, err := r.clientProvider.CloudFormationClient(ctx)
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ClientNotFoundDiag(err))
-
-		return
-	}
+	conn := r.provider.CloudFormationClient(ctx)
 
 	currentState := &request.State
 	identifier, err := r.getIdentifier(ctx, currentState)
@@ -254,13 +249,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
 	tflog.Debug(ctx, "Resource.Update(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 
-	conn, err := r.clientProvider.CloudFormationClient(ctx)
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ClientNotFoundDiag(err))
-
-		return
-	}
+	conn := r.provider.CloudFormationClient(ctx)
 
 	currentState := &request.State
 	identifier, err := r.getIdentifier(ctx, currentState)
@@ -308,6 +297,10 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		TypeName:      aws.String(r.resourceType.cfTypeName),
 	}
 
+	if roleARN := r.provider.RoleARN(ctx); roleARN != "" {
+		input.RoleArn = aws.String(roleARN)
+	}
+
 	output, err := conn.UpdateResourceWithContext(ctx, input)
 
 	if err != nil {
@@ -338,13 +331,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceRequest, response *tfsdk.DeleteResourceResponse) {
 	tflog.Debug(ctx, "Resource.Delete(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 
-	conn, err := r.clientProvider.CloudFormationClient(ctx)
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ClientNotFoundDiag(err))
-
-		return
-	}
+	conn := r.provider.CloudFormationClient(ctx)
 
 	identifier, err := r.getIdentifier(ctx, &request.State)
 
@@ -358,6 +345,10 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		ClientToken: aws.String(UniqueId()),
 		Identifier:  aws.String(identifier),
 		TypeName:    aws.String(r.resourceType.cfTypeName),
+	}
+
+	if roleARN := r.provider.RoleARN(ctx); roleARN != "" {
+		input.RoleArn = aws.String(roleARN)
 	}
 
 	output, err := conn.DeleteResourceWithContext(ctx, input)
@@ -396,6 +387,10 @@ func (r *resource) describe(ctx context.Context, conn *cloudformation.CloudForma
 	input := &cloudformation.GetResourceInput{
 		Identifier: aws.String(identifier),
 		TypeName:   aws.String(r.resourceType.cfTypeName),
+	}
+
+	if roleARN := r.provider.RoleARN(ctx); roleARN != "" {
+		input.RoleArn = aws.String(roleARN)
 	}
 
 	output, err := conn.GetResourceWithContext(ctx, input)
