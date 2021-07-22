@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aws/aws-sdk-go/service/cloudformation"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 

@@ -4,10 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/service/cloudformation"
-	awsbase "github.com/hashicorp/aws-sdk-go-base"
-
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -137,15 +135,17 @@ func (p *awsCloudAPIProvider) RoleARN(_ context.Context) string {
 
 // newCloudFormationClient configures and returns a fully initialized AWS CloudFormation client.
 func newCloudFormationClient(config *providerData) (*cloudformation.CloudFormation, error) {
-	awsbaseConfig := &awsbase.Config{
-		//DebugLogging: logging.IsDebugOrHigher(),
-		Region: config.Region.Value,
-	}
+	// awsbaseConfig := &awsbase.Config{
+	// 	//DebugLogging: logging.IsDebugOrHigher(),
+	// 	Region: config.Region.Value,
+	// }
 
-	sess, _, _, err := awsbase.GetSessionWithAccountIDAndPartition(awsbaseConfig)
-	if err != nil {
-		return nil, fmt.Errorf("error getting AWS SDK session: %w", err)
-	}
+	// sess, _, _, err := awsbase.GetSessionWithAccountIDAndPartition(awsbaseConfig)
+	// if err != nil {
+	// 	return nil, fmt.Errorf("error getting AWS SDK session: %w", err)
+	// }
 
-	return cloudformation.New(sess.Copy(&aws.Config{})), nil
+	// return cloudformation.New(sess.Copy(&aws.Config{})), nil
+
+	return nil, nil
 }

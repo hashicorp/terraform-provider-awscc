@@ -3,7 +3,8 @@ module github.com/hashicorp/terraform-provider-aws-cloudapi
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go v1.38.37
+	github.com/aws/aws-sdk-go-v2 v1.7.1
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.7.0
 	github.com/evanphx/json-patch v0.5.2 // indirect
 	github.com/google/go-cmp v0.5.6
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.2.0
@@ -19,4 +20,4 @@ require (
 	github.com/mitchellh/cli v1.1.2
 )
 
-replace github.com/aws/aws-sdk-go => github.com/hashicorp/aws-sdk-go-private v1.39.2-0.20210716172600-daec78152c52
+replace github.com/aws/aws-sdk-go-v2/service/cloudformation => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210716175306-5f481443c7cc
