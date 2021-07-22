@@ -293,6 +293,10 @@ func GetCloudFormationDesiredStateRaw(ctx context.Context, val tftypes.Value) (m
 		return nil, err
 	}
 
+	if v == nil {
+		return make(map[string]interface{}), nil
+	}
+
 	if v, ok := v.(map[string]interface{}); ok {
 		return v, nil
 	}
