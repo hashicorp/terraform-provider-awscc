@@ -388,6 +388,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			// DataQualityBaselineConfig is a force-new attribute.
 		},
 		"data_quality_job_input": {
@@ -851,6 +852,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: `The name of the job definition.`,
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			// JobDefinitionName is a force-new attribute.
 		},
 		"job_resources": {
@@ -1172,6 +1174,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			// NetworkConfig is a force-new attribute.
 		},
 		"role_arn": {
@@ -1230,6 +1233,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			// StoppingCondition is a force-new attribute.
 		},
 		"tags": {
@@ -1307,6 +1311,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			// Tags is a force-new attribute.
 		},
 	}

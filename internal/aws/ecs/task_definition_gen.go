@@ -2117,6 +2117,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 				schema.SetNestedAttributesOptions{},
 			),
 			Optional: true,
+			Computed: true,
 			// ContainerDefinitions is a force-new attribute.
 		},
 		"cpu": {
@@ -2129,6 +2130,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			*/
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			// Cpu is a force-new attribute.
 		},
 		"ephemeral_storage": {
@@ -2162,6 +2164,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			// EphemeralStorage is a force-new attribute.
 		},
 		"execution_role_arn": {
@@ -2174,6 +2177,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			*/
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			// ExecutionRoleArn is a force-new attribute.
 		},
 		"family": {
@@ -2186,6 +2190,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			*/
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			// Family is a force-new attribute.
 		},
 		"inference_accelerators": {
@@ -2238,6 +2243,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 				schema.SetNestedAttributesOptions{},
 			),
 			Optional: true,
+			Computed: true,
 			// InferenceAccelerators is a force-new attribute.
 		},
 		"ipc_mode": {
@@ -2250,6 +2256,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			*/
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			// IpcMode is a force-new attribute.
 		},
 		"memory": {
@@ -2262,6 +2269,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			*/
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			// Memory is a force-new attribute.
 		},
 		"network_mode": {
@@ -2274,6 +2282,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			*/
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			// NetworkMode is a force-new attribute.
 		},
 		"pid_mode": {
@@ -2286,6 +2295,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			*/
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			// PidMode is a force-new attribute.
 		},
 		"placement_constraints": {
@@ -2341,6 +2351,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 				schema.SetNestedAttributesOptions{},
 			),
 			Optional: true,
+			Computed: true,
 			// PlacementConstraints is a force-new attribute.
 		},
 		"proxy_configuration": {
@@ -2459,6 +2470,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			// ProxyConfiguration is a force-new attribute.
 		},
 		"requires_compatibilities": {
@@ -2475,6 +2487,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			*/
 			Type:     providertypes.SetType{ElemType: types.StringType},
 			Optional: true,
+			Computed: true,
 			// RequiresCompatibilities is a force-new attribute.
 		},
 		"tags": {
@@ -2551,6 +2564,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			*/
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			// TaskRoleArn is a force-new attribute.
 		},
 		"volumes": {
@@ -2978,6 +2992,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 				schema.SetNestedAttributesOptions{},
 			),
 			Optional: true,
+			Computed: true,
 			// Volumes is a force-new attribute.
 		},
 	}
