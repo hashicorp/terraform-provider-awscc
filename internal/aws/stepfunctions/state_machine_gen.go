@@ -335,6 +335,7 @@ func stateMachine(ctx context.Context) (tfsdk.ResourceType, error) {
 			*/
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			// StateMachineName is a force-new attribute.
 		},
 		"state_machine_type": {

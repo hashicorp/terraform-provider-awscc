@@ -264,7 +264,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 		e.printf("Optional: true,\n")
 	}
 
-	if readOnly && !required {
+	if (readOnly || createOnly) && !required {
 		e.printf("Computed: true,\n")
 	}
 

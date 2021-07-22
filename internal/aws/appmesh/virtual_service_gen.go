@@ -66,6 +66,7 @@ func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 			*/
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
 			// MeshOwner is a force-new attribute.
 		},
 		"resource_owner": {
