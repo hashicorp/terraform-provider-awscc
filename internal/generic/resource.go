@@ -3,14 +3,15 @@ package generic
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/service/cloudformation"
-	"github.com/hashicorp/aws-sdk-go-base/tfawserr"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
+	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -85,7 +86,7 @@ func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider
 // CloudFormationClientProvider is the interface implemented by AWS CloudFormation client providers.
 type CloudFormationClientProvider interface {
 	// CloudFormationClient returns an AWS CloudFormation client.
-	CloudFormationClient(context.Context) *cloudformation.CloudFormation
+	CloudFormationClient(context.Context) *cloudformation.Client
 
 	// RoleARN returns an AWS CloudFormation service role ARN.
 	RoleARN(context.Context) string
@@ -131,7 +132,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		input.RoleArn = aws.String(roleARN)
 	}
 
-	output, err := conn.CreateResourceWithContext(ctx, input)
+	output, err := conn.CreateResource(ctx, input)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "CreateResource", err))
@@ -145,7 +146,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.StringValue(output.ProgressEvent.RequestToken), 5*time.Minute)
+	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "CreateResource", err))
@@ -153,7 +154,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	identifier := aws.StringValue(output.ProgressEvent.Identifier)
+	identifier := aws.ToString(output.ProgressEvent.Identifier)
 	description, err := r.describe(ctx, conn, identifier)
 
 	if NotFound(err) {
@@ -174,12 +175,12 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	log.Printf("[DEBUG] ResourceModel: %s", aws.StringValue(description.ResourceModel))
+	log.Printf("[DEBUG] ResourceModel: %s", aws.ToString(description.ResourceModel))
 
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
-	err = SetUnknownValuesFromCloudFormationResourceModel(ctx, &response.State, aws.StringValue(description.ResourceModel))
+	err = SetUnknownValuesFromCloudFormationResourceModel(ctx, &response.State, aws.ToString(description.ResourceModel))
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -224,7 +225,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	}
 
 	schema := &currentState.Schema
-	val, err := GetCloudFormationResourceModelValue(ctx, schema, aws.StringValue(description.ResourceModel))
+	val, err := GetCloudFormationResourceModelValue(ctx, schema, aws.ToString(description.ResourceModel))
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -301,7 +302,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		input.RoleArn = aws.String(roleARN)
 	}
 
-	output, err := conn.UpdateResourceWithContext(ctx, input)
+	output, err := conn.UpdateResource(ctx, input)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "UpdateResource", err))
@@ -315,7 +316,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.StringValue(output.ProgressEvent.RequestToken), 5*time.Minute)
+	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "UpdateResource", err))
@@ -351,7 +352,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		input.RoleArn = aws.String(roleARN)
 	}
 
-	output, err := conn.DeleteResourceWithContext(ctx, input)
+	output, err := conn.DeleteResource(ctx, input)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "DeleteResource", err))
@@ -365,9 +366,9 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	progressEvent, err := waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.StringValue(output.ProgressEvent.RequestToken), 5*time.Minute)
+	progressEvent, err := waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
 
-	if progressEvent != nil && aws.StringValue(progressEvent.ErrorCode) == cloudformation.HandlerErrorCodeNotFound {
+	if progressEvent != nil && progressEvent.ErrorCode == cftypes.HandlerErrorCodeNotFound {
 		response.State.RemoveResource(ctx)
 
 		return
@@ -383,7 +384,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 }
 
 // describe returns the live state of the specified resource.
-func (r *resource) describe(ctx context.Context, conn *cloudformation.CloudFormation, identifier string) (*cloudformation.ResourceDescription, error) {
+func (r *resource) describe(ctx context.Context, conn *cloudformation.Client, identifier string) (*cftypes.ResourceDescription, error) {
 	input := &cloudformation.GetResourceInput{
 		Identifier: aws.String(identifier),
 		TypeName:   aws.String(r.resourceType.cfTypeName),
@@ -393,9 +394,9 @@ func (r *resource) describe(ctx context.Context, conn *cloudformation.CloudForma
 		input.RoleArn = aws.String(roleARN)
 	}
 
-	output, err := conn.GetResourceWithContext(ctx, input)
+	output, err := conn.GetResource(ctx, input)
 
-	if tfawserr.ErrCodeEquals(err, cloudformation.ErrCodeResourceNotFoundException) {
+	if rnfe := (*cftypes.ResourceNotFoundException)(nil); errors.As(err, &rnfe) {
 		return nil, &NotFoundError{LastError: err}
 	}
 
