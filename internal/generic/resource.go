@@ -292,11 +292,10 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	log.Printf("[DEBUG] Resource.Update(%s/%s)\nPatch document: %s", r.resourceType.cfTypeName, r.resourceType.tfTypeName, patchDocument)
 
 	input := &cloudformation.UpdateResourceInput{
-		ClientToken: aws.String(UniqueId()),
-		Identifier:  aws.String(identifier),
-		// TODO Missing from Go v2 SDK...
-		//PatchDocument: aws.String(patchDocument),
-		TypeName: aws.String(r.resourceType.cfTypeName),
+		ClientToken:   aws.String(UniqueId()),
+		Identifier:    aws.String(identifier),
+		PatchDocument: aws.String(patchDocument),
+		TypeName:      aws.String(r.resourceType.cfTypeName),
 	}
 
 	if roleARN := r.provider.RoleARN(ctx); roleARN != "" {
