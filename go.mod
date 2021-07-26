@@ -3,8 +3,6 @@ module github.com/hashicorp/terraform-provider-aws-cloudapi
 go 1.15
 
 require (
-	github.com/agl/ed25519 v0.0.0-20170116200512-5312a6153412 // indirect
-	github.com/alcortesm/tgz v0.0.0-20161220082320-9c5fe88206d7 // indirect
 	github.com/aws/aws-sdk-go v1.31.9 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.7.1
 	github.com/aws/aws-sdk-go-v2/config v1.5.0
@@ -18,7 +16,6 @@ require (
 	github.com/hashicorp/terraform-plugin-go v0.3.1
 	github.com/hashicorp/terraform-plugin-log v0.1.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.7.0
-	github.com/keybase/go-crypto v0.0.0-20161004153544-93f5b35093ba // indirect
 	github.com/mattbaird/jsonpatch v0.0.0-20200820163806-098863c1fc24
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mitchellh/cli v1.1.2
