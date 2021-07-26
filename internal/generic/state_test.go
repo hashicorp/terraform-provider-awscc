@@ -108,25 +108,6 @@ var diskElementType = tftypes.Object{
 	},
 }
 
-func makeSimpleTestState() tfsdk.State {
-	return tfsdk.State{
-		Raw: tftypes.NewValue(tftypes.Object{
-			AttributeTypes: map[string]tftypes.Type{
-				"arn":        tftypes.String,
-				"identifier": tftypes.String,
-				"name":       tftypes.String,
-				"number":     tftypes.Number,
-			},
-		}, map[string]tftypes.Value{
-			"arn":        tftypes.NewValue(tftypes.String, nil),
-			"identifier": tftypes.NewValue(tftypes.String, nil),
-			"name":       tftypes.NewValue(tftypes.String, "testing"),
-			"number":     tftypes.NewValue(tftypes.Number, 42),
-		}),
-		Schema: testSimpleSchema,
-	}
-}
-
 func makeSimpleValueWithUnknowns() tftypes.Value {
 	return tftypes.NewValue(tftypes.Object{
 		AttributeTypes: map[string]tftypes.Type{
@@ -143,59 +124,65 @@ func makeSimpleValueWithUnknowns() tftypes.Value {
 	})
 }
 
-func makeComplexTestState() tfsdk.State {
-	return tfsdk.State{
-		Raw: tftypes.NewValue(tftypes.Object{
-			AttributeTypes: map[string]tftypes.Type{
-				"name":         tftypes.String,
-				"machine_type": tftypes.String,
-				"tags":         tftypes.List{ElementType: tftypes.String},
-				"disks": tftypes.List{
-					ElementType: diskElementType,
-				},
-				"boot_disk": diskElementType,
-				"scratch_disk": tftypes.Object{
-					AttributeTypes: map[string]tftypes.Type{
-						"interface": tftypes.String,
-					},
-				},
-			},
-		}, map[string]tftypes.Value{
-			"name":         tftypes.NewValue(tftypes.String, "hello, world"),
-			"machine_type": tftypes.NewValue(tftypes.String, "e2-medium"),
-			"tags": tftypes.NewValue(tftypes.List{
-				ElementType: tftypes.String,
-			}, []tftypes.Value{
-				tftypes.NewValue(tftypes.String, "red"),
-				tftypes.NewValue(tftypes.String, "blue"),
-				tftypes.NewValue(tftypes.String, "green"),
-			}),
-			"disks": tftypes.NewValue(tftypes.List{
+func makeComplexValueWithUnknowns() tftypes.Value {
+	return tftypes.NewValue(tftypes.Object{
+		AttributeTypes: map[string]tftypes.Type{
+			"name":         tftypes.String,
+			"machine_type": tftypes.String,
+			"ports":        tftypes.List{ElementType: tftypes.Number},
+			"tags":         tftypes.Set{ElementType: tftypes.String},
+			"disks": tftypes.List{
 				ElementType: diskElementType,
-			}, []tftypes.Value{
-				tftypes.NewValue(diskElementType, map[string]tftypes.Value{
-					"id":                   tftypes.NewValue(tftypes.String, "disk0"),
-					"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
-				}),
-				tftypes.NewValue(diskElementType, map[string]tftypes.Value{
-					"id":                   tftypes.NewValue(tftypes.String, "disk1"),
-					"delete_with_instance": tftypes.NewValue(tftypes.Bool, false),
-				}),
-			}),
-			"boot_disk": tftypes.NewValue(diskElementType, map[string]tftypes.Value{
-				"id":                   tftypes.NewValue(tftypes.String, "bootdisk"),
-				"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
-			}),
-			"scratch_disk": tftypes.NewValue(tftypes.Object{
+			},
+			"boot_disk": diskElementType,
+			"scratch_disk": tftypes.Object{
 				AttributeTypes: map[string]tftypes.Type{
 					"interface": tftypes.String,
 				},
-			}, map[string]tftypes.Value{
-				"interface": tftypes.NewValue(tftypes.String, "SCSI"),
+			},
+			"identifier": tftypes.String,
+		},
+	}, map[string]tftypes.Value{
+		"name":         tftypes.NewValue(tftypes.String, "hello, world"),
+		"machine_type": tftypes.NewValue(tftypes.String, "e2-medium"),
+		"ports": tftypes.NewValue(tftypes.List{
+			ElementType: tftypes.Number,
+		}, []tftypes.Value{
+			tftypes.NewValue(tftypes.Number, 80),
+			tftypes.NewValue(tftypes.Number, 443),
+		}),
+		"tags": tftypes.NewValue(tftypes.Set{
+			ElementType: tftypes.String,
+		}, []tftypes.Value{
+			tftypes.NewValue(tftypes.String, "red"),
+			tftypes.NewValue(tftypes.String, "blue"),
+			tftypes.NewValue(tftypes.String, "green"),
+		}),
+		"disks": tftypes.NewValue(tftypes.List{
+			ElementType: diskElementType,
+		}, []tftypes.Value{
+			tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+				"id":                   tftypes.NewValue(tftypes.String, "disk0"),
+				"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+			}),
+			tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+				"id":                   tftypes.NewValue(tftypes.String, "disk1"),
+				"delete_with_instance": tftypes.NewValue(tftypes.Bool, false),
 			}),
 		}),
-		Schema: testComplexSchema,
-	}
+		"boot_disk": tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+			"id":                   tftypes.NewValue(tftypes.String, "bootdisk"),
+			"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+		}),
+		"scratch_disk": tftypes.NewValue(tftypes.Object{
+			AttributeTypes: map[string]tftypes.Type{
+				"interface": tftypes.String,
+			},
+		}, map[string]tftypes.Value{
+			"interface": tftypes.NewValue(tftypes.String, "SCSI"),
+		}),
+		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+	})
 }
 
 func TestGetCloudFormationResourceModelValue(t *testing.T) {
@@ -226,6 +213,91 @@ func TestGetCloudFormationResourceModelValue(t *testing.T) {
 				"identifier": tftypes.NewValue(tftypes.String, nil),
 				"name":       tftypes.NewValue(tftypes.String, "testing"),
 				"number":     tftypes.NewValue(tftypes.Number, 42),
+			}),
+		},
+		{
+			TestName: "complex State",
+			Schema:   testComplexSchema,
+			ResourceModel: map[string]interface{}{
+				"Name":        "hello, world",
+				"MachineType": "e2-medium",
+				"Ports":       []interface{}{float64(80), float64(443)},
+				"Tags":        []interface{}{"red", "blue", "green"},
+				"Disks": []interface{}{
+					map[string]interface{}{
+						"Id":                 "disk0",
+						"DeleteWithInstance": true,
+					},
+					map[string]interface{}{
+						"Id":                 "disk1",
+						"DeleteWithInstance": false,
+					},
+				},
+				"BootDisk": map[string]interface{}{
+					"Id":                 "bootdisk",
+					"DeleteWithInstance": true,
+				},
+				"ScratchDisk": map[string]interface{}{
+					"Interface": "SCSI",
+				},
+			},
+			ExpectedValue: tftypes.NewValue(tftypes.Object{
+				AttributeTypes: map[string]tftypes.Type{
+					"name":         tftypes.String,
+					"machine_type": tftypes.String,
+					"ports":        tftypes.List{ElementType: tftypes.Number},
+					"tags":         tftypes.Set{ElementType: tftypes.String},
+					"disks": tftypes.List{
+						ElementType: diskElementType,
+					},
+					"boot_disk": diskElementType,
+					"scratch_disk": tftypes.Object{
+						AttributeTypes: map[string]tftypes.Type{
+							"interface": tftypes.String,
+						},
+					},
+					"identifier": tftypes.String,
+				},
+			}, map[string]tftypes.Value{
+				"name":         tftypes.NewValue(tftypes.String, "hello, world"),
+				"machine_type": tftypes.NewValue(tftypes.String, "e2-medium"),
+				"ports": tftypes.NewValue(tftypes.List{
+					ElementType: tftypes.Number,
+				}, []tftypes.Value{
+					tftypes.NewValue(tftypes.Number, 80),
+					tftypes.NewValue(tftypes.Number, 443),
+				}),
+				"tags": tftypes.NewValue(tftypes.Set{
+					ElementType: tftypes.String,
+				}, []tftypes.Value{
+					tftypes.NewValue(tftypes.String, "red"),
+					tftypes.NewValue(tftypes.String, "blue"),
+					tftypes.NewValue(tftypes.String, "green"),
+				}),
+				"disks": tftypes.NewValue(tftypes.List{
+					ElementType: diskElementType,
+				}, []tftypes.Value{
+					tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+						"id":                   tftypes.NewValue(tftypes.String, "disk0"),
+						"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+					}),
+					tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+						"id":                   tftypes.NewValue(tftypes.String, "disk1"),
+						"delete_with_instance": tftypes.NewValue(tftypes.Bool, false),
+					}),
+				}),
+				"boot_disk": tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+					"id":                   tftypes.NewValue(tftypes.String, "bootdisk"),
+					"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+				}),
+				"scratch_disk": tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"interface": tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"interface": tftypes.NewValue(tftypes.String, "SCSI"),
+				}),
+				"identifier": tftypes.NewValue(tftypes.String, nil),
 			}),
 		},
 	}
@@ -264,6 +336,16 @@ func TestGetUnknownValuePaths(t *testing.T) {
 					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("arn"),
 					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("Arn"),
 				},
+				{
+					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("identifier"),
+					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("Identifier"),
+				},
+			},
+		},
+		{
+			TestName: "complex State",
+			Value:    makeComplexValueWithUnknowns(),
+			ExpectedPaths: []UnknownValuePath{
 				{
 					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("identifier"),
 					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("Identifier"),
@@ -361,7 +443,7 @@ func makeSimpleTestPlan() tfsdk.Plan {
 		}, map[string]tftypes.Value{
 			"name": tftypes.NewValue(tftypes.String, "testing"),
 		}),
-		Schema: testComplexSchema,
+		Schema: testSimpleSchema,
 	}
 }
 
