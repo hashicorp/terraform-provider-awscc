@@ -138,10 +138,8 @@ func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Sch
 		var vals []tftypes.Value
 		for idx, v := range v {
 			if typ.Is(tftypes.Set{}) {
-				// TODO
-				// TODO How to express the path for the element without knowing its value???
-				// TODO
-				path = path.WithElementKeyValue(tftypes.NewValue(typ.(tftypes.Set).ElementType, v))
+				// No need to worry about a specific value here.
+				path = path.WithElementKeyValue(tftypes.NewValue(typ.(tftypes.Set).ElementType, nil))
 			} else {
 				path = path.WithElementKeyInt(int64(idx))
 			}
