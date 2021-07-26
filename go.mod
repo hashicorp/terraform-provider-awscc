@@ -12,7 +12,7 @@ require (
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.2.0
 	github.com/hashicorp/go-getter v1.5.3
 	github.com/hashicorp/hcl/v2 v2.10.0
-	github.com/hashicorp/terraform-plugin-framework v0.1.0
+	github.com/hashicorp/terraform-plugin-framework v0.2.0
 	github.com/hashicorp/terraform-plugin-go v0.3.1
 	github.com/hashicorp/terraform-plugin-log v0.1.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.6.1
