@@ -529,7 +529,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "uniqueItems": true
 			   }
 			*/
-			Attributes: schema.SetNestedAttributes(
+			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"command": {
 						// Property: Command
@@ -715,7 +715,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Description: `The environment variables to pass to a container`,
-						Attributes: schema.SetNestedAttributes(
+						Attributes: providertypes.SetNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
@@ -740,7 +740,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.SetNestedAttributesOptions{},
+							providertypes.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -1606,7 +1606,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "uniqueItems": true
 						   }
 						*/
-						Attributes: schema.SetNestedAttributes(
+						Attributes: providertypes.SetNestedAttributes(
 							map[string]schema.Attribute{
 								"container_path": {
 									// Property: ContainerPath
@@ -1642,7 +1642,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.SetNestedAttributesOptions{},
+							providertypes.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -1686,7 +1686,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						   }
 						*/
 						Description: `Port mappings allow containers to access ports on the host container instance to send or receive traffic.`,
-						Attributes: schema.SetNestedAttributes(
+						Attributes: providertypes.SetNestedAttributes(
 							map[string]schema.Attribute{
 								"container_port": {
 									// Property: ContainerPort
@@ -1722,7 +1722,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.SetNestedAttributesOptions{},
+							providertypes.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -2073,7 +2073,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "uniqueItems": true
 						   }
 						*/
-						Attributes: schema.SetNestedAttributes(
+						Attributes: providertypes.SetNestedAttributes(
 							map[string]schema.Attribute{
 								"read_only": {
 									// Property: ReadOnly
@@ -2098,7 +2098,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.SetNestedAttributesOptions{},
+							providertypes.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -2114,7 +2114,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.SetNestedAttributesOptions{},
+				providertypes.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -2215,7 +2215,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "uniqueItems": true
 			   }
 			*/
-			Attributes: schema.SetNestedAttributes(
+			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"device_name": {
 						// Property: DeviceName
@@ -2240,7 +2240,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.SetNestedAttributesOptions{},
+				providertypes.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -2323,7 +2323,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "uniqueItems": true
 			   }
 			*/
-			Attributes: schema.SetNestedAttributes(
+			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"expression": {
 						// Property: Expression
@@ -2348,7 +2348,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.SetNestedAttributesOptions{},
+				providertypes.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -2427,7 +2427,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "uniqueItems": true
 						   }
 						*/
-						Attributes: schema.SetNestedAttributes(
+						Attributes: providertypes.SetNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
@@ -2452,7 +2452,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.SetNestedAttributesOptions{},
+							providertypes.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -2673,7 +2673,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "uniqueItems": true
 			   }
 			*/
-			Attributes: schema.SetNestedAttributes(
+			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"docker_volume_configuration": {
 						// Property: DockerVolumeConfiguration
@@ -2989,7 +2989,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.SetNestedAttributesOptions{},
+				providertypes.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,

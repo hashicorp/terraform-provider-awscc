@@ -99,7 +99,8 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 					return 0, fmt.Errorf("%s is of unsupported type: set of undefined schema", name)
 				}
 
-				e.printf("Attributes: schema.SetNestedAttributes(\n")
+				features |= UsesInternalTypes
+				e.printf("Attributes: providertypes.SetNestedAttributes(\n")
 
 				f, err := e.emitSchema(
 					parent{
@@ -115,7 +116,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				features |= f
 
 				e.printf(",\n")
-				e.printf("schema.SetNestedAttributesOptions{\n")
+				e.printf("providertypes.SetNestedAttributesOptions{\n")
 				if property.MinItems != nil {
 					e.printf("MinItems: %d,\n", *property.MinItems)
 				}
