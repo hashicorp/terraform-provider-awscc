@@ -84,24 +84,15 @@ func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider
 	return newGenericResource(provider, rt), nil
 }
 
-// CloudFormationClientProvider is the interface implemented by AWS CloudFormation client providers.
-type CloudFormationClientProvider interface {
-	// CloudFormationClient returns an AWS CloudFormation client.
-	CloudFormationClient(context.Context) *cloudformation.Client
-
-	// RoleARN returns an AWS CloudFormation service role ARN.
-	RoleARN(context.Context) string
-}
-
 // Implements tfsdk.Resource.
 type resource struct {
-	provider     CloudFormationClientProvider
+	provider     tfcloudformation.Provider
 	resourceType *resourceType
 }
 
 func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfsdk.Resource {
 	return &resource{
-		provider:     provider.(CloudFormationClientProvider),
+		provider:     provider.(tfcloudformation.Provider),
 		resourceType: resourceType,
 	}
 }

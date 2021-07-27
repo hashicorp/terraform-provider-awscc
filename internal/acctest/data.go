@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/provider"
 )
 
 type TestData struct {
@@ -19,6 +21,8 @@ type TestData struct {
 
 	// TerraformResourceType is the Terraform resource type, e.g. "aws_s3_bucket".
 	TerraformResourceType string
+
+	provider tfsdk.Provider
 }
 
 // RandomName returns a new random name with the standard prefix `tf-acc-test`.
@@ -38,6 +42,8 @@ func NewTestData(t *testing.T, cfResourceType, tfResourceType, resourceLabel str
 		ResourceLabel:              resourceLabel,
 		ResourceName:               fmt.Sprintf("%[1]s.%[2]s", tfResourceType, resourceLabel),
 		TerraformResourceType:      tfResourceType,
+
+		provider: provider.New(),
 	}
 
 	return data
