@@ -6,7 +6,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest/check"
 )
 
 type logGroupResource struct{}
@@ -19,7 +18,7 @@ func TestAccLogGroup_basic(t *testing.T) {
 		{
 			Config: r.basic(data),
 			Check: resource.ComposeTestCheckFunc(
-				check.That(data.ResourceName).ExistsInAWS(r),
+				acctest.CheckThat(data.ResourceName).ExistsInAWS(r),
 			),
 		},
 	})
