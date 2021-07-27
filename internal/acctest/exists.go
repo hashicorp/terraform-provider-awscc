@@ -12,23 +12,24 @@ import (
 )
 
 type checkThat struct {
-	resourceName string
+	testData TestData
 }
 
-func CheckThat(resourceName string) checkThat {
+func CheckThat(testData TestData) checkThat {
 	return checkThat{
-		resourceName: resourceName,
+		testData: testData,
 	}
 }
 
+// CheckDestroy returns a TestCheckFunc that tests whether a resource exists in AWS.
 func (t checkThat) ExistsInAWS() resource.TestCheckFunc {
 	return func(state *terraform.State) error {
-		// TODO
-		return nil
+		// TODO: Get the CF client from the provider.
+		return existsFunc(true)(context.TODO(), nil, t.testData.CloudFormationResourceType, t.testData.TerraformResourceType, t.testData.ResourceName)(state)
 	}
 }
 
-// CheckDestroy returns a TestCheckFunc that tests whether a resource has been destroyed.
+// CheckDestroy returns a TestCheckFunc that tests whether a resource has been destroyed in AWS.
 func (td TestData) CheckDestroy(ctx context.Context, conn *cloudformation.Client) resource.TestCheckFunc {
 	return func(state *terraform.State) error {
 		for resourceName, resourceState := range state.RootModule().Resources {

@@ -18,7 +18,7 @@ func TestAccLogGroup_basic(t *testing.T) {
 		{
 			Config: r.basic(data),
 			Check: resource.ComposeTestCheckFunc(
-				acctest.CheckThat(data.ResourceName).ExistsInAWS(),
+				acctest.CheckThat(data).ExistsInAWS(),
 			),
 		},
 	})
