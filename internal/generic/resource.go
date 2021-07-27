@@ -105,6 +105,11 @@ func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfs
 	}
 }
 
+var (
+	// Path to the "id" attribute required for acceptance testing.
+	idAttributePath = tftypes.NewAttributePath().WithAttributeName("id")
+)
+
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
 	tflog.Debug(ctx, "Resource.Create(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 
@@ -180,6 +185,9 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
+	// Set the "id" attribute required for acceptance testing.
+	response.State.SetAttribute(ctx, idAttributePath, identifier)
+
 	err = SetUnknownValuesFromCloudFormationResourceModel(ctx, &response.State, aws.ToString(description.ResourceModel))
 
 	if err != nil {
@@ -245,6 +253,9 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		Schema: *schema,
 		Raw:    val,
 	}
+
+	// Set the "id" attribute required for acceptance testing.
+	response.State.SetAttribute(ctx, idAttributePath, identifier)
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {

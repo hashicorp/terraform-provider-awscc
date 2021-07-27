@@ -232,6 +232,13 @@ func init() {
 func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := {{ .RootPropertiesSchema }}
 
+	// Required for acceptance testing.
+	attributes["id"] = schema.Attribute{
+		Description: "Uniquely identifies the resource.",
+		Type:        types.StringType,
+		Computed:    true,
+	}
+
 {{ $tick := "` + "`" + `" }}
 
 	schema := schema.Schema{
