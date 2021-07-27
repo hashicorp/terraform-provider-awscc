@@ -12,7 +12,7 @@ import (
 type logGroupResource struct{}
 
 func TestAccLogGroup_basic(t *testing.T) {
-	data := acctest.NewTestData(t, "aws_logs_log_group", "test")
+	data := acctest.NewTestData(t, "AWS::Logs::LogGroup", "aws_logs_log_group", "test")
 	r := logGroupResource{}
 
 	data.ResourceTest(t, r, []resource.TestStep{
@@ -30,5 +30,5 @@ func (r logGroupResource) basic(data acctest.TestData) string {
 resource %[1]q %[2]q {
   provider = cloudapi
 }
-`, data.ResourceType, data.ResourceLabel)
+`, data.TerraformResourceType, data.ResourceLabel)
 }
