@@ -2997,6 +2997,13 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
+	// Required for acceptance testing.
+	attributes["id"] = schema.Attribute{
+		Description: "Uniquely identifies the resource.",
+		Type:        types.StringType,
+		Computed:    true,
+	}
+
 	schema := schema.Schema{
 		Description: `Resource Schema describing various properties for ECS TaskDefinition`,
 		Version:     1,

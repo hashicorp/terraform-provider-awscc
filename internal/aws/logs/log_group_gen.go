@@ -102,6 +102,13 @@ func logGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
+	// Required for acceptance testing.
+	attributes["id"] = schema.Attribute{
+		Description: "Uniquely identifies the resource.",
+		Type:        types.StringType,
+		Computed:    true,
+	}
+
 	schema := schema.Schema{
 		Description: `Resource schema for AWS::Logs::LogGroup`,
 		Version:     1,

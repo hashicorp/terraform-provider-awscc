@@ -3,7 +3,6 @@ package generic
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"strings"
@@ -19,7 +18,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
+	tfcloudformation "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/waiter"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/tfresource"
 	"github.com/mattbaird/jsonpatch"
 )
 
@@ -105,6 +106,11 @@ func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfs
 	}
 }
 
+var (
+	// Path to the "id" attribute required for acceptance testing.
+	idAttributePath = tftypes.NewAttributePath().WithAttributeName("id")
+)
+
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
 	tflog.Debug(ctx, "Resource.Create(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
 
@@ -157,7 +163,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	identifier := aws.ToString(output.ProgressEvent.Identifier)
 	description, err := r.describe(ctx, conn, identifier)
 
-	if NotFound(err) {
+	if tfresource.NotFound(err) {
 		response.Diagnostics = append(response.Diagnostics, ResourceNotFoundAfterCreationDiag(err))
 
 		return
@@ -179,6 +185,9 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
+
+	// Set the "id" attribute required for acceptance testing.
+	response.State.SetAttribute(ctx, idAttributePath, identifier)
 
 	err = SetUnknownValuesFromCloudFormationResourceModel(ctx, &response.State, aws.ToString(description.ResourceModel))
 
@@ -211,7 +220,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 	description, err := r.describe(ctx, conn, identifier)
 
-	if NotFound(err) {
+	if tfresource.NotFound(err) {
 		response.Diagnostics = append(response.Diagnostics, ResourceNotFoundWarningDiag(err))
 		response.State.RemoveResource(ctx)
 
@@ -245,6 +254,9 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		Schema: *schema,
 		Raw:    val,
 	}
+
+	// Set the "id" attribute required for acceptance testing.
+	response.State.SetAttribute(ctx, idAttributePath, identifier)
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
@@ -385,30 +397,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 
 // describe returns the live state of the specified resource.
 func (r *resource) describe(ctx context.Context, conn *cloudformation.Client, identifier string) (*cftypes.ResourceDescription, error) {
-	input := &cloudformation.GetResourceInput{
-		Identifier: aws.String(identifier),
-		TypeName:   aws.String(r.resourceType.cfTypeName),
-	}
-
-	if roleARN := r.provider.RoleARN(ctx); roleARN != "" {
-		input.RoleArn = aws.String(roleARN)
-	}
-
-	output, err := conn.GetResource(ctx, input)
-
-	if rnfe := (*cftypes.ResourceNotFoundException)(nil); errors.As(err, &rnfe) {
-		return nil, &NotFoundError{LastError: err}
-	}
-
-	if err != nil {
-		return nil, err
-	}
-
-	if output == nil || output.ResourceDescription == nil {
-		return nil, &NotFoundError{Message: "Empty result"}
-	}
-
-	return output.ResourceDescription, nil
+	return tfcloudformation.FindResourceByTypeNameAndID(ctx, conn, r.provider.RoleARN(ctx), r.resourceType.cfTypeName, identifier)
 }
 
 // getIdentifier returns the resource's primary identifier value from State.
