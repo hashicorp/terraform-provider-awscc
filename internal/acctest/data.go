@@ -1,12 +1,19 @@
 package acctest
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 )
 
 type TestData struct {
+	// ResourceName is the resource label (local name), e.g. "test".
+	ResourceLabel string
+
+	// ResourceName is the qualified resource name, e.g. "aws_s3_bucket.test".
+	ResourceName string
+
 	// ResourceType is the Terraform resource type, e.g. "aws_s3_bucket".
 	ResourceType string
 }
@@ -22,9 +29,11 @@ func (td *TestData) RandomAlphaString(n int) string {
 }
 
 // NewTestData returns a new TestData structure.
-func NewTestData(t *testing.T, resourceType string) TestData {
+func NewTestData(t *testing.T, resourceType, resourceLabel string) TestData {
 	data := TestData{
-		ResourceType: resourceType,
+		ResourceLabel: resourceLabel,
+		ResourceName:  fmt.Sprintf("%[1]s.%[2]s", resourceType, resourceLabel),
+		ResourceType:  resourceType,
 	}
 
 	return data
