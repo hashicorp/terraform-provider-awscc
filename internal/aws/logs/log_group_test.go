@@ -14,11 +14,11 @@ func TestAccLogGroup_basic(t *testing.T) {
 	data := acctest.NewTestData(t, "AWS::Logs::LogGroup", "aws_logs_log_group", "test")
 	r := logGroupResource{}
 
-	data.ResourceTest(t, r, []resource.TestStep{
+	data.ResourceTest(t, []resource.TestStep{
 		{
 			Config: r.basic(data),
 			Check: resource.ComposeTestCheckFunc(
-				acctest.CheckThat(data.ResourceName).ExistsInAWS(r),
+				acctest.CheckThat(data.ResourceName).ExistsInAWS(),
 			),
 		},
 	})

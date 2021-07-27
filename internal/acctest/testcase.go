@@ -1,22 +1,21 @@
 package acctest
 
 import (
+	"context"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/provider"
 )
 
-func (td TestData) ResourceTest(t *testing.T, testResource TestResource, steps []resource.TestStep) {
+func (td TestData) ResourceTest(t *testing.T, steps []resource.TestStep) {
 	testCase := resource.TestCase{
 		PreCheck: func() { PreCheck(t) },
-		CheckDestroy: func(s *terraform.State) error {
-			return nil
-		},
-		Steps: steps,
+		// TODO: Get the CF client from the provider.
+		CheckDestroy: td.CheckDestroy(context.TODO(), nil),
+		Steps:        steps,
 	}
 	td.runAcceptanceTest(t, testCase)
 }
