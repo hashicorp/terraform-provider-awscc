@@ -7,11 +7,12 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.7.1
 	github.com/aws/aws-sdk-go-v2/config v1.5.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.7.0
+	github.com/aws/smithy-go v1.6.0
 	github.com/evanphx/json-patch v0.5.2 // indirect
 	github.com/google/go-cmp v0.5.6
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.2.0
 	github.com/hashicorp/go-getter v1.5.3
-	github.com/hashicorp/go-hclog v0.16.1 // indirect
+	github.com/hashicorp/go-hclog v0.16.1
 	github.com/hashicorp/hcl/v2 v2.10.0
 	github.com/hashicorp/terraform-plugin-framework v0.2.0
 	github.com/hashicorp/terraform-plugin-go v0.3.1
