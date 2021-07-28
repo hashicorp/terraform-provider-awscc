@@ -5,6 +5,7 @@ package xray
 import (
 	"context"
 
+	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -1071,7 +1072,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema for %s:\n\n%v", "aws_xray_sampling_rule", schema)
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_xray_sampling_rule", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

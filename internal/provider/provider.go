@@ -24,8 +24,6 @@ type awsCloudAPIProvider struct {
 }
 
 func (p *awsCloudAPIProvider) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
-	tflog.Debug(ctx, "Provider.GetSchema() enter")
-
 	return schema.Schema{
 		Version: 1,
 		Attributes: map[string]schema.Attribute{
@@ -50,8 +48,6 @@ type providerData struct {
 }
 
 func (p *awsCloudAPIProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
-	tflog.Debug(ctx, "Provider.Configure() enter")
-
 	var config providerData
 
 	err := request.Config.Get(ctx, &config)
@@ -95,8 +91,6 @@ func (p *awsCloudAPIProvider) Configure(ctx context.Context, request tfsdk.Confi
 }
 
 func (p *awsCloudAPIProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
-	tflog.Debug(ctx, "Provider.GetResources() enter")
-
 	var diags []*tfprotov6.Diagnostic
 	resources := make(map[string]tfsdk.ResourceType)
 
@@ -120,8 +114,6 @@ func (p *awsCloudAPIProvider) GetResources(ctx context.Context) (map[string]tfsd
 }
 
 func (p *awsCloudAPIProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
-	tflog.Debug(ctx, "Provider.GetDataSources() enter")
-
 	return nil, nil
 }
 

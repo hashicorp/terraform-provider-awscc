@@ -5,6 +5,8 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
+	hclog "github.com/hashicorp/go-hclog"
+	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	tfcloudformation "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation"
@@ -43,6 +45,7 @@ func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 		}
 
 		ctx := context.TODO()
+		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevel(hclog.Trace), tflog.WithoutLocation())
 
 		return existsFunc(shouldExist)(
 			ctx,

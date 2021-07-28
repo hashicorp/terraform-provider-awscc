@@ -5,6 +5,7 @@ package sagemaker
 import (
 	"context"
 
+	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -1346,7 +1347,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema for %s:\n\n%v", "aws_sagemaker_data_quality_job_definition", schema)
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_sagemaker_data_quality_job_definition", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }
