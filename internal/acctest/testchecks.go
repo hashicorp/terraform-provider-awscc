@@ -37,6 +37,13 @@ func (td TestData) CheckExistsInAWS() resource.TestCheckFunc {
 	return td.checkExists(true)
 }
 
+// DeleteResource returns a TestCheckFunc that deletes a resource in AWS.
+func (td TestData) DeleteResource() resource.TestCheckFunc {
+	return func(state *terraform.State) error {
+		return nil
+	}
+}
+
 func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 	return func(state *terraform.State) error {
 		provider, ok := td.provider.(tfcloudformation.Provider)

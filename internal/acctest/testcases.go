@@ -9,12 +9,11 @@ import (
 )
 
 func (td TestData) ResourceTest(t *testing.T, steps []resource.TestStep) {
-	testCase := resource.TestCase{
+	td.runAcceptanceTest(t, resource.TestCase{
 		PreCheck:     func() { PreCheck(t) },
 		CheckDestroy: td.CheckDestroy(),
 		Steps:        steps,
-	}
-	td.runAcceptanceTest(t, testCase)
+	})
 }
 
 func (td TestData) runAcceptanceTest(t *testing.T, testCase resource.TestCase) {
@@ -30,3 +29,5 @@ func (td TestData) providerFactories() map[string]func() (tfprotov6.ProviderServ
 		},
 	}
 }
+
+func PreCheck(t *testing.T) {}

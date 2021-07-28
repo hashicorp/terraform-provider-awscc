@@ -24,6 +24,17 @@ func TestAccLogGroup_basic(t *testing.T) {
 	})
 }
 
+func TestAccLogGroup_disappears(t *testing.T) {
+	data := acctest.NewTestData(t, "AWS::Logs::LogGroup", "aws_logs_log_group", "test")
+	r := logGroupResource{}
+
+	data.ResourceTest(t, []resource.TestStep{
+		data.DisappearsStep(acctest.DisappearsStepData{
+			Config: r.basic,
+		}),
+	})
+}
+
 func (r logGroupResource) basic(data acctest.TestData) string {
 	return fmt.Sprintf(`
 resource %[1]q %[2]q {

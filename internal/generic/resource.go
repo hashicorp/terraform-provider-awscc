@@ -121,7 +121,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	tflog.Debug(ctx, "CloudFormation DesiredState", "value", desiredState)
 
 	input := &cloudformation.CreateResourceInput{
-		ClientToken:  aws.String(UniqueId()),
+		ClientToken:  aws.String(tfresource.UniqueId()),
 		DesiredState: aws.String(desiredState),
 		TypeName:     aws.String(cfTypeName),
 	}
@@ -308,7 +308,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	tflog.Debug(ctx, "CloudFormation PatchDocument", "value", patchDocument)
 
 	input := &cloudformation.UpdateResourceInput{
-		ClientToken:   aws.String(UniqueId()),
+		ClientToken:   aws.String(tfresource.UniqueId()),
 		Identifier:    aws.String(identifier),
 		PatchDocument: aws.String(patchDocument),
 		TypeName:      aws.String(cfTypeName),
@@ -366,7 +366,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 	}
 
 	input := &cloudformation.DeleteResourceInput{
-		ClientToken: aws.String(UniqueId()),
+		ClientToken: aws.String(tfresource.UniqueId()),
 		Identifier:  aws.String(identifier),
 		TypeName:    aws.String(cfTypeName),
 	}
