@@ -79,7 +79,7 @@ func existsFunc(shouldExist bool) func(context.Context, *cloudformation.Client, 
 			// TODO
 
 			if !shouldExist {
-				if err != nil {
+				if err == nil {
 					return fmt.Errorf("(%s/%s) resource (%s) still exists", cfTypeName, tfTypeName, id)
 				}
 

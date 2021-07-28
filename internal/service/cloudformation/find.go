@@ -3,6 +3,7 @@ package cloudformation
 import (
 	"context"
 	"errors"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
@@ -30,6 +31,11 @@ func FindResourceByTypeNameAndID(ctx context.Context, conn *cloudformation.Clien
 	}
 
 	if err != nil {
+		// "api error ResourceNotFound: AWS::Logs::LogGroup Handler returned status FAILED: Resource of type 'AWS::Logs::LogGroup' with identifier '{"/properties/LogGroupName":"JPZD4AtrMPJQ4DJLl0EUpXRYS-7otPmOvuX3oo"}' was not found."
+		if strings.Contains(err.Error(), "api error ResourceNotFound") {
+			return nil, &tfresource.NotFoundError{LastError: err}
+		}
+
 		return nil, err
 	}
 
