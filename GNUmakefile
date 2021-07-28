@@ -1,5 +1,6 @@
 TEST?=./...
 TEST_COUNT?=1
+PKG_NAME=internal/provider
 ACCTEST_TIMEOUT?=180m
 ACCTEST_PARALLELISM?=20
 
@@ -22,5 +23,6 @@ schemas:
 test:
 	go test $(TEST) $(TESTARGS) -timeout=5m -parallel=4
 
+# make testacc PKG_NAME=internal/aws/logs TESTARGS='-run=TestAccLogGroup_'
 testacc:
-	TF_ACC=1 go test ./internal/provider -v -count $(TEST_COUNT) -parallel $(ACCTEST_PARALLELISM) $(TESTARGS) -timeout $(ACCTEST_TIMEOUT)
+	TF_ACC=1 go test ./$(PKG_NAME) -v -count $(TEST_COUNT) -parallel $(ACCTEST_PARALLELISM) $(TESTARGS) -timeout $(ACCTEST_TIMEOUT)

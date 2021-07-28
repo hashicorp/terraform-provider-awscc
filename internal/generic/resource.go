@@ -4,13 +4,13 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -73,35 +73,22 @@ func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema, prim
 }
 
 func (rt *resourceType) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
-	tflog.Debug(ctx, "ResourceType.GetSchema(%s/%s) enter", rt.cfTypeName, rt.tfTypeName)
-
 	return rt.tfSchema, nil
 }
 
 func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider) (tfsdk.Resource, []*tfprotov6.Diagnostic) {
-	tflog.Debug(ctx, "ResourceType.NewResource(%s/%s) enter", rt.cfTypeName, rt.tfTypeName)
-
 	return newGenericResource(provider, rt), nil
-}
-
-// CloudFormationClientProvider is the interface implemented by AWS CloudFormation client providers.
-type CloudFormationClientProvider interface {
-	// CloudFormationClient returns an AWS CloudFormation client.
-	CloudFormationClient(context.Context) *cloudformation.Client
-
-	// RoleARN returns an AWS CloudFormation service role ARN.
-	RoleARN(context.Context) string
 }
 
 // Implements tfsdk.Resource.
 type resource struct {
-	provider     CloudFormationClientProvider
+	provider     tfcloudformation.Provider
 	resourceType *resourceType
 }
 
 func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfsdk.Resource {
 	return &resource{
-		provider:     provider.(CloudFormationClientProvider),
+		provider:     provider.(tfcloudformation.Provider),
 		resourceType: resourceType,
 	}
 }
@@ -112,11 +99,16 @@ var (
 )
 
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
-	tflog.Debug(ctx, "Resource.Create(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevel(hclog.Trace), tflog.WithoutLocation())
+
+	cfTypeName := r.resourceType.cfTypeName
+	tfTypeName := r.resourceType.tfTypeName
+
+	tflog.Debug(ctx, "Resource.Create enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudFormationClient(ctx)
 
-	log.Printf("[DEBUG] Resource.Create(%s/%s)\nRaw plan: %v", r.resourceType.cfTypeName, r.resourceType.tfTypeName, request.Plan.Raw)
+	tflog.Debug(ctx, "Request.Plan.Raw", "value", hclog.Fmt("%v", request.Plan.Raw))
 
 	desiredState, err := GetCloudFormationDesiredState(ctx, request.Plan.Raw)
 
@@ -126,12 +118,12 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	log.Printf("[DEBUG] CloudFormation desired state: %s", desiredState)
+	tflog.Debug(ctx, "CloudFormation DesiredState", "value", desiredState)
 
 	input := &cloudformation.CreateResourceInput{
-		ClientToken:  aws.String(UniqueId()),
+		ClientToken:  aws.String(tfresource.UniqueId()),
 		DesiredState: aws.String(desiredState),
-		TypeName:     aws.String(r.resourceType.cfTypeName),
+		TypeName:     aws.String(cfTypeName),
 	}
 
 	if roleARN := r.provider.RoleARN(ctx); roleARN != "" {
@@ -152,6 +144,9 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
+	// TODO
+	// TODO How long to wait for?
+	// TODO
 	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
 
 	if err != nil {
@@ -181,8 +176,6 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	log.Printf("[DEBUG] ResourceModel: %s", aws.ToString(description.ResourceModel))
-
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
@@ -201,11 +194,18 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	log.Printf("[DEBUG] Resource.Create(%s/%s)\nRaw state: %v", r.resourceType.cfTypeName, r.resourceType.tfTypeName, response.State.Raw)
+	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
+
+	tflog.Debug(ctx, "Resource.Create exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
-	tflog.Debug(ctx, "Resource.Read(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevel(hclog.Trace), tflog.WithoutLocation())
+
+	cfTypeName := r.resourceType.cfTypeName
+	tfTypeName := r.resourceType.tfTypeName
+
+	tflog.Debug(ctx, "Resource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudFormationClient(ctx)
 
@@ -257,10 +257,17 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 	// Set the "id" attribute required for acceptance testing.
 	response.State.SetAttribute(ctx, idAttributePath, identifier)
+
+	tflog.Debug(ctx, "Resource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
-	tflog.Debug(ctx, "Resource.Update(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevel(hclog.Trace), tflog.WithoutLocation())
+
+	cfTypeName := r.resourceType.cfTypeName
+	tfTypeName := r.resourceType.tfTypeName
+
+	tflog.Debug(ctx, "Resource.Update enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudFormationClient(ctx)
 
@@ -301,13 +308,13 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	log.Printf("[DEBUG] Resource.Update(%s/%s)\nPatch document: %s", r.resourceType.cfTypeName, r.resourceType.tfTypeName, patchDocument)
+	tflog.Debug(ctx, "CloudFormation PatchDocument", "value", patchDocument)
 
 	input := &cloudformation.UpdateResourceInput{
-		ClientToken:   aws.String(UniqueId()),
+		ClientToken:   aws.String(tfresource.UniqueId()),
 		Identifier:    aws.String(identifier),
 		PatchDocument: aws.String(patchDocument),
-		TypeName:      aws.String(r.resourceType.cfTypeName),
+		TypeName:      aws.String(cfTypeName),
 	}
 
 	if roleARN := r.provider.RoleARN(ctx); roleARN != "" {
@@ -328,6 +335,9 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
+	// TODO
+	// TODO How long to wait for?
+	// TODO
 	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
 
 	if err != nil {
@@ -339,10 +349,17 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	// On Update there should be nothing unknown in the planned state...
 	response.State.Raw = request.Plan.Raw
+
+	tflog.Debug(ctx, "Resource.Update exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceRequest, response *tfsdk.DeleteResourceResponse) {
-	tflog.Debug(ctx, "Resource.Delete(%s/%s) enter", r.resourceType.cfTypeName, r.resourceType.tfTypeName)
+	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevel(hclog.Trace), tflog.WithoutLocation())
+
+	cfTypeName := r.resourceType.cfTypeName
+	tfTypeName := r.resourceType.tfTypeName
+
+	tflog.Debug(ctx, "Resource.Delete enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudFormationClient(ctx)
 
@@ -354,17 +371,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	input := &cloudformation.DeleteResourceInput{
-		ClientToken: aws.String(UniqueId()),
-		Identifier:  aws.String(identifier),
-		TypeName:    aws.String(r.resourceType.cfTypeName),
-	}
-
-	if roleARN := r.provider.RoleARN(ctx); roleARN != "" {
-		input.RoleArn = aws.String(roleARN)
-	}
-
-	output, err := conn.DeleteResource(ctx, input)
+	err = tfcloudformation.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, identifier)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "DeleteResource", err))
@@ -372,27 +379,9 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	if output == nil || output.ProgressEvent == nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "DeleteResource"))
-
-		return
-	}
-
-	progressEvent, err := waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
-
-	if progressEvent != nil && progressEvent.ErrorCode == cftypes.HandlerErrorCodeNotFound {
-		response.State.RemoveResource(ctx)
-
-		return
-	}
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "DeleteResource", err))
-
-		return
-	}
-
 	response.State.RemoveResource(ctx)
+
+	tflog.Debug(ctx, "Resource.Delete exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 // describe returns the live state of the specified resource.
