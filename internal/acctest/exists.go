@@ -11,38 +11,6 @@ import (
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/tfresource"
 )
 
-type checkThat struct {
-	testData TestData
-}
-
-func CheckThat(testData TestData) checkThat {
-	return checkThat{
-		testData: testData,
-	}
-}
-
-// CheckDestroy returns a TestCheckFunc that tests whether a resource exists in AWS.
-func (t checkThat) ExistsInAWS() resource.TestCheckFunc {
-	return func(state *terraform.State) error {
-		p, err := t.testData.cfProvider()
-
-		if err != nil {
-			return err
-		}
-
-		ctx := context.TODO()
-
-		return existsFunc(true)(
-			ctx,
-			p.CloudFormationClient(ctx),
-			p.RoleARN(ctx),
-			t.testData.CloudFormationResourceType,
-			t.testData.TerraformResourceType,
-			t.testData.ResourceName,
-		)(state)
-	}
-}
-
 // CheckDestroy returns a TestCheckFunc that tests whether a resource has been destroyed in AWS.
 func (td TestData) CheckDestroy() resource.TestCheckFunc {
 	return func(state *terraform.State) error {
@@ -55,34 +23,36 @@ func (td TestData) CheckDestroy() resource.TestCheckFunc {
 				continue
 			}
 
-			p, err := td.cfProvider()
-
-			if err != nil {
-				return err
-			}
-
-			ctx := context.TODO()
-
-			return existsFunc(false)(
-				ctx,
-				p.CloudFormationClient(ctx),
-				p.RoleARN(ctx),
-				td.CloudFormationResourceType,
-				td.TerraformResourceType,
-				td.ResourceName,
-			)(state)
+			return td.checkExists(false)(state)
 		}
 
 		return nil
 	}
 }
 
-func (td TestData) cfProvider() (tfcloudformation.Provider, error) {
-	if provider, ok := td.provider.(tfcloudformation.Provider); ok {
-		return provider, nil
-	}
+// CheckExistsInAWS returns a TestCheckFunc that tests whether a resource exists in AWS.
+func (td TestData) CheckExistsInAWS() resource.TestCheckFunc {
+	return td.checkExists(true)
+}
 
-	return nil, fmt.Errorf("unable to convert %T to CloudFormationProvider", td.provider)
+func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
+	return func(state *terraform.State) error {
+		provider, ok := td.provider.(tfcloudformation.Provider)
+		if !ok {
+			return fmt.Errorf("unable to convert %T to CloudFormationProvider", td.provider)
+		}
+
+		ctx := context.TODO()
+
+		return existsFunc(shouldExist)(
+			ctx,
+			provider.CloudFormationClient(ctx),
+			provider.RoleARN(ctx),
+			td.CloudFormationResourceType,
+			td.TerraformResourceType,
+			td.ResourceName,
+		)(state)
+	}
 }
 
 func existsFunc(shouldExist bool) func(context.Context, *cloudformation.Client, string, string, string, string) resource.TestCheckFunc {
@@ -100,6 +70,10 @@ func existsFunc(shouldExist bool) func(context.Context, *cloudformation.Client, 
 			}
 
 			_, err := tfcloudformation.FindResourceByTypeNameAndID(ctx, conn, roleARN, cfTypeName, id)
+
+			// TODO
+			// TODO Some resource can still be found but are logically deleted.
+			// TODO
 
 			if !shouldExist {
 				if err != nil {
