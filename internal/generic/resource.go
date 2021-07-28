@@ -144,6 +144,9 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
+	// TODO
+	// TODO How long to wait for?
+	// TODO
 	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
 
 	if err != nil {
@@ -332,6 +335,9 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
+	// TODO
+	// TODO How long to wait for?
+	// TODO
 	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
 
 	if err != nil {
@@ -365,40 +371,10 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	input := &cloudformation.DeleteResourceInput{
-		ClientToken: aws.String(tfresource.UniqueId()),
-		Identifier:  aws.String(identifier),
-		TypeName:    aws.String(cfTypeName),
-	}
-
-	if roleARN := r.provider.RoleARN(ctx); roleARN != "" {
-		input.RoleArn = aws.String(roleARN)
-	}
-
-	output, err := conn.DeleteResource(ctx, input)
+	err = tfcloudformation.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, identifier)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "DeleteResource", err))
-
-		return
-	}
-
-	if output == nil || output.ProgressEvent == nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "DeleteResource"))
-
-		return
-	}
-
-	progressEvent, err := waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
-
-	if progressEvent != nil && progressEvent.ErrorCode == cftypes.HandlerErrorCodeNotFound {
-		response.State.RemoveResource(ctx)
-
-		return
-	}
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "DeleteResource", err))
 
 		return
 	}

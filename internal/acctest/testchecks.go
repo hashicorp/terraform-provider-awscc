@@ -40,7 +40,27 @@ func (td TestData) CheckExistsInAWS() resource.TestCheckFunc {
 // DeleteResource returns a TestCheckFunc that deletes a resource in AWS.
 func (td TestData) DeleteResource() resource.TestCheckFunc {
 	return func(state *terraform.State) error {
-		return nil
+		resourceName := td.ResourceName
+		rs, ok := state.RootModule().Resources[resourceName]
+		if !ok {
+			return fmt.Errorf("not found: %s", resourceName)
+		}
+
+		id := rs.Primary.ID
+
+		if id == "" {
+			return fmt.Errorf("no ID is set")
+		}
+
+		provider, ok := td.provider.(tfcloudformation.Provider)
+		if !ok {
+			return fmt.Errorf("unable to convert %T to CloudFormationProvider", td.provider)
+		}
+
+		ctx := context.TODO()
+		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevel(hclog.Trace), tflog.WithoutLocation())
+
+		return tfcloudformation.DeleteResource(ctx, provider.CloudFormationClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id)
 	}
 }
 
