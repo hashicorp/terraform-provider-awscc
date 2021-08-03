@@ -4,16 +4,29 @@ package sagemaker_test
 
 import (
 	"fmt"
-	//"testing"
+	"regexp"
+	"testing"
 
-	//"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
 )
 
 type dataQualityJobDefinitionTest struct{}
 
-func (t dataQualityJobDefinitionTest) basic(data acctest.TestData) string {
+func TestAccAWSSageMakerDataQualityJobDefinition_basic(t *testing.T) {
+	data := acctest.NewTestData(t, "AWS::SageMaker::DataQualityJobDefinition", "aws_sagemaker_data_quality_job_definition", "test")
+	r := dataQualityJobDefinitionTest{}
 
+	data.ResourceTest(t, []resource.TestStep{
+		{
+			Config: r.basic(data),
+
+			ExpectError: regexp.MustCompile(`Missing required argument`),
+		},
+	})
+}
+
+func (r dataQualityJobDefinitionTest) basic(data acctest.TestData) string {
 	return fmt.Sprintf(`
 resource %[1]q %[2]q {
   provider = cloudapi

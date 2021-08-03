@@ -46,6 +46,7 @@ func (e *Emitter) EmitRootPropertiesSchema() (Features, error) {
 	for name := range cfResource.Properties {
 		if cfResource.IsRequired(name) {
 			features |= HasRequiredRootProperty
+			break
 		}
 	}
 

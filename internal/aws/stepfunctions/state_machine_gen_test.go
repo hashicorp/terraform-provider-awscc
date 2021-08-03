@@ -4,16 +4,29 @@ package stepfunctions_test
 
 import (
 	"fmt"
-	//"testing"
+	"regexp"
+	"testing"
 
-	//"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
 )
 
 type stateMachineTest struct{}
 
-func (t stateMachineTest) basic(data acctest.TestData) string {
+func TestAccAWSStepFunctionsStateMachine_basic(t *testing.T) {
+	data := acctest.NewTestData(t, "AWS::StepFunctions::StateMachine", "aws_stepfunctions_state_machine", "test")
+	r := stateMachineTest{}
 
+	data.ResourceTest(t, []resource.TestStep{
+		{
+			Config: r.basic(data),
+
+			ExpectError: regexp.MustCompile(`Missing required argument`),
+		},
+	})
+}
+
+func (r stateMachineTest) basic(data acctest.TestData) string {
 	return fmt.Sprintf(`
 resource %[1]q %[2]q {
   provider = cloudapi

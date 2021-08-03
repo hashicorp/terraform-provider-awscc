@@ -4,16 +4,42 @@ package ecs_test
 
 import (
 	"fmt"
-	//"testing"
 
-	//"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"testing"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
 )
 
 type taskDefinitionTest struct{}
 
-func (t taskDefinitionTest) basic(data acctest.TestData) string {
+func TestAccAWSECSTaskDefinition_basic(t *testing.T) {
+	data := acctest.NewTestData(t, "AWS::ECS::TaskDefinition", "aws_ecs_task_definition", "test")
+	r := taskDefinitionTest{}
 
+	data.ResourceTest(t, []resource.TestStep{
+		{
+			Config: r.basic(data),
+
+			Check: resource.ComposeTestCheckFunc(
+				data.CheckExistsInAWS(),
+			),
+		},
+	})
+}
+
+func TestAccAWSECSTaskDefinition_disappears(t *testing.T) {
+	data := acctest.NewTestData(t, "AWS::ECS::TaskDefinition", "aws_ecs_task_definition", "test")
+	r := taskDefinitionTest{}
+
+	data.ResourceTest(t, []resource.TestStep{
+		data.DisappearsStep(acctest.DisappearsStepData{
+			Config: r.basic,
+		}),
+	})
+}
+
+func (r taskDefinitionTest) basic(data acctest.TestData) string {
 	return fmt.Sprintf(`
 resource %[1]q %[2]q {
   provider = cloudapi
