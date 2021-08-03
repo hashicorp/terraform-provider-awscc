@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/waiter"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/tfresource"
 )
 
@@ -36,14 +35,17 @@ func DeleteResource(ctx context.Context, conn *cloudformation.Client, roleARN, t
 		return fmt.Errorf("empty result")
 	}
 
+	if output.ProgressEvent.ErrorCode == types.HandlerErrorCodeNotFound {
+		return nil
+	}
+
 	// TODO
 	// TODO How long to wait for?
 	// TODO
-	progressEvent, err := waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
+	maxWaitTime := 5 * time.Minute
+	waiter := NewResourceRequestStatusSuccessWaiter(conn)
 
-	if progressEvent != nil && progressEvent.ErrorCode == types.HandlerErrorCodeNotFound {
-		return nil
-	}
+	_, err = waiter.Wait(ctx, &cloudformation.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, maxWaitTime)
 
 	if err != nil {
 		return err

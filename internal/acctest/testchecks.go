@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
-	hclog "github.com/hashicorp/go-hclog"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
@@ -58,7 +57,7 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 		}
 
 		ctx := context.TODO()
-		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevel(hclog.Trace), tflog.WithoutLocation())
+		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
 		return tfcloudformation.DeleteResource(ctx, provider.CloudFormationClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id)
 	}
@@ -72,7 +71,7 @@ func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 		}
 
 		ctx := context.TODO()
-		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevel(hclog.Trace), tflog.WithoutLocation())
+		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
 		return existsFunc(shouldExist)(
 			ctx,

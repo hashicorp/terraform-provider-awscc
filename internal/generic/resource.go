@@ -19,7 +19,6 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
 	tfcloudformation "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/waiter"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/tfresource"
 	"github.com/mattbaird/jsonpatch"
 )
@@ -99,7 +98,7 @@ var (
 )
 
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevel(hclog.Trace), tflog.WithoutLocation())
+	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
@@ -130,7 +129,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		input.RoleArn = aws.String(roleARN)
 	}
 
-	output, err := conn.CreateResource(ctx, input)
+	createOutput, err := conn.CreateResource(ctx, input)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "CreateResource", err))
@@ -138,7 +137,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	if output == nil || output.ProgressEvent == nil {
+	if createOutput == nil || createOutput.ProgressEvent == nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "CreateResource"))
 
 		return
@@ -147,7 +146,10 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	// TODO
 	// TODO How long to wait for?
 	// TODO
-	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
+	maxWaitTime := 5 * time.Minute
+	waiter := tfcloudformation.NewResourceRequestStatusSuccessWaiter(conn)
+
+	waitOutput, err := waiter.Wait(ctx, &cloudformation.GetResourceRequestStatusInput{RequestToken: createOutput.ProgressEvent.RequestToken}, maxWaitTime)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "CreateResource", err))
@@ -155,7 +157,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	identifier := aws.ToString(output.ProgressEvent.Identifier)
+	identifier := aws.ToString(waitOutput.ProgressEvent.Identifier)
 	description, err := r.describe(ctx, conn, identifier)
 
 	if tfresource.NotFound(err) {
@@ -200,7 +202,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 }
 
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevel(hclog.Trace), tflog.WithoutLocation())
+	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
@@ -262,7 +264,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevel(hclog.Trace), tflog.WithoutLocation())
+	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
@@ -338,7 +340,10 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	// TODO
 	// TODO How long to wait for?
 	// TODO
-	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
+	maxWaitTime := 5 * time.Minute
+	waiter := tfcloudformation.NewResourceRequestStatusSuccessWaiter(conn)
+
+	_, err = waiter.Wait(ctx, &cloudformation.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, maxWaitTime)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "UpdateResource", err))
@@ -354,7 +359,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 }
 
 func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceRequest, response *tfsdk.DeleteResourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevel(hclog.Trace), tflog.WithoutLocation())
+	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
