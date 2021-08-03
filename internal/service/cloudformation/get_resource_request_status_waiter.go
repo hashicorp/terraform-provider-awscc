@@ -10,12 +10,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
-	"github.com/jmespath/go-jmespath"
 )
 
-// TODO
-// TODO Based on TypeRegistrationCompleteWaiter.
-// TODO
+//
+// Based on cloudformation.TypeRegistrationCompleteWaiter.
+//
 
 // GetResourceRequestStatusAPIClient is a client that implements the
 // GetResourceRequestStatus operation.
@@ -85,9 +84,9 @@ func NewResourceRequestStatusSuccessWaiter(client GetResourceRequestStatusAPICli
 // Wait calls the waiter function for ResourceRequestStatusSuccess waiter. The
 // maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
 // required and must be greater than zero.
-func (w *ResourceRequestStatusSuccessWaiter) Wait(ctx context.Context, params *cloudformation.GetResourceRequestStatusInput, maxWaitDur time.Duration, optFns ...func(*ResourceRequestStatusSuccessWaiterOptions)) error {
+func (w *ResourceRequestStatusSuccessWaiter) Wait(ctx context.Context, params *cloudformation.GetResourceRequestStatusInput, maxWaitDur time.Duration, optFns ...func(*ResourceRequestStatusSuccessWaiterOptions)) (*cloudformation.GetResourceRequestStatusOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -100,7 +99,7 @@ func (w *ResourceRequestStatusSuccessWaiter) Wait(ctx context.Context, params *c
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -128,10 +127,10 @@ func (w *ResourceRequestStatusSuccessWaiter) Wait(ctx context.Context, params *c
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -144,49 +143,27 @@ func (w *ResourceRequestStatusSuccessWaiter) Wait(ctx context.Context, params *c
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for ResourceRequestStatusSuccess waiter")
+	return nil, fmt.Errorf("exceeded max wait time for ResourceRequestStatusSuccess waiter")
 }
 
 func resourceRequestStatusSuccessStateRetryable(ctx context.Context, input *cloudformation.GetResourceRequestStatusInput, output *cloudformation.GetResourceRequestStatusOutput, err error) (bool, error) {
 	if err == nil {
-		pathValue, err := jmespath.Search("ProgressEvent.OperationStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
-		expectedValue := types.OperationStatusSuccess
-		value, ok := pathValue.(types.OperationStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.OperationStatus value, got %T", pathValue)
-		}
-
-		if value == expectedValue {
+		switch value := output.ProgressEvent.OperationStatus; value {
+		case types.OperationStatusSuccess:
 			return false, nil
-		}
-	}
-
-	if err == nil {
-		pathValue, err := jmespath.Search("ProgressEvent.OperationStatus", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
-		expectedValue := types.OperationStatusFailed
-		value, ok := pathValue.(types.OperationStatus)
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected types.OperationStatus value, got %T", pathValue)
-		}
-
-		if value == expectedValue {
+		case types.OperationStatusFailed:
+			if output.ProgressEvent.ErrorCode == types.HandlerErrorCodeNotFound && output.ProgressEvent.Operation == types.OperationDelete {
+				return false, nil
+			}
 			return false, fmt.Errorf("waiter state transitioned to %s", value)
 		}
 	}
