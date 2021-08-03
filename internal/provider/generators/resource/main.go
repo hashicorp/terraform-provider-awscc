@@ -25,7 +25,7 @@ var (
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "Usage:\n")
-	fmt.Fprintf(os.Stderr, "\tmain.go [flags] -resource <TF-resource-type> -cfschema <CF-type-schema-file> <generated-file>\n\n")
+	fmt.Fprintf(os.Stderr, "\tmain.go [flags] -resource <TF-resource-type> -cfschema <CF-type-schema-file> <generated-schema-file> <generated-acctests-file>\n\n")
 	fmt.Fprintf(os.Stderr, "Flags:\n")
 	flag.PrintDefaults()
 }
@@ -36,7 +36,7 @@ func main() {
 
 	args := flag.Args()
 
-	if len(args) == 0 || *tfResourceType == "" || *cfTypeSchemaFile == "" {
+	if len(args) < 2 || *tfResourceType == "" || *cfTypeSchemaFile == "" {
 		flag.Usage()
 		os.Exit(2)
 	}
@@ -46,7 +46,8 @@ func main() {
 		destinationPackage = *packageName
 	}
 
-	filename := args[0]
+	schemaFilename := args[0]
+	acctestsFilename := args[1]
 
 	ui := &cli.BasicUi{
 		Reader:      os.Stdin,
@@ -56,7 +57,7 @@ func main() {
 
 	generator := NewGenerator(ui, *tfResourceType, *cfTypeSchemaFile)
 
-	if err := generator.Generate(destinationPackage, filename); err != nil {
+	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s resource: %s", *tfResourceType, err))
 		os.Exit(1)
 	}
@@ -85,15 +86,17 @@ func (g *Generator) Infof(format string, a ...interface{}) {
 }
 
 // Generate generates the resource's type factory into the specified file.
-func (g *Generator) Generate(packageName, filename string) error {
-	g.Infof("generating Terraform resource code for %q from %q into %q", g.tfResourceType, g.cfTypeSchemaFile, filename)
+func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+	g.Infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", g.tfResourceType, g.cfTypeSchemaFile, schemaFilename, acctestsFilename)
 
-	// Create target directory.
-	dirname := path.Dir(filename)
-	err := os.MkdirAll(dirname, 0755)
+	// Create target directories.
+	for _, filename := range []string{schemaFilename, acctestsFilename} {
+		dirname := path.Dir(filename)
+		err := os.MkdirAll(dirname, 0755)
 
-	if err != nil {
-		return fmt.Errorf("error creating target directory %s: %w", dirname, err)
+		if err != nil {
+			return fmt.Errorf("error creating target directory %s: %w", dirname, err)
+		}
 	}
 
 	resource, err := NewResource(g.tfResourceType, g.cfTypeSchemaFile)
@@ -113,6 +116,9 @@ func (g *Generator) Generate(packageName, filename string) error {
 	// e.g. "logGroup"
 	factoryFunctionName := string(bytes.ToLower([]byte(parts[2][:1]))) + parts[2][1:]
 
+	// e.g. "TestAccAWSLogsLogGroup"
+	acceptanceTestFunctionPrefix := fmt.Sprintf("TestAcc%[1]s%[2]s%[3]s", parts[0], parts[1], parts[2])
+
 	sb := strings.Builder{}
 	codeEmitter := codegen.Emitter{
 		CfResource: resource.CfResource,
@@ -130,16 +136,21 @@ func (g *Generator) Generate(packageName, filename string) error {
 	sb.Reset()
 
 	templateData := TemplateData{
-		CloudFormationTypeName: cfTypeName,
-		FactoryFunctionName:    factoryFunctionName,
-		HasUpdateMethod:        true,
-		PackageName:            packageName,
-		PrimaryIdentifierPath:  string(resource.CfResource.PrimaryIdentifier[0]),
-		RootPropertiesSchema:   rootPropertiesSchema,
-		SchemaVersion:          1,
-		TerraformTypeName:      resource.TfType,
+		AcceptanceTestFunctionPrefix: acceptanceTestFunctionPrefix,
+		CloudFormationTypeName:       cfTypeName,
+		FactoryFunctionName:          factoryFunctionName,
+		HasRequiredAttribute:         true,
+		HasUpdateMethod:              true,
+		PackageName:                  packageName,
+		PrimaryIdentifierPath:        string(resource.CfResource.PrimaryIdentifier[0]),
+		RootPropertiesSchema:         rootPropertiesSchema,
+		SchemaVersion:                1,
+		TerraformTypeName:            resource.TfType,
 	}
 
+	if codeFeatures&codegen.HasRequiredRootProperty == 0 {
+		templateData.HasRequiredAttribute = false
+	}
 	if codeFeatures&codegen.HasUpdatableProperty == 0 {
 		templateData.HasUpdateMethod = false
 	}
@@ -155,6 +166,23 @@ func (g *Generator) Generate(packageName, filename string) error {
 		templateData.WriteOnlyPropertyPaths = append(templateData.WriteOnlyPropertyPaths, string(path))
 	}
 
+	err = g.applyAndWriteTemplate(schemaFilename, resourceSchemaTemplateBody, &templateData)
+
+	if err != nil {
+		return err
+	}
+
+	err = g.applyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, &templateData)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// applyAndWriteTemplate applies the template body to the specified data and writes it to file.
+func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templateData *TemplateData) error {
 	tmpl, err := template.New("function").Parse(templateBody)
 
 	if err != nil {
@@ -193,22 +221,25 @@ func (g *Generator) Generate(packageName, filename string) error {
 }
 
 type TemplateData struct {
-	CloudFormationTypeName string
-	FactoryFunctionName    string
-	HasUpdateMethod        bool
-	ImportInternalTypes    bool
-	PackageName            string
-	PrimaryIdentifierPath  string
-	RootPropertiesSchema   string
-	SchemaDescription      string
-	SchemaVersion          int64
-	TerraformTypeName      string
-	WriteOnlyPropertyPaths []string
+	AcceptanceTestFunctionPrefix string
+	CloudFormationTypeName       string
+	FactoryFunctionName          string
+	HasRequiredAttribute         bool
+	HasUpdateMethod              bool
+	ImportInternalTypes          bool
+	PackageName                  string
+	PrimaryIdentifierPath        string
+	RootPropertiesSchema         string
+	SchemaDescription            string
+	SchemaVersion                int64
+	TerraformTypeName            string
+	WriteOnlyPropertyPaths       []string
 }
 
-var templateBody = `
+// Terraform resource schema definition.
+var resourceSchemaTemplateBody = `
 // Code generated by generators/resource/main.go; DO NOT EDIT.
-
+{{ $tick := "` + "`" + `" }}
 package {{ .PackageName }}
 
 import (
@@ -221,7 +252,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-{{ if .ImportInternalTypes }}providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"{{- end }}
+	{{ if .ImportInternalTypes }}providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"{{- end }}
 )
 
 func init() {
@@ -239,8 +270,6 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 		Type:        types.StringType,
 		Computed:    true,
 	}
-
-{{ $tick := "` + "`" + `" }}
 
 	schema := schema.Schema{
 		Description: {{ $tick }}{{ .SchemaDescription }}{{ $tick }},
@@ -274,6 +303,63 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 	tflog.Debug(ctx, "Generated schema", "tfTypeName", "{{ .TerraformTypeName }}", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
+}
+`
+
+// Terraform acceptance tests.
+var acceptanceTestsTemplateBody = `
+// Code generated by generators/resource/main.go; DO NOT EDIT.
+{{ $tick := "` + "`" + `" }}
+package {{ .PackageName }}_test
+
+import (
+	"fmt"
+	{{ if .HasRequiredAttribute }}"regexp"{{- end }}
+	"testing"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+)
+
+type {{ .FactoryFunctionName }}Test struct{}
+
+func {{ .AcceptanceTestFunctionPrefix }}_basic(t *testing.T) {
+	data := acctest.NewTestData(t, "{{ .CloudFormationTypeName }}", "{{ .TerraformTypeName }}", "test")
+	r := {{ .FactoryFunctionName }}Test{}
+
+	data.ResourceTest(t, []resource.TestStep{
+		{
+			Config: r.basic(data),
+{{ if .HasRequiredAttribute }}
+			ExpectError: regexp.MustCompile({{ $tick }}Missing required argument{{ $tick }}),
+{{- else }}
+			Check: resource.ComposeTestCheckFunc(
+				data.CheckExistsInAWS(),
+			),
+{{- end }}
+		},
+	})
+}
+
+{{ if not .HasRequiredAttribute }}
+func {{ .AcceptanceTestFunctionPrefix }}_disappears(t *testing.T) {
+	data := acctest.NewTestData(t, "{{ .CloudFormationTypeName }}", "{{ .TerraformTypeName }}", "test")
+	r := {{ .FactoryFunctionName }}Test{}
+
+	data.ResourceTest(t, []resource.TestStep{
+		data.DisappearsStep(acctest.DisappearsStepData{
+			Config: r.basic,
+		}),
+	})
+}
+{{- end }}
+
+func (r {{ .FactoryFunctionName }}Test) basic(data acctest.TestData) string {
+	return fmt.Sprintf({{ $tick }}
+resource %[1]q %[2]q {
+  provider = cloudapi
+}
+{{ $tick }}, data.TerraformResourceType, data.ResourceLabel)
 }
 `
 
