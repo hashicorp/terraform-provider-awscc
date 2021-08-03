@@ -13,8 +13,9 @@ import (
 type Features int
 
 const (
-	HasUpdatableProperty Features = 1 << iota // At least one property can be updated.
-	UsesInternalTypes                         // Uses a type from the internal/types package.
+	HasUpdatableProperty    Features = 1 << iota // At least one property can be updated.
+	UsesInternalTypes                            // Uses a type from the internal/types package.
+	HasRequiredRootProperty                      // At least one root property is required.
 )
 
 type Emitter struct {
@@ -33,7 +34,22 @@ type parent struct {
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // The root schema is the map of root property names to Attributes.
 func (e *Emitter) EmitRootPropertiesSchema() (Features, error) {
-	return e.emitSchema(parent{reqd: e.CfResource}, e.CfResource.Properties)
+	var features Features
+
+	cfResource := e.CfResource
+	features, err := e.emitSchema(parent{reqd: cfResource}, cfResource.Properties)
+
+	if err != nil {
+		return 0, err
+	}
+
+	for name := range cfResource.Properties {
+		if cfResource.IsRequired(name) {
+			features |= HasRequiredRootProperty
+		}
+	}
+
+	return features, nil
 }
 
 // emitAttribute generates the Terraform Plugin SDK code for a CloudFormation property's Attributes

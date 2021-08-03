@@ -15,6 +15,7 @@ build:
 
 resources:
 	rm -f internal/*/*/*_gen.go
+	rm -f internal/*/*/*_gen_test.go
 	go generate internal/provider/resources.go
 
 schemas:
