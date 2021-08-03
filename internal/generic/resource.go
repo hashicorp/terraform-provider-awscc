@@ -19,7 +19,6 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
 	tfcloudformation "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/waiter"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/tfresource"
 	"github.com/mattbaird/jsonpatch"
 )
@@ -147,7 +146,10 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	// TODO
 	// TODO How long to wait for?
 	// TODO
-	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
+	maxWaitTime := 5 * time.Minute
+	waiter := tfcloudformation.NewResourceRequestStatusSuccessWaiter(conn)
+
+	err = waiter.Wait(ctx, &cloudformation.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, maxWaitTime)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "CreateResource", err))
@@ -338,7 +340,10 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	// TODO
 	// TODO How long to wait for?
 	// TODO
-	output.ProgressEvent, err = waiter.ResourceRequestStatusProgressEventOperationStatusSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), 5*time.Minute)
+	maxWaitTime := 5 * time.Minute
+	waiter := tfcloudformation.NewResourceRequestStatusSuccessWaiter(conn)
+
+	err = waiter.Wait(ctx, &cloudformation.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, maxWaitTime)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "UpdateResource", err))
