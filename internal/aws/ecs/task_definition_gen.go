@@ -3011,18 +3011,11 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var features ResourceTypeFeatures
+	var opts ResourceTypeOptions
 
-	features |= ResourceTypeHasUpdatableAttribute
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskDefinition").WithTerraformTypeName("aws_ecs_task_definition").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/TaskDefinitionArn")
 
-	resourceType, err := NewResourceType(
-		"AWS::ECS::TaskDefinition",      // CloudFormation type name
-		"aws_ecs_task_definition",       // Terraform type name
-		schema,                          // Terraform schema
-		"/properties/TaskDefinitionArn", // Primary identifier property path (JSON Pointer)
-		[]string{},                      // Write-only property paths (JSON Pointer)
-		features,
-	)
+	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -464,18 +464,11 @@ func stateMachine(ctx context.Context) (tfsdk.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var features ResourceTypeFeatures
+	var opts ResourceTypeOptions
 
-	features |= ResourceTypeHasUpdatableAttribute
+	opts = opts.WithCloudFormationTypeName("AWS::StepFunctions::StateMachine").WithTerraformTypeName("aws_stepfunctions_state_machine").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/Arn")
 
-	resourceType, err := NewResourceType(
-		"AWS::StepFunctions::StateMachine", // CloudFormation type name
-		"aws_stepfunctions_state_machine",  // Terraform type name
-		schema,                             // Terraform schema
-		"/properties/Arn",                  // Primary identifier property path (JSON Pointer)
-		[]string{},                         // Write-only property paths (JSON Pointer)
-		features,
-	)
+	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err

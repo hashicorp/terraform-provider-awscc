@@ -1055,18 +1055,11 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var features ResourceTypeFeatures
+	var opts ResourceTypeOptions
 
-	features |= ResourceTypeHasUpdatableAttribute
+	opts = opts.WithCloudFormationTypeName("AWS::XRay::SamplingRule").WithTerraformTypeName("aws_xray_sampling_rule").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/RuleARN")
 
-	resourceType, err := NewResourceType(
-		"AWS::XRay::SamplingRule", // CloudFormation type name
-		"aws_xray_sampling_rule",  // Terraform type name
-		schema,                    // Terraform schema
-		"/properties/RuleARN",     // Primary identifier property path (JSON Pointer)
-		[]string{},                // Write-only property paths (JSON Pointer)
-		features,
-	)
+	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err

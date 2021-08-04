@@ -1330,18 +1330,11 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var features ResourceTypeFeatures
+	var opts ResourceTypeOptions
 
-	features |= ResourceTypeHasUpdatableAttribute
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DataQualityJobDefinition").WithTerraformTypeName("aws_sagemaker_data_quality_job_definition").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/JobDefinitionArn")
 
-	resourceType, err := NewResourceType(
-		"AWS::SageMaker::DataQualityJobDefinition",  // CloudFormation type name
-		"aws_sagemaker_data_quality_job_definition", // Terraform type name
-		schema,                         // Terraform schema
-		"/properties/JobDefinitionArn", // Primary identifier property path (JSON Pointer)
-		[]string{},                     // Write-only property paths (JSON Pointer)
-		features,
-	)
+	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err

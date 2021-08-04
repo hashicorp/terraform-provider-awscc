@@ -613,18 +613,11 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var features ResourceTypeFeatures
+	var opts ResourceTypeOptions
 
-	features |= ResourceTypeHasUpdatableAttribute
+	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupPlan").WithTerraformTypeName("aws_backup_backup_plan").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/BackupPlanId")
 
-	resourceType, err := NewResourceType(
-		"AWS::Backup::BackupPlan",  // CloudFormation type name
-		"aws_backup_backup_plan",   // Terraform type name
-		schema,                     // Terraform schema
-		"/properties/BackupPlanId", // Primary identifier property path (JSON Pointer)
-		[]string{},                 // Write-only property paths (JSON Pointer)
-		features,
-	)
+	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err

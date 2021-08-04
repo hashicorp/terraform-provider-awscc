@@ -277,24 +277,21 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var features ResourceTypeFeatures
+	var opts ResourceTypeOptions
 
-{{ if .HasUpdateMethod }}
-	features |= ResourceTypeHasUpdatableAttribute
+	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}").WithTerraformSchema(schema).WithPrimaryIdentifierPath("{{ .PrimaryIdentifierPath }}")
+{{ if not .HasUpdateMethod }}
+	opts = opts.IsImmutableType(true)
+{{- end }}
+{{ if .WriteOnlyPropertyPaths }}
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+	{{- range .WriteOnlyPropertyPaths }}
+		"{{ . }}",
+	{{- end }}
+	})
 {{- end }}
 
-	resourceType, err := NewResourceType(
-		"{{ .CloudFormationTypeName }}", // CloudFormation type name
-		"{{ .TerraformTypeName }}", // Terraform type name
-		schema, // Terraform schema
-		"{{ .PrimaryIdentifierPath }}", // Primary identifier property path (JSON Pointer)
-		[]string{
-{{- range .WriteOnlyPropertyPaths }}
-			"{{ . }}",
-{{- end }}
-		}, // Write-only property paths (JSON Pointer)
-		features,
-	)
+	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -23,13 +23,6 @@ import (
 	"github.com/mattbaird/jsonpatch"
 )
 
-// Features of the resource type.
-type ResourceTypeFeatures int
-
-const (
-	ResourceTypeHasUpdatableAttribute ResourceTypeFeatures = 1 << iota // At least one attribute can be updated.
-)
-
 // resourceTypeOptions are a discrete set of options that are valid for the resource type.
 type resourceTypeOptions struct {
 	cfTypeName              string                   // CloudFormation type name for the resource type
@@ -92,7 +85,7 @@ func IsImmutableType(v bool) ResourceTypeOptionsFunc {
 }
 
 // WithPrimaryIdentifierPath is a helper function to construct functional options
-// that set a resource type's primary identifier path.
+// that set a resource type's primary identifier path (JSON Pointer).
 // If multiple WithPrimaryIdentifierPath calls are made, the last call overrides
 // the previous calls' values.
 func WithPrimaryIdentifierPath(v string) ResourceTypeOptionsFunc {
@@ -110,7 +103,7 @@ func WithPrimaryIdentifierPath(v string) ResourceTypeOptionsFunc {
 }
 
 // WithWriteOnlyPropertyPaths is a helper function to construct functional options
-// that set a resource type's write-only property paths.
+// that set a resource type's write-only property paths (JSON Pointer).
 // If multiple WithWriteOnlyPropertyPaths calls are made, the last call overrides
 // the previous calls' values.
 func WithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
@@ -184,8 +177,19 @@ func (opts ResourceTypeOptions) WithWriteOnlyPropertyPaths(v []string) ResourceT
 	return append(opts, WithWriteOnlyPropertyPaths(v))
 }
 
-// New returns a new ResourceType from the specified varidaic list of functional options.
-func New(ctx context.Context, optFns ...ResourceTypeOptionsFunc) (tfsdk.ResourceType, error) {
+// resourceType implements tfsdk.ResourceType.
+type resourceType struct {
+	cfTypeName              string                   // CloudFormation type name for the resource type
+	tfSchema                schema.Schema            // Terraform schema for the resource type
+	tfTypeName              string                   // Terraform type name for resource type
+	isImmutableType         bool                     // Resources cannot be updated and must be recreated
+	identifierAttributePath *tftypes.AttributePath   // Path to the resource's primary identifier attribute
+	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
+}
+
+// NewResourceType returns a new ResourceType from the specified varidaic list of functional options.
+// It's public as it's called from generated code.
+func NewResourceType(ctx context.Context, optFns ...ResourceTypeOptionsFunc) (tfsdk.ResourceType, error) {
 	var options resourceTypeOptions
 
 	for _, optFn := range optFns {
@@ -206,47 +210,13 @@ func New(ctx context.Context, optFns ...ResourceTypeOptionsFunc) (tfsdk.Resource
 		return nil, fmt.Errorf("no primary identifier path specified")
 	}
 
-	return nil, nil
-}
-
-// Implements tfsdk.ResourceType.
-type resourceType struct {
-	cfTypeName              string                   // CloudFormation type name for the resource type
-	tfSchema                schema.Schema            // Terraform schema for the resource type
-	tfTypeName              string                   // Terraform type name for resource type
-	features                ResourceTypeFeatures     // Resource type features
-	identifierAttributePath *tftypes.AttributePath   // Path to the resource's primary identifier attribute
-	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
-}
-
-// NewResourceType returns a new ResourceType representing the specified CloudFormation type.
-// It's public as it's called from generated code.
-func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema, primaryIdentifierPath string, writeOnlyPropertyPaths []string, features ResourceTypeFeatures) (tfsdk.ResourceType, error) {
-	identifierAttributePath, err := propertyPathToAttributePath(primaryIdentifierPath)
-
-	if err != nil {
-		return nil, fmt.Errorf("error creating ResourceType(%s/%s) identifier attribute path (%s): %w", cfTypeName, tfTypeName, primaryIdentifierPath, err)
-	}
-
-	writeOnlyAttributePaths := make([]*tftypes.AttributePath, 0)
-
-	for _, writeOnlyPropertyPath := range writeOnlyPropertyPaths {
-		writeOnlyAttributePath, err := propertyPathToAttributePath(writeOnlyPropertyPath)
-
-		if err != nil {
-			return nil, fmt.Errorf("error creating ResourceType(%s/%s) write-only attribute path (%s): %w", cfTypeName, tfTypeName, writeOnlyPropertyPath, err)
-		}
-
-		writeOnlyAttributePaths = append(writeOnlyAttributePaths, writeOnlyAttributePath)
-	}
-
 	return &resourceType{
-		features:                features,
-		identifierAttributePath: identifierAttributePath,
-		cfTypeName:              cfTypeName,
-		tfSchema:                tfSchema,
-		tfTypeName:              tfTypeName,
-		writeOnlyAttributePaths: writeOnlyAttributePaths,
+		cfTypeName:              options.cfTypeName,
+		tfSchema:                options.tfSchema,
+		tfTypeName:              options.tfTypeName,
+		isImmutableType:         options.isImmutableType,
+		identifierAttributePath: options.identifierAttributePath,
+		writeOnlyAttributePaths: options.writeOnlyAttributePaths,
 	}, nil
 }
 
