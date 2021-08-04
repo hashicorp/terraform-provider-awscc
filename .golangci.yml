@@ -10,7 +10,7 @@ linters:
     - errorlint
     - goconst
     - gofmt
-    # - gomnd
+    - gomnd
     - gosimple
     - govet
     - ineffassign
