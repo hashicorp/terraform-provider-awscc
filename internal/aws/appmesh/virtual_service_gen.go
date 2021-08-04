@@ -339,18 +339,13 @@ func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var features ResourceTypeFeatures
+	var opts ResourceTypeOptions
 
-	features |= ResourceTypeHasUpdatableAttribute
+	opts = opts.WithCloudFormationTypeName("AWS::AppMesh::VirtualService").WithTerraformTypeName("aws_appmesh_virtual_service").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/Id")
 
-	resourceType, err := NewResourceType(
-		"AWS::AppMesh::VirtualService", // CloudFormation type name
-		"aws_appmesh_virtual_service",  // Terraform type name
-		schema,                         // Terraform schema
-		"/properties/Id",               // Primary identifier property path (JSON Pointer)
-		[]string{},                     // Write-only property paths (JSON Pointer)
-		features,
-	)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err

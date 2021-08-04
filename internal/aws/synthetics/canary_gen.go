@@ -547,23 +547,19 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var features ResourceTypeFeatures
+	var opts ResourceTypeOptions
 
-	features |= ResourceTypeHasUpdatableAttribute
+	opts = opts.WithCloudFormationTypeName("AWS::Synthetics::Canary").WithTerraformTypeName("aws_synthetics_canary").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/Name")
 
-	resourceType, err := NewResourceType(
-		"AWS::Synthetics::Canary", // CloudFormation type name
-		"aws_synthetics_canary",   // Terraform type name
-		schema,                    // Terraform schema
-		"/properties/Name",        // Primary identifier property path (JSON Pointer)
-		[]string{
-			"/properties/Code/S3Bucket",
-			"/properties/Code/S3Key",
-			"/properties/Code/S3ObjectVersion",
-			"/properties/Code/Script",
-		}, // Write-only property paths (JSON Pointer)
-		features,
-	)
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Code/S3Bucket",
+		"/properties/Code/S3Key",
+		"/properties/Code/S3ObjectVersion",
+		"/properties/Code/Script",
+	})
+	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err

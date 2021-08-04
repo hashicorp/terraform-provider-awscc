@@ -166,6 +166,16 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 		templateData.WriteOnlyPropertyPaths = append(templateData.WriteOnlyPropertyPaths, string(path))
 	}
 
+	if v, ok := resource.CfResource.Handlers[cfschema.HandlerTypeCreate]; ok {
+		templateData.CreateTimeoutInMinutes = v.TimeoutInMinutes
+	}
+	if v, ok := resource.CfResource.Handlers[cfschema.HandlerTypeUpdate]; ok {
+		templateData.UpdateTimeoutInMinutes = v.TimeoutInMinutes
+	}
+	if v, ok := resource.CfResource.Handlers[cfschema.HandlerTypeDelete]; ok {
+		templateData.DeleteTimeoutInMinutes = v.TimeoutInMinutes
+	}
+
 	err = g.applyAndWriteTemplate(schemaFilename, resourceSchemaTemplateBody, &templateData)
 
 	if err != nil {
@@ -223,6 +233,8 @@ func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templat
 type TemplateData struct {
 	AcceptanceTestFunctionPrefix string
 	CloudFormationTypeName       string
+	CreateTimeoutInMinutes       int
+	DeleteTimeoutInMinutes       int
 	FactoryFunctionName          string
 	HasRequiredAttribute         bool
 	HasUpdateMethod              bool
@@ -233,6 +245,7 @@ type TemplateData struct {
 	SchemaDescription            string
 	SchemaVersion                int64
 	TerraformTypeName            string
+	UpdateTimeoutInMinutes       int
 	WriteOnlyPropertyPaths       []string
 }
 
@@ -277,24 +290,22 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 		Attributes:  attributes,
 	}
 
-	var features ResourceTypeFeatures
+	var opts ResourceTypeOptions
 
-{{ if .HasUpdateMethod }}
-	features |= ResourceTypeHasUpdatableAttribute
+	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}").WithTerraformSchema(schema).WithPrimaryIdentifierPath("{{ .PrimaryIdentifierPath }}")
+{{ if not .HasUpdateMethod }}
+	opts = opts.IsImmutableType(true)
 {{- end }}
+{{ if .WriteOnlyPropertyPaths }}
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+	{{- range .WriteOnlyPropertyPaths }}
+		"{{ . }}",
+	{{- end }}
+	})
+{{- end }}
+	opts = opts.WithCreateTimeoutInMinutes({{ .CreateTimeoutInMinutes }}).WithUpdateTimeoutInMinutes({{ .UpdateTimeoutInMinutes }}).WithDeleteTimeoutInMinutes({{ .DeleteTimeoutInMinutes }})
 
-	resourceType, err := NewResourceType(
-		"{{ .CloudFormationTypeName }}", // CloudFormation type name
-		"{{ .TerraformTypeName }}", // Terraform type name
-		schema, // Terraform schema
-		"{{ .PrimaryIdentifierPath }}", // Primary identifier property path (JSON Pointer)
-		[]string{
-{{- range .WriteOnlyPropertyPaths }}
-			"{{ . }}",
-{{- end }}
-		}, // Write-only property paths (JSON Pointer)
-		features,
-	)
+	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err

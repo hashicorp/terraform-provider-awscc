@@ -116,18 +116,13 @@ func logGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 		Attributes:  attributes,
 	}
 
-	var features ResourceTypeFeatures
+	var opts ResourceTypeOptions
 
-	features |= ResourceTypeHasUpdatableAttribute
+	opts = opts.WithCloudFormationTypeName("AWS::Logs::LogGroup").WithTerraformTypeName("aws_logs_log_group").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/LogGroupName")
 
-	resourceType, err := NewResourceType(
-		"AWS::Logs::LogGroup",      // CloudFormation type name
-		"aws_logs_log_group",       // Terraform type name
-		schema,                     // Terraform schema
-		"/properties/LogGroupName", // Primary identifier property path (JSON Pointer)
-		[]string{},                 // Write-only property paths (JSON Pointer)
-		features,
-	)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err

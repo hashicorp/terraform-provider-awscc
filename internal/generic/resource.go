@@ -23,51 +23,281 @@ import (
 	"github.com/mattbaird/jsonpatch"
 )
 
-// Features of the resource type.
-type ResourceTypeFeatures int
+// resourceTypeOptions are a discrete set of options that are valid for the resource type.
+type resourceTypeOptions struct {
+	cfTypeName              string                   // CloudFormation type name for the resource type
+	tfSchema                schema.Schema            // Terraform schema for the resource type
+	tfTypeName              string                   // Terraform type name for resource type
+	isImmutableType         bool                     // Resources cannot be updated and must be recreated
+	identifierAttributePath *tftypes.AttributePath   // Path to the resource's primary identifier attribute
+	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
+	createTimeout           time.Duration            // Maximum wait time for resource creation
+	updateTimeout           time.Duration            // Maximum wait time for resource update
+	deleteTimeout           time.Duration            // Maximum wait time for resource deletion
+}
 
-const (
-	ResourceTypeHasUpdatableAttribute ResourceTypeFeatures = 1 << iota // At least one attribute can be updated.
-)
+// ResourceTypeOptionsFunc is a type alias for a resource type functional option.
+type ResourceTypeOptionsFunc func(*resourceTypeOptions) error
 
-// Implements tfsdk.ResourceType.
+// WithCloudFormationTypeName is a helper function to construct functional options
+// that set a resource type's CloudFormation type name.
+// If multiple WithCloudFormationTypeName calls are made, the last call overrides
+// the previous calls' values.
+func WithCloudFormationTypeName(v string) ResourceTypeOptionsFunc {
+	return func(o *resourceTypeOptions) error {
+		o.cfTypeName = v
+
+		return nil
+	}
+}
+
+// WithTerraformSchema is a helper function to construct functional options
+// that set a resource type's Terraform schema.
+// If multiple WithTerraformSchema calls are made, the last call overrides
+// the previous calls' values.
+func WithTerraformSchema(v schema.Schema) ResourceTypeOptionsFunc {
+	return func(o *resourceTypeOptions) error {
+		o.tfSchema = v
+
+		return nil
+	}
+}
+
+// WithTerraformTypeName is a helper function to construct functional options
+// that set a resource type's Terraform type name.
+// If multiple WithTerraformTypeName calls are made, the last call overrides
+// the previous calls' values.
+func WithTerraformTypeName(v string) ResourceTypeOptionsFunc {
+	return func(o *resourceTypeOptions) error {
+		o.tfTypeName = v
+
+		return nil
+	}
+}
+
+// IsImmutableType is a helper function to construct functional options
+// that set a resource type's immutability flag.
+// If multiple IsImmutableType calls are made, the last call overrides
+// the previous calls' values.
+func IsImmutableType(v bool) ResourceTypeOptionsFunc {
+	return func(o *resourceTypeOptions) error {
+		o.isImmutableType = v
+
+		return nil
+	}
+}
+
+// WithPrimaryIdentifierPath is a helper function to construct functional options
+// that set a resource type's primary identifier path (JSON Pointer).
+// If multiple WithPrimaryIdentifierPath calls are made, the last call overrides
+// the previous calls' values.
+func WithPrimaryIdentifierPath(v string) ResourceTypeOptionsFunc {
+	return func(o *resourceTypeOptions) error {
+		identifierAttributePath, err := propertyPathToAttributePath(v)
+
+		if err != nil {
+			return fmt.Errorf("error creating identifier attribute path (%s): %w", v, err)
+		}
+
+		o.identifierAttributePath = identifierAttributePath
+
+		return nil
+	}
+}
+
+// WithWriteOnlyPropertyPaths is a helper function to construct functional options
+// that set a resource type's write-only property paths (JSON Pointer).
+// If multiple WithWriteOnlyPropertyPaths calls are made, the last call overrides
+// the previous calls' values.
+func WithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
+	return func(o *resourceTypeOptions) error {
+		writeOnlyAttributePaths := make([]*tftypes.AttributePath, 0)
+
+		for _, writeOnlyPropertyPath := range v {
+			writeOnlyAttributePath, err := propertyPathToAttributePath(writeOnlyPropertyPath)
+
+			if err != nil {
+				return fmt.Errorf("error creating write-only attribute path (%s): %w", writeOnlyPropertyPath, err)
+			}
+
+			writeOnlyAttributePaths = append(writeOnlyAttributePaths, writeOnlyAttributePath)
+		}
+
+		o.writeOnlyAttributePaths = writeOnlyAttributePaths
+
+		return nil
+	}
+}
+
+// WithCreateTimeoutInMinutes is a helper function to construct functional options
+// that set a resource type's create timeout (in minutes).
+// If multiple WithCreateTimeoutInMinutes calls are made, the last call overrides
+// the previous calls' values.
+func WithCreateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
+	return func(o *resourceTypeOptions) error {
+		if v > 0 {
+			o.createTimeout = time.Duration(v) * time.Minute
+		} else {
+			o.createTimeout = 120 * time.Minute
+		}
+
+		return nil
+	}
+}
+
+// WithUpdateTimeoutInMinutes is a helper function to construct functional options
+// that set a resource type's update timeout (in minutes).
+// If multiple WithUpdateTimeoutInMinutes calls are made, the last call overrides
+// the previous calls' values.
+func WithUpdateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
+	return func(o *resourceTypeOptions) error {
+		if v > 0 {
+			o.updateTimeout = time.Duration(v) * time.Minute
+		} else {
+			o.updateTimeout = 120 * time.Minute
+		}
+
+		return nil
+	}
+}
+
+// WithDeleteTimeoutInMinutes is a helper function to construct functional options
+// that set a resource type's delete timeout (in minutes).
+// If multiple WithDeleteTimeoutInMinutes calls are made, the last call overrides
+// the previous calls' values.
+func WithDeleteTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
+	return func(o *resourceTypeOptions) error {
+		if v > 0 {
+			o.deleteTimeout = time.Duration(v) * time.Minute
+		} else {
+			o.deleteTimeout = 120 * time.Minute
+		}
+
+		return nil
+	}
+}
+
+// ResourceTypeOptions is a type alias for a slice of resource type functional options.
+type ResourceTypeOptions []ResourceTypeOptionsFunc
+
+// WithCloudFormationTypeName is a helper function to construct functional options
+// that set a resource type's CloudFormation type name, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithCloudFormationTypeName(v string) ResourceTypeOptions {
+	return append(opts, WithCloudFormationTypeName(v))
+}
+
+// WithTerraformSchema is a helper function to construct functional options
+// that set a resource type's Terraform schema, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithTerraformSchema(v schema.Schema) ResourceTypeOptions {
+	return append(opts, WithTerraformSchema(v))
+}
+
+// WithTerraformTypeName is a helper function to construct functional options
+// that set a resource type's Terraform type name, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithTerraformTypeName(v string) ResourceTypeOptions {
+	return append(opts, WithTerraformTypeName(v))
+}
+
+// IsImmutableType is a helper function to construct functional options
+// that set a resource type's Terraform immutability flag, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) IsImmutableType(v bool) ResourceTypeOptions {
+	return append(opts, IsImmutableType(v))
+}
+
+// WithPrimaryIdentifierPath is a helper function to construct functional options
+// that set a resource type's primary identifier path, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithPrimaryIdentifierPath(v string) ResourceTypeOptions {
+	return append(opts, WithPrimaryIdentifierPath(v))
+}
+
+// WithWriteOnlyPropertyPaths is a helper function to construct functional options
+// that set a resource type's write-only property paths, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithWriteOnlyPropertyPaths(v []string) ResourceTypeOptions {
+	return append(opts, WithWriteOnlyPropertyPaths(v))
+}
+
+// WithCreateTimeoutInMinutes is a helper function to construct functional options
+// that set a resource type's create timeout, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithCreateTimeoutInMinutes(v int) ResourceTypeOptions {
+	return append(opts, WithCreateTimeoutInMinutes(v))
+}
+
+// WithUpdateTimeoutInMinutes is a helper function to construct functional options
+// that set a resource type's update timeout, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithUpdateTimeoutInMinutes(v int) ResourceTypeOptions {
+	return append(opts, WithUpdateTimeoutInMinutes(v))
+}
+
+// WithDeleteTimeoutInMinutes is a helper function to construct functional options
+// that set a resource type's delete timeout, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithDeleteTimeoutInMinutes(v int) ResourceTypeOptions {
+	return append(opts, WithDeleteTimeoutInMinutes(v))
+}
+
+// resourceType implements tfsdk.ResourceType.
 type resourceType struct {
 	cfTypeName              string                   // CloudFormation type name for the resource type
 	tfSchema                schema.Schema            // Terraform schema for the resource type
 	tfTypeName              string                   // Terraform type name for resource type
-	features                ResourceTypeFeatures     // Resource type features
+	isImmutableType         bool                     // Resources cannot be updated and must be recreated
 	identifierAttributePath *tftypes.AttributePath   // Path to the resource's primary identifier attribute
 	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
+	createTimeout           time.Duration            // Maximum wait time for resource creation
+	updateTimeout           time.Duration            // Maximum wait time for resource update
+	deleteTimeout           time.Duration            // Maximum wait time for resource deletion
 }
 
-// NewResourceType returns a new ResourceType representing the specified CloudFormation type.
+// NewResourceType returns a new ResourceType from the specified varidaic list of functional options.
 // It's public as it's called from generated code.
-func NewResourceType(cfTypeName, tfTypeName string, tfSchema schema.Schema, primaryIdentifierPath string, writeOnlyPropertyPaths []string, features ResourceTypeFeatures) (tfsdk.ResourceType, error) {
-	identifierAttributePath, err := propertyPathToAttributePath(primaryIdentifierPath)
+func NewResourceType(ctx context.Context, optFns ...ResourceTypeOptionsFunc) (tfsdk.ResourceType, error) {
+	var options resourceTypeOptions
 
-	if err != nil {
-		return nil, fmt.Errorf("error creating ResourceType(%s/%s) identifier attribute path (%s): %w", cfTypeName, tfTypeName, primaryIdentifierPath, err)
-	}
-
-	writeOnlyAttributePaths := make([]*tftypes.AttributePath, 0)
-
-	for _, writeOnlyPropertyPath := range writeOnlyPropertyPaths {
-		writeOnlyAttributePath, err := propertyPathToAttributePath(writeOnlyPropertyPath)
+	for _, optFn := range optFns {
+		err := optFn(&options)
 
 		if err != nil {
-			return nil, fmt.Errorf("error creating ResourceType(%s/%s) write-only attribute path (%s): %w", cfTypeName, tfTypeName, writeOnlyPropertyPath, err)
+			return nil, err
 		}
+	}
 
-		writeOnlyAttributePaths = append(writeOnlyAttributePaths, writeOnlyAttributePath)
+	if options.cfTypeName == "" {
+		return nil, fmt.Errorf("no CloudFormation type name specified")
+	}
+	if options.tfTypeName == "" {
+		return nil, fmt.Errorf("no Terraform type name specified")
+	}
+	if options.identifierAttributePath == nil {
+		return nil, fmt.Errorf("no primary identifier path specified")
 	}
 
 	return &resourceType{
-		features:                features,
-		identifierAttributePath: identifierAttributePath,
-		cfTypeName:              cfTypeName,
-		tfSchema:                tfSchema,
-		tfTypeName:              tfTypeName,
-		writeOnlyAttributePaths: writeOnlyAttributePaths,
+		cfTypeName:              options.cfTypeName,
+		tfSchema:                options.tfSchema,
+		tfTypeName:              options.tfTypeName,
+		isImmutableType:         options.isImmutableType,
+		identifierAttributePath: options.identifierAttributePath,
+		writeOnlyAttributePaths: options.writeOnlyAttributePaths,
+		createTimeout:           options.createTimeout,
+		updateTimeout:           options.updateTimeout,
+		deleteTimeout:           options.deleteTimeout,
 	}, nil
 }
 
@@ -129,7 +359,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		input.RoleArn = aws.String(roleARN)
 	}
 
-	createOutput, err := conn.CreateResource(ctx, input)
+	output, err := conn.CreateResource(ctx, input)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "CreateResource", err))
@@ -137,19 +367,13 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	if createOutput == nil || createOutput.ProgressEvent == nil {
+	if output == nil || output.ProgressEvent == nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "CreateResource"))
 
 		return
 	}
 
-	// TODO
-	// TODO How long to wait for?
-	// TODO
-	maxWaitTime := 5 * time.Minute
-	waiter := tfcloudformation.NewResourceRequestStatusSuccessWaiter(conn)
-
-	waitOutput, err := waiter.Wait(ctx, &cloudformation.GetResourceRequestStatusInput{RequestToken: createOutput.ProgressEvent.RequestToken}, maxWaitTime)
+	identifier, err := tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.createTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "CreateResource", err))
@@ -157,7 +381,6 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	identifier := aws.ToString(waitOutput.ProgressEvent.Identifier)
 	description, err := r.describe(ctx, conn, identifier)
 
 	if tfresource.NotFound(err) {
@@ -337,13 +560,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	// TODO
-	// TODO How long to wait for?
-	// TODO
-	maxWaitTime := 5 * time.Minute
-	waiter := tfcloudformation.NewResourceRequestStatusSuccessWaiter(conn)
-
-	_, err = waiter.Wait(ctx, &cloudformation.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, maxWaitTime)
+	_, err = tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.updateTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "UpdateResource", err))
@@ -376,7 +593,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	err = tfcloudformation.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, identifier)
+	err = tfcloudformation.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, identifier, r.resourceType.deleteTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "DeleteResource", err))

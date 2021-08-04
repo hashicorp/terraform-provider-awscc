@@ -3,6 +3,7 @@ package acctest
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -59,7 +60,7 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 		ctx := context.TODO()
 		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
-		return tfcloudformation.DeleteResource(ctx, provider.CloudFormationClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id)
+		return tfcloudformation.DeleteResource(ctx, provider.CloudFormationClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, 120*time.Minute)
 	}
 }
 
