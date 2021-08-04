@@ -1059,6 +1059,8 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::XRay::SamplingRule").WithTerraformTypeName("aws_xray_sampling_rule").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/RuleARN")
 
+	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
 	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {

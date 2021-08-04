@@ -166,6 +166,16 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 		templateData.WriteOnlyPropertyPaths = append(templateData.WriteOnlyPropertyPaths, string(path))
 	}
 
+	if v, ok := resource.CfResource.Handlers[cfschema.HandlerTypeCreate]; ok {
+		templateData.CreateTimeoutInMinutes = v.TimeoutInMinutes
+	}
+	if v, ok := resource.CfResource.Handlers[cfschema.HandlerTypeUpdate]; ok {
+		templateData.UpdateTimeoutInMinutes = v.TimeoutInMinutes
+	}
+	if v, ok := resource.CfResource.Handlers[cfschema.HandlerTypeDelete]; ok {
+		templateData.DeleteTimeoutInMinutes = v.TimeoutInMinutes
+	}
+
 	err = g.applyAndWriteTemplate(schemaFilename, resourceSchemaTemplateBody, &templateData)
 
 	if err != nil {
@@ -223,6 +233,8 @@ func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templat
 type TemplateData struct {
 	AcceptanceTestFunctionPrefix string
 	CloudFormationTypeName       string
+	CreateTimeoutInMinutes       int
+	DeleteTimeoutInMinutes       int
 	FactoryFunctionName          string
 	HasRequiredAttribute         bool
 	HasUpdateMethod              bool
@@ -233,6 +245,7 @@ type TemplateData struct {
 	SchemaDescription            string
 	SchemaVersion                int64
 	TerraformTypeName            string
+	UpdateTimeoutInMinutes       int
 	WriteOnlyPropertyPaths       []string
 }
 
@@ -290,6 +303,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 	{{- end }}
 	})
 {{- end }}
+	opts = opts.WithCreateTimeoutInMinutes({{ .CreateTimeoutInMinutes }}).WithUpdateTimeoutInMinutes({{ .UpdateTimeoutInMinutes }}).WithDeleteTimeoutInMinutes({{ .DeleteTimeoutInMinutes }})
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

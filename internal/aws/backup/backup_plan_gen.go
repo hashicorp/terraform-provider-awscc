@@ -617,6 +617,8 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupPlan").WithTerraformTypeName("aws_backup_backup_plan").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/BackupPlanId")
 
+	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
 	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {

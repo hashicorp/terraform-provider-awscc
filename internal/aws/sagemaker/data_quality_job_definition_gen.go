@@ -1334,6 +1334,8 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DataQualityJobDefinition").WithTerraformTypeName("aws_sagemaker_data_quality_job_definition").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/JobDefinitionArn")
 
+	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
 	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {

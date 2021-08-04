@@ -3015,6 +3015,8 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskDefinition").WithTerraformTypeName("aws_ecs_task_definition").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/TaskDefinitionArn")
 
+	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
 	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {
