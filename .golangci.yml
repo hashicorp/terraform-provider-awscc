@@ -23,7 +23,7 @@ linters:
     - structcheck
     - unconvert
     - unused
-    # - unparam
+    - unparam
     - varcheck
 
 linters-settings:

@@ -227,7 +227,7 @@ type resourceType struct {
 
 // NewResourceType returns a new ResourceType from the specified varidaic list of functional options.
 // It's public as it's called from generated code.
-func NewResourceType(ctx context.Context, optFns ...ResourceTypeOptionsFunc) (tfsdk.ResourceType, error) {
+func NewResourceType(_ context.Context, optFns ...ResourceTypeOptionsFunc) (tfsdk.ResourceType, error) {
 	resourceType := &resourceType{}
 
 	for _, optFn := range optFns {

@@ -237,11 +237,11 @@ type UnknownValuePath struct {
 }
 
 // GetUnknownValuePaths returns all the UnknownValuePaths for the specified value.
-func GetUnknownValuePaths(ctx context.Context, val tftypes.Value) ([]UnknownValuePath, error) {
-	return getAttributePathsForUnknownValues(ctx, nil, nil, val)
+func GetUnknownValuePaths(_ context.Context, val tftypes.Value) ([]UnknownValuePath, error) {
+	return getAttributePathsForUnknownValues(nil, nil, val)
 }
 
-func getAttributePathsForUnknownValues(ctx context.Context, inTerraformState, inCloudFormationResourceModel *tftypes.AttributePath, val tftypes.Value) ([]UnknownValuePath, error) {
+func getAttributePathsForUnknownValues(inTerraformState, inCloudFormationResourceModel *tftypes.AttributePath, val tftypes.Value) ([]UnknownValuePath, error) {
 	if !val.IsKnown() {
 		return []UnknownValuePath{
 			{
@@ -269,7 +269,7 @@ func getAttributePathsForUnknownValues(ctx context.Context, inTerraformState, in
 				inTerraformState = inTerraformState.WithElementKeyInt(int64(idx))
 				inCloudFormationResourceModel = inCloudFormationResourceModel.WithElementKeyInt(int64(idx))
 			}
-			paths, err := getAttributePathsForUnknownValues(ctx, inTerraformState, inCloudFormationResourceModel, val)
+			paths, err := getAttributePathsForUnknownValues(inTerraformState, inCloudFormationResourceModel, val)
 			if err != nil {
 				return nil, err
 			}
@@ -293,7 +293,7 @@ func getAttributePathsForUnknownValues(ctx context.Context, inTerraformState, in
 				// In the CloudFormation ResourceModel attribute names are camel cased.
 				inCloudFormationResourceModel = inCloudFormationResourceModel.WithAttributeName(naming.TerraformAttributeToCloudFormationProperty(key))
 			}
-			paths, err := getAttributePathsForUnknownValues(ctx, inTerraformState, inCloudFormationResourceModel, val)
+			paths, err := getAttributePathsForUnknownValues(inTerraformState, inCloudFormationResourceModel, val)
 			if err != nil {
 				return nil, err
 			}
@@ -324,8 +324,8 @@ func GetCloudFormationDesiredState(ctx context.Context, val tftypes.Value) (stri
 }
 
 // GetCloudFormationDesiredStateRaw returns the raw map[string]interface{} representing CloudFormation DesiredState from a Terraform Plan.
-func GetCloudFormationDesiredStateRaw(ctx context.Context, val tftypes.Value) (map[string]interface{}, error) {
-	v, err := rawFromValue(ctx, val)
+func GetCloudFormationDesiredStateRaw(_ context.Context, val tftypes.Value) (map[string]interface{}, error) {
+	v, err := rawFromValue(val)
 
 	if err != nil {
 		return nil, err
@@ -344,7 +344,7 @@ func GetCloudFormationDesiredStateRaw(ctx context.Context, val tftypes.Value) (m
 
 // rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
 // Attribute names are converted to camel case (AWS standard).
-func rawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) {
+func rawFromValue(val tftypes.Value) (interface{}, error) {
 	if val.IsNull() || !val.IsKnown() {
 		return nil, nil
 	}
@@ -386,7 +386,7 @@ func rawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) {
 		}
 		vs := make([]interface{}, 0)
 		for _, val := range vals {
-			v, err := rawFromValue(ctx, val)
+			v, err := rawFromValue(val)
 			if err != nil {
 				return nil, err
 			}
@@ -407,7 +407,7 @@ func rawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) {
 		}
 		vs := make(map[string]interface{})
 		for name, val := range vals {
-			v, err := rawFromValue(ctx, val)
+			v, err := rawFromValue(val)
 			if err != nil {
 				return nil, err
 			}

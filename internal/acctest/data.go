@@ -45,7 +45,7 @@ func (td *TestData) RandomAlphaString(n int) string {
 }
 
 // NewTestData returns a new TestData structure.
-func NewTestData(t *testing.T, cfResourceType, tfResourceType, resourceLabel string) TestData {
+func NewTestData(_ *testing.T, cfResourceType, tfResourceType, resourceLabel string) TestData {
 	data := TestData{
 		CloudFormationResourceType: cfResourceType,
 		ResourceLabel:              resourceLabel,
