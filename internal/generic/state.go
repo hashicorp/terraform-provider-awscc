@@ -3,6 +3,7 @@ package generic
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"math/big"
 
@@ -58,7 +59,7 @@ func SetUnknownValuesFromCloudFormationResourceModelRaw(ctx context.Context, sta
 		// Get the value from the CloudFormation ResourceModel.
 		val, _, err := tftypes.WalkAttributePath(resourceModel, path.InCloudFormationResourceModel)
 
-		if err == tftypes.ErrInvalidStep {
+		if errors.Is(err, tftypes.ErrInvalidStep) {
 			// Value not found in CloudFormation ResourceModel. Set to Nil in State.
 
 			// TODO

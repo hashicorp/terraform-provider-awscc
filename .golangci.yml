@@ -7,7 +7,7 @@ linters:
   enable:
     - deadcode
     - errcheck
-    # - errorlint
+    - errorlint
     - goconst
     - gofmt
     # - gomnd
