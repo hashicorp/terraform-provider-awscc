@@ -6,7 +6,7 @@ linters:
   disable-all: true
   enable:
     - deadcode
-    # - errcheck
+    - errcheck
     # - errorlint
     - goconst
     - gofmt
@@ -27,6 +27,11 @@ linters:
     - varcheck
 
 linters-settings:
+  errcheck:
+    # TODO: `ignore` is deprecated, but `exclude-functions` does not appear to work
+    ignore: fmt:.*,github.com/hashicorp/terraform-plugin-framework/tfsdk:SetAttribute
+    # exclude-functions:
+    #   - (*github.com/hashicorp/terraform-plugin-framework/tfsdk.State).SetAttribute
   gomnd:
     settings:
       mnd:
