@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/tfresource"
 )
 
-func DeleteResource(ctx context.Context, conn *cloudformation.Client, roleARN, typeName, id string) error {
+func DeleteResource(ctx context.Context, conn *cloudformation.Client, roleARN, typeName, id string, maxWaitTime time.Duration) error {
 	tflog.Debug(ctx, "DeleteResource", "cfTypeName", typeName, "id", id)
 
 	input := &cloudformation.DeleteResourceInput{
@@ -33,11 +33,6 @@ func DeleteResource(ctx context.Context, conn *cloudformation.Client, roleARN, t
 	if output == nil || output.ProgressEvent == nil {
 		return fmt.Errorf("empty result")
 	}
-
-	// TODO
-	// TODO How long to wait for?
-	// TODO
-	maxWaitTime := 5 * time.Minute
 
 	_, err = WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), maxWaitTime)
 

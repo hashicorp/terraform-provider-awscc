@@ -31,6 +31,9 @@ type resourceTypeOptions struct {
 	isImmutableType         bool                     // Resources cannot be updated and must be recreated
 	identifierAttributePath *tftypes.AttributePath   // Path to the resource's primary identifier attribute
 	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
+	createTimeout           time.Duration            // Maximum wait time for resource creation
+	updateTimeout           time.Duration            // Maximum wait time for resource update
+	deleteTimeout           time.Duration            // Maximum wait time for resource deletion
 }
 
 // ResourceTypeOptionsFunc is a type alias for a resource type functional option.
@@ -126,6 +129,54 @@ func WithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
 	}
 }
 
+// WithCreateTimeoutInMinutes is a helper function to construct functional options
+// that set a resource type's create timeout (in minutes).
+// If multiple WithCreateTimeoutInMinutes calls are made, the last call overrides
+// the previous calls' values.
+func WithCreateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
+	return func(o *resourceTypeOptions) error {
+		if v > 0 {
+			o.createTimeout = time.Duration(v) * time.Minute
+		} else {
+			o.createTimeout = 120 * time.Minute
+		}
+
+		return nil
+	}
+}
+
+// WithUpdateTimeoutInMinutes is a helper function to construct functional options
+// that set a resource type's update timeout (in minutes).
+// If multiple WithUpdateTimeoutInMinutes calls are made, the last call overrides
+// the previous calls' values.
+func WithUpdateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
+	return func(o *resourceTypeOptions) error {
+		if v > 0 {
+			o.updateTimeout = time.Duration(v) * time.Minute
+		} else {
+			o.updateTimeout = 120 * time.Minute
+		}
+
+		return nil
+	}
+}
+
+// WithDeleteTimeoutInMinutes is a helper function to construct functional options
+// that set a resource type's delete timeout (in minutes).
+// If multiple WithDeleteTimeoutInMinutes calls are made, the last call overrides
+// the previous calls' values.
+func WithDeleteTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
+	return func(o *resourceTypeOptions) error {
+		if v > 0 {
+			o.deleteTimeout = time.Duration(v) * time.Minute
+		} else {
+			o.deleteTimeout = 120 * time.Minute
+		}
+
+		return nil
+	}
+}
+
 // ResourceTypeOptions is a type alias for a slice of resource type functional options.
 type ResourceTypeOptions []ResourceTypeOptionsFunc
 
@@ -177,6 +228,30 @@ func (opts ResourceTypeOptions) WithWriteOnlyPropertyPaths(v []string) ResourceT
 	return append(opts, WithWriteOnlyPropertyPaths(v))
 }
 
+// WithCreateTimeoutInMinutes is a helper function to construct functional options
+// that set a resource type's create timeout, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithCreateTimeoutInMinutes(v int) ResourceTypeOptions {
+	return append(opts, WithCreateTimeoutInMinutes(v))
+}
+
+// WithUpdateTimeoutInMinutes is a helper function to construct functional options
+// that set a resource type's update timeout, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithUpdateTimeoutInMinutes(v int) ResourceTypeOptions {
+	return append(opts, WithUpdateTimeoutInMinutes(v))
+}
+
+// WithDeleteTimeoutInMinutes is a helper function to construct functional options
+// that set a resource type's delete timeout, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithDeleteTimeoutInMinutes(v int) ResourceTypeOptions {
+	return append(opts, WithDeleteTimeoutInMinutes(v))
+}
+
 // resourceType implements tfsdk.ResourceType.
 type resourceType struct {
 	cfTypeName              string                   // CloudFormation type name for the resource type
@@ -185,6 +260,9 @@ type resourceType struct {
 	isImmutableType         bool                     // Resources cannot be updated and must be recreated
 	identifierAttributePath *tftypes.AttributePath   // Path to the resource's primary identifier attribute
 	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
+	createTimeout           time.Duration            // Maximum wait time for resource creation
+	updateTimeout           time.Duration            // Maximum wait time for resource update
+	deleteTimeout           time.Duration            // Maximum wait time for resource deletion
 }
 
 // NewResourceType returns a new ResourceType from the specified varidaic list of functional options.
@@ -217,6 +295,9 @@ func NewResourceType(ctx context.Context, optFns ...ResourceTypeOptionsFunc) (tf
 		isImmutableType:         options.isImmutableType,
 		identifierAttributePath: options.identifierAttributePath,
 		writeOnlyAttributePaths: options.writeOnlyAttributePaths,
+		createTimeout:           options.createTimeout,
+		updateTimeout:           options.updateTimeout,
+		deleteTimeout:           options.deleteTimeout,
 	}, nil
 }
 
@@ -292,12 +373,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	// TODO
-	// TODO How long to wait for?
-	// TODO
-	maxWaitTime := 5 * time.Minute
-
-	identifier, err := tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), maxWaitTime)
+	identifier, err := tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.createTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "CreateResource", err))
@@ -484,12 +560,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	// TODO
-	// TODO How long to wait for?
-	// TODO
-	maxWaitTime := 5 * time.Minute
-
-	_, err = tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), maxWaitTime)
+	_, err = tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.updateTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "UpdateResource", err))
@@ -522,7 +593,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	err = tfcloudformation.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, identifier)
+	err = tfcloudformation.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, identifier, r.resourceType.deleteTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "DeleteResource", err))
