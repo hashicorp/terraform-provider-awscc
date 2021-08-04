@@ -1,0 +1,87 @@
+name: Linters
+
+on:
+  push:
+    branches:
+      - main
+      - "release/**"
+  pull_request:
+    paths:
+      - .github/workflows/linters.yml
+      - .go-version
+      - .golangci.yml
+      - go.sum
+      - GNUmakefile
+      - internal/**
+      - main.go
+      - tools/**
+
+jobs:
+  go_mod_download:
+    name: go mod download
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - id: go-version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./.go-version
+
+      - uses: actions/setup-go@v2
+        with:
+          # TODO: Replace with go-version-from-file when it is supported
+          # https://github.com/actions/setup-go/pull/62
+          go-version: ${{ steps.go-version.outputs.content }}
+
+      - uses: actions/cache@v2
+        continue-on-error: true
+        id: cache-go-pkg-mod
+        timeout-minutes: 2
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-pkg-mod-${{ hashFiles('go.sum') }}
+
+      - if: steps.cache-go-pkg-mod.outputs.cache-hit != 'true' || steps.cache-go-pkg-mod.outcome == 'failure'
+        run: go mod download
+
+  golangci-lint:
+    needs: [go_mod_download]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - id: go-version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./.go-version
+
+      - uses: actions/setup-go@v2
+        with:
+          # TODO: Replace with go-version-from-file when it is supported
+          # https://github.com/actions/setup-go/pull/62
+          go-version: ${{ steps.go-version.outputs.content }}
+
+      - name: GOCACHE
+        run: |
+          echo "GOCACHE=$(go env GOCACHE)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v2
+        continue-on-error: true
+        timeout-minutes: 2
+        with:
+          # TODO: Replace with supported mechanism when it is supported
+          # https://github.com/actions/setup-go/issues/54
+          path: ${{ env.GOCACHE }}
+          key: ${{ runner.os }}-GOCACHE-${{ hashFiles('go.sum') }}-${{ hashFiles('internal/**') }}
+
+      - uses: actions/cache@v2
+        continue-on-error: true
+        timeout-minutes: 2
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-pkg-mod-${{ hashFiles('go.sum') }}
+
+      - run: cd tools && go install github.com/golangci/golangci-lint/cmd/golangci-lint
+
+      - run: golangci-lint run ./internal/...
