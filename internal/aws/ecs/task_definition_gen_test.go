@@ -3,46 +3,36 @@
 package ecs_test
 
 import (
-	"fmt"
-
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
 )
 
-type taskDefinitionTest struct{}
-
 func TestAccAWSECSTaskDefinition_basic(t *testing.T) {
-	data := acctest.NewTestData(t, "AWS::ECS::TaskDefinition", "aws_ecs_task_definition", "test")
-	r := taskDefinitionTest{}
+	td := acctest.NewTestData(t, "AWS::ECS::TaskDefinition", "aws_ecs_task_definition", "test")
 
-	data.ResourceTest(t, []resource.TestStep{
+	td.ResourceTest(t, []resource.TestStep{
 		{
-			Config: r.basic(data),
-
+			Config: td.EmptyConfig(),
 			Check: resource.ComposeTestCheckFunc(
-				data.CheckExistsInAWS(),
+				td.CheckExistsInAWS(),
 			),
 		},
 	})
 }
 
 func TestAccAWSECSTaskDefinition_disappears(t *testing.T) {
-	data := acctest.NewTestData(t, "AWS::ECS::TaskDefinition", "aws_ecs_task_definition", "test")
-	r := taskDefinitionTest{}
+	td := acctest.NewTestData(t, "AWS::ECS::TaskDefinition", "aws_ecs_task_definition", "test")
 
-	data.ResourceTest(t, []resource.TestStep{
-		data.DisappearsStep(acctest.DisappearsStepData{
-			Config: r.basic,
-		}),
+	td.ResourceTest(t, []resource.TestStep{
+		{
+			Config: td.EmptyConfig(),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
+				td.DeleteResource(),
+			),
+			ExpectNonEmptyPlan: true,
+		},
 	})
-}
-
-func (r taskDefinitionTest) basic(data acctest.TestData) string {
-	return fmt.Sprintf(`
-resource %[1]q %[2]q {
-  provider = cloudapi
-}
-`, data.TerraformResourceType, data.ResourceLabel)
 }

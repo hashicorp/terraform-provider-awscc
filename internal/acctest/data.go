@@ -25,6 +25,15 @@ type TestData struct {
 	provider tfsdk.Provider
 }
 
+// EmptyConfig returns an empty (no attributes) Terraform configuration for the resource.
+func (td *TestData) EmptyConfig() string {
+	return fmt.Sprintf(`
+resource %[1]q %[2]q {
+  provider = cloudapi
+}
+`, td.TerraformResourceType, td.ResourceLabel)
+}
+
 // RandomName returns a new random name with the standard prefix `tf-acc-test`.
 func (td *TestData) RandomName() string {
 	return acctest.RandomWithPrefix("tf-acc-test")

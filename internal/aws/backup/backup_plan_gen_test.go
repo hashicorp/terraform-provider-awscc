@@ -3,7 +3,6 @@
 package backup_test
 
 import (
-	"fmt"
 	"regexp"
 	"testing"
 
@@ -11,25 +10,13 @@ import (
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
 )
 
-type backupPlanTest struct{}
-
 func TestAccAWSBackupBackupPlan_basic(t *testing.T) {
-	data := acctest.NewTestData(t, "AWS::Backup::BackupPlan", "aws_backup_backup_plan", "test")
-	r := backupPlanTest{}
+	td := acctest.NewTestData(t, "AWS::Backup::BackupPlan", "aws_backup_backup_plan", "test")
 
-	data.ResourceTest(t, []resource.TestStep{
+	td.ResourceTest(t, []resource.TestStep{
 		{
-			Config: r.basic(data),
-
-			ExpectError: regexp.MustCompile(`Missing required argument`),
+			Config:      td.EmptyConfig(),
+			ExpectError: regexp.MustCompile("Missing required argument"),
 		},
 	})
-}
-
-func (r backupPlanTest) basic(data acctest.TestData) string {
-	return fmt.Sprintf(`
-resource %[1]q %[2]q {
-  provider = cloudapi
-}
-`, data.TerraformResourceType, data.ResourceLabel)
 }

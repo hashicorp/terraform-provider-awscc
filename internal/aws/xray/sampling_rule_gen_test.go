@@ -3,46 +3,36 @@
 package xray_test
 
 import (
-	"fmt"
-
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
 )
 
-type samplingRuleTest struct{}
-
 func TestAccAWSXRaySamplingRule_basic(t *testing.T) {
-	data := acctest.NewTestData(t, "AWS::XRay::SamplingRule", "aws_xray_sampling_rule", "test")
-	r := samplingRuleTest{}
+	td := acctest.NewTestData(t, "AWS::XRay::SamplingRule", "aws_xray_sampling_rule", "test")
 
-	data.ResourceTest(t, []resource.TestStep{
+	td.ResourceTest(t, []resource.TestStep{
 		{
-			Config: r.basic(data),
-
+			Config: td.EmptyConfig(),
 			Check: resource.ComposeTestCheckFunc(
-				data.CheckExistsInAWS(),
+				td.CheckExistsInAWS(),
 			),
 		},
 	})
 }
 
 func TestAccAWSXRaySamplingRule_disappears(t *testing.T) {
-	data := acctest.NewTestData(t, "AWS::XRay::SamplingRule", "aws_xray_sampling_rule", "test")
-	r := samplingRuleTest{}
+	td := acctest.NewTestData(t, "AWS::XRay::SamplingRule", "aws_xray_sampling_rule", "test")
 
-	data.ResourceTest(t, []resource.TestStep{
-		data.DisappearsStep(acctest.DisappearsStepData{
-			Config: r.basic,
-		}),
+	td.ResourceTest(t, []resource.TestStep{
+		{
+			Config: td.EmptyConfig(),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
+				td.DeleteResource(),
+			),
+			ExpectNonEmptyPlan: true,
+		},
 	})
-}
-
-func (r samplingRuleTest) basic(data acctest.TestData) string {
-	return fmt.Sprintf(`
-resource %[1]q %[2]q {
-  provider = cloudapi
-}
-`, data.TerraformResourceType, data.ResourceLabel)
 }
