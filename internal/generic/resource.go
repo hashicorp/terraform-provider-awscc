@@ -278,7 +278,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		input.RoleArn = aws.String(roleARN)
 	}
 
-	createOutput, err := conn.CreateResource(ctx, input)
+	output, err := conn.CreateResource(ctx, input)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "CreateResource", err))
@@ -286,7 +286,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	if createOutput == nil || createOutput.ProgressEvent == nil {
+	if output == nil || output.ProgressEvent == nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "CreateResource"))
 
 		return
@@ -296,9 +296,8 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	// TODO How long to wait for?
 	// TODO
 	maxWaitTime := 5 * time.Minute
-	waiter := tfcloudformation.NewResourceRequestStatusSuccessWaiter(conn)
 
-	waitOutput, err := waiter.Wait(ctx, &cloudformation.GetResourceRequestStatusInput{RequestToken: createOutput.ProgressEvent.RequestToken}, maxWaitTime)
+	identifier, err := tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), maxWaitTime)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "CreateResource", err))
@@ -306,7 +305,6 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	identifier := aws.ToString(waitOutput.ProgressEvent.Identifier)
 	description, err := r.describe(ctx, conn, identifier)
 
 	if tfresource.NotFound(err) {
@@ -490,9 +488,8 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	// TODO How long to wait for?
 	// TODO
 	maxWaitTime := 5 * time.Minute
-	waiter := tfcloudformation.NewResourceRequestStatusSuccessWaiter(conn)
 
-	_, err = waiter.Wait(ctx, &cloudformation.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, maxWaitTime)
+	_, err = tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), maxWaitTime)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "UpdateResource", err))
