@@ -43,7 +43,7 @@ jobs:
           key: ${{ runner.os }}-go-pkg-mod-${{ hashFiles('go.sum') }}
 
       # Needed to access private repositories. Unfortunately, this cannot be restricted to specific repositories
-      - run: git config --global url."https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/hashicorp".insteadOf "https://github.com/hashicorp"
+      - run: git config --global url."https://${{ secrets.PRIVATE_GOMOD_TOKEN }}:x-oauth-basic@github.com/hashicorp".insteadOf "https://github.com/hashicorp"
 
       - if: steps.cache-go-pkg-mod.outputs.cache-hit != 'true' || steps.cache-go-pkg-mod.outcome == 'failure'
         run: go mod download
@@ -88,7 +88,7 @@ jobs:
       - run: cd tools && go install github.com/golangci/golangci-lint/cmd/golangci-lint
 
       # Needed to access private repositories. Unfortunately, this cannot be restricted to specific repositories
-      - run: git config --global url."https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/hashicorp".insteadOf "https://github.com/hashicorp"
+      - run: git config --global url."https://${{ secrets.PRIVATE_GOMOD_TOKEN }}:x-oauth-basic@github.com/hashicorp".insteadOf "https://github.com/hashicorp"
 
       - run: golangci-lint run ./internal/...
 
@@ -130,7 +130,7 @@ jobs:
           key: ${{ runner.os }}-go-pkg-mod-${{ hashFiles('go.sum') }}
 
       # Needed to access private repositories. Unfortunately, this cannot be restricted to specific repositories
-      - run: git config --global url."https://${{ secrets.GITHUB_TOKEN }}:x-oauth-basic@github.com/hashicorp".insteadOf "https://github.com/hashicorp"
+      - run: git config --global url."https://${{ secrets.PRIVATE_GOMOD_TOKEN }}:x-oauth-basic@github.com/hashicorp".insteadOf "https://github.com/hashicorp"
 
       - run: make test
 
