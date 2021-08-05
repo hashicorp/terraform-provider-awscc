@@ -31,7 +31,7 @@ func WaitForResourceRequestSuccess(ctx context.Context, client *cloudformation.C
 						// Resource not found error on delete is OK.
 						return false, nil
 					}
-					return false, fmt.Errorf("waiter state transitioned to %s", value)
+					return false, fmt.Errorf("waiter state transitioned to %s. StatusMessage: %s. ErrorCode: %s", value, aws.ToString(progressEvent.StatusMessage), progressEvent.ErrorCode)
 				}
 			}
 
@@ -192,20 +192,4 @@ func (w *ResourceRequestStatusSuccessWaiter) Wait(ctx context.Context, params *c
 		}
 	}
 	return fmt.Errorf("exceeded max wait time for ResourceRequestStatusSuccess waiter")
-}
-
-func resourceRequestStatusSuccessStateRetryable(ctx context.Context, input *cloudformation.GetResourceRequestStatusInput, output *cloudformation.GetResourceRequestStatusOutput, err error) (bool, error) {
-	if err == nil {
-		switch value := output.ProgressEvent.OperationStatus; value {
-		case types.OperationStatusSuccess:
-			return false, nil
-		case types.OperationStatusFailed:
-			if output.ProgressEvent.ErrorCode == types.HandlerErrorCodeNotFound && output.ProgressEvent.Operation == types.OperationDelete {
-				return false, nil
-			}
-			return false, fmt.Errorf("waiter state transitioned to %s", value)
-		}
-	}
-
-	return true, nil
 }
