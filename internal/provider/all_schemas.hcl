@@ -85,3 +85,11 @@ resource_schema "aws_ecs_task_definition" {
 
  local = "../service/cloudformation/schemas/us-west-2/aws-ecs-taskdefinition.json"
 }
+
+resource_schema "aws_kms_key" {
+  source {
+    url = "???"
+  }
+
+ local = "../service/cloudformation/schemas/us-west-2/aws-kms-key.json"
+}
