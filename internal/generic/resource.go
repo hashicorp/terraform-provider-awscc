@@ -456,7 +456,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	}
 
 	// Set the "id" attribute.
-	err = r.setId(ctx, id, &request.State)
+	err = r.setId(ctx, id, &response.State)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
