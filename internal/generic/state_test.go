@@ -372,8 +372,10 @@ func TestGetCloudFormationResourceModelValue(t *testing.T) {
 				t.Fatalf("unexpected error from GetCloudFormationResourceModelRawValue: %s", err)
 			}
 
-			if diff := cmp.Diff(got, testCase.ExpectedValue); diff != "" {
-				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+			if err == nil {
+				if diff := cmp.Diff(got, testCase.ExpectedValue); diff != "" {
+					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+				}
 			}
 		})
 	}
@@ -430,8 +432,10 @@ func TestGetUnknownValuePaths(t *testing.T) {
 				t.Fatalf("unexpected error from GetUnknownValuePaths: %s", err)
 			}
 
-			if diff := cmp.Diff(got, testCase.ExpectedPaths, opts); diff != "" {
-				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+			if err == nil {
+				if diff := cmp.Diff(got, testCase.ExpectedPaths, opts); diff != "" {
+					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+				}
 			}
 		})
 	}
@@ -485,8 +489,183 @@ func TestSetUnknownValuesFromCloudFormationResourceModel(t *testing.T) {
 				t.Fatalf("unexpected error from SetUnknownValuesFromCloudFormationResourceModelRaw: %s", err)
 			}
 
-			if diff := cmp.Diff(testCase.State, testCase.ExpectedState); diff != "" {
-				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+			if err == nil {
+				if diff := cmp.Diff(testCase.State, testCase.ExpectedState); diff != "" {
+					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+				}
+			}
+		})
+	}
+}
+
+func TestCopyValueAtPath(t *testing.T) {
+	testCases := []struct {
+		TestName      string
+		SrcState      tfsdk.State
+		DstState      tfsdk.State
+		Path          *tftypes.AttributePath
+		ExpectedError bool
+		ExpectedState tfsdk.State
+	}{
+		{
+			TestName: "simple State",
+			SrcState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"arn":        tftypes.String,
+						"name":       tftypes.String,
+						"number":     tftypes.Number,
+						"identifier": tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"arn":        tftypes.NewValue(tftypes.String, "arnsrc"),
+					"name":       tftypes.NewValue(tftypes.String, "namesrc"),
+					"number":     tftypes.NewValue(tftypes.Number, 42),
+					"identifier": tftypes.NewValue(tftypes.String, "idsrc"),
+				}),
+				Schema: testSimpleSchema,
+			},
+			DstState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"arn":        tftypes.String,
+						"name":       tftypes.String,
+						"number":     tftypes.Number,
+						"identifier": tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"arn":        tftypes.NewValue(tftypes.String, "arndest"),
+					"name":       tftypes.NewValue(tftypes.String, "namedest"),
+					"number":     tftypes.NewValue(tftypes.Number, 0),
+					"identifier": tftypes.NewValue(tftypes.String, "iddest"),
+				}),
+				Schema: testSimpleSchema,
+			},
+			Path: tftypes.NewAttributePath().WithAttributeName("number"),
+			ExpectedState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"arn":        tftypes.String,
+						"name":       tftypes.String,
+						"number":     tftypes.Number,
+						"identifier": tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"arn":        tftypes.NewValue(tftypes.String, "arndest"),
+					"name":       tftypes.NewValue(tftypes.String, "namedest"),
+					"number":     tftypes.NewValue(tftypes.Number, 42),
+					"identifier": tftypes.NewValue(tftypes.String, "iddest"),
+				}),
+				Schema: testSimpleSchema,
+			},
+		},
+		{
+			TestName: "simple State with Null",
+			SrcState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"arn":        tftypes.String,
+						"name":       tftypes.String,
+						"number":     tftypes.Number,
+						"identifier": tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"arn":        tftypes.NewValue(tftypes.String, nil),
+					"name":       tftypes.NewValue(tftypes.String, "namesrc"),
+					"number":     tftypes.NewValue(tftypes.Number, 42),
+					"identifier": tftypes.NewValue(tftypes.String, "idsrc"),
+				}),
+				Schema: testSimpleSchema,
+			},
+			DstState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"arn":        tftypes.String,
+						"name":       tftypes.String,
+						"number":     tftypes.Number,
+						"identifier": tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"arn":        tftypes.NewValue(tftypes.String, nil),
+					"name":       tftypes.NewValue(tftypes.String, "namedest"),
+					"number":     tftypes.NewValue(tftypes.Number, 43),
+					"identifier": tftypes.NewValue(tftypes.String, "iddest"),
+				}),
+				Schema: testSimpleSchema,
+			},
+			Path: tftypes.NewAttributePath().WithAttributeName("arn"),
+			ExpectedState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"arn":        tftypes.String,
+						"name":       tftypes.String,
+						"number":     tftypes.Number,
+						"identifier": tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"arn":        tftypes.NewValue(tftypes.String, nil),
+					"name":       tftypes.NewValue(tftypes.String, "namedest"),
+					"number":     tftypes.NewValue(tftypes.Number, 43),
+					"identifier": tftypes.NewValue(tftypes.String, "iddest"),
+				}),
+				Schema: testSimpleSchema,
+			},
+		},
+		{
+			TestName: "invalid Path",
+			SrcState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"arn":        tftypes.String,
+						"name":       tftypes.String,
+						"number":     tftypes.Number,
+						"identifier": tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"arn":        tftypes.NewValue(tftypes.String, "arnsrc"),
+					"name":       tftypes.NewValue(tftypes.String, "namesrc"),
+					"number":     tftypes.NewValue(tftypes.Number, 42),
+					"identifier": tftypes.NewValue(tftypes.String, "idsrc"),
+				}),
+				Schema: testSimpleSchema,
+			},
+			DstState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"arn":        tftypes.String,
+						"name":       tftypes.String,
+						"number":     tftypes.Number,
+						"identifier": tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"arn":        tftypes.NewValue(tftypes.String, "arndest"),
+					"name":       tftypes.NewValue(tftypes.String, "namedest"),
+					"number":     tftypes.NewValue(tftypes.Number, 0),
+					"identifier": tftypes.NewValue(tftypes.String, "iddest"),
+				}),
+				Schema: testSimpleSchema,
+			},
+			Path:          tftypes.NewAttributePath().WithAttributeName("height"),
+			ExpectedError: true,
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.TestName, func(t *testing.T) {
+			err := CopyValueAtPath(context.TODO(), &testCase.DstState, &testCase.SrcState, testCase.Path)
+
+			if err == nil && testCase.ExpectedError {
+				t.Fatalf("expected error from CopyValueAtPath")
+			}
+
+			if err != nil && !testCase.ExpectedError {
+				t.Fatalf("unexpected error from CopyValueAtPath: %s", err)
+			}
+
+			if err == nil {
+				if diff := cmp.Diff(testCase.DstState, testCase.ExpectedState); diff != "" {
+					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+				}
 			}
 		})
 	}
@@ -645,8 +824,10 @@ func TestPlanGetCloudFormationDesiredState(t *testing.T) {
 				t.Fatalf("unexpected error: %s", err)
 			}
 
-			if diff := cmp.Diff(got, testCase.ExpectedState); diff != "" {
-				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+			if err == nil {
+				if diff := cmp.Diff(got, testCase.ExpectedState); diff != "" {
+					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+				}
 			}
 		})
 	}

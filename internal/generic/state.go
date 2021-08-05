@@ -12,6 +12,23 @@ import (
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
 )
 
+// CopyValueAtPath copies the value at a specified path from source State to destination State.
+func CopyValueAtPath(ctx context.Context, dst, src *tfsdk.State, path *tftypes.AttributePath) error {
+	val, err := src.GetAttribute(ctx, path)
+
+	if err != nil {
+		return err
+	}
+
+	err = dst.SetAttribute(ctx, path, val)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // SetUnknownValuesFromCloudFormationResourceModel fills any unknown State values from a CloudFormation ResourceModel (string).
 func SetUnknownValuesFromCloudFormationResourceModel(ctx context.Context, state *tfsdk.State, resourceModel string) error {
 	var v interface{}
