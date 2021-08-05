@@ -407,6 +407,8 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 	tflog.Debug(ctx, "Resource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
+	tflog.Debug(ctx, "Request.State.Raw", "value", hclog.Fmt("%v", request.State.Raw))
+
 	conn := r.provider.CloudFormationClient(ctx)
 
 	currentState := &request.State
@@ -446,13 +448,25 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		return
 	}
 
-	// TODO
-	// TODO Consider write-only values. They can only be in the current state.
-	// TODO
-
 	response.State = tfsdk.State{
 		Schema: *schema,
 		Raw:    val,
+	}
+
+	// Copy over any write-only values.
+	// They can only be in the current state.
+	for _, path := range r.resourceType.writeOnlyAttributePaths {
+		err = CopyValueAtPath(ctx, &response.State, &request.State, path)
+
+		if err != nil {
+			response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+				Severity: tfprotov6.DiagnosticSeverityError,
+				Summary:  "Terraform State Value Not Set",
+				Detail:   fmt.Sprintf("Unable to set Terraform State value %s. This is typically an error with the Terraform provider implementation. Original Error: %s", path, err.Error()),
+			})
+
+			return
+		}
 	}
 
 	// Set the "id" attribute.
@@ -463,6 +477,8 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 		return
 	}
+
+	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
 
 	tflog.Debug(ctx, "Resource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }

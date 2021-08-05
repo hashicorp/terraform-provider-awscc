@@ -9,8 +9,26 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
 )
+
+// CopyValueAtPath copies the value at a specified path from source State to destination State.
+func CopyValueAtPath(ctx context.Context, dst, src *tfsdk.State, path *tftypes.AttributePath) error {
+	val, err := src.GetAttribute(ctx, path)
+
+	if err != nil {
+		return err
+	}
+
+	err = dst.SetAttribute(ctx, path, val)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
 
 // SetUnknownValuesFromCloudFormationResourceModel fills any unknown State values from a CloudFormation ResourceModel (string).
 func SetUnknownValuesFromCloudFormationResourceModel(ctx context.Context, state *tfsdk.State, resourceModel string) error {
@@ -150,9 +168,26 @@ func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Sch
 			vals = append(vals, val)
 			path = path.WithoutLastStep()
 		}
+		// TODO
+		// TODO This prevents a crash in Terraform Core, but is it correct?
+		// TODO
+		if len(vals) == 0 {
+			return tftypes.NewValue(typ, nil), nil
+		}
 		return tftypes.NewValue(typ, vals), nil
 
 	case map[string]interface{}:
+		if typ.Is(tftypes.String) {
+			// Value is JSON string.
+			val, err := json.Marshal(v)
+
+			if err != nil {
+				return tftypes.Value{}, err
+			}
+
+			return tftypes.NewValue(typ, string(val)), nil
+		}
+
 		isObject := typ.Is(tftypes.Object{})
 		vals := make(map[string]tftypes.Value)
 		for key, v := range v {
@@ -164,6 +199,11 @@ func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Sch
 			}
 			val, err := getCloudFormationResourceModelValue(ctx, schema, path, v)
 			if err != nil {
+				if isObject {
+					tflog.Info(ctx, "not found in Terraform schema", "key", key, "path", path, "error", err.Error())
+					path = path.WithoutLastStep()
+					continue
+				}
 				return tftypes.Value{}, err
 			}
 			if isObject {

@@ -8,6 +8,7 @@
 //go:generate go run generators/resource/main.go -resource aws_xray_sampling_rule -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-xray-samplingrule.json -package xray -- ../aws/xray/sampling_rule_gen.go ../aws/xray/sampling_rule_gen_test.go
 //go:generate go run generators/resource/main.go -resource aws_ecs_service -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-ecs-service.json -package ecs -- ../aws/ecs/service_gen.go ../aws/ecs/service_gen_test.go
 //go:generate go run generators/resource/main.go -resource aws_ecs_task_definition -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-ecs-taskdefinition.json -package ecs -- ../aws/ecs/task_definition_gen.go ../aws/ecs/task_definition_gen_test.go
+//go:generate go run generators/resource/main.go -resource aws_kms_key -cfschema /Users/ewbankkit/src/github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation/schemas/us-west-2/aws-kms-key.json -package kms -- ../aws/kms/key_gen.go ../aws/kms/key_gen_test.go
 
 package provider
 
@@ -15,6 +16,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/appmesh"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/backup"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/ecs"
+	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/kms"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/logs"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/sagemaker"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/stepfunctions"

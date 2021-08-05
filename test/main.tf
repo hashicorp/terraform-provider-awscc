@@ -10,9 +10,36 @@ provider "cloudapi" {
   region = "us-west-2"
 }
 
-resource "aws_logs_log_group" "test" {
+resource "aws_kms_key" "test" {
   provider = cloudapi
 
-  log_group_name    = "CloudAPI_testing"
-  retention_in_days = 120
+  key_policy = jsonencode({
+    Id = "kms-tf-1"
+    Statement = [
+      {
+        Action = "kms:*"
+        Effect = "Allow"
+        Principal = {
+          AWS = "*"
+        }
+
+        Resource = "*"
+        Sid      = "Enable IAM User Permissions"
+      },
+    ]
+    Version = "2012-10-17"
+  })
+
+  pending_window_in_days = 8
+
+  # tags = [
+  #   {
+  #     key   = "Name"
+  #     value = "Testing"
+  #   },
+  #   {
+  #     key   = "Env"
+  #     value = "dev"
+  #   }
+  # ]
 }
