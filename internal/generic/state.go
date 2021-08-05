@@ -170,6 +170,17 @@ func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Sch
 		return tftypes.NewValue(typ, vals), nil
 
 	case map[string]interface{}:
+		if typ.Is(tftypes.String) {
+			// Value is JSON string.
+			val, err := json.Marshal(v)
+
+			if err != nil {
+				return tftypes.Value{}, err
+			}
+
+			return tftypes.NewValue(typ, string(val)), nil
+		}
+
 		isObject := typ.Is(tftypes.Object{})
 		vals := make(map[string]tftypes.Value)
 		for key, v := range v {

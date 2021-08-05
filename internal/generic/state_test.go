@@ -238,6 +238,30 @@ func TestGetCloudFormationResourceModelValue(t *testing.T) {
 			}),
 		},
 		{
+			TestName: "simple State with JSON string",
+			Schema:   testSimpleSchema,
+			ResourceModel: map[string]interface{}{
+				"Arn": "arn:aws:test:::test",
+				"Name": map[string]interface{}{
+					"Value": "testing",
+				},
+				"Number": float64(42),
+			},
+			ExpectedValue: tftypes.NewValue(tftypes.Object{
+				AttributeTypes: map[string]tftypes.Type{
+					"arn":        tftypes.String,
+					"identifier": tftypes.String,
+					"name":       tftypes.String,
+					"number":     tftypes.Number,
+				},
+			}, map[string]tftypes.Value{
+				"arn":        tftypes.NewValue(tftypes.String, "arn:aws:test:::test"),
+				"identifier": tftypes.NewValue(tftypes.String, nil),
+				"name":       tftypes.NewValue(tftypes.String, `{"Value":"testing"}`),
+				"number":     tftypes.NewValue(tftypes.Number, 42),
+			}),
+		},
+		{
 			TestName: "complex State",
 			Schema:   testComplexSchema,
 			ResourceModel: map[string]interface{}{
