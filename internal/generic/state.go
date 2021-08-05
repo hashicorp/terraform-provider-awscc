@@ -168,6 +168,12 @@ func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Sch
 			vals = append(vals, val)
 			path = path.WithoutLastStep()
 		}
+		// TODO
+		// TODO This prevents a crash in Terraform Core, but is it correct?
+		// TODO
+		if len(vals) == 0 {
+			return tftypes.NewValue(typ, nil), nil
+		}
 		return tftypes.NewValue(typ, vals), nil
 
 	case map[string]interface{}:

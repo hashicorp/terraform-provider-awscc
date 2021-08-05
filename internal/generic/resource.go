@@ -407,6 +407,8 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 	tflog.Debug(ctx, "Resource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
+	tflog.Debug(ctx, "Request.State.Raw", "value", hclog.Fmt("%v", request.State.Raw))
+
 	conn := r.provider.CloudFormationClient(ctx)
 
 	currentState := &request.State
@@ -475,6 +477,8 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 		return
 	}
+
+	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
 
 	tflog.Debug(ctx, "Resource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
