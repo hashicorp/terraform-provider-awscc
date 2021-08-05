@@ -1,0 +1,13 @@
+rules:
+  - id: no-fmt-printf
+    languages: [go]
+    message: Do not call `fmt.Print` and variants
+    patterns:
+      - pattern-either:
+          - pattern: |
+              fmt.Print(...)
+          - pattern: |
+              fmt.Printf(...)
+          - pattern: |
+              fmt.Println(...)
+    severity: ERROR
