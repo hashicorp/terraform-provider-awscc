@@ -24,7 +24,6 @@ func stateMachine(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn
-			// PrimaryIdentifier: true
 			// CloudFormation resource type schema:
 			/*
 			   {
@@ -466,7 +465,7 @@ func stateMachine(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::StepFunctions::StateMachine").WithTerraformTypeName("aws_stepfunctions_state_machine").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/Arn")
+	opts = opts.WithCloudFormationTypeName("AWS::StepFunctions::StateMachine").WithTerraformTypeName("aws_stepfunctions_state_machine").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

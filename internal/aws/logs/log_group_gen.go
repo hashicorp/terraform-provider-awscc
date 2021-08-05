@@ -52,7 +52,6 @@ func logGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 		"log_group_name": {
 			// Property: LogGroupName
-			// PrimaryIdentifier: true
 			// CloudFormation resource type schema:
 			/*
 			   {
@@ -118,7 +117,7 @@ func logGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Logs::LogGroup").WithTerraformTypeName("aws_logs_log_group").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/LogGroupName")
+	opts = opts.WithCloudFormationTypeName("AWS::Logs::LogGroup").WithTerraformTypeName("aws_logs_log_group").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -60,9 +60,6 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 
 	e.printf("{\n")
 	e.printf("// Property: %s\n", name)
-	if e.CfResource.PrimaryIdentifier.ContainsPath(path) {
-		e.printf("// PrimaryIdentifier: %t\n", true)
-	}
 	e.printf("// CloudFormation resource type schema:\n")
 	e.printf("/*\n")
 	e.printf("%v\n", property)

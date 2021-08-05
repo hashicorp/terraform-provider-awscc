@@ -22,6 +22,14 @@ func ResourceIdentifierNotFoundDiag(err error) *tfprotov6.Diagnostic {
 	}
 }
 
+func ResourceIdentifierNotSetDiag(err error) *tfprotov6.Diagnostic {
+	return &tfprotov6.Diagnostic{
+		Severity: tfprotov6.DiagnosticSeverityError,
+		Summary:  "Terraform Resource Identifier Not Set",
+		Detail:   fmt.Sprintf("Terraform resource primary identifier not set in State. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+	}
+}
+
 func ResourceNotFoundAfterCreationDiag(err error) *tfprotov6.Diagnostic {
 	return &tfprotov6.Diagnostic{
 		Severity: tfprotov6.DiagnosticSeverityError,

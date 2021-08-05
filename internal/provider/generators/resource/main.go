@@ -142,7 +142,6 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 		HasRequiredAttribute:         true,
 		HasUpdateMethod:              true,
 		PackageName:                  packageName,
-		PrimaryIdentifierPath:        string(resource.CfResource.PrimaryIdentifier[0]),
 		RootPropertiesSchema:         rootPropertiesSchema,
 		SchemaVersion:                1,
 		TerraformTypeName:            resource.TfType,
@@ -240,7 +239,6 @@ type TemplateData struct {
 	HasUpdateMethod              bool
 	ImportInternalTypes          bool
 	PackageName                  string
-	PrimaryIdentifierPath        string
 	RootPropertiesSchema         string
 	SchemaDescription            string
 	SchemaVersion                int64
@@ -292,7 +290,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}").WithTerraformSchema(schema).WithPrimaryIdentifierPath("{{ .PrimaryIdentifierPath }}")
+	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}").WithTerraformSchema(schema)
 {{ if not .HasUpdateMethod }}
 	opts = opts.IsImmutableType(true)
 {{- end }}
@@ -389,11 +387,6 @@ func NewResource(resourceType, cfTypeSchemaFile string) (*Resource, error) {
 
 	if err != nil {
 		return nil, fmt.Errorf("error parsing CloudFormation Resource Type Schema: %w", err)
-	}
-
-	// Ensure that there is one and only one primary identifier path.
-	if got, expected := len(resource.PrimaryIdentifier), 1; got != expected {
-		return nil, fmt.Errorf("expected %d primary identifier path(s), got: %d", expected, got)
 	}
 
 	if err := resource.Expand(); err != nil {

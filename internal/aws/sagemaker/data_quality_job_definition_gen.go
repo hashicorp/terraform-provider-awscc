@@ -824,7 +824,6 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 		"job_definition_arn": {
 			// Property: JobDefinitionArn
-			// PrimaryIdentifier: true
 			// CloudFormation resource type schema:
 			/*
 			   {
@@ -1332,7 +1331,7 @@ func dataQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DataQualityJobDefinition").WithTerraformTypeName("aws_sagemaker_data_quality_job_definition").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/JobDefinitionArn")
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DataQualityJobDefinition").WithTerraformTypeName("aws_sagemaker_data_quality_job_definition").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
