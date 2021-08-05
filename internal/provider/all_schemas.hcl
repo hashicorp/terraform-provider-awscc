@@ -70,6 +70,14 @@ resource_schema "aws_xray_sampling_rule" {
 #  local = "aws_athena_workgroup.cf-resource-schema.json"
 #}
 
+resource_schema "aws_ecs_service" {
+  source {
+    url = "???"
+  }
+
+ local = "../service/cloudformation/schemas/us-west-2/aws-ecs-service.json"
+}
+
 resource_schema "aws_ecs_task_definition" {
   source {
     url = "???"

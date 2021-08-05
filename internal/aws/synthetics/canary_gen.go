@@ -172,7 +172,6 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 		"name": {
 			// Property: Name
-			// PrimaryIdentifier: true
 			// CloudFormation resource type schema:
 			/*
 			   {
@@ -549,7 +548,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Synthetics::Canary").WithTerraformTypeName("aws_synthetics_canary").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/Name")
+	opts = opts.WithCloudFormationTypeName("AWS::Synthetics::Canary").WithTerraformTypeName("aws_synthetics_canary").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Code/S3Bucket",

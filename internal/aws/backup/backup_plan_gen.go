@@ -24,7 +24,6 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"backup_plan": {
 			// Property: BackupPlan
-			// PrimaryIdentifier: true
 			// CloudFormation resource type schema:
 			/*
 			   {
@@ -559,7 +558,6 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 		"backup_plan_id": {
 			// Property: BackupPlanId
-			// PrimaryIdentifier: true
 			// CloudFormation resource type schema:
 			/*
 			   {
@@ -615,7 +613,7 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupPlan").WithTerraformTypeName("aws_backup_backup_plan").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/BackupPlanId")
+	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupPlan").WithTerraformTypeName("aws_backup_backup_plan").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -35,7 +35,6 @@ func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 		"id": {
 			// Property: Id
-			// PrimaryIdentifier: true
 			// CloudFormation resource type schema:
 			/*
 			   {
@@ -341,7 +340,7 @@ func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::AppMesh::VirtualService").WithTerraformTypeName("aws_appmesh_virtual_service").WithTerraformSchema(schema).WithPrimaryIdentifierPath("/properties/Id")
+	opts = opts.WithCloudFormationTypeName("AWS::AppMesh::VirtualService").WithTerraformTypeName("aws_appmesh_virtual_service").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

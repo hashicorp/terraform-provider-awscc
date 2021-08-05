@@ -29,7 +29,6 @@ type resourceTypeOptions struct {
 	tfSchema                schema.Schema            // Terraform schema for the resource type
 	tfTypeName              string                   // Terraform type name for resource type
 	isImmutableType         bool                     // Resources cannot be updated and must be recreated
-	identifierAttributePath *tftypes.AttributePath   // Path to the resource's primary identifier attribute
 	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
 	createTimeout           time.Duration            // Maximum wait time for resource creation
 	updateTimeout           time.Duration            // Maximum wait time for resource update
@@ -82,24 +81,6 @@ func WithTerraformTypeName(v string) ResourceTypeOptionsFunc {
 func IsImmutableType(v bool) ResourceTypeOptionsFunc {
 	return func(o *resourceTypeOptions) error {
 		o.isImmutableType = v
-
-		return nil
-	}
-}
-
-// WithPrimaryIdentifierPath is a helper function to construct functional options
-// that set a resource type's primary identifier path (JSON Pointer).
-// If multiple WithPrimaryIdentifierPath calls are made, the last call overrides
-// the previous calls' values.
-func WithPrimaryIdentifierPath(v string) ResourceTypeOptionsFunc {
-	return func(o *resourceTypeOptions) error {
-		identifierAttributePath, err := propertyPathToAttributePath(v)
-
-		if err != nil {
-			return fmt.Errorf("error creating identifier attribute path (%s): %w", v, err)
-		}
-
-		o.identifierAttributePath = identifierAttributePath
 
 		return nil
 	}
@@ -212,14 +193,6 @@ func (opts ResourceTypeOptions) IsImmutableType(v bool) ResourceTypeOptions {
 	return append(opts, IsImmutableType(v))
 }
 
-// WithPrimaryIdentifierPath is a helper function to construct functional options
-// that set a resource type's primary identifier path, append that function to the
-// current slice of functional options and return the new slice of options.
-// It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) WithPrimaryIdentifierPath(v string) ResourceTypeOptions {
-	return append(opts, WithPrimaryIdentifierPath(v))
-}
-
 // WithWriteOnlyPropertyPaths is a helper function to construct functional options
 // that set a resource type's write-only property paths, append that function to the
 // current slice of functional options and return the new slice of options.
@@ -258,7 +231,6 @@ type resourceType struct {
 	tfSchema                schema.Schema            // Terraform schema for the resource type
 	tfTypeName              string                   // Terraform type name for resource type
 	isImmutableType         bool                     // Resources cannot be updated and must be recreated
-	identifierAttributePath *tftypes.AttributePath   // Path to the resource's primary identifier attribute
 	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
 	createTimeout           time.Duration            // Maximum wait time for resource creation
 	updateTimeout           time.Duration            // Maximum wait time for resource update
@@ -284,16 +256,12 @@ func NewResourceType(ctx context.Context, optFns ...ResourceTypeOptionsFunc) (tf
 	if options.tfTypeName == "" {
 		return nil, fmt.Errorf("no Terraform type name specified")
 	}
-	if options.identifierAttributePath == nil {
-		return nil, fmt.Errorf("no primary identifier path specified")
-	}
 
 	return &resourceType{
 		cfTypeName:              options.cfTypeName,
 		tfSchema:                options.tfSchema,
 		tfTypeName:              options.tfTypeName,
 		isImmutableType:         options.isImmutableType,
-		identifierAttributePath: options.identifierAttributePath,
 		writeOnlyAttributePaths: options.writeOnlyAttributePaths,
 		createTimeout:           options.createTimeout,
 		updateTimeout:           options.updateTimeout,
@@ -323,7 +291,8 @@ func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfs
 }
 
 var (
-	// Path to the "id" attribute required for acceptance testing.
+	// Path to the "id" attribute which uniquely (for a specific resource type) identifies the resource.
+	// This attribute is required for acceptance testing.
 	idAttributePath = tftypes.NewAttributePath().WithAttributeName("id")
 )
 
@@ -373,7 +342,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	identifier, err := tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.createTimeout)
+	id, err := tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.createTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "CreateResource", err))
@@ -381,7 +350,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	description, err := r.describe(ctx, conn, identifier)
+	description, err := r.describe(ctx, conn, id)
 
 	if tfresource.NotFound(err) {
 		response.Diagnostics = append(response.Diagnostics, ResourceNotFoundAfterCreationDiag(err))
@@ -404,8 +373,14 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
-	// Set the "id" attribute required for acceptance testing.
-	response.State.SetAttribute(ctx, idAttributePath, identifier)
+	// Set the "id" attribute.
+	err = r.setId(ctx, id, &response.State)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+
+		return
+	}
 
 	err = SetUnknownValuesFromCloudFormationResourceModel(ctx, &response.State, aws.ToString(description.ResourceModel))
 
@@ -435,7 +410,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	conn := r.provider.CloudFormationClient(ctx)
 
 	currentState := &request.State
-	identifier, err := r.getIdentifier(ctx, currentState)
+	id, err := r.getId(ctx, currentState)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
@@ -443,7 +418,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		return
 	}
 
-	description, err := r.describe(ctx, conn, identifier)
+	description, err := r.describe(ctx, conn, id)
 
 	if tfresource.NotFound(err) {
 		response.Diagnostics = append(response.Diagnostics, ResourceNotFoundWarningDiag(err))
@@ -480,8 +455,14 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		Raw:    val,
 	}
 
-	// Set the "id" attribute required for acceptance testing.
-	response.State.SetAttribute(ctx, idAttributePath, identifier)
+	// Set the "id" attribute.
+	err = r.setId(ctx, id, &response.State)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+
+		return
+	}
 
 	tflog.Debug(ctx, "Resource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
@@ -497,7 +478,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	conn := r.provider.CloudFormationClient(ctx)
 
 	currentState := &request.State
-	identifier, err := r.getIdentifier(ctx, currentState)
+	id, err := r.getId(ctx, currentState)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
@@ -537,7 +518,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 
 	input := &cloudformation.UpdateResourceInput{
 		ClientToken:   aws.String(tfresource.UniqueId()),
-		Identifier:    aws.String(identifier),
+		Identifier:    aws.String(id),
 		PatchDocument: aws.String(patchDocument),
 		TypeName:      aws.String(cfTypeName),
 	}
@@ -585,7 +566,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 
 	conn := r.provider.CloudFormationClient(ctx)
 
-	identifier, err := r.getIdentifier(ctx, &request.State)
+	id, err := r.getId(ctx, &request.State)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
@@ -593,7 +574,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	err = tfcloudformation.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, identifier, r.resourceType.deleteTimeout)
+	err = tfcloudformation.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, id, r.resourceType.deleteTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "DeleteResource", err))
@@ -607,13 +588,13 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 }
 
 // describe returns the live state of the specified resource.
-func (r *resource) describe(ctx context.Context, conn *cloudformation.Client, identifier string) (*cftypes.ResourceDescription, error) {
-	return tfcloudformation.FindResourceByTypeNameAndID(ctx, conn, r.provider.RoleARN(ctx), r.resourceType.cfTypeName, identifier)
+func (r *resource) describe(ctx context.Context, conn *cloudformation.Client, id string) (*cftypes.ResourceDescription, error) {
+	return tfcloudformation.FindResourceByTypeNameAndID(ctx, conn, r.provider.RoleARN(ctx), r.resourceType.cfTypeName, id)
 }
 
-// getIdentifier returns the resource's primary identifier value from State.
-func (r *resource) getIdentifier(ctx context.Context, state *tfsdk.State) (string, error) {
-	val, err := state.GetAttribute(ctx, r.resourceType.identifierAttributePath)
+// getId returns the resource's primary identifier value from State.
+func (r *resource) getId(ctx context.Context, state *tfsdk.State) (string, error) {
+	val, err := state.GetAttribute(ctx, idAttributePath)
 
 	if err != nil {
 		return "", err
@@ -624,6 +605,17 @@ func (r *resource) getIdentifier(ctx context.Context, state *tfsdk.State) (strin
 	}
 
 	return "", fmt.Errorf("invalid identifier type %T", val)
+}
+
+// setId sets the resource's primary identifier value in State.
+func (r *resource) setId(ctx context.Context, val string, state *tfsdk.State) error {
+	err := state.SetAttribute(ctx, idAttributePath, val)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // patchDocument returns a JSON Patch document describing the difference between `old` and `new`.
