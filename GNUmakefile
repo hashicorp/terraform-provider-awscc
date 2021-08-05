@@ -22,7 +22,7 @@ schemas:
 	go generate internal/provider/schemas.go
 
 test:
-	go test $(TEST) $(TESTARGS) -timeout=5m -parallel=4
+	go test $(TEST) $(TESTARGS) -timeout=5m
 
 # make testacc PKG_NAME=internal/aws/logs TESTARGS='-run=TestAccLogGroup_'
 testacc:
