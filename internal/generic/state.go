@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
 )
 
@@ -192,6 +193,11 @@ func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Sch
 			}
 			val, err := getCloudFormationResourceModelValue(ctx, schema, path, v)
 			if err != nil {
+				if isObject {
+					tflog.Info(ctx, "not found in Terraform schema", "key", key, "path", path, "error", err.Error())
+					path = path.WithoutLastStep()
+					continue
+				}
 				return tftypes.Value{}, err
 			}
 			if isObject {
