@@ -122,6 +122,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	sb := strings.Builder{}
 	codeEmitter := codegen.Emitter{
 		CfResource: resource.CfResource,
+		Ui:         g.ui,
 		Writer:     &sb,
 	}
 

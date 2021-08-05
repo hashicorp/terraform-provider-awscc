@@ -7,6 +7,7 @@ import (
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
+	"github.com/mitchellh/cli"
 )
 
 // Features of the emitted code.
@@ -20,6 +21,7 @@ const (
 
 type Emitter struct {
 	CfResource *cfschema.Resource
+	Ui         cli.Ui
 	Writer     io.Writer
 }
 
@@ -86,7 +88,21 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 	// Complex types.
 	//
 	case cfschema.PropertyTypeArray:
-		if property.UniqueItems != nil && *property.UniqueItems {
+		// https://github.com/aws-cloudformation/cloudformation-resource-schema#insertionorder
+		insertionOrder := true
+		if property.InsertionOrder != nil {
+			insertionOrder = *property.InsertionOrder
+		}
+		uniqueItems := false
+		if property.UniqueItems != nil {
+			uniqueItems = *property.UniqueItems
+		}
+
+		if uniqueItems {
+			if insertionOrder {
+				e.warnf("%s is of type: ordered set. Emitting a Terraform set", name)
+			}
+
 			//
 			// Set.
 			//
@@ -144,6 +160,10 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				return 0, fmt.Errorf("%s is of unsupported type: set of %s", name, itemType)
 			}
 		} else {
+			if !insertionOrder {
+				return 0, fmt.Errorf("%s is of unsupported type: multiset", name)
+			}
+
 			//
 			// List.
 			//
@@ -333,6 +353,11 @@ func (e *Emitter) emitSchema(parent parent, properties map[string]*cfschema.Prop
 }
 
 // printf emits a formatted string to the underlying writer.
-func (g *Emitter) printf(format string, a ...interface{}) (int, error) {
-	return io.WriteString(g.Writer, fmt.Sprintf(format, a...))
+func (e *Emitter) printf(format string, a ...interface{}) (int, error) {
+	return io.WriteString(e.Writer, fmt.Sprintf(format, a...))
+}
+
+// warnf emits a formatted warning message to the UI.
+func (e *Emitter) warnf(format string, a ...interface{}) {
+	e.Ui.Warn(fmt.Sprintf(format, a...))
 }
