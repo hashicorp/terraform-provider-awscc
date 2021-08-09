@@ -1,9 +1,5 @@
 meta_schema {
-  source {
-    url = "https://raw.githubusercontent.com/aws-cloudformation/aws-cloudformation-resource-schema/v2.0.4/src/main/resources/schema/provider.definition.schema.v1.json"
-  }
-
-  local = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
+  path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
 resource_schema "aws_logs_log_group" {

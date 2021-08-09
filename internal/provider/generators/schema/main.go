@@ -26,9 +26,7 @@ type Config struct {
 }
 
 type MetaSchema struct {
-	Local   string `hcl:"local"`
-	Refresh bool   `hcl:"refresh,optional"`
-	Source  Source `hcl:"source,block"`
+	Path string `hcl:"path"`
 }
 
 type ResourceSchema struct {
@@ -174,24 +172,13 @@ type Downloader struct {
 }
 
 func (d *Downloader) MetaSchema() error {
-	metaSchemaFilename, err := filepath.Abs(filepath.Join(d.baseDir, d.config.MetaSchema.Local))
+	metaSchemaFilename, err := filepath.Abs(filepath.Join(d.baseDir, d.config.MetaSchema.Path))
 
 	if err != nil {
 		return fmt.Errorf("error making absolute path: %w", err)
 	}
 
-	metaSchemaFileExists := fileExists(metaSchemaFilename)
-
-	if !metaSchemaFileExists || d.config.MetaSchema.Refresh {
-		src := d.config.MetaSchema.Source.Url
-		d.Infof("downloading CloudFormation Resource Provider Definition Schema %q to %q", src, metaSchemaFilename)
-
-		if err := getter.GetFile(metaSchemaFilename, src); err != nil {
-			return fmt.Errorf("error downloading: %w", err)
-		}
-	} else {
-		d.Infof("using cached CloudFormation Resource Provider Definition Schema %q", metaSchemaFilename)
-	}
+	d.infof("using cached CloudFormation Resource Provider Definition Schema %q", metaSchemaFilename)
 
 	d.metaSchema, err = cfschema.NewMetaJsonSchemaPath(metaSchemaFilename)
 
@@ -259,7 +246,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 		src := schema.Source.Url
 		dst := filepath.Join(d.tempDirectory, filepath.Base(resourceSchemaFilename))
 
-		d.Infof("downloading CloudFormation Resource Provider Schema %q to %q", src, dst)
+		d.infof("downloading CloudFormation Resource Provider Schema %q to %q", src, dst)
 
 		if err := getter.GetFile(dst, src); err != nil {
 			return "", "", fmt.Errorf("error downloading: %w", err)
@@ -279,7 +266,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 			return "", "", fmt.Errorf("error copying: %w", err)
 		}
 	} else {
-		d.Infof("using cached CloudFormation Resource Provider Schema %q", resourceSchemaFilename)
+		d.infof("using cached CloudFormation Resource Provider Schema %q", resourceSchemaFilename)
 	}
 
 	// Read the resource type name from the schema.
@@ -298,7 +285,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 	return resourceSchemaFilename, *resource.TypeName, nil
 }
 
-func (d *Downloader) Infof(format string, a ...interface{}) {
+func (d *Downloader) infof(format string, a ...interface{}) {
 	d.ui.Info(fmt.Sprintf(format, a...))
 }
 
@@ -315,12 +302,8 @@ type Generator struct {
 	ui cli.Ui
 }
 
-func (g *Generator) Infof(format string, a ...interface{}) {
-	g.ui.Info(fmt.Sprintf(format, a...))
-}
-
 func (g *Generator) Generate(packageName, filename, generatedCodeRootDirectoryName, importPathRoot string, resources []*ResourceData) error {
-	g.Infof("generating Terraform resource generation instructions into %q", filename)
+	g.infof("generating Terraform resource generation instructions into %q", filename)
 
 	importPaths := make(map[string]struct{}) // Set of strings.
 
@@ -380,6 +363,10 @@ func (g *Generator) Generate(packageName, filename, generatedCodeRootDirectoryNa
 	}
 
 	return nil
+}
+
+func (g *Generator) infof(format string, a ...interface{}) {
+	g.ui.Info(fmt.Sprintf(format, a...))
 }
 
 var templateBody = `
