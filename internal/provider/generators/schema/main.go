@@ -12,11 +12,11 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
-	"strings"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	getter "github.com/hashicorp/go-getter"
 	"github.com/hashicorp/hcl/v2/hclsimple"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
 	"github.com/mitchellh/cli"
 )
 
@@ -217,29 +217,27 @@ func (d *Downloader) ResourceSchemas() ([]*ResourceData, error) {
 			continue
 		}
 
-		// https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-typeName
-		parts := strings.Split(cfResourceTypeName, "::")
+		_, _, _, err = naming.ParseCloudFormationTypeName(cfResourceTypeName)
 
-		if len(parts) != 3 {
+		if err != nil {
 			d.ui.Warn(fmt.Sprintf("incorrect format for CloudFormation Resource Provider Schema type name: %s", cfResourceTypeName))
 			continue
 		}
 
 		tfResourceTypeName := schema.ResourceTypeName
-		// e.g. "aws_logs_log_group"
-		parts = strings.Split(tfResourceTypeName, "_")
+		org, svc, res, err := naming.ParseTerraformTypeName(tfResourceTypeName)
 
-		if len(parts) < 3 {
+		if err != nil {
 			d.ui.Warn(fmt.Sprintf("incorrect format for Terraform resource type name: %s", tfResourceTypeName))
 			continue
 		}
 
 		resources = append(resources, &ResourceData{
 			CloudFormationTypeSchemaFile: cfResourceSchemaFilename,
-			GeneratedAccTestsFileName:    strings.Join(parts[2:], "_") + "_gen_test",                // e.g. "log_group_gen_test"
-			GeneratedCodeFileName:        strings.Join(parts[2:], "_") + "_gen",                     // e.g. "log_group_gen"
-			GeneratedCodePackageName:     strings.ToLower(parts[1]),                                 // e.g. "logs"
-			GeneratedCodePathSuffix:      strings.ToLower(fmt.Sprintf("%s/%s", parts[0], parts[1])), // e.g. "aws/logs"
+			GeneratedAccTestsFileName:    res + "_gen_test",              // e.g. "log_group_gen_test"
+			GeneratedCodeFileName:        res + "_gen",                   // e.g. "log_group_gen"
+			GeneratedCodePackageName:     svc,                            // e.g. "logs"
+			GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc), // e.g. "aws/logs"
 			TerraformResourceType:        tfResourceTypeName,
 		})
 	}
