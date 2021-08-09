@@ -191,19 +191,15 @@ type Downloader struct {
 }
 
 func (d *Downloader) MetaSchema() error {
-	metaSchemaFilename, err := filepath.Abs(d.config.MetaSchema.Path)
+	d.infof("using CloudFormation Resource Provider Definition Schema %q", d.config.MetaSchema.Path)
 
-	if err != nil {
-		return fmt.Errorf("error making absolute path: %w", err)
-	}
-
-	d.infof("using CloudFormation Resource Provider Definition Schema %q", metaSchemaFilename)
-
-	d.metaSchema, err = cfschema.NewMetaJsonSchemaPath(metaSchemaFilename)
+	metaSchema, err := cfschema.NewMetaJsonSchemaPath(d.config.MetaSchema.Path)
 
 	if err != nil {
 		return fmt.Errorf("error loading CloudFormation Resource Provider Definition Schema: %w", err)
 	}
+
+	d.metaSchema = metaSchema
 
 	return nil
 }
@@ -256,12 +252,6 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 	resourceSchemaFilename := schema.CloudFormationSchemaPath
 	if resourceSchemaFilename == "" {
 		resourceSchemaFilename = path.Join(d.config.Defaults.SchemaCacheDirectory, fmt.Sprintf("%s.json", schema.CloudFormationTypeName))
-	}
-
-	resourceSchemaFilename, err := filepath.Abs(resourceSchemaFilename)
-
-	if err != nil {
-		return "", "", fmt.Errorf("error making absolute path: %w", err)
 	}
 
 	resourceSchemaFileExists := fileExists(resourceSchemaFilename)
