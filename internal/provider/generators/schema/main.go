@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"flag"
 	"fmt"
@@ -9,20 +10,29 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"path"
 	"path/filepath"
 	"sort"
 	"text/template"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
-	getter "github.com/hashicorp/go-getter"
 	"github.com/hashicorp/hcl/v2/hclsimple"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
 	"github.com/mitchellh/cli"
 )
 
 type Config struct {
+	Defaults        Defaults         `hcl:"defaults,block"`
 	MetaSchema      MetaSchema       `hcl:"meta_schema,block"`
 	ResourceSchemas []ResourceSchema `hcl:"resource_schema,block"`
+}
+
+type Defaults struct {
+	SchemaCacheDirectory string `hcl:"schema_cache_directory"`
 }
 
 type MetaSchema struct {
@@ -30,10 +40,9 @@ type MetaSchema struct {
 }
 
 type ResourceSchema struct {
-	Local            string `hcl:"local"`
-	Refresh          bool   `hcl:"refresh,optional"`
-	ResourceTypeName string `hcl:"resource_type_name,label"`
-	Source           Source `hcl:"source,block"`
+	CloudFormationSchemaPath string `hcl:"cloudformation_schema_path,optional"`
+	CloudFormationTypeName   string `hcl:"cloudformation_type_name"`
+	ResourceTypeName         string `hcl:"resource_type_name,label"`
 }
 
 type Source struct {
@@ -92,8 +101,18 @@ func main() {
 
 	defer os.RemoveAll(tempDirectory)
 
+	ctx := context.TODO()
+	cfg, err := config.LoadDefaultConfig(ctx)
+
+	if err != nil {
+		ui.Error(fmt.Sprintf("error loading AWS SDK config: %s", err))
+		os.Exit(1)
+	}
+
+	client := cloudformation.NewFromConfig(cfg)
+
 	downloader := &Downloader{
-		baseDir:       filepath.Dir(*configFile),
+		client:        client,
 		tempDirectory: tempDirectory,
 		ui:            ui,
 	}
@@ -164,7 +183,7 @@ func fileExists(filename string) bool {
 }
 
 type Downloader struct {
-	baseDir       string
+	client        *cloudformation.Client
 	config        Config
 	metaSchema    *cfschema.MetaJsonSchema
 	tempDirectory string
@@ -172,13 +191,13 @@ type Downloader struct {
 }
 
 func (d *Downloader) MetaSchema() error {
-	metaSchemaFilename, err := filepath.Abs(filepath.Join(d.baseDir, d.config.MetaSchema.Path))
+	metaSchemaFilename, err := filepath.Abs(d.config.MetaSchema.Path)
 
 	if err != nil {
 		return fmt.Errorf("error making absolute path: %w", err)
 	}
 
-	d.infof("using cached CloudFormation Resource Provider Definition Schema %q", metaSchemaFilename)
+	d.infof("using CloudFormation Resource Provider Definition Schema %q", metaSchemaFilename)
 
 	d.metaSchema, err = cfschema.NewMetaJsonSchemaPath(metaSchemaFilename)
 
@@ -234,7 +253,12 @@ func (d *Downloader) ResourceSchemas() ([]*ResourceData, error) {
 
 // ResourceSchema returns the local resource schema file name and type name.
 func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, error) {
-	resourceSchemaFilename, err := filepath.Abs(filepath.Join(d.baseDir, schema.Local))
+	resourceSchemaFilename := schema.CloudFormationSchemaPath
+	if resourceSchemaFilename == "" {
+		resourceSchemaFilename = path.Join(d.config.Defaults.SchemaCacheDirectory, fmt.Sprintf("%s.json", schema.CloudFormationTypeName))
+	}
+
+	resourceSchemaFilename, err := filepath.Abs(resourceSchemaFilename)
 
 	if err != nil {
 		return "", "", fmt.Errorf("error making absolute path: %w", err)
@@ -242,14 +266,25 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 
 	resourceSchemaFileExists := fileExists(resourceSchemaFilename)
 
-	if !resourceSchemaFileExists || schema.Refresh {
-		src := schema.Source.Url
+	if !resourceSchemaFileExists {
 		dst := filepath.Join(d.tempDirectory, filepath.Base(resourceSchemaFilename))
 
-		d.infof("downloading CloudFormation Resource Provider Schema %q to %q", src, dst)
+		d.infof("downloading CloudFormation Resource Provider Schema to %q", dst)
 
-		if err := getter.GetFile(dst, src); err != nil {
-			return "", "", fmt.Errorf("error downloading: %w", err)
+		input := &cloudformation.DescribeTypeInput{
+			Type:     types.RegistryTypeResource,
+			TypeName: aws.String(schema.CloudFormationTypeName),
+		}
+		output, err := d.client.DescribeType(context.TODO(), input)
+
+		if err != nil {
+			return "", "", fmt.Errorf("error describing CloudFormation type: %w", err)
+		}
+
+		err = ioutil.WriteFile(dst, []byte(aws.ToString(output.Schema)), 0644)
+
+		if err != nil {
+			return "", "", fmt.Errorf("error writing schema to %q: %w", dst, err)
 		}
 
 		resourceSchema, err := cfschema.NewResourceJsonSchemaPath(dst)

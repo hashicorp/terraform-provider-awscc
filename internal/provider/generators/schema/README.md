@@ -16,7 +16,19 @@ Note that valid AWS credentials must be available via [standard mechanisms](http
 ### Configuration File
 
 The `-config` command-line argument specifies a configuration file.
-The file contains 2 types of block.
+The file contains 3 types of block.
+
+#### `defaults` Block
+
+The `defaults` block specifies defaults which can be overriden by each resource schema.
+Each configuration file must contain a single `defaults` block.
+
+```hcl
+defaults {
+  # Schema cache directory. Required.
+  schema_cache_directory = "../service/cloudformation/schemas"
+}
+```
 
 #### `meta_schema` Block
 
@@ -39,5 +51,10 @@ Each configuration file contains zero or more `resource_schema` blocks.
 resource_schema "aws_ec2_instance" {
   # CloudFormation type name. Required.
   cloudformation_type_name = "AWS::EC2::Instance"
+
+  # Path to the CloudFormation schema file.
+  # Optional.
+  # The default value combines the `defaults.schema_cache_directory` value with the CloudFormation type name.
+  cloudformation_schema_path = "../service/cloudformation/schemas/ec2-instance.json"
 }
 ```
