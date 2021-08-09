@@ -1,0 +1,387 @@
+{
+  "typeName": "AWS::EC2::EC2Fleet",
+  "description": "Resource Type definition for AWS::EC2::EC2Fleet",
+  "additionalProperties": false,
+  "properties": {
+    "TargetCapacitySpecification": {
+      "$ref": "#/definitions/TargetCapacitySpecificationRequest"
+    },
+    "OnDemandOptions": {
+      "$ref": "#/definitions/OnDemandOptionsRequest"
+    },
+    "Type": {
+      "type": "string",
+      "enum": [
+        "maintain",
+        "request",
+        "instant"
+      ]
+    },
+    "ExcessCapacityTerminationPolicy": {
+      "type": "string",
+      "enum": [
+        "termination",
+        "no-termination"
+      ]
+    },
+    "TagSpecifications": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/TagSpecification"
+      }
+    },
+    "SpotOptions": {
+      "$ref": "#/definitions/SpotOptionsRequest"
+    },
+    "ValidFrom": {
+      "type": "string"
+    },
+    "ReplaceUnhealthyInstances": {
+      "type": "boolean"
+    },
+    "LaunchTemplateConfigs": {
+      "type": "array",
+      "uniqueItems": false,
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/FleetLaunchTemplateConfigRequest"
+      }
+    },
+    "FleetId": {
+      "type": "string"
+    },
+    "TerminateInstancesWithExpiration": {
+      "type": "boolean"
+    },
+    "ValidUntil": {
+      "type": "string"
+    },
+    "Context": {
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "OnDemandOptionsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SingleAvailabilityZone": {
+          "type": "boolean"
+        },
+        "AllocationStrategy": {
+          "type": "string"
+        },
+        "SingleInstanceType": {
+          "type": "boolean"
+        },
+        "MinTargetCapacity": {
+          "type": "integer"
+        },
+        "MaxTotalPrice": {
+          "type": "string"
+        },
+        "CapacityReservationOptions": {
+          "$ref": "#/definitions/CapacityReservationOptionsRequest"
+        }
+      }
+    },
+    "SpotOptionsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SingleAvailabilityZone": {
+          "type": "boolean"
+        },
+        "AllocationStrategy": {
+          "type": "string",
+          "enum": [
+            "lowestPrice",
+            "diversified",
+            "capacityOptimized"
+          ]
+        },
+        "SingleInstanceType": {
+          "type": "boolean"
+        },
+        "MinTargetCapacity": {
+          "type": "integer"
+        },
+        "MaxTotalPrice": {
+          "type": "string"
+        },
+        "InstanceInterruptionBehavior": {
+          "type": "string",
+          "enum": [
+            "hibernate",
+            "stop",
+            "terminate"
+          ]
+        },
+        "InstancePoolsToUseCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "TargetCapacitySpecificationRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DefaultTargetCapacityType": {
+          "type": "string",
+          "enum": [
+            "on-demand",
+            "spot"
+          ]
+        },
+        "TotalTargetCapacity": {
+          "type": "integer"
+        },
+        "OnDemandTargetCapacity": {
+          "type": "integer"
+        },
+        "SpotTargetCapacity": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "TotalTargetCapacity"
+      ]
+    },
+    "FleetLaunchTemplateSpecificationRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "LaunchTemplateName": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "[a-zA-Z0-9\\(\\)\\.\\-/_]+"
+        },
+        "LaunchTemplateId": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        }
+      }
+    },
+    "Placement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "GroupName": {
+          "type": "string"
+        },
+        "Tenancy": {
+          "type": "string"
+        },
+        "SpreadDomain": {
+          "type": "string"
+        },
+        "PartitionNumber": {
+          "type": "integer"
+        },
+        "AvailabilityZone": {
+          "type": "string"
+        },
+        "Affinity": {
+          "type": "string"
+        },
+        "HostId": {
+          "type": "string"
+        },
+        "HostResourceGroupArn": {
+          "type": "string"
+        }
+      }
+    },
+    "FleetLaunchTemplateConfigRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "LaunchTemplateSpecification": {
+          "$ref": "#/definitions/FleetLaunchTemplateSpecificationRequest"
+        },
+        "Overrides": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/FleetLaunchTemplateOverridesRequest"
+          }
+        }
+      }
+    },
+    "CapacityReservationOptionsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "UsageStrategy": {
+          "type": "string",
+          "enum": [
+            "use-capacity-reservations-first"
+          ]
+        }
+      }
+    },
+    "FleetLaunchTemplateOverridesRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "WeightedCapacity": {
+          "type": "number"
+        },
+        "Placement": {
+          "$ref": "#/definitions/Placement"
+        },
+        "Priority": {
+          "type": "number"
+        },
+        "AvailabilityZone": {
+          "type": "string"
+        },
+        "SubnetId": {
+          "type": "string"
+        },
+        "InstanceType": {
+          "type": "string"
+        },
+        "MaxPrice": {
+          "type": "string"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    },
+    "TagSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ResourceType": {
+          "type": "string",
+          "enum": [
+            "client-vpn-endpoint",
+            "customer-gateway",
+            "dedicated-host",
+            "dhcp-options",
+            "egress-only-internet-gateway",
+            "elastic-gpu",
+            "elastic-ip",
+            "export-image-task",
+            "export-instance-task",
+            "fleet",
+            "fpga-image",
+            "host-reservation",
+            "image",
+            "import-image-task",
+            "import-snapshot-task",
+            "instance",
+            "internet-gateway",
+            "key-pair",
+            "launch-template",
+            "local-gateway-route-table-vpc-association",
+            "natgateway",
+            "network-acl",
+            "network-insights-analysis",
+            "network-insights-path",
+            "network-interface",
+            "placement-group",
+            "reserved-instances",
+            "route-table",
+            "security-group",
+            "snapshot",
+            "spot-fleet-request",
+            "spot-instances-request",
+            "subnet",
+            "traffic-mirror-filter",
+            "traffic-mirror-session",
+            "traffic-mirror-target",
+            "transit-gateway",
+            "transit-gateway-attachment",
+            "transit-gateway-connect-peer",
+            "transit-gateway-multicast-domain",
+            "transit-gateway-route-table",
+            "volume",
+            "vpc",
+            "vpc-flow-log",
+            "vpc-peering-connection",
+            "vpn-connection",
+            "vpn-gateway"
+          ]
+        },
+        "Tags": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "TargetCapacitySpecification",
+    "LaunchTemplateConfigs"
+  ],
+  "createOnlyProperties": [
+    "/properties/LaunchTemplateConfigs",
+    "/properties/OnDemandOptions",
+    "/properties/ReplaceUnhealthyInstances",
+    "/properties/SpotOptions",
+    "/properties/TagSpecifications",
+    "/properties/TerminateInstancesWithExpiration",
+    "/properties/Type",
+    "/properties/ValidFrom",
+    "/properties/ValidUntil"
+  ],
+  "primaryIdentifier": [
+    "/properties/FleetId"
+  ],
+  "readOnlyProperties": [
+    "/properties/FleetId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateFleet",
+        "ec2:DescribeFleets"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DescribeFleets",
+        "ec2:DeleteFleets"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeFleets"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeFleets"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:ModifyFleet",
+        "ec2:DescribeFleets"
+      ]
+    }
+  }
+}
