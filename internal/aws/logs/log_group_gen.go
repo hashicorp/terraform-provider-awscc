@@ -119,7 +119,9 @@ func logGroup(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::LogGroup").WithTerraformTypeName("aws_logs_log_group").WithTerraformSchema(schema)
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

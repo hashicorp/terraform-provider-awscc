@@ -247,7 +247,9 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/PendingWindowInDays",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

@@ -302,7 +302,10 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 	{{- end }}
 	})
 {{- end }}
-	opts = opts.WithCreateTimeoutInMinutes({{ .CreateTimeoutInMinutes }}).WithUpdateTimeoutInMinutes({{ .UpdateTimeoutInMinutes }}).WithDeleteTimeoutInMinutes({{ .DeleteTimeoutInMinutes }})
+	opts = opts.WithCreateTimeoutInMinutes({{ .CreateTimeoutInMinutes }}).WithDeleteTimeoutInMinutes({{ .DeleteTimeoutInMinutes }})
+{{ if .HasUpdateMethod }}
+	opts = opts.WithUpdateTimeoutInMinutes({{ .UpdateTimeoutInMinutes }})
+{{- end }}
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

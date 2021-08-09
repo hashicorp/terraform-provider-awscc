@@ -904,7 +904,9 @@ func service(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::Service").WithTerraformTypeName("aws_ecs_service").WithTerraformSchema(schema)
 
-	opts = opts.WithCreateTimeoutInMinutes(180).WithUpdateTimeoutInMinutes(180).WithDeleteTimeoutInMinutes(30)
+	opts = opts.WithCreateTimeoutInMinutes(180).WithDeleteTimeoutInMinutes(30)
+
+	opts = opts.WithUpdateTimeoutInMinutes(180)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

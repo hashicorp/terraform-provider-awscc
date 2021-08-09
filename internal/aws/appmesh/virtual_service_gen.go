@@ -342,7 +342,9 @@ func virtualService(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppMesh::VirtualService").WithTerraformTypeName("aws_appmesh_virtual_service").WithTerraformSchema(schema)
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithUpdateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 
