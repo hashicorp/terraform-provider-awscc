@@ -23,27 +23,15 @@ import (
 	"github.com/mattbaird/jsonpatch"
 )
 
-// resourceTypeOptions are a discrete set of options that are valid for the resource type.
-type resourceTypeOptions struct {
-	cfTypeName              string                   // CloudFormation type name for the resource type
-	tfSchema                schema.Schema            // Terraform schema for the resource type
-	tfTypeName              string                   // Terraform type name for resource type
-	isImmutableType         bool                     // Resources cannot be updated and must be recreated
-	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
-	createTimeout           time.Duration            // Maximum wait time for resource creation
-	updateTimeout           time.Duration            // Maximum wait time for resource update
-	deleteTimeout           time.Duration            // Maximum wait time for resource deletion
-}
-
 // ResourceTypeOptionsFunc is a type alias for a resource type functional option.
-type ResourceTypeOptionsFunc func(*resourceTypeOptions) error
+type ResourceTypeOptionsFunc func(*resourceType) error
 
 // WithCloudFormationTypeName is a helper function to construct functional options
 // that set a resource type's CloudFormation type name.
 // If multiple WithCloudFormationTypeName calls are made, the last call overrides
 // the previous calls' values.
 func WithCloudFormationTypeName(v string) ResourceTypeOptionsFunc {
-	return func(o *resourceTypeOptions) error {
+	return func(o *resourceType) error {
 		o.cfTypeName = v
 
 		return nil
@@ -55,7 +43,7 @@ func WithCloudFormationTypeName(v string) ResourceTypeOptionsFunc {
 // If multiple WithTerraformSchema calls are made, the last call overrides
 // the previous calls' values.
 func WithTerraformSchema(v schema.Schema) ResourceTypeOptionsFunc {
-	return func(o *resourceTypeOptions) error {
+	return func(o *resourceType) error {
 		o.tfSchema = v
 
 		return nil
@@ -67,7 +55,7 @@ func WithTerraformSchema(v schema.Schema) ResourceTypeOptionsFunc {
 // If multiple WithTerraformTypeName calls are made, the last call overrides
 // the previous calls' values.
 func WithTerraformTypeName(v string) ResourceTypeOptionsFunc {
-	return func(o *resourceTypeOptions) error {
+	return func(o *resourceType) error {
 		o.tfTypeName = v
 
 		return nil
@@ -79,7 +67,7 @@ func WithTerraformTypeName(v string) ResourceTypeOptionsFunc {
 // If multiple IsImmutableType calls are made, the last call overrides
 // the previous calls' values.
 func IsImmutableType(v bool) ResourceTypeOptionsFunc {
-	return func(o *resourceTypeOptions) error {
+	return func(o *resourceType) error {
 		o.isImmutableType = v
 
 		return nil
@@ -91,7 +79,7 @@ func IsImmutableType(v bool) ResourceTypeOptionsFunc {
 // If multiple WithWriteOnlyPropertyPaths calls are made, the last call overrides
 // the previous calls' values.
 func WithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
-	return func(o *resourceTypeOptions) error {
+	return func(o *resourceType) error {
 		writeOnlyAttributePaths := make([]*tftypes.AttributePath, 0)
 
 		for _, writeOnlyPropertyPath := range v {
@@ -115,7 +103,7 @@ func WithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
 // If multiple WithCreateTimeoutInMinutes calls are made, the last call overrides
 // the previous calls' values.
 func WithCreateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
-	return func(o *resourceTypeOptions) error {
+	return func(o *resourceType) error {
 		if v > 0 {
 			o.createTimeout = time.Duration(v) * time.Minute
 		} else {
@@ -131,7 +119,7 @@ func WithCreateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 // If multiple WithUpdateTimeoutInMinutes calls are made, the last call overrides
 // the previous calls' values.
 func WithUpdateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
-	return func(o *resourceTypeOptions) error {
+	return func(o *resourceType) error {
 		if v > 0 {
 			o.updateTimeout = time.Duration(v) * time.Minute
 		} else {
@@ -147,7 +135,7 @@ func WithUpdateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 // If multiple WithDeleteTimeoutInMinutes calls are made, the last call overrides
 // the previous calls' values.
 func WithDeleteTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
-	return func(o *resourceTypeOptions) error {
+	return func(o *resourceType) error {
 		if v > 0 {
 			o.deleteTimeout = time.Duration(v) * time.Minute
 		} else {
@@ -240,33 +228,24 @@ type resourceType struct {
 // NewResourceType returns a new ResourceType from the specified varidaic list of functional options.
 // It's public as it's called from generated code.
 func NewResourceType(ctx context.Context, optFns ...ResourceTypeOptionsFunc) (tfsdk.ResourceType, error) {
-	var options resourceTypeOptions
+	resourceType := &resourceType{}
 
 	for _, optFn := range optFns {
-		err := optFn(&options)
+		err := optFn(resourceType)
 
 		if err != nil {
 			return nil, err
 		}
 	}
 
-	if options.cfTypeName == "" {
+	if resourceType.cfTypeName == "" {
 		return nil, fmt.Errorf("no CloudFormation type name specified")
 	}
-	if options.tfTypeName == "" {
+	if resourceType.tfTypeName == "" {
 		return nil, fmt.Errorf("no Terraform type name specified")
 	}
 
-	return &resourceType{
-		cfTypeName:              options.cfTypeName,
-		tfSchema:                options.tfSchema,
-		tfTypeName:              options.tfTypeName,
-		isImmutableType:         options.isImmutableType,
-		writeOnlyAttributePaths: options.writeOnlyAttributePaths,
-		createTimeout:           options.createTimeout,
-		updateTimeout:           options.updateTimeout,
-		deleteTimeout:           options.deleteTimeout,
-	}, nil
+	return resourceType, nil
 }
 
 func (rt *resourceType) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
