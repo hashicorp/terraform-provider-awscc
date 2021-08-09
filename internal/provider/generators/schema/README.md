@@ -1,3 +1,3 @@
 # Schema Downloader
 
-Downloads and verifies AWS CloudFormation Resource Schemas.
+Download and verify AWS CloudFormation Resource Schemas.

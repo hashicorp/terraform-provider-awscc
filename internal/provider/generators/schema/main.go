@@ -6,12 +6,12 @@ import (
 	"flag"
 	"fmt"
 	"go/format"
-	"html/template"
 	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"sort"
+	"text/template"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	getter "github.com/hashicorp/go-getter"
