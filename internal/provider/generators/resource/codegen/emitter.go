@@ -68,7 +68,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 	e.printf("*/\n")
 
 	if description := property.Description; description != nil {
-		e.printf("Description: `%s`,\n", *description)
+		e.printf("Description: %q,\n", *description)
 	}
 
 	switch propertyType := property.Type.String(); propertyType {
