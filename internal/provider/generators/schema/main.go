@@ -276,7 +276,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 		// This works around any problems with JSON Schema regex validation.
 		schema := aws.ToString(output.Schema)
 		schema = regexp.MustCompile(`(?m)^(\s+"pattern"\s*:\s*)".*"`).ReplaceAllString(schema, `$1""`)
-		schema = regexp.MustCompile(`(?m)^(\s+"patternProperties"\s*:\s*{\s*)".*"`).ReplaceAllString(schema, `$1""`)
+		schema = regexp.MustCompile(`(?m)^(\s+"patternProperties"\s*:\s*{\s*)".*?"`).ReplaceAllString(schema, `$1""`)
 
 		err = ioutil.WriteFile(dst, []byte(schema), 0644)
 
@@ -311,6 +311,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 	resource, err := resourceSchema.Resource()
 
 	if err != nil {
+		d.infof("Schema:\n%s", schema)
 		return "", "", fmt.Errorf("error parsing %s: %w", resourceSchemaFilename, err)
 	}
 
