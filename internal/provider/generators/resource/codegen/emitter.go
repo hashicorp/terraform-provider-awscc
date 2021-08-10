@@ -98,11 +98,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 			uniqueItems = *property.UniqueItems
 		}
 
-		if uniqueItems {
-			if insertionOrder {
-				e.warnf("%s is of type: ordered set. Emitting a Terraform set", name)
-			}
-
+		if uniqueItems && !insertionOrder {
 			//
 			// Set.
 			//
@@ -160,8 +156,14 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				return 0, fmt.Errorf("%s is of unsupported type: set of %s", name, itemType)
 			}
 		} else {
-			if !insertionOrder {
-				return 0, fmt.Errorf("%s is of unsupported type: multiset", name)
+			if uniqueItems && insertionOrder {
+				e.printf("// Ordered set.\n")
+				e.warnf("%s is of type: ordered set. Emitting a Terraform list", name)
+			}
+
+			if !uniqueItems && !insertionOrder {
+				e.printf("// Multiset.\n")
+				e.warnf("%s is of type: multiset. Emitting a Terraform list", name)
 			}
 
 			//
