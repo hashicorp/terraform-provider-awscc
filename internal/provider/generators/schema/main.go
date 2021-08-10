@@ -311,7 +311,6 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 	resource, err := resourceSchema.Resource()
 
 	if err != nil {
-		d.infof("Schema:\n%s", schema)
 		return "", "", fmt.Errorf("error parsing %s: %w", resourceSchemaFilename, err)
 	}
 
