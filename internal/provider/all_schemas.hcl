@@ -284,9 +284,10 @@ resource_schema "aws_databrew_project" {
   cloudformation_type_name = "AWS::DataBrew::Project"
 }
 
-resource_schema "aws_databrew_recipe" {
-  cloudformation_type_name = "AWS::DataBrew::Recipe"
-}
+# Parameters property is 'anyOf', which we cannot yet handle.
+# resource_schema "aws_databrew_recipe" {
+#   cloudformation_type_name = "AWS::DataBrew::Recipe"
+# }
 
 resource_schema "aws_databrew_schedule" {
   cloudformation_type_name = "AWS::DataBrew::Schedule"
