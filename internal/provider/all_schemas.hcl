@@ -525,9 +525,10 @@ resource_schema "aws_events_connection" {
   cloudformation_type_name = "AWS::Events::Connection"
 }
 
-resource_schema "aws_fis_experiment_template" {
-  cloudformation_type_name = "AWS::FIS::ExperimentTemplate"
-}
+# Actions property is of type key-value map of string to object, which we cannot yet handle.
+# resource_schema "aws_fis_experiment_template" {
+#   cloudformation_type_name = "AWS::FIS::ExperimentTemplate"
+#}
 
 resource_schema "aws_fms_notification_channel" {
   cloudformation_type_name = "AWS::FMS::NotificationChannel"
@@ -605,9 +606,10 @@ resource_schema "aws_glue_schema_version_metadata" {
   cloudformation_type_name = "AWS::Glue::SchemaVersionMetadata"
 }
 
-resource_schema "aws_greengrassv2_component_version" {
-  cloudformation_type_name = "AWS::GreengrassV2::ComponentVersion"
-}
+# ComponentDependencies property is of type key-value map of string to object, which we cannot yet handle.
+# resource_schema "aws_greengrassv2_component_version" {
+#   cloudformation_type_name = "AWS::GreengrassV2::ComponentVersion"
+# }
 
 resource_schema "aws_groundstation_config" {
   cloudformation_type_name = "AWS::GroundStation::Config"
@@ -661,9 +663,10 @@ resource_schema "aws_imagebuilder_container_recipe" {
   cloudformation_type_name = "AWS::ImageBuilder::ContainerRecipe"
 }
 
-resource_schema "aws_imagebuilder_distribution_configuration" {
-  cloudformation_type_name = "AWS::ImageBuilder::DistributionConfiguration"
-}
+# TargetRepository property causes problems (???).
+# resource_schema "aws_imagebuilder_distribution_configuration" {
+#   cloudformation_type_name = "AWS::ImageBuilder::DistributionConfiguration"
+# }
 
 resource_schema "aws_imagebuilder_image" {
   cloudformation_type_name = "AWS::ImageBuilder::Image"
@@ -717,9 +720,10 @@ resource_schema "aws_iot_scheduled_audit" {
   cloudformation_type_name = "AWS::IoT::ScheduledAudit"
 }
 
-resource_schema "aws_iot_security_profile" {
-  cloudformation_type_name = "AWS::IoT::SecurityProfile"
-}
+# AlertTargets property is of type key-value map of string to object, which we cannot yet handle.
+# resource_schema "aws_iot_security_profile" {
+#   cloudformation_type_name = "AWS::IoT::SecurityProfile"
+# }
 
 resource_schema "aws_iot_topic_rule" {
   cloudformation_type_name = "AWS::IoT::TopicRule"
@@ -853,9 +857,10 @@ resource_schema "aws_location_geofence_collection" {
   cloudformation_type_name = "AWS::Location::GeofenceCollection"
 }
 
-resource_schema "aws_location_map" {
-  cloudformation_type_name = "AWS::Location::Map"
-}
+# Resource name is a Go reserved keyword ('map').
+# resource_schema "aws_location_map" {
+#   cloudformation_type_name = "AWS::Location::Map"
+# }
 
 resource_schema "aws_location_place_index" {
   cloudformation_type_name = "AWS::Location::PlaceIndex"
@@ -905,9 +910,10 @@ resource_schema "aws_macie_custom_data_identifier" {
   cloudformation_type_name = "AWS::Macie::CustomDataIdentifier"
 }
 
-resource_schema "aws_macie_findings_filter" {
-  cloudformation_type_name = "AWS::Macie::FindingsFilter"
-}
+# Criterion property is of type key-value map of string to object, which we cannot yet handle.
+# resource_schema "aws_macie_findings_filter" {
+#   cloudformation_type_name = "AWS::Macie::FindingsFilter"
+# }
 
 resource_schema "aws_macie_session" {
   cloudformation_type_name = "AWS::Macie::Session"
@@ -965,9 +971,10 @@ resource_schema "aws_networkfirewall_logging_configuration" {
   cloudformation_type_name = "AWS::NetworkFirewall::LoggingConfiguration"
 }
 
-resource_schema "aws_networkfirewall_rule_group" {
-  cloudformation_type_name = "AWS::NetworkFirewall::RuleGroup"
-}
+# IPSets property is of type key-value map of string to object, which we cannot yet handle.
+# resource_schema "aws_networkfirewall_rule_group" {
+#   cloudformation_type_name = "AWS::NetworkFirewall::RuleGroup"
+# }
 
 resource_schema "aws_networkmanager_customer_gateway_association" {
   cloudformation_type_name = "AWS::NetworkManager::CustomerGatewayAssociation"
@@ -1029,9 +1036,10 @@ resource_schema "aws_quicksight_dashboard" {
   cloudformation_type_name = "AWS::QuickSight::Dashboard"
 }
 
-resource_schema "aws_quicksight_data_set" {
-  cloudformation_type_name = "AWS::QuickSight::DataSet"
-}
+# FieldFolders property is of type key-value map of string to object, which we cannot yet handle.
+# resource_schema "aws_quicksight_data_set" {
+#   cloudformation_type_name = "AWS::QuickSight::DataSet"
+# }
 
 resource_schema "aws_quicksight_data_source" {
   cloudformation_type_name = "AWS::QuickSight::DataSource"
@@ -1161,9 +1169,10 @@ resource_schema "aws_s3outposts_access_point" {
   cloudformation_type_name = "AWS::S3Outposts::AccessPoint"
 }
 
-resource_schema "aws_s3outposts_bucket" {
-  cloudformation_type_name = "AWS::S3Outposts::Bucket"
-}
+# AndOperator property is 'oneOf', which we cannot yet handle.
+# resource_schema "aws_s3outposts_bucket" {
+#   cloudformation_type_name = "AWS::S3Outposts::Bucket"
+# }
 
 resource_schema "aws_s3outposts_bucket_policy" {
   cloudformation_type_name = "AWS::S3Outposts::BucketPolicy"
@@ -1181,9 +1190,10 @@ resource_schema "aws_ses_contact_list" {
   cloudformation_type_name = "AWS::SES::ContactList"
 }
 
-resource_schema "aws_ssm_association" {
-  cloudformation_type_name = "AWS::SSM::Association"
-}
+# Parameters property is of type key-value map of string to object, which we cannot yet handle.
+# resource_schema "aws_ssm_association" {
+#   cloudformation_type_name = "AWS::SSM::Association"
+# }
 
 resource_schema "aws_ssm_document" {
   cloudformation_type_name = "AWS::SSM::Document"
@@ -1289,9 +1299,10 @@ resource_schema "aws_sagemaker_user_profile" {
   cloudformation_type_name = "AWS::SageMaker::UserProfile"
 }
 
-resource_schema "aws_servicecatalog_cloud_formation_provisioned_product" {
-  cloudformation_type_name = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
-}
+# Outputs property is of type key-value map of string to object, which we cannot yet handle.
+# resource_schema "aws_servicecatalog_cloud_formation_provisioned_product" {
+#   cloudformation_type_name = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
+# }
 
 resource_schema "aws_servicecatalog_service_action" {
   cloudformation_type_name = "AWS::ServiceCatalog::ServiceAction"
@@ -1349,13 +1360,15 @@ resource_schema "aws_wafv2_regex_pattern_set" {
   cloudformation_type_name = "AWS::WAFv2::RegexPatternSet"
 }
 
-resource_schema "aws_wafv2_rule_group" {
-  cloudformation_type_name = "AWS::WAFv2::RuleGroup"
-}
+# CustomResponseBodies property is of type key-value map of string to object, which we cannot yet handle.
+# resource_schema "aws_wafv2_rule_group" {
+#   cloudformation_type_name = "AWS::WAFv2::RuleGroup"
+# }
 
-resource_schema "aws_wafv2_web_acl" {
-  cloudformation_type_name = "AWS::WAFv2::WebACL"
-}
+# CustomResponseBodies property is of type key-value map of string to object, which we cannot yet handle.
+# resource_schema "aws_wafv2_web_acl" {
+#   cloudformation_type_name = "AWS::WAFv2::WebACL"
+# }
 
 resource_schema "aws_wafv2_web_acl_association" {
   cloudformation_type_name = "AWS::WAFv2::WebACLAssociation"
