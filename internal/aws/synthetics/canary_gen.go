@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_synthetics_canary", canary)
+	registry.AddResourceTypeFactory("aws_synthetics_canary", canaryResourceType)
 }
 
-// canary returns the Terraform aws_synthetics_canary resource type.
+// canaryResourceType returns the Terraform aws_synthetics_canary resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Synthetics::Canary resource type.
-func canary(ctx context.Context) (tfsdk.ResourceType, error) {
+func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"artifact_s3_location": {
 			// Property: ArtifactS3Location
@@ -28,11 +28,11 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "Provide the s3 bucket output location for test results",
-			     "pattern": "^(s3|S3)://",
+			     "pattern": "",
 			     "type": "string"
 			   }
 			*/
-			Description: `Provide the s3 bucket output location for test results`,
+			Description: "Provide the s3 bucket output location for test results",
 			Type:        types.StringType,
 			Required:    true,
 		},
@@ -140,7 +140,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "string"
 			   }
 			*/
-			Description: `Lambda Execution role used to run your canaries`,
+			Description: "Lambda Execution role used to run your canaries",
 			Type:        types.StringType,
 			Required:    true,
 		},
@@ -153,7 +153,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "integer"
 			   }
 			*/
-			Description: `Retention period of failed canary runs represented in number of days`,
+			Description: "Retention period of failed canary runs represented in number of days",
 			Type:        types.NumberType,
 			Optional:    true,
 		},
@@ -166,7 +166,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "string"
 			   }
 			*/
-			Description: `Id of the canary`,
+			Description: "Id of the canary",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -176,11 +176,11 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "Name of the canary.",
-			     "pattern": "^[0-9a-z_\\-]{1,21}$",
+			     "pattern": "",
 			     "type": "string"
 			   }
 			*/
-			Description: `Name of the canary.`,
+			Description: "Name of the canary.",
 			Type:        types.StringType,
 			Required:    true,
 			// Name is a force-new attribute.
@@ -200,7 +200,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "additionalProperties": false,
 			         "description": "Environment variable key-value pairs.",
 			         "patternProperties": {
-			           "[a-zA-Z][a-zA-Z0-9_]+": {
+			           "": {
 			             "type": "string"
 			           }
 			         },
@@ -230,7 +230,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "boolean"
 						   }
 						*/
-						Description: `Enable active tracing if set to true`,
+						Description: "Enable active tracing if set to true",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
@@ -242,15 +242,15 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "additionalProperties": false,
 						     "description": "Environment variable key-value pairs.",
 						     "patternProperties": {
-						       "[a-zA-Z][a-zA-Z0-9_]+": {
+						       "": {
 						         "type": "string"
 						       }
 						     },
 						     "type": "object"
 						   }
 						*/
-						Description: `Environment variable key-value pairs.`,
-						// Pattern: "[a-zA-Z][a-zA-Z0-9_]+"
+						Description: "Environment variable key-value pairs.",
+						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
 					},
@@ -263,7 +263,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "integer"
 						   }
 						*/
-						Description: `Provide maximum memory available for canary in MB`,
+						Description: "Provide maximum memory available for canary in MB",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
@@ -276,7 +276,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "integer"
 						   }
 						*/
-						Description: `Provide maximum canary timeout per run in seconds`,
+						Description: "Provide maximum canary timeout per run in seconds",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
@@ -293,7 +293,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "string"
 			   }
 			*/
-			Description: `Runtime version of Synthetics Library`,
+			Description: "Runtime version of Synthetics Library",
 			Type:        types.StringType,
 			Required:    true,
 		},
@@ -355,7 +355,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "boolean"
 			   }
 			*/
-			Description: `Runs canary if set to True. Default is False`,
+			Description: "Runs canary if set to True. Default is False",
 			Type:        types.BoolType,
 			Required:    true,
 		},
@@ -368,7 +368,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "string"
 			   }
 			*/
-			Description: `State of the canary`,
+			Description: "State of the canary",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -381,7 +381,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "integer"
 			   }
 			*/
-			Description: `Retention period of successful canary runs represented in number of days`,
+			Description: "Retention period of successful canary runs represented in number of days",
 			Type:        types.NumberType,
 			Optional:    true,
 		},
@@ -431,7 +431,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. `,
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
 					},
@@ -446,7 +446,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. `,
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
 					},
@@ -531,6 +531,137 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 		},
+		"visual_reference": {
+			// Property: VisualReference
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "additionalProperties": false,
+			     "properties": {
+			       "BaseCanaryRunId": {
+			         "description": "Canary run id to be used as base reference for visual testing",
+			         "type": "string"
+			       },
+			       "BaseScreenshots": {
+			         "description": "List of screenshots used as base reference for visual testing",
+			         "items": {
+			           "properties": {
+			             "IgnoreCoordinates": {
+			               "description": "List of coordinates of rectangles to be ignored during visual testing",
+			               "items": {
+			                 "description": "Coordinates of a rectangle to be ignored during visual testing",
+			                 "type": "string"
+			               },
+			               "type": "array"
+			             },
+			             "ScreenshotName": {
+			               "description": "Name of the screenshot to be used as base reference for visual testing",
+			               "type": "string"
+			             }
+			           },
+			           "$ref": "#/definitions/BaseScreenshot",
+			           "required": [
+			             "ScreenshotName"
+			           ],
+			           "type": "object"
+			         },
+			         "type": "array"
+			       }
+			     },
+			     "$ref": "#/definitions/VisualReference",
+			     "required": [
+			       "BaseCanaryRunId"
+			     ],
+			     "type": "object"
+			   }
+			*/
+			Attributes: schema.SingleNestedAttributes(
+				map[string]schema.Attribute{
+					"base_canary_run_id": {
+						// Property: BaseCanaryRunId
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "description": "Canary run id to be used as base reference for visual testing",
+						     "type": "string"
+						   }
+						*/
+						Description: "Canary run id to be used as base reference for visual testing",
+						Type:        types.StringType,
+						Required:    true,
+					},
+					"base_screenshots": {
+						// Property: BaseScreenshots
+						// CloudFormation resource type schema:
+						/*
+						   {
+						     "description": "List of screenshots used as base reference for visual testing",
+						     "items": {
+						       "properties": {
+						         "IgnoreCoordinates": {
+						           "description": "List of coordinates of rectangles to be ignored during visual testing",
+						           "items": {
+						             "description": "Coordinates of a rectangle to be ignored during visual testing",
+						             "type": "string"
+						           },
+						           "type": "array"
+						         },
+						         "ScreenshotName": {
+						           "description": "Name of the screenshot to be used as base reference for visual testing",
+						           "type": "string"
+						         }
+						       },
+						       "$ref": "#/definitions/BaseScreenshot",
+						       "required": [
+						         "ScreenshotName"
+						       ],
+						       "type": "object"
+						     },
+						     "type": "array"
+						   }
+						*/
+						Description: "List of screenshots used as base reference for visual testing",
+						Attributes: schema.ListNestedAttributes(
+							map[string]schema.Attribute{
+								"ignore_coordinates": {
+									// Property: IgnoreCoordinates
+									// CloudFormation resource type schema:
+									/*
+									   {
+									     "description": "List of coordinates of rectangles to be ignored during visual testing",
+									     "items": {
+									       "description": "Coordinates of a rectangle to be ignored during visual testing",
+									       "type": "string"
+									     },
+									     "type": "array"
+									   }
+									*/
+									Description: "List of coordinates of rectangles to be ignored during visual testing",
+									Type:        types.ListType{ElemType: types.StringType},
+									Optional:    true,
+								},
+								"screenshot_name": {
+									// Property: ScreenshotName
+									// CloudFormation resource type schema:
+									/*
+									   {
+									     "description": "Name of the screenshot to be used as base reference for visual testing",
+									     "type": "string"
+									   }
+									*/
+									Description: "Name of the screenshot to be used as base reference for visual testing",
+									Type:        types.StringType,
+									Required:    true,
+								},
+							},
+							schema.ListNestedAttributesOptions{},
+						),
+						Optional: true,
+					},
+				},
+			),
+			Optional: true,
+		},
 	}
 
 	// Required for acceptance testing.
@@ -541,7 +672,7 @@ func canary(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	schema := schema.Schema{
-		Description: `Resource Type definition for AWS::Synthetics::Canary`,
+		Description: "Resource Type definition for AWS::Synthetics::Canary",
 		Version:     1,
 		Attributes:  attributes,
 	}

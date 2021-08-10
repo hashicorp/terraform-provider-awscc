@@ -12,16 +12,15 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecs_task_definition", taskDefinition)
+	registry.AddResourceTypeFactory("aws_ecs_task_definition", taskDefinitionResourceType)
 }
 
-// taskDefinition returns the Terraform aws_ecs_task_definition resource type.
+// taskDefinitionResourceType returns the Terraform aws_ecs_task_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::TaskDefinition resource type.
-func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
+func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"container_definitions": {
 			// Property: ContainerDefinitions
@@ -75,7 +74,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "DockerLabels": {
 			           "additionalProperties": false,
 			           "patternProperties": {
-			             ".{1,}": {
+			             "": {
 			               "type": "string"
 			             }
 			           },
@@ -153,7 +152,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "Options": {
 			               "additionalProperties": false,
 			               "patternProperties": {
-			                 ".{1,}": {
+			                 "": {
 			                   "type": "string"
 			                 }
 			               },
@@ -309,7 +308,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "Options": {
 			               "additionalProperties": false,
 			               "patternProperties": {
-			                 ".{1,}": {
+			                 "": {
 			                   "type": "string"
 			                 }
 			               },
@@ -530,7 +529,8 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "uniqueItems": true
 			   }
 			*/
-			Attributes: providertypes.SetNestedAttributes(
+			// Ordered set.
+			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"command": {
 						// Property: Command
@@ -653,14 +653,14 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						   {
 						     "additionalProperties": false,
 						     "patternProperties": {
-						       ".{1,}": {
+						       "": {
 						         "type": "string"
 						       }
 						     },
 						     "type": "object"
 						   }
 						*/
-						// Pattern: ".{1,}"
+						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
 					},
@@ -715,8 +715,9 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "uniqueItems": true
 						   }
 						*/
-						Description: `The environment variables to pass to a container`,
-						Attributes: providertypes.SetNestedAttributes(
+						Description: "The environment variables to pass to a container",
+						// Ordered set.
+						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
@@ -741,7 +742,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							schema.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -767,7 +768,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "array"
 						   }
 						*/
-						Description: `The list of one or more files that contain the environment variables to pass to a container`,
+						Description: "The list of one or more files that contain the environment variables to pass to a container",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"type": {
@@ -868,7 +869,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "Options": {
 						         "additionalProperties": false,
 						         "patternProperties": {
-						           ".{1,}": {
+						           "": {
 						             "type": "string"
 						           }
 						         },
@@ -891,14 +892,14 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "additionalProperties": false,
 									     "patternProperties": {
-									       ".{1,}": {
+									       "": {
 									         "type": "string"
 									       }
 									     },
 									     "type": "object"
 									   }
 									*/
-									// Pattern: ".{1,}"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -953,7 +954,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "object"
 						   }
 						*/
-						Description: `The health check command and associated configuration parameters for the container.`,
+						Description: "The health check command and associated configuration parameters for the container.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"command": {
@@ -968,7 +969,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "array"
 									   }
 									*/
-									Description: `A string array representing the command that the container runs to determine if it is healthy.`,
+									Description: "A string array representing the command that the container runs to determine if it is healthy.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
 								},
@@ -981,7 +982,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "integer"
 									   }
 									*/
-									Description: `The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.`,
+									Description: "The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
@@ -994,7 +995,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "integer"
 									   }
 									*/
-									Description: `The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries.`,
+									Description: "The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
@@ -1007,7 +1008,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "integer"
 									   }
 									*/
-									Description: `The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default.`,
+									Description: "The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
@@ -1020,7 +1021,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "integer"
 									   }
 									*/
-									Description: `The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds.`,
+									Description: "The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
@@ -1048,7 +1049,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `The image used to start a container. This string is passed directly to the Docker daemon.`,
+						Description: "The image used to start a container. This string is passed directly to the Docker daemon.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -1075,7 +1076,8 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "uniqueItems": true
 						   }
 						*/
-						Type:     providertypes.SetType{ElemType: types.StringType},
+						// Ordered set.
+						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"linux_parameters": {
@@ -1293,7 +1295,8 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "uniqueItems": true
 												   }
 												*/
-												Type:     providertypes.SetType{ElemType: types.StringType},
+												// Ordered set.
+												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 											},
 										},
@@ -1435,7 +1438,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "Options": {
 						         "additionalProperties": false,
 						         "patternProperties": {
-						           ".{1,}": {
+						           "": {
 						             "type": "string"
 						           }
 						         },
@@ -1489,14 +1492,14 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "additionalProperties": false,
 									     "patternProperties": {
-									       ".{1,}": {
+									       "": {
 									         "type": "string"
 									       }
 									     },
 									     "type": "object"
 									   }
 									*/
-									// Pattern: ".{1,}"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -1567,7 +1570,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "integer"
 						   }
 						*/
-						Description: `The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.`,
+						Description: "The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
@@ -1607,7 +1610,8 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "uniqueItems": true
 						   }
 						*/
-						Attributes: providertypes.SetNestedAttributes(
+						// Ordered set.
+						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"container_path": {
 									// Property: ContainerPath
@@ -1643,7 +1647,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							schema.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -1656,7 +1660,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed`,
+						Description: "The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -1686,8 +1690,9 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "uniqueItems": true
 						   }
 						*/
-						Description: `Port mappings allow containers to access ports on the host container instance to send or receive traffic.`,
-						Attributes: providertypes.SetNestedAttributes(
+						Description: "Port mappings allow containers to access ports on the host container instance to send or receive traffic.",
+						// Ordered set.
+						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"container_port": {
 									// Property: ContainerPort
@@ -1723,7 +1728,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							schema.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -2074,7 +2079,8 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "uniqueItems": true
 						   }
 						*/
-						Attributes: providertypes.SetNestedAttributes(
+						// Ordered set.
+						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"read_only": {
 									// Property: ReadOnly
@@ -2099,7 +2105,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							schema.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -2115,7 +2121,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				schema.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -2216,7 +2222,8 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "uniqueItems": true
 			   }
 			*/
-			Attributes: providertypes.SetNestedAttributes(
+			// Ordered set.
+			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"device_name": {
 						// Property: DeviceName
@@ -2241,7 +2248,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				schema.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -2324,7 +2331,8 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "uniqueItems": true
 			   }
 			*/
-			Attributes: providertypes.SetNestedAttributes(
+			// Ordered set.
+			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"expression": {
 						// Property: Expression
@@ -2349,7 +2357,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				schema.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -2428,7 +2436,8 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "uniqueItems": true
 						   }
 						*/
-						Attributes: providertypes.SetNestedAttributes(
+						// Ordered set.
+						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
@@ -2453,7 +2462,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							schema.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -2486,7 +2495,8 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "uniqueItems": true
 			   }
 			*/
-			Type:     providertypes.SetType{ElemType: types.StringType},
+			// Ordered set.
+			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
 			// RequiresCompatibilities is a force-new attribute.
@@ -2550,7 +2560,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "string"
 			   }
 			*/
-			Description: `The Amazon Resource Name (ARN) of the Amazon ECS task definition`,
+			Description: "The Amazon Resource Name (ARN) of the Amazon ECS task definition",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -2587,7 +2597,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "DriverOpts": {
 			               "additionalProperties": false,
 			               "patternProperties": {
-			                 ".{1,}": {
+			                 "": {
 			                   "type": "string"
 			                 }
 			               },
@@ -2596,7 +2606,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "Labels": {
 			               "additionalProperties": false,
 			               "patternProperties": {
-			                 ".{1,}": {
+			                 "": {
 			                   "type": "string"
 			                 }
 			               },
@@ -2673,7 +2683,8 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "uniqueItems": true
 			   }
 			*/
-			Attributes: providertypes.SetNestedAttributes(
+			// Ordered set.
+			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"docker_volume_configuration": {
 						// Property: DockerVolumeConfiguration
@@ -2691,7 +2702,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "DriverOpts": {
 						         "additionalProperties": false,
 						         "patternProperties": {
-						           ".{1,}": {
+						           "": {
 						             "type": "string"
 						           }
 						         },
@@ -2700,7 +2711,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "Labels": {
 						         "additionalProperties": false,
 						         "patternProperties": {
-						           ".{1,}": {
+						           "": {
 						             "type": "string"
 						           }
 						         },
@@ -2745,14 +2756,14 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "additionalProperties": false,
 									     "patternProperties": {
-									       ".{1,}": {
+									       "": {
 									         "type": "string"
 									       }
 									     },
 									     "type": "object"
 									   }
 									*/
-									// Pattern: ".{1,}"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -2763,14 +2774,14 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "additionalProperties": false,
 									     "patternProperties": {
-									       ".{1,}": {
+									       "": {
 									         "type": "string"
 									       }
 									     },
 									     "type": "object"
 									   }
 									*/
-									// Pattern: ".{1,}"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -2989,7 +3000,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				schema.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -3005,7 +3016,7 @@ func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	schema := schema.Schema{
-		Description: `Resource Schema describing various properties for ECS TaskDefinition`,
+		Description: "Resource Schema describing various properties for ECS TaskDefinition",
 		Version:     1,
 		Attributes:  attributes,
 	}

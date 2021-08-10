@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_xray_sampling_rule", samplingRule)
+	registry.AddResourceTypeFactory("aws_xray_sampling_rule", samplingRuleResourceType)
 }
 
-// samplingRule returns the Terraform aws_xray_sampling_rule resource type.
+// samplingRuleResourceType returns the Terraform aws_xray_sampling_rule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::XRay::SamplingRule resource type.
-func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
+func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"rule_arn": {
 			// Property: RuleARN
@@ -32,7 +32,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "string"
 			   }
 			*/
-			Description: `The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.`,
+			Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -48,7 +48,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "string"
 			   }
 			*/
-			Description: `The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.`,
+			Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 			Type:        types.StringType,
 			Optional:    true,
 		},
@@ -64,7 +64,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "$comment": "String to string map",
 			         "description": "Matches attributes derived from the request.",
 			         "patternProperties": {
-			           ".{1,}": {
+			           "": {
 			             "type": "string"
 			           }
 			         },
@@ -144,15 +144,15 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "$comment": "String to string map",
 						     "description": "Matches attributes derived from the request.",
 						     "patternProperties": {
-						       ".{1,}": {
+						       "": {
 						         "type": "string"
 						       }
 						     },
 						     "type": "object"
 						   }
 						*/
-						Description: `Matches attributes derived from the request.`,
-						// Pattern: ".{1,}"
+						Description: "Matches attributes derived from the request.",
+						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
 					},
@@ -165,7 +165,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "number"
 						   }
 						*/
-						Description: `The percentage of matching requests to instrument, after the reservoir is exhausted.`,
+						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
@@ -179,7 +179,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `Matches the HTTP method from a request URL.`,
+						Description: "Matches the HTTP method from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -193,7 +193,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `Matches the hostname from a request URL.`,
+						Description: "Matches the hostname from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -206,7 +206,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "integer"
 						   }
 						*/
-						Description: `The priority of the sampling rule.`,
+						Description: "The priority of the sampling rule.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
@@ -219,7 +219,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "integer"
 						   }
 						*/
-						Description: `A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.`,
+						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
@@ -233,7 +233,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `Matches the ARN of the AWS resource on which the service runs.`,
+						Description: "Matches the ARN of the AWS resource on which the service runs.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -247,7 +247,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.`,
+						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -263,7 +263,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.`,
+						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -277,7 +277,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `Matches the name that the service uses to identify itself in segments.`,
+						Description: "Matches the name that the service uses to identify itself in segments.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -291,7 +291,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `Matches the origin that the service uses to identify its type in segments.`,
+						Description: "Matches the origin that the service uses to identify its type in segments.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -305,7 +305,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `Matches the path from a request URL.`,
+						Description: "Matches the path from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -318,7 +318,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "integer"
 						   }
 						*/
-						Description: `The version of the sampling rule format (1)`,
+						Description: "The version of the sampling rule format (1)",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
@@ -349,7 +349,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "$comment": "String to string map",
 			             "description": "Matches attributes derived from the request.",
 			             "patternProperties": {
-			               ".{1,}": {
+			               "": {
 			                 "type": "string"
 			               }
 			             },
@@ -433,7 +433,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `When the rule was created, in Unix time seconds.`,
+						Description: "When the rule was created, in Unix time seconds.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -446,7 +446,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `When the rule was modified, in Unix time seconds.`,
+						Description: "When the rule was modified, in Unix time seconds.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -462,7 +462,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "$comment": "String to string map",
 						         "description": "Matches attributes derived from the request.",
 						         "patternProperties": {
-						           ".{1,}": {
+						           "": {
 						             "type": "string"
 						           }
 						         },
@@ -542,15 +542,15 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "$comment": "String to string map",
 									     "description": "Matches attributes derived from the request.",
 									     "patternProperties": {
-									       ".{1,}": {
+									       "": {
 									         "type": "string"
 									       }
 									     },
 									     "type": "object"
 									   }
 									*/
-									Description: `Matches attributes derived from the request.`,
-									// Pattern: ".{1,}"
+									Description: "Matches attributes derived from the request.",
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -563,7 +563,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "number"
 									   }
 									*/
-									Description: `The percentage of matching requests to instrument, after the reservoir is exhausted.`,
+									Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
@@ -577,7 +577,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "string"
 									   }
 									*/
-									Description: `Matches the HTTP method from a request URL.`,
+									Description: "Matches the HTTP method from a request URL.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
@@ -591,7 +591,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "string"
 									   }
 									*/
-									Description: `Matches the hostname from a request URL.`,
+									Description: "Matches the hostname from a request URL.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
@@ -604,7 +604,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "integer"
 									   }
 									*/
-									Description: `The priority of the sampling rule.`,
+									Description: "The priority of the sampling rule.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
@@ -617,7 +617,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "integer"
 									   }
 									*/
-									Description: `A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.`,
+									Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
@@ -631,7 +631,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "string"
 									   }
 									*/
-									Description: `Matches the ARN of the AWS resource on which the service runs.`,
+									Description: "Matches the ARN of the AWS resource on which the service runs.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
@@ -645,7 +645,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "string"
 									   }
 									*/
-									Description: `The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.`,
+									Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
@@ -661,7 +661,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "string"
 									   }
 									*/
-									Description: `The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.`,
+									Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
@@ -675,7 +675,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "string"
 									   }
 									*/
-									Description: `Matches the name that the service uses to identify itself in segments.`,
+									Description: "Matches the name that the service uses to identify itself in segments.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
@@ -689,7 +689,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "string"
 									   }
 									*/
-									Description: `Matches the origin that the service uses to identify its type in segments.`,
+									Description: "Matches the origin that the service uses to identify its type in segments.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
@@ -703,7 +703,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "string"
 									   }
 									*/
-									Description: `Matches the path from a request URL.`,
+									Description: "Matches the path from a request URL.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
@@ -716,7 +716,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "type": "integer"
 									   }
 									*/
-									Description: `The version of the sampling rule format (1)`,
+									Description: "The version of the sampling rule format (1)",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
@@ -740,7 +740,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "$comment": "String to string map",
 			         "description": "Matches attributes derived from the request.",
 			         "patternProperties": {
-			           ".{1,}": {
+			           "": {
 			             "type": "string"
 			           }
 			         },
@@ -816,15 +816,15 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "$comment": "String to string map",
 						     "description": "Matches attributes derived from the request.",
 						     "patternProperties": {
-						       ".{1,}": {
+						       "": {
 						         "type": "string"
 						       }
 						     },
 						     "type": "object"
 						   }
 						*/
-						Description: `Matches attributes derived from the request.`,
-						// Pattern: ".{1,}"
+						Description: "Matches attributes derived from the request.",
+						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
 					},
@@ -837,7 +837,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "number"
 						   }
 						*/
-						Description: `The percentage of matching requests to instrument, after the reservoir is exhausted.`,
+						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
@@ -851,7 +851,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `Matches the HTTP method from a request URL.`,
+						Description: "Matches the HTTP method from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -865,7 +865,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `Matches the hostname from a request URL.`,
+						Description: "Matches the hostname from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -878,7 +878,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "integer"
 						   }
 						*/
-						Description: `The priority of the sampling rule.`,
+						Description: "The priority of the sampling rule.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
@@ -891,7 +891,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "integer"
 						   }
 						*/
-						Description: `A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.`,
+						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
@@ -905,7 +905,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `Matches the ARN of the AWS resource on which the service runs.`,
+						Description: "Matches the ARN of the AWS resource on which the service runs.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -919,7 +919,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.`,
+						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -935,7 +935,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.`,
+						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -949,7 +949,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `Matches the name that the service uses to identify itself in segments.`,
+						Description: "Matches the name that the service uses to identify itself in segments.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -963,7 +963,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `Matches the origin that the service uses to identify its type in segments.`,
+						Description: "Matches the origin that the service uses to identify its type in segments.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -977,7 +977,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `Matches the path from a request URL.`,
+						Description: "Matches the path from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
@@ -1049,7 +1049,7 @@ func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	schema := schema.Schema{
-		Description: `This schema provides construct and validation rules for AWS-XRay SamplingRule resource parameters.`,
+		Description: "This schema provides construct and validation rules for AWS-XRay SamplingRule resource parameters.",
 		Version:     1,
 		Attributes:  attributes,
 	}

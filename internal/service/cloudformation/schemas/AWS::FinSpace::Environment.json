@@ -1,0 +1,170 @@
+{
+    "typeName": "AWS::FinSpace::Environment",
+    "description": "An example resource schema demonstrating some basic constructs and validation rules.",
+    "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+    "definitions": {
+        "FederationParameters": {
+            "description": "Additional parameters to identify Federation mode",
+            "type": "object",
+            "properties": {
+                "SamlMetadataURL": {
+                    "description": "SAML metadata URL to link with the Environment",
+                    "type": "string",
+                    "pattern": ""
+                },
+                "FederationProviderName": {
+                    "description": "Federation provider name to link with the Environment",
+                    "type": "string",
+                    "pattern": "",
+                    "minLength": 1,
+                    "maxLength": 32
+                },
+                "SamlMetadataDocument": {
+                    "description": "SAML metadata document to link the federation provider to the Environment",
+                    "type": "string",
+                    "pattern": "",
+                    "minLength": 1000,
+                    "maxLength": 10000000
+                },
+                "ApplicationCallBackURL": {
+                    "description": "SAML metadata URL to link with the Environment",
+                    "type": "string",
+                    "pattern": ""
+                },
+                "FederationURN": {
+                    "description": "SAML metadata URL to link with the Environment",
+                    "type": "string",
+                    "pattern": ""
+                },
+                "AttributeMap": {
+                    "description": "Attribute map for SAML configuration",
+                    "type": "object"
+                }
+            }
+        }
+    },
+    "properties": {
+        "EnvironmentId": {
+            "description": "Unique identifier for representing FinSpace Environment",
+            "type": "string",
+            "pattern": ""
+        },
+        "Name": {
+            "description": "Name of the Environment",
+            "type": "string",
+            "pattern": ""
+        },
+        "AwsAccountId": {
+            "description": "AWS account ID associated with the Environment",
+            "type": "string",
+            "pattern": ""
+        },
+        "Description": {
+            "description": "Description of the Environment",
+            "type": "string",
+            "pattern": ""
+        },
+        "Status": {
+            "description": "State of the Environment",
+            "type": "string",
+            "enum": [
+                "CREATE_REQUESTED",
+                "CREATING",
+                "CREATED",
+                "DELETE_REQUESTED",
+                "DELETING",
+                "DELETED",
+                "FAILED_CREATION",
+                "FAILED_DELETION",
+                "RETRY_DELETION",
+                "SUSPENDED"
+            ]
+        },
+        "EnvironmentUrl": {
+            "description": "URL used to login to the Environment",
+            "type": "string",
+            "pattern": ""
+        },
+        "EnvironmentArn": {
+            "description": "ARN of the Environment",
+            "type": "string",
+            "pattern": ""
+        },
+        "SageMakerStudioDomainUrl": {
+            "description": "SageMaker Studio Domain URL associated with the Environment",
+            "type": "string",
+            "pattern": ""
+        },
+        "KmsKeyId": {
+            "description": "KMS key used to encrypt customer data within FinSpace Environment infrastructure",
+            "type": "string",
+            "pattern": ""
+        },
+        "DedicatedServiceAccountId": {
+            "description": "ID for FinSpace created account used to store Environment artifacts",
+            "type": "string",
+            "pattern": ""
+        },
+        "FederationMode": {
+            "description": "Federation mode used with the Environment",
+            "type": "string",
+            "enum": [
+                "LOCAL",
+                "FEDERATED"
+            ]
+        },
+        "FederationParameters": {
+            "$ref": "#/definitions/FederationParameters"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "Name"
+    ],
+    "readOnlyProperties": [
+        "/properties/EnvironmentId",
+        "/properties/Status",
+        "/properties/SageMakerStudioDomainUrl",
+        "/properties/EnvironmentArn",
+        "/properties/EnvironmentUrl",
+        "/properties/AwsAccountId",
+        "/properties/DedicatedServiceAccountId"
+    ],
+    "createOnlyProperties": [
+        "/properties/KmsKeyId"
+    ],
+    "primaryIdentifier": [
+        "/properties/EnvironmentId"
+    ],
+    "handlers": {
+        "create": {
+            "permissions": [
+                "finspace:CreateEnvironment",
+                "finspace:GetEnvironment",
+                "finspace:ListEnvironments",
+                "sts:AssumeRole"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "finspace:GetEnvironment"
+            ]
+        },
+        "update": {
+            "permissions": [
+                "finspace:UpdateEnvironment"
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "finspace:DeleteEnvironment",
+                "finspace:GetEnvironment"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "finspace:ListEnvironments"
+            ]
+        }
+    }
+}

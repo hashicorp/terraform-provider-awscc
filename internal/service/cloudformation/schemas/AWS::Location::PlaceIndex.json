@@ -1,0 +1,118 @@
+{
+    "typeName": "AWS::Location::PlaceIndex",
+    "description": "Definition of AWS::Location::PlaceIndex Resource Type",
+    "definitions": {
+        "DataSourceConfiguration": {
+            "type": "object",
+            "properties": {
+                "IntendedUse": {
+                    "$ref": "#/definitions/IntendedUse"
+                }
+            },
+            "additionalProperties": false
+        },
+        "IntendedUse": {
+            "type": "string",
+            "enum": [
+                "SingleUse",
+                "Storage"
+            ]
+        },
+        "PricingPlan": {
+            "type": "string",
+            "enum": [
+                "RequestBasedUsage",
+                "MobileAssetTracking",
+                "MobileAssetManagement"
+            ]
+        },
+        "iso8601UTC": {
+            "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+            "type": "string",
+            "pattern": ""
+        }
+    },
+    "properties": {
+        "CreateTime": {
+            "$ref": "#/definitions/iso8601UTC"
+        },
+        "DataSource": {
+            "type": "string"
+        },
+        "DataSourceConfiguration": {
+            "$ref": "#/definitions/DataSourceConfiguration"
+        },
+        "Description": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 0
+        },
+        "IndexArn": {
+            "type": "string",
+            "maxLength": 1600,
+            "pattern": ""
+        },
+        "Arn": {
+            "type": "string",
+            "maxLength": 1600,
+            "pattern": ""
+        },
+        "IndexName": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": ""
+        },
+        "PricingPlan": {
+            "$ref": "#/definitions/PricingPlan"
+        },
+        "UpdateTime": {
+            "$ref": "#/definitions/iso8601UTC"
+        }
+    },
+    "readOnlyProperties": [
+        "/properties/CreateTime",
+        "/properties/IndexArn",
+        "/properties/Arn",
+        "/properties/UpdateTime"
+    ],
+    "createOnlyProperties": [
+        "/properties/IndexName",
+        "/properties/DataSource",
+        "/properties/DataSourceConfiguration",
+        "/properties/Description",
+        "/properties/PricingPlan"
+    ],
+    "required": [
+        "IndexName",
+        "DataSource",
+        "PricingPlan"
+    ],
+    "primaryIdentifier": [
+        "/properties/IndexName"
+    ],
+    "additionalProperties": false,
+    "handlers": {
+        "create" : {
+            "permissions": [
+                "geo:CreatePlaceIndex",
+                "geo:DescribePlaceIndex"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "geo:DescribePlaceIndex"
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "geo:DeletePlaceIndex"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "geo:ListPlaceIndexes"
+            ]
+        }
+    }
+}

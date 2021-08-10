@@ -1,0 +1,91 @@
+{
+  "typeName": "AWS::CloudFormation::PublicTypeVersion",
+  "description": "Test and Publish a resource that has been registered in the CloudFormation Registry.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-cloudformation",
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Number (ARN) of the extension.",
+      "pattern": "",
+      "type": "string"
+    },
+    "TypeVersionArn": {
+      "description": "The Amazon Resource Number (ARN) of the extension with the versionId.",
+      "pattern": "",
+      "type": "string"
+    },
+    "PublicVersionNumber": {
+      "description": "The version number of a public third-party extension",
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 64
+    },
+    "PublisherId": {
+      "description": "The publisher id assigned by CloudFormation for publishing in this region.",
+      "pattern": "",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "PublicTypeArn": {
+      "description": "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
+      "pattern": "",
+      "type": "string",
+      "maxLength": 1024
+    },
+    "TypeName": {
+      "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+      "pattern": "",
+      "type": "string"
+    },
+    "LogDeliveryBucket": {
+      "description": "A url to the S3 bucket where logs for the testType run will be available",
+      "type": "string"
+    },
+    "Type": {
+      "description": "The kind of extension",
+      "enum": ["RESOURCE", "MODULE"],
+      "type": "string"
+    }
+  },
+  "oneOf": [
+    {"required": ["TypeName", "Type"]},
+    {"required": ["Arn"]}
+  ],
+  "readOnlyProperties": [
+    "/properties/PublicTypeArn",
+    "/properties/TypeVersionArn",
+    "/properties/PublisherId"
+  ],
+  "createOnlyProperties": [
+    "/properties/LogDeliveryBucket",
+    "/properties/PublicVersionNumber",
+    "/properties/TypeName",
+    "/properties/Type",
+    "/properties/Arn"
+  ],
+  "primaryIdentifier": ["/properties/PublicTypeArn"],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudformation:TestType",
+        "cloudformation:DescribeType",
+        "cloudformation:PublishType",
+        "cloudformation:DescribePublisher",
+        "s3:GetObject",
+        "s3:PutObject"
+      ]
+    },
+    "delete": {
+      "permissions": []
+    },
+    "read": {
+      "permissions": ["cloudformation:DescribeType",
+        "cloudformation:DescribePublisher"
+      ]
+    },
+    "list": {
+      "permissions": ["cloudformation:ListTypes"]
+    }
+  },
+  "additionalProperties": false
+}

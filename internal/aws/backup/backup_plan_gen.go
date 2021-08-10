@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_backup_backup_plan", backupPlan)
+	registry.AddResourceTypeFactory("aws_backup_backup_plan", backupPlanResourceType)
 }
 
-// backupPlan returns the Terraform aws_backup_backup_plan resource type.
+// backupPlanResourceType returns the Terraform aws_backup_backup_plan resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Backup::BackupPlan resource type.
-func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
+func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"backup_plan": {
 			// Property: BackupPlan
@@ -109,7 +109,7 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "RecoveryPointTags": {
 			               "additionalProperties": false,
 			               "patternProperties": {
-			                 "^.{1,128}$": {
+			                 "": {
 			                   "type": "string"
 			                 }
 			               },
@@ -275,7 +275,7 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "RecoveryPointTags": {
 						           "additionalProperties": false,
 						           "patternProperties": {
-						             "^.{1,128}$": {
+						             "": {
 						               "type": "string"
 						             }
 						           },
@@ -481,14 +481,14 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "additionalProperties": false,
 									     "patternProperties": {
-									       "^.{1,128}$": {
+									       "": {
 									         "type": "string"
 									       }
 									     },
 									     "type": "object"
 									   }
 									*/
-									// Pattern: "^.{1,128}$"
+									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -574,14 +574,14 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "additionalProperties": false,
 			     "patternProperties": {
-			       "^.{1,128}$": {
+			       "": {
 			         "type": "string"
 			       }
 			     },
 			     "type": "object"
 			   }
 			*/
-			// Pattern: "^.{1,128}$"
+			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 		},
@@ -606,7 +606,7 @@ func backupPlan(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	schema := schema.Schema{
-		Description: `Resource Type definition for AWS::Backup::BackupPlan`,
+		Description: "Resource Type definition for AWS::Backup::BackupPlan",
 		Version:     1,
 		Attributes:  attributes,
 	}

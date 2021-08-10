@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_stepfunctions_state_machine", stateMachine)
+	registry.AddResourceTypeFactory("aws_stepfunctions_state_machine", stateMachineResourceType)
 }
 
-// stateMachine returns the Terraform aws_stepfunctions_state_machine resource type.
+// stateMachineResourceType returns the Terraform aws_stepfunctions_state_machine resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::StepFunctions::StateMachine resource type.
-func stateMachine(ctx context.Context) (tfsdk.ResourceType, error) {
+func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn
@@ -131,7 +131,7 @@ func stateMachine(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "additionalProperties": false,
 			     "patternProperties": {
-			       ".*": {
+			       "": {
 			         "type": "string"
 			       }
 			     },
@@ -139,7 +139,7 @@ func stateMachine(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "object"
 			   }
 			*/
-			// Pattern: ".*"
+			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 		},
@@ -458,7 +458,7 @@ func stateMachine(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	schema := schema.Schema{
-		Description: `Resource schema for StateMachine`,
+		Description: "Resource schema for StateMachine",
 		Version:     1,
 		Attributes:  attributes,
 	}

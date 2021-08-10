@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_kms_key", key)
+	registry.AddResourceTypeFactory("aws_kms_key", keyResourceType)
 }
 
-// key returns the Terraform aws_kms_key resource type.
+// keyResourceType returns the Terraform aws_kms_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::KMS::Key resource type.
-func key(ctx context.Context) (tfsdk.ResourceType, error) {
+func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn
@@ -45,7 +45,7 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "string"
 			   }
 			*/
-			Description: `A description of the CMK. Use a description that helps you to distinguish this CMK from others in the account, such as its intended use.`,
+			Description: "A description of the CMK. Use a description that helps you to distinguish this CMK from others in the account, such as its intended use.",
 			Type:        types.StringType,
 			Optional:    true,
 		},
@@ -58,7 +58,7 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "boolean"
 			   }
 			*/
-			Description: `Enables automatic rotation of the key material for the specified customer master key (CMK). By default, automation key rotation is not enabled.`,
+			Description: "Enables automatic rotation of the key material for the specified customer master key (CMK). By default, automation key rotation is not enabled.",
 			Type:        types.BoolType,
 			Optional:    true,
 		},
@@ -71,7 +71,7 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "boolean"
 			   }
 			*/
-			Description: `Specifies whether the customer master key (CMK) is enabled. Disabled CMKs cannot be used in cryptographic operations.`,
+			Description: "Specifies whether the customer master key (CMK) is enabled. Disabled CMKs cannot be used in cryptographic operations.",
 			Type:        types.BoolType,
 			Optional:    true,
 		},
@@ -95,7 +95,7 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "string"
 			   }
 			*/
-			Description: `The key policy that authorizes use of the CMK. The key policy must observe the following rules.`,
+			Description: "The key policy that authorizes use of the CMK. The key policy must observe the following rules.",
 			Type:        types.StringType,
 			Required:    true,
 		},
@@ -118,7 +118,7 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "string"
 			   }
 			*/
-			Description: `Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.`,
+			Description: "Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.",
 			Type:        types.StringType,
 			Optional:    true,
 		},
@@ -135,8 +135,21 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "string"
 			   }
 			*/
-			Description: `Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.`,
+			Description: "Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.",
 			Type:        types.StringType,
+			Optional:    true,
+		},
+		"multi_region": {
+			// Property: MultiRegion
+			// CloudFormation resource type schema:
+			/*
+			   {
+			     "description": "Specifies whether the CMK should be Multi-Region. You can't change the MultiRegion value after the CMK is created.",
+			     "type": "boolean"
+			   }
+			*/
+			Description: "Specifies whether the CMK should be Multi-Region. You can't change the MultiRegion value after the CMK is created.",
+			Type:        types.BoolType,
 			Optional:    true,
 		},
 		"pending_window_in_days": {
@@ -148,7 +161,7 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "type": "integer"
 			   }
 			*/
-			Description: `Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.`,
+			Description: "Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
 			Type:        types.NumberType,
 			Optional:    true,
 			// PendingWindowInDays is a write-only attribute.
@@ -161,6 +174,7 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "An array of key-value pairs to apply to this resource.",
 			     "insertionOrder": false,
 			     "items": {
+			       "additionalProperties": false,
 			       "description": "A key-value pair to associate with a resource.",
 			       "properties": {
 			         "Key": {
@@ -187,7 +201,7 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "uniqueItems": true
 			   }
 			*/
-			Description: `An array of key-value pairs to apply to this resource.`,
+			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
@@ -201,7 +215,7 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.`,
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
 					},
@@ -216,7 +230,7 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "type": "string"
 						   }
 						*/
-						Description: `The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.`,
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
 					},
@@ -235,7 +249,7 @@ func key(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	schema := schema.Schema{
-		Description: `The AWS::KMS::Key resource specifies a customer master key (CMK) in AWS Key Management Service (AWS KMS). Authorized users can use the CMK to encrypt and decrypt small amounts of data (up to 4096 bytes), but they are more commonly used to generate data keys. You can also use CMKs to encrypt data stored in AWS services that are integrated with AWS KMS or within their applications.`,
+		Description: "The AWS::KMS::Key resource specifies a customer master key (CMK) in AWS Key Management Service (AWS KMS). Authorized users can use the CMK to encrypt and decrypt small amounts of data (up to 4096 bytes), but they are more commonly used to generate data keys. You can also use CMKs to encrypt data stored in AWS services that are integrated with AWS KMS or within their applications.",
 		Version:     1,
 		Attributes:  attributes,
 	}

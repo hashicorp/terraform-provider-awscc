@@ -1,0 +1,97 @@
+{
+    "typeName": "AWS::Location::RouteCalculator",
+    "description": "Definition of AWS::Location::RouteCalculator Resource Type",
+    "definitions": {
+        "PricingPlan": {
+            "type": "string",
+            "enum": [
+                "RequestBasedUsage",
+                "MobileAssetManagement"
+            ]
+        },
+        "iso8601UTC": {
+            "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+            "type": "string",
+            "pattern": ""
+        }
+    },
+    "properties": {
+        "CalculatorArn": {
+            "type": "string",
+            "maxLength": 1600,
+            "pattern": ""
+        },
+        "Arn": {
+            "type": "string",
+            "maxLength": 1600,
+            "pattern": ""
+        },
+        "CalculatorName": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": ""
+        },
+        "CreateTime": {
+            "$ref": "#/definitions/iso8601UTC"
+        },
+        "DataSource": {
+            "type": "string"
+        },
+        "Description": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 0
+        },
+        "PricingPlan": {
+            "$ref": "#/definitions/PricingPlan"
+        },
+        "UpdateTime": {
+            "$ref": "#/definitions/iso8601UTC"
+        }
+    },
+    "readOnlyProperties": [
+        "/properties/CalculatorArn",
+        "/properties/Arn",
+        "/properties/CreateTime",
+        "/properties/UpdateTime"
+    ],
+    "createOnlyProperties": [
+        "/properties/CalculatorName",
+        "/properties/DataSource",
+        "/properties/Description",
+        "/properties/PricingPlan"
+    ],
+    "required": [
+        "CalculatorName",
+        "DataSource",
+        "PricingPlan"
+    ],
+    "primaryIdentifier": [
+        "/properties/CalculatorName"
+    ],
+    "additionalProperties": false,
+    "handlers": {
+        "create" : {
+            "permissions": [
+                "geo:CreateRouteCalculator",
+                "geo:DescribeRouteCalculator"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "geo:DescribeRouteCalculator"
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "geo:DeleteRouteCalculator"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "geo:ListRouteCalculators"
+            ]
+        }
+    }
+}

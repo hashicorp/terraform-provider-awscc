@@ -1,7 +1,9 @@
-package naming
+package naming_test
 
 import (
 	"testing"
+
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
 )
 
 func TestCloudFormationPropertyToTerraformAttribute(t *testing.T) {
@@ -44,7 +46,7 @@ func TestCloudFormationPropertyToTerraformAttribute(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			got := CloudFormationPropertyToTerraformAttribute(testCase.Value)
+			got := naming.CloudFormationPropertyToTerraformAttribute(testCase.Value)
 
 			if got != testCase.ExpectedValue {
 				t.Errorf("expected: %s, got: %s", testCase.ExpectedValue, got)
@@ -93,7 +95,7 @@ func TestTerraformAttributeToCloudFormationProperty(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			got := TerraformAttributeToCloudFormationProperty(testCase.Value)
+			got := naming.TerraformAttributeToCloudFormationProperty(testCase.Value)
 
 			if got != testCase.ExpectedValue {
 				t.Errorf("expected: %s, got: %s", testCase.ExpectedValue, got)

@@ -1,0 +1,116 @@
+{
+    "typeName": "AWS::Location::Map",
+    "description": "Definition of AWS::Location::Map Resource Type",
+    "definitions": {
+        "MapConfiguration": {
+            "type": "object",
+            "properties": {
+                "Style": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1,
+                    "pattern": ""
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "Style"
+            ]
+        },
+        "PricingPlan": {
+            "type": "string",
+            "enum": [
+                "RequestBasedUsage",
+                "MobileAssetTracking",
+                "MobileAssetManagement"
+            ]
+        },
+        "iso8601UTC": {
+            "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+            "type": "string",
+            "pattern": ""
+        }
+    },
+    "properties": {
+        "Configuration": {
+            "$ref": "#/definitions/MapConfiguration"
+        },
+        "CreateTime": {
+            "$ref": "#/definitions/iso8601UTC"
+        },
+        "DataSource": {
+            "type": "string"
+        },
+        "Description": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 0
+        },
+        "MapArn": {
+            "type": "string",
+            "maxLength": 1600,
+            "pattern": ""
+        },
+        "Arn": {
+            "type": "string",
+            "maxLength": 1600,
+            "pattern": ""
+        },
+        "MapName": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": ""
+        },
+        "PricingPlan": {
+            "$ref": "#/definitions/PricingPlan"
+        },
+        "UpdateTime": {
+            "$ref": "#/definitions/iso8601UTC"
+        }
+    },
+    "readOnlyProperties": [
+        "/properties/CreateTime",
+        "/properties/DataSource",
+        "/properties/MapArn",
+        "/properties/Arn",
+        "/properties/UpdateTime"
+    ],
+    "createOnlyProperties": [
+        "/properties/MapName",
+        "/properties/Configuration",
+        "/properties/Description",
+        "/properties/PricingPlan"
+    ],
+    "required" : [
+        "MapName",
+        "Configuration",
+        "PricingPlan"
+    ],
+    "primaryIdentifier": [
+        "/properties/MapName"
+    ],
+    "additionalProperties": false,
+    "handlers": {
+        "create" : {
+            "permissions" : [
+                "geo:CreateMap"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "geo:DescribeMap"
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "geo:DeleteMap"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "geo:ListMaps"
+            ]
+        }
+    }
+}

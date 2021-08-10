@@ -1,0 +1,64 @@
+{
+  "typeName": "AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation",
+  "description": "Resource Schema for AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-servicecatalog-appregistry.git",
+  "documentationUrl": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-appregistry-attributegroupassociation.html",
+  "properties": {
+    "Application": {
+      "type": "string",
+      "description": "The name or the Id of the Application.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": ""
+    },
+    "AttributeGroup": {
+      "type": "string",
+      "description": "The name or the Id of the AttributeGroup.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": ""
+    },
+    "ApplicationArn": {
+      "type": "string",
+      "pattern": ""
+    },
+    "AttributeGroupArn": {
+      "type": "string",
+      "pattern": ""
+    },
+    "Id": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Application",
+    "AttributeGroup"
+  ],
+  "readOnlyProperties": [
+    "/properties/ApplicationArn",
+    "/properties/AttributeGroupArn",
+    "/properties/Id"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "taggable": false,
+  "handlers": {
+    "create": {
+      "permissions": [
+        "servicecatalog:AssociateAttributeGroup"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "servicecatalog:ListAssociatedAttributeGroups"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "servicecatalog:DisassociateAttributeGroup"
+      ]
+    }
+  }
+}

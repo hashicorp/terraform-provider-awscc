@@ -1,0 +1,82 @@
+{
+  "typeName": "AWS::DevOpsGuru::NotificationChannel",
+  "description": "This resource schema represents the NotificationChannel resource in the Amazon DevOps Guru.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-devops-guru",
+  "definitions": {
+    "NotificationChannelConfig": {
+      "description": "Information about notification channels you have configured with DevOps Guru.",
+      "type": "object",
+      "properties": {
+        "Sns": {
+          "$ref": "#/definitions/SnsChannelConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SnsChannelConfig": {
+      "description": "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
+      "type": "object",
+      "properties": {
+        "TopicArn": {
+          "type": "string",
+          "minLength": 36,
+          "maxLength": 1024,
+          "pattern": ""
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Config": {
+      "$ref": "#/definitions/NotificationChannelConfig"
+    },
+    "Id": {
+      "description": "The ID of a notification channel.",
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": ""
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Config"
+  ],
+  "createOnlyProperties": [
+    "/properties/Config"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "devops-guru:AddNotificationChannel",
+        "devops-guru:ListNotificationChannels",
+        "sns:Publish",
+        "sns:GetTopicAttributes",
+        "sns:SetTopicAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "devops-guru:ListNotificationChannels"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "devops-guru:RemoveNotificationChannel",
+        "devops-guru:ListNotificationChannels"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "devops-guru:ListNotificationChannels"
+      ]
+    }
+  }
+}

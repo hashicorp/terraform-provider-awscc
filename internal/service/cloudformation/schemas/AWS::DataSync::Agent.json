@@ -1,0 +1,154 @@
+{
+  "typeName": "AWS::DataSync::Agent",
+  "description": "Resource schema for AWS::DataSync::Agent.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-datasync.git",
+  "definitions": {
+    "Tag": {
+      "additionalProperties": false,
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key for an AWS resource tag.",
+          "pattern": "",
+          "maxLength": 256,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for an AWS resource tag.",
+          "pattern": "",
+          "maxLength": 256,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "properties": {
+    "AgentName": {
+      "description": "The name configured for the agent. Text reference used to identify the agent in the console.",
+      "type": "string",
+      "pattern": "",
+      "maxLength": 256,
+      "minLength": 1
+    },
+    "ActivationKey": {
+      "description": "Activation key of the Agent.",
+      "type": "string",
+      "pattern": "",
+      "maxLength": 29
+    },
+    "SecurityGroupArns": {
+      "description": "The ARNs of the security group used to protect your data transfer task subnets.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "type": "string",
+        "pattern": "",
+        "maxLength": 128
+      }
+    },
+    "SubnetArns": {
+      "description": "The ARNs of the subnets in which DataSync will create elastic network interfaces for each data transfer task.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "type": "string",
+        "pattern": "",
+        "maxLength": 128
+      }
+    },
+    "VpcEndpointId": {
+      "description": "The ID of the VPC endpoint that the agent has access to.",
+      "type": "string",
+      "pattern": ""
+    },
+    "EndpointType": {
+      "description": "The service endpoints that the agent will connect to.",
+      "type": "string",
+      "enum": [
+        "FIPS",
+        "PUBLIC",
+        "PRIVATE_LINK"
+      ]
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "AgentArn": {
+      "description": "The DataSync Agent ARN.",
+      "type": "string",
+      "pattern": "",
+      "maxLength": 128
+    }
+  },
+  "taggable": true,
+  "additionalProperties": false,
+  "required": [
+    "ActivationKey"
+  ],
+  "readOnlyProperties": [
+    "/properties/AgentArn",
+    "/properties/EndpointType"
+  ],
+  "primaryIdentifier": [
+    "/properties/AgentArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/ActivationKey",
+    "/properties/SecurityGroupArns",
+    "/properties/SubnetArns",
+    "/properties/VpcEndpointId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ActivationKey"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "datasync:CreateAgent",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcEndpoints"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "datasync:DescribeAgent",
+        "datasync:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "datasync:UpdateAgent",
+        "datasync:DescribeAgent",
+        "datasync:ListTagsForResource",
+        "datasync:TagResource",
+        "datasync:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "datasync:DeleteAgent"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "datasync:ListAgents"
+      ]
+    }
+  }
+}

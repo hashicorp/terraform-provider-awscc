@@ -1,0 +1,161 @@
+{
+  "typeName": "AWS::DataSync::LocationFSxWindows",
+  "description": "Resource schema for AWS::DataSync::LocationFSxWindows.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-datasync.git",
+  "definitions": {
+    "Tag": {
+      "additionalProperties": false,
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key for an AWS resource tag.",
+          "pattern": "",
+          "maxLength": 256,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for an AWS resource tag.",
+          "pattern": "",
+          "maxLength": 256,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "properties": {
+    "Domain": {
+      "description": "The name of the Windows domain that the FSx for Windows server belongs to.",
+      "type": "string",
+      "maxLength": 253,
+      "pattern": ""
+    },
+    "FsxFilesystemArn": {
+      "description": "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
+      "type": "string",
+      "maxLength": 128,
+      "pattern": ""
+    },
+    "Password": {
+      "description": "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
+      "type": "string",
+      "maxLength": 104,
+      "pattern": ""
+    },
+    "SecurityGroupArns": {
+      "description": "The ARNs of the security groups that are to use to configure the FSx for Windows file system.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 128,
+        "pattern": ""
+      },
+      "insertionOrder": false
+    },
+    "Subdirectory": {
+      "description": "A subdirectory in the location's path.",
+      "type": "string",
+      "maxLength": 4096,
+      "pattern": ""
+    },
+    "User": {
+      "description": "The user who has the permissions to access files and folders in the FSx for Windows file system.",
+      "type": "string",
+      "maxLength": 104,
+      "pattern": ""
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "LocationArn": {
+      "description": "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
+      "type": "string",
+      "pattern": "",
+      "maxLength": 128
+    },
+    "LocationUri": {
+      "description": "The URL of the FSx for Windows location that was described.",
+      "type": "string",
+      "pattern": "",
+      "maxLength": 4356
+    }
+  },
+  "taggable": true,
+  "additionalProperties": false,
+  "required": [
+    "User",
+    "Password",
+    "SecurityGroupArns",
+    "FsxFilesystemArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/LocationArn",
+    "/properties/LocationUri"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Password",
+    "/properties/Subdirectory",
+    "/properties/FsxFilesystemArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/LocationArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Domain",
+    "/properties/FsxFilesystemArn",
+    "/properties/Password",
+    "/properties/SecurityGroupArns",
+    "/properties/Subdirectory",
+    "/properties/User"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "datasync:CreateLocationFsxWindows",
+        "datasync:DescribeLocationFsxWindows",
+        "datasync:ListTagsForResource",
+        "fsx:DescribeFileSystems",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "datasync:DescribeLocationFsxWindows",
+        "datasync:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "datasync:DescribeLocationFsxWindows",
+        "datasync:ListTagsForResource",
+        "datasync:TagResource",
+        "datasync:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "datasync:DeleteLocation"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "datasync:ListLocations"
+      ]
+    }
+  }
+}
