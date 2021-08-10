@@ -51,7 +51,7 @@
     "Tags": {
       "type": "object",
       "patternProperties": {
-        "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$": {
+        "": {
           "type": "string"
         }
       },

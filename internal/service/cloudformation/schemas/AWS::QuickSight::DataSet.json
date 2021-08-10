@@ -201,7 +201,7 @@
     "FieldFolderMap": {
       "type": "object",
       "patternProperties": {
-        ".+": {
+        "": {
           "$ref": "#/definitions/FieldFolder"
         }
       }
@@ -403,7 +403,7 @@
       "maxProperties": 64,
       "minProperties": 1,
       "patternProperties": {
-        "[0-9a-zA-Z-]*": {
+        "": {
           "$ref": "#/definitions/LogicalTable"
         }
       }
@@ -465,7 +465,7 @@
       "maxProperties": 32,
       "minProperties": 1,
       "patternProperties": {
-        "[0-9a-zA-Z-]*": {
+        "": {
           "$ref": "#/definitions/PhysicalTable"
         }
       }

@@ -59,7 +59,7 @@
         "IPSets": {
           "type": "object",
           "patternProperties": {
-            "^[A-Za-z0-9_]{1,32}$": {
+            "": {
               "$ref": "#/definitions/IPSet"
             }
           },
@@ -68,7 +68,7 @@
         "PortSets": {
           "type": "object",
           "patternProperties": {
-            "^[A-Za-z0-9_]{1,32}$": {
+            "": {
               "$ref": "#/definitions/PortSet"
             }
           },

@@ -117,7 +117,7 @@
         "ResourceTags": {
           "type": "object",
           "patternProperties": {
-            ".{1,128}": {
+            "": {
               "type": "string",
               "maxLength": 256
             }
@@ -140,7 +140,7 @@
       "type": "object",
       "description": "The targets for the experiment.",
       "patternProperties": {
-        ".{1,64}": {
+        "": {
           "$ref": "#/definitions/ExperimentTemplateTarget"
         }
       },
@@ -190,7 +190,7 @@
           "type": "object",
           "description": "The parameters for the action, if applicable.",
           "patternProperties": {
-            ".{1,64}": {
+            "": {
               "$ref": "#/definitions/ExperimentTemplateActionItemParameter"
             }
           },
@@ -200,7 +200,7 @@
           "type": "object",
           "description": "One or more targets for the action.",
           "patternProperties": {
-            ".{1,64}": {
+            "": {
               "$ref": "#/definitions/ExperimentTemplateActionItemTarget"
             }
           },
@@ -218,7 +218,7 @@
       "type": "object",
       "description": "The actions for the experiment.",
       "patternProperties": {
-        "[\\S]{1,64}": {
+        "": {
           "$ref": "#/definitions/ExperimentTemplateAction"
         }
       },
@@ -252,7 +252,7 @@
     "Tags": {
       "type": "object",
       "patternProperties": {
-        ".{1,128}": {
+        "": {
           "type": "string",
           "maxLength": 256
         }

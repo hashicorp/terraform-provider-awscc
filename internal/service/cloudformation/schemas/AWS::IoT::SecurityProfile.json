@@ -298,7 +298,7 @@
       "description": "Specifies the destinations to which alerts are sent.",
       "type": "object",
       "patternProperties": {
-        "[a-zA-Z0-9:_-]+": {
+        "": {
           "$ref": "#/definitions/AlertTarget"
         }
       },

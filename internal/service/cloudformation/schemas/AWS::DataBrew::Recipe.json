@@ -496,7 +496,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^[A-Za-z0-9]{1,128}$": {
+        "": {
           "type": "string"
         }
       }

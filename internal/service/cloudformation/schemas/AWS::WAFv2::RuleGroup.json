@@ -546,7 +546,7 @@
       "description": "Custom response key and body map.",
       "type": "object",
       "patternProperties": {
-        "^[\\w\\-]+$": {
+        "": {
           "$ref": "#/definitions/CustomResponseBody"
         }
       },

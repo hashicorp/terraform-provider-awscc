@@ -47,7 +47,7 @@
             "description": "Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type. ",
             "type": "object",
             "patternProperties": {
-                ".*": {
+                "": {
                     "type": "string",
                     "maxLength": 51200
                 }

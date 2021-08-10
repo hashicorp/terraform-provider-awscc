@@ -690,7 +690,7 @@
           "type": "object",
           "additionalProperties": false,
           "patternProperties": {
-            ".*": {
+            "": {
               "type": "string"
             }
           },

@@ -49,7 +49,7 @@
     "TokenSigningPublicKeys": {
       "type": "object",
       "patternProperties": {
-        "[a-zA-Z0-9:_-]+": {
+        "": {
           "type": "string",
           "maxLength": 5120
         }

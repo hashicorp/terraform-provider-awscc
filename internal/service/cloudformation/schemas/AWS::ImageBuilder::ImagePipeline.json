@@ -57,7 +57,7 @@
             "type": "object",
             "additionalProperties": false,
             "patternProperties": {
-                ".{1,}": {
+                "": {
                     "type": "string"
                 }
             }

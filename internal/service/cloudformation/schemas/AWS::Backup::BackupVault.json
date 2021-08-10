@@ -42,7 +42,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^.{1,128}$": {
+        "": {
           "type": "string"
         }
       }

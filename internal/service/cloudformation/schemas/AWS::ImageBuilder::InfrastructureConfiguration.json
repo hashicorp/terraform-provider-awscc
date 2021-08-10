@@ -59,7 +59,7 @@
             "type": "object",
             "additionalProperties": false,
             "patternProperties": {
-                ".{1,}": {
+                "": {
                     "type": "string"
                 }
             }
@@ -69,7 +69,7 @@
             "type": "object",
             "additionalProperties": false,
             "patternProperties": {
-                ".{1,}": {
+                "": {
                     "type": "string"
                 }
             }

@@ -40,7 +40,7 @@
       "description": "Map of filter criteria.",
       "type": "object",
       "patternProperties": {
-        "\\w": {
+        "": {
           "$ref": "#/definitions/CriterionAdditionalProperties"
         }
       }

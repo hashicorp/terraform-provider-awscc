@@ -89,7 +89,7 @@
       "additionalProperties" : false,
       "description" : "Sets the environment variables in the Docker container",
       "patternProperties" : {
-        "[a-zA-Z_][a-zA-Z0-9_]*": {
+        "": {
           "type": "string",
           "minLength" : 1,
           "maxLength" : 256
