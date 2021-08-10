@@ -857,10 +857,9 @@ resource_schema "aws_location_geofence_collection" {
   cloudformation_type_name = "AWS::Location::GeofenceCollection"
 }
 
-# Resource name is a Go reserved keyword ('map').
-# resource_schema "aws_location_map" {
-#   cloudformation_type_name = "AWS::Location::Map"
-# }
+resource_schema "aws_location_map" {
+  cloudformation_type_name = "AWS::Location::Map"
+}
 
 resource_schema "aws_location_place_index" {
   cloudformation_type_name = "AWS::Location::PlaceIndex"
