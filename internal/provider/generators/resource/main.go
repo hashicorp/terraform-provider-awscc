@@ -113,8 +113,8 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 		return fmt.Errorf("incorrect format for CloudFormation Resource Provider Schema type name: %s", cfTypeName)
 	}
 
-	// e.g. "logGroup"
-	factoryFunctionName := string(bytes.ToLower([]byte(res[:1]))) + res[1:]
+	// e.g. "logGroupResourceType"
+	factoryFunctionName := string(bytes.ToLower([]byte(res[:1]))) + res[1:] + "ResourceType"
 
 	// e.g. "TestAccAWSLogsLogGroup"
 	acceptanceTestFunctionPrefix := fmt.Sprintf("TestAcc%[1]s%[2]s%[3]s", org, svc, res)
