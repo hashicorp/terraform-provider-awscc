@@ -11,11 +11,11 @@
         },
         "Arn": {
             "type": "string",
-            "pattern": "^arn:aws(-(cn|gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"
+            "pattern": ""
         },
         "ProfileVersion": {
             "type": "string",
-            "pattern": "^[0-9a-zA-Z]{10}$"
+            "pattern": ""
         },
         "SignatureValidityPeriod": {
             "type": "object",
@@ -41,7 +41,7 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 127,
-                    "pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+                    "pattern": ""
                 },
                 "Value": {
                     "type": "string",

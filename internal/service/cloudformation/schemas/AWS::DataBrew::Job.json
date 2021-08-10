@@ -422,7 +422,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 128,
-      "pattern": "^[A-Z\\_]+$"
+      "pattern": ""
     },
     "StatisticOverride": {
       "type": "object",

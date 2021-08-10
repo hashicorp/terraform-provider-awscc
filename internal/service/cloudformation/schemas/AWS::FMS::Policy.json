@@ -6,14 +6,14 @@
         "AccountId": {
             "description": "An AWS account ID.",
             "type": "string",
-            "pattern": "^([0-9]*)$",
+            "pattern": "",
             "minLength": 12,
             "maxLength": 12
         },
         "OrganizationalUnitId": {
             "description": "An Organizational Unit ID.",
             "type": "string",
-            "pattern": "^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
+            "pattern": "",
             "minLength": 16,
             "maxLength": 68
         },
@@ -41,13 +41,13 @@
             "properties": {
                 "Key": {
                     "type": "string",
-                    "pattern": "^([^\\s]*)$",
+                    "pattern": "",
                     "minLength": 1,
                     "maxLength": 128
                 },
                 "Value": {
                     "type": "string",
-                    "pattern": "^([^\\s]*)$",
+                    "pattern": "",
                     "maxLength": 256
                 }
             },
@@ -77,14 +77,14 @@
         "ResourceType": {
             "description": "An AWS resource type",
             "type": "string",
-            "pattern": "^([^\\s]*)$",
+            "pattern": "",
             "minLength": 1,
             "maxLength": 128
         },
         "ResourceArn": {
             "description": "A resource ARN.",
             "type": "string",
-            "pattern": "^([^\\s]*)$",
+            "pattern": "",
             "minLength": 1,
             "maxLength": 1024
         }
@@ -101,13 +101,13 @@
         },
         "Id": {
             "type": "string",
-            "pattern": "^[a-z0-9A-Z-]{36}$",
+            "pattern": "",
             "minLength": 36,
             "maxLength": 36
         },
         "PolicyName": {
             "type": "string",
-            "pattern": "^([a-zA-Z0-9_.:/=+\\-@]+)$",
+            "pattern": "",
             "minLength": 1,
             "maxLength": 1024
         },

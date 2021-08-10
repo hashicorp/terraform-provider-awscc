@@ -7,7 +7,7 @@
       "type": "string",
       "minLength": 0,
       "maxLength": 256,
-      "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*"
+      "pattern": ""
     },
     "AccessControlAttributeValueSourceList": {
       "type": "array",
@@ -33,7 +33,7 @@
       "properties": {
         "Key": {
           "type": "string",
-          "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+",
+          "pattern": "",
           "minLength": 1,
           "maxLength": 128
         },
@@ -59,7 +59,7 @@
     "InstanceArn": {
       "description": "The ARN of the AWS SSO instance under which the operation will be executed.",
       "type": "string",
-      "pattern": "arn:aws:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
+      "pattern": "",
       "minLength": 10,
       "maxLength": 1224
     },

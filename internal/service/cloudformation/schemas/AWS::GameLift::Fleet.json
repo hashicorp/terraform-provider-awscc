@@ -65,7 +65,7 @@
         "IpRange": {
           "description": "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
           "type": "string",
-          "pattern": "(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$)",
+          "pattern": "",
           "additionalProperties": false
         },
         "Protocol": {
@@ -97,7 +97,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 64,
-      "pattern": "^[a-z]+(-([a-z]+|\\d))*",
+      "pattern": "",
       "additionalProperties": false
     },
     "LocationConfiguration": {
@@ -180,7 +180,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 1024,
-          "pattern": "^([Cc]:\\\\game\\S+|/local/game/\\S+)",
+          "pattern": "",
           "additionalProperties": false
         },
         "Parameters": {
@@ -229,7 +229,7 @@
     "EC2InstanceType": {
       "description": "The name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.",
       "type": "string",
-      "pattern": "^.*..*$",
+      "pattern": "",
       "additionalProperties": false
     },
     "FleetType": {
@@ -245,7 +245,7 @@
       "description": "A unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, and daemons (background processes). Create a role or look up a role's ARN from the IAM dashboard in the AWS Management Console.",
       "type": "string",
       "minLength": 1,
-      "pattern": "^arn:aws(-.*)?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+      "pattern": "",
       "additionalProperties": false
     },
     "Locations": {
@@ -307,7 +307,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "pattern": "^[0-9]{12}$",
+      "pattern": "",
       "additionalProperties": false
     },
     "PeerVpcId": {
@@ -315,7 +315,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "pattern": "^vpc-\\S+",
+      "pattern": "",
       "additionalProperties": false
     },
     "ResourceCreationLimitPolicy": {
@@ -326,19 +326,19 @@
     "FleetId": {
       "description": "Unique fleet ID",
       "type": "string",
-      "pattern": "^fleet-\\S+",
+      "pattern": "",
       "additionalProperties": false
     },
     "BuildId": {
       "description": "A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.",
       "type": "string",
-      "pattern": "^build-\\S+|^arn:.*:build\\/build-\\S+",
+      "pattern": "",
       "additionalProperties": false
     },
     "ScriptId": {
       "description": "A unique identifier for a Realtime script to be deployed on a new Realtime Servers fleet. The script must have been successfully uploaded to Amazon GameLift. This fleet setting cannot be changed once the fleet is created.\n\nNote: It is not currently possible to use the !Ref command to reference a script created with a CloudFormation template for the fleet property ScriptId. Instead, use Fn::GetAtt Script.Arn or Fn::GetAtt Script.Id to retrieve either of these properties as input for ScriptId. Alternatively, enter a ScriptId string manually.",
       "type": "string",
-      "pattern": "^script-\\S+|^arn:.*:script\\/script-\\S+",
+      "pattern": "",
       "additionalProperties": false
     },
     "RuntimeConfiguration": {

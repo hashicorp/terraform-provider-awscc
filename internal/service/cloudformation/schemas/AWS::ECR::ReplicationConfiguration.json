@@ -61,12 +61,12 @@
         "RegistryId": {
             "type": "string",
             "description": "The account ID of the destination registry to replicate to.",
-            "pattern": "^[0-9]{12}$"
+            "pattern": ""
         },
         "Region": {
             "description": "A Region to replicate to.",
             "type": "string",
-            "pattern": "[0-9a-z-]{2,25}"
+            "pattern": ""
         }
     },
     "properties": {

@@ -5,7 +5,7 @@
   "definitions": {
     "Arn": {
       "type": "string",
-      "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"
+      "pattern": ""
     },
     "KinesisConfiguration": {
       "type": "object",

@@ -14,13 +14,13 @@
           "enum": [
             "SIMPLE_PATTERN"
           ],
-          "pattern": "^[A-Z0-9_]+$",
+          "pattern": "",
           "maxLength": 128
         },
         "Value": {
           "description": "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
           "type": "string",
-          "pattern": "^[^\\x00]+$",
+          "pattern": "",
           "maxLength": 409600
         }
       }
@@ -33,14 +33,14 @@
         "Key": {
           "type": "string",
           "description": "The key for an AWS resource tag.",
-          "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
+          "pattern": "",
           "maxLength": 256,
           "minLength": 1
         },
         "Value": {
           "type": "string",
           "description": "The value for an AWS resource tag.",
-          "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
+          "pattern": "",
           "maxLength": 256,
           "minLength": 1
         }
@@ -59,7 +59,7 @@
           "description": "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
           "type": "string",
           "maxLength": 256,
-          "pattern": "^[a-zA-Z0-9\\ \\_\\*\\?\\,\\|\\^\\-\\/\\#\\s\\(\\)\\+]*$"
+          "pattern": ""
         }
       },
       "required": [
@@ -195,7 +195,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "^arn:aws[\\-a-z]{0,}:ec2:[a-z\\-0-9]*:[0-9]{12}:network-interface/eni-[0-9a-f]+$"
+        "pattern": ""
       },
       "maxItems": 128,
       "insertionOrder": false
@@ -205,7 +205,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "^arn:aws[\\-a-z]{0,}:ec2:[a-z\\-0-9]*:[0-9]{12}:network-interface/eni-[0-9a-f]+$"
+        "pattern": ""
       },
       "maxItems": 128,
       "insertionOrder": false
@@ -235,20 +235,20 @@
       "description": "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
       "type": "string",
       "maxLength": 562,
-      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)(:\\*)?$"
+      "pattern": ""
     },
     "DestinationLocationArn": {
       "description": "The ARN of an AWS storage resource's location.",
       "type": "string",
       "maxLength": 128,
-      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$"
+      "pattern": ""
     },
     "Name": {
       "description": "The name of a task. This value is a text reference that is used to identify the task in the console.",
       "type": "string",
       "maxLength": 256,
       "minLength": 1,
-      "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$"
+      "pattern": ""
     },
     "Options": {
       "$ref": "#/definitions/Options"
@@ -260,13 +260,13 @@
       "description": "The ARN of the source location for the task.",
       "type": "string",
       "maxLength": 128,
-      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$"
+      "pattern": ""
     },
     "TaskArn": {
       "description": "The ARN of the task.",
       "type": "string",
       "maxLength": 128,
-      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$"
+      "pattern": ""
     },
     "ErrorCode": {
       "description": "Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.",

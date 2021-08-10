@@ -9,12 +9,12 @@
       "description": "The name or the Id of the Application.",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": "\\w+|[a-z0-9]{12}"
+      "pattern": ""
     },
     "Resource": {
       "type": "string",
       "description": "The name or the Id of the Resource.",
-      "pattern": "\\w+|arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}"
+      "pattern": ""
     },
     "ResourceType": {
       "type": "string",
@@ -25,11 +25,11 @@
     },
     "ApplicationArn": {
       "type": "string",
-      "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+"
+      "pattern": ""
     },
     "ResourceArn": {
       "type": "string",
-      "pattern": "arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}"
+      "pattern": ""
     },
     "Id": {
       "type": "string"

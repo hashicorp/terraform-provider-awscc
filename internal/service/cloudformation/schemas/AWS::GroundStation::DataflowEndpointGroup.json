@@ -20,7 +20,7 @@
             "properties": {
                 "Name": {
                     "type": "string",
-                    "pattern": "^[ a-zA-Z0-9_:-]{1,256}$"
+                    "pattern": ""
                 },
                 "Address": {
                     "$ref": "#/definitions/SocketAddress"
@@ -69,11 +69,11 @@
             "properties": {
                 "Key": {
                     "type": "string",
-                    "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$"
+                    "pattern": ""
                 },
                 "Value": {
                     "type": "string",
-                    "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$"
+                    "pattern": ""
                 }
             },
             "additionalProperties": false

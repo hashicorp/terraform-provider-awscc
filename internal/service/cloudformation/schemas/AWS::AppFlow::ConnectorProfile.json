@@ -6,19 +6,19 @@
         "ConnectorProfileArn": {
             "description": "Unique identifier for connector profile resources",
             "type": "string",
-            "pattern": "arn:aws:kms:.*:[0-9]+:.*",
+            "pattern": "",
             "maxLength": 512
         },
         "ConnectorProfileName": {
             "description": "The maximum number of items to retrieve in a single batch.",
             "type": "string",
-            "pattern": "[\\w/!@#+=.-]+",
+            "pattern": "",
             "maxLength": 256
         },
         "KMSArn": {
             "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
             "type": "string",
-            "pattern": "arn:aws:kms:.*:[0-9]+:.*",
+            "pattern": "",
             "maxLength": 2048,
             "minLength": 20
         },
@@ -41,7 +41,7 @@
         "CredentialsArn": {
             "description": "A unique Arn for Connector-Profile resource",
             "type": "string",
-            "pattern": "arn:aws:.*:.*:[0-9]+:.*",
+            "pattern": "",
             "maxLength": 512
         }
     },
@@ -634,52 +634,52 @@
         },
         "ClientId": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 512
         },
         "ClientSecret": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 512
         },
         "InstanceUrl": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 256
         },
         "AccessToken": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 512
         },
         "ApiKey": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 256
         },
         "ApiSecretKey": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 256
         },
         "ApiToken": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 256
         },
         "ApplicationKey": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 512
         },
         "AuthCode": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 512
         },
         "BucketName": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 63,
             "minLength": 3
         },
@@ -689,67 +689,67 @@
         },
         "Key": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 512
         },
         "DatabaseUrl": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 512
         },
         "RoleArn": {
             "type": "string",
-            "pattern": "arn:aws:iam:.*:[0-9]+:.*",
+            "pattern": "",
             "maxLength": 512
         },
         "Warehouse": {
             "type": "string",
-            "pattern": "[\\s\\w/!@#+=.-]*",
+            "pattern": "",
             "maxLength": 512
         },
         "Stage": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 16
         },
         "PrivateLinkServiceName": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 512
         },
         "AccountName": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 512
         },
         "RefreshToken": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 512
         },
         "Region": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 64
         },
         "SecretKey": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 256
         },
         "AccessKeyId": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 256
         },
         "Username": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 512
         },
         "Password": {
             "type": "string",
-            "pattern": "\\S+",
+            "pattern": "",
             "maxLength": 512
         },
         "ConnectorOAuthRequest": {
@@ -767,7 +767,7 @@
         },
         "ClientCredentialsArn": {
             "type": "string",
-            "pattern": "arn:aws:secretsmanager:.*:[0-9]+:.*",
+            "pattern": "",
             "maxLength": 2048
         }
     },

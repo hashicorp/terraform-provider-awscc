@@ -20,11 +20,11 @@
             "properties": {
                 "Key": {
                     "type": "string",
-                    "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$"
+                    "pattern": ""
                 },
                 "Value": {
                     "type": "string",
-                    "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$"
+                    "pattern": ""
                 }
             },
             "additionalProperties": false
@@ -34,7 +34,7 @@
         "Name": {
             "description": "A name used to identify a mission profile.",
             "type": "string",
-            "pattern": "^[ a-zA-Z0-9_:-]{1,256}$"
+            "pattern": ""
         },
         "ContactPrePassDurationSeconds": {
             "description": "Pre-pass time needed before the contact.",

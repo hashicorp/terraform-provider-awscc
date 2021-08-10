@@ -8,14 +8,14 @@
       "description": "The name of the Pipeline.",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+      "pattern": ""
     },
     "PipelineDisplayName": {
       "type": "string",
       "description": "The display name of the Pipeline.",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+      "pattern": ""
     },
     "PipelineDescription": {
       "type": "string",
@@ -52,7 +52,7 @@
       "description": "Role Arn",
       "minLength": 20,
       "maxLength": 2048,
-      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+      "pattern": ""
     },
     "Tags": {
       "type": "array",

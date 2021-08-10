@@ -6,7 +6,7 @@
         "Id": {
             "description": "Event Source Mapping Identifier UUID.",
             "type": "string",
-            "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
+            "pattern": "",
             "minLength": 36,
             "maxLength": 36
         },
@@ -31,14 +31,14 @@
         "EventSourceArn": {
             "description": "The Amazon Resource Name (ARN) of the event source.",
             "type": "string",
-            "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
+            "pattern": "",
             "minLength": 12,
             "maxLength": 1024
         },
         "FunctionName": {
             "description": "The name of the Lambda function.",
             "type": "string",
-            "pattern": "(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?",
+            "pattern": "",
             "minLength": 1,
             "maxLength": 140
         },
@@ -69,7 +69,7 @@
         "StartingPosition": {
             "description": "The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources.",
             "type": "string",
-            "pattern": "(LATEST|TRIM_HORIZON)+",
+            "pattern": "",
             "minLength": 6,
             "maxLength": 12
         },
@@ -83,7 +83,7 @@
             "uniqueItems": true,
             "items": {
                 "type": "string",
-                "pattern": "^[^.]([a-zA-Z0-9\\-_.]+)",
+                "pattern": "",
                 "minLength": 1,
                 "maxLength": 249
             },
@@ -96,7 +96,7 @@
             "uniqueItems": true,
             "items": {
                 "type": "string",
-                "pattern": "[\\s\\S]*",
+                "pattern": "",
                 "minLength": 1,
                 "maxLength": 1000
             },
@@ -157,7 +157,7 @@
                 "Destination": {
                     "description": "The Amazon Resource Name (ARN) of the destination resource.",
                     "type": "string",
-                    "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
+                    "pattern": "",
                     "minLength": 12,
                     "maxLength": 1024
                 }
@@ -183,7 +183,7 @@
                 "URI" : {
                     "description": "The URI for the source access configuration resource.",
                     "type": "string",
-                    "pattern": "[a-zA-Z0-9-\\/*:_+=.@-]*",
+                    "pattern": "",
                     "minLength": 1,
                     "maxLength": 200
                 }
@@ -212,7 +212,7 @@
                     "items": {
                         "type": "string",
                         "description": "The URL of a Kafka server.",
-                        "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}",
+                        "pattern": "",
                         "minLength": 1,
                         "maxLength": 300
                     },

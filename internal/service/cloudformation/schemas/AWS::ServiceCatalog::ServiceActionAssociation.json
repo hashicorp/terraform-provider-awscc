@@ -5,19 +5,19 @@
   "properties": {
     "ProductId": {
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{1,99}\\Z",
+      "pattern": "",
       "minLength": 1,
       "maxLength": 100
     },
     "ProvisioningArtifactId": {
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{1,99}\\Z",
+      "pattern": "",
       "minLength": 1,
       "maxLength": 100
     },
     "ServiceActionId": {
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{1,99}\\Z",
+      "pattern": "",
       "minLength": 1,
       "maxLength": 100
     }

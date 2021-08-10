@@ -18,7 +18,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 128,
-          "pattern": "^(?!aws:.*)[a-zA-Z0-9\\s\\:\\_\\.\\/\\=\\+\\-]+$"
+          "pattern": ""
         },
         "Value": {
           "description": "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
@@ -50,15 +50,15 @@
     "Account": {
       "description": "AWS account that you want to create stack instances in the specified Region(s) for.",
       "type": "string",
-      "pattern": "^[0-9]{12}$"
+      "pattern": ""
     },
     "Region": {
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-]{1,128}$"
+      "pattern": ""
     },
     "OrganizationalUnitId": {
       "type": "string",
-      "pattern": "^(ou-[a-z0-9]{4,32}-[a-z0-9]{8,32}|r-[a-z0-9]{4,32})$"
+      "pattern": ""
     },
     "Capability": {
       "type": "string",
@@ -191,7 +191,7 @@
     "StackSetName": {
       "description": "The name to associate with the stack set. The name must be unique in the Region where you create your stack set.",
       "type": "string",
-      "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,127}$",
+      "pattern": "",
       "maxLength": 128
     },
     "StackSetId": {

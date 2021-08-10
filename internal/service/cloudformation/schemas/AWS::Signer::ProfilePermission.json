@@ -8,7 +8,7 @@
         },
         "ProfileVersion": {
             "type": "string",
-            "pattern": "^[0-9a-zA-Z]{10}$"
+            "pattern": ""
         },
         "Action": {
             "type": "string"

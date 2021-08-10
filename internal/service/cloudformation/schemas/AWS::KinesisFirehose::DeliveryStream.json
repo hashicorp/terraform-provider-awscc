@@ -13,7 +13,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 64,
-      "pattern": "[a-zA-Z0-9._-]+"
+      "pattern": ""
     },
     "DeliveryStreamType": {
       "type": "string",
@@ -61,7 +61,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 512,
-          "pattern": "arn:.*"
+          "pattern": ""
         },
         "KeyType": {
           "type": "string",
@@ -132,7 +132,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 512,
-          "pattern": "arn:.*"
+          "pattern": ""
         },
         "EndpointConfiguration": {
           "$ref": "#/definitions/HttpEndpointConfiguration"
@@ -172,13 +172,13 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 512,
-          "pattern": "arn:.*"
+          "pattern": ""
         },
         "RoleARN": {
           "type": "string",
           "minLength": 1,
           "maxLength": 512,
-          "pattern": "arn:.*"
+          "pattern": ""
         }
       },
       "required": [
@@ -194,7 +194,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 512,
-          "pattern": "arn:.*"
+          "pattern": ""
         },
         "SubnetIds": {
           "type": "array",
@@ -233,7 +233,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 2048,
-          "pattern": "arn:.*"
+          "pattern": ""
         },
         "BufferingHints": {
           "$ref": "#/definitions/BufferingHints"
@@ -274,7 +274,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 512,
-          "pattern": "arn:.*"
+          "pattern": ""
         },
         "S3BackupConfiguration": {
           "$ref": "#/definitions/S3DestinationConfiguration"
@@ -300,7 +300,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 2048,
-          "pattern": "arn:.*"
+          "pattern": ""
         },
         "BufferingHints": {
           "$ref": "#/definitions/BufferingHints"
@@ -335,7 +335,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 512,
-          "pattern": "arn:.*"
+          "pattern": ""
         }
       },
       "required": [
@@ -373,7 +373,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 512,
-          "pattern": "arn:.*"
+          "pattern": ""
         },
         "S3BackupConfiguration": {
           "$ref": "#/definitions/S3DestinationConfiguration"
@@ -417,7 +417,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 512,
-          "pattern": "arn:.*"
+          "pattern": ""
         },
         "IndexName": {
           "type": "string",
@@ -444,7 +444,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 512,
-          "pattern": "arn:.*"
+          "pattern": ""
         },
         "S3BackupMode": {
           "type": "string",
@@ -460,7 +460,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 512,
-          "pattern": "https:.*"
+          "pattern": ""
         },
         "TypeName": {
           "type": "string",
@@ -694,7 +694,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 512,
-          "pattern": "arn:.*"
+          "pattern": ""
         },
         "TableName": {
           "type": "string"
@@ -912,13 +912,13 @@
       "properties": {
         "Key": {
           "type": "string",
-          "pattern": "^(?!aws:)[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*$",
+          "pattern": "",
           "minLength": 1,
           "maxLength": 128
         },
         "Value": {
           "type": "string",
-          "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*$",
+          "pattern": "",
           "minLength": 0,
           "maxLength": 256
         }

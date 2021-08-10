@@ -6,7 +6,7 @@
         "Name": {
             "minLength": 1,
             "maxLength": 128,
-            "pattern": "[\\w._-]+",
+            "pattern": "",
             "type": "string"
         },
         "SamlMetadataDocument": {

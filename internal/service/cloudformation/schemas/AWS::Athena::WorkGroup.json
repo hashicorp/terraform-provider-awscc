@@ -193,7 +193,7 @@
     "properties": {
         "Name": {
             "description": "The workGroup name.",
-            "pattern": "[a-zA-Z0-9._-]{1,128}",
+            "pattern": "",
             "type": "string",
             "minLength": 1,
             "maxLength": 128

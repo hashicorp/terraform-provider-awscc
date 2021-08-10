@@ -8,7 +8,7 @@
       "properties": {
         "Key": {
           "type": "string",
-          "pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$",
+          "pattern": "",
           "minLength": 1,
           "maxLength": 128
         },
@@ -29,7 +29,7 @@
     "DomainName": {
       "description": "The unique name of the domain.",
       "type": "string",
-      "pattern": "^[a-zA-Z0-9_-]+$",
+      "pattern": "",
       "minLength": 1,
       "maxLength": 64
     },

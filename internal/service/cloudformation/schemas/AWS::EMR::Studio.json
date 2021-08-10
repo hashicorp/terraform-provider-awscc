@@ -6,11 +6,11 @@
         "SubnetId": {
             "description": "Identifier of a subnet",
             "type": "string",
-            "pattern": "^(subnet-[a-f0-9]{13})|(subnet-[a-f0-9]{8})\\Z"
+            "pattern": ""
         },
         "Arn": {
             "type": "string",
-            "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"
+            "pattern": ""
         },
         "Tags": {
             "type": "array",
@@ -30,14 +30,14 @@
                     "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
                     "minLength": 1,
                     "maxLength": 128,
-                    "pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+                    "pattern": ""
                 },
                 "Value": {
                     "type": "string",
                     "description": "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
                     "minLength": 0,
                     "maxLength": 256,
-                    "pattern": "[a-zA-Z+-=._:/]+$"
+                    "pattern": ""
                 }
             },
             "required": [
@@ -64,7 +64,7 @@
             "type": "string",
             "minLength": 6,
             "maxLength": 10280,
-            "pattern": "^s3://.*"
+            "pattern": ""
         },
         "Description": {
             "description": "A detailed description of the Studio.",
@@ -77,14 +77,14 @@
             "type": "string",
             "minLength": 4,
             "maxLength": 256,
-            "pattern": "^sg-[a-zA-Z0-9\\-._]+$"
+            "pattern": ""
         },
         "Name": {
             "description": "A descriptive name for the Amazon EMR Studio.",
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "pattern": "[a-zA-Z0-9_-]+"
+            "pattern": ""
         },
         "ServiceRole": {
             "description": "The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other AWS services.",
@@ -93,7 +93,7 @@
         "StudioId": {
             "description": "The ID of the EMR Studio.",
             "type": "string",
-            "pattern": "^es-[0-9A-Z]+",
+            "pattern": "",
             "minLength": 4,
             "maxLength": 256
         },
@@ -112,7 +112,7 @@
         "Url": {
             "description": "The unique Studio access URL.",
             "type": "string",
-            "pattern": "^https://[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])(:[0-9]*)*([?/#].*)?$",
+            "pattern": "",
             "maxLength": 4096
         },
         "UserRole": {
@@ -122,12 +122,12 @@
         "VpcId": {
             "description": "The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the Studio.",
             "type": "string",
-            "pattern": "^(vpc-[0-9a-f]{8}|vpc-[0-9a-f]{17})$"
+            "pattern": ""
         },
         "WorkspaceSecurityGroupId": {
             "description": "The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by VpcId.",
             "type": "string",
-            "pattern": "^sg-[a-zA-Z0-9\\-._]+$"
+            "pattern": ""
         }
     },
     "additionalProperties": false,

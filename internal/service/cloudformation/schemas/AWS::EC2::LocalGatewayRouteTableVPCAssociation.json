@@ -18,13 +18,13 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 127,
-                    "pattern": "^(?!aws:.*)"
+                    "pattern": ""
                 },
                 "Value": {
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 255,
-                    "pattern": "^(?!aws:.*)"
+                    "pattern": ""
                 }
             },
             "additionalProperties": false

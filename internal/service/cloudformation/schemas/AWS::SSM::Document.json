@@ -29,7 +29,7 @@
                 "Name": {
                     "description": "The name of the document attachment file.",
                     "type": "string",
-                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+                    "pattern": "",
                     "minLength": 1,
                     "maxLength": 128
                 }
@@ -42,14 +42,14 @@
                 "Key": {
                     "description": "The name of the tag.",
                     "type": "string",
-                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+                    "pattern": "",
                     "minLength": 1,
                     "maxLength": 128
                 },
                 "Value": {
                     "description": "The value of the tag.",
                     "type": "string",
-                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+                    "pattern": "",
                     "minLength": 1,
                     "maxLength": 256
                 }
@@ -62,13 +62,13 @@
                 "Name": {
                     "description": "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
                     "type": "string",
-                    "pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
+                    "pattern": "",
                     "maxLength": 200
                 },
                 "Version": {
                     "description": "The document version required by the current document.",
                     "type": "string",
-                    "pattern": "([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)",
+                    "pattern": "",
                     "maxLength": 8
                 }
             },
@@ -95,12 +95,12 @@
         "Name": {
             "description": "A name for the Systems Manager document.",
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$"
+            "pattern": ""
         },
         "VersionName": {
             "description": "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_\\-.]{1,128}$"
+            "pattern": ""
         },
         "DocumentType": {
             "description": "The type of document to create.",
@@ -134,7 +134,7 @@
         "TargetType": {
             "description": "Specify a target type to define the kinds of resources the document can run on.",
             "type": "string",
-            "pattern": "^\\/[\\w\\.\\-\\:\\/]*$"
+            "pattern": ""
         },
         "Tags": {
             "description": "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",

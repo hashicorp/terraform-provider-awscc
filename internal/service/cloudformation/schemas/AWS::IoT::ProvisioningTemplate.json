@@ -37,7 +37,7 @@
     },
     "TemplateName": {
       "type": "string",
-      "pattern": "^[0-9A-Za-z_-]+$",
+      "pattern": "",
       "minLength": 1,
       "maxLength": 36
     },

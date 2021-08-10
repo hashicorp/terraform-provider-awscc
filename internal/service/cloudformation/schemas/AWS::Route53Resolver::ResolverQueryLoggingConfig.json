@@ -37,7 +37,7 @@
         "Name": {
             "description": "ResolverQueryLogConfigName",
             "type": "string",
-            "pattern": "(?!^[0-9]+$)([a-zA-Z0-9\\-_' ']+)",
+            "pattern": "",
             "minLength": 1,
             "maxLength": 64
         },

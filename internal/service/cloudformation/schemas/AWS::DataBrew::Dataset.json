@@ -303,14 +303,14 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 6,
-          "pattern": "^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$"
+          "pattern": ""
         },
         "LocaleCode": {
           "description": "Locale code for a date parameter",
           "type": "string",
           "minLength": 2,
           "maxLength": 100,
-          "pattern": "^[A-Za-z0-9_\\.#@\\-]+$"
+          "pattern": ""
         }
       },
       "additionalProperties": false,
@@ -324,7 +324,7 @@
           "type": "string",
           "minLength": 4,
           "maxLength": 1024,
-          "pattern": "^[&lt;&gt;0-9A-Za-z_:)(!= ]+$"
+          "pattern": ""
         },
         "ValuesMap": {
           "type": "array",
@@ -346,7 +346,7 @@
           "type": "string",
           "minLength": 2,
           "maxLength": 128,
-          "pattern": "^:[A-Za-z0-9_]+$"
+          "pattern": ""
         },
         "Value": {
           "type": "string",

@@ -13,7 +13,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
+            "pattern": "",
             "maxLength": 128
           },
           "minItems": 1,
@@ -23,7 +23,7 @@
         "SubnetArn": {
           "description": "The ARN of the subnet that DataSync uses to access the target EFS file system.",
           "type": "string",
-          "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
+          "pattern": "",
           "maxLength": 128
         }
       },
@@ -40,14 +40,14 @@
         "Key": {
           "type": "string",
           "description": "The key for an AWS resource tag.",
-          "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
+          "pattern": "",
           "maxLength": 256,
           "minLength": 1
         },
         "Value": {
           "type": "string",
           "description": "The value for an AWS resource tag.",
-          "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
+          "pattern": "",
           "maxLength": 256,
           "minLength": 1
         }
@@ -65,14 +65,14 @@
     "EfsFilesystemArn": {
       "description": "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
       "type": "string",
-      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
+      "pattern": "",
       "maxLength": 128
     },
     "Subdirectory": {
       "description": "A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.",
       "type": "string",
       "maxLength": 4096,
-      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
+      "pattern": ""
     },
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource.",
@@ -87,13 +87,13 @@
     "LocationArn": {
       "description": "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
       "type": "string",
-      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+      "pattern": "",
       "maxLength": 128
     },
     "LocationUri": {
       "description": "The URL of the EFS location that was described.",
       "type": "string",
-      "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9.\\-/]+$",
+      "pattern": "",
       "maxLength": 4356
     }
   },

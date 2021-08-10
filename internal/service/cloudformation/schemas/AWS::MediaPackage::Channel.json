@@ -10,7 +10,7 @@
     "Id": {
       "description": "The ID of the Channel.",
       "type": "string",
-      "pattern": "\\A[0-9a-zA-Z-_]+\\Z",
+      "pattern": "",
       "minLength": 1,
       "maxLength": 256
     },
@@ -100,7 +100,7 @@
         "LogGroupName": {
           "description": "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
           "type": "string",
-          "pattern": "\\A^(\\/aws\\/MediaPackage\\/)[a-zA-Z0-9_-]+\\Z",
+          "pattern": "",
           "minLength": 1,
           "maxLength": 256
         }

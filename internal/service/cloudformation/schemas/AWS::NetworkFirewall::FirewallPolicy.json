@@ -7,7 +7,7 @@
     "ResourceArn": {
       "description": "A resource ARN.",
       "type": "string",
-      "pattern": "^(arn:aws.*)$",
+      "pattern": "",
       "minLength": 1,
       "maxLength": 256
     },
@@ -18,13 +18,13 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 128,
-          "pattern": "^.*$"
+          "pattern": ""
         },
         "Value": {
           "type": "string",
           "minLength": 0,
           "maxLength": 255,
-          "pattern": "^.*$"
+          "pattern": ""
         }
       },
       "required": [
@@ -90,7 +90,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 128,
-          "pattern": "^[a-zA-Z0-9]+$"
+          "pattern": ""
         },
         "ActionDefinition": {
           "$ref": "#/definitions/ActionDefinition"
@@ -135,7 +135,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 128,
-          "pattern": "^[a-zA-Z0-9-_ ]+$"
+          "pattern": ""
         }
       },
       "required": [
@@ -179,7 +179,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 128,
-      "pattern": "^[a-zA-Z0-9-]+$"
+      "pattern": ""
     },
     "FirewallPolicyArn": {
       "$ref": "#/definitions/ResourceArn"
@@ -191,13 +191,13 @@
       "type": "string",
       "minLength": 36,
       "maxLength": 36,
-      "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$"
+      "pattern": ""
     },
     "Description": {
       "type": "string",
       "minLength": 1,
       "maxLength": 512,
-      "pattern": "^.*$"
+      "pattern": ""
     },
     "Tags": {
       "type": "array",

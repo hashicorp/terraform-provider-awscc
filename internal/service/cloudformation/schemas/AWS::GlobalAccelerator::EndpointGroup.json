@@ -55,7 +55,7 @@
     "ListenerArn": {
       "description": "The Amazon Resource Name (ARN) of the listener",
       "type": "string",
-      "pattern": "^arn:aws:(\\w+)::(\\d{12}):(accelerator)/([0-9a-f-]+)/listener/([0-9a-f-]+)$"
+      "pattern": ""
     },
     "EndpointGroupRegion": {
       "description": "The name of the AWS Region where the endpoint group is located",

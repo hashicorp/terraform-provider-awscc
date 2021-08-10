@@ -9,7 +9,7 @@
     },
     "UserId": {
       "description": "The ID of the user.",
-      "pattern": "[a-z][a-z0-9\\\\-]*",
+      "pattern": "",
       "type": "string"
     },
     "UserName": {

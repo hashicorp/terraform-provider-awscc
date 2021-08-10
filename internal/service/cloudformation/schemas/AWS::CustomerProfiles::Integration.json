@@ -8,7 +8,7 @@
       "properties": {
         "Key": {
           "type": "string",
-          "pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$",
+          "pattern": "",
           "minLength": 1,
           "maxLength": 128
         },
@@ -27,7 +27,7 @@
     "Object": {
       "type": "string",
       "maxLength": 512,
-      "pattern": "\\S+",
+      "pattern": "",
       "additionalProperties": false
     },
     "MarketoSourceProperties": {
@@ -49,12 +49,12 @@
           "type": "string",
           "minLength": 3,
           "maxLength": 63,
-          "pattern": "\\S+"
+          "pattern": ""
         },
         "BucketPrefix": {
           "type": "string",
           "maxLength": 512,
-          "pattern": ".*"
+          "pattern": ""
         }
       },
       "required": [
@@ -154,7 +154,7 @@
         "ConnectorProfileName": {
           "type": "string",
           "maxLength": 256,
-          "pattern": "[\\w/!@#+=.-]+"
+          "pattern": ""
         },
         "IncrementalPullConfig": {
           "$ref": "#/definitions/IncrementalPullConfig"
@@ -355,7 +355,7 @@
     "DestinationField": {
       "type": "string",
       "maxLength": 256,
-      "pattern": ".*"
+      "pattern": ""
     },
     "TaskType": {
       "type": "string",
@@ -378,7 +378,7 @@
         "Property": {
           "type": "string",
           "maxLength": 2048,
-          "pattern": ".+"
+          "pattern": ""
         }
       },
       "required": [
@@ -398,7 +398,7 @@
           "items": {
             "type": "string",
             "maxLength": 2048,
-            "pattern": ".*"
+            "pattern": ""
           }
         },
         "DestinationField": {
@@ -437,7 +437,7 @@
         "ScheduleExpression": {
           "type": "string",
           "maxLength": 256,
-          "pattern": ".*"
+          "pattern": ""
         },
         "DataPullMode": {
           "type": "string",
@@ -455,7 +455,7 @@
         "Timezone": {
           "type": "string",
           "maxLength": 256,
-          "pattern": ".*"
+          "pattern": ""
         },
         "ScheduleOffset": {
           "type": "integer",
@@ -500,17 +500,17 @@
       "properties": {
         "FlowName": {
           "type": "string",
-          "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
+          "pattern": "",
           "maxLength": 256
         },
         "Description": {
           "type": "string",
-          "pattern": "[\\w!@#\\-.?,\\s]*",
+          "pattern": "",
           "maxLength": 2048
         },
         "KmsArn": {
           "type": "string",
-          "pattern": "arn:aws:kms:.*:[0-9]+:.*",
+          "pattern": "",
           "minLength": 20,
           "maxLength": 2048
         },
@@ -541,7 +541,7 @@
     "DomainName": {
       "description": "The unique name of the domain.",
       "type": "string",
-      "pattern": "^[a-zA-Z0-9_-]+$",
+      "pattern": "",
       "minLength": 1,
       "maxLength": 64
     },
@@ -557,7 +557,7 @@
     "ObjectTypeName": {
       "description": "The name of the ObjectType defined for the 3rd party data in Profile Service",
       "type": "string",
-      "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
+      "pattern": "",
       "minLength": 1,
       "maxLength": 255
     },

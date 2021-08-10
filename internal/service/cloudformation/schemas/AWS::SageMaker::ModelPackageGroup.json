@@ -50,13 +50,13 @@
                     "description" : "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
                     "minLength" : 1,
                     "maxLength" : 128,
-                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+                    "pattern": ""
                 },
                 "Value" : {
                     "type" : "string",
                     "description" : "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
                     "maxLength" : 256,
-                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+                    "pattern": ""
                 }
             },
             "required" : [ "Key", "Value" ],
@@ -65,13 +65,13 @@
         "ModelPackageGroupDescription": {
             "type" : "string",
             "description" : "The description of the model package group.",
-            "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
+            "pattern": "",
             "maxLength" : 1024
         },
         "ModelPackageGroupName": {
             "type" : "string",
             "description" : "The name of the model package group.",
-            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+            "pattern": "",
             "maxLength" : 63
         },
         "ModelPackageGroupArn": {
@@ -79,7 +79,7 @@
             "type" : "string",
             "minLength": 1,
             "maxLength": 256,
-            "pattern": "arn:.*"
+            "pattern": ""
         }
     },
     "required": [

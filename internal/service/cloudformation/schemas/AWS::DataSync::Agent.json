@@ -11,14 +11,14 @@
         "Key": {
           "type": "string",
           "description": "The key for an AWS resource tag.",
-          "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
+          "pattern": "",
           "maxLength": 256,
           "minLength": 1
         },
         "Value": {
           "type": "string",
           "description": "The value for an AWS resource tag.",
-          "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
+          "pattern": "",
           "maxLength": 256,
           "minLength": 1
         }
@@ -33,14 +33,14 @@
     "AgentName": {
       "description": "The name configured for the agent. Text reference used to identify the agent in the console.",
       "type": "string",
-      "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
+      "pattern": "",
       "maxLength": 256,
       "minLength": 1
     },
     "ActivationKey": {
       "description": "Activation key of the Agent.",
       "type": "string",
-      "pattern": "[A-Z0-9]{5}(-[A-Z0-9]{5}){4}",
+      "pattern": "",
       "maxLength": 29
     },
     "SecurityGroupArns": {
@@ -49,7 +49,7 @@
       "insertionOrder": false,
       "items": {
         "type": "string",
-        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
+        "pattern": "",
         "maxLength": 128
       }
     },
@@ -59,14 +59,14 @@
       "insertionOrder": false,
       "items": {
         "type": "string",
-        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
+        "pattern": "",
         "maxLength": 128
       }
     },
     "VpcEndpointId": {
       "description": "The ID of the VPC endpoint that the agent has access to.",
       "type": "string",
-      "pattern": "^vpce-[0-9a-f]{17}$"
+      "pattern": ""
     },
     "EndpointType": {
       "description": "The service endpoints that the agent will connect to.",
@@ -90,7 +90,7 @@
     "AgentArn": {
       "description": "The DataSync Agent ARN.",
       "type": "string",
-      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
+      "pattern": "",
       "maxLength": 128
     }
   },

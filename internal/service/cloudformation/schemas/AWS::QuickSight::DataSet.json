@@ -332,14 +332,14 @@
           "type": "string",
           "maxLength": 64,
           "minLength": 1,
-          "pattern": "[0-9a-zA-Z-]*",
+          "pattern": "",
           "description": "<p>Left operand.</p>"
         },
         "RightOperand": {
           "type": "string",
           "maxLength": 64,
           "minLength": 1,
-          "pattern": "[0-9a-zA-Z-]*",
+          "pattern": "",
           "description": "<p>Right operand.</p>"
         },
         "RightJoinKeyProperties": {
@@ -416,7 +416,7 @@
           "type": "string",
           "maxLength": 64,
           "minLength": 1,
-          "pattern": "[0-9a-zA-Z-]*",
+          "pattern": "",
           "description": "<p>Physical table ID.</p>"
         },
         "JoinInstruction": {
@@ -588,7 +588,7 @@
           "type": "string",
           "maxLength": 64,
           "minLength": 0,
-          "pattern": "^[a-zA-Z0-9._-]*$",
+          "pattern": "",
           "description": "<p>The namespace associated with the row-level permissions dataset.</p>"
         },
         "PermissionPolicy": {
@@ -776,7 +776,7 @@
       "type": "string",
       "maxLength": 12,
       "minLength": 12,
-      "pattern": "^[0-9]{12}$"
+      "pattern": ""
     },
     "ColumnGroups": {
       "type": "array",

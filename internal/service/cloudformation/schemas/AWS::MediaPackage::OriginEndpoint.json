@@ -14,7 +14,7 @@
     "Id": {
       "description": "The ID of the OriginEndpoint.",
       "type": "string",
-      "pattern": "\\A[0-9a-zA-Z-_]+\\Z",
+      "pattern": "",
       "minLength": 1,
       "maxLength": 256
     },
@@ -400,7 +400,7 @@
         "ConstantInitializationVector": {
           "description": "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
           "type": "string",
-          "pattern": "\\A[0-9a-fA-F]+\\Z",
+          "pattern": "",
           "minLength": 32,
           "maxLength": 32
         }

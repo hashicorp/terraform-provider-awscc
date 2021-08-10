@@ -32,12 +32,12 @@
         "DatabaseName": {
             "description": "The name for the database which the table to be created belongs to.",
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]{3,64}$"
+            "pattern": ""
         },
         "TableName": {
             "description": "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]{3,64}$"
+            "pattern": ""
         },
         "RetentionProperties": {
             "description": "The retention duration of the memory store and the magnetic store.",
