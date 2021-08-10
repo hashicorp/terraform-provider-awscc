@@ -272,10 +272,11 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 			return "", "", fmt.Errorf("error describing CloudFormation type: %w", err)
 		}
 
-		// Rewrite all pattern values to the empty string.
+		// Rewrite all pattern and patternProperty regexes to the empty string.
 		// This works around any problems with JSON Schema regex validation.
 		schema := aws.ToString(output.Schema)
 		schema = regexp.MustCompile(`(?m)^(\s+"pattern"\s*:\s*)".*"`).ReplaceAllString(schema, `$1""`)
+		schema = regexp.MustCompile(`(?m)^(\s+"patternProperties"\s*:\s*{\s*)".*"`).ReplaceAllString(schema, `$1""`)
 
 		err = ioutil.WriteFile(dst, []byte(schema), 0644)
 
