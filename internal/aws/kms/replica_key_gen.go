@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_kms_replica_key", replicaKey)
+	registry.AddResourceTypeFactory("aws_kms_replica_key", replicaKeyResourceType)
 }
 
-// replicaKey returns the Terraform aws_kms_replica_key resource type.
+// replicaKeyResourceType returns the Terraform aws_kms_replica_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::KMS::ReplicaKey resource type.
-func replicaKey(ctx context.Context) (tfsdk.ResourceType, error) {
+func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

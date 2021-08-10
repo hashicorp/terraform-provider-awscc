@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_logs_resource_policy", resourcePolicy)
+	registry.AddResourceTypeFactory("aws_logs_resource_policy", resourcePolicyResourceType)
 }
 
-// resourcePolicy returns the Terraform aws_logs_resource_policy resource type.
+// resourcePolicyResourceType returns the Terraform aws_logs_resource_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Logs::ResourcePolicy resource type.
-func resourcePolicy(ctx context.Context) (tfsdk.ResourceType, error) {
+func resourcePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"policy_document": {
 			// Property: PolicyDocument

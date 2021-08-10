@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_link_association", linkAssociation)
+	registry.AddResourceTypeFactory("aws_networkmanager_link_association", linkAssociationResourceType)
 }
 
-// linkAssociation returns the Terraform aws_networkmanager_link_association resource type.
+// linkAssociationResourceType returns the Terraform aws_networkmanager_link_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::LinkAssociation resource type.
-func linkAssociation(ctx context.Context) (tfsdk.ResourceType, error) {
+func linkAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"device_id": {
 			// Property: DeviceId

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_athena_work_group", workGroup)
+	registry.AddResourceTypeFactory("aws_athena_work_group", workGroupResourceType)
 }
 
-// workGroup returns the Terraform aws_athena_work_group resource type.
+// workGroupResourceType returns the Terraform aws_athena_work_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Athena::WorkGroup resource type.
-func workGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"creation_time": {
 			// Property: CreationTime

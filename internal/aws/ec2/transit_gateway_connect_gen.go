@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_connect", transitGatewayConnect)
+	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_connect", transitGatewayConnectResourceType)
 }
 
-// transitGatewayConnect returns the Terraform aws_ec2_transit_gateway_connect resource type.
+// transitGatewayConnectResourceType returns the Terraform aws_ec2_transit_gateway_connect resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayConnect resource type.
-func transitGatewayConnect(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"creation_time": {
 			// Property: CreationTime

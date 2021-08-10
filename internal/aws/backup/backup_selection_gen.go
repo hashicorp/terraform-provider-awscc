@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_backup_backup_selection", backupSelection)
+	registry.AddResourceTypeFactory("aws_backup_backup_selection", backupSelectionResourceType)
 }
 
-// backupSelection returns the Terraform aws_backup_backup_selection resource type.
+// backupSelectionResourceType returns the Terraform aws_backup_backup_selection resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Backup::BackupSelection resource type.
-func backupSelection(ctx context.Context) (tfsdk.ResourceType, error) {
+func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"backup_plan_id": {
 			// Property: BackupPlanId

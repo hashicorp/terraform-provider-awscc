@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_apigateway_usage_plan_key", usagePlanKey)
+	registry.AddResourceTypeFactory("aws_apigateway_usage_plan_key", usagePlanKeyResourceType)
 }
 
-// usagePlanKey returns the Terraform aws_apigateway_usage_plan_key resource type.
+// usagePlanKeyResourceType returns the Terraform aws_apigateway_usage_plan_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::UsagePlanKey resource type.
-func usagePlanKey(ctx context.Context) (tfsdk.ResourceType, error) {
+func usagePlanKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"id": {
 			// Property: Id

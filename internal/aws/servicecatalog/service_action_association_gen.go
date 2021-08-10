@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_servicecatalog_service_action_association", serviceActionAssociation)
+	registry.AddResourceTypeFactory("aws_servicecatalog_service_action_association", serviceActionAssociationResourceType)
 }
 
-// serviceActionAssociation returns the Terraform aws_servicecatalog_service_action_association resource type.
+// serviceActionAssociationResourceType returns the Terraform aws_servicecatalog_service_action_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalog::ServiceActionAssociation resource type.
-func serviceActionAssociation(ctx context.Context) (tfsdk.ResourceType, error) {
+func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"product_id": {
 			// Property: ProductId

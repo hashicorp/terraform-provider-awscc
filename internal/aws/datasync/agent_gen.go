@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_agent", agent)
+	registry.AddResourceTypeFactory("aws_datasync_agent", agentResourceType)
 }
 
-// agent returns the Terraform aws_datasync_agent resource type.
+// agentResourceType returns the Terraform aws_datasync_agent resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::Agent resource type.
-func agent(ctx context.Context) (tfsdk.ResourceType, error) {
+func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"activation_key": {
 			// Property: ActivationKey

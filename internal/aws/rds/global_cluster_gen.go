@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_rds_global_cluster", globalCluster)
+	registry.AddResourceTypeFactory("aws_rds_global_cluster", globalClusterResourceType)
 }
 
-// globalCluster returns the Terraform aws_rds_global_cluster resource type.
+// globalClusterResourceType returns the Terraform aws_rds_global_cluster resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::GlobalCluster resource type.
-func globalCluster(ctx context.Context) (tfsdk.ResourceType, error) {
+func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"deletion_protection": {
 			// Property: DeletionProtection

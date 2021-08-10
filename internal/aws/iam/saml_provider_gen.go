@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iam_saml_provider", sAMLProvider)
+	registry.AddResourceTypeFactory("aws_iam_saml_provider", sAMLProviderResourceType)
 }
 
-// sAMLProvider returns the Terraform aws_iam_saml_provider resource type.
+// sAMLProviderResourceType returns the Terraform aws_iam_saml_provider resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IAM::SAMLProvider resource type.
-func sAMLProvider(ctx context.Context) (tfsdk.ResourceType, error) {
+func sAMLProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

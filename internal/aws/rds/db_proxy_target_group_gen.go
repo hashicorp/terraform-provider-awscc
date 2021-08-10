@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_rds_db_proxy_target_group", dBProxyTargetGroup)
+	registry.AddResourceTypeFactory("aws_rds_db_proxy_target_group", dBProxyTargetGroupResourceType)
 }
 
-// dBProxyTargetGroup returns the Terraform aws_rds_db_proxy_target_group resource type.
+// dBProxyTargetGroupResourceType returns the Terraform aws_rds_db_proxy_target_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBProxyTargetGroup resource type.
-func dBProxyTargetGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"connection_pool_configuration_info": {
 			// Property: ConnectionPoolConfigurationInfo

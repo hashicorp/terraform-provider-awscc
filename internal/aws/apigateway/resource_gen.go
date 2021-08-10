@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_apigateway_resource", resource)
+	registry.AddResourceTypeFactory("aws_apigateway_resource", resourceResourceType)
 }
 
-// resource returns the Terraform aws_apigateway_resource resource type.
+// resourceResourceType returns the Terraform aws_apigateway_resource resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::Resource resource type.
-func resource(ctx context.Context) (tfsdk.ResourceType, error) {
+func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"parent_id": {
 			// Property: ParentId

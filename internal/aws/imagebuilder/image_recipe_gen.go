@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_imagebuilder_image_recipe", imageRecipe)
+	registry.AddResourceTypeFactory("aws_imagebuilder_image_recipe", imageRecipeResourceType)
 }
 
-// imageRecipe returns the Terraform aws_imagebuilder_image_recipe resource type.
+// imageRecipeResourceType returns the Terraform aws_imagebuilder_image_recipe resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::ImageRecipe resource type.
-func imageRecipe(ctx context.Context) (tfsdk.ResourceType, error) {
+func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"additional_instance_configuration": {
 			// Property: AdditionalInstanceConfiguration

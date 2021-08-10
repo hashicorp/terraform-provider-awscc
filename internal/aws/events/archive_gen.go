@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_events_archive", archive)
+	registry.AddResourceTypeFactory("aws_events_archive", archiveResourceType)
 }
 
-// archive returns the Terraform aws_events_archive resource type.
+// archiveResourceType returns the Terraform aws_events_archive resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Events::Archive resource type.
-func archive(ctx context.Context) (tfsdk.ResourceType, error) {
+func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"archive_name": {
 			// Property: ArchiveName

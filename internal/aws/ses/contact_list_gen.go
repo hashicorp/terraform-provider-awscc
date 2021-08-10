@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ses_contact_list", contactList)
+	registry.AddResourceTypeFactory("aws_ses_contact_list", contactListResourceType)
 }
 
-// contactList returns the Terraform aws_ses_contact_list resource type.
+// contactListResourceType returns the Terraform aws_ses_contact_list resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SES::ContactList resource type.
-func contactList(ctx context.Context) (tfsdk.ResourceType, error) {
+func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"contact_list_name": {
 			// Property: ContactListName

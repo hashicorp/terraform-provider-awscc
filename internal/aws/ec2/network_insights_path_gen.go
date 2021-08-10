@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_network_insights_path", networkInsightsPath)
+	registry.AddResourceTypeFactory("aws_ec2_network_insights_path", networkInsightsPathResourceType)
 }
 
-// networkInsightsPath returns the Terraform aws_ec2_network_insights_path resource type.
+// networkInsightsPathResourceType returns the Terraform aws_ec2_network_insights_path resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInsightsPath resource type.
-func networkInsightsPath(ctx context.Context) (tfsdk.ResourceType, error) {
+func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"created_date": {
 			// Property: CreatedDate

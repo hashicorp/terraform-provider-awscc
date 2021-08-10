@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_quicksight_template", template)
+	registry.AddResourceTypeFactory("aws_quicksight_template", templateResourceType)
 }
 
-// template returns the Terraform aws_quicksight_template resource type.
+// templateResourceType returns the Terraform aws_quicksight_template resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::QuickSight::Template resource type.
-func template(ctx context.Context) (tfsdk.ResourceType, error) {
+func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

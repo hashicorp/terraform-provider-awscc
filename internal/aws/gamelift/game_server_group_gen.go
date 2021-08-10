@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_gamelift_game_server_group", gameServerGroup)
+	registry.AddResourceTypeFactory("aws_gamelift_game_server_group", gameServerGroupResourceType)
 }
 
-// gameServerGroup returns the Terraform aws_gamelift_game_server_group resource type.
+// gameServerGroupResourceType returns the Terraform aws_gamelift_game_server_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GameLift::GameServerGroup resource type.
-func gameServerGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"auto_scaling_group_arn": {
 			// Property: AutoScalingGroupArn

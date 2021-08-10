@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_s3objectlambda_access_point_policy", accessPointPolicy)
+	registry.AddResourceTypeFactory("aws_s3objectlambda_access_point_policy", accessPointPolicyResourceType)
 }
 
-// accessPointPolicy returns the Terraform aws_s3objectlambda_access_point_policy resource type.
+// accessPointPolicyResourceType returns the Terraform aws_s3objectlambda_access_point_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3ObjectLambda::AccessPointPolicy resource type.
-func accessPointPolicy(ctx context.Context) (tfsdk.ResourceType, error) {
+func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"object_lambda_access_point": {
 			// Property: ObjectLambdaAccessPoint

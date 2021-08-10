@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_monitoring_schedule", monitoringSchedule)
+	registry.AddResourceTypeFactory("aws_sagemaker_monitoring_schedule", monitoringScheduleResourceType)
 }
 
-// monitoringSchedule returns the Terraform aws_sagemaker_monitoring_schedule resource type.
+// monitoringScheduleResourceType returns the Terraform aws_sagemaker_monitoring_schedule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::MonitoringSchedule resource type.
-func monitoringSchedule(ctx context.Context) (tfsdk.ResourceType, error) {
+func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"creation_time": {
 			// Property: CreationTime

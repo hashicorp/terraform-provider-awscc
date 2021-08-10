@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_location_nfs", locationNFS)
+	registry.AddResourceTypeFactory("aws_datasync_location_nfs", locationNFSResourceType)
 }
 
-// locationNFS returns the Terraform aws_datasync_location_nfs resource type.
+// locationNFSResourceType returns the Terraform aws_datasync_location_nfs resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationNFS resource type.
-func locationNFS(ctx context.Context) (tfsdk.ResourceType, error) {
+func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"location_arn": {
 			// Property: LocationArn

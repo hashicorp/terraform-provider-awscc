@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_project", project)
+	registry.AddResourceTypeFactory("aws_sagemaker_project", projectResourceType)
 }
 
-// project returns the Terraform aws_sagemaker_project resource type.
+// projectResourceType returns the Terraform aws_sagemaker_project resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::Project resource type.
-func project(ctx context.Context) (tfsdk.ResourceType, error) {
+func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"creation_time": {
 			// Property: CreationTime

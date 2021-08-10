@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotsitewise_gateway", gateway)
+	registry.AddResourceTypeFactory("aws_iotsitewise_gateway", gatewayResourceType)
 }
 
-// gateway returns the Terraform aws_iotsitewise_gateway resource type.
+// gatewayResourceType returns the Terraform aws_iotsitewise_gateway resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::Gateway resource type.
-func gateway(ctx context.Context) (tfsdk.ResourceType, error) {
+func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"gateway_capability_summaries": {
 			// Property: GatewayCapabilitySummaries

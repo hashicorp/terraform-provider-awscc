@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudfront_origin_request_policy", originRequestPolicy)
+	registry.AddResourceTypeFactory("aws_cloudfront_origin_request_policy", originRequestPolicyResourceType)
 }
 
-// originRequestPolicy returns the Terraform aws_cloudfront_origin_request_policy resource type.
+// originRequestPolicyResourceType returns the Terraform aws_cloudfront_origin_request_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::OriginRequestPolicy resource type.
-func originRequestPolicy(ctx context.Context) (tfsdk.ResourceType, error) {
+func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"id": {
 			// Property: Id

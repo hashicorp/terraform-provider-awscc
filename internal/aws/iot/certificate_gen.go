@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_certificate", certificate)
+	registry.AddResourceTypeFactory("aws_iot_certificate", certificateResourceType)
 }
 
-// certificate returns the Terraform aws_iot_certificate resource type.
+// certificateResourceType returns the Terraform aws_iot_certificate resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::Certificate resource type.
-func certificate(ctx context.Context) (tfsdk.ResourceType, error) {
+func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

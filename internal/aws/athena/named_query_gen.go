@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_athena_named_query", namedQuery)
+	registry.AddResourceTypeFactory("aws_athena_named_query", namedQueryResourceType)
 }
 
-// namedQuery returns the Terraform aws_athena_named_query resource type.
+// namedQueryResourceType returns the Terraform aws_athena_named_query resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Athena::NamedQuery resource type.
-func namedQuery(ctx context.Context) (tfsdk.ResourceType, error) {
+func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"database": {
 			// Property: Database

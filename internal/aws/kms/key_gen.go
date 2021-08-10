@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_kms_key", key)
+	registry.AddResourceTypeFactory("aws_kms_key", keyResourceType)
 }
 
-// key returns the Terraform aws_kms_key resource type.
+// keyResourceType returns the Terraform aws_kms_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::KMS::Key resource type.
-func key(ctx context.Context) (tfsdk.ResourceType, error) {
+func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

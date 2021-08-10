@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ivs_recording_configuration", recordingConfiguration)
+	registry.AddResourceTypeFactory("aws_ivs_recording_configuration", recordingConfigurationResourceType)
 }
 
-// recordingConfiguration returns the Terraform aws_ivs_recording_configuration resource type.
+// recordingConfigurationResourceType returns the Terraform aws_ivs_recording_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IVS::RecordingConfiguration resource type.
-func recordingConfiguration(ctx context.Context) (tfsdk.ResourceType, error) {
+func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediapackage_channel", channel)
+	registry.AddResourceTypeFactory("aws_mediapackage_channel", channelResourceType)
 }
 
-// channel returns the Terraform aws_mediapackage_channel resource type.
+// channelResourceType returns the Terraform aws_mediapackage_channel resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaPackage::Channel resource type.
-func channel(ctx context.Context) (tfsdk.ResourceType, error) {
+func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

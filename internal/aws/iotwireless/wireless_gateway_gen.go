@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotwireless_wireless_gateway", wirelessGateway)
+	registry.AddResourceTypeFactory("aws_iotwireless_wireless_gateway", wirelessGatewayResourceType)
 }
 
-// wirelessGateway returns the Terraform aws_iotwireless_wireless_gateway resource type.
+// wirelessGatewayResourceType returns the Terraform aws_iotwireless_wireless_gateway resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::WirelessGateway resource type.
-func wirelessGateway(ctx context.Context) (tfsdk.ResourceType, error) {
+func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

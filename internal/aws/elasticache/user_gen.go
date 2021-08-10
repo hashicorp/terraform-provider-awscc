@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_elasticache_user", user)
+	registry.AddResourceTypeFactory("aws_elasticache_user", userResourceType)
 }
 
-// user returns the Terraform aws_elasticache_user resource type.
+// userResourceType returns the Terraform aws_elasticache_user resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ElastiCache::User resource type.
-func user(ctx context.Context) (tfsdk.ResourceType, error) {
+func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"access_string": {
 			// Property: AccessString

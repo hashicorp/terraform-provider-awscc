@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_appflow_connector_profile", connectorProfile)
+	registry.AddResourceTypeFactory("aws_appflow_connector_profile", connectorProfileResourceType)
 }
 
-// connectorProfile returns the Terraform aws_appflow_connector_profile resource type.
+// connectorProfileResourceType returns the Terraform aws_appflow_connector_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppFlow::ConnectorProfile resource type.
-func connectorProfile(ctx context.Context) (tfsdk.ResourceType, error) {
+func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"connection_mode": {
 			// Property: ConnectionMode

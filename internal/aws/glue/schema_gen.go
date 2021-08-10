@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_glue_schema", schema)
+	registry.AddResourceTypeFactory("aws_glue_schema", schemaResourceType)
 }
 
-// schema returns the Terraform aws_glue_schema resource type.
+// schemaResourceType returns the Terraform aws_glue_schema resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Glue::Schema resource type.
-func schema(ctx context.Context) (tfsdk.ResourceType, error) {
+func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

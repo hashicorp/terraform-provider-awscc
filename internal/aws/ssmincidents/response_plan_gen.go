@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ssmincidents_response_plan", responsePlan)
+	registry.AddResourceTypeFactory("aws_ssmincidents_response_plan", responsePlanResourceType)
 }
 
-// responsePlan returns the Terraform aws_ssmincidents_response_plan resource type.
+// responsePlanResourceType returns the Terraform aws_ssmincidents_response_plan resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSMIncidents::ResponsePlan resource type.
-func responsePlan(ctx context.Context) (tfsdk.ResourceType, error) {
+func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"actions": {
 			// Property: Actions

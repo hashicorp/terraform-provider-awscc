@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_globalaccelerator_accelerator", accelerator)
+	registry.AddResourceTypeFactory("aws_globalaccelerator_accelerator", acceleratorResourceType)
 }
 
-// accelerator returns the Terraform aws_globalaccelerator_accelerator resource type.
+// acceleratorResourceType returns the Terraform aws_globalaccelerator_accelerator resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GlobalAccelerator::Accelerator resource type.
-func accelerator(ctx context.Context) (tfsdk.ResourceType, error) {
+func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"accelerator_arn": {
 			// Property: AcceleratorArn

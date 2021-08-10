@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecs_primary_task_set", primaryTaskSet)
+	registry.AddResourceTypeFactory("aws_ecs_primary_task_set", primaryTaskSetResourceType)
 }
 
-// primaryTaskSet returns the Terraform aws_ecs_primary_task_set resource type.
+// primaryTaskSetResourceType returns the Terraform aws_ecs_primary_task_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::PrimaryTaskSet resource type.
-func primaryTaskSet(ctx context.Context) (tfsdk.ResourceType, error) {
+func primaryTaskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"cluster": {
 			// Property: Cluster

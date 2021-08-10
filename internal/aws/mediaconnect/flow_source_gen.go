@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediaconnect_flow_source", flowSource)
+	registry.AddResourceTypeFactory("aws_mediaconnect_flow_source", flowSourceResourceType)
 }
 
-// flowSource returns the Terraform aws_mediaconnect_flow_source resource type.
+// flowSourceResourceType returns the Terraform aws_mediaconnect_flow_source resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowSource resource type.
-func flowSource(ctx context.Context) (tfsdk.ResourceType, error) {
+func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"decryption": {
 			// Property: Decryption

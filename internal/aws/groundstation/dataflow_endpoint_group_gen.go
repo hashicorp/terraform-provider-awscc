@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_groundstation_dataflow_endpoint_group", dataflowEndpointGroup)
+	registry.AddResourceTypeFactory("aws_groundstation_dataflow_endpoint_group", dataflowEndpointGroupResourceType)
 }
 
-// dataflowEndpointGroup returns the Terraform aws_groundstation_dataflow_endpoint_group resource type.
+// dataflowEndpointGroupResourceType returns the Terraform aws_groundstation_dataflow_endpoint_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GroundStation::DataflowEndpointGroup resource type.
-func dataflowEndpointGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

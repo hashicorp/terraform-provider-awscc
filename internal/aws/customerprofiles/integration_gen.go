@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_customerprofiles_integration", integration)
+	registry.AddResourceTypeFactory("aws_customerprofiles_integration", integrationResourceType)
 }
 
-// integration returns the Terraform aws_customerprofiles_integration resource type.
+// integrationResourceType returns the Terraform aws_customerprofiles_integration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CustomerProfiles::Integration resource type.
-func integration(ctx context.Context) (tfsdk.ResourceType, error) {
+func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"created_at": {
 			// Property: CreatedAt

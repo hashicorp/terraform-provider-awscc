@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_task", task)
+	registry.AddResourceTypeFactory("aws_datasync_task", taskResourceType)
 }
 
-// task returns the Terraform aws_datasync_task resource type.
+// taskResourceType returns the Terraform aws_datasync_task resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::Task resource type.
-func task(ctx context.Context) (tfsdk.ResourceType, error) {
+func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"cloud_watch_log_group_arn": {
 			// Property: CloudWatchLogGroupArn

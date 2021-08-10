@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_wafv2_regex_pattern_set", regexPatternSet)
+	registry.AddResourceTypeFactory("aws_wafv2_regex_pattern_set", regexPatternSetResourceType)
 }
 
-// regexPatternSet returns the Terraform aws_wafv2_regex_pattern_set resource type.
+// regexPatternSetResourceType returns the Terraform aws_wafv2_regex_pattern_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WAFv2::RegexPatternSet resource type.
-func regexPatternSet(ctx context.Context) (tfsdk.ResourceType, error) {
+func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

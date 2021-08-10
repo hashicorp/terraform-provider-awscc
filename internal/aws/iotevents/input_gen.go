@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotevents_input", input)
+	registry.AddResourceTypeFactory("aws_iotevents_input", inputResourceType)
 }
 
-// input returns the Terraform aws_iotevents_input resource type.
+// inputResourceType returns the Terraform aws_iotevents_input resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTEvents::Input resource type.
-func input(ctx context.Context) (tfsdk.ResourceType, error) {
+func inputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"input_definition": {
 			// Property: InputDefinition

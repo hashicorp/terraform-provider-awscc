@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudfront_public_key", publicKey)
+	registry.AddResourceTypeFactory("aws_cloudfront_public_key", publicKeyResourceType)
 }
 
-// publicKey returns the Terraform aws_cloudfront_public_key resource type.
+// publicKeyResourceType returns the Terraform aws_cloudfront_public_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::PublicKey resource type.
-func publicKey(ctx context.Context) (tfsdk.ResourceType, error) {
+func publicKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"created_time": {
 			// Property: CreatedTime

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecs_capacity_provider", capacityProvider)
+	registry.AddResourceTypeFactory("aws_ecs_capacity_provider", capacityProviderResourceType)
 }
 
-// capacityProvider returns the Terraform aws_ecs_capacity_provider resource type.
+// capacityProviderResourceType returns the Terraform aws_ecs_capacity_provider resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::CapacityProvider resource type.
-func capacityProvider(ctx context.Context) (tfsdk.ResourceType, error) {
+func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"auto_scaling_group_provider": {
 			// Property: AutoScalingGroupProvider

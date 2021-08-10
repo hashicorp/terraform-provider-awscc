@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkfirewall_firewall", firewall)
+	registry.AddResourceTypeFactory("aws_networkfirewall_firewall", firewallResourceType)
 }
 
-// firewall returns the Terraform aws_networkfirewall_firewall resource type.
+// firewallResourceType returns the Terraform aws_networkfirewall_firewall resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkFirewall::Firewall resource type.
-func firewall(ctx context.Context) (tfsdk.ResourceType, error) {
+func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"delete_protection": {
 			// Property: DeleteProtection

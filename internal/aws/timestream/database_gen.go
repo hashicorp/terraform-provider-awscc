@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_timestream_database", database)
+	registry.AddResourceTypeFactory("aws_timestream_database", databaseResourceType)
 }
 
-// database returns the Terraform aws_timestream_database resource type.
+// databaseResourceType returns the Terraform aws_timestream_database resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Timestream::Database resource type.
-func database(ctx context.Context) (tfsdk.ResourceType, error) {
+func databaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

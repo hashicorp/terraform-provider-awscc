@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_certificatemanager_account", account)
+	registry.AddResourceTypeFactory("aws_certificatemanager_account", accountResourceType)
 }
 
-// account returns the Terraform aws_certificatemanager_account resource type.
+// accountResourceType returns the Terraform aws_certificatemanager_account resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CertificateManager::Account resource type.
-func account(ctx context.Context) (tfsdk.ResourceType, error) {
+func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"account_id": {
 			// Property: AccountId

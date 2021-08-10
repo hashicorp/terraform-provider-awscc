@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_image_version", imageVersion)
+	registry.AddResourceTypeFactory("aws_sagemaker_image_version", imageVersionResourceType)
 }
 
-// imageVersion returns the Terraform aws_sagemaker_image_version resource type.
+// imageVersionResourceType returns the Terraform aws_sagemaker_image_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ImageVersion resource type.
-func imageVersion(ctx context.Context) (tfsdk.ResourceType, error) {
+func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"base_image": {
 			// Property: BaseImage

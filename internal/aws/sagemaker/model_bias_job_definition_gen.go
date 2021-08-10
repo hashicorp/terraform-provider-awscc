@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_model_bias_job_definition", modelBiasJobDefinition)
+	registry.AddResourceTypeFactory("aws_sagemaker_model_bias_job_definition", modelBiasJobDefinitionResourceType)
 }
 
-// modelBiasJobDefinition returns the Terraform aws_sagemaker_model_bias_job_definition resource type.
+// modelBiasJobDefinitionResourceType returns the Terraform aws_sagemaker_model_bias_job_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelBiasJobDefinition resource type.
-func modelBiasJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
+func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"creation_time": {
 			// Property: CreationTime

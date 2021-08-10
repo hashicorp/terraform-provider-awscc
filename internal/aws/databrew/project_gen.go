@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_databrew_project", project)
+	registry.AddResourceTypeFactory("aws_databrew_project", projectResourceType)
 }
 
-// project returns the Terraform aws_databrew_project resource type.
+// projectResourceType returns the Terraform aws_databrew_project resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataBrew::Project resource type.
-func project(ctx context.Context) (tfsdk.ResourceType, error) {
+func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"dataset_name": {
 			// Property: DatasetName

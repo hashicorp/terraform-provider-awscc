@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_domain_configuration", domainConfiguration)
+	registry.AddResourceTypeFactory("aws_iot_domain_configuration", domainConfigurationResourceType)
 }
 
-// domainConfiguration returns the Terraform aws_iot_domain_configuration resource type.
+// domainConfigurationResourceType returns the Terraform aws_iot_domain_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::DomainConfiguration resource type.
-func domainConfiguration(ctx context.Context) (tfsdk.ResourceType, error) {
+func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

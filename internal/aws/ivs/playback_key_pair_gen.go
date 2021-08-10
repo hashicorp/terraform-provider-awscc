@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ivs_playback_key_pair", playbackKeyPair)
+	registry.AddResourceTypeFactory("aws_ivs_playback_key_pair", playbackKeyPairResourceType)
 }
 
-// playbackKeyPair returns the Terraform aws_ivs_playback_key_pair resource type.
+// playbackKeyPairResourceType returns the Terraform aws_ivs_playback_key_pair resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IVS::PlaybackKeyPair resource type.
-func playbackKeyPair(ctx context.Context) (tfsdk.ResourceType, error) {
+func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

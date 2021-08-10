@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sso_permission_set", permissionSet)
+	registry.AddResourceTypeFactory("aws_sso_permission_set", permissionSetResourceType)
 }
 
-// permissionSet returns the Terraform aws_sso_permission_set resource type.
+// permissionSetResourceType returns the Terraform aws_sso_permission_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSO::PermissionSet resource type.
-func permissionSet(ctx context.Context) (tfsdk.ResourceType, error) {
+func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"description": {
 			// Property: Description

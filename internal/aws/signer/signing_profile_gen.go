@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_signer_signing_profile", signingProfile)
+	registry.AddResourceTypeFactory("aws_signer_signing_profile", signingProfileResourceType)
 }
 
-// signingProfile returns the Terraform aws_signer_signing_profile resource type.
+// signingProfileResourceType returns the Terraform aws_signer_signing_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Signer::SigningProfile resource type.
-func signingProfile(ctx context.Context) (tfsdk.ResourceType, error) {
+func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

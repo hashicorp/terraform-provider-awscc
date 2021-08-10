@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_imagebuilder_image_pipeline", imagePipeline)
+	registry.AddResourceTypeFactory("aws_imagebuilder_image_pipeline", imagePipelineResourceType)
 }
 
-// imagePipeline returns the Terraform aws_imagebuilder_image_pipeline resource type.
+// imagePipelineResourceType returns the Terraform aws_imagebuilder_image_pipeline resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::ImagePipeline resource type.
-func imagePipeline(ctx context.Context) (tfsdk.ResourceType, error) {
+func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

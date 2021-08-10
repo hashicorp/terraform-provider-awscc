@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ssmcontacts_contact", contact)
+	registry.AddResourceTypeFactory("aws_ssmcontacts_contact", contactResourceType)
 }
 
-// contact returns the Terraform aws_ssmcontacts_contact resource type.
+// contactResourceType returns the Terraform aws_ssmcontacts_contact resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSMContacts::Contact resource type.
-func contact(ctx context.Context) (tfsdk.ResourceType, error) {
+func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"alias": {
 			// Property: Alias

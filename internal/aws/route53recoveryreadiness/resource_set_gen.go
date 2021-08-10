@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoveryreadiness_resource_set", resourceSet)
+	registry.AddResourceTypeFactory("aws_route53recoveryreadiness_resource_set", resourceSetResourceType)
 }
 
-// resourceSet returns the Terraform aws_route53recoveryreadiness_resource_set resource type.
+// resourceSetResourceType returns the Terraform aws_route53recoveryreadiness_resource_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::ResourceSet resource type.
-func resourceSet(ctx context.Context) (tfsdk.ResourceType, error) {
+func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"resource_set_arn": {
 			// Property: ResourceSetArn

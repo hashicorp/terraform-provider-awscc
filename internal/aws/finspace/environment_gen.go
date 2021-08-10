@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_finspace_environment", environment)
+	registry.AddResourceTypeFactory("aws_finspace_environment", environmentResourceType)
 }
 
-// environment returns the Terraform aws_finspace_environment resource type.
+// environmentResourceType returns the Terraform aws_finspace_environment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FinSpace::Environment resource type.
-func environment(ctx context.Context) (tfsdk.ResourceType, error) {
+func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"aws_account_id": {
 			// Property: AwsAccountId

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_multicast_group_member", transitGatewayMulticastGroupMember)
+	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_multicast_group_member", transitGatewayMulticastGroupMemberResourceType)
 }
 
-// transitGatewayMulticastGroupMember returns the Terraform aws_ec2_transit_gateway_multicast_group_member resource type.
+// transitGatewayMulticastGroupMemberResourceType returns the Terraform aws_ec2_transit_gateway_multicast_group_member resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastGroupMember resource type.
-func transitGatewayMulticastGroupMember(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"group_ip_address": {
 			// Property: GroupIpAddress

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_backup_backup_vault", backupVault)
+	registry.AddResourceTypeFactory("aws_backup_backup_vault", backupVaultResourceType)
 }
 
-// backupVault returns the Terraform aws_backup_backup_vault resource type.
+// backupVaultResourceType returns the Terraform aws_backup_backup_vault resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Backup::BackupVault resource type.
-func backupVault(ctx context.Context) (tfsdk.ResourceType, error) {
+func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"access_policy": {
 			// Property: AccessPolicy

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_account_audit_configuration", accountAuditConfiguration)
+	registry.AddResourceTypeFactory("aws_iot_account_audit_configuration", accountAuditConfigurationResourceType)
 }
 
-// accountAuditConfiguration returns the Terraform aws_iot_account_audit_configuration resource type.
+// accountAuditConfigurationResourceType returns the Terraform aws_iot_account_audit_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::AccountAuditConfiguration resource type.
-func accountAuditConfiguration(ctx context.Context) (tfsdk.ResourceType, error) {
+func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"account_id": {
 			// Property: AccountId

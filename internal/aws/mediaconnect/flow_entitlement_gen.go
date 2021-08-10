@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediaconnect_flow_entitlement", flowEntitlement)
+	registry.AddResourceTypeFactory("aws_mediaconnect_flow_entitlement", flowEntitlementResourceType)
 }
 
-// flowEntitlement returns the Terraform aws_mediaconnect_flow_entitlement resource type.
+// flowEntitlementResourceType returns the Terraform aws_mediaconnect_flow_entitlement resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowEntitlement resource type.
-func flowEntitlement(ctx context.Context) (tfsdk.ResourceType, error) {
+func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"data_transfer_subscriber_fee_percent": {
 			// Property: DataTransferSubscriberFeePercent

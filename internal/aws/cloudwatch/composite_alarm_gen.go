@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudwatch_composite_alarm", compositeAlarm)
+	registry.AddResourceTypeFactory("aws_cloudwatch_composite_alarm", compositeAlarmResourceType)
 }
 
-// compositeAlarm returns the Terraform aws_cloudwatch_composite_alarm resource type.
+// compositeAlarmResourceType returns the Terraform aws_cloudwatch_composite_alarm resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudWatch::CompositeAlarm resource type.
-func compositeAlarm(ctx context.Context) (tfsdk.ResourceType, error) {
+func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"actions_enabled": {
 			// Property: ActionsEnabled

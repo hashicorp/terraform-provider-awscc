@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_nimblestudio_launch_profile", launchProfile)
+	registry.AddResourceTypeFactory("aws_nimblestudio_launch_profile", launchProfileResourceType)
 }
 
-// launchProfile returns the Terraform aws_nimblestudio_launch_profile resource type.
+// launchProfileResourceType returns the Terraform aws_nimblestudio_launch_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NimbleStudio::LaunchProfile resource type.
-func launchProfile(ctx context.Context) (tfsdk.ResourceType, error) {
+func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"description": {
 			// Property: Description

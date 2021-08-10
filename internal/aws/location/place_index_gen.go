@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_location_place_index", placeIndex)
+	registry.AddResourceTypeFactory("aws_location_place_index", placeIndexResourceType)
 }
 
-// placeIndex returns the Terraform aws_location_place_index resource type.
+// placeIndexResourceType returns the Terraform aws_location_place_index resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Location::PlaceIndex resource type.
-func placeIndex(ctx context.Context) (tfsdk.ResourceType, error) {
+func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

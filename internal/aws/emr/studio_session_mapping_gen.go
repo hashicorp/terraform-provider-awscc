@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_emr_studio_session_mapping", studioSessionMapping)
+	registry.AddResourceTypeFactory("aws_emr_studio_session_mapping", studioSessionMappingResourceType)
 }
 
-// studioSessionMapping returns the Terraform aws_emr_studio_session_mapping resource type.
+// studioSessionMappingResourceType returns the Terraform aws_emr_studio_session_mapping resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EMR::StudioSessionMapping resource type.
-func studioSessionMapping(ctx context.Context) (tfsdk.ResourceType, error) {
+func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"identity_name": {
 			// Property: IdentityName

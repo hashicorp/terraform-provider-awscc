@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_wafv2_ip_set", iPSet)
+	registry.AddResourceTypeFactory("aws_wafv2_ip_set", iPSetResourceType)
 }
 
-// iPSet returns the Terraform aws_wafv2_ip_set resource type.
+// iPSetResourceType returns the Terraform aws_wafv2_ip_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WAFv2::IPSet resource type.
-func iPSet(ctx context.Context) (tfsdk.ResourceType, error) {
+func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"addresses": {
 			// Property: Addresses

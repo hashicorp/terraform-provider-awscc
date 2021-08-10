@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cassandra_table", table)
+	registry.AddResourceTypeFactory("aws_cassandra_table", tableResourceType)
 }
 
-// table returns the Terraform aws_cassandra_table resource type.
+// tableResourceType returns the Terraform aws_cassandra_table resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Cassandra::Table resource type.
-func table(ctx context.Context) (tfsdk.ResourceType, error) {
+func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"billing_mode": {
 			// Property: BillingMode

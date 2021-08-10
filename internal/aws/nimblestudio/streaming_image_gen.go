@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_nimblestudio_streaming_image", streamingImage)
+	registry.AddResourceTypeFactory("aws_nimblestudio_streaming_image", streamingImageResourceType)
 }
 
-// streamingImage returns the Terraform aws_nimblestudio_streaming_image resource type.
+// streamingImageResourceType returns the Terraform aws_nimblestudio_streaming_image resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NimbleStudio::StreamingImage resource type.
-func streamingImage(ctx context.Context) (tfsdk.ResourceType, error) {
+func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"description": {
 			// Property: Description

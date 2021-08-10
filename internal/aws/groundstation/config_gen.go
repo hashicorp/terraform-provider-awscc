@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_groundstation_config", config)
+	registry.AddResourceTypeFactory("aws_groundstation_config", configResourceType)
 }
 
-// config returns the Terraform aws_groundstation_config resource type.
+// configResourceType returns the Terraform aws_groundstation_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GroundStation::Config resource type.
-func config(ctx context.Context) (tfsdk.ResourceType, error) {
+func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

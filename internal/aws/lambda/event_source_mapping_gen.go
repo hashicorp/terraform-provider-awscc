@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_lambda_event_source_mapping", eventSourceMapping)
+	registry.AddResourceTypeFactory("aws_lambda_event_source_mapping", eventSourceMappingResourceType)
 }
 
-// eventSourceMapping returns the Terraform aws_lambda_event_source_mapping resource type.
+// eventSourceMappingResourceType returns the Terraform aws_lambda_event_source_mapping resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Lambda::EventSourceMapping resource type.
-func eventSourceMapping(ctx context.Context) (tfsdk.ResourceType, error) {
+func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"batch_size": {
 			// Property: BatchSize

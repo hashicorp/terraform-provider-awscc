@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_gateway_route_table_association", gatewayRouteTableAssociation)
+	registry.AddResourceTypeFactory("aws_ec2_gateway_route_table_association", gatewayRouteTableAssociationResourceType)
 }
 
-// gatewayRouteTableAssociation returns the Terraform aws_ec2_gateway_route_table_association resource type.
+// gatewayRouteTableAssociationResourceType returns the Terraform aws_ec2_gateway_route_table_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::GatewayRouteTableAssociation resource type.
-func gatewayRouteTableAssociation(ctx context.Context) (tfsdk.ResourceType, error) {
+func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"association_id": {
 			// Property: AssociationId

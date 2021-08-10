@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_amplify_branch", branch)
+	registry.AddResourceTypeFactory("aws_amplify_branch", branchResourceType)
 }
 
-// branch returns the Terraform aws_amplify_branch resource type.
+// branchResourceType returns the Terraform aws_amplify_branch resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Amplify::Branch resource type.
-func branch(ctx context.Context) (tfsdk.ResourceType, error) {
+func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"app_id": {
 			// Property: AppId

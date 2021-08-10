@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediapackage_origin_endpoint", originEndpoint)
+	registry.AddResourceTypeFactory("aws_mediapackage_origin_endpoint", originEndpointResourceType)
 }
 
-// originEndpoint returns the Terraform aws_mediapackage_origin_endpoint resource type.
+// originEndpointResourceType returns the Terraform aws_mediapackage_origin_endpoint resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaPackage::OriginEndpoint resource type.
-func originEndpoint(ctx context.Context) (tfsdk.ResourceType, error) {
+func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

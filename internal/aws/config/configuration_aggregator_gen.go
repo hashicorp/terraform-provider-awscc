@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_config_configuration_aggregator", configurationAggregator)
+	registry.AddResourceTypeFactory("aws_config_configuration_aggregator", configurationAggregatorResourceType)
 }
 
-// configurationAggregator returns the Terraform aws_config_configuration_aggregator resource type.
+// configurationAggregatorResourceType returns the Terraform aws_config_configuration_aggregator resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::ConfigurationAggregator resource type.
-func configurationAggregator(ctx context.Context) (tfsdk.ResourceType, error) {
+func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"account_aggregation_sources": {
 			// Property: AccountAggregationSources

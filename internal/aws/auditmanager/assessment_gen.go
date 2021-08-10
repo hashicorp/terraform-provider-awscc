@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_auditmanager_assessment", assessment)
+	registry.AddResourceTypeFactory("aws_auditmanager_assessment", assessmentResourceType)
 }
 
-// assessment returns the Terraform aws_auditmanager_assessment resource type.
+// assessmentResourceType returns the Terraform aws_auditmanager_assessment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AuditManager::Assessment resource type.
-func assessment(ctx context.Context) (tfsdk.ResourceType, error) {
+func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

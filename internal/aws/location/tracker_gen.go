@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_location_tracker", tracker)
+	registry.AddResourceTypeFactory("aws_location_tracker", trackerResourceType)
 }
 
-// tracker returns the Terraform aws_location_tracker resource type.
+// trackerResourceType returns the Terraform aws_location_tracker resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Location::Tracker resource type.
-func tracker(ctx context.Context) (tfsdk.ResourceType, error) {
+func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

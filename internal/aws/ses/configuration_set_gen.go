@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ses_configuration_set", configurationSet)
+	registry.AddResourceTypeFactory("aws_ses_configuration_set", configurationSetResourceType)
 }
 
-// configurationSet returns the Terraform aws_ses_configuration_set resource type.
+// configurationSetResourceType returns the Terraform aws_ses_configuration_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SES::ConfigurationSet resource type.
-func configurationSet(ctx context.Context) (tfsdk.ResourceType, error) {
+func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"name": {
 			// Property: Name

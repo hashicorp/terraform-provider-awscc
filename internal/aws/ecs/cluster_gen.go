@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecs_cluster", cluster)
+	registry.AddResourceTypeFactory("aws_ecs_cluster", clusterResourceType)
 }
 
-// cluster returns the Terraform aws_ecs_cluster resource type.
+// clusterResourceType returns the Terraform aws_ecs_cluster resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::Cluster resource type.
-func cluster(ctx context.Context) (tfsdk.ResourceType, error) {
+func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

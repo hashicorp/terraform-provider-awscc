@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_elasticache_user_group", userGroup)
+	registry.AddResourceTypeFactory("aws_elasticache_user_group", userGroupResourceType)
 }
 
-// userGroup returns the Terraform aws_elasticache_user_group resource type.
+// userGroupResourceType returns the Terraform aws_elasticache_user_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ElastiCache::UserGroup resource type.
-func userGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

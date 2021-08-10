@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_codestarconnections_connection", connection)
+	registry.AddResourceTypeFactory("aws_codestarconnections_connection", connectionResourceType)
 }
 
-// connection returns the Terraform aws_codestarconnections_connection resource type.
+// connectionResourceType returns the Terraform aws_codestarconnections_connection resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CodeStarConnections::Connection resource type.
-func connection(ctx context.Context) (tfsdk.ResourceType, error) {
+func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"connection_arn": {
 			// Property: ConnectionArn

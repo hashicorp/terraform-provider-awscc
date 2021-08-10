@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_gamelift_alias", alias)
+	registry.AddResourceTypeFactory("aws_gamelift_alias", aliasResourceType)
 }
 
-// alias returns the Terraform aws_gamelift_alias resource type.
+// aliasResourceType returns the Terraform aws_gamelift_alias resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GameLift::Alias resource type.
-func alias(ctx context.Context) (tfsdk.ResourceType, error) {
+func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"alias_id": {
 			// Property: AliasId

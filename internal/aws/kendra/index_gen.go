@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_kendra_index", index)
+	registry.AddResourceTypeFactory("aws_kendra_index", indexResourceType)
 }
 
-// index returns the Terraform aws_kendra_index resource type.
+// indexResourceType returns the Terraform aws_kendra_index resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Kendra::Index resource type.
-func index(ctx context.Context) (tfsdk.ResourceType, error) {
+func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

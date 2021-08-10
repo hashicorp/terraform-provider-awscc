@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_lambda_function", function)
+	registry.AddResourceTypeFactory("aws_lambda_function", functionResourceType)
 }
 
-// function returns the Terraform aws_lambda_function resource type.
+// functionResourceType returns the Terraform aws_lambda_function resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Lambda::Function resource type.
-func function(ctx context.Context) (tfsdk.ResourceType, error) {
+func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

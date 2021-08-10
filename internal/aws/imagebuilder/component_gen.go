@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_imagebuilder_component", component)
+	registry.AddResourceTypeFactory("aws_imagebuilder_component", componentResourceType)
 }
 
-// component returns the Terraform aws_imagebuilder_component resource type.
+// componentResourceType returns the Terraform aws_imagebuilder_component resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::Component resource type.
-func component(ctx context.Context) (tfsdk.ResourceType, error) {
+func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

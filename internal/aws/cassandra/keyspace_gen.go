@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cassandra_keyspace", keyspace)
+	registry.AddResourceTypeFactory("aws_cassandra_keyspace", keyspaceResourceType)
 }
 
-// keyspace returns the Terraform aws_cassandra_keyspace resource type.
+// keyspaceResourceType returns the Terraform aws_cassandra_keyspace resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Cassandra::Keyspace resource type.
-func keyspace(ctx context.Context) (tfsdk.ResourceType, error) {
+func keyspaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"keyspace_name": {
 			// Property: KeyspaceName

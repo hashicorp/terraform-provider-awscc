@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_macie_custom_data_identifier", customDataIdentifier)
+	registry.AddResourceTypeFactory("aws_macie_custom_data_identifier", customDataIdentifierResourceType)
 }
 
-// customDataIdentifier returns the Terraform aws_macie_custom_data_identifier resource type.
+// customDataIdentifierResourceType returns the Terraform aws_macie_custom_data_identifier resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Macie::CustomDataIdentifier resource type.
-func customDataIdentifier(ctx context.Context) (tfsdk.ResourceType, error) {
+func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

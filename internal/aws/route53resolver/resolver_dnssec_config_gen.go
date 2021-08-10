@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53resolver_resolver_dnssec_config", resolverDNSSECConfig)
+	registry.AddResourceTypeFactory("aws_route53resolver_resolver_dnssec_config", resolverDNSSECConfigResourceType)
 }
 
-// resolverDNSSECConfig returns the Terraform aws_route53resolver_resolver_dnssec_config resource type.
+// resolverDNSSECConfigResourceType returns the Terraform aws_route53resolver_resolver_dnssec_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::ResolverDNSSECConfig resource type.
-func resolverDNSSECConfig(ctx context.Context) (tfsdk.ResourceType, error) {
+func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"id": {
 			// Property: Id

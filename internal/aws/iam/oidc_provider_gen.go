@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iam_oidc_provider", oIDCProvider)
+	registry.AddResourceTypeFactory("aws_iam_oidc_provider", oIDCProviderResourceType)
 }
 
-// oIDCProvider returns the Terraform aws_iam_oidc_provider resource type.
+// oIDCProviderResourceType returns the Terraform aws_iam_oidc_provider resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IAM::OIDCProvider resource type.
-func oIDCProvider(ctx context.Context) (tfsdk.ResourceType, error) {
+func oIDCProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_acmpca_certificate_authority", certificateAuthority)
+	registry.AddResourceTypeFactory("aws_acmpca_certificate_authority", certificateAuthorityResourceType)
 }
 
-// certificateAuthority returns the Terraform aws_acmpca_certificate_authority resource type.
+// certificateAuthorityResourceType returns the Terraform aws_acmpca_certificate_authority resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ACMPCA::CertificateAuthority resource type.
-func certificateAuthority(ctx context.Context) (tfsdk.ResourceType, error) {
+func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

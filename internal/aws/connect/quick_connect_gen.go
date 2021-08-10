@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_connect_quick_connect", quickConnect)
+	registry.AddResourceTypeFactory("aws_connect_quick_connect", quickConnectResourceType)
 }
 
-// quickConnect returns the Terraform aws_connect_quick_connect resource type.
+// quickConnectResourceType returns the Terraform aws_connect_quick_connect resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Connect::QuickConnect resource type.
-func quickConnect(ctx context.Context) (tfsdk.ResourceType, error) {
+func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"description": {
 			// Property: Description

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_nimblestudio_studio_component", studioComponent)
+	registry.AddResourceTypeFactory("aws_nimblestudio_studio_component", studioComponentResourceType)
 }
 
-// studioComponent returns the Terraform aws_nimblestudio_studio_component resource type.
+// studioComponentResourceType returns the Terraform aws_nimblestudio_studio_component resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NimbleStudio::StudioComponent resource type.
-func studioComponent(ctx context.Context) (tfsdk.ResourceType, error) {
+func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"configuration": {
 			// Property: Configuration

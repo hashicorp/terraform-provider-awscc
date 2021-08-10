@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iam_virtual_mfa_device", virtualMFADevice)
+	registry.AddResourceTypeFactory("aws_iam_virtual_mfa_device", virtualMFADeviceResourceType)
 }
 
-// virtualMFADevice returns the Terraform aws_iam_virtual_mfa_device resource type.
+// virtualMFADeviceResourceType returns the Terraform aws_iam_virtual_mfa_device resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IAM::VirtualMFADevice resource type.
-func virtualMFADevice(ctx context.Context) (tfsdk.ResourceType, error) {
+func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"path": {
 			// Property: Path

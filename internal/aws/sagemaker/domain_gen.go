@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_domain", domain)
+	registry.AddResourceTypeFactory("aws_sagemaker_domain", domainResourceType)
 }
 
-// domain returns the Terraform aws_sagemaker_domain resource type.
+// domainResourceType returns the Terraform aws_sagemaker_domain resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::Domain resource type.
-func domain(ctx context.Context) (tfsdk.ResourceType, error) {
+func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"app_network_access_type": {
 			// Property: AppNetworkAccessType

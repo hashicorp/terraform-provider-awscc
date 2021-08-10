@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_rds_db_proxy", dBProxy)
+	registry.AddResourceTypeFactory("aws_rds_db_proxy", dBProxyResourceType)
 }
 
-// dBProxy returns the Terraform aws_rds_db_proxy resource type.
+// dBProxyResourceType returns the Terraform aws_rds_db_proxy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBProxy resource type.
-func dBProxy(ctx context.Context) (tfsdk.ResourceType, error) {
+func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"auth": {
 			// Property: Auth

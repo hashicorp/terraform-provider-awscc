@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_customer_gateway_association", customerGatewayAssociation)
+	registry.AddResourceTypeFactory("aws_networkmanager_customer_gateway_association", customerGatewayAssociationResourceType)
 }
 
-// customerGatewayAssociation returns the Terraform aws_networkmanager_customer_gateway_association resource type.
+// customerGatewayAssociationResourceType returns the Terraform aws_networkmanager_customer_gateway_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::CustomerGatewayAssociation resource type.
-func customerGatewayAssociation(ctx context.Context) (tfsdk.ResourceType, error) {
+func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"customer_gateway_arn": {
 			// Property: CustomerGatewayArn

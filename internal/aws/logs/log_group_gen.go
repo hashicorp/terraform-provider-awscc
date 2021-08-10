@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_logs_log_group", logGroup)
+	registry.AddResourceTypeFactory("aws_logs_log_group", logGroupResourceType)
 }
 
-// logGroup returns the Terraform aws_logs_log_group resource type.
+// logGroupResourceType returns the Terraform aws_logs_log_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Logs::LogGroup resource type.
-func logGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func logGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

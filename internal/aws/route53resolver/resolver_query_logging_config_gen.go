@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53resolver_resolver_query_logging_config", resolverQueryLoggingConfig)
+	registry.AddResourceTypeFactory("aws_route53resolver_resolver_query_logging_config", resolverQueryLoggingConfigResourceType)
 }
 
-// resolverQueryLoggingConfig returns the Terraform aws_route53resolver_resolver_query_logging_config resource type.
+// resolverQueryLoggingConfigResourceType returns the Terraform aws_route53resolver_resolver_query_logging_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfig resource type.
-func resolverQueryLoggingConfig(ctx context.Context) (tfsdk.ResourceType, error) {
+func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

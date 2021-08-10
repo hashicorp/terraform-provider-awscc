@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_workspaces_connection_alias", connectionAlias)
+	registry.AddResourceTypeFactory("aws_workspaces_connection_alias", connectionAliasResourceType)
 }
 
-// connectionAlias returns the Terraform aws_workspaces_connection_alias resource type.
+// connectionAliasResourceType returns the Terraform aws_workspaces_connection_alias resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WorkSpaces::ConnectionAlias resource type.
-func connectionAlias(ctx context.Context) (tfsdk.ResourceType, error) {
+func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"alias_id": {
 			// Property: AliasId

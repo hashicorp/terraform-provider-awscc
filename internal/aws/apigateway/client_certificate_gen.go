@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_apigateway_client_certificate", clientCertificate)
+	registry.AddResourceTypeFactory("aws_apigateway_client_certificate", clientCertificateResourceType)
 }
 
-// clientCertificate returns the Terraform aws_apigateway_client_certificate resource type.
+// clientCertificateResourceType returns the Terraform aws_apigateway_client_certificate resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::ClientCertificate resource type.
-func clientCertificate(ctx context.Context) (tfsdk.ResourceType, error) {
+func clientCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"client_certificate_id": {
 			// Property: ClientCertificateId

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_autoscaling_warm_pool", warmPool)
+	registry.AddResourceTypeFactory("aws_autoscaling_warm_pool", warmPoolResourceType)
 }
 
-// warmPool returns the Terraform aws_autoscaling_warm_pool resource type.
+// warmPoolResourceType returns the Terraform aws_autoscaling_warm_pool resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AutoScaling::WarmPool resource type.
-func warmPool(ctx context.Context) (tfsdk.ResourceType, error) {
+func warmPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"auto_scaling_group_name": {
 			// Property: AutoScalingGroupName

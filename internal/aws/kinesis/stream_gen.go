@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_kinesis_stream", stream)
+	registry.AddResourceTypeFactory("aws_kinesis_stream", streamResourceType)
 }
 
-// stream returns the Terraform aws_kinesis_stream resource type.
+// streamResourceType returns the Terraform aws_kinesis_stream resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Kinesis::Stream resource type.
-func stream(ctx context.Context) (tfsdk.ResourceType, error) {
+func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

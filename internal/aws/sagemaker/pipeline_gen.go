@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_pipeline", pipeline)
+	registry.AddResourceTypeFactory("aws_sagemaker_pipeline", pipelineResourceType)
 }
 
-// pipeline returns the Terraform aws_sagemaker_pipeline resource type.
+// pipelineResourceType returns the Terraform aws_sagemaker_pipeline resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::Pipeline resource type.
-func pipeline(ctx context.Context) (tfsdk.ResourceType, error) {
+func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"pipeline_definition": {
 			// Property: PipelineDefinition

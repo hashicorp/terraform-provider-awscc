@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_quicksight_theme", theme)
+	registry.AddResourceTypeFactory("aws_quicksight_theme", themeResourceType)
 }
 
-// theme returns the Terraform aws_quicksight_theme resource type.
+// themeResourceType returns the Terraform aws_quicksight_theme resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::QuickSight::Theme resource type.
-func theme(ctx context.Context) (tfsdk.ResourceType, error) {
+func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

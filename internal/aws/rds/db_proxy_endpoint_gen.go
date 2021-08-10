@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_rds_db_proxy_endpoint", dBProxyEndpoint)
+	registry.AddResourceTypeFactory("aws_rds_db_proxy_endpoint", dBProxyEndpointResourceType)
 }
 
-// dBProxyEndpoint returns the Terraform aws_rds_db_proxy_endpoint resource type.
+// dBProxyEndpointResourceType returns the Terraform aws_rds_db_proxy_endpoint resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBProxyEndpoint resource type.
-func dBProxyEndpoint(ctx context.Context) (tfsdk.ResourceType, error) {
+func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"db_proxy_endpoint_arn": {
 			// Property: DBProxyEndpointArn

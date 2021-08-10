@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotwireless_destination", destination)
+	registry.AddResourceTypeFactory("aws_iotwireless_destination", destinationResourceType)
 }
 
-// destination returns the Terraform aws_iotwireless_destination resource type.
+// destinationResourceType returns the Terraform aws_iotwireless_destination resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::Destination resource type.
-func destination(ctx context.Context) (tfsdk.ResourceType, error) {
+func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

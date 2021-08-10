@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotsitewise_access_policy", accessPolicy)
+	registry.AddResourceTypeFactory("aws_iotsitewise_access_policy", accessPolicyResourceType)
 }
 
-// accessPolicy returns the Terraform aws_iotsitewise_access_policy resource type.
+// accessPolicyResourceType returns the Terraform aws_iotsitewise_access_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::AccessPolicy resource type.
-func accessPolicy(ctx context.Context) (tfsdk.ResourceType, error) {
+func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"access_policy_arn": {
 			// Property: AccessPolicyArn

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_config_conformance_pack", conformancePack)
+	registry.AddResourceTypeFactory("aws_config_conformance_pack", conformancePackResourceType)
 }
 
-// conformancePack returns the Terraform aws_config_conformance_pack resource type.
+// conformancePackResourceType returns the Terraform aws_config_conformance_pack resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::ConformancePack resource type.
-func conformancePack(ctx context.Context) (tfsdk.ResourceType, error) {
+func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"conformance_pack_input_parameters": {
 			// Property: ConformancePackInputParameters

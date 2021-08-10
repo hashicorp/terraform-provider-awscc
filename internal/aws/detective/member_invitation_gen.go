@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_detective_member_invitation", memberInvitation)
+	registry.AddResourceTypeFactory("aws_detective_member_invitation", memberInvitationResourceType)
 }
 
-// memberInvitation returns the Terraform aws_detective_member_invitation resource type.
+// memberInvitationResourceType returns the Terraform aws_detective_member_invitation resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Detective::MemberInvitation resource type.
-func memberInvitation(ctx context.Context) (tfsdk.ResourceType, error) {
+func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"disable_email_notification": {
 			// Property: DisableEmailNotification

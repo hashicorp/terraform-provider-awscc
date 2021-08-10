@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudfront_cloud_front_origin_access_identity", cloudFrontOriginAccessIdentity)
+	registry.AddResourceTypeFactory("aws_cloudfront_cloud_front_origin_access_identity", cloudFrontOriginAccessIdentityResourceType)
 }
 
-// cloudFrontOriginAccessIdentity returns the Terraform aws_cloudfront_cloud_front_origin_access_identity resource type.
+// cloudFrontOriginAccessIdentityResourceType returns the Terraform aws_cloudfront_cloud_front_origin_access_identity resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::CloudFrontOriginAccessIdentity resource type.
-func cloudFrontOriginAccessIdentity(ctx context.Context) (tfsdk.ResourceType, error) {
+func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"cloud_front_origin_access_identity_config": {
 			// Property: CloudFrontOriginAccessIdentityConfig

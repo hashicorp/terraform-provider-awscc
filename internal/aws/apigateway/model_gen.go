@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_apigateway_model", model)
+	registry.AddResourceTypeFactory("aws_apigateway_model", modelResourceType)
 }
 
-// model returns the Terraform aws_apigateway_model resource type.
+// modelResourceType returns the Terraform aws_apigateway_model resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::Model resource type.
-func model(ctx context.Context) (tfsdk.ResourceType, error) {
+func modelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"content_type": {
 			// Property: ContentType

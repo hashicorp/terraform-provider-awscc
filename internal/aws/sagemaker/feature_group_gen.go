@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_feature_group", featureGroup)
+	registry.AddResourceTypeFactory("aws_sagemaker_feature_group", featureGroupResourceType)
 }
 
-// featureGroup returns the Terraform aws_sagemaker_feature_group resource type.
+// featureGroupResourceType returns the Terraform aws_sagemaker_feature_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::FeatureGroup resource type.
-func featureGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"description": {
 			// Property: Description

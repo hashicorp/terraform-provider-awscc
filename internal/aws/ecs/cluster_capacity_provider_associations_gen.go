@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecs_cluster_capacity_provider_associations", clusterCapacityProviderAssociations)
+	registry.AddResourceTypeFactory("aws_ecs_cluster_capacity_provider_associations", clusterCapacityProviderAssociationsResourceType)
 }
 
-// clusterCapacityProviderAssociations returns the Terraform aws_ecs_cluster_capacity_provider_associations resource type.
+// clusterCapacityProviderAssociationsResourceType returns the Terraform aws_ecs_cluster_capacity_provider_associations resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::ClusterCapacityProviderAssociations resource type.
-func clusterCapacityProviderAssociations(ctx context.Context) (tfsdk.ResourceType, error) {
+func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"capacity_providers": {
 			// Property: CapacityProviders

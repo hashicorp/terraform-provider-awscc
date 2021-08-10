@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sso_instance_access_control_attribute_configuration", instanceAccessControlAttributeConfiguration)
+	registry.AddResourceTypeFactory("aws_sso_instance_access_control_attribute_configuration", instanceAccessControlAttributeConfigurationResourceType)
 }
 
-// instanceAccessControlAttributeConfiguration returns the Terraform aws_sso_instance_access_control_attribute_configuration resource type.
+// instanceAccessControlAttributeConfigurationResourceType returns the Terraform aws_sso_instance_access_control_attribute_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSO::InstanceAccessControlAttributeConfiguration resource type.
-func instanceAccessControlAttributeConfiguration(ctx context.Context) (tfsdk.ResourceType, error) {
+func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"access_control_attributes": {
 			// Property: AccessControlAttributes

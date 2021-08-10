@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53resolver_firewall_rule_group_association", firewallRuleGroupAssociation)
+	registry.AddResourceTypeFactory("aws_route53resolver_firewall_rule_group_association", firewallRuleGroupAssociationResourceType)
 }
 
-// firewallRuleGroupAssociation returns the Terraform aws_route53resolver_firewall_rule_group_association resource type.
+// firewallRuleGroupAssociationResourceType returns the Terraform aws_route53resolver_firewall_rule_group_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::FirewallRuleGroupAssociation resource type.
-func firewallRuleGroupAssociation(ctx context.Context) (tfsdk.ResourceType, error) {
+func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

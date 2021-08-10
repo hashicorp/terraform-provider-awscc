@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_user_profile", userProfile)
+	registry.AddResourceTypeFactory("aws_sagemaker_user_profile", userProfileResourceType)
 }
 
-// userProfile returns the Terraform aws_sagemaker_user_profile resource type.
+// userProfileResourceType returns the Terraform aws_sagemaker_user_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::UserProfile resource type.
-func userProfile(ctx context.Context) (tfsdk.ResourceType, error) {
+func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"domain_id": {
 			// Property: DomainId

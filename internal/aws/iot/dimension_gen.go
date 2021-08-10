@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_dimension", dimension)
+	registry.AddResourceTypeFactory("aws_iot_dimension", dimensionResourceType)
 }
 
-// dimension returns the Terraform aws_iot_dimension resource type.
+// dimensionResourceType returns the Terraform aws_iot_dimension resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::Dimension resource type.
-func dimension(ctx context.Context) (tfsdk.ResourceType, error) {
+func dimensionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

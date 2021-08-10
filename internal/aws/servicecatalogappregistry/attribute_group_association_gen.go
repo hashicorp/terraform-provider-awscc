@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_servicecatalogappregistry_attribute_group_association", attributeGroupAssociation)
+	registry.AddResourceTypeFactory("aws_servicecatalogappregistry_attribute_group_association", attributeGroupAssociationResourceType)
 }
 
-// attributeGroupAssociation returns the Terraform aws_servicecatalogappregistry_attribute_group_association resource type.
+// attributeGroupAssociationResourceType returns the Terraform aws_servicecatalogappregistry_attribute_group_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation resource type.
-func attributeGroupAssociation(ctx context.Context) (tfsdk.ResourceType, error) {
+func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"application": {
 			// Property: Application

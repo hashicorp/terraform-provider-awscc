@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_dynamodb_global_table", globalTable)
+	registry.AddResourceTypeFactory("aws_dynamodb_global_table", globalTableResourceType)
 }
 
-// globalTable returns the Terraform aws_dynamodb_global_table resource type.
+// globalTableResourceType returns the Terraform aws_dynamodb_global_table resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DynamoDB::GlobalTable resource type.
-func globalTable(ctx context.Context) (tfsdk.ResourceType, error) {
+func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

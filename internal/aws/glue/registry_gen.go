@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_glue_registry", registry)
+	registry.AddResourceTypeFactory("aws_glue_registry", registryResourceType)
 }
 
-// registry returns the Terraform aws_glue_registry resource type.
+// registryResourceType returns the Terraform aws_glue_registry resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Glue::Registry resource type.
-func registry(ctx context.Context) (tfsdk.ResourceType, error) {
+func registryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

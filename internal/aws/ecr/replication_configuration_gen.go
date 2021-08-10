@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecr_replication_configuration", replicationConfiguration)
+	registry.AddResourceTypeFactory("aws_ecr_replication_configuration", replicationConfigurationResourceType)
 }
 
-// replicationConfiguration returns the Terraform aws_ecr_replication_configuration resource type.
+// replicationConfigurationResourceType returns the Terraform aws_ecr_replication_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECR::ReplicationConfiguration resource type.
-func replicationConfiguration(ctx context.Context) (tfsdk.ResourceType, error) {
+func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"registry_id": {
 			// Property: RegistryId

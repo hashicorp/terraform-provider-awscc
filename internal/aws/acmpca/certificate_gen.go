@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_acmpca_certificate", certificate)
+	registry.AddResourceTypeFactory("aws_acmpca_certificate", certificateResourceType)
 }
 
-// certificate returns the Terraform aws_acmpca_certificate resource type.
+// certificateResourceType returns the Terraform aws_acmpca_certificate resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ACMPCA::Certificate resource type.
-func certificate(ctx context.Context) (tfsdk.ResourceType, error) {
+func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"api_passthrough": {
 			// Property: ApiPassthrough

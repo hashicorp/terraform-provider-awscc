@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoverycontrol_safety_rule", safetyRule)
+	registry.AddResourceTypeFactory("aws_route53recoverycontrol_safety_rule", safetyRuleResourceType)
 }
 
-// safetyRule returns the Terraform aws_route53recoverycontrol_safety_rule resource type.
+// safetyRuleResourceType returns the Terraform aws_route53recoverycontrol_safety_rule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryControl::SafetyRule resource type.
-func safetyRule(ctx context.Context) (tfsdk.ResourceType, error) {
+func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"assertion_rule": {
 			// Property: AssertionRule

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_databrew_job", job)
+	registry.AddResourceTypeFactory("aws_databrew_job", jobResourceType)
 }
 
-// job returns the Terraform aws_databrew_job resource type.
+// jobResourceType returns the Terraform aws_databrew_job resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataBrew::Job resource type.
-func job(ctx context.Context) (tfsdk.ResourceType, error) {
+func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"data_catalog_outputs": {
 			// Property: DataCatalogOutputs

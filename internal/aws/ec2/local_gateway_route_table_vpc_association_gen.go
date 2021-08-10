@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_local_gateway_route_table_vpc_association", localGatewayRouteTableVPCAssociation)
+	registry.AddResourceTypeFactory("aws_ec2_local_gateway_route_table_vpc_association", localGatewayRouteTableVPCAssociationResourceType)
 }
 
-// localGatewayRouteTableVPCAssociation returns the Terraform aws_ec2_local_gateway_route_table_vpc_association resource type.
+// localGatewayRouteTableVPCAssociationResourceType returns the Terraform aws_ec2_local_gateway_route_table_vpc_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::LocalGatewayRouteTableVPCAssociation resource type.
-func localGatewayRouteTableVPCAssociation(ctx context.Context) (tfsdk.ResourceType, error) {
+func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"local_gateway_id": {
 			// Property: LocalGatewayId

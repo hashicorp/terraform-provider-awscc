@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_transit_gateway", transitGateway)
+	registry.AddResourceTypeFactory("aws_ec2_transit_gateway", transitGatewayResourceType)
 }
 
-// transitGateway returns the Terraform aws_ec2_transit_gateway resource type.
+// transitGatewayResourceType returns the Terraform aws_ec2_transit_gateway resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGateway resource type.
-func transitGateway(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"amazon_side_asn": {
 			// Property: AmazonSideAsn

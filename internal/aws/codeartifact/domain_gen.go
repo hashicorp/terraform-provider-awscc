@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_codeartifact_domain", domain)
+	registry.AddResourceTypeFactory("aws_codeartifact_domain", domainResourceType)
 }
 
-// domain returns the Terraform aws_codeartifact_domain resource type.
+// domainResourceType returns the Terraform aws_codeartifact_domain resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CodeArtifact::Domain resource type.
-func domain(ctx context.Context) (tfsdk.ResourceType, error) {
+func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

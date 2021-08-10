@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_frauddetector_label", label)
+	registry.AddResourceTypeFactory("aws_frauddetector_label", labelResourceType)
 }
 
-// label returns the Terraform aws_frauddetector_label resource type.
+// labelResourceType returns the Terraform aws_frauddetector_label resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FraudDetector::Label resource type.
-func label(ctx context.Context) (tfsdk.ResourceType, error) {
+func labelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

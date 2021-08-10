@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudfront_key_group", keyGroup)
+	registry.AddResourceTypeFactory("aws_cloudfront_key_group", keyGroupResourceType)
 }
 
-// keyGroup returns the Terraform aws_cloudfront_key_group resource type.
+// keyGroupResourceType returns the Terraform aws_cloudfront_key_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::KeyGroup resource type.
-func keyGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func keyGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"id": {
 			// Property: Id

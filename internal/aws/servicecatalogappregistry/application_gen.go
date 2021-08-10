@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_servicecatalogappregistry_application", application)
+	registry.AddResourceTypeFactory("aws_servicecatalogappregistry_application", applicationResourceType)
 }
 
-// application returns the Terraform aws_servicecatalogappregistry_application resource type.
+// applicationResourceType returns the Terraform aws_servicecatalogappregistry_application resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalogAppRegistry::Application resource type.
-func application(ctx context.Context) (tfsdk.ResourceType, error) {
+func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

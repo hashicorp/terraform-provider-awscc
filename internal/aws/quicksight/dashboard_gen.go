@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_quicksight_dashboard", dashboard)
+	registry.AddResourceTypeFactory("aws_quicksight_dashboard", dashboardResourceType)
 }
 
-// dashboard returns the Terraform aws_quicksight_dashboard resource type.
+// dashboardResourceType returns the Terraform aws_quicksight_dashboard resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::QuickSight::Dashboard resource type.
-func dashboard(ctx context.Context) (tfsdk.ResourceType, error) {
+func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_emrcontainers_virtual_cluster", virtualCluster)
+	registry.AddResourceTypeFactory("aws_emrcontainers_virtual_cluster", virtualClusterResourceType)
 }
 
-// virtualCluster returns the Terraform aws_emrcontainers_virtual_cluster resource type.
+// virtualClusterResourceType returns the Terraform aws_emrcontainers_virtual_cluster resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EMRContainers::VirtualCluster resource type.
-func virtualCluster(ctx context.Context) (tfsdk.ResourceType, error) {
+func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sso_assignment", assignment)
+	registry.AddResourceTypeFactory("aws_sso_assignment", assignmentResourceType)
 }
 
-// assignment returns the Terraform aws_sso_assignment resource type.
+// assignmentResourceType returns the Terraform aws_sso_assignment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSO::Assignment resource type.
-func assignment(ctx context.Context) (tfsdk.ResourceType, error) {
+func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"instance_arn": {
 			// Property: InstanceArn

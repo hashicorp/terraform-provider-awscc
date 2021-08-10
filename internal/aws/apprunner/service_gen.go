@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_apprunner_service", service)
+	registry.AddResourceTypeFactory("aws_apprunner_service", serviceResourceType)
 }
 
-// service returns the Terraform aws_apprunner_service resource type.
+// serviceResourceType returns the Terraform aws_apprunner_service resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppRunner::Service resource type.
-func service(ctx context.Context) (tfsdk.ResourceType, error) {
+func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"auto_scaling_configuration_arn": {
 			// Property: AutoScalingConfigurationArn

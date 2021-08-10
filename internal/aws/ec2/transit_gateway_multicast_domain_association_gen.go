@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_multicast_domain_association", transitGatewayMulticastDomainAssociation)
+	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_multicast_domain_association", transitGatewayMulticastDomainAssociationResourceType)
 }
 
-// transitGatewayMulticastDomainAssociation returns the Terraform aws_ec2_transit_gateway_multicast_domain_association resource type.
+// transitGatewayMulticastDomainAssociationResourceType returns the Terraform aws_ec2_transit_gateway_multicast_domain_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastDomainAssociation resource type.
-func transitGatewayMulticastDomainAssociation(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"resource_id": {
 			// Property: ResourceId

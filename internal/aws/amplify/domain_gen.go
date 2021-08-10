@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_amplify_domain", domain)
+	registry.AddResourceTypeFactory("aws_amplify_domain", domainResourceType)
 }
 
-// domain returns the Terraform aws_amplify_domain resource type.
+// domainResourceType returns the Terraform aws_amplify_domain resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Amplify::Domain resource type.
-func domain(ctx context.Context) (tfsdk.ResourceType, error) {
+func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"app_id": {
 			// Property: AppId

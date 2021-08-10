@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudfront_distribution", distribution)
+	registry.AddResourceTypeFactory("aws_cloudfront_distribution", distributionResourceType)
 }
 
-// distribution returns the Terraform aws_cloudfront_distribution resource type.
+// distributionResourceType returns the Terraform aws_cloudfront_distribution resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::Distribution resource type.
-func distribution(ctx context.Context) (tfsdk.ResourceType, error) {
+func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"distribution_config": {
 			// Property: DistributionConfig

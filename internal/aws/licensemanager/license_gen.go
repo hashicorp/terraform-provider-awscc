@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_licensemanager_license", license)
+	registry.AddResourceTypeFactory("aws_licensemanager_license", licenseResourceType)
 }
 
-// license returns the Terraform aws_licensemanager_license resource type.
+// licenseResourceType returns the Terraform aws_licensemanager_license resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LicenseManager::License resource type.
-func license(ctx context.Context) (tfsdk.ResourceType, error) {
+func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"beneficiary": {
 			// Property: Beneficiary

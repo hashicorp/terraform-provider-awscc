@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecs_task_set", taskSet)
+	registry.AddResourceTypeFactory("aws_ecs_task_set", taskSetResourceType)
 }
 
-// taskSet returns the Terraform aws_ecs_task_set resource type.
+// taskSetResourceType returns the Terraform aws_ecs_task_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::TaskSet resource type.
-func taskSet(ctx context.Context) (tfsdk.ResourceType, error) {
+func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"cluster": {
 			// Property: Cluster

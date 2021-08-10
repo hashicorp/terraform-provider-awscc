@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotsitewise_portal", portal)
+	registry.AddResourceTypeFactory("aws_iotsitewise_portal", portalResourceType)
 }
 
-// portal returns the Terraform aws_iotsitewise_portal resource type.
+// portalResourceType returns the Terraform aws_iotsitewise_portal resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::Portal resource type.
-func portal(ctx context.Context) (tfsdk.ResourceType, error) {
+func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"alarms": {
 			// Property: Alarms

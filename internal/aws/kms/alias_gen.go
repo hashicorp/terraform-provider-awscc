@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_kms_alias", alias)
+	registry.AddResourceTypeFactory("aws_kms_alias", aliasResourceType)
 }
 
-// alias returns the Terraform aws_kms_alias resource type.
+// aliasResourceType returns the Terraform aws_kms_alias resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::KMS::Alias resource type.
-func alias(ctx context.Context) (tfsdk.ResourceType, error) {
+func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"alias_name": {
 			// Property: AliasName

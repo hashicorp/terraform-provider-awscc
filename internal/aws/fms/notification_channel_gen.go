@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_fms_notification_channel", notificationChannel)
+	registry.AddResourceTypeFactory("aws_fms_notification_channel", notificationChannelResourceType)
 }
 
-// notificationChannel returns the Terraform aws_fms_notification_channel resource type.
+// notificationChannelResourceType returns the Terraform aws_fms_notification_channel resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FMS::NotificationChannel resource type.
-func notificationChannel(ctx context.Context) (tfsdk.ResourceType, error) {
+func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"sns_role_name": {
 			// Property: SnsRoleName

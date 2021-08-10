@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_codeartifact_repository", repository)
+	registry.AddResourceTypeFactory("aws_codeartifact_repository", repositoryResourceType)
 }
 
-// repository returns the Terraform aws_codeartifact_repository resource type.
+// repositoryResourceType returns the Terraform aws_codeartifact_repository resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CodeArtifact::Repository resource type.
-func repository(ctx context.Context) (tfsdk.ResourceType, error) {
+func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

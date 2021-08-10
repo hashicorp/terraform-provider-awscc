@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_efs_access_point", accessPoint)
+	registry.AddResourceTypeFactory("aws_efs_access_point", accessPointResourceType)
 }
 
-// accessPoint returns the Terraform aws_efs_access_point resource type.
+// accessPointResourceType returns the Terraform aws_efs_access_point resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EFS::AccessPoint resource type.
-func accessPoint(ctx context.Context) (tfsdk.ResourceType, error) {
+func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"access_point_id": {
 			// Property: AccessPointId

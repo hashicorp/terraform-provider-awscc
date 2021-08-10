@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_logs_query_definition", queryDefinition)
+	registry.AddResourceTypeFactory("aws_logs_query_definition", queryDefinitionResourceType)
 }
 
-// queryDefinition returns the Terraform aws_logs_query_definition resource type.
+// queryDefinitionResourceType returns the Terraform aws_logs_query_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Logs::QueryDefinition resource type.
-func queryDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
+func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"log_group_names": {
 			// Property: LogGroupNames

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoveryreadiness_cell", cell)
+	registry.AddResourceTypeFactory("aws_route53recoveryreadiness_cell", cellResourceType)
 }
 
-// cell returns the Terraform aws_route53recoveryreadiness_cell resource type.
+// cellResourceType returns the Terraform aws_route53recoveryreadiness_cell resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::Cell resource type.
-func cell(ctx context.Context) (tfsdk.ResourceType, error) {
+func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"cell_arn": {
 			// Property: CellArn

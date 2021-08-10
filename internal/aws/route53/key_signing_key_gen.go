@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53_key_signing_key", keySigningKey)
+	registry.AddResourceTypeFactory("aws_route53_key_signing_key", keySigningKeyResourceType)
 }
 
-// keySigningKey returns the Terraform aws_route53_key_signing_key resource type.
+// keySigningKeyResourceType returns the Terraform aws_route53_key_signing_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53::KeySigningKey resource type.
-func keySigningKey(ctx context.Context) (tfsdk.ResourceType, error) {
+func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"hosted_zone_id": {
 			// Property: HostedZoneId

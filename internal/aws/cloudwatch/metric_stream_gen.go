@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudwatch_metric_stream", metricStream)
+	registry.AddResourceTypeFactory("aws_cloudwatch_metric_stream", metricStreamResourceType)
 }
 
-// metricStream returns the Terraform aws_cloudwatch_metric_stream resource type.
+// metricStreamResourceType returns the Terraform aws_cloudwatch_metric_stream resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudWatch::MetricStream resource type.
-func metricStream(ctx context.Context) (tfsdk.ResourceType, error) {
+func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

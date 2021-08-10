@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_synthetics_canary", canary)
+	registry.AddResourceTypeFactory("aws_synthetics_canary", canaryResourceType)
 }
 
-// canary returns the Terraform aws_synthetics_canary resource type.
+// canaryResourceType returns the Terraform aws_synthetics_canary resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Synthetics::Canary resource type.
-func canary(ctx context.Context) (tfsdk.ResourceType, error) {
+func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"artifact_s3_location": {
 			// Property: ArtifactS3Location

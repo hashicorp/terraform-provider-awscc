@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_kinesisfirehose_delivery_stream", deliveryStream)
+	registry.AddResourceTypeFactory("aws_kinesisfirehose_delivery_stream", deliveryStreamResourceType)
 }
 
-// deliveryStream returns the Terraform aws_kinesisfirehose_delivery_stream resource type.
+// deliveryStreamResourceType returns the Terraform aws_kinesisfirehose_delivery_stream resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::KinesisFirehose::DeliveryStream resource type.
-func deliveryStream(ctx context.Context) (tfsdk.ResourceType, error) {
+func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

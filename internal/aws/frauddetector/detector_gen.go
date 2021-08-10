@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_frauddetector_detector", detector)
+	registry.AddResourceTypeFactory("aws_frauddetector_detector", detectorResourceType)
 }
 
-// detector returns the Terraform aws_frauddetector_detector resource type.
+// detectorResourceType returns the Terraform aws_frauddetector_detector resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FraudDetector::Detector resource type.
-func detector(ctx context.Context) (tfsdk.ResourceType, error) {
+func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

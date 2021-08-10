@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudformation_type_activation", typeActivation)
+	registry.AddResourceTypeFactory("aws_cloudformation_type_activation", typeActivationResourceType)
 }
 
-// typeActivation returns the Terraform aws_cloudformation_type_activation resource type.
+// typeActivationResourceType returns the Terraform aws_cloudformation_type_activation resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::TypeActivation resource type.
-func typeActivation(ctx context.Context) (tfsdk.ResourceType, error) {
+func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

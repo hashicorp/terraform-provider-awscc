@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_customerprofiles_object_type", objectType)
+	registry.AddResourceTypeFactory("aws_customerprofiles_object_type", objectTypeResourceType)
 }
 
-// objectType returns the Terraform aws_customerprofiles_object_type resource type.
+// objectTypeResourceType returns the Terraform aws_customerprofiles_object_type resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CustomerProfiles::ObjectType resource type.
-func objectType(ctx context.Context) (tfsdk.ResourceType, error) {
+func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"allow_profile_creation": {
 			// Property: AllowProfileCreation

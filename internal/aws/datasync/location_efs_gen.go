@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_location_efs", locationEFS)
+	registry.AddResourceTypeFactory("aws_datasync_location_efs", locationEFSResourceType)
 }
 
-// locationEFS returns the Terraform aws_datasync_location_efs resource type.
+// locationEFSResourceType returns the Terraform aws_datasync_location_efs resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationEFS resource type.
-func locationEFS(ctx context.Context) (tfsdk.ResourceType, error) {
+func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"ec_2_config": {
 			// Property: Ec2Config

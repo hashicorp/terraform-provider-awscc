@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_quicksight_analysis", analysis)
+	registry.AddResourceTypeFactory("aws_quicksight_analysis", analysisResourceType)
 }
 
-// analysis returns the Terraform aws_quicksight_analysis resource type.
+// analysisResourceType returns the Terraform aws_quicksight_analysis resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::QuickSight::Analysis resource type.
-func analysis(ctx context.Context) (tfsdk.ResourceType, error) {
+func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"analysis_id": {
 			// Property: AnalysisId

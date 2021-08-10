@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_elasticloadbalancingv2_listener_rule", listenerRule)
+	registry.AddResourceTypeFactory("aws_elasticloadbalancingv2_listener_rule", listenerRuleResourceType)
 }
 
-// listenerRule returns the Terraform aws_elasticloadbalancingv2_listener_rule resource type.
+// listenerRuleResourceType returns the Terraform aws_elasticloadbalancingv2_listener_rule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ElasticLoadBalancingV2::ListenerRule resource type.
-func listenerRule(ctx context.Context) (tfsdk.ResourceType, error) {
+func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"actions": {
 			// Property: Actions

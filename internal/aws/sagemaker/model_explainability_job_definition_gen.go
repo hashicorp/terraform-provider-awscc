@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_model_explainability_job_definition", modelExplainabilityJobDefinition)
+	registry.AddResourceTypeFactory("aws_sagemaker_model_explainability_job_definition", modelExplainabilityJobDefinitionResourceType)
 }
 
-// modelExplainabilityJobDefinition returns the Terraform aws_sagemaker_model_explainability_job_definition resource type.
+// modelExplainabilityJobDefinitionResourceType returns the Terraform aws_sagemaker_model_explainability_job_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelExplainabilityJobDefinition resource type.
-func modelExplainabilityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
+func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"creation_time": {
 			// Property: CreationTime

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_appflow_flow", flow)
+	registry.AddResourceTypeFactory("aws_appflow_flow", flowResourceType)
 }
 
-// flow returns the Terraform aws_appflow_flow resource type.
+// flowResourceType returns the Terraform aws_appflow_flow resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppFlow::Flow resource type.
-func flow(ctx context.Context) (tfsdk.ResourceType, error) {
+func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"description": {
 			// Property: Description

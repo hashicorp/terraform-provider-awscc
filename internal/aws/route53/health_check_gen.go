@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53_health_check", healthCheck)
+	registry.AddResourceTypeFactory("aws_route53_health_check", healthCheckResourceType)
 }
 
-// healthCheck returns the Terraform aws_route53_health_check resource type.
+// healthCheckResourceType returns the Terraform aws_route53_health_check resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53::HealthCheck resource type.
-func healthCheck(ctx context.Context) (tfsdk.ResourceType, error) {
+func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"health_check_config": {
 			// Property: HealthCheckConfig

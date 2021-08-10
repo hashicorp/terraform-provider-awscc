@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_network_insights_analysis", networkInsightsAnalysis)
+	registry.AddResourceTypeFactory("aws_ec2_network_insights_analysis", networkInsightsAnalysisResourceType)
 }
 
-// networkInsightsAnalysis returns the Terraform aws_ec2_network_insights_analysis resource type.
+// networkInsightsAnalysisResourceType returns the Terraform aws_ec2_network_insights_analysis resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInsightsAnalysis resource type.
-func networkInsightsAnalysis(ctx context.Context) (tfsdk.ResourceType, error) {
+func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"alternate_path_hints": {
 			// Property: AlternatePathHints

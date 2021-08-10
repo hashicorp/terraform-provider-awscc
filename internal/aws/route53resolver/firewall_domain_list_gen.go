@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53resolver_firewall_domain_list", firewallDomainList)
+	registry.AddResourceTypeFactory("aws_route53resolver_firewall_domain_list", firewallDomainListResourceType)
 }
 
-// firewallDomainList returns the Terraform aws_route53resolver_firewall_domain_list resource type.
+// firewallDomainListResourceType returns the Terraform aws_route53resolver_firewall_domain_list resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::FirewallDomainList resource type.
-func firewallDomainList(ctx context.Context) (tfsdk.ResourceType, error) {
+func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_eks_addon", addon)
+	registry.AddResourceTypeFactory("aws_eks_addon", addonResourceType)
 }
 
-// addon returns the Terraform aws_eks_addon resource type.
+// addonResourceType returns the Terraform aws_eks_addon resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EKS::Addon resource type.
-func addon(ctx context.Context) (tfsdk.ResourceType, error) {
+func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"addon_name": {
 			// Property: AddonName

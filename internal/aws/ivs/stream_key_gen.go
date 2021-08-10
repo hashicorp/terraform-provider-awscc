@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ivs_stream_key", streamKey)
+	registry.AddResourceTypeFactory("aws_ivs_stream_key", streamKeyResourceType)
 }
 
-// streamKey returns the Terraform aws_ivs_stream_key resource type.
+// streamKeyResourceType returns the Terraform aws_ivs_stream_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IVS::StreamKey resource type.
-func streamKey(ctx context.Context) (tfsdk.ResourceType, error) {
+func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

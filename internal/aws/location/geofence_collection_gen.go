@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_location_geofence_collection", geofenceCollection)
+	registry.AddResourceTypeFactory("aws_location_geofence_collection", geofenceCollectionResourceType)
 }
 
-// geofenceCollection returns the Terraform aws_location_geofence_collection resource type.
+// geofenceCollectionResourceType returns the Terraform aws_location_geofence_collection resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Location::GeofenceCollection resource type.
-func geofenceCollection(ctx context.Context) (tfsdk.ResourceType, error) {
+func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"collection_arn": {
 			// Property: CollectionArn

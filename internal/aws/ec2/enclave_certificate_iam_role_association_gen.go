@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_enclave_certificate_iam_role_association", enclaveCertificateIamRoleAssociation)
+	registry.AddResourceTypeFactory("aws_ec2_enclave_certificate_iam_role_association", enclaveCertificateIamRoleAssociationResourceType)
 }
 
-// enclaveCertificateIamRoleAssociation returns the Terraform aws_ec2_enclave_certificate_iam_role_association resource type.
+// enclaveCertificateIamRoleAssociationResourceType returns the Terraform aws_ec2_enclave_certificate_iam_role_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::EnclaveCertificateIamRoleAssociation resource type.
-func enclaveCertificateIamRoleAssociation(ctx context.Context) (tfsdk.ResourceType, error) {
+func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"certificate_arn": {
 			// Property: CertificateArn

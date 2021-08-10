@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudformation_public_type_version", publicTypeVersion)
+	registry.AddResourceTypeFactory("aws_cloudformation_public_type_version", publicTypeVersionResourceType)
 }
 
-// publicTypeVersion returns the Terraform aws_cloudformation_public_type_version resource type.
+// publicTypeVersionResourceType returns the Terraform aws_cloudformation_public_type_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::PublicTypeVersion resource type.
-func publicTypeVersion(ctx context.Context) (tfsdk.ResourceType, error) {
+func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

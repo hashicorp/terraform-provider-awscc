@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_gamelift_fleet", fleet)
+	registry.AddResourceTypeFactory("aws_gamelift_fleet", fleetResourceType)
 }
 
-// fleet returns the Terraform aws_gamelift_fleet resource type.
+// fleetResourceType returns the Terraform aws_gamelift_fleet resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GameLift::Fleet resource type.
-func fleet(ctx context.Context) (tfsdk.ResourceType, error) {
+func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"build_id": {
 			// Property: BuildId

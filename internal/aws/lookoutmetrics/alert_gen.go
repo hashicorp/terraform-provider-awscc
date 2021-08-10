@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_lookoutmetrics_alert", alert)
+	registry.AddResourceTypeFactory("aws_lookoutmetrics_alert", alertResourceType)
 }
 
-// alert returns the Terraform aws_lookoutmetrics_alert resource type.
+// alertResourceType returns the Terraform aws_lookoutmetrics_alert resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LookoutMetrics::Alert resource type.
-func alert(ctx context.Context) (tfsdk.ResourceType, error) {
+func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"action": {
 			// Property: Action

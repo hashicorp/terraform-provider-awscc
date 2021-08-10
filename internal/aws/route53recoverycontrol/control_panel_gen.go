@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoverycontrol_control_panel", controlPanel)
+	registry.AddResourceTypeFactory("aws_route53recoverycontrol_control_panel", controlPanelResourceType)
 }
 
-// controlPanel returns the Terraform aws_route53recoverycontrol_control_panel resource type.
+// controlPanelResourceType returns the Terraform aws_route53recoverycontrol_control_panel resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryControl::ControlPanel resource type.
-func controlPanel(ctx context.Context) (tfsdk.ResourceType, error) {
+func controlPanelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"cluster_arn": {
 			// Property: ClusterArn

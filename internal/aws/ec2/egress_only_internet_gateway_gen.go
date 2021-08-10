@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_egress_only_internet_gateway", egressOnlyInternetGateway)
+	registry.AddResourceTypeFactory("aws_ec2_egress_only_internet_gateway", egressOnlyInternetGatewayResourceType)
 }
 
-// egressOnlyInternetGateway returns the Terraform aws_ec2_egress_only_internet_gateway resource type.
+// egressOnlyInternetGatewayResourceType returns the Terraform aws_ec2_egress_only_internet_gateway resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::EgressOnlyInternetGateway resource type.
-func egressOnlyInternetGateway(ctx context.Context) (tfsdk.ResourceType, error) {
+func egressOnlyInternetGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"id": {
 			// Property: Id

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_flow_log", flowLog)
+	registry.AddResourceTypeFactory("aws_ec2_flow_log", flowLogResourceType)
 }
 
-// flowLog returns the Terraform aws_ec2_flow_log resource type.
+// flowLogResourceType returns the Terraform aws_ec2_flow_log resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::FlowLog resource type.
-func flowLog(ctx context.Context) (tfsdk.ResourceType, error) {
+func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"deliver_logs_permission_arn": {
 			// Property: DeliverLogsPermissionArn

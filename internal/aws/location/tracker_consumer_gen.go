@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_location_tracker_consumer", trackerConsumer)
+	registry.AddResourceTypeFactory("aws_location_tracker_consumer", trackerConsumerResourceType)
 }
 
-// trackerConsumer returns the Terraform aws_location_tracker_consumer resource type.
+// trackerConsumerResourceType returns the Terraform aws_location_tracker_consumer resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Location::TrackerConsumer resource type.
-func trackerConsumer(ctx context.Context) (tfsdk.ResourceType, error) {
+func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"consumer_arn": {
 			// Property: ConsumerArn

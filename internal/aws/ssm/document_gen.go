@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ssm_document", document)
+	registry.AddResourceTypeFactory("aws_ssm_document", documentResourceType)
 }
 
-// document returns the Terraform aws_ssm_document resource type.
+// documentResourceType returns the Terraform aws_ssm_document resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSM::Document resource type.
-func document(ctx context.Context) (tfsdk.ResourceType, error) {
+func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"attachments": {
 			// Property: Attachments

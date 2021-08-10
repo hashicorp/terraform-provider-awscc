@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_prefix_list", prefixList)
+	registry.AddResourceTypeFactory("aws_ec2_prefix_list", prefixListResourceType)
 }
 
-// prefixList returns the Terraform aws_ec2_prefix_list resource type.
+// prefixListResourceType returns the Terraform aws_ec2_prefix_list resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::PrefixList resource type.
-func prefixList(ctx context.Context) (tfsdk.ResourceType, error) {
+func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"address_family": {
 			// Property: AddressFamily

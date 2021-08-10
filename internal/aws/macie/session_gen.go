@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_macie_session", session)
+	registry.AddResourceTypeFactory("aws_macie_session", sessionResourceType)
 }
 
-// session returns the Terraform aws_macie_session resource type.
+// sessionResourceType returns the Terraform aws_macie_session resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Macie::Session resource type.
-func session(ctx context.Context) (tfsdk.ResourceType, error) {
+func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"aws_account_id": {
 			// Property: AwsAccountId

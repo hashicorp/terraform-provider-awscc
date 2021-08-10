@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_glue_schema_version", schemaVersion)
+	registry.AddResourceTypeFactory("aws_glue_schema_version", schemaVersionResourceType)
 }
 
-// schemaVersion returns the Terraform aws_glue_schema_version resource type.
+// schemaVersionResourceType returns the Terraform aws_glue_schema_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Glue::SchemaVersion resource type.
-func schemaVersion(ctx context.Context) (tfsdk.ResourceType, error) {
+func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"schema": {
 			// Property: Schema

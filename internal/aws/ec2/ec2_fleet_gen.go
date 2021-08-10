@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_ec2_fleet", eC2Fleet)
+	registry.AddResourceTypeFactory("aws_ec2_ec2_fleet", eC2FleetResourceType)
 }
 
-// eC2Fleet returns the Terraform aws_ec2_ec2_fleet resource type.
+// eC2FleetResourceType returns the Terraform aws_ec2_ec2_fleet resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::EC2Fleet resource type.
-func eC2Fleet(ctx context.Context) (tfsdk.ResourceType, error) {
+func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"context": {
 			// Property: Context

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_device", device)
+	registry.AddResourceTypeFactory("aws_networkmanager_device", deviceResourceType)
 }
 
-// device returns the Terraform aws_networkmanager_device resource type.
+// deviceResourceType returns the Terraform aws_networkmanager_device resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::Device resource type.
-func device(ctx context.Context) (tfsdk.ResourceType, error) {
+func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"description": {
 			// Property: Description

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_chatbot_slack_channel_configuration", slackChannelConfiguration)
+	registry.AddResourceTypeFactory("aws_chatbot_slack_channel_configuration", slackChannelConfigurationResourceType)
 }
 
-// slackChannelConfiguration returns the Terraform aws_chatbot_slack_channel_configuration resource type.
+// slackChannelConfigurationResourceType returns the Terraform aws_chatbot_slack_channel_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Chatbot::SlackChannelConfiguration resource type.
-func slackChannelConfiguration(ctx context.Context) (tfsdk.ResourceType, error) {
+func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_model_quality_job_definition", modelQualityJobDefinition)
+	registry.AddResourceTypeFactory("aws_sagemaker_model_quality_job_definition", modelQualityJobDefinitionResourceType)
 }
 
-// modelQualityJobDefinition returns the Terraform aws_sagemaker_model_quality_job_definition resource type.
+// modelQualityJobDefinitionResourceType returns the Terraform aws_sagemaker_model_quality_job_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelQualityJobDefinition resource type.
-func modelQualityJobDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
+func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"creation_time": {
 			// Property: CreationTime

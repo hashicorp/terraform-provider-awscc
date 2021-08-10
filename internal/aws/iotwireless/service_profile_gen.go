@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotwireless_service_profile", serviceProfile)
+	registry.AddResourceTypeFactory("aws_iotwireless_service_profile", serviceProfileResourceType)
 }
 
-// serviceProfile returns the Terraform aws_iotwireless_service_profile resource type.
+// serviceProfileResourceType returns the Terraform aws_iotwireless_service_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::ServiceProfile resource type.
-func serviceProfile(ctx context.Context) (tfsdk.ResourceType, error) {
+func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

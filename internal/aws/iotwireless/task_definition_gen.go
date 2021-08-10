@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotwireless_task_definition", taskDefinition)
+	registry.AddResourceTypeFactory("aws_iotwireless_task_definition", taskDefinitionResourceType)
 }
 
-// taskDefinition returns the Terraform aws_iotwireless_task_definition resource type.
+// taskDefinitionResourceType returns the Terraform aws_iotwireless_task_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::TaskDefinition resource type.
-func taskDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
+func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

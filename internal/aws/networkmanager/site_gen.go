@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_site", site)
+	registry.AddResourceTypeFactory("aws_networkmanager_site", siteResourceType)
 }
 
-// site returns the Terraform aws_networkmanager_site resource type.
+// siteResourceType returns the Terraform aws_networkmanager_site resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::Site resource type.
-func site(ctx context.Context) (tfsdk.ResourceType, error) {
+func siteResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"description": {
 			// Property: Description

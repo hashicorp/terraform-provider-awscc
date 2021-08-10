@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_apigateway_request_validator", requestValidator)
+	registry.AddResourceTypeFactory("aws_apigateway_request_validator", requestValidatorResourceType)
 }
 
-// requestValidator returns the Terraform aws_apigateway_request_validator resource type.
+// requestValidatorResourceType returns the Terraform aws_apigateway_request_validator resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::RequestValidator resource type.
-func requestValidator(ctx context.Context) (tfsdk.ResourceType, error) {
+func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"name": {
 			// Property: Name

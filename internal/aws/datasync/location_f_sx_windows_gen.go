@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_location_f_sx_windows", locationFSxWindows)
+	registry.AddResourceTypeFactory("aws_datasync_location_f_sx_windows", locationFSxWindowsResourceType)
 }
 
-// locationFSxWindows returns the Terraform aws_datasync_location_f_sx_windows resource type.
+// locationFSxWindowsResourceType returns the Terraform aws_datasync_location_f_sx_windows resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationFSxWindows resource type.
-func locationFSxWindows(ctx context.Context) (tfsdk.ResourceType, error) {
+func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"domain": {
 			// Property: Domain

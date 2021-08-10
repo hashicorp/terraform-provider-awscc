@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecr_registry_policy", registryPolicy)
+	registry.AddResourceTypeFactory("aws_ecr_registry_policy", registryPolicyResourceType)
 }
 
-// registryPolicy returns the Terraform aws_ecr_registry_policy resource type.
+// registryPolicyResourceType returns the Terraform aws_ecr_registry_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECR::RegistryPolicy resource type.
-func registryPolicy(ctx context.Context) (tfsdk.ResourceType, error) {
+func registryPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"policy_text": {
 			// Property: PolicyText

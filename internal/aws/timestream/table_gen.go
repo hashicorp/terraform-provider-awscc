@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_timestream_table", table)
+	registry.AddResourceTypeFactory("aws_timestream_table", tableResourceType)
 }
 
-// table returns the Terraform aws_timestream_table resource type.
+// tableResourceType returns the Terraform aws_timestream_table resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Timestream::Table resource type.
-func table(ctx context.Context) (tfsdk.ResourceType, error) {
+func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_app_image_config", appImageConfig)
+	registry.AddResourceTypeFactory("aws_sagemaker_app_image_config", appImageConfigResourceType)
 }
 
-// appImageConfig returns the Terraform aws_sagemaker_app_image_config resource type.
+// appImageConfigResourceType returns the Terraform aws_sagemaker_app_image_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::AppImageConfig resource type.
-func appImageConfig(ctx context.Context) (tfsdk.ResourceType, error) {
+func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"app_image_config_arn": {
 			// Property: AppImageConfigArn

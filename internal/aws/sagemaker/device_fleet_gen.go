@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_device_fleet", deviceFleet)
+	registry.AddResourceTypeFactory("aws_sagemaker_device_fleet", deviceFleetResourceType)
 }
 
-// deviceFleet returns the Terraform aws_sagemaker_device_fleet resource type.
+// deviceFleetResourceType returns the Terraform aws_sagemaker_device_fleet resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::DeviceFleet resource type.
-func deviceFleet(ctx context.Context) (tfsdk.ResourceType, error) {
+func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"description": {
 			// Property: Description

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoveryreadiness_readiness_check", readinessCheck)
+	registry.AddResourceTypeFactory("aws_route53recoveryreadiness_readiness_check", readinessCheckResourceType)
 }
 
-// readinessCheck returns the Terraform aws_route53recoveryreadiness_readiness_check resource type.
+// readinessCheckResourceType returns the Terraform aws_route53recoveryreadiness_readiness_check resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::ReadinessCheck resource type.
-func readinessCheck(ctx context.Context) (tfsdk.ResourceType, error) {
+func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"readiness_check_arn": {
 			// Property: ReadinessCheckArn

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudformation_module_version", moduleVersion)
+	registry.AddResourceTypeFactory("aws_cloudformation_module_version", moduleVersionResourceType)
 }
 
-// moduleVersion returns the Terraform aws_cloudformation_module_version resource type.
+// moduleVersionResourceType returns the Terraform aws_cloudformation_module_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::ModuleVersion resource type.
-func moduleVersion(ctx context.Context) (tfsdk.ResourceType, error) {
+func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

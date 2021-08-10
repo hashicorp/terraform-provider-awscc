@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_emr_studio", studio)
+	registry.AddResourceTypeFactory("aws_emr_studio", studioResourceType)
 }
 
-// studio returns the Terraform aws_emr_studio resource type.
+// studioResourceType returns the Terraform aws_emr_studio resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EMR::Studio resource type.
-func studio(ctx context.Context) (tfsdk.ResourceType, error) {
+func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

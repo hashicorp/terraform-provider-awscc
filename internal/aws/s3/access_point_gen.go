@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_s3_access_point", accessPoint)
+	registry.AddResourceTypeFactory("aws_s3_access_point", accessPointResourceType)
 }
 
-// accessPoint returns the Terraform aws_s3_access_point resource type.
+// accessPointResourceType returns the Terraform aws_s3_access_point resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3::AccessPoint resource type.
-func accessPoint(ctx context.Context) (tfsdk.ResourceType, error) {
+func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"alias": {
 			// Property: Alias

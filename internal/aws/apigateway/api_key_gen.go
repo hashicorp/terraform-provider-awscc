@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_apigateway_api_key", apiKey)
+	registry.AddResourceTypeFactory("aws_apigateway_api_key", apiKeyResourceType)
 }
 
-// apiKey returns the Terraform aws_apigateway_api_key resource type.
+// apiKeyResourceType returns the Terraform aws_apigateway_api_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::ApiKey resource type.
-func apiKey(ctx context.Context) (tfsdk.ResourceType, error) {
+func apiKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"api_key_id": {
 			// Property: APIKeyId

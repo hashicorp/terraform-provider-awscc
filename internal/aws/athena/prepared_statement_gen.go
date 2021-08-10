@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_athena_prepared_statement", preparedStatement)
+	registry.AddResourceTypeFactory("aws_athena_prepared_statement", preparedStatementResourceType)
 }
 
-// preparedStatement returns the Terraform aws_athena_prepared_statement resource type.
+// preparedStatementResourceType returns the Terraform aws_athena_prepared_statement resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Athena::PreparedStatement resource type.
-func preparedStatement(ctx context.Context) (tfsdk.ResourceType, error) {
+func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"description": {
 			// Property: Description

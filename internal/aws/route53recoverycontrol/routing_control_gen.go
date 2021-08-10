@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoverycontrol_routing_control", routingControl)
+	registry.AddResourceTypeFactory("aws_route53recoverycontrol_routing_control", routingControlResourceType)
 }
 
-// routingControl returns the Terraform aws_route53recoverycontrol_routing_control resource type.
+// routingControlResourceType returns the Terraform aws_route53recoverycontrol_routing_control resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryControl::RoutingControl resource type.
-func routingControl(ctx context.Context) (tfsdk.ResourceType, error) {
+func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"cluster_arn": {
 			// Property: ClusterArn

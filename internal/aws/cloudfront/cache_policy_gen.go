@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudfront_cache_policy", cachePolicy)
+	registry.AddResourceTypeFactory("aws_cloudfront_cache_policy", cachePolicyResourceType)
 }
 
-// cachePolicy returns the Terraform aws_cloudfront_cache_policy resource type.
+// cachePolicyResourceType returns the Terraform aws_cloudfront_cache_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::CachePolicy resource type.
-func cachePolicy(ctx context.Context) (tfsdk.ResourceType, error) {
+func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"cache_policy_config": {
 			// Property: CachePolicyConfig

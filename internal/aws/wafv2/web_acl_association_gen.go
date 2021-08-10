@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_wafv2_web_acl_association", webACLAssociation)
+	registry.AddResourceTypeFactory("aws_wafv2_web_acl_association", webACLAssociationResourceType)
 }
 
-// webACLAssociation returns the Terraform aws_wafv2_web_acl_association resource type.
+// webACLAssociationResourceType returns the Terraform aws_wafv2_web_acl_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WAFv2::WebACLAssociation resource type.
-func webACLAssociation(ctx context.Context) (tfsdk.ResourceType, error) {
+func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"resource_arn": {
 			// Property: ResourceArn

@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_location_s3", locationS3)
+	registry.AddResourceTypeFactory("aws_datasync_location_s3", locationS3ResourceType)
 }
 
-// locationS3 returns the Terraform aws_datasync_location_s3 resource type.
+// locationS3ResourceType returns the Terraform aws_datasync_location_s3 resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationS3 resource type.
-func locationS3(ctx context.Context) (tfsdk.ResourceType, error) {
+func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"location_arn": {
 			// Property: LocationArn

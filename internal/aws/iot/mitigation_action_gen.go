@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_mitigation_action", mitigationAction)
+	registry.AddResourceTypeFactory("aws_iot_mitigation_action", mitigationActionResourceType)
 }
 
-// mitigationAction returns the Terraform aws_iot_mitigation_action resource type.
+// mitigationActionResourceType returns the Terraform aws_iot_mitigation_action resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::MitigationAction resource type.
-func mitigationAction(ctx context.Context) (tfsdk.ResourceType, error) {
+func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"action_name": {
 			// Property: ActionName

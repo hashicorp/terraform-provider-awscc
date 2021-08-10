@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_apigateway_domain_name", domainName)
+	registry.AddResourceTypeFactory("aws_apigateway_domain_name", domainNameResourceType)
 }
 
-// domainName returns the Terraform aws_apigateway_domain_name resource type.
+// domainNameResourceType returns the Terraform aws_apigateway_domain_name resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::DomainName resource type.
-func domainName(ctx context.Context) (tfsdk.ResourceType, error) {
+func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"certificate_arn": {
 			// Property: CertificateArn

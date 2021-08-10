@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_amplify_app", app)
+	registry.AddResourceTypeFactory("aws_amplify_app", appResourceType)
 }
 
-// app returns the Terraform aws_amplify_app resource type.
+// appResourceType returns the Terraform aws_amplify_app resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Amplify::App resource type.
-func app(ctx context.Context) (tfsdk.ResourceType, error) {
+func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"access_token": {
 			// Property: AccessToken

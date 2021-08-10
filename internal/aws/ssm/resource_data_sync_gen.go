@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ssm_resource_data_sync", resourceDataSync)
+	registry.AddResourceTypeFactory("aws_ssm_resource_data_sync", resourceDataSyncResourceType)
 }
 
-// resourceDataSync returns the Terraform aws_ssm_resource_data_sync resource type.
+// resourceDataSyncResourceType returns the Terraform aws_ssm_resource_data_sync resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSM::ResourceDataSync resource type.
-func resourceDataSync(ctx context.Context) (tfsdk.ResourceType, error) {
+func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"bucket_name": {
 			// Property: BucketName

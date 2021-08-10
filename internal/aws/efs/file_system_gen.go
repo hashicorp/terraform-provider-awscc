@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_efs_file_system", fileSystem)
+	registry.AddResourceTypeFactory("aws_efs_file_system", fileSystemResourceType)
 }
 
-// fileSystem returns the Terraform aws_efs_file_system resource type.
+// fileSystemResourceType returns the Terraform aws_efs_file_system resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EFS::FileSystem resource type.
-func fileSystem(ctx context.Context) (tfsdk.ResourceType, error) {
+func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

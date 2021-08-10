@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_codegurureviewer_repository_association", repositoryAssociation)
+	registry.AddResourceTypeFactory("aws_codegurureviewer_repository_association", repositoryAssociationResourceType)
 }
 
-// repositoryAssociation returns the Terraform aws_codegurureviewer_repository_association resource type.
+// repositoryAssociationResourceType returns the Terraform aws_codegurureviewer_repository_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CodeGuruReviewer::RepositoryAssociation resource type.
-func repositoryAssociation(ctx context.Context) (tfsdk.ResourceType, error) {
+func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"association_arn": {
 			// Property: AssociationArn

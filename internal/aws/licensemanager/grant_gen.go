@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_licensemanager_grant", grant)
+	registry.AddResourceTypeFactory("aws_licensemanager_grant", grantResourceType)
 }
 
-// grant returns the Terraform aws_licensemanager_grant resource type.
+// grantResourceType returns the Terraform aws_licensemanager_grant resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LicenseManager::Grant resource type.
-func grant(ctx context.Context) (tfsdk.ResourceType, error) {
+func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"allowed_operations": {
 			// Property: AllowedOperations

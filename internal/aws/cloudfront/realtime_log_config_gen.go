@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudfront_realtime_log_config", realtimeLogConfig)
+	registry.AddResourceTypeFactory("aws_cloudfront_realtime_log_config", realtimeLogConfigResourceType)
 }
 
-// realtimeLogConfig returns the Terraform aws_cloudfront_realtime_log_config resource type.
+// realtimeLogConfigResourceType returns the Terraform aws_cloudfront_realtime_log_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::RealtimeLogConfig resource type.
-func realtimeLogConfig(ctx context.Context) (tfsdk.ResourceType, error) {
+func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

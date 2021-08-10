@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_local_gateway_route", localGatewayRoute)
+	registry.AddResourceTypeFactory("aws_ec2_local_gateway_route", localGatewayRouteResourceType)
 }
 
-// localGatewayRoute returns the Terraform aws_ec2_local_gateway_route resource type.
+// localGatewayRouteResourceType returns the Terraform aws_ec2_local_gateway_route resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::LocalGatewayRoute resource type.
-func localGatewayRoute(ctx context.Context) (tfsdk.ResourceType, error) {
+func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"destination_cidr_block": {
 			// Property: DestinationCidrBlock

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotevents_detector_model", detectorModel)
+	registry.AddResourceTypeFactory("aws_iotevents_detector_model", detectorModelResourceType)
 }
 
-// detectorModel returns the Terraform aws_iotevents_detector_model resource type.
+// detectorModelResourceType returns the Terraform aws_iotevents_detector_model resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTEvents::DetectorModel resource type.
-func detectorModel(ctx context.Context) (tfsdk.ResourceType, error) {
+func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"detector_model_definition": {
 			// Property: DetectorModelDefinition

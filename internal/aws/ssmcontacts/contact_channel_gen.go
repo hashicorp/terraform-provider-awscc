@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ssmcontacts_contact_channel", contactChannel)
+	registry.AddResourceTypeFactory("aws_ssmcontacts_contact_channel", contactChannelResourceType)
 }
 
-// contactChannel returns the Terraform aws_ssmcontacts_contact_channel resource type.
+// contactChannelResourceType returns the Terraform aws_ssmcontacts_contact_channel resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSMContacts::ContactChannel resource type.
-func contactChannel(ctx context.Context) (tfsdk.ResourceType, error) {
+func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

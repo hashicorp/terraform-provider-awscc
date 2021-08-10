@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_athena_data_catalog", dataCatalog)
+	registry.AddResourceTypeFactory("aws_athena_data_catalog", dataCatalogResourceType)
 }
 
-// dataCatalog returns the Terraform aws_athena_data_catalog resource type.
+// dataCatalogResourceType returns the Terraform aws_athena_data_catalog resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Athena::DataCatalog resource type.
-func dataCatalog(ctx context.Context) (tfsdk.ResourceType, error) {
+func dataCatalogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"description": {
 			// Property: Description

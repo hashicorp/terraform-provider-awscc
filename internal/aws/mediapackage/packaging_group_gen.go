@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediapackage_packaging_group", packagingGroup)
+	registry.AddResourceTypeFactory("aws_mediapackage_packaging_group", packagingGroupResourceType)
 }
 
-// packagingGroup returns the Terraform aws_mediapackage_packaging_group resource type.
+// packagingGroupResourceType returns the Terraform aws_mediapackage_packaging_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaPackage::PackagingGroup resource type.
-func packagingGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

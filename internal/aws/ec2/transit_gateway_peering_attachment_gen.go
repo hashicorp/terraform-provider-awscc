@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_peering_attachment", transitGatewayPeeringAttachment)
+	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_peering_attachment", transitGatewayPeeringAttachmentResourceType)
 }
 
-// transitGatewayPeeringAttachment returns the Terraform aws_ec2_transit_gateway_peering_attachment resource type.
+// transitGatewayPeeringAttachmentResourceType returns the Terraform aws_ec2_transit_gateway_peering_attachment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayPeeringAttachment resource type.
-func transitGatewayPeeringAttachment(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"creation_time": {
 			// Property: CreationTime

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_detective_graph", graph)
+	registry.AddResourceTypeFactory("aws_detective_graph", graphResourceType)
 }
 
-// graph returns the Terraform aws_detective_graph resource type.
+// graphResourceType returns the Terraform aws_detective_graph resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Detective::Graph resource type.
-func graph(ctx context.Context) (tfsdk.ResourceType, error) {
+func graphResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

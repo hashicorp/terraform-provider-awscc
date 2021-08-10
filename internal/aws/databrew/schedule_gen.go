@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_databrew_schedule", schedule)
+	registry.AddResourceTypeFactory("aws_databrew_schedule", scheduleResourceType)
 }
 
-// schedule returns the Terraform aws_databrew_schedule resource type.
+// scheduleResourceType returns the Terraform aws_databrew_schedule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataBrew::Schedule resource type.
-func schedule(ctx context.Context) (tfsdk.ResourceType, error) {
+func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"cron_expression": {
 			// Property: CronExpression

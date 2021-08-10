@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_location_route_calculator", routeCalculator)
+	registry.AddResourceTypeFactory("aws_location_route_calculator", routeCalculatorResourceType)
 }
 
-// routeCalculator returns the Terraform aws_location_route_calculator resource type.
+// routeCalculatorResourceType returns the Terraform aws_location_route_calculator resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Location::RouteCalculator resource type.
-func routeCalculator(ctx context.Context) (tfsdk.ResourceType, error) {
+func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

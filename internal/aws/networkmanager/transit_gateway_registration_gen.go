@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_transit_gateway_registration", transitGatewayRegistration)
+	registry.AddResourceTypeFactory("aws_networkmanager_transit_gateway_registration", transitGatewayRegistrationResourceType)
 }
 
-// transitGatewayRegistration returns the Terraform aws_networkmanager_transit_gateway_registration resource type.
+// transitGatewayRegistrationResourceType returns the Terraform aws_networkmanager_transit_gateway_registration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::TransitGatewayRegistration resource type.
-func transitGatewayRegistration(ctx context.Context) (tfsdk.ResourceType, error) {
+func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"global_network_id": {
 			// Property: GlobalNetworkId

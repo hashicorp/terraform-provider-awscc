@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_imagebuilder_container_recipe", containerRecipe)
+	registry.AddResourceTypeFactory("aws_imagebuilder_container_recipe", containerRecipeResourceType)
 }
 
-// containerRecipe returns the Terraform aws_imagebuilder_container_recipe resource type.
+// containerRecipeResourceType returns the Terraform aws_imagebuilder_container_recipe resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::ContainerRecipe resource type.
-func containerRecipe(ctx context.Context) (tfsdk.ResourceType, error) {
+func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

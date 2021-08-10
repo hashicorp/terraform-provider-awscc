@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotsitewise_dashboard", dashboard)
+	registry.AddResourceTypeFactory("aws_iotsitewise_dashboard", dashboardResourceType)
 }
 
-// dashboard returns the Terraform aws_iotsitewise_dashboard resource type.
+// dashboardResourceType returns the Terraform aws_iotsitewise_dashboard resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::Dashboard resource type.
-func dashboard(ctx context.Context) (tfsdk.ResourceType, error) {
+func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"dashboard_arn": {
 			// Property: DashboardArn

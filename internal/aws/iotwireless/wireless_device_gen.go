@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotwireless_wireless_device", wirelessDevice)
+	registry.AddResourceTypeFactory("aws_iotwireless_wireless_device", wirelessDeviceResourceType)
 }
 
-// wirelessDevice returns the Terraform aws_iotwireless_wireless_device resource type.
+// wirelessDeviceResourceType returns the Terraform aws_iotwireless_wireless_device resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::WirelessDevice resource type.
-func wirelessDevice(ctx context.Context) (tfsdk.ResourceType, error) {
+func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

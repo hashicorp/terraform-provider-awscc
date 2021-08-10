@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_config_stored_query", storedQuery)
+	registry.AddResourceTypeFactory("aws_config_stored_query", storedQueryResourceType)
 }
 
-// storedQuery returns the Terraform aws_config_stored_query resource type.
+// storedQueryResourceType returns the Terraform aws_config_stored_query resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::StoredQuery resource type.
-func storedQuery(ctx context.Context) (tfsdk.ResourceType, error) {
+func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"query_arn": {
 			// Property: QueryArn

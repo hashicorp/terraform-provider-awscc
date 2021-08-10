@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkfirewall_logging_configuration", loggingConfiguration)
+	registry.AddResourceTypeFactory("aws_networkfirewall_logging_configuration", loggingConfigurationResourceType)
 }
 
-// loggingConfiguration returns the Terraform aws_networkfirewall_logging_configuration resource type.
+// loggingConfigurationResourceType returns the Terraform aws_networkfirewall_logging_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkFirewall::LoggingConfiguration resource type.
-func loggingConfiguration(ctx context.Context) (tfsdk.ResourceType, error) {
+func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"firewall_arn": {
 			// Property: FirewallArn

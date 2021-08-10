@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediaconnect_flow_vpc_interface", flowVpcInterface)
+	registry.AddResourceTypeFactory("aws_mediaconnect_flow_vpc_interface", flowVpcInterfaceResourceType)
 }
 
-// flowVpcInterface returns the Terraform aws_mediaconnect_flow_vpc_interface resource type.
+// flowVpcInterfaceResourceType returns the Terraform aws_mediaconnect_flow_vpc_interface resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowVpcInterface resource type.
-func flowVpcInterface(ctx context.Context) (tfsdk.ResourceType, error) {
+func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"flow_arn": {
 			// Property: FlowArn

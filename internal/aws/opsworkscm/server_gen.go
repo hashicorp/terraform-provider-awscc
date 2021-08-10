@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_opsworkscm_server", server)
+	registry.AddResourceTypeFactory("aws_opsworkscm_server", serverResourceType)
 }
 
-// server returns the Terraform aws_opsworkscm_server resource type.
+// serverResourceType returns the Terraform aws_opsworkscm_server resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::OpsWorksCM::Server resource type.
-func server(ctx context.Context) (tfsdk.ResourceType, error) {
+func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

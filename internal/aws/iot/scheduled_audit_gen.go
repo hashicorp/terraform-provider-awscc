@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_scheduled_audit", scheduledAudit)
+	registry.AddResourceTypeFactory("aws_iot_scheduled_audit", scheduledAuditResourceType)
 }
 
-// scheduledAudit returns the Terraform aws_iot_scheduled_audit resource type.
+// scheduledAuditResourceType returns the Terraform aws_iot_scheduled_audit resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::ScheduledAudit resource type.
-func scheduledAudit(ctx context.Context) (tfsdk.ResourceType, error) {
+func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"day_of_month": {
 			// Property: DayOfMonth

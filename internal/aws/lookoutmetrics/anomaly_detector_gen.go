@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_lookoutmetrics_anomaly_detector", anomalyDetector)
+	registry.AddResourceTypeFactory("aws_lookoutmetrics_anomaly_detector", anomalyDetectorResourceType)
 }
 
-// anomalyDetector returns the Terraform aws_lookoutmetrics_anomaly_detector resource type.
+// anomalyDetectorResourceType returns the Terraform aws_lookoutmetrics_anomaly_detector resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LookoutMetrics::AnomalyDetector resource type.
-func anomalyDetector(ctx context.Context) (tfsdk.ResourceType, error) {
+func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"anomaly_detector_config": {
 			// Property: AnomalyDetectorConfig

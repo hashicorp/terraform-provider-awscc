@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_budgets_budgets_action", budgetsAction)
+	registry.AddResourceTypeFactory("aws_budgets_budgets_action", budgetsActionResourceType)
 }
 
-// budgetsAction returns the Terraform aws_budgets_budgets_action resource type.
+// budgetsActionResourceType returns the Terraform aws_budgets_budgets_action resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Budgets::BudgetsAction resource type.
-func budgetsAction(ctx context.Context) (tfsdk.ResourceType, error) {
+func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"action_id": {
 			// Property: ActionId

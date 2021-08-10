@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_location_smb", locationSMB)
+	registry.AddResourceTypeFactory("aws_datasync_location_smb", locationSMBResourceType)
 }
 
-// locationSMB returns the Terraform aws_datasync_location_smb resource type.
+// locationSMBResourceType returns the Terraform aws_datasync_location_smb resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationSMB resource type.
-func locationSMB(ctx context.Context) (tfsdk.ResourceType, error) {
+func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"agent_arns": {
 			// Property: AgentArns

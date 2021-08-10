@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_devopsguru_notification_channel", notificationChannel)
+	registry.AddResourceTypeFactory("aws_devopsguru_notification_channel", notificationChannelResourceType)
 }
 
-// notificationChannel returns the Terraform aws_devopsguru_notification_channel resource type.
+// notificationChannelResourceType returns the Terraform aws_devopsguru_notification_channel resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DevOpsGuru::NotificationChannel resource type.
-func notificationChannel(ctx context.Context) (tfsdk.ResourceType, error) {
+func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"config": {
 			// Property: Config

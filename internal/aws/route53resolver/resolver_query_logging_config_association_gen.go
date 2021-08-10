@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53resolver_resolver_query_logging_config_association", resolverQueryLoggingConfigAssociation)
+	registry.AddResourceTypeFactory("aws_route53resolver_resolver_query_logging_config_association", resolverQueryLoggingConfigAssociationResourceType)
 }
 
-// resolverQueryLoggingConfigAssociation returns the Terraform aws_route53resolver_resolver_query_logging_config_association resource type.
+// resolverQueryLoggingConfigAssociationResourceType returns the Terraform aws_route53resolver_resolver_query_logging_config_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation resource type.
-func resolverQueryLoggingConfigAssociation(ctx context.Context) (tfsdk.ResourceType, error) {
+func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"creation_time": {
 			// Property: CreationTime

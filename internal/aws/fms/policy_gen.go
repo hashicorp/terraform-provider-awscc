@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_fms_policy", policy)
+	registry.AddResourceTypeFactory("aws_fms_policy", policyResourceType)
 }
 
-// policy returns the Terraform aws_fms_policy resource type.
+// policyResourceType returns the Terraform aws_fms_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FMS::Policy resource type.
-func policy(ctx context.Context) (tfsdk.ResourceType, error) {
+func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

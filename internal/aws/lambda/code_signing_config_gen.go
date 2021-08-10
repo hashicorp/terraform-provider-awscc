@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_lambda_code_signing_config", codeSigningConfig)
+	registry.AddResourceTypeFactory("aws_lambda_code_signing_config", codeSigningConfigResourceType)
 }
 
-// codeSigningConfig returns the Terraform aws_lambda_code_signing_config resource type.
+// codeSigningConfigResourceType returns the Terraform aws_lambda_code_signing_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Lambda::CodeSigningConfig resource type.
-func codeSigningConfig(ctx context.Context) (tfsdk.ResourceType, error) {
+func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"allowed_publishers": {
 			// Property: AllowedPublishers

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_spot_fleet", spotFleet)
+	registry.AddResourceTypeFactory("aws_ec2_spot_fleet", spotFleetResourceType)
 }
 
-// spotFleet returns the Terraform aws_ec2_spot_fleet resource type.
+// spotFleetResourceType returns the Terraform aws_ec2_spot_fleet resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::SpotFleet resource type.
-func spotFleet(ctx context.Context) (tfsdk.ResourceType, error) {
+func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"id": {
 			// Property: Id

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_global_network", globalNetwork)
+	registry.AddResourceTypeFactory("aws_networkmanager_global_network", globalNetworkResourceType)
 }
 
-// globalNetwork returns the Terraform aws_networkmanager_global_network resource type.
+// globalNetworkResourceType returns the Terraform aws_networkmanager_global_network resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::GlobalNetwork resource type.
-func globalNetwork(ctx context.Context) (tfsdk.ResourceType, error) {
+func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

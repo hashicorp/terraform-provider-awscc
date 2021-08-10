@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotcoredeviceadvisor_suite_definition", suiteDefinition)
+	registry.AddResourceTypeFactory("aws_iotcoredeviceadvisor_suite_definition", suiteDefinitionResourceType)
 }
 
-// suiteDefinition returns the Terraform aws_iotcoredeviceadvisor_suite_definition resource type.
+// suiteDefinitionResourceType returns the Terraform aws_iotcoredeviceadvisor_suite_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTCoreDeviceAdvisor::SuiteDefinition resource type.
-func suiteDefinition(ctx context.Context) (tfsdk.ResourceType, error) {
+func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"suite_definition_arn": {
 			// Property: SuiteDefinitionArn

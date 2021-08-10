@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecr_repository", repository)
+	registry.AddResourceTypeFactory("aws_ecr_repository", repositoryResourceType)
 }
 
-// repository returns the Terraform aws_ecr_repository resource type.
+// repositoryResourceType returns the Terraform aws_ecr_repository resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECR::Repository resource type.
-func repository(ctx context.Context) (tfsdk.ResourceType, error) {
+func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

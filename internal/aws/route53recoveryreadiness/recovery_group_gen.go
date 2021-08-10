@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoveryreadiness_recovery_group", recoveryGroup)
+	registry.AddResourceTypeFactory("aws_route53recoveryreadiness_recovery_group", recoveryGroupResourceType)
 }
 
-// recoveryGroup returns the Terraform aws_route53recoveryreadiness_recovery_group resource type.
+// recoveryGroupResourceType returns the Terraform aws_route53recoveryreadiness_recovery_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::RecoveryGroup resource type.
-func recoveryGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"cells": {
 			// Property: Cells

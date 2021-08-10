@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_eks_fargate_profile", fargateProfile)
+	registry.AddResourceTypeFactory("aws_eks_fargate_profile", fargateProfileResourceType)
 }
 
-// fargateProfile returns the Terraform aws_eks_fargate_profile resource type.
+// fargateProfileResourceType returns the Terraform aws_eks_fargate_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EKS::FargateProfile resource type.
-func fargateProfile(ctx context.Context) (tfsdk.ResourceType, error) {
+func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

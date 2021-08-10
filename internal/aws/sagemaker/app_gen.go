@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_app", app)
+	registry.AddResourceTypeFactory("aws_sagemaker_app", appResourceType)
 }
 
-// app returns the Terraform aws_sagemaker_app resource type.
+// appResourceType returns the Terraform aws_sagemaker_app resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::App resource type.
-func app(ctx context.Context) (tfsdk.ResourceType, error) {
+func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"app_arn": {
 			// Property: AppArn

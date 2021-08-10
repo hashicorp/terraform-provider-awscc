@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_appintegrations_event_integration", eventIntegration)
+	registry.AddResourceTypeFactory("aws_appintegrations_event_integration", eventIntegrationResourceType)
 }
 
-// eventIntegration returns the Terraform aws_appintegrations_event_integration resource type.
+// eventIntegrationResourceType returns the Terraform aws_appintegrations_event_integration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppIntegrations::EventIntegration resource type.
-func eventIntegration(ctx context.Context) (tfsdk.ResourceType, error) {
+func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"associations": {
 			// Property: Associations

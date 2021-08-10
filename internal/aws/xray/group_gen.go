@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_xray_group", group)
+	registry.AddResourceTypeFactory("aws_xray_group", groupResourceType)
 }
 
-// group returns the Terraform aws_xray_group resource type.
+// groupResourceType returns the Terraform aws_xray_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::XRay::Group resource type.
-func group(ctx context.Context) (tfsdk.ResourceType, error) {
+func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"filter_expression": {
 			// Property: FilterExpression

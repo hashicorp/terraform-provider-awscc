@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_events_api_destination", apiDestination)
+	registry.AddResourceTypeFactory("aws_events_api_destination", apiDestinationResourceType)
 }
 
-// apiDestination returns the Terraform aws_events_api_destination resource type.
+// apiDestinationResourceType returns the Terraform aws_events_api_destination resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Events::ApiDestination resource type.
-func apiDestination(ctx context.Context) (tfsdk.ResourceType, error) {
+func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_xray_sampling_rule", samplingRule)
+	registry.AddResourceTypeFactory("aws_xray_sampling_rule", samplingRuleResourceType)
 }
 
-// samplingRule returns the Terraform aws_xray_sampling_rule resource type.
+// samplingRuleResourceType returns the Terraform aws_xray_sampling_rule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::XRay::SamplingRule resource type.
-func samplingRule(ctx context.Context) (tfsdk.ResourceType, error) {
+func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"rule_arn": {
 			// Property: RuleARN

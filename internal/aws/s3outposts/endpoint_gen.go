@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_s3outposts_endpoint", endpoint)
+	registry.AddResourceTypeFactory("aws_s3outposts_endpoint", endpointResourceType)
 }
 
-// endpoint returns the Terraform aws_s3outposts_endpoint resource type.
+// endpointResourceType returns the Terraform aws_s3outposts_endpoint resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3Outposts::Endpoint resource type.
-func endpoint(ctx context.Context) (tfsdk.ResourceType, error) {
+func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"access_type": {
 			// Property: AccessType

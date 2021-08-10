@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudformation_stack_set", stackSet)
+	registry.AddResourceTypeFactory("aws_cloudformation_stack_set", stackSetResourceType)
 }
 
-// stackSet returns the Terraform aws_cloudformation_stack_set resource type.
+// stackSetResourceType returns the Terraform aws_cloudformation_stack_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::StackSet resource type.
-func stackSet(ctx context.Context) (tfsdk.ResourceType, error) {
+func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"administration_role_arn": {
 			// Property: AdministrationRoleARN

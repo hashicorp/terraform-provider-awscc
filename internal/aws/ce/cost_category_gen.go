@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ce_cost_category", costCategory)
+	registry.AddResourceTypeFactory("aws_ce_cost_category", costCategoryResourceType)
 }
 
-// costCategory returns the Terraform aws_ce_cost_category resource type.
+// costCategoryResourceType returns the Terraform aws_ce_cost_category resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CE::CostCategory resource type.
-func costCategory(ctx context.Context) (tfsdk.ResourceType, error) {
+func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

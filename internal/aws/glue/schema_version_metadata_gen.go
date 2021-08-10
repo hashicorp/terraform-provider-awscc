@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_glue_schema_version_metadata", schemaVersionMetadata)
+	registry.AddResourceTypeFactory("aws_glue_schema_version_metadata", schemaVersionMetadataResourceType)
 }
 
-// schemaVersionMetadata returns the Terraform aws_glue_schema_version_metadata resource type.
+// schemaVersionMetadataResourceType returns the Terraform aws_glue_schema_version_metadata resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Glue::SchemaVersionMetadata resource type.
-func schemaVersionMetadata(ctx context.Context) (tfsdk.ResourceType, error) {
+func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"key": {
 			// Property: Key

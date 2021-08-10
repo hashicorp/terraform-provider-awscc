@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_applicationinsights_application", application)
+	registry.AddResourceTypeFactory("aws_applicationinsights_application", applicationResourceType)
 }
 
-// application returns the Terraform aws_applicationinsights_application resource type.
+// applicationResourceType returns the Terraform aws_applicationinsights_application resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApplicationInsights::Application resource type.
-func application(ctx context.Context) (tfsdk.ResourceType, error) {
+func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"application_arn": {
 			// Property: ApplicationARN

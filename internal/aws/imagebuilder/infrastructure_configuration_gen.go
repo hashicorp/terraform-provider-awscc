@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_imagebuilder_infrastructure_configuration", infrastructureConfiguration)
+	registry.AddResourceTypeFactory("aws_imagebuilder_infrastructure_configuration", infrastructureConfigurationResourceType)
 }
 
-// infrastructureConfiguration returns the Terraform aws_imagebuilder_infrastructure_configuration resource type.
+// infrastructureConfigurationResourceType returns the Terraform aws_imagebuilder_infrastructure_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::InfrastructureConfiguration resource type.
-func infrastructureConfiguration(ctx context.Context) (tfsdk.ResourceType, error) {
+func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

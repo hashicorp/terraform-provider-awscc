@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_signer_profile_permission", profilePermission)
+	registry.AddResourceTypeFactory("aws_signer_profile_permission", profilePermissionResourceType)
 }
 
-// profilePermission returns the Terraform aws_signer_profile_permission resource type.
+// profilePermissionResourceType returns the Terraform aws_signer_profile_permission resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Signer::ProfilePermission resource type.
-func profilePermission(ctx context.Context) (tfsdk.ResourceType, error) {
+func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"action": {
 			// Property: Action

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediaconnect_flow_output", flowOutput)
+	registry.AddResourceTypeFactory("aws_mediaconnect_flow_output", flowOutputResourceType)
 }
 
-// flowOutput returns the Terraform aws_mediaconnect_flow_output resource type.
+// flowOutputResourceType returns the Terraform aws_mediaconnect_flow_output resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowOutput resource type.
-func flowOutput(ctx context.Context) (tfsdk.ResourceType, error) {
+func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"cidr_allow_list": {
 			// Property: CidrAllowList

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_elasticache_global_replication_group", globalReplicationGroup)
+	registry.AddResourceTypeFactory("aws_elasticache_global_replication_group", globalReplicationGroupResourceType)
 }
 
-// globalReplicationGroup returns the Terraform aws_elasticache_global_replication_group resource type.
+// globalReplicationGroupResourceType returns the Terraform aws_elasticache_global_replication_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ElastiCache::GlobalReplicationGroup resource type.
-func globalReplicationGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"automatic_failover_enabled": {
 			// Property: AutomaticFailoverEnabled

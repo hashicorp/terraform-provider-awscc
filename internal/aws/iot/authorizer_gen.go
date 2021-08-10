@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_authorizer", authorizer)
+	registry.AddResourceTypeFactory("aws_iot_authorizer", authorizerResourceType)
 }
 
-// authorizer returns the Terraform aws_iot_authorizer resource type.
+// authorizerResourceType returns the Terraform aws_iot_authorizer resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::Authorizer resource type.
-func authorizer(ctx context.Context) (tfsdk.ResourceType, error) {
+func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

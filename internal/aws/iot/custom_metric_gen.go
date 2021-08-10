@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_custom_metric", customMetric)
+	registry.AddResourceTypeFactory("aws_iot_custom_metric", customMetricResourceType)
 }
 
-// customMetric returns the Terraform aws_iot_custom_metric resource type.
+// customMetricResourceType returns the Terraform aws_iot_custom_metric resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::CustomMetric resource type.
-func customMetric(ctx context.Context) (tfsdk.ResourceType, error) {
+func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"display_name": {
 			// Property: DisplayName

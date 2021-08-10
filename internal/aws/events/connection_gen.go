@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_events_connection", connection)
+	registry.AddResourceTypeFactory("aws_events_connection", connectionResourceType)
 }
 
-// connection returns the Terraform aws_events_connection resource type.
+// connectionResourceType returns the Terraform aws_events_connection resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Events::Connection resource type.
-func connection(ctx context.Context) (tfsdk.ResourceType, error) {
+func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

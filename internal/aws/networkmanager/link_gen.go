@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_link", link)
+	registry.AddResourceTypeFactory("aws_networkmanager_link", linkResourceType)
 }
 
-// link returns the Terraform aws_networkmanager_link resource type.
+// linkResourceType returns the Terraform aws_networkmanager_link resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::Link resource type.
-func link(ctx context.Context) (tfsdk.ResourceType, error) {
+func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"bandwidth": {
 			// Property: Bandwidth

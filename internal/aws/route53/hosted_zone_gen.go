@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53_hosted_zone", hostedZone)
+	registry.AddResourceTypeFactory("aws_route53_hosted_zone", hostedZoneResourceType)
 }
 
-// hostedZone returns the Terraform aws_route53_hosted_zone resource type.
+// hostedZoneResourceType returns the Terraform aws_route53_hosted_zone resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53::HostedZone resource type.
-func hostedZone(ctx context.Context) (tfsdk.ResourceType, error) {
+func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"hosted_zone_config": {
 			// Property: HostedZoneConfig

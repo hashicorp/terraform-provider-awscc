@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_model_package_group", modelPackageGroup)
+	registry.AddResourceTypeFactory("aws_sagemaker_model_package_group", modelPackageGroupResourceType)
 }
 
-// modelPackageGroup returns the Terraform aws_sagemaker_model_package_group resource type.
+// modelPackageGroupResourceType returns the Terraform aws_sagemaker_model_package_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelPackageGroup resource type.
-func modelPackageGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"creation_time": {
 			// Property: CreationTime

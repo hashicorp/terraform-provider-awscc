@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_devopsguru_resource_collection", resourceCollection)
+	registry.AddResourceTypeFactory("aws_devopsguru_resource_collection", resourceCollectionResourceType)
 }
 
-// resourceCollection returns the Terraform aws_devopsguru_resource_collection resource type.
+// resourceCollectionResourceType returns the Terraform aws_devopsguru_resource_collection resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DevOpsGuru::ResourceCollection resource type.
-func resourceCollection(ctx context.Context) (tfsdk.ResourceType, error) {
+func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"resource_collection_filter": {
 			// Property: ResourceCollectionFilter

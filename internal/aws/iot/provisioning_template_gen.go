@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_provisioning_template", provisioningTemplate)
+	registry.AddResourceTypeFactory("aws_iot_provisioning_template", provisioningTemplateResourceType)
 }
 
-// provisioningTemplate returns the Terraform aws_iot_provisioning_template resource type.
+// provisioningTemplateResourceType returns the Terraform aws_iot_provisioning_template resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::ProvisioningTemplate resource type.
-func provisioningTemplate(ctx context.Context) (tfsdk.ResourceType, error) {
+func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"description": {
 			// Property: Description

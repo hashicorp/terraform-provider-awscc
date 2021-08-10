@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_s3_storage_lens", storageLens)
+	registry.AddResourceTypeFactory("aws_s3_storage_lens", storageLensResourceType)
 }
 
-// storageLens returns the Terraform aws_s3_storage_lens resource type.
+// storageLensResourceType returns the Terraform aws_s3_storage_lens resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3::StorageLens resource type.
-func storageLens(ctx context.Context) (tfsdk.ResourceType, error) {
+func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"storage_lens_configuration": {
 			// Property: StorageLensConfiguration

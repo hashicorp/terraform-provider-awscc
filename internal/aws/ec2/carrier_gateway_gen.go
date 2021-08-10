@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_carrier_gateway", carrierGateway)
+	registry.AddResourceTypeFactory("aws_ec2_carrier_gateway", carrierGatewayResourceType)
 }
 
-// carrierGateway returns the Terraform aws_ec2_carrier_gateway resource type.
+// carrierGatewayResourceType returns the Terraform aws_ec2_carrier_gateway resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::CarrierGateway resource type.
-func carrierGateway(ctx context.Context) (tfsdk.ResourceType, error) {
+func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"carrier_gateway_id": {
 			// Property: CarrierGatewayId

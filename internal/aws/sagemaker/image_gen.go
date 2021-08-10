@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_image", image)
+	registry.AddResourceTypeFactory("aws_sagemaker_image", imageResourceType)
 }
 
-// image returns the Terraform aws_sagemaker_image resource type.
+// imageResourceType returns the Terraform aws_sagemaker_image resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::Image resource type.
-func image(ctx context.Context) (tfsdk.ResourceType, error) {
+func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"image_arn": {
 			// Property: ImageArn

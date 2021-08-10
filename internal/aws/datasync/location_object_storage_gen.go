@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_location_object_storage", locationObjectStorage)
+	registry.AddResourceTypeFactory("aws_datasync_location_object_storage", locationObjectStorageResourceType)
 }
 
-// locationObjectStorage returns the Terraform aws_datasync_location_object_storage resource type.
+// locationObjectStorageResourceType returns the Terraform aws_datasync_location_object_storage resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationObjectStorage resource type.
-func locationObjectStorage(ctx context.Context) (tfsdk.ResourceType, error) {
+func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"access_key": {
 			// Property: AccessKey

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_servicecatalog_service_action", serviceAction)
+	registry.AddResourceTypeFactory("aws_servicecatalog_service_action", serviceActionResourceType)
 }
 
-// serviceAction returns the Terraform aws_servicecatalog_service_action resource type.
+// serviceActionResourceType returns the Terraform aws_servicecatalog_service_action resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalog::ServiceAction resource type.
-func serviceAction(ctx context.Context) (tfsdk.ResourceType, error) {
+func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"accept_language": {
 			// Property: AcceptLanguage

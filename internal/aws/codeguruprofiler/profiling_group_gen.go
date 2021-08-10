@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_codeguruprofiler_profiling_group", profilingGroup)
+	registry.AddResourceTypeFactory("aws_codeguruprofiler_profiling_group", profilingGroupResourceType)
 }
 
-// profilingGroup returns the Terraform aws_codeguruprofiler_profiling_group resource type.
+// profilingGroupResourceType returns the Terraform aws_codeguruprofiler_profiling_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CodeGuruProfiler::ProfilingGroup resource type.
-func profilingGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"agent_permissions": {
 			// Property: AgentPermissions

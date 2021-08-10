@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_nimblestudio_studio", studio)
+	registry.AddResourceTypeFactory("aws_nimblestudio_studio", studioResourceType)
 }
 
-// studio returns the Terraform aws_nimblestudio_studio resource type.
+// studioResourceType returns the Terraform aws_nimblestudio_studio resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NimbleStudio::Studio resource type.
-func studio(ctx context.Context) (tfsdk.ResourceType, error) {
+func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"admin_role_arn": {
 			// Property: AdminRoleArn

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_kendra_faq", faq)
+	registry.AddResourceTypeFactory("aws_kendra_faq", faqResourceType)
 }
 
-// faq returns the Terraform aws_kendra_faq resource type.
+// faqResourceType returns the Terraform aws_kendra_faq resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Kendra::Faq resource type.
-func faq(ctx context.Context) (tfsdk.ResourceType, error) {
+func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

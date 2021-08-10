@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53_dnssec", dNSSEC)
+	registry.AddResourceTypeFactory("aws_route53_dnssec", dNSSECResourceType)
 }
 
-// dNSSEC returns the Terraform aws_route53_dnssec resource type.
+// dNSSECResourceType returns the Terraform aws_route53_dnssec resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53::DNSSEC resource type.
-func dNSSEC(ctx context.Context) (tfsdk.ResourceType, error) {
+func dNSSECResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"hosted_zone_id": {
 			// Property: HostedZoneId

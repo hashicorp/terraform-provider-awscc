@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediapackage_asset", asset)
+	registry.AddResourceTypeFactory("aws_mediapackage_asset", assetResourceType)
 }
 
-// asset returns the Terraform aws_mediapackage_asset resource type.
+// assetResourceType returns the Terraform aws_mediapackage_asset resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaPackage::Asset resource type.
-func asset(ctx context.Context) (tfsdk.ResourceType, error) {
+func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

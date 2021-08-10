@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_globalaccelerator_endpoint_group", endpointGroup)
+	registry.AddResourceTypeFactory("aws_globalaccelerator_endpoint_group", endpointGroupResourceType)
 }
 
-// endpointGroup returns the Terraform aws_globalaccelerator_endpoint_group resource type.
+// endpointGroupResourceType returns the Terraform aws_globalaccelerator_endpoint_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GlobalAccelerator::EndpointGroup resource type.
-func endpointGroup(ctx context.Context) (tfsdk.ResourceType, error) {
+func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"endpoint_configurations": {
 			// Property: EndpointConfigurations

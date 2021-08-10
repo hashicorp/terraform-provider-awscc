@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotsitewise_asset_model", assetModel)
+	registry.AddResourceTypeFactory("aws_iotsitewise_asset_model", assetModelResourceType)
 }
 
-// assetModel returns the Terraform aws_iotsitewise_asset_model resource type.
+// assetModelResourceType returns the Terraform aws_iotsitewise_asset_model resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::AssetModel resource type.
-func assetModel(ctx context.Context) (tfsdk.ResourceType, error) {
+func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"asset_model_arn": {
 			// Property: AssetModelArn

@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iam_server_certificate", serverCertificate)
+	registry.AddResourceTypeFactory("aws_iam_server_certificate", serverCertificateResourceType)
 }
 
-// serverCertificate returns the Terraform aws_iam_server_certificate resource type.
+// serverCertificateResourceType returns the Terraform aws_iam_server_certificate resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IAM::ServerCertificate resource type.
-func serverCertificate(ctx context.Context) (tfsdk.ResourceType, error) {
+func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

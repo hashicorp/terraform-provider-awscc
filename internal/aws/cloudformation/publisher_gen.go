@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudformation_publisher", publisher)
+	registry.AddResourceTypeFactory("aws_cloudformation_publisher", publisherResourceType)
 }
 
-// publisher returns the Terraform aws_cloudformation_publisher resource type.
+// publisherResourceType returns the Terraform aws_cloudformation_publisher resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::Publisher resource type.
-func publisher(ctx context.Context) (tfsdk.ResourceType, error) {
+func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"accept_terms_and_conditions": {
 			// Property: AcceptTermsAndConditions

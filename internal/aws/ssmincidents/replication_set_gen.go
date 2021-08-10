@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ssmincidents_replication_set", replicationSet)
+	registry.AddResourceTypeFactory("aws_ssmincidents_replication_set", replicationSetResourceType)
 }
 
-// replicationSet returns the Terraform aws_ssmincidents_replication_set resource type.
+// replicationSetResourceType returns the Terraform aws_ssmincidents_replication_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSMIncidents::ReplicationSet resource type.
-func replicationSet(ctx context.Context) (tfsdk.ResourceType, error) {
+func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

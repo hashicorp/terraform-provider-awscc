@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_topic_rule", topicRule)
+	registry.AddResourceTypeFactory("aws_iot_topic_rule", topicRuleResourceType)
 }
 
-// topicRule returns the Terraform aws_iot_topic_rule resource type.
+// topicRuleResourceType returns the Terraform aws_iot_topic_rule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::TopicRule resource type.
-func topicRule(ctx context.Context) (tfsdk.ResourceType, error) {
+func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"arn": {
 			// Property: Arn

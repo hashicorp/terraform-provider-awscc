@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_s3outposts_bucket_policy", bucketPolicy)
+	registry.AddResourceTypeFactory("aws_s3outposts_bucket_policy", bucketPolicyResourceType)
 }
 
-// bucketPolicy returns the Terraform aws_s3outposts_bucket_policy resource type.
+// bucketPolicyResourceType returns the Terraform aws_s3outposts_bucket_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3Outposts::BucketPolicy resource type.
-func bucketPolicy(ctx context.Context) (tfsdk.ResourceType, error) {
+func bucketPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
 		"bucket": {
 			// Property: Bucket
