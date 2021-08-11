@@ -98,7 +98,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "Actions": {
 			               "insertionOrder": false,
 			               "items": {
-			                 "$ref": "#/definitions/Action",
 			                 "type": "string"
 			               },
 			               "type": "array",
@@ -108,14 +107,12 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/TransformationConfiguration",
 			           "type": "object"
 			         },
 			         "type": "array",
 			         "uniqueItems": true
 			       }
 			     },
-			     "$ref": "#/definitions/ObjectLambdaConfiguration",
 			     "required": [
 			       "SupportingAccessPoint",
 			       "TransformationConfigurations"
@@ -179,7 +176,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "Actions": {
 						           "insertionOrder": false,
 						           "items": {
-						             "$ref": "#/definitions/Action",
 						             "type": "string"
 						           },
 						           "type": "array",
@@ -189,7 +185,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/TransformationConfiguration",
 						       "type": "object"
 						     },
 						     "type": "array",
@@ -205,7 +200,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "insertionOrder": false,
 									     "items": {
-									       "$ref": "#/definitions/Action",
 									       "type": "string"
 									     },
 									     "type": "array",
@@ -294,7 +288,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/PublicAccessBlockConfiguration",
 			     "type": "object"
 			   }
 			*/

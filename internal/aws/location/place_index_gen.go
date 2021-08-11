@@ -42,7 +42,6 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			     "pattern": "",
-			     "$ref": "#/definitions/iso8601UTC",
 			     "type": "string"
 			   }
 			*/
@@ -74,11 +73,9 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "SingleUse",
 			           "Storage"
 			         ],
-			         "$ref": "#/definitions/IntendedUse",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/DataSourceConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -93,7 +90,6 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "SingleUse",
 						       "Storage"
 						     ],
-						     "$ref": "#/definitions/IntendedUse",
 						     "type": "string"
 						   }
 						*/
@@ -159,7 +155,6 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "MobileAssetTracking",
 			       "MobileAssetManagement"
 			     ],
-			     "$ref": "#/definitions/PricingPlan",
 			     "type": "string"
 			   }
 			*/
@@ -174,7 +169,6 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			     "pattern": "",
-			     "$ref": "#/definitions/iso8601UTC",
 			     "type": "string"
 			   }
 			*/

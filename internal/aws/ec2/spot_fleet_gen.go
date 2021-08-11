@@ -117,7 +117,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/EbsBlockDevice",
 			                     "type": "object"
 			                   },
 			                   "NoDevice": {
@@ -127,7 +126,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/BlockDeviceMapping",
 			                 "required": [
 			                   "DeviceName"
 			                 ],
@@ -146,7 +144,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/IamInstanceProfileSpecification",
 			               "type": "object"
 			             },
 			             "ImageId": {
@@ -168,7 +165,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "boolean"
 			                 }
 			               },
-			               "$ref": "#/definitions/SpotFleetMonitoring",
 			               "type": "object"
 			             },
 			             "NetworkInterfaces": {
@@ -205,7 +201,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/InstanceIpv6Address",
 			                       "required": [
 			                         "Ipv6Address"
 			                       ],
@@ -228,7 +223,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/PrivateIpAddressSpecification",
 			                       "required": [
 			                         "PrivateIpAddress"
 			                       ],
@@ -244,7 +238,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/InstanceNetworkInterfaceSpecification",
 			                 "type": "object"
 			               },
 			               "type": "array",
@@ -268,7 +261,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/SpotPlacement",
 			               "type": "object"
 			             },
 			             "RamdiskId": {
@@ -282,7 +274,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/GroupIdentifier",
 			                 "required": [
 			                   "GroupId"
 			                 ],
@@ -364,7 +355,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/Tag",
 			                       "required": [
 			                         "Value",
 			                         "Key"
@@ -375,7 +365,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "uniqueItems": false
 			                   }
 			                 },
-			                 "$ref": "#/definitions/SpotFleetTagSpecification",
 			                 "type": "object"
 			               },
 			               "type": "array",
@@ -388,7 +377,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "number"
 			             }
 			           },
-			           "$ref": "#/definitions/SpotFleetLaunchSpecification",
 			           "required": [
 			             "ImageId",
 			             "InstanceType"
@@ -418,7 +406,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/FleetLaunchTemplateSpecification",
 			               "required": [
 			                 "Version"
 			               ],
@@ -444,14 +431,12 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "number"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/LaunchTemplateOverrides",
 			                 "type": "object"
 			               },
 			               "type": "array",
 			               "uniqueItems": true
 			             }
 			           },
-			           "$ref": "#/definitions/LaunchTemplateConfig",
 			           "type": "object"
 			         },
 			         "type": "array",
@@ -471,7 +456,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/ClassicLoadBalancer",
 			                   "required": [
 			                     "Name"
 			                   ],
@@ -481,7 +465,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "uniqueItems": true
 			               }
 			             },
-			             "$ref": "#/definitions/ClassicLoadBalancersConfig",
 			             "required": [
 			               "ClassicLoadBalancers"
 			             ],
@@ -498,7 +481,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/TargetGroup",
 			                   "required": [
 			                     "Arn"
 			                   ],
@@ -508,14 +490,12 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "uniqueItems": true
 			               }
 			             },
-			             "$ref": "#/definitions/TargetGroupsConfig",
 			             "required": [
 			               "TargetGroups"
 			             ],
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/LoadBalancersConfig",
 			         "type": "object"
 			       },
 			       "OnDemandAllocationStrategy": {
@@ -543,11 +523,9 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SpotCapacityRebalance",
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/SpotMaintenanceStrategies",
 			         "type": "object"
 			       },
 			       "SpotMaxTotalPrice": {
@@ -576,7 +554,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/SpotFleetRequestConfigData",
 			     "required": [
 			       "IamFleetRole",
 			       "TargetCapacity"
@@ -722,7 +699,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/EbsBlockDevice",
 						                 "type": "object"
 						               },
 						               "NoDevice": {
@@ -732,7 +708,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/BlockDeviceMapping",
 						             "required": [
 						               "DeviceName"
 						             ],
@@ -751,7 +726,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/IamInstanceProfileSpecification",
 						           "type": "object"
 						         },
 						         "ImageId": {
@@ -773,7 +747,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "boolean"
 						             }
 						           },
-						           "$ref": "#/definitions/SpotFleetMonitoring",
 						           "type": "object"
 						         },
 						         "NetworkInterfaces": {
@@ -810,7 +783,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "type": "string"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/InstanceIpv6Address",
 						                   "required": [
 						                     "Ipv6Address"
 						                   ],
@@ -833,7 +805,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "type": "string"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/PrivateIpAddressSpecification",
 						                   "required": [
 						                     "PrivateIpAddress"
 						                   ],
@@ -849,7 +820,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/InstanceNetworkInterfaceSpecification",
 						             "type": "object"
 						           },
 						           "type": "array",
@@ -873,7 +843,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/SpotPlacement",
 						           "type": "object"
 						         },
 						         "RamdiskId": {
@@ -887,7 +856,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/GroupIdentifier",
 						             "required": [
 						               "GroupId"
 						             ],
@@ -969,7 +937,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "type": "string"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/Tag",
 						                   "required": [
 						                     "Value",
 						                     "Key"
@@ -980,7 +947,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "uniqueItems": false
 						               }
 						             },
-						             "$ref": "#/definitions/SpotFleetTagSpecification",
 						             "type": "object"
 						           },
 						           "type": "array",
@@ -993,7 +959,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "number"
 						         }
 						       },
-						       "$ref": "#/definitions/SpotFleetLaunchSpecification",
 						       "required": [
 						         "ImageId",
 						         "InstanceType"
@@ -1049,7 +1014,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/EbsBlockDevice",
 									           "type": "object"
 									         },
 									         "NoDevice": {
@@ -1059,7 +1023,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/BlockDeviceMapping",
 									       "required": [
 									         "DeviceName"
 									       ],
@@ -1118,7 +1081,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/EbsBlockDevice",
 												     "type": "object"
 												   }
 												*/
@@ -1252,7 +1214,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/IamInstanceProfileSpecification",
 									     "type": "object"
 									   }
 									*/
@@ -1328,7 +1289,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "boolean"
 									       }
 									     },
-									     "$ref": "#/definitions/SpotFleetMonitoring",
 									     "type": "object"
 									   }
 									*/
@@ -1387,7 +1347,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/InstanceIpv6Address",
 									             "required": [
 									               "Ipv6Address"
 									             ],
@@ -1410,7 +1369,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/PrivateIpAddressSpecification",
 									             "required": [
 									               "PrivateIpAddress"
 									             ],
@@ -1426,7 +1384,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/InstanceNetworkInterfaceSpecification",
 									       "type": "object"
 									     },
 									     "type": "array",
@@ -1519,7 +1476,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/InstanceIpv6Address",
 												       "required": [
 												         "Ipv6Address"
 												       ],
@@ -1574,7 +1530,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/PrivateIpAddressSpecification",
 												       "required": [
 												         "PrivateIpAddress"
 												       ],
@@ -1663,7 +1618,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SpotPlacement",
 									     "type": "object"
 									   }
 									*/
@@ -1734,7 +1688,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/GroupIdentifier",
 									       "required": [
 									         "GroupId"
 									       ],
@@ -1856,7 +1809,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/Tag",
 									             "required": [
 									               "Value",
 									               "Key"
@@ -1867,7 +1819,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "uniqueItems": false
 									         }
 									       },
-									       "$ref": "#/definitions/SpotFleetTagSpecification",
 									       "type": "object"
 									     },
 									     "type": "array",
@@ -1952,7 +1903,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/Tag",
 												       "required": [
 												         "Value",
 												         "Key"
@@ -2050,7 +2000,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/FleetLaunchTemplateSpecification",
 						           "required": [
 						             "Version"
 						           ],
@@ -2076,14 +2025,12 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "number"
 						               }
 						             },
-						             "$ref": "#/definitions/LaunchTemplateOverrides",
 						             "type": "object"
 						           },
 						           "type": "array",
 						           "uniqueItems": true
 						         }
 						       },
-						       "$ref": "#/definitions/LaunchTemplateConfig",
 						       "type": "object"
 						     },
 						     "type": "array",
@@ -2113,7 +2060,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/FleetLaunchTemplateSpecification",
 									     "required": [
 									       "Version"
 									     ],
@@ -2186,7 +2132,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "number"
 									         }
 									       },
-									       "$ref": "#/definitions/LaunchTemplateOverrides",
 									       "type": "object"
 									     },
 									     "type": "array",
@@ -2281,7 +2226,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/ClassicLoadBalancer",
 						               "required": [
 						                 "Name"
 						               ],
@@ -2291,7 +2235,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "uniqueItems": true
 						           }
 						         },
-						         "$ref": "#/definitions/ClassicLoadBalancersConfig",
 						         "required": [
 						           "ClassicLoadBalancers"
 						         ],
@@ -2308,7 +2251,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/TargetGroup",
 						               "required": [
 						                 "Arn"
 						               ],
@@ -2318,14 +2260,12 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "uniqueItems": true
 						           }
 						         },
-						         "$ref": "#/definitions/TargetGroupsConfig",
 						         "required": [
 						           "TargetGroups"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/LoadBalancersConfig",
 						     "type": "object"
 						   }
 						*/
@@ -2346,7 +2286,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/ClassicLoadBalancer",
 									           "required": [
 									             "Name"
 									           ],
@@ -2356,7 +2295,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "uniqueItems": true
 									       }
 									     },
-									     "$ref": "#/definitions/ClassicLoadBalancersConfig",
 									     "required": [
 									       "ClassicLoadBalancers"
 									     ],
@@ -2377,7 +2315,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/ClassicLoadBalancer",
 												       "required": [
 												         "Name"
 												       ],
@@ -2425,7 +2362,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/TargetGroup",
 									           "required": [
 									             "Arn"
 									           ],
@@ -2435,7 +2371,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "uniqueItems": true
 									       }
 									     },
-									     "$ref": "#/definitions/TargetGroupsConfig",
 									     "required": [
 									       "TargetGroups"
 									     ],
@@ -2456,7 +2391,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/TargetGroup",
 												       "required": [
 												         "Arn"
 												       ],
@@ -2564,11 +2498,9 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SpotCapacityRebalance",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/SpotMaintenanceStrategies",
 						     "type": "object"
 						   }
 						*/
@@ -2588,7 +2520,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SpotCapacityRebalance",
 									     "type": "object"
 									   }
 									*/

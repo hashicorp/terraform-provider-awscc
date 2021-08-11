@@ -54,7 +54,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/DeliveryStreamEncryptionConfigurationInput",
 			     "required": [
 			       "KeyType"
 			     ],
@@ -146,7 +145,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/ElasticsearchBufferingHints",
 			         "type": "object"
 			       },
 			       "CloudWatchLoggingOptions": {
@@ -162,7 +160,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/CloudWatchLoggingOptions",
 			         "type": "object"
 			       },
 			       "ClusterEndpoint": {
@@ -213,7 +210,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/ProcessorParameter",
 			                     "required": [
 			                       "ParameterValue",
 			                       "ParameterName"
@@ -230,7 +226,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/Processor",
 			               "required": [
 			                 "Type"
 			               ],
@@ -240,7 +235,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "uniqueItems": true
 			           }
 			         },
-			         "$ref": "#/definitions/ProcessingConfiguration",
 			         "type": "object"
 			       },
 			       "RetryOptions": {
@@ -250,7 +244,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/ElasticsearchRetryOptions",
 			         "type": "object"
 			       },
 			       "RoleARN": {
@@ -285,7 +278,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "integer"
 			               }
 			             },
-			             "$ref": "#/definitions/BufferingHints",
 			             "type": "object"
 			           },
 			           "CloudWatchLoggingOptions": {
@@ -301,7 +293,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/CloudWatchLoggingOptions",
 			             "type": "object"
 			           },
 			           "CompressionFormat": {
@@ -324,7 +315,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/KMSEncryptionConfig",
 			                 "required": [
 			                   "AWSKMSKeyARN"
 			                 ],
@@ -337,7 +327,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/EncryptionConfiguration",
 			             "type": "object"
 			           },
 			           "ErrorOutputPrefix": {
@@ -357,7 +346,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/S3DestinationConfiguration",
 			         "required": [
 			           "BucketARN",
 			           "RoleARN"
@@ -401,7 +389,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "uniqueItems": true
 			           }
 			         },
-			         "$ref": "#/definitions/VpcConfiguration",
 			         "required": [
 			           "RoleARN",
 			           "SubnetIds",
@@ -410,7 +397,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/ElasticsearchDestinationConfiguration",
 			     "required": [
 			       "IndexName",
 			       "S3Configuration",
@@ -435,7 +421,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/ElasticsearchBufferingHints",
 						     "type": "object"
 						   }
 						*/
@@ -484,7 +469,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/CloudWatchLoggingOptions",
 						     "type": "object"
 						   }
 						*/
@@ -611,7 +595,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/ProcessorParameter",
 						                 "required": [
 						                   "ParameterValue",
 						                   "ParameterName"
@@ -628,7 +611,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/Processor",
 						           "required": [
 						             "Type"
 						           ],
@@ -638,7 +620,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/ProcessingConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -674,7 +655,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/ProcessorParameter",
 									             "required": [
 									               "ParameterValue",
 									               "ParameterName"
@@ -691,7 +671,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Processor",
 									       "required": [
 									         "Type"
 									       ],
@@ -719,7 +698,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/ProcessorParameter",
 												       "required": [
 												         "ParameterValue",
 												         "ParameterName"
@@ -794,7 +772,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/ElasticsearchRetryOptions",
 						     "type": "object"
 						   }
 						*/
@@ -867,7 +844,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/BufferingHints",
 						         "type": "object"
 						       },
 						       "CloudWatchLoggingOptions": {
@@ -883,7 +859,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/CloudWatchLoggingOptions",
 						         "type": "object"
 						       },
 						       "CompressionFormat": {
@@ -906,7 +881,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/KMSEncryptionConfig",
 						             "required": [
 						               "AWSKMSKeyARN"
 						             ],
@@ -919,7 +893,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/EncryptionConfiguration",
 						         "type": "object"
 						       },
 						       "ErrorOutputPrefix": {
@@ -939,7 +912,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/S3DestinationConfiguration",
 						     "required": [
 						       "BucketARN",
 						       "RoleARN"
@@ -977,7 +949,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/BufferingHints",
 									     "type": "object"
 									   }
 									*/
@@ -1026,7 +997,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudWatchLoggingOptions",
 									     "type": "object"
 									   }
 									*/
@@ -1101,7 +1071,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/KMSEncryptionConfig",
 									         "required": [
 									           "AWSKMSKeyARN"
 									         ],
@@ -1114,7 +1083,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/EncryptionConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -1131,7 +1099,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/KMSEncryptionConfig",
 												     "required": [
 												       "AWSKMSKeyARN"
 												     ],
@@ -1266,7 +1233,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/VpcConfiguration",
 						     "required": [
 						       "RoleARN",
 						       "SubnetIds",
@@ -1364,7 +1330,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/BufferingHints",
 			         "type": "object"
 			       },
 			       "CloudWatchLoggingOptions": {
@@ -1380,7 +1345,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/CloudWatchLoggingOptions",
 			         "type": "object"
 			       },
 			       "CompressionFormat": {
@@ -1416,7 +1380,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                         "uniqueItems": true
 			                       }
 			                     },
-			                     "$ref": "#/definitions/HiveJsonSerDe",
 			                     "type": "object"
 			                   },
 			                   "OpenXJsonSerDe": {
@@ -1437,15 +1400,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                         "type": "boolean"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/OpenXJsonSerDe",
 			                     "type": "object"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Deserializer",
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/InputFormatConfiguration",
 			             "type": "object"
 			           },
 			           "OutputFormatConfiguration": {
@@ -1492,7 +1452,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                         "type": "integer"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/OrcSerDe",
 			                     "type": "object"
 			                   },
 			                   "ParquetSerDe": {
@@ -1517,15 +1476,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/ParquetSerDe",
 			                     "type": "object"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Serializer",
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/OutputFormatConfiguration",
 			             "type": "object"
 			           },
 			           "SchemaConfiguration": {
@@ -1553,11 +1509,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SchemaConfiguration",
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/DataFormatConversionConfiguration",
 			         "type": "object"
 			       },
 			       "EncryptionConfiguration": {
@@ -1570,7 +1524,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/KMSEncryptionConfig",
 			             "required": [
 			               "AWSKMSKeyARN"
 			             ],
@@ -1583,7 +1536,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/EncryptionConfiguration",
 			         "type": "object"
 			       },
 			       "ErrorOutputPrefix": {
@@ -1617,7 +1569,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/ProcessorParameter",
 			                     "required": [
 			                       "ParameterValue",
 			                       "ParameterName"
@@ -1634,7 +1585,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/Processor",
 			               "required": [
 			                 "Type"
 			               ],
@@ -1644,7 +1594,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "uniqueItems": true
 			           }
 			         },
-			         "$ref": "#/definitions/ProcessingConfiguration",
 			         "type": "object"
 			       },
 			       "RoleARN": {
@@ -1672,7 +1621,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "integer"
 			               }
 			             },
-			             "$ref": "#/definitions/BufferingHints",
 			             "type": "object"
 			           },
 			           "CloudWatchLoggingOptions": {
@@ -1688,7 +1636,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/CloudWatchLoggingOptions",
 			             "type": "object"
 			           },
 			           "CompressionFormat": {
@@ -1711,7 +1658,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/KMSEncryptionConfig",
 			                 "required": [
 			                   "AWSKMSKeyARN"
 			                 ],
@@ -1724,7 +1670,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/EncryptionConfiguration",
 			             "type": "object"
 			           },
 			           "ErrorOutputPrefix": {
@@ -1744,7 +1689,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/S3DestinationConfiguration",
 			         "required": [
 			           "BucketARN",
 			           "RoleARN"
@@ -1759,7 +1703,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/ExtendedS3DestinationConfiguration",
 			     "required": [
 			       "BucketARN",
 			       "RoleARN"
@@ -1797,7 +1740,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/BufferingHints",
 						     "type": "object"
 						   }
 						*/
@@ -1846,7 +1788,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/CloudWatchLoggingOptions",
 						     "type": "object"
 						   }
 						*/
@@ -1934,7 +1875,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                     "uniqueItems": true
 						                   }
 						                 },
-						                 "$ref": "#/definitions/HiveJsonSerDe",
 						                 "type": "object"
 						               },
 						               "OpenXJsonSerDe": {
@@ -1955,15 +1895,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                     "type": "boolean"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/OpenXJsonSerDe",
 						                 "type": "object"
 						               }
 						             },
-						             "$ref": "#/definitions/Deserializer",
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/InputFormatConfiguration",
 						         "type": "object"
 						       },
 						       "OutputFormatConfiguration": {
@@ -2010,7 +1947,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                     "type": "integer"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/OrcSerDe",
 						                 "type": "object"
 						               },
 						               "ParquetSerDe": {
@@ -2035,15 +1971,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/ParquetSerDe",
 						                 "type": "object"
 						               }
 						             },
-						             "$ref": "#/definitions/Serializer",
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/OutputFormatConfiguration",
 						         "type": "object"
 						       },
 						       "SchemaConfiguration": {
@@ -2071,11 +2004,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SchemaConfiguration",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/DataFormatConversionConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -2113,7 +2044,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									                 "uniqueItems": true
 									               }
 									             },
-									             "$ref": "#/definitions/HiveJsonSerDe",
 									             "type": "object"
 									           },
 									           "OpenXJsonSerDe": {
@@ -2134,15 +2064,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									                 "type": "boolean"
 									               }
 									             },
-									             "$ref": "#/definitions/OpenXJsonSerDe",
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/Deserializer",
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/InputFormatConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -2166,7 +2093,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												             "uniqueItems": true
 												           }
 												         },
-												         "$ref": "#/definitions/HiveJsonSerDe",
 												         "type": "object"
 												       },
 												       "OpenXJsonSerDe": {
@@ -2187,11 +2113,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												             "type": "boolean"
 												           }
 												         },
-												         "$ref": "#/definitions/OpenXJsonSerDe",
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/Deserializer",
 												     "type": "object"
 												   }
 												*/
@@ -2212,7 +2136,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															         "uniqueItems": true
 															       }
 															     },
-															     "$ref": "#/definitions/HiveJsonSerDe",
 															     "type": "object"
 															   }
 															*/
@@ -2260,7 +2183,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															         "type": "boolean"
 															       }
 															     },
-															     "$ref": "#/definitions/OpenXJsonSerDe",
 															     "type": "object"
 															   }
 															*/
@@ -2365,7 +2287,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									                 "type": "integer"
 									               }
 									             },
-									             "$ref": "#/definitions/OrcSerDe",
 									             "type": "object"
 									           },
 									           "ParquetSerDe": {
@@ -2390,15 +2311,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/ParquetSerDe",
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/Serializer",
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/OutputFormatConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -2449,7 +2367,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												             "type": "integer"
 												           }
 												         },
-												         "$ref": "#/definitions/OrcSerDe",
 												         "type": "object"
 												       },
 												       "ParquetSerDe": {
@@ -2474,11 +2391,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												             "type": "string"
 												           }
 												         },
-												         "$ref": "#/definitions/ParquetSerDe",
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/Serializer",
 												     "type": "object"
 												   }
 												*/
@@ -2526,7 +2441,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															         "type": "integer"
 															       }
 															     },
-															     "$ref": "#/definitions/OrcSerDe",
 															     "type": "object"
 															   }
 															*/
@@ -2677,7 +2591,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/ParquetSerDe",
 															     "type": "object"
 															   }
 															*/
@@ -2790,7 +2703,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SchemaConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -2887,7 +2799,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/KMSEncryptionConfig",
 						         "required": [
 						           "AWSKMSKeyARN"
 						         ],
@@ -2900,7 +2811,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/EncryptionConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -2917,7 +2827,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/KMSEncryptionConfig",
 									     "required": [
 									       "AWSKMSKeyARN"
 									     ],
@@ -3010,7 +2919,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/ProcessorParameter",
 						                 "required": [
 						                   "ParameterValue",
 						                   "ParameterName"
@@ -3027,7 +2935,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/Processor",
 						           "required": [
 						             "Type"
 						           ],
@@ -3037,7 +2944,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/ProcessingConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -3073,7 +2979,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/ProcessorParameter",
 									             "required": [
 									               "ParameterValue",
 									               "ParameterName"
@@ -3090,7 +2995,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Processor",
 									       "required": [
 									         "Type"
 									       ],
@@ -3118,7 +3022,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/ProcessorParameter",
 												       "required": [
 												         "ParameterValue",
 												         "ParameterName"
@@ -3219,7 +3122,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/BufferingHints",
 						         "type": "object"
 						       },
 						       "CloudWatchLoggingOptions": {
@@ -3235,7 +3137,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/CloudWatchLoggingOptions",
 						         "type": "object"
 						       },
 						       "CompressionFormat": {
@@ -3258,7 +3159,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/KMSEncryptionConfig",
 						             "required": [
 						               "AWSKMSKeyARN"
 						             ],
@@ -3271,7 +3171,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/EncryptionConfiguration",
 						         "type": "object"
 						       },
 						       "ErrorOutputPrefix": {
@@ -3291,7 +3190,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/S3DestinationConfiguration",
 						     "required": [
 						       "BucketARN",
 						       "RoleARN"
@@ -3329,7 +3227,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/BufferingHints",
 									     "type": "object"
 									   }
 									*/
@@ -3378,7 +3275,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudWatchLoggingOptions",
 									     "type": "object"
 									   }
 									*/
@@ -3453,7 +3349,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/KMSEncryptionConfig",
 									         "required": [
 									           "AWSKMSKeyARN"
 									         ],
@@ -3466,7 +3361,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/EncryptionConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -3483,7 +3377,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/KMSEncryptionConfig",
 												     "required": [
 												       "AWSKMSKeyARN"
 												     ],
@@ -3605,7 +3498,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/BufferingHints",
 			         "type": "object"
 			       },
 			       "CloudWatchLoggingOptions": {
@@ -3621,7 +3513,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/CloudWatchLoggingOptions",
 			         "type": "object"
 			       },
 			       "EndpointConfiguration": {
@@ -3643,7 +3534,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/HttpEndpointConfiguration",
 			         "required": [
 			           "Url"
 			         ],
@@ -3670,7 +3560,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/ProcessorParameter",
 			                     "required": [
 			                       "ParameterValue",
 			                       "ParameterName"
@@ -3687,7 +3576,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/Processor",
 			               "required": [
 			                 "Type"
 			               ],
@@ -3697,7 +3585,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "uniqueItems": true
 			           }
 			         },
-			         "$ref": "#/definitions/ProcessingConfiguration",
 			         "type": "object"
 			       },
 			       "RequestConfiguration": {
@@ -3718,7 +3605,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/HttpEndpointCommonAttribute",
 			               "required": [
 			                 "AttributeName",
 			                 "AttributeValue"
@@ -3738,7 +3624,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/HttpEndpointRequestConfiguration",
 			         "type": "object"
 			       },
 			       "RetryOptions": {
@@ -3748,7 +3633,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/RetryOptions",
 			         "type": "object"
 			       },
 			       "RoleARN": {
@@ -3779,7 +3663,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "integer"
 			               }
 			             },
-			             "$ref": "#/definitions/BufferingHints",
 			             "type": "object"
 			           },
 			           "CloudWatchLoggingOptions": {
@@ -3795,7 +3678,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/CloudWatchLoggingOptions",
 			             "type": "object"
 			           },
 			           "CompressionFormat": {
@@ -3818,7 +3700,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/KMSEncryptionConfig",
 			                 "required": [
 			                   "AWSKMSKeyARN"
 			                 ],
@@ -3831,7 +3712,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/EncryptionConfiguration",
 			             "type": "object"
 			           },
 			           "ErrorOutputPrefix": {
@@ -3851,7 +3731,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/S3DestinationConfiguration",
 			         "required": [
 			           "BucketARN",
 			           "RoleARN"
@@ -3859,7 +3738,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/HttpEndpointDestinationConfiguration",
 			     "required": [
 			       "EndpointConfiguration",
 			       "S3Configuration"
@@ -3883,7 +3761,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/BufferingHints",
 						     "type": "object"
 						   }
 						*/
@@ -3932,7 +3809,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/CloudWatchLoggingOptions",
 						     "type": "object"
 						   }
 						*/
@@ -3998,7 +3874,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/HttpEndpointConfiguration",
 						     "required": [
 						       "Url"
 						     ],
@@ -4075,7 +3950,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/ProcessorParameter",
 						                 "required": [
 						                   "ParameterValue",
 						                   "ParameterName"
@@ -4092,7 +3966,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/Processor",
 						           "required": [
 						             "Type"
 						           ],
@@ -4102,7 +3975,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/ProcessingConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -4138,7 +4010,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/ProcessorParameter",
 									             "required": [
 									               "ParameterValue",
 									               "ParameterName"
@@ -4155,7 +4026,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Processor",
 									       "required": [
 									         "Type"
 									       ],
@@ -4183,7 +4053,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/ProcessorParameter",
 												       "required": [
 												         "ParameterValue",
 												         "ParameterName"
@@ -4269,7 +4138,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/HttpEndpointCommonAttribute",
 						           "required": [
 						             "AttributeName",
 						             "AttributeValue"
@@ -4289,7 +4157,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/HttpEndpointRequestConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -4314,7 +4181,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/HttpEndpointCommonAttribute",
 									       "required": [
 									         "AttributeName",
 									         "AttributeValue"
@@ -4394,7 +4260,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/RetryOptions",
 						     "type": "object"
 						   }
 						*/
@@ -4463,7 +4328,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/BufferingHints",
 						         "type": "object"
 						       },
 						       "CloudWatchLoggingOptions": {
@@ -4479,7 +4343,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/CloudWatchLoggingOptions",
 						         "type": "object"
 						       },
 						       "CompressionFormat": {
@@ -4502,7 +4365,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/KMSEncryptionConfig",
 						             "required": [
 						               "AWSKMSKeyARN"
 						             ],
@@ -4515,7 +4377,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/EncryptionConfiguration",
 						         "type": "object"
 						       },
 						       "ErrorOutputPrefix": {
@@ -4535,7 +4396,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/S3DestinationConfiguration",
 						     "required": [
 						       "BucketARN",
 						       "RoleARN"
@@ -4573,7 +4433,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/BufferingHints",
 									     "type": "object"
 									   }
 									*/
@@ -4622,7 +4481,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudWatchLoggingOptions",
 									     "type": "object"
 									   }
 									*/
@@ -4697,7 +4555,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/KMSEncryptionConfig",
 									         "required": [
 									           "AWSKMSKeyARN"
 									         ],
@@ -4710,7 +4567,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/EncryptionConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -4727,7 +4583,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/KMSEncryptionConfig",
 												     "required": [
 												       "AWSKMSKeyARN"
 												     ],
@@ -4837,7 +4692,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/KinesisStreamSourceConfiguration",
 			     "required": [
 			       "RoleARN",
 			       "KinesisStreamARN"
@@ -4901,7 +4755,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/CloudWatchLoggingOptions",
 			         "type": "object"
 			       },
 			       "ClusterJDBCURL": {
@@ -4928,7 +4781,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/CopyCommand",
 			         "required": [
 			           "DataTableName"
 			         ],
@@ -4960,7 +4812,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/ProcessorParameter",
 			                     "required": [
 			                       "ParameterValue",
 			                       "ParameterName"
@@ -4977,7 +4828,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/Processor",
 			               "required": [
 			                 "Type"
 			               ],
@@ -4987,7 +4837,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "uniqueItems": true
 			           }
 			         },
-			         "$ref": "#/definitions/ProcessingConfiguration",
 			         "type": "object"
 			       },
 			       "RetryOptions": {
@@ -4997,7 +4846,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/RedshiftRetryOptions",
 			         "type": "object"
 			       },
 			       "RoleARN": {
@@ -5025,7 +4873,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "integer"
 			               }
 			             },
-			             "$ref": "#/definitions/BufferingHints",
 			             "type": "object"
 			           },
 			           "CloudWatchLoggingOptions": {
@@ -5041,7 +4888,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/CloudWatchLoggingOptions",
 			             "type": "object"
 			           },
 			           "CompressionFormat": {
@@ -5064,7 +4910,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/KMSEncryptionConfig",
 			                 "required": [
 			                   "AWSKMSKeyARN"
 			                 ],
@@ -5077,7 +4922,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/EncryptionConfiguration",
 			             "type": "object"
 			           },
 			           "ErrorOutputPrefix": {
@@ -5097,7 +4941,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/S3DestinationConfiguration",
 			         "required": [
 			           "BucketARN",
 			           "RoleARN"
@@ -5130,7 +4973,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "integer"
 			               }
 			             },
-			             "$ref": "#/definitions/BufferingHints",
 			             "type": "object"
 			           },
 			           "CloudWatchLoggingOptions": {
@@ -5146,7 +4988,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/CloudWatchLoggingOptions",
 			             "type": "object"
 			           },
 			           "CompressionFormat": {
@@ -5169,7 +5010,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/KMSEncryptionConfig",
 			                 "required": [
 			                   "AWSKMSKeyARN"
 			                 ],
@@ -5182,7 +5022,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/EncryptionConfiguration",
 			             "type": "object"
 			           },
 			           "ErrorOutputPrefix": {
@@ -5202,7 +5041,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/S3DestinationConfiguration",
 			         "required": [
 			           "BucketARN",
 			           "RoleARN"
@@ -5215,7 +5053,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/RedshiftDestinationConfiguration",
 			     "required": [
 			       "S3Configuration",
 			       "Username",
@@ -5246,7 +5083,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/CloudWatchLoggingOptions",
 						     "type": "object"
 						   }
 						*/
@@ -5325,7 +5161,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/CopyCommand",
 						     "required": [
 						       "DataTableName"
 						     ],
@@ -5415,7 +5250,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/ProcessorParameter",
 						                 "required": [
 						                   "ParameterValue",
 						                   "ParameterName"
@@ -5432,7 +5266,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/Processor",
 						           "required": [
 						             "Type"
 						           ],
@@ -5442,7 +5275,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/ProcessingConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -5478,7 +5310,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/ProcessorParameter",
 									             "required": [
 									               "ParameterValue",
 									               "ParameterName"
@@ -5495,7 +5326,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Processor",
 									       "required": [
 									         "Type"
 									       ],
@@ -5523,7 +5353,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/ProcessorParameter",
 												       "required": [
 												         "ParameterValue",
 												         "ParameterName"
@@ -5598,7 +5427,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/RedshiftRetryOptions",
 						     "type": "object"
 						   }
 						*/
@@ -5656,7 +5484,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/BufferingHints",
 						         "type": "object"
 						       },
 						       "CloudWatchLoggingOptions": {
@@ -5672,7 +5499,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/CloudWatchLoggingOptions",
 						         "type": "object"
 						       },
 						       "CompressionFormat": {
@@ -5695,7 +5521,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/KMSEncryptionConfig",
 						             "required": [
 						               "AWSKMSKeyARN"
 						             ],
@@ -5708,7 +5533,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/EncryptionConfiguration",
 						         "type": "object"
 						       },
 						       "ErrorOutputPrefix": {
@@ -5728,7 +5552,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/S3DestinationConfiguration",
 						     "required": [
 						       "BucketARN",
 						       "RoleARN"
@@ -5766,7 +5589,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/BufferingHints",
 									     "type": "object"
 									   }
 									*/
@@ -5815,7 +5637,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudWatchLoggingOptions",
 									     "type": "object"
 									   }
 									*/
@@ -5890,7 +5711,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/KMSEncryptionConfig",
 									         "required": [
 									           "AWSKMSKeyARN"
 									         ],
@@ -5903,7 +5723,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/EncryptionConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -5920,7 +5739,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/KMSEncryptionConfig",
 												     "required": [
 												       "AWSKMSKeyARN"
 												     ],
@@ -6044,7 +5862,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/BufferingHints",
 						         "type": "object"
 						       },
 						       "CloudWatchLoggingOptions": {
@@ -6060,7 +5877,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/CloudWatchLoggingOptions",
 						         "type": "object"
 						       },
 						       "CompressionFormat": {
@@ -6083,7 +5899,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/KMSEncryptionConfig",
 						             "required": [
 						               "AWSKMSKeyARN"
 						             ],
@@ -6096,7 +5911,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/EncryptionConfiguration",
 						         "type": "object"
 						       },
 						       "ErrorOutputPrefix": {
@@ -6116,7 +5930,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/S3DestinationConfiguration",
 						     "required": [
 						       "BucketARN",
 						       "RoleARN"
@@ -6154,7 +5967,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/BufferingHints",
 									     "type": "object"
 									   }
 									*/
@@ -6203,7 +6015,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudWatchLoggingOptions",
 									     "type": "object"
 									   }
 									*/
@@ -6278,7 +6089,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/KMSEncryptionConfig",
 									         "required": [
 									           "AWSKMSKeyARN"
 									         ],
@@ -6291,7 +6101,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/EncryptionConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -6308,7 +6117,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/KMSEncryptionConfig",
 												     "required": [
 												       "AWSKMSKeyARN"
 												     ],
@@ -6434,7 +6242,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/BufferingHints",
 			         "type": "object"
 			       },
 			       "CloudWatchLoggingOptions": {
@@ -6450,7 +6257,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/CloudWatchLoggingOptions",
 			         "type": "object"
 			       },
 			       "CompressionFormat": {
@@ -6473,7 +6279,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/KMSEncryptionConfig",
 			             "required": [
 			               "AWSKMSKeyARN"
 			             ],
@@ -6486,7 +6291,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/EncryptionConfiguration",
 			         "type": "object"
 			       },
 			       "ErrorOutputPrefix": {
@@ -6506,7 +6310,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/S3DestinationConfiguration",
 			     "required": [
 			       "BucketARN",
 			       "RoleARN"
@@ -6544,7 +6347,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/BufferingHints",
 						     "type": "object"
 						   }
 						*/
@@ -6593,7 +6395,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/CloudWatchLoggingOptions",
 						     "type": "object"
 						   }
 						*/
@@ -6668,7 +6469,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/KMSEncryptionConfig",
 						         "required": [
 						           "AWSKMSKeyARN"
 						         ],
@@ -6681,7 +6481,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/EncryptionConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -6698,7 +6497,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/KMSEncryptionConfig",
 									     "required": [
 									       "AWSKMSKeyARN"
 									     ],
@@ -6804,7 +6602,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/CloudWatchLoggingOptions",
 			         "type": "object"
 			       },
 			       "HECAcknowledgmentTimeoutInSeconds": {
@@ -6848,7 +6645,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/ProcessorParameter",
 			                     "required": [
 			                       "ParameterValue",
 			                       "ParameterName"
@@ -6865,7 +6661,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/Processor",
 			               "required": [
 			                 "Type"
 			               ],
@@ -6875,7 +6670,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "uniqueItems": true
 			           }
 			         },
-			         "$ref": "#/definitions/ProcessingConfiguration",
 			         "type": "object"
 			       },
 			       "RetryOptions": {
@@ -6885,7 +6679,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/SplunkRetryOptions",
 			         "type": "object"
 			       },
 			       "S3BackupMode": {
@@ -6910,7 +6703,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "integer"
 			               }
 			             },
-			             "$ref": "#/definitions/BufferingHints",
 			             "type": "object"
 			           },
 			           "CloudWatchLoggingOptions": {
@@ -6926,7 +6718,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/CloudWatchLoggingOptions",
 			             "type": "object"
 			           },
 			           "CompressionFormat": {
@@ -6949,7 +6740,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/KMSEncryptionConfig",
 			                 "required": [
 			                   "AWSKMSKeyARN"
 			                 ],
@@ -6962,7 +6752,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/EncryptionConfiguration",
 			             "type": "object"
 			           },
 			           "ErrorOutputPrefix": {
@@ -6982,7 +6771,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/S3DestinationConfiguration",
 			         "required": [
 			           "BucketARN",
 			           "RoleARN"
@@ -6990,7 +6778,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/SplunkDestinationConfiguration",
 			     "required": [
 			       "HECEndpoint",
 			       "S3Configuration",
@@ -7019,7 +6806,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/CloudWatchLoggingOptions",
 						     "type": "object"
 						   }
 						*/
@@ -7139,7 +6925,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/ProcessorParameter",
 						                 "required": [
 						                   "ParameterValue",
 						                   "ParameterName"
@@ -7156,7 +6941,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/Processor",
 						           "required": [
 						             "Type"
 						           ],
@@ -7166,7 +6950,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/ProcessingConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -7202,7 +6985,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/ProcessorParameter",
 									             "required": [
 									               "ParameterValue",
 									               "ParameterName"
@@ -7219,7 +7001,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Processor",
 									       "required": [
 									         "Type"
 									       ],
@@ -7247,7 +7028,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/ProcessorParameter",
 												       "required": [
 												         "ParameterValue",
 												         "ParameterName"
@@ -7322,7 +7102,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/SplunkRetryOptions",
 						     "type": "object"
 						   }
 						*/
@@ -7377,7 +7156,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/BufferingHints",
 						         "type": "object"
 						       },
 						       "CloudWatchLoggingOptions": {
@@ -7393,7 +7171,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/CloudWatchLoggingOptions",
 						         "type": "object"
 						       },
 						       "CompressionFormat": {
@@ -7416,7 +7193,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/KMSEncryptionConfig",
 						             "required": [
 						               "AWSKMSKeyARN"
 						             ],
@@ -7429,7 +7205,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/EncryptionConfiguration",
 						         "type": "object"
 						       },
 						       "ErrorOutputPrefix": {
@@ -7449,7 +7224,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/S3DestinationConfiguration",
 						     "required": [
 						       "BucketARN",
 						       "RoleARN"
@@ -7487,7 +7261,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/BufferingHints",
 									     "type": "object"
 									   }
 									*/
@@ -7536,7 +7309,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudWatchLoggingOptions",
 									     "type": "object"
 									   }
 									*/
@@ -7611,7 +7383,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/KMSEncryptionConfig",
 									         "required": [
 									           "AWSKMSKeyARN"
 									         ],
@@ -7624,7 +7395,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/EncryptionConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -7641,7 +7411,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/KMSEncryptionConfig",
 												     "required": [
 												       "AWSKMSKeyARN"
 												     ],
@@ -7751,7 +7520,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key"
 			       ],

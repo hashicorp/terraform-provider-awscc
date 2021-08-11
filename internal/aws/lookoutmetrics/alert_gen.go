@@ -36,17 +36,14 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "LambdaArn": {
 			             "maxLength": 256,
 			             "pattern": "",
-			             "$ref": "#/definitions/Arn",
 			             "type": "string"
 			           },
 			           "RoleArn": {
 			             "maxLength": 256,
 			             "pattern": "",
-			             "$ref": "#/definitions/Arn",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/LambdaConfiguration",
 			         "required": [
 			           "RoleArn",
 			           "LambdaArn"
@@ -60,17 +57,14 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "RoleArn": {
 			             "maxLength": 256,
 			             "pattern": "",
-			             "$ref": "#/definitions/Arn",
 			             "type": "string"
 			           },
 			           "SnsTopicArn": {
 			             "maxLength": 256,
 			             "pattern": "",
-			             "$ref": "#/definitions/Arn",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/SNSConfiguration",
 			         "required": [
 			           "RoleArn",
 			           "SnsTopicArn"
@@ -78,7 +72,6 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/Action",
 			     "type": "object"
 			   }
 			*/
@@ -95,17 +88,14 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "LambdaArn": {
 						         "maxLength": 256,
 						         "pattern": "",
-						         "$ref": "#/definitions/Arn",
 						         "type": "string"
 						       },
 						       "RoleArn": {
 						         "maxLength": 256,
 						         "pattern": "",
-						         "$ref": "#/definitions/Arn",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/LambdaConfiguration",
 						     "required": [
 						       "RoleArn",
 						       "LambdaArn"
@@ -123,7 +113,6 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "maxLength": 256,
 									     "pattern": "",
-									     "$ref": "#/definitions/Arn",
 									     "type": "string"
 									   }
 									*/
@@ -137,7 +126,6 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "maxLength": 256,
 									     "pattern": "",
-									     "$ref": "#/definitions/Arn",
 									     "type": "string"
 									   }
 									*/
@@ -159,17 +147,14 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "RoleArn": {
 						         "maxLength": 256,
 						         "pattern": "",
-						         "$ref": "#/definitions/Arn",
 						         "type": "string"
 						       },
 						       "SnsTopicArn": {
 						         "maxLength": 256,
 						         "pattern": "",
-						         "$ref": "#/definitions/Arn",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/SNSConfiguration",
 						     "required": [
 						       "RoleArn",
 						       "SnsTopicArn"
@@ -187,7 +172,6 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "maxLength": 256,
 									     "pattern": "",
-									     "$ref": "#/definitions/Arn",
 									     "type": "string"
 									   }
 									*/
@@ -201,7 +185,6 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "maxLength": 256,
 									     "pattern": "",
-									     "$ref": "#/definitions/Arn",
 									     "type": "string"
 									   }
 									*/
@@ -289,7 +272,6 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "maxLength": 256,
 			     "pattern": "",
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/

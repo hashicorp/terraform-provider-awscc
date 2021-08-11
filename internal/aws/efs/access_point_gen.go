@@ -54,7 +54,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/AccessPointTag",
 			       "type": "object"
 			     },
 			     "type": "array",
@@ -157,7 +156,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/PosixUser",
 			     "required": [
 			       "Uid",
 			       "Gid"
@@ -243,7 +241,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/CreationInfo",
 			         "required": [
 			           "OwnerUid",
 			           "OwnerGid",
@@ -258,7 +255,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/RootDirectory",
 			     "type": "object"
 			   }
 			*/
@@ -285,7 +281,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/CreationInfo",
 						     "required": [
 						       "OwnerUid",
 						       "OwnerGid",

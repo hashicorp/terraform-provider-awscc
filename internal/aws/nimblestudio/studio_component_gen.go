@@ -43,10 +43,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/ActiveDirectoryComputerAttribute",
 			               "type": "object"
 			             },
-			             "$ref": "#/definitions/ActiveDirectoryComputerAttributeList",
 			             "type": "array"
 			           },
 			           "DirectoryId": {
@@ -56,7 +54,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ActiveDirectoryConfiguration",
 			         "type": "object"
 			       },
 			       "ComputeFarmConfiguration": {
@@ -69,7 +66,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ComputeFarmConfiguration",
 			         "type": "object"
 			       },
 			       "LicenseServiceConfiguration": {
@@ -79,7 +75,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/LicenseServiceConfiguration",
 			         "type": "object"
 			       },
 			       "SharedFileSystemConfiguration": {
@@ -101,11 +96,9 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/SharedFileSystemConfiguration",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/StudioComponentConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -129,10 +122,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/ActiveDirectoryComputerAttribute",
 						           "type": "object"
 						         },
-						         "$ref": "#/definitions/ActiveDirectoryComputerAttributeList",
 						         "type": "array"
 						       },
 						       "DirectoryId": {
@@ -142,7 +133,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ActiveDirectoryConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -163,10 +153,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/ActiveDirectoryComputerAttribute",
 									       "type": "object"
 									     },
-									     "$ref": "#/definitions/ActiveDirectoryComputerAttributeList",
 									     "type": "array"
 									   }
 									*/
@@ -239,7 +227,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ComputeFarmConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -282,7 +269,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/LicenseServiceConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -326,7 +312,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/SharedFileSystemConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -412,10 +397,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			/*
 			   {
 			     "items": {
-			       "$ref": "#/definitions/SecurityGroupId",
 			       "type": "string"
 			     },
-			     "$ref": "#/definitions/StudioComponentSecurityGroupIdList",
 			     "type": "array"
 			   }
 			*/
@@ -443,10 +426,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/StudioComponentInitializationScript",
 			       "type": "object"
 			     },
-			     "$ref": "#/definitions/StudioComponentInitializationScriptList",
 			     "type": "array"
 			   }
 			*/
@@ -527,10 +508,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ScriptParameterKeyValue",
 			       "type": "object"
 			     },
-			     "$ref": "#/definitions/StudioComponentScriptParameterKeyValueList",
 			     "type": "array"
 			   }
 			*/

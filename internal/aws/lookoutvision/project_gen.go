@@ -28,7 +28,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "maxLength": 1000,
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -44,7 +43,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 255,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ProjectName",
 			     "type": "string"
 			   }
 			*/

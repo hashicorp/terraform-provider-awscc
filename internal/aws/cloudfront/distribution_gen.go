@@ -90,7 +90,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "uniqueItems": false
 			                     }
 			                   },
-			                   "$ref": "#/definitions/Cookies",
 			                   "required": [
 			                     "Forward"
 			                   ],
@@ -114,7 +113,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "uniqueItems": false
 			                 }
 			               },
-			               "$ref": "#/definitions/ForwardedValues",
 			               "required": [
 			                 "QueryString"
 			               ],
@@ -131,7 +129,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/FunctionAssociation",
 			                 "type": "object"
 			               },
 			               "type": "array",
@@ -151,7 +148,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/LambdaFunctionAssociation",
 			                 "type": "object"
 			               },
 			               "type": "array",
@@ -196,7 +192,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/CacheBehavior",
 			           "required": [
 			             "PathPattern",
 			             "TargetOriginId",
@@ -227,7 +222,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/CustomErrorResponse",
 			           "required": [
 			             "ErrorCode"
 			           ],
@@ -259,7 +253,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "uniqueItems": false
 			           }
 			         },
-			         "$ref": "#/definitions/LegacyCustomOrigin",
 			         "required": [
 			           "DNSName",
 			           "OriginProtocolPolicy",
@@ -313,7 +306,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "uniqueItems": false
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Cookies",
 			                 "required": [
 			                   "Forward"
 			                 ],
@@ -337,7 +329,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "uniqueItems": false
 			               }
 			             },
-			             "$ref": "#/definitions/ForwardedValues",
 			             "required": [
 			               "QueryString"
 			             ],
@@ -354,7 +345,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/FunctionAssociation",
 			               "type": "object"
 			             },
 			             "type": "array",
@@ -374,7 +364,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/LambdaFunctionAssociation",
 			               "type": "object"
 			             },
 			             "type": "array",
@@ -416,7 +405,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/DefaultCacheBehavior",
 			         "required": [
 			           "TargetOriginId",
 			           "ViewerProtocolPolicy"
@@ -448,7 +436,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/Logging",
 			         "required": [
 			           "Bucket"
 			         ],
@@ -478,7 +465,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                           "type": "integer"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/StatusCodes",
 			                       "required": [
 			                         "Quantity",
 			                         "Items"
@@ -486,7 +472,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "object"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/OriginGroupFailoverCriteria",
 			                   "required": [
 			                     "StatusCodes"
 			                   ],
@@ -506,7 +491,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "type": "string"
 			                           }
 			                         },
-			                         "$ref": "#/definitions/OriginGroupMember",
 			                         "required": [
 			                           "OriginId"
 			                         ],
@@ -519,7 +503,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "integer"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/OriginGroupMembers",
 			                   "required": [
 			                     "Quantity",
 			                     "Items"
@@ -527,7 +510,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/OriginGroup",
 			               "required": [
 			                 "Id",
 			                 "FailoverCriteria",
@@ -542,7 +524,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/OriginGroups",
 			         "required": [
 			           "Quantity"
 			         ],
@@ -584,7 +565,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "uniqueItems": false
 			                 }
 			               },
-			               "$ref": "#/definitions/CustomOriginConfig",
 			               "required": [
 			                 "OriginProtocolPolicy"
 			               ],
@@ -607,7 +587,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/OriginCustomHeader",
 			                 "required": [
 			                   "HeaderValue",
 			                   "HeaderName"
@@ -630,7 +609,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/OriginShield",
 			               "type": "object"
 			             },
 			             "S3OriginConfig": {
@@ -640,11 +618,9 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/S3OriginConfig",
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/Origin",
 			           "required": [
 			             "DomainName",
 			             "Id"
@@ -674,14 +650,12 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/GeoRestriction",
 			             "required": [
 			               "RestrictionType"
 			             ],
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/Restrictions",
 			         "required": [
 			           "GeoRestriction"
 			         ],
@@ -697,7 +671,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/LegacyS3Origin",
 			         "required": [
 			           "DNSName"
 			         ],
@@ -722,14 +695,12 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ViewerCertificate",
 			         "type": "object"
 			       },
 			       "WebACLId": {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/DistributionConfig",
 			     "required": [
 			       "Enabled"
 			     ],
@@ -819,7 +790,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "uniqueItems": false
 						                 }
 						               },
-						               "$ref": "#/definitions/Cookies",
 						               "required": [
 						                 "Forward"
 						               ],
@@ -843,7 +813,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "uniqueItems": false
 						             }
 						           },
-						           "$ref": "#/definitions/ForwardedValues",
 						           "required": [
 						             "QueryString"
 						           ],
@@ -860,7 +829,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/FunctionAssociation",
 						             "type": "object"
 						           },
 						           "type": "array",
@@ -880,7 +848,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/LambdaFunctionAssociation",
 						             "type": "object"
 						           },
 						           "type": "array",
@@ -925,7 +892,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/CacheBehavior",
 						       "required": [
 						         "PathPattern",
 						         "TargetOriginId",
@@ -1034,7 +1000,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "uniqueItems": false
 									           }
 									         },
-									         "$ref": "#/definitions/Cookies",
 									         "required": [
 									           "Forward"
 									         ],
@@ -1058,7 +1023,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "uniqueItems": false
 									       }
 									     },
-									     "$ref": "#/definitions/ForwardedValues",
 									     "required": [
 									       "QueryString"
 									     ],
@@ -1085,7 +1049,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "uniqueItems": false
 												       }
 												     },
-												     "$ref": "#/definitions/Cookies",
 												     "required": [
 												       "Forward"
 												     ],
@@ -1184,7 +1147,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/FunctionAssociation",
 									       "type": "object"
 									     },
 									     "type": "array",
@@ -1238,7 +1200,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/LambdaFunctionAssociation",
 									       "type": "object"
 									     },
 									     "type": "array",
@@ -1440,7 +1401,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/CustomErrorResponse",
 						       "required": [
 						         "ErrorCode"
 						       ],
@@ -1528,7 +1488,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "uniqueItems": false
 						       }
 						     },
-						     "$ref": "#/definitions/LegacyCustomOrigin",
 						     "required": [
 						       "DNSName",
 						       "OriginProtocolPolicy",
@@ -1652,7 +1611,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "uniqueItems": false
 						               }
 						             },
-						             "$ref": "#/definitions/Cookies",
 						             "required": [
 						               "Forward"
 						             ],
@@ -1676,7 +1634,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "uniqueItems": false
 						           }
 						         },
-						         "$ref": "#/definitions/ForwardedValues",
 						         "required": [
 						           "QueryString"
 						         ],
@@ -1693,7 +1650,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/FunctionAssociation",
 						           "type": "object"
 						         },
 						         "type": "array",
@@ -1713,7 +1669,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/LambdaFunctionAssociation",
 						           "type": "object"
 						         },
 						         "type": "array",
@@ -1755,7 +1710,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/DefaultCacheBehavior",
 						     "required": [
 						       "TargetOriginId",
 						       "ViewerProtocolPolicy"
@@ -1860,7 +1814,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "uniqueItems": false
 									           }
 									         },
-									         "$ref": "#/definitions/Cookies",
 									         "required": [
 									           "Forward"
 									         ],
@@ -1884,7 +1837,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "uniqueItems": false
 									       }
 									     },
-									     "$ref": "#/definitions/ForwardedValues",
 									     "required": [
 									       "QueryString"
 									     ],
@@ -1911,7 +1863,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "uniqueItems": false
 												       }
 												     },
-												     "$ref": "#/definitions/Cookies",
 												     "required": [
 												       "Forward"
 												     ],
@@ -2010,7 +1961,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/FunctionAssociation",
 									       "type": "object"
 									     },
 									     "type": "array",
@@ -2064,7 +2014,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/LambdaFunctionAssociation",
 									       "type": "object"
 									     },
 									     "type": "array",
@@ -2283,7 +2232,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/Logging",
 						     "required": [
 						       "Bucket"
 						     ],
@@ -2357,7 +2305,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "type": "integer"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/StatusCodes",
 						                   "required": [
 						                     "Quantity",
 						                     "Items"
@@ -2365,7 +2312,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "object"
 						                 }
 						               },
-						               "$ref": "#/definitions/OriginGroupFailoverCriteria",
 						               "required": [
 						                 "StatusCodes"
 						               ],
@@ -2385,7 +2331,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                         "type": "string"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/OriginGroupMember",
 						                     "required": [
 						                       "OriginId"
 						                     ],
@@ -2398,7 +2343,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "integer"
 						                 }
 						               },
-						               "$ref": "#/definitions/OriginGroupMembers",
 						               "required": [
 						                 "Quantity",
 						                 "Items"
@@ -2406,7 +2350,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "object"
 						             }
 						           },
-						           "$ref": "#/definitions/OriginGroup",
 						           "required": [
 						             "Id",
 						             "FailoverCriteria",
@@ -2421,7 +2364,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/OriginGroups",
 						     "required": [
 						       "Quantity"
 						     ],
@@ -2455,7 +2397,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "type": "integer"
 									                 }
 									               },
-									               "$ref": "#/definitions/StatusCodes",
 									               "required": [
 									                 "Quantity",
 									                 "Items"
@@ -2463,7 +2404,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "object"
 									             }
 									           },
-									           "$ref": "#/definitions/OriginGroupFailoverCriteria",
 									           "required": [
 									             "StatusCodes"
 									           ],
@@ -2483,7 +2423,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                     "type": "string"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/OriginGroupMember",
 									                 "required": [
 									                   "OriginId"
 									                 ],
@@ -2496,7 +2435,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "integer"
 									             }
 									           },
-									           "$ref": "#/definitions/OriginGroupMembers",
 									           "required": [
 									             "Quantity",
 									             "Items"
@@ -2504,7 +2442,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "object"
 									         }
 									       },
-									       "$ref": "#/definitions/OriginGroup",
 									       "required": [
 									         "Id",
 									         "FailoverCriteria",
@@ -2539,7 +2476,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "type": "integer"
 												           }
 												         },
-												         "$ref": "#/definitions/StatusCodes",
 												         "required": [
 												           "Quantity",
 												           "Items"
@@ -2547,7 +2483,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/OriginGroupFailoverCriteria",
 												     "required": [
 												       "StatusCodes"
 												     ],
@@ -2574,7 +2509,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "type": "integer"
 															       }
 															     },
-															     "$ref": "#/definitions/StatusCodes",
 															     "required": [
 															       "Quantity",
 															       "Items"
@@ -2644,7 +2578,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/OriginGroupMember",
 												           "required": [
 												             "OriginId"
 												           ],
@@ -2657,7 +2590,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "integer"
 												       }
 												     },
-												     "$ref": "#/definitions/OriginGroupMembers",
 												     "required": [
 												       "Quantity",
 												       "Items"
@@ -2679,7 +2611,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "type": "string"
 															         }
 															       },
-															       "$ref": "#/definitions/OriginGroupMember",
 															       "required": [
 															         "OriginId"
 															       ],
@@ -2782,7 +2713,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "uniqueItems": false
 						             }
 						           },
-						           "$ref": "#/definitions/CustomOriginConfig",
 						           "required": [
 						             "OriginProtocolPolicy"
 						           ],
@@ -2805,7 +2735,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/OriginCustomHeader",
 						             "required": [
 						               "HeaderValue",
 						               "HeaderName"
@@ -2828,7 +2757,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/OriginShield",
 						           "type": "object"
 						         },
 						         "S3OriginConfig": {
@@ -2838,11 +2766,9 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/S3OriginConfig",
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/Origin",
 						       "required": [
 						         "DomainName",
 						         "Id"
@@ -2907,7 +2833,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "uniqueItems": false
 									       }
 									     },
-									     "$ref": "#/definitions/CustomOriginConfig",
 									     "required": [
 									       "OriginProtocolPolicy"
 									     ],
@@ -3027,7 +2952,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/OriginCustomHeader",
 									       "required": [
 									         "HeaderValue",
 									         "HeaderName"
@@ -3092,7 +3016,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/OriginShield",
 									     "type": "object"
 									   }
 									*/
@@ -3135,7 +3058,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3OriginConfig",
 									     "type": "object"
 									   }
 									*/
@@ -3193,14 +3115,12 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/GeoRestriction",
 						         "required": [
 						           "RestrictionType"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/Restrictions",
 						     "required": [
 						       "GeoRestriction"
 						     ],
@@ -3227,7 +3147,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/GeoRestriction",
 									     "required": [
 									       "RestrictionType"
 									     ],
@@ -3284,7 +3203,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/LegacyS3Origin",
 						     "required": [
 						       "DNSName"
 						     ],
@@ -3342,7 +3260,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ViewerCertificate",
 						     "type": "object"
 						   }
 						*/
@@ -3459,7 +3376,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

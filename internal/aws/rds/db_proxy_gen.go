@@ -60,7 +60,6 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/AuthFormat",
 			       "type": "object"
 			     },
 			     "minItems": 1,
@@ -283,7 +282,6 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/TagFormat",
 			       "type": "object"
 			     },
 			     "type": "array"

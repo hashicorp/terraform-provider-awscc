@@ -69,7 +69,6 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			             "uniqueItems": false
 			           }
 			         },
-			         "$ref": "#/definitions/CookiesConfig",
 			         "required": [
 			           "CookieBehavior"
 			         ],
@@ -90,7 +89,6 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			             "uniqueItems": false
 			           }
 			         },
-			         "$ref": "#/definitions/HeadersConfig",
 			         "required": [
 			           "HeaderBehavior"
 			         ],
@@ -114,14 +112,12 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			             "uniqueItems": false
 			           }
 			         },
-			         "$ref": "#/definitions/QueryStringsConfig",
 			         "required": [
 			           "QueryStringBehavior"
 			         ],
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/OriginRequestPolicyConfig",
 			     "required": [
 			       "Name",
 			       "HeadersConfig",
@@ -163,7 +159,6 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						         "uniqueItems": false
 						       }
 						     },
-						     "$ref": "#/definitions/CookiesConfig",
 						     "required": [
 						       "CookieBehavior"
 						     ],
@@ -222,7 +217,6 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						         "uniqueItems": false
 						       }
 						     },
-						     "$ref": "#/definitions/HeadersConfig",
 						     "required": [
 						       "HeaderBehavior"
 						     ],
@@ -292,7 +286,6 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						         "uniqueItems": false
 						       }
 						     },
-						     "$ref": "#/definitions/QueryStringsConfig",
 						     "required": [
 						       "QueryStringBehavior"
 						     ],

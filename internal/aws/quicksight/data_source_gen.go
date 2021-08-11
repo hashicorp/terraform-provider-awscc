@@ -41,7 +41,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AmazonElasticsearchParameters",
 			           "required": [
 			             "Domain"
 			           ],
@@ -57,7 +56,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AthenaParameters",
 			           "type": "object"
 			         },
 			         "AuroraParameters": {
@@ -80,7 +78,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "number"
 			             }
 			           },
-			           "$ref": "#/definitions/AuroraParameters",
 			           "required": [
 			             "Database",
 			             "Host",
@@ -108,7 +105,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "number"
 			             }
 			           },
-			           "$ref": "#/definitions/AuroraPostgreSqlParameters",
 			           "required": [
 			             "Database",
 			             "Host",
@@ -136,7 +132,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "number"
 			             }
 			           },
-			           "$ref": "#/definitions/MariaDbParameters",
 			           "required": [
 			             "Database",
 			             "Host",
@@ -164,7 +159,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "number"
 			             }
 			           },
-			           "$ref": "#/definitions/MySqlParameters",
 			           "required": [
 			             "Database",
 			             "Host",
@@ -188,7 +182,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "number"
 			             }
 			           },
-			           "$ref": "#/definitions/OracleParameters",
 			           "required": [
 			             "Database",
 			             "Host",
@@ -216,7 +209,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "number"
 			             }
 			           },
-			           "$ref": "#/definitions/PostgreSqlParameters",
 			           "required": [
 			             "Database",
 			             "Host",
@@ -244,7 +236,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "number"
 			             }
 			           },
-			           "$ref": "#/definitions/PrestoParameters",
 			           "required": [
 			             "Catalog",
 			             "Host",
@@ -268,7 +259,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/RdsParameters",
 			           "required": [
 			             "Database",
 			             "InstanceId"
@@ -301,7 +291,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "number"
 			             }
 			           },
-			           "$ref": "#/definitions/RedshiftParameters",
 			           "required": [
 			             "Database"
 			           ],
@@ -326,7 +315,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/ManifestFileLocation",
 			               "required": [
 			                 "Bucket",
 			                 "Key"
@@ -334,7 +322,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/S3Parameters",
 			           "required": [
 			             "ManifestFileLocation"
 			           ],
@@ -362,7 +349,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/SnowflakeParameters",
 			           "required": [
 			             "Database",
 			             "Host",
@@ -384,7 +370,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "number"
 			             }
 			           },
-			           "$ref": "#/definitions/SparkParameters",
 			           "required": [
 			             "Host",
 			             "Port"
@@ -411,7 +396,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "number"
 			             }
 			           },
-			           "$ref": "#/definitions/SqlServerParameters",
 			           "required": [
 			             "Database",
 			             "Host",
@@ -439,7 +423,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "number"
 			             }
 			           },
-			           "$ref": "#/definitions/TeradataParameters",
 			           "required": [
 			             "Database",
 			             "Host",
@@ -448,7 +431,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/DataSourceParameters",
 			       "type": "object"
 			     },
 			     "maxItems": 50,
@@ -473,7 +455,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AmazonElasticsearchParameters",
 						     "required": [
 						       "Domain"
 						     ],
@@ -516,7 +497,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AthenaParameters",
 						     "type": "object"
 						   }
 						*/
@@ -566,7 +546,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/AuroraParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -649,7 +628,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/AuroraPostgreSqlParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -732,7 +710,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/MariaDbParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -815,7 +792,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/MySqlParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -894,7 +870,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/OracleParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -970,7 +945,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/PostgreSqlParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -1053,7 +1027,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/PrestoParameters",
 						     "required": [
 						       "Catalog",
 						       "Host",
@@ -1132,7 +1105,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/RdsParameters",
 						     "required": [
 						       "Database",
 						       "InstanceId"
@@ -1207,7 +1179,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/RedshiftParameters",
 						     "required": [
 						       "Database"
 						     ],
@@ -1302,7 +1273,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ManifestFileLocation",
 						         "required": [
 						           "Bucket",
 						           "Key"
@@ -1310,7 +1280,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/S3Parameters",
 						     "required": [
 						       "ManifestFileLocation"
 						     ],
@@ -1340,7 +1309,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ManifestFileLocation",
 									     "required": [
 									       "Bucket",
 									       "Key"
@@ -1415,7 +1383,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/SnowflakeParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -1494,7 +1461,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/SparkParameters",
 						     "required": [
 						       "Host",
 						       "Port"
@@ -1561,7 +1527,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/SqlServerParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -1644,7 +1609,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/TeradataParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -1784,7 +1748,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/AmazonElasticsearchParameters",
 			                   "required": [
 			                     "Domain"
 			                   ],
@@ -1800,7 +1763,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/AthenaParameters",
 			                   "type": "object"
 			                 },
 			                 "AuroraParameters": {
@@ -1823,7 +1785,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/AuroraParameters",
 			                   "required": [
 			                     "Database",
 			                     "Host",
@@ -1851,7 +1812,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/AuroraPostgreSqlParameters",
 			                   "required": [
 			                     "Database",
 			                     "Host",
@@ -1879,7 +1839,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/MariaDbParameters",
 			                   "required": [
 			                     "Database",
 			                     "Host",
@@ -1907,7 +1866,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/MySqlParameters",
 			                   "required": [
 			                     "Database",
 			                     "Host",
@@ -1931,7 +1889,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/OracleParameters",
 			                   "required": [
 			                     "Database",
 			                     "Host",
@@ -1959,7 +1916,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/PostgreSqlParameters",
 			                   "required": [
 			                     "Database",
 			                     "Host",
@@ -1987,7 +1943,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/PrestoParameters",
 			                   "required": [
 			                     "Catalog",
 			                     "Host",
@@ -2011,7 +1966,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/RdsParameters",
 			                   "required": [
 			                     "Database",
 			                     "InstanceId"
@@ -2044,7 +1998,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/RedshiftParameters",
 			                   "required": [
 			                     "Database"
 			                   ],
@@ -2069,7 +2022,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/ManifestFileLocation",
 			                       "required": [
 			                         "Bucket",
 			                         "Key"
@@ -2077,7 +2029,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "object"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/S3Parameters",
 			                   "required": [
 			                     "ManifestFileLocation"
 			                   ],
@@ -2105,7 +2056,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/SnowflakeParameters",
 			                   "required": [
 			                     "Database",
 			                     "Host",
@@ -2127,7 +2077,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/SparkParameters",
 			                   "required": [
 			                     "Host",
 			                     "Port"
@@ -2154,7 +2103,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/SqlServerParameters",
 			                   "required": [
 			                     "Database",
 			                     "Host",
@@ -2182,7 +2130,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/TeradataParameters",
 			                   "required": [
 			                     "Database",
 			                     "Host",
@@ -2191,7 +2138,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/DataSourceParameters",
 			               "type": "object"
 			             },
 			             "maxItems": 50,
@@ -2211,7 +2157,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/CredentialPair",
 			         "required": [
 			           "Password",
 			           "Username"
@@ -2219,7 +2164,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/DataSourceCredentials",
 			     "type": "object"
 			   }
 			*/
@@ -2262,7 +2206,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/AmazonElasticsearchParameters",
 						               "required": [
 						                 "Domain"
 						               ],
@@ -2278,7 +2221,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/AthenaParameters",
 						               "type": "object"
 						             },
 						             "AuroraParameters": {
@@ -2301,7 +2243,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "number"
 						                 }
 						               },
-						               "$ref": "#/definitions/AuroraParameters",
 						               "required": [
 						                 "Database",
 						                 "Host",
@@ -2329,7 +2270,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "number"
 						                 }
 						               },
-						               "$ref": "#/definitions/AuroraPostgreSqlParameters",
 						               "required": [
 						                 "Database",
 						                 "Host",
@@ -2357,7 +2297,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "number"
 						                 }
 						               },
-						               "$ref": "#/definitions/MariaDbParameters",
 						               "required": [
 						                 "Database",
 						                 "Host",
@@ -2385,7 +2324,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "number"
 						                 }
 						               },
-						               "$ref": "#/definitions/MySqlParameters",
 						               "required": [
 						                 "Database",
 						                 "Host",
@@ -2409,7 +2347,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "number"
 						                 }
 						               },
-						               "$ref": "#/definitions/OracleParameters",
 						               "required": [
 						                 "Database",
 						                 "Host",
@@ -2437,7 +2374,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "number"
 						                 }
 						               },
-						               "$ref": "#/definitions/PostgreSqlParameters",
 						               "required": [
 						                 "Database",
 						                 "Host",
@@ -2465,7 +2401,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "number"
 						                 }
 						               },
-						               "$ref": "#/definitions/PrestoParameters",
 						               "required": [
 						                 "Catalog",
 						                 "Host",
@@ -2489,7 +2424,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/RdsParameters",
 						               "required": [
 						                 "Database",
 						                 "InstanceId"
@@ -2522,7 +2456,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "number"
 						                 }
 						               },
-						               "$ref": "#/definitions/RedshiftParameters",
 						               "required": [
 						                 "Database"
 						               ],
@@ -2547,7 +2480,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "type": "string"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/ManifestFileLocation",
 						                   "required": [
 						                     "Bucket",
 						                     "Key"
@@ -2555,7 +2487,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "object"
 						                 }
 						               },
-						               "$ref": "#/definitions/S3Parameters",
 						               "required": [
 						                 "ManifestFileLocation"
 						               ],
@@ -2583,7 +2514,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/SnowflakeParameters",
 						               "required": [
 						                 "Database",
 						                 "Host",
@@ -2605,7 +2535,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "number"
 						                 }
 						               },
-						               "$ref": "#/definitions/SparkParameters",
 						               "required": [
 						                 "Host",
 						                 "Port"
@@ -2632,7 +2561,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "number"
 						                 }
 						               },
-						               "$ref": "#/definitions/SqlServerParameters",
 						               "required": [
 						                 "Database",
 						                 "Host",
@@ -2660,7 +2588,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "number"
 						                 }
 						               },
-						               "$ref": "#/definitions/TeradataParameters",
 						               "required": [
 						                 "Database",
 						                 "Host",
@@ -2669,7 +2596,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "object"
 						             }
 						           },
-						           "$ref": "#/definitions/DataSourceParameters",
 						           "type": "object"
 						         },
 						         "maxItems": 50,
@@ -2689,7 +2615,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/CredentialPair",
 						     "required": [
 						       "Password",
 						       "Username"
@@ -2719,7 +2644,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/AmazonElasticsearchParameters",
 									           "required": [
 									             "Domain"
 									           ],
@@ -2735,7 +2659,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/AthenaParameters",
 									           "type": "object"
 									         },
 									         "AuroraParameters": {
@@ -2758,7 +2681,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "number"
 									             }
 									           },
-									           "$ref": "#/definitions/AuroraParameters",
 									           "required": [
 									             "Database",
 									             "Host",
@@ -2786,7 +2708,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "number"
 									             }
 									           },
-									           "$ref": "#/definitions/AuroraPostgreSqlParameters",
 									           "required": [
 									             "Database",
 									             "Host",
@@ -2814,7 +2735,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "number"
 									             }
 									           },
-									           "$ref": "#/definitions/MariaDbParameters",
 									           "required": [
 									             "Database",
 									             "Host",
@@ -2842,7 +2762,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "number"
 									             }
 									           },
-									           "$ref": "#/definitions/MySqlParameters",
 									           "required": [
 									             "Database",
 									             "Host",
@@ -2866,7 +2785,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "number"
 									             }
 									           },
-									           "$ref": "#/definitions/OracleParameters",
 									           "required": [
 									             "Database",
 									             "Host",
@@ -2894,7 +2812,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "number"
 									             }
 									           },
-									           "$ref": "#/definitions/PostgreSqlParameters",
 									           "required": [
 									             "Database",
 									             "Host",
@@ -2922,7 +2839,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "number"
 									             }
 									           },
-									           "$ref": "#/definitions/PrestoParameters",
 									           "required": [
 									             "Catalog",
 									             "Host",
@@ -2946,7 +2862,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/RdsParameters",
 									           "required": [
 									             "Database",
 									             "InstanceId"
@@ -2979,7 +2894,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "number"
 									             }
 									           },
-									           "$ref": "#/definitions/RedshiftParameters",
 									           "required": [
 									             "Database"
 									           ],
@@ -3004,7 +2918,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "type": "string"
 									                 }
 									               },
-									               "$ref": "#/definitions/ManifestFileLocation",
 									               "required": [
 									                 "Bucket",
 									                 "Key"
@@ -3012,7 +2925,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "object"
 									             }
 									           },
-									           "$ref": "#/definitions/S3Parameters",
 									           "required": [
 									             "ManifestFileLocation"
 									           ],
@@ -3040,7 +2952,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/SnowflakeParameters",
 									           "required": [
 									             "Database",
 									             "Host",
@@ -3062,7 +2973,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "number"
 									             }
 									           },
-									           "$ref": "#/definitions/SparkParameters",
 									           "required": [
 									             "Host",
 									             "Port"
@@ -3089,7 +2999,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "number"
 									             }
 									           },
-									           "$ref": "#/definitions/SqlServerParameters",
 									           "required": [
 									             "Database",
 									             "Host",
@@ -3117,7 +3026,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "number"
 									             }
 									           },
-									           "$ref": "#/definitions/TeradataParameters",
 									           "required": [
 									             "Database",
 									             "Host",
@@ -3126,7 +3034,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "object"
 									         }
 									       },
-									       "$ref": "#/definitions/DataSourceParameters",
 									       "type": "object"
 									     },
 									     "maxItems": 50,
@@ -3151,7 +3058,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/AmazonElasticsearchParameters",
 												     "required": [
 												       "Domain"
 												     ],
@@ -3194,7 +3100,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/AthenaParameters",
 												     "type": "object"
 												   }
 												*/
@@ -3244,7 +3149,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/AuroraParameters",
 												     "required": [
 												       "Database",
 												       "Host",
@@ -3327,7 +3231,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/AuroraPostgreSqlParameters",
 												     "required": [
 												       "Database",
 												       "Host",
@@ -3410,7 +3313,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/MariaDbParameters",
 												     "required": [
 												       "Database",
 												       "Host",
@@ -3493,7 +3395,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/MySqlParameters",
 												     "required": [
 												       "Database",
 												       "Host",
@@ -3572,7 +3473,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/OracleParameters",
 												     "required": [
 												       "Database",
 												       "Host",
@@ -3648,7 +3548,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/PostgreSqlParameters",
 												     "required": [
 												       "Database",
 												       "Host",
@@ -3731,7 +3630,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/PrestoParameters",
 												     "required": [
 												       "Catalog",
 												       "Host",
@@ -3810,7 +3708,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/RdsParameters",
 												     "required": [
 												       "Database",
 												       "InstanceId"
@@ -3885,7 +3782,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/RedshiftParameters",
 												     "required": [
 												       "Database"
 												     ],
@@ -3980,7 +3876,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "type": "string"
 												           }
 												         },
-												         "$ref": "#/definitions/ManifestFileLocation",
 												         "required": [
 												           "Bucket",
 												           "Key"
@@ -3988,7 +3883,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/S3Parameters",
 												     "required": [
 												       "ManifestFileLocation"
 												     ],
@@ -4018,7 +3912,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/ManifestFileLocation",
 															     "required": [
 															       "Bucket",
 															       "Key"
@@ -4093,7 +3986,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/SnowflakeParameters",
 												     "required": [
 												       "Database",
 												       "Host",
@@ -4172,7 +4064,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/SparkParameters",
 												     "required": [
 												       "Host",
 												       "Port"
@@ -4239,7 +4130,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/SqlServerParameters",
 												     "required": [
 												       "Database",
 												       "Host",
@@ -4322,7 +4212,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/TeradataParameters",
 												     "required": [
 												       "Database",
 												       "Host",
@@ -4458,7 +4347,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/AmazonElasticsearchParameters",
 			         "required": [
 			           "Domain"
 			         ],
@@ -4474,7 +4362,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/AthenaParameters",
 			         "type": "object"
 			       },
 			       "AuroraParameters": {
@@ -4497,7 +4384,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "number"
 			           }
 			         },
-			         "$ref": "#/definitions/AuroraParameters",
 			         "required": [
 			           "Database",
 			           "Host",
@@ -4525,7 +4411,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "number"
 			           }
 			         },
-			         "$ref": "#/definitions/AuroraPostgreSqlParameters",
 			         "required": [
 			           "Database",
 			           "Host",
@@ -4553,7 +4438,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "number"
 			           }
 			         },
-			         "$ref": "#/definitions/MariaDbParameters",
 			         "required": [
 			           "Database",
 			           "Host",
@@ -4581,7 +4465,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "number"
 			           }
 			         },
-			         "$ref": "#/definitions/MySqlParameters",
 			         "required": [
 			           "Database",
 			           "Host",
@@ -4605,7 +4488,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "number"
 			           }
 			         },
-			         "$ref": "#/definitions/OracleParameters",
 			         "required": [
 			           "Database",
 			           "Host",
@@ -4633,7 +4515,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "number"
 			           }
 			         },
-			         "$ref": "#/definitions/PostgreSqlParameters",
 			         "required": [
 			           "Database",
 			           "Host",
@@ -4661,7 +4542,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "number"
 			           }
 			         },
-			         "$ref": "#/definitions/PrestoParameters",
 			         "required": [
 			           "Catalog",
 			           "Host",
@@ -4685,7 +4565,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/RdsParameters",
 			         "required": [
 			           "Database",
 			           "InstanceId"
@@ -4718,7 +4597,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "number"
 			           }
 			         },
-			         "$ref": "#/definitions/RedshiftParameters",
 			         "required": [
 			           "Database"
 			         ],
@@ -4743,7 +4621,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ManifestFileLocation",
 			             "required": [
 			               "Bucket",
 			               "Key"
@@ -4751,7 +4628,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/S3Parameters",
 			         "required": [
 			           "ManifestFileLocation"
 			         ],
@@ -4779,7 +4655,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/SnowflakeParameters",
 			         "required": [
 			           "Database",
 			           "Host",
@@ -4801,7 +4676,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "number"
 			           }
 			         },
-			         "$ref": "#/definitions/SparkParameters",
 			         "required": [
 			           "Host",
 			           "Port"
@@ -4828,7 +4702,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "number"
 			           }
 			         },
-			         "$ref": "#/definitions/SqlServerParameters",
 			         "required": [
 			           "Database",
 			           "Host",
@@ -4856,7 +4729,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "number"
 			           }
 			         },
-			         "$ref": "#/definitions/TeradataParameters",
 			         "required": [
 			           "Database",
 			           "Host",
@@ -4865,7 +4737,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/DataSourceParameters",
 			     "type": "object"
 			   }
 			*/
@@ -4886,7 +4757,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AmazonElasticsearchParameters",
 						     "required": [
 						       "Domain"
 						     ],
@@ -4929,7 +4799,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AthenaParameters",
 						     "type": "object"
 						   }
 						*/
@@ -4979,7 +4848,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/AuroraParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -5062,7 +4930,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/AuroraPostgreSqlParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -5145,7 +5012,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/MariaDbParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -5228,7 +5094,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/MySqlParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -5307,7 +5172,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/OracleParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -5383,7 +5247,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/PostgreSqlParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -5466,7 +5329,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/PrestoParameters",
 						     "required": [
 						       "Catalog",
 						       "Host",
@@ -5545,7 +5407,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/RdsParameters",
 						     "required": [
 						       "Database",
 						       "InstanceId"
@@ -5620,7 +5481,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/RedshiftParameters",
 						     "required": [
 						       "Database"
 						     ],
@@ -5715,7 +5575,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ManifestFileLocation",
 						         "required": [
 						           "Bucket",
 						           "Key"
@@ -5723,7 +5582,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/S3Parameters",
 						     "required": [
 						       "ManifestFileLocation"
 						     ],
@@ -5753,7 +5611,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ManifestFileLocation",
 									     "required": [
 									       "Bucket",
 									       "Key"
@@ -5828,7 +5685,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/SnowflakeParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -5907,7 +5763,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/SparkParameters",
 						     "required": [
 						       "Host",
 						       "Port"
@@ -5974,7 +5829,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/SqlServerParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -6057,7 +5911,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/TeradataParameters",
 						     "required": [
 						       "Database",
 						       "Host",
@@ -6142,11 +5995,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "CONFLICT",
 			           "UNKNOWN"
 			         ],
-			         "$ref": "#/definitions/DataSourceErrorInfoType",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/DataSourceErrorInfo",
 			     "type": "object"
 			   }
 			*/
@@ -6181,7 +6032,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "CONFLICT",
 						       "UNKNOWN"
 						     ],
-						     "$ref": "#/definitions/DataSourceErrorInfoType",
 						     "type": "string"
 						   }
 						*/
@@ -6246,7 +6096,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ResourcePermission",
 			       "required": [
 			         "Actions",
 			         "Principal"
@@ -6314,7 +6163,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/SslProperties",
 			     "type": "object"
 			   }
 			*/
@@ -6352,7 +6200,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "UPDATE_FAILED",
 			       "DELETED"
 			     ],
-			     "$ref": "#/definitions/ResourceStatus",
 			     "type": "string"
 			   }
 			*/
@@ -6381,7 +6228,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -6464,7 +6310,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "TWITTER",
 			       "TIMESTREAM"
 			     ],
-			     "$ref": "#/definitions/DataSourceType",
 			     "type": "string"
 			   }
 			*/
@@ -6485,7 +6330,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/VpcConnectionProperties",
 			     "required": [
 			       "VpcConnectionArn"
 			     ],

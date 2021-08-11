@@ -33,7 +33,6 @@ func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.Reso
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/CloudFrontOriginAccessIdentityConfig",
 			     "required": [
 			       "Comment"
 			     ],

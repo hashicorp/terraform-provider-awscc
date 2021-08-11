@@ -169,7 +169,6 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

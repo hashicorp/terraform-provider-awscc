@@ -208,7 +208,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Endpoint",
 			     "type": "object"
 			   }
 			*/
@@ -325,7 +324,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/LoggingProperties",
 			     "required": [
 			       "BucketName"
 			     ],
@@ -523,7 +521,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

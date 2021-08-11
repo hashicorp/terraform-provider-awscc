@@ -34,7 +34,6 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "description": "The principals for the agent permissions.",
 			         "items": {
 			           "pattern": "",
-			           "$ref": "#/definitions/IamArn",
 			           "type": "string"
 			         },
 			         "type": "array"
@@ -57,7 +56,6 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						     "description": "The principals for the agent permissions.",
 						     "items": {
 						       "pattern": "",
-						       "$ref": "#/definitions/IamArn",
 						       "type": "string"
 						     },
 						     "type": "array"
@@ -83,17 +81,14 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "channelId": {
 			           "description": "Unique identifier for each Channel in the notification configuration of a Profiling Group",
 			           "pattern": "",
-			           "$ref": "#/definitions/ChannelId",
 			           "type": "string"
 			         },
 			         "channelUri": {
 			           "description": "Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.",
 			           "pattern": "",
-			           "$ref": "#/definitions/ChannelUri",
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Channel",
 			       "required": [
 			         "channelUri"
 			       ],
@@ -112,7 +107,6 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						   {
 						     "description": "Unique identifier for each Channel in the notification configuration of a Profiling Group",
 						     "pattern": "",
-						     "$ref": "#/definitions/ChannelId",
 						     "type": "string"
 						   }
 						*/
@@ -127,7 +121,6 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						   {
 						     "description": "Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.",
 						     "pattern": "",
-						     "$ref": "#/definitions/ChannelUri",
 						     "type": "string"
 						   }
 						*/
@@ -146,7 +139,6 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			/*
 			   {
 			     "pattern": "",
-			     "$ref": "#/definitions/ProfilingGroupArn",
 			     "type": "string"
 			   }
 			*/
@@ -212,7 +204,6 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

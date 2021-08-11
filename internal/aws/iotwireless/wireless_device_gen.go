@@ -118,7 +118,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SessionKeysAbpV10x",
 			             "required": [
 			               "NwkSKey",
 			               "AppSKey"
@@ -126,7 +125,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/AbpV10x",
 			         "required": [
 			           "DevAddr",
 			           "SessionKeys"
@@ -160,7 +158,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SessionKeysAbpV11",
 			             "required": [
 			               "FNwkSIntKey",
 			               "SNwkSIntKey",
@@ -170,7 +167,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/AbpV11",
 			         "required": [
 			           "DevAddr",
 			           "SessionKeys"
@@ -197,7 +193,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/OtaaV10x",
 			         "required": [
 			           "AppKey",
 			           "AppEui"
@@ -220,7 +215,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/OtaaV11",
 			         "required": [
 			           "AppKey",
 			           "NwkKey",
@@ -233,7 +227,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/LoRaWANDevice",
 			     "type": "object"
 			   }
 			*/
@@ -262,7 +255,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SessionKeysAbpV10x",
 						         "required": [
 						           "NwkSKey",
 						           "AppSKey"
@@ -270,7 +262,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/AbpV10x",
 						     "required": [
 						       "DevAddr",
 						       "SessionKeys"
@@ -308,7 +299,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SessionKeysAbpV10x",
 									     "required": [
 									       "NwkSKey",
 									       "AppSKey"
@@ -381,7 +371,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SessionKeysAbpV11",
 						         "required": [
 						           "FNwkSIntKey",
 						           "SNwkSIntKey",
@@ -391,7 +380,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/AbpV11",
 						     "required": [
 						       "DevAddr",
 						       "SessionKeys"
@@ -437,7 +425,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SessionKeysAbpV11",
 									     "required": [
 									       "FNwkSIntKey",
 									       "SNwkSIntKey",
@@ -545,7 +532,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/OtaaV10x",
 						     "required": [
 						       "AppKey",
 						       "AppEui"
@@ -603,7 +589,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/OtaaV11",
 						     "required": [
 						       "AppKey",
 						       "NwkKey",
@@ -705,7 +690,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "maxItems": 50,

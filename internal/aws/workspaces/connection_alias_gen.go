@@ -70,7 +70,6 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ConnectionAliasAssociation",
 			       "type": "object"
 			     },
 			     "maxLength": 25,
@@ -188,7 +187,6 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

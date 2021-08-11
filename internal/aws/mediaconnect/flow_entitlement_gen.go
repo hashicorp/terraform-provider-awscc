@@ -104,7 +104,6 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Encryption",
 			     "required": [
 			       "Algorithm",
 			       "RoleArn"

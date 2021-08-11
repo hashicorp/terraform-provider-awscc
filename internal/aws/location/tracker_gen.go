@@ -42,7 +42,6 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			     "pattern": "",
-			     "$ref": "#/definitions/iso8601UTC",
 			     "type": "string"
 			   }
 			*/
@@ -90,7 +89,6 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "MobileAssetTracking",
 			       "MobileAssetManagement"
 			     ],
-			     "$ref": "#/definitions/PricingPlan",
 			     "type": "string"
 			   }
 			*/
@@ -146,7 +144,6 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			     "pattern": "",
-			     "$ref": "#/definitions/iso8601UTC",
 			     "type": "string"
 			   }
 			*/

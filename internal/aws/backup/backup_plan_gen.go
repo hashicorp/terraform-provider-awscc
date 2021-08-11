@@ -40,7 +40,6 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AdvancedBackupSettingResourceType",
 			           "required": [
 			             "BackupOptions",
 			             "ResourceType"
@@ -77,11 +76,9 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "number"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/LifecycleResourceType",
 			                     "type": "object"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/CopyActionResourceType",
 			                 "required": [
 			                   "DestinationBackupVaultArn"
 			                 ],
@@ -103,7 +100,6 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "number"
 			                 }
 			               },
-			               "$ref": "#/definitions/LifecycleResourceType",
 			               "type": "object"
 			             },
 			             "RecoveryPointTags": {
@@ -128,7 +124,6 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/BackupRuleResourceType",
 			           "required": [
 			             "TargetBackupVault",
 			             "RuleName"
@@ -139,7 +134,6 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "uniqueItems": false
 			       }
 			     },
-			     "$ref": "#/definitions/BackupPlanResourceType",
 			     "required": [
 			       "BackupPlanName",
 			       "BackupPlanRule"
@@ -164,7 +158,6 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/AdvancedBackupSettingResourceType",
 						       "required": [
 						         "BackupOptions",
 						         "ResourceType"
@@ -243,11 +236,9 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "type": "number"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/LifecycleResourceType",
 						                 "type": "object"
 						               }
 						             },
-						             "$ref": "#/definitions/CopyActionResourceType",
 						             "required": [
 						               "DestinationBackupVaultArn"
 						             ],
@@ -269,7 +260,6 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "number"
 						             }
 						           },
-						           "$ref": "#/definitions/LifecycleResourceType",
 						           "type": "object"
 						         },
 						         "RecoveryPointTags": {
@@ -294,7 +284,6 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/BackupRuleResourceType",
 						       "required": [
 						         "TargetBackupVault",
 						         "RuleName"
@@ -339,11 +328,9 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "number"
 									             }
 									           },
-									           "$ref": "#/definitions/LifecycleResourceType",
 									           "type": "object"
 									         }
 									       },
-									       "$ref": "#/definitions/CopyActionResourceType",
 									       "required": [
 									         "DestinationBackupVaultArn"
 									       ],
@@ -380,7 +367,6 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/LifecycleResourceType",
 												     "type": "object"
 												   }
 												*/
@@ -442,7 +428,6 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "number"
 									       }
 									     },
-									     "$ref": "#/definitions/LifecycleResourceType",
 									     "type": "object"
 									   }
 									*/

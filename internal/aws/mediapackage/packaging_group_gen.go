@@ -51,7 +51,6 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Authorization",
 			     "required": [
 			       "CdnIdentifierSecret",
 			       "SecretsRoleArn"
@@ -119,7 +118,6 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/LogConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -178,7 +176,6 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

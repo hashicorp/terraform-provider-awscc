@@ -64,7 +64,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AuthenticateCognitoConfig",
 			           "required": [
 			             "UserPoolClientId",
 			             "UserPoolDomain",
@@ -118,7 +117,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AuthenticateOidcConfig",
 			           "required": [
 			             "TokenEndpoint",
 			             "Issuer",
@@ -142,7 +140,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/FixedResponseConfig",
 			           "required": [
 			             "StatusCode"
 			           ],
@@ -161,7 +158,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "boolean"
 			                 }
 			               },
-			               "$ref": "#/definitions/TargetGroupStickinessConfig",
 			               "type": "object"
 			             },
 			             "TargetGroups": {
@@ -175,14 +171,12 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/TargetGroupTuple",
 			                 "type": "object"
 			               },
 			               "type": "array",
 			               "uniqueItems": true
 			             }
 			           },
-			           "$ref": "#/definitions/ForwardConfig",
 			           "type": "object"
 			         },
 			         "Order": {
@@ -210,7 +204,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/RedirectConfig",
 			           "required": [
 			             "StatusCode"
 			           ],
@@ -223,7 +216,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Action",
 			       "required": [
 			         "Type"
 			       ],
@@ -274,7 +266,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AuthenticateCognitoConfig",
 						     "required": [
 						       "UserPoolClientId",
 						       "UserPoolDomain",
@@ -434,7 +425,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AuthenticateOidcConfig",
 						     "required": [
 						       "TokenEndpoint",
 						       "Issuer",
@@ -608,7 +598,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/FixedResponseConfig",
 						     "required": [
 						       "StatusCode"
 						     ],
@@ -671,7 +660,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "boolean"
 						           }
 						         },
-						         "$ref": "#/definitions/TargetGroupStickinessConfig",
 						         "type": "object"
 						       },
 						       "TargetGroups": {
@@ -685,14 +673,12 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/TargetGroupTuple",
 						           "type": "object"
 						         },
 						         "type": "array",
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/ForwardConfig",
 						     "type": "object"
 						   }
 						*/
@@ -712,7 +698,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "boolean"
 									       }
 									     },
-									     "$ref": "#/definitions/TargetGroupStickinessConfig",
 									     "type": "object"
 									   }
 									*/
@@ -759,7 +744,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/TargetGroupTuple",
 									       "type": "object"
 									     },
 									     "type": "array",
@@ -837,7 +821,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/RedirectConfig",
 						     "required": [
 						       "StatusCode"
 						     ],
@@ -965,7 +948,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "uniqueItems": true
 			             }
 			           },
-			           "$ref": "#/definitions/HostHeaderConfig",
 			           "type": "object"
 			         },
 			         "HttpHeaderConfig": {
@@ -982,7 +964,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "uniqueItems": true
 			             }
 			           },
-			           "$ref": "#/definitions/HttpHeaderConfig",
 			           "type": "object"
 			         },
 			         "HttpRequestMethodConfig": {
@@ -996,7 +977,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "uniqueItems": true
 			             }
 			           },
-			           "$ref": "#/definitions/HttpRequestMethodConfig",
 			           "type": "object"
 			         },
 			         "PathPatternConfig": {
@@ -1010,7 +990,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "uniqueItems": true
 			             }
 			           },
-			           "$ref": "#/definitions/PathPatternConfig",
 			           "type": "object"
 			         },
 			         "QueryStringConfig": {
@@ -1027,14 +1006,12 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/QueryStringKeyValue",
 			                 "type": "object"
 			               },
 			               "type": "array",
 			               "uniqueItems": true
 			             }
 			           },
-			           "$ref": "#/definitions/QueryStringConfig",
 			           "type": "object"
 			         },
 			         "SourceIpConfig": {
@@ -1048,7 +1025,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "uniqueItems": true
 			             }
 			           },
-			           "$ref": "#/definitions/SourceIpConfig",
 			           "type": "object"
 			         },
 			         "Values": {
@@ -1059,7 +1035,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "uniqueItems": true
 			         }
 			       },
-			       "$ref": "#/definitions/RuleCondition",
 			       "type": "object"
 			     },
 			     "type": "array",
@@ -1095,7 +1070,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/HostHeaderConfig",
 						     "type": "object"
 						   }
 						*/
@@ -1139,7 +1113,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/HttpHeaderConfig",
 						     "type": "object"
 						   }
 						*/
@@ -1191,7 +1164,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/HttpRequestMethodConfig",
 						     "type": "object"
 						   }
 						*/
@@ -1232,7 +1204,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/PathPatternConfig",
 						     "type": "object"
 						   }
 						*/
@@ -1276,14 +1247,12 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/QueryStringKeyValue",
 						           "type": "object"
 						         },
 						         "type": "array",
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/QueryStringConfig",
 						     "type": "object"
 						   }
 						*/
@@ -1304,7 +1273,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/QueryStringKeyValue",
 									       "type": "object"
 									     },
 									     "type": "array",
@@ -1360,7 +1328,6 @@ func listenerRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/SourceIpConfig",
 						     "type": "object"
 						   }
 						*/

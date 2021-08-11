@@ -116,7 +116,6 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/TagFormat",
 			       "type": "object"
 			     },
 			     "type": "array"

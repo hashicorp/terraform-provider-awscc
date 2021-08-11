@@ -71,7 +71,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Code",
 			     "type": "object"
 			   }
 			*/
@@ -182,7 +181,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/DeadLetterConfig",
 			     "type": "object"
 			   }
 			*/
@@ -240,7 +238,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/Environment",
 			     "type": "object"
 			   }
 			*/
@@ -293,7 +290,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/FileSystemConfig",
 			       "required": [
 			         "Arn",
 			         "LocalMountPath"
@@ -405,7 +401,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/ImageConfig",
 			     "type": "object"
 			   }
 			*/
@@ -590,7 +585,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key"
 			       ],
@@ -668,7 +662,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/TracingConfig",
 			     "type": "object"
 			   }
 			*/
@@ -723,7 +716,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "uniqueItems": false
 			       }
 			     },
-			     "$ref": "#/definitions/VpcConfig",
 			     "type": "object"
 			   }
 			*/

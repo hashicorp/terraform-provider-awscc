@@ -50,7 +50,6 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ComponentConfiguration",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -219,7 +218,6 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/EbsInstanceBlockDeviceSpecification",
 			               "type": "object"
 			             },
 			             "NoDevice": {
@@ -231,7 +229,6 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/InstanceBlockDeviceMapping",
 			           "type": "object"
 			         },
 			         "type": "array"
@@ -241,7 +238,6 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/InstanceConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -304,7 +300,6 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/EbsInstanceBlockDeviceSpecification",
 						           "type": "object"
 						         },
 						         "NoDevice": {
@@ -316,7 +311,6 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/InstanceBlockDeviceMapping",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -384,7 +378,6 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/EbsInstanceBlockDeviceSpecification",
 									     "type": "object"
 									   }
 									*/
@@ -651,7 +644,6 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/TargetContainerRepository",
 			     "type": "object"
 			   }
 			*/

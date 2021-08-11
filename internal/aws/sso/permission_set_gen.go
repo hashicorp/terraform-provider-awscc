@@ -78,7 +78,6 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			       "description": "The managed policy to attach.",
 			       "maxLength": 2048,
 			       "minLength": 20,
-			       "$ref": "#/definitions/ManagedPolicyArn",
 			       "type": "string"
 			     },
 			     "maxItems": 20,
@@ -177,7 +176,6 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

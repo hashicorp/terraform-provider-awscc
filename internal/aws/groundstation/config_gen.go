@@ -55,14 +55,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "MHz",
 			                       "kHz"
 			                     ],
-			                     "$ref": "#/definitions/BandwidthUnits",
 			                     "type": "string"
 			                   },
 			                   "Value": {
 			                     "type": "number"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/FrequencyBandwidth",
 			                 "type": "object"
 			               },
 			               "CenterFrequency": {
@@ -74,14 +72,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "MHz",
 			                       "kHz"
 			                     ],
-			                     "$ref": "#/definitions/FrequencyUnits",
 			                     "type": "string"
 			                   },
 			                   "Value": {
 			                     "type": "number"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Frequency",
 			                 "type": "object"
 			               },
 			               "Polarization": {
@@ -90,15 +86,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "RIGHT_HAND",
 			                   "NONE"
 			                 ],
-			                 "$ref": "#/definitions/Polarization",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SpectrumConfig",
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/AntennaDownlinkConfig",
 			         "type": "object"
 			       },
 			       "AntennaDownlinkDemodDecodeConfig": {
@@ -109,11 +102,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "properties": {
 			               "UnvalidatedJSON": {
 			                 "pattern": "",
-			                 "$ref": "#/definitions/JsonString",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/DecodeConfig",
 			             "type": "object"
 			           },
 			           "DemodulationConfig": {
@@ -121,11 +112,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "properties": {
 			               "UnvalidatedJSON": {
 			                 "pattern": "",
-			                 "$ref": "#/definitions/JsonString",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/DemodulationConfig",
 			             "type": "object"
 			           },
 			           "SpectrumConfig": {
@@ -140,14 +129,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "MHz",
 			                       "kHz"
 			                     ],
-			                     "$ref": "#/definitions/BandwidthUnits",
 			                     "type": "string"
 			                   },
 			                   "Value": {
 			                     "type": "number"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/FrequencyBandwidth",
 			                 "type": "object"
 			               },
 			               "CenterFrequency": {
@@ -159,14 +146,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "MHz",
 			                       "kHz"
 			                     ],
-			                     "$ref": "#/definitions/FrequencyUnits",
 			                     "type": "string"
 			                   },
 			                   "Value": {
 			                     "type": "number"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Frequency",
 			                 "type": "object"
 			               },
 			               "Polarization": {
@@ -175,15 +160,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "RIGHT_HAND",
 			                   "NONE"
 			                 ],
-			                 "$ref": "#/definitions/Polarization",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SpectrumConfig",
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/AntennaDownlinkDemodDecodeConfig",
 			         "type": "object"
 			       },
 			       "AntennaUplinkConfig": {
@@ -201,14 +183,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "MHz",
 			                       "kHz"
 			                     ],
-			                     "$ref": "#/definitions/FrequencyUnits",
 			                     "type": "string"
 			                   },
 			                   "Value": {
 			                     "type": "number"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Frequency",
 			                 "type": "object"
 			               },
 			               "Polarization": {
@@ -217,11 +197,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "RIGHT_HAND",
 			                   "NONE"
 			                 ],
-			                 "$ref": "#/definitions/Polarization",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/UplinkSpectrumConfig",
 			             "type": "object"
 			           },
 			           "TargetEirp": {
@@ -231,21 +209,18 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "enum": [
 			                   "dBW"
 			                 ],
-			                 "$ref": "#/definitions/EirpUnits",
 			                 "type": "string"
 			               },
 			               "Value": {
 			                 "type": "number"
 			               }
 			             },
-			             "$ref": "#/definitions/Eirp",
 			             "type": "object"
 			           },
 			           "TransmitDisabled": {
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AntennaUplinkConfig",
 			         "type": "object"
 			       },
 			       "DataflowEndpointConfig": {
@@ -258,27 +233,22 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/DataflowEndpointConfig",
 			         "type": "object"
 			       },
 			       "S3RecordingConfig": {
 			         "additionalProperties": false,
 			         "properties": {
 			           "BucketArn": {
-			             "$ref": "#/definitions/BucketArn",
 			             "type": "string"
 			           },
 			           "Prefix": {
 			             "pattern": "",
-			             "$ref": "#/definitions/S3KeyPrefix",
 			             "type": "string"
 			           },
 			           "RoleArn": {
-			             "$ref": "#/definitions/RoleArn",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/S3RecordingConfig",
 			         "type": "object"
 			       },
 			       "TrackingConfig": {
@@ -293,7 +263,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/TrackingConfig",
 			         "type": "object"
 			       },
 			       "UplinkEchoConfig": {
@@ -306,11 +275,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/UplinkEchoConfig",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/ConfigData",
 			     "type": "object"
 			   }
 			*/
@@ -335,14 +302,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "MHz",
 						                   "kHz"
 						                 ],
-						                 "$ref": "#/definitions/BandwidthUnits",
 						                 "type": "string"
 						               },
 						               "Value": {
 						                 "type": "number"
 						               }
 						             },
-						             "$ref": "#/definitions/FrequencyBandwidth",
 						             "type": "object"
 						           },
 						           "CenterFrequency": {
@@ -354,14 +319,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "MHz",
 						                   "kHz"
 						                 ],
-						                 "$ref": "#/definitions/FrequencyUnits",
 						                 "type": "string"
 						               },
 						               "Value": {
 						                 "type": "number"
 						               }
 						             },
-						             "$ref": "#/definitions/Frequency",
 						             "type": "object"
 						           },
 						           "Polarization": {
@@ -370,15 +333,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "RIGHT_HAND",
 						               "NONE"
 						             ],
-						             "$ref": "#/definitions/Polarization",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SpectrumConfig",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/AntennaDownlinkConfig",
 						     "type": "object"
 						   }
 						*/
@@ -400,14 +360,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "MHz",
 									               "kHz"
 									             ],
-									             "$ref": "#/definitions/BandwidthUnits",
 									             "type": "string"
 									           },
 									           "Value": {
 									             "type": "number"
 									           }
 									         },
-									         "$ref": "#/definitions/FrequencyBandwidth",
 									         "type": "object"
 									       },
 									       "CenterFrequency": {
@@ -419,14 +377,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "MHz",
 									               "kHz"
 									             ],
-									             "$ref": "#/definitions/FrequencyUnits",
 									             "type": "string"
 									           },
 									           "Value": {
 									             "type": "number"
 									           }
 									         },
-									         "$ref": "#/definitions/Frequency",
 									         "type": "object"
 									       },
 									       "Polarization": {
@@ -435,11 +391,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "RIGHT_HAND",
 									           "NONE"
 									         ],
-									         "$ref": "#/definitions/Polarization",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SpectrumConfig",
 									     "type": "object"
 									   }
 									*/
@@ -458,14 +412,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "MHz",
 												           "kHz"
 												         ],
-												         "$ref": "#/definitions/BandwidthUnits",
 												         "type": "string"
 												       },
 												       "Value": {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/FrequencyBandwidth",
 												     "type": "object"
 												   }
 												*/
@@ -481,7 +433,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "MHz",
 															       "kHz"
 															     ],
-															     "$ref": "#/definitions/BandwidthUnits",
 															     "type": "string"
 															   }
 															*/
@@ -516,14 +467,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "MHz",
 												           "kHz"
 												         ],
-												         "$ref": "#/definitions/FrequencyUnits",
 												         "type": "string"
 												       },
 												       "Value": {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/Frequency",
 												     "type": "object"
 												   }
 												*/
@@ -539,7 +488,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "MHz",
 															       "kHz"
 															     ],
-															     "$ref": "#/definitions/FrequencyUnits",
 															     "type": "string"
 															   }
 															*/
@@ -571,7 +519,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "RIGHT_HAND",
 												       "NONE"
 												     ],
-												     "$ref": "#/definitions/Polarization",
 												     "type": "string"
 												   }
 												*/
@@ -598,11 +545,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "properties": {
 						           "UnvalidatedJSON": {
 						             "pattern": "",
-						             "$ref": "#/definitions/JsonString",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/DecodeConfig",
 						         "type": "object"
 						       },
 						       "DemodulationConfig": {
@@ -610,11 +555,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "properties": {
 						           "UnvalidatedJSON": {
 						             "pattern": "",
-						             "$ref": "#/definitions/JsonString",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/DemodulationConfig",
 						         "type": "object"
 						       },
 						       "SpectrumConfig": {
@@ -629,14 +572,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "MHz",
 						                   "kHz"
 						                 ],
-						                 "$ref": "#/definitions/BandwidthUnits",
 						                 "type": "string"
 						               },
 						               "Value": {
 						                 "type": "number"
 						               }
 						             },
-						             "$ref": "#/definitions/FrequencyBandwidth",
 						             "type": "object"
 						           },
 						           "CenterFrequency": {
@@ -648,14 +589,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "MHz",
 						                   "kHz"
 						                 ],
-						                 "$ref": "#/definitions/FrequencyUnits",
 						                 "type": "string"
 						               },
 						               "Value": {
 						                 "type": "number"
 						               }
 						             },
-						             "$ref": "#/definitions/Frequency",
 						             "type": "object"
 						           },
 						           "Polarization": {
@@ -664,15 +603,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "RIGHT_HAND",
 						               "NONE"
 						             ],
-						             "$ref": "#/definitions/Polarization",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SpectrumConfig",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/AntennaDownlinkDemodDecodeConfig",
 						     "type": "object"
 						   }
 						*/
@@ -687,11 +623,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "properties": {
 									       "UnvalidatedJSON": {
 									         "pattern": "",
-									         "$ref": "#/definitions/JsonString",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DecodeConfig",
 									     "type": "object"
 									   }
 									*/
@@ -703,7 +637,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												/*
 												   {
 												     "pattern": "",
-												     "$ref": "#/definitions/JsonString",
 												     "type": "string"
 												   }
 												*/
@@ -723,11 +656,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "properties": {
 									       "UnvalidatedJSON": {
 									         "pattern": "",
-									         "$ref": "#/definitions/JsonString",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DemodulationConfig",
 									     "type": "object"
 									   }
 									*/
@@ -739,7 +670,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												/*
 												   {
 												     "pattern": "",
-												     "$ref": "#/definitions/JsonString",
 												     "type": "string"
 												   }
 												*/
@@ -766,14 +696,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "MHz",
 									               "kHz"
 									             ],
-									             "$ref": "#/definitions/BandwidthUnits",
 									             "type": "string"
 									           },
 									           "Value": {
 									             "type": "number"
 									           }
 									         },
-									         "$ref": "#/definitions/FrequencyBandwidth",
 									         "type": "object"
 									       },
 									       "CenterFrequency": {
@@ -785,14 +713,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "MHz",
 									               "kHz"
 									             ],
-									             "$ref": "#/definitions/FrequencyUnits",
 									             "type": "string"
 									           },
 									           "Value": {
 									             "type": "number"
 									           }
 									         },
-									         "$ref": "#/definitions/Frequency",
 									         "type": "object"
 									       },
 									       "Polarization": {
@@ -801,11 +727,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "RIGHT_HAND",
 									           "NONE"
 									         ],
-									         "$ref": "#/definitions/Polarization",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SpectrumConfig",
 									     "type": "object"
 									   }
 									*/
@@ -824,14 +748,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "MHz",
 												           "kHz"
 												         ],
-												         "$ref": "#/definitions/BandwidthUnits",
 												         "type": "string"
 												       },
 												       "Value": {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/FrequencyBandwidth",
 												     "type": "object"
 												   }
 												*/
@@ -847,7 +769,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "MHz",
 															       "kHz"
 															     ],
-															     "$ref": "#/definitions/BandwidthUnits",
 															     "type": "string"
 															   }
 															*/
@@ -882,14 +803,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "MHz",
 												           "kHz"
 												         ],
-												         "$ref": "#/definitions/FrequencyUnits",
 												         "type": "string"
 												       },
 												       "Value": {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/Frequency",
 												     "type": "object"
 												   }
 												*/
@@ -905,7 +824,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "MHz",
 															       "kHz"
 															     ],
-															     "$ref": "#/definitions/FrequencyUnits",
 															     "type": "string"
 															   }
 															*/
@@ -937,7 +855,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "RIGHT_HAND",
 												       "NONE"
 												     ],
-												     "$ref": "#/definitions/Polarization",
 												     "type": "string"
 												   }
 												*/
@@ -971,14 +888,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "MHz",
 						                   "kHz"
 						                 ],
-						                 "$ref": "#/definitions/FrequencyUnits",
 						                 "type": "string"
 						               },
 						               "Value": {
 						                 "type": "number"
 						               }
 						             },
-						             "$ref": "#/definitions/Frequency",
 						             "type": "object"
 						           },
 						           "Polarization": {
@@ -987,11 +902,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "RIGHT_HAND",
 						               "NONE"
 						             ],
-						             "$ref": "#/definitions/Polarization",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/UplinkSpectrumConfig",
 						         "type": "object"
 						       },
 						       "TargetEirp": {
@@ -1001,21 +914,18 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "enum": [
 						               "dBW"
 						             ],
-						             "$ref": "#/definitions/EirpUnits",
 						             "type": "string"
 						           },
 						           "Value": {
 						             "type": "number"
 						           }
 						         },
-						         "$ref": "#/definitions/Eirp",
 						         "type": "object"
 						       },
 						       "TransmitDisabled": {
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AntennaUplinkConfig",
 						     "type": "object"
 						   }
 						*/
@@ -1037,14 +947,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "MHz",
 									               "kHz"
 									             ],
-									             "$ref": "#/definitions/FrequencyUnits",
 									             "type": "string"
 									           },
 									           "Value": {
 									             "type": "number"
 									           }
 									         },
-									         "$ref": "#/definitions/Frequency",
 									         "type": "object"
 									       },
 									       "Polarization": {
@@ -1053,11 +961,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "RIGHT_HAND",
 									           "NONE"
 									         ],
-									         "$ref": "#/definitions/Polarization",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/UplinkSpectrumConfig",
 									     "type": "object"
 									   }
 									*/
@@ -1076,14 +982,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "MHz",
 												           "kHz"
 												         ],
-												         "$ref": "#/definitions/FrequencyUnits",
 												         "type": "string"
 												       },
 												       "Value": {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/Frequency",
 												     "type": "object"
 												   }
 												*/
@@ -1099,7 +1003,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "MHz",
 															       "kHz"
 															     ],
-															     "$ref": "#/definitions/FrequencyUnits",
 															     "type": "string"
 															   }
 															*/
@@ -1131,7 +1034,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "RIGHT_HAND",
 												       "NONE"
 												     ],
-												     "$ref": "#/definitions/Polarization",
 												     "type": "string"
 												   }
 												*/
@@ -1153,14 +1055,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "enum": [
 									           "dBW"
 									         ],
-									         "$ref": "#/definitions/EirpUnits",
 									         "type": "string"
 									       },
 									       "Value": {
 									         "type": "number"
 									       }
 									     },
-									     "$ref": "#/definitions/Eirp",
 									     "type": "object"
 									   }
 									*/
@@ -1174,7 +1074,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "enum": [
 												       "dBW"
 												     ],
-												     "$ref": "#/definitions/EirpUnits",
 												     "type": "string"
 												   }
 												*/
@@ -1225,7 +1124,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/DataflowEndpointConfig",
 						     "type": "object"
 						   }
 						*/
@@ -1265,20 +1163,16 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "additionalProperties": false,
 						     "properties": {
 						       "BucketArn": {
-						         "$ref": "#/definitions/BucketArn",
 						         "type": "string"
 						       },
 						       "Prefix": {
 						         "pattern": "",
-						         "$ref": "#/definitions/S3KeyPrefix",
 						         "type": "string"
 						       },
 						       "RoleArn": {
-						         "$ref": "#/definitions/RoleArn",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/S3RecordingConfig",
 						     "type": "object"
 						   }
 						*/
@@ -1289,7 +1183,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/BucketArn",
 									     "type": "string"
 									   }
 									*/
@@ -1302,7 +1195,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "pattern": "",
-									     "$ref": "#/definitions/S3KeyPrefix",
 									     "type": "string"
 									   }
 									*/
@@ -1314,7 +1206,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/RoleArn",
 									     "type": "string"
 									   }
 									*/
@@ -1341,7 +1232,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/TrackingConfig",
 						     "type": "object"
 						   }
 						*/
@@ -1381,7 +1271,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/UplinkEchoConfig",
 						     "type": "object"
 						   }
 						*/
@@ -1457,7 +1346,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

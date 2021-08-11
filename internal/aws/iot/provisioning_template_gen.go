@@ -58,7 +58,6 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/ProvisioningHook",
 			     "type": "object"
 			   }
 			*/
@@ -116,7 +115,6 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

@@ -31,7 +31,6 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 256,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ImageArn",
 			     "type": "string"
 			   }
 			*/
@@ -48,7 +47,6 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 512,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ImageDescription",
 			     "type": "string"
 			   }
 			*/
@@ -65,7 +63,6 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 128,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ImageDisplayName",
 			     "type": "string"
 			   }
 			*/
@@ -82,7 +79,6 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 63,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ImageName",
 			     "type": "string"
 			   }
 			*/
@@ -100,7 +96,6 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 256,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ImageRoleArn",
 			     "type": "string"
 			   }
 			*/
@@ -130,7 +125,6 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

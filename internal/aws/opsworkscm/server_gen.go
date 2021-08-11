@@ -177,7 +177,6 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/EngineAttribute",
 			       "type": "object"
 			     },
 			     "type": "array",
@@ -413,7 +412,6 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

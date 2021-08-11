@@ -106,7 +106,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			                     "type": "object"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Condition",
 			                 "type": "object"
 			               },
 			               "minItems": 1,
@@ -121,7 +120,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/Filter",
 			           "required": [
 			             "Behavior",
 			             "Conditions",
@@ -216,7 +214,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						                 "type": "object"
 						               }
 						             },
-						             "$ref": "#/definitions/Condition",
 						             "type": "object"
 						           },
 						           "minItems": 1,
@@ -231,7 +228,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Filter",
 						       "required": [
 						         "Behavior",
 						         "Conditions",
@@ -306,7 +302,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									           "type": "object"
 									         }
 									       },
-									       "$ref": "#/definitions/Condition",
 									       "type": "object"
 									     },
 									     "minItems": 1,
@@ -539,7 +534,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/FieldToMatch",
 			       "type": "object"
 			     },
 			     "type": "array"

@@ -125,7 +125,6 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			           "type": "integer"
 			         }
 			       },
-			       "$ref": "#/definitions/FirewallRule",
 			       "required": [
 			         "FirewallDomainListId",
 			         "Priority",
@@ -403,7 +402,6 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

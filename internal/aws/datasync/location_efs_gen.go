@@ -50,7 +50,6 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Ec2Config",
 			     "required": [
 			       "SecurityGroupArns",
 			       "SubnetArn"
@@ -194,7 +193,6 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

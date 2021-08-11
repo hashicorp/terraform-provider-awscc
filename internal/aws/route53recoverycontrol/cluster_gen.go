@@ -58,7 +58,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ClusterEndpoint",
 			       "type": "object"
 			     },
 			     "type": "array"

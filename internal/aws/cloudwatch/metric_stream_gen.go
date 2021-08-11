@@ -68,7 +68,6 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/MetricStreamFilter",
 			       "required": [
 			         "Namespace"
 			       ],
@@ -137,7 +136,6 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/MetricStreamFilter",
 			       "required": [
 			         "Namespace"
 			       ],
@@ -273,7 +271,6 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key"
 			       ],

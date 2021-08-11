@@ -61,14 +61,12 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/EksInfo",
 			             "required": [
 			               "Namespace"
 			             ],
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/ContainerInfo",
 			         "required": [
 			           "EksInfo"
 			         ],
@@ -79,7 +77,6 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/ContainerProvider",
 			     "required": [
 			       "Type",
 			       "Id",
@@ -123,14 +120,12 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/EksInfo",
 						         "required": [
 						           "Namespace"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/ContainerInfo",
 						     "required": [
 						       "EksInfo"
 						     ],
@@ -153,7 +148,6 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/EksInfo",
 									     "required": [
 									       "Namespace"
 									     ],
@@ -254,7 +248,6 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

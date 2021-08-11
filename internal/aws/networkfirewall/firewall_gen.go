@@ -54,7 +54,6 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "items": {
 			       "description": "An endpoint Id.",
-			       "$ref": "#/definitions/EndpointId",
 			       "type": "string"
 			     },
 			     "type": "array"
@@ -72,7 +71,6 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 256,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ResourceArn",
 			     "type": "string"
 			   }
 			*/
@@ -118,7 +116,6 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 256,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ResourceArn",
 			     "type": "string"
 			   }
 			*/
@@ -162,7 +159,6 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/SubnetMapping",
 			       "required": [
 			         "SubnetId"
 			       ],
@@ -215,7 +211,6 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

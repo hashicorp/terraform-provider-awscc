@@ -39,7 +39,6 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/SystemsManagerAgent",
 			         "required": [
 			           "UninstallAfterBuild"
 			         ],
@@ -50,7 +49,6 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/AdditionalInstanceConfiguration",
 			     "required": [
 			       "UserDataOverride"
 			     ],
@@ -73,7 +71,6 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/SystemsManagerAgent",
 						     "required": [
 						       "UninstallAfterBuild"
 						     ],
@@ -186,7 +183,6 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/EbsInstanceBlockDeviceSpecification",
 			           "type": "object"
 			         },
 			         "NoDevice": {
@@ -198,7 +194,6 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/InstanceBlockDeviceMapping",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -266,7 +261,6 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/EbsInstanceBlockDeviceSpecification",
 						     "type": "object"
 						   }
 						*/
@@ -442,7 +436,6 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/ComponentParameter",
 			             "required": [
 			               "Name",
 			               "Value"
@@ -452,7 +445,6 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "array"
 			         }
 			       },
-			       "$ref": "#/definitions/ComponentConfiguration",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -496,7 +488,6 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "array"
 						         }
 						       },
-						       "$ref": "#/definitions/ComponentParameter",
 						       "required": [
 						         "Name",
 						         "Value"

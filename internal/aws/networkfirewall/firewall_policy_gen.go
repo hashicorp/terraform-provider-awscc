@@ -54,11 +54,9 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "maxLength": 256,
 			               "minLength": 1,
 			               "pattern": "",
-			               "$ref": "#/definitions/ResourceArn",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/StatefulRuleGroupReference",
 			           "required": [
 			             "ResourceArn"
 			           ],
@@ -90,7 +88,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                             "type": "string"
 			                           }
 			                         },
-			                         "$ref": "#/definitions/Dimension",
 			                         "required": [
 			                           "Value"
 			                         ],
@@ -100,14 +97,12 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                       "uniqueItems": true
 			                     }
 			                   },
-			                   "$ref": "#/definitions/PublishMetricAction",
 			                   "required": [
 			                     "Dimensions"
 			                   ],
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/ActionDefinition",
 			               "type": "object"
 			             },
 			             "ActionName": {
@@ -117,7 +112,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/CustomAction",
 			           "required": [
 			             "ActionName",
 			             "ActionDefinition"
@@ -156,11 +150,9 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "maxLength": 256,
 			               "minLength": 1,
 			               "pattern": "",
-			               "$ref": "#/definitions/ResourceArn",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/StatelessRuleGroupReference",
 			           "required": [
 			             "ResourceArn",
 			             "Priority"
@@ -171,7 +163,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "uniqueItems": true
 			       }
 			     },
-			     "$ref": "#/definitions/FirewallPolicy",
 			     "required": [
 			       "StatelessDefaultActions",
 			       "StatelessFragmentDefaultActions"
@@ -195,11 +186,9 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "maxLength": 256,
 						           "minLength": 1,
 						           "pattern": "",
-						           "$ref": "#/definitions/ResourceArn",
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/StatefulRuleGroupReference",
 						       "required": [
 						         "ResourceArn"
 						       ],
@@ -220,7 +209,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									     "maxLength": 256,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/ResourceArn",
 									     "type": "string"
 									   }
 									*/
@@ -260,7 +248,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                         "type": "string"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/Dimension",
 						                     "required": [
 						                       "Value"
 						                     ],
@@ -270,14 +257,12 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						                   "uniqueItems": true
 						                 }
 						               },
-						               "$ref": "#/definitions/PublishMetricAction",
 						               "required": [
 						                 "Dimensions"
 						               ],
 						               "type": "object"
 						             }
 						           },
-						           "$ref": "#/definitions/ActionDefinition",
 						           "type": "object"
 						         },
 						         "ActionName": {
@@ -287,7 +272,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/CustomAction",
 						       "required": [
 						         "ActionName",
 						         "ActionDefinition"
@@ -322,7 +306,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									                   "type": "string"
 									                 }
 									               },
-									               "$ref": "#/definitions/Dimension",
 									               "required": [
 									                 "Value"
 									               ],
@@ -332,14 +315,12 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									             "uniqueItems": true
 									           }
 									         },
-									         "$ref": "#/definitions/PublishMetricAction",
 									         "required": [
 									           "Dimensions"
 									         ],
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/ActionDefinition",
 									     "type": "object"
 									   }
 									*/
@@ -364,7 +345,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/Dimension",
 												           "required": [
 												             "Value"
 												           ],
@@ -374,7 +354,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												         "uniqueItems": true
 												       }
 												     },
-												     "$ref": "#/definitions/PublishMetricAction",
 												     "required": [
 												       "Dimensions"
 												     ],
@@ -399,7 +378,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															           "type": "string"
 															         }
 															       },
-															       "$ref": "#/definitions/Dimension",
 															       "required": [
 															         "Value"
 															       ],
@@ -506,11 +484,9 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "maxLength": 256,
 						           "minLength": 1,
 						           "pattern": "",
-						           "$ref": "#/definitions/ResourceArn",
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/StatelessRuleGroupReference",
 						       "required": [
 						         "ResourceArn",
 						         "Priority"
@@ -543,7 +519,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									     "maxLength": 256,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/ResourceArn",
 									     "type": "string"
 									   }
 									*/
@@ -570,7 +545,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			     "maxLength": 256,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ResourceArn",
 			     "type": "string"
 			   }
 			*/
@@ -629,7 +603,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

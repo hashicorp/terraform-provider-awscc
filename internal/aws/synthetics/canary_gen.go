@@ -59,7 +59,6 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Code",
 			     "required": [
 			       "Handler"
 			     ],
@@ -215,7 +214,6 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/RunConfig",
 			     "type": "object"
 			   }
 			*/
@@ -311,7 +309,6 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Schedule",
 			     "required": [
 			       "Expression"
 			     ],
@@ -407,7 +404,6 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"
@@ -478,7 +474,6 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/VPCConfig",
 			     "required": [
 			       "SubnetIds",
 			       "SecurityGroupIds"
@@ -559,7 +554,6 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/BaseScreenshot",
 			           "required": [
 			             "ScreenshotName"
 			           ],
@@ -568,7 +562,6 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/VisualReference",
 			     "required": [
 			       "BaseCanaryRunId"
 			     ],
@@ -611,7 +604,6 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/BaseScreenshot",
 						       "required": [
 						         "ScreenshotName"
 						       ],

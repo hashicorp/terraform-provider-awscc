@@ -31,7 +31,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			     "maxLength": 256,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ResourceArn",
 			     "type": "string"
 			   }
 			*/
@@ -97,7 +96,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/LogDestinationConfig",
 			           "required": [
 			             "LogType",
 			             "LogDestinationType",
@@ -109,7 +107,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/LoggingConfiguration",
 			     "required": [
 			       "LogDestinationConfigs"
 			     ],
@@ -156,7 +153,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/LogDestinationConfig",
 						       "required": [
 						         "LogType",
 						         "LogDestinationType",

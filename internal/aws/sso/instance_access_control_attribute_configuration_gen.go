@@ -44,22 +44,18 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			                 "maxLength": 256,
 			                 "minLength": 0,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/AccessControlAttributeValueSource",
 			                 "type": "string"
 			               },
 			               "maxItems": 1,
-			               "$ref": "#/definitions/AccessControlAttributeValueSourceList",
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/AccessControlAttributeValue",
 			           "required": [
 			             "Source"
 			           ],
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/AccessControlAttribute",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -67,7 +63,6 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			       "type": "object"
 			     },
 			     "maxItems": 50,
-			     "$ref": "#/definitions/AccessControlAttributeList",
 			     "type": "array"
 			   }
 			*/
@@ -99,15 +94,12 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 						           "maxLength": 256,
 						           "minLength": 0,
 						           "pattern": "",
-						           "$ref": "#/definitions/AccessControlAttributeValueSource",
 						           "type": "string"
 						         },
 						         "maxItems": 1,
-						         "$ref": "#/definitions/AccessControlAttributeValueSourceList",
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/AccessControlAttributeValue",
 						     "required": [
 						       "Source"
 						     ],
@@ -125,11 +117,9 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 									       "maxLength": 256,
 									       "minLength": 0,
 									       "pattern": "",
-									       "$ref": "#/definitions/AccessControlAttributeValueSource",
 									       "type": "string"
 									     },
 									     "maxItems": 1,
-									     "$ref": "#/definitions/AccessControlAttributeValueSourceList",
 									     "type": "array"
 									   }
 									*/
@@ -173,22 +163,18 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			                     "maxLength": 256,
 			                     "minLength": 0,
 			                     "pattern": "",
-			                     "$ref": "#/definitions/AccessControlAttributeValueSource",
 			                     "type": "string"
 			                   },
 			                   "maxItems": 1,
-			                   "$ref": "#/definitions/AccessControlAttributeValueSourceList",
 			                   "type": "array"
 			                 }
 			               },
-			               "$ref": "#/definitions/AccessControlAttributeValue",
 			               "required": [
 			                 "Source"
 			               ],
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/AccessControlAttribute",
 			           "required": [
 			             "Key",
 			             "Value"
@@ -196,7 +182,6 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			           "type": "object"
 			         },
 			         "maxItems": 50,
-			         "$ref": "#/definitions/AccessControlAttributeList",
 			         "type": "array"
 			       }
 			     },
@@ -231,22 +216,18 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 						                 "maxLength": 256,
 						                 "minLength": 0,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/AccessControlAttributeValueSource",
 						                 "type": "string"
 						               },
 						               "maxItems": 1,
-						               "$ref": "#/definitions/AccessControlAttributeValueSourceList",
 						               "type": "array"
 						             }
 						           },
-						           "$ref": "#/definitions/AccessControlAttributeValue",
 						           "required": [
 						             "Source"
 						           ],
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/AccessControlAttribute",
 						       "required": [
 						         "Key",
 						         "Value"
@@ -254,7 +235,6 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 						       "type": "object"
 						     },
 						     "maxItems": 50,
-						     "$ref": "#/definitions/AccessControlAttributeList",
 						     "type": "array"
 						   }
 						*/
@@ -286,15 +266,12 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 									           "maxLength": 256,
 									           "minLength": 0,
 									           "pattern": "",
-									           "$ref": "#/definitions/AccessControlAttributeValueSource",
 									           "type": "string"
 									         },
 									         "maxItems": 1,
-									         "$ref": "#/definitions/AccessControlAttributeValueSourceList",
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/AccessControlAttributeValue",
 									     "required": [
 									       "Source"
 									     ],
@@ -312,11 +289,9 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 												       "maxLength": 256,
 												       "minLength": 0,
 												       "pattern": "",
-												       "$ref": "#/definitions/AccessControlAttributeValueSource",
 												       "type": "string"
 												     },
 												     "maxItems": 1,
-												     "$ref": "#/definitions/AccessControlAttributeValueSourceList",
 												     "type": "array"
 												   }
 												*/

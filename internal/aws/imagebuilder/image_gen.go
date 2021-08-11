@@ -122,7 +122,6 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/ImageTestsConfiguration",
 			     "type": "object"
 			   }
 			*/

@@ -27,7 +27,6 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			/*
 			   {
-			     "$ref": "#/definitions/AccountId",
 			     "type": "string"
 			   }
 			*/
@@ -45,7 +44,6 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/ExpiryEventsConfiguration",
 			     "type": "object"
 			   }
 			*/

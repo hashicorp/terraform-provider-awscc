@@ -66,7 +66,6 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "type": "string"
 			     },
 			     "maxItems": 128,
-			     "$ref": "#/definitions/DestinationNetworkInterfaceArns",
 			     "type": "array"
 			   }
 			*/
@@ -127,7 +126,6 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/FilterRule",
 			       "type": "object"
 			     },
 			     "maxItems": 1,
@@ -320,7 +318,6 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Options",
 			     "type": "object"
 			   }
 			*/
@@ -588,7 +585,6 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/TaskSchedule",
 			     "required": [
 			       "ScheduleExpression"
 			     ],
@@ -645,7 +641,6 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "type": "string"
 			     },
 			     "maxItems": 128,
-			     "$ref": "#/definitions/SourceNetworkInterfaceArns",
 			     "type": "array"
 			   }
 			*/
@@ -700,7 +695,6 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

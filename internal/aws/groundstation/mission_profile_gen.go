@@ -75,7 +75,6 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/DataflowEdge",
 			       "type": "object"
 			     },
 			     "minItems": 1,
@@ -180,7 +179,6 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

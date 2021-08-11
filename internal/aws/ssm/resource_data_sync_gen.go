@@ -115,7 +115,6 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/S3Destination",
 			     "required": [
 			       "BucketName",
 			       "BucketRegion",
@@ -249,7 +248,6 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			             "uniqueItems": false
 			           }
 			         },
-			         "$ref": "#/definitions/AwsOrganizationsSource",
 			         "required": [
 			           "OrganizationSourceType"
 			         ],
@@ -271,7 +269,6 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/SyncSource",
 			     "required": [
 			       "SourceType",
 			       "SourceRegions"
@@ -301,7 +298,6 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						         "uniqueItems": false
 						       }
 						     },
-						     "$ref": "#/definitions/AwsOrganizationsSource",
 						     "required": [
 						       "OrganizationSourceType"
 						     ],

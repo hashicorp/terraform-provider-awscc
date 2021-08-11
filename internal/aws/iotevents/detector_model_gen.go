@@ -68,7 +68,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/ClearTimer",
 			                               "required": [
 			                                 "TimerName"
 			                               ],
@@ -108,7 +107,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -136,7 +134,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/DynamoDB",
 			                               "required": [
 			                                 "HashKeyField",
 			                                 "HashKeyValue",
@@ -162,7 +159,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -174,7 +170,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/DynamoDBv2",
 			                               "required": [
 			                                 "TableName"
 			                               ],
@@ -202,7 +197,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -215,7 +209,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Firehose",
 			                               "required": [
 			                                 "DeliveryStreamName"
 			                               ],
@@ -246,7 +239,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -254,7 +246,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/IotEvents",
 			                               "required": [
 			                                 "InputName"
 			                               ],
@@ -301,7 +292,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                           "type": "string"
 			                                         }
 			                                       },
-			                                       "$ref": "#/definitions/AssetPropertyTimestamp",
 			                                       "required": [
 			                                         "TimeInSeconds"
 			                                       ],
@@ -328,18 +318,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                           "type": "string"
 			                                         }
 			                                       },
-			                                       "$ref": "#/definitions/AssetPropertyVariant",
 			                                       "type": "object"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/AssetPropertyValue",
 			                                   "required": [
 			                                     "Value"
 			                                   ],
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/IotSiteWise",
 			                               "required": [
 			                                 "PropertyValue"
 			                               ],
@@ -369,7 +356,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -377,7 +363,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/IotTopicPublish",
 			                               "required": [
 			                                 "MqttTopic"
 			                               ],
@@ -406,7 +391,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -414,7 +398,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Lambda",
 			                               "required": [
 			                                 "FunctionArn"
 			                               ],
@@ -431,7 +414,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/ResetTimer",
 			                               "required": [
 			                                 "TimerName"
 			                               ],
@@ -458,7 +440,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/SetTimer",
 			                               "required": [
 			                                 "TimerName"
 			                               ],
@@ -482,7 +463,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/SetVariable",
 			                               "required": [
 			                                 "Value",
 			                                 "VariableName"
@@ -507,7 +487,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -521,7 +500,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Sns",
 			                               "required": [
 			                                 "TargetArn"
 			                               ],
@@ -544,7 +522,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -560,14 +537,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "boolean"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Sqs",
 			                               "required": [
 			                                 "QueueUrl"
 			                               ],
 			                               "type": "object"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/Action",
 			                           "type": "object"
 			                         },
 			                         "type": "array",
@@ -584,7 +559,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/Event",
 			                     "required": [
 			                       "EventName"
 			                     ],
@@ -594,7 +568,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                   "uniqueItems": false
 			                 }
 			               },
-			               "$ref": "#/definitions/OnEnter",
 			               "type": "object"
 			             },
 			             "OnExit": {
@@ -623,7 +596,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/ClearTimer",
 			                               "required": [
 			                                 "TimerName"
 			                               ],
@@ -663,7 +635,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -691,7 +662,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/DynamoDB",
 			                               "required": [
 			                                 "HashKeyField",
 			                                 "HashKeyValue",
@@ -717,7 +687,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -729,7 +698,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/DynamoDBv2",
 			                               "required": [
 			                                 "TableName"
 			                               ],
@@ -757,7 +725,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -770,7 +737,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Firehose",
 			                               "required": [
 			                                 "DeliveryStreamName"
 			                               ],
@@ -801,7 +767,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -809,7 +774,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/IotEvents",
 			                               "required": [
 			                                 "InputName"
 			                               ],
@@ -856,7 +820,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                           "type": "string"
 			                                         }
 			                                       },
-			                                       "$ref": "#/definitions/AssetPropertyTimestamp",
 			                                       "required": [
 			                                         "TimeInSeconds"
 			                                       ],
@@ -883,18 +846,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                           "type": "string"
 			                                         }
 			                                       },
-			                                       "$ref": "#/definitions/AssetPropertyVariant",
 			                                       "type": "object"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/AssetPropertyValue",
 			                                   "required": [
 			                                     "Value"
 			                                   ],
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/IotSiteWise",
 			                               "required": [
 			                                 "PropertyValue"
 			                               ],
@@ -924,7 +884,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -932,7 +891,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/IotTopicPublish",
 			                               "required": [
 			                                 "MqttTopic"
 			                               ],
@@ -961,7 +919,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -969,7 +926,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Lambda",
 			                               "required": [
 			                                 "FunctionArn"
 			                               ],
@@ -986,7 +942,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/ResetTimer",
 			                               "required": [
 			                                 "TimerName"
 			                               ],
@@ -1013,7 +968,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/SetTimer",
 			                               "required": [
 			                                 "TimerName"
 			                               ],
@@ -1037,7 +991,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/SetVariable",
 			                               "required": [
 			                                 "Value",
 			                                 "VariableName"
@@ -1062,7 +1015,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1076,7 +1028,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Sns",
 			                               "required": [
 			                                 "TargetArn"
 			                               ],
@@ -1099,7 +1050,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1115,14 +1065,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "boolean"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Sqs",
 			                               "required": [
 			                                 "QueueUrl"
 			                               ],
 			                               "type": "object"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/Action",
 			                           "type": "object"
 			                         },
 			                         "type": "array",
@@ -1139,7 +1087,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/Event",
 			                     "required": [
 			                       "EventName"
 			                     ],
@@ -1149,7 +1096,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                   "uniqueItems": false
 			                 }
 			               },
-			               "$ref": "#/definitions/OnExit",
 			               "type": "object"
 			             },
 			             "OnInput": {
@@ -1178,7 +1124,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/ClearTimer",
 			                               "required": [
 			                                 "TimerName"
 			                               ],
@@ -1218,7 +1163,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1246,7 +1190,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/DynamoDB",
 			                               "required": [
 			                                 "HashKeyField",
 			                                 "HashKeyValue",
@@ -1272,7 +1215,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1284,7 +1226,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/DynamoDBv2",
 			                               "required": [
 			                                 "TableName"
 			                               ],
@@ -1312,7 +1253,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1325,7 +1265,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Firehose",
 			                               "required": [
 			                                 "DeliveryStreamName"
 			                               ],
@@ -1356,7 +1295,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1364,7 +1302,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/IotEvents",
 			                               "required": [
 			                                 "InputName"
 			                               ],
@@ -1411,7 +1348,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                           "type": "string"
 			                                         }
 			                                       },
-			                                       "$ref": "#/definitions/AssetPropertyTimestamp",
 			                                       "required": [
 			                                         "TimeInSeconds"
 			                                       ],
@@ -1438,18 +1374,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                           "type": "string"
 			                                         }
 			                                       },
-			                                       "$ref": "#/definitions/AssetPropertyVariant",
 			                                       "type": "object"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/AssetPropertyValue",
 			                                   "required": [
 			                                     "Value"
 			                                   ],
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/IotSiteWise",
 			                               "required": [
 			                                 "PropertyValue"
 			                               ],
@@ -1479,7 +1412,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1487,7 +1419,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/IotTopicPublish",
 			                               "required": [
 			                                 "MqttTopic"
 			                               ],
@@ -1516,7 +1447,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1524,7 +1454,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Lambda",
 			                               "required": [
 			                                 "FunctionArn"
 			                               ],
@@ -1541,7 +1470,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/ResetTimer",
 			                               "required": [
 			                                 "TimerName"
 			                               ],
@@ -1568,7 +1496,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/SetTimer",
 			                               "required": [
 			                                 "TimerName"
 			                               ],
@@ -1592,7 +1519,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/SetVariable",
 			                               "required": [
 			                                 "Value",
 			                                 "VariableName"
@@ -1617,7 +1543,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1631,7 +1556,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Sns",
 			                               "required": [
 			                                 "TargetArn"
 			                               ],
@@ -1654,7 +1578,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1670,14 +1593,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "boolean"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Sqs",
 			                               "required": [
 			                                 "QueueUrl"
 			                               ],
 			                               "type": "object"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/Action",
 			                           "type": "object"
 			                         },
 			                         "type": "array",
@@ -1694,7 +1615,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/Event",
 			                     "required": [
 			                       "EventName"
 			                     ],
@@ -1725,7 +1645,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/ClearTimer",
 			                               "required": [
 			                                 "TimerName"
 			                               ],
@@ -1765,7 +1684,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1793,7 +1711,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/DynamoDB",
 			                               "required": [
 			                                 "HashKeyField",
 			                                 "HashKeyValue",
@@ -1819,7 +1736,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1831,7 +1747,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/DynamoDBv2",
 			                               "required": [
 			                                 "TableName"
 			                               ],
@@ -1859,7 +1774,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1872,7 +1786,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Firehose",
 			                               "required": [
 			                                 "DeliveryStreamName"
 			                               ],
@@ -1903,7 +1816,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -1911,7 +1823,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/IotEvents",
 			                               "required": [
 			                                 "InputName"
 			                               ],
@@ -1958,7 +1869,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                           "type": "string"
 			                                         }
 			                                       },
-			                                       "$ref": "#/definitions/AssetPropertyTimestamp",
 			                                       "required": [
 			                                         "TimeInSeconds"
 			                                       ],
@@ -1985,18 +1895,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                           "type": "string"
 			                                         }
 			                                       },
-			                                       "$ref": "#/definitions/AssetPropertyVariant",
 			                                       "type": "object"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/AssetPropertyValue",
 			                                   "required": [
 			                                     "Value"
 			                                   ],
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/IotSiteWise",
 			                               "required": [
 			                                 "PropertyValue"
 			                               ],
@@ -2026,7 +1933,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -2034,7 +1940,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/IotTopicPublish",
 			                               "required": [
 			                                 "MqttTopic"
 			                               ],
@@ -2063,7 +1968,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -2071,7 +1975,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "object"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Lambda",
 			                               "required": [
 			                                 "FunctionArn"
 			                               ],
@@ -2088,7 +1991,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/ResetTimer",
 			                               "required": [
 			                                 "TimerName"
 			                               ],
@@ -2115,7 +2017,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/SetTimer",
 			                               "required": [
 			                                 "TimerName"
 			                               ],
@@ -2139,7 +2040,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/SetVariable",
 			                               "required": [
 			                                 "Value",
 			                                 "VariableName"
@@ -2164,7 +2064,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -2178,7 +2077,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Sns",
 			                               "required": [
 			                                 "TargetArn"
 			                               ],
@@ -2201,7 +2099,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                       "type": "string"
 			                                     }
 			                                   },
-			                                   "$ref": "#/definitions/Payload",
 			                                   "required": [
 			                                     "ContentExpression",
 			                                     "Type"
@@ -2217,14 +2114,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                                   "type": "boolean"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/Sqs",
 			                               "required": [
 			                                 "QueueUrl"
 			                               ],
 			                               "type": "object"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/Action",
 			                           "type": "object"
 			                         },
 			                         "type": "array",
@@ -2248,7 +2143,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/TransitionEvent",
 			                     "required": [
 			                       "Condition",
 			                       "EventName",
@@ -2260,7 +2154,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			                   "uniqueItems": false
 			                 }
 			               },
-			               "$ref": "#/definitions/OnInput",
 			               "type": "object"
 			             },
 			             "StateName": {
@@ -2270,7 +2163,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/State",
 			           "required": [
 			             "StateName"
 			           ],
@@ -2281,7 +2173,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			         "uniqueItems": false
 			       }
 			     },
-			     "$ref": "#/definitions/DetectorModelDefinition",
 			     "required": [
 			       "States",
 			       "InitialStateName"
@@ -2343,7 +2234,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/ClearTimer",
 						                           "required": [
 						                             "TimerName"
 						                           ],
@@ -2383,7 +2273,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -2411,7 +2300,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/DynamoDB",
 						                           "required": [
 						                             "HashKeyField",
 						                             "HashKeyValue",
@@ -2437,7 +2325,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -2449,7 +2336,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/DynamoDBv2",
 						                           "required": [
 						                             "TableName"
 						                           ],
@@ -2477,7 +2363,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -2490,7 +2375,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Firehose",
 						                           "required": [
 						                             "DeliveryStreamName"
 						                           ],
@@ -2521,7 +2405,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -2529,7 +2412,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/IotEvents",
 						                           "required": [
 						                             "InputName"
 						                           ],
@@ -2576,7 +2458,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                       "type": "string"
 						                                     }
 						                                   },
-						                                   "$ref": "#/definitions/AssetPropertyTimestamp",
 						                                   "required": [
 						                                     "TimeInSeconds"
 						                                   ],
@@ -2603,18 +2484,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                       "type": "string"
 						                                     }
 						                                   },
-						                                   "$ref": "#/definitions/AssetPropertyVariant",
 						                                   "type": "object"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/AssetPropertyValue",
 						                               "required": [
 						                                 "Value"
 						                               ],
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/IotSiteWise",
 						                           "required": [
 						                             "PropertyValue"
 						                           ],
@@ -2644,7 +2522,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -2652,7 +2529,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/IotTopicPublish",
 						                           "required": [
 						                             "MqttTopic"
 						                           ],
@@ -2681,7 +2557,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -2689,7 +2564,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Lambda",
 						                           "required": [
 						                             "FunctionArn"
 						                           ],
@@ -2706,7 +2580,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/ResetTimer",
 						                           "required": [
 						                             "TimerName"
 						                           ],
@@ -2733,7 +2606,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/SetTimer",
 						                           "required": [
 						                             "TimerName"
 						                           ],
@@ -2757,7 +2629,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/SetVariable",
 						                           "required": [
 						                             "Value",
 						                             "VariableName"
@@ -2782,7 +2653,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -2796,7 +2666,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Sns",
 						                           "required": [
 						                             "TargetArn"
 						                           ],
@@ -2819,7 +2688,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -2835,14 +2703,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "boolean"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Sqs",
 						                           "required": [
 						                             "QueueUrl"
 						                           ],
 						                           "type": "object"
 						                         }
 						                       },
-						                       "$ref": "#/definitions/Action",
 						                       "type": "object"
 						                     },
 						                     "type": "array",
@@ -2859,7 +2725,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/Event",
 						                 "required": [
 						                   "EventName"
 						                 ],
@@ -2869,7 +2734,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						               "uniqueItems": false
 						             }
 						           },
-						           "$ref": "#/definitions/OnEnter",
 						           "type": "object"
 						         },
 						         "OnExit": {
@@ -2898,7 +2762,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/ClearTimer",
 						                           "required": [
 						                             "TimerName"
 						                           ],
@@ -2938,7 +2801,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -2966,7 +2828,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/DynamoDB",
 						                           "required": [
 						                             "HashKeyField",
 						                             "HashKeyValue",
@@ -2992,7 +2853,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3004,7 +2864,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/DynamoDBv2",
 						                           "required": [
 						                             "TableName"
 						                           ],
@@ -3032,7 +2891,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3045,7 +2903,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Firehose",
 						                           "required": [
 						                             "DeliveryStreamName"
 						                           ],
@@ -3076,7 +2933,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3084,7 +2940,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/IotEvents",
 						                           "required": [
 						                             "InputName"
 						                           ],
@@ -3131,7 +2986,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                       "type": "string"
 						                                     }
 						                                   },
-						                                   "$ref": "#/definitions/AssetPropertyTimestamp",
 						                                   "required": [
 						                                     "TimeInSeconds"
 						                                   ],
@@ -3158,18 +3012,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                       "type": "string"
 						                                     }
 						                                   },
-						                                   "$ref": "#/definitions/AssetPropertyVariant",
 						                                   "type": "object"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/AssetPropertyValue",
 						                               "required": [
 						                                 "Value"
 						                               ],
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/IotSiteWise",
 						                           "required": [
 						                             "PropertyValue"
 						                           ],
@@ -3199,7 +3050,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3207,7 +3057,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/IotTopicPublish",
 						                           "required": [
 						                             "MqttTopic"
 						                           ],
@@ -3236,7 +3085,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3244,7 +3092,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Lambda",
 						                           "required": [
 						                             "FunctionArn"
 						                           ],
@@ -3261,7 +3108,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/ResetTimer",
 						                           "required": [
 						                             "TimerName"
 						                           ],
@@ -3288,7 +3134,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/SetTimer",
 						                           "required": [
 						                             "TimerName"
 						                           ],
@@ -3312,7 +3157,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/SetVariable",
 						                           "required": [
 						                             "Value",
 						                             "VariableName"
@@ -3337,7 +3181,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3351,7 +3194,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Sns",
 						                           "required": [
 						                             "TargetArn"
 						                           ],
@@ -3374,7 +3216,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3390,14 +3231,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "boolean"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Sqs",
 						                           "required": [
 						                             "QueueUrl"
 						                           ],
 						                           "type": "object"
 						                         }
 						                       },
-						                       "$ref": "#/definitions/Action",
 						                       "type": "object"
 						                     },
 						                     "type": "array",
@@ -3414,7 +3253,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/Event",
 						                 "required": [
 						                   "EventName"
 						                 ],
@@ -3424,7 +3262,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						               "uniqueItems": false
 						             }
 						           },
-						           "$ref": "#/definitions/OnExit",
 						           "type": "object"
 						         },
 						         "OnInput": {
@@ -3453,7 +3290,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/ClearTimer",
 						                           "required": [
 						                             "TimerName"
 						                           ],
@@ -3493,7 +3329,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3521,7 +3356,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/DynamoDB",
 						                           "required": [
 						                             "HashKeyField",
 						                             "HashKeyValue",
@@ -3547,7 +3381,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3559,7 +3392,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/DynamoDBv2",
 						                           "required": [
 						                             "TableName"
 						                           ],
@@ -3587,7 +3419,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3600,7 +3431,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Firehose",
 						                           "required": [
 						                             "DeliveryStreamName"
 						                           ],
@@ -3631,7 +3461,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3639,7 +3468,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/IotEvents",
 						                           "required": [
 						                             "InputName"
 						                           ],
@@ -3686,7 +3514,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                       "type": "string"
 						                                     }
 						                                   },
-						                                   "$ref": "#/definitions/AssetPropertyTimestamp",
 						                                   "required": [
 						                                     "TimeInSeconds"
 						                                   ],
@@ -3713,18 +3540,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                       "type": "string"
 						                                     }
 						                                   },
-						                                   "$ref": "#/definitions/AssetPropertyVariant",
 						                                   "type": "object"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/AssetPropertyValue",
 						                               "required": [
 						                                 "Value"
 						                               ],
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/IotSiteWise",
 						                           "required": [
 						                             "PropertyValue"
 						                           ],
@@ -3754,7 +3578,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3762,7 +3585,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/IotTopicPublish",
 						                           "required": [
 						                             "MqttTopic"
 						                           ],
@@ -3791,7 +3613,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3799,7 +3620,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Lambda",
 						                           "required": [
 						                             "FunctionArn"
 						                           ],
@@ -3816,7 +3636,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/ResetTimer",
 						                           "required": [
 						                             "TimerName"
 						                           ],
@@ -3843,7 +3662,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/SetTimer",
 						                           "required": [
 						                             "TimerName"
 						                           ],
@@ -3867,7 +3685,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/SetVariable",
 						                           "required": [
 						                             "Value",
 						                             "VariableName"
@@ -3892,7 +3709,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3906,7 +3722,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Sns",
 						                           "required": [
 						                             "TargetArn"
 						                           ],
@@ -3929,7 +3744,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -3945,14 +3759,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "boolean"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Sqs",
 						                           "required": [
 						                             "QueueUrl"
 						                           ],
 						                           "type": "object"
 						                         }
 						                       },
-						                       "$ref": "#/definitions/Action",
 						                       "type": "object"
 						                     },
 						                     "type": "array",
@@ -3969,7 +3781,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/Event",
 						                 "required": [
 						                   "EventName"
 						                 ],
@@ -4000,7 +3811,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/ClearTimer",
 						                           "required": [
 						                             "TimerName"
 						                           ],
@@ -4040,7 +3850,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -4068,7 +3877,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/DynamoDB",
 						                           "required": [
 						                             "HashKeyField",
 						                             "HashKeyValue",
@@ -4094,7 +3902,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -4106,7 +3913,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/DynamoDBv2",
 						                           "required": [
 						                             "TableName"
 						                           ],
@@ -4134,7 +3940,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -4147,7 +3952,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Firehose",
 						                           "required": [
 						                             "DeliveryStreamName"
 						                           ],
@@ -4178,7 +3982,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -4186,7 +3989,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/IotEvents",
 						                           "required": [
 						                             "InputName"
 						                           ],
@@ -4233,7 +4035,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                       "type": "string"
 						                                     }
 						                                   },
-						                                   "$ref": "#/definitions/AssetPropertyTimestamp",
 						                                   "required": [
 						                                     "TimeInSeconds"
 						                                   ],
@@ -4260,18 +4061,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                       "type": "string"
 						                                     }
 						                                   },
-						                                   "$ref": "#/definitions/AssetPropertyVariant",
 						                                   "type": "object"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/AssetPropertyValue",
 						                               "required": [
 						                                 "Value"
 						                               ],
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/IotSiteWise",
 						                           "required": [
 						                             "PropertyValue"
 						                           ],
@@ -4301,7 +4099,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -4309,7 +4106,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/IotTopicPublish",
 						                           "required": [
 						                             "MqttTopic"
 						                           ],
@@ -4338,7 +4134,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -4346,7 +4141,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "object"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Lambda",
 						                           "required": [
 						                             "FunctionArn"
 						                           ],
@@ -4363,7 +4157,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/ResetTimer",
 						                           "required": [
 						                             "TimerName"
 						                           ],
@@ -4390,7 +4183,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/SetTimer",
 						                           "required": [
 						                             "TimerName"
 						                           ],
@@ -4414,7 +4206,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/SetVariable",
 						                           "required": [
 						                             "Value",
 						                             "VariableName"
@@ -4439,7 +4230,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -4453,7 +4243,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Sns",
 						                           "required": [
 						                             "TargetArn"
 						                           ],
@@ -4476,7 +4265,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                                   "type": "string"
 						                                 }
 						                               },
-						                               "$ref": "#/definitions/Payload",
 						                               "required": [
 						                                 "ContentExpression",
 						                                 "Type"
@@ -4492,14 +4280,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                               "type": "boolean"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/Sqs",
 						                           "required": [
 						                             "QueueUrl"
 						                           ],
 						                           "type": "object"
 						                         }
 						                       },
-						                       "$ref": "#/definitions/Action",
 						                       "type": "object"
 						                     },
 						                     "type": "array",
@@ -4523,7 +4309,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/TransitionEvent",
 						                 "required": [
 						                   "Condition",
 						                   "EventName",
@@ -4535,7 +4320,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						               "uniqueItems": false
 						             }
 						           },
-						           "$ref": "#/definitions/OnInput",
 						           "type": "object"
 						         },
 						         "StateName": {
@@ -4545,7 +4329,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/State",
 						       "required": [
 						         "StateName"
 						       ],
@@ -4589,7 +4372,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/ClearTimer",
 									                     "required": [
 									                       "TimerName"
 									                     ],
@@ -4629,7 +4411,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -4657,7 +4438,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/DynamoDB",
 									                     "required": [
 									                       "HashKeyField",
 									                       "HashKeyValue",
@@ -4683,7 +4463,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -4695,7 +4474,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/DynamoDBv2",
 									                     "required": [
 									                       "TableName"
 									                     ],
@@ -4723,7 +4501,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -4736,7 +4513,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Firehose",
 									                     "required": [
 									                       "DeliveryStreamName"
 									                     ],
@@ -4767,7 +4543,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -4775,7 +4550,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/IotEvents",
 									                     "required": [
 									                       "InputName"
 									                     ],
@@ -4822,7 +4596,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                                 "type": "string"
 									                               }
 									                             },
-									                             "$ref": "#/definitions/AssetPropertyTimestamp",
 									                             "required": [
 									                               "TimeInSeconds"
 									                             ],
@@ -4849,18 +4622,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                                 "type": "string"
 									                               }
 									                             },
-									                             "$ref": "#/definitions/AssetPropertyVariant",
 									                             "type": "object"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/AssetPropertyValue",
 									                         "required": [
 									                           "Value"
 									                         ],
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/IotSiteWise",
 									                     "required": [
 									                       "PropertyValue"
 									                     ],
@@ -4890,7 +4660,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -4898,7 +4667,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/IotTopicPublish",
 									                     "required": [
 									                       "MqttTopic"
 									                     ],
@@ -4927,7 +4695,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -4935,7 +4702,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Lambda",
 									                     "required": [
 									                       "FunctionArn"
 									                     ],
@@ -4952,7 +4718,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/ResetTimer",
 									                     "required": [
 									                       "TimerName"
 									                     ],
@@ -4979,7 +4744,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/SetTimer",
 									                     "required": [
 									                       "TimerName"
 									                     ],
@@ -5003,7 +4767,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/SetVariable",
 									                     "required": [
 									                       "Value",
 									                       "VariableName"
@@ -5028,7 +4791,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -5042,7 +4804,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Sns",
 									                     "required": [
 									                       "TargetArn"
 									                     ],
@@ -5065,7 +4826,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -5081,14 +4841,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "boolean"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Sqs",
 									                     "required": [
 									                       "QueueUrl"
 									                     ],
 									                     "type": "object"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/Action",
 									                 "type": "object"
 									               },
 									               "type": "array",
@@ -5105,7 +4863,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/Event",
 									           "required": [
 									             "EventName"
 									           ],
@@ -5115,7 +4872,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									         "uniqueItems": false
 									       }
 									     },
-									     "$ref": "#/definitions/OnEnter",
 									     "type": "object"
 									   }
 									*/
@@ -5148,7 +4904,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/ClearTimer",
 												                 "required": [
 												                   "TimerName"
 												                 ],
@@ -5188,7 +4943,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -5216,7 +4970,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/DynamoDB",
 												                 "required": [
 												                   "HashKeyField",
 												                   "HashKeyValue",
@@ -5242,7 +4995,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -5254,7 +5006,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/DynamoDBv2",
 												                 "required": [
 												                   "TableName"
 												                 ],
@@ -5282,7 +5033,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -5295,7 +5045,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Firehose",
 												                 "required": [
 												                   "DeliveryStreamName"
 												                 ],
@@ -5326,7 +5075,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -5334,7 +5082,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/IotEvents",
 												                 "required": [
 												                   "InputName"
 												                 ],
@@ -5381,7 +5128,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                             "type": "string"
 												                           }
 												                         },
-												                         "$ref": "#/definitions/AssetPropertyTimestamp",
 												                         "required": [
 												                           "TimeInSeconds"
 												                         ],
@@ -5408,18 +5154,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                             "type": "string"
 												                           }
 												                         },
-												                         "$ref": "#/definitions/AssetPropertyVariant",
 												                         "type": "object"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/AssetPropertyValue",
 												                     "required": [
 												                       "Value"
 												                     ],
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/IotSiteWise",
 												                 "required": [
 												                   "PropertyValue"
 												                 ],
@@ -5449,7 +5192,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -5457,7 +5199,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/IotTopicPublish",
 												                 "required": [
 												                   "MqttTopic"
 												                 ],
@@ -5486,7 +5227,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -5494,7 +5234,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Lambda",
 												                 "required": [
 												                   "FunctionArn"
 												                 ],
@@ -5511,7 +5250,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/ResetTimer",
 												                 "required": [
 												                   "TimerName"
 												                 ],
@@ -5538,7 +5276,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/SetTimer",
 												                 "required": [
 												                   "TimerName"
 												                 ],
@@ -5562,7 +5299,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/SetVariable",
 												                 "required": [
 												                   "Value",
 												                   "VariableName"
@@ -5587,7 +5323,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -5601,7 +5336,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Sns",
 												                 "required": [
 												                   "TargetArn"
 												                 ],
@@ -5624,7 +5358,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -5640,14 +5373,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "boolean"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Sqs",
 												                 "required": [
 												                   "QueueUrl"
 												                 ],
 												                 "type": "object"
 												               }
 												             },
-												             "$ref": "#/definitions/Action",
 												             "type": "object"
 												           },
 												           "type": "array",
@@ -5664,7 +5395,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/Event",
 												       "required": [
 												         "EventName"
 												       ],
@@ -5697,7 +5427,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/ClearTimer",
 															           "required": [
 															             "TimerName"
 															           ],
@@ -5737,7 +5466,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -5765,7 +5493,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/DynamoDB",
 															           "required": [
 															             "HashKeyField",
 															             "HashKeyValue",
@@ -5791,7 +5518,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -5803,7 +5529,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/DynamoDBv2",
 															           "required": [
 															             "TableName"
 															           ],
@@ -5831,7 +5556,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -5844,7 +5568,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/Firehose",
 															           "required": [
 															             "DeliveryStreamName"
 															           ],
@@ -5875,7 +5598,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -5883,7 +5605,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/IotEvents",
 															           "required": [
 															             "InputName"
 															           ],
@@ -5930,7 +5651,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                       "type": "string"
 															                     }
 															                   },
-															                   "$ref": "#/definitions/AssetPropertyTimestamp",
 															                   "required": [
 															                     "TimeInSeconds"
 															                   ],
@@ -5957,18 +5677,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                       "type": "string"
 															                     }
 															                   },
-															                   "$ref": "#/definitions/AssetPropertyVariant",
 															                   "type": "object"
 															                 }
 															               },
-															               "$ref": "#/definitions/AssetPropertyValue",
 															               "required": [
 															                 "Value"
 															               ],
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/IotSiteWise",
 															           "required": [
 															             "PropertyValue"
 															           ],
@@ -5998,7 +5715,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -6006,7 +5722,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/IotTopicPublish",
 															           "required": [
 															             "MqttTopic"
 															           ],
@@ -6035,7 +5750,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -6043,7 +5757,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/Lambda",
 															           "required": [
 															             "FunctionArn"
 															           ],
@@ -6060,7 +5773,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/ResetTimer",
 															           "required": [
 															             "TimerName"
 															           ],
@@ -6087,7 +5799,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/SetTimer",
 															           "required": [
 															             "TimerName"
 															           ],
@@ -6111,7 +5822,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/SetVariable",
 															           "required": [
 															             "Value",
 															             "VariableName"
@@ -6136,7 +5846,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -6150,7 +5859,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/Sns",
 															           "required": [
 															             "TargetArn"
 															           ],
@@ -6173,7 +5881,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -6189,14 +5896,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "boolean"
 															             }
 															           },
-															           "$ref": "#/definitions/Sqs",
 															           "required": [
 															             "QueueUrl"
 															           ],
 															           "type": "object"
 															         }
 															       },
-															       "$ref": "#/definitions/Action",
 															       "type": "object"
 															     },
 															     "type": "array",
@@ -6220,7 +5925,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/ClearTimer",
 																		     "required": [
 																		       "TimerName"
 																		     ],
@@ -6285,7 +5989,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -6313,7 +6016,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/DynamoDB",
 																		     "required": [
 																		       "HashKeyField",
 																		       "HashKeyValue",
@@ -6395,7 +6097,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -6528,7 +6229,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -6540,7 +6240,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/DynamoDBv2",
 																		     "required": [
 																		       "TableName"
 																		     ],
@@ -6568,7 +6267,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -6653,7 +6351,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -6666,7 +6363,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Firehose",
 																		     "required": [
 																		       "DeliveryStreamName"
 																		     ],
@@ -6707,7 +6403,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -6796,7 +6491,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -6804,7 +6498,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/IotEvents",
 																		     "required": [
 																		       "InputName"
 																		     ],
@@ -6848,7 +6541,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -6939,7 +6631,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		                 "type": "string"
 																		               }
 																		             },
-																		             "$ref": "#/definitions/AssetPropertyTimestamp",
 																		             "required": [
 																		               "TimeInSeconds"
 																		             ],
@@ -6966,18 +6657,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		                 "type": "string"
 																		               }
 																		             },
-																		             "$ref": "#/definitions/AssetPropertyVariant",
 																		             "type": "object"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/AssetPropertyValue",
 																		         "required": [
 																		           "Value"
 																		         ],
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/IotSiteWise",
 																		     "required": [
 																		       "PropertyValue"
 																		     ],
@@ -7064,7 +6752,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					             "type": "string"
 																					           }
 																					         },
-																					         "$ref": "#/definitions/AssetPropertyTimestamp",
 																					         "required": [
 																					           "TimeInSeconds"
 																					         ],
@@ -7091,11 +6778,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					             "type": "string"
 																					           }
 																					         },
-																					         "$ref": "#/definitions/AssetPropertyVariant",
 																					         "type": "object"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/AssetPropertyValue",
 																					     "required": [
 																					       "Value"
 																					     ],
@@ -7135,7 +6820,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								         "type": "string"
 																								       }
 																								     },
-																								     "$ref": "#/definitions/AssetPropertyTimestamp",
 																								     "required": [
 																								       "TimeInSeconds"
 																								     ],
@@ -7200,7 +6884,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								         "type": "string"
 																								       }
 																								     },
-																								     "$ref": "#/definitions/AssetPropertyVariant",
 																								     "type": "object"
 																								   }
 																								*/
@@ -7299,7 +6982,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -7307,7 +6989,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/IotTopicPublish",
 																		     "required": [
 																		       "MqttTopic"
 																		     ],
@@ -7350,7 +7031,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -7423,7 +7103,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -7431,7 +7110,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Lambda",
 																		     "required": [
 																		       "FunctionArn"
 																		     ],
@@ -7473,7 +7151,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -7534,7 +7211,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/ResetTimer",
 																		     "required": [
 																		       "TimerName"
 																		     ],
@@ -7588,7 +7264,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/SetTimer",
 																		     "required": [
 																		       "TimerName"
 																		     ],
@@ -7667,7 +7342,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/SetVariable",
 																		     "required": [
 																		       "Value",
 																		       "VariableName"
@@ -7735,7 +7409,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -7749,7 +7422,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Sns",
 																		     "required": [
 																		       "TargetArn"
 																		     ],
@@ -7777,7 +7449,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -7859,7 +7530,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -7875,7 +7545,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "boolean"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Sqs",
 																		     "required": [
 																		       "QueueUrl"
 																		     ],
@@ -7902,7 +7571,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -8046,7 +7714,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/ClearTimer",
 									                     "required": [
 									                       "TimerName"
 									                     ],
@@ -8086,7 +7753,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -8114,7 +7780,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/DynamoDB",
 									                     "required": [
 									                       "HashKeyField",
 									                       "HashKeyValue",
@@ -8140,7 +7805,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -8152,7 +7816,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/DynamoDBv2",
 									                     "required": [
 									                       "TableName"
 									                     ],
@@ -8180,7 +7843,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -8193,7 +7855,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Firehose",
 									                     "required": [
 									                       "DeliveryStreamName"
 									                     ],
@@ -8224,7 +7885,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -8232,7 +7892,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/IotEvents",
 									                     "required": [
 									                       "InputName"
 									                     ],
@@ -8279,7 +7938,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                                 "type": "string"
 									                               }
 									                             },
-									                             "$ref": "#/definitions/AssetPropertyTimestamp",
 									                             "required": [
 									                               "TimeInSeconds"
 									                             ],
@@ -8306,18 +7964,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                                 "type": "string"
 									                               }
 									                             },
-									                             "$ref": "#/definitions/AssetPropertyVariant",
 									                             "type": "object"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/AssetPropertyValue",
 									                         "required": [
 									                           "Value"
 									                         ],
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/IotSiteWise",
 									                     "required": [
 									                       "PropertyValue"
 									                     ],
@@ -8347,7 +8002,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -8355,7 +8009,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/IotTopicPublish",
 									                     "required": [
 									                       "MqttTopic"
 									                     ],
@@ -8384,7 +8037,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -8392,7 +8044,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Lambda",
 									                     "required": [
 									                       "FunctionArn"
 									                     ],
@@ -8409,7 +8060,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/ResetTimer",
 									                     "required": [
 									                       "TimerName"
 									                     ],
@@ -8436,7 +8086,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/SetTimer",
 									                     "required": [
 									                       "TimerName"
 									                     ],
@@ -8460,7 +8109,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/SetVariable",
 									                     "required": [
 									                       "Value",
 									                       "VariableName"
@@ -8485,7 +8133,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -8499,7 +8146,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Sns",
 									                     "required": [
 									                       "TargetArn"
 									                     ],
@@ -8522,7 +8168,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -8538,14 +8183,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "boolean"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Sqs",
 									                     "required": [
 									                       "QueueUrl"
 									                     ],
 									                     "type": "object"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/Action",
 									                 "type": "object"
 									               },
 									               "type": "array",
@@ -8562,7 +8205,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/Event",
 									           "required": [
 									             "EventName"
 									           ],
@@ -8572,7 +8214,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									         "uniqueItems": false
 									       }
 									     },
-									     "$ref": "#/definitions/OnExit",
 									     "type": "object"
 									   }
 									*/
@@ -8605,7 +8246,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/ClearTimer",
 												                 "required": [
 												                   "TimerName"
 												                 ],
@@ -8645,7 +8285,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -8673,7 +8312,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/DynamoDB",
 												                 "required": [
 												                   "HashKeyField",
 												                   "HashKeyValue",
@@ -8699,7 +8337,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -8711,7 +8348,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/DynamoDBv2",
 												                 "required": [
 												                   "TableName"
 												                 ],
@@ -8739,7 +8375,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -8752,7 +8387,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Firehose",
 												                 "required": [
 												                   "DeliveryStreamName"
 												                 ],
@@ -8783,7 +8417,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -8791,7 +8424,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/IotEvents",
 												                 "required": [
 												                   "InputName"
 												                 ],
@@ -8838,7 +8470,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                             "type": "string"
 												                           }
 												                         },
-												                         "$ref": "#/definitions/AssetPropertyTimestamp",
 												                         "required": [
 												                           "TimeInSeconds"
 												                         ],
@@ -8865,18 +8496,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                             "type": "string"
 												                           }
 												                         },
-												                         "$ref": "#/definitions/AssetPropertyVariant",
 												                         "type": "object"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/AssetPropertyValue",
 												                     "required": [
 												                       "Value"
 												                     ],
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/IotSiteWise",
 												                 "required": [
 												                   "PropertyValue"
 												                 ],
@@ -8906,7 +8534,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -8914,7 +8541,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/IotTopicPublish",
 												                 "required": [
 												                   "MqttTopic"
 												                 ],
@@ -8943,7 +8569,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -8951,7 +8576,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Lambda",
 												                 "required": [
 												                   "FunctionArn"
 												                 ],
@@ -8968,7 +8592,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/ResetTimer",
 												                 "required": [
 												                   "TimerName"
 												                 ],
@@ -8995,7 +8618,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/SetTimer",
 												                 "required": [
 												                   "TimerName"
 												                 ],
@@ -9019,7 +8641,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/SetVariable",
 												                 "required": [
 												                   "Value",
 												                   "VariableName"
@@ -9044,7 +8665,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -9058,7 +8678,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Sns",
 												                 "required": [
 												                   "TargetArn"
 												                 ],
@@ -9081,7 +8700,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -9097,14 +8715,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "boolean"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Sqs",
 												                 "required": [
 												                   "QueueUrl"
 												                 ],
 												                 "type": "object"
 												               }
 												             },
-												             "$ref": "#/definitions/Action",
 												             "type": "object"
 												           },
 												           "type": "array",
@@ -9121,7 +8737,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/Event",
 												       "required": [
 												         "EventName"
 												       ],
@@ -9154,7 +8769,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/ClearTimer",
 															           "required": [
 															             "TimerName"
 															           ],
@@ -9194,7 +8808,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -9222,7 +8835,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/DynamoDB",
 															           "required": [
 															             "HashKeyField",
 															             "HashKeyValue",
@@ -9248,7 +8860,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -9260,7 +8871,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/DynamoDBv2",
 															           "required": [
 															             "TableName"
 															           ],
@@ -9288,7 +8898,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -9301,7 +8910,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/Firehose",
 															           "required": [
 															             "DeliveryStreamName"
 															           ],
@@ -9332,7 +8940,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -9340,7 +8947,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/IotEvents",
 															           "required": [
 															             "InputName"
 															           ],
@@ -9387,7 +8993,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                       "type": "string"
 															                     }
 															                   },
-															                   "$ref": "#/definitions/AssetPropertyTimestamp",
 															                   "required": [
 															                     "TimeInSeconds"
 															                   ],
@@ -9414,18 +9019,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                       "type": "string"
 															                     }
 															                   },
-															                   "$ref": "#/definitions/AssetPropertyVariant",
 															                   "type": "object"
 															                 }
 															               },
-															               "$ref": "#/definitions/AssetPropertyValue",
 															               "required": [
 															                 "Value"
 															               ],
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/IotSiteWise",
 															           "required": [
 															             "PropertyValue"
 															           ],
@@ -9455,7 +9057,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -9463,7 +9064,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/IotTopicPublish",
 															           "required": [
 															             "MqttTopic"
 															           ],
@@ -9492,7 +9092,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -9500,7 +9099,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/Lambda",
 															           "required": [
 															             "FunctionArn"
 															           ],
@@ -9517,7 +9115,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/ResetTimer",
 															           "required": [
 															             "TimerName"
 															           ],
@@ -9544,7 +9141,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/SetTimer",
 															           "required": [
 															             "TimerName"
 															           ],
@@ -9568,7 +9164,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/SetVariable",
 															           "required": [
 															             "Value",
 															             "VariableName"
@@ -9593,7 +9188,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -9607,7 +9201,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/Sns",
 															           "required": [
 															             "TargetArn"
 															           ],
@@ -9630,7 +9223,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -9646,14 +9238,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "boolean"
 															             }
 															           },
-															           "$ref": "#/definitions/Sqs",
 															           "required": [
 															             "QueueUrl"
 															           ],
 															           "type": "object"
 															         }
 															       },
-															       "$ref": "#/definitions/Action",
 															       "type": "object"
 															     },
 															     "type": "array",
@@ -9677,7 +9267,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/ClearTimer",
 																		     "required": [
 																		       "TimerName"
 																		     ],
@@ -9742,7 +9331,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -9770,7 +9358,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/DynamoDB",
 																		     "required": [
 																		       "HashKeyField",
 																		       "HashKeyValue",
@@ -9852,7 +9439,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -9985,7 +9571,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -9997,7 +9582,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/DynamoDBv2",
 																		     "required": [
 																		       "TableName"
 																		     ],
@@ -10025,7 +9609,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -10110,7 +9693,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -10123,7 +9705,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Firehose",
 																		     "required": [
 																		       "DeliveryStreamName"
 																		     ],
@@ -10164,7 +9745,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -10253,7 +9833,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -10261,7 +9840,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/IotEvents",
 																		     "required": [
 																		       "InputName"
 																		     ],
@@ -10305,7 +9883,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -10396,7 +9973,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		                 "type": "string"
 																		               }
 																		             },
-																		             "$ref": "#/definitions/AssetPropertyTimestamp",
 																		             "required": [
 																		               "TimeInSeconds"
 																		             ],
@@ -10423,18 +9999,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		                 "type": "string"
 																		               }
 																		             },
-																		             "$ref": "#/definitions/AssetPropertyVariant",
 																		             "type": "object"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/AssetPropertyValue",
 																		         "required": [
 																		           "Value"
 																		         ],
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/IotSiteWise",
 																		     "required": [
 																		       "PropertyValue"
 																		     ],
@@ -10521,7 +10094,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					             "type": "string"
 																					           }
 																					         },
-																					         "$ref": "#/definitions/AssetPropertyTimestamp",
 																					         "required": [
 																					           "TimeInSeconds"
 																					         ],
@@ -10548,11 +10120,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					             "type": "string"
 																					           }
 																					         },
-																					         "$ref": "#/definitions/AssetPropertyVariant",
 																					         "type": "object"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/AssetPropertyValue",
 																					     "required": [
 																					       "Value"
 																					     ],
@@ -10592,7 +10162,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								         "type": "string"
 																								       }
 																								     },
-																								     "$ref": "#/definitions/AssetPropertyTimestamp",
 																								     "required": [
 																								       "TimeInSeconds"
 																								     ],
@@ -10657,7 +10226,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								         "type": "string"
 																								       }
 																								     },
-																								     "$ref": "#/definitions/AssetPropertyVariant",
 																								     "type": "object"
 																								   }
 																								*/
@@ -10756,7 +10324,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -10764,7 +10331,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/IotTopicPublish",
 																		     "required": [
 																		       "MqttTopic"
 																		     ],
@@ -10807,7 +10373,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -10880,7 +10445,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -10888,7 +10452,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Lambda",
 																		     "required": [
 																		       "FunctionArn"
 																		     ],
@@ -10930,7 +10493,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -10991,7 +10553,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/ResetTimer",
 																		     "required": [
 																		       "TimerName"
 																		     ],
@@ -11045,7 +10606,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/SetTimer",
 																		     "required": [
 																		       "TimerName"
 																		     ],
@@ -11124,7 +10684,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/SetVariable",
 																		     "required": [
 																		       "Value",
 																		       "VariableName"
@@ -11192,7 +10751,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -11206,7 +10764,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Sns",
 																		     "required": [
 																		       "TargetArn"
 																		     ],
@@ -11234,7 +10791,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -11316,7 +10872,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -11332,7 +10887,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "boolean"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Sqs",
 																		     "required": [
 																		       "QueueUrl"
 																		     ],
@@ -11359,7 +10913,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -11503,7 +11056,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/ClearTimer",
 									                     "required": [
 									                       "TimerName"
 									                     ],
@@ -11543,7 +11095,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -11571,7 +11122,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/DynamoDB",
 									                     "required": [
 									                       "HashKeyField",
 									                       "HashKeyValue",
@@ -11597,7 +11147,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -11609,7 +11158,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/DynamoDBv2",
 									                     "required": [
 									                       "TableName"
 									                     ],
@@ -11637,7 +11185,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -11650,7 +11197,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Firehose",
 									                     "required": [
 									                       "DeliveryStreamName"
 									                     ],
@@ -11681,7 +11227,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -11689,7 +11234,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/IotEvents",
 									                     "required": [
 									                       "InputName"
 									                     ],
@@ -11736,7 +11280,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                                 "type": "string"
 									                               }
 									                             },
-									                             "$ref": "#/definitions/AssetPropertyTimestamp",
 									                             "required": [
 									                               "TimeInSeconds"
 									                             ],
@@ -11763,18 +11306,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                                 "type": "string"
 									                               }
 									                             },
-									                             "$ref": "#/definitions/AssetPropertyVariant",
 									                             "type": "object"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/AssetPropertyValue",
 									                         "required": [
 									                           "Value"
 									                         ],
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/IotSiteWise",
 									                     "required": [
 									                       "PropertyValue"
 									                     ],
@@ -11804,7 +11344,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -11812,7 +11351,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/IotTopicPublish",
 									                     "required": [
 									                       "MqttTopic"
 									                     ],
@@ -11841,7 +11379,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -11849,7 +11386,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Lambda",
 									                     "required": [
 									                       "FunctionArn"
 									                     ],
@@ -11866,7 +11402,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/ResetTimer",
 									                     "required": [
 									                       "TimerName"
 									                     ],
@@ -11893,7 +11428,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/SetTimer",
 									                     "required": [
 									                       "TimerName"
 									                     ],
@@ -11917,7 +11451,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/SetVariable",
 									                     "required": [
 									                       "Value",
 									                       "VariableName"
@@ -11942,7 +11475,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -11956,7 +11488,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Sns",
 									                     "required": [
 									                       "TargetArn"
 									                     ],
@@ -11979,7 +11510,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -11995,14 +11525,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "boolean"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Sqs",
 									                     "required": [
 									                       "QueueUrl"
 									                     ],
 									                     "type": "object"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/Action",
 									                 "type": "object"
 									               },
 									               "type": "array",
@@ -12019,7 +11547,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/Event",
 									           "required": [
 									             "EventName"
 									           ],
@@ -12050,7 +11577,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/ClearTimer",
 									                     "required": [
 									                       "TimerName"
 									                     ],
@@ -12090,7 +11616,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -12118,7 +11643,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/DynamoDB",
 									                     "required": [
 									                       "HashKeyField",
 									                       "HashKeyValue",
@@ -12144,7 +11668,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -12156,7 +11679,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/DynamoDBv2",
 									                     "required": [
 									                       "TableName"
 									                     ],
@@ -12184,7 +11706,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -12197,7 +11718,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Firehose",
 									                     "required": [
 									                       "DeliveryStreamName"
 									                     ],
@@ -12228,7 +11748,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -12236,7 +11755,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/IotEvents",
 									                     "required": [
 									                       "InputName"
 									                     ],
@@ -12283,7 +11801,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                                 "type": "string"
 									                               }
 									                             },
-									                             "$ref": "#/definitions/AssetPropertyTimestamp",
 									                             "required": [
 									                               "TimeInSeconds"
 									                             ],
@@ -12310,18 +11827,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                                 "type": "string"
 									                               }
 									                             },
-									                             "$ref": "#/definitions/AssetPropertyVariant",
 									                             "type": "object"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/AssetPropertyValue",
 									                         "required": [
 									                           "Value"
 									                         ],
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/IotSiteWise",
 									                     "required": [
 									                       "PropertyValue"
 									                     ],
@@ -12351,7 +11865,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -12359,7 +11872,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/IotTopicPublish",
 									                     "required": [
 									                       "MqttTopic"
 									                     ],
@@ -12388,7 +11900,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -12396,7 +11907,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "object"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Lambda",
 									                     "required": [
 									                       "FunctionArn"
 									                     ],
@@ -12413,7 +11923,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/ResetTimer",
 									                     "required": [
 									                       "TimerName"
 									                     ],
@@ -12440,7 +11949,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/SetTimer",
 									                     "required": [
 									                       "TimerName"
 									                     ],
@@ -12464,7 +11972,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/SetVariable",
 									                     "required": [
 									                       "Value",
 									                       "VariableName"
@@ -12489,7 +11996,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -12503,7 +12009,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Sns",
 									                     "required": [
 									                       "TargetArn"
 									                     ],
@@ -12526,7 +12031,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                             "type": "string"
 									                           }
 									                         },
-									                         "$ref": "#/definitions/Payload",
 									                         "required": [
 									                           "ContentExpression",
 									                           "Type"
@@ -12542,14 +12046,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									                         "type": "boolean"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/Sqs",
 									                     "required": [
 									                       "QueueUrl"
 									                     ],
 									                     "type": "object"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/Action",
 									                 "type": "object"
 									               },
 									               "type": "array",
@@ -12573,7 +12075,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/TransitionEvent",
 									           "required": [
 									             "Condition",
 									             "EventName",
@@ -12585,7 +12086,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									         "uniqueItems": false
 									       }
 									     },
-									     "$ref": "#/definitions/OnInput",
 									     "type": "object"
 									   }
 									*/
@@ -12618,7 +12118,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/ClearTimer",
 												                 "required": [
 												                   "TimerName"
 												                 ],
@@ -12658,7 +12157,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -12686,7 +12184,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/DynamoDB",
 												                 "required": [
 												                   "HashKeyField",
 												                   "HashKeyValue",
@@ -12712,7 +12209,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -12724,7 +12220,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/DynamoDBv2",
 												                 "required": [
 												                   "TableName"
 												                 ],
@@ -12752,7 +12247,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -12765,7 +12259,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Firehose",
 												                 "required": [
 												                   "DeliveryStreamName"
 												                 ],
@@ -12796,7 +12289,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -12804,7 +12296,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/IotEvents",
 												                 "required": [
 												                   "InputName"
 												                 ],
@@ -12851,7 +12342,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                             "type": "string"
 												                           }
 												                         },
-												                         "$ref": "#/definitions/AssetPropertyTimestamp",
 												                         "required": [
 												                           "TimeInSeconds"
 												                         ],
@@ -12878,18 +12368,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                             "type": "string"
 												                           }
 												                         },
-												                         "$ref": "#/definitions/AssetPropertyVariant",
 												                         "type": "object"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/AssetPropertyValue",
 												                     "required": [
 												                       "Value"
 												                     ],
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/IotSiteWise",
 												                 "required": [
 												                   "PropertyValue"
 												                 ],
@@ -12919,7 +12406,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -12927,7 +12413,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/IotTopicPublish",
 												                 "required": [
 												                   "MqttTopic"
 												                 ],
@@ -12956,7 +12441,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -12964,7 +12448,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Lambda",
 												                 "required": [
 												                   "FunctionArn"
 												                 ],
@@ -12981,7 +12464,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/ResetTimer",
 												                 "required": [
 												                   "TimerName"
 												                 ],
@@ -13008,7 +12490,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/SetTimer",
 												                 "required": [
 												                   "TimerName"
 												                 ],
@@ -13032,7 +12513,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/SetVariable",
 												                 "required": [
 												                   "Value",
 												                   "VariableName"
@@ -13057,7 +12537,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -13071,7 +12550,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Sns",
 												                 "required": [
 												                   "TargetArn"
 												                 ],
@@ -13094,7 +12572,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -13110,14 +12587,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "boolean"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Sqs",
 												                 "required": [
 												                   "QueueUrl"
 												                 ],
 												                 "type": "object"
 												               }
 												             },
-												             "$ref": "#/definitions/Action",
 												             "type": "object"
 												           },
 												           "type": "array",
@@ -13134,7 +12609,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/Event",
 												       "required": [
 												         "EventName"
 												       ],
@@ -13167,7 +12641,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/ClearTimer",
 															           "required": [
 															             "TimerName"
 															           ],
@@ -13207,7 +12680,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -13235,7 +12707,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/DynamoDB",
 															           "required": [
 															             "HashKeyField",
 															             "HashKeyValue",
@@ -13261,7 +12732,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -13273,7 +12743,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/DynamoDBv2",
 															           "required": [
 															             "TableName"
 															           ],
@@ -13301,7 +12770,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -13314,7 +12782,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/Firehose",
 															           "required": [
 															             "DeliveryStreamName"
 															           ],
@@ -13345,7 +12812,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -13353,7 +12819,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/IotEvents",
 															           "required": [
 															             "InputName"
 															           ],
@@ -13400,7 +12865,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                       "type": "string"
 															                     }
 															                   },
-															                   "$ref": "#/definitions/AssetPropertyTimestamp",
 															                   "required": [
 															                     "TimeInSeconds"
 															                   ],
@@ -13427,18 +12891,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                       "type": "string"
 															                     }
 															                   },
-															                   "$ref": "#/definitions/AssetPropertyVariant",
 															                   "type": "object"
 															                 }
 															               },
-															               "$ref": "#/definitions/AssetPropertyValue",
 															               "required": [
 															                 "Value"
 															               ],
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/IotSiteWise",
 															           "required": [
 															             "PropertyValue"
 															           ],
@@ -13468,7 +12929,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -13476,7 +12936,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/IotTopicPublish",
 															           "required": [
 															             "MqttTopic"
 															           ],
@@ -13505,7 +12964,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -13513,7 +12971,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/Lambda",
 															           "required": [
 															             "FunctionArn"
 															           ],
@@ -13530,7 +12987,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/ResetTimer",
 															           "required": [
 															             "TimerName"
 															           ],
@@ -13557,7 +13013,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/SetTimer",
 															           "required": [
 															             "TimerName"
 															           ],
@@ -13581,7 +13036,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/SetVariable",
 															           "required": [
 															             "Value",
 															             "VariableName"
@@ -13606,7 +13060,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -13620,7 +13073,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/Sns",
 															           "required": [
 															             "TargetArn"
 															           ],
@@ -13643,7 +13095,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -13659,14 +13110,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "boolean"
 															             }
 															           },
-															           "$ref": "#/definitions/Sqs",
 															           "required": [
 															             "QueueUrl"
 															           ],
 															           "type": "object"
 															         }
 															       },
-															       "$ref": "#/definitions/Action",
 															       "type": "object"
 															     },
 															     "type": "array",
@@ -13690,7 +13139,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/ClearTimer",
 																		     "required": [
 																		       "TimerName"
 																		     ],
@@ -13755,7 +13203,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -13783,7 +13230,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/DynamoDB",
 																		     "required": [
 																		       "HashKeyField",
 																		       "HashKeyValue",
@@ -13865,7 +13311,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -13998,7 +13443,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -14010,7 +13454,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/DynamoDBv2",
 																		     "required": [
 																		       "TableName"
 																		     ],
@@ -14038,7 +13481,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -14123,7 +13565,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -14136,7 +13577,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Firehose",
 																		     "required": [
 																		       "DeliveryStreamName"
 																		     ],
@@ -14177,7 +13617,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -14266,7 +13705,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -14274,7 +13712,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/IotEvents",
 																		     "required": [
 																		       "InputName"
 																		     ],
@@ -14318,7 +13755,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -14409,7 +13845,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		                 "type": "string"
 																		               }
 																		             },
-																		             "$ref": "#/definitions/AssetPropertyTimestamp",
 																		             "required": [
 																		               "TimeInSeconds"
 																		             ],
@@ -14436,18 +13871,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		                 "type": "string"
 																		               }
 																		             },
-																		             "$ref": "#/definitions/AssetPropertyVariant",
 																		             "type": "object"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/AssetPropertyValue",
 																		         "required": [
 																		           "Value"
 																		         ],
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/IotSiteWise",
 																		     "required": [
 																		       "PropertyValue"
 																		     ],
@@ -14534,7 +13966,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					             "type": "string"
 																					           }
 																					         },
-																					         "$ref": "#/definitions/AssetPropertyTimestamp",
 																					         "required": [
 																					           "TimeInSeconds"
 																					         ],
@@ -14561,11 +13992,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					             "type": "string"
 																					           }
 																					         },
-																					         "$ref": "#/definitions/AssetPropertyVariant",
 																					         "type": "object"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/AssetPropertyValue",
 																					     "required": [
 																					       "Value"
 																					     ],
@@ -14605,7 +14034,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								         "type": "string"
 																								       }
 																								     },
-																								     "$ref": "#/definitions/AssetPropertyTimestamp",
 																								     "required": [
 																								       "TimeInSeconds"
 																								     ],
@@ -14670,7 +14098,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								         "type": "string"
 																								       }
 																								     },
-																								     "$ref": "#/definitions/AssetPropertyVariant",
 																								     "type": "object"
 																								   }
 																								*/
@@ -14769,7 +14196,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -14777,7 +14203,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/IotTopicPublish",
 																		     "required": [
 																		       "MqttTopic"
 																		     ],
@@ -14820,7 +14245,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -14893,7 +14317,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -14901,7 +14324,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Lambda",
 																		     "required": [
 																		       "FunctionArn"
 																		     ],
@@ -14943,7 +14365,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -15004,7 +14425,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/ResetTimer",
 																		     "required": [
 																		       "TimerName"
 																		     ],
@@ -15058,7 +14478,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/SetTimer",
 																		     "required": [
 																		       "TimerName"
 																		     ],
@@ -15137,7 +14556,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/SetVariable",
 																		     "required": [
 																		       "Value",
 																		       "VariableName"
@@ -15205,7 +14623,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -15219,7 +14636,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Sns",
 																		     "required": [
 																		       "TargetArn"
 																		     ],
@@ -15247,7 +14663,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -15329,7 +14744,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -15345,7 +14759,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "boolean"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Sqs",
 																		     "required": [
 																		       "QueueUrl"
 																		     ],
@@ -15372,7 +14785,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -15508,7 +14920,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/ClearTimer",
 												                 "required": [
 												                   "TimerName"
 												                 ],
@@ -15548,7 +14959,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -15576,7 +14986,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/DynamoDB",
 												                 "required": [
 												                   "HashKeyField",
 												                   "HashKeyValue",
@@ -15602,7 +15011,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -15614,7 +15022,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/DynamoDBv2",
 												                 "required": [
 												                   "TableName"
 												                 ],
@@ -15642,7 +15049,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -15655,7 +15061,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Firehose",
 												                 "required": [
 												                   "DeliveryStreamName"
 												                 ],
@@ -15686,7 +15091,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -15694,7 +15098,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/IotEvents",
 												                 "required": [
 												                   "InputName"
 												                 ],
@@ -15741,7 +15144,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                             "type": "string"
 												                           }
 												                         },
-												                         "$ref": "#/definitions/AssetPropertyTimestamp",
 												                         "required": [
 												                           "TimeInSeconds"
 												                         ],
@@ -15768,18 +15170,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                             "type": "string"
 												                           }
 												                         },
-												                         "$ref": "#/definitions/AssetPropertyVariant",
 												                         "type": "object"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/AssetPropertyValue",
 												                     "required": [
 												                       "Value"
 												                     ],
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/IotSiteWise",
 												                 "required": [
 												                   "PropertyValue"
 												                 ],
@@ -15809,7 +15208,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -15817,7 +15215,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/IotTopicPublish",
 												                 "required": [
 												                   "MqttTopic"
 												                 ],
@@ -15846,7 +15243,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -15854,7 +15250,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "object"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Lambda",
 												                 "required": [
 												                   "FunctionArn"
 												                 ],
@@ -15871,7 +15266,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/ResetTimer",
 												                 "required": [
 												                   "TimerName"
 												                 ],
@@ -15898,7 +15292,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/SetTimer",
 												                 "required": [
 												                   "TimerName"
 												                 ],
@@ -15922,7 +15315,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/SetVariable",
 												                 "required": [
 												                   "Value",
 												                   "VariableName"
@@ -15947,7 +15339,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -15961,7 +15352,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Sns",
 												                 "required": [
 												                   "TargetArn"
 												                 ],
@@ -15984,7 +15374,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                         "type": "string"
 												                       }
 												                     },
-												                     "$ref": "#/definitions/Payload",
 												                     "required": [
 												                       "ContentExpression",
 												                       "Type"
@@ -16000,14 +15389,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												                     "type": "boolean"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/Sqs",
 												                 "required": [
 												                   "QueueUrl"
 												                 ],
 												                 "type": "object"
 												               }
 												             },
-												             "$ref": "#/definitions/Action",
 												             "type": "object"
 												           },
 												           "type": "array",
@@ -16031,7 +15418,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/TransitionEvent",
 												       "required": [
 												         "Condition",
 												         "EventName",
@@ -16066,7 +15452,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/ClearTimer",
 															           "required": [
 															             "TimerName"
 															           ],
@@ -16106,7 +15491,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -16134,7 +15518,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/DynamoDB",
 															           "required": [
 															             "HashKeyField",
 															             "HashKeyValue",
@@ -16160,7 +15543,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -16172,7 +15554,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/DynamoDBv2",
 															           "required": [
 															             "TableName"
 															           ],
@@ -16200,7 +15581,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -16213,7 +15593,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/Firehose",
 															           "required": [
 															             "DeliveryStreamName"
 															           ],
@@ -16244,7 +15623,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -16252,7 +15630,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/IotEvents",
 															           "required": [
 															             "InputName"
 															           ],
@@ -16299,7 +15676,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                       "type": "string"
 															                     }
 															                   },
-															                   "$ref": "#/definitions/AssetPropertyTimestamp",
 															                   "required": [
 															                     "TimeInSeconds"
 															                   ],
@@ -16326,18 +15702,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                       "type": "string"
 															                     }
 															                   },
-															                   "$ref": "#/definitions/AssetPropertyVariant",
 															                   "type": "object"
 															                 }
 															               },
-															               "$ref": "#/definitions/AssetPropertyValue",
 															               "required": [
 															                 "Value"
 															               ],
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/IotSiteWise",
 															           "required": [
 															             "PropertyValue"
 															           ],
@@ -16367,7 +15740,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -16375,7 +15747,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/IotTopicPublish",
 															           "required": [
 															             "MqttTopic"
 															           ],
@@ -16404,7 +15775,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -16412,7 +15782,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "object"
 															             }
 															           },
-															           "$ref": "#/definitions/Lambda",
 															           "required": [
 															             "FunctionArn"
 															           ],
@@ -16429,7 +15798,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/ResetTimer",
 															           "required": [
 															             "TimerName"
 															           ],
@@ -16456,7 +15824,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/SetTimer",
 															           "required": [
 															             "TimerName"
 															           ],
@@ -16480,7 +15847,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/SetVariable",
 															           "required": [
 															             "Value",
 															             "VariableName"
@@ -16505,7 +15871,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -16519,7 +15884,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/Sns",
 															           "required": [
 															             "TargetArn"
 															           ],
@@ -16542,7 +15906,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															                   "type": "string"
 															                 }
 															               },
-															               "$ref": "#/definitions/Payload",
 															               "required": [
 															                 "ContentExpression",
 															                 "Type"
@@ -16558,14 +15921,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															               "type": "boolean"
 															             }
 															           },
-															           "$ref": "#/definitions/Sqs",
 															           "required": [
 															             "QueueUrl"
 															           ],
 															           "type": "object"
 															         }
 															       },
-															       "$ref": "#/definitions/Action",
 															       "type": "object"
 															     },
 															     "type": "array",
@@ -16589,7 +15950,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/ClearTimer",
 																		     "required": [
 																		       "TimerName"
 																		     ],
@@ -16654,7 +16014,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -16682,7 +16041,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/DynamoDB",
 																		     "required": [
 																		       "HashKeyField",
 																		       "HashKeyValue",
@@ -16764,7 +16122,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -16897,7 +16254,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -16909,7 +16265,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/DynamoDBv2",
 																		     "required": [
 																		       "TableName"
 																		     ],
@@ -16937,7 +16292,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -17022,7 +16376,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -17035,7 +16388,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Firehose",
 																		     "required": [
 																		       "DeliveryStreamName"
 																		     ],
@@ -17076,7 +16428,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -17165,7 +16516,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -17173,7 +16523,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/IotEvents",
 																		     "required": [
 																		       "InputName"
 																		     ],
@@ -17217,7 +16566,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -17308,7 +16656,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		                 "type": "string"
 																		               }
 																		             },
-																		             "$ref": "#/definitions/AssetPropertyTimestamp",
 																		             "required": [
 																		               "TimeInSeconds"
 																		             ],
@@ -17335,18 +16682,15 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		                 "type": "string"
 																		               }
 																		             },
-																		             "$ref": "#/definitions/AssetPropertyVariant",
 																		             "type": "object"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/AssetPropertyValue",
 																		         "required": [
 																		           "Value"
 																		         ],
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/IotSiteWise",
 																		     "required": [
 																		       "PropertyValue"
 																		     ],
@@ -17433,7 +16777,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					             "type": "string"
 																					           }
 																					         },
-																					         "$ref": "#/definitions/AssetPropertyTimestamp",
 																					         "required": [
 																					           "TimeInSeconds"
 																					         ],
@@ -17460,11 +16803,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					             "type": "string"
 																					           }
 																					         },
-																					         "$ref": "#/definitions/AssetPropertyVariant",
 																					         "type": "object"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/AssetPropertyValue",
 																					     "required": [
 																					       "Value"
 																					     ],
@@ -17504,7 +16845,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								         "type": "string"
 																								       }
 																								     },
-																								     "$ref": "#/definitions/AssetPropertyTimestamp",
 																								     "required": [
 																								       "TimeInSeconds"
 																								     ],
@@ -17569,7 +16909,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								         "type": "string"
 																								       }
 																								     },
-																								     "$ref": "#/definitions/AssetPropertyVariant",
 																								     "type": "object"
 																								   }
 																								*/
@@ -17668,7 +17007,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -17676,7 +17014,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/IotTopicPublish",
 																		     "required": [
 																		       "MqttTopic"
 																		     ],
@@ -17719,7 +17056,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -17792,7 +17128,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -17800,7 +17135,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "object"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Lambda",
 																		     "required": [
 																		       "FunctionArn"
 																		     ],
@@ -17842,7 +17176,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -17903,7 +17236,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/ResetTimer",
 																		     "required": [
 																		       "TimerName"
 																		     ],
@@ -17957,7 +17289,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/SetTimer",
 																		     "required": [
 																		       "TimerName"
 																		     ],
@@ -18036,7 +17367,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/SetVariable",
 																		     "required": [
 																		       "Value",
 																		       "VariableName"
@@ -18104,7 +17434,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -18118,7 +17447,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Sns",
 																		     "required": [
 																		       "TargetArn"
 																		     ],
@@ -18146,7 +17474,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -18228,7 +17555,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		             "type": "string"
 																		           }
 																		         },
-																		         "$ref": "#/definitions/Payload",
 																		         "required": [
 																		           "ContentExpression",
 																		           "Type"
@@ -18244,7 +17570,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		         "type": "boolean"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/Sqs",
 																		     "required": [
 																		       "QueueUrl"
 																		     ],
@@ -18271,7 +17596,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					         "type": "string"
 																					       }
 																					     },
-																					     "$ref": "#/definitions/Payload",
 																					     "required": [
 																					       "ContentExpression",
 																					       "Type"
@@ -18528,7 +17852,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

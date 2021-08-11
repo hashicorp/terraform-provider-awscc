@@ -110,7 +110,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/BasicAuthConfig",
 			         "type": "object"
 			       },
 			       "BuildSpec": {
@@ -145,7 +144,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/EnvironmentVariable",
 			           "required": [
 			             "Name",
 			             "Value"
@@ -171,7 +169,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/AutoBranchCreationConfig",
 			     "type": "object"
 			   }
 			*/
@@ -215,7 +212,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/BasicAuthConfig",
 						     "type": "object"
 						   }
 						*/
@@ -338,7 +334,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/EnvironmentVariable",
 						       "required": [
 						         "Name",
 						         "Value"
@@ -439,7 +434,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/BasicAuthConfig",
 			     "type": "object"
 			   }
 			*/
@@ -548,7 +542,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/CustomRule",
 			       "required": [
 			         "Target",
 			         "Source"
@@ -678,7 +671,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/EnvironmentVariable",
 			       "required": [
 			         "Name",
 			         "Value"
@@ -797,7 +789,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

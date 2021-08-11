@@ -58,7 +58,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			     "description": "The name of the job definition.",
 			     "maxLength": 63,
 			     "pattern": "",
-			     "$ref": "#/definitions/JobDefinitionName",
 			     "type": "string"
 			   }
 			*/
@@ -97,7 +96,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/ClusterConfig",
 			         "required": [
 			           "InstanceCount",
 			           "InstanceType",
@@ -106,7 +104,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/MonitoringResources",
 			     "required": [
 			       "ClusterConfig"
 			     ],
@@ -141,7 +138,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/ClusterConfig",
 						     "required": [
 						       "InstanceCount",
 						       "InstanceType",
@@ -242,7 +238,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/Environment",
 			         "type": "object"
 			       },
 			       "ImageUri": {
@@ -252,7 +247,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/ModelBiasAppSpecification",
 			     "required": [
 			       "ImageUri",
 			       "ConfigUri"
@@ -296,7 +290,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/Environment",
 						     "type": "object"
 						   }
 						*/
@@ -339,7 +332,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			         "maxLength": 63,
 			         "minLength": 1,
 			         "pattern": "",
-			         "$ref": "#/definitions/ProcessingJobName",
 			         "type": "string"
 			       },
 			       "ConstraintsResource": {
@@ -350,15 +342,12 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "description": "The Amazon S3 URI.",
 			             "maxLength": 1024,
 			             "pattern": "",
-			             "$ref": "#/definitions/S3Uri",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ConstraintsResource",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/ModelBiasBaselineConfig",
 			     "type": "object"
 			   }
 			*/
@@ -374,7 +363,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 						     "maxLength": 63,
 						     "minLength": 1,
 						     "pattern": "",
-						     "$ref": "#/definitions/ProcessingJobName",
 						     "type": "string"
 						   }
 						*/
@@ -394,11 +382,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "description": "The Amazon S3 URI.",
 						         "maxLength": 1024,
 						         "pattern": "",
-						         "$ref": "#/definitions/S3Uri",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ConstraintsResource",
 						     "type": "object"
 						   }
 						*/
@@ -413,7 +399,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 									     "description": "The Amazon S3 URI.",
 									     "maxLength": 1024,
 									     "pattern": "",
-									     "$ref": "#/definitions/S3Uri",
 									     "type": "string"
 									   }
 									*/
@@ -448,14 +433,12 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "maxLength": 15,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/MonitoringTimeOffsetString",
 			             "type": "string"
 			           },
 			           "EndpointName": {
 			             "description": "The name of the endpoint used to run the monitoring job.",
 			             "maxLength": 63,
 			             "pattern": "",
-			             "$ref": "#/definitions/EndpointName",
 			             "type": "string"
 			           },
 			           "FeaturesAttribute": {
@@ -504,11 +487,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "maxLength": 15,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/MonitoringTimeOffsetString",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/EndpointInput",
 			         "required": [
 			           "EndpointName",
 			           "LocalPath"
@@ -526,14 +507,12 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/MonitoringGroundTruthS3Input",
 			         "required": [
 			           "S3Uri"
 			         ],
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/ModelBiasJobInput",
 			     "required": [
 			       "EndpointInput",
 			       "GroundTruthS3Input"
@@ -557,14 +536,12 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "maxLength": 15,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/MonitoringTimeOffsetString",
 						         "type": "string"
 						       },
 						       "EndpointName": {
 						         "description": "The name of the endpoint used to run the monitoring job.",
 						         "maxLength": 63,
 						         "pattern": "",
-						         "$ref": "#/definitions/EndpointName",
 						         "type": "string"
 						       },
 						       "FeaturesAttribute": {
@@ -613,11 +590,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "maxLength": 15,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/MonitoringTimeOffsetString",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/EndpointInput",
 						     "required": [
 						       "EndpointName",
 						       "LocalPath"
@@ -637,7 +612,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 									     "maxLength": 15,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/MonitoringTimeOffsetString",
 									     "type": "string"
 									   }
 									*/
@@ -653,7 +627,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 									     "description": "The name of the endpoint used to run the monitoring job.",
 									     "maxLength": 63,
 									     "pattern": "",
-									     "$ref": "#/definitions/EndpointName",
 									     "type": "string"
 									   }
 									*/
@@ -773,7 +746,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 									     "maxLength": 15,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/MonitoringTimeOffsetString",
 									     "type": "string"
 									   }
 									*/
@@ -800,7 +772,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/MonitoringGroundTruthS3Input",
 						     "required": [
 						       "S3Uri"
 						     ],
@@ -879,7 +850,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/S3Output",
 			               "required": [
 			                 "LocalPath",
 			                 "S3Uri"
@@ -887,7 +857,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/MonitoringOutput",
 			           "required": [
 			             "S3Output"
 			           ],
@@ -898,7 +867,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/MonitoringOutputConfig",
 			     "required": [
 			       "MonitoringOutputs"
 			     ],
@@ -958,7 +926,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/S3Output",
 						           "required": [
 						             "LocalPath",
 						             "S3Uri"
@@ -966,7 +933,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/MonitoringOutput",
 						       "required": [
 						         "S3Output"
 						       ],
@@ -1009,7 +975,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3Output",
 									     "required": [
 									       "LocalPath",
 									       "S3Uri"
@@ -1124,7 +1089,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/VpcConfig",
 			         "required": [
 			           "SecurityGroupIds",
 			           "Subnets"
@@ -1132,7 +1096,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/NetworkConfig",
 			     "type": "object"
 			   }
 			*/
@@ -1196,7 +1159,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/VpcConfig",
 						     "required": [
 						       "SecurityGroupIds",
 						       "Subnets"
@@ -1287,7 +1249,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/StoppingCondition",
 			     "required": [
 			       "MaxRuntimeInSeconds"
 			     ],
@@ -1340,7 +1301,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

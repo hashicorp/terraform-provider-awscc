@@ -89,7 +89,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/LoRaWANGatewayVersion",
 			         "type": "object"
 			       },
 			       "UpdateVersion": {
@@ -111,11 +110,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/LoRaWANGatewayVersion",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/LoRaWANUpdateGatewayTaskEntry",
 			     "type": "object"
 			   }
 			*/
@@ -144,7 +141,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/LoRaWANGatewayVersion",
 						     "type": "object"
 						   }
 						*/
@@ -216,7 +212,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/LoRaWANGatewayVersion",
 						     "type": "object"
 						   }
 						*/
@@ -305,7 +300,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "maxItems": 50,
@@ -394,7 +388,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/LoRaWANGatewayVersion",
 			             "type": "object"
 			           },
 			           "SigKeyCrc": {
@@ -425,11 +418,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/LoRaWANGatewayVersion",
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/LoRaWANUpdateGatewayTaskCreate",
 			         "type": "object"
 			       },
 			       "UpdateDataRole": {
@@ -443,7 +434,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/UpdateWirelessGatewayTaskCreate",
 			     "type": "object"
 			   }
 			*/
@@ -475,7 +465,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/LoRaWANGatewayVersion",
 						         "type": "object"
 						       },
 						       "SigKeyCrc": {
@@ -506,11 +495,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/LoRaWANGatewayVersion",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/LoRaWANUpdateGatewayTaskCreate",
 						     "type": "object"
 						   }
 						*/
@@ -539,7 +526,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/LoRaWANGatewayVersion",
 									     "type": "object"
 									   }
 									*/
@@ -636,7 +622,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/LoRaWANGatewayVersion",
 									     "type": "object"
 									   }
 									*/

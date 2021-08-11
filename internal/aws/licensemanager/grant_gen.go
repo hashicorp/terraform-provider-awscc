@@ -45,7 +45,6 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "maxLength": 2048,
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -84,7 +83,6 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "maxLength": 2048,
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -98,7 +96,6 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "items": {
 			       "maxLength": 2048,
-			       "$ref": "#/definitions/Arn",
 			       "type": "string"
 			     },
 			     "type": "array",

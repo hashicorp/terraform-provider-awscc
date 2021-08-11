@@ -41,11 +41,9 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/SnsChannelConfig",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/NotificationChannelConfig",
 			     "type": "object"
 			   }
 			*/
@@ -67,7 +65,6 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/SnsChannelConfig",
 						     "type": "object"
 						   }
 						*/

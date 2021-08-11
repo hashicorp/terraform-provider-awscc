@@ -34,17 +34,14 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			         "ParameterName": {
 			           "maxLength": 255,
 			           "minLength": 0,
-			           "$ref": "#/definitions/ParameterName",
 			           "type": "string"
 			         },
 			         "ParameterValue": {
 			           "maxLength": 4096,
 			           "minLength": 0,
-			           "$ref": "#/definitions/ParameterValue",
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ConformancePackInputParameter",
 			       "required": [
 			         "ParameterName",
 			         "ParameterValue"
@@ -66,7 +63,6 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 						   {
 						     "maxLength": 255,
 						     "minLength": 0,
-						     "$ref": "#/definitions/ParameterName",
 						     "type": "string"
 						   }
 						*/
@@ -80,7 +76,6 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 						   {
 						     "maxLength": 4096,
 						     "minLength": 0,
-						     "$ref": "#/definitions/ParameterValue",
 						     "type": "string"
 						   }
 						*/
@@ -132,7 +127,6 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			   {
 			     "description": "A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.",
 			     "items": {
-			       "$ref": "#/definitions/AccountId",
 			       "type": "string"
 			     },
 			     "maxItems": 1000,

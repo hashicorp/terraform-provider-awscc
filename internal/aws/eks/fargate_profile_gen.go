@@ -105,7 +105,6 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Label",
 			             "required": [
 			               "Key",
 			               "Value"
@@ -119,7 +118,6 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Selector",
 			       "required": [
 			         "Namespace"
 			       ],
@@ -153,7 +151,6 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Label",
 						       "required": [
 						         "Key",
 						         "Value"
@@ -259,7 +256,6 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

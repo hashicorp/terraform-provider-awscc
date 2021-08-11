@@ -52,7 +52,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/AttributeDefinition",
 			       "required": [
 			         "AttributeName",
 			         "AttributeType"
@@ -135,7 +134,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/KeySchema",
 			             "required": [
 			               "KeyType",
 			               "AttributeName"
@@ -163,7 +161,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/Projection",
 			           "type": "object"
 			         },
 			         "WriteProvisionedThroughputSettings": {
@@ -198,14 +195,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 			                   "required": [
 			                     "TargetValue"
 			                   ],
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/CapacityAutoScalingSettings",
 			               "required": [
 			                 "MinCapacity",
 			                 "MaxCapacity",
@@ -214,11 +209,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/WriteProvisionedThroughputSettings",
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/GlobalSecondaryIndex",
 			       "required": [
 			         "IndexName",
 			         "Projection",
@@ -262,7 +255,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/KeySchema",
 						       "required": [
 						         "KeyType",
 						         "AttributeName"
@@ -330,7 +322,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/Projection",
 						     "type": "object"
 						   }
 						*/
@@ -404,14 +395,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "number"
 						               }
 						             },
-						             "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 						             "required": [
 						               "TargetValue"
 						             ],
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/CapacityAutoScalingSettings",
 						         "required": [
 						           "MinCapacity",
 						           "MaxCapacity",
@@ -420,7 +409,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/WriteProvisionedThroughputSettings",
 						     "type": "object"
 						   }
 						*/
@@ -459,14 +447,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "number"
 									           }
 									         },
-									         "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 									         "required": [
 									           "TargetValue"
 									         ],
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/CapacityAutoScalingSettings",
 									     "required": [
 									       "MinCapacity",
 									       "MaxCapacity",
@@ -531,7 +517,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 												     "required": [
 												       "TargetValue"
 												     ],
@@ -619,7 +604,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/KeySchema",
 			       "required": [
 			         "KeyType",
 			         "AttributeName"
@@ -695,7 +679,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/KeySchema",
 			             "required": [
 			               "KeyType",
 			               "AttributeName"
@@ -722,11 +705,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/Projection",
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/LocalSecondaryIndex",
 			       "required": [
 			         "IndexName",
 			         "Projection",
@@ -770,7 +751,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/KeySchema",
 						       "required": [
 						         "KeyType",
 						         "AttributeName"
@@ -836,7 +816,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/Projection",
 						     "type": "object"
 						   }
 						*/
@@ -897,7 +876,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "boolean"
 			             }
 			           },
-			           "$ref": "#/definitions/ContributorInsightsSpecification",
 			           "required": [
 			             "Enabled"
 			           ],
@@ -915,7 +893,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "boolean"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ContributorInsightsSpecification",
 			                 "required": [
 			                   "Enabled"
 			                 ],
@@ -958,14 +935,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "type": "number"
 			                           }
 			                         },
-			                         "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 			                         "required": [
 			                           "TargetValue"
 			                         ],
 			                         "type": "object"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/CapacityAutoScalingSettings",
 			                     "required": [
 			                       "MinCapacity",
 			                       "MaxCapacity",
@@ -977,11 +952,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ReadProvisionedThroughputSettings",
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/ReplicaGlobalSecondaryIndexSpecification",
 			             "required": [
 			               "IndexName"
 			             ],
@@ -997,7 +970,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "boolean"
 			             }
 			           },
-			           "$ref": "#/definitions/PointInTimeRecoverySpecification",
 			           "type": "object"
 			         },
 			         "ReadProvisionedThroughputSettings": {
@@ -1032,14 +1004,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "number"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 			                   "required": [
 			                     "TargetValue"
 			                   ],
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/CapacityAutoScalingSettings",
 			               "required": [
 			                 "MinCapacity",
 			                 "MaxCapacity",
@@ -1051,7 +1021,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "integer"
 			             }
 			           },
-			           "$ref": "#/definitions/ReadProvisionedThroughputSettings",
 			           "type": "object"
 			         },
 			         "Region": {
@@ -1064,7 +1033,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/ReplicaSSESpecification",
 			           "required": [
 			             "KMSMasterKeyId"
 			           ],
@@ -1082,7 +1050,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Tag",
 			             "required": [
 			               "Value",
 			               "Key"
@@ -1093,7 +1060,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "uniqueItems": true
 			         }
 			       },
-			       "$ref": "#/definitions/ReplicaSpecification",
 			       "required": [
 			         "Region"
 			       ],
@@ -1117,7 +1083,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/ContributorInsightsSpecification",
 						     "required": [
 						       "Enabled"
 						     ],
@@ -1157,7 +1122,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "boolean"
 						             }
 						           },
-						           "$ref": "#/definitions/ContributorInsightsSpecification",
 						           "required": [
 						             "Enabled"
 						           ],
@@ -1200,14 +1164,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "type": "number"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 						                   "required": [
 						                     "TargetValue"
 						                   ],
 						                   "type": "object"
 						                 }
 						               },
-						               "$ref": "#/definitions/CapacityAutoScalingSettings",
 						               "required": [
 						                 "MinCapacity",
 						                 "MaxCapacity",
@@ -1219,11 +1181,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/ReadProvisionedThroughputSettings",
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/ReplicaGlobalSecondaryIndexSpecification",
 						       "required": [
 						         "IndexName"
 						       ],
@@ -1246,7 +1206,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "boolean"
 									       }
 									     },
-									     "$ref": "#/definitions/ContributorInsightsSpecification",
 									     "required": [
 									       "Enabled"
 									     ],
@@ -1319,14 +1278,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "type": "number"
 									               }
 									             },
-									             "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 									             "required": [
 									               "TargetValue"
 									             ],
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/CapacityAutoScalingSettings",
 									         "required": [
 									           "MinCapacity",
 									           "MaxCapacity",
@@ -1338,7 +1295,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/ReadProvisionedThroughputSettings",
 									     "type": "object"
 									   }
 									*/
@@ -1377,14 +1333,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "type": "number"
 												           }
 												         },
-												         "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 												         "required": [
 												           "TargetValue"
 												         ],
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/CapacityAutoScalingSettings",
 												     "required": [
 												       "MinCapacity",
 												       "MaxCapacity",
@@ -1449,7 +1403,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "type": "number"
 															       }
 															     },
-															     "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 															     "required": [
 															       "TargetValue"
 															     ],
@@ -1542,7 +1495,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/PointInTimeRecoverySpecification",
 						     "type": "object"
 						   }
 						*/
@@ -1599,14 +1551,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "number"
 						               }
 						             },
-						             "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 						             "required": [
 						               "TargetValue"
 						             ],
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/CapacityAutoScalingSettings",
 						         "required": [
 						           "MinCapacity",
 						           "MaxCapacity",
@@ -1618,7 +1568,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/ReadProvisionedThroughputSettings",
 						     "type": "object"
 						   }
 						*/
@@ -1657,14 +1606,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "number"
 									           }
 									         },
-									         "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 									         "required": [
 									           "TargetValue"
 									         ],
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/CapacityAutoScalingSettings",
 									     "required": [
 									       "MinCapacity",
 									       "MaxCapacity",
@@ -1729,7 +1676,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "number"
 												       }
 												     },
-												     "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 												     "required": [
 												       "TargetValue"
 												     ],
@@ -1828,7 +1774,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ReplicaSSESpecification",
 						     "required": [
 						       "KMSMasterKeyId"
 						     ],
@@ -1868,7 +1813,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Tag",
 						       "required": [
 						         "Value",
 						         "Key"
@@ -1929,7 +1873,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/SSESpecification",
 			     "required": [
 			       "SSEEnabled"
 			     ],
@@ -1986,7 +1929,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/StreamSpecification",
 			     "required": [
 			       "StreamViewType"
 			     ],
@@ -2048,7 +1990,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/TimeToLiveSpecification",
 			     "required": [
 			       "Enabled"
 			     ],
@@ -2119,14 +2060,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "number"
 			               }
 			             },
-			             "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 			             "required": [
 			               "TargetValue"
 			             ],
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/CapacityAutoScalingSettings",
 			         "required": [
 			           "MinCapacity",
 			           "MaxCapacity",
@@ -2135,7 +2074,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/WriteProvisionedThroughputSettings",
 			     "type": "object"
 			   }
 			*/
@@ -2174,14 +2112,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "number"
 						           }
 						         },
-						         "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 						         "required": [
 						           "TargetValue"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/CapacityAutoScalingSettings",
 						     "required": [
 						       "MinCapacity",
 						       "MaxCapacity",
@@ -2246,7 +2182,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "number"
 									       }
 									     },
-									     "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration",
 									     "required": [
 									       "TargetValue"
 									     ],

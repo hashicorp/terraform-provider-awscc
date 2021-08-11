@@ -43,7 +43,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			     "description": "The name of the endpoint used to run the monitoring job.",
 			     "maxLength": 63,
 			     "pattern": "",
-			     "$ref": "#/definitions/EndpointName",
 			     "type": "string"
 			   }
 			*/
@@ -94,7 +93,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			         "description": "The name of the endpoint used to run the monitoring job.",
 			         "maxLength": 63,
 			         "pattern": "",
-			         "$ref": "#/definitions/EndpointName",
 			         "type": "string"
 			       },
 			       "FailureReason": {
@@ -123,7 +121,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			         "description": "The name of the monitoring schedule.",
 			         "maxLength": 63,
 			         "pattern": "",
-			         "$ref": "#/definitions/MonitoringScheduleName",
 			         "type": "string"
 			       },
 			       "ProcessingJobArn": {
@@ -137,7 +134,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/MonitoringExecutionSummary",
 			     "required": [
 			       "CreationTime",
 			       "LastModifiedTime",
@@ -172,7 +168,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						     "description": "The name of the endpoint used to run the monitoring job.",
 						     "maxLength": 63,
 						     "pattern": "",
-						     "$ref": "#/definitions/EndpointName",
 						     "type": "string"
 						   }
 						*/
@@ -237,7 +232,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						     "description": "The name of the monitoring schedule.",
 						     "maxLength": 63,
 						     "pattern": "",
-						     "$ref": "#/definitions/MonitoringScheduleName",
 						     "type": "string"
 						   }
 						*/
@@ -316,11 +310,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                     "description": "The Amazon S3 URI.",
 			                     "maxLength": 1024,
 			                     "pattern": "",
-			                     "$ref": "#/definitions/S3Uri",
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ConstraintsResource",
 			                 "type": "object"
 			               },
 			               "StatisticsResource": {
@@ -331,15 +323,12 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                     "description": "The Amazon S3 URI.",
 			                     "maxLength": 1024,
 			                     "pattern": "",
-			                     "$ref": "#/definitions/S3Uri",
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/StatisticsResource",
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/BaselineConfig",
 			             "type": "object"
 			           },
 			           "Environment": {
@@ -355,7 +344,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Environment",
 			             "type": "object"
 			           },
 			           "MonitoringAppSpecification": {
@@ -369,7 +357,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                   "description": "Arguments for the container used to run the monitoring job.",
 			                   "maxLength": 256,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/ContainerArgument",
 			                   "type": "string"
 			                 },
 			                 "maxItems": 50,
@@ -395,18 +382,15 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                 "description": "The Amazon S3 URI.",
 			                 "maxLength": 1024,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/S3Uri",
 			                 "type": "string"
 			               },
 			               "RecordPreprocessorSourceUri": {
 			                 "description": "The Amazon S3 URI.",
 			                 "maxLength": 1024,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/S3Uri",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/MonitoringAppSpecification",
 			             "required": [
 			               "ImageUri"
 			             ],
@@ -427,7 +411,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                       "description": "The name of the endpoint used to run the monitoring job.",
 			                       "maxLength": 63,
 			                       "pattern": "",
-			                       "$ref": "#/definitions/EndpointName",
 			                       "type": "string"
 			                     },
 			                     "LocalPath": {
@@ -453,7 +436,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/EndpointInput",
 			                   "required": [
 			                     "EndpointName",
 			                     "LocalPath"
@@ -461,7 +443,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/MonitoringInput",
 			               "required": [
 			                 "EndpointInput"
 			               ],
@@ -469,7 +450,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			             },
 			             "maxItems": 1,
 			             "minItems": 1,
-			             "$ref": "#/definitions/MonitoringInputs",
 			             "type": "array"
 			           },
 			           "MonitoringOutputConfig": {
@@ -513,7 +493,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/S3Output",
 			                       "required": [
 			                         "LocalPath",
 			                         "S3Uri"
@@ -521,7 +500,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                       "type": "object"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/MonitoringOutput",
 			                   "required": [
 			                     "S3Output"
 			                   ],
@@ -532,7 +510,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/MonitoringOutputConfig",
 			             "required": [
 			               "MonitoringOutputs"
 			             ],
@@ -563,7 +540,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ClusterConfig",
 			                 "required": [
 			                   "InstanceCount",
 			                   "InstanceType",
@@ -572,7 +548,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/MonitoringResources",
 			             "required": [
 			               "ClusterConfig"
 			             ],
@@ -617,7 +592,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                     "type": "array"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/VpcConfig",
 			                 "required": [
 			                   "SecurityGroupIds",
 			                   "Subnets"
@@ -625,7 +599,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/NetworkConfig",
 			             "type": "object"
 			           },
 			           "RoleArn": {
@@ -644,14 +617,12 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			                 "type": "integer"
 			               }
 			             },
-			             "$ref": "#/definitions/StoppingCondition",
 			             "required": [
 			               "MaxRuntimeInSeconds"
 			             ],
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/MonitoringJobDefinition",
 			         "required": [
 			           "MonitoringAppSpecification",
 			           "MonitoringInputs",
@@ -676,7 +647,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			           "ModelBias",
 			           "ModelExplainability"
 			         ],
-			         "$ref": "#/definitions/MonitoringType",
 			         "type": "string"
 			       },
 			       "ScheduleConfig": {
@@ -690,14 +660,12 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ScheduleConfig",
 			         "required": [
 			           "ScheduleExpression"
 			         ],
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/MonitoringScheduleConfig",
 			     "type": "object"
 			   }
 			*/
@@ -724,11 +692,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						                 "description": "The Amazon S3 URI.",
 						                 "maxLength": 1024,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/S3Uri",
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/ConstraintsResource",
 						             "type": "object"
 						           },
 						           "StatisticsResource": {
@@ -739,15 +705,12 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						                 "description": "The Amazon S3 URI.",
 						                 "maxLength": 1024,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/S3Uri",
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/StatisticsResource",
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/BaselineConfig",
 						         "type": "object"
 						       },
 						       "Environment": {
@@ -763,7 +726,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/Environment",
 						         "type": "object"
 						       },
 						       "MonitoringAppSpecification": {
@@ -777,7 +739,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						               "description": "Arguments for the container used to run the monitoring job.",
 						               "maxLength": 256,
 						               "minLength": 1,
-						               "$ref": "#/definitions/ContainerArgument",
 						               "type": "string"
 						             },
 						             "maxItems": 50,
@@ -803,18 +764,15 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						             "description": "The Amazon S3 URI.",
 						             "maxLength": 1024,
 						             "pattern": "",
-						             "$ref": "#/definitions/S3Uri",
 						             "type": "string"
 						           },
 						           "RecordPreprocessorSourceUri": {
 						             "description": "The Amazon S3 URI.",
 						             "maxLength": 1024,
 						             "pattern": "",
-						             "$ref": "#/definitions/S3Uri",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/MonitoringAppSpecification",
 						         "required": [
 						           "ImageUri"
 						         ],
@@ -835,7 +793,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						                   "description": "The name of the endpoint used to run the monitoring job.",
 						                   "maxLength": 63,
 						                   "pattern": "",
-						                   "$ref": "#/definitions/EndpointName",
 						                   "type": "string"
 						                 },
 						                 "LocalPath": {
@@ -861,7 +818,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/EndpointInput",
 						               "required": [
 						                 "EndpointName",
 						                 "LocalPath"
@@ -869,7 +825,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						               "type": "object"
 						             }
 						           },
-						           "$ref": "#/definitions/MonitoringInput",
 						           "required": [
 						             "EndpointInput"
 						           ],
@@ -877,7 +832,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						         },
 						         "maxItems": 1,
 						         "minItems": 1,
-						         "$ref": "#/definitions/MonitoringInputs",
 						         "type": "array"
 						       },
 						       "MonitoringOutputConfig": {
@@ -921,7 +875,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						                       "type": "string"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/S3Output",
 						                   "required": [
 						                     "LocalPath",
 						                     "S3Uri"
@@ -929,7 +882,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						                   "type": "object"
 						                 }
 						               },
-						               "$ref": "#/definitions/MonitoringOutput",
 						               "required": [
 						                 "S3Output"
 						               ],
@@ -940,7 +892,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/MonitoringOutputConfig",
 						         "required": [
 						           "MonitoringOutputs"
 						         ],
@@ -971,7 +922,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						                 "type": "integer"
 						               }
 						             },
-						             "$ref": "#/definitions/ClusterConfig",
 						             "required": [
 						               "InstanceCount",
 						               "InstanceType",
@@ -980,7 +930,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/MonitoringResources",
 						         "required": [
 						           "ClusterConfig"
 						         ],
@@ -1025,7 +974,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						                 "type": "array"
 						               }
 						             },
-						             "$ref": "#/definitions/VpcConfig",
 						             "required": [
 						               "SecurityGroupIds",
 						               "Subnets"
@@ -1033,7 +981,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/NetworkConfig",
 						         "type": "object"
 						       },
 						       "RoleArn": {
@@ -1052,14 +999,12 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/StoppingCondition",
 						         "required": [
 						           "MaxRuntimeInSeconds"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/MonitoringJobDefinition",
 						     "required": [
 						       "MonitoringAppSpecification",
 						       "MonitoringInputs",
@@ -1089,11 +1034,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									             "description": "The Amazon S3 URI.",
 									             "maxLength": 1024,
 									             "pattern": "",
-									             "$ref": "#/definitions/S3Uri",
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/ConstraintsResource",
 									         "type": "object"
 									       },
 									       "StatisticsResource": {
@@ -1104,15 +1047,12 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									             "description": "The Amazon S3 URI.",
 									             "maxLength": 1024,
 									             "pattern": "",
-									             "$ref": "#/definitions/S3Uri",
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/StatisticsResource",
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/BaselineConfig",
 									     "type": "object"
 									   }
 									*/
@@ -1131,11 +1071,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												         "description": "The Amazon S3 URI.",
 												         "maxLength": 1024,
 												         "pattern": "",
-												         "$ref": "#/definitions/S3Uri",
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/ConstraintsResource",
 												     "type": "object"
 												   }
 												*/
@@ -1150,7 +1088,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															     "description": "The Amazon S3 URI.",
 															     "maxLength": 1024,
 															     "pattern": "",
-															     "$ref": "#/definitions/S3Uri",
 															     "type": "string"
 															   }
 															*/
@@ -1174,11 +1111,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												         "description": "The Amazon S3 URI.",
 												         "maxLength": 1024,
 												         "pattern": "",
-												         "$ref": "#/definitions/S3Uri",
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/StatisticsResource",
 												     "type": "object"
 												   }
 												*/
@@ -1193,7 +1128,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															     "description": "The Amazon S3 URI.",
 															     "maxLength": 1024,
 															     "pattern": "",
-															     "$ref": "#/definitions/S3Uri",
 															     "type": "string"
 															   }
 															*/
@@ -1226,7 +1160,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/Environment",
 									     "type": "object"
 									   }
 									*/
@@ -1251,7 +1184,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									           "description": "Arguments for the container used to run the monitoring job.",
 									           "maxLength": 256,
 									           "minLength": 1,
-									           "$ref": "#/definitions/ContainerArgument",
 									           "type": "string"
 									         },
 									         "maxItems": 50,
@@ -1277,18 +1209,15 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									         "description": "The Amazon S3 URI.",
 									         "maxLength": 1024,
 									         "pattern": "",
-									         "$ref": "#/definitions/S3Uri",
 									         "type": "string"
 									       },
 									       "RecordPreprocessorSourceUri": {
 									         "description": "The Amazon S3 URI.",
 									         "maxLength": 1024,
 									         "pattern": "",
-									         "$ref": "#/definitions/S3Uri",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/MonitoringAppSpecification",
 									     "required": [
 									       "ImageUri"
 									     ],
@@ -1309,7 +1238,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												       "description": "Arguments for the container used to run the monitoring job.",
 												       "maxLength": 256,
 												       "minLength": 1,
-												       "$ref": "#/definitions/ContainerArgument",
 												       "type": "string"
 												     },
 												     "maxItems": 50,
@@ -1362,7 +1290,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												     "description": "The Amazon S3 URI.",
 												     "maxLength": 1024,
 												     "pattern": "",
-												     "$ref": "#/definitions/S3Uri",
 												     "type": "string"
 												   }
 												*/
@@ -1378,7 +1305,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												     "description": "The Amazon S3 URI.",
 												     "maxLength": 1024,
 												     "pattern": "",
-												     "$ref": "#/definitions/S3Uri",
 												     "type": "string"
 												   }
 												*/
@@ -1409,7 +1335,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									               "description": "The name of the endpoint used to run the monitoring job.",
 									               "maxLength": 63,
 									               "pattern": "",
-									               "$ref": "#/definitions/EndpointName",
 									               "type": "string"
 									             },
 									             "LocalPath": {
@@ -1435,7 +1360,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/EndpointInput",
 									           "required": [
 									             "EndpointName",
 									             "LocalPath"
@@ -1443,7 +1367,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									           "type": "object"
 									         }
 									       },
-									       "$ref": "#/definitions/MonitoringInput",
 									       "required": [
 									         "EndpointInput"
 									       ],
@@ -1451,7 +1374,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									     },
 									     "maxItems": 1,
 									     "minItems": 1,
-									     "$ref": "#/definitions/MonitoringInputs",
 									     "type": "array"
 									   }
 									*/
@@ -1470,7 +1392,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												         "description": "The name of the endpoint used to run the monitoring job.",
 												         "maxLength": 63,
 												         "pattern": "",
-												         "$ref": "#/definitions/EndpointName",
 												         "type": "string"
 												       },
 												       "LocalPath": {
@@ -1496,7 +1417,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/EndpointInput",
 												     "required": [
 												       "EndpointName",
 												       "LocalPath"
@@ -1515,7 +1435,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															     "description": "The name of the endpoint used to run the monitoring job.",
 															     "maxLength": 63,
 															     "pattern": "",
-															     "$ref": "#/definitions/EndpointName",
 															     "type": "string"
 															   }
 															*/
@@ -1629,7 +1548,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									                   "type": "string"
 									                 }
 									               },
-									               "$ref": "#/definitions/S3Output",
 									               "required": [
 									                 "LocalPath",
 									                 "S3Uri"
@@ -1637,7 +1555,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									               "type": "object"
 									             }
 									           },
-									           "$ref": "#/definitions/MonitoringOutput",
 									           "required": [
 									             "S3Output"
 									           ],
@@ -1648,7 +1565,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/MonitoringOutputConfig",
 									     "required": [
 									       "MonitoringOutputs"
 									     ],
@@ -1708,7 +1624,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/S3Output",
 												           "required": [
 												             "LocalPath",
 												             "S3Uri"
@@ -1716,7 +1631,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												           "type": "object"
 												         }
 												       },
-												       "$ref": "#/definitions/MonitoringOutput",
 												       "required": [
 												         "S3Output"
 												       ],
@@ -1759,7 +1673,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/S3Output",
 															     "required": [
 															       "LocalPath",
 															       "S3Uri"
@@ -1859,7 +1772,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									             "type": "integer"
 									           }
 									         },
-									         "$ref": "#/definitions/ClusterConfig",
 									         "required": [
 									           "InstanceCount",
 									           "InstanceType",
@@ -1868,7 +1780,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/MonitoringResources",
 									     "required": [
 									       "ClusterConfig"
 									     ],
@@ -1903,7 +1814,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												         "type": "integer"
 												       }
 												     },
-												     "$ref": "#/definitions/ClusterConfig",
 												     "required": [
 												       "InstanceCount",
 												       "InstanceType",
@@ -2018,7 +1928,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									             "type": "array"
 									           }
 									         },
-									         "$ref": "#/definitions/VpcConfig",
 									         "required": [
 									           "SecurityGroupIds",
 									           "Subnets"
@@ -2026,7 +1935,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/NetworkConfig",
 									     "type": "object"
 									   }
 									*/
@@ -2090,7 +1998,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												         "type": "array"
 												       }
 												     },
-												     "$ref": "#/definitions/VpcConfig",
 												     "required": [
 												       "SecurityGroupIds",
 												       "Subnets"
@@ -2178,7 +2085,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/StoppingCondition",
 									     "required": [
 									       "MaxRuntimeInSeconds"
 									     ],
@@ -2237,7 +2143,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						       "ModelBias",
 						       "ModelExplainability"
 						     ],
-						     "$ref": "#/definitions/MonitoringType",
 						     "type": "string"
 						   }
 						*/
@@ -2260,7 +2165,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ScheduleConfig",
 						     "required": [
 						       "ScheduleExpression"
 						     ],
@@ -2301,7 +2205,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			     "description": "The name of the monitoring schedule.",
 			     "maxLength": 63,
 			     "pattern": "",
-			     "$ref": "#/definitions/MonitoringScheduleName",
 			     "type": "string"
 			   }
 			*/
@@ -2352,7 +2255,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

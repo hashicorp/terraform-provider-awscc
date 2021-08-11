@@ -57,7 +57,6 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/BackupPolicy",
 			     "required": [
 			       "Status"
 			     ],
@@ -145,7 +144,6 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ElasticFileSystemTag",
 			       "required": [
 			         "Value",
 			         "Key"
@@ -211,7 +209,6 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/LifecyclePolicy",
 			       "required": [
 			         "TransitionToIA"
 			       ],

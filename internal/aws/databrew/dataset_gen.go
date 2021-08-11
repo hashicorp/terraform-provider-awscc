@@ -62,7 +62,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/CsvOptions",
 			         "type": "object"
 			       },
 			       "Excel": {
@@ -90,7 +89,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/ExcelOptions",
 			         "type": "object"
 			       },
 			       "Json": {
@@ -101,11 +99,9 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/JsonOptions",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/FormatOptions",
 			     "type": "object"
 			   }
 			*/
@@ -129,7 +125,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/CsvOptions",
 						     "type": "object"
 						   }
 						*/
@@ -193,7 +188,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/ExcelOptions",
 						     "type": "object"
 						   }
 						*/
@@ -260,7 +254,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/JsonOptions",
 						     "type": "object"
 						   }
 						*/
@@ -320,14 +313,12 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/S3Location",
 			             "required": [
 			               "Bucket"
 			             ],
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/DataCatalogInputDefinition",
 			         "type": "object"
 			       },
 			       "DatabaseInputDefinition": {
@@ -352,14 +343,12 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/S3Location",
 			             "required": [
 			               "Bucket"
 			             ],
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/DatabaseInputDefinition",
 			         "type": "object"
 			       },
 			       "S3InputDefinition": {
@@ -373,14 +362,12 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/S3Location",
 			         "required": [
 			           "Bucket"
 			         ],
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/Input",
 			     "type": "object"
 			   }
 			*/
@@ -417,14 +404,12 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/S3Location",
 						         "required": [
 						           "Bucket"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/DataCatalogInputDefinition",
 						     "type": "object"
 						   }
 						*/
@@ -484,7 +469,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3Location",
 									     "required": [
 									       "Bucket"
 									     ],
@@ -550,14 +534,12 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/S3Location",
 						         "required": [
 						           "Bucket"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/DatabaseInputDefinition",
 						     "type": "object"
 						   }
 						*/
@@ -604,7 +586,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3Location",
 									     "required": [
 									       "Bucket"
 									     ],
@@ -659,7 +640,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/S3Location",
 						     "required": [
 						       "Bucket"
 						     ],
@@ -746,7 +726,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/FilesLimit",
 			         "required": [
 			           "MaxFiles"
 			         ],
@@ -781,7 +760,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/FilterValue",
 			               "required": [
 			                 "ValueReference",
 			                 "Value"
@@ -791,7 +769,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/FilterExpression",
 			         "required": [
 			           "Expression",
 			           "ValuesMap"
@@ -835,7 +812,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/DatetimeOptions",
 			                   "required": [
 			                     "Format"
 			                   ],
@@ -870,7 +846,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "type": "string"
 			                           }
 			                         },
-			                         "$ref": "#/definitions/FilterValue",
 			                         "required": [
 			                           "ValueReference",
 			                           "Value"
@@ -880,7 +855,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "array"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/FilterExpression",
 			                   "required": [
 			                     "Expression",
 			                     "ValuesMap"
@@ -891,7 +865,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "description": "Parameter name",
 			                   "maxLength": 255,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/PathParameterName",
 			                   "type": "string"
 			                 },
 			                 "Type": {
@@ -904,7 +877,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/DatasetParameter",
 			               "required": [
 			                 "Name",
 			                 "Type"
@@ -915,11 +887,9 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "description": "Parameter name",
 			               "maxLength": 255,
 			               "minLength": 1,
-			               "$ref": "#/definitions/PathParameterName",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/PathParameter",
 			           "required": [
 			             "PathParameterName",
 			             "DatasetParameter"
@@ -929,7 +899,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/PathOptions",
 			     "type": "object"
 			   }
 			*/
@@ -963,7 +932,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/FilesLimit",
 						     "required": [
 						       "MaxFiles"
 						     ],
@@ -1055,7 +1023,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/FilterValue",
 						           "required": [
 						             "ValueReference",
 						             "Value"
@@ -1065,7 +1032,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/FilterExpression",
 						     "required": [
 						       "Expression",
 						       "ValuesMap"
@@ -1114,7 +1080,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/FilterValue",
 									       "required": [
 									         "ValueReference",
 									         "Value"
@@ -1205,7 +1170,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/DatetimeOptions",
 						               "required": [
 						                 "Format"
 						               ],
@@ -1240,7 +1204,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                         "type": "string"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/FilterValue",
 						                     "required": [
 						                       "ValueReference",
 						                       "Value"
@@ -1250,7 +1213,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "array"
 						                 }
 						               },
-						               "$ref": "#/definitions/FilterExpression",
 						               "required": [
 						                 "Expression",
 						                 "ValuesMap"
@@ -1261,7 +1223,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "description": "Parameter name",
 						               "maxLength": 255,
 						               "minLength": 1,
-						               "$ref": "#/definitions/PathParameterName",
 						               "type": "string"
 						             },
 						             "Type": {
@@ -1274,7 +1235,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/DatasetParameter",
 						           "required": [
 						             "Name",
 						             "Type"
@@ -1285,11 +1245,9 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "description": "Parameter name",
 						           "maxLength": 255,
 						           "minLength": 1,
-						           "$ref": "#/definitions/PathParameterName",
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/PathParameter",
 						       "required": [
 						         "PathParameterName",
 						         "DatasetParameter"
@@ -1336,7 +1294,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/DatetimeOptions",
 									         "required": [
 									           "Format"
 									         ],
@@ -1371,7 +1328,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "type": "string"
 									                 }
 									               },
-									               "$ref": "#/definitions/FilterValue",
 									               "required": [
 									                 "ValueReference",
 									                 "Value"
@@ -1381,7 +1337,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "array"
 									           }
 									         },
-									         "$ref": "#/definitions/FilterExpression",
 									         "required": [
 									           "Expression",
 									           "ValuesMap"
@@ -1392,7 +1347,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "description": "Parameter name",
 									         "maxLength": 255,
 									         "minLength": 1,
-									         "$ref": "#/definitions/PathParameterName",
 									         "type": "string"
 									       },
 									       "Type": {
@@ -1405,7 +1359,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DatasetParameter",
 									     "required": [
 									       "Name",
 									       "Type"
@@ -1456,7 +1409,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/DatetimeOptions",
 												     "required": [
 												       "Format"
 												     ],
@@ -1549,7 +1501,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/FilterValue",
 												           "required": [
 												             "ValueReference",
 												             "Value"
@@ -1559,7 +1510,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "array"
 												       }
 												     },
-												     "$ref": "#/definitions/FilterExpression",
 												     "required": [
 												       "Expression",
 												       "ValuesMap"
@@ -1608,7 +1558,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "type": "string"
 															         }
 															       },
-															       "$ref": "#/definitions/FilterValue",
 															       "required": [
 															         "ValueReference",
 															         "Value"
@@ -1666,7 +1615,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "description": "Parameter name",
 												     "maxLength": 255,
 												     "minLength": 1,
-												     "$ref": "#/definitions/PathParameterName",
 												     "type": "string"
 												   }
 												*/
@@ -1704,7 +1652,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "description": "Parameter name",
 									     "maxLength": 255,
 									     "minLength": 1,
-									     "$ref": "#/definitions/PathParameterName",
 									     "type": "string"
 									   }
 									*/
@@ -1742,7 +1689,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

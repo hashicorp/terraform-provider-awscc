@@ -28,7 +28,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "maxLength": 1000,
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -66,23 +65,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "URL",
 			                         "VERSION"
 			                       ],
-			                       "$ref": "#/definitions/ConfluenceAttachmentFieldName",
 			                       "type": "string"
 			                     },
 			                     "DateFieldFormat": {
 			                       "maxLength": 40,
 			                       "minLength": 4,
-			                       "$ref": "#/definitions/DateFieldFormat",
 			                       "type": "string"
 			                     },
 			                     "IndexFieldName": {
 			                       "maxLength": 30,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/IndexFieldName",
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/ConfluenceAttachmentToIndexFieldMapping",
 			                   "required": [
 			                     "DataSourceFieldName",
 			                     "IndexFieldName"
@@ -91,14 +86,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 },
 			                 "maxItems": 11,
 			                 "minItems": 1,
-			                 "$ref": "#/definitions/ConfluenceAttachmentFieldMappingsList",
 			                 "type": "array"
 			               },
 			               "CrawlAttachments": {
 			                 "type": "boolean"
 			               }
 			             },
-			             "$ref": "#/definitions/ConfluenceAttachmentConfiguration",
 			             "type": "object"
 			           },
 			           "BlogConfiguration": {
@@ -120,23 +113,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "URL",
 			                         "VERSION"
 			                       ],
-			                       "$ref": "#/definitions/ConfluenceBlogFieldName",
 			                       "type": "string"
 			                     },
 			                     "DateFieldFormat": {
 			                       "maxLength": 40,
 			                       "minLength": 4,
-			                       "$ref": "#/definitions/DateFieldFormat",
 			                       "type": "string"
 			                     },
 			                     "IndexFieldName": {
 			                       "maxLength": 30,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/IndexFieldName",
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/ConfluenceBlogToIndexFieldMapping",
 			                   "required": [
 			                     "DataSourceFieldName",
 			                     "IndexFieldName"
@@ -145,11 +134,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 },
 			                 "maxItems": 9,
 			                 "minItems": 1,
-			                 "$ref": "#/definitions/ConfluenceBlogFieldMappingsList",
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/ConfluenceBlogConfiguration",
 			             "type": "object"
 			           },
 			           "ExclusionPatterns": {
@@ -159,7 +146,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           },
 			           "InclusionPatterns": {
@@ -169,7 +155,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           },
 			           "PageConfiguration": {
@@ -194,23 +179,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "URL",
 			                         "VERSION"
 			                       ],
-			                       "$ref": "#/definitions/ConfluencePageFieldName",
 			                       "type": "string"
 			                     },
 			                     "DateFieldFormat": {
 			                       "maxLength": 40,
 			                       "minLength": 4,
-			                       "$ref": "#/definitions/DateFieldFormat",
 			                       "type": "string"
 			                     },
 			                     "IndexFieldName": {
 			                       "maxLength": 30,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/IndexFieldName",
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/ConfluencePageToIndexFieldMapping",
 			                   "required": [
 			                     "DataSourceFieldName",
 			                     "IndexFieldName"
@@ -219,25 +200,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 },
 			                 "maxItems": 12,
 			                 "minItems": 1,
-			                 "$ref": "#/definitions/ConfluencePageFieldMappingsList",
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/ConfluencePageConfiguration",
 			             "type": "object"
 			           },
 			           "SecretArn": {
 			             "maxLength": 1284,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/SecretArn",
 			             "type": "string"
 			           },
 			           "ServerUrl": {
 			             "maxLength": 2048,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/Url",
 			             "type": "string"
 			           },
 			           "SpaceConfiguration": {
@@ -253,22 +230,18 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "items": {
 			                   "maxLength": 255,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/ConfluenceSpaceIdentifier",
 			                   "type": "string"
 			                 },
 			                 "minItems": 1,
-			                 "$ref": "#/definitions/ConfluenceSpaceList",
 			                 "type": "array"
 			               },
 			               "IncludeSpaces": {
 			                 "items": {
 			                   "maxLength": 255,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/ConfluenceSpaceIdentifier",
 			                   "type": "string"
 			                 },
 			                 "minItems": 1,
-			                 "$ref": "#/definitions/ConfluenceSpaceList",
 			                 "type": "array"
 			               },
 			               "SpaceFieldMappings": {
@@ -282,23 +255,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "SPACE_KEY",
 			                         "URL"
 			                       ],
-			                       "$ref": "#/definitions/ConfluenceSpaceFieldName",
 			                       "type": "string"
 			                     },
 			                     "DateFieldFormat": {
 			                       "maxLength": 40,
 			                       "minLength": 4,
-			                       "$ref": "#/definitions/DateFieldFormat",
 			                       "type": "string"
 			                     },
 			                     "IndexFieldName": {
 			                       "maxLength": 30,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/IndexFieldName",
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/ConfluenceSpaceToIndexFieldMapping",
 			                   "required": [
 			                     "DataSourceFieldName",
 			                     "IndexFieldName"
@@ -307,11 +276,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 },
 			                 "maxItems": 4,
 			                 "minItems": 1,
-			                 "$ref": "#/definitions/ConfluenceSpaceFieldMappingsList",
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/ConfluenceSpaceConfiguration",
 			             "type": "object"
 			           },
 			           "Version": {
@@ -319,7 +286,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "CLOUD",
 			               "SERVER"
 			             ],
-			             "$ref": "#/definitions/ConfluenceVersion",
 			             "type": "string"
 			           },
 			           "VpcConfiguration": {
@@ -346,7 +312,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/DataSourceVpcConfiguration",
 			             "required": [
 			               "SubnetIds",
 			               "SecurityGroupIds"
@@ -354,7 +319,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/ConfluenceConfiguration",
 			         "required": [
 			           "ServerUrl",
 			           "SecretArn",
@@ -371,11 +335,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "AllowedGroupsColumnName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/ColumnName",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/AclConfiguration",
 			             "required": [
 			               "AllowedGroupsColumnName"
 			             ],
@@ -388,30 +350,25 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "items": {
 			                   "maxLength": 100,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/ColumnName",
 			                   "type": "string"
 			                 },
 			                 "maxItems": 5,
 			                 "minItems": 1,
-			                 "$ref": "#/definitions/ChangeDetectingColumns",
 			                 "type": "array"
 			               },
 			               "DocumentDataColumnName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/ColumnName",
 			                 "type": "string"
 			               },
 			               "DocumentIdColumnName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/ColumnName",
 			                 "type": "string"
 			               },
 			               "DocumentTitleColumnName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/ColumnName",
 			                 "type": "string"
 			               },
 			               "FieldMappings": {
@@ -421,23 +378,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "DataSourceFieldName": {
 			                       "maxLength": 100,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/DataSourceFieldName",
 			                       "type": "string"
 			                     },
 			                     "DateFieldFormat": {
 			                       "maxLength": 40,
 			                       "minLength": 4,
-			                       "$ref": "#/definitions/DateFieldFormat",
 			                       "type": "string"
 			                     },
 			                     "IndexFieldName": {
 			                       "maxLength": 30,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/IndexFieldName",
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 			                   "required": [
 			                     "DataSourceFieldName",
 			                     "IndexFieldName"
@@ -445,11 +398,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "object"
 			                 },
 			                 "maxItems": 100,
-			                 "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/ColumnConfiguration",
 			             "required": [
 			               "DocumentIdColumnName",
 			               "DocumentDataColumnName",
@@ -463,34 +414,28 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "DatabaseHost": {
 			                 "maxLength": 253,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/DatabaseHost",
 			                 "type": "string"
 			               },
 			               "DatabaseName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/DatabaseName",
 			                 "type": "string"
 			               },
 			               "DatabasePort": {
-			                 "$ref": "#/definitions/DatabasePort",
 			                 "type": "integer"
 			               },
 			               "SecretArn": {
 			                 "maxLength": 1284,
 			                 "minLength": 1,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/SecretArn",
 			                 "type": "string"
 			               },
 			               "TableName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/TableName",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ConnectionConfiguration",
 			             "required": [
 			               "DatabaseHost",
 			               "DatabasePort",
@@ -507,7 +452,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "RDS_MYSQL",
 			               "RDS_POSTGRESQL"
 			             ],
-			             "$ref": "#/definitions/DatabaseEngineType",
 			             "type": "string"
 			           },
 			           "SqlConfiguration": {
@@ -518,11 +462,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "DOUBLE_QUOTES",
 			                   "NONE"
 			                 ],
-			                 "$ref": "#/definitions/QueryIdentifiersEnclosingOption",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SqlConfiguration",
 			             "type": "object"
 			           },
 			           "VpcConfiguration": {
@@ -549,7 +491,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/DataSourceVpcConfiguration",
 			             "required": [
 			               "SubnetIds",
 			               "SecurityGroupIds"
@@ -557,7 +498,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/DatabaseConfiguration",
 			         "required": [
 			           "ConnectionConfiguration",
 			           "ColumnConfiguration",
@@ -571,36 +511,30 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "items": {
 			               "maxLength": 256,
 			               "minLength": 1,
-			               "$ref": "#/definitions/MimeType",
 			               "type": "string"
 			             },
 			             "maxLength": 30,
 			             "minLength": 0,
-			             "$ref": "#/definitions/ExcludeMimeTypesList",
 			             "type": "array"
 			           },
 			           "ExcludeSharedDrives": {
 			             "items": {
 			               "maxLength": 256,
 			               "minLength": 1,
-			               "$ref": "#/definitions/SharedDriveId",
 			               "type": "string"
 			             },
 			             "maxLength": 100,
 			             "minLength": 0,
-			             "$ref": "#/definitions/ExcludeSharedDrivesList",
 			             "type": "array"
 			           },
 			           "ExcludeUserAccounts": {
 			             "items": {
 			               "maxLength": 256,
 			               "minLength": 1,
-			               "$ref": "#/definitions/UserAccount",
 			               "type": "string"
 			             },
 			             "maxLength": 100,
 			             "minLength": 0,
-			             "$ref": "#/definitions/ExcludeUserAccountsList",
 			             "type": "array"
 			           },
 			           "ExclusionPatterns": {
@@ -610,7 +544,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           },
 			           "FieldMappings": {
@@ -620,23 +553,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "DataSourceFieldName": {
 			                   "maxLength": 100,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/DataSourceFieldName",
 			                   "type": "string"
 			                 },
 			                 "DateFieldFormat": {
 			                   "maxLength": 40,
 			                   "minLength": 4,
-			                   "$ref": "#/definitions/DateFieldFormat",
 			                   "type": "string"
 			                 },
 			                 "IndexFieldName": {
 			                   "maxLength": 30,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/IndexFieldName",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 			               "required": [
 			                 "DataSourceFieldName",
 			                 "IndexFieldName"
@@ -644,7 +573,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "object"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 			             "type": "array"
 			           },
 			           "InclusionPatterns": {
@@ -654,18 +582,15 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           },
 			           "SecretArn": {
 			             "maxLength": 1284,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/SecretArn",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/GoogleDriveConfiguration",
 			         "required": [
 			           "SecretArn"
 			         ],
@@ -675,7 +600,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "additionalProperties": false,
 			         "properties": {
 			           "DisableLocalGroups": {
-			             "$ref": "#/definitions/DisableLocalGroups",
 			             "type": "boolean"
 			           },
 			           "ExclusionPatterns": {
@@ -685,7 +609,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           },
 			           "FieldMappings": {
@@ -695,23 +618,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "DataSourceFieldName": {
 			                   "maxLength": 100,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/DataSourceFieldName",
 			                   "type": "string"
 			                 },
 			                 "DateFieldFormat": {
 			                   "maxLength": 40,
 			                   "minLength": 4,
-			                   "$ref": "#/definitions/DateFieldFormat",
 			                   "type": "string"
 			                 },
 			                 "IndexFieldName": {
 			                   "maxLength": 30,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/IndexFieldName",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 			               "required": [
 			                 "DataSourceFieldName",
 			                 "IndexFieldName"
@@ -719,7 +638,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "object"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 			             "type": "array"
 			           },
 			           "InclusionPatterns": {
@@ -729,7 +647,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           },
 			           "OneDriveUsers": {
@@ -740,12 +657,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "maxLength": 256,
 			                   "minLength": 1,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/OneDriveUser",
 			                   "type": "string"
 			                 },
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/OneDriveUserList",
 			                 "type": "array"
 			               },
 			               "OneDriveUserS3Path": {
@@ -755,17 +670,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "maxLength": 63,
 			                     "minLength": 3,
 			                     "pattern": "",
-			                     "$ref": "#/definitions/S3BucketName",
 			                     "type": "string"
 			                   },
 			                   "Key": {
 			                     "maxLength": 1024,
 			                     "minLength": 1,
-			                     "$ref": "#/definitions/S3ObjectKey",
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/S3Path",
 			                 "required": [
 			                   "Bucket",
 			                   "Key"
@@ -773,25 +685,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/OneDriveUsers",
 			             "type": "object"
 			           },
 			           "SecretArn": {
 			             "maxLength": 1284,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/SecretArn",
 			             "type": "string"
 			           },
 			           "TenantDomain": {
 			             "maxLength": 256,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/TenantDomain",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/OneDriveConfiguration",
 			         "required": [
 			           "TenantDomain",
 			           "SecretArn",
@@ -809,18 +717,15 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "KeyPath": {
 			                 "maxLength": 1024,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/S3ObjectKey",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/AccessControlListConfiguration",
 			             "type": "object"
 			           },
 			           "BucketName": {
 			             "maxLength": 63,
 			             "minLength": 3,
 			             "pattern": "",
-			             "$ref": "#/definitions/S3BucketName",
 			             "type": "string"
 			           },
 			           "DocumentsMetadataConfiguration": {
@@ -829,11 +734,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "S3Prefix": {
 			                 "maxLength": 1024,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/S3ObjectKey",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/DocumentsMetadataConfiguration",
 			             "type": "object"
 			           },
 			           "ExclusionPatterns": {
@@ -843,7 +746,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           },
 			           "InclusionPatterns": {
@@ -853,7 +755,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           },
 			           "InclusionPrefixes": {
@@ -863,11 +764,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/S3DataSourceConfiguration",
 			         "required": [
 			           "BucketName"
 			         ],
@@ -882,13 +781,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "DocumentDataFieldName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/DataSourceFieldName",
 			                 "type": "string"
 			               },
 			               "DocumentTitleFieldName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/DataSourceFieldName",
 			                 "type": "string"
 			               },
 			               "FieldMappings": {
@@ -898,23 +795,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "DataSourceFieldName": {
 			                       "maxLength": 100,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/DataSourceFieldName",
 			                       "type": "string"
 			                     },
 			                     "DateFieldFormat": {
 			                       "maxLength": 40,
 			                       "minLength": 4,
-			                       "$ref": "#/definitions/DateFieldFormat",
 			                       "type": "string"
 			                     },
 			                     "IndexFieldName": {
 			                       "maxLength": 30,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/IndexFieldName",
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 			                   "required": [
 			                     "DataSourceFieldName",
 			                     "IndexFieldName"
@@ -922,7 +815,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "object"
 			                 },
 			                 "maxItems": 100,
-			                 "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 			                 "type": "array"
 			               },
 			               "IncludeFilterTypes": {
@@ -931,16 +823,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "ACTIVE_USER",
 			                     "STANDARD_USER"
 			                   ],
-			                   "$ref": "#/definitions/SalesforceChatterFeedIncludeFilterType",
 			                   "type": "string"
 			                 },
 			                 "maxLength": 2,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/SalesforceChatterFeedIncludeFilterTypes",
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/SalesforceChatterFeedConfiguration",
 			             "required": [
 			               "DocumentDataFieldName"
 			             ],
@@ -956,7 +845,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           },
 			           "IncludeAttachmentFilePatterns": {
@@ -966,7 +854,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           },
 			           "KnowledgeArticleConfiguration": {
@@ -979,13 +866,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "DocumentDataFieldName": {
 			                       "maxLength": 100,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/DataSourceFieldName",
 			                       "type": "string"
 			                     },
 			                     "DocumentTitleFieldName": {
 			                       "maxLength": 100,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/DataSourceFieldName",
 			                       "type": "string"
 			                     },
 			                     "FieldMappings": {
@@ -995,23 +880,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                           "DataSourceFieldName": {
 			                             "maxLength": 100,
 			                             "minLength": 1,
-			                             "$ref": "#/definitions/DataSourceFieldName",
 			                             "type": "string"
 			                           },
 			                           "DateFieldFormat": {
 			                             "maxLength": 40,
 			                             "minLength": 4,
-			                             "$ref": "#/definitions/DateFieldFormat",
 			                             "type": "string"
 			                           },
 			                           "IndexFieldName": {
 			                             "maxLength": 30,
 			                             "minLength": 1,
-			                             "$ref": "#/definitions/IndexFieldName",
 			                             "type": "string"
 			                           }
 			                         },
-			                         "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 			                         "required": [
 			                           "DataSourceFieldName",
 			                           "IndexFieldName"
@@ -1019,17 +900,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "object"
 			                       },
 			                       "maxItems": 100,
-			                       "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 			                       "type": "array"
 			                     },
 			                     "Name": {
 			                       "maxLength": 100,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeName",
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeConfiguration",
 			                   "required": [
 			                     "Name",
 			                     "DocumentDataFieldName"
@@ -1038,7 +916,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 },
 			                 "maxItems": 10,
 			                 "minItems": 1,
-			                 "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeConfigurationList",
 			                 "type": "array"
 			               },
 			               "IncludedStates": {
@@ -1048,12 +925,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "PUBLISHED",
 			                     "ARCHIVED"
 			                   ],
-			                   "$ref": "#/definitions/SalesforceKnowledgeArticleState",
 			                   "type": "string"
 			                 },
 			                 "maxItems": 3,
 			                 "minItems": 1,
-			                 "$ref": "#/definitions/SalesforceKnowledgeArticleStateList",
 			                 "type": "array"
 			               },
 			               "StandardKnowledgeArticleTypeConfiguration": {
@@ -1062,13 +937,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "DocumentDataFieldName": {
 			                     "maxLength": 100,
 			                     "minLength": 1,
-			                     "$ref": "#/definitions/DataSourceFieldName",
 			                     "type": "string"
 			                   },
 			                   "DocumentTitleFieldName": {
 			                     "maxLength": 100,
 			                     "minLength": 1,
-			                     "$ref": "#/definitions/DataSourceFieldName",
 			                     "type": "string"
 			                   },
 			                   "FieldMappings": {
@@ -1078,23 +951,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "DataSourceFieldName": {
 			                           "maxLength": 100,
 			                           "minLength": 1,
-			                           "$ref": "#/definitions/DataSourceFieldName",
 			                           "type": "string"
 			                         },
 			                         "DateFieldFormat": {
 			                           "maxLength": 40,
 			                           "minLength": 4,
-			                           "$ref": "#/definitions/DateFieldFormat",
 			                           "type": "string"
 			                         },
 			                         "IndexFieldName": {
 			                           "maxLength": 30,
 			                           "minLength": 1,
-			                           "$ref": "#/definitions/IndexFieldName",
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 			                       "required": [
 			                         "DataSourceFieldName",
 			                         "IndexFieldName"
@@ -1102,18 +971,15 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "object"
 			                     },
 			                     "maxItems": 100,
-			                     "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 			                     "type": "array"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/SalesforceStandardKnowledgeArticleTypeConfiguration",
 			                 "required": [
 			                   "DocumentDataFieldName"
 			                 ],
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/SalesforceKnowledgeArticleConfiguration",
 			             "required": [
 			               "IncludedStates"
 			             ],
@@ -1123,14 +989,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "maxLength": 1284,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/SecretArn",
 			             "type": "string"
 			           },
 			           "ServerUrl": {
 			             "maxLength": 2048,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/Url",
 			             "type": "string"
 			           },
 			           "StandardObjectAttachmentConfiguration": {
@@ -1139,7 +1003,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "DocumentTitleFieldName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/DataSourceFieldName",
 			                 "type": "string"
 			               },
 			               "FieldMappings": {
@@ -1149,23 +1012,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "DataSourceFieldName": {
 			                       "maxLength": 100,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/DataSourceFieldName",
 			                       "type": "string"
 			                     },
 			                     "DateFieldFormat": {
 			                       "maxLength": 40,
 			                       "minLength": 4,
-			                       "$ref": "#/definitions/DateFieldFormat",
 			                       "type": "string"
 			                     },
 			                     "IndexFieldName": {
 			                       "maxLength": 30,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/IndexFieldName",
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 			                   "required": [
 			                     "DataSourceFieldName",
 			                     "IndexFieldName"
@@ -1173,11 +1032,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "object"
 			                 },
 			                 "maxItems": 100,
-			                 "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/SalesforceStandardObjectAttachmentConfiguration",
 			             "type": "object"
 			           },
 			           "StandardObjectConfigurations": {
@@ -1187,13 +1044,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "DocumentDataFieldName": {
 			                   "maxLength": 100,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/DataSourceFieldName",
 			                   "type": "string"
 			                 },
 			                 "DocumentTitleFieldName": {
 			                   "maxLength": 100,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/DataSourceFieldName",
 			                   "type": "string"
 			                 },
 			                 "FieldMappings": {
@@ -1203,23 +1058,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "DataSourceFieldName": {
 			                         "maxLength": 100,
 			                         "minLength": 1,
-			                         "$ref": "#/definitions/DataSourceFieldName",
 			                         "type": "string"
 			                       },
 			                       "DateFieldFormat": {
 			                         "maxLength": 40,
 			                         "minLength": 4,
-			                         "$ref": "#/definitions/DateFieldFormat",
 			                         "type": "string"
 			                       },
 			                       "IndexFieldName": {
 			                         "maxLength": 30,
 			                         "minLength": 1,
-			                         "$ref": "#/definitions/IndexFieldName",
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 			                     "required": [
 			                       "DataSourceFieldName",
 			                       "IndexFieldName"
@@ -1227,7 +1078,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "object"
 			                   },
 			                   "maxItems": 100,
-			                   "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 			                   "type": "array"
 			                 },
 			                 "Name": {
@@ -1250,11 +1100,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "TASK",
 			                     "USER"
 			                   ],
-			                   "$ref": "#/definitions/SalesforceStandardObjectName",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/SalesforceStandardObjectConfiguration",
 			               "required": [
 			                 "Name",
 			                 "DocumentDataFieldName"
@@ -1263,11 +1111,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             },
 			             "maxItems": 17,
 			             "minItems": 1,
-			             "$ref": "#/definitions/SalesforceStandardObjectConfigurationList",
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/SalesforceConfiguration",
 			         "required": [
 			           "ServerUrl",
 			           "SecretArn"
@@ -1281,7 +1127,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "maxLength": 2048,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/ServiceNowHostUrl",
 			             "type": "string"
 			           },
 			           "KnowledgeArticleConfiguration": {
@@ -1293,13 +1138,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "DocumentDataFieldName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/DataSourceFieldName",
 			                 "type": "string"
 			               },
 			               "DocumentTitleFieldName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/DataSourceFieldName",
 			                 "type": "string"
 			               },
 			               "ExcludeAttachmentFilePatterns": {
@@ -1309,7 +1152,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 },
 			                 "maxItems": 100,
-			                 "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			                 "type": "array"
 			               },
 			               "FieldMappings": {
@@ -1319,23 +1161,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "DataSourceFieldName": {
 			                       "maxLength": 100,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/DataSourceFieldName",
 			                       "type": "string"
 			                     },
 			                     "DateFieldFormat": {
 			                       "maxLength": 40,
 			                       "minLength": 4,
-			                       "$ref": "#/definitions/DateFieldFormat",
 			                       "type": "string"
 			                     },
 			                     "IndexFieldName": {
 			                       "maxLength": 30,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/IndexFieldName",
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 			                   "required": [
 			                     "DataSourceFieldName",
 			                     "IndexFieldName"
@@ -1343,7 +1181,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "object"
 			                 },
 			                 "maxItems": 100,
-			                 "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 			                 "type": "array"
 			               },
 			               "IncludeAttachmentFilePatterns": {
@@ -1353,11 +1190,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 },
 			                 "maxItems": 100,
-			                 "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/ServiceNowKnowledgeArticleConfiguration",
 			             "required": [
 			               "DocumentDataFieldName"
 			             ],
@@ -1367,7 +1202,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "maxLength": 1284,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/SecretArn",
 			             "type": "string"
 			           },
 			           "ServiceCatalogConfiguration": {
@@ -1379,13 +1213,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "DocumentDataFieldName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/DataSourceFieldName",
 			                 "type": "string"
 			               },
 			               "DocumentTitleFieldName": {
 			                 "maxLength": 100,
 			                 "minLength": 1,
-			                 "$ref": "#/definitions/DataSourceFieldName",
 			                 "type": "string"
 			               },
 			               "ExcludeAttachmentFilePatterns": {
@@ -1395,7 +1227,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 },
 			                 "maxItems": 100,
-			                 "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			                 "type": "array"
 			               },
 			               "FieldMappings": {
@@ -1405,23 +1236,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "DataSourceFieldName": {
 			                       "maxLength": 100,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/DataSourceFieldName",
 			                       "type": "string"
 			                     },
 			                     "DateFieldFormat": {
 			                       "maxLength": 40,
 			                       "minLength": 4,
-			                       "$ref": "#/definitions/DateFieldFormat",
 			                       "type": "string"
 			                     },
 			                     "IndexFieldName": {
 			                       "maxLength": 30,
 			                       "minLength": 1,
-			                       "$ref": "#/definitions/IndexFieldName",
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 			                   "required": [
 			                     "DataSourceFieldName",
 			                     "IndexFieldName"
@@ -1429,7 +1256,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "object"
 			                 },
 			                 "maxItems": 100,
-			                 "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 			                 "type": "array"
 			               },
 			               "IncludeAttachmentFilePatterns": {
@@ -1439,11 +1265,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 },
 			                 "maxItems": 100,
-			                 "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/ServiceNowServiceCatalogConfiguration",
 			             "required": [
 			               "DocumentDataFieldName"
 			             ],
@@ -1454,11 +1278,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "LONDON",
 			               "OTHERS"
 			             ],
-			             "$ref": "#/definitions/ServiceNowBuildVersionType",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ServiceNowConfiguration",
 			         "required": [
 			           "HostUrl",
 			           "SecretArn",
@@ -1474,13 +1296,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "boolean"
 			           },
 			           "DisableLocalGroups": {
-			             "$ref": "#/definitions/DisableLocalGroups",
 			             "type": "boolean"
 			           },
 			           "DocumentTitleFieldName": {
 			             "maxLength": 100,
 			             "minLength": 1,
-			             "$ref": "#/definitions/DataSourceFieldName",
 			             "type": "string"
 			           },
 			           "ExclusionPatterns": {
@@ -1490,7 +1310,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           },
 			           "FieldMappings": {
@@ -1500,23 +1319,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "DataSourceFieldName": {
 			                   "maxLength": 100,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/DataSourceFieldName",
 			                   "type": "string"
 			                 },
 			                 "DateFieldFormat": {
 			                   "maxLength": 40,
 			                   "minLength": 4,
-			                   "$ref": "#/definitions/DateFieldFormat",
 			                   "type": "string"
 			                 },
 			                 "IndexFieldName": {
 			                   "maxLength": 30,
 			                   "minLength": 1,
-			                   "$ref": "#/definitions/IndexFieldName",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 			               "required": [
 			                 "DataSourceFieldName",
 			                 "IndexFieldName"
@@ -1524,7 +1339,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "object"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 			             "type": "array"
 			           },
 			           "InclusionPatterns": {
@@ -1534,14 +1348,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             },
 			             "maxItems": 100,
-			             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 			             "type": "array"
 			           },
 			           "SecretArn": {
 			             "maxLength": 1284,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/SecretArn",
 			             "type": "string"
 			           },
 			           "SharePointVersion": {
@@ -1555,7 +1367,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "maxLength": 2048,
 			               "minLength": 1,
 			               "pattern": "",
-			               "$ref": "#/definitions/Url",
 			               "type": "string"
 			             },
 			             "maxItems": 100,
@@ -1588,7 +1399,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/DataSourceVpcConfiguration",
 			             "required": [
 			               "SubnetIds",
 			               "SecurityGroupIds"
@@ -1596,7 +1406,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/SharePointConfiguration",
 			         "required": [
 			           "Urls",
 			           "SecretArn",
@@ -1605,7 +1414,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/DataSourceConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -1639,23 +1447,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "URL",
 						                     "VERSION"
 						                   ],
-						                   "$ref": "#/definitions/ConfluenceAttachmentFieldName",
 						                   "type": "string"
 						                 },
 						                 "DateFieldFormat": {
 						                   "maxLength": 40,
 						                   "minLength": 4,
-						                   "$ref": "#/definitions/DateFieldFormat",
 						                   "type": "string"
 						                 },
 						                 "IndexFieldName": {
 						                   "maxLength": 30,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/IndexFieldName",
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/ConfluenceAttachmentToIndexFieldMapping",
 						               "required": [
 						                 "DataSourceFieldName",
 						                 "IndexFieldName"
@@ -1664,14 +1468,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             },
 						             "maxItems": 11,
 						             "minItems": 1,
-						             "$ref": "#/definitions/ConfluenceAttachmentFieldMappingsList",
 						             "type": "array"
 						           },
 						           "CrawlAttachments": {
 						             "type": "boolean"
 						           }
 						         },
-						         "$ref": "#/definitions/ConfluenceAttachmentConfiguration",
 						         "type": "object"
 						       },
 						       "BlogConfiguration": {
@@ -1693,23 +1495,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "URL",
 						                     "VERSION"
 						                   ],
-						                   "$ref": "#/definitions/ConfluenceBlogFieldName",
 						                   "type": "string"
 						                 },
 						                 "DateFieldFormat": {
 						                   "maxLength": 40,
 						                   "minLength": 4,
-						                   "$ref": "#/definitions/DateFieldFormat",
 						                   "type": "string"
 						                 },
 						                 "IndexFieldName": {
 						                   "maxLength": 30,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/IndexFieldName",
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/ConfluenceBlogToIndexFieldMapping",
 						               "required": [
 						                 "DataSourceFieldName",
 						                 "IndexFieldName"
@@ -1718,11 +1516,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             },
 						             "maxItems": 9,
 						             "minItems": 1,
-						             "$ref": "#/definitions/ConfluenceBlogFieldMappingsList",
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/ConfluenceBlogConfiguration",
 						         "type": "object"
 						       },
 						       "ExclusionPatterns": {
@@ -1732,7 +1528,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       },
 						       "InclusionPatterns": {
@@ -1742,7 +1537,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       },
 						       "PageConfiguration": {
@@ -1767,23 +1561,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "URL",
 						                     "VERSION"
 						                   ],
-						                   "$ref": "#/definitions/ConfluencePageFieldName",
 						                   "type": "string"
 						                 },
 						                 "DateFieldFormat": {
 						                   "maxLength": 40,
 						                   "minLength": 4,
-						                   "$ref": "#/definitions/DateFieldFormat",
 						                   "type": "string"
 						                 },
 						                 "IndexFieldName": {
 						                   "maxLength": 30,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/IndexFieldName",
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/ConfluencePageToIndexFieldMapping",
 						               "required": [
 						                 "DataSourceFieldName",
 						                 "IndexFieldName"
@@ -1792,25 +1582,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             },
 						             "maxItems": 12,
 						             "minItems": 1,
-						             "$ref": "#/definitions/ConfluencePageFieldMappingsList",
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/ConfluencePageConfiguration",
 						         "type": "object"
 						       },
 						       "SecretArn": {
 						         "maxLength": 1284,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/SecretArn",
 						         "type": "string"
 						       },
 						       "ServerUrl": {
 						         "maxLength": 2048,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/Url",
 						         "type": "string"
 						       },
 						       "SpaceConfiguration": {
@@ -1826,22 +1612,18 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "items": {
 						               "maxLength": 255,
 						               "minLength": 1,
-						               "$ref": "#/definitions/ConfluenceSpaceIdentifier",
 						               "type": "string"
 						             },
 						             "minItems": 1,
-						             "$ref": "#/definitions/ConfluenceSpaceList",
 						             "type": "array"
 						           },
 						           "IncludeSpaces": {
 						             "items": {
 						               "maxLength": 255,
 						               "minLength": 1,
-						               "$ref": "#/definitions/ConfluenceSpaceIdentifier",
 						               "type": "string"
 						             },
 						             "minItems": 1,
-						             "$ref": "#/definitions/ConfluenceSpaceList",
 						             "type": "array"
 						           },
 						           "SpaceFieldMappings": {
@@ -1855,23 +1637,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "SPACE_KEY",
 						                     "URL"
 						                   ],
-						                   "$ref": "#/definitions/ConfluenceSpaceFieldName",
 						                   "type": "string"
 						                 },
 						                 "DateFieldFormat": {
 						                   "maxLength": 40,
 						                   "minLength": 4,
-						                   "$ref": "#/definitions/DateFieldFormat",
 						                   "type": "string"
 						                 },
 						                 "IndexFieldName": {
 						                   "maxLength": 30,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/IndexFieldName",
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/ConfluenceSpaceToIndexFieldMapping",
 						               "required": [
 						                 "DataSourceFieldName",
 						                 "IndexFieldName"
@@ -1880,11 +1658,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             },
 						             "maxItems": 4,
 						             "minItems": 1,
-						             "$ref": "#/definitions/ConfluenceSpaceFieldMappingsList",
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/ConfluenceSpaceConfiguration",
 						         "type": "object"
 						       },
 						       "Version": {
@@ -1892,7 +1668,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "CLOUD",
 						           "SERVER"
 						         ],
-						         "$ref": "#/definitions/ConfluenceVersion",
 						         "type": "string"
 						       },
 						       "VpcConfiguration": {
@@ -1919,7 +1694,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/DataSourceVpcConfiguration",
 						         "required": [
 						           "SubnetIds",
 						           "SecurityGroupIds"
@@ -1927,7 +1701,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/ConfluenceConfiguration",
 						     "required": [
 						       "ServerUrl",
 						       "SecretArn",
@@ -1963,23 +1736,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "URL",
 									                 "VERSION"
 									               ],
-									               "$ref": "#/definitions/ConfluenceAttachmentFieldName",
 									               "type": "string"
 									             },
 									             "DateFieldFormat": {
 									               "maxLength": 40,
 									               "minLength": 4,
-									               "$ref": "#/definitions/DateFieldFormat",
 									               "type": "string"
 									             },
 									             "IndexFieldName": {
 									               "maxLength": 30,
 									               "minLength": 1,
-									               "$ref": "#/definitions/IndexFieldName",
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/ConfluenceAttachmentToIndexFieldMapping",
 									           "required": [
 									             "DataSourceFieldName",
 									             "IndexFieldName"
@@ -1988,14 +1757,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         },
 									         "maxItems": 11,
 									         "minItems": 1,
-									         "$ref": "#/definitions/ConfluenceAttachmentFieldMappingsList",
 									         "type": "array"
 									       },
 									       "CrawlAttachments": {
 									         "type": "boolean"
 									       }
 									     },
-									     "$ref": "#/definitions/ConfluenceAttachmentConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -2023,23 +1790,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "URL",
 												             "VERSION"
 												           ],
-												           "$ref": "#/definitions/ConfluenceAttachmentFieldName",
 												           "type": "string"
 												         },
 												         "DateFieldFormat": {
 												           "maxLength": 40,
 												           "minLength": 4,
-												           "$ref": "#/definitions/DateFieldFormat",
 												           "type": "string"
 												         },
 												         "IndexFieldName": {
 												           "maxLength": 30,
 												           "minLength": 1,
-												           "$ref": "#/definitions/IndexFieldName",
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/ConfluenceAttachmentToIndexFieldMapping",
 												       "required": [
 												         "DataSourceFieldName",
 												         "IndexFieldName"
@@ -2048,7 +1811,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     },
 												     "maxItems": 11,
 												     "minItems": 1,
-												     "$ref": "#/definitions/ConfluenceAttachmentFieldMappingsList",
 												     "type": "array"
 												   }
 												*/
@@ -2072,7 +1834,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "URL",
 															       "VERSION"
 															     ],
-															     "$ref": "#/definitions/ConfluenceAttachmentFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -2086,7 +1847,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 40,
 															     "minLength": 4,
-															     "$ref": "#/definitions/DateFieldFormat",
 															     "type": "string"
 															   }
 															*/
@@ -2100,7 +1860,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 30,
 															     "minLength": 1,
-															     "$ref": "#/definitions/IndexFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -2153,23 +1912,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "URL",
 									                 "VERSION"
 									               ],
-									               "$ref": "#/definitions/ConfluenceBlogFieldName",
 									               "type": "string"
 									             },
 									             "DateFieldFormat": {
 									               "maxLength": 40,
 									               "minLength": 4,
-									               "$ref": "#/definitions/DateFieldFormat",
 									               "type": "string"
 									             },
 									             "IndexFieldName": {
 									               "maxLength": 30,
 									               "minLength": 1,
-									               "$ref": "#/definitions/IndexFieldName",
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/ConfluenceBlogToIndexFieldMapping",
 									           "required": [
 									             "DataSourceFieldName",
 									             "IndexFieldName"
@@ -2178,11 +1933,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         },
 									         "maxItems": 9,
 									         "minItems": 1,
-									         "$ref": "#/definitions/ConfluenceBlogFieldMappingsList",
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/ConfluenceBlogConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -2208,23 +1961,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "URL",
 												             "VERSION"
 												           ],
-												           "$ref": "#/definitions/ConfluenceBlogFieldName",
 												           "type": "string"
 												         },
 												         "DateFieldFormat": {
 												           "maxLength": 40,
 												           "minLength": 4,
-												           "$ref": "#/definitions/DateFieldFormat",
 												           "type": "string"
 												         },
 												         "IndexFieldName": {
 												           "maxLength": 30,
 												           "minLength": 1,
-												           "$ref": "#/definitions/IndexFieldName",
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/ConfluenceBlogToIndexFieldMapping",
 												       "required": [
 												         "DataSourceFieldName",
 												         "IndexFieldName"
@@ -2233,7 +1982,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     },
 												     "maxItems": 9,
 												     "minItems": 1,
-												     "$ref": "#/definitions/ConfluenceBlogFieldMappingsList",
 												     "type": "array"
 												   }
 												*/
@@ -2255,7 +2003,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "URL",
 															       "VERSION"
 															     ],
-															     "$ref": "#/definitions/ConfluenceBlogFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -2269,7 +2016,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 40,
 															     "minLength": 4,
-															     "$ref": "#/definitions/DateFieldFormat",
 															     "type": "string"
 															   }
 															*/
@@ -2283,7 +2029,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 30,
 															     "minLength": 1,
-															     "$ref": "#/definitions/IndexFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -2313,7 +2058,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -2331,7 +2075,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -2364,23 +2107,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "URL",
 									                 "VERSION"
 									               ],
-									               "$ref": "#/definitions/ConfluencePageFieldName",
 									               "type": "string"
 									             },
 									             "DateFieldFormat": {
 									               "maxLength": 40,
 									               "minLength": 4,
-									               "$ref": "#/definitions/DateFieldFormat",
 									               "type": "string"
 									             },
 									             "IndexFieldName": {
 									               "maxLength": 30,
 									               "minLength": 1,
-									               "$ref": "#/definitions/IndexFieldName",
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/ConfluencePageToIndexFieldMapping",
 									           "required": [
 									             "DataSourceFieldName",
 									             "IndexFieldName"
@@ -2389,11 +2128,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         },
 									         "maxItems": 12,
 									         "minItems": 1,
-									         "$ref": "#/definitions/ConfluencePageFieldMappingsList",
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/ConfluencePageConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -2422,23 +2159,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "URL",
 												             "VERSION"
 												           ],
-												           "$ref": "#/definitions/ConfluencePageFieldName",
 												           "type": "string"
 												         },
 												         "DateFieldFormat": {
 												           "maxLength": 40,
 												           "minLength": 4,
-												           "$ref": "#/definitions/DateFieldFormat",
 												           "type": "string"
 												         },
 												         "IndexFieldName": {
 												           "maxLength": 30,
 												           "minLength": 1,
-												           "$ref": "#/definitions/IndexFieldName",
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/ConfluencePageToIndexFieldMapping",
 												       "required": [
 												         "DataSourceFieldName",
 												         "IndexFieldName"
@@ -2447,7 +2180,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     },
 												     "maxItems": 12,
 												     "minItems": 1,
-												     "$ref": "#/definitions/ConfluencePageFieldMappingsList",
 												     "type": "array"
 												   }
 												*/
@@ -2472,7 +2204,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "URL",
 															       "VERSION"
 															     ],
-															     "$ref": "#/definitions/ConfluencePageFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -2486,7 +2217,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 40,
 															     "minLength": 4,
-															     "$ref": "#/definitions/DateFieldFormat",
 															     "type": "string"
 															   }
 															*/
@@ -2500,7 +2230,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 30,
 															     "minLength": 1,
-															     "$ref": "#/definitions/IndexFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -2527,7 +2256,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 1284,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/SecretArn",
 									     "type": "string"
 									   }
 									*/
@@ -2542,7 +2270,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 2048,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/Url",
 									     "type": "string"
 									   }
 									*/
@@ -2566,22 +2293,18 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "items": {
 									           "maxLength": 255,
 									           "minLength": 1,
-									           "$ref": "#/definitions/ConfluenceSpaceIdentifier",
 									           "type": "string"
 									         },
 									         "minItems": 1,
-									         "$ref": "#/definitions/ConfluenceSpaceList",
 									         "type": "array"
 									       },
 									       "IncludeSpaces": {
 									         "items": {
 									           "maxLength": 255,
 									           "minLength": 1,
-									           "$ref": "#/definitions/ConfluenceSpaceIdentifier",
 									           "type": "string"
 									         },
 									         "minItems": 1,
-									         "$ref": "#/definitions/ConfluenceSpaceList",
 									         "type": "array"
 									       },
 									       "SpaceFieldMappings": {
@@ -2595,23 +2318,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "SPACE_KEY",
 									                 "URL"
 									               ],
-									               "$ref": "#/definitions/ConfluenceSpaceFieldName",
 									               "type": "string"
 									             },
 									             "DateFieldFormat": {
 									               "maxLength": 40,
 									               "minLength": 4,
-									               "$ref": "#/definitions/DateFieldFormat",
 									               "type": "string"
 									             },
 									             "IndexFieldName": {
 									               "maxLength": 30,
 									               "minLength": 1,
-									               "$ref": "#/definitions/IndexFieldName",
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/ConfluenceSpaceToIndexFieldMapping",
 									           "required": [
 									             "DataSourceFieldName",
 									             "IndexFieldName"
@@ -2620,11 +2339,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         },
 									         "maxItems": 4,
 									         "minItems": 1,
-									         "$ref": "#/definitions/ConfluenceSpaceFieldMappingsList",
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/ConfluenceSpaceConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -2660,11 +2377,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "items": {
 												       "maxLength": 255,
 												       "minLength": 1,
-												       "$ref": "#/definitions/ConfluenceSpaceIdentifier",
 												       "type": "string"
 												     },
 												     "minItems": 1,
-												     "$ref": "#/definitions/ConfluenceSpaceList",
 												     "type": "array"
 												   }
 												*/
@@ -2679,11 +2394,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "items": {
 												       "maxLength": 255,
 												       "minLength": 1,
-												       "$ref": "#/definitions/ConfluenceSpaceIdentifier",
 												       "type": "string"
 												     },
 												     "minItems": 1,
-												     "$ref": "#/definitions/ConfluenceSpaceList",
 												     "type": "array"
 												   }
 												*/
@@ -2705,23 +2418,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "SPACE_KEY",
 												             "URL"
 												           ],
-												           "$ref": "#/definitions/ConfluenceSpaceFieldName",
 												           "type": "string"
 												         },
 												         "DateFieldFormat": {
 												           "maxLength": 40,
 												           "minLength": 4,
-												           "$ref": "#/definitions/DateFieldFormat",
 												           "type": "string"
 												         },
 												         "IndexFieldName": {
 												           "maxLength": 30,
 												           "minLength": 1,
-												           "$ref": "#/definitions/IndexFieldName",
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/ConfluenceSpaceToIndexFieldMapping",
 												       "required": [
 												         "DataSourceFieldName",
 												         "IndexFieldName"
@@ -2730,7 +2439,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     },
 												     "maxItems": 4,
 												     "minItems": 1,
-												     "$ref": "#/definitions/ConfluenceSpaceFieldMappingsList",
 												     "type": "array"
 												   }
 												*/
@@ -2747,7 +2455,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "SPACE_KEY",
 															       "URL"
 															     ],
-															     "$ref": "#/definitions/ConfluenceSpaceFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -2761,7 +2468,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 40,
 															     "minLength": 4,
-															     "$ref": "#/definitions/DateFieldFormat",
 															     "type": "string"
 															   }
 															*/
@@ -2775,7 +2481,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 30,
 															     "minLength": 1,
-															     "$ref": "#/definitions/IndexFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -2803,7 +2508,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "CLOUD",
 									       "SERVER"
 									     ],
-									     "$ref": "#/definitions/ConfluenceVersion",
 									     "type": "string"
 									   }
 									*/
@@ -2838,7 +2542,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/DataSourceVpcConfiguration",
 									     "required": [
 									       "SubnetIds",
 									       "SecurityGroupIds"
@@ -2905,11 +2608,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "AllowedGroupsColumnName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/ColumnName",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/AclConfiguration",
 						         "required": [
 						           "AllowedGroupsColumnName"
 						         ],
@@ -2922,30 +2623,25 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "items": {
 						               "maxLength": 100,
 						               "minLength": 1,
-						               "$ref": "#/definitions/ColumnName",
 						               "type": "string"
 						             },
 						             "maxItems": 5,
 						             "minItems": 1,
-						             "$ref": "#/definitions/ChangeDetectingColumns",
 						             "type": "array"
 						           },
 						           "DocumentDataColumnName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/ColumnName",
 						             "type": "string"
 						           },
 						           "DocumentIdColumnName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/ColumnName",
 						             "type": "string"
 						           },
 						           "DocumentTitleColumnName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/ColumnName",
 						             "type": "string"
 						           },
 						           "FieldMappings": {
@@ -2955,23 +2651,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "DataSourceFieldName": {
 						                   "maxLength": 100,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/DataSourceFieldName",
 						                   "type": "string"
 						                 },
 						                 "DateFieldFormat": {
 						                   "maxLength": 40,
 						                   "minLength": 4,
-						                   "$ref": "#/definitions/DateFieldFormat",
 						                   "type": "string"
 						                 },
 						                 "IndexFieldName": {
 						                   "maxLength": 30,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/IndexFieldName",
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 						               "required": [
 						                 "DataSourceFieldName",
 						                 "IndexFieldName"
@@ -2979,11 +2671,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "object"
 						             },
 						             "maxItems": 100,
-						             "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/ColumnConfiguration",
 						         "required": [
 						           "DocumentIdColumnName",
 						           "DocumentDataColumnName",
@@ -2997,34 +2687,28 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "DatabaseHost": {
 						             "maxLength": 253,
 						             "minLength": 1,
-						             "$ref": "#/definitions/DatabaseHost",
 						             "type": "string"
 						           },
 						           "DatabaseName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/DatabaseName",
 						             "type": "string"
 						           },
 						           "DatabasePort": {
-						             "$ref": "#/definitions/DatabasePort",
 						             "type": "integer"
 						           },
 						           "SecretArn": {
 						             "maxLength": 1284,
 						             "minLength": 1,
 						             "pattern": "",
-						             "$ref": "#/definitions/SecretArn",
 						             "type": "string"
 						           },
 						           "TableName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/TableName",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ConnectionConfiguration",
 						         "required": [
 						           "DatabaseHost",
 						           "DatabasePort",
@@ -3041,7 +2725,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "RDS_MYSQL",
 						           "RDS_POSTGRESQL"
 						         ],
-						         "$ref": "#/definitions/DatabaseEngineType",
 						         "type": "string"
 						       },
 						       "SqlConfiguration": {
@@ -3052,11 +2735,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "DOUBLE_QUOTES",
 						               "NONE"
 						             ],
-						             "$ref": "#/definitions/QueryIdentifiersEnclosingOption",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SqlConfiguration",
 						         "type": "object"
 						       },
 						       "VpcConfiguration": {
@@ -3083,7 +2764,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/DataSourceVpcConfiguration",
 						         "required": [
 						           "SubnetIds",
 						           "SecurityGroupIds"
@@ -3091,7 +2771,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/DatabaseConfiguration",
 						     "required": [
 						       "ConnectionConfiguration",
 						       "ColumnConfiguration",
@@ -3112,11 +2791,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "AllowedGroupsColumnName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/ColumnName",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/AclConfiguration",
 									     "required": [
 									       "AllowedGroupsColumnName"
 									     ],
@@ -3132,7 +2809,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/ColumnName",
 												     "type": "string"
 												   }
 												*/
@@ -3154,30 +2830,25 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "items": {
 									           "maxLength": 100,
 									           "minLength": 1,
-									           "$ref": "#/definitions/ColumnName",
 									           "type": "string"
 									         },
 									         "maxItems": 5,
 									         "minItems": 1,
-									         "$ref": "#/definitions/ChangeDetectingColumns",
 									         "type": "array"
 									       },
 									       "DocumentDataColumnName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/ColumnName",
 									         "type": "string"
 									       },
 									       "DocumentIdColumnName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/ColumnName",
 									         "type": "string"
 									       },
 									       "DocumentTitleColumnName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/ColumnName",
 									         "type": "string"
 									       },
 									       "FieldMappings": {
@@ -3187,23 +2858,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "DataSourceFieldName": {
 									               "maxLength": 100,
 									               "minLength": 1,
-									               "$ref": "#/definitions/DataSourceFieldName",
 									               "type": "string"
 									             },
 									             "DateFieldFormat": {
 									               "maxLength": 40,
 									               "minLength": 4,
-									               "$ref": "#/definitions/DateFieldFormat",
 									               "type": "string"
 									             },
 									             "IndexFieldName": {
 									               "maxLength": 30,
 									               "minLength": 1,
-									               "$ref": "#/definitions/IndexFieldName",
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 									           "required": [
 									             "DataSourceFieldName",
 									             "IndexFieldName"
@@ -3211,11 +2878,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "object"
 									         },
 									         "maxItems": 100,
-									         "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/ColumnConfiguration",
 									     "required": [
 									       "DocumentIdColumnName",
 									       "DocumentDataColumnName",
@@ -3234,12 +2899,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "items": {
 												       "maxLength": 100,
 												       "minLength": 1,
-												       "$ref": "#/definitions/ColumnName",
 												       "type": "string"
 												     },
 												     "maxItems": 5,
 												     "minItems": 1,
-												     "$ref": "#/definitions/ChangeDetectingColumns",
 												     "type": "array"
 												   }
 												*/
@@ -3253,7 +2916,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/ColumnName",
 												     "type": "string"
 												   }
 												*/
@@ -3267,7 +2929,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/ColumnName",
 												     "type": "string"
 												   }
 												*/
@@ -3281,7 +2942,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/ColumnName",
 												     "type": "string"
 												   }
 												*/
@@ -3299,23 +2959,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "DataSourceFieldName": {
 												           "maxLength": 100,
 												           "minLength": 1,
-												           "$ref": "#/definitions/DataSourceFieldName",
 												           "type": "string"
 												         },
 												         "DateFieldFormat": {
 												           "maxLength": 40,
 												           "minLength": 4,
-												           "$ref": "#/definitions/DateFieldFormat",
 												           "type": "string"
 												         },
 												         "IndexFieldName": {
 												           "maxLength": 30,
 												           "minLength": 1,
-												           "$ref": "#/definitions/IndexFieldName",
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 												       "required": [
 												         "DataSourceFieldName",
 												         "IndexFieldName"
@@ -3323,7 +2979,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "type": "object"
 												     },
 												     "maxItems": 100,
-												     "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 												     "type": "array"
 												   }
 												*/
@@ -3336,7 +2991,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 100,
 															     "minLength": 1,
-															     "$ref": "#/definitions/DataSourceFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -3350,7 +3004,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 40,
 															     "minLength": 4,
-															     "$ref": "#/definitions/DateFieldFormat",
 															     "type": "string"
 															   }
 															*/
@@ -3364,7 +3017,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 30,
 															     "minLength": 1,
-															     "$ref": "#/definitions/IndexFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -3392,34 +3044,28 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "DatabaseHost": {
 									         "maxLength": 253,
 									         "minLength": 1,
-									         "$ref": "#/definitions/DatabaseHost",
 									         "type": "string"
 									       },
 									       "DatabaseName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/DatabaseName",
 									         "type": "string"
 									       },
 									       "DatabasePort": {
-									         "$ref": "#/definitions/DatabasePort",
 									         "type": "integer"
 									       },
 									       "SecretArn": {
 									         "maxLength": 1284,
 									         "minLength": 1,
 									         "pattern": "",
-									         "$ref": "#/definitions/SecretArn",
 									         "type": "string"
 									       },
 									       "TableName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/TableName",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ConnectionConfiguration",
 									     "required": [
 									       "DatabaseHost",
 									       "DatabasePort",
@@ -3439,7 +3085,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 253,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DatabaseHost",
 												     "type": "string"
 												   }
 												*/
@@ -3453,7 +3098,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DatabaseName",
 												     "type": "string"
 												   }
 												*/
@@ -3465,7 +3109,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// CloudFormation resource type schema:
 												/*
 												   {
-												     "$ref": "#/definitions/DatabasePort",
 												     "type": "integer"
 												   }
 												*/
@@ -3480,7 +3123,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "maxLength": 1284,
 												     "minLength": 1,
 												     "pattern": "",
-												     "$ref": "#/definitions/SecretArn",
 												     "type": "string"
 												   }
 												*/
@@ -3494,7 +3136,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/TableName",
 												     "type": "string"
 												   }
 												*/
@@ -3516,7 +3157,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "RDS_MYSQL",
 									       "RDS_POSTGRESQL"
 									     ],
-									     "$ref": "#/definitions/DatabaseEngineType",
 									     "type": "string"
 									   }
 									*/
@@ -3535,11 +3175,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "DOUBLE_QUOTES",
 									           "NONE"
 									         ],
-									         "$ref": "#/definitions/QueryIdentifiersEnclosingOption",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SqlConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -3554,7 +3192,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "DOUBLE_QUOTES",
 												       "NONE"
 												     ],
-												     "$ref": "#/definitions/QueryIdentifiersEnclosingOption",
 												     "type": "string"
 												   }
 												*/
@@ -3593,7 +3230,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/DataSourceVpcConfiguration",
 									     "required": [
 									       "SubnetIds",
 									       "SecurityGroupIds"
@@ -3657,36 +3293,30 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "items": {
 						           "maxLength": 256,
 						           "minLength": 1,
-						           "$ref": "#/definitions/MimeType",
 						           "type": "string"
 						         },
 						         "maxLength": 30,
 						         "minLength": 0,
-						         "$ref": "#/definitions/ExcludeMimeTypesList",
 						         "type": "array"
 						       },
 						       "ExcludeSharedDrives": {
 						         "items": {
 						           "maxLength": 256,
 						           "minLength": 1,
-						           "$ref": "#/definitions/SharedDriveId",
 						           "type": "string"
 						         },
 						         "maxLength": 100,
 						         "minLength": 0,
-						         "$ref": "#/definitions/ExcludeSharedDrivesList",
 						         "type": "array"
 						       },
 						       "ExcludeUserAccounts": {
 						         "items": {
 						           "maxLength": 256,
 						           "minLength": 1,
-						           "$ref": "#/definitions/UserAccount",
 						           "type": "string"
 						         },
 						         "maxLength": 100,
 						         "minLength": 0,
-						         "$ref": "#/definitions/ExcludeUserAccountsList",
 						         "type": "array"
 						       },
 						       "ExclusionPatterns": {
@@ -3696,7 +3326,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       },
 						       "FieldMappings": {
@@ -3706,23 +3335,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "DataSourceFieldName": {
 						               "maxLength": 100,
 						               "minLength": 1,
-						               "$ref": "#/definitions/DataSourceFieldName",
 						               "type": "string"
 						             },
 						             "DateFieldFormat": {
 						               "maxLength": 40,
 						               "minLength": 4,
-						               "$ref": "#/definitions/DateFieldFormat",
 						               "type": "string"
 						             },
 						             "IndexFieldName": {
 						               "maxLength": 30,
 						               "minLength": 1,
-						               "$ref": "#/definitions/IndexFieldName",
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 						           "required": [
 						             "DataSourceFieldName",
 						             "IndexFieldName"
@@ -3730,7 +3355,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "object"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 						         "type": "array"
 						       },
 						       "InclusionPatterns": {
@@ -3740,18 +3364,15 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       },
 						       "SecretArn": {
 						         "maxLength": 1284,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/SecretArn",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/GoogleDriveConfiguration",
 						     "required": [
 						       "SecretArn"
 						     ],
@@ -3768,12 +3389,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "items": {
 									       "maxLength": 256,
 									       "minLength": 1,
-									       "$ref": "#/definitions/MimeType",
 									       "type": "string"
 									     },
 									     "maxLength": 30,
 									     "minLength": 0,
-									     "$ref": "#/definitions/ExcludeMimeTypesList",
 									     "type": "array"
 									   }
 									*/
@@ -3788,12 +3407,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "items": {
 									       "maxLength": 256,
 									       "minLength": 1,
-									       "$ref": "#/definitions/SharedDriveId",
 									       "type": "string"
 									     },
 									     "maxLength": 100,
 									     "minLength": 0,
-									     "$ref": "#/definitions/ExcludeSharedDrivesList",
 									     "type": "array"
 									   }
 									*/
@@ -3808,12 +3425,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "items": {
 									       "maxLength": 256,
 									       "minLength": 1,
-									       "$ref": "#/definitions/UserAccount",
 									       "type": "string"
 									     },
 									     "maxLength": 100,
 									     "minLength": 0,
-									     "$ref": "#/definitions/ExcludeUserAccountsList",
 									     "type": "array"
 									   }
 									*/
@@ -3831,7 +3446,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -3849,23 +3463,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "DataSourceFieldName": {
 									           "maxLength": 100,
 									           "minLength": 1,
-									           "$ref": "#/definitions/DataSourceFieldName",
 									           "type": "string"
 									         },
 									         "DateFieldFormat": {
 									           "maxLength": 40,
 									           "minLength": 4,
-									           "$ref": "#/definitions/DateFieldFormat",
 									           "type": "string"
 									         },
 									         "IndexFieldName": {
 									           "maxLength": 30,
 									           "minLength": 1,
-									           "$ref": "#/definitions/IndexFieldName",
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 									       "required": [
 									         "DataSourceFieldName",
 									         "IndexFieldName"
@@ -3873,7 +3483,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "object"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 									     "type": "array"
 									   }
 									*/
@@ -3886,7 +3495,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DataSourceFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -3900,7 +3508,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 40,
 												     "minLength": 4,
-												     "$ref": "#/definitions/DateFieldFormat",
 												     "type": "string"
 												   }
 												*/
@@ -3914,7 +3521,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 30,
 												     "minLength": 1,
-												     "$ref": "#/definitions/IndexFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -3939,7 +3545,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -3954,7 +3559,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 1284,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/SecretArn",
 									     "type": "string"
 									   }
 									*/
@@ -3973,7 +3577,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "additionalProperties": false,
 						     "properties": {
 						       "DisableLocalGroups": {
-						         "$ref": "#/definitions/DisableLocalGroups",
 						         "type": "boolean"
 						       },
 						       "ExclusionPatterns": {
@@ -3983,7 +3586,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       },
 						       "FieldMappings": {
@@ -3993,23 +3595,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "DataSourceFieldName": {
 						               "maxLength": 100,
 						               "minLength": 1,
-						               "$ref": "#/definitions/DataSourceFieldName",
 						               "type": "string"
 						             },
 						             "DateFieldFormat": {
 						               "maxLength": 40,
 						               "minLength": 4,
-						               "$ref": "#/definitions/DateFieldFormat",
 						               "type": "string"
 						             },
 						             "IndexFieldName": {
 						               "maxLength": 30,
 						               "minLength": 1,
-						               "$ref": "#/definitions/IndexFieldName",
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 						           "required": [
 						             "DataSourceFieldName",
 						             "IndexFieldName"
@@ -4017,7 +3615,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "object"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 						         "type": "array"
 						       },
 						       "InclusionPatterns": {
@@ -4027,7 +3624,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       },
 						       "OneDriveUsers": {
@@ -4038,12 +3634,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "maxLength": 256,
 						               "minLength": 1,
 						               "pattern": "",
-						               "$ref": "#/definitions/OneDriveUser",
 						               "type": "string"
 						             },
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/OneDriveUserList",
 						             "type": "array"
 						           },
 						           "OneDriveUserS3Path": {
@@ -4053,17 +3647,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "maxLength": 63,
 						                 "minLength": 3,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/S3BucketName",
 						                 "type": "string"
 						               },
 						               "Key": {
 						                 "maxLength": 1024,
 						                 "minLength": 1,
-						                 "$ref": "#/definitions/S3ObjectKey",
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/S3Path",
 						             "required": [
 						               "Bucket",
 						               "Key"
@@ -4071,25 +3662,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/OneDriveUsers",
 						         "type": "object"
 						       },
 						       "SecretArn": {
 						         "maxLength": 1284,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/SecretArn",
 						         "type": "string"
 						       },
 						       "TenantDomain": {
 						         "maxLength": 256,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/TenantDomain",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/OneDriveConfiguration",
 						     "required": [
 						       "TenantDomain",
 						       "SecretArn",
@@ -4105,7 +3692,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/DisableLocalGroups",
 									     "type": "boolean"
 									   }
 									*/
@@ -4123,7 +3709,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -4141,23 +3726,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "DataSourceFieldName": {
 									           "maxLength": 100,
 									           "minLength": 1,
-									           "$ref": "#/definitions/DataSourceFieldName",
 									           "type": "string"
 									         },
 									         "DateFieldFormat": {
 									           "maxLength": 40,
 									           "minLength": 4,
-									           "$ref": "#/definitions/DateFieldFormat",
 									           "type": "string"
 									         },
 									         "IndexFieldName": {
 									           "maxLength": 30,
 									           "minLength": 1,
-									           "$ref": "#/definitions/IndexFieldName",
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 									       "required": [
 									         "DataSourceFieldName",
 									         "IndexFieldName"
@@ -4165,7 +3746,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "object"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 									     "type": "array"
 									   }
 									*/
@@ -4178,7 +3758,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DataSourceFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -4192,7 +3771,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 40,
 												     "minLength": 4,
-												     "$ref": "#/definitions/DateFieldFormat",
 												     "type": "string"
 												   }
 												*/
@@ -4206,7 +3784,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 30,
 												     "minLength": 1,
-												     "$ref": "#/definitions/IndexFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -4231,7 +3808,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -4250,12 +3826,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "maxLength": 256,
 									           "minLength": 1,
 									           "pattern": "",
-									           "$ref": "#/definitions/OneDriveUser",
 									           "type": "string"
 									         },
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/OneDriveUserList",
 									         "type": "array"
 									       },
 									       "OneDriveUserS3Path": {
@@ -4265,17 +3839,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "maxLength": 63,
 									             "minLength": 3,
 									             "pattern": "",
-									             "$ref": "#/definitions/S3BucketName",
 									             "type": "string"
 									           },
 									           "Key": {
 									             "maxLength": 1024,
 									             "minLength": 1,
-									             "$ref": "#/definitions/S3ObjectKey",
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/S3Path",
 									         "required": [
 									           "Bucket",
 									           "Key"
@@ -4283,7 +3854,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/OneDriveUsers",
 									     "type": "object"
 									   }
 									*/
@@ -4298,12 +3868,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "maxLength": 256,
 												       "minLength": 1,
 												       "pattern": "",
-												       "$ref": "#/definitions/OneDriveUser",
 												       "type": "string"
 												     },
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/OneDriveUserList",
 												     "type": "array"
 												   }
 												*/
@@ -4321,17 +3889,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "maxLength": 63,
 												         "minLength": 3,
 												         "pattern": "",
-												         "$ref": "#/definitions/S3BucketName",
 												         "type": "string"
 												       },
 												       "Key": {
 												         "maxLength": 1024,
 												         "minLength": 1,
-												         "$ref": "#/definitions/S3ObjectKey",
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/S3Path",
 												     "required": [
 												       "Bucket",
 												       "Key"
@@ -4349,7 +3914,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															     "maxLength": 63,
 															     "minLength": 3,
 															     "pattern": "",
-															     "$ref": "#/definitions/S3BucketName",
 															     "type": "string"
 															   }
 															*/
@@ -4363,7 +3927,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 1024,
 															     "minLength": 1,
-															     "$ref": "#/definitions/S3ObjectKey",
 															     "type": "string"
 															   }
 															*/
@@ -4386,7 +3949,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 1284,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/SecretArn",
 									     "type": "string"
 									   }
 									*/
@@ -4401,7 +3963,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 256,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/TenantDomain",
 									     "type": "string"
 									   }
 									*/
@@ -4426,18 +3987,15 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "KeyPath": {
 						             "maxLength": 1024,
 						             "minLength": 1,
-						             "$ref": "#/definitions/S3ObjectKey",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/AccessControlListConfiguration",
 						         "type": "object"
 						       },
 						       "BucketName": {
 						         "maxLength": 63,
 						         "minLength": 3,
 						         "pattern": "",
-						         "$ref": "#/definitions/S3BucketName",
 						         "type": "string"
 						       },
 						       "DocumentsMetadataConfiguration": {
@@ -4446,11 +4004,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "S3Prefix": {
 						             "maxLength": 1024,
 						             "minLength": 1,
-						             "$ref": "#/definitions/S3ObjectKey",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/DocumentsMetadataConfiguration",
 						         "type": "object"
 						       },
 						       "ExclusionPatterns": {
@@ -4460,7 +4016,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       },
 						       "InclusionPatterns": {
@@ -4470,7 +4025,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       },
 						       "InclusionPrefixes": {
@@ -4480,11 +4034,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/S3DataSourceConfiguration",
 						     "required": [
 						       "BucketName"
 						     ],
@@ -4504,11 +4056,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "KeyPath": {
 									         "maxLength": 1024,
 									         "minLength": 1,
-									         "$ref": "#/definitions/S3ObjectKey",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/AccessControlListConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -4521,7 +4071,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 1024,
 												     "minLength": 1,
-												     "$ref": "#/definitions/S3ObjectKey",
 												     "type": "string"
 												   }
 												*/
@@ -4540,7 +4089,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 63,
 									     "minLength": 3,
 									     "pattern": "",
-									     "$ref": "#/definitions/S3BucketName",
 									     "type": "string"
 									   }
 									*/
@@ -4557,11 +4105,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "S3Prefix": {
 									         "maxLength": 1024,
 									         "minLength": 1,
-									         "$ref": "#/definitions/S3ObjectKey",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DocumentsMetadataConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -4574,7 +4120,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 1024,
 												     "minLength": 1,
-												     "$ref": "#/definitions/S3ObjectKey",
 												     "type": "string"
 												   }
 												*/
@@ -4596,7 +4141,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -4614,7 +4158,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -4632,7 +4175,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -4656,13 +4198,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "DocumentDataFieldName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/DataSourceFieldName",
 						             "type": "string"
 						           },
 						           "DocumentTitleFieldName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/DataSourceFieldName",
 						             "type": "string"
 						           },
 						           "FieldMappings": {
@@ -4672,23 +4212,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "DataSourceFieldName": {
 						                   "maxLength": 100,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/DataSourceFieldName",
 						                   "type": "string"
 						                 },
 						                 "DateFieldFormat": {
 						                   "maxLength": 40,
 						                   "minLength": 4,
-						                   "$ref": "#/definitions/DateFieldFormat",
 						                   "type": "string"
 						                 },
 						                 "IndexFieldName": {
 						                   "maxLength": 30,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/IndexFieldName",
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 						               "required": [
 						                 "DataSourceFieldName",
 						                 "IndexFieldName"
@@ -4696,7 +4232,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "object"
 						             },
 						             "maxItems": 100,
-						             "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 						             "type": "array"
 						           },
 						           "IncludeFilterTypes": {
@@ -4705,16 +4240,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "ACTIVE_USER",
 						                 "STANDARD_USER"
 						               ],
-						               "$ref": "#/definitions/SalesforceChatterFeedIncludeFilterType",
 						               "type": "string"
 						             },
 						             "maxLength": 2,
 						             "minLength": 1,
-						             "$ref": "#/definitions/SalesforceChatterFeedIncludeFilterTypes",
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/SalesforceChatterFeedConfiguration",
 						         "required": [
 						           "DocumentDataFieldName"
 						         ],
@@ -4730,7 +4262,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       },
 						       "IncludeAttachmentFilePatterns": {
@@ -4740,7 +4271,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       },
 						       "KnowledgeArticleConfiguration": {
@@ -4753,13 +4283,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "DocumentDataFieldName": {
 						                   "maxLength": 100,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/DataSourceFieldName",
 						                   "type": "string"
 						                 },
 						                 "DocumentTitleFieldName": {
 						                   "maxLength": 100,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/DataSourceFieldName",
 						                   "type": "string"
 						                 },
 						                 "FieldMappings": {
@@ -4769,23 +4297,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "DataSourceFieldName": {
 						                         "maxLength": 100,
 						                         "minLength": 1,
-						                         "$ref": "#/definitions/DataSourceFieldName",
 						                         "type": "string"
 						                       },
 						                       "DateFieldFormat": {
 						                         "maxLength": 40,
 						                         "minLength": 4,
-						                         "$ref": "#/definitions/DateFieldFormat",
 						                         "type": "string"
 						                       },
 						                       "IndexFieldName": {
 						                         "maxLength": 30,
 						                         "minLength": 1,
-						                         "$ref": "#/definitions/IndexFieldName",
 						                         "type": "string"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 						                     "required": [
 						                       "DataSourceFieldName",
 						                       "IndexFieldName"
@@ -4793,17 +4317,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "type": "object"
 						                   },
 						                   "maxItems": 100,
-						                   "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 						                   "type": "array"
 						                 },
 						                 "Name": {
 						                   "maxLength": 100,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeName",
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeConfiguration",
 						               "required": [
 						                 "Name",
 						                 "DocumentDataFieldName"
@@ -4812,7 +4333,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             },
 						             "maxItems": 10,
 						             "minItems": 1,
-						             "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeConfigurationList",
 						             "type": "array"
 						           },
 						           "IncludedStates": {
@@ -4822,12 +4342,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "PUBLISHED",
 						                 "ARCHIVED"
 						               ],
-						               "$ref": "#/definitions/SalesforceKnowledgeArticleState",
 						               "type": "string"
 						             },
 						             "maxItems": 3,
 						             "minItems": 1,
-						             "$ref": "#/definitions/SalesforceKnowledgeArticleStateList",
 						             "type": "array"
 						           },
 						           "StandardKnowledgeArticleTypeConfiguration": {
@@ -4836,13 +4354,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "DocumentDataFieldName": {
 						                 "maxLength": 100,
 						                 "minLength": 1,
-						                 "$ref": "#/definitions/DataSourceFieldName",
 						                 "type": "string"
 						               },
 						               "DocumentTitleFieldName": {
 						                 "maxLength": 100,
 						                 "minLength": 1,
-						                 "$ref": "#/definitions/DataSourceFieldName",
 						                 "type": "string"
 						               },
 						               "FieldMappings": {
@@ -4852,23 +4368,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "DataSourceFieldName": {
 						                       "maxLength": 100,
 						                       "minLength": 1,
-						                       "$ref": "#/definitions/DataSourceFieldName",
 						                       "type": "string"
 						                     },
 						                     "DateFieldFormat": {
 						                       "maxLength": 40,
 						                       "minLength": 4,
-						                       "$ref": "#/definitions/DateFieldFormat",
 						                       "type": "string"
 						                     },
 						                     "IndexFieldName": {
 						                       "maxLength": 30,
 						                       "minLength": 1,
-						                       "$ref": "#/definitions/IndexFieldName",
 						                       "type": "string"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 						                   "required": [
 						                     "DataSourceFieldName",
 						                     "IndexFieldName"
@@ -4876,18 +4388,15 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "object"
 						                 },
 						                 "maxItems": 100,
-						                 "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 						                 "type": "array"
 						               }
 						             },
-						             "$ref": "#/definitions/SalesforceStandardKnowledgeArticleTypeConfiguration",
 						             "required": [
 						               "DocumentDataFieldName"
 						             ],
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/SalesforceKnowledgeArticleConfiguration",
 						         "required": [
 						           "IncludedStates"
 						         ],
@@ -4897,14 +4406,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "maxLength": 1284,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/SecretArn",
 						         "type": "string"
 						       },
 						       "ServerUrl": {
 						         "maxLength": 2048,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/Url",
 						         "type": "string"
 						       },
 						       "StandardObjectAttachmentConfiguration": {
@@ -4913,7 +4420,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "DocumentTitleFieldName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/DataSourceFieldName",
 						             "type": "string"
 						           },
 						           "FieldMappings": {
@@ -4923,23 +4429,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "DataSourceFieldName": {
 						                   "maxLength": 100,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/DataSourceFieldName",
 						                   "type": "string"
 						                 },
 						                 "DateFieldFormat": {
 						                   "maxLength": 40,
 						                   "minLength": 4,
-						                   "$ref": "#/definitions/DateFieldFormat",
 						                   "type": "string"
 						                 },
 						                 "IndexFieldName": {
 						                   "maxLength": 30,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/IndexFieldName",
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 						               "required": [
 						                 "DataSourceFieldName",
 						                 "IndexFieldName"
@@ -4947,11 +4449,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "object"
 						             },
 						             "maxItems": 100,
-						             "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/SalesforceStandardObjectAttachmentConfiguration",
 						         "type": "object"
 						       },
 						       "StandardObjectConfigurations": {
@@ -4961,13 +4461,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "DocumentDataFieldName": {
 						               "maxLength": 100,
 						               "minLength": 1,
-						               "$ref": "#/definitions/DataSourceFieldName",
 						               "type": "string"
 						             },
 						             "DocumentTitleFieldName": {
 						               "maxLength": 100,
 						               "minLength": 1,
-						               "$ref": "#/definitions/DataSourceFieldName",
 						               "type": "string"
 						             },
 						             "FieldMappings": {
@@ -4977,23 +4475,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "DataSourceFieldName": {
 						                     "maxLength": 100,
 						                     "minLength": 1,
-						                     "$ref": "#/definitions/DataSourceFieldName",
 						                     "type": "string"
 						                   },
 						                   "DateFieldFormat": {
 						                     "maxLength": 40,
 						                     "minLength": 4,
-						                     "$ref": "#/definitions/DateFieldFormat",
 						                     "type": "string"
 						                   },
 						                   "IndexFieldName": {
 						                     "maxLength": 30,
 						                     "minLength": 1,
-						                     "$ref": "#/definitions/IndexFieldName",
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 						                 "required": [
 						                   "DataSourceFieldName",
 						                   "IndexFieldName"
@@ -5001,7 +4495,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "object"
 						               },
 						               "maxItems": 100,
-						               "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 						               "type": "array"
 						             },
 						             "Name": {
@@ -5024,11 +4517,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "TASK",
 						                 "USER"
 						               ],
-						               "$ref": "#/definitions/SalesforceStandardObjectName",
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/SalesforceStandardObjectConfiguration",
 						           "required": [
 						             "Name",
 						             "DocumentDataFieldName"
@@ -5037,11 +4528,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         },
 						         "maxItems": 17,
 						         "minItems": 1,
-						         "$ref": "#/definitions/SalesforceStandardObjectConfigurationList",
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/SalesforceConfiguration",
 						     "required": [
 						       "ServerUrl",
 						       "SecretArn"
@@ -5061,13 +4550,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "DocumentDataFieldName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/DataSourceFieldName",
 									         "type": "string"
 									       },
 									       "DocumentTitleFieldName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/DataSourceFieldName",
 									         "type": "string"
 									       },
 									       "FieldMappings": {
@@ -5077,23 +4564,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "DataSourceFieldName": {
 									               "maxLength": 100,
 									               "minLength": 1,
-									               "$ref": "#/definitions/DataSourceFieldName",
 									               "type": "string"
 									             },
 									             "DateFieldFormat": {
 									               "maxLength": 40,
 									               "minLength": 4,
-									               "$ref": "#/definitions/DateFieldFormat",
 									               "type": "string"
 									             },
 									             "IndexFieldName": {
 									               "maxLength": 30,
 									               "minLength": 1,
-									               "$ref": "#/definitions/IndexFieldName",
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 									           "required": [
 									             "DataSourceFieldName",
 									             "IndexFieldName"
@@ -5101,7 +4584,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "object"
 									         },
 									         "maxItems": 100,
-									         "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 									         "type": "array"
 									       },
 									       "IncludeFilterTypes": {
@@ -5110,16 +4592,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "ACTIVE_USER",
 									             "STANDARD_USER"
 									           ],
-									           "$ref": "#/definitions/SalesforceChatterFeedIncludeFilterType",
 									           "type": "string"
 									         },
 									         "maxLength": 2,
 									         "minLength": 1,
-									         "$ref": "#/definitions/SalesforceChatterFeedIncludeFilterTypes",
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/SalesforceChatterFeedConfiguration",
 									     "required": [
 									       "DocumentDataFieldName"
 									     ],
@@ -5135,7 +4614,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DataSourceFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -5149,7 +4627,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DataSourceFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -5167,23 +4644,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "DataSourceFieldName": {
 												           "maxLength": 100,
 												           "minLength": 1,
-												           "$ref": "#/definitions/DataSourceFieldName",
 												           "type": "string"
 												         },
 												         "DateFieldFormat": {
 												           "maxLength": 40,
 												           "minLength": 4,
-												           "$ref": "#/definitions/DateFieldFormat",
 												           "type": "string"
 												         },
 												         "IndexFieldName": {
 												           "maxLength": 30,
 												           "minLength": 1,
-												           "$ref": "#/definitions/IndexFieldName",
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 												       "required": [
 												         "DataSourceFieldName",
 												         "IndexFieldName"
@@ -5191,7 +4664,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "type": "object"
 												     },
 												     "maxItems": 100,
-												     "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 												     "type": "array"
 												   }
 												*/
@@ -5204,7 +4676,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 100,
 															     "minLength": 1,
-															     "$ref": "#/definitions/DataSourceFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -5218,7 +4689,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 40,
 															     "minLength": 4,
-															     "$ref": "#/definitions/DateFieldFormat",
 															     "type": "string"
 															   }
 															*/
@@ -5232,7 +4702,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 30,
 															     "minLength": 1,
-															     "$ref": "#/definitions/IndexFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -5256,12 +4725,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "ACTIVE_USER",
 												         "STANDARD_USER"
 												       ],
-												       "$ref": "#/definitions/SalesforceChatterFeedIncludeFilterType",
 												       "type": "string"
 												     },
 												     "maxLength": 2,
 												     "minLength": 1,
-												     "$ref": "#/definitions/SalesforceChatterFeedIncludeFilterTypes",
 												     "type": "array"
 												   }
 												*/
@@ -5294,7 +4761,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -5312,7 +4778,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -5333,13 +4798,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "DocumentDataFieldName": {
 									               "maxLength": 100,
 									               "minLength": 1,
-									               "$ref": "#/definitions/DataSourceFieldName",
 									               "type": "string"
 									             },
 									             "DocumentTitleFieldName": {
 									               "maxLength": 100,
 									               "minLength": 1,
-									               "$ref": "#/definitions/DataSourceFieldName",
 									               "type": "string"
 									             },
 									             "FieldMappings": {
@@ -5349,23 +4812,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "DataSourceFieldName": {
 									                     "maxLength": 100,
 									                     "minLength": 1,
-									                     "$ref": "#/definitions/DataSourceFieldName",
 									                     "type": "string"
 									                   },
 									                   "DateFieldFormat": {
 									                     "maxLength": 40,
 									                     "minLength": 4,
-									                     "$ref": "#/definitions/DateFieldFormat",
 									                     "type": "string"
 									                   },
 									                   "IndexFieldName": {
 									                     "maxLength": 30,
 									                     "minLength": 1,
-									                     "$ref": "#/definitions/IndexFieldName",
 									                     "type": "string"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 									                 "required": [
 									                   "DataSourceFieldName",
 									                   "IndexFieldName"
@@ -5373,17 +4832,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "type": "object"
 									               },
 									               "maxItems": 100,
-									               "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 									               "type": "array"
 									             },
 									             "Name": {
 									               "maxLength": 100,
 									               "minLength": 1,
-									               "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeName",
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeConfiguration",
 									           "required": [
 									             "Name",
 									             "DocumentDataFieldName"
@@ -5392,7 +4848,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         },
 									         "maxItems": 10,
 									         "minItems": 1,
-									         "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeConfigurationList",
 									         "type": "array"
 									       },
 									       "IncludedStates": {
@@ -5402,12 +4857,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "PUBLISHED",
 									             "ARCHIVED"
 									           ],
-									           "$ref": "#/definitions/SalesforceKnowledgeArticleState",
 									           "type": "string"
 									         },
 									         "maxItems": 3,
 									         "minItems": 1,
-									         "$ref": "#/definitions/SalesforceKnowledgeArticleStateList",
 									         "type": "array"
 									       },
 									       "StandardKnowledgeArticleTypeConfiguration": {
@@ -5416,13 +4869,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "DocumentDataFieldName": {
 									             "maxLength": 100,
 									             "minLength": 1,
-									             "$ref": "#/definitions/DataSourceFieldName",
 									             "type": "string"
 									           },
 									           "DocumentTitleFieldName": {
 									             "maxLength": 100,
 									             "minLength": 1,
-									             "$ref": "#/definitions/DataSourceFieldName",
 									             "type": "string"
 									           },
 									           "FieldMappings": {
@@ -5432,23 +4883,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "DataSourceFieldName": {
 									                   "maxLength": 100,
 									                   "minLength": 1,
-									                   "$ref": "#/definitions/DataSourceFieldName",
 									                   "type": "string"
 									                 },
 									                 "DateFieldFormat": {
 									                   "maxLength": 40,
 									                   "minLength": 4,
-									                   "$ref": "#/definitions/DateFieldFormat",
 									                   "type": "string"
 									                 },
 									                 "IndexFieldName": {
 									                   "maxLength": 30,
 									                   "minLength": 1,
-									                   "$ref": "#/definitions/IndexFieldName",
 									                   "type": "string"
 									                 }
 									               },
-									               "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 									               "required": [
 									                 "DataSourceFieldName",
 									                 "IndexFieldName"
@@ -5456,18 +4903,15 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "object"
 									             },
 									             "maxItems": 100,
-									             "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 									             "type": "array"
 									           }
 									         },
-									         "$ref": "#/definitions/SalesforceStandardKnowledgeArticleTypeConfiguration",
 									         "required": [
 									           "DocumentDataFieldName"
 									         ],
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/SalesforceKnowledgeArticleConfiguration",
 									     "required": [
 									       "IncludedStates"
 									     ],
@@ -5487,13 +4931,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "DocumentDataFieldName": {
 												           "maxLength": 100,
 												           "minLength": 1,
-												           "$ref": "#/definitions/DataSourceFieldName",
 												           "type": "string"
 												         },
 												         "DocumentTitleFieldName": {
 												           "maxLength": 100,
 												           "minLength": 1,
-												           "$ref": "#/definitions/DataSourceFieldName",
 												           "type": "string"
 												         },
 												         "FieldMappings": {
@@ -5503,23 +4945,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "DataSourceFieldName": {
 												                 "maxLength": 100,
 												                 "minLength": 1,
-												                 "$ref": "#/definitions/DataSourceFieldName",
 												                 "type": "string"
 												               },
 												               "DateFieldFormat": {
 												                 "maxLength": 40,
 												                 "minLength": 4,
-												                 "$ref": "#/definitions/DateFieldFormat",
 												                 "type": "string"
 												               },
 												               "IndexFieldName": {
 												                 "maxLength": 30,
 												                 "minLength": 1,
-												                 "$ref": "#/definitions/IndexFieldName",
 												                 "type": "string"
 												               }
 												             },
-												             "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 												             "required": [
 												               "DataSourceFieldName",
 												               "IndexFieldName"
@@ -5527,17 +4965,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "type": "object"
 												           },
 												           "maxItems": 100,
-												           "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 												           "type": "array"
 												         },
 												         "Name": {
 												           "maxLength": 100,
 												           "minLength": 1,
-												           "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeName",
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeConfiguration",
 												       "required": [
 												         "Name",
 												         "DocumentDataFieldName"
@@ -5546,7 +4981,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     },
 												     "maxItems": 10,
 												     "minItems": 1,
-												     "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeConfigurationList",
 												     "type": "array"
 												   }
 												*/
@@ -5559,7 +4993,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 100,
 															     "minLength": 1,
-															     "$ref": "#/definitions/DataSourceFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -5573,7 +5006,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 100,
 															     "minLength": 1,
-															     "$ref": "#/definitions/DataSourceFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -5591,23 +5023,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "DataSourceFieldName": {
 															           "maxLength": 100,
 															           "minLength": 1,
-															           "$ref": "#/definitions/DataSourceFieldName",
 															           "type": "string"
 															         },
 															         "DateFieldFormat": {
 															           "maxLength": 40,
 															           "minLength": 4,
-															           "$ref": "#/definitions/DateFieldFormat",
 															           "type": "string"
 															         },
 															         "IndexFieldName": {
 															           "maxLength": 30,
 															           "minLength": 1,
-															           "$ref": "#/definitions/IndexFieldName",
 															           "type": "string"
 															         }
 															       },
-															       "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 															       "required": [
 															         "DataSourceFieldName",
 															         "IndexFieldName"
@@ -5615,7 +5043,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "type": "object"
 															     },
 															     "maxItems": 100,
-															     "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 															     "type": "array"
 															   }
 															*/
@@ -5628,7 +5055,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		   {
 																		     "maxLength": 100,
 																		     "minLength": 1,
-																		     "$ref": "#/definitions/DataSourceFieldName",
 																		     "type": "string"
 																		   }
 																		*/
@@ -5642,7 +5068,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		   {
 																		     "maxLength": 40,
 																		     "minLength": 4,
-																		     "$ref": "#/definitions/DateFieldFormat",
 																		     "type": "string"
 																		   }
 																		*/
@@ -5656,7 +5081,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		   {
 																		     "maxLength": 30,
 																		     "minLength": 1,
-																		     "$ref": "#/definitions/IndexFieldName",
 																		     "type": "string"
 																		   }
 																		*/
@@ -5677,7 +5101,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 100,
 															     "minLength": 1,
-															     "$ref": "#/definitions/SalesforceCustomKnowledgeArticleTypeName",
 															     "type": "string"
 															   }
 															*/
@@ -5703,12 +5126,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "PUBLISHED",
 												         "ARCHIVED"
 												       ],
-												       "$ref": "#/definitions/SalesforceKnowledgeArticleState",
 												       "type": "string"
 												     },
 												     "maxItems": 3,
 												     "minItems": 1,
-												     "$ref": "#/definitions/SalesforceKnowledgeArticleStateList",
 												     "type": "array"
 												   }
 												*/
@@ -5725,13 +5146,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "DocumentDataFieldName": {
 												         "maxLength": 100,
 												         "minLength": 1,
-												         "$ref": "#/definitions/DataSourceFieldName",
 												         "type": "string"
 												       },
 												       "DocumentTitleFieldName": {
 												         "maxLength": 100,
 												         "minLength": 1,
-												         "$ref": "#/definitions/DataSourceFieldName",
 												         "type": "string"
 												       },
 												       "FieldMappings": {
@@ -5741,23 +5160,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "DataSourceFieldName": {
 												               "maxLength": 100,
 												               "minLength": 1,
-												               "$ref": "#/definitions/DataSourceFieldName",
 												               "type": "string"
 												             },
 												             "DateFieldFormat": {
 												               "maxLength": 40,
 												               "minLength": 4,
-												               "$ref": "#/definitions/DateFieldFormat",
 												               "type": "string"
 												             },
 												             "IndexFieldName": {
 												               "maxLength": 30,
 												               "minLength": 1,
-												               "$ref": "#/definitions/IndexFieldName",
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 												           "required": [
 												             "DataSourceFieldName",
 												             "IndexFieldName"
@@ -5765,11 +5180,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "object"
 												         },
 												         "maxItems": 100,
-												         "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 												         "type": "array"
 												       }
 												     },
-												     "$ref": "#/definitions/SalesforceStandardKnowledgeArticleTypeConfiguration",
 												     "required": [
 												       "DocumentDataFieldName"
 												     ],
@@ -5785,7 +5198,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 100,
 															     "minLength": 1,
-															     "$ref": "#/definitions/DataSourceFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -5799,7 +5211,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 100,
 															     "minLength": 1,
-															     "$ref": "#/definitions/DataSourceFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -5817,23 +5228,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "DataSourceFieldName": {
 															           "maxLength": 100,
 															           "minLength": 1,
-															           "$ref": "#/definitions/DataSourceFieldName",
 															           "type": "string"
 															         },
 															         "DateFieldFormat": {
 															           "maxLength": 40,
 															           "minLength": 4,
-															           "$ref": "#/definitions/DateFieldFormat",
 															           "type": "string"
 															         },
 															         "IndexFieldName": {
 															           "maxLength": 30,
 															           "minLength": 1,
-															           "$ref": "#/definitions/IndexFieldName",
 															           "type": "string"
 															         }
 															       },
-															       "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 															       "required": [
 															         "DataSourceFieldName",
 															         "IndexFieldName"
@@ -5841,7 +5248,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "type": "object"
 															     },
 															     "maxItems": 100,
-															     "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 															     "type": "array"
 															   }
 															*/
@@ -5854,7 +5260,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		   {
 																		     "maxLength": 100,
 																		     "minLength": 1,
-																		     "$ref": "#/definitions/DataSourceFieldName",
 																		     "type": "string"
 																		   }
 																		*/
@@ -5868,7 +5273,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		   {
 																		     "maxLength": 40,
 																		     "minLength": 4,
-																		     "$ref": "#/definitions/DateFieldFormat",
 																		     "type": "string"
 																		   }
 																		*/
@@ -5882,7 +5286,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		   {
 																		     "maxLength": 30,
 																		     "minLength": 1,
-																		     "$ref": "#/definitions/IndexFieldName",
 																		     "type": "string"
 																		   }
 																		*/
@@ -5912,7 +5315,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 1284,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/SecretArn",
 									     "type": "string"
 									   }
 									*/
@@ -5927,7 +5329,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 2048,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/Url",
 									     "type": "string"
 									   }
 									*/
@@ -5944,7 +5345,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "DocumentTitleFieldName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/DataSourceFieldName",
 									         "type": "string"
 									       },
 									       "FieldMappings": {
@@ -5954,23 +5354,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "DataSourceFieldName": {
 									               "maxLength": 100,
 									               "minLength": 1,
-									               "$ref": "#/definitions/DataSourceFieldName",
 									               "type": "string"
 									             },
 									             "DateFieldFormat": {
 									               "maxLength": 40,
 									               "minLength": 4,
-									               "$ref": "#/definitions/DateFieldFormat",
 									               "type": "string"
 									             },
 									             "IndexFieldName": {
 									               "maxLength": 30,
 									               "minLength": 1,
-									               "$ref": "#/definitions/IndexFieldName",
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 									           "required": [
 									             "DataSourceFieldName",
 									             "IndexFieldName"
@@ -5978,11 +5374,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "object"
 									         },
 									         "maxItems": 100,
-									         "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/SalesforceStandardObjectAttachmentConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -5995,7 +5389,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DataSourceFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -6013,23 +5406,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "DataSourceFieldName": {
 												           "maxLength": 100,
 												           "minLength": 1,
-												           "$ref": "#/definitions/DataSourceFieldName",
 												           "type": "string"
 												         },
 												         "DateFieldFormat": {
 												           "maxLength": 40,
 												           "minLength": 4,
-												           "$ref": "#/definitions/DateFieldFormat",
 												           "type": "string"
 												         },
 												         "IndexFieldName": {
 												           "maxLength": 30,
 												           "minLength": 1,
-												           "$ref": "#/definitions/IndexFieldName",
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 												       "required": [
 												         "DataSourceFieldName",
 												         "IndexFieldName"
@@ -6037,7 +5426,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "type": "object"
 												     },
 												     "maxItems": 100,
-												     "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 												     "type": "array"
 												   }
 												*/
@@ -6050,7 +5438,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 100,
 															     "minLength": 1,
-															     "$ref": "#/definitions/DataSourceFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -6064,7 +5451,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 40,
 															     "minLength": 4,
-															     "$ref": "#/definitions/DateFieldFormat",
 															     "type": "string"
 															   }
 															*/
@@ -6078,7 +5464,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 30,
 															     "minLength": 1,
-															     "$ref": "#/definitions/IndexFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -6107,13 +5492,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "DocumentDataFieldName": {
 									           "maxLength": 100,
 									           "minLength": 1,
-									           "$ref": "#/definitions/DataSourceFieldName",
 									           "type": "string"
 									         },
 									         "DocumentTitleFieldName": {
 									           "maxLength": 100,
 									           "minLength": 1,
-									           "$ref": "#/definitions/DataSourceFieldName",
 									           "type": "string"
 									         },
 									         "FieldMappings": {
@@ -6123,23 +5506,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "DataSourceFieldName": {
 									                 "maxLength": 100,
 									                 "minLength": 1,
-									                 "$ref": "#/definitions/DataSourceFieldName",
 									                 "type": "string"
 									               },
 									               "DateFieldFormat": {
 									                 "maxLength": 40,
 									                 "minLength": 4,
-									                 "$ref": "#/definitions/DateFieldFormat",
 									                 "type": "string"
 									               },
 									               "IndexFieldName": {
 									                 "maxLength": 30,
 									                 "minLength": 1,
-									                 "$ref": "#/definitions/IndexFieldName",
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 									             "required": [
 									               "DataSourceFieldName",
 									               "IndexFieldName"
@@ -6147,7 +5526,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "object"
 									           },
 									           "maxItems": 100,
-									           "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 									           "type": "array"
 									         },
 									         "Name": {
@@ -6170,11 +5548,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "TASK",
 									             "USER"
 									           ],
-									           "$ref": "#/definitions/SalesforceStandardObjectName",
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/SalesforceStandardObjectConfiguration",
 									       "required": [
 									         "Name",
 									         "DocumentDataFieldName"
@@ -6183,7 +5559,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     },
 									     "maxItems": 17,
 									     "minItems": 1,
-									     "$ref": "#/definitions/SalesforceStandardObjectConfigurationList",
 									     "type": "array"
 									   }
 									*/
@@ -6196,7 +5571,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DataSourceFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -6210,7 +5584,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DataSourceFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -6228,23 +5601,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "DataSourceFieldName": {
 												           "maxLength": 100,
 												           "minLength": 1,
-												           "$ref": "#/definitions/DataSourceFieldName",
 												           "type": "string"
 												         },
 												         "DateFieldFormat": {
 												           "maxLength": 40,
 												           "minLength": 4,
-												           "$ref": "#/definitions/DateFieldFormat",
 												           "type": "string"
 												         },
 												         "IndexFieldName": {
 												           "maxLength": 30,
 												           "minLength": 1,
-												           "$ref": "#/definitions/IndexFieldName",
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 												       "required": [
 												         "DataSourceFieldName",
 												         "IndexFieldName"
@@ -6252,7 +5621,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "type": "object"
 												     },
 												     "maxItems": 100,
-												     "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 												     "type": "array"
 												   }
 												*/
@@ -6265,7 +5633,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 100,
 															     "minLength": 1,
-															     "$ref": "#/definitions/DataSourceFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -6279,7 +5646,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 40,
 															     "minLength": 4,
-															     "$ref": "#/definitions/DateFieldFormat",
 															     "type": "string"
 															   }
 															*/
@@ -6293,7 +5659,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 30,
 															     "minLength": 1,
-															     "$ref": "#/definitions/IndexFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -6331,7 +5696,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "TASK",
 												       "USER"
 												     ],
-												     "$ref": "#/definitions/SalesforceStandardObjectName",
 												     "type": "string"
 												   }
 												*/
@@ -6361,7 +5725,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "maxLength": 2048,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/ServiceNowHostUrl",
 						         "type": "string"
 						       },
 						       "KnowledgeArticleConfiguration": {
@@ -6373,13 +5736,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "DocumentDataFieldName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/DataSourceFieldName",
 						             "type": "string"
 						           },
 						           "DocumentTitleFieldName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/DataSourceFieldName",
 						             "type": "string"
 						           },
 						           "ExcludeAttachmentFilePatterns": {
@@ -6389,7 +5750,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             },
 						             "maxItems": 100,
-						             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						             "type": "array"
 						           },
 						           "FieldMappings": {
@@ -6399,23 +5759,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "DataSourceFieldName": {
 						                   "maxLength": 100,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/DataSourceFieldName",
 						                   "type": "string"
 						                 },
 						                 "DateFieldFormat": {
 						                   "maxLength": 40,
 						                   "minLength": 4,
-						                   "$ref": "#/definitions/DateFieldFormat",
 						                   "type": "string"
 						                 },
 						                 "IndexFieldName": {
 						                   "maxLength": 30,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/IndexFieldName",
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 						               "required": [
 						                 "DataSourceFieldName",
 						                 "IndexFieldName"
@@ -6423,7 +5779,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "object"
 						             },
 						             "maxItems": 100,
-						             "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 						             "type": "array"
 						           },
 						           "IncludeAttachmentFilePatterns": {
@@ -6433,11 +5788,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             },
 						             "maxItems": 100,
-						             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/ServiceNowKnowledgeArticleConfiguration",
 						         "required": [
 						           "DocumentDataFieldName"
 						         ],
@@ -6447,7 +5800,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "maxLength": 1284,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/SecretArn",
 						         "type": "string"
 						       },
 						       "ServiceCatalogConfiguration": {
@@ -6459,13 +5811,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "DocumentDataFieldName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/DataSourceFieldName",
 						             "type": "string"
 						           },
 						           "DocumentTitleFieldName": {
 						             "maxLength": 100,
 						             "minLength": 1,
-						             "$ref": "#/definitions/DataSourceFieldName",
 						             "type": "string"
 						           },
 						           "ExcludeAttachmentFilePatterns": {
@@ -6475,7 +5825,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             },
 						             "maxItems": 100,
-						             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						             "type": "array"
 						           },
 						           "FieldMappings": {
@@ -6485,23 +5834,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "DataSourceFieldName": {
 						                   "maxLength": 100,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/DataSourceFieldName",
 						                   "type": "string"
 						                 },
 						                 "DateFieldFormat": {
 						                   "maxLength": 40,
 						                   "minLength": 4,
-						                   "$ref": "#/definitions/DateFieldFormat",
 						                   "type": "string"
 						                 },
 						                 "IndexFieldName": {
 						                   "maxLength": 30,
 						                   "minLength": 1,
-						                   "$ref": "#/definitions/IndexFieldName",
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 						               "required": [
 						                 "DataSourceFieldName",
 						                 "IndexFieldName"
@@ -6509,7 +5854,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "object"
 						             },
 						             "maxItems": 100,
-						             "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 						             "type": "array"
 						           },
 						           "IncludeAttachmentFilePatterns": {
@@ -6519,11 +5863,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             },
 						             "maxItems": 100,
-						             "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/ServiceNowServiceCatalogConfiguration",
 						         "required": [
 						           "DocumentDataFieldName"
 						         ],
@@ -6534,11 +5876,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "LONDON",
 						           "OTHERS"
 						         ],
-						         "$ref": "#/definitions/ServiceNowBuildVersionType",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ServiceNowConfiguration",
 						     "required": [
 						       "HostUrl",
 						       "SecretArn",
@@ -6557,7 +5897,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 2048,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/ServiceNowHostUrl",
 									     "type": "string"
 									   }
 									*/
@@ -6577,13 +5916,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "DocumentDataFieldName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/DataSourceFieldName",
 									         "type": "string"
 									       },
 									       "DocumentTitleFieldName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/DataSourceFieldName",
 									         "type": "string"
 									       },
 									       "ExcludeAttachmentFilePatterns": {
@@ -6593,7 +5930,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         },
 									         "maxItems": 100,
-									         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									         "type": "array"
 									       },
 									       "FieldMappings": {
@@ -6603,23 +5939,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "DataSourceFieldName": {
 									               "maxLength": 100,
 									               "minLength": 1,
-									               "$ref": "#/definitions/DataSourceFieldName",
 									               "type": "string"
 									             },
 									             "DateFieldFormat": {
 									               "maxLength": 40,
 									               "minLength": 4,
-									               "$ref": "#/definitions/DateFieldFormat",
 									               "type": "string"
 									             },
 									             "IndexFieldName": {
 									               "maxLength": 30,
 									               "minLength": 1,
-									               "$ref": "#/definitions/IndexFieldName",
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 									           "required": [
 									             "DataSourceFieldName",
 									             "IndexFieldName"
@@ -6627,7 +5959,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "object"
 									         },
 									         "maxItems": 100,
-									         "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 									         "type": "array"
 									       },
 									       "IncludeAttachmentFilePatterns": {
@@ -6637,11 +5968,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         },
 									         "maxItems": 100,
-									         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/ServiceNowKnowledgeArticleConfiguration",
 									     "required": [
 									       "DocumentDataFieldName"
 									     ],
@@ -6668,7 +5997,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DataSourceFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -6682,7 +6010,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DataSourceFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -6700,7 +6027,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "type": "string"
 												     },
 												     "maxItems": 100,
-												     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 												     "type": "array"
 												   }
 												*/
@@ -6718,23 +6044,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "DataSourceFieldName": {
 												           "maxLength": 100,
 												           "minLength": 1,
-												           "$ref": "#/definitions/DataSourceFieldName",
 												           "type": "string"
 												         },
 												         "DateFieldFormat": {
 												           "maxLength": 40,
 												           "minLength": 4,
-												           "$ref": "#/definitions/DateFieldFormat",
 												           "type": "string"
 												         },
 												         "IndexFieldName": {
 												           "maxLength": 30,
 												           "minLength": 1,
-												           "$ref": "#/definitions/IndexFieldName",
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 												       "required": [
 												         "DataSourceFieldName",
 												         "IndexFieldName"
@@ -6742,7 +6064,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "type": "object"
 												     },
 												     "maxItems": 100,
-												     "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 												     "type": "array"
 												   }
 												*/
@@ -6755,7 +6076,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 100,
 															     "minLength": 1,
-															     "$ref": "#/definitions/DataSourceFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -6769,7 +6089,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 40,
 															     "minLength": 4,
-															     "$ref": "#/definitions/DateFieldFormat",
 															     "type": "string"
 															   }
 															*/
@@ -6783,7 +6102,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 30,
 															     "minLength": 1,
-															     "$ref": "#/definitions/IndexFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -6808,7 +6126,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "type": "string"
 												     },
 												     "maxItems": 100,
-												     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 												     "type": "array"
 												   }
 												*/
@@ -6827,7 +6144,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 1284,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/SecretArn",
 									     "type": "string"
 									   }
 									*/
@@ -6847,13 +6163,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "DocumentDataFieldName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/DataSourceFieldName",
 									         "type": "string"
 									       },
 									       "DocumentTitleFieldName": {
 									         "maxLength": 100,
 									         "minLength": 1,
-									         "$ref": "#/definitions/DataSourceFieldName",
 									         "type": "string"
 									       },
 									       "ExcludeAttachmentFilePatterns": {
@@ -6863,7 +6177,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         },
 									         "maxItems": 100,
-									         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									         "type": "array"
 									       },
 									       "FieldMappings": {
@@ -6873,23 +6186,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "DataSourceFieldName": {
 									               "maxLength": 100,
 									               "minLength": 1,
-									               "$ref": "#/definitions/DataSourceFieldName",
 									               "type": "string"
 									             },
 									             "DateFieldFormat": {
 									               "maxLength": 40,
 									               "minLength": 4,
-									               "$ref": "#/definitions/DateFieldFormat",
 									               "type": "string"
 									             },
 									             "IndexFieldName": {
 									               "maxLength": 30,
 									               "minLength": 1,
-									               "$ref": "#/definitions/IndexFieldName",
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 									           "required": [
 									             "DataSourceFieldName",
 									             "IndexFieldName"
@@ -6897,7 +6206,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "object"
 									         },
 									         "maxItems": 100,
-									         "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 									         "type": "array"
 									       },
 									       "IncludeAttachmentFilePatterns": {
@@ -6907,11 +6215,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         },
 									         "maxItems": 100,
-									         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/ServiceNowServiceCatalogConfiguration",
 									     "required": [
 									       "DocumentDataFieldName"
 									     ],
@@ -6938,7 +6244,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DataSourceFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -6952,7 +6257,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DataSourceFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -6970,7 +6274,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "type": "string"
 												     },
 												     "maxItems": 100,
-												     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 												     "type": "array"
 												   }
 												*/
@@ -6988,23 +6291,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "DataSourceFieldName": {
 												           "maxLength": 100,
 												           "minLength": 1,
-												           "$ref": "#/definitions/DataSourceFieldName",
 												           "type": "string"
 												         },
 												         "DateFieldFormat": {
 												           "maxLength": 40,
 												           "minLength": 4,
-												           "$ref": "#/definitions/DateFieldFormat",
 												           "type": "string"
 												         },
 												         "IndexFieldName": {
 												           "maxLength": 30,
 												           "minLength": 1,
-												           "$ref": "#/definitions/IndexFieldName",
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 												       "required": [
 												         "DataSourceFieldName",
 												         "IndexFieldName"
@@ -7012,7 +6311,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "type": "object"
 												     },
 												     "maxItems": 100,
-												     "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 												     "type": "array"
 												   }
 												*/
@@ -7025,7 +6323,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 100,
 															     "minLength": 1,
-															     "$ref": "#/definitions/DataSourceFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -7039,7 +6336,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 40,
 															     "minLength": 4,
-															     "$ref": "#/definitions/DateFieldFormat",
 															     "type": "string"
 															   }
 															*/
@@ -7053,7 +6349,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															   {
 															     "maxLength": 30,
 															     "minLength": 1,
-															     "$ref": "#/definitions/IndexFieldName",
 															     "type": "string"
 															   }
 															*/
@@ -7078,7 +6373,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "type": "string"
 												     },
 												     "maxItems": 100,
-												     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 												     "type": "array"
 												   }
 												*/
@@ -7098,7 +6392,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "LONDON",
 									       "OTHERS"
 									     ],
-									     "$ref": "#/definitions/ServiceNowBuildVersionType",
 									     "type": "string"
 									   }
 									*/
@@ -7121,13 +6414,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "boolean"
 						       },
 						       "DisableLocalGroups": {
-						         "$ref": "#/definitions/DisableLocalGroups",
 						         "type": "boolean"
 						       },
 						       "DocumentTitleFieldName": {
 						         "maxLength": 100,
 						         "minLength": 1,
-						         "$ref": "#/definitions/DataSourceFieldName",
 						         "type": "string"
 						       },
 						       "ExclusionPatterns": {
@@ -7137,7 +6428,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       },
 						       "FieldMappings": {
@@ -7147,23 +6437,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "DataSourceFieldName": {
 						               "maxLength": 100,
 						               "minLength": 1,
-						               "$ref": "#/definitions/DataSourceFieldName",
 						               "type": "string"
 						             },
 						             "DateFieldFormat": {
 						               "maxLength": 40,
 						               "minLength": 4,
-						               "$ref": "#/definitions/DateFieldFormat",
 						               "type": "string"
 						             },
 						             "IndexFieldName": {
 						               "maxLength": 30,
 						               "minLength": 1,
-						               "$ref": "#/definitions/IndexFieldName",
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 						           "required": [
 						             "DataSourceFieldName",
 						             "IndexFieldName"
@@ -7171,7 +6457,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "object"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 						         "type": "array"
 						       },
 						       "InclusionPatterns": {
@@ -7181,14 +6466,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         },
 						         "maxItems": 100,
-						         "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 						         "type": "array"
 						       },
 						       "SecretArn": {
 						         "maxLength": 1284,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/SecretArn",
 						         "type": "string"
 						       },
 						       "SharePointVersion": {
@@ -7202,7 +6485,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "maxLength": 2048,
 						           "minLength": 1,
 						           "pattern": "",
-						           "$ref": "#/definitions/Url",
 						           "type": "string"
 						         },
 						         "maxItems": 100,
@@ -7235,7 +6517,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/DataSourceVpcConfiguration",
 						         "required": [
 						           "SubnetIds",
 						           "SecurityGroupIds"
@@ -7243,7 +6524,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/SharePointConfiguration",
 						     "required": [
 						       "Urls",
 						       "SecretArn",
@@ -7271,7 +6551,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/DisableLocalGroups",
 									     "type": "boolean"
 									   }
 									*/
@@ -7285,7 +6564,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "maxLength": 100,
 									     "minLength": 1,
-									     "$ref": "#/definitions/DataSourceFieldName",
 									     "type": "string"
 									   }
 									*/
@@ -7303,7 +6581,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -7321,23 +6598,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "DataSourceFieldName": {
 									           "maxLength": 100,
 									           "minLength": 1,
-									           "$ref": "#/definitions/DataSourceFieldName",
 									           "type": "string"
 									         },
 									         "DateFieldFormat": {
 									           "maxLength": 40,
 									           "minLength": 4,
-									           "$ref": "#/definitions/DateFieldFormat",
 									           "type": "string"
 									         },
 									         "IndexFieldName": {
 									           "maxLength": 30,
 									           "minLength": 1,
-									           "$ref": "#/definitions/IndexFieldName",
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/DataSourceToIndexFieldMapping",
 									       "required": [
 									         "DataSourceFieldName",
 									         "IndexFieldName"
@@ -7345,7 +6618,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "object"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceToIndexFieldMappingList",
 									     "type": "array"
 									   }
 									*/
@@ -7358,7 +6630,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 100,
 												     "minLength": 1,
-												     "$ref": "#/definitions/DataSourceFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -7372,7 +6643,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 40,
 												     "minLength": 4,
-												     "$ref": "#/definitions/DateFieldFormat",
 												     "type": "string"
 												   }
 												*/
@@ -7386,7 +6656,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 30,
 												     "minLength": 1,
-												     "$ref": "#/definitions/IndexFieldName",
 												     "type": "string"
 												   }
 												*/
@@ -7411,7 +6680,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "type": "string"
 									     },
 									     "maxItems": 100,
-									     "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings",
 									     "type": "array"
 									   }
 									*/
@@ -7426,7 +6694,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 1284,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/SecretArn",
 									     "type": "string"
 									   }
 									*/
@@ -7456,7 +6723,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "maxLength": 2048,
 									       "minLength": 1,
 									       "pattern": "",
-									       "$ref": "#/definitions/Url",
 									       "type": "string"
 									     },
 									     "maxItems": 100,
@@ -7505,7 +6771,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/DataSourceVpcConfiguration",
 									     "required": [
 									       "SubnetIds",
 									       "SecurityGroupIds"
@@ -7571,7 +6836,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Description of data source",
 			     "maxLength": 1000,
 			     "minLength": 1,
-			     "$ref": "#/definitions/Description",
 			     "type": "string"
 			   }
 			*/
@@ -7587,7 +6851,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "ID of data source",
 			     "maxLength": 100,
 			     "minLength": 1,
-			     "$ref": "#/definitions/Id",
 			     "type": "string"
 			   }
 			*/
@@ -7603,7 +6866,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "ID of Index",
 			     "maxLength": 36,
 			     "minLength": 36,
-			     "$ref": "#/definitions/IndexId",
 			     "type": "string"
 			   }
 			*/
@@ -7619,7 +6881,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Name of data source",
 			     "maxLength": 1000,
 			     "minLength": 1,
-			     "$ref": "#/definitions/Name",
 			     "type": "string"
 			   }
 			*/
@@ -7636,7 +6897,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 1284,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/RoleArn",
 			     "type": "string"
 			   }
 			*/
@@ -7651,7 +6911,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "description": "Schedule",
 			     "maxLength": 1000,
-			     "$ref": "#/definitions/Schedule",
 			     "type": "string"
 			   }
 			*/
@@ -7682,7 +6941,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -7690,7 +6948,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "type": "object"
 			     },
 			     "maxItems": 200,
-			     "$ref": "#/definitions/TagList",
 			     "type": "array"
 			   }
 			*/
@@ -7751,7 +7008,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "CONFLUENCE",
 			       "GOOGLEDRIVE"
 			     ],
-			     "$ref": "#/definitions/Type",
 			     "type": "string"
 			   }
 			*/

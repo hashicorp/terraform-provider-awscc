@@ -44,7 +44,6 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			     "maxLength": 256,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ModelPackageGroupArn",
 			     "type": "string"
 			   }
 			*/
@@ -60,7 +59,6 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			     "description": "The description of the model package group.",
 			     "maxLength": 1024,
 			     "pattern": "",
-			     "$ref": "#/definitions/ModelPackageGroupDescription",
 			     "type": "string"
 			   }
 			*/
@@ -78,7 +76,6 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			     "description": "The name of the model package group.",
 			     "maxLength": 63,
 			     "pattern": "",
-			     "$ref": "#/definitions/ModelPackageGroupName",
 			     "type": "string"
 			   }
 			*/
@@ -143,7 +140,6 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

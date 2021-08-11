@@ -111,11 +111,9 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/S3Logs",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/Logging",
 			     "type": "object"
 			   }
 			*/
@@ -139,7 +137,6 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/S3Logs",
 						     "type": "object"
 						   }
 						*/

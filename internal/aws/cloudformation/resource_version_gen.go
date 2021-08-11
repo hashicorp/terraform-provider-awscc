@@ -85,7 +85,6 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/LoggingConfig",
 			     "type": "object"
 			   }
 			*/

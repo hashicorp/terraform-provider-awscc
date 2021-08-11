@@ -59,7 +59,6 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "array"
 			         }
 			       },
-			       "$ref": "#/definitions/AttachmentsSource",
 			       "type": "object"
 			     },
 			     "maxItems": 20,
@@ -236,7 +235,6 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/DocumentRequires",
 			       "type": "object"
 			     },
 			     "minItems": 1,
@@ -309,7 +307,6 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "maxItems": 1000,

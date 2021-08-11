@@ -50,7 +50,6 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "pattern": "",
-			     "$ref": "#/definitions/BackupVaultNamePattern",
 			     "type": "string"
 			   }
 			*/
@@ -107,7 +106,6 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/NotificationObjectType",
 			     "required": [
 			       "SNSTopicArn",
 			       "BackupVaultEvents"

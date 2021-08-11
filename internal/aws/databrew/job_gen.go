@@ -60,14 +60,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/S3Location",
 			               "required": [
 			                 "Bucket"
 			               ],
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/DatabaseTableOutputOptions",
 			           "required": [
 			             "TableName"
 			           ],
@@ -90,14 +88,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/S3Location",
 			               "required": [
 			                 "Bucket"
 			               ],
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/S3TableOutputOptions",
 			           "required": [
 			             "Location"
 			           ],
@@ -109,7 +105,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/DataCatalogOutput",
 			       "required": [
 			         "DatabaseName",
 			         "TableName"
@@ -170,14 +165,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/S3Location",
 						         "required": [
 						           "Bucket"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/DatabaseTableOutputOptions",
 						     "required": [
 						       "TableName"
 						     ],
@@ -214,7 +207,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3Location",
 									     "required": [
 									       "Bucket"
 									     ],
@@ -283,14 +275,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/S3Location",
 						         "required": [
 						           "Bucket"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/S3TableOutputOptions",
 						     "required": [
 						       "Location"
 						     ],
@@ -314,7 +304,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3Location",
 									     "required": [
 									       "Bucket"
 									     ],
@@ -400,14 +389,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/S3Location",
 			               "required": [
 			                 "Bucket"
 			               ],
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/DatabaseTableOutputOptions",
 			           "required": [
 			             "TableName"
 			           ],
@@ -425,7 +412,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/DatabaseOutput",
 			       "required": [
 			         "GlueConnectionName",
 			         "DatabaseOptions"
@@ -460,14 +446,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/S3Location",
 						         "required": [
 						           "Bucket"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/DatabaseTableOutputOptions",
 						     "required": [
 						       "TableName"
 						     ],
@@ -504,7 +488,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3Location",
 									     "required": [
 									       "Bucket"
 									     ],
@@ -639,17 +622,14 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "FULL_DATASET",
 			           "CUSTOM_ROWS"
 			         ],
-			         "$ref": "#/definitions/SampleMode",
 			         "type": "string"
 			       },
 			       "Size": {
 			         "description": "Sample configuration size for profile jobs.",
 			         "format": "int64",
-			         "$ref": "#/definitions/JobSize",
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/JobSample",
 			     "type": "object"
 			   }
 			*/
@@ -666,7 +646,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "FULL_DATASET",
 						       "CUSTOM_ROWS"
 						     ],
-						     "$ref": "#/definitions/SampleMode",
 						     "type": "string"
 						   }
 						*/
@@ -681,7 +660,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						   {
 						     "description": "Sample configuration size for profile jobs.",
 						     "format": "int64",
-						     "$ref": "#/definitions/JobSize",
 						     "type": "integer"
 						   }
 						*/
@@ -767,7 +745,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/OutputLocation",
 			     "required": [
 			       "Bucket"
 			     ],
@@ -852,11 +829,9 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/CsvOutputOptions",
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/OutputFormatOptions",
 			           "type": "object"
 			         },
 			         "Location": {
@@ -870,7 +845,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/S3Location",
 			           "required": [
 			             "Bucket"
 			           ],
@@ -888,7 +862,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "uniqueItems": true
 			         }
 			       },
-			       "$ref": "#/definitions/Output",
 			       "required": [
 			         "Location"
 			       ],
@@ -959,11 +932,9 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/CsvOutputOptions",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/OutputFormatOptions",
 						     "type": "object"
 						   }
 						*/
@@ -984,7 +955,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CsvOutputOptions",
 									     "type": "object"
 									   }
 									*/
@@ -1027,7 +997,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/S3Location",
 						     "required": [
 						       "Bucket"
 						     ],
@@ -1124,7 +1093,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ColumnSelector",
 			                 "type": "object"
 			               },
 			               "minItems": 1,
@@ -1139,7 +1107,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "maxLength": 128,
 			                     "minLength": 1,
 			                     "pattern": "",
-			                     "$ref": "#/definitions/Statistic",
 			                     "type": "string"
 			                   },
 			                   "minItems": 1,
@@ -1157,18 +1124,15 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "type": "string"
 			                           }
 			                         },
-			                         "$ref": "#/definitions/ParameterMap",
 			                         "type": "object"
 			                       },
 			                       "Statistic": {
 			                         "maxLength": 128,
 			                         "minLength": 1,
 			                         "pattern": "",
-			                         "$ref": "#/definitions/Statistic",
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/StatisticOverride",
 			                     "required": [
 			                       "Statistic",
 			                       "Parameters"
@@ -1179,11 +1143,9 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "array"
 			                 }
 			               },
-			               "$ref": "#/definitions/StatisticsConfiguration",
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/ColumnStatisticsConfiguration",
 			           "required": [
 			             "Statistics"
 			           ],
@@ -1201,7 +1163,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "maxLength": 128,
 			               "minLength": 1,
 			               "pattern": "",
-			               "$ref": "#/definitions/Statistic",
 			               "type": "string"
 			             },
 			             "minItems": 1,
@@ -1219,18 +1180,15 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/ParameterMap",
 			                   "type": "object"
 			                 },
 			                 "Statistic": {
 			                   "maxLength": 128,
 			                   "minLength": 1,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/Statistic",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/StatisticOverride",
 			               "required": [
 			                 "Statistic",
 			                 "Parameters"
@@ -1241,7 +1199,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/StatisticsConfiguration",
 			         "type": "object"
 			       },
 			       "ProfileColumns": {
@@ -1260,14 +1217,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/ColumnSelector",
 			           "type": "object"
 			         },
 			         "minItems": 1,
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/ProfileConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -1298,7 +1253,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/ColumnSelector",
 						             "type": "object"
 						           },
 						           "minItems": 1,
@@ -1313,7 +1267,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "maxLength": 128,
 						                 "minLength": 1,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/Statistic",
 						                 "type": "string"
 						               },
 						               "minItems": 1,
@@ -1331,18 +1284,15 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                         "type": "string"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/ParameterMap",
 						                     "type": "object"
 						                   },
 						                   "Statistic": {
 						                     "maxLength": 128,
 						                     "minLength": 1,
 						                     "pattern": "",
-						                     "$ref": "#/definitions/Statistic",
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/StatisticOverride",
 						                 "required": [
 						                   "Statistic",
 						                   "Parameters"
@@ -1353,11 +1303,9 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "array"
 						             }
 						           },
-						           "$ref": "#/definitions/StatisticsConfiguration",
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/ColumnStatisticsConfiguration",
 						       "required": [
 						         "Statistics"
 						       ],
@@ -1389,7 +1337,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/ColumnSelector",
 									       "type": "object"
 									     },
 									     "minItems": 1,
@@ -1444,7 +1391,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "maxLength": 128,
 									           "minLength": 1,
 									           "pattern": "",
-									           "$ref": "#/definitions/Statistic",
 									           "type": "string"
 									         },
 									         "minItems": 1,
@@ -1462,18 +1408,15 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "type": "string"
 									                 }
 									               },
-									               "$ref": "#/definitions/ParameterMap",
 									               "type": "object"
 									             },
 									             "Statistic": {
 									               "maxLength": 128,
 									               "minLength": 1,
 									               "pattern": "",
-									               "$ref": "#/definitions/Statistic",
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/StatisticOverride",
 									           "required": [
 									             "Statistic",
 									             "Parameters"
@@ -1484,7 +1427,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/StatisticsConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -1500,7 +1442,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "maxLength": 128,
 												       "minLength": 1,
 												       "pattern": "",
-												       "$ref": "#/definitions/Statistic",
 												       "type": "string"
 												     },
 												     "minItems": 1,
@@ -1526,18 +1467,15 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/ParameterMap",
 												           "type": "object"
 												         },
 												         "Statistic": {
 												           "maxLength": 128,
 												           "minLength": 1,
 												           "pattern": "",
-												           "$ref": "#/definitions/Statistic",
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/StatisticOverride",
 												       "required": [
 												         "Statistic",
 												         "Parameters"
@@ -1561,7 +1499,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/ParameterMap",
 															     "type": "object"
 															   }
 															*/
@@ -1577,7 +1514,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															     "maxLength": 128,
 															     "minLength": 1,
 															     "pattern": "",
-															     "$ref": "#/definitions/Statistic",
 															     "type": "string"
 															   }
 															*/
@@ -1615,7 +1551,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "maxLength": 128,
 						           "minLength": 1,
 						           "pattern": "",
-						           "$ref": "#/definitions/Statistic",
 						           "type": "string"
 						         },
 						         "minItems": 1,
@@ -1633,18 +1568,15 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/ParameterMap",
 						               "type": "object"
 						             },
 						             "Statistic": {
 						               "maxLength": 128,
 						               "minLength": 1,
 						               "pattern": "",
-						               "$ref": "#/definitions/Statistic",
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/StatisticOverride",
 						           "required": [
 						             "Statistic",
 						             "Parameters"
@@ -1655,7 +1587,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/StatisticsConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -1671,7 +1602,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "maxLength": 128,
 									       "minLength": 1,
 									       "pattern": "",
-									       "$ref": "#/definitions/Statistic",
 									       "type": "string"
 									     },
 									     "minItems": 1,
@@ -1697,18 +1627,15 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/ParameterMap",
 									           "type": "object"
 									         },
 									         "Statistic": {
 									           "maxLength": 128,
 									           "minLength": 1,
 									           "pattern": "",
-									           "$ref": "#/definitions/Statistic",
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/StatisticOverride",
 									       "required": [
 									         "Statistic",
 									         "Parameters"
@@ -1732,7 +1659,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/ParameterMap",
 												     "type": "object"
 												   }
 												*/
@@ -1748,7 +1674,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "maxLength": 128,
 												     "minLength": 1,
 												     "pattern": "",
-												     "$ref": "#/definitions/Statistic",
 												     "type": "string"
 												   }
 												*/
@@ -1786,7 +1711,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/ColumnSelector",
 						       "type": "object"
 						     },
 						     "minItems": 1,
@@ -1863,7 +1787,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Recipe",
 			     "required": [
 			       "Name"
 			     ],
@@ -1936,7 +1859,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

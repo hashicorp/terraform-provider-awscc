@@ -31,7 +31,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 2048,
 			     "minLength": 20,
 			     "pattern": "",
-			     "$ref": "#/definitions/AssessmentArn",
 			     "type": "string"
 			   }
 			*/
@@ -47,7 +46,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 36,
 			     "minLength": 36,
 			     "pattern": "",
-			     "$ref": "#/definitions/UUID",
 			     "type": "string"
 			   }
 			*/
@@ -64,7 +62,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "properties": {
 			       "Destination": {
 			         "description": "The URL of the specified Amazon S3 bucket.",
-			         "$ref": "#/definitions/S3Url",
 			         "type": "string"
 			       },
 			       "DestinationType": {
@@ -72,11 +69,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "enum": [
 			           "S3"
 			         ],
-			         "$ref": "#/definitions/AssessmentReportDestinationType",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/AssessmentReportsDestination",
 			     "type": "object"
 			   }
 			*/
@@ -89,7 +84,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "The URL of the specified Amazon S3 bucket.",
-						     "$ref": "#/definitions/S3Url",
 						     "type": "string"
 						   }
 						*/
@@ -106,7 +100,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "enum": [
 						       "S3"
 						     ],
-						     "$ref": "#/definitions/AssessmentReportDestinationType",
 						     "type": "string"
 						   }
 						*/
@@ -131,7 +124,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "maxLength": 320,
 			         "minLength": 1,
 			         "pattern": "",
-			         "$ref": "#/definitions/EmailAddress",
 			         "type": "string"
 			       },
 			       "Id": {
@@ -139,7 +131,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "maxLength": 12,
 			         "minLength": 12,
 			         "pattern": "",
-			         "$ref": "#/definitions/AccountId",
 			         "type": "string"
 			       },
 			       "Name": {
@@ -147,11 +138,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "maxLength": 50,
 			         "minLength": 1,
 			         "pattern": "",
-			         "$ref": "#/definitions/AccountName",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/AWSAccount",
 			     "type": "object"
 			   }
 			*/
@@ -167,7 +156,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 320,
 						     "minLength": 1,
 						     "pattern": "",
-						     "$ref": "#/definitions/EmailAddress",
 						     "type": "string"
 						   }
 						*/
@@ -184,7 +172,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 12,
 						     "minLength": 12,
 						     "pattern": "",
-						     "$ref": "#/definitions/AccountId",
 						     "type": "string"
 						   }
 						*/
@@ -201,7 +188,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 50,
 						     "minLength": 1,
 						     "pattern": "",
-						     "$ref": "#/definitions/AccountName",
 						     "type": "string"
 						   }
 						*/
@@ -221,7 +207,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "The sequence of characters that identifies when the event occurred.",
-			     "$ref": "#/definitions/Timestamp",
 			     "type": "number"
 			   }
 			*/
@@ -243,7 +228,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "maxLength": 36,
 			           "minLength": 36,
 			           "pattern": "",
-			           "$ref": "#/definitions/UUID",
 			           "type": "string"
 			         },
 			         "AssessmentName": {
@@ -251,14 +235,12 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "maxLength": 127,
 			           "minLength": 1,
 			           "pattern": "",
-			           "$ref": "#/definitions/AssessmentName",
 			           "type": "string"
 			         },
 			         "Comment": {
 			           "description": "The comment related to the delegation.",
 			           "maxLength": 350,
 			           "pattern": "",
-			           "$ref": "#/definitions/DelegationComment",
 			           "type": "string"
 			         },
 			         "ControlSetId": {
@@ -266,7 +248,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "maxLength": 300,
 			           "minLength": 1,
 			           "pattern": "",
-			           "$ref": "#/definitions/ControlSetId",
 			           "type": "string"
 			         },
 			         "CreatedBy": {
@@ -274,24 +255,20 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "maxLength": 100,
 			           "minLength": 1,
 			           "pattern": "",
-			           "$ref": "#/definitions/CreatedBy",
 			           "type": "string"
 			         },
 			         "CreationTime": {
 			           "description": "The sequence of characters that identifies when the event occurred.",
-			           "$ref": "#/definitions/Timestamp",
 			           "type": "number"
 			         },
 			         "Id": {
 			           "maxLength": 36,
 			           "minLength": 36,
 			           "pattern": "",
-			           "$ref": "#/definitions/UUID",
 			           "type": "string"
 			         },
 			         "LastUpdated": {
 			           "description": "The sequence of characters that identifies when the event occurred.",
-			           "$ref": "#/definitions/Timestamp",
 			           "type": "number"
 			         },
 			         "RoleArn": {
@@ -299,7 +276,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "maxLength": 2048,
 			           "minLength": 20,
 			           "pattern": "",
-			           "$ref": "#/definitions/IamArn",
 			           "type": "string"
 			         },
 			         "RoleType": {
@@ -308,7 +284,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "PROCESS_OWNER",
 			             "RESOURCE_OWNER"
 			           ],
-			           "$ref": "#/definitions/RoleType",
 			           "type": "string"
 			         },
 			         "Status": {
@@ -318,11 +293,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "UNDER_REVIEW",
 			             "COMPLETE"
 			           ],
-			           "$ref": "#/definitions/DelegationStatus",
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Delegation",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -339,7 +312,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 36,
 						     "minLength": 36,
 						     "pattern": "",
-						     "$ref": "#/definitions/UUID",
 						     "type": "string"
 						   }
 						*/
@@ -355,7 +327,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 127,
 						     "minLength": 1,
 						     "pattern": "",
-						     "$ref": "#/definitions/AssessmentName",
 						     "type": "string"
 						   }
 						*/
@@ -371,7 +342,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "description": "The comment related to the delegation.",
 						     "maxLength": 350,
 						     "pattern": "",
-						     "$ref": "#/definitions/DelegationComment",
 						     "type": "string"
 						   }
 						*/
@@ -388,7 +358,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 300,
 						     "minLength": 1,
 						     "pattern": "",
-						     "$ref": "#/definitions/ControlSetId",
 						     "type": "string"
 						   }
 						*/
@@ -405,7 +374,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 100,
 						     "minLength": 1,
 						     "pattern": "",
-						     "$ref": "#/definitions/CreatedBy",
 						     "type": "string"
 						   }
 						*/
@@ -419,7 +387,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "The sequence of characters that identifies when the event occurred.",
-						     "$ref": "#/definitions/Timestamp",
 						     "type": "number"
 						   }
 						*/
@@ -435,7 +402,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 36,
 						     "minLength": 36,
 						     "pattern": "",
-						     "$ref": "#/definitions/UUID",
 						     "type": "string"
 						   }
 						*/
@@ -448,7 +414,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "The sequence of characters that identifies when the event occurred.",
-						     "$ref": "#/definitions/Timestamp",
 						     "type": "number"
 						   }
 						*/
@@ -465,7 +430,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 2048,
 						     "minLength": 20,
 						     "pattern": "",
-						     "$ref": "#/definitions/IamArn",
 						     "type": "string"
 						   }
 						*/
@@ -483,7 +447,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "PROCESS_OWNER",
 						       "RESOURCE_OWNER"
 						     ],
-						     "$ref": "#/definitions/RoleType",
 						     "type": "string"
 						   }
 						*/
@@ -502,7 +465,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "UNDER_REVIEW",
 						       "COMPLETE"
 						     ],
-						     "$ref": "#/definitions/DelegationStatus",
 						     "type": "string"
 						   }
 						*/
@@ -521,7 +483,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "The description of the specified assessment.",
-			     "$ref": "#/definitions/AssessmentDescription",
 			     "type": "string"
 			   }
 			*/
@@ -539,7 +500,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 36,
 			     "minLength": 32,
 			     "pattern": "",
-			     "$ref": "#/definitions/FrameworkId",
 			     "type": "string"
 			   }
 			*/
@@ -558,7 +518,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 127,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/AssessmentName",
 			     "type": "string"
 			   }
 			*/
@@ -582,7 +541,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "maxLength": 2048,
 			           "minLength": 20,
 			           "pattern": "",
-			           "$ref": "#/definitions/IamArn",
 			           "type": "string"
 			         },
 			         "RoleType": {
@@ -591,11 +549,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "PROCESS_OWNER",
 			             "RESOURCE_OWNER"
 			           ],
-			           "$ref": "#/definitions/RoleType",
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Role",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -613,7 +569,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 2048,
 						     "minLength": 20,
 						     "pattern": "",
-						     "$ref": "#/definitions/IamArn",
 						     "type": "string"
 						   }
 						*/
@@ -631,7 +586,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "PROCESS_OWNER",
 						       "RESOURCE_OWNER"
 						     ],
-						     "$ref": "#/definitions/RoleType",
 						     "type": "string"
 						   }
 						*/
@@ -663,7 +617,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "maxLength": 320,
 			               "minLength": 1,
 			               "pattern": "",
-			               "$ref": "#/definitions/EmailAddress",
 			               "type": "string"
 			             },
 			             "Id": {
@@ -671,7 +624,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "maxLength": 12,
 			               "minLength": 12,
 			               "pattern": "",
-			               "$ref": "#/definitions/AccountId",
 			               "type": "string"
 			             },
 			             "Name": {
@@ -679,11 +631,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "maxLength": 50,
 			               "minLength": 1,
 			               "pattern": "",
-			               "$ref": "#/definitions/AccountName",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AWSAccount",
 			           "type": "object"
 			         },
 			         "type": "array"
@@ -696,17 +646,14 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "properties": {
 			             "ServiceName": {
 			               "description": "The name of the AWS service.",
-			               "$ref": "#/definitions/AWSServiceName",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AWSService",
 			           "type": "object"
 			         },
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/Scope",
 			     "type": "object"
 			   }
 			*/
@@ -728,7 +675,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "maxLength": 320,
 						           "minLength": 1,
 						           "pattern": "",
-						           "$ref": "#/definitions/EmailAddress",
 						           "type": "string"
 						         },
 						         "Id": {
@@ -736,7 +682,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "maxLength": 12,
 						           "minLength": 12,
 						           "pattern": "",
-						           "$ref": "#/definitions/AccountId",
 						           "type": "string"
 						         },
 						         "Name": {
@@ -744,11 +689,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "maxLength": 50,
 						           "minLength": 1,
 						           "pattern": "",
-						           "$ref": "#/definitions/AccountName",
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/AWSAccount",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -766,7 +709,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 320,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/EmailAddress",
 									     "type": "string"
 									   }
 									*/
@@ -783,7 +725,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 12,
 									     "minLength": 12,
 									     "pattern": "",
-									     "$ref": "#/definitions/AccountId",
 									     "type": "string"
 									   }
 									*/
@@ -800,7 +741,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 50,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/AccountName",
 									     "type": "string"
 									   }
 									*/
@@ -825,11 +765,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "properties": {
 						         "ServiceName": {
 						           "description": "The name of the AWS service.",
-						           "$ref": "#/definitions/AWSServiceName",
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/AWSService",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -844,7 +782,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "The name of the AWS service.",
-									     "$ref": "#/definitions/AWSServiceName",
 									     "type": "string"
 									   }
 									*/
@@ -871,7 +808,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "ACTIVE",
 			       "INACTIVE"
 			     ],
-			     "$ref": "#/definitions/AssessmentStatus",
 			     "type": "string"
 			   }
 			*/
@@ -902,7 +838,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

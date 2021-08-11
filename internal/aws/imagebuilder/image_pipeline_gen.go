@@ -117,7 +117,6 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/ImageTestsConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -203,7 +202,6 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Schedule",
 			     "type": "object"
 			   }
 			*/

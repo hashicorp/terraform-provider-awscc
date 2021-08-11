@@ -34,16 +34,13 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "properties": {
 			         "CapabilityConfiguration": {
 			           "description": "The JSON document that defines the gateway capability's configuration.",
-			           "$ref": "#/definitions/CapabilityConfiguration",
 			           "type": "string"
 			         },
 			         "CapabilityNamespace": {
 			           "description": "The namespace of the capability configuration.",
-			           "$ref": "#/definitions/CapabilityNamespace",
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/GatewayCapabilitySummary",
 			       "required": [
 			         "CapabilityNamespace"
 			       ],
@@ -63,7 +60,6 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "The JSON document that defines the gateway capability's configuration.",
-						     "$ref": "#/definitions/CapabilityConfiguration",
 						     "type": "string"
 						   }
 						*/
@@ -77,7 +73,6 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "The namespace of the capability configuration.",
-						     "$ref": "#/definitions/CapabilityNamespace",
 						     "type": "string"
 						   }
 						*/
@@ -133,14 +128,12 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/Greengrass",
 			         "required": [
 			           "GroupArn"
 			         ],
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/GatewayPlatform",
 			     "required": [
 			       "Greengrass"
 			     ],
@@ -163,7 +156,6 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/Greengrass",
 						     "required": [
 						       "GroupArn"
 						     ],
@@ -212,7 +204,6 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

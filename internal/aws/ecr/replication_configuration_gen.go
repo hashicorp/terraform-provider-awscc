@@ -58,17 +58,14 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			                   "Region": {
 			                     "description": "A Region to replicate to.",
 			                     "pattern": "",
-			                     "$ref": "#/definitions/Region",
 			                     "type": "string"
 			                   },
 			                   "RegistryId": {
 			                     "description": "The account ID of the destination registry to replicate to.",
 			                     "pattern": "",
-			                     "$ref": "#/definitions/RegistryId",
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ReplicationDestination",
 			                 "required": [
 			                   "Region",
 			                   "RegistryId"
@@ -80,7 +77,6 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/ReplicationRule",
 			           "required": [
 			             "Destinations"
 			           ],
@@ -91,7 +87,6 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/ReplicationConfiguration",
 			     "required": [
 			       "Rules"
 			     ],
@@ -120,17 +115,14 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 						               "Region": {
 						                 "description": "A Region to replicate to.",
 						                 "pattern": "",
-						                 "$ref": "#/definitions/Region",
 						                 "type": "string"
 						               },
 						               "RegistryId": {
 						                 "description": "The account ID of the destination registry to replicate to.",
 						                 "pattern": "",
-						                 "$ref": "#/definitions/RegistryId",
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/ReplicationDestination",
 						             "required": [
 						               "Region",
 						               "RegistryId"
@@ -142,7 +134,6 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 						           "type": "array"
 						         }
 						       },
-						       "$ref": "#/definitions/ReplicationRule",
 						       "required": [
 						         "Destinations"
 						       ],
@@ -169,17 +160,14 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 									         "Region": {
 									           "description": "A Region to replicate to.",
 									           "pattern": "",
-									           "$ref": "#/definitions/Region",
 									           "type": "string"
 									         },
 									         "RegistryId": {
 									           "description": "The account ID of the destination registry to replicate to.",
 									           "pattern": "",
-									           "$ref": "#/definitions/RegistryId",
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/ReplicationDestination",
 									       "required": [
 									         "Region",
 									         "RegistryId"
@@ -201,7 +189,6 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 												   {
 												     "description": "A Region to replicate to.",
 												     "pattern": "",
-												     "$ref": "#/definitions/Region",
 												     "type": "string"
 												   }
 												*/
@@ -216,7 +203,6 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 												   {
 												     "description": "The account ID of the destination registry to replicate to.",
 												     "pattern": "",
-												     "$ref": "#/definitions/RegistryId",
 												     "type": "string"
 												   }
 												*/

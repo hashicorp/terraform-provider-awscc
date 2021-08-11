@@ -113,7 +113,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/AlarmMetric",
 			                     "required": [
 			                       "AlarmMetricName"
 			                     ],
@@ -143,7 +142,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/Alarm",
 			                     "required": [
 			                       "AlarmName"
 			                     ],
@@ -168,7 +166,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/JMXPrometheusExporter",
 			                   "type": "object"
 			                 },
 			                 "Logs": {
@@ -213,7 +210,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/Log",
 			                     "required": [
 			                       "LogType"
 			                     ],
@@ -238,7 +234,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "CRITICAL",
 			                             "VERBOSE"
 			                           ],
-			                           "$ref": "#/definitions/EventLevel",
 			                           "type": "string"
 			                         },
 			                         "minItems": 1,
@@ -266,7 +261,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/WindowsEvent",
 			                     "required": [
 			                       "LogGroupName",
 			                       "EventName",
@@ -277,7 +271,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "array"
 			                 }
 			               },
-			               "$ref": "#/definitions/ConfigurationDetails",
 			               "type": "object"
 			             },
 			             "SubComponentTypeConfigurations": {
@@ -301,7 +294,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                               "type": "string"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/AlarmMetric",
 			                           "required": [
 			                             "AlarmMetricName"
 			                           ],
@@ -351,7 +343,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                               "type": "string"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/Log",
 			                           "required": [
 			                             "LogType"
 			                           ],
@@ -376,7 +367,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                                   "CRITICAL",
 			                                   "VERBOSE"
 			                                 ],
-			                                 "$ref": "#/definitions/EventLevel",
 			                                 "type": "string"
 			                               },
 			                               "minItems": 1,
@@ -404,7 +394,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                               "type": "string"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/WindowsEvent",
 			                           "required": [
 			                             "LogGroupName",
 			                             "EventName",
@@ -415,7 +404,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "array"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/SubComponentConfigurationDetails",
 			                     "type": "object"
 			                   },
 			                   "SubComponentType": {
@@ -427,7 +415,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/SubComponentTypeConfiguration",
 			                 "required": [
 			                   "SubComponentType",
 			                   "SubComponentConfigurationDetails"
@@ -438,7 +425,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/ComponentConfiguration",
 			           "type": "object"
 			         },
 			         "DefaultOverwriteComponentConfiguration": {
@@ -460,7 +446,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/AlarmMetric",
 			                     "required": [
 			                       "AlarmMetricName"
 			                     ],
@@ -490,7 +475,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/Alarm",
 			                     "required": [
 			                       "AlarmName"
 			                     ],
@@ -515,7 +499,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/JMXPrometheusExporter",
 			                   "type": "object"
 			                 },
 			                 "Logs": {
@@ -560,7 +543,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/Log",
 			                     "required": [
 			                       "LogType"
 			                     ],
@@ -585,7 +567,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "CRITICAL",
 			                             "VERBOSE"
 			                           ],
-			                           "$ref": "#/definitions/EventLevel",
 			                           "type": "string"
 			                         },
 			                         "minItems": 1,
@@ -613,7 +594,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/WindowsEvent",
 			                     "required": [
 			                       "LogGroupName",
 			                       "EventName",
@@ -624,7 +604,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "array"
 			                 }
 			               },
-			               "$ref": "#/definitions/ConfigurationDetails",
 			               "type": "object"
 			             },
 			             "SubComponentTypeConfigurations": {
@@ -648,7 +627,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                               "type": "string"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/AlarmMetric",
 			                           "required": [
 			                             "AlarmMetricName"
 			                           ],
@@ -698,7 +676,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                               "type": "string"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/Log",
 			                           "required": [
 			                             "LogType"
 			                           ],
@@ -723,7 +700,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                                   "CRITICAL",
 			                                   "VERBOSE"
 			                                 ],
-			                                 "$ref": "#/definitions/EventLevel",
 			                                 "type": "string"
 			                               },
 			                               "minItems": 1,
@@ -751,7 +727,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                               "type": "string"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/WindowsEvent",
 			                           "required": [
 			                             "LogGroupName",
 			                             "EventName",
@@ -762,7 +737,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "array"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/SubComponentConfigurationDetails",
 			                     "type": "object"
 			                   },
 			                   "SubComponentType": {
@@ -774,7 +748,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/SubComponentTypeConfiguration",
 			                 "required": [
 			                   "SubComponentType",
 			                   "SubComponentConfigurationDetails"
@@ -785,7 +758,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/ComponentConfiguration",
 			           "type": "object"
 			         },
 			         "Tier": {
@@ -794,7 +766,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ComponentMonitoringSetting",
 			       "required": [
 			         "Tier",
 			         "ComponentConfigurationMode"
@@ -881,7 +852,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/AlarmMetric",
 						               "required": [
 						                 "AlarmMetricName"
 						               ],
@@ -911,7 +881,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/Alarm",
 						               "required": [
 						                 "AlarmName"
 						               ],
@@ -936,7 +905,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/JMXPrometheusExporter",
 						             "type": "object"
 						           },
 						           "Logs": {
@@ -981,7 +949,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/Log",
 						               "required": [
 						                 "LogType"
 						               ],
@@ -1006,7 +973,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "CRITICAL",
 						                       "VERBOSE"
 						                     ],
-						                     "$ref": "#/definitions/EventLevel",
 						                     "type": "string"
 						                   },
 						                   "minItems": 1,
@@ -1034,7 +1000,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/WindowsEvent",
 						               "required": [
 						                 "LogGroupName",
 						                 "EventName",
@@ -1045,7 +1010,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/ConfigurationDetails",
 						         "type": "object"
 						       },
 						       "SubComponentTypeConfigurations": {
@@ -1069,7 +1033,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                         "type": "string"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/AlarmMetric",
 						                     "required": [
 						                       "AlarmMetricName"
 						                     ],
@@ -1119,7 +1082,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                         "type": "string"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/Log",
 						                     "required": [
 						                       "LogType"
 						                     ],
@@ -1144,7 +1106,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                             "CRITICAL",
 						                             "VERBOSE"
 						                           ],
-						                           "$ref": "#/definitions/EventLevel",
 						                           "type": "string"
 						                         },
 						                         "minItems": 1,
@@ -1172,7 +1133,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                         "type": "string"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/WindowsEvent",
 						                     "required": [
 						                       "LogGroupName",
 						                       "EventName",
@@ -1183,7 +1143,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "array"
 						                 }
 						               },
-						               "$ref": "#/definitions/SubComponentConfigurationDetails",
 						               "type": "object"
 						             },
 						             "SubComponentType": {
@@ -1195,7 +1154,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/SubComponentTypeConfiguration",
 						           "required": [
 						             "SubComponentType",
 						             "SubComponentConfigurationDetails"
@@ -1206,7 +1164,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/ComponentConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -1232,7 +1189,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/AlarmMetric",
 									           "required": [
 									             "AlarmMetricName"
 									           ],
@@ -1262,7 +1218,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/Alarm",
 									           "required": [
 									             "AlarmName"
 									           ],
@@ -1287,7 +1242,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/JMXPrometheusExporter",
 									         "type": "object"
 									       },
 									       "Logs": {
@@ -1332,7 +1286,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/Log",
 									           "required": [
 									             "LogType"
 									           ],
@@ -1357,7 +1310,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "CRITICAL",
 									                   "VERBOSE"
 									                 ],
-									                 "$ref": "#/definitions/EventLevel",
 									                 "type": "string"
 									               },
 									               "minItems": 1,
@@ -1385,7 +1337,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/WindowsEvent",
 									           "required": [
 									             "LogGroupName",
 									             "EventName",
@@ -1396,7 +1347,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/ConfigurationDetails",
 									     "type": "object"
 									   }
 									*/
@@ -1418,7 +1368,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/AlarmMetric",
 												       "required": [
 												         "AlarmMetricName"
 												       ],
@@ -1474,7 +1423,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/Alarm",
 												       "required": [
 												         "AlarmName"
 												       ],
@@ -1545,7 +1493,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/JMXPrometheusExporter",
 												     "type": "object"
 												   }
 												*/
@@ -1641,7 +1588,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/Log",
 												       "required": [
 												         "LogType"
 												       ],
@@ -1759,7 +1705,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "CRITICAL",
 												               "VERBOSE"
 												             ],
-												             "$ref": "#/definitions/EventLevel",
 												             "type": "string"
 												           },
 												           "minItems": 1,
@@ -1787,7 +1732,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/WindowsEvent",
 												       "required": [
 												         "LogGroupName",
 												         "EventName",
@@ -1816,7 +1760,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "CRITICAL",
 															         "VERBOSE"
 															       ],
-															       "$ref": "#/definitions/EventLevel",
 															       "type": "string"
 															     },
 															     "minItems": 1,
@@ -1909,7 +1852,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                     "type": "string"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/AlarmMetric",
 									                 "required": [
 									                   "AlarmMetricName"
 									                 ],
@@ -1959,7 +1901,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                     "type": "string"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/Log",
 									                 "required": [
 									                   "LogType"
 									                 ],
@@ -1984,7 +1925,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                         "CRITICAL",
 									                         "VERBOSE"
 									                       ],
-									                       "$ref": "#/definitions/EventLevel",
 									                       "type": "string"
 									                     },
 									                     "minItems": 1,
@@ -2012,7 +1952,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                     "type": "string"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/WindowsEvent",
 									                 "required": [
 									                   "LogGroupName",
 									                   "EventName",
@@ -2023,7 +1962,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "array"
 									             }
 									           },
-									           "$ref": "#/definitions/SubComponentConfigurationDetails",
 									           "type": "object"
 									         },
 									         "SubComponentType": {
@@ -2035,7 +1973,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/SubComponentTypeConfiguration",
 									       "required": [
 									         "SubComponentType",
 									         "SubComponentConfigurationDetails"
@@ -2068,7 +2005,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/AlarmMetric",
 												           "required": [
 												             "AlarmMetricName"
 												           ],
@@ -2118,7 +2054,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/Log",
 												           "required": [
 												             "LogType"
 												           ],
@@ -2143,7 +2078,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												                   "CRITICAL",
 												                   "VERBOSE"
 												                 ],
-												                 "$ref": "#/definitions/EventLevel",
 												                 "type": "string"
 												               },
 												               "minItems": 1,
@@ -2171,7 +2105,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/WindowsEvent",
 												           "required": [
 												             "LogGroupName",
 												             "EventName",
@@ -2182,7 +2115,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "array"
 												       }
 												     },
-												     "$ref": "#/definitions/SubComponentConfigurationDetails",
 												     "type": "object"
 												   }
 												*/
@@ -2204,7 +2136,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "type": "string"
 															         }
 															       },
-															       "$ref": "#/definitions/AlarmMetric",
 															       "required": [
 															         "AlarmMetricName"
 															       ],
@@ -2280,7 +2211,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "type": "string"
 															         }
 															       },
-															       "$ref": "#/definitions/Log",
 															       "required": [
 															         "LogType"
 															       ],
@@ -2398,7 +2328,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															               "CRITICAL",
 															               "VERBOSE"
 															             ],
-															             "$ref": "#/definitions/EventLevel",
 															             "type": "string"
 															           },
 															           "minItems": 1,
@@ -2426,7 +2355,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "type": "string"
 															         }
 															       },
-															       "$ref": "#/definitions/WindowsEvent",
 															       "required": [
 															         "LogGroupName",
 															         "EventName",
@@ -2455,7 +2383,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		         "CRITICAL",
 																		         "VERBOSE"
 																		       ],
-																		       "$ref": "#/definitions/EventLevel",
 																		       "type": "string"
 																		     },
 																		     "minItems": 1,
@@ -2574,7 +2501,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/AlarmMetric",
 						               "required": [
 						                 "AlarmMetricName"
 						               ],
@@ -2604,7 +2530,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/Alarm",
 						               "required": [
 						                 "AlarmName"
 						               ],
@@ -2629,7 +2554,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/JMXPrometheusExporter",
 						             "type": "object"
 						           },
 						           "Logs": {
@@ -2674,7 +2598,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/Log",
 						               "required": [
 						                 "LogType"
 						               ],
@@ -2699,7 +2622,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "CRITICAL",
 						                       "VERBOSE"
 						                     ],
-						                     "$ref": "#/definitions/EventLevel",
 						                     "type": "string"
 						                   },
 						                   "minItems": 1,
@@ -2727,7 +2649,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/WindowsEvent",
 						               "required": [
 						                 "LogGroupName",
 						                 "EventName",
@@ -2738,7 +2659,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/ConfigurationDetails",
 						         "type": "object"
 						       },
 						       "SubComponentTypeConfigurations": {
@@ -2762,7 +2682,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                         "type": "string"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/AlarmMetric",
 						                     "required": [
 						                       "AlarmMetricName"
 						                     ],
@@ -2812,7 +2731,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                         "type": "string"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/Log",
 						                     "required": [
 						                       "LogType"
 						                     ],
@@ -2837,7 +2755,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                             "CRITICAL",
 						                             "VERBOSE"
 						                           ],
-						                           "$ref": "#/definitions/EventLevel",
 						                           "type": "string"
 						                         },
 						                         "minItems": 1,
@@ -2865,7 +2782,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                         "type": "string"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/WindowsEvent",
 						                     "required": [
 						                       "LogGroupName",
 						                       "EventName",
@@ -2876,7 +2792,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "array"
 						                 }
 						               },
-						               "$ref": "#/definitions/SubComponentConfigurationDetails",
 						               "type": "object"
 						             },
 						             "SubComponentType": {
@@ -2888,7 +2803,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/SubComponentTypeConfiguration",
 						           "required": [
 						             "SubComponentType",
 						             "SubComponentConfigurationDetails"
@@ -2899,7 +2813,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/ComponentConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -2925,7 +2838,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/AlarmMetric",
 									           "required": [
 									             "AlarmMetricName"
 									           ],
@@ -2955,7 +2867,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/Alarm",
 									           "required": [
 									             "AlarmName"
 									           ],
@@ -2980,7 +2891,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/JMXPrometheusExporter",
 									         "type": "object"
 									       },
 									       "Logs": {
@@ -3025,7 +2935,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/Log",
 									           "required": [
 									             "LogType"
 									           ],
@@ -3050,7 +2959,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "CRITICAL",
 									                   "VERBOSE"
 									                 ],
-									                 "$ref": "#/definitions/EventLevel",
 									                 "type": "string"
 									               },
 									               "minItems": 1,
@@ -3078,7 +2986,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/WindowsEvent",
 									           "required": [
 									             "LogGroupName",
 									             "EventName",
@@ -3089,7 +2996,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/ConfigurationDetails",
 									     "type": "object"
 									   }
 									*/
@@ -3111,7 +3017,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/AlarmMetric",
 												       "required": [
 												         "AlarmMetricName"
 												       ],
@@ -3167,7 +3072,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/Alarm",
 												       "required": [
 												         "AlarmName"
 												       ],
@@ -3238,7 +3142,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/JMXPrometheusExporter",
 												     "type": "object"
 												   }
 												*/
@@ -3334,7 +3237,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/Log",
 												       "required": [
 												         "LogType"
 												       ],
@@ -3452,7 +3354,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "CRITICAL",
 												               "VERBOSE"
 												             ],
-												             "$ref": "#/definitions/EventLevel",
 												             "type": "string"
 												           },
 												           "minItems": 1,
@@ -3480,7 +3381,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/WindowsEvent",
 												       "required": [
 												         "LogGroupName",
 												         "EventName",
@@ -3509,7 +3409,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "CRITICAL",
 															         "VERBOSE"
 															       ],
-															       "$ref": "#/definitions/EventLevel",
 															       "type": "string"
 															     },
 															     "minItems": 1,
@@ -3602,7 +3501,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                     "type": "string"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/AlarmMetric",
 									                 "required": [
 									                   "AlarmMetricName"
 									                 ],
@@ -3652,7 +3550,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                     "type": "string"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/Log",
 									                 "required": [
 									                   "LogType"
 									                 ],
@@ -3677,7 +3574,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                         "CRITICAL",
 									                         "VERBOSE"
 									                       ],
-									                       "$ref": "#/definitions/EventLevel",
 									                       "type": "string"
 									                     },
 									                     "minItems": 1,
@@ -3705,7 +3601,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                     "type": "string"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/WindowsEvent",
 									                 "required": [
 									                   "LogGroupName",
 									                   "EventName",
@@ -3716,7 +3611,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "array"
 									             }
 									           },
-									           "$ref": "#/definitions/SubComponentConfigurationDetails",
 									           "type": "object"
 									         },
 									         "SubComponentType": {
@@ -3728,7 +3622,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/SubComponentTypeConfiguration",
 									       "required": [
 									         "SubComponentType",
 									         "SubComponentConfigurationDetails"
@@ -3761,7 +3654,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/AlarmMetric",
 												           "required": [
 												             "AlarmMetricName"
 												           ],
@@ -3811,7 +3703,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/Log",
 												           "required": [
 												             "LogType"
 												           ],
@@ -3836,7 +3727,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												                   "CRITICAL",
 												                   "VERBOSE"
 												                 ],
-												                 "$ref": "#/definitions/EventLevel",
 												                 "type": "string"
 												               },
 												               "minItems": 1,
@@ -3864,7 +3754,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/WindowsEvent",
 												           "required": [
 												             "LogGroupName",
 												             "EventName",
@@ -3875,7 +3764,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "array"
 												       }
 												     },
-												     "$ref": "#/definitions/SubComponentConfigurationDetails",
 												     "type": "object"
 												   }
 												*/
@@ -3897,7 +3785,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "type": "string"
 															         }
 															       },
-															       "$ref": "#/definitions/AlarmMetric",
 															       "required": [
 															         "AlarmMetricName"
 															       ],
@@ -3973,7 +3860,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "type": "string"
 															         }
 															       },
-															       "$ref": "#/definitions/Log",
 															       "required": [
 															         "LogType"
 															       ],
@@ -4091,7 +3977,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															               "CRITICAL",
 															               "VERBOSE"
 															             ],
-															             "$ref": "#/definitions/EventLevel",
 															             "type": "string"
 															           },
 															           "minItems": 1,
@@ -4119,7 +4004,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "type": "string"
 															         }
 															       },
-															       "$ref": "#/definitions/WindowsEvent",
 															       "required": [
 															         "LogGroupName",
 															         "EventName",
@@ -4148,7 +4032,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		         "CRITICAL",
 																		         "VERBOSE"
 																		       ],
-																		       "$ref": "#/definitions/EventLevel",
 																		       "type": "string"
 																		     },
 																		     "minItems": 1,
@@ -4294,7 +4177,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "array"
 			         }
 			       },
-			       "$ref": "#/definitions/CustomComponent",
 			       "required": [
 			         "ComponentName",
 			         "ResourceList"
@@ -4385,7 +4267,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "integer"
 			               }
 			             },
-			             "$ref": "#/definitions/LogPattern",
 			             "required": [
 			               "PatternName",
 			               "Pattern",
@@ -4404,7 +4285,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/LogPatternSet",
 			       "required": [
 			         "PatternSetName",
 			         "LogPatterns"
@@ -4446,7 +4326,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "integer"
 						         }
 						       },
-						       "$ref": "#/definitions/LogPattern",
 						       "required": [
 						         "PatternName",
 						         "Pattern",
@@ -4604,7 +4483,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

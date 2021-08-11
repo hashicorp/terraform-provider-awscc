@@ -96,11 +96,9 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "PhoneNumber": {
 			             "description": "The phone number in E.164 format.",
 			             "pattern": "",
-			             "$ref": "#/definitions/PhoneNumber",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/PhoneNumberQuickConnectConfig",
 			         "required": [
 			           "PhoneNumber"
 			         ],
@@ -113,17 +111,14 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "ContactFlowArn": {
 			             "description": "The identifier of the contact flow.",
 			             "pattern": "",
-			             "$ref": "#/definitions/ContactFlowArn",
 			             "type": "string"
 			           },
 			           "QueueArn": {
 			             "description": "The identifier for the queue.",
 			             "pattern": "",
-			             "$ref": "#/definitions/QueueArn",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/QueueQuickConnectConfig",
 			         "required": [
 			           "ContactFlowArn",
 			           "QueueArn"
@@ -137,7 +132,6 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "QUEUE",
 			           "USER"
 			         ],
-			         "$ref": "#/definitions/QuickConnectType",
 			         "type": "string"
 			       },
 			       "UserConfig": {
@@ -147,17 +141,14 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "ContactFlowArn": {
 			             "description": "The identifier of the contact flow.",
 			             "pattern": "",
-			             "$ref": "#/definitions/ContactFlowArn",
 			             "type": "string"
 			           },
 			           "UserArn": {
 			             "description": "The identifier of the user.",
 			             "pattern": "",
-			             "$ref": "#/definitions/UserArn",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/UserQuickConnectConfig",
 			         "required": [
 			           "ContactFlowArn",
 			           "UserArn"
@@ -165,7 +156,6 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/QuickConnectConfig",
 			     "required": [
 			       "QuickConnectType"
 			     ],
@@ -186,11 +176,9 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "PhoneNumber": {
 						         "description": "The phone number in E.164 format.",
 						         "pattern": "",
-						         "$ref": "#/definitions/PhoneNumber",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/PhoneNumberQuickConnectConfig",
 						     "required": [
 						       "PhoneNumber"
 						     ],
@@ -207,7 +195,6 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "description": "The phone number in E.164 format.",
 									     "pattern": "",
-									     "$ref": "#/definitions/PhoneNumber",
 									     "type": "string"
 									   }
 									*/
@@ -230,17 +217,14 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "ContactFlowArn": {
 						         "description": "The identifier of the contact flow.",
 						         "pattern": "",
-						         "$ref": "#/definitions/ContactFlowArn",
 						         "type": "string"
 						       },
 						       "QueueArn": {
 						         "description": "The identifier for the queue.",
 						         "pattern": "",
-						         "$ref": "#/definitions/QueueArn",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/QueueQuickConnectConfig",
 						     "required": [
 						       "ContactFlowArn",
 						       "QueueArn"
@@ -258,7 +242,6 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "description": "The identifier of the contact flow.",
 									     "pattern": "",
-									     "$ref": "#/definitions/ContactFlowArn",
 									     "type": "string"
 									   }
 									*/
@@ -273,7 +256,6 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "description": "The identifier for the queue.",
 									     "pattern": "",
-									     "$ref": "#/definitions/QueueArn",
 									     "type": "string"
 									   }
 									*/
@@ -296,7 +278,6 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "QUEUE",
 						       "USER"
 						     ],
-						     "$ref": "#/definitions/QuickConnectType",
 						     "type": "string"
 						   }
 						*/
@@ -315,17 +296,14 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "ContactFlowArn": {
 						         "description": "The identifier of the contact flow.",
 						         "pattern": "",
-						         "$ref": "#/definitions/ContactFlowArn",
 						         "type": "string"
 						       },
 						       "UserArn": {
 						         "description": "The identifier of the user.",
 						         "pattern": "",
-						         "$ref": "#/definitions/UserArn",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/UserQuickConnectConfig",
 						     "required": [
 						       "ContactFlowArn",
 						       "UserArn"
@@ -343,7 +321,6 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "description": "The identifier of the contact flow.",
 									     "pattern": "",
-									     "$ref": "#/definitions/ContactFlowArn",
 									     "type": "string"
 									   }
 									*/
@@ -358,7 +335,6 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "description": "The identifier of the user.",
 									     "pattern": "",
-									     "$ref": "#/definitions/UserArn",
 									     "type": "string"
 									   }
 									*/
@@ -398,7 +374,6 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

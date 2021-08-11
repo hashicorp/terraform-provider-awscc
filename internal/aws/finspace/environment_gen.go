@@ -164,7 +164,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/FederationParameters",
 			     "type": "object"
 			   }
 			*/

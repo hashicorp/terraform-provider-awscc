@@ -44,7 +44,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 2048,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ProjectArn",
 			     "type": "string"
 			   }
 			*/
@@ -60,7 +59,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "The description of the project.",
 			     "maxLength": 1024,
 			     "pattern": "",
-			     "$ref": "#/definitions/ProjectDescription",
 			     "type": "string"
 			   }
 			*/
@@ -78,7 +76,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Project Id.",
 			     "maxLength": 20,
 			     "pattern": "",
-			     "$ref": "#/definitions/ProjectId",
 			     "type": "string"
 			   }
 			*/
@@ -95,7 +92,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 32,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ProjectName",
 			     "type": "string"
 			   }
 			*/
@@ -138,12 +134,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "description": "The identifier of the provisioning artifact (also known as a version).",
 			         "maxLength": 100,
 			         "pattern": "",
-			         "$ref": "#/definitions/ProvisioningArtifactId",
 			         "type": "string"
 			       },
 			       "ProvisionedProductStatusMessage": {
 			         "description": "Provisioned Product Status Message",
-			         "$ref": "#/definitions/ProvisionedProductStatusMessage",
 			         "type": "string"
 			       }
 			     },
@@ -161,7 +155,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "description": "The identifier of the provisioning artifact (also known as a version).",
 						     "maxLength": 100,
 						     "pattern": "",
-						     "$ref": "#/definitions/ProvisioningArtifactId",
 						     "type": "string"
 						   }
 						*/
@@ -175,7 +168,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "Provisioned Product Status Message",
-						     "$ref": "#/definitions/ProvisionedProductStatusMessage",
 						     "type": "string"
 						   }
 						*/
@@ -199,21 +191,18 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "description": "The path identifier of the product.",
 			         "maxLength": 100,
 			         "pattern": "",
-			         "$ref": "#/definitions/PathId",
 			         "type": "string"
 			       },
 			       "ProductId": {
 			         "description": "Service Catalog product identifier.",
 			         "maxLength": 100,
 			         "pattern": "",
-			         "$ref": "#/definitions/ProductId",
 			         "type": "string"
 			       },
 			       "ProvisioningArtifactId": {
 			         "description": "The identifier of the provisioning artifact (also known as a version).",
 			         "maxLength": 100,
 			         "pattern": "",
-			         "$ref": "#/definitions/ProvisioningArtifactId",
 			         "type": "string"
 			       },
 			       "ProvisioningParameters": {
@@ -236,7 +225,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/ProvisioningParameter",
 			           "required": [
 			             "Key",
 			             "Value"
@@ -264,7 +252,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "description": "The path identifier of the product.",
 						     "maxLength": 100,
 						     "pattern": "",
-						     "$ref": "#/definitions/PathId",
 						     "type": "string"
 						   }
 						*/
@@ -280,7 +267,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "description": "Service Catalog product identifier.",
 						     "maxLength": 100,
 						     "pattern": "",
-						     "$ref": "#/definitions/ProductId",
 						     "type": "string"
 						   }
 						*/
@@ -296,7 +282,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "description": "The identifier of the provisioning artifact (also known as a version).",
 						     "maxLength": 100,
 						     "pattern": "",
-						     "$ref": "#/definitions/ProvisioningArtifactId",
 						     "type": "string"
 						   }
 						*/
@@ -328,7 +313,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/ProvisioningParameter",
 						       "required": [
 						         "Key",
 						         "Value"
@@ -406,7 +390,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

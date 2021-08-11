@@ -81,7 +81,6 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/InsightsConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -138,7 +137,6 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       ],
 			       "type": "object"
 			     },
-			     "$ref": "#/definitions/Tags",
 			     "type": "array"
 			   }
 			*/

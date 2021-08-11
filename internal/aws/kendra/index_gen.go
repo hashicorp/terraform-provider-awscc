@@ -28,7 +28,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "maxLength": 1000,
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -43,15 +42,12 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "additionalProperties": false,
 			     "properties": {
 			       "QueryCapacityUnits": {
-			         "$ref": "#/definitions/QueryCapacityUnits",
 			         "type": "integer"
 			       },
 			       "StorageCapacityUnits": {
-			         "$ref": "#/definitions/StorageCapacityUnits",
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/CapacityUnitsConfiguration",
 			     "required": [
 			       "StorageCapacityUnits",
 			       "QueryCapacityUnits"
@@ -66,7 +62,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// CloudFormation resource type schema:
 						/*
 						   {
-						     "$ref": "#/definitions/QueryCapacityUnits",
 						     "type": "integer"
 						   }
 						*/
@@ -78,7 +73,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// CloudFormation resource type schema:
 						/*
 						   {
-						     "$ref": "#/definitions/StorageCapacityUnits",
 						     "type": "integer"
 						   }
 						*/
@@ -95,7 +89,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "maxLength": 1000,
-			     "$ref": "#/definitions/Description",
 			     "type": "string"
 			   }
 			*/
@@ -113,7 +106,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "Name": {
 			           "maxLength": 30,
 			           "minLength": 1,
-			           "$ref": "#/definitions/DocumentMetadataConfigurationName",
 			           "type": "string"
 			         },
 			         "Relevance": {
@@ -123,15 +115,12 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "maxLength": 10,
 			               "minLength": 1,
 			               "pattern": "",
-			               "$ref": "#/definitions/Duration",
 			               "type": "string"
 			             },
 			             "Freshness": {
-			               "$ref": "#/definitions/Freshness",
 			               "type": "boolean"
 			             },
 			             "Importance": {
-			               "$ref": "#/definitions/Importance",
 			               "type": "integer"
 			             },
 			             "RankOrder": {
@@ -139,7 +128,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "ASCENDING",
 			                 "DESCENDING"
 			               ],
-			               "$ref": "#/definitions/Order",
 			               "type": "string"
 			             },
 			             "ValueImportanceItems": {
@@ -149,22 +137,17 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "Key": {
 			                     "maxLength": 50,
 			                     "minLength": 1,
-			                     "$ref": "#/definitions/ValueImportanceItemKey",
 			                     "type": "string"
 			                   },
 			                   "Value": {
-			                     "$ref": "#/definitions/Importance",
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ValueImportanceItem",
 			                 "type": "object"
 			               },
-			               "$ref": "#/definitions/ValueImportanceItems",
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/Relevance",
 			           "type": "object"
 			         },
 			         "Search": {
@@ -183,7 +166,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "boolean"
 			             }
 			           },
-			           "$ref": "#/definitions/Search",
 			           "type": "object"
 			         },
 			         "Type": {
@@ -193,11 +175,9 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "LONG_VALUE",
 			             "DATE_VALUE"
 			           ],
-			           "$ref": "#/definitions/DocumentAttributeValueType",
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/DocumentMetadataConfiguration",
 			       "required": [
 			         "Name",
 			         "Type"
@@ -205,7 +185,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "type": "object"
 			     },
 			     "maxItems": 500,
-			     "$ref": "#/definitions/DocumentMetadataConfigurationList",
 			     "type": "array"
 			   }
 			*/
@@ -218,7 +197,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						   {
 						     "maxLength": 30,
 						     "minLength": 1,
-						     "$ref": "#/definitions/DocumentMetadataConfigurationName",
 						     "type": "string"
 						   }
 						*/
@@ -236,15 +214,12 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "maxLength": 10,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/Duration",
 						         "type": "string"
 						       },
 						       "Freshness": {
-						         "$ref": "#/definitions/Freshness",
 						         "type": "boolean"
 						       },
 						       "Importance": {
-						         "$ref": "#/definitions/Importance",
 						         "type": "integer"
 						       },
 						       "RankOrder": {
@@ -252,7 +227,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "ASCENDING",
 						           "DESCENDING"
 						         ],
-						         "$ref": "#/definitions/Order",
 						         "type": "string"
 						       },
 						       "ValueImportanceItems": {
@@ -262,22 +236,17 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "Key": {
 						               "maxLength": 50,
 						               "minLength": 1,
-						               "$ref": "#/definitions/ValueImportanceItemKey",
 						               "type": "string"
 						             },
 						             "Value": {
-						               "$ref": "#/definitions/Importance",
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/ValueImportanceItem",
 						           "type": "object"
 						         },
-						         "$ref": "#/definitions/ValueImportanceItems",
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/Relevance",
 						     "type": "object"
 						   }
 						*/
@@ -291,7 +260,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 10,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/Duration",
 									     "type": "string"
 									   }
 									*/
@@ -303,7 +271,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Freshness",
 									     "type": "boolean"
 									   }
 									*/
@@ -315,7 +282,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Importance",
 									     "type": "integer"
 									   }
 									*/
@@ -331,7 +297,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "ASCENDING",
 									       "DESCENDING"
 									     ],
-									     "$ref": "#/definitions/Order",
 									     "type": "string"
 									   }
 									*/
@@ -349,18 +314,14 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "Key": {
 									           "maxLength": 50,
 									           "minLength": 1,
-									           "$ref": "#/definitions/ValueImportanceItemKey",
 									           "type": "string"
 									         },
 									         "Value": {
-									           "$ref": "#/definitions/Importance",
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/ValueImportanceItem",
 									       "type": "object"
 									     },
-									     "$ref": "#/definitions/ValueImportanceItems",
 									     "type": "array"
 									   }
 									*/
@@ -373,7 +334,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 50,
 												     "minLength": 1,
-												     "$ref": "#/definitions/ValueImportanceItemKey",
 												     "type": "string"
 												   }
 												*/
@@ -385,7 +345,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// CloudFormation resource type schema:
 												/*
 												   {
-												     "$ref": "#/definitions/Importance",
 												     "type": "integer"
 												   }
 												*/
@@ -421,7 +380,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/Search",
 						     "type": "object"
 						   }
 						*/
@@ -486,7 +444,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "LONG_VALUE",
 						       "DATE_VALUE"
 						     ],
-						     "$ref": "#/definitions/DocumentAttributeValueType",
 						     "type": "string"
 						   }
 						*/
@@ -510,7 +467,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "DEVELOPER_EDITION",
 			       "ENTERPRISE_EDITION"
 			     ],
-			     "$ref": "#/definitions/Edition",
 			     "type": "string"
 			   }
 			*/
@@ -527,7 +483,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Unique ID of index",
 			     "maxLength": 36,
 			     "minLength": 36,
-			     "$ref": "#/definitions/Id",
 			     "type": "string"
 			   }
 			*/
@@ -543,7 +498,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Name of index",
 			     "maxLength": 1000,
 			     "minLength": 1,
-			     "$ref": "#/definitions/Name",
 			     "type": "string"
 			   }
 			*/
@@ -560,7 +514,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 1284,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/RoleArn",
 			     "type": "string"
 			   }
 			*/
@@ -578,11 +531,9 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "KmsKeyId": {
 			         "maxLength": 2048,
 			         "minLength": 1,
-			         "$ref": "#/definitions/KmsKeyId",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/ServerSideEncryptionConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -595,7 +546,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						   {
 						     "maxLength": 2048,
 						     "minLength": 1,
-						     "$ref": "#/definitions/KmsKeyId",
 						     "type": "string"
 						   }
 						*/
@@ -631,7 +581,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -639,7 +588,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "type": "object"
 			     },
 			     "maxItems": 200,
-			     "$ref": "#/definitions/TagList",
 			     "type": "array"
 			   }
 			*/
@@ -692,7 +640,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "ATTRIBUTE_FILTER",
 			       "USER_TOKEN"
 			     ],
-			     "$ref": "#/definitions/UserContextPolicy",
 			     "type": "string"
 			   }
 			*/
@@ -713,17 +660,14 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "GroupAttributeField": {
 			               "maxLength": 100,
 			               "minLength": 1,
-			               "$ref": "#/definitions/GroupAttributeField",
 			               "type": "string"
 			             },
 			             "UserNameAttributeField": {
 			               "maxLength": 100,
 			               "minLength": 1,
-			               "$ref": "#/definitions/UserNameAttributeField",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/JsonTokenTypeConfiguration",
 			           "required": [
 			             "UserNameAttributeField",
 			             "GroupAttributeField"
@@ -736,19 +680,16 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "ClaimRegex": {
 			               "maxLength": 100,
 			               "minLength": 1,
-			               "$ref": "#/definitions/ClaimRegex",
 			               "type": "string"
 			             },
 			             "GroupAttributeField": {
 			               "maxLength": 100,
 			               "minLength": 1,
-			               "$ref": "#/definitions/GroupAttributeField",
 			               "type": "string"
 			             },
 			             "Issuer": {
 			               "maxLength": 65,
 			               "minLength": 1,
-			               "$ref": "#/definitions/Issuer",
 			               "type": "string"
 			             },
 			             "KeyLocation": {
@@ -756,7 +697,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "URL",
 			                 "SECRET_MANAGER"
 			               ],
-			               "$ref": "#/definitions/KeyLocation",
 			               "type": "string"
 			             },
 			             "SecretManagerArn": {
@@ -764,35 +704,29 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "maxLength": 1284,
 			               "minLength": 1,
 			               "pattern": "",
-			               "$ref": "#/definitions/RoleArn",
 			               "type": "string"
 			             },
 			             "URL": {
 			               "maxLength": 2048,
 			               "minLength": 1,
 			               "pattern": "",
-			               "$ref": "#/definitions/Url",
 			               "type": "string"
 			             },
 			             "UserNameAttributeField": {
 			               "maxLength": 100,
 			               "minLength": 1,
-			               "$ref": "#/definitions/UserNameAttributeField",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/JwtTokenTypeConfiguration",
 			           "required": [
 			             "KeyLocation"
 			           ],
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/UserTokenConfiguration",
 			       "type": "object"
 			     },
 			     "maxItems": 1,
-			     "$ref": "#/definitions/UserTokenConfigurationList",
 			     "type": "array"
 			   }
 			*/
@@ -808,17 +742,14 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "GroupAttributeField": {
 						         "maxLength": 100,
 						         "minLength": 1,
-						         "$ref": "#/definitions/GroupAttributeField",
 						         "type": "string"
 						       },
 						       "UserNameAttributeField": {
 						         "maxLength": 100,
 						         "minLength": 1,
-						         "$ref": "#/definitions/UserNameAttributeField",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/JsonTokenTypeConfiguration",
 						     "required": [
 						       "UserNameAttributeField",
 						       "GroupAttributeField"
@@ -835,7 +766,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "maxLength": 100,
 									     "minLength": 1,
-									     "$ref": "#/definitions/GroupAttributeField",
 									     "type": "string"
 									   }
 									*/
@@ -849,7 +779,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "maxLength": 100,
 									     "minLength": 1,
-									     "$ref": "#/definitions/UserNameAttributeField",
 									     "type": "string"
 									   }
 									*/
@@ -870,19 +799,16 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "ClaimRegex": {
 						         "maxLength": 100,
 						         "minLength": 1,
-						         "$ref": "#/definitions/ClaimRegex",
 						         "type": "string"
 						       },
 						       "GroupAttributeField": {
 						         "maxLength": 100,
 						         "minLength": 1,
-						         "$ref": "#/definitions/GroupAttributeField",
 						         "type": "string"
 						       },
 						       "Issuer": {
 						         "maxLength": 65,
 						         "minLength": 1,
-						         "$ref": "#/definitions/Issuer",
 						         "type": "string"
 						       },
 						       "KeyLocation": {
@@ -890,7 +816,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "URL",
 						           "SECRET_MANAGER"
 						         ],
-						         "$ref": "#/definitions/KeyLocation",
 						         "type": "string"
 						       },
 						       "SecretManagerArn": {
@@ -898,24 +823,20 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "maxLength": 1284,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/RoleArn",
 						         "type": "string"
 						       },
 						       "URL": {
 						         "maxLength": 2048,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/Url",
 						         "type": "string"
 						       },
 						       "UserNameAttributeField": {
 						         "maxLength": 100,
 						         "minLength": 1,
-						         "$ref": "#/definitions/UserNameAttributeField",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/JwtTokenTypeConfiguration",
 						     "required": [
 						       "KeyLocation"
 						     ],
@@ -931,7 +852,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "maxLength": 100,
 									     "minLength": 1,
-									     "$ref": "#/definitions/ClaimRegex",
 									     "type": "string"
 									   }
 									*/
@@ -945,7 +865,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "maxLength": 100,
 									     "minLength": 1,
-									     "$ref": "#/definitions/GroupAttributeField",
 									     "type": "string"
 									   }
 									*/
@@ -959,7 +878,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "maxLength": 65,
 									     "minLength": 1,
-									     "$ref": "#/definitions/Issuer",
 									     "type": "string"
 									   }
 									*/
@@ -975,7 +893,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "URL",
 									       "SECRET_MANAGER"
 									     ],
-									     "$ref": "#/definitions/KeyLocation",
 									     "type": "string"
 									   }
 									*/
@@ -991,7 +908,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 1284,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/RoleArn",
 									     "type": "string"
 									   }
 									*/
@@ -1007,7 +923,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 2048,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/Url",
 									     "type": "string"
 									   }
 									*/
@@ -1021,7 +936,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "maxLength": 100,
 									     "minLength": 1,
-									     "$ref": "#/definitions/UserNameAttributeField",
 									     "type": "string"
 									   }
 									*/

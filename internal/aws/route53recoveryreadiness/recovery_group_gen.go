@@ -96,7 +96,6 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			           "type": "array"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

@@ -46,7 +46,6 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/HttpUrlDestinationSummary",
 			     "type": "object"
 			   }
 			*/
@@ -79,7 +78,6 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			       "IN_PROGRESS",
 			       "DISABLED"
 			     ],
-			     "$ref": "#/definitions/TopicRuleDestinationStatus",
 			     "type": "string"
 			   }
 			*/
@@ -127,7 +125,6 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/VpcDestinationProperties",
 			     "type": "object"
 			   }
 			*/

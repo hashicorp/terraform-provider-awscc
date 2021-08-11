@@ -79,7 +79,6 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/FeatureDefinition",
 			       "required": [
 			         "FeatureName",
 			         "FeatureType"
@@ -180,7 +179,6 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/DataCatalogConfig",
 			         "required": [
 			           "TableName",
 			           "Catalog",
@@ -196,7 +194,6 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "properties": {
 			           "KmsKeyId": {
 			             "maxLength": 2048,
-			             "$ref": "#/definitions/KmsKeyId",
 			             "type": "string"
 			           },
 			           "S3Uri": {
@@ -205,7 +202,6 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/S3StorageConfig",
 			         "required": [
 			           "S3Uri"
 			         ],
@@ -246,7 +242,6 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/DataCatalogConfig",
 						     "required": [
 						       "TableName",
 						       "Catalog",
@@ -323,7 +318,6 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "properties": {
 						       "KmsKeyId": {
 						         "maxLength": 2048,
-						         "$ref": "#/definitions/KmsKeyId",
 						         "type": "string"
 						       },
 						       "S3Uri": {
@@ -332,7 +326,6 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/S3StorageConfig",
 						     "required": [
 						       "S3Uri"
 						     ],
@@ -347,7 +340,6 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "maxLength": 2048,
-									     "$ref": "#/definitions/KmsKeyId",
 									     "type": "string"
 									   }
 									*/
@@ -392,11 +384,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "properties": {
 			           "KmsKeyId": {
 			             "maxLength": 2048,
-			             "$ref": "#/definitions/KmsKeyId",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/OnlineStoreSecurityConfig",
 			         "type": "object"
 			       }
 			     },
@@ -425,11 +415,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "properties": {
 						       "KmsKeyId": {
 						         "maxLength": 2048,
-						         "$ref": "#/definitions/KmsKeyId",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/OnlineStoreSecurityConfig",
 						     "type": "object"
 						   }
 						*/
@@ -441,7 +429,6 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "maxLength": 2048,
-									     "$ref": "#/definitions/KmsKeyId",
 									     "type": "string"
 									   }
 									*/
@@ -510,7 +497,6 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

@@ -152,11 +152,9 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/ObjectTypeField",
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/FieldMap",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -212,7 +210,6 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ObjectTypeField",
 						     "type": "object"
 						   }
 						*/
@@ -325,13 +322,11 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/ObjectTypeKey",
 			             "type": "object"
 			           },
 			           "type": "array"
 			         }
 			       },
-			       "$ref": "#/definitions/KeyMap",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -390,7 +385,6 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "array"
 						         }
 						       },
-						       "$ref": "#/definitions/ObjectTypeKey",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -503,7 +497,6 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

@@ -52,7 +52,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Authorization",
 			     "required": [
 			       "SecretsRoleArn",
 			       "CdnIdentifierSecret"
@@ -157,7 +156,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SpekeKeyProvider",
 			             "required": [
 			               "ResourceId",
 			               "SystemIds",
@@ -167,7 +165,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/CmafEncryption",
 			         "required": [
 			           "SpekeKeyProvider"
 			         ],
@@ -214,7 +211,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "UNRESTRICTED",
 			                 "BOTH"
 			               ],
-			               "$ref": "#/definitions/AdsOnDeliveryRestrictions",
 			               "type": "string"
 			             },
 			             "Id": {
@@ -251,7 +247,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/HlsManifest",
 			           "required": [
 			             "Id"
 			           ],
@@ -289,11 +284,9 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/StreamSelection",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/CmafPackage",
 			     "type": "object"
 			   }
 			*/
@@ -347,7 +340,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SpekeKeyProvider",
 						         "required": [
 						           "ResourceId",
 						           "SystemIds",
@@ -357,7 +349,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/CmafEncryption",
 						     "required": [
 						       "SpekeKeyProvider"
 						     ],
@@ -428,7 +419,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SpekeKeyProvider",
 									     "required": [
 									       "ResourceId",
 									       "SystemIds",
@@ -562,7 +552,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "UNRESTRICTED",
 						             "BOTH"
 						           ],
-						           "$ref": "#/definitions/AdsOnDeliveryRestrictions",
 						           "type": "string"
 						         },
 						         "Id": {
@@ -599,7 +588,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/HlsManifest",
 						       "required": [
 						         "Id"
 						       ],
@@ -668,7 +656,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									       "UNRESTRICTED",
 									       "BOTH"
 									     ],
-									     "$ref": "#/definitions/AdsOnDeliveryRestrictions",
 									     "type": "string"
 									   }
 									*/
@@ -829,7 +816,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/StreamSelection",
 						     "type": "object"
 						   }
 						*/
@@ -921,7 +907,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "UNRESTRICTED",
 			           "BOTH"
 			         ],
-			         "$ref": "#/definitions/AdsOnDeliveryRestrictions",
 			         "type": "string"
 			       },
 			       "Encryption": {
@@ -960,7 +945,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SpekeKeyProvider",
 			             "required": [
 			               "ResourceId",
 			               "SystemIds",
@@ -970,7 +954,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/DashEncryption",
 			         "required": [
 			           "SpekeKeyProvider"
 			         ],
@@ -1049,7 +1032,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/StreamSelection",
 			         "type": "object"
 			       },
 			       "SuggestedPresentationDelaySeconds": {
@@ -1070,7 +1052,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/DashPackage",
 			     "type": "object"
 			   }
 			*/
@@ -1115,7 +1096,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						       "UNRESTRICTED",
 						       "BOTH"
 						     ],
-						     "$ref": "#/definitions/AdsOnDeliveryRestrictions",
 						     "type": "string"
 						   }
 						*/
@@ -1163,7 +1143,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SpekeKeyProvider",
 						         "required": [
 						           "ResourceId",
 						           "SystemIds",
@@ -1173,7 +1152,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/DashEncryption",
 						     "required": [
 						       "SpekeKeyProvider"
 						     ],
@@ -1228,7 +1206,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SpekeKeyProvider",
 									     "required": [
 									       "ResourceId",
 									       "SystemIds",
@@ -1466,7 +1443,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/StreamSelection",
 						     "type": "object"
 						   }
 						*/
@@ -1625,7 +1601,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "UNRESTRICTED",
 			           "BOTH"
 			         ],
-			         "$ref": "#/definitions/AdsOnDeliveryRestrictions",
 			         "type": "string"
 			       },
 			       "Encryption": {
@@ -1680,7 +1655,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SpekeKeyProvider",
 			             "required": [
 			               "ResourceId",
 			               "SystemIds",
@@ -1690,7 +1664,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/HlsEncryption",
 			         "required": [
 			           "SpekeKeyProvider"
 			         ],
@@ -1743,7 +1716,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/StreamSelection",
 			         "type": "object"
 			       },
 			       "UseAudioRenditionGroup": {
@@ -1751,7 +1723,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/HlsPackage",
 			     "type": "object"
 			   }
 			*/
@@ -1815,7 +1786,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						       "UNRESTRICTED",
 						       "BOTH"
 						     ],
-						     "$ref": "#/definitions/AdsOnDeliveryRestrictions",
 						     "type": "string"
 						   }
 						*/
@@ -1879,7 +1849,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SpekeKeyProvider",
 						         "required": [
 						           "ResourceId",
 						           "SystemIds",
@@ -1889,7 +1858,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/HlsEncryption",
 						     "required": [
 						       "SpekeKeyProvider"
 						     ],
@@ -1987,7 +1955,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SpekeKeyProvider",
 									     "required": [
 									       "ResourceId",
 									       "SystemIds",
@@ -2172,7 +2139,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/StreamSelection",
 						     "type": "object"
 						   }
 						*/
@@ -2314,7 +2280,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SpekeKeyProvider",
 			             "required": [
 			               "ResourceId",
 			               "SystemIds",
@@ -2324,7 +2289,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/MssEncryption",
 			         "required": [
 			           "SpekeKeyProvider"
 			         ],
@@ -2360,11 +2324,9 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/StreamSelection",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/MssPackage",
 			     "type": "object"
 			   }
 			*/
@@ -2407,7 +2369,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SpekeKeyProvider",
 						         "required": [
 						           "ResourceId",
 						           "SystemIds",
@@ -2417,7 +2378,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/MssEncryption",
 						     "required": [
 						       "SpekeKeyProvider"
 						     ],
@@ -2459,7 +2419,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SpekeKeyProvider",
 									     "required": [
 									       "ResourceId",
 									       "SystemIds",
@@ -2600,7 +2559,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/StreamSelection",
 						     "type": "object"
 						   }
 						*/
@@ -2705,7 +2663,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

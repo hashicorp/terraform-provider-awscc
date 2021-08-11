@@ -51,7 +51,6 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			         "type": "number"
 			       }
 			     },
-			     "$ref": "#/definitions/ActionThreshold",
 			     "required": [
 			       "Value",
 			       "Type"
@@ -173,7 +172,6 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/IamActionDefinition",
 			         "required": [
 			           "PolicyArn"
 			         ],
@@ -194,7 +192,6 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/ScpActionDefinition",
 			         "required": [
 			           "PolicyId",
 			           "TargetIds"
@@ -223,7 +220,6 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/SsmActionDefinition",
 			         "required": [
 			           "Subtype",
 			           "Region",
@@ -232,7 +228,6 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/Definition",
 			     "type": "object"
 			   }
 			*/
@@ -273,7 +268,6 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/IamActionDefinition",
 						     "required": [
 						       "PolicyArn"
 						     ],
@@ -364,7 +358,6 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/ScpActionDefinition",
 						     "required": [
 						       "PolicyId",
 						       "TargetIds"
@@ -431,7 +424,6 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/SsmActionDefinition",
 						     "required": [
 						       "Subtype",
 						       "Region",
@@ -537,7 +529,6 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Subscriber",
 			       "required": [
 			         "Type",
 			         "Address"

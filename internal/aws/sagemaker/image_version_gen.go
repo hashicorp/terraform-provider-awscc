@@ -31,7 +31,6 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 255,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/BaseImage",
 			     "type": "string"
 			   }
 			*/
@@ -49,7 +48,6 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 255,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ContainerImage",
 			     "type": "string"
 			   }
 			*/
@@ -66,7 +64,6 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 256,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ImageArn",
 			     "type": "string"
 			   }
 			*/
@@ -83,7 +80,6 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 63,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ImageName",
 			     "type": "string"
 			   }
 			*/
@@ -101,7 +97,6 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 256,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ImageVersionArn",
 			     "type": "string"
 			   }
 			*/
@@ -115,7 +110,6 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "The version number of the image version.",
-			     "$ref": "#/definitions/Version",
 			     "type": "integer"
 			   }
 			*/

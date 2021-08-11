@@ -231,7 +231,6 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

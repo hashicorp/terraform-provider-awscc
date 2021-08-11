@@ -56,7 +56,6 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/DefinitionParameter",
 			       "required": [
 			         "Key",
 			         "Value"

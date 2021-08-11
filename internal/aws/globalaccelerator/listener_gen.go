@@ -76,16 +76,13 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "properties": {
 			         "FromPort": {
 			           "description": "A network port number",
-			           "$ref": "#/definitions/Port",
 			           "type": "integer"
 			         },
 			         "ToPort": {
 			           "description": "A network port number",
-			           "$ref": "#/definitions/Port",
 			           "type": "integer"
 			         }
 			       },
-			       "$ref": "#/definitions/PortRange",
 			       "required": [
 			         "FromPort",
 			         "ToPort"
@@ -103,7 +100,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "A network port number",
-						     "$ref": "#/definitions/Port",
 						     "type": "integer"
 						   }
 						*/
@@ -117,7 +113,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "A network port number",
-						     "$ref": "#/definitions/Port",
 						     "type": "integer"
 						   }
 						*/

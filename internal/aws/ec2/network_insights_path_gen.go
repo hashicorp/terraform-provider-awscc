@@ -50,7 +50,6 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// CloudFormation resource type schema:
 			/*
 			   {
-			     "$ref": "#/definitions/IpAddress",
 			     "type": "string"
 			   }
 			*/
@@ -64,7 +63,6 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// CloudFormation resource type schema:
 			/*
 			   {
-			     "$ref": "#/definitions/Port",
 			     "type": "integer"
 			   }
 			*/
@@ -104,7 +102,6 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			       "tcp",
 			       "udp"
 			     ],
-			     "$ref": "#/definitions/Protocol",
 			     "type": "string"
 			   }
 			*/
@@ -129,7 +126,6 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// CloudFormation resource type schema:
 			/*
 			   {
-			     "$ref": "#/definitions/IpAddress",
 			     "type": "string"
 			   }
 			*/
@@ -154,7 +150,6 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key"
 			       ],

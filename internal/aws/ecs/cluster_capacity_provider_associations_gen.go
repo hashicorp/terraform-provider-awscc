@@ -30,10 +30,8 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			     "description": "List of capacity providers to associate with the cluster",
 			     "items": {
 			       "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-			       "$ref": "#/definitions/CapacityProvider",
 			       "type": "string"
 			     },
-			     "$ref": "#/definitions/CapacityProviders",
 			     "type": "array",
 			     "uniqueItems": true
 			   }
@@ -51,7 +49,6 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			     "description": "The name of the cluster",
 			     "maxLength": 2048,
 			     "minLength": 1,
-			     "$ref": "#/definitions/Cluster",
 			     "type": "string"
 			   }
 			*/
@@ -74,20 +71,17 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			         },
 			         "CapacityProvider": {
 			           "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-			           "$ref": "#/definitions/CapacityProvider",
 			           "type": "string"
 			         },
 			         "Weight": {
 			           "type": "integer"
 			         }
 			       },
-			       "$ref": "#/definitions/CapacityProviderStrategy",
 			       "required": [
 			         "CapacityProvider"
 			       ],
 			       "type": "object"
 			     },
-			     "$ref": "#/definitions/DefaultCapacityProviderStrategy",
 			     "type": "array"
 			   }
 			*/
@@ -111,7 +105,6 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 						/*
 						   {
 						     "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-						     "$ref": "#/definitions/CapacityProvider",
 						     "type": "string"
 						   }
 						*/

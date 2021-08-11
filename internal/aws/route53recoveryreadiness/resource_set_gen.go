@@ -113,7 +113,6 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/NLBResource",
 			                   "type": "object"
 			                 },
 			                 "R53Resource": {
@@ -129,15 +128,12 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/R53ResourceRecord",
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/TargetResource",
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/DNSTargetResource",
 			           "type": "object"
 			         },
 			         "ReadinessScopes": {
@@ -154,7 +150,6 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Resource",
 			       "type": "object"
 			     },
 			     "maxItems": 4,
@@ -216,7 +211,6 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/NLBResource",
 						             "type": "object"
 						           },
 						           "R53Resource": {
@@ -232,15 +226,12 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/R53ResourceRecord",
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/TargetResource",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/DNSTargetResource",
 						     "type": "object"
 						   }
 						*/
@@ -316,7 +307,6 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/NLBResource",
 									         "type": "object"
 									       },
 									       "R53Resource": {
@@ -332,11 +322,9 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/R53ResourceRecord",
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/TargetResource",
 									     "type": "object"
 									   }
 									*/
@@ -356,7 +344,6 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/NLBResource",
 												     "type": "object"
 												   }
 												*/
@@ -397,7 +384,6 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/R53ResourceRecord",
 												     "type": "object"
 												   }
 												*/
@@ -504,7 +490,6 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "array"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

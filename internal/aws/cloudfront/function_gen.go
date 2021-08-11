@@ -71,7 +71,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/FunctionConfig",
 			     "required": [
 			       "Comment",
 			       "Runtime"
@@ -118,7 +117,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/FunctionMetadata",
 			     "type": "object"
 			   }
 			*/

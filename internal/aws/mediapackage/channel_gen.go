@@ -63,7 +63,6 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/LogConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -120,13 +119,11 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/IngestEndpoint",
 			           "type": "object"
 			         },
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/HlsIngest",
 			     "type": "object"
 			   }
 			*/
@@ -160,7 +157,6 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/IngestEndpoint",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -262,7 +258,6 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/LogConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -304,7 +299,6 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

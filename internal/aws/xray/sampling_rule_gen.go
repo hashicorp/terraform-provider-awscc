@@ -28,7 +28,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-			     "$ref": "#/definitions/RuleARN",
 			     "type": "string"
 			   }
 			*/
@@ -44,7 +43,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 			     "maxLength": 32,
 			     "minLength": 1,
-			     "$ref": "#/definitions/RuleName",
 			     "type": "string"
 			   }
 			*/
@@ -99,14 +97,12 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       },
 			       "RuleARN": {
 			         "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-			         "$ref": "#/definitions/RuleARN",
 			         "type": "string"
 			       },
 			       "RuleName": {
 			         "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 			         "maxLength": 32,
 			         "minLength": 1,
-			         "$ref": "#/definitions/RuleName",
 			         "type": "string"
 			       },
 			       "ServiceName": {
@@ -129,7 +125,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/SamplingRule",
 			     "type": "object"
 			   }
 			*/
@@ -243,7 +238,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-						     "$ref": "#/definitions/RuleARN",
 						     "type": "string"
 						   }
 						*/
@@ -259,7 +253,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						     "maxLength": 32,
 						     "minLength": 1,
-						     "$ref": "#/definitions/RuleName",
 						     "type": "string"
 						   }
 						*/
@@ -384,14 +377,12 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           },
 			           "RuleARN": {
 			             "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-			             "$ref": "#/definitions/RuleARN",
 			             "type": "string"
 			           },
 			           "RuleName": {
 			             "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 			             "maxLength": 32,
 			             "minLength": 1,
-			             "$ref": "#/definitions/RuleName",
 			             "type": "string"
 			           },
 			           "ServiceName": {
@@ -414,11 +405,9 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/SamplingRule",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/SamplingRuleRecord",
 			     "type": "object"
 			   }
 			*/
@@ -497,14 +486,12 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       },
 						       "RuleARN": {
 						         "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-						         "$ref": "#/definitions/RuleARN",
 						         "type": "string"
 						       },
 						       "RuleName": {
 						         "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						         "maxLength": 32,
 						         "minLength": 1,
-						         "$ref": "#/definitions/RuleName",
 						         "type": "string"
 						       },
 						       "ServiceName": {
@@ -527,7 +514,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/SamplingRule",
 						     "type": "object"
 						   }
 						*/
@@ -641,7 +627,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-									     "$ref": "#/definitions/RuleARN",
 									     "type": "string"
 									   }
 									*/
@@ -657,7 +642,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 									     "maxLength": 32,
 									     "minLength": 1,
-									     "$ref": "#/definitions/RuleName",
 									     "type": "string"
 									   }
 									*/
@@ -775,14 +759,12 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       },
 			       "RuleARN": {
 			         "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-			         "$ref": "#/definitions/RuleARN",
 			         "type": "string"
 			       },
 			       "RuleName": {
 			         "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 			         "maxLength": 32,
 			         "minLength": 1,
-			         "$ref": "#/definitions/RuleName",
 			         "type": "string"
 			       },
 			       "ServiceName": {
@@ -801,7 +783,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/SamplingRuleUpdate",
 			     "type": "object"
 			   }
 			*/
@@ -915,7 +896,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-						     "$ref": "#/definitions/RuleARN",
 						     "type": "string"
 						   }
 						*/
@@ -931,7 +911,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						     "maxLength": 32,
 						     "minLength": 1,
-						     "$ref": "#/definitions/RuleName",
 						     "type": "string"
 						   }
 						*/
@@ -1006,7 +985,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       ],
 			       "type": "object"
 			     },
-			     "$ref": "#/definitions/Tags",
 			     "type": "array"
 			   }
 			*/

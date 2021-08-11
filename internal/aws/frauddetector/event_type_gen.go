@@ -112,7 +112,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Tag",
 			             "required": [
 			               "Key",
 			               "Value"
@@ -124,7 +123,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "uniqueItems": false
 			         }
 			       },
-			       "$ref": "#/definitions/EntityType",
 			       "type": "object"
 			     },
 			     "minItems": 1,
@@ -230,7 +228,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Tag",
 						       "required": [
 						         "Key",
 						         "Value"
@@ -353,7 +350,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Tag",
 			             "required": [
 			               "Key",
 			               "Value"
@@ -403,7 +399,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/EventVariable",
 			       "type": "object"
 			     },
 			     "minItems": 1,
@@ -551,7 +546,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Tag",
 						       "required": [
 						         "Key",
 						         "Value"
@@ -702,7 +696,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Tag",
 			             "required": [
 			               "Key",
 			               "Value"
@@ -714,7 +707,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "uniqueItems": false
 			         }
 			       },
-			       "$ref": "#/definitions/Label",
 			       "type": "object"
 			     },
 			     "minItems": 2,
@@ -820,7 +812,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Tag",
 						       "required": [
 						         "Key",
 						         "Value"
@@ -927,7 +918,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

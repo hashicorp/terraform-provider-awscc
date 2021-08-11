@@ -37,11 +37,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "PT1H",
 			           "P1D"
 			         ],
-			         "$ref": "#/definitions/AnomalyDetectorFrequency",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/AnomalyDetectorConfig",
 			     "required": [
 			       "AnomalyDetectorFrequency"
 			     ],
@@ -62,7 +60,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						       "PT1H",
 						       "P1D"
 						     ],
-						     "$ref": "#/definitions/AnomalyDetectorFrequency",
 						     "type": "string"
 						   }
 						*/
@@ -114,7 +111,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			   {
 			     "maxLength": 256,
 			     "pattern": "",
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -154,7 +150,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			             "maxLength": 63,
 			             "minLength": 1,
 			             "pattern": "",
-			             "$ref": "#/definitions/ColumnName",
 			             "type": "string"
 			           },
 			           "minItems": 0,
@@ -179,7 +174,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                 "maxLength": 63,
 			                 "minLength": 1,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ColumnName",
 			                 "type": "string"
 			               },
 			               "Namespace": {
@@ -189,7 +183,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Metric",
 			             "required": [
 			               "MetricName",
 			               "AggregationFunction"
@@ -236,11 +229,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                 "RoleArn": {
 			                   "maxLength": 256,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/Arn",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/AppFlowConfig",
 			               "required": [
 			                 "RoleArn",
 			                 "FlowName"
@@ -253,11 +244,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                 "RoleArn": {
 			                   "maxLength": 256,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/Arn",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/CloudwatchConfig",
 			               "required": [
 			                 "RoleArn"
 			               ],
@@ -276,7 +265,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                   "maxLength": 253,
 			                   "minLength": 1,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/DatabaseHost",
 			                   "type": "string"
 			                 },
 			                 "DatabaseName": {
@@ -286,26 +274,22 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                   "type": "string"
 			                 },
 			                 "DatabasePort": {
-			                   "$ref": "#/definitions/DatabasePort",
 			                   "type": "integer"
 			                 },
 			                 "RoleArn": {
 			                   "maxLength": 256,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/Arn",
 			                   "type": "string"
 			                 },
 			                 "SecretManagerArn": {
 			                   "maxLength": 256,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/SecretManagerArn",
 			                   "type": "string"
 			                 },
 			                 "TableName": {
 			                   "maxLength": 100,
 			                   "minLength": 1,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/TableName",
 			                   "type": "string"
 			                 },
 			                 "VpcConfiguration": {
@@ -318,7 +302,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                         "pattern": "",
 			                         "type": "string"
 			                       },
-			                       "$ref": "#/definitions/SecurityGroupIdList",
 			                       "type": "array"
 			                     },
 			                     "SubnetIdList": {
@@ -327,11 +310,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                         "pattern": "",
 			                         "type": "string"
 			                       },
-			                       "$ref": "#/definitions/SubnetIdList",
 			                       "type": "array"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/VpcConfiguration",
 			                   "required": [
 			                     "SubnetIdList",
 			                     "SecurityGroupIdList"
@@ -339,7 +320,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/RDSSourceConfig",
 			               "required": [
 			                 "DBInstanceIdentifier",
 			                 "DatabaseHost",
@@ -365,7 +345,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                   "maxLength": 253,
 			                   "minLength": 1,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/DatabaseHost",
 			                   "type": "string"
 			                 },
 			                 "DatabaseName": {
@@ -375,26 +354,22 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                   "type": "string"
 			                 },
 			                 "DatabasePort": {
-			                   "$ref": "#/definitions/DatabasePort",
 			                   "type": "integer"
 			                 },
 			                 "RoleArn": {
 			                   "maxLength": 256,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/Arn",
 			                   "type": "string"
 			                 },
 			                 "SecretManagerArn": {
 			                   "maxLength": 256,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/SecretManagerArn",
 			                   "type": "string"
 			                 },
 			                 "TableName": {
 			                   "maxLength": 100,
 			                   "minLength": 1,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/TableName",
 			                   "type": "string"
 			                 },
 			                 "VpcConfiguration": {
@@ -407,7 +382,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                         "pattern": "",
 			                         "type": "string"
 			                       },
-			                       "$ref": "#/definitions/SecurityGroupIdList",
 			                       "type": "array"
 			                     },
 			                     "SubnetIdList": {
@@ -416,11 +390,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                         "pattern": "",
 			                         "type": "string"
 			                       },
-			                       "$ref": "#/definitions/SubnetIdList",
 			                       "type": "array"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/VpcConfiguration",
 			                   "required": [
 			                     "SubnetIdList",
 			                     "SecurityGroupIdList"
@@ -428,7 +400,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/RedshiftSourceConfig",
 			               "required": [
 			                 "ClusterIdentifier",
 			                 "DatabaseHost",
@@ -453,7 +424,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                         "Charset": {
 			                           "maxLength": 63,
 			                           "pattern": "",
-			                           "$ref": "#/definitions/Charset",
 			                           "type": "string"
 			                         },
 			                         "ContainsHeader": {
@@ -477,7 +447,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                             "maxLength": 63,
 			                             "minLength": 1,
 			                             "pattern": "",
-			                             "$ref": "#/definitions/ColumnName",
 			                             "type": "string"
 			                           },
 			                           "type": "array"
@@ -488,7 +457,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/CsvFormatDescriptor",
 			                       "type": "object"
 			                     },
 			                     "JsonFormatDescriptor": {
@@ -497,7 +465,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                         "Charset": {
 			                           "maxLength": 63,
 			                           "pattern": "",
-			                           "$ref": "#/definitions/Charset",
 			                           "type": "string"
 			                         },
 			                         "FileCompression": {
@@ -508,11 +475,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/JsonFormatDescriptor",
 			                       "type": "object"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/FileFormatDescriptor",
 			                   "type": "object"
 			                 },
 			                 "HistoricalDataPathList": {
@@ -528,7 +493,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                 "RoleArn": {
 			                   "maxLength": 256,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/Arn",
 			                   "type": "string"
 			                 },
 			                 "TemplatedPathList": {
@@ -542,7 +506,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			                   "type": "array"
 			                 }
 			               },
-			               "$ref": "#/definitions/S3SourceConfig",
 			               "required": [
 			                 "RoleArn",
 			                 "FileFormatDescriptor"
@@ -550,7 +513,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/MetricSource",
 			           "type": "object"
 			         },
 			         "Offset": {
@@ -571,11 +533,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			               "maxLength": 63,
 			               "minLength": 1,
 			               "pattern": "",
-			               "$ref": "#/definitions/ColumnName",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/TimestampColumn",
 			           "type": "object"
 			         },
 			         "Timezone": {
@@ -584,7 +544,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/MetricSet",
 			       "required": [
 			         "MetricSetName",
 			         "MetricList",
@@ -612,7 +571,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						       "maxLength": 63,
 						       "minLength": 1,
 						       "pattern": "",
-						       "$ref": "#/definitions/ColumnName",
 						       "type": "string"
 						     },
 						     "minItems": 0,
@@ -647,7 +605,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						           "maxLength": 63,
 						           "minLength": 1,
 						           "pattern": "",
-						           "$ref": "#/definitions/ColumnName",
 						           "type": "string"
 						         },
 						         "Namespace": {
@@ -657,7 +614,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Metric",
 						       "required": [
 						         "MetricName",
 						         "AggregationFunction"
@@ -698,7 +654,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									     "maxLength": 63,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/ColumnName",
 									     "type": "string"
 									   }
 									*/
@@ -795,11 +750,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						           "RoleArn": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/Arn",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/AppFlowConfig",
 						         "required": [
 						           "RoleArn",
 						           "FlowName"
@@ -812,11 +765,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						           "RoleArn": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/Arn",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/CloudwatchConfig",
 						         "required": [
 						           "RoleArn"
 						         ],
@@ -835,7 +786,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						             "maxLength": 253,
 						             "minLength": 1,
 						             "pattern": "",
-						             "$ref": "#/definitions/DatabaseHost",
 						             "type": "string"
 						           },
 						           "DatabaseName": {
@@ -845,26 +795,22 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						             "type": "string"
 						           },
 						           "DatabasePort": {
-						             "$ref": "#/definitions/DatabasePort",
 						             "type": "integer"
 						           },
 						           "RoleArn": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/Arn",
 						             "type": "string"
 						           },
 						           "SecretManagerArn": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/SecretManagerArn",
 						             "type": "string"
 						           },
 						           "TableName": {
 						             "maxLength": 100,
 						             "minLength": 1,
 						             "pattern": "",
-						             "$ref": "#/definitions/TableName",
 						             "type": "string"
 						           },
 						           "VpcConfiguration": {
@@ -877,7 +823,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						                   "pattern": "",
 						                   "type": "string"
 						                 },
-						                 "$ref": "#/definitions/SecurityGroupIdList",
 						                 "type": "array"
 						               },
 						               "SubnetIdList": {
@@ -886,11 +831,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						                   "pattern": "",
 						                   "type": "string"
 						                 },
-						                 "$ref": "#/definitions/SubnetIdList",
 						                 "type": "array"
 						               }
 						             },
-						             "$ref": "#/definitions/VpcConfiguration",
 						             "required": [
 						               "SubnetIdList",
 						               "SecurityGroupIdList"
@@ -898,7 +841,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/RDSSourceConfig",
 						         "required": [
 						           "DBInstanceIdentifier",
 						           "DatabaseHost",
@@ -924,7 +866,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						             "maxLength": 253,
 						             "minLength": 1,
 						             "pattern": "",
-						             "$ref": "#/definitions/DatabaseHost",
 						             "type": "string"
 						           },
 						           "DatabaseName": {
@@ -934,26 +875,22 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						             "type": "string"
 						           },
 						           "DatabasePort": {
-						             "$ref": "#/definitions/DatabasePort",
 						             "type": "integer"
 						           },
 						           "RoleArn": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/Arn",
 						             "type": "string"
 						           },
 						           "SecretManagerArn": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/SecretManagerArn",
 						             "type": "string"
 						           },
 						           "TableName": {
 						             "maxLength": 100,
 						             "minLength": 1,
 						             "pattern": "",
-						             "$ref": "#/definitions/TableName",
 						             "type": "string"
 						           },
 						           "VpcConfiguration": {
@@ -966,7 +903,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						                   "pattern": "",
 						                   "type": "string"
 						                 },
-						                 "$ref": "#/definitions/SecurityGroupIdList",
 						                 "type": "array"
 						               },
 						               "SubnetIdList": {
@@ -975,11 +911,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						                   "pattern": "",
 						                   "type": "string"
 						                 },
-						                 "$ref": "#/definitions/SubnetIdList",
 						                 "type": "array"
 						               }
 						             },
-						             "$ref": "#/definitions/VpcConfiguration",
 						             "required": [
 						               "SubnetIdList",
 						               "SecurityGroupIdList"
@@ -987,7 +921,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/RedshiftSourceConfig",
 						         "required": [
 						           "ClusterIdentifier",
 						           "DatabaseHost",
@@ -1012,7 +945,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						                   "Charset": {
 						                     "maxLength": 63,
 						                     "pattern": "",
-						                     "$ref": "#/definitions/Charset",
 						                     "type": "string"
 						                   },
 						                   "ContainsHeader": {
@@ -1036,7 +968,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						                       "maxLength": 63,
 						                       "minLength": 1,
 						                       "pattern": "",
-						                       "$ref": "#/definitions/ColumnName",
 						                       "type": "string"
 						                     },
 						                     "type": "array"
@@ -1047,7 +978,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/CsvFormatDescriptor",
 						                 "type": "object"
 						               },
 						               "JsonFormatDescriptor": {
@@ -1056,7 +986,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						                   "Charset": {
 						                     "maxLength": 63,
 						                     "pattern": "",
-						                     "$ref": "#/definitions/Charset",
 						                     "type": "string"
 						                   },
 						                   "FileCompression": {
@@ -1067,11 +996,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/JsonFormatDescriptor",
 						                 "type": "object"
 						               }
 						             },
-						             "$ref": "#/definitions/FileFormatDescriptor",
 						             "type": "object"
 						           },
 						           "HistoricalDataPathList": {
@@ -1087,7 +1014,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						           "RoleArn": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/Arn",
 						             "type": "string"
 						           },
 						           "TemplatedPathList": {
@@ -1101,7 +1027,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/S3SourceConfig",
 						         "required": [
 						           "RoleArn",
 						           "FileFormatDescriptor"
@@ -1109,7 +1034,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/MetricSource",
 						     "type": "object"
 						   }
 						*/
@@ -1130,11 +1054,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									       "RoleArn": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/Arn",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/AppFlowConfig",
 									     "required": [
 									       "RoleArn",
 									       "FlowName"
@@ -1164,7 +1086,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/Arn",
 												     "type": "string"
 												   }
 												*/
@@ -1185,11 +1106,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									       "RoleArn": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/Arn",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudwatchConfig",
 									     "required": [
 									       "RoleArn"
 									     ],
@@ -1205,7 +1124,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/Arn",
 												     "type": "string"
 												   }
 												*/
@@ -1233,7 +1151,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									         "maxLength": 253,
 									         "minLength": 1,
 									         "pattern": "",
-									         "$ref": "#/definitions/DatabaseHost",
 									         "type": "string"
 									       },
 									       "DatabaseName": {
@@ -1243,26 +1160,22 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									         "type": "string"
 									       },
 									       "DatabasePort": {
-									         "$ref": "#/definitions/DatabasePort",
 									         "type": "integer"
 									       },
 									       "RoleArn": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/Arn",
 									         "type": "string"
 									       },
 									       "SecretManagerArn": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/SecretManagerArn",
 									         "type": "string"
 									       },
 									       "TableName": {
 									         "maxLength": 100,
 									         "minLength": 1,
 									         "pattern": "",
-									         "$ref": "#/definitions/TableName",
 									         "type": "string"
 									       },
 									       "VpcConfiguration": {
@@ -1275,7 +1188,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									               "pattern": "",
 									               "type": "string"
 									             },
-									             "$ref": "#/definitions/SecurityGroupIdList",
 									             "type": "array"
 									           },
 									           "SubnetIdList": {
@@ -1284,11 +1196,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									               "pattern": "",
 									               "type": "string"
 									             },
-									             "$ref": "#/definitions/SubnetIdList",
 									             "type": "array"
 									           }
 									         },
-									         "$ref": "#/definitions/VpcConfiguration",
 									         "required": [
 									           "SubnetIdList",
 									           "SecurityGroupIdList"
@@ -1296,7 +1206,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/RDSSourceConfig",
 									     "required": [
 									       "DBInstanceIdentifier",
 									       "DatabaseHost",
@@ -1334,7 +1243,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												     "maxLength": 253,
 												     "minLength": 1,
 												     "pattern": "",
-												     "$ref": "#/definitions/DatabaseHost",
 												     "type": "string"
 												   }
 												*/
@@ -1360,7 +1268,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												// CloudFormation resource type schema:
 												/*
 												   {
-												     "$ref": "#/definitions/DatabasePort",
 												     "type": "integer"
 												   }
 												*/
@@ -1374,7 +1281,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/Arn",
 												     "type": "string"
 												   }
 												*/
@@ -1388,7 +1294,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/SecretManagerArn",
 												     "type": "string"
 												   }
 												*/
@@ -1403,7 +1308,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												     "maxLength": 100,
 												     "minLength": 1,
 												     "pattern": "",
-												     "$ref": "#/definitions/TableName",
 												     "type": "string"
 												   }
 												*/
@@ -1424,7 +1328,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												           "pattern": "",
 												           "type": "string"
 												         },
-												         "$ref": "#/definitions/SecurityGroupIdList",
 												         "type": "array"
 												       },
 												       "SubnetIdList": {
@@ -1433,11 +1336,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												           "pattern": "",
 												           "type": "string"
 												         },
-												         "$ref": "#/definitions/SubnetIdList",
 												         "type": "array"
 												       }
 												     },
-												     "$ref": "#/definitions/VpcConfiguration",
 												     "required": [
 												       "SubnetIdList",
 												       "SecurityGroupIdList"
@@ -1458,7 +1359,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															       "pattern": "",
 															       "type": "string"
 															     },
-															     "$ref": "#/definitions/SecurityGroupIdList",
 															     "type": "array"
 															   }
 															*/
@@ -1475,7 +1375,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															       "pattern": "",
 															       "type": "string"
 															     },
-															     "$ref": "#/definitions/SubnetIdList",
 															     "type": "array"
 															   }
 															*/
@@ -1507,7 +1406,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									         "maxLength": 253,
 									         "minLength": 1,
 									         "pattern": "",
-									         "$ref": "#/definitions/DatabaseHost",
 									         "type": "string"
 									       },
 									       "DatabaseName": {
@@ -1517,26 +1415,22 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									         "type": "string"
 									       },
 									       "DatabasePort": {
-									         "$ref": "#/definitions/DatabasePort",
 									         "type": "integer"
 									       },
 									       "RoleArn": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/Arn",
 									         "type": "string"
 									       },
 									       "SecretManagerArn": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/SecretManagerArn",
 									         "type": "string"
 									       },
 									       "TableName": {
 									         "maxLength": 100,
 									         "minLength": 1,
 									         "pattern": "",
-									         "$ref": "#/definitions/TableName",
 									         "type": "string"
 									       },
 									       "VpcConfiguration": {
@@ -1549,7 +1443,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									               "pattern": "",
 									               "type": "string"
 									             },
-									             "$ref": "#/definitions/SecurityGroupIdList",
 									             "type": "array"
 									           },
 									           "SubnetIdList": {
@@ -1558,11 +1451,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									               "pattern": "",
 									               "type": "string"
 									             },
-									             "$ref": "#/definitions/SubnetIdList",
 									             "type": "array"
 									           }
 									         },
-									         "$ref": "#/definitions/VpcConfiguration",
 									         "required": [
 									           "SubnetIdList",
 									           "SecurityGroupIdList"
@@ -1570,7 +1461,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/RedshiftSourceConfig",
 									     "required": [
 									       "ClusterIdentifier",
 									       "DatabaseHost",
@@ -1608,7 +1498,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												     "maxLength": 253,
 												     "minLength": 1,
 												     "pattern": "",
-												     "$ref": "#/definitions/DatabaseHost",
 												     "type": "string"
 												   }
 												*/
@@ -1634,7 +1523,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												// CloudFormation resource type schema:
 												/*
 												   {
-												     "$ref": "#/definitions/DatabasePort",
 												     "type": "integer"
 												   }
 												*/
@@ -1648,7 +1536,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/Arn",
 												     "type": "string"
 												   }
 												*/
@@ -1662,7 +1549,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/SecretManagerArn",
 												     "type": "string"
 												   }
 												*/
@@ -1677,7 +1563,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												     "maxLength": 100,
 												     "minLength": 1,
 												     "pattern": "",
-												     "$ref": "#/definitions/TableName",
 												     "type": "string"
 												   }
 												*/
@@ -1698,7 +1583,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												           "pattern": "",
 												           "type": "string"
 												         },
-												         "$ref": "#/definitions/SecurityGroupIdList",
 												         "type": "array"
 												       },
 												       "SubnetIdList": {
@@ -1707,11 +1591,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												           "pattern": "",
 												           "type": "string"
 												         },
-												         "$ref": "#/definitions/SubnetIdList",
 												         "type": "array"
 												       }
 												     },
-												     "$ref": "#/definitions/VpcConfiguration",
 												     "required": [
 												       "SubnetIdList",
 												       "SecurityGroupIdList"
@@ -1732,7 +1614,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															       "pattern": "",
 															       "type": "string"
 															     },
-															     "$ref": "#/definitions/SecurityGroupIdList",
 															     "type": "array"
 															   }
 															*/
@@ -1749,7 +1630,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															       "pattern": "",
 															       "type": "string"
 															     },
-															     "$ref": "#/definitions/SubnetIdList",
 															     "type": "array"
 															   }
 															*/
@@ -1780,7 +1660,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									               "Charset": {
 									                 "maxLength": 63,
 									                 "pattern": "",
-									                 "$ref": "#/definitions/Charset",
 									                 "type": "string"
 									               },
 									               "ContainsHeader": {
@@ -1804,7 +1683,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									                   "maxLength": 63,
 									                   "minLength": 1,
 									                   "pattern": "",
-									                   "$ref": "#/definitions/ColumnName",
 									                   "type": "string"
 									                 },
 									                 "type": "array"
@@ -1815,7 +1693,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/CsvFormatDescriptor",
 									             "type": "object"
 									           },
 									           "JsonFormatDescriptor": {
@@ -1824,7 +1701,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									               "Charset": {
 									                 "maxLength": 63,
 									                 "pattern": "",
-									                 "$ref": "#/definitions/Charset",
 									                 "type": "string"
 									               },
 									               "FileCompression": {
@@ -1835,11 +1711,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/JsonFormatDescriptor",
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/FileFormatDescriptor",
 									         "type": "object"
 									       },
 									       "HistoricalDataPathList": {
@@ -1855,7 +1729,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									       "RoleArn": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/Arn",
 									         "type": "string"
 									       },
 									       "TemplatedPathList": {
@@ -1869,7 +1742,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/S3SourceConfig",
 									     "required": [
 									       "RoleArn",
 									       "FileFormatDescriptor"
@@ -1892,7 +1764,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												           "Charset": {
 												             "maxLength": 63,
 												             "pattern": "",
-												             "$ref": "#/definitions/Charset",
 												             "type": "string"
 												           },
 												           "ContainsHeader": {
@@ -1916,7 +1787,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												               "maxLength": 63,
 												               "minLength": 1,
 												               "pattern": "",
-												               "$ref": "#/definitions/ColumnName",
 												               "type": "string"
 												             },
 												             "type": "array"
@@ -1927,7 +1797,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												             "type": "string"
 												           }
 												         },
-												         "$ref": "#/definitions/CsvFormatDescriptor",
 												         "type": "object"
 												       },
 												       "JsonFormatDescriptor": {
@@ -1936,7 +1805,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												           "Charset": {
 												             "maxLength": 63,
 												             "pattern": "",
-												             "$ref": "#/definitions/Charset",
 												             "type": "string"
 												           },
 												           "FileCompression": {
@@ -1947,11 +1815,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												             "type": "string"
 												           }
 												         },
-												         "$ref": "#/definitions/JsonFormatDescriptor",
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/FileFormatDescriptor",
 												     "type": "object"
 												   }
 												*/
@@ -1967,7 +1833,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															       "Charset": {
 															         "maxLength": 63,
 															         "pattern": "",
-															         "$ref": "#/definitions/Charset",
 															         "type": "string"
 															       },
 															       "ContainsHeader": {
@@ -1991,7 +1856,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															           "maxLength": 63,
 															           "minLength": 1,
 															           "pattern": "",
-															           "$ref": "#/definitions/ColumnName",
 															           "type": "string"
 															         },
 															         "type": "array"
@@ -2002,7 +1866,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/CsvFormatDescriptor",
 															     "type": "object"
 															   }
 															*/
@@ -2015,7 +1878,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 																		   {
 																		     "maxLength": 63,
 																		     "pattern": "",
-																		     "$ref": "#/definitions/Charset",
 																		     "type": "string"
 																		   }
 																		*/
@@ -2071,7 +1933,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 																		       "maxLength": 63,
 																		       "minLength": 1,
 																		       "pattern": "",
-																		       "$ref": "#/definitions/ColumnName",
 																		       "type": "string"
 																		     },
 																		     "type": "array"
@@ -2107,7 +1968,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															       "Charset": {
 															         "maxLength": 63,
 															         "pattern": "",
-															         "$ref": "#/definitions/Charset",
 															         "type": "string"
 															       },
 															       "FileCompression": {
@@ -2118,7 +1978,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/JsonFormatDescriptor",
 															     "type": "object"
 															   }
 															*/
@@ -2131,7 +1990,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 																		   {
 																		     "maxLength": 63,
 																		     "pattern": "",
-																		     "$ref": "#/definitions/Charset",
 																		     "type": "string"
 																		   }
 																		*/
@@ -2186,7 +2044,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/Arn",
 												     "type": "string"
 												   }
 												*/
@@ -2250,11 +2107,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						         "maxLength": 63,
 						         "minLength": 1,
 						         "pattern": "",
-						         "$ref": "#/definitions/ColumnName",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/TimestampColumn",
 						     "type": "object"
 						   }
 						*/
@@ -2284,7 +2139,6 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									     "maxLength": 63,
 									     "minLength": 1,
 									     "pattern": "",
-									     "$ref": "#/definitions/ColumnName",
 									     "type": "string"
 									   }
 									*/

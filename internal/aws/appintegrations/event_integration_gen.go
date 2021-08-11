@@ -51,7 +51,6 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Metadata",
 			             "required": [
 			               "Key",
 			               "Value"
@@ -86,7 +85,6 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/EventIntegrationAssociation",
 			       "type": "object"
 			     },
 			     "minItems": 0,
@@ -120,7 +118,6 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Metadata",
 						       "required": [
 						         "Key",
 						         "Value"
@@ -285,7 +282,6 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/EventFilter",
 			     "required": [
 			       "Source"
 			     ],
@@ -371,7 +367,6 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

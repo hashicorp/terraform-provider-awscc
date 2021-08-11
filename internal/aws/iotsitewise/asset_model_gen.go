@@ -61,14 +61,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "BOOLEAN",
 			                   "STRUCT"
 			                 ],
-			                 "$ref": "#/definitions/DataType",
 			                 "type": "string"
 			               },
 			               "DataTypeSpec": {
 			                 "enum": [
 			                   "AWS/ALARM_STATE"
 			                 ],
-			                 "$ref": "#/definitions/DataTypeSpec",
 			                 "type": "string"
 			               },
 			               "LogicalId": {
@@ -93,7 +91,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/Attribute",
 			                     "type": "object"
 			                   },
 			                   "Metric": {
@@ -129,14 +126,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/VariableValue",
 			                               "required": [
 			                                 "PropertyLogicalId"
 			                               ],
 			                               "type": "object"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/ExpressionVariable",
 			                           "required": [
 			                             "Name",
 			                             "Value"
@@ -155,27 +150,22 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "properties": {
 			                               "Interval": {
 			                                 "description": "The time interval for the tumbling window.",
-			                                 "$ref": "#/definitions/Interval",
 			                                 "type": "string"
 			                               },
 			                               "Offset": {
 			                                 "description": "The shift or reference point on timeline for the contiguous time intervals.",
-			                                 "$ref": "#/definitions/Offset",
 			                                 "type": "string"
 			                               }
 			                             },
-			                             "$ref": "#/definitions/TumblingWindow",
 			                             "required": [
 			                               "Interval"
 			                             ],
 			                             "type": "object"
 			                           }
 			                         },
-			                         "$ref": "#/definitions/MetricWindow",
 			                         "type": "object"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/Metric",
 			                     "required": [
 			                       "Expression",
 			                       "Variables",
@@ -216,14 +206,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/VariableValue",
 			                               "required": [
 			                                 "PropertyLogicalId"
 			                               ],
 			                               "type": "object"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/ExpressionVariable",
 			                           "required": [
 			                             "Name",
 			                             "Value"
@@ -233,7 +221,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "array"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/Transform",
 			                     "required": [
 			                       "Expression",
 			                       "Variables"
@@ -247,11 +234,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "Transform",
 			                       "Metric"
 			                     ],
-			                     "$ref": "#/definitions/TypeName",
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/PropertyType",
 			                 "required": [
 			                   "TypeName"
 			                 ],
@@ -262,7 +247,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/AssetModelProperty",
 			             "required": [
 			               "LogicalId",
 			               "Name",
@@ -286,7 +270,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/AssetModelCompositeModel",
 			       "required": [
 			         "Name",
 			         "Type"
@@ -319,14 +302,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "BOOLEAN",
 						             "STRUCT"
 						           ],
-						           "$ref": "#/definitions/DataType",
 						           "type": "string"
 						         },
 						         "DataTypeSpec": {
 						           "enum": [
 						             "AWS/ALARM_STATE"
 						           ],
-						           "$ref": "#/definitions/DataTypeSpec",
 						           "type": "string"
 						         },
 						         "LogicalId": {
@@ -351,7 +332,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/Attribute",
 						               "type": "object"
 						             },
 						             "Metric": {
@@ -387,14 +367,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                             "type": "string"
 						                           }
 						                         },
-						                         "$ref": "#/definitions/VariableValue",
 						                         "required": [
 						                           "PropertyLogicalId"
 						                         ],
 						                         "type": "object"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/ExpressionVariable",
 						                     "required": [
 						                       "Name",
 						                       "Value"
@@ -413,27 +391,22 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "properties": {
 						                         "Interval": {
 						                           "description": "The time interval for the tumbling window.",
-						                           "$ref": "#/definitions/Interval",
 						                           "type": "string"
 						                         },
 						                         "Offset": {
 						                           "description": "The shift or reference point on timeline for the contiguous time intervals.",
-						                           "$ref": "#/definitions/Offset",
 						                           "type": "string"
 						                         }
 						                       },
-						                       "$ref": "#/definitions/TumblingWindow",
 						                       "required": [
 						                         "Interval"
 						                       ],
 						                       "type": "object"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/MetricWindow",
 						                   "type": "object"
 						                 }
 						               },
-						               "$ref": "#/definitions/Metric",
 						               "required": [
 						                 "Expression",
 						                 "Variables",
@@ -474,14 +447,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                             "type": "string"
 						                           }
 						                         },
-						                         "$ref": "#/definitions/VariableValue",
 						                         "required": [
 						                           "PropertyLogicalId"
 						                         ],
 						                         "type": "object"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/ExpressionVariable",
 						                     "required": [
 						                       "Name",
 						                       "Value"
@@ -491,7 +462,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "array"
 						                 }
 						               },
-						               "$ref": "#/definitions/Transform",
 						               "required": [
 						                 "Expression",
 						                 "Variables"
@@ -505,11 +475,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "Transform",
 						                 "Metric"
 						               ],
-						               "$ref": "#/definitions/TypeName",
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/PropertyType",
 						           "required": [
 						             "TypeName"
 						           ],
@@ -520,7 +488,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/AssetModelProperty",
 						       "required": [
 						         "LogicalId",
 						         "Name",
@@ -548,7 +515,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "BOOLEAN",
 									       "STRUCT"
 									     ],
-									     "$ref": "#/definitions/DataType",
 									     "type": "string"
 									   }
 									*/
@@ -563,7 +529,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "enum": [
 									       "AWS/ALARM_STATE"
 									     ],
-									     "$ref": "#/definitions/DataTypeSpec",
 									     "type": "string"
 									   }
 									*/
@@ -614,7 +579,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/Attribute",
 									         "type": "object"
 									       },
 									       "Metric": {
@@ -650,14 +614,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                       "type": "string"
 									                     }
 									                   },
-									                   "$ref": "#/definitions/VariableValue",
 									                   "required": [
 									                     "PropertyLogicalId"
 									                   ],
 									                   "type": "object"
 									                 }
 									               },
-									               "$ref": "#/definitions/ExpressionVariable",
 									               "required": [
 									                 "Name",
 									                 "Value"
@@ -676,27 +638,22 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "properties": {
 									                   "Interval": {
 									                     "description": "The time interval for the tumbling window.",
-									                     "$ref": "#/definitions/Interval",
 									                     "type": "string"
 									                   },
 									                   "Offset": {
 									                     "description": "The shift or reference point on timeline for the contiguous time intervals.",
-									                     "$ref": "#/definitions/Offset",
 									                     "type": "string"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/TumblingWindow",
 									                 "required": [
 									                   "Interval"
 									                 ],
 									                 "type": "object"
 									               }
 									             },
-									             "$ref": "#/definitions/MetricWindow",
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/Metric",
 									         "required": [
 									           "Expression",
 									           "Variables",
@@ -737,14 +694,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                       "type": "string"
 									                     }
 									                   },
-									                   "$ref": "#/definitions/VariableValue",
 									                   "required": [
 									                     "PropertyLogicalId"
 									                   ],
 									                   "type": "object"
 									                 }
 									               },
-									               "$ref": "#/definitions/ExpressionVariable",
 									               "required": [
 									                 "Name",
 									                 "Value"
@@ -754,7 +709,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "array"
 									           }
 									         },
-									         "$ref": "#/definitions/Transform",
 									         "required": [
 									           "Expression",
 									           "Variables"
@@ -768,11 +722,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "Transform",
 									           "Metric"
 									         ],
-									         "$ref": "#/definitions/TypeName",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/PropertyType",
 									     "required": [
 									       "TypeName"
 									     ],
@@ -793,7 +745,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/Attribute",
 												     "type": "object"
 												   }
 												*/
@@ -851,14 +802,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												                   "type": "string"
 												                 }
 												               },
-												               "$ref": "#/definitions/VariableValue",
 												               "required": [
 												                 "PropertyLogicalId"
 												               ],
 												               "type": "object"
 												             }
 												           },
-												           "$ref": "#/definitions/ExpressionVariable",
 												           "required": [
 												             "Name",
 												             "Value"
@@ -877,27 +826,22 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "properties": {
 												               "Interval": {
 												                 "description": "The time interval for the tumbling window.",
-												                 "$ref": "#/definitions/Interval",
 												                 "type": "string"
 												               },
 												               "Offset": {
 												                 "description": "The shift or reference point on timeline for the contiguous time intervals.",
-												                 "$ref": "#/definitions/Offset",
 												                 "type": "string"
 												               }
 												             },
-												             "$ref": "#/definitions/TumblingWindow",
 												             "required": [
 												               "Interval"
 												             ],
 												             "type": "object"
 												           }
 												         },
-												         "$ref": "#/definitions/MetricWindow",
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/Metric",
 												     "required": [
 												       "Expression",
 												       "Variables",
@@ -951,14 +895,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/VariableValue",
 															           "required": [
 															             "PropertyLogicalId"
 															           ],
 															           "type": "object"
 															         }
 															       },
-															       "$ref": "#/definitions/ExpressionVariable",
 															       "required": [
 															         "Name",
 															         "Value"
@@ -1005,7 +947,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/VariableValue",
 																		     "required": [
 																		       "PropertyLogicalId"
 																		     ],
@@ -1065,23 +1006,19 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "properties": {
 															           "Interval": {
 															             "description": "The time interval for the tumbling window.",
-															             "$ref": "#/definitions/Interval",
 															             "type": "string"
 															           },
 															           "Offset": {
 															             "description": "The shift or reference point on timeline for the contiguous time intervals.",
-															             "$ref": "#/definitions/Offset",
 															             "type": "string"
 															           }
 															         },
-															         "$ref": "#/definitions/TumblingWindow",
 															         "required": [
 															           "Interval"
 															         ],
 															         "type": "object"
 															       }
 															     },
-															     "$ref": "#/definitions/MetricWindow",
 															     "type": "object"
 															   }
 															*/
@@ -1098,16 +1035,13 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		     "properties": {
 																		       "Interval": {
 																		         "description": "The time interval for the tumbling window.",
-																		         "$ref": "#/definitions/Interval",
 																		         "type": "string"
 																		       },
 																		       "Offset": {
 																		         "description": "The shift or reference point on timeline for the contiguous time intervals.",
-																		         "$ref": "#/definitions/Offset",
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/TumblingWindow",
 																		     "required": [
 																		       "Interval"
 																		     ],
@@ -1123,7 +1057,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					/*
 																					   {
 																					     "description": "The time interval for the tumbling window.",
-																					     "$ref": "#/definitions/Interval",
 																					     "type": "string"
 																					   }
 																					*/
@@ -1137,7 +1070,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					/*
 																					   {
 																					     "description": "The shift or reference point on timeline for the contiguous time intervals.",
-																					     "$ref": "#/definitions/Offset",
 																					     "type": "string"
 																					   }
 																					*/
@@ -1194,14 +1126,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												                   "type": "string"
 												                 }
 												               },
-												               "$ref": "#/definitions/VariableValue",
 												               "required": [
 												                 "PropertyLogicalId"
 												               ],
 												               "type": "object"
 												             }
 												           },
-												           "$ref": "#/definitions/ExpressionVariable",
 												           "required": [
 												             "Name",
 												             "Value"
@@ -1211,7 +1141,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "array"
 												       }
 												     },
-												     "$ref": "#/definitions/Transform",
 												     "required": [
 												       "Expression",
 												       "Variables"
@@ -1264,14 +1193,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/VariableValue",
 															           "required": [
 															             "PropertyLogicalId"
 															           ],
 															           "type": "object"
 															         }
 															       },
-															       "$ref": "#/definitions/ExpressionVariable",
 															       "required": [
 															         "Name",
 															         "Value"
@@ -1318,7 +1245,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/VariableValue",
 																		     "required": [
 																		       "PropertyLogicalId"
 																		     ],
@@ -1379,7 +1305,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "Transform",
 												       "Metric"
 												     ],
-												     "$ref": "#/definitions/TypeName",
 												     "type": "string"
 												   }
 												*/
@@ -1492,7 +1417,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/AssetModelHierarchy",
 			       "required": [
 			         "LogicalId",
 			         "Name",
@@ -1599,14 +1523,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "BOOLEAN",
 			             "STRUCT"
 			           ],
-			           "$ref": "#/definitions/DataType",
 			           "type": "string"
 			         },
 			         "DataTypeSpec": {
 			           "enum": [
 			             "AWS/ALARM_STATE"
 			           ],
-			           "$ref": "#/definitions/DataTypeSpec",
 			           "type": "string"
 			         },
 			         "LogicalId": {
@@ -1631,7 +1553,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/Attribute",
 			               "type": "object"
 			             },
 			             "Metric": {
@@ -1667,14 +1588,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "type": "string"
 			                           }
 			                         },
-			                         "$ref": "#/definitions/VariableValue",
 			                         "required": [
 			                           "PropertyLogicalId"
 			                         ],
 			                         "type": "object"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/ExpressionVariable",
 			                     "required": [
 			                       "Name",
 			                       "Value"
@@ -1693,27 +1612,22 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "properties": {
 			                         "Interval": {
 			                           "description": "The time interval for the tumbling window.",
-			                           "$ref": "#/definitions/Interval",
 			                           "type": "string"
 			                         },
 			                         "Offset": {
 			                           "description": "The shift or reference point on timeline for the contiguous time intervals.",
-			                           "$ref": "#/definitions/Offset",
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/TumblingWindow",
 			                       "required": [
 			                         "Interval"
 			                       ],
 			                       "type": "object"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/MetricWindow",
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/Metric",
 			               "required": [
 			                 "Expression",
 			                 "Variables",
@@ -1754,14 +1668,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "type": "string"
 			                           }
 			                         },
-			                         "$ref": "#/definitions/VariableValue",
 			                         "required": [
 			                           "PropertyLogicalId"
 			                         ],
 			                         "type": "object"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/ExpressionVariable",
 			                     "required": [
 			                       "Name",
 			                       "Value"
@@ -1771,7 +1683,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "array"
 			                 }
 			               },
-			               "$ref": "#/definitions/Transform",
 			               "required": [
 			                 "Expression",
 			                 "Variables"
@@ -1785,11 +1696,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "Transform",
 			                 "Metric"
 			               ],
-			               "$ref": "#/definitions/TypeName",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/PropertyType",
 			           "required": [
 			             "TypeName"
 			           ],
@@ -1800,7 +1709,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/AssetModelProperty",
 			       "required": [
 			         "LogicalId",
 			         "Name",
@@ -1828,7 +1736,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "BOOLEAN",
 						       "STRUCT"
 						     ],
-						     "$ref": "#/definitions/DataType",
 						     "type": "string"
 						   }
 						*/
@@ -1843,7 +1750,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "enum": [
 						       "AWS/ALARM_STATE"
 						     ],
-						     "$ref": "#/definitions/DataTypeSpec",
 						     "type": "string"
 						   }
 						*/
@@ -1894,7 +1800,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/Attribute",
 						         "type": "object"
 						       },
 						       "Metric": {
@@ -1930,14 +1835,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "type": "string"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/VariableValue",
 						                   "required": [
 						                     "PropertyLogicalId"
 						                   ],
 						                   "type": "object"
 						                 }
 						               },
-						               "$ref": "#/definitions/ExpressionVariable",
 						               "required": [
 						                 "Name",
 						                 "Value"
@@ -1956,27 +1859,22 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "properties": {
 						                   "Interval": {
 						                     "description": "The time interval for the tumbling window.",
-						                     "$ref": "#/definitions/Interval",
 						                     "type": "string"
 						                   },
 						                   "Offset": {
 						                     "description": "The shift or reference point on timeline for the contiguous time intervals.",
-						                     "$ref": "#/definitions/Offset",
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/TumblingWindow",
 						                 "required": [
 						                   "Interval"
 						                 ],
 						                 "type": "object"
 						               }
 						             },
-						             "$ref": "#/definitions/MetricWindow",
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/Metric",
 						         "required": [
 						           "Expression",
 						           "Variables",
@@ -2017,14 +1915,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "type": "string"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/VariableValue",
 						                   "required": [
 						                     "PropertyLogicalId"
 						                   ],
 						                   "type": "object"
 						                 }
 						               },
-						               "$ref": "#/definitions/ExpressionVariable",
 						               "required": [
 						                 "Name",
 						                 "Value"
@@ -2034,7 +1930,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/Transform",
 						         "required": [
 						           "Expression",
 						           "Variables"
@@ -2048,11 +1943,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Transform",
 						           "Metric"
 						         ],
-						         "$ref": "#/definitions/TypeName",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/PropertyType",
 						     "required": [
 						       "TypeName"
 						     ],
@@ -2073,7 +1966,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/Attribute",
 									     "type": "object"
 									   }
 									*/
@@ -2131,14 +2023,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "type": "string"
 									                 }
 									               },
-									               "$ref": "#/definitions/VariableValue",
 									               "required": [
 									                 "PropertyLogicalId"
 									               ],
 									               "type": "object"
 									             }
 									           },
-									           "$ref": "#/definitions/ExpressionVariable",
 									           "required": [
 									             "Name",
 									             "Value"
@@ -2157,27 +2047,22 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "properties": {
 									               "Interval": {
 									                 "description": "The time interval for the tumbling window.",
-									                 "$ref": "#/definitions/Interval",
 									                 "type": "string"
 									               },
 									               "Offset": {
 									                 "description": "The shift or reference point on timeline for the contiguous time intervals.",
-									                 "$ref": "#/definitions/Offset",
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/TumblingWindow",
 									             "required": [
 									               "Interval"
 									             ],
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/MetricWindow",
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/Metric",
 									     "required": [
 									       "Expression",
 									       "Variables",
@@ -2231,14 +2116,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/VariableValue",
 												           "required": [
 												             "PropertyLogicalId"
 												           ],
 												           "type": "object"
 												         }
 												       },
-												       "$ref": "#/definitions/ExpressionVariable",
 												       "required": [
 												         "Name",
 												         "Value"
@@ -2285,7 +2168,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/VariableValue",
 															     "required": [
 															       "PropertyLogicalId"
 															     ],
@@ -2345,23 +2227,19 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "properties": {
 												           "Interval": {
 												             "description": "The time interval for the tumbling window.",
-												             "$ref": "#/definitions/Interval",
 												             "type": "string"
 												           },
 												           "Offset": {
 												             "description": "The shift or reference point on timeline for the contiguous time intervals.",
-												             "$ref": "#/definitions/Offset",
 												             "type": "string"
 												           }
 												         },
-												         "$ref": "#/definitions/TumblingWindow",
 												         "required": [
 												           "Interval"
 												         ],
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/MetricWindow",
 												     "type": "object"
 												   }
 												*/
@@ -2378,16 +2256,13 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															     "properties": {
 															       "Interval": {
 															         "description": "The time interval for the tumbling window.",
-															         "$ref": "#/definitions/Interval",
 															         "type": "string"
 															       },
 															       "Offset": {
 															         "description": "The shift or reference point on timeline for the contiguous time intervals.",
-															         "$ref": "#/definitions/Offset",
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/TumblingWindow",
 															     "required": [
 															       "Interval"
 															     ],
@@ -2403,7 +2278,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		/*
 																		   {
 																		     "description": "The time interval for the tumbling window.",
-																		     "$ref": "#/definitions/Interval",
 																		     "type": "string"
 																		   }
 																		*/
@@ -2417,7 +2291,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		/*
 																		   {
 																		     "description": "The shift or reference point on timeline for the contiguous time intervals.",
-																		     "$ref": "#/definitions/Offset",
 																		     "type": "string"
 																		   }
 																		*/
@@ -2474,14 +2347,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "type": "string"
 									                 }
 									               },
-									               "$ref": "#/definitions/VariableValue",
 									               "required": [
 									                 "PropertyLogicalId"
 									               ],
 									               "type": "object"
 									             }
 									           },
-									           "$ref": "#/definitions/ExpressionVariable",
 									           "required": [
 									             "Name",
 									             "Value"
@@ -2491,7 +2362,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/Transform",
 									     "required": [
 									       "Expression",
 									       "Variables"
@@ -2544,14 +2414,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/VariableValue",
 												           "required": [
 												             "PropertyLogicalId"
 												           ],
 												           "type": "object"
 												         }
 												       },
-												       "$ref": "#/definitions/ExpressionVariable",
 												       "required": [
 												         "Name",
 												         "Value"
@@ -2598,7 +2466,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/VariableValue",
 															     "required": [
 															       "PropertyLogicalId"
 															     ],
@@ -2659,7 +2526,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Transform",
 									       "Metric"
 									     ],
-									     "$ref": "#/definitions/TypeName",
 									     "type": "string"
 									   }
 									*/
@@ -2705,7 +2571,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

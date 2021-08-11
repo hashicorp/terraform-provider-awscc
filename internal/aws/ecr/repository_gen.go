@@ -48,18 +48,15 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "AES256",
 			           "KMS"
 			         ],
-			         "$ref": "#/definitions/EncryptionType",
 			         "type": "string"
 			       },
 			       "KmsKey": {
 			         "description": "If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.",
 			         "maxLength": 2048,
 			         "minLength": 1,
-			         "$ref": "#/definitions/KmsKey",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/EncryptionConfiguration",
 			     "required": [
 			       "EncryptionType"
 			     ],
@@ -79,7 +76,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "AES256",
 						       "KMS"
 						     ],
-						     "$ref": "#/definitions/EncryptionType",
 						     "type": "string"
 						   }
 						*/
@@ -96,7 +92,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "description": "If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.",
 						     "maxLength": 2048,
 						     "minLength": 1,
-						     "$ref": "#/definitions/KmsKey",
 						     "type": "string"
 						   }
 						*/
@@ -122,11 +117,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "properties": {
 			       "ScanOnPush": {
 			         "description": "The setting that determines whether images are scanned after being pushed to a repository.",
-			         "$ref": "#/definitions/ScanOnPush",
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/ImageScanningConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -139,7 +132,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "The setting that determines whether images are scanned after being pushed to a repository.",
-						     "$ref": "#/definitions/ScanOnPush",
 						     "type": "boolean"
 						   }
 						*/
@@ -180,7 +172,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "description": "The JSON repository policy text to apply to the repository.",
 			         "maxLength": 30720,
 			         "minLength": 100,
-			         "$ref": "#/definitions/LifecyclePolicyText",
 			         "type": "string"
 			       },
 			       "RegistryId": {
@@ -188,11 +179,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "maxLength": 12,
 			         "minLength": 12,
 			         "pattern": "",
-			         "$ref": "#/definitions/RegistryId",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/LifecyclePolicy",
 			     "type": "object"
 			   }
 			*/
@@ -207,7 +196,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "description": "The JSON repository policy text to apply to the repository.",
 						     "maxLength": 30720,
 						     "minLength": 100,
-						     "$ref": "#/definitions/LifecyclePolicyText",
 						     "type": "string"
 						   }
 						*/
@@ -224,7 +212,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 12,
 						     "minLength": 12,
 						     "pattern": "",
-						     "$ref": "#/definitions/RegistryId",
 						     "type": "string"
 						   }
 						*/
@@ -302,7 +289,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

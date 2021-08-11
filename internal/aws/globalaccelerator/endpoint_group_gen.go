@@ -44,7 +44,6 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			           "type": "integer"
 			         }
 			       },
-			       "$ref": "#/definitions/EndpointConfiguration",
 			       "required": [
 			         "EndpointId"
 			       ],
@@ -209,16 +208,13 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			       "properties": {
 			         "EndpointPort": {
 			           "description": "A network port number",
-			           "$ref": "#/definitions/Port",
 			           "type": "integer"
 			         },
 			         "ListenerPort": {
 			           "description": "A network port number",
-			           "$ref": "#/definitions/Port",
 			           "type": "integer"
 			         }
 			       },
-			       "$ref": "#/definitions/PortOverride",
 			       "required": [
 			         "ListenerPort",
 			         "EndpointPort"
@@ -236,7 +232,6 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						/*
 						   {
 						     "description": "A network port number",
-						     "$ref": "#/definitions/Port",
 						     "type": "integer"
 						   }
 						*/
@@ -250,7 +245,6 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						/*
 						   {
 						     "description": "A network port number",
-						     "$ref": "#/definitions/Port",
 						     "type": "integer"
 						   }
 						*/

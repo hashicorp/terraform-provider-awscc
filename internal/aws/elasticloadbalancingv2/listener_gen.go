@@ -48,7 +48,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Certificate",
 			       "type": "object"
 			     },
 			     "type": "array",
@@ -115,7 +114,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AuthenticateCognitoConfig",
 			           "required": [
 			             "UserPoolClientId",
 			             "UserPoolDomain",
@@ -165,7 +163,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AuthenticateOidcConfig",
 			           "required": [
 			             "TokenEndpoint",
 			             "Issuer",
@@ -189,7 +186,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/FixedResponseConfig",
 			           "required": [
 			             "StatusCode"
 			           ],
@@ -208,7 +204,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "boolean"
 			                 }
 			               },
-			               "$ref": "#/definitions/TargetGroupStickinessConfig",
 			               "type": "object"
 			             },
 			             "TargetGroups": {
@@ -222,14 +217,12 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/TargetGroupTuple",
 			                 "type": "object"
 			               },
 			               "type": "array",
 			               "uniqueItems": true
 			             }
 			           },
-			           "$ref": "#/definitions/ForwardConfig",
 			           "type": "object"
 			         },
 			         "Order": {
@@ -257,7 +250,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/RedirectConfig",
 			           "required": [
 			             "StatusCode"
 			           ],
@@ -270,7 +262,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Action",
 			       "required": [
 			         "Type"
 			       ],
@@ -320,7 +311,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AuthenticateCognitoConfig",
 						     "required": [
 						       "UserPoolClientId",
 						       "UserPoolDomain",
@@ -475,7 +465,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AuthenticateOidcConfig",
 						     "required": [
 						       "TokenEndpoint",
 						       "Issuer",
@@ -637,7 +626,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/FixedResponseConfig",
 						     "required": [
 						       "StatusCode"
 						     ],
@@ -700,7 +688,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "boolean"
 						           }
 						         },
-						         "$ref": "#/definitions/TargetGroupStickinessConfig",
 						         "type": "object"
 						       },
 						       "TargetGroups": {
@@ -714,14 +701,12 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/TargetGroupTuple",
 						           "type": "object"
 						         },
 						         "type": "array",
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/ForwardConfig",
 						     "type": "object"
 						   }
 						*/
@@ -741,7 +726,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "boolean"
 									       }
 									     },
-									     "$ref": "#/definitions/TargetGroupStickinessConfig",
 									     "type": "object"
 									   }
 									*/
@@ -788,7 +772,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/TargetGroupTuple",
 									       "type": "object"
 									     },
 									     "type": "array",
@@ -866,7 +849,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/RedirectConfig",
 						     "required": [
 						       "StatusCode"
 						     ],

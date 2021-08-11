@@ -97,7 +97,6 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Encryption",
 			     "required": [
 			       "Algorithm",
 			       "RoleArn",
@@ -312,7 +311,6 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/VpcInterfaceAttachment",
 			     "type": "object"
 			   }
 			*/

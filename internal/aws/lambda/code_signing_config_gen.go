@@ -43,7 +43,6 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/AllowedPublishers",
 			     "required": [
 			       "SigningProfileVersionArns"
 			     ],
@@ -123,7 +122,6 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/CodeSigningPolicies",
 			     "required": [
 			       "UntrustedArtifactOnDeployment"
 			     ],

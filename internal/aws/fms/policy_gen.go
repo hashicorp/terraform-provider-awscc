@@ -31,7 +31,6 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 1024,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ResourceArn",
 			     "type": "string"
 			   }
 			*/
@@ -64,7 +63,6 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "maxLength": 12,
 			           "minLength": 12,
 			           "pattern": "",
-			           "$ref": "#/definitions/AccountId",
 			           "type": "string"
 			         },
 			         "type": "array"
@@ -75,13 +73,11 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "maxLength": 68,
 			           "minLength": 16,
 			           "pattern": "",
-			           "$ref": "#/definitions/OrganizationalUnitId",
 			           "type": "string"
 			         },
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/IEMap",
 			     "type": "object"
 			   }
 			*/
@@ -98,7 +94,6 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "maxLength": 12,
 						       "minLength": 12,
 						       "pattern": "",
-						       "$ref": "#/definitions/AccountId",
 						       "type": "string"
 						     },
 						     "type": "array"
@@ -117,7 +112,6 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "maxLength": 68,
 						       "minLength": 16,
 						       "pattern": "",
-						       "$ref": "#/definitions/OrganizationalUnitId",
 						       "type": "string"
 						     },
 						     "type": "array"
@@ -168,7 +162,6 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "maxLength": 12,
 			           "minLength": 12,
 			           "pattern": "",
-			           "$ref": "#/definitions/AccountId",
 			           "type": "string"
 			         },
 			         "type": "array"
@@ -179,13 +172,11 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "maxLength": 68,
 			           "minLength": 16,
 			           "pattern": "",
-			           "$ref": "#/definitions/OrganizationalUnitId",
 			           "type": "string"
 			         },
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/IEMap",
 			     "type": "object"
 			   }
 			*/
@@ -202,7 +193,6 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "maxLength": 12,
 						       "minLength": 12,
 						       "pattern": "",
-						       "$ref": "#/definitions/AccountId",
 						       "type": "string"
 						     },
 						     "type": "array"
@@ -221,7 +211,6 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "maxLength": 68,
 						       "minLength": 16,
 						       "pattern": "",
-						       "$ref": "#/definitions/OrganizationalUnitId",
 						       "type": "string"
 						     },
 						     "type": "array"
@@ -277,7 +266,6 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ResourceTag",
 			       "required": [
 			         "Key"
 			       ],
@@ -328,7 +316,6 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 128,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ResourceType",
 			     "type": "string"
 			   }
 			*/
@@ -346,7 +333,6 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "maxLength": 128,
 			       "minLength": 1,
 			       "pattern": "",
-			       "$ref": "#/definitions/ResourceType",
 			       "type": "string"
 			     },
 			     "type": "array"
@@ -446,7 +432,6 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/PolicyTag",
 			       "required": [
 			         "Key",
 			         "Value"

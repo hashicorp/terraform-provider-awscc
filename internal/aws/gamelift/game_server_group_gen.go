@@ -32,7 +32,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			     "maxLength": 256,
 			     "minLength": 0,
 			     "pattern": "",
-			     "$ref": "#/definitions/AutoScalingGroupArn",
 			     "type": "string"
 			   }
 			*/
@@ -51,7 +50,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			       "EstimatedInstanceWarmup": {
 			         "additionalProperties": false,
 			         "description": "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
-			         "$ref": "#/definitions/EstimatedInstanceWarmup",
 			         "type": "number"
 			       },
 			       "TargetTrackingConfiguration": {
@@ -61,18 +59,15 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "TargetValue": {
 			             "additionalProperties": false,
 			             "description": "Desired value to use with a game server group target-based scaling policy.",
-			             "$ref": "#/definitions/TargetValue",
 			             "type": "number"
 			           }
 			         },
-			         "$ref": "#/definitions/TargetTrackingConfiguration",
 			         "required": [
 			           "TargetValue"
 			         ],
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/AutoScalingPolicy",
 			     "required": [
 			       "TargetTrackingConfiguration"
 			     ],
@@ -89,7 +84,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						   {
 						     "additionalProperties": false,
 						     "description": "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
-						     "$ref": "#/definitions/EstimatedInstanceWarmup",
 						     "type": "number"
 						   }
 						*/
@@ -108,11 +102,9 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						       "TargetValue": {
 						         "additionalProperties": false,
 						         "description": "Desired value to use with a game server group target-based scaling policy.",
-						         "$ref": "#/definitions/TargetValue",
 						         "type": "number"
 						       }
 						     },
-						     "$ref": "#/definitions/TargetTrackingConfiguration",
 						     "required": [
 						       "TargetValue"
 						     ],
@@ -129,7 +121,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									   {
 									     "additionalProperties": false,
 									     "description": "Desired value to use with a game server group target-based scaling policy.",
-									     "$ref": "#/definitions/TargetValue",
 									     "type": "number"
 									   }
 									*/
@@ -157,7 +148,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			       "SPOT_PREFERRED",
 			       "ON_DEMAND_ONLY"
 			     ],
-			     "$ref": "#/definitions/BalancingStrategy",
 			     "type": "string"
 			   }
 			*/
@@ -177,7 +167,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			       "FORCE_DELETE",
 			       "RETAIN"
 			     ],
-			     "$ref": "#/definitions/DeleteOption",
 			     "type": "string"
 			   }
 			*/
@@ -196,7 +185,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			     "maxLength": 256,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/GameServerGroupArn",
 			     "type": "string"
 			   }
 			*/
@@ -214,7 +202,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			     "maxLength": 128,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/GameServerGroupName",
 			     "type": "string"
 			   }
 			*/
@@ -233,7 +220,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			       "NO_PROTECTION",
 			       "FULL_PROTECTION"
 			     ],
-			     "$ref": "#/definitions/GameServerProtectionPolicy",
 			     "type": "string"
 			   }
 			*/
@@ -255,17 +241,14 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			         "InstanceType": {
 			           "additionalProperties": false,
 			           "description": "An EC2 instance type designation.",
-			           "$ref": "#/definitions/InstanceType",
 			           "type": "string"
 			         },
 			         "WeightedCapacity": {
 			           "additionalProperties": false,
 			           "description": "Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.",
-			           "$ref": "#/definitions/WeightedCapacity",
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/InstanceDefinition",
 			       "required": [
 			         "InstanceType"
 			       ],
@@ -273,7 +256,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			     },
 			     "maxItems": 20,
 			     "minItems": 2,
-			     "$ref": "#/definitions/InstanceDefinitions",
 			     "type": "array"
 			   }
 			*/
@@ -287,7 +269,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						   {
 						     "additionalProperties": false,
 						     "description": "An EC2 instance type designation.",
-						     "$ref": "#/definitions/InstanceType",
 						     "type": "string"
 						   }
 						*/
@@ -302,7 +283,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						   {
 						     "additionalProperties": false,
 						     "description": "Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.",
-						     "$ref": "#/definitions/WeightedCapacity",
 						     "type": "string"
 						   }
 						*/
@@ -329,23 +309,19 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			       "LaunchTemplateId": {
 			         "additionalProperties": false,
 			         "description": "A unique identifier for an existing EC2 launch template.",
-			         "$ref": "#/definitions/LaunchTemplateId",
 			         "type": "string"
 			       },
 			       "LaunchTemplateName": {
 			         "additionalProperties": false,
 			         "description": "A readable identifier for an existing EC2 launch template.",
-			         "$ref": "#/definitions/LaunchTemplateName",
 			         "type": "string"
 			       },
 			       "Version": {
 			         "additionalProperties": false,
 			         "description": "The version of the EC2 launch template to use.",
-			         "$ref": "#/definitions/Version",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/LaunchTemplate",
 			     "type": "object"
 			   }
 			*/
@@ -359,7 +335,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						   {
 						     "additionalProperties": false,
 						     "description": "A unique identifier for an existing EC2 launch template.",
-						     "$ref": "#/definitions/LaunchTemplateId",
 						     "type": "string"
 						   }
 						*/
@@ -374,7 +349,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						   {
 						     "additionalProperties": false,
 						     "description": "A readable identifier for an existing EC2 launch template.",
-						     "$ref": "#/definitions/LaunchTemplateName",
 						     "type": "string"
 						   }
 						*/
@@ -389,7 +363,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						   {
 						     "additionalProperties": false,
 						     "description": "The version of the EC2 launch template to use.",
-						     "$ref": "#/definitions/Version",
 						     "type": "string"
 						   }
 						*/
@@ -408,7 +381,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			   {
 			     "additionalProperties": false,
 			     "description": "The maximum number of instances allowed in the EC2 Auto Scaling group.",
-			     "$ref": "#/definitions/MaxSize",
 			     "type": "number"
 			   }
 			*/
@@ -423,7 +395,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			   {
 			     "additionalProperties": false,
 			     "description": "The minimum number of instances allowed in the EC2 Auto Scaling group.",
-			     "$ref": "#/definitions/MinSize",
 			     "type": "number"
 			   }
 			*/
@@ -441,7 +412,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			     "maxLength": 256,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/RoleArn",
 			     "type": "string"
 			   }
 			*/
@@ -468,12 +438,10 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "maxItems": 200,
 			     "minItems": 0,
-			     "$ref": "#/definitions/Tags",
 			     "type": "array"
 			   }
 			*/
@@ -529,7 +497,6 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			     },
 			     "maxItems": 20,
 			     "minItems": 1,
-			     "$ref": "#/definitions/VpcSubnets",
 			     "type": "array"
 			   }
 			*/

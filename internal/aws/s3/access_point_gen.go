@@ -44,7 +44,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "the Amazon Resource Name (ARN) of the specified accesspoint.",
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -179,7 +178,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/PublicAccessBlockConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -257,7 +255,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/VpcConfiguration",
 			     "type": "object"
 			   }
 			*/

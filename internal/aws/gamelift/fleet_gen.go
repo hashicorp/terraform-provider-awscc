@@ -56,7 +56,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/CertificateConfiguration",
 			     "required": [
 			       "CertificateType"
 			     ],
@@ -155,7 +154,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "integer"
 			         }
 			       },
-			       "$ref": "#/definitions/IpPermission",
 			       "required": [
 			         "FromPort",
 			         "IpRange",
@@ -324,7 +322,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "maxLength": 64,
 			           "minLength": 1,
 			           "pattern": "",
-			           "$ref": "#/definitions/Location",
 			           "type": "string"
 			         },
 			         "LocationCapacity": {
@@ -347,7 +344,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "integer"
 			             }
 			           },
-			           "$ref": "#/definitions/LocationCapacity",
 			           "required": [
 			             "DesiredEC2Instances",
 			             "MinSize",
@@ -356,7 +352,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/LocationConfiguration",
 			       "required": [
 			         "Location"
 			       ],
@@ -378,7 +373,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 64,
 						     "minLength": 1,
 						     "pattern": "",
-						     "$ref": "#/definitions/Location",
 						     "type": "string"
 						   }
 						*/
@@ -409,7 +403,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/LocationCapacity",
 						     "required": [
 						       "DesiredEC2Instances",
 						       "MinSize",
@@ -631,7 +624,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/ResourceCreationLimitPolicy",
 			     "type": "object"
 			   }
 			*/
@@ -716,7 +708,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/ServerProcess",
 			           "required": [
 			             "ConcurrentExecutions",
 			             "LaunchPath"
@@ -727,7 +718,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/RuntimeConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -794,7 +784,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/ServerProcess",
 						       "required": [
 						         "ConcurrentExecutions",
 						         "LaunchPath"

@@ -36,7 +36,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "PROVISIONED",
 			           "ON_DEMAND"
 			         ],
-			         "$ref": "#/definitions/Mode",
 			         "type": "string"
 			       },
 			       "ProvisionedThroughput": {
@@ -50,7 +49,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/ProvisionedThroughput",
 			         "required": [
 			           "ReadCapacityUnits",
 			           "WriteCapacityUnits"
@@ -58,7 +56,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/BillingMode",
 			     "required": [
 			       "Mode"
 			     ],
@@ -77,7 +74,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "PROVISIONED",
 						       "ON_DEMAND"
 						     ],
-						     "$ref": "#/definitions/Mode",
 						     "type": "string"
 						   }
 						*/
@@ -100,7 +96,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/ProvisionedThroughput",
 						     "required": [
 						       "ReadCapacityUnits",
 						       "WriteCapacityUnits"
@@ -162,7 +157,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/Column",
 			           "required": [
 			             "ColumnName",
 			             "ColumnType"
@@ -177,7 +171,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ClusteringKeyColumn",
 			       "required": [
 			         "Column"
 			       ],
@@ -206,7 +199,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/Column",
 						     "required": [
 						       "ColumnName",
 						       "ColumnType"
@@ -279,16 +271,13 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "AWS_OWNED_KMS_KEY",
 			           "CUSTOMER_MANAGED_KMS_KEY"
 			         ],
-			         "$ref": "#/definitions/EncryptionType",
 			         "type": "string"
 			       },
 			       "KmsKeyIdentifier": {
 			         "description": "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
-			         "$ref": "#/definitions/KmsKeyIdentifier",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/EncryptionSpecification",
 			     "required": [
 			       "EncryptionType"
 			     ],
@@ -308,7 +297,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "AWS_OWNED_KMS_KEY",
 						       "CUSTOMER_MANAGED_KMS_KEY"
 						     ],
-						     "$ref": "#/definitions/EncryptionType",
 						     "type": "string"
 						   }
 						*/
@@ -322,7 +310,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
-						     "$ref": "#/definitions/KmsKeyIdentifier",
 						     "type": "string"
 						   }
 						*/
@@ -367,7 +354,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Column",
 			       "required": [
 			         "ColumnName",
 			         "ColumnType"
@@ -445,7 +431,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Column",
 			       "required": [
 			         "ColumnName",
 			         "ColumnType"
@@ -524,7 +509,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

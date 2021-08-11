@@ -54,7 +54,6 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 			                   "type": "integer"
 			                 }
 			               },
-			               "$ref": "#/definitions/SocketAddress",
 			               "type": "object"
 			             },
 			             "Mtu": {
@@ -65,7 +64,6 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/DataflowEndpoint",
 			           "type": "object"
 			         },
 			         "SecurityDetails": {
@@ -87,11 +85,9 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/SecurityDetails",
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/EndpointDetails",
 			       "type": "object"
 			     },
 			     "minItems": 1,
@@ -117,7 +113,6 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/SocketAddress",
 						         "type": "object"
 						       },
 						       "Mtu": {
@@ -128,7 +123,6 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/DataflowEndpoint",
 						     "type": "object"
 						   }
 						*/
@@ -148,7 +142,6 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/SocketAddress",
 									     "type": "object"
 									   }
 									*/
@@ -230,7 +223,6 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/SecurityDetails",
 						     "type": "object"
 						   }
 						*/
@@ -314,7 +306,6 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

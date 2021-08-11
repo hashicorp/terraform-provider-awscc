@@ -54,7 +54,6 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/ConnectionPoolConfigurationInfoFormat",
 			     "type": "object"
 			   }
 			*/

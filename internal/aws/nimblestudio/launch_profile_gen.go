@@ -41,7 +41,6 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			     "items": {
 			       "type": "string"
 			     },
-			     "$ref": "#/definitions/Ec2SubnetIdList",
 			     "type": "array"
 			   }
 			*/
@@ -66,10 +65,8 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			/*
 			   {
 			     "items": {
-			       "$ref": "#/definitions/LaunchProfileProtocolVersion",
 			       "type": "string"
 			     },
-			     "$ref": "#/definitions/LaunchProfileProtocolVersions",
 			     "type": "array"
 			   }
 			*/
@@ -99,10 +96,8 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			       },
 			       "Ec2InstanceTypes": {
 			         "items": {
-			           "$ref": "#/definitions/StreamingInstanceType",
 			           "type": "string"
 			         },
-			         "$ref": "#/definitions/StreamingInstanceTypeList",
 			         "type": "array"
 			       },
 			       "MaxSessionLengthInMinutes": {
@@ -110,14 +105,11 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			       },
 			       "StreamingImageIds": {
 			         "items": {
-			           "$ref": "#/definitions/StreamingImageId",
 			           "type": "string"
 			         },
-			         "$ref": "#/definitions/StreamingImageIdList",
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/StreamConfiguration",
 			     "required": [
 			       "Ec2InstanceTypes",
 			       "StreamingImageIds",
@@ -145,10 +137,8 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						/*
 						   {
 						     "items": {
-						       "$ref": "#/definitions/StreamingInstanceType",
 						       "type": "string"
 						     },
-						     "$ref": "#/definitions/StreamingInstanceTypeList",
 						     "type": "array"
 						   }
 						*/
@@ -172,10 +162,8 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						/*
 						   {
 						     "items": {
-						       "$ref": "#/definitions/StreamingImageId",
 						       "type": "string"
 						     },
-						     "$ref": "#/definitions/StreamingImageIdList",
 						     "type": "array"
 						   }
 						*/
@@ -194,7 +182,6 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			     "items": {
 			       "type": "string"
 			     },
-			     "$ref": "#/definitions/LaunchProfileStudioComponentIdList",
 			     "type": "array"
 			   }
 			*/

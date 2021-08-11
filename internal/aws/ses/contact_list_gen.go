@@ -72,7 +72,6 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -151,7 +150,6 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Topic",
 			       "required": [
 			         "TopicName",
 			         "DisplayName",

@@ -44,7 +44,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "boolean"
 			               }
 			             },
-			             "$ref": "#/definitions/ActivityMetrics",
 			             "type": "object"
 			           },
 			           "BucketLevel": {
@@ -60,7 +59,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "boolean"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ActivityMetrics",
 			                 "type": "object"
 			               },
 			               "PrefixLevel": {
@@ -91,26 +89,21 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "type": "number"
 			                           }
 			                         },
-			                         "$ref": "#/definitions/SelectionCriteria",
 			                         "type": "object"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/PrefixLevelStorageMetrics",
 			                     "type": "object"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/PrefixLevel",
 			                 "required": [
 			                   "StorageMetrics"
 			                 ],
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/BucketLevel",
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/AccountLevel",
 			         "required": [
 			           "BucketLevel"
 			         ],
@@ -122,11 +115,9 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "properties": {
 			           "Arn": {
 			             "description": "The Amazon Resource Name (ARN) of the specified resource.",
-			             "$ref": "#/definitions/Arn",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/AwsOrg",
 			         "required": [
 			           "Arn"
 			         ],
@@ -150,7 +141,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               },
 			               "Encryption": {
 			                 "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
-			                 "$ref": "#/definitions/Encryption",
 			                 "type": "object"
 			               },
 			               "Format": {
@@ -173,7 +163,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/S3BucketDestination",
 			             "required": [
 			               "OutputSchemaVersion",
 			               "Format",
@@ -183,7 +172,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/DataExport",
 			         "required": [
 			           "S3BucketDestination"
 			         ],
@@ -197,7 +185,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "insertionOrder": false,
 			             "items": {
 			               "description": "The Amazon Resource Name (ARN) of the specified resource.",
-			               "$ref": "#/definitions/Arn",
 			               "type": "string"
 			             },
 			             "type": "array",
@@ -213,7 +200,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "uniqueItems": true
 			           }
 			         },
-			         "$ref": "#/definitions/BucketsAndRegions",
 			         "type": "object"
 			       },
 			       "Id": {
@@ -221,7 +207,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "maxLength": 64,
 			         "minLength": 1,
 			         "pattern": "",
-			         "$ref": "#/definitions/Id",
 			         "type": "string"
 			       },
 			       "Include": {
@@ -232,7 +217,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "insertionOrder": false,
 			             "items": {
 			               "description": "The Amazon Resource Name (ARN) of the specified resource.",
-			               "$ref": "#/definitions/Arn",
 			               "type": "string"
 			             },
 			             "type": "array",
@@ -248,7 +232,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "uniqueItems": true
 			           }
 			         },
-			         "$ref": "#/definitions/BucketsAndRegions",
 			         "type": "object"
 			       },
 			       "IsEnabled": {
@@ -260,7 +243,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/StorageLensConfiguration",
 			     "required": [
 			       "Id",
 			       "AccountLevel",
@@ -289,7 +271,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "boolean"
 						           }
 						         },
-						         "$ref": "#/definitions/ActivityMetrics",
 						         "type": "object"
 						       },
 						       "BucketLevel": {
@@ -305,7 +286,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "boolean"
 						               }
 						             },
-						             "$ref": "#/definitions/ActivityMetrics",
 						             "type": "object"
 						           },
 						           "PrefixLevel": {
@@ -336,26 +316,21 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                         "type": "number"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/SelectionCriteria",
 						                     "type": "object"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/PrefixLevelStorageMetrics",
 						                 "type": "object"
 						               }
 						             },
-						             "$ref": "#/definitions/PrefixLevel",
 						             "required": [
 						               "StorageMetrics"
 						             ],
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/BucketLevel",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/AccountLevel",
 						     "required": [
 						       "BucketLevel"
 						     ],
@@ -378,7 +353,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "boolean"
 									       }
 									     },
-									     "$ref": "#/definitions/ActivityMetrics",
 									     "type": "object"
 									   }
 									*/
@@ -419,7 +393,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "boolean"
 									           }
 									         },
-									         "$ref": "#/definitions/ActivityMetrics",
 									         "type": "object"
 									       },
 									       "PrefixLevel": {
@@ -450,22 +423,18 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                     "type": "number"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/SelectionCriteria",
 									                 "type": "object"
 									               }
 									             },
-									             "$ref": "#/definitions/PrefixLevelStorageMetrics",
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/PrefixLevel",
 									         "required": [
 									           "StorageMetrics"
 									         ],
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/BucketLevel",
 									     "type": "object"
 									   }
 									*/
@@ -485,7 +454,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "boolean"
 												       }
 												     },
-												     "$ref": "#/definitions/ActivityMetrics",
 												     "type": "object"
 												   }
 												*/
@@ -541,15 +509,12 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												                 "type": "number"
 												               }
 												             },
-												             "$ref": "#/definitions/SelectionCriteria",
 												             "type": "object"
 												           }
 												         },
-												         "$ref": "#/definitions/PrefixLevelStorageMetrics",
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/PrefixLevel",
 												     "required": [
 												       "StorageMetrics"
 												     ],
@@ -587,11 +552,9 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															             "type": "number"
 															           }
 															         },
-															         "$ref": "#/definitions/SelectionCriteria",
 															         "type": "object"
 															       }
 															     },
-															     "$ref": "#/definitions/PrefixLevelStorageMetrics",
 															     "type": "object"
 															   }
 															*/
@@ -631,7 +594,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		         "type": "number"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/SelectionCriteria",
 																		     "type": "object"
 																		   }
 																		*/
@@ -707,11 +669,9 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "properties": {
 						       "Arn": {
 						         "description": "The Amazon Resource Name (ARN) of the specified resource.",
-						         "$ref": "#/definitions/Arn",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AwsOrg",
 						     "required": [
 						       "Arn"
 						     ],
@@ -727,7 +687,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "The Amazon Resource Name (ARN) of the specified resource.",
-									     "$ref": "#/definitions/Arn",
 									     "type": "string"
 									   }
 									*/
@@ -761,7 +720,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           },
 						           "Encryption": {
 						             "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
-						             "$ref": "#/definitions/Encryption",
 						             "type": "object"
 						           },
 						           "Format": {
@@ -784,7 +742,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/S3BucketDestination",
 						         "required": [
 						           "OutputSchemaVersion",
 						           "Format",
@@ -794,7 +751,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/DataExport",
 						     "required": [
 						       "S3BucketDestination"
 						     ],
@@ -822,7 +778,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       },
 									       "Encryption": {
 									         "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
-									         "$ref": "#/definitions/Encryption",
 									         "type": "object"
 									       },
 									       "Format": {
@@ -845,7 +800,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3BucketDestination",
 									     "required": [
 									       "OutputSchemaVersion",
 									       "Format",
@@ -890,7 +844,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												/*
 												   {
 												     "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
-												     "$ref": "#/definitions/Encryption",
 												     "type": "object"
 												   }
 												*/
@@ -964,7 +917,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "insertionOrder": false,
 						         "items": {
 						           "description": "The Amazon Resource Name (ARN) of the specified resource.",
-						           "$ref": "#/definitions/Arn",
 						           "type": "string"
 						         },
 						         "type": "array",
@@ -980,7 +932,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/BucketsAndRegions",
 						     "type": "object"
 						   }
 						*/
@@ -995,7 +946,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "insertionOrder": false,
 									     "items": {
 									       "description": "The Amazon Resource Name (ARN) of the specified resource.",
-									       "$ref": "#/definitions/Arn",
 									       "type": "string"
 									     },
 									     "type": "array",
@@ -1035,7 +985,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 64,
 						     "minLength": 1,
 						     "pattern": "",
-						     "$ref": "#/definitions/Id",
 						     "type": "string"
 						   }
 						*/
@@ -1056,7 +1005,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "insertionOrder": false,
 						         "items": {
 						           "description": "The Amazon Resource Name (ARN) of the specified resource.",
-						           "$ref": "#/definitions/Arn",
 						           "type": "string"
 						         },
 						         "type": "array",
@@ -1072,7 +1020,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/BucketsAndRegions",
 						     "type": "object"
 						   }
 						*/
@@ -1087,7 +1034,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "insertionOrder": false,
 									     "items": {
 									       "description": "The Amazon Resource Name (ARN) of the specified resource.",
-									       "$ref": "#/definitions/Arn",
 									       "type": "string"
 									     },
 									     "type": "array",
@@ -1171,7 +1117,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

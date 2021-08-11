@@ -47,7 +47,6 @@ func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "description": "Job name",
 			       "maxLength": 255,
 			       "minLength": 1,
-			       "$ref": "#/definitions/JobName",
 			       "type": "string"
 			     },
 			     "type": "array",
@@ -95,7 +94,6 @@ func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

@@ -91,14 +91,12 @@ func dataCatalogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
 			       ],
 			       "type": "object"
 			     },
-			     "$ref": "#/definitions/Tags",
 			     "type": "array"
 			   }
 			*/

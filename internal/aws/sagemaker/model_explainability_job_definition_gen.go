@@ -58,7 +58,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			     "description": "The name of the job definition.",
 			     "maxLength": 63,
 			     "pattern": "",
-			     "$ref": "#/definitions/JobDefinitionName",
 			     "type": "string"
 			   }
 			*/
@@ -97,7 +96,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/ClusterConfig",
 			         "required": [
 			           "InstanceCount",
 			           "InstanceType",
@@ -106,7 +104,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/MonitoringResources",
 			     "required": [
 			       "ClusterConfig"
 			     ],
@@ -141,7 +138,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/ClusterConfig",
 						     "required": [
 						       "InstanceCount",
 						       "InstanceType",
@@ -242,7 +238,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/Environment",
 			         "type": "object"
 			       },
 			       "ImageUri": {
@@ -252,7 +247,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/ModelExplainabilityAppSpecification",
 			     "required": [
 			       "ImageUri",
 			       "ConfigUri"
@@ -296,7 +290,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/Environment",
 						     "type": "object"
 						   }
 						*/
@@ -339,7 +332,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			         "maxLength": 63,
 			         "minLength": 1,
 			         "pattern": "",
-			         "$ref": "#/definitions/ProcessingJobName",
 			         "type": "string"
 			       },
 			       "ConstraintsResource": {
@@ -350,15 +342,12 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			             "description": "The Amazon S3 URI.",
 			             "maxLength": 1024,
 			             "pattern": "",
-			             "$ref": "#/definitions/S3Uri",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ConstraintsResource",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/ModelExplainabilityBaselineConfig",
 			     "type": "object"
 			   }
 			*/
@@ -374,7 +363,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						     "maxLength": 63,
 						     "minLength": 1,
 						     "pattern": "",
-						     "$ref": "#/definitions/ProcessingJobName",
 						     "type": "string"
 						   }
 						*/
@@ -394,11 +382,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						         "description": "The Amazon S3 URI.",
 						         "maxLength": 1024,
 						         "pattern": "",
-						         "$ref": "#/definitions/S3Uri",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ConstraintsResource",
 						     "type": "object"
 						   }
 						*/
@@ -413,7 +399,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									     "description": "The Amazon S3 URI.",
 									     "maxLength": 1024,
 									     "pattern": "",
-									     "$ref": "#/definitions/S3Uri",
 									     "type": "string"
 									   }
 									*/
@@ -447,7 +432,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			             "description": "The name of the endpoint used to run the monitoring job.",
 			             "maxLength": 63,
 			             "pattern": "",
-			             "$ref": "#/definitions/EndpointName",
 			             "type": "string"
 			           },
 			           "FeaturesAttribute": {
@@ -488,7 +472,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/EndpointInput",
 			         "required": [
 			           "EndpointName",
 			           "LocalPath"
@@ -496,7 +479,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/ModelExplainabilityJobInput",
 			     "required": [
 			       "EndpointInput"
 			     ],
@@ -518,7 +500,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						         "description": "The name of the endpoint used to run the monitoring job.",
 						         "maxLength": 63,
 						         "pattern": "",
-						         "$ref": "#/definitions/EndpointName",
 						         "type": "string"
 						       },
 						       "FeaturesAttribute": {
@@ -559,7 +540,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/EndpointInput",
 						     "required": [
 						       "EndpointName",
 						       "LocalPath"
@@ -578,7 +558,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									     "description": "The name of the endpoint used to run the monitoring job.",
 									     "maxLength": 63,
 									     "pattern": "",
-									     "$ref": "#/definitions/EndpointName",
 									     "type": "string"
 									   }
 									*/
@@ -731,7 +710,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/S3Output",
 			               "required": [
 			                 "LocalPath",
 			                 "S3Uri"
@@ -739,7 +717,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/MonitoringOutput",
 			           "required": [
 			             "S3Output"
 			           ],
@@ -750,7 +727,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/MonitoringOutputConfig",
 			     "required": [
 			       "MonitoringOutputs"
 			     ],
@@ -810,7 +786,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/S3Output",
 						           "required": [
 						             "LocalPath",
 						             "S3Uri"
@@ -818,7 +793,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/MonitoringOutput",
 						       "required": [
 						         "S3Output"
 						       ],
@@ -861,7 +835,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3Output",
 									     "required": [
 									       "LocalPath",
 									       "S3Uri"
@@ -976,7 +949,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/VpcConfig",
 			         "required": [
 			           "SecurityGroupIds",
 			           "Subnets"
@@ -984,7 +956,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/NetworkConfig",
 			     "type": "object"
 			   }
 			*/
@@ -1048,7 +1019,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/VpcConfig",
 						     "required": [
 						       "SecurityGroupIds",
 						       "Subnets"
@@ -1139,7 +1109,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/StoppingCondition",
 			     "required": [
 			       "MaxRuntimeInSeconds"
 			     ],
@@ -1192,7 +1161,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

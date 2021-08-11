@@ -109,7 +109,6 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/LoadBalancer",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -213,14 +212,12 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/AwsVpcConfiguration",
 			         "required": [
 			           "Subnets"
 			         ],
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/NetworkConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -260,7 +257,6 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/AwsVpcConfiguration",
 						     "required": [
 						       "Subnets"
 						     ],
@@ -365,7 +361,6 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "number"
 			       }
 			     },
-			     "$ref": "#/definitions/Scale",
 			     "type": "object"
 			   }
 			*/
@@ -444,7 +439,6 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ServiceRegistry",
 			       "type": "object"
 			     },
 			     "type": "array"

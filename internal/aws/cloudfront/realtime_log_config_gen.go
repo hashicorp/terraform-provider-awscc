@@ -51,7 +51,6 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/KinesisStreamConfig",
 			           "required": [
 			             "RoleArn",
 			             "StreamArn"
@@ -62,7 +61,6 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/EndPoint",
 			       "required": [
 			         "KinesisStreamConfig",
 			         "StreamType"
@@ -90,7 +88,6 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/KinesisStreamConfig",
 						     "required": [
 						       "RoleArn",
 						       "StreamArn"

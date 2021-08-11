@@ -79,7 +79,6 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
 			     "pattern": "",
-			     "$ref": "#/definitions/iso8601UTC",
 			     "type": "string"
 			   }
 			*/
@@ -135,7 +134,6 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/NetworkInterface",
 			       "required": [
 			         "NetworkInterfaceId"
 			       ],

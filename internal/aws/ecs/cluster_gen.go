@@ -79,7 +79,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ClusterSettings",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -146,18 +145,15 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ExecuteCommandLogConfiguration",
 			             "type": "object"
 			           },
 			           "Logging": {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ExecuteCommandConfiguration",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/ClusterConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -193,14 +189,12 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ExecuteCommandLogConfiguration",
 						         "type": "object"
 						       },
 						       "Logging": {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ExecuteCommandConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -241,7 +235,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ExecuteCommandLogConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -344,7 +337,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "integer"
 			         }
 			       },
-			       "$ref": "#/definitions/CapacityProviderStrategyItem",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -405,7 +397,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

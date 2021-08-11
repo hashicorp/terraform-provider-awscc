@@ -44,7 +44,6 @@ func inputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/Attribute",
 			           "required": [
 			             "JsonPath"
 			           ],
@@ -56,7 +55,6 @@ func inputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "uniqueItems": true
 			       }
 			     },
-			     "$ref": "#/definitions/InputDefinition",
 			     "required": [
 			       "Attributes"
 			     ],
@@ -84,7 +82,6 @@ func inputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Attribute",
 						       "required": [
 						         "JsonPath"
 						       ],
@@ -180,7 +177,6 @@ func inputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

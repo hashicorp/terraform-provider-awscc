@@ -83,7 +83,6 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/FileSystemConfig",
 			         "type": "object"
 			       },
 			       "KernelSpecs": {
@@ -104,7 +103,6 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/KernelSpec",
 			           "required": [
 			             "Name"
 			           ],
@@ -115,7 +113,6 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/KernelGatewayImageConfig",
 			     "required": [
 			       "KernelSpecs"
 			     ],
@@ -149,7 +146,6 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/FileSystemConfig",
 						     "type": "object"
 						   }
 						*/
@@ -224,7 +220,6 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/KernelSpec",
 						       "required": [
 						         "Name"
 						       ],
@@ -300,7 +295,6 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

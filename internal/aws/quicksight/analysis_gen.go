@@ -125,11 +125,9 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
 			             "COLUMN_REPLACEMENT_MISSING"
 			           ],
-			           "$ref": "#/definitions/AnalysisErrorType",
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/AnalysisError",
 			       "type": "object"
 			     },
 			     "minItems": 1,
@@ -170,7 +168,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
 						       "COLUMN_REPLACEMENT_MISSING"
 						     ],
-						     "$ref": "#/definitions/AnalysisErrorType",
 						     "type": "string"
 						   }
 						*/
@@ -242,7 +239,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/DateTimeParameter",
 			           "required": [
 			             "Name",
 			             "Values"
@@ -272,7 +268,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/DecimalParameter",
 			           "required": [
 			             "Name",
 			             "Values"
@@ -302,7 +297,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/IntegerParameter",
 			           "required": [
 			             "Name",
 			             "Values"
@@ -332,7 +326,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/StringParameter",
 			           "required": [
 			             "Name",
 			             "Values"
@@ -344,7 +337,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/Parameters",
 			     "type": "object"
 			   }
 			*/
@@ -374,7 +366,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "array"
 						         }
 						       },
-						       "$ref": "#/definitions/DateTimeParameter",
 						       "required": [
 						         "Name",
 						         "Values"
@@ -450,7 +441,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "array"
 						         }
 						       },
-						       "$ref": "#/definitions/DecimalParameter",
 						       "required": [
 						         "Name",
 						         "Values"
@@ -526,7 +516,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "array"
 						         }
 						       },
-						       "$ref": "#/definitions/IntegerParameter",
 						       "required": [
 						         "Name",
 						         "Values"
@@ -602,7 +591,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "array"
 						         }
 						       },
-						       "$ref": "#/definitions/StringParameter",
 						       "required": [
 						         "Name",
 						         "Values"
@@ -686,7 +674,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ResourcePermission",
 			       "required": [
 			         "Actions",
 			         "Principal"
@@ -765,7 +752,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Sheet",
 			       "type": "object"
 			     },
 			     "maxItems": 20,
@@ -847,7 +833,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/DataSetReference",
 			               "required": [
 			                 "DataSetArn",
 			                 "DataSetPlaceholder"
@@ -858,7 +843,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/AnalysisSourceTemplate",
 			         "required": [
 			           "Arn",
 			           "DataSetReferences"
@@ -866,7 +850,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/AnalysisSourceEntity",
 			     "type": "object"
 			   }
 			*/
@@ -901,7 +884,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/DataSetReference",
 						           "required": [
 						             "DataSetArn",
 						             "DataSetPlaceholder"
@@ -912,7 +894,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisSourceTemplate",
 						     "required": [
 						       "Arn",
 						       "DataSetReferences"
@@ -956,7 +937,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/DataSetReference",
 									       "required": [
 									         "DataSetArn",
 									         "DataSetPlaceholder"
@@ -1027,7 +1007,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "UPDATE_FAILED",
 			       "DELETED"
 			     ],
-			     "$ref": "#/definitions/ResourceStatus",
 			     "type": "string"
 			   }
 			*/
@@ -1058,7 +1037,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

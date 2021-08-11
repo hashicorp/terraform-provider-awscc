@@ -40,7 +40,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "integer"
 			         }
 			       },
-			       "$ref": "#/definitions/CapacityProviderStrategyItem",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -116,7 +115,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/DeploymentCircuitBreaker",
 			         "required": [
 			           "Enable",
 			           "Rollback"
@@ -130,7 +128,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/DeploymentConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -150,7 +147,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/DeploymentCircuitBreaker",
 						     "required": [
 						       "Enable",
 						       "Rollback"
@@ -228,7 +224,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/DeploymentController",
 			     "type": "object"
 			   }
 			*/
@@ -341,7 +336,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/LoadBalancer",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -441,11 +435,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/AwsVpcConfiguration",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/NetworkConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -478,7 +470,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/AwsVpcConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -554,7 +545,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/PlacementConstraint",
 			       "required": [
 			         "Type"
 			       ],
@@ -618,7 +608,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/PlacementStrategy",
 			       "required": [
 			         "Type"
 			       ],
@@ -766,7 +755,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ServiceRegistry",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -840,7 +828,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

@@ -57,7 +57,6 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/AssetHierarchy",
 			       "required": [
 			         "LogicalId",
 			         "ChildAssetId"
@@ -173,7 +172,6 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/AssetProperty",
 			       "required": [
 			         "LogicalId"
 			       ],
@@ -253,7 +251,6 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

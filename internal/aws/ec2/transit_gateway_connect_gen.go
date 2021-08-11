@@ -47,7 +47,6 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/TransitGatewayConnectOptions",
 			     "type": "object"
 			   }
 			*/
@@ -102,7 +101,6 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

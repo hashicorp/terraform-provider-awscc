@@ -98,10 +98,8 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
-			     "$ref": "#/definitions/Tags",
 			     "type": "array",
 			     "uniqueItems": true
 			   }

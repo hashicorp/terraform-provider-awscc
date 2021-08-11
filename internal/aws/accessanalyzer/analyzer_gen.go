@@ -81,7 +81,6 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Filter",
 			             "required": [
 			               "Property"
 			             ],
@@ -95,7 +94,6 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ArchiveRule",
 			       "required": [
 			         "Filter",
 			         "RuleName"
@@ -144,7 +142,6 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Filter",
 						       "required": [
 						         "Property"
 						       ],
@@ -290,7 +287,6 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

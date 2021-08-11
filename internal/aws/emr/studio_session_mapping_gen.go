@@ -60,7 +60,6 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			/*
 			   {
 			     "pattern": "",
-			     "$ref": "#/definitions/IamPolicyArn",
 			     "type": "string"
 			   }
 			*/

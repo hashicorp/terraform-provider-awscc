@@ -60,7 +60,6 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 25,
 			     "minLength": 20,
 			     "pattern": "",
-			     "$ref": "#/definitions/ZonedDateTime",
 			     "type": "string"
 			   }
 			*/

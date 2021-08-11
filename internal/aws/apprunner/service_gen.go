@@ -55,7 +55,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/EncryptionConfiguration",
 			     "required": [
 			       "KmsKey"
 			     ],
@@ -124,7 +123,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/HealthCheckConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -236,7 +234,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "maxLength": 102,
 			         "minLength": 29,
 			         "pattern": "",
-			         "$ref": "#/definitions/RoleArn",
 			         "type": "string"
 			       },
 			       "Memory": {
@@ -247,7 +244,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/InstanceConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -278,7 +274,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 102,
 						     "minLength": 29,
 						     "pattern": "",
-						     "$ref": "#/definitions/RoleArn",
 						     "type": "string"
 						   }
 						*/
@@ -383,7 +378,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "maxLength": 102,
 			             "minLength": 29,
 			             "pattern": "",
-			             "$ref": "#/definitions/RoleArn",
 			             "type": "string"
 			           },
 			           "ConnectionArn": {
@@ -394,7 +388,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/AuthenticationConfiguration",
 			         "type": "object"
 			       },
 			       "AutoDeploymentsEnabled": {
@@ -440,7 +433,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/KeyValuePair",
 			                       "type": "object"
 			                     },
 			                     "type": "array"
@@ -450,7 +442,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/CodeConfigurationValues",
 			                 "required": [
 			                   "Runtime"
 			                 ],
@@ -465,7 +456,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/CodeConfiguration",
 			             "required": [
 			               "ConfigurationSource"
 			             ],
@@ -491,7 +481,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SourceCodeVersion",
 			             "required": [
 			               "Type",
 			               "Value"
@@ -499,7 +488,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/CodeRepository",
 			         "required": [
 			           "RepositoryUrl",
 			           "SourceCodeVersion"
@@ -529,7 +517,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/KeyValuePair",
 			                   "type": "object"
 			                 },
 			                 "type": "array"
@@ -539,7 +526,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ImageConfiguration",
 			             "type": "object"
 			           },
 			           "ImageIdentifier": {
@@ -558,7 +544,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ImageRepository",
 			         "required": [
 			           "ImageIdentifier",
 			           "ImageRepositoryType"
@@ -566,7 +551,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/SourceConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -585,7 +569,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "maxLength": 102,
 						         "minLength": 29,
 						         "pattern": "",
-						         "$ref": "#/definitions/RoleArn",
 						         "type": "string"
 						       },
 						       "ConnectionArn": {
@@ -596,7 +579,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AuthenticationConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -611,7 +593,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "maxLength": 102,
 									     "minLength": 29,
 									     "pattern": "",
-									     "$ref": "#/definitions/RoleArn",
 									     "type": "string"
 									   }
 									*/
@@ -694,7 +675,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "type": "string"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/KeyValuePair",
 						                   "type": "object"
 						                 },
 						                 "type": "array"
@@ -704,7 +684,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/CodeConfigurationValues",
 						             "required": [
 						               "Runtime"
 						             ],
@@ -719,7 +698,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/CodeConfiguration",
 						         "required": [
 						           "ConfigurationSource"
 						         ],
@@ -745,7 +723,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SourceCodeVersion",
 						         "required": [
 						           "Type",
 						           "Value"
@@ -753,7 +730,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/CodeRepository",
 						     "required": [
 						       "RepositoryUrl",
 						       "SourceCodeVersion"
@@ -803,7 +779,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "type": "string"
 									                 }
 									               },
-									               "$ref": "#/definitions/KeyValuePair",
 									               "type": "object"
 									             },
 									             "type": "array"
@@ -813,7 +788,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/CodeConfigurationValues",
 									         "required": [
 									           "Runtime"
 									         ],
@@ -828,7 +802,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CodeConfiguration",
 									     "required": [
 									       "ConfigurationSource"
 									     ],
@@ -873,7 +846,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "type": "string"
 												             }
 												           },
-												           "$ref": "#/definitions/KeyValuePair",
 												           "type": "object"
 												         },
 												         "type": "array"
@@ -883,7 +855,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/CodeConfigurationValues",
 												     "required": [
 												       "Runtime"
 												     ],
@@ -951,7 +922,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "type": "string"
 															         }
 															       },
-															       "$ref": "#/definitions/KeyValuePair",
 															       "type": "object"
 															     },
 															     "type": "array"
@@ -1057,7 +1027,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SourceCodeVersion",
 									     "required": [
 									       "Type",
 									       "Value"
@@ -1132,7 +1101,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/KeyValuePair",
 						               "type": "object"
 						             },
 						             "type": "array"
@@ -1142,7 +1110,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ImageConfiguration",
 						         "type": "object"
 						       },
 						       "ImageIdentifier": {
@@ -1161,7 +1128,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ImageRepository",
 						     "required": [
 						       "ImageIdentifier",
 						       "ImageRepositoryType"
@@ -1195,7 +1161,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/KeyValuePair",
 									           "type": "object"
 									         },
 									         "type": "array"
@@ -1205,7 +1170,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ImageConfiguration",
 									     "type": "object"
 									   }
 									*/
@@ -1240,7 +1204,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/KeyValuePair",
 												       "type": "object"
 												     },
 												     "type": "array"
@@ -1361,7 +1324,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

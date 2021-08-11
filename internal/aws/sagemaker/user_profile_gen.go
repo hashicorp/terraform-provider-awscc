@@ -91,7 +91,6 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -248,11 +247,9 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ResourceSpec",
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/JupyterServerAppSettings",
 			         "type": "object"
 			       },
 			       "KernelGatewayAppSettings": {
@@ -282,7 +279,6 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "integer"
 			                 }
 			               },
-			               "$ref": "#/definitions/CustomImage",
 			               "required": [
 			                 "AppImageConfigName",
 			                 "ImageName"
@@ -348,11 +344,9 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ResourceSpec",
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/KernelGatewayAppSettings",
 			         "type": "object"
 			       },
 			       "SecurityGroups": {
@@ -392,11 +386,9 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/SharingSettings",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/UserSettings",
 			     "type": "object"
 			   }
 			*/
@@ -481,11 +473,9 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ResourceSpec",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/JupyterServerAppSettings",
 						     "type": "object"
 						   }
 						*/
@@ -550,7 +540,6 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ResourceSpec",
 									     "type": "object"
 									   }
 									*/
@@ -672,7 +661,6 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/CustomImage",
 						           "required": [
 						             "AppImageConfigName",
 						             "ImageName"
@@ -738,11 +726,9 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ResourceSpec",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/KernelGatewayAppSettings",
 						     "type": "object"
 						   }
 						*/
@@ -776,7 +762,6 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/CustomImage",
 									       "required": [
 									         "AppImageConfigName",
 									         "ImageName"
@@ -901,7 +886,6 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ResourceSpec",
 									     "type": "object"
 									   }
 									*/
@@ -1042,7 +1026,6 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/SharingSettings",
 						     "type": "object"
 						   }
 						*/

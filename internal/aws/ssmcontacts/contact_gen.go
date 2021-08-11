@@ -101,7 +101,6 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ChannelTargetInfo",
 			                 "required": [
 			                   "ChannelId",
 			                   "RetryIntervalInMinutes"
@@ -121,7 +120,6 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "boolean"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ContactTargetInfo",
 			                 "required": [
 			                   "ContactId",
 			                   "IsEssential"
@@ -129,13 +127,11 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/Targets",
 			             "type": "object"
 			           },
 			           "type": "array"
 			         }
 			       },
-			       "$ref": "#/definitions/Stage",
 			       "required": [
 			         "DurationInMinutes"
 			       ],
@@ -183,7 +179,6 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/ChannelTargetInfo",
 						           "required": [
 						             "ChannelId",
 						             "RetryIntervalInMinutes"
@@ -203,7 +198,6 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "boolean"
 						             }
 						           },
-						           "$ref": "#/definitions/ContactTargetInfo",
 						           "required": [
 						             "ContactId",
 						             "IsEssential"
@@ -211,7 +205,6 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/Targets",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -237,7 +230,6 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/ChannelTargetInfo",
 									     "required": [
 									       "ChannelId",
 									       "RetryIntervalInMinutes"
@@ -295,7 +287,6 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "boolean"
 									       }
 									     },
-									     "$ref": "#/definitions/ContactTargetInfo",
 									     "required": [
 									       "ContactId",
 									       "IsEssential"

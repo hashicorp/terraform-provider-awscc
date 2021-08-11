@@ -52,7 +52,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ApiKeyAuthParameters",
 			         "required": [
 			           "ApiKeyName",
 			           "ApiKeyValue"
@@ -69,7 +68,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/BasicAuthParameters",
 			         "required": [
 			           "Username",
 			           "Password"
@@ -93,7 +91,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/Parameter",
 			               "required": [
 			                 "Key",
 			                 "Value"
@@ -116,7 +113,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/Parameter",
 			               "required": [
 			                 "Key",
 			                 "Value"
@@ -139,7 +135,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/Parameter",
 			               "required": [
 			                 "Key",
 			                 "Value"
@@ -149,7 +144,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/ConnectionHttpParameters",
 			         "type": "object"
 			       },
 			       "OAuthParameters": {
@@ -170,7 +164,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ClientParameters",
 			             "required": [
 			               "ClientID",
 			               "ClientSecret"
@@ -202,7 +195,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/Parameter",
 			                   "required": [
 			                     "Key",
 			                     "Value"
@@ -225,7 +217,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/Parameter",
 			                   "required": [
 			                     "Key",
 			                     "Value"
@@ -248,7 +239,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/Parameter",
 			                   "required": [
 			                     "Key",
 			                     "Value"
@@ -258,11 +248,9 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/ConnectionHttpParameters",
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/OAuthParameters",
 			         "required": [
 			           "ClientParameters",
 			           "AuthorizationEndpoint",
@@ -290,7 +278,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ApiKeyAuthParameters",
 						     "required": [
 						       "ApiKeyName",
 						       "ApiKeyValue"
@@ -340,7 +327,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/BasicAuthParameters",
 						     "required": [
 						       "Username",
 						       "Password"
@@ -397,7 +383,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/Parameter",
 						           "required": [
 						             "Key",
 						             "Value"
@@ -420,7 +405,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/Parameter",
 						           "required": [
 						             "Key",
 						             "Value"
@@ -443,7 +427,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/Parameter",
 						           "required": [
 						             "Key",
 						             "Value"
@@ -453,7 +436,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/ConnectionHttpParameters",
 						     "type": "object"
 						   }
 						*/
@@ -477,7 +459,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Parameter",
 									       "required": [
 									         "Key",
 									         "Value"
@@ -545,7 +526,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Parameter",
 									       "required": [
 									         "Key",
 									         "Value"
@@ -613,7 +593,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Parameter",
 									       "required": [
 									         "Key",
 									         "Value"
@@ -689,7 +668,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ClientParameters",
 						         "required": [
 						           "ClientID",
 						           "ClientSecret"
@@ -721,7 +699,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/Parameter",
 						               "required": [
 						                 "Key",
 						                 "Value"
@@ -744,7 +721,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/Parameter",
 						               "required": [
 						                 "Key",
 						                 "Value"
@@ -767,7 +743,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/Parameter",
 						               "required": [
 						                 "Key",
 						                 "Value"
@@ -777,11 +752,9 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/ConnectionHttpParameters",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/OAuthParameters",
 						     "required": [
 						       "ClientParameters",
 						       "AuthorizationEndpoint",
@@ -819,7 +792,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ClientParameters",
 									     "required": [
 									       "ClientID",
 									       "ClientSecret"
@@ -892,7 +864,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/Parameter",
 									           "required": [
 									             "Key",
 									             "Value"
@@ -915,7 +886,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/Parameter",
 									           "required": [
 									             "Key",
 									             "Value"
@@ -938,7 +908,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/Parameter",
 									           "required": [
 									             "Key",
 									             "Value"
@@ -948,7 +917,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/ConnectionHttpParameters",
 									     "type": "object"
 									   }
 									*/
@@ -972,7 +940,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/Parameter",
 												       "required": [
 												         "Key",
 												         "Value"
@@ -1040,7 +1007,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/Parameter",
 												       "required": [
 												         "Key",
 												         "Value"
@@ -1108,7 +1074,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/Parameter",
 												       "required": [
 												         "Key",
 												         "Value"

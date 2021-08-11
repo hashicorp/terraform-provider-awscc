@@ -71,7 +71,6 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/BasicAuthConfig",
 			     "required": [
 			       "Username",
 			       "Password"
@@ -217,7 +216,6 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/EnvironmentVariable",
 			       "required": [
 			         "Name",
 			         "Value"
@@ -314,7 +312,6 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

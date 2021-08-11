@@ -29,7 +29,6 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "pattern": "",
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -124,7 +123,6 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "pattern": "",
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -157,7 +155,6 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "items": {
 			       "description": "Identifier of a subnet",
 			       "pattern": "",
-			       "$ref": "#/definitions/SubnetId",
 			       "type": "string"
 			     },
 			     "minItems": 1,
@@ -193,14 +190,12 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"
 			       ],
 			       "type": "object"
 			     },
-			     "$ref": "#/definitions/Tags",
 			     "type": "array",
 			     "uniqueItems": true
 			   }
@@ -265,7 +260,6 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "pattern": "",
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/

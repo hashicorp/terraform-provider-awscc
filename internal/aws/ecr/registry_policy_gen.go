@@ -44,7 +44,6 @@ func registryPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			     "maxLength": 12,
 			     "minLength": 12,
 			     "pattern": "",
-			     "$ref": "#/definitions/RegistryId",
 			     "type": "string"
 			   }
 			*/

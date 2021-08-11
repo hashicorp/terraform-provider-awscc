@@ -32,7 +32,6 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "description": "IP address",
 			       "maxLength": 50,
 			       "minLength": 1,
-			       "$ref": "#/definitions/IPAddress",
 			       "type": "string"
 			     },
 			     "type": "array"
@@ -48,7 +47,6 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "ARN of the WAF entity.",
-			     "$ref": "#/definitions/ResourceArn",
 			     "type": "string"
 			   }
 			*/
@@ -63,7 +61,6 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "description": "Description of the entity.",
 			     "pattern": "",
-			     "$ref": "#/definitions/EntityDescription",
 			     "type": "string"
 			   }
 			*/
@@ -81,7 +78,6 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "IPV4",
 			       "IPV6"
 			     ],
-			     "$ref": "#/definitions/IPAddressVersion",
 			     "type": "string"
 			   }
 			*/
@@ -96,7 +92,6 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "description": "Id of the IPSet",
 			     "pattern": "",
-			     "$ref": "#/definitions/EntityId",
 			     "type": "string"
 			   }
 			*/
@@ -111,7 +106,6 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "description": "Name of the IPSet.",
 			     "pattern": "",
-			     "$ref": "#/definitions/EntityName",
 			     "type": "string"
 			   }
 			*/
@@ -131,7 +125,6 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "CLOUDFRONT",
 			       "REGIONAL"
 			     ],
-			     "$ref": "#/definitions/Scope",
 			     "type": "string"
 			   }
 			*/
@@ -159,7 +152,6 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "minItems": 1,

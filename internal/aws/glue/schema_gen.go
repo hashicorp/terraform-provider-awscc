@@ -53,7 +53,6 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/SchemaVersion",
 			     "type": "object"
 			   }
 			*/
@@ -196,7 +195,6 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Registry",
 			     "type": "object"
 			   }
 			*/
@@ -277,7 +275,6 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

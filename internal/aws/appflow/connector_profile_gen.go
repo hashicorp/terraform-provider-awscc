@@ -69,17 +69,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "ApiKey": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ApiKey",
 			                 "type": "string"
 			               },
 			               "SecretKey": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/SecretKey",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/AmplitudeConnectorProfileCredentials",
 			             "required": [
 			               "ApiKey",
 			               "SecretKey"
@@ -91,17 +88,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "ApiKey": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ApiKey",
 			                 "type": "string"
 			               },
 			               "ApplicationKey": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ApplicationKey",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/DatadogConnectorProfileCredentials",
 			             "required": [
 			               "ApiKey",
 			               "ApplicationKey"
@@ -113,11 +107,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "ApiToken": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ApiToken",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/DynatraceConnectorProfileCredentials",
 			             "required": [
 			               "ApiToken"
 			             ],
@@ -128,19 +120,16 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "AccessToken": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/AccessToken",
 			                 "type": "string"
 			               },
 			               "ClientId": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ClientId",
 			                 "type": "string"
 			               },
 			               "ClientSecret": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ClientSecret",
 			                 "type": "string"
 			               },
 			               "ConnectorOAuthRequest": {
@@ -154,17 +143,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ConnectorOAuthRequest",
 			                 "type": "object"
 			               },
 			               "RefreshToken": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/RefreshToken",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/GoogleAnalyticsConnectorProfileCredentials",
 			             "required": [
 			               "ClientId",
 			               "ClientSecret"
@@ -176,29 +162,24 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "AccessKeyId": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/AccessKeyId",
 			                 "type": "string"
 			               },
 			               "Datakey": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Key",
 			                 "type": "string"
 			               },
 			               "SecretAccessKey": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Key",
 			                 "type": "string"
 			               },
 			               "UserId": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Username",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/InforNexusConnectorProfileCredentials",
 			             "required": [
 			               "AccessKeyId",
 			               "UserId",
@@ -212,19 +193,16 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "AccessToken": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/AccessToken",
 			                 "type": "string"
 			               },
 			               "ClientId": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ClientId",
 			                 "type": "string"
 			               },
 			               "ClientSecret": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ClientSecret",
 			                 "type": "string"
 			               },
 			               "ConnectorOAuthRequest": {
@@ -238,11 +216,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ConnectorOAuthRequest",
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/MarketoConnectorProfileCredentials",
 			             "required": [
 			               "ClientId",
 			               "ClientSecret"
@@ -254,17 +230,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "Password": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Password",
 			                 "type": "string"
 			               },
 			               "Username": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Username",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/RedshiftConnectorProfileCredentials",
 			             "required": [
 			               "Username",
 			               "Password"
@@ -276,13 +249,11 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "AccessToken": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/AccessToken",
 			                 "type": "string"
 			               },
 			               "ClientCredentialsArn": {
 			                 "maxLength": 2048,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ClientCredentialsArn",
 			                 "type": "string"
 			               },
 			               "ConnectorOAuthRequest": {
@@ -296,17 +267,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ConnectorOAuthRequest",
 			                 "type": "object"
 			               },
 			               "RefreshToken": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/RefreshToken",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SalesforceConnectorProfileCredentials",
 			             "type": "object"
 			           },
 			           "ServiceNow": {
@@ -314,17 +282,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "Password": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Password",
 			                 "type": "string"
 			               },
 			               "Username": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Username",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ServiceNowConnectorProfileCredentials",
 			             "required": [
 			               "Username",
 			               "Password"
@@ -336,11 +301,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "ApiKey": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ApiKey",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SingularConnectorProfileCredentials",
 			             "required": [
 			               "ApiKey"
 			             ],
@@ -351,19 +314,16 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "AccessToken": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/AccessToken",
 			                 "type": "string"
 			               },
 			               "ClientId": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ClientId",
 			                 "type": "string"
 			               },
 			               "ClientSecret": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ClientSecret",
 			                 "type": "string"
 			               },
 			               "ConnectorOAuthRequest": {
@@ -377,11 +337,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ConnectorOAuthRequest",
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/SlackConnectorProfileCredentials",
 			             "required": [
 			               "ClientId",
 			               "ClientSecret"
@@ -393,17 +351,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "Password": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Password",
 			                 "type": "string"
 			               },
 			               "Username": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Username",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SnowflakeConnectorProfileCredentials",
 			             "required": [
 			               "Username",
 			               "Password"
@@ -415,11 +370,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "ApiSecretKey": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ApiSecretKey",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/TrendmicroConnectorProfileCredentials",
 			             "required": [
 			               "ApiSecretKey"
 			             ],
@@ -430,17 +383,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "Password": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Password",
 			                 "type": "string"
 			               },
 			               "Username": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Username",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/VeevaConnectorProfileCredentials",
 			             "required": [
 			               "Username",
 			               "Password"
@@ -452,19 +402,16 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "AccessToken": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/AccessToken",
 			                 "type": "string"
 			               },
 			               "ClientId": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ClientId",
 			                 "type": "string"
 			               },
 			               "ClientSecret": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/ClientSecret",
 			                 "type": "string"
 			               },
 			               "ConnectorOAuthRequest": {
@@ -478,11 +425,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ConnectorOAuthRequest",
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/ZendeskConnectorProfileCredentials",
 			             "required": [
 			               "ClientId",
 			               "ClientSecret"
@@ -490,7 +435,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/ConnectorProfileCredentials",
 			         "type": "object"
 			       },
 			       "ConnectorProfileProperties": {
@@ -501,11 +445,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "InstanceUrl": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/InstanceUrl",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/DatadogConnectorProfileProperties",
 			             "required": [
 			               "InstanceUrl"
 			             ],
@@ -516,11 +458,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "InstanceUrl": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/InstanceUrl",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/DynatraceConnectorProfileProperties",
 			             "required": [
 			               "InstanceUrl"
 			             ],
@@ -531,11 +471,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "InstanceUrl": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/InstanceUrl",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/InforNexusConnectorProfileProperties",
 			             "required": [
 			               "InstanceUrl"
 			             ],
@@ -546,11 +484,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "InstanceUrl": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/InstanceUrl",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/MarketoConnectorProfileProperties",
 			             "required": [
 			               "InstanceUrl"
 			             ],
@@ -562,28 +498,23 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			                 "maxLength": 63,
 			                 "minLength": 3,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/BucketName",
 			                 "type": "string"
 			               },
 			               "BucketPrefix": {
 			                 "maxLength": 128,
-			                 "$ref": "#/definitions/BucketPrefix",
 			                 "type": "string"
 			               },
 			               "DatabaseUrl": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/DatabaseUrl",
 			                 "type": "string"
 			               },
 			               "RoleArn": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/RoleArn",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/RedshiftConnectorProfileProperties",
 			             "required": [
 			               "DatabaseUrl",
 			               "BucketName",
@@ -596,14 +527,12 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "InstanceUrl": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/InstanceUrl",
 			                 "type": "string"
 			               },
 			               "isSandboxEnvironment": {
 			                 "type": "boolean"
 			               }
 			             },
-			             "$ref": "#/definitions/SalesforceConnectorProfileProperties",
 			             "type": "object"
 			           },
 			           "ServiceNow": {
@@ -611,11 +540,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "InstanceUrl": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/InstanceUrl",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ServiceNowConnectorProfileProperties",
 			             "required": [
 			               "InstanceUrl"
 			             ],
@@ -626,11 +553,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "InstanceUrl": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/InstanceUrl",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SlackConnectorProfileProperties",
 			             "required": [
 			               "InstanceUrl"
 			             ],
@@ -641,47 +566,39 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "AccountName": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/AccountName",
 			                 "type": "string"
 			               },
 			               "BucketName": {
 			                 "maxLength": 63,
 			                 "minLength": 3,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/BucketName",
 			                 "type": "string"
 			               },
 			               "BucketPrefix": {
 			                 "maxLength": 128,
-			                 "$ref": "#/definitions/BucketPrefix",
 			                 "type": "string"
 			               },
 			               "PrivateLinkServiceName": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/PrivateLinkServiceName",
 			                 "type": "string"
 			               },
 			               "Region": {
 			                 "maxLength": 64,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Region",
 			                 "type": "string"
 			               },
 			               "Stage": {
 			                 "maxLength": 16,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Stage",
 			                 "type": "string"
 			               },
 			               "Warehouse": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Warehouse",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SnowflakeConnectorProfileProperties",
 			             "required": [
 			               "Warehouse",
 			               "Stage",
@@ -694,11 +611,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "InstanceUrl": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/InstanceUrl",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/VeevaConnectorProfileProperties",
 			             "required": [
 			               "InstanceUrl"
 			             ],
@@ -709,22 +624,18 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			               "InstanceUrl": {
 			                 "maxLength": 256,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/InstanceUrl",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ZendeskConnectorProfileProperties",
 			             "required": [
 			               "InstanceUrl"
 			             ],
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/ConnectorProfileProperties",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/ConnectorProfileConfig",
 			     "required": [
 			       "ConnectorProfileCredentials"
 			     ],
@@ -746,17 +657,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "ApiKey": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/ApiKey",
 						             "type": "string"
 						           },
 						           "SecretKey": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/SecretKey",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/AmplitudeConnectorProfileCredentials",
 						         "required": [
 						           "ApiKey",
 						           "SecretKey"
@@ -768,17 +676,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "ApiKey": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/ApiKey",
 						             "type": "string"
 						           },
 						           "ApplicationKey": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/ApplicationKey",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/DatadogConnectorProfileCredentials",
 						         "required": [
 						           "ApiKey",
 						           "ApplicationKey"
@@ -790,11 +695,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "ApiToken": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/ApiToken",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/DynatraceConnectorProfileCredentials",
 						         "required": [
 						           "ApiToken"
 						         ],
@@ -805,19 +708,16 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "AccessToken": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/AccessToken",
 						             "type": "string"
 						           },
 						           "ClientId": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/ClientId",
 						             "type": "string"
 						           },
 						           "ClientSecret": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/ClientSecret",
 						             "type": "string"
 						           },
 						           "ConnectorOAuthRequest": {
@@ -831,17 +731,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/ConnectorOAuthRequest",
 						             "type": "object"
 						           },
 						           "RefreshToken": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/RefreshToken",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/GoogleAnalyticsConnectorProfileCredentials",
 						         "required": [
 						           "ClientId",
 						           "ClientSecret"
@@ -853,29 +750,24 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "AccessKeyId": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/AccessKeyId",
 						             "type": "string"
 						           },
 						           "Datakey": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Key",
 						             "type": "string"
 						           },
 						           "SecretAccessKey": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Key",
 						             "type": "string"
 						           },
 						           "UserId": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Username",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/InforNexusConnectorProfileCredentials",
 						         "required": [
 						           "AccessKeyId",
 						           "UserId",
@@ -889,19 +781,16 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "AccessToken": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/AccessToken",
 						             "type": "string"
 						           },
 						           "ClientId": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/ClientId",
 						             "type": "string"
 						           },
 						           "ClientSecret": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/ClientSecret",
 						             "type": "string"
 						           },
 						           "ConnectorOAuthRequest": {
@@ -915,11 +804,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/ConnectorOAuthRequest",
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/MarketoConnectorProfileCredentials",
 						         "required": [
 						           "ClientId",
 						           "ClientSecret"
@@ -931,17 +818,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "Password": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Password",
 						             "type": "string"
 						           },
 						           "Username": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Username",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/RedshiftConnectorProfileCredentials",
 						         "required": [
 						           "Username",
 						           "Password"
@@ -953,13 +837,11 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "AccessToken": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/AccessToken",
 						             "type": "string"
 						           },
 						           "ClientCredentialsArn": {
 						             "maxLength": 2048,
 						             "pattern": "",
-						             "$ref": "#/definitions/ClientCredentialsArn",
 						             "type": "string"
 						           },
 						           "ConnectorOAuthRequest": {
@@ -973,17 +855,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/ConnectorOAuthRequest",
 						             "type": "object"
 						           },
 						           "RefreshToken": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/RefreshToken",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SalesforceConnectorProfileCredentials",
 						         "type": "object"
 						       },
 						       "ServiceNow": {
@@ -991,17 +870,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "Password": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Password",
 						             "type": "string"
 						           },
 						           "Username": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Username",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ServiceNowConnectorProfileCredentials",
 						         "required": [
 						           "Username",
 						           "Password"
@@ -1013,11 +889,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "ApiKey": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/ApiKey",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SingularConnectorProfileCredentials",
 						         "required": [
 						           "ApiKey"
 						         ],
@@ -1028,19 +902,16 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "AccessToken": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/AccessToken",
 						             "type": "string"
 						           },
 						           "ClientId": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/ClientId",
 						             "type": "string"
 						           },
 						           "ClientSecret": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/ClientSecret",
 						             "type": "string"
 						           },
 						           "ConnectorOAuthRequest": {
@@ -1054,11 +925,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/ConnectorOAuthRequest",
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/SlackConnectorProfileCredentials",
 						         "required": [
 						           "ClientId",
 						           "ClientSecret"
@@ -1070,17 +939,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "Password": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Password",
 						             "type": "string"
 						           },
 						           "Username": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Username",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SnowflakeConnectorProfileCredentials",
 						         "required": [
 						           "Username",
 						           "Password"
@@ -1092,11 +958,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "ApiSecretKey": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/ApiSecretKey",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/TrendmicroConnectorProfileCredentials",
 						         "required": [
 						           "ApiSecretKey"
 						         ],
@@ -1107,17 +971,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "Password": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Password",
 						             "type": "string"
 						           },
 						           "Username": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Username",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/VeevaConnectorProfileCredentials",
 						         "required": [
 						           "Username",
 						           "Password"
@@ -1129,19 +990,16 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "AccessToken": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/AccessToken",
 						             "type": "string"
 						           },
 						           "ClientId": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/ClientId",
 						             "type": "string"
 						           },
 						           "ClientSecret": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/ClientSecret",
 						             "type": "string"
 						           },
 						           "ConnectorOAuthRequest": {
@@ -1155,11 +1013,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/ConnectorOAuthRequest",
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/ZendeskConnectorProfileCredentials",
 						         "required": [
 						           "ClientId",
 						           "ClientSecret"
@@ -1167,7 +1023,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/ConnectorProfileCredentials",
 						     "type": "object"
 						   }
 						*/
@@ -1183,17 +1038,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "ApiKey": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/ApiKey",
 									         "type": "string"
 									       },
 									       "SecretKey": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/SecretKey",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/AmplitudeConnectorProfileCredentials",
 									     "required": [
 									       "ApiKey",
 									       "SecretKey"
@@ -1210,7 +1062,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/ApiKey",
 												     "type": "string"
 												   }
 												*/
@@ -1224,7 +1075,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/SecretKey",
 												     "type": "string"
 												   }
 												*/
@@ -1244,17 +1094,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "ApiKey": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/ApiKey",
 									         "type": "string"
 									       },
 									       "ApplicationKey": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/ApplicationKey",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DatadogConnectorProfileCredentials",
 									     "required": [
 									       "ApiKey",
 									       "ApplicationKey"
@@ -1271,7 +1118,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/ApiKey",
 												     "type": "string"
 												   }
 												*/
@@ -1285,7 +1131,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/ApplicationKey",
 												     "type": "string"
 												   }
 												*/
@@ -1305,11 +1150,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "ApiToken": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/ApiToken",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DynatraceConnectorProfileCredentials",
 									     "required": [
 									       "ApiToken"
 									     ],
@@ -1325,7 +1168,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/ApiToken",
 												     "type": "string"
 												   }
 												*/
@@ -1345,19 +1187,16 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "AccessToken": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/AccessToken",
 									         "type": "string"
 									       },
 									       "ClientId": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/ClientId",
 									         "type": "string"
 									       },
 									       "ClientSecret": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/ClientSecret",
 									         "type": "string"
 									       },
 									       "ConnectorOAuthRequest": {
@@ -1371,17 +1210,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/ConnectorOAuthRequest",
 									         "type": "object"
 									       },
 									       "RefreshToken": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/RefreshToken",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/GoogleAnalyticsConnectorProfileCredentials",
 									     "required": [
 									       "ClientId",
 									       "ClientSecret"
@@ -1398,7 +1234,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/AccessToken",
 												     "type": "string"
 												   }
 												*/
@@ -1412,7 +1247,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/ClientId",
 												     "type": "string"
 												   }
 												*/
@@ -1426,7 +1260,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/ClientSecret",
 												     "type": "string"
 												   }
 												*/
@@ -1448,7 +1281,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/ConnectorOAuthRequest",
 												     "type": "object"
 												   }
 												*/
@@ -1491,7 +1323,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/RefreshToken",
 												     "type": "string"
 												   }
 												*/
@@ -1511,29 +1342,24 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "AccessKeyId": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/AccessKeyId",
 									         "type": "string"
 									       },
 									       "Datakey": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Key",
 									         "type": "string"
 									       },
 									       "SecretAccessKey": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Key",
 									         "type": "string"
 									       },
 									       "UserId": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Username",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/InforNexusConnectorProfileCredentials",
 									     "required": [
 									       "AccessKeyId",
 									       "UserId",
@@ -1552,7 +1378,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/AccessKeyId",
 												     "type": "string"
 												   }
 												*/
@@ -1566,7 +1391,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Key",
 												     "type": "string"
 												   }
 												*/
@@ -1580,7 +1404,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Key",
 												     "type": "string"
 												   }
 												*/
@@ -1594,7 +1417,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Username",
 												     "type": "string"
 												   }
 												*/
@@ -1614,19 +1436,16 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "AccessToken": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/AccessToken",
 									         "type": "string"
 									       },
 									       "ClientId": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/ClientId",
 									         "type": "string"
 									       },
 									       "ClientSecret": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/ClientSecret",
 									         "type": "string"
 									       },
 									       "ConnectorOAuthRequest": {
@@ -1640,11 +1459,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/ConnectorOAuthRequest",
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/MarketoConnectorProfileCredentials",
 									     "required": [
 									       "ClientId",
 									       "ClientSecret"
@@ -1661,7 +1478,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/AccessToken",
 												     "type": "string"
 												   }
 												*/
@@ -1675,7 +1491,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/ClientId",
 												     "type": "string"
 												   }
 												*/
@@ -1689,7 +1504,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/ClientSecret",
 												     "type": "string"
 												   }
 												*/
@@ -1711,7 +1525,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/ConnectorOAuthRequest",
 												     "type": "object"
 												   }
 												*/
@@ -1760,17 +1573,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "Password": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Password",
 									         "type": "string"
 									       },
 									       "Username": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Username",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/RedshiftConnectorProfileCredentials",
 									     "required": [
 									       "Username",
 									       "Password"
@@ -1787,7 +1597,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Password",
 												     "type": "string"
 												   }
 												*/
@@ -1801,7 +1610,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Username",
 												     "type": "string"
 												   }
 												*/
@@ -1821,13 +1629,11 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "AccessToken": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/AccessToken",
 									         "type": "string"
 									       },
 									       "ClientCredentialsArn": {
 									         "maxLength": 2048,
 									         "pattern": "",
-									         "$ref": "#/definitions/ClientCredentialsArn",
 									         "type": "string"
 									       },
 									       "ConnectorOAuthRequest": {
@@ -1841,17 +1647,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/ConnectorOAuthRequest",
 									         "type": "object"
 									       },
 									       "RefreshToken": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/RefreshToken",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SalesforceConnectorProfileCredentials",
 									     "type": "object"
 									   }
 									*/
@@ -1864,7 +1667,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/AccessToken",
 												     "type": "string"
 												   }
 												*/
@@ -1878,7 +1680,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 2048,
 												     "pattern": "",
-												     "$ref": "#/definitions/ClientCredentialsArn",
 												     "type": "string"
 												   }
 												*/
@@ -1900,7 +1701,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/ConnectorOAuthRequest",
 												     "type": "object"
 												   }
 												*/
@@ -1943,7 +1743,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/RefreshToken",
 												     "type": "string"
 												   }
 												*/
@@ -1963,17 +1762,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "Password": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Password",
 									         "type": "string"
 									       },
 									       "Username": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Username",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ServiceNowConnectorProfileCredentials",
 									     "required": [
 									       "Username",
 									       "Password"
@@ -1990,7 +1786,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Password",
 												     "type": "string"
 												   }
 												*/
@@ -2004,7 +1799,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Username",
 												     "type": "string"
 												   }
 												*/
@@ -2024,11 +1818,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "ApiKey": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/ApiKey",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SingularConnectorProfileCredentials",
 									     "required": [
 									       "ApiKey"
 									     ],
@@ -2044,7 +1836,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/ApiKey",
 												     "type": "string"
 												   }
 												*/
@@ -2064,19 +1855,16 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "AccessToken": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/AccessToken",
 									         "type": "string"
 									       },
 									       "ClientId": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/ClientId",
 									         "type": "string"
 									       },
 									       "ClientSecret": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/ClientSecret",
 									         "type": "string"
 									       },
 									       "ConnectorOAuthRequest": {
@@ -2090,11 +1878,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/ConnectorOAuthRequest",
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/SlackConnectorProfileCredentials",
 									     "required": [
 									       "ClientId",
 									       "ClientSecret"
@@ -2111,7 +1897,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/AccessToken",
 												     "type": "string"
 												   }
 												*/
@@ -2125,7 +1910,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/ClientId",
 												     "type": "string"
 												   }
 												*/
@@ -2139,7 +1923,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/ClientSecret",
 												     "type": "string"
 												   }
 												*/
@@ -2161,7 +1944,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/ConnectorOAuthRequest",
 												     "type": "object"
 												   }
 												*/
@@ -2210,17 +1992,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "Password": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Password",
 									         "type": "string"
 									       },
 									       "Username": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Username",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SnowflakeConnectorProfileCredentials",
 									     "required": [
 									       "Username",
 									       "Password"
@@ -2237,7 +2016,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Password",
 												     "type": "string"
 												   }
 												*/
@@ -2251,7 +2029,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Username",
 												     "type": "string"
 												   }
 												*/
@@ -2271,11 +2048,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "ApiSecretKey": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/ApiSecretKey",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/TrendmicroConnectorProfileCredentials",
 									     "required": [
 									       "ApiSecretKey"
 									     ],
@@ -2291,7 +2066,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/ApiSecretKey",
 												     "type": "string"
 												   }
 												*/
@@ -2311,17 +2085,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "Password": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Password",
 									         "type": "string"
 									       },
 									       "Username": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Username",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/VeevaConnectorProfileCredentials",
 									     "required": [
 									       "Username",
 									       "Password"
@@ -2338,7 +2109,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Password",
 												     "type": "string"
 												   }
 												*/
@@ -2352,7 +2122,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Username",
 												     "type": "string"
 												   }
 												*/
@@ -2372,19 +2141,16 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "AccessToken": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/AccessToken",
 									         "type": "string"
 									       },
 									       "ClientId": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/ClientId",
 									         "type": "string"
 									       },
 									       "ClientSecret": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/ClientSecret",
 									         "type": "string"
 									       },
 									       "ConnectorOAuthRequest": {
@@ -2398,11 +2164,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/ConnectorOAuthRequest",
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/ZendeskConnectorProfileCredentials",
 									     "required": [
 									       "ClientId",
 									       "ClientSecret"
@@ -2419,7 +2183,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/AccessToken",
 												     "type": "string"
 												   }
 												*/
@@ -2433,7 +2196,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/ClientId",
 												     "type": "string"
 												   }
 												*/
@@ -2447,7 +2209,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/ClientSecret",
 												     "type": "string"
 												   }
 												*/
@@ -2469,7 +2230,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/ConnectorOAuthRequest",
 												     "type": "object"
 												   }
 												*/
@@ -2525,11 +2285,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "InstanceUrl": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/InstanceUrl",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/DatadogConnectorProfileProperties",
 						         "required": [
 						           "InstanceUrl"
 						         ],
@@ -2540,11 +2298,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "InstanceUrl": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/InstanceUrl",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/DynatraceConnectorProfileProperties",
 						         "required": [
 						           "InstanceUrl"
 						         ],
@@ -2555,11 +2311,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "InstanceUrl": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/InstanceUrl",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/InforNexusConnectorProfileProperties",
 						         "required": [
 						           "InstanceUrl"
 						         ],
@@ -2570,11 +2324,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "InstanceUrl": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/InstanceUrl",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/MarketoConnectorProfileProperties",
 						         "required": [
 						           "InstanceUrl"
 						         ],
@@ -2586,28 +2338,23 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						             "maxLength": 63,
 						             "minLength": 3,
 						             "pattern": "",
-						             "$ref": "#/definitions/BucketName",
 						             "type": "string"
 						           },
 						           "BucketPrefix": {
 						             "maxLength": 128,
-						             "$ref": "#/definitions/BucketPrefix",
 						             "type": "string"
 						           },
 						           "DatabaseUrl": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/DatabaseUrl",
 						             "type": "string"
 						           },
 						           "RoleArn": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/RoleArn",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/RedshiftConnectorProfileProperties",
 						         "required": [
 						           "DatabaseUrl",
 						           "BucketName",
@@ -2620,14 +2367,12 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "InstanceUrl": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/InstanceUrl",
 						             "type": "string"
 						           },
 						           "isSandboxEnvironment": {
 						             "type": "boolean"
 						           }
 						         },
-						         "$ref": "#/definitions/SalesforceConnectorProfileProperties",
 						         "type": "object"
 						       },
 						       "ServiceNow": {
@@ -2635,11 +2380,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "InstanceUrl": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/InstanceUrl",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ServiceNowConnectorProfileProperties",
 						         "required": [
 						           "InstanceUrl"
 						         ],
@@ -2650,11 +2393,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "InstanceUrl": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/InstanceUrl",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SlackConnectorProfileProperties",
 						         "required": [
 						           "InstanceUrl"
 						         ],
@@ -2665,47 +2406,39 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "AccountName": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/AccountName",
 						             "type": "string"
 						           },
 						           "BucketName": {
 						             "maxLength": 63,
 						             "minLength": 3,
 						             "pattern": "",
-						             "$ref": "#/definitions/BucketName",
 						             "type": "string"
 						           },
 						           "BucketPrefix": {
 						             "maxLength": 128,
-						             "$ref": "#/definitions/BucketPrefix",
 						             "type": "string"
 						           },
 						           "PrivateLinkServiceName": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/PrivateLinkServiceName",
 						             "type": "string"
 						           },
 						           "Region": {
 						             "maxLength": 64,
 						             "pattern": "",
-						             "$ref": "#/definitions/Region",
 						             "type": "string"
 						           },
 						           "Stage": {
 						             "maxLength": 16,
 						             "pattern": "",
-						             "$ref": "#/definitions/Stage",
 						             "type": "string"
 						           },
 						           "Warehouse": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Warehouse",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SnowflakeConnectorProfileProperties",
 						         "required": [
 						           "Warehouse",
 						           "Stage",
@@ -2718,11 +2451,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "InstanceUrl": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/InstanceUrl",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/VeevaConnectorProfileProperties",
 						         "required": [
 						           "InstanceUrl"
 						         ],
@@ -2733,18 +2464,15 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						           "InstanceUrl": {
 						             "maxLength": 256,
 						             "pattern": "",
-						             "$ref": "#/definitions/InstanceUrl",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ZendeskConnectorProfileProperties",
 						         "required": [
 						           "InstanceUrl"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/ConnectorProfileProperties",
 						     "type": "object"
 						   }
 						*/
@@ -2760,11 +2488,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "InstanceUrl": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/InstanceUrl",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DatadogConnectorProfileProperties",
 									     "required": [
 									       "InstanceUrl"
 									     ],
@@ -2780,7 +2506,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/InstanceUrl",
 												     "type": "string"
 												   }
 												*/
@@ -2800,11 +2525,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "InstanceUrl": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/InstanceUrl",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DynatraceConnectorProfileProperties",
 									     "required": [
 									       "InstanceUrl"
 									     ],
@@ -2820,7 +2543,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/InstanceUrl",
 												     "type": "string"
 												   }
 												*/
@@ -2840,11 +2562,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "InstanceUrl": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/InstanceUrl",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/InforNexusConnectorProfileProperties",
 									     "required": [
 									       "InstanceUrl"
 									     ],
@@ -2860,7 +2580,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/InstanceUrl",
 												     "type": "string"
 												   }
 												*/
@@ -2880,11 +2599,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "InstanceUrl": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/InstanceUrl",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/MarketoConnectorProfileProperties",
 									     "required": [
 									       "InstanceUrl"
 									     ],
@@ -2900,7 +2617,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/InstanceUrl",
 												     "type": "string"
 												   }
 												*/
@@ -2921,28 +2637,23 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									         "maxLength": 63,
 									         "minLength": 3,
 									         "pattern": "",
-									         "$ref": "#/definitions/BucketName",
 									         "type": "string"
 									       },
 									       "BucketPrefix": {
 									         "maxLength": 128,
-									         "$ref": "#/definitions/BucketPrefix",
 									         "type": "string"
 									       },
 									       "DatabaseUrl": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/DatabaseUrl",
 									         "type": "string"
 									       },
 									       "RoleArn": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/RoleArn",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/RedshiftConnectorProfileProperties",
 									     "required": [
 									       "DatabaseUrl",
 									       "BucketName",
@@ -2961,7 +2672,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												     "maxLength": 63,
 												     "minLength": 3,
 												     "pattern": "",
-												     "$ref": "#/definitions/BucketName",
 												     "type": "string"
 												   }
 												*/
@@ -2974,7 +2684,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												/*
 												   {
 												     "maxLength": 128,
-												     "$ref": "#/definitions/BucketPrefix",
 												     "type": "string"
 												   }
 												*/
@@ -2988,7 +2697,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/DatabaseUrl",
 												     "type": "string"
 												   }
 												*/
@@ -3002,7 +2710,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/RoleArn",
 												     "type": "string"
 												   }
 												*/
@@ -3022,14 +2729,12 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "InstanceUrl": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/InstanceUrl",
 									         "type": "string"
 									       },
 									       "isSandboxEnvironment": {
 									         "type": "boolean"
 									       }
 									     },
-									     "$ref": "#/definitions/SalesforceConnectorProfileProperties",
 									     "type": "object"
 									   }
 									*/
@@ -3042,7 +2747,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/InstanceUrl",
 												     "type": "string"
 												   }
 												*/
@@ -3073,11 +2777,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "InstanceUrl": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/InstanceUrl",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ServiceNowConnectorProfileProperties",
 									     "required": [
 									       "InstanceUrl"
 									     ],
@@ -3093,7 +2795,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/InstanceUrl",
 												     "type": "string"
 												   }
 												*/
@@ -3113,11 +2814,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "InstanceUrl": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/InstanceUrl",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SlackConnectorProfileProperties",
 									     "required": [
 									       "InstanceUrl"
 									     ],
@@ -3133,7 +2832,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/InstanceUrl",
 												     "type": "string"
 												   }
 												*/
@@ -3153,47 +2851,39 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "AccountName": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/AccountName",
 									         "type": "string"
 									       },
 									       "BucketName": {
 									         "maxLength": 63,
 									         "minLength": 3,
 									         "pattern": "",
-									         "$ref": "#/definitions/BucketName",
 									         "type": "string"
 									       },
 									       "BucketPrefix": {
 									         "maxLength": 128,
-									         "$ref": "#/definitions/BucketPrefix",
 									         "type": "string"
 									       },
 									       "PrivateLinkServiceName": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/PrivateLinkServiceName",
 									         "type": "string"
 									       },
 									       "Region": {
 									         "maxLength": 64,
 									         "pattern": "",
-									         "$ref": "#/definitions/Region",
 									         "type": "string"
 									       },
 									       "Stage": {
 									         "maxLength": 16,
 									         "pattern": "",
-									         "$ref": "#/definitions/Stage",
 									         "type": "string"
 									       },
 									       "Warehouse": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Warehouse",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SnowflakeConnectorProfileProperties",
 									     "required": [
 									       "Warehouse",
 									       "Stage",
@@ -3211,7 +2901,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/AccountName",
 												     "type": "string"
 												   }
 												*/
@@ -3226,7 +2915,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												     "maxLength": 63,
 												     "minLength": 3,
 												     "pattern": "",
-												     "$ref": "#/definitions/BucketName",
 												     "type": "string"
 												   }
 												*/
@@ -3239,7 +2927,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												/*
 												   {
 												     "maxLength": 128,
-												     "$ref": "#/definitions/BucketPrefix",
 												     "type": "string"
 												   }
 												*/
@@ -3253,7 +2940,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/PrivateLinkServiceName",
 												     "type": "string"
 												   }
 												*/
@@ -3267,7 +2953,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 64,
 												     "pattern": "",
-												     "$ref": "#/definitions/Region",
 												     "type": "string"
 												   }
 												*/
@@ -3281,7 +2966,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 16,
 												     "pattern": "",
-												     "$ref": "#/definitions/Stage",
 												     "type": "string"
 												   }
 												*/
@@ -3295,7 +2979,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Warehouse",
 												     "type": "string"
 												   }
 												*/
@@ -3315,11 +2998,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "InstanceUrl": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/InstanceUrl",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/VeevaConnectorProfileProperties",
 									     "required": [
 									       "InstanceUrl"
 									     ],
@@ -3335,7 +3016,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/InstanceUrl",
 												     "type": "string"
 												   }
 												*/
@@ -3355,11 +3035,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									       "InstanceUrl": {
 									         "maxLength": 256,
 									         "pattern": "",
-									         "$ref": "#/definitions/InstanceUrl",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ZendeskConnectorProfileProperties",
 									     "required": [
 									       "InstanceUrl"
 									     ],
@@ -3375,7 +3053,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												   {
 												     "maxLength": 256,
 												     "pattern": "",
-												     "$ref": "#/definitions/InstanceUrl",
 												     "type": "string"
 												   }
 												*/
@@ -3433,7 +3110,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			       "Amplitude",
 			       "Veeva"
 			     ],
-			     "$ref": "#/definitions/ConnectorType",
 			     "type": "string"
 			   }
 			*/

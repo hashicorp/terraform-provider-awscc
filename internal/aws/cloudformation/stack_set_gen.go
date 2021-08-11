@@ -54,7 +54,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/AutoDeployment",
 			     "type": "object"
 			   }
 			*/
@@ -121,7 +120,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "CAPABILITY_NAMED_IAM",
 			         "CAPABILITY_AUTO_EXPAND"
 			       ],
-			       "$ref": "#/definitions/Capability",
 			       "type": "string"
 			     },
 			     "type": "array",
@@ -187,19 +185,16 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "SEQUENTIAL",
 			           "PARALLEL"
 			         ],
-			         "$ref": "#/definitions/RegionConcurrencyType",
 			         "type": "string"
 			       },
 			       "RegionOrder": {
 			         "items": {
 			           "pattern": "",
-			           "$ref": "#/definitions/Region",
 			           "type": "string"
 			         },
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/OperationPreferences",
 			     "type": "object"
 			   }
 			*/
@@ -260,7 +255,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "SEQUENTIAL",
 						       "PARALLEL"
 						     ],
-						     "$ref": "#/definitions/RegionConcurrencyType",
 						     "type": "string"
 						   }
 						*/
@@ -275,7 +269,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						   {
 						     "items": {
 						       "pattern": "",
-						       "$ref": "#/definitions/Region",
 						       "type": "string"
 						     },
 						     "type": "array"
@@ -308,7 +301,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Parameter",
 			       "required": [
 			         "ParameterKey",
 			         "ParameterValue"
@@ -391,7 +383,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "items": {
 			                 "description": "AWS account that you want to create stack instances in the specified Region(s) for.",
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Account",
 			                 "type": "string"
 			               },
 			               "minItems": 1,
@@ -403,7 +394,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "insertionOrder": false,
 			               "items": {
 			                 "pattern": "",
-			                 "$ref": "#/definitions/OrganizationalUnitId",
 			                 "type": "string"
 			               },
 			               "minItems": 1,
@@ -411,7 +401,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "uniqueItems": true
 			             }
 			           },
-			           "$ref": "#/definitions/DeploymentTargets",
 			           "type": "object"
 			         },
 			         "ParameterOverrides": {
@@ -429,7 +418,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Parameter",
 			             "required": [
 			               "ParameterKey",
 			               "ParameterValue"
@@ -444,7 +432,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "insertionOrder": false,
 			           "items": {
 			             "pattern": "",
-			             "$ref": "#/definitions/Region",
 			             "type": "string"
 			           },
 			           "minItems": 1,
@@ -452,7 +439,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "uniqueItems": true
 			         }
 			       },
-			       "$ref": "#/definitions/StackInstances",
 			       "required": [
 			         "DeploymentTargets",
 			         "Regions"
@@ -480,7 +466,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "items": {
 						           "description": "AWS account that you want to create stack instances in the specified Region(s) for.",
 						           "pattern": "",
-						           "$ref": "#/definitions/Account",
 						           "type": "string"
 						         },
 						         "minItems": 1,
@@ -492,7 +477,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "insertionOrder": false,
 						         "items": {
 						           "pattern": "",
-						           "$ref": "#/definitions/OrganizationalUnitId",
 						           "type": "string"
 						         },
 						         "minItems": 1,
@@ -500,7 +484,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/DeploymentTargets",
 						     "type": "object"
 						   }
 						*/
@@ -517,7 +500,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "items": {
 									       "description": "AWS account that you want to create stack instances in the specified Region(s) for.",
 									       "pattern": "",
-									       "$ref": "#/definitions/Account",
 									       "type": "string"
 									     },
 									     "minItems": 1,
@@ -538,7 +520,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "insertionOrder": false,
 									     "items": {
 									       "pattern": "",
-									       "$ref": "#/definitions/OrganizationalUnitId",
 									       "type": "string"
 									     },
 									     "minItems": 1,
@@ -573,7 +554,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Parameter",
 						       "required": [
 						         "ParameterKey",
 						         "ParameterValue"
@@ -627,7 +607,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "insertionOrder": false,
 						     "items": {
 						       "pattern": "",
-						       "$ref": "#/definitions/Region",
 						       "type": "string"
 						     },
 						     "minItems": 1,
@@ -698,7 +677,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

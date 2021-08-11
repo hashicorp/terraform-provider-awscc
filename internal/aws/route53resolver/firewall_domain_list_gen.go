@@ -109,7 +109,6 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			       "minLength": 1,
 			       "type": "string"
 			     },
-			     "$ref": "#/definitions/Domains",
 			     "type": "array",
 			     "uniqueItems": true
 			   }
@@ -241,7 +240,6 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

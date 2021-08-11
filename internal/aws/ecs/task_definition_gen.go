@@ -51,7 +51,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ContainerDependency",
 			             "type": "object"
 			           },
 			           "type": "array"
@@ -104,7 +103,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/KeyValuePair",
 			             "type": "object"
 			           },
 			           "type": "array",
@@ -122,7 +120,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/EnvironmentFile",
 			             "type": "object"
 			           },
 			           "type": "array"
@@ -141,7 +138,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/HostEntry",
 			             "type": "object"
 			           },
 			           "type": "array"
@@ -162,7 +158,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/FirelensConfiguration",
 			           "type": "object"
 			         },
 			         "HealthCheck": {
@@ -193,7 +188,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "type": "integer"
 			             }
 			           },
-			           "$ref": "#/definitions/HealthCheck",
 			           "type": "object"
 			         },
 			         "Hostname": {
@@ -232,7 +226,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                   "type": "array"
 			                 }
 			               },
-			               "$ref": "#/definitions/KernelCapabilities",
 			               "type": "object"
 			             },
 			             "Devices": {
@@ -253,7 +246,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                     "uniqueItems": true
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Device",
 			                 "type": "object"
 			               },
 			               "type": "array"
@@ -287,7 +279,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Tmpfs",
 			                 "required": [
 			                   "Size"
 			                 ],
@@ -296,7 +287,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/LinuxParameters",
 			           "type": "object"
 			         },
 			         "LogConfiguration": {
@@ -325,7 +315,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Secret",
 			                 "required": [
 			                   "Name",
 			                   "ValueFrom"
@@ -335,7 +324,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/LogConfiguration",
 			           "required": [
 			             "LogDriver"
 			           ],
@@ -362,7 +350,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/MountPoint",
 			             "type": "object"
 			           },
 			           "type": "array",
@@ -387,7 +374,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/PortMapping",
 			             "type": "object"
 			           },
 			           "type": "array",
@@ -409,7 +395,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/RepositoryCredentials",
 			           "type": "object"
 			         },
 			         "ResourceRequirements": {
@@ -423,7 +408,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ResourceRequirement",
 			             "required": [
 			               "Type",
 			               "Value"
@@ -443,7 +427,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Secret",
 			             "required": [
 			               "Name",
 			               "ValueFrom"
@@ -469,7 +452,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SystemControl",
 			             "type": "object"
 			           },
 			           "type": "array"
@@ -488,7 +470,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "integer"
 			               }
 			             },
-			             "$ref": "#/definitions/Ulimit",
 			             "required": [
 			               "HardLimit",
 			               "Name",
@@ -512,7 +493,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/VolumeFrom",
 			             "type": "object"
 			           },
 			           "type": "array",
@@ -522,7 +502,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ContainerDefinition",
 			       "type": "object"
 			     },
 			     "type": "array",
@@ -572,7 +551,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/ContainerDependency",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -708,7 +686,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/KeyValuePair",
 						       "type": "object"
 						     },
 						     "type": "array",
@@ -762,7 +739,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/EnvironmentFile",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -824,7 +800,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/HostEntry",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -879,7 +854,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/FirelensConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -950,7 +924,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/HealthCheck",
 						     "type": "object"
 						   }
 						*/
@@ -1103,7 +1076,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/KernelCapabilities",
 						         "type": "object"
 						       },
 						       "Devices": {
@@ -1124,7 +1096,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						               "uniqueItems": true
 						             }
 						           },
-						           "$ref": "#/definitions/Device",
 						           "type": "object"
 						         },
 						         "type": "array"
@@ -1158,7 +1129,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/Tmpfs",
 						           "required": [
 						             "Size"
 						           ],
@@ -1167,7 +1137,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/LinuxParameters",
 						     "type": "object"
 						   }
 						*/
@@ -1193,7 +1162,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/KernelCapabilities",
 									     "type": "object"
 									   }
 									*/
@@ -1253,7 +1221,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									           "uniqueItems": true
 									         }
 									       },
-									       "$ref": "#/definitions/Device",
 									       "type": "object"
 									     },
 									     "type": "array"
@@ -1369,7 +1336,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/Tmpfs",
 									       "required": [
 									         "Size"
 									       ],
@@ -1455,7 +1421,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/Secret",
 						           "required": [
 						             "Name",
 						             "ValueFrom"
@@ -1465,7 +1430,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/LogConfiguration",
 						     "required": [
 						       "LogDriver"
 						     ],
@@ -1518,7 +1482,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Secret",
 									       "required": [
 									         "Name",
 									         "ValueFrom"
@@ -1603,7 +1566,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/MountPoint",
 						       "type": "object"
 						     },
 						     "type": "array",
@@ -1683,7 +1645,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/PortMapping",
 						       "type": "object"
 						     },
 						     "type": "array",
@@ -1776,7 +1737,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/RepositoryCredentials",
 						     "type": "object"
 						   }
 						*/
@@ -1812,7 +1772,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/ResourceRequirement",
 						       "required": [
 						         "Type",
 						         "Value"
@@ -1866,7 +1825,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Secret",
 						       "required": [
 						         "Name",
 						         "ValueFrom"
@@ -1942,7 +1900,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/SystemControl",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -1995,7 +1952,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "integer"
 						         }
 						       },
-						       "$ref": "#/definitions/Ulimit",
 						       "required": [
 						         "HardLimit",
 						         "Name",
@@ -2072,7 +2028,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/VolumeFrom",
 						       "type": "object"
 						     },
 						     "type": "array",
@@ -2151,7 +2106,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/EphemeralStorage",
 			     "type": "object"
 			   }
 			*/
@@ -2215,7 +2169,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/InferenceAccelerator",
 			       "type": "object"
 			     },
 			     "type": "array",
@@ -2321,7 +2274,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/TaskDefinitionPlacementConstraint",
 			       "required": [
 			         "Type"
 			       ],
@@ -2384,7 +2336,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/KeyValuePair",
 			           "type": "object"
 			         },
 			         "type": "array",
@@ -2394,7 +2345,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/ProxyConfiguration",
 			     "required": [
 			       "ContainerName"
 			     ],
@@ -2429,7 +2379,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/KeyValuePair",
 						       "type": "object"
 						     },
 						     "type": "array",
@@ -2516,7 +2465,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -2616,7 +2564,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/DockerVolumeConfiguration",
 			           "type": "object"
 			         },
 			         "EFSVolumeConfiguration": {
@@ -2636,7 +2583,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/AuthorizationConfig",
 			               "type": "object"
 			             },
 			             "FilesystemId": {
@@ -2656,7 +2602,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "type": "integer"
 			             }
 			           },
-			           "$ref": "#/definitions/EFSVolumeConfiguration",
 			           "required": [
 			             "FilesystemId"
 			           ],
@@ -2669,14 +2614,12 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/HostVolumeProperties",
 			           "type": "object"
 			         },
 			         "Name": {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Volume",
 			       "type": "object"
 			     },
 			     "type": "array",
@@ -2721,7 +2664,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/DockerVolumeConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -2821,7 +2763,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/AuthorizationConfig",
 						         "type": "object"
 						       },
 						       "FilesystemId": {
@@ -2841,7 +2782,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/EFSVolumeConfiguration",
 						     "required": [
 						       "FilesystemId"
 						     ],
@@ -2868,7 +2808,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/AuthorizationConfig",
 									     "type": "object"
 									   }
 									*/
@@ -2967,7 +2906,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/HostVolumeProperties",
 						     "type": "object"
 						   }
 						*/

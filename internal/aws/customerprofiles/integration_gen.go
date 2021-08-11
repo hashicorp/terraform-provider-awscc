@@ -91,7 +91,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Zendesk",
 			               "S3"
 			             ],
-			             "$ref": "#/definitions/ConnectorType",
 			             "type": "string"
 			           },
 			           "IncrementalPullConfig": {
@@ -102,7 +101,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/IncrementalPullConfig",
 			             "type": "object"
 			           },
 			           "SourceConnectorProperties": {
@@ -115,11 +113,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "additionalProperties": false,
 			                     "maxLength": 512,
 			                     "pattern": "",
-			                     "$ref": "#/definitions/Object",
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/MarketoSourceProperties",
 			                 "required": [
 			                   "Object"
 			                 ],
@@ -140,7 +136,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/S3SourceProperties",
 			                 "required": [
 			                   "BucketName"
 			                 ],
@@ -159,11 +154,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "additionalProperties": false,
 			                     "maxLength": 512,
 			                     "pattern": "",
-			                     "$ref": "#/definitions/Object",
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/SalesforceSourceProperties",
 			                 "required": [
 			                   "Object"
 			                 ],
@@ -176,11 +169,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "additionalProperties": false,
 			                     "maxLength": 512,
 			                     "pattern": "",
-			                     "$ref": "#/definitions/Object",
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ServiceNowSourceProperties",
 			                 "required": [
 			                   "Object"
 			                 ],
@@ -193,22 +184,18 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "additionalProperties": false,
 			                     "maxLength": 512,
 			                     "pattern": "",
-			                     "$ref": "#/definitions/Object",
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ZendeskSourceProperties",
 			                 "required": [
 			                   "Object"
 			                 ],
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/SourceConnectorProperties",
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/SourceFlowConfig",
 			         "required": [
 			           "ConnectorType",
 			           "SourceConnectorProperties"
@@ -241,7 +228,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "VALIDATE_NUMERIC",
 			                     "NO_OP"
 			                   ],
-			                   "$ref": "#/definitions/MarketoConnectorOperator",
 			                   "type": "string"
 			                 },
 			                 "S3": {
@@ -267,7 +253,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "VALIDATE_NUMERIC",
 			                     "NO_OP"
 			                   ],
-			                   "$ref": "#/definitions/S3ConnectorOperator",
 			                   "type": "string"
 			                 },
 			                 "Salesforce": {
@@ -294,7 +279,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "VALIDATE_NUMERIC",
 			                     "NO_OP"
 			                   ],
-			                   "$ref": "#/definitions/SalesforceConnectorOperator",
 			                   "type": "string"
 			                 },
 			                 "ServiceNow": {
@@ -321,7 +305,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "VALIDATE_NUMERIC",
 			                     "NO_OP"
 			                   ],
-			                   "$ref": "#/definitions/ServiceNowConnectorOperator",
 			                   "type": "string"
 			                 },
 			                 "Zendesk": {
@@ -341,17 +324,14 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "VALIDATE_NUMERIC",
 			                     "NO_OP"
 			                   ],
-			                   "$ref": "#/definitions/ZendeskConnectorOperator",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/ConnectorOperator",
 			               "type": "object"
 			             },
 			             "DestinationField": {
 			               "maxLength": 256,
 			               "pattern": "",
-			               "$ref": "#/definitions/DestinationField",
 			               "type": "string"
 			             },
 			             "SourceFields": {
@@ -383,7 +363,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "CONCAT_FORMAT",
 			                       "SUBFIELD_CATEGORY_MAP"
 			                     ],
-			                     "$ref": "#/definitions/OperatorPropertiesKeys",
 			                     "type": "string"
 			                   },
 			                   "Property": {
@@ -392,7 +371,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/TaskPropertiesMap",
 			                 "required": [
 			                   "OperatorPropertyKey",
 			                   "Property"
@@ -411,11 +389,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "Truncate",
 			                 "Validate"
 			               ],
-			               "$ref": "#/definitions/TaskType",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/Task",
 			           "required": [
 			             "SourceFields",
 			             "TaskType"
@@ -441,11 +417,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   },
 			                   "FirstExecutionFrom": {
-			                     "$ref": "#/definitions/Date",
 			                     "type": "number"
 			                   },
 			                   "ScheduleEndTime": {
-			                     "$ref": "#/definitions/Date",
 			                     "type": "number"
 			                   },
 			                   "ScheduleExpression": {
@@ -457,7 +431,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "integer"
 			                   },
 			                   "ScheduleStartTime": {
-			                     "$ref": "#/definitions/Date",
 			                     "type": "number"
 			                   },
 			                   "Timezone": {
@@ -466,14 +439,12 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ScheduledTriggerProperties",
 			                 "required": [
 			                   "ScheduleExpression"
 			                 ],
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/TriggerProperties",
 			             "type": "object"
 			           },
 			           "TriggerType": {
@@ -482,18 +453,15 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Event",
 			               "OnDemand"
 			             ],
-			             "$ref": "#/definitions/TriggerType",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/TriggerConfig",
 			         "required": [
 			           "TriggerType"
 			         ],
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/FlowDefinition",
 			     "required": [
 			       "FlowName",
 			       "KmsArn",
@@ -566,7 +534,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Zendesk",
 						           "S3"
 						         ],
-						         "$ref": "#/definitions/ConnectorType",
 						         "type": "string"
 						       },
 						       "IncrementalPullConfig": {
@@ -577,7 +544,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/IncrementalPullConfig",
 						         "type": "object"
 						       },
 						       "SourceConnectorProperties": {
@@ -590,11 +556,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "additionalProperties": false,
 						                 "maxLength": 512,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/Object",
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/MarketoSourceProperties",
 						             "required": [
 						               "Object"
 						             ],
@@ -615,7 +579,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/S3SourceProperties",
 						             "required": [
 						               "BucketName"
 						             ],
@@ -634,11 +597,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "additionalProperties": false,
 						                 "maxLength": 512,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/Object",
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/SalesforceSourceProperties",
 						             "required": [
 						               "Object"
 						             ],
@@ -651,11 +612,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "additionalProperties": false,
 						                 "maxLength": 512,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/Object",
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/ServiceNowSourceProperties",
 						             "required": [
 						               "Object"
 						             ],
@@ -668,22 +627,18 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "additionalProperties": false,
 						                 "maxLength": 512,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/Object",
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/ZendeskSourceProperties",
 						             "required": [
 						               "Object"
 						             ],
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/SourceConnectorProperties",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/SourceFlowConfig",
 						     "required": [
 						       "ConnectorType",
 						       "SourceConnectorProperties"
@@ -718,7 +673,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Zendesk",
 									       "S3"
 									     ],
-									     "$ref": "#/definitions/ConnectorType",
 									     "type": "string"
 									   }
 									*/
@@ -737,7 +691,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/IncrementalPullConfig",
 									     "type": "object"
 									   }
 									*/
@@ -773,11 +726,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "additionalProperties": false,
 									             "maxLength": 512,
 									             "pattern": "",
-									             "$ref": "#/definitions/Object",
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/MarketoSourceProperties",
 									         "required": [
 									           "Object"
 									         ],
@@ -798,7 +749,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/S3SourceProperties",
 									         "required": [
 									           "BucketName"
 									         ],
@@ -817,11 +767,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "additionalProperties": false,
 									             "maxLength": 512,
 									             "pattern": "",
-									             "$ref": "#/definitions/Object",
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/SalesforceSourceProperties",
 									         "required": [
 									           "Object"
 									         ],
@@ -834,11 +782,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "additionalProperties": false,
 									             "maxLength": 512,
 									             "pattern": "",
-									             "$ref": "#/definitions/Object",
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/ServiceNowSourceProperties",
 									         "required": [
 									           "Object"
 									         ],
@@ -851,18 +797,15 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "additionalProperties": false,
 									             "maxLength": 512,
 									             "pattern": "",
-									             "$ref": "#/definitions/Object",
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/ZendeskSourceProperties",
 									         "required": [
 									           "Object"
 									         ],
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/SourceConnectorProperties",
 									     "type": "object"
 									   }
 									*/
@@ -879,11 +822,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "additionalProperties": false,
 												         "maxLength": 512,
 												         "pattern": "",
-												         "$ref": "#/definitions/Object",
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/MarketoSourceProperties",
 												     "required": [
 												       "Object"
 												     ],
@@ -900,7 +841,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															     "additionalProperties": false,
 															     "maxLength": 512,
 															     "pattern": "",
-															     "$ref": "#/definitions/Object",
 															     "type": "string"
 															   }
 															*/
@@ -930,7 +870,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/S3SourceProperties",
 												     "required": [
 												       "BucketName"
 												     ],
@@ -987,11 +926,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "additionalProperties": false,
 												         "maxLength": 512,
 												         "pattern": "",
-												         "$ref": "#/definitions/Object",
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/SalesforceSourceProperties",
 												     "required": [
 												       "Object"
 												     ],
@@ -1030,7 +967,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															     "additionalProperties": false,
 															     "maxLength": 512,
 															     "pattern": "",
-															     "$ref": "#/definitions/Object",
 															     "type": "string"
 															   }
 															*/
@@ -1052,11 +988,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "additionalProperties": false,
 												         "maxLength": 512,
 												         "pattern": "",
-												         "$ref": "#/definitions/Object",
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/ServiceNowSourceProperties",
 												     "required": [
 												       "Object"
 												     ],
@@ -1073,7 +1007,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															     "additionalProperties": false,
 															     "maxLength": 512,
 															     "pattern": "",
-															     "$ref": "#/definitions/Object",
 															     "type": "string"
 															   }
 															*/
@@ -1095,11 +1028,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "additionalProperties": false,
 												         "maxLength": 512,
 												         "pattern": "",
-												         "$ref": "#/definitions/Object",
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/ZendeskSourceProperties",
 												     "required": [
 												       "Object"
 												     ],
@@ -1116,7 +1047,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															     "additionalProperties": false,
 															     "maxLength": 512,
 															     "pattern": "",
-															     "$ref": "#/definitions/Object",
 															     "type": "string"
 															   }
 															*/
@@ -1165,7 +1095,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "VALIDATE_NUMERIC",
 						                 "NO_OP"
 						               ],
-						               "$ref": "#/definitions/MarketoConnectorOperator",
 						               "type": "string"
 						             },
 						             "S3": {
@@ -1191,7 +1120,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "VALIDATE_NUMERIC",
 						                 "NO_OP"
 						               ],
-						               "$ref": "#/definitions/S3ConnectorOperator",
 						               "type": "string"
 						             },
 						             "Salesforce": {
@@ -1218,7 +1146,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "VALIDATE_NUMERIC",
 						                 "NO_OP"
 						               ],
-						               "$ref": "#/definitions/SalesforceConnectorOperator",
 						               "type": "string"
 						             },
 						             "ServiceNow": {
@@ -1245,7 +1172,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "VALIDATE_NUMERIC",
 						                 "NO_OP"
 						               ],
-						               "$ref": "#/definitions/ServiceNowConnectorOperator",
 						               "type": "string"
 						             },
 						             "Zendesk": {
@@ -1265,17 +1191,14 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "VALIDATE_NUMERIC",
 						                 "NO_OP"
 						               ],
-						               "$ref": "#/definitions/ZendeskConnectorOperator",
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/ConnectorOperator",
 						           "type": "object"
 						         },
 						         "DestinationField": {
 						           "maxLength": 256,
 						           "pattern": "",
-						           "$ref": "#/definitions/DestinationField",
 						           "type": "string"
 						         },
 						         "SourceFields": {
@@ -1307,7 +1230,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "CONCAT_FORMAT",
 						                   "SUBFIELD_CATEGORY_MAP"
 						                 ],
-						                 "$ref": "#/definitions/OperatorPropertiesKeys",
 						                 "type": "string"
 						               },
 						               "Property": {
@@ -1316,7 +1238,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/TaskPropertiesMap",
 						             "required": [
 						               "OperatorPropertyKey",
 						               "Property"
@@ -1335,11 +1256,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "Truncate",
 						             "Validate"
 						           ],
-						           "$ref": "#/definitions/TaskType",
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Task",
 						       "required": [
 						         "SourceFields",
 						         "TaskType"
@@ -1377,7 +1296,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "VALIDATE_NUMERIC",
 									           "NO_OP"
 									         ],
-									         "$ref": "#/definitions/MarketoConnectorOperator",
 									         "type": "string"
 									       },
 									       "S3": {
@@ -1403,7 +1321,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "VALIDATE_NUMERIC",
 									           "NO_OP"
 									         ],
-									         "$ref": "#/definitions/S3ConnectorOperator",
 									         "type": "string"
 									       },
 									       "Salesforce": {
@@ -1430,7 +1347,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "VALIDATE_NUMERIC",
 									           "NO_OP"
 									         ],
-									         "$ref": "#/definitions/SalesforceConnectorOperator",
 									         "type": "string"
 									       },
 									       "ServiceNow": {
@@ -1457,7 +1373,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "VALIDATE_NUMERIC",
 									           "NO_OP"
 									         ],
-									         "$ref": "#/definitions/ServiceNowConnectorOperator",
 									         "type": "string"
 									       },
 									       "Zendesk": {
@@ -1477,11 +1392,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "VALIDATE_NUMERIC",
 									           "NO_OP"
 									         ],
-									         "$ref": "#/definitions/ZendeskConnectorOperator",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ConnectorOperator",
 									     "type": "object"
 									   }
 									*/
@@ -1510,7 +1423,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "VALIDATE_NUMERIC",
 												       "NO_OP"
 												     ],
-												     "$ref": "#/definitions/MarketoConnectorOperator",
 												     "type": "string"
 												   }
 												*/
@@ -1544,7 +1456,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "VALIDATE_NUMERIC",
 												       "NO_OP"
 												     ],
-												     "$ref": "#/definitions/S3ConnectorOperator",
 												     "type": "string"
 												   }
 												*/
@@ -1579,7 +1490,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "VALIDATE_NUMERIC",
 												       "NO_OP"
 												     ],
-												     "$ref": "#/definitions/SalesforceConnectorOperator",
 												     "type": "string"
 												   }
 												*/
@@ -1614,7 +1524,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "VALIDATE_NUMERIC",
 												       "NO_OP"
 												     ],
-												     "$ref": "#/definitions/ServiceNowConnectorOperator",
 												     "type": "string"
 												   }
 												*/
@@ -1642,7 +1551,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "VALIDATE_NUMERIC",
 												       "NO_OP"
 												     ],
-												     "$ref": "#/definitions/ZendeskConnectorOperator",
 												     "type": "string"
 												   }
 												*/
@@ -1660,7 +1568,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "maxLength": 256,
 									     "pattern": "",
-									     "$ref": "#/definitions/DestinationField",
 									     "type": "string"
 									   }
 									*/
@@ -1708,7 +1615,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "CONCAT_FORMAT",
 									             "SUBFIELD_CATEGORY_MAP"
 									           ],
-									           "$ref": "#/definitions/OperatorPropertiesKeys",
 									           "type": "string"
 									         },
 									         "Property": {
@@ -1717,7 +1623,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/TaskPropertiesMap",
 									       "required": [
 									         "OperatorPropertyKey",
 									         "Property"
@@ -1750,7 +1655,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "CONCAT_FORMAT",
 												       "SUBFIELD_CATEGORY_MAP"
 												     ],
-												     "$ref": "#/definitions/OperatorPropertiesKeys",
 												     "type": "string"
 												   }
 												*/
@@ -1789,7 +1693,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Truncate",
 									       "Validate"
 									     ],
-									     "$ref": "#/definitions/TaskType",
 									     "type": "string"
 									   }
 									*/
@@ -1822,11 +1725,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               },
 						               "FirstExecutionFrom": {
-						                 "$ref": "#/definitions/Date",
 						                 "type": "number"
 						               },
 						               "ScheduleEndTime": {
-						                 "$ref": "#/definitions/Date",
 						                 "type": "number"
 						               },
 						               "ScheduleExpression": {
@@ -1838,7 +1739,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "integer"
 						               },
 						               "ScheduleStartTime": {
-						                 "$ref": "#/definitions/Date",
 						                 "type": "number"
 						               },
 						               "Timezone": {
@@ -1847,14 +1747,12 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/ScheduledTriggerProperties",
 						             "required": [
 						               "ScheduleExpression"
 						             ],
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/TriggerProperties",
 						         "type": "object"
 						       },
 						       "TriggerType": {
@@ -1863,11 +1761,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Event",
 						           "OnDemand"
 						         ],
-						         "$ref": "#/definitions/TriggerType",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/TriggerConfig",
 						     "required": [
 						       "TriggerType"
 						     ],
@@ -1894,11 +1790,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           },
 									           "FirstExecutionFrom": {
-									             "$ref": "#/definitions/Date",
 									             "type": "number"
 									           },
 									           "ScheduleEndTime": {
-									             "$ref": "#/definitions/Date",
 									             "type": "number"
 									           },
 									           "ScheduleExpression": {
@@ -1910,7 +1804,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "integer"
 									           },
 									           "ScheduleStartTime": {
-									             "$ref": "#/definitions/Date",
 									             "type": "number"
 									           },
 									           "Timezone": {
@@ -1919,14 +1812,12 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/ScheduledTriggerProperties",
 									         "required": [
 									           "ScheduleExpression"
 									         ],
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/TriggerProperties",
 									     "type": "object"
 									   }
 									*/
@@ -1947,11 +1838,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       },
 												       "FirstExecutionFrom": {
-												         "$ref": "#/definitions/Date",
 												         "type": "number"
 												       },
 												       "ScheduleEndTime": {
-												         "$ref": "#/definitions/Date",
 												         "type": "number"
 												       },
 												       "ScheduleExpression": {
@@ -1963,7 +1852,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "integer"
 												       },
 												       "ScheduleStartTime": {
-												         "$ref": "#/definitions/Date",
 												         "type": "number"
 												       },
 												       "Timezone": {
@@ -1972,7 +1860,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/ScheduledTriggerProperties",
 												     "required": [
 												       "ScheduleExpression"
 												     ],
@@ -2001,7 +1888,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// CloudFormation resource type schema:
 															/*
 															   {
-															     "$ref": "#/definitions/Date",
 															     "type": "number"
 															   }
 															*/
@@ -2013,7 +1899,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// CloudFormation resource type schema:
 															/*
 															   {
-															     "$ref": "#/definitions/Date",
 															     "type": "number"
 															   }
 															*/
@@ -2049,7 +1934,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// CloudFormation resource type schema:
 															/*
 															   {
-															     "$ref": "#/definitions/Date",
 															     "type": "number"
 															   }
 															*/
@@ -2087,7 +1971,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Event",
 									       "OnDemand"
 									     ],
-									     "$ref": "#/definitions/TriggerType",
 									     "type": "string"
 									   }
 									*/
@@ -2153,7 +2036,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

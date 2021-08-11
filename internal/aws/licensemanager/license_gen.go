@@ -52,7 +52,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/BorrowConfiguration",
 			         "required": [
 			           "MaxTimeToLiveInMinutes",
 			           "AllowEarlyCheckIn"
@@ -66,7 +65,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/ProvisionalConfiguration",
 			         "required": [
 			           "MaxTimeToLiveInMinutes"
 			         ],
@@ -76,7 +74,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/ConsumptionConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -96,7 +93,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/BorrowConfiguration",
 						     "required": [
 						       "MaxTimeToLiveInMinutes",
 						       "AllowEarlyCheckIn"
@@ -143,7 +139,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/ProvisionalConfiguration",
 						     "required": [
 						       "MaxTimeToLiveInMinutes"
 						     ],
@@ -209,7 +204,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Entitlement",
 			       "required": [
 			         "Name",
 			         "Unit"
@@ -321,7 +315,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/IssuerData",
 			     "required": [
 			       "Name"
 			     ],
@@ -362,7 +355,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "maxLength": 2048,
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -384,7 +376,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Metadata",
 			       "required": [
 			         "Name",
 			         "Value"
@@ -471,7 +462,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			/*
 			   {
-			     "$ref": "#/definitions/LicenseStatus",
 			     "type": "string"
 			   }
 			*/
@@ -497,7 +487,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/ValidityDateFormat",
 			     "required": [
 			       "Begin",
 			       "End"

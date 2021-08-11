@@ -28,7 +28,6 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			/*
 			   {
 			     "pattern": "",
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -43,7 +42,6 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			     "enum": [
 			       "AWSLambda-SHA384-ECDSA"
 			     ],
-			     "$ref": "#/definitions/PlatformId",
 			     "type": "string"
 			   }
 			*/
@@ -70,7 +68,6 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			/*
 			   {
 			     "pattern": "",
-			     "$ref": "#/definitions/ProfileVersion",
 			     "type": "string"
 			   }
 			*/
@@ -83,7 +80,6 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			/*
 			   {
 			     "pattern": "",
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -109,7 +105,6 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/SignatureValidityPeriod",
 			     "type": "object"
 			   }
 			*/
@@ -169,7 +164,6 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

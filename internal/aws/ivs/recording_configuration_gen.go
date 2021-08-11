@@ -58,14 +58,12 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/S3DestinationConfiguration",
 			         "required": [
 			           "BucketName"
 			         ],
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/DestinationConfiguration",
 			     "required": [
 			       "S3"
 			     ],
@@ -90,7 +88,6 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/S3DestinationConfiguration",
 						     "required": [
 						       "BucketName"
 						     ],
@@ -182,7 +179,6 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

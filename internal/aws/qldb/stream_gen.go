@@ -29,7 +29,6 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "pattern": "",
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -84,11 +83,9 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       },
 			       "StreamArn": {
 			         "pattern": "",
-			         "$ref": "#/definitions/Arn",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/KinesisConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -111,7 +108,6 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "pattern": "",
-						     "$ref": "#/definitions/Arn",
 						     "type": "string"
 						   }
 						*/
@@ -141,7 +137,6 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "pattern": "",
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -185,7 +180,6 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

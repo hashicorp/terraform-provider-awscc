@@ -31,7 +31,6 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			     "description": "The ARN of the ReplicationSet.",
 			     "maxLength": 1000,
 			     "pattern": "",
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -45,7 +44,6 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			/*
 			   {
 			     "description": "Configures the ReplicationSet deletion protection.",
-			     "$ref": "#/definitions/DeletionProtected",
 			     "type": "boolean"
 			   }
 			*/
@@ -71,11 +69,9 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			               "description": "The ARN of the ReplicationSet.",
 			               "maxLength": 1000,
 			               "pattern": "",
-			               "$ref": "#/definitions/Arn",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/RegionConfiguration",
 			           "required": [
 			             "SseKmsKeyId"
 			           ],
@@ -84,16 +80,13 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			         "RegionName": {
 			           "description": "The AWS region name.",
 			           "maxLength": 20,
-			           "$ref": "#/definitions/RegionName",
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ReplicationRegion",
 			       "type": "object"
 			     },
 			     "maxItems": 3,
 			     "minItems": 1,
-			     "$ref": "#/definitions/RegionList",
 			     "type": "array",
 			     "uniqueItems": true
 			   }
@@ -112,11 +105,9 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						         "description": "The ARN of the ReplicationSet.",
 						         "maxLength": 1000,
 						         "pattern": "",
-						         "$ref": "#/definitions/Arn",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/RegionConfiguration",
 						     "required": [
 						       "SseKmsKeyId"
 						     ],
@@ -134,7 +125,6 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									     "description": "The ARN of the ReplicationSet.",
 									     "maxLength": 1000,
 									     "pattern": "",
-									     "$ref": "#/definitions/Arn",
 									     "type": "string"
 									   }
 									*/
@@ -153,7 +143,6 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						   {
 						     "description": "The AWS region name.",
 						     "maxLength": 20,
-						     "$ref": "#/definitions/RegionName",
 						     "type": "string"
 						   }
 						*/

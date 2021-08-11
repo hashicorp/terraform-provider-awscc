@@ -43,7 +43,6 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/AssertionRule",
 			     "required": [
 			       "AssertedControls",
 			       "WaitPeriodMs"
@@ -133,7 +132,6 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/GatingRule",
 			     "required": [
 			       "WaitPeriodMs",
 			       "TargetControls",
@@ -204,7 +202,6 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "The name for the safety rule.",
-			     "$ref": "#/definitions/SafetyRuleName",
 			     "type": "string"
 			   }
 			*/
@@ -235,11 +232,9 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "OR",
 			           "ATLEAST"
 			         ],
-			         "$ref": "#/definitions/RuleType",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/RuleConfig",
 			     "required": [
 			       "Type",
 			       "Threshold",
@@ -288,7 +283,6 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "OR",
 						       "ATLEAST"
 						     ],
-						     "$ref": "#/definitions/RuleType",
 						     "type": "string"
 						   }
 						*/

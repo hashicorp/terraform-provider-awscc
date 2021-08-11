@@ -62,7 +62,6 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "uniqueItems": false
 			               }
 			             },
-			             "$ref": "#/definitions/CookiesConfig",
 			             "required": [
 			               "CookieBehavior"
 			             ],
@@ -89,7 +88,6 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "uniqueItems": false
 			               }
 			             },
-			             "$ref": "#/definitions/HeadersConfig",
 			             "required": [
 			               "HeaderBehavior"
 			             ],
@@ -110,14 +108,12 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "uniqueItems": false
 			               }
 			             },
-			             "$ref": "#/definitions/QueryStringsConfig",
 			             "required": [
 			               "QueryStringBehavior"
 			             ],
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/ParametersInCacheKeyAndForwardedToOrigin",
 			         "required": [
 			           "EnableAcceptEncodingGzip",
 			           "HeadersConfig",
@@ -127,7 +123,6 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/CachePolicyConfig",
 			     "required": [
 			       "Name",
 			       "MinTTL",
@@ -217,7 +212,6 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "uniqueItems": false
 						           }
 						         },
-						         "$ref": "#/definitions/CookiesConfig",
 						         "required": [
 						           "CookieBehavior"
 						         ],
@@ -244,7 +238,6 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "uniqueItems": false
 						           }
 						         },
-						         "$ref": "#/definitions/HeadersConfig",
 						         "required": [
 						           "HeaderBehavior"
 						         ],
@@ -265,14 +258,12 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "uniqueItems": false
 						           }
 						         },
-						         "$ref": "#/definitions/QueryStringsConfig",
 						         "required": [
 						           "QueryStringBehavior"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/ParametersInCacheKeyAndForwardedToOrigin",
 						     "required": [
 						       "EnableAcceptEncodingGzip",
 						       "HeadersConfig",
@@ -303,7 +294,6 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "uniqueItems": false
 									       }
 									     },
-									     "$ref": "#/definitions/CookiesConfig",
 									     "required": [
 									       "CookieBehavior"
 									     ],
@@ -384,7 +374,6 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "uniqueItems": false
 									       }
 									     },
-									     "$ref": "#/definitions/HeadersConfig",
 									     "required": [
 									       "HeaderBehavior"
 									     ],
@@ -443,7 +432,6 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "uniqueItems": false
 									       }
 									     },
-									     "$ref": "#/definitions/QueryStringsConfig",
 									     "required": [
 									       "QueryStringBehavior"
 									     ],

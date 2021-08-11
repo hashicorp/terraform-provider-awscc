@@ -83,7 +83,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/FleetLaunchTemplateSpecificationRequest",
 			           "type": "object"
 			         },
 			         "Overrides": {
@@ -127,7 +126,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Placement",
 			                 "type": "object"
 			               },
 			               "Priority": {
@@ -140,14 +138,12 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "number"
 			               }
 			             },
-			             "$ref": "#/definitions/FleetLaunchTemplateOverridesRequest",
 			             "type": "object"
 			           },
 			           "type": "array",
 			           "uniqueItems": false
 			         }
 			       },
-			       "$ref": "#/definitions/FleetLaunchTemplateConfigRequest",
 			       "type": "object"
 			     },
 			     "maxItems": 50,
@@ -177,7 +173,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/FleetLaunchTemplateSpecificationRequest",
 						     "type": "object"
 						   }
 						*/
@@ -268,7 +263,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/Placement",
 						           "type": "object"
 						         },
 						         "Priority": {
@@ -281,7 +275,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "number"
 						         }
 						       },
-						       "$ref": "#/definitions/FleetLaunchTemplateOverridesRequest",
 						       "type": "object"
 						     },
 						     "type": "array",
@@ -355,7 +348,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/Placement",
 									     "type": "object"
 									   }
 									*/
@@ -519,7 +511,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/CapacityReservationOptionsRequest",
 			         "type": "object"
 			       },
 			       "MaxTotalPrice": {
@@ -535,7 +526,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/OnDemandOptionsRequest",
 			     "type": "object"
 			   }
 			*/
@@ -566,7 +556,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/CapacityReservationOptionsRequest",
 						     "type": "object"
 						   }
 						*/
@@ -692,7 +681,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/SpotOptionsRequest",
 			     "type": "object"
 			   }
 			*/
@@ -862,7 +850,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Tag",
 			             "required": [
 			               "Value",
 			               "Key"
@@ -873,7 +860,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "uniqueItems": false
 			         }
 			       },
-			       "$ref": "#/definitions/TagSpecification",
 			       "type": "object"
 			     },
 			     "type": "array",
@@ -957,7 +943,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Tag",
 						       "required": [
 						         "Value",
 						         "Key"
@@ -1028,7 +1013,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/TargetCapacitySpecificationRequest",
 			     "required": [
 			       "TotalTargetCapacity"
 			     ],

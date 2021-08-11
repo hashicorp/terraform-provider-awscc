@@ -137,7 +137,6 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

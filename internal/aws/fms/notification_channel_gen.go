@@ -31,7 +31,6 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			     "maxLength": 1024,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ResourceArn",
 			     "type": "string"
 			   }
 			*/
@@ -48,7 +47,6 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			     "maxLength": 1024,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/ResourceArn",
 			     "type": "string"
 			   }
 			*/

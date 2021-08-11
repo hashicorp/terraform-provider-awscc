@@ -215,7 +215,6 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

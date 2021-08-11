@@ -43,7 +43,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Version of airflow to deploy to the environment.",
 			     "maxLength": 32,
 			     "pattern": "",
-			     "$ref": "#/definitions/AirflowVersion",
 			     "type": "string"
 			   }
 			*/
@@ -60,7 +59,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 1224,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/EnvironmentArn",
 			     "type": "string"
 			   }
 			*/
@@ -76,7 +74,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
 			     "maxLength": 1024,
 			     "pattern": "",
-			     "$ref": "#/definitions/RelativePath",
 			     "type": "string"
 			   }
 			*/
@@ -92,7 +89,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Templated configuration for airflow processes and backing infrastructure.",
 			     "maxLength": 1024,
 			     "minLength": 1,
-			     "$ref": "#/definitions/EnvironmentClass",
 			     "type": "string"
 			   }
 			*/
@@ -108,7 +104,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "IAM role to be used by tasks.",
 			     "maxLength": 1224,
 			     "pattern": "",
-			     "$ref": "#/definitions/ExecutionRoleArn",
 			     "type": "string"
 			   }
 			*/
@@ -124,7 +119,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for MWAA data encryption.\n\n    You can specify the CMK using any of the following:\n\n    Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.\n\n    Key alias. For example, alias/ExampleAlias.\n\n    Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.\n\n    Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.\n\n    AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.",
 			     "maxLength": 1224,
 			     "pattern": "",
-			     "$ref": "#/definitions/KmsKey",
 			     "type": "string"
 			   }
 			*/
@@ -150,12 +144,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "description": "",
 			             "maxLength": 1224,
 			             "pattern": "",
-			             "$ref": "#/definitions/CloudWatchLogGroupArn",
 			             "type": "string"
 			           },
 			           "Enabled": {
 			             "description": "",
-			             "$ref": "#/definitions/LoggingEnabled",
 			             "type": "boolean"
 			           },
 			           "LogLevel": {
@@ -167,11 +159,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "INFO",
 			               "DEBUG"
 			             ],
-			             "$ref": "#/definitions/LoggingLevel",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ModuleLoggingConfiguration",
 			         "type": "object"
 			       },
 			       "SchedulerLogs": {
@@ -182,12 +172,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "description": "",
 			             "maxLength": 1224,
 			             "pattern": "",
-			             "$ref": "#/definitions/CloudWatchLogGroupArn",
 			             "type": "string"
 			           },
 			           "Enabled": {
 			             "description": "",
-			             "$ref": "#/definitions/LoggingEnabled",
 			             "type": "boolean"
 			           },
 			           "LogLevel": {
@@ -199,11 +187,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "INFO",
 			               "DEBUG"
 			             ],
-			             "$ref": "#/definitions/LoggingLevel",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ModuleLoggingConfiguration",
 			         "type": "object"
 			       },
 			       "TaskLogs": {
@@ -214,12 +200,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "description": "",
 			             "maxLength": 1224,
 			             "pattern": "",
-			             "$ref": "#/definitions/CloudWatchLogGroupArn",
 			             "type": "string"
 			           },
 			           "Enabled": {
 			             "description": "",
-			             "$ref": "#/definitions/LoggingEnabled",
 			             "type": "boolean"
 			           },
 			           "LogLevel": {
@@ -231,11 +215,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "INFO",
 			               "DEBUG"
 			             ],
-			             "$ref": "#/definitions/LoggingLevel",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ModuleLoggingConfiguration",
 			         "type": "object"
 			       },
 			       "WebserverLogs": {
@@ -246,12 +228,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "description": "",
 			             "maxLength": 1224,
 			             "pattern": "",
-			             "$ref": "#/definitions/CloudWatchLogGroupArn",
 			             "type": "string"
 			           },
 			           "Enabled": {
 			             "description": "",
-			             "$ref": "#/definitions/LoggingEnabled",
 			             "type": "boolean"
 			           },
 			           "LogLevel": {
@@ -263,11 +243,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "INFO",
 			               "DEBUG"
 			             ],
-			             "$ref": "#/definitions/LoggingLevel",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ModuleLoggingConfiguration",
 			         "type": "object"
 			       },
 			       "WorkerLogs": {
@@ -278,12 +256,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "description": "",
 			             "maxLength": 1224,
 			             "pattern": "",
-			             "$ref": "#/definitions/CloudWatchLogGroupArn",
 			             "type": "string"
 			           },
 			           "Enabled": {
 			             "description": "",
-			             "$ref": "#/definitions/LoggingEnabled",
 			             "type": "boolean"
 			           },
 			           "LogLevel": {
@@ -295,15 +271,12 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "INFO",
 			               "DEBUG"
 			             ],
-			             "$ref": "#/definitions/LoggingLevel",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ModuleLoggingConfiguration",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/LoggingConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -322,12 +295,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "description": "",
 						         "maxLength": 1224,
 						         "pattern": "",
-						         "$ref": "#/definitions/CloudWatchLogGroupArn",
 						         "type": "string"
 						       },
 						       "Enabled": {
 						         "description": "",
-						         "$ref": "#/definitions/LoggingEnabled",
 						         "type": "boolean"
 						       },
 						       "LogLevel": {
@@ -339,11 +310,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "INFO",
 						           "DEBUG"
 						         ],
-						         "$ref": "#/definitions/LoggingLevel",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ModuleLoggingConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -358,7 +327,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "description": "",
 									     "maxLength": 1224,
 									     "pattern": "",
-									     "$ref": "#/definitions/CloudWatchLogGroupArn",
 									     "type": "string"
 									   }
 									*/
@@ -372,7 +340,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "",
-									     "$ref": "#/definitions/LoggingEnabled",
 									     "type": "boolean"
 									   }
 									*/
@@ -393,7 +360,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "INFO",
 									       "DEBUG"
 									     ],
-									     "$ref": "#/definitions/LoggingLevel",
 									     "type": "string"
 									   }
 									*/
@@ -417,12 +383,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "description": "",
 						         "maxLength": 1224,
 						         "pattern": "",
-						         "$ref": "#/definitions/CloudWatchLogGroupArn",
 						         "type": "string"
 						       },
 						       "Enabled": {
 						         "description": "",
-						         "$ref": "#/definitions/LoggingEnabled",
 						         "type": "boolean"
 						       },
 						       "LogLevel": {
@@ -434,11 +398,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "INFO",
 						           "DEBUG"
 						         ],
-						         "$ref": "#/definitions/LoggingLevel",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ModuleLoggingConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -453,7 +415,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "description": "",
 									     "maxLength": 1224,
 									     "pattern": "",
-									     "$ref": "#/definitions/CloudWatchLogGroupArn",
 									     "type": "string"
 									   }
 									*/
@@ -467,7 +428,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "",
-									     "$ref": "#/definitions/LoggingEnabled",
 									     "type": "boolean"
 									   }
 									*/
@@ -488,7 +448,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "INFO",
 									       "DEBUG"
 									     ],
-									     "$ref": "#/definitions/LoggingLevel",
 									     "type": "string"
 									   }
 									*/
@@ -512,12 +471,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "description": "",
 						         "maxLength": 1224,
 						         "pattern": "",
-						         "$ref": "#/definitions/CloudWatchLogGroupArn",
 						         "type": "string"
 						       },
 						       "Enabled": {
 						         "description": "",
-						         "$ref": "#/definitions/LoggingEnabled",
 						         "type": "boolean"
 						       },
 						       "LogLevel": {
@@ -529,11 +486,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "INFO",
 						           "DEBUG"
 						         ],
-						         "$ref": "#/definitions/LoggingLevel",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ModuleLoggingConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -548,7 +503,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "description": "",
 									     "maxLength": 1224,
 									     "pattern": "",
-									     "$ref": "#/definitions/CloudWatchLogGroupArn",
 									     "type": "string"
 									   }
 									*/
@@ -562,7 +516,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "",
-									     "$ref": "#/definitions/LoggingEnabled",
 									     "type": "boolean"
 									   }
 									*/
@@ -583,7 +536,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "INFO",
 									       "DEBUG"
 									     ],
-									     "$ref": "#/definitions/LoggingLevel",
 									     "type": "string"
 									   }
 									*/
@@ -607,12 +559,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "description": "",
 						         "maxLength": 1224,
 						         "pattern": "",
-						         "$ref": "#/definitions/CloudWatchLogGroupArn",
 						         "type": "string"
 						       },
 						       "Enabled": {
 						         "description": "",
-						         "$ref": "#/definitions/LoggingEnabled",
 						         "type": "boolean"
 						       },
 						       "LogLevel": {
@@ -624,11 +574,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "INFO",
 						           "DEBUG"
 						         ],
-						         "$ref": "#/definitions/LoggingLevel",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ModuleLoggingConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -643,7 +591,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "description": "",
 									     "maxLength": 1224,
 									     "pattern": "",
-									     "$ref": "#/definitions/CloudWatchLogGroupArn",
 									     "type": "string"
 									   }
 									*/
@@ -657,7 +604,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "",
-									     "$ref": "#/definitions/LoggingEnabled",
 									     "type": "boolean"
 									   }
 									*/
@@ -678,7 +624,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "INFO",
 									       "DEBUG"
 									     ],
-									     "$ref": "#/definitions/LoggingLevel",
 									     "type": "string"
 									   }
 									*/
@@ -702,12 +647,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "description": "",
 						         "maxLength": 1224,
 						         "pattern": "",
-						         "$ref": "#/definitions/CloudWatchLogGroupArn",
 						         "type": "string"
 						       },
 						       "Enabled": {
 						         "description": "",
-						         "$ref": "#/definitions/LoggingEnabled",
 						         "type": "boolean"
 						       },
 						       "LogLevel": {
@@ -719,11 +662,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "INFO",
 						           "DEBUG"
 						         ],
-						         "$ref": "#/definitions/LoggingLevel",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ModuleLoggingConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -738,7 +679,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "description": "",
 									     "maxLength": 1224,
 									     "pattern": "",
-									     "$ref": "#/definitions/CloudWatchLogGroupArn",
 									     "type": "string"
 									   }
 									*/
@@ -752,7 +692,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "",
-									     "$ref": "#/definitions/LoggingEnabled",
 									     "type": "boolean"
 									   }
 									*/
@@ -773,7 +712,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "INFO",
 									       "DEBUG"
 									     ],
-									     "$ref": "#/definitions/LoggingLevel",
 									     "type": "string"
 									   }
 									*/
@@ -795,7 +733,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "Maximum worker compute units.",
-			     "$ref": "#/definitions/MaxWorkers",
 			     "type": "integer"
 			   }
 			*/
@@ -809,7 +746,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "Minimum worker compute units.",
-			     "$ref": "#/definitions/MinWorkers",
 			     "type": "integer"
 			   }
 			*/
@@ -826,7 +762,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 80,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/EnvironmentName",
 			     "type": "string"
 			   }
 			*/
@@ -850,7 +785,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "maxLength": 1024,
 			           "minLength": 1,
 			           "pattern": "",
-			           "$ref": "#/definitions/SecurityGroupId",
 			           "type": "string"
 			         },
 			         "maxItems": 5,
@@ -863,7 +797,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "description": "",
 			           "maxLength": 1024,
 			           "pattern": "",
-			           "$ref": "#/definitions/SubnetId",
 			           "type": "string"
 			         },
 			         "maxItems": 2,
@@ -871,7 +804,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/NetworkConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -889,7 +821,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "maxLength": 1024,
 						       "minLength": 1,
 						       "pattern": "",
-						       "$ref": "#/definitions/SecurityGroupId",
 						       "type": "string"
 						     },
 						     "maxItems": 5,
@@ -911,7 +842,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "description": "",
 						       "maxLength": 1024,
 						       "pattern": "",
-						       "$ref": "#/definitions/SubnetId",
 						       "type": "string"
 						     },
 						     "maxItems": 2,
@@ -936,7 +866,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "description": "Represents an version ID for an S3 object.",
 			     "maxLength": 1024,
-			     "$ref": "#/definitions/S3ObjectVersion",
 			     "type": "string"
 			   }
 			*/
@@ -952,7 +881,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
 			     "maxLength": 1024,
 			     "pattern": "",
-			     "$ref": "#/definitions/RelativePath",
 			     "type": "string"
 			   }
 			*/
@@ -967,7 +895,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "description": "Represents an version ID for an S3 object.",
 			     "maxLength": 1024,
-			     "$ref": "#/definitions/S3ObjectVersion",
 			     "type": "string"
 			   }
 			*/
@@ -983,7 +910,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
 			     "maxLength": 1024,
 			     "pattern": "",
-			     "$ref": "#/definitions/RelativePath",
 			     "type": "string"
 			   }
 			*/
@@ -997,7 +923,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "Scheduler compute units.",
-			     "$ref": "#/definitions/Schedulers",
 			     "type": "integer"
 			   }
 			*/
@@ -1014,7 +939,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 1224,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/S3BucketArn",
 			     "type": "string"
 			   }
 			*/
@@ -1028,7 +952,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			/*
 			   {
 			     "description": "A map of tags for the environment.",
-			     "$ref": "#/definitions/TagMap",
 			     "type": "object"
 			   }
 			*/
@@ -1046,7 +969,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "PRIVATE_ONLY",
 			       "PUBLIC_ONLY"
 			     ],
-			     "$ref": "#/definitions/WebserverAccessMode",
 			     "type": "string"
 			   }
 			*/
@@ -1063,7 +985,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 256,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/WebserverUrl",
 			     "type": "string"
 			   }
 			*/
@@ -1079,7 +1000,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Start time for the weekly maintenance window.",
 			     "maxLength": 9,
 			     "pattern": "",
-			     "$ref": "#/definitions/WeeklyMaintenanceWindowStart",
 			     "type": "string"
 			   }
 			*/

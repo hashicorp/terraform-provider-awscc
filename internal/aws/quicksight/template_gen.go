@@ -122,7 +122,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ResourcePermission",
 			       "required": [
 			         "Actions",
 			         "Principal"
@@ -210,7 +209,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/DataSetReference",
 			               "required": [
 			                 "DataSetArn",
 			                 "DataSetPlaceholder"
@@ -221,7 +219,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/TemplateSourceAnalysis",
 			         "required": [
 			           "Arn",
 			           "DataSetReferences"
@@ -237,14 +234,12 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/TemplateSourceTemplate",
 			         "required": [
 			           "Arn"
 			         ],
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/TemplateSourceEntity",
 			     "type": "object"
 			   }
 			*/
@@ -279,7 +274,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/DataSetReference",
 						           "required": [
 						             "DataSetArn",
 						             "DataSetPlaceholder"
@@ -290,7 +284,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/TemplateSourceAnalysis",
 						     "required": [
 						       "Arn",
 						       "DataSetReferences"
@@ -334,7 +327,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/DataSetReference",
 									       "required": [
 									         "DataSetArn",
 									         "DataSetPlaceholder"
@@ -399,7 +391,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/TemplateSourceTemplate",
 						     "required": [
 						       "Arn"
 						     ],
@@ -454,7 +445,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -558,7 +548,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/ColumnGroupColumnSchema",
 			                       "type": "object"
 			                     },
 			                     "maxItems": 500,
@@ -570,7 +559,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/ColumnGroupSchema",
 			                 "type": "object"
 			               },
 			               "maxItems": 500,
@@ -600,7 +588,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/ColumnSchema",
 			                     "type": "object"
 			                   },
 			                   "maxItems": 500,
@@ -608,7 +595,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "array"
 			                 }
 			               },
-			               "$ref": "#/definitions/DataSetSchema",
 			               "type": "object"
 			             },
 			             "Placeholder": {
@@ -616,7 +602,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/DataSetConfiguration",
 			           "type": "object"
 			         },
 			         "maxItems": 30,
@@ -647,11 +632,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "INTERNAL_FAILURE",
 			                 "ACCESS_DENIED"
 			               ],
-			               "$ref": "#/definitions/TemplateErrorType",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/TemplateError",
 			           "type": "object"
 			         },
 			         "minItems": 1,
@@ -676,7 +659,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/Sheet",
 			           "type": "object"
 			         },
 			         "maxItems": 20,
@@ -697,7 +679,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "UPDATE_FAILED",
 			           "DELETED"
 			         ],
-			         "$ref": "#/definitions/ResourceStatus",
 			         "type": "string"
 			       },
 			       "ThemeArn": {
@@ -709,7 +690,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "number"
 			       }
 			     },
-			     "$ref": "#/definitions/TemplateVersion",
 			     "type": "object"
 			   }
 			*/
@@ -757,7 +737,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "type": "string"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/ColumnGroupColumnSchema",
 						                   "type": "object"
 						                 },
 						                 "maxItems": 500,
@@ -769,7 +748,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/ColumnGroupSchema",
 						             "type": "object"
 						           },
 						           "maxItems": 500,
@@ -799,7 +777,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/ColumnSchema",
 						                 "type": "object"
 						               },
 						               "maxItems": 500,
@@ -807,7 +784,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "array"
 						             }
 						           },
-						           "$ref": "#/definitions/DataSetSchema",
 						           "type": "object"
 						         },
 						         "Placeholder": {
@@ -815,7 +791,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/DataSetConfiguration",
 						       "type": "object"
 						     },
 						     "maxItems": 30,
@@ -847,7 +822,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/ColumnGroupColumnSchema",
 									             "type": "object"
 									           },
 									           "maxItems": 500,
@@ -859,7 +833,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/ColumnGroupSchema",
 									       "type": "object"
 									     },
 									     "maxItems": 500,
@@ -885,7 +858,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/ColumnGroupColumnSchema",
 												       "type": "object"
 												     },
 												     "maxItems": 500,
@@ -965,7 +937,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/ColumnSchema",
 									           "type": "object"
 									         },
 									         "maxItems": 500,
@@ -973,7 +944,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/DataSetSchema",
 									     "type": "object"
 									   }
 									*/
@@ -1003,7 +973,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/ColumnSchema",
 												       "type": "object"
 												     },
 												     "maxItems": 500,
@@ -1123,11 +1092,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "INTERNAL_FAILURE",
 						             "ACCESS_DENIED"
 						           ],
-						           "$ref": "#/definitions/TemplateErrorType",
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/TemplateError",
 						       "type": "object"
 						     },
 						     "minItems": 1,
@@ -1162,7 +1129,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "INTERNAL_FAILURE",
 									       "ACCESS_DENIED"
 									     ],
-									     "$ref": "#/definitions/TemplateErrorType",
 									     "type": "string"
 									   }
 									*/
@@ -1199,7 +1165,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Sheet",
 						       "type": "object"
 						     },
 						     "maxItems": 20,
@@ -1275,7 +1240,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "UPDATE_FAILED",
 						       "DELETED"
 						     ],
-						     "$ref": "#/definitions/ResourceStatus",
 						     "type": "string"
 						   }
 						*/

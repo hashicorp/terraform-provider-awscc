@@ -65,7 +65,6 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/IamRole",
 			         "type": "object"
 			       },
 			       "IamUser": {
@@ -77,7 +76,6 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/IamUser",
 			         "type": "object"
 			       },
 			       "User": {
@@ -89,11 +87,9 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/User",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/AccessPolicyIdentity",
 			     "type": "object"
 			   }
 			*/
@@ -113,7 +109,6 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/IamRole",
 						     "type": "object"
 						   }
 						*/
@@ -150,7 +145,6 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/IamUser",
 						     "type": "object"
 						   }
 						*/
@@ -187,7 +181,6 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/User",
 						     "type": "object"
 						   }
 						*/
@@ -245,7 +238,6 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/Portal",
 			         "type": "object"
 			       },
 			       "Project": {
@@ -257,11 +249,9 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/Project",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/AccessPolicyResource",
 			     "type": "object"
 			   }
 			*/
@@ -281,7 +271,6 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/Portal",
 						     "type": "object"
 						   }
 						*/
@@ -318,7 +307,6 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/Project",
 						     "type": "object"
 						   }
 						*/

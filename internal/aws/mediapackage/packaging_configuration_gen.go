@@ -53,7 +53,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "properties": {
 			               "RoleArn": {
 			                 "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-			                 "$ref": "#/definitions/RoleArn",
 			                 "type": "string"
 			               },
 			               "SystemIds": {
@@ -68,7 +67,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SpekeKeyProvider",
 			             "required": [
 			               "RoleArn",
 			               "SystemIds",
@@ -77,7 +75,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/CmafEncryption",
 			         "required": [
 			           "SpekeKeyProvider"
 			         ],
@@ -104,7 +101,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			             },
 			             "ManifestName": {
 			               "description": "An optional string to include in the name of the manifest.",
-			               "$ref": "#/definitions/ManifestName",
 			               "type": "string"
 			             },
 			             "ProgramDateTimeIntervalSeconds": {
@@ -137,11 +133,9 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/StreamSelection",
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/HlsManifest",
 			           "type": "object"
 			         },
 			         "type": "array"
@@ -152,11 +146,9 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			       },
 			       "SegmentDurationSeconds": {
 			         "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-			         "$ref": "#/definitions/SegmentDurationSeconds",
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/CmafPackage",
 			     "required": [
 			       "HlsManifests"
 			     ],
@@ -180,7 +172,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "properties": {
 						           "RoleArn": {
 						             "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-						             "$ref": "#/definitions/RoleArn",
 						             "type": "string"
 						           },
 						           "SystemIds": {
@@ -195,7 +186,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SpekeKeyProvider",
 						         "required": [
 						           "RoleArn",
 						           "SystemIds",
@@ -204,7 +194,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/CmafEncryption",
 						     "required": [
 						       "SpekeKeyProvider"
 						     ],
@@ -224,7 +213,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									     "properties": {
 									       "RoleArn": {
 									         "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									         "$ref": "#/definitions/RoleArn",
 									         "type": "string"
 									       },
 									       "SystemIds": {
@@ -239,7 +227,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SpekeKeyProvider",
 									     "required": [
 									       "RoleArn",
 									       "SystemIds",
@@ -257,7 +244,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 												/*
 												   {
 												     "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												     "$ref": "#/definitions/RoleArn",
 												     "type": "string"
 												   }
 												*/
@@ -327,7 +313,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						         },
 						         "ManifestName": {
 						           "description": "An optional string to include in the name of the manifest.",
-						           "$ref": "#/definitions/ManifestName",
 						           "type": "string"
 						         },
 						         "ProgramDateTimeIntervalSeconds": {
@@ -360,11 +345,9 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/StreamSelection",
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/HlsManifest",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -410,7 +393,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									/*
 									   {
 									     "description": "An optional string to include in the name of the manifest.",
-									     "$ref": "#/definitions/ManifestName",
 									     "type": "string"
 									   }
 									*/
@@ -470,7 +452,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/StreamSelection",
 									     "type": "object"
 									   }
 									*/
@@ -549,7 +530,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						/*
 						   {
 						     "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-						     "$ref": "#/definitions/SegmentDurationSeconds",
 						     "type": "integer"
 						   }
 						*/
@@ -585,7 +565,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			             },
 			             "ManifestName": {
 			               "description": "An optional string to include in the name of the manifest.",
-			               "$ref": "#/definitions/ManifestName",
 			               "type": "string"
 			             },
 			             "MinBufferTimeSeconds": {
@@ -622,11 +601,9 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/StreamSelection",
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/DashManifest",
 			           "type": "object"
 			         },
 			         "type": "array"
@@ -641,7 +618,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "properties": {
 			               "RoleArn": {
 			                 "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-			                 "$ref": "#/definitions/RoleArn",
 			                 "type": "string"
 			               },
 			               "SystemIds": {
@@ -656,7 +632,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SpekeKeyProvider",
 			             "required": [
 			               "RoleArn",
 			               "SystemIds",
@@ -665,7 +640,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/DashEncryption",
 			         "required": [
 			           "SpekeKeyProvider"
 			         ],
@@ -687,7 +661,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			       },
 			       "SegmentDurationSeconds": {
 			         "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-			         "$ref": "#/definitions/SegmentDurationSeconds",
 			         "type": "integer"
 			       },
 			       "SegmentTemplateFormat": {
@@ -700,7 +673,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/DashPackage",
 			     "required": [
 			       "DashManifests"
 			     ],
@@ -730,7 +702,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						         },
 						         "ManifestName": {
 						           "description": "An optional string to include in the name of the manifest.",
-						           "$ref": "#/definitions/ManifestName",
 						           "type": "string"
 						         },
 						         "MinBufferTimeSeconds": {
@@ -767,11 +738,9 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/StreamSelection",
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/DashManifest",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -803,7 +772,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									/*
 									   {
 									     "description": "An optional string to include in the name of the manifest.",
-									     "$ref": "#/definitions/ManifestName",
 									     "type": "string"
 									   }
 									*/
@@ -867,7 +835,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/StreamSelection",
 									     "type": "object"
 									   }
 									*/
@@ -941,7 +908,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "properties": {
 						           "RoleArn": {
 						             "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-						             "$ref": "#/definitions/RoleArn",
 						             "type": "string"
 						           },
 						           "SystemIds": {
@@ -956,7 +922,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SpekeKeyProvider",
 						         "required": [
 						           "RoleArn",
 						           "SystemIds",
@@ -965,7 +930,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/DashEncryption",
 						     "required": [
 						       "SpekeKeyProvider"
 						     ],
@@ -985,7 +949,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									     "properties": {
 									       "RoleArn": {
 									         "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									         "$ref": "#/definitions/RoleArn",
 									         "type": "string"
 									       },
 									       "SystemIds": {
@@ -1000,7 +963,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SpekeKeyProvider",
 									     "required": [
 									       "RoleArn",
 									       "SystemIds",
@@ -1018,7 +980,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 												/*
 												   {
 												     "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												     "$ref": "#/definitions/RoleArn",
 												     "type": "string"
 												   }
 												*/
@@ -1101,7 +1062,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						/*
 						   {
 						     "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-						     "$ref": "#/definitions/SegmentDurationSeconds",
 						     "type": "integer"
 						   }
 						*/
@@ -1161,7 +1121,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "properties": {
 			               "RoleArn": {
 			                 "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-			                 "$ref": "#/definitions/RoleArn",
 			                 "type": "string"
 			               },
 			               "SystemIds": {
@@ -1176,7 +1135,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SpekeKeyProvider",
 			             "required": [
 			               "RoleArn",
 			               "SystemIds",
@@ -1185,7 +1143,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/HlsEncryption",
 			         "required": [
 			           "SpekeKeyProvider"
 			         ],
@@ -1212,7 +1169,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			             },
 			             "ManifestName": {
 			               "description": "An optional string to include in the name of the manifest.",
-			               "$ref": "#/definitions/ManifestName",
 			               "type": "string"
 			             },
 			             "ProgramDateTimeIntervalSeconds": {
@@ -1245,18 +1201,15 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/StreamSelection",
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/HlsManifest",
 			           "type": "object"
 			         },
 			         "type": "array"
 			       },
 			       "SegmentDurationSeconds": {
 			         "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-			         "$ref": "#/definitions/SegmentDurationSeconds",
 			         "type": "integer"
 			       },
 			       "UseAudioRenditionGroup": {
@@ -1264,7 +1217,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/HlsPackage",
 			     "required": [
 			       "HlsManifests"
 			     ],
@@ -1300,7 +1252,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "properties": {
 						           "RoleArn": {
 						             "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-						             "$ref": "#/definitions/RoleArn",
 						             "type": "string"
 						           },
 						           "SystemIds": {
@@ -1315,7 +1266,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SpekeKeyProvider",
 						         "required": [
 						           "RoleArn",
 						           "SystemIds",
@@ -1324,7 +1274,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/HlsEncryption",
 						     "required": [
 						       "SpekeKeyProvider"
 						     ],
@@ -1374,7 +1323,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									     "properties": {
 									       "RoleArn": {
 									         "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									         "$ref": "#/definitions/RoleArn",
 									         "type": "string"
 									       },
 									       "SystemIds": {
@@ -1389,7 +1337,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SpekeKeyProvider",
 									     "required": [
 									       "RoleArn",
 									       "SystemIds",
@@ -1407,7 +1354,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 												/*
 												   {
 												     "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												     "$ref": "#/definitions/RoleArn",
 												     "type": "string"
 												   }
 												*/
@@ -1477,7 +1423,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						         },
 						         "ManifestName": {
 						           "description": "An optional string to include in the name of the manifest.",
-						           "$ref": "#/definitions/ManifestName",
 						           "type": "string"
 						         },
 						         "ProgramDateTimeIntervalSeconds": {
@@ -1510,11 +1455,9 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/StreamSelection",
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/HlsManifest",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -1560,7 +1503,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									/*
 									   {
 									     "description": "An optional string to include in the name of the manifest.",
-									     "$ref": "#/definitions/ManifestName",
 									     "type": "string"
 									   }
 									*/
@@ -1620,7 +1562,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/StreamSelection",
 									     "type": "object"
 									   }
 									*/
@@ -1686,7 +1627,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						/*
 						   {
 						     "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-						     "$ref": "#/definitions/SegmentDurationSeconds",
 						     "type": "integer"
 						   }
 						*/
@@ -1743,7 +1683,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "properties": {
 			               "RoleArn": {
 			                 "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-			                 "$ref": "#/definitions/RoleArn",
 			                 "type": "string"
 			               },
 			               "SystemIds": {
@@ -1758,7 +1697,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SpekeKeyProvider",
 			             "required": [
 			               "RoleArn",
 			               "SystemIds",
@@ -1767,7 +1705,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/MssEncryption",
 			         "required": [
 			           "SpekeKeyProvider"
 			         ],
@@ -1781,7 +1718,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			           "properties": {
 			             "ManifestName": {
 			               "description": "An optional string to include in the name of the manifest.",
-			               "$ref": "#/definitions/ManifestName",
 			               "type": "string"
 			             },
 			             "StreamSelection": {
@@ -1806,22 +1742,18 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/StreamSelection",
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/MssManifest",
 			           "type": "object"
 			         },
 			         "type": "array"
 			       },
 			       "SegmentDurationSeconds": {
 			         "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-			         "$ref": "#/definitions/SegmentDurationSeconds",
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/MssPackage",
 			     "required": [
 			       "MssManifests"
 			     ],
@@ -1845,7 +1777,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "properties": {
 						           "RoleArn": {
 						             "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-						             "$ref": "#/definitions/RoleArn",
 						             "type": "string"
 						           },
 						           "SystemIds": {
@@ -1860,7 +1791,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SpekeKeyProvider",
 						         "required": [
 						           "RoleArn",
 						           "SystemIds",
@@ -1869,7 +1799,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/MssEncryption",
 						     "required": [
 						       "SpekeKeyProvider"
 						     ],
@@ -1889,7 +1818,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									     "properties": {
 									       "RoleArn": {
 									         "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									         "$ref": "#/definitions/RoleArn",
 									         "type": "string"
 									       },
 									       "SystemIds": {
@@ -1904,7 +1832,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SpekeKeyProvider",
 									     "required": [
 									       "RoleArn",
 									       "SystemIds",
@@ -1922,7 +1849,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 												/*
 												   {
 												     "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												     "$ref": "#/definitions/RoleArn",
 												     "type": "string"
 												   }
 												*/
@@ -1979,7 +1905,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						       "properties": {
 						         "ManifestName": {
 						           "description": "An optional string to include in the name of the manifest.",
-						           "$ref": "#/definitions/ManifestName",
 						           "type": "string"
 						         },
 						         "StreamSelection": {
@@ -2004,11 +1929,9 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/StreamSelection",
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/MssManifest",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -2023,7 +1946,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									/*
 									   {
 									     "description": "An optional string to include in the name of the manifest.",
-									     "$ref": "#/definitions/ManifestName",
 									     "type": "string"
 									   }
 									*/
@@ -2057,7 +1979,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/StreamSelection",
 									     "type": "object"
 									   }
 									*/
@@ -2123,7 +2044,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						/*
 						   {
 						     "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-						     "$ref": "#/definitions/SegmentDurationSeconds",
 						     "type": "integer"
 						   }
 						*/
@@ -2164,7 +2084,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

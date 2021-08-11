@@ -115,14 +115,12 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
 			       ],
 			       "type": "object"
 			     },
-			     "$ref": "#/definitions/Tags",
 			     "type": "array"
 			   }
 			*/
@@ -168,12 +166,10 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "BytesScannedCutoffPerQuery": {
 			         "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 			         "format": "int64",
-			         "$ref": "#/definitions/BytesScannedCutoffPerQuery",
 			         "type": "integer"
 			       },
 			       "EnforceWorkGroupConfiguration": {
 			         "description": "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
-			         "$ref": "#/definitions/EnforceWorkGroupConfiguration",
 			         "type": "boolean"
 			       },
 			       "EngineVersion": {
@@ -181,26 +177,21 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "properties": {
 			           "EffectiveEngineVersion": {
 			             "description": "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
-			             "$ref": "#/definitions/EffectiveEngineVersion",
 			             "type": "string"
 			           },
 			           "SelectedEngineVersion": {
 			             "description": "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
-			             "$ref": "#/definitions/SelectedEngineVersion",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/EngineVersion",
 			         "type": "object"
 			       },
 			       "PublishCloudWatchMetricsEnabled": {
 			         "description": "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
-			         "$ref": "#/definitions/PublishCloudWatchMetricsEnabled",
 			         "type": "boolean"
 			       },
 			       "RequesterPaysEnabled": {
 			         "description": "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
-			         "$ref": "#/definitions/RequesterPaysEnabled",
 			         "type": "boolean"
 			       },
 			       "ResultConfiguration": {
@@ -216,16 +207,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "SSE_KMS",
 			                   "CSE_KMS"
 			                 ],
-			                 "$ref": "#/definitions/EncryptionOption",
 			                 "type": "string"
 			               },
 			               "KmsKey": {
 			                 "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-			                 "$ref": "#/definitions/KmsKey",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/EncryptionConfiguration",
 			             "required": [
 			               "EncryptionOption"
 			             ],
@@ -233,15 +221,12 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           },
 			           "OutputLocation": {
 			             "description": "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
-			             "$ref": "#/definitions/OutputLocation",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ResultConfiguration",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/WorkGroupConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -254,7 +239,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						   {
 						     "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 						     "format": "int64",
-						     "$ref": "#/definitions/BytesScannedCutoffPerQuery",
 						     "type": "integer"
 						   }
 						*/
@@ -268,7 +252,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
-						     "$ref": "#/definitions/EnforceWorkGroupConfiguration",
 						     "type": "boolean"
 						   }
 						*/
@@ -285,16 +268,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "properties": {
 						       "EffectiveEngineVersion": {
 						         "description": "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
-						         "$ref": "#/definitions/EffectiveEngineVersion",
 						         "type": "string"
 						       },
 						       "SelectedEngineVersion": {
 						         "description": "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
-						         "$ref": "#/definitions/SelectedEngineVersion",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/EngineVersion",
 						     "type": "object"
 						   }
 						*/
@@ -307,7 +287,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
-									     "$ref": "#/definitions/EffectiveEngineVersion",
 									     "type": "string"
 									   }
 									*/
@@ -321,7 +300,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
-									     "$ref": "#/definitions/SelectedEngineVersion",
 									     "type": "string"
 									   }
 									*/
@@ -339,7 +317,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
-						     "$ref": "#/definitions/PublishCloudWatchMetricsEnabled",
 						     "type": "boolean"
 						   }
 						*/
@@ -353,7 +330,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
-						     "$ref": "#/definitions/RequesterPaysEnabled",
 						     "type": "boolean"
 						   }
 						*/
@@ -378,16 +354,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "SSE_KMS",
 						               "CSE_KMS"
 						             ],
-						             "$ref": "#/definitions/EncryptionOption",
 						             "type": "string"
 						           },
 						           "KmsKey": {
 						             "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-						             "$ref": "#/definitions/KmsKey",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/EncryptionConfiguration",
 						         "required": [
 						           "EncryptionOption"
 						         ],
@@ -395,11 +368,9 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       },
 						       "OutputLocation": {
 						         "description": "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
-						         "$ref": "#/definitions/OutputLocation",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ResultConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -420,16 +391,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "SSE_KMS",
 									           "CSE_KMS"
 									         ],
-									         "$ref": "#/definitions/EncryptionOption",
 									         "type": "string"
 									       },
 									       "KmsKey": {
 									         "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-									         "$ref": "#/definitions/KmsKey",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/EncryptionConfiguration",
 									     "required": [
 									       "EncryptionOption"
 									     ],
@@ -450,7 +418,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "SSE_KMS",
 												       "CSE_KMS"
 												     ],
-												     "$ref": "#/definitions/EncryptionOption",
 												     "type": "string"
 												   }
 												*/
@@ -464,7 +431,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												/*
 												   {
 												     "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-												     "$ref": "#/definitions/KmsKey",
 												     "type": "string"
 												   }
 												*/
@@ -482,7 +448,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
-									     "$ref": "#/definitions/OutputLocation",
 									     "type": "string"
 									   }
 									*/
@@ -508,12 +473,10 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "BytesScannedCutoffPerQuery": {
 			         "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 			         "format": "int64",
-			         "$ref": "#/definitions/BytesScannedCutoffPerQuery",
 			         "type": "integer"
 			       },
 			       "EnforceWorkGroupConfiguration": {
 			         "description": "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
-			         "$ref": "#/definitions/EnforceWorkGroupConfiguration",
 			         "type": "boolean"
 			       },
 			       "EngineVersion": {
@@ -521,31 +484,25 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "properties": {
 			           "EffectiveEngineVersion": {
 			             "description": "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
-			             "$ref": "#/definitions/EffectiveEngineVersion",
 			             "type": "string"
 			           },
 			           "SelectedEngineVersion": {
 			             "description": "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
-			             "$ref": "#/definitions/SelectedEngineVersion",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/EngineVersion",
 			         "type": "object"
 			       },
 			       "PublishCloudWatchMetricsEnabled": {
 			         "description": "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
-			         "$ref": "#/definitions/PublishCloudWatchMetricsEnabled",
 			         "type": "boolean"
 			       },
 			       "RemoveBytesScannedCutoffPerQuery": {
 			         "description": "Indicates that the data usage control limit per query is removed.",
-			         "$ref": "#/definitions/RemoveBytesScannedCutoffPerQuery",
 			         "type": "boolean"
 			       },
 			       "RequesterPaysEnabled": {
 			         "description": "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
-			         "$ref": "#/definitions/RequesterPaysEnabled",
 			         "type": "boolean"
 			       },
 			       "ResultConfigurationUpdates": {
@@ -561,16 +518,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "SSE_KMS",
 			                   "CSE_KMS"
 			                 ],
-			                 "$ref": "#/definitions/EncryptionOption",
 			                 "type": "string"
 			               },
 			               "KmsKey": {
 			                 "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-			                 "$ref": "#/definitions/KmsKey",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/EncryptionConfiguration",
 			             "required": [
 			               "EncryptionOption"
 			             ],
@@ -578,23 +532,18 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           },
 			           "OutputLocation": {
 			             "description": "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
-			             "$ref": "#/definitions/OutputLocation",
 			             "type": "string"
 			           },
 			           "RemoveEncryptionConfiguration": {
-			             "$ref": "#/definitions/RemoveEncryptionConfiguration",
 			             "type": "boolean"
 			           },
 			           "RemoveOutputLocation": {
-			             "$ref": "#/definitions/RemoveOutputLocation",
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/ResultConfigurationUpdates",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/WorkGroupConfigurationUpdates",
 			     "type": "object"
 			   }
 			*/
@@ -608,7 +557,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						   {
 						     "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 						     "format": "int64",
-						     "$ref": "#/definitions/BytesScannedCutoffPerQuery",
 						     "type": "integer"
 						   }
 						*/
@@ -622,7 +570,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
-						     "$ref": "#/definitions/EnforceWorkGroupConfiguration",
 						     "type": "boolean"
 						   }
 						*/
@@ -639,16 +586,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "properties": {
 						       "EffectiveEngineVersion": {
 						         "description": "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
-						         "$ref": "#/definitions/EffectiveEngineVersion",
 						         "type": "string"
 						       },
 						       "SelectedEngineVersion": {
 						         "description": "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
-						         "$ref": "#/definitions/SelectedEngineVersion",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/EngineVersion",
 						     "type": "object"
 						   }
 						*/
@@ -661,7 +605,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
-									     "$ref": "#/definitions/EffectiveEngineVersion",
 									     "type": "string"
 									   }
 									*/
@@ -675,7 +618,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
-									     "$ref": "#/definitions/SelectedEngineVersion",
 									     "type": "string"
 									   }
 									*/
@@ -693,7 +635,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
-						     "$ref": "#/definitions/PublishCloudWatchMetricsEnabled",
 						     "type": "boolean"
 						   }
 						*/
@@ -707,7 +648,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "Indicates that the data usage control limit per query is removed.",
-						     "$ref": "#/definitions/RemoveBytesScannedCutoffPerQuery",
 						     "type": "boolean"
 						   }
 						*/
@@ -721,7 +661,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						/*
 						   {
 						     "description": "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
-						     "$ref": "#/definitions/RequesterPaysEnabled",
 						     "type": "boolean"
 						   }
 						*/
@@ -746,16 +685,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "SSE_KMS",
 						               "CSE_KMS"
 						             ],
-						             "$ref": "#/definitions/EncryptionOption",
 						             "type": "string"
 						           },
 						           "KmsKey": {
 						             "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-						             "$ref": "#/definitions/KmsKey",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/EncryptionConfiguration",
 						         "required": [
 						           "EncryptionOption"
 						         ],
@@ -763,19 +699,15 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       },
 						       "OutputLocation": {
 						         "description": "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
-						         "$ref": "#/definitions/OutputLocation",
 						         "type": "string"
 						       },
 						       "RemoveEncryptionConfiguration": {
-						         "$ref": "#/definitions/RemoveEncryptionConfiguration",
 						         "type": "boolean"
 						       },
 						       "RemoveOutputLocation": {
-						         "$ref": "#/definitions/RemoveOutputLocation",
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/ResultConfigurationUpdates",
 						     "type": "object"
 						   }
 						*/
@@ -796,16 +728,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "SSE_KMS",
 									           "CSE_KMS"
 									         ],
-									         "$ref": "#/definitions/EncryptionOption",
 									         "type": "string"
 									       },
 									       "KmsKey": {
 									         "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-									         "$ref": "#/definitions/KmsKey",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/EncryptionConfiguration",
 									     "required": [
 									       "EncryptionOption"
 									     ],
@@ -826,7 +755,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "SSE_KMS",
 												       "CSE_KMS"
 												     ],
-												     "$ref": "#/definitions/EncryptionOption",
 												     "type": "string"
 												   }
 												*/
@@ -840,7 +768,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												/*
 												   {
 												     "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-												     "$ref": "#/definitions/KmsKey",
 												     "type": "string"
 												   }
 												*/
@@ -858,7 +785,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									/*
 									   {
 									     "description": "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
-									     "$ref": "#/definitions/OutputLocation",
 									     "type": "string"
 									   }
 									*/
@@ -871,7 +797,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/RemoveEncryptionConfiguration",
 									     "type": "boolean"
 									   }
 									*/
@@ -883,7 +808,6 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/RemoveOutputLocation",
 									     "type": "boolean"
 									   }
 									*/

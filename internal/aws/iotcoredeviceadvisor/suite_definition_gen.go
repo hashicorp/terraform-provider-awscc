@@ -49,7 +49,6 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			         "description": "The device permission role arn of the test suite.",
 			         "maxLength": 2048,
 			         "minLength": 20,
-			         "$ref": "#/definitions/DevicePermissionRoleArn",
 			         "type": "string"
 			       },
 			       "Devices": {
@@ -68,31 +67,26 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/DeviceUnderTest",
 			           "type": "object"
 			         },
 			         "maxItems": 2,
 			         "minItems": 0,
-			         "$ref": "#/definitions/Devices",
 			         "type": "array"
 			       },
 			       "IntendedForQualification": {
 			         "description": "Whether the tests are intended for qualification in a suite.",
-			         "$ref": "#/definitions/IntendedForQualification",
 			         "type": "boolean"
 			       },
 			       "RootGroup": {
 			         "description": "The root group of the test suite.",
 			         "maxLength": 2048,
 			         "minLength": 1,
-			         "$ref": "#/definitions/RootGroup",
 			         "type": "string"
 			       },
 			       "SuiteDefinitionName": {
 			         "description": "The Name of the suite definition.",
 			         "maxLength": 256,
 			         "minLength": 1,
-			         "$ref": "#/definitions/SuiteDefinitionName",
 			         "type": "string"
 			       }
 			     },
@@ -113,7 +107,6 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						     "description": "The device permission role arn of the test suite.",
 						     "maxLength": 2048,
 						     "minLength": 20,
-						     "$ref": "#/definitions/DevicePermissionRoleArn",
 						     "type": "string"
 						   }
 						*/
@@ -141,12 +134,10 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/DeviceUnderTest",
 						       "type": "object"
 						     },
 						     "maxItems": 2,
 						     "minItems": 0,
-						     "$ref": "#/definitions/Devices",
 						     "type": "array"
 						   }
 						*/
@@ -193,7 +184,6 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						/*
 						   {
 						     "description": "Whether the tests are intended for qualification in a suite.",
-						     "$ref": "#/definitions/IntendedForQualification",
 						     "type": "boolean"
 						   }
 						*/
@@ -209,7 +199,6 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						     "description": "The root group of the test suite.",
 						     "maxLength": 2048,
 						     "minLength": 1,
-						     "$ref": "#/definitions/RootGroup",
 						     "type": "string"
 						   }
 						*/
@@ -225,7 +214,6 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						     "description": "The Name of the suite definition.",
 						     "maxLength": 256,
 						     "minLength": 1,
-						     "$ref": "#/definitions/SuiteDefinitionName",
 						     "type": "string"
 						   }
 						*/
@@ -291,7 +279,6 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

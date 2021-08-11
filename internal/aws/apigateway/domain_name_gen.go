@@ -82,7 +82,6 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/EndpointConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -120,7 +119,6 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/MutualTlsAuthentication",
 			     "type": "object"
 			   }
 			*/
@@ -222,7 +220,6 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

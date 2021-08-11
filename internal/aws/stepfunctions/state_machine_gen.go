@@ -40,7 +40,6 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			/*
 			   {
-			     "$ref": "#/definitions/Definition",
 			     "type": "object"
 			   }
 			*/
@@ -64,7 +63,6 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/S3Location",
 			     "required": [
 			       "Bucket",
 			       "Key"
@@ -135,7 +133,6 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/DefinitionSubstitutions",
 			     "type": "object"
 			   }
 			*/
@@ -163,11 +160,9 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/CloudWatchLogsLogGroup",
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/LogDestination",
 			           "type": "object"
 			         },
 			         "minItems": 1,
@@ -186,7 +181,6 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/LoggingConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -209,11 +203,9 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/CloudWatchLogsLogGroup",
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/LogDestination",
 						       "type": "object"
 						     },
 						     "minItems": 1,
@@ -235,7 +227,6 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudWatchLogsLogGroup",
 									     "type": "object"
 									   }
 									*/
@@ -372,7 +363,6 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/TagsEntry",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -427,7 +417,6 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/TracingConfiguration",
 			     "type": "object"
 			   }
 			*/

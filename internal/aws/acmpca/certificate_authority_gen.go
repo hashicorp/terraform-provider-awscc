@@ -27,7 +27,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// CloudFormation resource type schema:
 			/*
 			   {
-			     "$ref": "#/definitions/Arn",
 			     "type": "string"
 			   }
 			*/
@@ -87,7 +86,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/KeyUsage",
 			         "type": "object"
 			       },
 			       "SubjectInformationAccess": {
@@ -147,12 +145,10 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/Subject",
 			                   "type": "object"
 			                 },
 			                 "DnsName": {
 			                   "description": "String that contains X.509 DnsName information.",
-			                   "$ref": "#/definitions/DnsName",
 			                   "type": "string"
 			                 },
 			                 "EdiPartyName": {
@@ -166,7 +162,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/EdiPartyName",
 			                   "required": [
 			                     "PartyName",
 			                     "NameAssigner"
@@ -175,7 +170,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			                 },
 			                 "IpAddress": {
 			                   "description": "String that contains X.509 IpAddress information.",
-			                   "$ref": "#/definitions/IpAddress",
 			                   "type": "string"
 			                 },
 			                 "OtherName": {
@@ -184,14 +178,12 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			                   "properties": {
 			                     "TypeId": {
 			                       "description": "String that contains X.509 ObjectIdentifier information.",
-			                       "$ref": "#/definitions/CustomObjectIdentifier",
 			                       "type": "string"
 			                     },
 			                     "Value": {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/OtherName",
 			                   "required": [
 			                     "TypeId",
 			                     "Value"
@@ -200,21 +192,17 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			                 },
 			                 "RegisteredId": {
 			                   "description": "String that contains X.509 ObjectIdentifier information.",
-			                   "$ref": "#/definitions/CustomObjectIdentifier",
 			                   "type": "string"
 			                 },
 			                 "Rfc822Name": {
 			                   "description": "String that contains X.509 Rfc822Name information.",
-			                   "$ref": "#/definitions/Rfc822Name",
 			                   "type": "string"
 			                 },
 			                 "UniformResourceIdentifier": {
 			                   "description": "String that contains X.509 UniformResourceIdentifier information.",
-			                   "$ref": "#/definitions/UniformResourceIdentifier",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/GeneralName",
 			               "type": "object"
 			             },
 			             "AccessMethod": {
@@ -223,31 +211,25 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			               "properties": {
 			                 "AccessMethodType": {
 			                   "description": "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
-			                   "$ref": "#/definitions/AccessMethodType",
 			                   "type": "string"
 			                 },
 			                 "CustomObjectIdentifier": {
 			                   "description": "String that contains X.509 ObjectIdentifier information.",
-			                   "$ref": "#/definitions/CustomObjectIdentifier",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/AccessMethod",
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/AccessDescription",
 			           "required": [
 			             "AccessMethod",
 			             "AccessLocation"
 			           ],
 			           "type": "object"
 			         },
-			         "$ref": "#/definitions/SubjectInformationAccess",
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/CsrExtensions",
 			     "type": "object"
 			   }
 			*/
@@ -290,7 +272,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/KeyUsage",
 						     "type": "object"
 						   }
 						*/
@@ -461,12 +442,10 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/Subject",
 						               "type": "object"
 						             },
 						             "DnsName": {
 						               "description": "String that contains X.509 DnsName information.",
-						               "$ref": "#/definitions/DnsName",
 						               "type": "string"
 						             },
 						             "EdiPartyName": {
@@ -480,7 +459,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/EdiPartyName",
 						               "required": [
 						                 "PartyName",
 						                 "NameAssigner"
@@ -489,7 +467,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						             },
 						             "IpAddress": {
 						               "description": "String that contains X.509 IpAddress information.",
-						               "$ref": "#/definitions/IpAddress",
 						               "type": "string"
 						             },
 						             "OtherName": {
@@ -498,14 +475,12 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						               "properties": {
 						                 "TypeId": {
 						                   "description": "String that contains X.509 ObjectIdentifier information.",
-						                   "$ref": "#/definitions/CustomObjectIdentifier",
 						                   "type": "string"
 						                 },
 						                 "Value": {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/OtherName",
 						               "required": [
 						                 "TypeId",
 						                 "Value"
@@ -514,21 +489,17 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						             },
 						             "RegisteredId": {
 						               "description": "String that contains X.509 ObjectIdentifier information.",
-						               "$ref": "#/definitions/CustomObjectIdentifier",
 						               "type": "string"
 						             },
 						             "Rfc822Name": {
 						               "description": "String that contains X.509 Rfc822Name information.",
-						               "$ref": "#/definitions/Rfc822Name",
 						               "type": "string"
 						             },
 						             "UniformResourceIdentifier": {
 						               "description": "String that contains X.509 UniformResourceIdentifier information.",
-						               "$ref": "#/definitions/UniformResourceIdentifier",
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/GeneralName",
 						           "type": "object"
 						         },
 						         "AccessMethod": {
@@ -537,27 +508,22 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						           "properties": {
 						             "AccessMethodType": {
 						               "description": "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
-						               "$ref": "#/definitions/AccessMethodType",
 						               "type": "string"
 						             },
 						             "CustomObjectIdentifier": {
 						               "description": "String that contains X.509 ObjectIdentifier information.",
-						               "$ref": "#/definitions/CustomObjectIdentifier",
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/AccessMethod",
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/AccessDescription",
 						       "required": [
 						         "AccessMethod",
 						         "AccessLocation"
 						       ],
 						       "type": "object"
 						     },
-						     "$ref": "#/definitions/SubjectInformationAccess",
 						     "type": "array"
 						   }
 						*/
@@ -619,12 +585,10 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/Subject",
 									         "type": "object"
 									       },
 									       "DnsName": {
 									         "description": "String that contains X.509 DnsName information.",
-									         "$ref": "#/definitions/DnsName",
 									         "type": "string"
 									       },
 									       "EdiPartyName": {
@@ -638,7 +602,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/EdiPartyName",
 									         "required": [
 									           "PartyName",
 									           "NameAssigner"
@@ -647,7 +610,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									       },
 									       "IpAddress": {
 									         "description": "String that contains X.509 IpAddress information.",
-									         "$ref": "#/definitions/IpAddress",
 									         "type": "string"
 									       },
 									       "OtherName": {
@@ -656,14 +618,12 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									         "properties": {
 									           "TypeId": {
 									             "description": "String that contains X.509 ObjectIdentifier information.",
-									             "$ref": "#/definitions/CustomObjectIdentifier",
 									             "type": "string"
 									           },
 									           "Value": {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/OtherName",
 									         "required": [
 									           "TypeId",
 									           "Value"
@@ -672,21 +632,17 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									       },
 									       "RegisteredId": {
 									         "description": "String that contains X.509 ObjectIdentifier information.",
-									         "$ref": "#/definitions/CustomObjectIdentifier",
 									         "type": "string"
 									       },
 									       "Rfc822Name": {
 									         "description": "String that contains X.509 Rfc822Name information.",
-									         "$ref": "#/definitions/Rfc822Name",
 									         "type": "string"
 									       },
 									       "UniformResourceIdentifier": {
 									         "description": "String that contains X.509 UniformResourceIdentifier information.",
-									         "$ref": "#/definitions/UniformResourceIdentifier",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/GeneralName",
 									     "type": "object"
 									   }
 									*/
@@ -744,7 +700,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/Subject",
 												     "type": "object"
 												   }
 												*/
@@ -915,7 +870,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												/*
 												   {
 												     "description": "String that contains X.509 DnsName information.",
-												     "$ref": "#/definitions/DnsName",
 												     "type": "string"
 												   }
 												*/
@@ -938,7 +892,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/EdiPartyName",
 												     "required": [
 												       "PartyName",
 												       "NameAssigner"
@@ -981,7 +934,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												/*
 												   {
 												     "description": "String that contains X.509 IpAddress information.",
-												     "$ref": "#/definitions/IpAddress",
 												     "type": "string"
 												   }
 												*/
@@ -999,14 +951,12 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												     "properties": {
 												       "TypeId": {
 												         "description": "String that contains X.509 ObjectIdentifier information.",
-												         "$ref": "#/definitions/CustomObjectIdentifier",
 												         "type": "string"
 												       },
 												       "Value": {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/OtherName",
 												     "required": [
 												       "TypeId",
 												       "Value"
@@ -1023,7 +973,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 															/*
 															   {
 															     "description": "String that contains X.509 ObjectIdentifier information.",
-															     "$ref": "#/definitions/CustomObjectIdentifier",
 															     "type": "string"
 															   }
 															*/
@@ -1052,7 +1001,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												/*
 												   {
 												     "description": "String that contains X.509 ObjectIdentifier information.",
-												     "$ref": "#/definitions/CustomObjectIdentifier",
 												     "type": "string"
 												   }
 												*/
@@ -1066,7 +1014,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												/*
 												   {
 												     "description": "String that contains X.509 Rfc822Name information.",
-												     "$ref": "#/definitions/Rfc822Name",
 												     "type": "string"
 												   }
 												*/
@@ -1080,7 +1027,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												/*
 												   {
 												     "description": "String that contains X.509 UniformResourceIdentifier information.",
-												     "$ref": "#/definitions/UniformResourceIdentifier",
 												     "type": "string"
 												   }
 												*/
@@ -1102,16 +1048,13 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									     "properties": {
 									       "AccessMethodType": {
 									         "description": "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
-									         "$ref": "#/definitions/AccessMethodType",
 									         "type": "string"
 									       },
 									       "CustomObjectIdentifier": {
 									         "description": "String that contains X.509 ObjectIdentifier information.",
-									         "$ref": "#/definitions/CustomObjectIdentifier",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/AccessMethod",
 									     "type": "object"
 									   }
 									*/
@@ -1124,7 +1067,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												/*
 												   {
 												     "description": "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
-												     "$ref": "#/definitions/AccessMethodType",
 												     "type": "string"
 												   }
 												*/
@@ -1138,7 +1080,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												/*
 												   {
 												     "description": "String that contains X.509 ObjectIdentifier information.",
-												     "$ref": "#/definitions/CustomObjectIdentifier",
 												     "type": "string"
 												   }
 												*/
@@ -1218,11 +1159,9 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/CrlConfiguration",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/RevocationConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -1253,7 +1192,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/CrlConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -1388,7 +1326,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Subject",
 			     "type": "object"
 			   }
 			*/
@@ -1570,7 +1507,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

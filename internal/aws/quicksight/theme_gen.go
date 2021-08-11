@@ -105,7 +105,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/DataColorPalette",
 			         "type": "object"
 			       },
 			       "Sheet": {
@@ -125,11 +124,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "boolean"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/BorderStyle",
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/TileStyle",
 			             "type": "object"
 			           },
 			           "TileLayout": {
@@ -145,7 +142,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "boolean"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/GutterStyle",
 			                 "type": "object"
 			               },
 			               "Margin": {
@@ -157,15 +153,12 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "boolean"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/MarginStyle",
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/TileLayoutStyle",
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/SheetStyle",
 			         "type": "object"
 			       },
 			       "Typography": {
@@ -179,7 +172,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/Font",
 			               "type": "object"
 			             },
 			             "maxItems": 5,
@@ -187,7 +179,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/Typography",
 			         "type": "object"
 			       },
 			       "UIColorPalette": {
@@ -275,11 +266,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/UIColorPalette",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/ThemeConfiguration",
 			     "type": "object"
 			   }
 			*/
@@ -320,7 +309,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/DataColorPalette",
 						     "type": "object"
 						   }
 						*/
@@ -404,11 +392,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "boolean"
 						               }
 						             },
-						             "$ref": "#/definitions/BorderStyle",
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/TileStyle",
 						         "type": "object"
 						       },
 						       "TileLayout": {
@@ -424,7 +410,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "boolean"
 						               }
 						             },
-						             "$ref": "#/definitions/GutterStyle",
 						             "type": "object"
 						           },
 						           "Margin": {
@@ -436,15 +421,12 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "boolean"
 						               }
 						             },
-						             "$ref": "#/definitions/MarginStyle",
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/TileLayoutStyle",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/SheetStyle",
 						     "type": "object"
 						   }
 						*/
@@ -468,11 +450,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "boolean"
 									           }
 									         },
-									         "$ref": "#/definitions/BorderStyle",
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/TileStyle",
 									     "type": "object"
 									   }
 									*/
@@ -492,7 +472,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "boolean"
 												       }
 												     },
-												     "$ref": "#/definitions/BorderStyle",
 												     "type": "object"
 												   }
 												*/
@@ -537,7 +516,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "boolean"
 									           }
 									         },
-									         "$ref": "#/definitions/GutterStyle",
 									         "type": "object"
 									       },
 									       "Margin": {
@@ -549,11 +527,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "boolean"
 									           }
 									         },
-									         "$ref": "#/definitions/MarginStyle",
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/TileLayoutStyle",
 									     "type": "object"
 									   }
 									*/
@@ -573,7 +549,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "boolean"
 												       }
 												     },
-												     "$ref": "#/definitions/GutterStyle",
 												     "type": "object"
 												   }
 												*/
@@ -610,7 +585,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "boolean"
 												       }
 												     },
-												     "$ref": "#/definitions/MarginStyle",
 												     "type": "object"
 												   }
 												*/
@@ -657,7 +631,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/Font",
 						           "type": "object"
 						         },
 						         "maxItems": 5,
@@ -665,7 +638,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/Typography",
 						     "type": "object"
 						   }
 						*/
@@ -683,7 +655,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Font",
 									       "type": "object"
 									     },
 									     "maxItems": 5,
@@ -805,7 +776,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/UIColorPalette",
 						     "type": "object"
 						   }
 						*/
@@ -1114,7 +1084,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ResourcePermission",
 			       "required": [
 			         "Actions",
 			         "Principal"
@@ -1193,7 +1162,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -1271,7 +1239,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "CUSTOM",
 			       "ALL"
 			     ],
-			     "$ref": "#/definitions/ThemeType",
 			     "type": "string"
 			   }
 			*/
@@ -1331,7 +1298,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/DataColorPalette",
 			             "type": "object"
 			           },
 			           "Sheet": {
@@ -1351,11 +1317,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "boolean"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/BorderStyle",
 			                     "type": "object"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/TileStyle",
 			                 "type": "object"
 			               },
 			               "TileLayout": {
@@ -1371,7 +1335,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "boolean"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/GutterStyle",
 			                     "type": "object"
 			                   },
 			                   "Margin": {
@@ -1383,15 +1346,12 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "boolean"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/MarginStyle",
 			                     "type": "object"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/TileLayoutStyle",
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/SheetStyle",
 			             "type": "object"
 			           },
 			           "Typography": {
@@ -1405,7 +1365,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/Font",
 			                   "type": "object"
 			                 },
 			                 "maxItems": 5,
@@ -1413,7 +1372,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/Typography",
 			             "type": "object"
 			           },
 			           "UIColorPalette": {
@@ -1501,11 +1459,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/UIColorPalette",
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/ThemeConfiguration",
 			         "type": "object"
 			       },
 			       "CreatedTime": {
@@ -1534,11 +1490,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "enum": [
 			                 "INTERNAL_FAILURE"
 			               ],
-			               "$ref": "#/definitions/ThemeErrorType",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/ThemeError",
 			           "type": "object"
 			         },
 			         "minItems": 1,
@@ -1554,7 +1508,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "UPDATE_FAILED",
 			           "DELETED"
 			         ],
-			         "$ref": "#/definitions/ResourceStatus",
 			         "type": "string"
 			       },
 			       "VersionNumber": {
@@ -1562,7 +1515,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "number"
 			       }
 			     },
-			     "$ref": "#/definitions/ThemeVersion",
 			     "type": "object"
 			   }
 			*/
@@ -1636,7 +1588,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/DataColorPalette",
 						         "type": "object"
 						       },
 						       "Sheet": {
@@ -1656,11 +1607,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "type": "boolean"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/BorderStyle",
 						                 "type": "object"
 						               }
 						             },
-						             "$ref": "#/definitions/TileStyle",
 						             "type": "object"
 						           },
 						           "TileLayout": {
@@ -1676,7 +1625,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "type": "boolean"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/GutterStyle",
 						                 "type": "object"
 						               },
 						               "Margin": {
@@ -1688,15 +1636,12 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "type": "boolean"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/MarginStyle",
 						                 "type": "object"
 						               }
 						             },
-						             "$ref": "#/definitions/TileLayoutStyle",
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/SheetStyle",
 						         "type": "object"
 						       },
 						       "Typography": {
@@ -1710,7 +1655,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/Font",
 						               "type": "object"
 						             },
 						             "maxItems": 5,
@@ -1718,7 +1662,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "array"
 						           }
 						         },
-						         "$ref": "#/definitions/Typography",
 						         "type": "object"
 						       },
 						       "UIColorPalette": {
@@ -1806,11 +1749,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/UIColorPalette",
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/ThemeConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -1851,7 +1792,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/DataColorPalette",
 									     "type": "object"
 									   }
 									*/
@@ -1935,11 +1875,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "type": "boolean"
 									               }
 									             },
-									             "$ref": "#/definitions/BorderStyle",
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/TileStyle",
 									         "type": "object"
 									       },
 									       "TileLayout": {
@@ -1955,7 +1893,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "type": "boolean"
 									               }
 									             },
-									             "$ref": "#/definitions/GutterStyle",
 									             "type": "object"
 									           },
 									           "Margin": {
@@ -1967,15 +1904,12 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "type": "boolean"
 									               }
 									             },
-									             "$ref": "#/definitions/MarginStyle",
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/TileLayoutStyle",
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/SheetStyle",
 									     "type": "object"
 									   }
 									*/
@@ -1999,11 +1933,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "type": "boolean"
 												           }
 												         },
-												         "$ref": "#/definitions/BorderStyle",
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/TileStyle",
 												     "type": "object"
 												   }
 												*/
@@ -2023,7 +1955,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "type": "boolean"
 															       }
 															     },
-															     "$ref": "#/definitions/BorderStyle",
 															     "type": "object"
 															   }
 															*/
@@ -2068,7 +1999,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "type": "boolean"
 												           }
 												         },
-												         "$ref": "#/definitions/GutterStyle",
 												         "type": "object"
 												       },
 												       "Margin": {
@@ -2080,11 +2010,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "type": "boolean"
 												           }
 												         },
-												         "$ref": "#/definitions/MarginStyle",
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/TileLayoutStyle",
 												     "type": "object"
 												   }
 												*/
@@ -2104,7 +2032,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "type": "boolean"
 															       }
 															     },
-															     "$ref": "#/definitions/GutterStyle",
 															     "type": "object"
 															   }
 															*/
@@ -2141,7 +2068,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "type": "boolean"
 															       }
 															     },
-															     "$ref": "#/definitions/MarginStyle",
 															     "type": "object"
 															   }
 															*/
@@ -2188,7 +2114,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/Font",
 									           "type": "object"
 									         },
 									         "maxItems": 5,
@@ -2196,7 +2121,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "array"
 									       }
 									     },
-									     "$ref": "#/definitions/Typography",
 									     "type": "object"
 									   }
 									*/
@@ -2214,7 +2138,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/Font",
 												       "type": "object"
 												     },
 												     "maxItems": 5,
@@ -2336,7 +2259,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/UIColorPalette",
 									     "type": "object"
 									   }
 									*/
@@ -2623,11 +2545,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "enum": [
 						             "INTERNAL_FAILURE"
 						           ],
-						           "$ref": "#/definitions/ThemeErrorType",
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/ThemeError",
 						       "type": "object"
 						     },
 						     "minItems": 1,
@@ -2659,7 +2579,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "enum": [
 									       "INTERNAL_FAILURE"
 									     ],
-									     "$ref": "#/definitions/ThemeErrorType",
 									     "type": "string"
 									   }
 									*/
@@ -2687,7 +2606,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "UPDATE_FAILED",
 						       "DELETED"
 						     ],
-						     "$ref": "#/definitions/ResourceStatus",
 						     "type": "string"
 						   }
 						*/

@@ -68,11 +68,9 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/OnFailure",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/DestinationConfig",
 			     "type": "object"
 			   }
 			*/
@@ -95,7 +93,6 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/OnFailure",
 						     "type": "object"
 						   }
 						*/
@@ -314,11 +311,9 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			             "uniqueItems": true
 			           }
 			         },
-			         "$ref": "#/definitions/Endpoints",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/SelfManagedEventSource",
 			     "type": "object"
 			   }
 			*/
@@ -348,7 +343,6 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/Endpoints",
 						     "type": "object"
 						   }
 						*/
@@ -419,7 +413,6 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/SourceAccessConfiguration",
 			       "type": "object"
 			     },
 			     "maxItems": 22,

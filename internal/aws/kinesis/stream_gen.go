@@ -101,7 +101,6 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/StreamEncryption",
 			     "required": [
 			       "EncryptionType",
 			       "KeyId"
@@ -171,7 +170,6 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

@@ -57,7 +57,6 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			   {
 			     "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			     "pattern": "",
-			     "$ref": "#/definitions/iso8601UTC",
 			     "type": "string"
 			   }
 			*/
@@ -103,7 +102,6 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			       "MobileAssetTracking",
 			       "MobileAssetManagement"
 			     ],
-			     "$ref": "#/definitions/PricingPlan",
 			     "type": "string"
 			   }
 			*/
@@ -131,7 +129,6 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			   {
 			     "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			     "pattern": "",
-			     "$ref": "#/definitions/iso8601UTC",
 			     "type": "string"
 			   }
 			*/

@@ -97,11 +97,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "ENABLED",
 			               "DISABLED"
 			             ],
-			             "$ref": "#/definitions/DashboardBehavior",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/AdHocFilteringOption",
 			         "type": "object"
 			       },
 			       "ExportToCSVOption": {
@@ -113,11 +111,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "ENABLED",
 			               "DISABLED"
 			             ],
-			             "$ref": "#/definitions/DashboardBehavior",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ExportToCSVOption",
 			         "type": "object"
 			       },
 			       "SheetControlsOption": {
@@ -129,15 +125,12 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "EXPANDED",
 			               "COLLAPSED"
 			             ],
-			             "$ref": "#/definitions/DashboardUIState",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/SheetControlsOption",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/DashboardPublishOptions",
 			     "type": "object"
 			   }
 			*/
@@ -157,11 +150,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "ENABLED",
 						           "DISABLED"
 						         ],
-						         "$ref": "#/definitions/DashboardBehavior",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AdHocFilteringOption",
 						     "type": "object"
 						   }
 						*/
@@ -177,7 +168,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "ENABLED",
 									       "DISABLED"
 									     ],
-									     "$ref": "#/definitions/DashboardBehavior",
 									     "type": "string"
 									   }
 									*/
@@ -201,11 +191,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "ENABLED",
 						           "DISABLED"
 						         ],
-						         "$ref": "#/definitions/DashboardBehavior",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ExportToCSVOption",
 						     "type": "object"
 						   }
 						*/
@@ -221,7 +209,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "ENABLED",
 									       "DISABLED"
 									     ],
-									     "$ref": "#/definitions/DashboardBehavior",
 									     "type": "string"
 									   }
 									*/
@@ -245,11 +232,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "EXPANDED",
 						           "COLLAPSED"
 						         ],
-						         "$ref": "#/definitions/DashboardUIState",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/SheetControlsOption",
 						     "type": "object"
 						   }
 						*/
@@ -265,7 +250,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "EXPANDED",
 									       "COLLAPSED"
 									     ],
-									     "$ref": "#/definitions/DashboardUIState",
 									     "type": "string"
 									   }
 									*/
@@ -353,7 +337,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/DateTimeParameter",
 			           "required": [
 			             "Name",
 			             "Values"
@@ -383,7 +366,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/DecimalParameter",
 			           "required": [
 			             "Name",
 			             "Values"
@@ -413,7 +395,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/IntegerParameter",
 			           "required": [
 			             "Name",
 			             "Values"
@@ -443,7 +424,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/StringParameter",
 			           "required": [
 			             "Name",
 			             "Values"
@@ -455,7 +435,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/Parameters",
 			     "type": "object"
 			   }
 			*/
@@ -485,7 +464,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "array"
 						         }
 						       },
-						       "$ref": "#/definitions/DateTimeParameter",
 						       "required": [
 						         "Name",
 						         "Values"
@@ -561,7 +539,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "array"
 						         }
 						       },
-						       "$ref": "#/definitions/DecimalParameter",
 						       "required": [
 						         "Name",
 						         "Values"
@@ -637,7 +614,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "array"
 						         }
 						       },
-						       "$ref": "#/definitions/IntegerParameter",
 						       "required": [
 						         "Name",
 						         "Values"
@@ -713,7 +689,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "array"
 						         }
 						       },
-						       "$ref": "#/definitions/StringParameter",
 						       "required": [
 						         "Name",
 						         "Values"
@@ -797,7 +772,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ResourcePermission",
 			       "required": [
 			         "Actions",
 			         "Principal"
@@ -885,7 +859,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/DataSetReference",
 			               "required": [
 			                 "DataSetArn",
 			                 "DataSetPlaceholder"
@@ -896,7 +869,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/DashboardSourceTemplate",
 			         "required": [
 			           "Arn",
 			           "DataSetReferences"
@@ -904,7 +876,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/DashboardSourceEntity",
 			     "type": "object"
 			   }
 			*/
@@ -939,7 +910,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/DataSetReference",
 						           "required": [
 						             "DataSetArn",
 						             "DataSetPlaceholder"
@@ -950,7 +920,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/DashboardSourceTemplate",
 						     "required": [
 						       "Arn",
 						       "DataSetReferences"
@@ -994,7 +963,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/DataSetReference",
 									       "required": [
 									         "DataSetArn",
 									         "DataSetPlaceholder"
@@ -1074,7 +1042,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -1197,11 +1164,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
 			                 "COLUMN_REPLACEMENT_MISSING"
 			               ],
-			               "$ref": "#/definitions/DashboardErrorType",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/DashboardError",
 			           "type": "object"
 			         },
 			         "minItems": 1,
@@ -1226,7 +1191,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/Sheet",
 			           "type": "object"
 			         },
 			         "maxItems": 20,
@@ -1247,7 +1211,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "UPDATE_FAILED",
 			           "DELETED"
 			         ],
-			         "$ref": "#/definitions/ResourceStatus",
 			         "type": "string"
 			       },
 			       "ThemeArn": {
@@ -1259,7 +1222,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "number"
 			       }
 			     },
-			     "$ref": "#/definitions/DashboardVersion",
 			     "type": "object"
 			   }
 			*/
@@ -1354,11 +1316,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
 						             "COLUMN_REPLACEMENT_MISSING"
 						           ],
-						           "$ref": "#/definitions/DashboardErrorType",
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/DashboardError",
 						       "type": "object"
 						     },
 						     "minItems": 1,
@@ -1399,7 +1359,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
 									       "COLUMN_REPLACEMENT_MISSING"
 									     ],
-									     "$ref": "#/definitions/DashboardErrorType",
 									     "type": "string"
 									   }
 									*/
@@ -1436,7 +1395,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Sheet",
 						       "type": "object"
 						     },
 						     "maxItems": 20,
@@ -1512,7 +1470,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "UPDATE_FAILED",
 						       "DELETED"
 						     ],
-						     "$ref": "#/definitions/ResourceStatus",
 						     "type": "string"
 						   }
 						*/

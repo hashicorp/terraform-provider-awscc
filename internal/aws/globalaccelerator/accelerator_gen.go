@@ -87,7 +87,6 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "items": {
 			       "description": "The IP addresses from BYOIP Prefix pool.",
 			       "pattern": "",
-			       "$ref": "#/definitions/IpAddress",
 			       "type": "string"
 			     },
 			     "type": "array"
@@ -134,7 +133,6 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

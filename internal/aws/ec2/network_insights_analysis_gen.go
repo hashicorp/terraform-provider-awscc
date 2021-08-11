@@ -37,7 +37,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/AlternatePathHint",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -90,7 +89,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "AclRule": {
@@ -112,11 +110,9 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                   "type": "integer"
 			                 }
 			               },
-			               "$ref": "#/definitions/PortRange",
 			               "type": "object"
 			             },
 			             "Protocol": {
-			               "$ref": "#/definitions/Protocol",
 			               "type": "string"
 			             },
 			             "RuleAction": {
@@ -126,16 +122,13 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "integer"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisAclRule",
 			           "type": "object"
 			         },
 			         "Address": {
-			           "$ref": "#/definitions/IpAddress",
 			           "type": "string"
 			         },
 			         "Addresses": {
 			           "items": {
-			             "$ref": "#/definitions/IpAddress",
 			             "type": "string"
 			           },
 			           "type": "array"
@@ -150,7 +143,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "AvailabilityZones": {
@@ -169,15 +161,12 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			           "additionalProperties": false,
 			           "properties": {
 			             "InstancePort": {
-			               "$ref": "#/definitions/Port",
 			               "type": "integer"
 			             },
 			             "LoadBalancerPort": {
-			               "$ref": "#/definitions/Port",
 			               "type": "integer"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisLoadBalancerListener",
 			           "type": "object"
 			         },
 			         "Component": {
@@ -190,7 +179,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "CustomerGateway": {
@@ -203,7 +191,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "Destination": {
@@ -216,7 +203,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "DestinationVpc": {
@@ -229,7 +215,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "Direction": {
@@ -245,7 +230,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "ExplanationCode": {
@@ -261,7 +245,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "InternetGateway": {
@@ -274,22 +257,18 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "LoadBalancerArn": {
-			           "$ref": "#/definitions/ResourceArn",
 			           "type": "string"
 			         },
 			         "LoadBalancerListenerPort": {
-			           "$ref": "#/definitions/Port",
 			           "type": "integer"
 			         },
 			         "LoadBalancerTarget": {
 			           "additionalProperties": false,
 			           "properties": {
 			             "Address": {
-			               "$ref": "#/definitions/IpAddress",
 			               "type": "string"
 			             },
 			             "AvailabilityZone": {
@@ -305,15 +284,12 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/AnalysisComponent",
 			               "type": "object"
 			             },
 			             "Port": {
-			               "$ref": "#/definitions/Port",
 			               "type": "integer"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisLoadBalancerTarget",
 			           "type": "object"
 			         },
 			         "LoadBalancerTargetGroup": {
@@ -326,7 +302,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "LoadBalancerTargetGroups": {
@@ -340,13 +315,11 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/AnalysisComponent",
 			             "type": "object"
 			           },
 			           "type": "array"
 			         },
 			         "LoadBalancerTargetPort": {
-			           "$ref": "#/definitions/Port",
 			           "type": "integer"
 			         },
 			         "MissingComponent": {
@@ -362,7 +335,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "NetworkInterface": {
@@ -375,14 +347,12 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "PacketField": {
 			           "type": "string"
 			         },
 			         "Port": {
-			           "$ref": "#/definitions/Port",
 			           "type": "integer"
 			         },
 			         "PortRanges": {
@@ -396,7 +366,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                 "type": "integer"
 			               }
 			             },
-			             "$ref": "#/definitions/PortRange",
 			             "type": "object"
 			           },
 			           "type": "array"
@@ -411,12 +380,10 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "Protocols": {
 			           "items": {
-			             "$ref": "#/definitions/Protocol",
 			             "type": "string"
 			           },
 			           "type": "array"
@@ -431,7 +398,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "RouteTableRoute": {
@@ -468,7 +434,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisRouteTableRoute",
 			           "type": "object"
 			         },
 			         "SecurityGroup": {
@@ -481,7 +446,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "SecurityGroupRule": {
@@ -503,21 +467,18 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                   "type": "integer"
 			                 }
 			               },
-			               "$ref": "#/definitions/PortRange",
 			               "type": "object"
 			             },
 			             "PrefixListId": {
 			               "type": "string"
 			             },
 			             "Protocol": {
-			               "$ref": "#/definitions/Protocol",
 			               "type": "string"
 			             },
 			             "SecurityGroupId": {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisSecurityGroupRule",
 			           "type": "object"
 			         },
 			         "SecurityGroups": {
@@ -531,7 +492,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/AnalysisComponent",
 			             "type": "object"
 			           },
 			           "type": "array"
@@ -546,7 +506,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "State": {
@@ -562,7 +521,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "SubnetRouteTable": {
@@ -575,7 +533,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "Vpc": {
@@ -588,7 +545,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "VpcPeeringConnection": {
@@ -601,7 +557,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "VpnConnection": {
@@ -614,7 +569,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "VpnGateway": {
@@ -627,7 +581,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "vpcEndpoint": {
@@ -640,11 +593,9 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/Explanation",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -666,7 +617,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -721,11 +671,9 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/PortRange",
 						         "type": "object"
 						       },
 						       "Protocol": {
-						         "$ref": "#/definitions/Protocol",
 						         "type": "string"
 						       },
 						       "RuleAction": {
@@ -735,7 +683,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisAclRule",
 						     "type": "object"
 						   }
 						*/
@@ -777,7 +724,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/PortRange",
 									     "type": "object"
 									   }
 									*/
@@ -814,7 +760,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Protocol",
 									     "type": "string"
 									   }
 									*/
@@ -852,7 +797,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						// CloudFormation resource type schema:
 						/*
 						   {
-						     "$ref": "#/definitions/IpAddress",
 						     "type": "string"
 						   }
 						*/
@@ -865,7 +809,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						/*
 						   {
 						     "items": {
-						       "$ref": "#/definitions/IpAddress",
 						       "type": "string"
 						     },
 						     "type": "array"
@@ -888,7 +831,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -956,15 +898,12 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						     "additionalProperties": false,
 						     "properties": {
 						       "InstancePort": {
-						         "$ref": "#/definitions/Port",
 						         "type": "integer"
 						       },
 						       "LoadBalancerPort": {
-						         "$ref": "#/definitions/Port",
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisLoadBalancerListener",
 						     "type": "object"
 						   }
 						*/
@@ -975,7 +914,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Port",
 									     "type": "integer"
 									   }
 									*/
@@ -987,7 +925,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Port",
 									     "type": "integer"
 									   }
 									*/
@@ -1012,7 +949,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -1058,7 +994,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -1104,7 +1039,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -1150,7 +1084,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -1207,7 +1140,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -1264,7 +1196,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -1310,7 +1241,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -1347,7 +1277,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						// CloudFormation resource type schema:
 						/*
 						   {
-						     "$ref": "#/definitions/ResourceArn",
 						     "type": "string"
 						   }
 						*/
@@ -1359,7 +1288,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						// CloudFormation resource type schema:
 						/*
 						   {
-						     "$ref": "#/definitions/Port",
 						     "type": "integer"
 						   }
 						*/
@@ -1374,7 +1302,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						     "additionalProperties": false,
 						     "properties": {
 						       "Address": {
-						         "$ref": "#/definitions/IpAddress",
 						         "type": "string"
 						       },
 						       "AvailabilityZone": {
@@ -1390,15 +1317,12 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/AnalysisComponent",
 						         "type": "object"
 						       },
 						       "Port": {
-						         "$ref": "#/definitions/Port",
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisLoadBalancerTarget",
 						     "type": "object"
 						   }
 						*/
@@ -1409,7 +1333,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/IpAddress",
 									     "type": "string"
 									   }
 									*/
@@ -1441,7 +1364,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/AnalysisComponent",
 									     "type": "object"
 									   }
 									*/
@@ -1478,7 +1400,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Port",
 									     "type": "integer"
 									   }
 									*/
@@ -1503,7 +1424,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -1550,7 +1470,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/AnalysisComponent",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -1590,7 +1509,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						// CloudFormation resource type schema:
 						/*
 						   {
-						     "$ref": "#/definitions/Port",
 						     "type": "integer"
 						   }
 						*/
@@ -1622,7 +1540,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -1668,7 +1585,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -1716,7 +1632,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						// CloudFormation resource type schema:
 						/*
 						   {
-						     "$ref": "#/definitions/Port",
 						     "type": "integer"
 						   }
 						*/
@@ -1738,7 +1653,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						           "type": "integer"
 						         }
 						       },
-						       "$ref": "#/definitions/PortRange",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -1787,7 +1701,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -1825,7 +1738,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						/*
 						   {
 						     "items": {
-						       "$ref": "#/definitions/Protocol",
 						       "type": "string"
 						     },
 						     "type": "array"
@@ -1848,7 +1760,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -1918,7 +1829,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisRouteTableRoute",
 						     "type": "object"
 						   }
 						*/
@@ -2052,7 +1962,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -2107,21 +2016,18 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/PortRange",
 						         "type": "object"
 						       },
 						       "PrefixListId": {
 						         "type": "string"
 						       },
 						       "Protocol": {
-						         "$ref": "#/definitions/Protocol",
 						         "type": "string"
 						       },
 						       "SecurityGroupId": {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisSecurityGroupRule",
 						     "type": "object"
 						   }
 						*/
@@ -2163,7 +2069,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/PortRange",
 									     "type": "object"
 									   }
 									*/
@@ -2211,7 +2116,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Protocol",
 									     "type": "string"
 									   }
 									*/
@@ -2248,7 +2152,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/AnalysisComponent",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -2297,7 +2200,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -2354,7 +2256,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -2400,7 +2301,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -2446,7 +2346,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -2492,7 +2391,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -2538,7 +2436,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -2584,7 +2481,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -2630,7 +2526,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -2673,7 +2568,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			/*
 			   {
 			     "items": {
-			       "$ref": "#/definitions/ResourceArn",
 			       "type": "string"
 			     },
 			     "type": "array"
@@ -2711,11 +2605,9 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                   "type": "integer"
 			                 }
 			               },
-			               "$ref": "#/definitions/PortRange",
 			               "type": "object"
 			             },
 			             "Protocol": {
-			               "$ref": "#/definitions/Protocol",
 			               "type": "string"
 			             },
 			             "RuleAction": {
@@ -2725,7 +2617,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "integer"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisAclRule",
 			           "type": "object"
 			         },
 			         "Component": {
@@ -2738,7 +2629,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "DestinationVpc": {
@@ -2751,7 +2641,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "InboundHeader": {
@@ -2759,7 +2648,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			           "properties": {
 			             "DestinationAddresses": {
 			               "items": {
-			                 "$ref": "#/definitions/IpAddress",
 			                 "type": "string"
 			               },
 			               "type": "array"
@@ -2775,18 +2663,15 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/PortRange",
 			                 "type": "object"
 			               },
 			               "type": "array"
 			             },
 			             "Protocol": {
-			               "$ref": "#/definitions/Protocol",
 			               "type": "string"
 			             },
 			             "SourceAddresses": {
 			               "items": {
-			                 "$ref": "#/definitions/IpAddress",
 			                 "type": "string"
 			               },
 			               "type": "array"
@@ -2802,13 +2687,11 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/PortRange",
 			                 "type": "object"
 			               },
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisPacketHeader",
 			           "type": "object"
 			         },
 			         "OutboundHeader": {
@@ -2816,7 +2699,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			           "properties": {
 			             "DestinationAddresses": {
 			               "items": {
-			                 "$ref": "#/definitions/IpAddress",
 			                 "type": "string"
 			               },
 			               "type": "array"
@@ -2832,18 +2714,15 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/PortRange",
 			                 "type": "object"
 			               },
 			               "type": "array"
 			             },
 			             "Protocol": {
-			               "$ref": "#/definitions/Protocol",
 			               "type": "string"
 			             },
 			             "SourceAddresses": {
 			               "items": {
-			                 "$ref": "#/definitions/IpAddress",
 			                 "type": "string"
 			               },
 			               "type": "array"
@@ -2859,13 +2738,11 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/PortRange",
 			                 "type": "object"
 			               },
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisPacketHeader",
 			           "type": "object"
 			         },
 			         "RouteTableRoute": {
@@ -2902,7 +2779,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisRouteTableRoute",
 			           "type": "object"
 			         },
 			         "SecurityGroupRule": {
@@ -2924,21 +2800,18 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                   "type": "integer"
 			                 }
 			               },
-			               "$ref": "#/definitions/PortRange",
 			               "type": "object"
 			             },
 			             "PrefixListId": {
 			               "type": "string"
 			             },
 			             "Protocol": {
-			               "$ref": "#/definitions/Protocol",
 			               "type": "string"
 			             },
 			             "SecurityGroupId": {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisSecurityGroupRule",
 			           "type": "object"
 			         },
 			         "SequenceNumber": {
@@ -2954,7 +2827,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "Subnet": {
@@ -2967,7 +2839,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "Vpc": {
@@ -2980,11 +2851,9 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/PathComponent",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -3015,11 +2884,9 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/PortRange",
 						         "type": "object"
 						       },
 						       "Protocol": {
-						         "$ref": "#/definitions/Protocol",
 						         "type": "string"
 						       },
 						       "RuleAction": {
@@ -3029,7 +2896,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisAclRule",
 						     "type": "object"
 						   }
 						*/
@@ -3071,7 +2937,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/PortRange",
 									     "type": "object"
 									   }
 									*/
@@ -3108,7 +2973,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Protocol",
 									     "type": "string"
 									   }
 									*/
@@ -3155,7 +3019,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -3201,7 +3064,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -3242,7 +3104,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						     "properties": {
 						       "DestinationAddresses": {
 						         "items": {
-						           "$ref": "#/definitions/IpAddress",
 						           "type": "string"
 						         },
 						         "type": "array"
@@ -3258,18 +3119,15 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/PortRange",
 						           "type": "object"
 						         },
 						         "type": "array"
 						       },
 						       "Protocol": {
-						         "$ref": "#/definitions/Protocol",
 						         "type": "string"
 						       },
 						       "SourceAddresses": {
 						         "items": {
-						           "$ref": "#/definitions/IpAddress",
 						           "type": "string"
 						         },
 						         "type": "array"
@@ -3285,13 +3143,11 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/PortRange",
 						           "type": "object"
 						         },
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisPacketHeader",
 						     "type": "object"
 						   }
 						*/
@@ -3303,7 +3159,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									/*
 									   {
 									     "items": {
-									       "$ref": "#/definitions/IpAddress",
 									       "type": "string"
 									     },
 									     "type": "array"
@@ -3327,7 +3182,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/PortRange",
 									       "type": "object"
 									     },
 									     "type": "array"
@@ -3367,7 +3221,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Protocol",
 									     "type": "string"
 									   }
 									*/
@@ -3380,7 +3233,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									/*
 									   {
 									     "items": {
-									       "$ref": "#/definitions/IpAddress",
 									       "type": "string"
 									     },
 									     "type": "array"
@@ -3404,7 +3256,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/PortRange",
 									       "type": "object"
 									     },
 									     "type": "array"
@@ -3452,7 +3303,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						     "properties": {
 						       "DestinationAddresses": {
 						         "items": {
-						           "$ref": "#/definitions/IpAddress",
 						           "type": "string"
 						         },
 						         "type": "array"
@@ -3468,18 +3318,15 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/PortRange",
 						           "type": "object"
 						         },
 						         "type": "array"
 						       },
 						       "Protocol": {
-						         "$ref": "#/definitions/Protocol",
 						         "type": "string"
 						       },
 						       "SourceAddresses": {
 						         "items": {
-						           "$ref": "#/definitions/IpAddress",
 						           "type": "string"
 						         },
 						         "type": "array"
@@ -3495,13 +3342,11 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/PortRange",
 						           "type": "object"
 						         },
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisPacketHeader",
 						     "type": "object"
 						   }
 						*/
@@ -3513,7 +3358,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									/*
 									   {
 									     "items": {
-									       "$ref": "#/definitions/IpAddress",
 									       "type": "string"
 									     },
 									     "type": "array"
@@ -3537,7 +3381,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/PortRange",
 									       "type": "object"
 									     },
 									     "type": "array"
@@ -3577,7 +3420,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Protocol",
 									     "type": "string"
 									   }
 									*/
@@ -3590,7 +3432,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									/*
 									   {
 									     "items": {
-									       "$ref": "#/definitions/IpAddress",
 									       "type": "string"
 									     },
 									     "type": "array"
@@ -3614,7 +3455,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/PortRange",
 									       "type": "object"
 									     },
 									     "type": "array"
@@ -3691,7 +3531,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisRouteTableRoute",
 						     "type": "object"
 						   }
 						*/
@@ -3834,21 +3673,18 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/PortRange",
 						         "type": "object"
 						       },
 						       "PrefixListId": {
 						         "type": "string"
 						       },
 						       "Protocol": {
-						         "$ref": "#/definitions/Protocol",
 						         "type": "string"
 						       },
 						       "SecurityGroupId": {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisSecurityGroupRule",
 						     "type": "object"
 						   }
 						*/
@@ -3890,7 +3726,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/PortRange",
 									     "type": "object"
 									   }
 									*/
@@ -3938,7 +3773,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Protocol",
 									     "type": "string"
 									   }
 									*/
@@ -3985,7 +3819,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -4031,7 +3864,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -4077,7 +3909,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -4186,11 +4017,9 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                   "type": "integer"
 			                 }
 			               },
-			               "$ref": "#/definitions/PortRange",
 			               "type": "object"
 			             },
 			             "Protocol": {
-			               "$ref": "#/definitions/Protocol",
 			               "type": "string"
 			             },
 			             "RuleAction": {
@@ -4200,7 +4029,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "integer"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisAclRule",
 			           "type": "object"
 			         },
 			         "Component": {
@@ -4213,7 +4041,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "DestinationVpc": {
@@ -4226,7 +4053,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "InboundHeader": {
@@ -4234,7 +4060,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			           "properties": {
 			             "DestinationAddresses": {
 			               "items": {
-			                 "$ref": "#/definitions/IpAddress",
 			                 "type": "string"
 			               },
 			               "type": "array"
@@ -4250,18 +4075,15 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/PortRange",
 			                 "type": "object"
 			               },
 			               "type": "array"
 			             },
 			             "Protocol": {
-			               "$ref": "#/definitions/Protocol",
 			               "type": "string"
 			             },
 			             "SourceAddresses": {
 			               "items": {
-			                 "$ref": "#/definitions/IpAddress",
 			                 "type": "string"
 			               },
 			               "type": "array"
@@ -4277,13 +4099,11 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/PortRange",
 			                 "type": "object"
 			               },
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisPacketHeader",
 			           "type": "object"
 			         },
 			         "OutboundHeader": {
@@ -4291,7 +4111,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			           "properties": {
 			             "DestinationAddresses": {
 			               "items": {
-			                 "$ref": "#/definitions/IpAddress",
 			                 "type": "string"
 			               },
 			               "type": "array"
@@ -4307,18 +4126,15 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/PortRange",
 			                 "type": "object"
 			               },
 			               "type": "array"
 			             },
 			             "Protocol": {
-			               "$ref": "#/definitions/Protocol",
 			               "type": "string"
 			             },
 			             "SourceAddresses": {
 			               "items": {
-			                 "$ref": "#/definitions/IpAddress",
 			                 "type": "string"
 			               },
 			               "type": "array"
@@ -4334,13 +4150,11 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                     "type": "integer"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/PortRange",
 			                 "type": "object"
 			               },
 			               "type": "array"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisPacketHeader",
 			           "type": "object"
 			         },
 			         "RouteTableRoute": {
@@ -4377,7 +4191,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisRouteTableRoute",
 			           "type": "object"
 			         },
 			         "SecurityGroupRule": {
@@ -4399,21 +4212,18 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			                   "type": "integer"
 			                 }
 			               },
-			               "$ref": "#/definitions/PortRange",
 			               "type": "object"
 			             },
 			             "PrefixListId": {
 			               "type": "string"
 			             },
 			             "Protocol": {
-			               "$ref": "#/definitions/Protocol",
 			               "type": "string"
 			             },
 			             "SecurityGroupId": {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisSecurityGroupRule",
 			           "type": "object"
 			         },
 			         "SequenceNumber": {
@@ -4429,7 +4239,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "Subnet": {
@@ -4442,7 +4251,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         },
 			         "Vpc": {
@@ -4455,11 +4263,9 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/AnalysisComponent",
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/PathComponent",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -4490,11 +4296,9 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/PortRange",
 						         "type": "object"
 						       },
 						       "Protocol": {
-						         "$ref": "#/definitions/Protocol",
 						         "type": "string"
 						       },
 						       "RuleAction": {
@@ -4504,7 +4308,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisAclRule",
 						     "type": "object"
 						   }
 						*/
@@ -4546,7 +4349,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/PortRange",
 									     "type": "object"
 									   }
 									*/
@@ -4583,7 +4385,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Protocol",
 									     "type": "string"
 									   }
 									*/
@@ -4630,7 +4431,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -4676,7 +4476,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -4717,7 +4516,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						     "properties": {
 						       "DestinationAddresses": {
 						         "items": {
-						           "$ref": "#/definitions/IpAddress",
 						           "type": "string"
 						         },
 						         "type": "array"
@@ -4733,18 +4531,15 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/PortRange",
 						           "type": "object"
 						         },
 						         "type": "array"
 						       },
 						       "Protocol": {
-						         "$ref": "#/definitions/Protocol",
 						         "type": "string"
 						       },
 						       "SourceAddresses": {
 						         "items": {
-						           "$ref": "#/definitions/IpAddress",
 						           "type": "string"
 						         },
 						         "type": "array"
@@ -4760,13 +4555,11 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/PortRange",
 						           "type": "object"
 						         },
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisPacketHeader",
 						     "type": "object"
 						   }
 						*/
@@ -4778,7 +4571,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									/*
 									   {
 									     "items": {
-									       "$ref": "#/definitions/IpAddress",
 									       "type": "string"
 									     },
 									     "type": "array"
@@ -4802,7 +4594,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/PortRange",
 									       "type": "object"
 									     },
 									     "type": "array"
@@ -4842,7 +4633,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Protocol",
 									     "type": "string"
 									   }
 									*/
@@ -4855,7 +4645,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									/*
 									   {
 									     "items": {
-									       "$ref": "#/definitions/IpAddress",
 									       "type": "string"
 									     },
 									     "type": "array"
@@ -4879,7 +4668,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/PortRange",
 									       "type": "object"
 									     },
 									     "type": "array"
@@ -4927,7 +4715,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						     "properties": {
 						       "DestinationAddresses": {
 						         "items": {
-						           "$ref": "#/definitions/IpAddress",
 						           "type": "string"
 						         },
 						         "type": "array"
@@ -4943,18 +4730,15 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/PortRange",
 						           "type": "object"
 						         },
 						         "type": "array"
 						       },
 						       "Protocol": {
-						         "$ref": "#/definitions/Protocol",
 						         "type": "string"
 						       },
 						       "SourceAddresses": {
 						         "items": {
-						           "$ref": "#/definitions/IpAddress",
 						           "type": "string"
 						         },
 						         "type": "array"
@@ -4970,13 +4754,11 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						               "type": "integer"
 						             }
 						           },
-						           "$ref": "#/definitions/PortRange",
 						           "type": "object"
 						         },
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisPacketHeader",
 						     "type": "object"
 						   }
 						*/
@@ -4988,7 +4770,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									/*
 									   {
 									     "items": {
-									       "$ref": "#/definitions/IpAddress",
 									       "type": "string"
 									     },
 									     "type": "array"
@@ -5012,7 +4793,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/PortRange",
 									       "type": "object"
 									     },
 									     "type": "array"
@@ -5052,7 +4832,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Protocol",
 									     "type": "string"
 									   }
 									*/
@@ -5065,7 +4844,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									/*
 									   {
 									     "items": {
-									       "$ref": "#/definitions/IpAddress",
 									       "type": "string"
 									     },
 									     "type": "array"
@@ -5089,7 +4867,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									           "type": "integer"
 									         }
 									       },
-									       "$ref": "#/definitions/PortRange",
 									       "type": "object"
 									     },
 									     "type": "array"
@@ -5166,7 +4943,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisRouteTableRoute",
 						     "type": "object"
 						   }
 						*/
@@ -5309,21 +5085,18 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						             "type": "integer"
 						           }
 						         },
-						         "$ref": "#/definitions/PortRange",
 						         "type": "object"
 						       },
 						       "PrefixListId": {
 						         "type": "string"
 						       },
 						       "Protocol": {
-						         "$ref": "#/definitions/Protocol",
 						         "type": "string"
 						       },
 						       "SecurityGroupId": {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisSecurityGroupRule",
 						     "type": "object"
 						   }
 						*/
@@ -5365,7 +5138,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									         "type": "integer"
 									       }
 									     },
-									     "$ref": "#/definitions/PortRange",
 									     "type": "object"
 									   }
 									*/
@@ -5413,7 +5185,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									// CloudFormation resource type schema:
 									/*
 									   {
-									     "$ref": "#/definitions/Protocol",
 									     "type": "string"
 									   }
 									*/
@@ -5460,7 +5231,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -5506,7 +5276,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -5552,7 +5321,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AnalysisComponent",
 						     "type": "object"
 						   }
 						*/
@@ -5642,7 +5410,6 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key"
 			       ],

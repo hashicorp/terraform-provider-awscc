@@ -94,7 +94,6 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/LoRaWANGateway",
 			     "required": [
 			       "GatewayEui",
 			       "RfRegion"
@@ -167,7 +166,6 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "maxItems": 50,

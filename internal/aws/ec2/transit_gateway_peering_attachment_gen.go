@@ -107,7 +107,6 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/PeeringAttachmentStatus",
 			     "type": "object"
 			   }
 			*/
@@ -161,7 +160,6 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

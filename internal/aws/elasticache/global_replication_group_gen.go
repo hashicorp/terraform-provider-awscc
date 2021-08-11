@@ -159,7 +159,6 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/GlobalReplicationGroupMember",
 			       "type": "object"
 			     },
 			     "minItems": 1,
@@ -256,14 +255,12 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			                 "uniqueItems": false
 			               }
 			             },
-			             "$ref": "#/definitions/ReshardingConfiguration",
 			             "type": "object"
 			           },
 			           "type": "array",
 			           "uniqueItems": true
 			         }
 			       },
-			       "$ref": "#/definitions/RegionalConfiguration",
 			       "type": "object"
 			     },
 			     "type": "array",
@@ -322,7 +319,6 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 						           "uniqueItems": false
 						         }
 						       },
-						       "$ref": "#/definitions/ReshardingConfiguration",
 						       "type": "object"
 						     },
 						     "type": "array",

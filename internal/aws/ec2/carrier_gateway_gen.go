@@ -84,10 +84,8 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
-			     "$ref": "#/definitions/Tags",
 			     "type": "array",
 			     "uniqueItems": true
 			   }

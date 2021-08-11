@@ -76,7 +76,6 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/EdgeOutputConfig",
 			     "required": [
 			       "S3OutputLocation"
 			     ],
@@ -161,7 +160,6 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

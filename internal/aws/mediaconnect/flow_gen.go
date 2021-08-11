@@ -135,7 +135,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/Encryption",
 			         "required": [
 			           "Algorithm",
 			           "RoleArn"
@@ -197,7 +196,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Source",
 			     "type": "object"
 			   }
 			*/
@@ -258,7 +256,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/Encryption",
 						     "required": [
 						       "Algorithm",
 						       "RoleArn"
@@ -587,7 +584,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/FailoverConfig",
 			     "type": "object"
 			   }
 			*/

@@ -65,7 +65,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "items": {
 			                       "description": "A value of the parameter to set when starting the SSM automation document.",
 			                       "maxLength": 10000,
-			                       "$ref": "#/definitions/SsmParameterValue",
 			                       "type": "string"
 			                     },
 			                     "maxItems": 10,
@@ -74,7 +73,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "uniqueItems": true
 			                   }
 			                 },
-			                 "$ref": "#/definitions/SsmParameter",
 			                 "required": [
 			                   "Values",
 			                   "Key"
@@ -100,7 +98,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/SsmAutomation",
 			           "required": [
 			             "RoleArn",
 			             "DocumentName"
@@ -108,7 +105,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/Action",
 			       "type": "object"
 			     },
 			     "maxItems": 1,
@@ -155,7 +151,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "items": {
 						                 "description": "A value of the parameter to set when starting the SSM automation document.",
 						                 "maxLength": 10000,
-						                 "$ref": "#/definitions/SsmParameterValue",
 						                 "type": "string"
 						               },
 						               "maxItems": 10,
@@ -164,7 +159,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "uniqueItems": true
 						             }
 						           },
-						           "$ref": "#/definitions/SsmParameter",
 						           "required": [
 						             "Values",
 						             "Key"
@@ -190,7 +184,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/SsmAutomation",
 						     "required": [
 						       "RoleArn",
 						       "DocumentName"
@@ -250,7 +243,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "items": {
 									             "description": "A value of the parameter to set when starting the SSM automation document.",
 									             "maxLength": 10000,
-									             "$ref": "#/definitions/SsmParameterValue",
 									             "type": "string"
 									           },
 									           "maxItems": 10,
@@ -259,7 +251,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "uniqueItems": true
 									         }
 									       },
-									       "$ref": "#/definitions/SsmParameter",
 									       "required": [
 									         "Values",
 									         "Key"
@@ -296,7 +287,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "items": {
 												       "description": "A value of the parameter to set when starting the SSM automation document.",
 												       "maxLength": 10000,
-												       "$ref": "#/definitions/SsmParameterValue",
 												       "type": "string"
 												     },
 												     "maxItems": 10,
@@ -388,15 +378,12 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "description": "The ARN of the Chatbot SNS topic.",
 			           "maxLength": 1000,
 			           "pattern": "",
-			           "$ref": "#/definitions/SnsArn",
 			           "type": "string"
 			         },
-			         "$ref": "#/definitions/ChatbotSns",
 			         "type": "array",
 			         "uniqueItems": true
 			       }
 			     },
-			     "$ref": "#/definitions/ChatChannel",
 			     "type": "object"
 			   }
 			*/
@@ -413,10 +400,8 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "description": "The ARN of the Chatbot SNS topic.",
 						       "maxLength": 1000,
 						       "pattern": "",
-						       "$ref": "#/definitions/SnsArn",
 						       "type": "string"
 						     },
-						     "$ref": "#/definitions/ChatbotSns",
 						     "type": "array",
 						     "uniqueItems": true
 						   }
@@ -455,7 +440,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "description": "The ARN of the contact.",
 			       "maxLength": 1000,
 			       "pattern": "",
-			       "$ref": "#/definitions/SSMContact",
 			       "type": "string"
 			     },
 			     "maxItems": 5,
@@ -496,11 +480,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "description": "The ARN of the Chatbot SNS topic.",
 			               "maxLength": 1000,
 			               "pattern": "",
-			               "$ref": "#/definitions/SnsArn",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/NotificationTargetItem",
 			           "type": "object"
 			         },
 			         "maxItems": 10,
@@ -518,7 +500,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/IncidentTemplate",
 			     "required": [
 			       "Title",
 			       "Impact"
@@ -571,11 +552,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "description": "The ARN of the Chatbot SNS topic.",
 						           "maxLength": 1000,
 						           "pattern": "",
-						           "$ref": "#/definitions/SnsArn",
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/NotificationTargetItem",
 						       "type": "object"
 						     },
 						     "maxItems": 10,
@@ -593,7 +572,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "description": "The ARN of the Chatbot SNS topic.",
 									     "maxLength": 1000,
 									     "pattern": "",
-									     "$ref": "#/definitions/SnsArn",
 									     "type": "string"
 									   }
 									*/
@@ -681,7 +659,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

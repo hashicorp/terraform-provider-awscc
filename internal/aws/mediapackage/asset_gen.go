@@ -67,7 +67,6 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/EgressEndpoint",
 			       "required": [
 			         "PackagingConfigurationId",
 			         "Url"
@@ -192,7 +191,6 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

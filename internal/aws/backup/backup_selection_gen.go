@@ -58,7 +58,6 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/ConditionResourceType",
 			           "required": [
 			             "ConditionValue",
 			             "ConditionKey",
@@ -80,7 +79,6 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/BackupSelectionResourceType",
 			     "required": [
 			       "SelectionName",
 			       "IamRoleArn"
@@ -119,7 +117,6 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/ConditionResourceType",
 						       "required": [
 						         "ConditionValue",
 						         "ConditionKey",

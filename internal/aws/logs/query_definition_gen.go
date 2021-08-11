@@ -33,7 +33,6 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			       "maxLength": 512,
 			       "minLength": 1,
 			       "pattern": "",
-			       "$ref": "#/definitions/LogGroup",
 			       "type": "string"
 			     },
 			     "type": "array"

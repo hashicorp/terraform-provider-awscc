@@ -103,7 +103,6 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			         "type": "boolean"
 			       }
 			     },
-			     "$ref": "#/definitions/LoRaWANDeviceProfile",
 			     "type": "object"
 			   }
 			*/
@@ -305,7 +304,6 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "maxItems": 50,

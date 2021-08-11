@@ -50,7 +50,6 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/AuthorizerConfig",
 			     "type": "object"
 			   }
 			*/
@@ -194,7 +193,6 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ServerCertificateSummary",
 			       "type": "object"
 			     },
 			     "type": "array"
@@ -280,7 +278,6 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

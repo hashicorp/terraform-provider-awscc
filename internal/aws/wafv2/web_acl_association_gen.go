@@ -29,7 +29,6 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			   {
 			     "maxLength": 2048,
 			     "minLength": 20,
-			     "$ref": "#/definitions/ResourceArn",
 			     "type": "string"
 			   }
 			*/
@@ -44,7 +43,6 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			   {
 			     "maxLength": 2048,
 			     "minLength": 20,
-			     "$ref": "#/definitions/ResourceArn",
 			     "type": "string"
 			   }
 			*/

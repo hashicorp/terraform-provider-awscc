@@ -35,18 +35,15 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			           "description": "Key part of key-value pair with value being parameter value",
 			           "maxLength": 255,
 			           "minLength": 0,
-			           "$ref": "#/definitions/ParameterName",
 			           "type": "string"
 			         },
 			         "ParameterValue": {
 			           "description": "Value part of key-value pair with key being parameter Name",
 			           "maxLength": 4096,
 			           "minLength": 0,
-			           "$ref": "#/definitions/ParameterValue",
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ConformancePackInputParameter",
 			       "required": [
 			         "ParameterName",
 			         "ParameterValue"
@@ -69,7 +66,6 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						     "description": "Key part of key-value pair with value being parameter value",
 						     "maxLength": 255,
 						     "minLength": 0,
-						     "$ref": "#/definitions/ParameterName",
 						     "type": "string"
 						   }
 						*/
@@ -85,7 +81,6 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						     "description": "Value part of key-value pair with key being parameter Name",
 						     "maxLength": 4096,
 						     "minLength": 0,
-						     "$ref": "#/definitions/ParameterValue",
 						     "type": "string"
 						   }
 						*/

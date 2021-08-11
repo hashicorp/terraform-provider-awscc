@@ -42,7 +42,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Description of the FAQ",
 			     "maxLength": 1000,
 			     "minLength": 1,
-			     "$ref": "#/definitions/Description",
 			     "type": "string"
 			   }
 			*/
@@ -63,7 +62,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "CSV_WITH_HEADER",
 			       "JSON"
 			     ],
-			     "$ref": "#/definitions/FileFormat",
 			     "type": "string"
 			   }
 			*/
@@ -81,7 +79,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Unique ID of the FAQ",
 			     "maxLength": 100,
 			     "minLength": 1,
-			     "$ref": "#/definitions/Id",
 			     "type": "string"
 			   }
 			*/
@@ -97,7 +94,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "description": "Unique ID of Index",
 			     "maxLength": 36,
 			     "minLength": 36,
-			     "$ref": "#/definitions/IndexId",
 			     "type": "string"
 			   }
 			*/
@@ -113,7 +109,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			   {
 			     "maxLength": 100,
 			     "minLength": 1,
-			     "$ref": "#/definitions/FaqName",
 			     "type": "string"
 			   }
 			*/
@@ -129,7 +124,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			     "maxLength": 1284,
 			     "minLength": 1,
 			     "pattern": "",
-			     "$ref": "#/definitions/RoleArn",
 			     "type": "string"
 			   }
 			*/
@@ -148,17 +142,14 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "maxLength": 63,
 			         "minLength": 3,
 			         "pattern": "",
-			         "$ref": "#/definitions/S3BucketName",
 			         "type": "string"
 			       },
 			       "Key": {
 			         "maxLength": 1024,
 			         "minLength": 1,
-			         "$ref": "#/definitions/S3ObjectKey",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/S3Path",
 			     "required": [
 			       "Bucket",
 			       "Key"
@@ -176,7 +167,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "maxLength": 63,
 						     "minLength": 3,
 						     "pattern": "",
-						     "$ref": "#/definitions/S3BucketName",
 						     "type": "string"
 						   }
 						*/
@@ -190,7 +180,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						   {
 						     "maxLength": 1024,
 						     "minLength": 1,
-						     "$ref": "#/definitions/S3ObjectKey",
 						     "type": "string"
 						   }
 						*/
@@ -225,7 +214,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -233,7 +221,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			       "type": "object"
 			     },
 			     "maxItems": 200,
-			     "$ref": "#/definitions/TagList",
 			     "type": "array"
 			   }
 			*/

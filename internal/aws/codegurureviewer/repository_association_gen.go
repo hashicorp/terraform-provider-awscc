@@ -132,7 +132,6 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

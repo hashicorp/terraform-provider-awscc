@@ -55,7 +55,6 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "array"
 			               }
 			             },
-			             "$ref": "#/definitions/ConfigurationParameter",
 			             "type": "object"
 			           },
 			           "type": "array"
@@ -64,10 +63,8 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/ConfigurationItem",
 			       "type": "object"
 			     },
-			     "$ref": "#/definitions/Configuration",
 			     "type": "array"
 			   }
 			*/
@@ -90,7 +87,6 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "array"
 						         }
 						       },
-						       "$ref": "#/definitions/ConfigurationParameter",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -203,13 +199,11 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "array"
 			                 }
 			               },
-			               "$ref": "#/definitions/TagFilter",
 			               "type": "object"
 			             },
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/Query",
 			         "type": "object"
 			       },
 			       "Type": {
@@ -220,7 +214,6 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/ResourceQuery",
 			     "type": "object"
 			   }
 			*/
@@ -254,13 +247,11 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "array"
 						             }
 						           },
-						           "$ref": "#/definitions/TagFilter",
 						           "type": "object"
 						         },
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/Query",
 						     "type": "object"
 						   }
 						*/
@@ -308,7 +299,6 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "array"
 									         }
 									       },
-									       "$ref": "#/definitions/TagFilter",
 									       "type": "object"
 									     },
 									     "type": "array"
@@ -398,7 +388,6 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

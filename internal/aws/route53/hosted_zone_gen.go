@@ -36,7 +36,6 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/HostedZoneConfig",
 			     "type": "object"
 			   }
 			*/
@@ -82,7 +81,6 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/HostedZoneTag",
 			       "required": [
 			         "Value",
 			         "Key"
@@ -182,7 +180,6 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/QueryLoggingConfig",
 			     "required": [
 			       "CloudWatchLogsLogGroupArn"
 			     ],
@@ -229,7 +226,6 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/VPC",
 			       "required": [
 			         "VPCId",
 			         "VPCRegion"

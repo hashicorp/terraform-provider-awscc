@@ -71,7 +71,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			             "uniqueItems": true
 			           }
 			         },
-			         "$ref": "#/definitions/AddThingsToThingGroupParams",
 			         "required": [
 			           "ThingGroupNames"
 			         ],
@@ -98,7 +97,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/EnableIoTLoggingParams",
 			         "required": [
 			           "LogLevel",
 			           "RoleArnForLogging"
@@ -116,7 +114,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/PublishFindingToSnsParams",
 			         "required": [
 			           "TopicArn"
 			         ],
@@ -133,7 +130,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ReplaceDefaultPolicyVersionParams",
 			         "required": [
 			           "TemplateName"
 			         ],
@@ -150,7 +146,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/UpdateCACertificateParams",
 			         "required": [
 			           "Action"
 			         ],
@@ -167,14 +162,12 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/UpdateDeviceCertificateParams",
 			         "required": [
 			           "Action"
 			         ],
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/ActionParams",
 			     "type": "object"
 			   }
 			*/
@@ -207,7 +200,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						         "uniqueItems": true
 						       }
 						     },
-						     "$ref": "#/definitions/AddThingsToThingGroupParams",
 						     "required": [
 						       "ThingGroupNames"
 						     ],
@@ -281,7 +273,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/EnableIoTLoggingParams",
 						     "required": [
 						       "LogLevel",
 						       "RoleArnForLogging"
@@ -345,7 +336,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/PublishFindingToSnsParams",
 						     "required": [
 						       "TopicArn"
 						     ],
@@ -389,7 +379,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ReplaceDefaultPolicyVersionParams",
 						     "required": [
 						       "TemplateName"
 						     ],
@@ -432,7 +421,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/UpdateCACertificateParams",
 						     "required": [
 						       "Action"
 						     ],
@@ -475,7 +463,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/UpdateDeviceCertificateParams",
 						     "required": [
 						       "Action"
 						     ],
@@ -564,7 +551,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

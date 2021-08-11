@@ -137,7 +137,6 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

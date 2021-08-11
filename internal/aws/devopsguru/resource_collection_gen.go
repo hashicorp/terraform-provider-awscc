@@ -47,11 +47,9 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/CloudFormationCollectionFilter",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/ResourceCollectionFilter",
 			     "type": "object"
 			   }
 			*/
@@ -79,7 +77,6 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/CloudFormationCollectionFilter",
 						     "type": "object"
 						   }
 						*/

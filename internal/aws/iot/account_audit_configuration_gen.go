@@ -55,7 +55,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "CaCertificateExpiringCheck": {
@@ -67,7 +66,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "CaCertificateKeyQualityCheck": {
@@ -79,7 +77,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "ConflictingClientIdsCheck": {
@@ -91,7 +88,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "DeviceCertificateExpiringCheck": {
@@ -103,7 +99,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "DeviceCertificateKeyQualityCheck": {
@@ -115,7 +110,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "DeviceCertificateSharedCheck": {
@@ -127,7 +121,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "IotPolicyOverlyPermissiveCheck": {
@@ -139,7 +132,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "IotRoleAliasAllowsAccessToUnusedServicesCheck": {
@@ -151,7 +143,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "IotRoleAliasOverlyPermissiveCheck": {
@@ -163,7 +154,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "LoggingDisabledCheck": {
@@ -175,7 +165,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "RevokedCaCertificateStillActiveCheck": {
@@ -187,7 +176,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "RevokedDeviceCertificateStillActiveCheck": {
@@ -199,7 +187,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       },
 			       "UnauthenticatedCognitoRoleOverlyPermissiveCheck": {
@@ -211,11 +198,9 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "boolean"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditCheckConfiguration",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/AuditCheckConfigurations",
 			     "type": "object"
 			   }
 			*/
@@ -235,7 +220,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -272,7 +256,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -309,7 +292,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -346,7 +328,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -383,7 +364,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -420,7 +400,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -457,7 +436,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -494,7 +472,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -531,7 +508,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -568,7 +544,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -605,7 +580,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -642,7 +616,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -679,7 +652,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -716,7 +688,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "boolean"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditCheckConfiguration",
 						     "type": "object"
 						   }
 						*/
@@ -771,11 +742,9 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/AuditNotificationTarget",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/AuditNotificationTargetConfigurations",
 			     "type": "object"
 			   }
 			*/
@@ -805,7 +774,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AuditNotificationTarget",
 						     "type": "object"
 						   }
 						*/

@@ -50,7 +50,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Model",
 			       "type": "object"
 			     },
 			     "maxItems": 10,
@@ -221,7 +220,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Tag",
 			                 "required": [
 			                   "Key",
 			                   "Value"
@@ -233,7 +231,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "uniqueItems": false
 			             }
 			           },
-			           "$ref": "#/definitions/EntityType",
 			           "type": "object"
 			         },
 			         "minItems": 1,
@@ -303,7 +300,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Tag",
 			                 "required": [
 			                   "Key",
 			                   "Value"
@@ -353,7 +349,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/EventVariable",
 			           "type": "object"
 			         },
 			         "minItems": 1,
@@ -408,7 +403,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/Tag",
 			                 "required": [
 			                   "Key",
 			                   "Value"
@@ -420,7 +414,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "uniqueItems": false
 			             }
 			           },
-			           "$ref": "#/definitions/Label",
 			           "type": "object"
 			         },
 			         "minItems": 2,
@@ -455,7 +448,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/Tag",
 			           "required": [
 			             "Key",
 			             "Value"
@@ -467,7 +459,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "uniqueItems": false
 			       }
 			     },
-			     "$ref": "#/definitions/EventType",
 			     "type": "object"
 			   }
 			*/
@@ -563,7 +554,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/Tag",
 						             "required": [
 						               "Key",
 						               "Value"
@@ -575,7 +565,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "uniqueItems": false
 						         }
 						       },
-						       "$ref": "#/definitions/EntityType",
 						       "type": "object"
 						     },
 						     "minItems": 1,
@@ -681,7 +670,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Tag",
 									       "required": [
 									         "Key",
 									         "Value"
@@ -804,7 +792,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/Tag",
 						             "required": [
 						               "Key",
 						               "Value"
@@ -854,7 +841,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/EventVariable",
 						       "type": "object"
 						     },
 						     "minItems": 1,
@@ -1002,7 +988,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Tag",
 									       "required": [
 									         "Key",
 									         "Value"
@@ -1164,7 +1149,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/Tag",
 						             "required": [
 						               "Key",
 						               "Value"
@@ -1176,7 +1160,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "uniqueItems": false
 						         }
 						       },
-						       "$ref": "#/definitions/Label",
 						       "type": "object"
 						     },
 						     "minItems": 2,
@@ -1282,7 +1265,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Tag",
 									       "required": [
 									         "Key",
 									         "Value"
@@ -1388,7 +1370,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Tag",
 						       "required": [
 						         "Key",
 						         "Value"
@@ -1552,7 +1533,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/Tag",
 			                   "required": [
 			                     "Key",
 			                     "Value"
@@ -1564,7 +1544,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "uniqueItems": false
 			               }
 			             },
-			             "$ref": "#/definitions/Outcome",
 			             "type": "object"
 			           },
 			           "minItems": 1,
@@ -1594,7 +1573,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/Tag",
 			             "required": [
 			               "Key",
 			               "Value"
@@ -1606,7 +1584,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "uniqueItems": false
 			         }
 			       },
-			       "$ref": "#/definitions/Rule",
 			       "type": "object"
 			     },
 			     "minItems": 1,
@@ -1754,7 +1731,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/Tag",
 						             "required": [
 						               "Key",
 						               "Value"
@@ -1766,7 +1742,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "uniqueItems": false
 						         }
 						       },
-						       "$ref": "#/definitions/Outcome",
 						       "type": "object"
 						     },
 						     "minItems": 1,
@@ -1872,7 +1847,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "type": "string"
 									         }
 									       },
-									       "$ref": "#/definitions/Tag",
 									       "required": [
 									         "Key",
 									         "Value"
@@ -1971,7 +1945,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/Tag",
 						       "required": [
 						         "Key",
 						         "Value"
@@ -2048,7 +2021,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

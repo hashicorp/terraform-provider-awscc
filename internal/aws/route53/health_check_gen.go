@@ -46,7 +46,6 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/AlarmIdentifier",
 			         "required": [
 			           "Name",
 			           "Region"
@@ -162,7 +161,6 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/AlarmIdentifier",
 						     "required": [
 						       "Name",
 						       "Region"
@@ -457,7 +455,6 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/HealthCheckTag",
 			       "required": [
 			         "Value",
 			         "Key"

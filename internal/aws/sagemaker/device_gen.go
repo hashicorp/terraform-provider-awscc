@@ -51,7 +51,6 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/Device",
 			     "required": [
 			       "DeviceName"
 			     ],
@@ -155,7 +154,6 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

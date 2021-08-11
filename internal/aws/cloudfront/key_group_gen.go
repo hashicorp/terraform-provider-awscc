@@ -54,7 +54,6 @@ func keyGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/KeyGroupConfig",
 			     "required": [
 			       "Name",
 			       "Items"

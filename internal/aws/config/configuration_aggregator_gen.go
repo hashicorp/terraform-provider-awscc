@@ -48,7 +48,6 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			           "uniqueItems": false
 			         }
 			       },
-			       "$ref": "#/definitions/AccountAggregationSource",
 			       "required": [
 			         "AccountIds"
 			       ],
@@ -158,7 +157,6 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/OrganizationAggregationSource",
 			     "required": [
 			       "RoleArn"
 			     ],
@@ -231,7 +229,6 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

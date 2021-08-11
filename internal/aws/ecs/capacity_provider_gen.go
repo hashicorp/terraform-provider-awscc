@@ -56,7 +56,6 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/ManagedScaling",
 			         "type": "object"
 			       },
 			       "ManagedTerminationProtection": {
@@ -67,7 +66,6 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/AutoScalingGroupProvider",
 			     "required": [
 			       "AutoScalingGroupArn"
 			     ],
@@ -116,7 +114,6 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/ManagedScaling",
 						     "type": "object"
 						   }
 						*/
@@ -235,7 +232,6 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "type": "object"
 			     },
 			     "type": "array"

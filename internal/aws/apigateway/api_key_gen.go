@@ -123,7 +123,6 @@ func apiKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/StageKey",
 			       "type": "object"
 			     },
 			     "type": "array",
@@ -186,7 +185,6 @@ func apiKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Value",
 			         "Key"

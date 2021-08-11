@@ -108,7 +108,6 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/MountOptions",
 			     "type": "object"
 			   }
 			*/
@@ -212,7 +211,6 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

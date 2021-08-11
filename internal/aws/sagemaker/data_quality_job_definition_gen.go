@@ -77,7 +77,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/Environment",
 			         "type": "object"
 			       },
 			       "ImageUri": {
@@ -90,18 +89,15 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			         "description": "The Amazon S3 URI.",
 			         "maxLength": 1024,
 			         "pattern": "",
-			         "$ref": "#/definitions/S3Uri",
 			         "type": "string"
 			       },
 			       "RecordPreprocessorSourceUri": {
 			         "description": "The Amazon S3 URI.",
 			         "maxLength": 1024,
 			         "pattern": "",
-			         "$ref": "#/definitions/S3Uri",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/DataQualityAppSpecification",
 			     "required": [
 			       "ImageUri"
 			     ],
@@ -167,7 +163,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/Environment",
 						     "type": "object"
 						   }
 						*/
@@ -200,7 +195,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						     "description": "The Amazon S3 URI.",
 						     "maxLength": 1024,
 						     "pattern": "",
-						     "$ref": "#/definitions/S3Uri",
 						     "type": "string"
 						   }
 						*/
@@ -216,7 +210,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						     "description": "The Amazon S3 URI.",
 						     "maxLength": 1024,
 						     "pattern": "",
-						     "$ref": "#/definitions/S3Uri",
 						     "type": "string"
 						   }
 						*/
@@ -242,7 +235,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			         "maxLength": 63,
 			         "minLength": 1,
 			         "pattern": "",
-			         "$ref": "#/definitions/ProcessingJobName",
 			         "type": "string"
 			       },
 			       "ConstraintsResource": {
@@ -253,11 +245,9 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			             "description": "The Amazon S3 URI.",
 			             "maxLength": 1024,
 			             "pattern": "",
-			             "$ref": "#/definitions/S3Uri",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ConstraintsResource",
 			         "type": "object"
 			       },
 			       "StatisticsResource": {
@@ -268,15 +258,12 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			             "description": "The Amazon S3 URI.",
 			             "maxLength": 1024,
 			             "pattern": "",
-			             "$ref": "#/definitions/S3Uri",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/StatisticsResource",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/DataQualityBaselineConfig",
 			     "type": "object"
 			   }
 			*/
@@ -292,7 +279,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						     "maxLength": 63,
 						     "minLength": 1,
 						     "pattern": "",
-						     "$ref": "#/definitions/ProcessingJobName",
 						     "type": "string"
 						   }
 						*/
@@ -312,11 +298,9 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						         "description": "The Amazon S3 URI.",
 						         "maxLength": 1024,
 						         "pattern": "",
-						         "$ref": "#/definitions/S3Uri",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ConstraintsResource",
 						     "type": "object"
 						   }
 						*/
@@ -331,7 +315,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									     "description": "The Amazon S3 URI.",
 									     "maxLength": 1024,
 									     "pattern": "",
-									     "$ref": "#/definitions/S3Uri",
 									     "type": "string"
 									   }
 									*/
@@ -355,11 +338,9 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						         "description": "The Amazon S3 URI.",
 						         "maxLength": 1024,
 						         "pattern": "",
-						         "$ref": "#/definitions/S3Uri",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/StatisticsResource",
 						     "type": "object"
 						   }
 						*/
@@ -374,7 +355,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									     "description": "The Amazon S3 URI.",
 									     "maxLength": 1024,
 									     "pattern": "",
-									     "$ref": "#/definitions/S3Uri",
 									     "type": "string"
 									   }
 									*/
@@ -408,7 +388,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			             "description": "The name of the endpoint used to run the monitoring job.",
 			             "maxLength": 63,
 			             "pattern": "",
-			             "$ref": "#/definitions/EndpointName",
 			             "type": "string"
 			           },
 			           "LocalPath": {
@@ -434,7 +413,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/EndpointInput",
 			         "required": [
 			           "EndpointName",
 			           "LocalPath"
@@ -442,7 +420,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/DataQualityJobInput",
 			     "required": [
 			       "EndpointInput"
 			     ],
@@ -464,7 +441,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						         "description": "The name of the endpoint used to run the monitoring job.",
 						         "maxLength": 63,
 						         "pattern": "",
-						         "$ref": "#/definitions/EndpointName",
 						         "type": "string"
 						       },
 						       "LocalPath": {
@@ -490,7 +466,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/EndpointInput",
 						     "required": [
 						       "EndpointName",
 						       "LocalPath"
@@ -509,7 +484,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									     "description": "The name of the endpoint used to run the monitoring job.",
 									     "maxLength": 63,
 									     "pattern": "",
-									     "$ref": "#/definitions/EndpointName",
 									     "type": "string"
 									   }
 									*/
@@ -620,7 +594,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/S3Output",
 			               "required": [
 			                 "LocalPath",
 			                 "S3Uri"
@@ -628,7 +601,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/MonitoringOutput",
 			           "required": [
 			             "S3Output"
 			           ],
@@ -639,7 +611,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			         "type": "array"
 			       }
 			     },
-			     "$ref": "#/definitions/MonitoringOutputConfig",
 			     "required": [
 			       "MonitoringOutputs"
 			     ],
@@ -699,7 +670,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/S3Output",
 						           "required": [
 						             "LocalPath",
 						             "S3Uri"
@@ -707,7 +677,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/MonitoringOutput",
 						       "required": [
 						         "S3Output"
 						       ],
@@ -750,7 +719,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3Output",
 									     "required": [
 									       "LocalPath",
 									       "S3Uri"
@@ -845,7 +813,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			     "description": "The name of the job definition.",
 			     "maxLength": 63,
 			     "pattern": "",
-			     "$ref": "#/definitions/JobDefinitionName",
 			     "type": "string"
 			   }
 			*/
@@ -884,7 +851,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			             "type": "integer"
 			           }
 			         },
-			         "$ref": "#/definitions/ClusterConfig",
 			         "required": [
 			           "InstanceCount",
 			           "InstanceType",
@@ -893,7 +859,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/MonitoringResources",
 			     "required": [
 			       "ClusterConfig"
 			     ],
@@ -928,7 +893,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						         "type": "integer"
 						       }
 						     },
-						     "$ref": "#/definitions/ClusterConfig",
 						     "required": [
 						       "InstanceCount",
 						       "InstanceType",
@@ -1044,7 +1008,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			             "type": "array"
 			           }
 			         },
-			         "$ref": "#/definitions/VpcConfig",
 			         "required": [
 			           "SecurityGroupIds",
 			           "Subnets"
@@ -1052,7 +1015,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/NetworkConfig",
 			     "type": "object"
 			   }
 			*/
@@ -1116,7 +1078,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						         "type": "array"
 						       }
 						     },
-						     "$ref": "#/definitions/VpcConfig",
 						     "required": [
 						       "SecurityGroupIds",
 						       "Subnets"
@@ -1207,7 +1168,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			         "type": "integer"
 			       }
 			     },
-			     "$ref": "#/definitions/StoppingCondition",
 			     "required": [
 			       "MaxRuntimeInSeconds"
 			     ],
@@ -1260,7 +1220,6 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"

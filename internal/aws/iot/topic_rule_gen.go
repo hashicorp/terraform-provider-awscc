@@ -61,7 +61,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -127,7 +126,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/CloudwatchAlarmAction",
 			               "required": [
 			                 "AlarmName",
 			                 "StateReason",
@@ -146,7 +144,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/CloudwatchLogsAction",
 			               "required": [
 			                 "LogGroupName",
 			                 "RoleArn"
@@ -175,7 +172,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/CloudwatchMetricAction",
 			               "required": [
 			                 "MetricName",
 			                 "MetricValue",
@@ -216,7 +212,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/DynamoDBAction",
 			               "required": [
 			                 "TableName",
 			                 "HashKeyField",
@@ -235,7 +230,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/PutItemInput",
 			                   "required": [
 			                     "TableName"
 			                   ],
@@ -245,7 +239,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/DynamoDBv2Action",
 			               "type": "object"
 			             },
 			             "Elasticsearch": {
@@ -267,7 +260,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/ElasticsearchAction",
 			               "required": [
 			                 "Type",
 			                 "Endpoint",
@@ -293,7 +285,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/FirehoseAction",
 			               "required": [
 			                 "DeliveryStreamName",
 			                 "RoleArn"
@@ -319,7 +310,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/SigV4Authorization",
 			                       "required": [
 			                         "ServiceName",
 			                         "SigningRegion",
@@ -328,7 +318,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "object"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/HttpAuthorization",
 			                   "type": "object"
 			                 },
 			                 "ConfirmationUrl": {
@@ -345,7 +334,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/HttpActionHeader",
 			                     "required": [
 			                       "Value",
 			                       "Key"
@@ -359,7 +347,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/HttpAction",
 			               "required": [
 			                 "Url"
 			               ],
@@ -378,7 +365,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/IotAnalyticsAction",
 			               "required": [
 			                 "ChannelName",
 			                 "RoleArn"
@@ -401,7 +387,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/IotEventsAction",
 			               "required": [
 			                 "InputName",
 			                 "RoleArn"
@@ -444,7 +429,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/AssetPropertyTimestamp",
 			                               "required": [
 			                                 "TimeInSeconds"
 			                               ],
@@ -466,11 +450,9 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                                   "type": "string"
 			                                 }
 			                               },
-			                               "$ref": "#/definitions/AssetPropertyVariant",
 			                               "type": "object"
 			                             }
 			                           },
-			                           "$ref": "#/definitions/AssetPropertyValue",
 			                           "required": [
 			                             "Value",
 			                             "Timestamp"
@@ -481,7 +463,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "uniqueItems": true
 			                       }
 			                     },
-			                     "$ref": "#/definitions/PutAssetPropertyValueEntry",
 			                     "required": [
 			                       "PropertyValues"
 			                     ],
@@ -494,7 +475,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/IotSiteWiseAction",
 			               "required": [
 			                 "PutAssetPropertyValueEntries",
 			                 "RoleArn"
@@ -526,7 +506,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/KafkaAction",
 			               "required": [
 			                 "DestinationArn",
 			                 "Topic",
@@ -547,7 +526,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/KinesisAction",
 			               "required": [
 			                 "StreamName",
 			                 "RoleArn"
@@ -561,7 +539,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/LambdaAction",
 			               "type": "object"
 			             },
 			             "Republish": {
@@ -577,7 +554,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/RepublishAction",
 			               "required": [
 			                 "Topic",
 			                 "RoleArn"
@@ -601,7 +577,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "bucket-owner-full-control",
 			                     "log-delivery-write"
 			                   ],
-			                   "$ref": "#/definitions/CannedAccessControlList",
 			                   "type": "string"
 			                 },
 			                 "Key": {
@@ -611,7 +586,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/S3Action",
 			               "required": [
 			                 "BucketName",
 			                 "Key",
@@ -632,7 +606,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/SnsAction",
 			               "required": [
 			                 "TargetArn",
 			                 "RoleArn"
@@ -652,7 +625,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "boolean"
 			                 }
 			               },
-			               "$ref": "#/definitions/SqsAction",
 			               "required": [
 			                 "RoleArn",
 			                 "QueueUrl"
@@ -672,7 +644,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/StepFunctionsAction",
 			               "required": [
 			                 "StateMachineName",
 			                 "RoleArn"
@@ -699,7 +670,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/TimestreamDimension",
 			                     "required": [
 			                       "Name",
 			                       "Value"
@@ -708,7 +678,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   },
 			                   "maxItems": 128,
 			                   "minItems": 1,
-			                   "$ref": "#/definitions/TimestreamDimensionsList",
 			                   "type": "array"
 			                 },
 			                 "RoleArn": {
@@ -727,7 +696,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/TimestreamTimestamp",
 			                   "required": [
 			                     "Value",
 			                     "Unit"
@@ -735,7 +703,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/TimestreamAction",
 			               "required": [
 			                 "RoleArn",
 			                 "DatabaseName",
@@ -745,7 +712,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/Action",
 			           "type": "object"
 			         },
 			         "type": "array"
@@ -775,7 +741,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/CloudwatchAlarmAction",
 			             "required": [
 			               "AlarmName",
 			               "StateReason",
@@ -794,7 +759,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/CloudwatchLogsAction",
 			             "required": [
 			               "LogGroupName",
 			               "RoleArn"
@@ -823,7 +787,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/CloudwatchMetricAction",
 			             "required": [
 			               "MetricName",
 			               "MetricValue",
@@ -864,7 +827,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/DynamoDBAction",
 			             "required": [
 			               "TableName",
 			               "HashKeyField",
@@ -883,7 +845,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/PutItemInput",
 			                 "required": [
 			                   "TableName"
 			                 ],
@@ -893,7 +854,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/DynamoDBv2Action",
 			             "type": "object"
 			           },
 			           "Elasticsearch": {
@@ -915,7 +875,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ElasticsearchAction",
 			             "required": [
 			               "Type",
 			               "Endpoint",
@@ -941,7 +900,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/FirehoseAction",
 			             "required": [
 			               "DeliveryStreamName",
 			               "RoleArn"
@@ -967,7 +925,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "type": "string"
 			                       }
 			                     },
-			                     "$ref": "#/definitions/SigV4Authorization",
 			                     "required": [
 			                       "ServiceName",
 			                       "SigningRegion",
@@ -976,7 +933,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "object"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/HttpAuthorization",
 			                 "type": "object"
 			               },
 			               "ConfirmationUrl": {
@@ -993,7 +949,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/HttpActionHeader",
 			                   "required": [
 			                     "Value",
 			                     "Key"
@@ -1007,7 +962,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/HttpAction",
 			             "required": [
 			               "Url"
 			             ],
@@ -1026,7 +980,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/IotAnalyticsAction",
 			             "required": [
 			               "ChannelName",
 			               "RoleArn"
@@ -1049,7 +1002,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/IotEventsAction",
 			             "required": [
 			               "InputName",
 			               "RoleArn"
@@ -1092,7 +1044,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                                 "type": "string"
 			                               }
 			                             },
-			                             "$ref": "#/definitions/AssetPropertyTimestamp",
 			                             "required": [
 			                               "TimeInSeconds"
 			                             ],
@@ -1114,11 +1065,9 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                                 "type": "string"
 			                               }
 			                             },
-			                             "$ref": "#/definitions/AssetPropertyVariant",
 			                             "type": "object"
 			                           }
 			                         },
-			                         "$ref": "#/definitions/AssetPropertyValue",
 			                         "required": [
 			                           "Value",
 			                           "Timestamp"
@@ -1129,7 +1078,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "uniqueItems": true
 			                     }
 			                   },
-			                   "$ref": "#/definitions/PutAssetPropertyValueEntry",
 			                   "required": [
 			                     "PropertyValues"
 			                   ],
@@ -1142,7 +1090,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/IotSiteWiseAction",
 			             "required": [
 			               "PutAssetPropertyValueEntries",
 			               "RoleArn"
@@ -1174,7 +1121,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/KafkaAction",
 			             "required": [
 			               "DestinationArn",
 			               "Topic",
@@ -1195,7 +1141,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/KinesisAction",
 			             "required": [
 			               "StreamName",
 			               "RoleArn"
@@ -1209,7 +1154,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/LambdaAction",
 			             "type": "object"
 			           },
 			           "Republish": {
@@ -1225,7 +1169,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/RepublishAction",
 			             "required": [
 			               "Topic",
 			               "RoleArn"
@@ -1249,7 +1192,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "bucket-owner-full-control",
 			                   "log-delivery-write"
 			                 ],
-			                 "$ref": "#/definitions/CannedAccessControlList",
 			                 "type": "string"
 			               },
 			               "Key": {
@@ -1259,7 +1201,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/S3Action",
 			             "required": [
 			               "BucketName",
 			               "Key",
@@ -1280,7 +1221,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SnsAction",
 			             "required": [
 			               "TargetArn",
 			               "RoleArn"
@@ -1300,7 +1240,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "boolean"
 			               }
 			             },
-			             "$ref": "#/definitions/SqsAction",
 			             "required": [
 			               "RoleArn",
 			               "QueueUrl"
@@ -1320,7 +1259,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/StepFunctionsAction",
 			             "required": [
 			               "StateMachineName",
 			               "RoleArn"
@@ -1347,7 +1285,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "type": "string"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/TimestreamDimension",
 			                   "required": [
 			                     "Name",
 			                     "Value"
@@ -1356,7 +1293,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 },
 			                 "maxItems": 128,
 			                 "minItems": 1,
-			                 "$ref": "#/definitions/TimestreamDimensionsList",
 			                 "type": "array"
 			               },
 			               "RoleArn": {
@@ -1375,7 +1311,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "type": "string"
 			                   }
 			                 },
-			                 "$ref": "#/definitions/TimestreamTimestamp",
 			                 "required": [
 			                   "Value",
 			                   "Unit"
@@ -1383,7 +1318,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "object"
 			               }
 			             },
-			             "$ref": "#/definitions/TimestreamAction",
 			             "required": [
 			               "RoleArn",
 			               "DatabaseName",
@@ -1393,7 +1327,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/Action",
 			         "type": "object"
 			       },
 			       "RuleDisabled": {
@@ -1403,7 +1336,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/TopicRulePayload",
 			     "required": [
 			       "Actions",
 			       "Sql"
@@ -1437,7 +1369,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/CloudwatchAlarmAction",
 						           "required": [
 						             "AlarmName",
 						             "StateReason",
@@ -1456,7 +1387,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/CloudwatchLogsAction",
 						           "required": [
 						             "LogGroupName",
 						             "RoleArn"
@@ -1485,7 +1415,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/CloudwatchMetricAction",
 						           "required": [
 						             "MetricName",
 						             "MetricValue",
@@ -1526,7 +1455,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/DynamoDBAction",
 						           "required": [
 						             "TableName",
 						             "HashKeyField",
@@ -1545,7 +1473,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/PutItemInput",
 						               "required": [
 						                 "TableName"
 						               ],
@@ -1555,7 +1482,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/DynamoDBv2Action",
 						           "type": "object"
 						         },
 						         "Elasticsearch": {
@@ -1577,7 +1503,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/ElasticsearchAction",
 						           "required": [
 						             "Type",
 						             "Endpoint",
@@ -1603,7 +1528,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/FirehoseAction",
 						           "required": [
 						             "DeliveryStreamName",
 						             "RoleArn"
@@ -1629,7 +1553,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "type": "string"
 						                     }
 						                   },
-						                   "$ref": "#/definitions/SigV4Authorization",
 						                   "required": [
 						                     "ServiceName",
 						                     "SigningRegion",
@@ -1638,7 +1561,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "object"
 						                 }
 						               },
-						               "$ref": "#/definitions/HttpAuthorization",
 						               "type": "object"
 						             },
 						             "ConfirmationUrl": {
@@ -1655,7 +1577,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/HttpActionHeader",
 						                 "required": [
 						                   "Value",
 						                   "Key"
@@ -1669,7 +1590,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/HttpAction",
 						           "required": [
 						             "Url"
 						           ],
@@ -1688,7 +1608,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/IotAnalyticsAction",
 						           "required": [
 						             "ChannelName",
 						             "RoleArn"
@@ -1711,7 +1630,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/IotEventsAction",
 						           "required": [
 						             "InputName",
 						             "RoleArn"
@@ -1754,7 +1672,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/AssetPropertyTimestamp",
 						                           "required": [
 						                             "TimeInSeconds"
 						                           ],
@@ -1776,11 +1693,9 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                               "type": "string"
 						                             }
 						                           },
-						                           "$ref": "#/definitions/AssetPropertyVariant",
 						                           "type": "object"
 						                         }
 						                       },
-						                       "$ref": "#/definitions/AssetPropertyValue",
 						                       "required": [
 						                         "Value",
 						                         "Timestamp"
@@ -1791,7 +1706,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "uniqueItems": true
 						                   }
 						                 },
-						                 "$ref": "#/definitions/PutAssetPropertyValueEntry",
 						                 "required": [
 						                   "PropertyValues"
 						                 ],
@@ -1804,7 +1718,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/IotSiteWiseAction",
 						           "required": [
 						             "PutAssetPropertyValueEntries",
 						             "RoleArn"
@@ -1836,7 +1749,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/KafkaAction",
 						           "required": [
 						             "DestinationArn",
 						             "Topic",
@@ -1857,7 +1769,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/KinesisAction",
 						           "required": [
 						             "StreamName",
 						             "RoleArn"
@@ -1871,7 +1782,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/LambdaAction",
 						           "type": "object"
 						         },
 						         "Republish": {
@@ -1887,7 +1797,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/RepublishAction",
 						           "required": [
 						             "Topic",
 						             "RoleArn"
@@ -1911,7 +1820,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "bucket-owner-full-control",
 						                 "log-delivery-write"
 						               ],
-						               "$ref": "#/definitions/CannedAccessControlList",
 						               "type": "string"
 						             },
 						             "Key": {
@@ -1921,7 +1829,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/S3Action",
 						           "required": [
 						             "BucketName",
 						             "Key",
@@ -1942,7 +1849,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/SnsAction",
 						           "required": [
 						             "TargetArn",
 						             "RoleArn"
@@ -1962,7 +1868,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "boolean"
 						             }
 						           },
-						           "$ref": "#/definitions/SqsAction",
 						           "required": [
 						             "RoleArn",
 						             "QueueUrl"
@@ -1982,7 +1887,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "string"
 						             }
 						           },
-						           "$ref": "#/definitions/StepFunctionsAction",
 						           "required": [
 						             "StateMachineName",
 						             "RoleArn"
@@ -2009,7 +1913,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/TimestreamDimension",
 						                 "required": [
 						                   "Name",
 						                   "Value"
@@ -2018,7 +1921,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               },
 						               "maxItems": 128,
 						               "minItems": 1,
-						               "$ref": "#/definitions/TimestreamDimensionsList",
 						               "type": "array"
 						             },
 						             "RoleArn": {
@@ -2037,7 +1939,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/TimestreamTimestamp",
 						               "required": [
 						                 "Value",
 						                 "Unit"
@@ -2045,7 +1946,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "type": "object"
 						             }
 						           },
-						           "$ref": "#/definitions/TimestreamAction",
 						           "required": [
 						             "RoleArn",
 						             "DatabaseName",
@@ -2055,7 +1955,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "object"
 						         }
 						       },
-						       "$ref": "#/definitions/Action",
 						       "type": "object"
 						     },
 						     "type": "array"
@@ -2083,7 +1982,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudwatchAlarmAction",
 									     "required": [
 									       "AlarmName",
 									       "StateReason",
@@ -2157,7 +2055,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudwatchLogsAction",
 									     "required": [
 									       "LogGroupName",
 									       "RoleArn"
@@ -2219,7 +2116,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudwatchMetricAction",
 									     "required": [
 									       "MetricName",
 									       "MetricValue",
@@ -2337,7 +2233,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DynamoDBAction",
 									     "required": [
 									       "TableName",
 									       "HashKeyField",
@@ -2466,7 +2361,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/PutItemInput",
 									         "required": [
 									           "TableName"
 									         ],
@@ -2476,7 +2370,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DynamoDBv2Action",
 									     "type": "object"
 									   }
 									*/
@@ -2493,7 +2386,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/PutItemInput",
 												     "required": [
 												       "TableName"
 												     ],
@@ -2555,7 +2447,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ElasticsearchAction",
 									     "required": [
 									       "Type",
 									       "Endpoint",
@@ -2647,7 +2538,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/FirehoseAction",
 									     "required": [
 									       "DeliveryStreamName",
 									       "RoleArn"
@@ -2728,7 +2618,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/SigV4Authorization",
 									             "required": [
 									               "ServiceName",
 									               "SigningRegion",
@@ -2737,7 +2626,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/HttpAuthorization",
 									         "type": "object"
 									       },
 									       "ConfirmationUrl": {
@@ -2754,7 +2642,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/HttpActionHeader",
 									           "required": [
 									             "Value",
 									             "Key"
@@ -2768,7 +2655,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/HttpAction",
 									     "required": [
 									       "Url"
 									     ],
@@ -2797,7 +2683,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "type": "string"
 												           }
 												         },
-												         "$ref": "#/definitions/SigV4Authorization",
 												         "required": [
 												           "ServiceName",
 												           "SigningRegion",
@@ -2806,7 +2691,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/HttpAuthorization",
 												     "type": "object"
 												   }
 												*/
@@ -2829,7 +2713,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/SigV4Authorization",
 															     "required": [
 															       "ServiceName",
 															       "SigningRegion",
@@ -2907,7 +2790,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/HttpActionHeader",
 												       "required": [
 												         "Value",
 												         "Key"
@@ -2980,7 +2862,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/IotAnalyticsAction",
 									     "required": [
 									       "ChannelName",
 									       "RoleArn"
@@ -3047,7 +2928,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/IotEventsAction",
 									     "required": [
 									       "InputName",
 									       "RoleArn"
@@ -3145,7 +3025,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/AssetPropertyTimestamp",
 									                     "required": [
 									                       "TimeInSeconds"
 									                     ],
@@ -3167,11 +3046,9 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/AssetPropertyVariant",
 									                     "type": "object"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/AssetPropertyValue",
 									                 "required": [
 									                   "Value",
 									                   "Timestamp"
@@ -3182,7 +3059,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "uniqueItems": true
 									             }
 									           },
-									           "$ref": "#/definitions/PutAssetPropertyValueEntry",
 									           "required": [
 									             "PropertyValues"
 									           ],
@@ -3195,7 +3071,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/IotSiteWiseAction",
 									     "required": [
 									       "PutAssetPropertyValueEntries",
 									       "RoleArn"
@@ -3242,7 +3117,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/AssetPropertyTimestamp",
 												                 "required": [
 												                   "TimeInSeconds"
 												                 ],
@@ -3264,11 +3138,9 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/AssetPropertyVariant",
 												                 "type": "object"
 												               }
 												             },
-												             "$ref": "#/definitions/AssetPropertyValue",
 												             "required": [
 												               "Value",
 												               "Timestamp"
@@ -3279,7 +3151,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "uniqueItems": true
 												         }
 												       },
-												       "$ref": "#/definitions/PutAssetPropertyValueEntry",
 												       "required": [
 												         "PropertyValues"
 												       ],
@@ -3357,7 +3228,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/AssetPropertyTimestamp",
 															           "required": [
 															             "TimeInSeconds"
 															           ],
@@ -3379,11 +3249,9 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/AssetPropertyVariant",
 															           "type": "object"
 															         }
 															       },
-															       "$ref": "#/definitions/AssetPropertyValue",
 															       "required": [
 															         "Value",
 															         "Timestamp"
@@ -3422,7 +3290,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/AssetPropertyTimestamp",
 																		     "required": [
 																		       "TimeInSeconds"
 																		     ],
@@ -3477,7 +3344,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/AssetPropertyVariant",
 																		     "type": "object"
 																		   }
 																		*/
@@ -3585,7 +3451,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/KafkaAction",
 									     "required": [
 									       "DestinationArn",
 									       "Topic",
@@ -3679,7 +3544,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/KinesisAction",
 									     "required": [
 									       "StreamName",
 									       "RoleArn"
@@ -3737,7 +3601,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/LambdaAction",
 									     "type": "object"
 									   }
 									*/
@@ -3775,7 +3638,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/RepublishAction",
 									     "required": [
 									       "Topic",
 									       "RoleArn"
@@ -3843,7 +3705,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "bucket-owner-full-control",
 									           "log-delivery-write"
 									         ],
-									         "$ref": "#/definitions/CannedAccessControlList",
 									         "type": "string"
 									       },
 									       "Key": {
@@ -3853,7 +3714,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3Action",
 									     "required": [
 									       "BucketName",
 									       "Key",
@@ -3890,7 +3750,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "bucket-owner-full-control",
 												       "log-delivery-write"
 												     ],
-												     "$ref": "#/definitions/CannedAccessControlList",
 												     "type": "string"
 												   }
 												*/
@@ -3940,7 +3799,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SnsAction",
 									     "required": [
 									       "TargetArn",
 									       "RoleArn"
@@ -4004,7 +3862,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "boolean"
 									       }
 									     },
-									     "$ref": "#/definitions/SqsAction",
 									     "required": [
 									       "RoleArn",
 									       "QueueUrl"
@@ -4068,7 +3925,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/StepFunctionsAction",
 									     "required": [
 									       "StateMachineName",
 									       "RoleArn"
@@ -4139,7 +3995,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/TimestreamDimension",
 									           "required": [
 									             "Name",
 									             "Value"
@@ -4148,7 +4003,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         },
 									         "maxItems": 128,
 									         "minItems": 1,
-									         "$ref": "#/definitions/TimestreamDimensionsList",
 									         "type": "array"
 									       },
 									       "RoleArn": {
@@ -4167,7 +4021,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/TimestreamTimestamp",
 									         "required": [
 									           "Value",
 									           "Unit"
@@ -4175,7 +4028,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/TimestreamAction",
 									     "required": [
 									       "RoleArn",
 									       "DatabaseName",
@@ -4224,7 +4076,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/TimestreamDimension",
 												       "required": [
 												         "Name",
 												         "Value"
@@ -4233,7 +4084,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     },
 												     "maxItems": 128,
 												     "minItems": 1,
-												     "$ref": "#/definitions/TimestreamDimensionsList",
 												     "type": "array"
 												   }
 												*/
@@ -4305,7 +4155,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/TimestreamTimestamp",
 												     "required": [
 												       "Value",
 												       "Unit"
@@ -4395,7 +4244,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/CloudwatchAlarmAction",
 						         "required": [
 						           "AlarmName",
 						           "StateReason",
@@ -4414,7 +4262,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/CloudwatchLogsAction",
 						         "required": [
 						           "LogGroupName",
 						           "RoleArn"
@@ -4443,7 +4290,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/CloudwatchMetricAction",
 						         "required": [
 						           "MetricName",
 						           "MetricValue",
@@ -4484,7 +4330,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/DynamoDBAction",
 						         "required": [
 						           "TableName",
 						           "HashKeyField",
@@ -4503,7 +4348,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/PutItemInput",
 						             "required": [
 						               "TableName"
 						             ],
@@ -4513,7 +4357,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/DynamoDBv2Action",
 						         "type": "object"
 						       },
 						       "Elasticsearch": {
@@ -4535,7 +4378,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ElasticsearchAction",
 						         "required": [
 						           "Type",
 						           "Endpoint",
@@ -4561,7 +4403,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/FirehoseAction",
 						         "required": [
 						           "DeliveryStreamName",
 						           "RoleArn"
@@ -4587,7 +4428,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/SigV4Authorization",
 						                 "required": [
 						                   "ServiceName",
 						                   "SigningRegion",
@@ -4596,7 +4436,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "object"
 						               }
 						             },
-						             "$ref": "#/definitions/HttpAuthorization",
 						             "type": "object"
 						           },
 						           "ConfirmationUrl": {
@@ -4613,7 +4452,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/HttpActionHeader",
 						               "required": [
 						                 "Value",
 						                 "Key"
@@ -4627,7 +4465,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/HttpAction",
 						         "required": [
 						           "Url"
 						         ],
@@ -4646,7 +4483,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/IotAnalyticsAction",
 						         "required": [
 						           "ChannelName",
 						           "RoleArn"
@@ -4669,7 +4505,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/IotEventsAction",
 						         "required": [
 						           "InputName",
 						           "RoleArn"
@@ -4712,7 +4547,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                             "type": "string"
 						                           }
 						                         },
-						                         "$ref": "#/definitions/AssetPropertyTimestamp",
 						                         "required": [
 						                           "TimeInSeconds"
 						                         ],
@@ -4734,11 +4568,9 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                             "type": "string"
 						                           }
 						                         },
-						                         "$ref": "#/definitions/AssetPropertyVariant",
 						                         "type": "object"
 						                       }
 						                     },
-						                     "$ref": "#/definitions/AssetPropertyValue",
 						                     "required": [
 						                       "Value",
 						                       "Timestamp"
@@ -4749,7 +4581,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "uniqueItems": true
 						                 }
 						               },
-						               "$ref": "#/definitions/PutAssetPropertyValueEntry",
 						               "required": [
 						                 "PropertyValues"
 						               ],
@@ -4762,7 +4593,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/IotSiteWiseAction",
 						         "required": [
 						           "PutAssetPropertyValueEntries",
 						           "RoleArn"
@@ -4794,7 +4624,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/KafkaAction",
 						         "required": [
 						           "DestinationArn",
 						           "Topic",
@@ -4815,7 +4644,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/KinesisAction",
 						         "required": [
 						           "StreamName",
 						           "RoleArn"
@@ -4829,7 +4657,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/LambdaAction",
 						         "type": "object"
 						       },
 						       "Republish": {
@@ -4845,7 +4672,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/RepublishAction",
 						         "required": [
 						           "Topic",
 						           "RoleArn"
@@ -4869,7 +4695,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "bucket-owner-full-control",
 						               "log-delivery-write"
 						             ],
-						             "$ref": "#/definitions/CannedAccessControlList",
 						             "type": "string"
 						           },
 						           "Key": {
@@ -4879,7 +4704,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/S3Action",
 						         "required": [
 						           "BucketName",
 						           "Key",
@@ -4900,7 +4724,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SnsAction",
 						         "required": [
 						           "TargetArn",
 						           "RoleArn"
@@ -4920,7 +4743,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "boolean"
 						           }
 						         },
-						         "$ref": "#/definitions/SqsAction",
 						         "required": [
 						           "RoleArn",
 						           "QueueUrl"
@@ -4940,7 +4762,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/StepFunctionsAction",
 						         "required": [
 						           "StateMachineName",
 						           "RoleArn"
@@ -4967,7 +4788,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "type": "string"
 						                 }
 						               },
-						               "$ref": "#/definitions/TimestreamDimension",
 						               "required": [
 						                 "Name",
 						                 "Value"
@@ -4976,7 +4796,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             },
 						             "maxItems": 128,
 						             "minItems": 1,
-						             "$ref": "#/definitions/TimestreamDimensionsList",
 						             "type": "array"
 						           },
 						           "RoleArn": {
@@ -4995,7 +4814,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "type": "string"
 						               }
 						             },
-						             "$ref": "#/definitions/TimestreamTimestamp",
 						             "required": [
 						               "Value",
 						               "Unit"
@@ -5003,7 +4821,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/TimestreamAction",
 						         "required": [
 						           "RoleArn",
 						           "DatabaseName",
@@ -5013,7 +4830,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/Action",
 						     "type": "object"
 						   }
 						*/
@@ -5039,7 +4855,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudwatchAlarmAction",
 									     "required": [
 									       "AlarmName",
 									       "StateReason",
@@ -5113,7 +4928,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudwatchLogsAction",
 									     "required": [
 									       "LogGroupName",
 									       "RoleArn"
@@ -5175,7 +4989,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/CloudwatchMetricAction",
 									     "required": [
 									       "MetricName",
 									       "MetricValue",
@@ -5293,7 +5106,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DynamoDBAction",
 									     "required": [
 									       "TableName",
 									       "HashKeyField",
@@ -5422,7 +5234,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/PutItemInput",
 									         "required": [
 									           "TableName"
 									         ],
@@ -5432,7 +5243,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DynamoDBv2Action",
 									     "type": "object"
 									   }
 									*/
@@ -5449,7 +5259,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/PutItemInput",
 												     "required": [
 												       "TableName"
 												     ],
@@ -5511,7 +5320,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ElasticsearchAction",
 									     "required": [
 									       "Type",
 									       "Endpoint",
@@ -5603,7 +5411,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/FirehoseAction",
 									     "required": [
 									       "DeliveryStreamName",
 									       "RoleArn"
@@ -5684,7 +5491,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/SigV4Authorization",
 									             "required": [
 									               "ServiceName",
 									               "SigningRegion",
@@ -5693,7 +5499,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/HttpAuthorization",
 									         "type": "object"
 									       },
 									       "ConfirmationUrl": {
@@ -5710,7 +5515,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/HttpActionHeader",
 									           "required": [
 									             "Value",
 									             "Key"
@@ -5724,7 +5528,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/HttpAction",
 									     "required": [
 									       "Url"
 									     ],
@@ -5753,7 +5556,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												             "type": "string"
 												           }
 												         },
-												         "$ref": "#/definitions/SigV4Authorization",
 												         "required": [
 												           "ServiceName",
 												           "SigningRegion",
@@ -5762,7 +5564,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/HttpAuthorization",
 												     "type": "object"
 												   }
 												*/
@@ -5785,7 +5586,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/SigV4Authorization",
 															     "required": [
 															       "ServiceName",
 															       "SigningRegion",
@@ -5863,7 +5663,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/HttpActionHeader",
 												       "required": [
 												         "Value",
 												         "Key"
@@ -5936,7 +5735,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/IotAnalyticsAction",
 									     "required": [
 									       "ChannelName",
 									       "RoleArn"
@@ -6003,7 +5801,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/IotEventsAction",
 									     "required": [
 									       "InputName",
 									       "RoleArn"
@@ -6101,7 +5898,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/AssetPropertyTimestamp",
 									                     "required": [
 									                       "TimeInSeconds"
 									                     ],
@@ -6123,11 +5919,9 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                         "type": "string"
 									                       }
 									                     },
-									                     "$ref": "#/definitions/AssetPropertyVariant",
 									                     "type": "object"
 									                   }
 									                 },
-									                 "$ref": "#/definitions/AssetPropertyValue",
 									                 "required": [
 									                   "Value",
 									                   "Timestamp"
@@ -6138,7 +5932,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "uniqueItems": true
 									             }
 									           },
-									           "$ref": "#/definitions/PutAssetPropertyValueEntry",
 									           "required": [
 									             "PropertyValues"
 									           ],
@@ -6151,7 +5944,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/IotSiteWiseAction",
 									     "required": [
 									       "PutAssetPropertyValueEntries",
 									       "RoleArn"
@@ -6198,7 +5990,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/AssetPropertyTimestamp",
 												                 "required": [
 												                   "TimeInSeconds"
 												                 ],
@@ -6220,11 +6011,9 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												                     "type": "string"
 												                   }
 												                 },
-												                 "$ref": "#/definitions/AssetPropertyVariant",
 												                 "type": "object"
 												               }
 												             },
-												             "$ref": "#/definitions/AssetPropertyValue",
 												             "required": [
 												               "Value",
 												               "Timestamp"
@@ -6235,7 +6024,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "uniqueItems": true
 												         }
 												       },
-												       "$ref": "#/definitions/PutAssetPropertyValueEntry",
 												       "required": [
 												         "PropertyValues"
 												       ],
@@ -6313,7 +6101,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/AssetPropertyTimestamp",
 															           "required": [
 															             "TimeInSeconds"
 															           ],
@@ -6335,11 +6122,9 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															               "type": "string"
 															             }
 															           },
-															           "$ref": "#/definitions/AssetPropertyVariant",
 															           "type": "object"
 															         }
 															       },
-															       "$ref": "#/definitions/AssetPropertyValue",
 															       "required": [
 															         "Value",
 															         "Timestamp"
@@ -6378,7 +6163,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/AssetPropertyTimestamp",
 																		     "required": [
 																		       "TimeInSeconds"
 																		     ],
@@ -6433,7 +6217,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		         "type": "string"
 																		       }
 																		     },
-																		     "$ref": "#/definitions/AssetPropertyVariant",
 																		     "type": "object"
 																		   }
 																		*/
@@ -6541,7 +6324,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/KafkaAction",
 									     "required": [
 									       "DestinationArn",
 									       "Topic",
@@ -6635,7 +6417,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/KinesisAction",
 									     "required": [
 									       "StreamName",
 									       "RoleArn"
@@ -6693,7 +6474,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/LambdaAction",
 									     "type": "object"
 									   }
 									*/
@@ -6731,7 +6511,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/RepublishAction",
 									     "required": [
 									       "Topic",
 									       "RoleArn"
@@ -6799,7 +6578,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "bucket-owner-full-control",
 									           "log-delivery-write"
 									         ],
-									         "$ref": "#/definitions/CannedAccessControlList",
 									         "type": "string"
 									       },
 									       "Key": {
@@ -6809,7 +6587,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3Action",
 									     "required": [
 									       "BucketName",
 									       "Key",
@@ -6846,7 +6623,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "bucket-owner-full-control",
 												       "log-delivery-write"
 												     ],
-												     "$ref": "#/definitions/CannedAccessControlList",
 												     "type": "string"
 												   }
 												*/
@@ -6896,7 +6672,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SnsAction",
 									     "required": [
 									       "TargetArn",
 									       "RoleArn"
@@ -6960,7 +6735,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "boolean"
 									       }
 									     },
-									     "$ref": "#/definitions/SqsAction",
 									     "required": [
 									       "RoleArn",
 									       "QueueUrl"
@@ -7024,7 +6798,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/StepFunctionsAction",
 									     "required": [
 									       "StateMachineName",
 									       "RoleArn"
@@ -7095,7 +6868,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "type": "string"
 									             }
 									           },
-									           "$ref": "#/definitions/TimestreamDimension",
 									           "required": [
 									             "Name",
 									             "Value"
@@ -7104,7 +6876,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         },
 									         "maxItems": 128,
 									         "minItems": 1,
-									         "$ref": "#/definitions/TimestreamDimensionsList",
 									         "type": "array"
 									       },
 									       "RoleArn": {
@@ -7123,7 +6894,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "type": "string"
 									           }
 									         },
-									         "$ref": "#/definitions/TimestreamTimestamp",
 									         "required": [
 									           "Value",
 									           "Unit"
@@ -7131,7 +6901,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/TimestreamAction",
 									     "required": [
 									       "RoleArn",
 									       "DatabaseName",
@@ -7180,7 +6949,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "type": "string"
 												         }
 												       },
-												       "$ref": "#/definitions/TimestreamDimension",
 												       "required": [
 												         "Name",
 												         "Value"
@@ -7189,7 +6957,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     },
 												     "maxItems": 128,
 												     "minItems": 1,
-												     "$ref": "#/definitions/TimestreamDimensionsList",
 												     "type": "array"
 												   }
 												*/
@@ -7261,7 +7028,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "type": "string"
 												       }
 												     },
-												     "$ref": "#/definitions/TimestreamTimestamp",
 												     "required": [
 												       "Value",
 												       "Unit"

@@ -51,7 +51,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "description": "Name of connector profile",
 			           "maxLength": 256,
 			           "pattern": "",
-			           "$ref": "#/definitions/ConnectorProfileName",
 			           "type": "string"
 			         },
 			         "ConnectorType": {
@@ -76,7 +75,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "Upsolver",
 			             "LookoutMetrics"
 			           ],
-			           "$ref": "#/definitions/ConnectorType",
 			           "type": "string"
 			         },
 			         "DestinationConnectorProperties": {
@@ -92,29 +90,24 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "maxLength": 63,
 			                       "minLength": 3,
 			                       "pattern": "",
-			                       "$ref": "#/definitions/BucketName",
 			                       "type": "string"
 			                     },
 			                     "BucketPrefix": {
 			                       "maxLength": 512,
-			                       "$ref": "#/definitions/BucketPrefix",
 			                       "type": "string"
 			                     },
 			                     "FailOnFirstError": {
 			                       "type": "boolean"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/ErrorHandlingConfig",
 			                   "type": "object"
 			                 },
 			                 "Object": {
 			                   "maxLength": 512,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/Object",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/EventBridgeDestinationProperties",
 			               "required": [
 			                 "Object"
 			               ],
@@ -126,11 +119,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "Object": {
 			                   "maxLength": 512,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/Object",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/LookoutMetricsDestinationProperties",
 			               "type": "object"
 			             },
 			             "Redshift": {
@@ -138,7 +129,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "properties": {
 			                 "BucketPrefix": {
 			                   "maxLength": 512,
-			                   "$ref": "#/definitions/BucketPrefix",
 			                   "type": "string"
 			                 },
 			                 "ErrorHandlingConfig": {
@@ -148,36 +138,30 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "maxLength": 63,
 			                       "minLength": 3,
 			                       "pattern": "",
-			                       "$ref": "#/definitions/BucketName",
 			                       "type": "string"
 			                     },
 			                     "BucketPrefix": {
 			                       "maxLength": 512,
-			                       "$ref": "#/definitions/BucketPrefix",
 			                       "type": "string"
 			                     },
 			                     "FailOnFirstError": {
 			                       "type": "boolean"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/ErrorHandlingConfig",
 			                   "type": "object"
 			                 },
 			                 "IntermediateBucketName": {
 			                   "maxLength": 63,
 			                   "minLength": 3,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/BucketName",
 			                   "type": "string"
 			                 },
 			                 "Object": {
 			                   "maxLength": 512,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/Object",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/RedshiftDestinationProperties",
 			               "required": [
 			                 "Object",
 			                 "IntermediateBucketName"
@@ -191,12 +175,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "maxLength": 63,
 			                   "minLength": 3,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/BucketName",
 			                   "type": "string"
 			                 },
 			                 "BucketPrefix": {
 			                   "maxLength": 512,
-			                   "$ref": "#/definitions/BucketPrefix",
 			                   "type": "string"
 			                 },
 			                 "S3OutputFormatConfig": {
@@ -209,11 +191,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "None",
 			                             "SingleFile"
 			                           ],
-			                           "$ref": "#/definitions/AggregationType",
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/AggregationConfig",
 			                       "type": "object"
 			                     },
 			                     "FileType": {
@@ -222,7 +202,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "JSON",
 			                         "PARQUET"
 			                       ],
-			                       "$ref": "#/definitions/FileType",
 			                       "type": "string"
 			                     },
 			                     "PrefixConfig": {
@@ -236,7 +215,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "HOUR",
 			                             "MINUTE"
 			                           ],
-			                           "$ref": "#/definitions/PrefixFormat",
 			                           "type": "string"
 			                         },
 			                         "PrefixType": {
@@ -245,19 +223,15 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "PATH",
 			                             "PATH_AND_FILENAME"
 			                           ],
-			                           "$ref": "#/definitions/PrefixType",
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/PrefixConfig",
 			                       "type": "object"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/S3OutputFormatConfig",
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/S3DestinationProperties",
 			               "required": [
 			                 "BucketName"
 			               ],
@@ -273,19 +247,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "maxLength": 63,
 			                       "minLength": 3,
 			                       "pattern": "",
-			                       "$ref": "#/definitions/BucketName",
 			                       "type": "string"
 			                     },
 			                     "BucketPrefix": {
 			                       "maxLength": 512,
-			                       "$ref": "#/definitions/BucketPrefix",
 			                       "type": "string"
 			                     },
 			                     "FailOnFirstError": {
 			                       "type": "boolean"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/ErrorHandlingConfig",
 			                   "type": "object"
 			                 },
 			                 "IdFieldNames": {
@@ -298,7 +269,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "Object": {
 			                   "maxLength": 512,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/Object",
 			                   "type": "string"
 			                 },
 			                 "WriteOperationType": {
@@ -307,11 +277,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "UPSERT",
 			                     "UPDATE"
 			                   ],
-			                   "$ref": "#/definitions/WriteOperationType",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/SalesforceDestinationProperties",
 			               "required": [
 			                 "Object"
 			               ],
@@ -322,7 +290,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "properties": {
 			                 "BucketPrefix": {
 			                   "maxLength": 512,
-			                   "$ref": "#/definitions/BucketPrefix",
 			                   "type": "string"
 			                 },
 			                 "ErrorHandlingConfig": {
@@ -332,36 +299,30 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "maxLength": 63,
 			                       "minLength": 3,
 			                       "pattern": "",
-			                       "$ref": "#/definitions/BucketName",
 			                       "type": "string"
 			                     },
 			                     "BucketPrefix": {
 			                       "maxLength": 512,
-			                       "$ref": "#/definitions/BucketPrefix",
 			                       "type": "string"
 			                     },
 			                     "FailOnFirstError": {
 			                       "type": "boolean"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/ErrorHandlingConfig",
 			                   "type": "object"
 			                 },
 			                 "IntermediateBucketName": {
 			                   "maxLength": 63,
 			                   "minLength": 3,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/BucketName",
 			                   "type": "string"
 			                 },
 			                 "Object": {
 			                   "maxLength": 512,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/Object",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/SnowflakeDestinationProperties",
 			               "required": [
 			                 "Object",
 			                 "IntermediateBucketName"
@@ -375,12 +336,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "maxLength": 63,
 			                   "minLength": 16,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/UpsolverBucketName",
 			                   "type": "string"
 			                 },
 			                 "BucketPrefix": {
 			                   "maxLength": 512,
-			                   "$ref": "#/definitions/BucketPrefix",
 			                   "type": "string"
 			                 },
 			                 "S3OutputFormatConfig": {
@@ -393,11 +352,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "None",
 			                             "SingleFile"
 			                           ],
-			                           "$ref": "#/definitions/AggregationType",
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/AggregationConfig",
 			                       "type": "object"
 			                     },
 			                     "FileType": {
@@ -406,7 +363,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                         "JSON",
 			                         "PARQUET"
 			                       ],
-			                       "$ref": "#/definitions/FileType",
 			                       "type": "string"
 			                     },
 			                     "PrefixConfig": {
@@ -420,7 +376,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "HOUR",
 			                             "MINUTE"
 			                           ],
-			                           "$ref": "#/definitions/PrefixFormat",
 			                           "type": "string"
 			                         },
 			                         "PrefixType": {
@@ -429,22 +384,18 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                             "PATH",
 			                             "PATH_AND_FILENAME"
 			                           ],
-			                           "$ref": "#/definitions/PrefixType",
 			                           "type": "string"
 			                         }
 			                       },
-			                       "$ref": "#/definitions/PrefixConfig",
 			                       "type": "object"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/UpsolverS3OutputFormatConfig",
 			                   "required": [
 			                     "PrefixConfig"
 			                   ],
 			                   "type": "object"
 			                 }
 			               },
-			               "$ref": "#/definitions/UpsolverDestinationProperties",
 			               "required": [
 			                 "BucketName",
 			                 "S3OutputFormatConfig"
@@ -461,19 +412,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                       "maxLength": 63,
 			                       "minLength": 3,
 			                       "pattern": "",
-			                       "$ref": "#/definitions/BucketName",
 			                       "type": "string"
 			                     },
 			                     "BucketPrefix": {
 			                       "maxLength": 512,
-			                       "$ref": "#/definitions/BucketPrefix",
 			                       "type": "string"
 			                     },
 			                     "FailOnFirstError": {
 			                       "type": "boolean"
 			                     }
 			                   },
-			                   "$ref": "#/definitions/ErrorHandlingConfig",
 			                   "type": "object"
 			                 },
 			                 "IdFieldNames": {
@@ -486,7 +434,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "Object": {
 			                   "maxLength": 512,
 			                   "pattern": "",
-			                   "$ref": "#/definitions/Object",
 			                   "type": "string"
 			                 },
 			                 "WriteOperationType": {
@@ -495,22 +442,18 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                     "UPSERT",
 			                     "UPDATE"
 			                   ],
-			                   "$ref": "#/definitions/WriteOperationType",
 			                   "type": "string"
 			                 }
 			               },
-			               "$ref": "#/definitions/ZendeskDestinationProperties",
 			               "required": [
 			                 "Object"
 			               ],
 			               "type": "object"
 			             }
 			           },
-			           "$ref": "#/definitions/DestinationConnectorProperties",
 			           "type": "object"
 			         }
 			       },
-			       "$ref": "#/definitions/DestinationFlowConfig",
 			       "required": [
 			         "ConnectorType",
 			         "DestinationConnectorProperties"
@@ -531,7 +474,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "description": "Name of connector profile",
 						     "maxLength": 256,
 						     "pattern": "",
-						     "$ref": "#/definitions/ConnectorProfileName",
 						     "type": "string"
 						   }
 						*/
@@ -565,7 +507,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "Upsolver",
 						       "LookoutMetrics"
 						     ],
-						     "$ref": "#/definitions/ConnectorType",
 						     "type": "string"
 						   }
 						*/
@@ -589,29 +530,24 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "maxLength": 63,
 						                 "minLength": 3,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/BucketName",
 						                 "type": "string"
 						               },
 						               "BucketPrefix": {
 						                 "maxLength": 512,
-						                 "$ref": "#/definitions/BucketPrefix",
 						                 "type": "string"
 						               },
 						               "FailOnFirstError": {
 						                 "type": "boolean"
 						               }
 						             },
-						             "$ref": "#/definitions/ErrorHandlingConfig",
 						             "type": "object"
 						           },
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/EventBridgeDestinationProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -623,11 +559,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/LookoutMetricsDestinationProperties",
 						         "type": "object"
 						       },
 						       "Redshift": {
@@ -635,7 +569,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "properties": {
 						           "BucketPrefix": {
 						             "maxLength": 512,
-						             "$ref": "#/definitions/BucketPrefix",
 						             "type": "string"
 						           },
 						           "ErrorHandlingConfig": {
@@ -645,36 +578,30 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "maxLength": 63,
 						                 "minLength": 3,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/BucketName",
 						                 "type": "string"
 						               },
 						               "BucketPrefix": {
 						                 "maxLength": 512,
-						                 "$ref": "#/definitions/BucketPrefix",
 						                 "type": "string"
 						               },
 						               "FailOnFirstError": {
 						                 "type": "boolean"
 						               }
 						             },
-						             "$ref": "#/definitions/ErrorHandlingConfig",
 						             "type": "object"
 						           },
 						           "IntermediateBucketName": {
 						             "maxLength": 63,
 						             "minLength": 3,
 						             "pattern": "",
-						             "$ref": "#/definitions/BucketName",
 						             "type": "string"
 						           },
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/RedshiftDestinationProperties",
 						         "required": [
 						           "Object",
 						           "IntermediateBucketName"
@@ -688,12 +615,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "maxLength": 63,
 						             "minLength": 3,
 						             "pattern": "",
-						             "$ref": "#/definitions/BucketName",
 						             "type": "string"
 						           },
 						           "BucketPrefix": {
 						             "maxLength": 512,
-						             "$ref": "#/definitions/BucketPrefix",
 						             "type": "string"
 						           },
 						           "S3OutputFormatConfig": {
@@ -706,11 +631,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "None",
 						                       "SingleFile"
 						                     ],
-						                     "$ref": "#/definitions/AggregationType",
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/AggregationConfig",
 						                 "type": "object"
 						               },
 						               "FileType": {
@@ -719,7 +642,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "JSON",
 						                   "PARQUET"
 						                 ],
-						                 "$ref": "#/definitions/FileType",
 						                 "type": "string"
 						               },
 						               "PrefixConfig": {
@@ -733,7 +655,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "HOUR",
 						                       "MINUTE"
 						                     ],
-						                     "$ref": "#/definitions/PrefixFormat",
 						                     "type": "string"
 						                   },
 						                   "PrefixType": {
@@ -742,19 +663,15 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "PATH",
 						                       "PATH_AND_FILENAME"
 						                     ],
-						                     "$ref": "#/definitions/PrefixType",
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/PrefixConfig",
 						                 "type": "object"
 						               }
 						             },
-						             "$ref": "#/definitions/S3OutputFormatConfig",
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/S3DestinationProperties",
 						         "required": [
 						           "BucketName"
 						         ],
@@ -770,19 +687,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "maxLength": 63,
 						                 "minLength": 3,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/BucketName",
 						                 "type": "string"
 						               },
 						               "BucketPrefix": {
 						                 "maxLength": 512,
-						                 "$ref": "#/definitions/BucketPrefix",
 						                 "type": "string"
 						               },
 						               "FailOnFirstError": {
 						                 "type": "boolean"
 						               }
 						             },
-						             "$ref": "#/definitions/ErrorHandlingConfig",
 						             "type": "object"
 						           },
 						           "IdFieldNames": {
@@ -795,7 +709,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           },
 						           "WriteOperationType": {
@@ -804,11 +717,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "UPSERT",
 						               "UPDATE"
 						             ],
-						             "$ref": "#/definitions/WriteOperationType",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SalesforceDestinationProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -819,7 +730,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "properties": {
 						           "BucketPrefix": {
 						             "maxLength": 512,
-						             "$ref": "#/definitions/BucketPrefix",
 						             "type": "string"
 						           },
 						           "ErrorHandlingConfig": {
@@ -829,36 +739,30 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "maxLength": 63,
 						                 "minLength": 3,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/BucketName",
 						                 "type": "string"
 						               },
 						               "BucketPrefix": {
 						                 "maxLength": 512,
-						                 "$ref": "#/definitions/BucketPrefix",
 						                 "type": "string"
 						               },
 						               "FailOnFirstError": {
 						                 "type": "boolean"
 						               }
 						             },
-						             "$ref": "#/definitions/ErrorHandlingConfig",
 						             "type": "object"
 						           },
 						           "IntermediateBucketName": {
 						             "maxLength": 63,
 						             "minLength": 3,
 						             "pattern": "",
-						             "$ref": "#/definitions/BucketName",
 						             "type": "string"
 						           },
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SnowflakeDestinationProperties",
 						         "required": [
 						           "Object",
 						           "IntermediateBucketName"
@@ -872,12 +776,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "maxLength": 63,
 						             "minLength": 16,
 						             "pattern": "",
-						             "$ref": "#/definitions/UpsolverBucketName",
 						             "type": "string"
 						           },
 						           "BucketPrefix": {
 						             "maxLength": 512,
-						             "$ref": "#/definitions/BucketPrefix",
 						             "type": "string"
 						           },
 						           "S3OutputFormatConfig": {
@@ -890,11 +792,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "None",
 						                       "SingleFile"
 						                     ],
-						                     "$ref": "#/definitions/AggregationType",
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/AggregationConfig",
 						                 "type": "object"
 						               },
 						               "FileType": {
@@ -903,7 +803,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                   "JSON",
 						                   "PARQUET"
 						                 ],
-						                 "$ref": "#/definitions/FileType",
 						                 "type": "string"
 						               },
 						               "PrefixConfig": {
@@ -917,7 +816,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "HOUR",
 						                       "MINUTE"
 						                     ],
-						                     "$ref": "#/definitions/PrefixFormat",
 						                     "type": "string"
 						                   },
 						                   "PrefixType": {
@@ -926,22 +824,18 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                       "PATH",
 						                       "PATH_AND_FILENAME"
 						                     ],
-						                     "$ref": "#/definitions/PrefixType",
 						                     "type": "string"
 						                   }
 						                 },
-						                 "$ref": "#/definitions/PrefixConfig",
 						                 "type": "object"
 						               }
 						             },
-						             "$ref": "#/definitions/UpsolverS3OutputFormatConfig",
 						             "required": [
 						               "PrefixConfig"
 						             ],
 						             "type": "object"
 						           }
 						         },
-						         "$ref": "#/definitions/UpsolverDestinationProperties",
 						         "required": [
 						           "BucketName",
 						           "S3OutputFormatConfig"
@@ -958,19 +852,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						                 "maxLength": 63,
 						                 "minLength": 3,
 						                 "pattern": "",
-						                 "$ref": "#/definitions/BucketName",
 						                 "type": "string"
 						               },
 						               "BucketPrefix": {
 						                 "maxLength": 512,
-						                 "$ref": "#/definitions/BucketPrefix",
 						                 "type": "string"
 						               },
 						               "FailOnFirstError": {
 						                 "type": "boolean"
 						               }
 						             },
-						             "$ref": "#/definitions/ErrorHandlingConfig",
 						             "type": "object"
 						           },
 						           "IdFieldNames": {
@@ -983,7 +874,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           },
 						           "WriteOperationType": {
@@ -992,18 +882,15 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						               "UPSERT",
 						               "UPDATE"
 						             ],
-						             "$ref": "#/definitions/WriteOperationType",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ZendeskDestinationProperties",
 						         "required": [
 						           "Object"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/DestinationConnectorProperties",
 						     "type": "object"
 						   }
 						*/
@@ -1024,29 +911,24 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "maxLength": 63,
 									             "minLength": 3,
 									             "pattern": "",
-									             "$ref": "#/definitions/BucketName",
 									             "type": "string"
 									           },
 									           "BucketPrefix": {
 									             "maxLength": 512,
-									             "$ref": "#/definitions/BucketPrefix",
 									             "type": "string"
 									           },
 									           "FailOnFirstError": {
 									             "type": "boolean"
 									           }
 									         },
-									         "$ref": "#/definitions/ErrorHandlingConfig",
 									         "type": "object"
 									       },
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/EventBridgeDestinationProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -1066,19 +948,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "maxLength": 63,
 												         "minLength": 3,
 												         "pattern": "",
-												         "$ref": "#/definitions/BucketName",
 												         "type": "string"
 												       },
 												       "BucketPrefix": {
 												         "maxLength": 512,
-												         "$ref": "#/definitions/BucketPrefix",
 												         "type": "string"
 												       },
 												       "FailOnFirstError": {
 												         "type": "boolean"
 												       }
 												     },
-												     "$ref": "#/definitions/ErrorHandlingConfig",
 												     "type": "object"
 												   }
 												*/
@@ -1092,7 +971,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															     "maxLength": 63,
 															     "minLength": 3,
 															     "pattern": "",
-															     "$ref": "#/definitions/BucketName",
 															     "type": "string"
 															   }
 															*/
@@ -1105,7 +983,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															/*
 															   {
 															     "maxLength": 512,
-															     "$ref": "#/definitions/BucketPrefix",
 															     "type": "string"
 															   }
 															*/
@@ -1134,7 +1011,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -1155,11 +1031,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/LookoutMetricsDestinationProperties",
 									     "type": "object"
 									   }
 									*/
@@ -1172,7 +1046,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -1192,7 +1065,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "properties": {
 									       "BucketPrefix": {
 									         "maxLength": 512,
-									         "$ref": "#/definitions/BucketPrefix",
 									         "type": "string"
 									       },
 									       "ErrorHandlingConfig": {
@@ -1202,36 +1074,30 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "maxLength": 63,
 									             "minLength": 3,
 									             "pattern": "",
-									             "$ref": "#/definitions/BucketName",
 									             "type": "string"
 									           },
 									           "BucketPrefix": {
 									             "maxLength": 512,
-									             "$ref": "#/definitions/BucketPrefix",
 									             "type": "string"
 									           },
 									           "FailOnFirstError": {
 									             "type": "boolean"
 									           }
 									         },
-									         "$ref": "#/definitions/ErrorHandlingConfig",
 									         "type": "object"
 									       },
 									       "IntermediateBucketName": {
 									         "maxLength": 63,
 									         "minLength": 3,
 									         "pattern": "",
-									         "$ref": "#/definitions/BucketName",
 									         "type": "string"
 									       },
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/RedshiftDestinationProperties",
 									     "required": [
 									       "Object",
 									       "IntermediateBucketName"
@@ -1247,7 +1113,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												/*
 												   {
 												     "maxLength": 512,
-												     "$ref": "#/definitions/BucketPrefix",
 												     "type": "string"
 												   }
 												*/
@@ -1265,19 +1130,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "maxLength": 63,
 												         "minLength": 3,
 												         "pattern": "",
-												         "$ref": "#/definitions/BucketName",
 												         "type": "string"
 												       },
 												       "BucketPrefix": {
 												         "maxLength": 512,
-												         "$ref": "#/definitions/BucketPrefix",
 												         "type": "string"
 												       },
 												       "FailOnFirstError": {
 												         "type": "boolean"
 												       }
 												     },
-												     "$ref": "#/definitions/ErrorHandlingConfig",
 												     "type": "object"
 												   }
 												*/
@@ -1291,7 +1153,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															     "maxLength": 63,
 															     "minLength": 3,
 															     "pattern": "",
-															     "$ref": "#/definitions/BucketName",
 															     "type": "string"
 															   }
 															*/
@@ -1304,7 +1165,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															/*
 															   {
 															     "maxLength": 512,
-															     "$ref": "#/definitions/BucketPrefix",
 															     "type": "string"
 															   }
 															*/
@@ -1334,7 +1194,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "maxLength": 63,
 												     "minLength": 3,
 												     "pattern": "",
-												     "$ref": "#/definitions/BucketName",
 												     "type": "string"
 												   }
 												*/
@@ -1348,7 +1207,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -1370,12 +1228,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "maxLength": 63,
 									         "minLength": 3,
 									         "pattern": "",
-									         "$ref": "#/definitions/BucketName",
 									         "type": "string"
 									       },
 									       "BucketPrefix": {
 									         "maxLength": 512,
-									         "$ref": "#/definitions/BucketPrefix",
 									         "type": "string"
 									       },
 									       "S3OutputFormatConfig": {
@@ -1388,11 +1244,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "None",
 									                   "SingleFile"
 									                 ],
-									                 "$ref": "#/definitions/AggregationType",
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/AggregationConfig",
 									             "type": "object"
 									           },
 									           "FileType": {
@@ -1401,7 +1255,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "JSON",
 									               "PARQUET"
 									             ],
-									             "$ref": "#/definitions/FileType",
 									             "type": "string"
 									           },
 									           "PrefixConfig": {
@@ -1415,7 +1268,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "HOUR",
 									                   "MINUTE"
 									                 ],
-									                 "$ref": "#/definitions/PrefixFormat",
 									                 "type": "string"
 									               },
 									               "PrefixType": {
@@ -1424,19 +1276,15 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "PATH",
 									                   "PATH_AND_FILENAME"
 									                 ],
-									                 "$ref": "#/definitions/PrefixType",
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/PrefixConfig",
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/S3OutputFormatConfig",
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/S3DestinationProperties",
 									     "required": [
 									       "BucketName"
 									     ],
@@ -1453,7 +1301,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "maxLength": 63,
 												     "minLength": 3,
 												     "pattern": "",
-												     "$ref": "#/definitions/BucketName",
 												     "type": "string"
 												   }
 												*/
@@ -1466,7 +1313,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												/*
 												   {
 												     "maxLength": 512,
-												     "$ref": "#/definitions/BucketPrefix",
 												     "type": "string"
 												   }
 												*/
@@ -1487,11 +1333,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "None",
 												               "SingleFile"
 												             ],
-												             "$ref": "#/definitions/AggregationType",
 												             "type": "string"
 												           }
 												         },
-												         "$ref": "#/definitions/AggregationConfig",
 												         "type": "object"
 												       },
 												       "FileType": {
@@ -1500,7 +1344,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "JSON",
 												           "PARQUET"
 												         ],
-												         "$ref": "#/definitions/FileType",
 												         "type": "string"
 												       },
 												       "PrefixConfig": {
@@ -1514,7 +1357,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "HOUR",
 												               "MINUTE"
 												             ],
-												             "$ref": "#/definitions/PrefixFormat",
 												             "type": "string"
 												           },
 												           "PrefixType": {
@@ -1523,15 +1365,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "PATH",
 												               "PATH_AND_FILENAME"
 												             ],
-												             "$ref": "#/definitions/PrefixType",
 												             "type": "string"
 												           }
 												         },
-												         "$ref": "#/definitions/PrefixConfig",
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/S3OutputFormatConfig",
 												     "type": "object"
 												   }
 												*/
@@ -1548,11 +1387,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "None",
 															           "SingleFile"
 															         ],
-															         "$ref": "#/definitions/AggregationType",
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/AggregationConfig",
 															     "type": "object"
 															   }
 															*/
@@ -1567,7 +1404,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		       "None",
 																		       "SingleFile"
 																		     ],
-																		     "$ref": "#/definitions/AggregationType",
 																		     "type": "string"
 																		   }
 																		*/
@@ -1588,7 +1424,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "JSON",
 															       "PARQUET"
 															     ],
-															     "$ref": "#/definitions/FileType",
 															     "type": "string"
 															   }
 															*/
@@ -1610,7 +1445,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "HOUR",
 															           "MINUTE"
 															         ],
-															         "$ref": "#/definitions/PrefixFormat",
 															         "type": "string"
 															       },
 															       "PrefixType": {
@@ -1619,11 +1453,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "PATH",
 															           "PATH_AND_FILENAME"
 															         ],
-															         "$ref": "#/definitions/PrefixType",
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/PrefixConfig",
 															     "type": "object"
 															   }
 															*/
@@ -1641,7 +1473,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		       "HOUR",
 																		       "MINUTE"
 																		     ],
-																		     "$ref": "#/definitions/PrefixFormat",
 																		     "type": "string"
 																		   }
 																		*/
@@ -1658,7 +1489,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		       "PATH",
 																		       "PATH_AND_FILENAME"
 																		     ],
-																		     "$ref": "#/definitions/PrefixType",
 																		     "type": "string"
 																		   }
 																		*/
@@ -1691,19 +1521,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "maxLength": 63,
 									             "minLength": 3,
 									             "pattern": "",
-									             "$ref": "#/definitions/BucketName",
 									             "type": "string"
 									           },
 									           "BucketPrefix": {
 									             "maxLength": 512,
-									             "$ref": "#/definitions/BucketPrefix",
 									             "type": "string"
 									           },
 									           "FailOnFirstError": {
 									             "type": "boolean"
 									           }
 									         },
-									         "$ref": "#/definitions/ErrorHandlingConfig",
 									         "type": "object"
 									       },
 									       "IdFieldNames": {
@@ -1716,7 +1543,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       },
 									       "WriteOperationType": {
@@ -1725,11 +1551,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "UPSERT",
 									           "UPDATE"
 									         ],
-									         "$ref": "#/definitions/WriteOperationType",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SalesforceDestinationProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -1749,19 +1573,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "maxLength": 63,
 												         "minLength": 3,
 												         "pattern": "",
-												         "$ref": "#/definitions/BucketName",
 												         "type": "string"
 												       },
 												       "BucketPrefix": {
 												         "maxLength": 512,
-												         "$ref": "#/definitions/BucketPrefix",
 												         "type": "string"
 												       },
 												       "FailOnFirstError": {
 												         "type": "boolean"
 												       }
 												     },
-												     "$ref": "#/definitions/ErrorHandlingConfig",
 												     "type": "object"
 												   }
 												*/
@@ -1775,7 +1596,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															     "maxLength": 63,
 															     "minLength": 3,
 															     "pattern": "",
-															     "$ref": "#/definitions/BucketName",
 															     "type": "string"
 															   }
 															*/
@@ -1788,7 +1608,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															/*
 															   {
 															     "maxLength": 512,
-															     "$ref": "#/definitions/BucketPrefix",
 															     "type": "string"
 															   }
 															*/
@@ -1833,7 +1652,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -1850,7 +1668,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "UPSERT",
 												       "UPDATE"
 												     ],
-												     "$ref": "#/definitions/WriteOperationType",
 												     "type": "string"
 												   }
 												*/
@@ -1870,7 +1687,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "properties": {
 									       "BucketPrefix": {
 									         "maxLength": 512,
-									         "$ref": "#/definitions/BucketPrefix",
 									         "type": "string"
 									       },
 									       "ErrorHandlingConfig": {
@@ -1880,36 +1696,30 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "maxLength": 63,
 									             "minLength": 3,
 									             "pattern": "",
-									             "$ref": "#/definitions/BucketName",
 									             "type": "string"
 									           },
 									           "BucketPrefix": {
 									             "maxLength": 512,
-									             "$ref": "#/definitions/BucketPrefix",
 									             "type": "string"
 									           },
 									           "FailOnFirstError": {
 									             "type": "boolean"
 									           }
 									         },
-									         "$ref": "#/definitions/ErrorHandlingConfig",
 									         "type": "object"
 									       },
 									       "IntermediateBucketName": {
 									         "maxLength": 63,
 									         "minLength": 3,
 									         "pattern": "",
-									         "$ref": "#/definitions/BucketName",
 									         "type": "string"
 									       },
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SnowflakeDestinationProperties",
 									     "required": [
 									       "Object",
 									       "IntermediateBucketName"
@@ -1925,7 +1735,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												/*
 												   {
 												     "maxLength": 512,
-												     "$ref": "#/definitions/BucketPrefix",
 												     "type": "string"
 												   }
 												*/
@@ -1943,19 +1752,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "maxLength": 63,
 												         "minLength": 3,
 												         "pattern": "",
-												         "$ref": "#/definitions/BucketName",
 												         "type": "string"
 												       },
 												       "BucketPrefix": {
 												         "maxLength": 512,
-												         "$ref": "#/definitions/BucketPrefix",
 												         "type": "string"
 												       },
 												       "FailOnFirstError": {
 												         "type": "boolean"
 												       }
 												     },
-												     "$ref": "#/definitions/ErrorHandlingConfig",
 												     "type": "object"
 												   }
 												*/
@@ -1969,7 +1775,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															     "maxLength": 63,
 															     "minLength": 3,
 															     "pattern": "",
-															     "$ref": "#/definitions/BucketName",
 															     "type": "string"
 															   }
 															*/
@@ -1982,7 +1787,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															/*
 															   {
 															     "maxLength": 512,
-															     "$ref": "#/definitions/BucketPrefix",
 															     "type": "string"
 															   }
 															*/
@@ -2012,7 +1816,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "maxLength": 63,
 												     "minLength": 3,
 												     "pattern": "",
-												     "$ref": "#/definitions/BucketName",
 												     "type": "string"
 												   }
 												*/
@@ -2026,7 +1829,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -2048,12 +1850,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "maxLength": 63,
 									         "minLength": 16,
 									         "pattern": "",
-									         "$ref": "#/definitions/UpsolverBucketName",
 									         "type": "string"
 									       },
 									       "BucketPrefix": {
 									         "maxLength": 512,
-									         "$ref": "#/definitions/BucketPrefix",
 									         "type": "string"
 									       },
 									       "S3OutputFormatConfig": {
@@ -2066,11 +1866,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "None",
 									                   "SingleFile"
 									                 ],
-									                 "$ref": "#/definitions/AggregationType",
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/AggregationConfig",
 									             "type": "object"
 									           },
 									           "FileType": {
@@ -2079,7 +1877,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									               "JSON",
 									               "PARQUET"
 									             ],
-									             "$ref": "#/definitions/FileType",
 									             "type": "string"
 									           },
 									           "PrefixConfig": {
@@ -2093,7 +1890,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "HOUR",
 									                   "MINUTE"
 									                 ],
-									                 "$ref": "#/definitions/PrefixFormat",
 									                 "type": "string"
 									               },
 									               "PrefixType": {
@@ -2102,22 +1898,18 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									                   "PATH",
 									                   "PATH_AND_FILENAME"
 									                 ],
-									                 "$ref": "#/definitions/PrefixType",
 									                 "type": "string"
 									               }
 									             },
-									             "$ref": "#/definitions/PrefixConfig",
 									             "type": "object"
 									           }
 									         },
-									         "$ref": "#/definitions/UpsolverS3OutputFormatConfig",
 									         "required": [
 									           "PrefixConfig"
 									         ],
 									         "type": "object"
 									       }
 									     },
-									     "$ref": "#/definitions/UpsolverDestinationProperties",
 									     "required": [
 									       "BucketName",
 									       "S3OutputFormatConfig"
@@ -2135,7 +1927,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "maxLength": 63,
 												     "minLength": 16,
 												     "pattern": "",
-												     "$ref": "#/definitions/UpsolverBucketName",
 												     "type": "string"
 												   }
 												*/
@@ -2148,7 +1939,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												/*
 												   {
 												     "maxLength": 512,
-												     "$ref": "#/definitions/BucketPrefix",
 												     "type": "string"
 												   }
 												*/
@@ -2169,11 +1959,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "None",
 												               "SingleFile"
 												             ],
-												             "$ref": "#/definitions/AggregationType",
 												             "type": "string"
 												           }
 												         },
-												         "$ref": "#/definitions/AggregationConfig",
 												         "type": "object"
 												       },
 												       "FileType": {
@@ -2182,7 +1970,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												           "JSON",
 												           "PARQUET"
 												         ],
-												         "$ref": "#/definitions/FileType",
 												         "type": "string"
 												       },
 												       "PrefixConfig": {
@@ -2196,7 +1983,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "HOUR",
 												               "MINUTE"
 												             ],
-												             "$ref": "#/definitions/PrefixFormat",
 												             "type": "string"
 												           },
 												           "PrefixType": {
@@ -2205,15 +1991,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												               "PATH",
 												               "PATH_AND_FILENAME"
 												             ],
-												             "$ref": "#/definitions/PrefixType",
 												             "type": "string"
 												           }
 												         },
-												         "$ref": "#/definitions/PrefixConfig",
 												         "type": "object"
 												       }
 												     },
-												     "$ref": "#/definitions/UpsolverS3OutputFormatConfig",
 												     "required": [
 												       "PrefixConfig"
 												     ],
@@ -2233,11 +2016,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "None",
 															           "SingleFile"
 															         ],
-															         "$ref": "#/definitions/AggregationType",
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/AggregationConfig",
 															     "type": "object"
 															   }
 															*/
@@ -2252,7 +2033,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		       "None",
 																		       "SingleFile"
 																		     ],
-																		     "$ref": "#/definitions/AggregationType",
 																		     "type": "string"
 																		   }
 																		*/
@@ -2273,7 +2053,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															       "JSON",
 															       "PARQUET"
 															     ],
-															     "$ref": "#/definitions/FileType",
 															     "type": "string"
 															   }
 															*/
@@ -2295,7 +2074,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "HOUR",
 															           "MINUTE"
 															         ],
-															         "$ref": "#/definitions/PrefixFormat",
 															         "type": "string"
 															       },
 															       "PrefixType": {
@@ -2304,11 +2082,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															           "PATH",
 															           "PATH_AND_FILENAME"
 															         ],
-															         "$ref": "#/definitions/PrefixType",
 															         "type": "string"
 															       }
 															     },
-															     "$ref": "#/definitions/PrefixConfig",
 															     "type": "object"
 															   }
 															*/
@@ -2326,7 +2102,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		       "HOUR",
 																		       "MINUTE"
 																		     ],
-																		     "$ref": "#/definitions/PrefixFormat",
 																		     "type": "string"
 																		   }
 																		*/
@@ -2343,7 +2118,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		       "PATH",
 																		       "PATH_AND_FILENAME"
 																		     ],
-																		     "$ref": "#/definitions/PrefixType",
 																		     "type": "string"
 																		   }
 																		*/
@@ -2376,19 +2150,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									             "maxLength": 63,
 									             "minLength": 3,
 									             "pattern": "",
-									             "$ref": "#/definitions/BucketName",
 									             "type": "string"
 									           },
 									           "BucketPrefix": {
 									             "maxLength": 512,
-									             "$ref": "#/definitions/BucketPrefix",
 									             "type": "string"
 									           },
 									           "FailOnFirstError": {
 									             "type": "boolean"
 									           }
 									         },
-									         "$ref": "#/definitions/ErrorHandlingConfig",
 									         "type": "object"
 									       },
 									       "IdFieldNames": {
@@ -2401,7 +2172,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       },
 									       "WriteOperationType": {
@@ -2410,11 +2180,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									           "UPSERT",
 									           "UPDATE"
 									         ],
-									         "$ref": "#/definitions/WriteOperationType",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ZendeskDestinationProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -2434,19 +2202,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												         "maxLength": 63,
 												         "minLength": 3,
 												         "pattern": "",
-												         "$ref": "#/definitions/BucketName",
 												         "type": "string"
 												       },
 												       "BucketPrefix": {
 												         "maxLength": 512,
-												         "$ref": "#/definitions/BucketPrefix",
 												         "type": "string"
 												       },
 												       "FailOnFirstError": {
 												         "type": "boolean"
 												       }
 												     },
-												     "$ref": "#/definitions/ErrorHandlingConfig",
 												     "type": "object"
 												   }
 												*/
@@ -2460,7 +2225,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															     "maxLength": 63,
 															     "minLength": 3,
 															     "pattern": "",
-															     "$ref": "#/definitions/BucketName",
 															     "type": "string"
 															   }
 															*/
@@ -2473,7 +2237,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															/*
 															   {
 															     "maxLength": 512,
-															     "$ref": "#/definitions/BucketPrefix",
 															     "type": "string"
 															   }
 															*/
@@ -2518,7 +2281,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -2535,7 +2297,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												       "UPSERT",
 												       "UPDATE"
 												     ],
-												     "$ref": "#/definitions/WriteOperationType",
 												     "type": "string"
 												   }
 												*/
@@ -2617,7 +2378,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			         "description": "Name of connector profile",
 			         "maxLength": 256,
 			         "pattern": "",
-			         "$ref": "#/definitions/ConnectorProfileName",
 			         "type": "string"
 			       },
 			       "ConnectorType": {
@@ -2642,7 +2402,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "Upsolver",
 			           "LookoutMetrics"
 			         ],
-			         "$ref": "#/definitions/ConnectorType",
 			         "type": "string"
 			       },
 			       "IncrementalPullConfig": {
@@ -2651,11 +2410,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "DatetimeTypeFieldName": {
 			             "description": "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",
 			             "maxLength": 256,
-			             "$ref": "#/definitions/DatetimeTypeFieldName",
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/IncrementalPullConfig",
 			         "type": "object"
 			       },
 			       "SourceConnectorProperties": {
@@ -2667,11 +2424,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/AmplitudeSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
@@ -2683,11 +2438,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/DatadogSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
@@ -2699,11 +2452,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/DynatraceSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
@@ -2715,11 +2466,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/GoogleAnalyticsSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
@@ -2731,11 +2480,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/InforNexusSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
@@ -2747,11 +2494,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/MarketoSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
@@ -2764,16 +2509,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "maxLength": 63,
 			                 "minLength": 3,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/BucketName",
 			                 "type": "string"
 			               },
 			               "BucketPrefix": {
 			                 "maxLength": 512,
-			                 "$ref": "#/definitions/BucketPrefix",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/S3SourceProperties",
 			             "required": [
 			               "BucketName",
 			               "BucketPrefix"
@@ -2784,21 +2526,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "additionalProperties": false,
 			             "properties": {
 			               "EnableDynamicFieldUpdate": {
-			                 "$ref": "#/definitions/EnableDynamicFieldUpdate",
 			                 "type": "boolean"
 			               },
 			               "IncludeDeletedRecords": {
-			                 "$ref": "#/definitions/IncludeDeletedRecords",
 			                 "type": "boolean"
 			               },
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SalesforceSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
@@ -2810,11 +2548,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ServiceNowSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
@@ -2826,11 +2562,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SingularSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
@@ -2842,11 +2576,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/SlackSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
@@ -2858,11 +2590,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/TrendmicroSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
@@ -2874,11 +2604,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/VeevaSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
@@ -2890,22 +2618,18 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "Object": {
 			                 "maxLength": 512,
 			                 "pattern": "",
-			                 "$ref": "#/definitions/Object",
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/ZendeskSourceProperties",
 			             "required": [
 			               "Object"
 			             ],
 			             "type": "object"
 			           }
 			         },
-			         "$ref": "#/definitions/SourceConnectorProperties",
 			         "type": "object"
 			       }
 			     },
-			     "$ref": "#/definitions/SourceFlowConfig",
 			     "required": [
 			       "ConnectorType",
 			       "SourceConnectorProperties"
@@ -2924,7 +2648,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						     "description": "Name of connector profile",
 						     "maxLength": 256,
 						     "pattern": "",
-						     "$ref": "#/definitions/ConnectorProfileName",
 						     "type": "string"
 						   }
 						*/
@@ -2958,7 +2681,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "Upsolver",
 						       "LookoutMetrics"
 						     ],
-						     "$ref": "#/definitions/ConnectorType",
 						     "type": "string"
 						   }
 						*/
@@ -2975,11 +2697,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "DatetimeTypeFieldName": {
 						         "description": "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",
 						         "maxLength": 256,
-						         "$ref": "#/definitions/DatetimeTypeFieldName",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/IncrementalPullConfig",
 						     "type": "object"
 						   }
 						*/
@@ -2993,7 +2713,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									   {
 									     "description": "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",
 									     "maxLength": 256,
-									     "$ref": "#/definitions/DatetimeTypeFieldName",
 									     "type": "string"
 									   }
 									*/
@@ -3018,11 +2737,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/AmplitudeSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -3034,11 +2751,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/DatadogSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -3050,11 +2765,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/DynatraceSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -3066,11 +2779,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/GoogleAnalyticsSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -3082,11 +2793,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/InforNexusSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -3098,11 +2807,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/MarketoSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -3115,16 +2822,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "maxLength": 63,
 						             "minLength": 3,
 						             "pattern": "",
-						             "$ref": "#/definitions/BucketName",
 						             "type": "string"
 						           },
 						           "BucketPrefix": {
 						             "maxLength": 512,
-						             "$ref": "#/definitions/BucketPrefix",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/S3SourceProperties",
 						         "required": [
 						           "BucketName",
 						           "BucketPrefix"
@@ -3135,21 +2839,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "additionalProperties": false,
 						         "properties": {
 						           "EnableDynamicFieldUpdate": {
-						             "$ref": "#/definitions/EnableDynamicFieldUpdate",
 						             "type": "boolean"
 						           },
 						           "IncludeDeletedRecords": {
-						             "$ref": "#/definitions/IncludeDeletedRecords",
 						             "type": "boolean"
 						           },
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SalesforceSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -3161,11 +2861,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ServiceNowSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -3177,11 +2875,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SingularSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -3193,11 +2889,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/SlackSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -3209,11 +2903,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/TrendmicroSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -3225,11 +2917,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/VeevaSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
@@ -3241,18 +2931,15 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "Object": {
 						             "maxLength": 512,
 						             "pattern": "",
-						             "$ref": "#/definitions/Object",
 						             "type": "string"
 						           }
 						         },
-						         "$ref": "#/definitions/ZendeskSourceProperties",
 						         "required": [
 						           "Object"
 						         ],
 						         "type": "object"
 						       }
 						     },
-						     "$ref": "#/definitions/SourceConnectorProperties",
 						     "type": "object"
 						   }
 						*/
@@ -3269,11 +2956,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/AmplitudeSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3289,7 +2974,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3310,11 +2994,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DatadogSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3330,7 +3012,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3351,11 +3032,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/DynatraceSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3371,7 +3050,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3392,11 +3070,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/GoogleAnalyticsSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3412,7 +3088,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3433,11 +3108,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/InforNexusSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3453,7 +3126,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3474,11 +3146,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/MarketoSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3494,7 +3164,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3516,16 +3185,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									         "maxLength": 63,
 									         "minLength": 3,
 									         "pattern": "",
-									         "$ref": "#/definitions/BucketName",
 									         "type": "string"
 									       },
 									       "BucketPrefix": {
 									         "maxLength": 512,
-									         "$ref": "#/definitions/BucketPrefix",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/S3SourceProperties",
 									     "required": [
 									       "BucketName",
 									       "BucketPrefix"
@@ -3543,7 +3209,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												     "maxLength": 63,
 												     "minLength": 3,
 												     "pattern": "",
-												     "$ref": "#/definitions/BucketName",
 												     "type": "string"
 												   }
 												*/
@@ -3556,7 +3221,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												/*
 												   {
 												     "maxLength": 512,
-												     "$ref": "#/definitions/BucketPrefix",
 												     "type": "string"
 												   }
 												*/
@@ -3575,21 +3239,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "additionalProperties": false,
 									     "properties": {
 									       "EnableDynamicFieldUpdate": {
-									         "$ref": "#/definitions/EnableDynamicFieldUpdate",
 									         "type": "boolean"
 									       },
 									       "IncludeDeletedRecords": {
-									         "$ref": "#/definitions/IncludeDeletedRecords",
 									         "type": "boolean"
 									       },
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SalesforceSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3603,7 +3263,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// CloudFormation resource type schema:
 												/*
 												   {
-												     "$ref": "#/definitions/EnableDynamicFieldUpdate",
 												     "type": "boolean"
 												   }
 												*/
@@ -3615,7 +3274,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// CloudFormation resource type schema:
 												/*
 												   {
-												     "$ref": "#/definitions/IncludeDeletedRecords",
 												     "type": "boolean"
 												   }
 												*/
@@ -3629,7 +3287,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3650,11 +3307,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ServiceNowSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3670,7 +3325,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3691,11 +3345,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SingularSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3711,7 +3363,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3732,11 +3383,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/SlackSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3752,7 +3401,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3773,11 +3421,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/TrendmicroSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3793,7 +3439,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3814,11 +3459,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/VeevaSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3834,7 +3477,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3855,11 +3497,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "Object": {
 									         "maxLength": 512,
 									         "pattern": "",
-									         "$ref": "#/definitions/Object",
 									         "type": "string"
 									       }
 									     },
-									     "$ref": "#/definitions/ZendeskSourceProperties",
 									     "required": [
 									       "Object"
 									     ],
@@ -3875,7 +3515,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												   {
 												     "maxLength": 512,
 												     "pattern": "",
-												     "$ref": "#/definitions/Object",
 												     "type": "string"
 												   }
 												*/
@@ -3917,7 +3556,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Tag",
 			       "required": [
 			         "Key",
 			         "Value"
@@ -3981,7 +3619,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			               "enum": [
 			                 "BETWEEN"
 			               ],
-			               "$ref": "#/definitions/AmplitudeConnectorOperator",
 			               "type": "string"
 			             },
 			             "Datadog": {
@@ -4002,7 +3639,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "VALIDATE_NUMERIC",
 			                 "NO_OP"
 			               ],
-			               "$ref": "#/definitions/DatadogConnectorOperator",
 			               "type": "string"
 			             },
 			             "Dynatrace": {
@@ -4023,7 +3659,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "VALIDATE_NUMERIC",
 			                 "NO_OP"
 			               ],
-			               "$ref": "#/definitions/DynatraceConnectorOperator",
 			               "type": "string"
 			             },
 			             "GoogleAnalytics": {
@@ -4031,7 +3666,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "PROJECTION",
 			                 "BETWEEN"
 			               ],
-			               "$ref": "#/definitions/GoogleAnalyticsConnectorOperator",
 			               "type": "string"
 			             },
 			             "InforNexus": {
@@ -4052,7 +3686,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "VALIDATE_NUMERIC",
 			                 "NO_OP"
 			               ],
-			               "$ref": "#/definitions/InforNexusConnectorOperator",
 			               "type": "string"
 			             },
 			             "Marketo": {
@@ -4074,7 +3707,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "VALIDATE_NUMERIC",
 			                 "NO_OP"
 			               ],
-			               "$ref": "#/definitions/MarketoConnectorOperator",
 			               "type": "string"
 			             },
 			             "S3": {
@@ -4100,7 +3732,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "VALIDATE_NUMERIC",
 			                 "NO_OP"
 			               ],
-			               "$ref": "#/definitions/S3ConnectorOperator",
 			               "type": "string"
 			             },
 			             "Salesforce": {
@@ -4127,7 +3758,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "VALIDATE_NUMERIC",
 			                 "NO_OP"
 			               ],
-			               "$ref": "#/definitions/SalesforceConnectorOperator",
 			               "type": "string"
 			             },
 			             "ServiceNow": {
@@ -4154,7 +3784,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "VALIDATE_NUMERIC",
 			                 "NO_OP"
 			               ],
-			               "$ref": "#/definitions/ServiceNowConnectorOperator",
 			               "type": "string"
 			             },
 			             "Singular": {
@@ -4174,7 +3803,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "VALIDATE_NUMERIC",
 			                 "NO_OP"
 			               ],
-			               "$ref": "#/definitions/SingularConnectorOperator",
 			               "type": "string"
 			             },
 			             "Slack": {
@@ -4195,7 +3823,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "VALIDATE_NUMERIC",
 			                 "NO_OP"
 			               ],
-			               "$ref": "#/definitions/SlackConnectorOperator",
 			               "type": "string"
 			             },
 			             "Trendmicro": {
@@ -4215,7 +3842,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "VALIDATE_NUMERIC",
 			                 "NO_OP"
 			               ],
-			               "$ref": "#/definitions/TrendmicroConnectorOperator",
 			               "type": "string"
 			             },
 			             "Veeva": {
@@ -4241,7 +3867,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "VALIDATE_NUMERIC",
 			                 "NO_OP"
 			               ],
-			               "$ref": "#/definitions/VeevaConnectorOperator",
 			               "type": "string"
 			             },
 			             "Zendesk": {
@@ -4261,11 +3886,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "VALIDATE_NUMERIC",
 			                 "NO_OP"
 			               ],
-			               "$ref": "#/definitions/ZendeskConnectorOperator",
 			               "type": "string"
 			             }
 			           },
-			           "$ref": "#/definitions/ConnectorOperator",
 			           "type": "object"
 			         },
 			         "DestinationField": {
@@ -4305,7 +3928,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                   "SUBFIELD_CATEGORY_MAP",
 			                   "EXCLUDE_SOURCE_FIELDS_LIST"
 			                 ],
-			                 "$ref": "#/definitions/OperatorPropertiesKeys",
 			                 "type": "string"
 			               },
 			               "Value": {
@@ -4314,7 +3936,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			                 "type": "string"
 			               }
 			             },
-			             "$ref": "#/definitions/TaskPropertiesObject",
 			             "required": [
 			               "Key",
 			               "Value"
@@ -4334,11 +3955,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "Truncate",
 			             "Validate"
 			           ],
-			           "$ref": "#/definitions/TaskType",
 			           "type": "string"
 			         }
 			       },
-			       "$ref": "#/definitions/Task",
 			       "required": [
 			         "SourceFields",
 			         "TaskType"
@@ -4362,7 +3981,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "enum": [
 						           "BETWEEN"
 						         ],
-						         "$ref": "#/definitions/AmplitudeConnectorOperator",
 						         "type": "string"
 						       },
 						       "Datadog": {
@@ -4383,7 +4001,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "VALIDATE_NUMERIC",
 						           "NO_OP"
 						         ],
-						         "$ref": "#/definitions/DatadogConnectorOperator",
 						         "type": "string"
 						       },
 						       "Dynatrace": {
@@ -4404,7 +4021,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "VALIDATE_NUMERIC",
 						           "NO_OP"
 						         ],
-						         "$ref": "#/definitions/DynatraceConnectorOperator",
 						         "type": "string"
 						       },
 						       "GoogleAnalytics": {
@@ -4412,7 +4028,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "PROJECTION",
 						           "BETWEEN"
 						         ],
-						         "$ref": "#/definitions/GoogleAnalyticsConnectorOperator",
 						         "type": "string"
 						       },
 						       "InforNexus": {
@@ -4433,7 +4048,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "VALIDATE_NUMERIC",
 						           "NO_OP"
 						         ],
-						         "$ref": "#/definitions/InforNexusConnectorOperator",
 						         "type": "string"
 						       },
 						       "Marketo": {
@@ -4455,7 +4069,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "VALIDATE_NUMERIC",
 						           "NO_OP"
 						         ],
-						         "$ref": "#/definitions/MarketoConnectorOperator",
 						         "type": "string"
 						       },
 						       "S3": {
@@ -4481,7 +4094,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "VALIDATE_NUMERIC",
 						           "NO_OP"
 						         ],
-						         "$ref": "#/definitions/S3ConnectorOperator",
 						         "type": "string"
 						       },
 						       "Salesforce": {
@@ -4508,7 +4120,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "VALIDATE_NUMERIC",
 						           "NO_OP"
 						         ],
-						         "$ref": "#/definitions/SalesforceConnectorOperator",
 						         "type": "string"
 						       },
 						       "ServiceNow": {
@@ -4535,7 +4146,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "VALIDATE_NUMERIC",
 						           "NO_OP"
 						         ],
-						         "$ref": "#/definitions/ServiceNowConnectorOperator",
 						         "type": "string"
 						       },
 						       "Singular": {
@@ -4555,7 +4165,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "VALIDATE_NUMERIC",
 						           "NO_OP"
 						         ],
-						         "$ref": "#/definitions/SingularConnectorOperator",
 						         "type": "string"
 						       },
 						       "Slack": {
@@ -4576,7 +4185,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "VALIDATE_NUMERIC",
 						           "NO_OP"
 						         ],
-						         "$ref": "#/definitions/SlackConnectorOperator",
 						         "type": "string"
 						       },
 						       "Trendmicro": {
@@ -4596,7 +4204,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "VALIDATE_NUMERIC",
 						           "NO_OP"
 						         ],
-						         "$ref": "#/definitions/TrendmicroConnectorOperator",
 						         "type": "string"
 						       },
 						       "Veeva": {
@@ -4622,7 +4229,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "VALIDATE_NUMERIC",
 						           "NO_OP"
 						         ],
-						         "$ref": "#/definitions/VeevaConnectorOperator",
 						         "type": "string"
 						       },
 						       "Zendesk": {
@@ -4642,11 +4248,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "VALIDATE_NUMERIC",
 						           "NO_OP"
 						         ],
-						         "$ref": "#/definitions/ZendeskConnectorOperator",
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ConnectorOperator",
 						     "type": "object"
 						   }
 						*/
@@ -4661,7 +4265,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									     "enum": [
 									       "BETWEEN"
 									     ],
-									     "$ref": "#/definitions/AmplitudeConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -4690,7 +4293,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "VALIDATE_NUMERIC",
 									       "NO_OP"
 									     ],
-									     "$ref": "#/definitions/DatadogConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -4719,7 +4321,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "VALIDATE_NUMERIC",
 									       "NO_OP"
 									     ],
-									     "$ref": "#/definitions/DynatraceConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -4735,7 +4336,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "PROJECTION",
 									       "BETWEEN"
 									     ],
-									     "$ref": "#/definitions/GoogleAnalyticsConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -4764,7 +4364,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "VALIDATE_NUMERIC",
 									       "NO_OP"
 									     ],
-									     "$ref": "#/definitions/InforNexusConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -4794,7 +4393,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "VALIDATE_NUMERIC",
 									       "NO_OP"
 									     ],
-									     "$ref": "#/definitions/MarketoConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -4828,7 +4426,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "VALIDATE_NUMERIC",
 									       "NO_OP"
 									     ],
-									     "$ref": "#/definitions/S3ConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -4863,7 +4460,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "VALIDATE_NUMERIC",
 									       "NO_OP"
 									     ],
-									     "$ref": "#/definitions/SalesforceConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -4898,7 +4494,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "VALIDATE_NUMERIC",
 									       "NO_OP"
 									     ],
-									     "$ref": "#/definitions/ServiceNowConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -4926,7 +4521,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "VALIDATE_NUMERIC",
 									       "NO_OP"
 									     ],
-									     "$ref": "#/definitions/SingularConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -4955,7 +4549,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "VALIDATE_NUMERIC",
 									       "NO_OP"
 									     ],
-									     "$ref": "#/definitions/SlackConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -4983,7 +4576,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "VALIDATE_NUMERIC",
 									       "NO_OP"
 									     ],
-									     "$ref": "#/definitions/TrendmicroConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -5017,7 +4609,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "VALIDATE_NUMERIC",
 									       "NO_OP"
 									     ],
-									     "$ref": "#/definitions/VeevaConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -5045,7 +4636,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "VALIDATE_NUMERIC",
 									       "NO_OP"
 									     ],
-									     "$ref": "#/definitions/ZendeskConnectorOperator",
 									     "type": "string"
 									   }
 									*/
@@ -5115,7 +4705,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						             "SUBFIELD_CATEGORY_MAP",
 						             "EXCLUDE_SOURCE_FIELDS_LIST"
 						           ],
-						           "$ref": "#/definitions/OperatorPropertiesKeys",
 						           "type": "string"
 						         },
 						         "Value": {
@@ -5124,7 +4713,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						           "type": "string"
 						         }
 						       },
-						       "$ref": "#/definitions/TaskPropertiesObject",
 						       "required": [
 						         "Key",
 						         "Value"
@@ -5159,7 +4747,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									       "SUBFIELD_CATEGORY_MAP",
 									       "EXCLUDE_SOURCE_FIELDS_LIST"
 									     ],
-									     "$ref": "#/definitions/OperatorPropertiesKeys",
 									     "type": "string"
 									   }
 									*/
@@ -5199,7 +4786,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "Truncate",
 						       "Validate"
 						     ],
-						     "$ref": "#/definitions/TaskType",
 						     "type": "string"
 						   }
 						*/
@@ -5246,7 +4832,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			             "type": "string"
 			           }
 			         },
-			         "$ref": "#/definitions/ScheduledTriggerProperties",
 			         "required": [
 			           "ScheduleExpression"
 			         ],
@@ -5258,11 +4843,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			           "Event",
 			           "OnDemand"
 			         ],
-			         "$ref": "#/definitions/TriggerType",
 			         "type": "string"
 			       }
 			     },
-			     "$ref": "#/definitions/TriggerConfig",
 			     "required": [
 			       "TriggerType"
 			     ],
@@ -5303,7 +4886,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						         "type": "string"
 						       }
 						     },
-						     "$ref": "#/definitions/ScheduledTriggerProperties",
 						     "required": [
 						       "ScheduleExpression"
 						     ],
@@ -5389,7 +4971,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						       "Event",
 						       "OnDemand"
 						     ],
-						     "$ref": "#/definitions/TriggerType",
 						     "type": "string"
 						   }
 						*/
