@@ -14,6 +14,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"sort"
+	"strings"
 	"text/template"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -252,7 +253,10 @@ func (d *Downloader) ResourceSchemas() ([]*ResourceData, error) {
 func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, error) {
 	resourceSchemaFilename := schema.CloudFormationSchemaPath
 	if resourceSchemaFilename == "" {
-		resourceSchemaFilename = path.Join(d.config.Defaults.SchemaCacheDirectory, fmt.Sprintf("%s.json", schema.CloudFormationTypeName))
+		filename := fmt.Sprintf("%s.json", schema.CloudFormationTypeName)
+		// Replace all '::'s in the filename.
+		filename = strings.ReplaceAll(filename, "::", "_")
+		resourceSchemaFilename = path.Join(d.config.Defaults.SchemaCacheDirectory, filename)
 	}
 
 	resourceSchemaFileExists := fileExists(resourceSchemaFilename)
