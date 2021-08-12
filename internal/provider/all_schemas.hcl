@@ -1355,7 +1355,7 @@ resource_schema "aws_wafv2_regex_pattern_set" {
   cloudformation_type_name = "AWS::WAFv2::RegexPatternSet"
 }
 
-# error generating Terraform aws_wafv2_rule_group resource: error emitting root properties schema code: CustomRequestHandling is of unsupported type:
+# Goes into infinite loop while generating code...
 # resource_schema "aws_wafv2_rule_group" {
 #   cloudformation_type_name = "AWS::WAFv2::RuleGroup"
 # }
