@@ -82,13 +82,9 @@ func NewGenerator(ui cli.Ui, tfResourceType, cfTypeSchemaFile string) *Generator
 	}
 }
 
-func (g *Generator) Infof(format string, a ...interface{}) {
-	g.ui.Info(fmt.Sprintf(format, a...))
-}
-
 // Generate generates the resource's type factory into the specified file.
 func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
-	g.Infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", g.tfResourceType, g.cfTypeSchemaFile, schemaFilename, acctestsFilename)
+	g.infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", g.tfResourceType, g.cfTypeSchemaFile, schemaFilename, acctestsFilename)
 
 	// Create target directories.
 	for _, filename := range []string{schemaFilename, acctestsFilename} {
@@ -96,14 +92,14 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 		err := os.MkdirAll(dirname, 0755)
 
 		if err != nil {
-			return fmt.Errorf("error creating target directory %s: %w", dirname, err)
+			return fmt.Errorf("creating target directory %s: %w", dirname, err)
 		}
 	}
 
 	resource, err := NewResource(g.tfResourceType, g.cfTypeSchemaFile)
 
 	if err != nil {
-		return fmt.Errorf("error reading CloudFormation resource schema for %s: %w", g.tfResourceType, err)
+		return fmt.Errorf("reading CloudFormation resource schema for %s: %w", g.tfResourceType, err)
 	}
 
 	cfTypeName := *resource.CfResource.TypeName
@@ -130,7 +126,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	codeFeatures, err := codeEmitter.EmitRootPropertiesSchema()
 
 	if err != nil {
-		return fmt.Errorf("error emitting root properties schema code: %w", err)
+		return fmt.Errorf("emitting schema code: %w", err)
 	}
 
 	rootPropertiesSchema := sb.String()
@@ -196,27 +192,27 @@ func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templat
 	tmpl, err := template.New("function").Parse(templateBody)
 
 	if err != nil {
-		return fmt.Errorf("error parsing function template: %w", err)
+		return fmt.Errorf("parsing function template: %w", err)
 	}
 
 	var buffer bytes.Buffer
 	err = tmpl.Execute(&buffer, templateData)
 
 	if err != nil {
-		return fmt.Errorf("error executing template: %w", err)
+		return fmt.Errorf("executing template: %w", err)
 	}
 
 	generatedFileContents, err := format.Source(buffer.Bytes())
 
 	if err != nil {
-		g.Infof("%s", buffer.String())
-		return fmt.Errorf("error formatting generated source code: %w", err)
+		g.infof("%s", buffer.String())
+		return fmt.Errorf("formatting generated source code: %w", err)
 	}
 
 	f, err := os.Create(filename)
 
 	if err != nil {
-		return fmt.Errorf("error creating file (%s): %w", filename, err)
+		return fmt.Errorf("creating file (%s): %w", filename, err)
 	}
 
 	defer f.Close()
@@ -224,10 +220,14 @@ func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templat
 	_, err = f.Write(generatedFileContents)
 
 	if err != nil {
-		return fmt.Errorf("error writing to file (%s): %w", filename, err)
+		return fmt.Errorf("writing to file (%s): %w", filename, err)
 	}
 
 	return nil
+}
+
+func (g *Generator) infof(format string, a ...interface{}) {
+	g.ui.Info(fmt.Sprintf(format, a...))
 }
 
 type TemplateData struct {
@@ -384,17 +384,17 @@ func NewResource(resourceType, cfTypeSchemaFile string) (*Resource, error) {
 	resourceSchema, err := cfschema.NewResourceJsonSchemaPath(cfTypeSchemaFile)
 
 	if err != nil {
-		return nil, fmt.Errorf("error reading CloudFormation Resource Type Schema: %w", err)
+		return nil, fmt.Errorf("reading CloudFormation Resource Type Schema: %w", err)
 	}
 
 	resource, err := resourceSchema.Resource()
 
 	if err != nil {
-		return nil, fmt.Errorf("error parsing CloudFormation Resource Type Schema: %w", err)
+		return nil, fmt.Errorf("parsing CloudFormation Resource Type Schema: %w", err)
 	}
 
 	if err := resource.Expand(); err != nil {
-		return nil, fmt.Errorf("error expanding JSON Pointer references: %w", err)
+		return nil, fmt.Errorf("expanding JSON Pointer references: %w", err)
 	}
 
 	return &Resource{

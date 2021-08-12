@@ -5,6 +5,7 @@ import (
 	"io"
 	"regexp"
 	"sort"
+	"strings"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
@@ -92,17 +93,9 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 	// Complex types.
 	//
 	case cfschema.PropertyTypeArray:
-		// https://github.com/aws-cloudformation/cloudformation-resource-schema#insertionorder
-		insertionOrder := true
-		if property.InsertionOrder != nil {
-			insertionOrder = *property.InsertionOrder
-		}
-		uniqueItems := false
-		if property.UniqueItems != nil {
-			uniqueItems = *property.UniqueItems
-		}
+		arrayType := aggregateType(property)
 
-		if uniqueItems && !insertionOrder {
+		if arrayType == aggregateSet {
 			//
 			// Set.
 			//
@@ -122,11 +115,11 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
-					return 0, fmt.Errorf("%s is of unsupported type: set of map", name)
+					return 0, unsupportedTypeError(path, "set of key-value map")
 				}
 
 				if len(property.Items.Properties) == 0 {
-					return 0, fmt.Errorf("%s is of unsupported type: set of undefined schema", name)
+					return 0, unsupportedTypeError(path, "set of undefined schema")
 				}
 
 				features |= UsesInternalTypes
@@ -157,15 +150,15 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				e.printf("),\n")
 
 			default:
-				return 0, fmt.Errorf("%s is of unsupported type: set of %s", name, itemType)
+				return 0, unsupportedTypeError(path, fmt.Sprintf("set of %s", itemType))
 			}
 		} else {
-			if uniqueItems && insertionOrder {
+			if arrayType == aggregateOrderedSet {
 				e.printf("// Ordered set.\n")
 				e.warnf("%s is of type: ordered set. Emitting a Terraform list", name)
 			}
 
-			if !uniqueItems && !insertionOrder {
+			if arrayType == aggregateMultiset {
 				e.printf("// Multiset.\n")
 				e.warnf("%s is of type: multiset. Emitting a Terraform list", name)
 			}
@@ -185,11 +178,11 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
-					return 0, fmt.Errorf("%s is of unsupported type: list of map", name)
+					return 0, unsupportedTypeError(path, "list of key-value map")
 				}
 
 				if len(property.Items.Properties) == 0 {
-					return 0, fmt.Errorf("%s is of unsupported type: list of undefined schema", name)
+					return 0, unsupportedTypeError(path, "list of undefined schema")
 				}
 
 				e.printf("Attributes: schema.ListNestedAttributes(\n")
@@ -219,7 +212,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				e.printf("),\n")
 
 			default:
-				return 0, fmt.Errorf("%s is of unsupported type: list of %s", name, itemType)
+				return 0, unsupportedTypeError(path, fmt.Sprintf("list of %s", itemType))
 			}
 		}
 
@@ -229,7 +222,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 			// Map.
 			//
 			if len(property.Properties) > 0 {
-				return 0, fmt.Errorf("%s has both Properties and PatternProperties", name)
+				return 0, fmt.Errorf("%s has both Properties and PatternProperties", strings.Join(path, "/"))
 			}
 
 			// Sort the patterns to reduce diffs.
@@ -277,7 +270,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 						e.printf("Type: types.MapType{ElemType:providertypes.SetType{ElemType:types.StringType}},\n")
 
 					default:
-						return 0, fmt.Errorf("%s is of unsupported type: key-value map of set of %s", name, itemType)
+						return 0, unsupportedTypeError(path, fmt.Sprintf("key-value map of set of %s", itemType))
 					}
 				} else {
 					switch itemType := patternProperty.Items.Type.String(); itemType {
@@ -291,17 +284,17 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 						e.printf("Type: types.MapType{ElemType:types.ListType{ElemType:types.StringType}},\n")
 
 					default:
-						return 0, fmt.Errorf("%s is of unsupported type: key-value map of list of %s", name, itemType)
+						return 0, unsupportedTypeError(path, fmt.Sprintf("key-value map of list of %s", itemType))
 					}
 				}
 
 			case cfschema.PropertyTypeObject:
 				if len(patternProperty.PatternProperties) > 0 {
-					return 0, fmt.Errorf("%s is of unsupported type: key-value map of key-value map", name)
+					return 0, unsupportedTypeError(path, "key-value map of key-value map")
 				}
 
 				if len(patternProperty.Properties) == 0 {
-					return 0, fmt.Errorf("%s is of unsupported type: key-value map of undefined schema", name)
+					return 0, unsupportedTypeError(path, "key-value map of undefined schema")
 				}
 
 				e.printf("Attributes: schema.MapNestedAttributes(\n")
@@ -331,7 +324,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				e.printf("),\n")
 
 			default:
-				return 0, fmt.Errorf("%s is of unsupported type: key-value map of %s", name, propertyType)
+				return 0, unsupportedTypeError(path, fmt.Sprintf("key-value map of %s", propertyType))
 			}
 
 			for _, pattern := range patterns[1:] {
@@ -369,7 +362,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 		e.printf("),\n")
 
 	default:
-		return 0, fmt.Errorf("%s is of unsupported type: %s", name, propertyType)
+		return 0, unsupportedTypeError(path, propertyType)
 	}
 
 	createOnly := e.CfResource.CreateOnlyProperties.ContainsPath(path)
@@ -484,4 +477,8 @@ func aggregateType(property *cfschema.Property) aggregate {
 	}
 
 	return aggregateList
+}
+
+func unsupportedTypeError(path []string, typ string) error {
+	return fmt.Errorf("%s is of unsupported type: %s", strings.Join(path, "/"), typ)
 }
