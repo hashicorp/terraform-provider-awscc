@@ -74,19 +74,11 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"comment": {
 						// Property: Comment
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"runtime": {
 						// Property: Runtime
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -110,10 +102,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"function_arn": {
 						// Property: FunctionARN
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Computed: true,
 					},

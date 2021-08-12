@@ -50,32 +50,11 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				map[string]schema.Attribute{
 					"sns": {
 						// Property: Sns
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
-						//   "properties": {
-						//     "TopicArn": {
-						//       "maxLength": 1024,
-						//       "minLength": 36,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"topic_arn": {
 									// Property: TopicArn
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 36,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},

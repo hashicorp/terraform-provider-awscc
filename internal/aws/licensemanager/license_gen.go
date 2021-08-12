@@ -77,40 +77,15 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"borrow_configuration": {
 						// Property: BorrowConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "AllowEarlyCheckIn": {
-						//       "type": "boolean"
-						//     },
-						//     "MaxTimeToLiveInMinutes": {
-						//       "type": "integer"
-						//     }
-						//   },
-						//   "required": [
-						//     "MaxTimeToLiveInMinutes",
-						//     "AllowEarlyCheckIn"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"allow_early_check_in": {
 									// Property: AllowEarlyCheckIn
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Required: true,
 								},
 								"max_time_to_live_in_minutes": {
 									// Property: MaxTimeToLiveInMinutes
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Required: true,
 								},
@@ -120,27 +95,10 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"provisional_configuration": {
 						// Property: ProvisionalConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "MaxTimeToLiveInMinutes": {
-						//       "type": "integer"
-						//     }
-						//   },
-						//   "required": [
-						//     "MaxTimeToLiveInMinutes"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"max_time_to_live_in_minutes": {
 									// Property: MaxTimeToLiveInMinutes
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Required: true,
 								},
@@ -150,10 +108,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"renew_type": {
 						// Property: RenewType
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -201,55 +155,31 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"allow_check_in": {
 						// Property: AllowCheckIn
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"max_count": {
 						// Property: MaxCount
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"overage": {
 						// Property: Overage
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"unit": {
 						// Property: Unit
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -291,19 +221,11 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"sign_key": {
 						// Property: SignKey
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -349,19 +271,11 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -442,24 +356,12 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"begin": {
 						// Property: Begin
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Validity begin date for the license.",
-						//   "format": "date-time",
-						//   "type": "string"
-						// }
 						Description: "Validity begin date for the license.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"end": {
 						// Property: End
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Validity begin date for the license.",
-						//   "format": "date-time",
-						//   "type": "string"
-						// }
 						Description: "Validity begin date for the license.",
 						Type:        types.StringType,
 						Required:    true,

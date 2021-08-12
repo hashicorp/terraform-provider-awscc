@@ -232,122 +232,51 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				map[string]schema.Attribute{
 					"key_usage": {
 						// Property: KeyUsage
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Structure that contains X.509 KeyUsage information.",
-						//   "properties": {
-						//     "CRLSign": {
-						//       "type": "boolean"
-						//     },
-						//     "DataEncipherment": {
-						//       "type": "boolean"
-						//     },
-						//     "DecipherOnly": {
-						//       "type": "boolean"
-						//     },
-						//     "DigitalSignature": {
-						//       "type": "boolean"
-						//     },
-						//     "EncipherOnly": {
-						//       "type": "boolean"
-						//     },
-						//     "KeyAgreement": {
-						//       "type": "boolean"
-						//     },
-						//     "KeyCertSign": {
-						//       "type": "boolean"
-						//     },
-						//     "KeyEncipherment": {
-						//       "type": "boolean"
-						//     },
-						//     "NonRepudiation": {
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Structure that contains X.509 KeyUsage information.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"crl_sign": {
 									// Property: CRLSign
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"data_encipherment": {
 									// Property: DataEncipherment
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"decipher_only": {
 									// Property: DecipherOnly
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"digital_signature": {
 									// Property: DigitalSignature
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"encipher_only": {
 									// Property: EncipherOnly
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"key_agreement": {
 									// Property: KeyAgreement
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"key_cert_sign": {
 									// Property: KeyCertSign
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"key_encipherment": {
 									// Property: KeyEncipherment
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"non_repudiation": {
 									// Property: NonRepudiation
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
@@ -357,446 +286,86 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					},
 					"subject_information_access": {
 						// Property: SubjectInformationAccess
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Array of X.509 AccessDescription.",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "Structure that contains X.509 AccessDescription information.",
-						//     "properties": {
-						//       "AccessLocation": {
-						//         "additionalProperties": false,
-						//         "description": "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
-						//         "properties": {
-						//           "DirectoryName": {
-						//             "additionalProperties": false,
-						//             "description": "Structure that contains X.500 distinguished name information for your CA.",
-						//             "properties": {
-						//               "CommonName": {
-						//                 "type": "string"
-						//               },
-						//               "Country": {
-						//                 "type": "string"
-						//               },
-						//               "DistinguishedNameQualifier": {
-						//                 "type": "string"
-						//               },
-						//               "GenerationQualifier": {
-						//                 "type": "string"
-						//               },
-						//               "GivenName": {
-						//                 "type": "string"
-						//               },
-						//               "Initials": {
-						//                 "type": "string"
-						//               },
-						//               "Locality": {
-						//                 "type": "string"
-						//               },
-						//               "Organization": {
-						//                 "type": "string"
-						//               },
-						//               "OrganizationalUnit": {
-						//                 "type": "string"
-						//               },
-						//               "Pseudonym": {
-						//                 "type": "string"
-						//               },
-						//               "SerialNumber": {
-						//                 "type": "string"
-						//               },
-						//               "State": {
-						//                 "type": "string"
-						//               },
-						//               "Surname": {
-						//                 "type": "string"
-						//               },
-						//               "Title": {
-						//                 "type": "string"
-						//               }
-						//             },
-						//             "type": "object"
-						//           },
-						//           "DnsName": {
-						//             "description": "String that contains X.509 DnsName information.",
-						//             "type": "string"
-						//           },
-						//           "EdiPartyName": {
-						//             "additionalProperties": false,
-						//             "description": "Structure that contains X.509 EdiPartyName information.",
-						//             "properties": {
-						//               "NameAssigner": {
-						//                 "type": "string"
-						//               },
-						//               "PartyName": {
-						//                 "type": "string"
-						//               }
-						//             },
-						//             "required": [
-						//               "PartyName",
-						//               "NameAssigner"
-						//             ],
-						//             "type": "object"
-						//           },
-						//           "IpAddress": {
-						//             "description": "String that contains X.509 IpAddress information.",
-						//             "type": "string"
-						//           },
-						//           "OtherName": {
-						//             "additionalProperties": false,
-						//             "description": "Structure that contains X.509 OtherName information.",
-						//             "properties": {
-						//               "TypeId": {
-						//                 "description": "String that contains X.509 ObjectIdentifier information.",
-						//                 "type": "string"
-						//               },
-						//               "Value": {
-						//                 "type": "string"
-						//               }
-						//             },
-						//             "required": [
-						//               "TypeId",
-						//               "Value"
-						//             ],
-						//             "type": "object"
-						//           },
-						//           "RegisteredId": {
-						//             "description": "String that contains X.509 ObjectIdentifier information.",
-						//             "type": "string"
-						//           },
-						//           "Rfc822Name": {
-						//             "description": "String that contains X.509 Rfc822Name information.",
-						//             "type": "string"
-						//           },
-						//           "UniformResourceIdentifier": {
-						//             "description": "String that contains X.509 UniformResourceIdentifier information.",
-						//             "type": "string"
-						//           }
-						//         },
-						//         "type": "object"
-						//       },
-						//       "AccessMethod": {
-						//         "additionalProperties": false,
-						//         "description": "Structure that contains X.509 AccessMethod information. Assign one and ONLY one field.",
-						//         "properties": {
-						//           "AccessMethodType": {
-						//             "description": "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
-						//             "type": "string"
-						//           },
-						//           "CustomObjectIdentifier": {
-						//             "description": "String that contains X.509 ObjectIdentifier information.",
-						//             "type": "string"
-						//           }
-						//         },
-						//         "type": "object"
-						//       }
-						//     },
-						//     "required": [
-						//       "AccessMethod",
-						//       "AccessLocation"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "Array of X.509 AccessDescription.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"access_location": {
 									// Property: AccessLocation
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
-									//   "properties": {
-									//     "DirectoryName": {
-									//       "additionalProperties": false,
-									//       "description": "Structure that contains X.500 distinguished name information for your CA.",
-									//       "properties": {
-									//         "CommonName": {
-									//           "type": "string"
-									//         },
-									//         "Country": {
-									//           "type": "string"
-									//         },
-									//         "DistinguishedNameQualifier": {
-									//           "type": "string"
-									//         },
-									//         "GenerationQualifier": {
-									//           "type": "string"
-									//         },
-									//         "GivenName": {
-									//           "type": "string"
-									//         },
-									//         "Initials": {
-									//           "type": "string"
-									//         },
-									//         "Locality": {
-									//           "type": "string"
-									//         },
-									//         "Organization": {
-									//           "type": "string"
-									//         },
-									//         "OrganizationalUnit": {
-									//           "type": "string"
-									//         },
-									//         "Pseudonym": {
-									//           "type": "string"
-									//         },
-									//         "SerialNumber": {
-									//           "type": "string"
-									//         },
-									//         "State": {
-									//           "type": "string"
-									//         },
-									//         "Surname": {
-									//           "type": "string"
-									//         },
-									//         "Title": {
-									//           "type": "string"
-									//         }
-									//       },
-									//       "type": "object"
-									//     },
-									//     "DnsName": {
-									//       "description": "String that contains X.509 DnsName information.",
-									//       "type": "string"
-									//     },
-									//     "EdiPartyName": {
-									//       "additionalProperties": false,
-									//       "description": "Structure that contains X.509 EdiPartyName information.",
-									//       "properties": {
-									//         "NameAssigner": {
-									//           "type": "string"
-									//         },
-									//         "PartyName": {
-									//           "type": "string"
-									//         }
-									//       },
-									//       "required": [
-									//         "PartyName",
-									//         "NameAssigner"
-									//       ],
-									//       "type": "object"
-									//     },
-									//     "IpAddress": {
-									//       "description": "String that contains X.509 IpAddress information.",
-									//       "type": "string"
-									//     },
-									//     "OtherName": {
-									//       "additionalProperties": false,
-									//       "description": "Structure that contains X.509 OtherName information.",
-									//       "properties": {
-									//         "TypeId": {
-									//           "description": "String that contains X.509 ObjectIdentifier information.",
-									//           "type": "string"
-									//         },
-									//         "Value": {
-									//           "type": "string"
-									//         }
-									//       },
-									//       "required": [
-									//         "TypeId",
-									//         "Value"
-									//       ],
-									//       "type": "object"
-									//     },
-									//     "RegisteredId": {
-									//       "description": "String that contains X.509 ObjectIdentifier information.",
-									//       "type": "string"
-									//     },
-									//     "Rfc822Name": {
-									//       "description": "String that contains X.509 Rfc822Name information.",
-									//       "type": "string"
-									//     },
-									//     "UniformResourceIdentifier": {
-									//       "description": "String that contains X.509 UniformResourceIdentifier information.",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Description: "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"directory_name": {
 												// Property: DirectoryName
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "description": "Structure that contains X.500 distinguished name information for your CA.",
-												//   "properties": {
-												//     "CommonName": {
-												//       "type": "string"
-												//     },
-												//     "Country": {
-												//       "type": "string"
-												//     },
-												//     "DistinguishedNameQualifier": {
-												//       "type": "string"
-												//     },
-												//     "GenerationQualifier": {
-												//       "type": "string"
-												//     },
-												//     "GivenName": {
-												//       "type": "string"
-												//     },
-												//     "Initials": {
-												//       "type": "string"
-												//     },
-												//     "Locality": {
-												//       "type": "string"
-												//     },
-												//     "Organization": {
-												//       "type": "string"
-												//     },
-												//     "OrganizationalUnit": {
-												//       "type": "string"
-												//     },
-												//     "Pseudonym": {
-												//       "type": "string"
-												//     },
-												//     "SerialNumber": {
-												//       "type": "string"
-												//     },
-												//     "State": {
-												//       "type": "string"
-												//     },
-												//     "Surname": {
-												//       "type": "string"
-												//     },
-												//     "Title": {
-												//       "type": "string"
-												//     }
-												//   },
-												//   "type": "object"
-												// }
 												Description: "Structure that contains X.500 distinguished name information for your CA.",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"common_name": {
 															// Property: CommonName
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"country": {
 															// Property: Country
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"distinguished_name_qualifier": {
 															// Property: DistinguishedNameQualifier
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"generation_qualifier": {
 															// Property: GenerationQualifier
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"given_name": {
 															// Property: GivenName
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"initials": {
 															// Property: Initials
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"locality": {
 															// Property: Locality
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"organization": {
 															// Property: Organization
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"organizational_unit": {
 															// Property: OrganizationalUnit
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"pseudonym": {
 															// Property: Pseudonym
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"serial_number": {
 															// Property: SerialNumber
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"state": {
 															// Property: State
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"surname": {
 															// Property: Surname
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"title": {
 															// Property: Title
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
@@ -806,53 +375,22 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 											},
 											"dns_name": {
 												// Property: DnsName
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "String that contains X.509 DnsName information.",
-												//   "type": "string"
-												// }
 												Description: "String that contains X.509 DnsName information.",
 												Type:        types.StringType,
 												Optional:    true,
 											},
 											"edi_party_name": {
 												// Property: EdiPartyName
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "description": "Structure that contains X.509 EdiPartyName information.",
-												//   "properties": {
-												//     "NameAssigner": {
-												//       "type": "string"
-												//     },
-												//     "PartyName": {
-												//       "type": "string"
-												//     }
-												//   },
-												//   "required": [
-												//     "PartyName",
-												//     "NameAssigner"
-												//   ],
-												//   "type": "object"
-												// }
 												Description: "Structure that contains X.509 EdiPartyName information.",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"name_assigner": {
 															// Property: NameAssigner
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
 														"party_name": {
 															// Property: PartyName
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -862,56 +400,23 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 											},
 											"ip_address": {
 												// Property: IpAddress
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "String that contains X.509 IpAddress information.",
-												//   "type": "string"
-												// }
 												Description: "String that contains X.509 IpAddress information.",
 												Type:        types.StringType,
 												Optional:    true,
 											},
 											"other_name": {
 												// Property: OtherName
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "description": "Structure that contains X.509 OtherName information.",
-												//   "properties": {
-												//     "TypeId": {
-												//       "description": "String that contains X.509 ObjectIdentifier information.",
-												//       "type": "string"
-												//     },
-												//     "Value": {
-												//       "type": "string"
-												//     }
-												//   },
-												//   "required": [
-												//     "TypeId",
-												//     "Value"
-												//   ],
-												//   "type": "object"
-												// }
 												Description: "Structure that contains X.509 OtherName information.",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"type_id": {
 															// Property: TypeId
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "String that contains X.509 ObjectIdentifier information.",
-															//   "type": "string"
-															// }
 															Description: "String that contains X.509 ObjectIdentifier information.",
 															Type:        types.StringType,
 															Required:    true,
 														},
 														"value": {
 															// Property: Value
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -921,33 +426,18 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 											},
 											"registered_id": {
 												// Property: RegisteredId
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "String that contains X.509 ObjectIdentifier information.",
-												//   "type": "string"
-												// }
 												Description: "String that contains X.509 ObjectIdentifier information.",
 												Type:        types.StringType,
 												Optional:    true,
 											},
 											"rfc_822_name": {
 												// Property: Rfc822Name
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "String that contains X.509 Rfc822Name information.",
-												//   "type": "string"
-												// }
 												Description: "String that contains X.509 Rfc822Name information.",
 												Type:        types.StringType,
 												Optional:    true,
 											},
 											"uniform_resource_identifier": {
 												// Property: UniformResourceIdentifier
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "String that contains X.509 UniformResourceIdentifier information.",
-												//   "type": "string"
-												// }
 												Description: "String that contains X.509 UniformResourceIdentifier information.",
 												Type:        types.StringType,
 												Optional:    true,
@@ -958,43 +448,17 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 								},
 								"access_method": {
 									// Property: AccessMethod
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "Structure that contains X.509 AccessMethod information. Assign one and ONLY one field.",
-									//   "properties": {
-									//     "AccessMethodType": {
-									//       "description": "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
-									//       "type": "string"
-									//     },
-									//     "CustomObjectIdentifier": {
-									//       "description": "String that contains X.509 ObjectIdentifier information.",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Description: "Structure that contains X.509 AccessMethod information. Assign one and ONLY one field.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"access_method_type": {
 												// Property: AccessMethodType
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
-												//   "type": "string"
-												// }
 												Description: "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
 												Type:        types.StringType,
 												Optional:    true,
 											},
 											"custom_object_identifier": {
 												// Property: CustomObjectIdentifier
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "String that contains X.509 ObjectIdentifier information.",
-												//   "type": "string"
-												// }
 												Description: "String that contains X.509 ObjectIdentifier information.",
 												Type:        types.StringType,
 												Optional:    true,
@@ -1076,74 +540,31 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				map[string]schema.Attribute{
 					"crl_configuration": {
 						// Property: CrlConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
-						//   "properties": {
-						//     "CustomCname": {
-						//       "type": "string"
-						//     },
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "ExpirationInDays": {
-						//       "type": "integer"
-						//     },
-						//     "S3BucketName": {
-						//       "type": "string"
-						//     },
-						//     "S3ObjectAcl": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"custom_cname": {
 									// Property: CustomCname
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"expiration_in_days": {
 									// Property: ExpirationInDays
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"s3_bucket_name": {
 									// Property: S3BucketName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"s3_object_acl": {
 									// Property: S3ObjectAcl
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1224,127 +645,71 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				map[string]schema.Attribute{
 					"common_name": {
 						// Property: CommonName
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"country": {
 						// Property: Country
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"distinguished_name_qualifier": {
 						// Property: DistinguishedNameQualifier
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"generation_qualifier": {
 						// Property: GenerationQualifier
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"given_name": {
 						// Property: GivenName
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"initials": {
 						// Property: Initials
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"locality": {
 						// Property: Locality
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"organization": {
 						// Property: Organization
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"organizational_unit": {
 						// Property: OrganizationalUnit
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"pseudonym": {
 						// Property: Pseudonym
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"serial_number": {
 						// Property: SerialNumber
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"state": {
 						// Property: State
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"surname": {
 						// Property: Surname
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"title": {
 						// Property: Title
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -1376,19 +741,11 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

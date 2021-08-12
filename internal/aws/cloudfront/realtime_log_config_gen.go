@@ -72,40 +72,15 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				map[string]schema.Attribute{
 					"kinesis_stream_config": {
 						// Property: KinesisStreamConfig
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "RoleArn": {
-						//       "type": "string"
-						//     },
-						//     "StreamArn": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "RoleArn",
-						//     "StreamArn"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"role_arn": {
 									// Property: RoleArn
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"stream_arn": {
 									// Property: StreamArn
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -115,10 +90,6 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 					},
 					"stream_type": {
 						// Property: StreamType
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

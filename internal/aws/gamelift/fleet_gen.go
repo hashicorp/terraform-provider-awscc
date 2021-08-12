@@ -63,15 +63,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"certificate_type": {
 						// Property: CertificateType
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "enum": [
-						//     "DISABLED",
-						//     "GENERATED"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -159,53 +150,24 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"from_port": {
 						// Property: FromPort
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A starting value for a range of allowed port numbers.",
-						//   "type": "integer"
-						// }
 						Description: "A starting value for a range of allowed port numbers.",
 						Type:        types.NumberType,
 						Required:    true,
 					},
 					"ip_range": {
 						// Property: IpRange
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"protocol": {
 						// Property: Protocol
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The network communication protocol used by the fleet.",
-						//   "enum": [
-						//     "TCP",
-						//     "UDP"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The network communication protocol used by the fleet.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"to_port": {
 						// Property: ToPort
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
-						//   "type": "integer"
-						// }
 						Description: "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
 						Type:        types.NumberType,
 						Required:    true,
@@ -336,82 +298,28 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"location": {
 						// Property: Location
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "maxLength": 64,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"location_capacity": {
 						// Property: LocationCapacity
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.",
-						//   "properties": {
-						//     "DesiredEC2Instances": {
-						//       "additionalProperties": false,
-						//       "description": "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
-						//       "type": "integer"
-						//     },
-						//     "MaxSize": {
-						//       "additionalProperties": false,
-						//       "description": "The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
-						//       "type": "integer"
-						//     },
-						//     "MinSize": {
-						//       "additionalProperties": false,
-						//       "description": "The minimum value allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
-						//       "type": "integer"
-						//     }
-						//   },
-						//   "required": [
-						//     "DesiredEC2Instances",
-						//     "MinSize",
-						//     "MaxSize"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"desired_ec2_instances": {
 									// Property: DesiredEC2Instances
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
-									//   "type": "integer"
-									// }
 									Description: "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
 									Type:        types.NumberType,
 									Required:    true,
 								},
 								"max_size": {
 									// Property: MaxSize
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
-									//   "type": "integer"
-									// }
 									Description: "The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
 									Type:        types.NumberType,
 									Required:    true,
 								},
 								"min_size": {
 									// Property: MinSize
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "The minimum value allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
-									//   "type": "integer"
-									// }
 									Description: "The minimum value allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
 									Type:        types.NumberType,
 									Required:    true,
@@ -574,24 +482,12 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"new_game_sessions_per_creator": {
 						// Property: NewGameSessionsPerCreator
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The maximum number of game sessions that an individual can create during the policy period.",
-						//   "type": "integer"
-						// }
 						Description: "The maximum number of game sessions that an individual can create during the policy period.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"policy_period_in_minutes": {
 						// Property: PolicyPeriodInMinutes
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The time span used in evaluating the resource creation limit policy.",
-						//   "type": "integer"
-						// }
 						Description: "The time span used in evaluating the resource creation limit policy.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -662,108 +558,35 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"game_session_activation_timeout_seconds": {
 						// Property: GameSessionActivationTimeoutSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The maximum amount of time (in seconds) that a game session can remain in status ACTIVATING. If the game session is not active before the timeout, activation is terminated and the game session status is changed to TERMINATED.",
-						//   "type": "integer"
-						// }
 						Description: "The maximum amount of time (in seconds) that a game session can remain in status ACTIVATING. If the game session is not active before the timeout, activation is terminated and the game session status is changed to TERMINATED.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"max_concurrent_game_session_activations": {
 						// Property: MaxConcurrentGameSessionActivations
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously. This setting limits the amount of instance resources that can be used for new game activations at any one time.",
-						//   "type": "integer"
-						// }
 						Description: "The maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously. This setting limits the amount of instance resources that can be used for new game activations at any one time.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"server_processes": {
 						// Property: ServerProcesses
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A collection of server process configurations that describe which server processes to run on each instance in a fleet.",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "A set of instructions for launching server processes on each instance in a fleet. Each instruction set identifies the location of the server executable, optional launch parameters, and the number of server processes with this configuration to maintain concurrently on the instance. Server process configurations make up a fleet's RuntimeConfiguration.",
-						//     "properties": {
-						//       "ConcurrentExecutions": {
-						//         "additionalProperties": false,
-						//         "description": "The number of server processes that use this configuration to run concurrently on an instance.",
-						//         "type": "integer"
-						//       },
-						//       "LaunchPath": {
-						//         "additionalProperties": false,
-						//         "description": "The location of the server executable in a custom game build or the name of the Realtime script file that contains the Init() function. Game builds and Realtime scripts are installed on instances at the root:\n\nWindows (for custom game builds only): C:\\game. Example: \"C:\\game\\MyGame\\server.exe\"\n\nLinux: /local/game. Examples: \"/local/game/MyGame/server.exe\" or \"/local/game/MyRealtimeScript.js\"",
-						//         "maxLength": 1024,
-						//         "minLength": 1,
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "Parameters": {
-						//         "additionalProperties": false,
-						//         "description": "An optional list of parameters to pass to the server executable or Realtime script on launch.",
-						//         "maxLength": 1024,
-						//         "minLength": 1,
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "ConcurrentExecutions",
-						//       "LaunchPath"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "maxItems": 50,
-						//   "type": "array"
-						// }
 						Description: "A collection of server process configurations that describe which server processes to run on each instance in a fleet.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"concurrent_executions": {
 									// Property: ConcurrentExecutions
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "The number of server processes that use this configuration to run concurrently on an instance.",
-									//   "type": "integer"
-									// }
 									Description: "The number of server processes that use this configuration to run concurrently on an instance.",
 									Type:        types.NumberType,
 									Required:    true,
 								},
 								"launch_path": {
 									// Property: LaunchPath
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "The location of the server executable in a custom game build or the name of the Realtime script file that contains the Init() function. Game builds and Realtime scripts are installed on instances at the root:\n\nWindows (for custom game builds only): C:\\game. Example: \"C:\\game\\MyGame\\server.exe\"\n\nLinux: /local/game. Examples: \"/local/game/MyGame/server.exe\" or \"/local/game/MyRealtimeScript.js\"",
-									//   "maxLength": 1024,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The location of the server executable in a custom game build or the name of the Realtime script file that contains the Init() function. Game builds and Realtime scripts are installed on instances at the root:\n\nWindows (for custom game builds only): C:\\game. Example: \"C:\\game\\MyGame\\server.exe\"\n\nLinux: /local/game. Examples: \"/local/game/MyGame/server.exe\" or \"/local/game/MyRealtimeScript.js\"",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"parameters": {
 									// Property: Parameters
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "An optional list of parameters to pass to the server executable or Realtime script on launch.",
-									//   "maxLength": 1024,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Description: "An optional list of parameters to pass to the server executable or Realtime script on launch.",
 									Type:        types.StringType,
 									Optional:    true,

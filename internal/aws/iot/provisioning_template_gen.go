@@ -59,19 +59,11 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				map[string]schema.Attribute{
 					"payload_version": {
 						// Property: PayloadVersion
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"target_arn": {
 						// Property: TargetArn
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -114,19 +106,11 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

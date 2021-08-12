@@ -105,23 +105,11 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"backup_vault_events": {
 						// Property: BackupVaultEvents
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "type": "array",
-						//   "uniqueItems": false
-						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 					"sns_topic_arn": {
 						// Property: SNSTopicArn
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

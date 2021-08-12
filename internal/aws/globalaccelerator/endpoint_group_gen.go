@@ -55,33 +55,18 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]schema.Attribute{
 					"client_ip_preservation_enabled": {
 						// Property: ClientIPPreservationEnabled
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "true if client ip should be preserved",
-						//   "type": "boolean"
-						// }
 						Description: "true if client ip should be preserved",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"endpoint_id": {
 						// Property: EndpointId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
-						//   "type": "string"
-						// }
 						Description: "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"weight": {
 						// Property: Weight
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The weight for the endpoint.",
-						//   "type": "integer"
-						// }
 						Description: "The weight for the endpoint.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -204,22 +189,12 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]schema.Attribute{
 					"endpoint_port": {
 						// Property: EndpointPort
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A network port number",
-						//   "type": "integer"
-						// }
 						Description: "A network port number",
 						Type:        types.NumberType,
 						Required:    true,
 					},
 					"listener_port": {
 						// Property: ListenerPort
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A network port number",
-						//   "type": "integer"
-						// }
 						Description: "A network port number",
 						Type:        types.NumberType,
 						Required:    true,

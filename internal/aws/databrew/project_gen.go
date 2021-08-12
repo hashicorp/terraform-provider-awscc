@@ -102,27 +102,12 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"size": {
 						// Property: Size
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Sample size",
-						//   "type": "integer"
-						// }
 						Description: "Sample size",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Sample type",
-						//   "enum": [
-						//     "FIRST_N",
-						//     "LAST_N",
-						//     "RANDOM"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "Sample type",
 						Type:        types.StringType,
 						Required:    true,
@@ -165,23 +150,11 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

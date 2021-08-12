@@ -56,23 +56,11 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 				map[string]schema.Attribute{
 					"parameter_name": {
 						// Property: ParameterName
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"parameter_value": {
 						// Property: ParameterValue
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 4096,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

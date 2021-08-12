@@ -122,15 +122,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"is_public": {
 						// Property: IsPublic
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Specifies whether the policy is public or not.",
-						//   "enum": [
-						//     "true",
-						//     "false"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "Specifies whether the policy is public or not.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -167,44 +158,24 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"block_public_acls": {
 						// Property: BlockPublicAcls
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\n. - PUT Bucket calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
-						//   "type": "boolean"
-						// }
 						Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\n. - PUT Bucket calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"block_public_policy": {
 						// Property: BlockPublicPolicy
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. Enabling this setting doesn't affect existing bucket policies.",
-						//   "type": "boolean"
-						// }
 						Description: "Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. Enabling this setting doesn't affect existing bucket policies.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"ignore_public_acls": {
 						// Property: IgnorePublicAcls
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
-						//   "type": "boolean"
-						// }
 						Description: "Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"restrict_public_buckets": {
 						// Property: RestrictPublicBuckets
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
-						//   "type": "boolean"
-						// }
 						Description: "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
 						Type:        types.BoolType,
 						Optional:    true,
@@ -235,13 +206,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"vpc_id": {
 						// Property: VpcId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "If this field is specified, this access point will only allow connections from the specified VPC ID.",
-						//   "maxLength": 1024,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "If this field is specified, this access point will only allow connections from the specified VPC ID.",
 						Type:        types.StringType,
 						Optional:    true,

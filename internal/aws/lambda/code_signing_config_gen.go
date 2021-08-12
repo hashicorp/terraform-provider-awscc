@@ -52,19 +52,6 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				map[string]schema.Attribute{
 					"signing_profile_version_arns": {
 						// Property: SigningProfileVersionArns
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "List of Signing profile version Arns",
-						//   "items": {
-						//     "maxLength": 1024,
-						//     "minLength": 12,
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "maxItems": 20,
-						//   "minItems": 1,
-						//   "type": "array"
-						// }
 						Description: "List of Signing profile version Arns",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
@@ -123,15 +110,6 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				map[string]schema.Attribute{
 					"untrusted_artifact_on_deployment": {
 						// Property: UntrustedArtifactOnDeployment
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
-						//   "enum": [
-						//     "Warn",
-						//     "Enforce"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
 						Type:        types.StringType,
 						Required:    true,

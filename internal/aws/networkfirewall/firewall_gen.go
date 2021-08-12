@@ -153,11 +153,6 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"subnet_id": {
 						// Property: SubnetId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A SubnetId.",
-						//   "type": "string"
-						// }
 						Description: "A SubnetId.",
 						Type:        types.StringType,
 						Required:    true,
@@ -201,23 +196,11 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

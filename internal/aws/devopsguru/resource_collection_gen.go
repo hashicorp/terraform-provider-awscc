@@ -56,44 +56,11 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				map[string]schema.Attribute{
 					"cloud_formation": {
 						// Property: CloudFormation
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "CloudFormation resource for DevOps Guru to monitor",
-						//   "properties": {
-						//     "StackNames": {
-						//       "description": "An array of CloudFormation stack names.",
-						//       "items": {
-						//         "maxLength": 128,
-						//         "minLength": 1,
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "maxItems": 200,
-						//       "minItems": 1,
-						//       "type": "array"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "CloudFormation resource for DevOps Guru to monitor",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"stack_names": {
 									// Property: StackNames
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "An array of CloudFormation stack names.",
-									//   "items": {
-									//     "maxLength": 128,
-									//     "minLength": 1,
-									//     "pattern": "",
-									//     "type": "string"
-									//   },
-									//   "maxItems": 200,
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Description: "An array of CloudFormation stack names.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,

@@ -76,32 +76,16 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"enable_basic_auth": {
 						// Property: EnableBasicAuth
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"password": {
 						// Property: Password
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"username": {
 						// Property: Username
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -204,23 +188,11 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 5500,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -290,25 +262,11 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

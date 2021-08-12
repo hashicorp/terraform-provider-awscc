@@ -86,66 +86,25 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"iam_role_arn": {
 						// Property: IamRoleArn
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"list_of_tags": {
 						// Property: ListOfTags
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "properties": {
-						//       "ConditionKey": {
-						//         "type": "string"
-						//       },
-						//       "ConditionType": {
-						//         "type": "string"
-						//       },
-						//       "ConditionValue": {
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "ConditionValue",
-						//       "ConditionKey",
-						//       "ConditionType"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "type": "array",
-						//   "uniqueItems": false
-						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"condition_key": {
 									// Property: ConditionKey
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"condition_type": {
 									// Property: ConditionType
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"condition_value": {
 									// Property: ConditionValue
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -156,23 +115,11 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"resources": {
 						// Property: Resources
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "type": "array",
-						//   "uniqueItems": false
-						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"selection_name": {
 						// Property: SelectionName
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

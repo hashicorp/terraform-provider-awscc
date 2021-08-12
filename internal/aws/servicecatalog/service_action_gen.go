@@ -65,22 +65,11 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 1000,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 4096,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

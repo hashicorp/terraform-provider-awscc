@@ -269,76 +269,23 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"dag_processing_logs": {
 						// Property: DagProcessingLogs
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Logging configuration for a specific airflow component.",
-						//   "properties": {
-						//     "CloudWatchLogGroupArn": {
-						//       "description": "",
-						//       "maxLength": 1224,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "Enabled": {
-						//       "description": "",
-						//       "type": "boolean"
-						//     },
-						//     "LogLevel": {
-						//       "description": "",
-						//       "enum": [
-						//         "CRITICAL",
-						//         "ERROR",
-						//         "WARNING",
-						//         "INFO",
-						//         "DEBUG"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Logging configuration for a specific airflow component.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cloud_watch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "maxLength": 1224,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
 								},
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "type": "boolean"
-									// }
 									Description: "",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"log_level": {
 									// Property: LogLevel
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "enum": [
-									//     "CRITICAL",
-									//     "ERROR",
-									//     "WARNING",
-									//     "INFO",
-									//     "DEBUG"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
@@ -349,76 +296,23 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"scheduler_logs": {
 						// Property: SchedulerLogs
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Logging configuration for a specific airflow component.",
-						//   "properties": {
-						//     "CloudWatchLogGroupArn": {
-						//       "description": "",
-						//       "maxLength": 1224,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "Enabled": {
-						//       "description": "",
-						//       "type": "boolean"
-						//     },
-						//     "LogLevel": {
-						//       "description": "",
-						//       "enum": [
-						//         "CRITICAL",
-						//         "ERROR",
-						//         "WARNING",
-						//         "INFO",
-						//         "DEBUG"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Logging configuration for a specific airflow component.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cloud_watch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "maxLength": 1224,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
 								},
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "type": "boolean"
-									// }
 									Description: "",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"log_level": {
 									// Property: LogLevel
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "enum": [
-									//     "CRITICAL",
-									//     "ERROR",
-									//     "WARNING",
-									//     "INFO",
-									//     "DEBUG"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
@@ -429,76 +323,23 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"task_logs": {
 						// Property: TaskLogs
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Logging configuration for a specific airflow component.",
-						//   "properties": {
-						//     "CloudWatchLogGroupArn": {
-						//       "description": "",
-						//       "maxLength": 1224,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "Enabled": {
-						//       "description": "",
-						//       "type": "boolean"
-						//     },
-						//     "LogLevel": {
-						//       "description": "",
-						//       "enum": [
-						//         "CRITICAL",
-						//         "ERROR",
-						//         "WARNING",
-						//         "INFO",
-						//         "DEBUG"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Logging configuration for a specific airflow component.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cloud_watch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "maxLength": 1224,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
 								},
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "type": "boolean"
-									// }
 									Description: "",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"log_level": {
 									// Property: LogLevel
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "enum": [
-									//     "CRITICAL",
-									//     "ERROR",
-									//     "WARNING",
-									//     "INFO",
-									//     "DEBUG"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
@@ -509,76 +350,23 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"webserver_logs": {
 						// Property: WebserverLogs
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Logging configuration for a specific airflow component.",
-						//   "properties": {
-						//     "CloudWatchLogGroupArn": {
-						//       "description": "",
-						//       "maxLength": 1224,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "Enabled": {
-						//       "description": "",
-						//       "type": "boolean"
-						//     },
-						//     "LogLevel": {
-						//       "description": "",
-						//       "enum": [
-						//         "CRITICAL",
-						//         "ERROR",
-						//         "WARNING",
-						//         "INFO",
-						//         "DEBUG"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Logging configuration for a specific airflow component.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cloud_watch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "maxLength": 1224,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
 								},
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "type": "boolean"
-									// }
 									Description: "",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"log_level": {
 									// Property: LogLevel
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "enum": [
-									//     "CRITICAL",
-									//     "ERROR",
-									//     "WARNING",
-									//     "INFO",
-									//     "DEBUG"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
@@ -589,76 +377,23 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"worker_logs": {
 						// Property: WorkerLogs
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Logging configuration for a specific airflow component.",
-						//   "properties": {
-						//     "CloudWatchLogGroupArn": {
-						//       "description": "",
-						//       "maxLength": 1224,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "Enabled": {
-						//       "description": "",
-						//       "type": "boolean"
-						//     },
-						//     "LogLevel": {
-						//       "description": "",
-						//       "enum": [
-						//         "CRITICAL",
-						//         "ERROR",
-						//         "WARNING",
-						//         "INFO",
-						//         "DEBUG"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Logging configuration for a specific airflow component.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cloud_watch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "maxLength": 1224,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
 								},
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "type": "boolean"
-									// }
 									Description: "",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"log_level": {
 									// Property: LogLevel
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "",
-									//   "enum": [
-									//     "CRITICAL",
-									//     "ERROR",
-									//     "WARNING",
-									//     "INFO",
-									//     "DEBUG"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
@@ -748,39 +483,12 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"security_group_ids": {
 						// Property: SecurityGroupIds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A list of security groups to use for the environment.",
-						//   "items": {
-						//     "description": "",
-						//     "maxLength": 1024,
-						//     "minLength": 1,
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "maxItems": 5,
-						//   "minItems": 1,
-						//   "type": "array"
-						// }
 						Description: "A list of security groups to use for the environment.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A list of subnets to use for the environment. These must be private subnets, in the same VPC, in two different availability zones.",
-						//   "items": {
-						//     "description": "",
-						//     "maxLength": 1024,
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "maxItems": 2,
-						//   "minItems": 2,
-						//   "type": "array"
-						// }
 						Description: "A list of subnets to use for the environment. These must be private subnets, in the same VPC, in two different availability zones.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,

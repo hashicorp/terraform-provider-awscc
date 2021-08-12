@@ -145,24 +145,11 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"bucket": {
 						// Property: Bucket
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 63,
-						//   "minLength": 3,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 1024,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -207,26 +194,12 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A string used to identify this tag",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "A string used to identify this tag",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A string containing the value for the tag",
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "A string containing the value for the tag",
 						Type:        types.StringType,
 						Required:    true,

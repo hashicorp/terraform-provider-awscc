@@ -95,21 +95,11 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"gateway_eui": {
 						// Property: GatewayEui
-						// CloudFormation resource type schema:
-						// {
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"rf_region": {
 						// Property: RfRegion
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 64,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -160,23 +150,11 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

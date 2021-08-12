@@ -45,22 +45,12 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"download_speed": {
 						// Property: DownloadSpeed
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Download speed in Mbps.",
-						//   "type": "integer"
-						// }
 						Description: "Download speed in Mbps.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"upload_speed": {
 						// Property: UploadSpeed
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Upload speed in Mbps.",
-						//   "type": "integer"
-						// }
 						Description: "Upload speed in Mbps.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -162,19 +152,11 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

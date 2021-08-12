@@ -135,12 +135,6 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"network_interface_id": {
 						// Property: NetworkInterfaceId
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 100,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

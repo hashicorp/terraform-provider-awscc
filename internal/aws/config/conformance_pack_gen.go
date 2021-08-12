@@ -58,26 +58,12 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"parameter_name": {
 						// Property: ParameterName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Key part of key-value pair with value being parameter value",
-						//   "maxLength": 255,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "Key part of key-value pair with value being parameter value",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"parameter_value": {
 						// Property: ParameterValue
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Value part of key-value pair with key being parameter Name",
-						//   "maxLength": 4096,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "Value part of key-value pair with key being parameter Name",
 						Type:        types.StringType,
 						Required:    true,

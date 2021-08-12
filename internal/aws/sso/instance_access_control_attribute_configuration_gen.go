@@ -68,53 +68,15 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Source": {
-						//       "items": {
-						//         "maxLength": 256,
-						//         "minLength": 0,
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "maxItems": 1,
-						//       "type": "array"
-						//     }
-						//   },
-						//   "required": [
-						//     "Source"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"source": {
 									// Property: Source
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "maxLength": 256,
-									//     "minLength": 0,
-									//     "pattern": "",
-									//     "type": "string"
-									//   },
-									//   "maxItems": 1,
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Required: true,
 								},
@@ -186,97 +148,19 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 				map[string]schema.Attribute{
 					"access_control_attributes": {
 						// Property: AccessControlAttributes
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "properties": {
-						//       "Key": {
-						//         "maxLength": 128,
-						//         "minLength": 1,
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "Value": {
-						//         "additionalProperties": false,
-						//         "properties": {
-						//           "Source": {
-						//             "items": {
-						//               "maxLength": 256,
-						//               "minLength": 0,
-						//               "pattern": "",
-						//               "type": "string"
-						//             },
-						//             "maxItems": 1,
-						//             "type": "array"
-						//           }
-						//         },
-						//         "required": [
-						//           "Source"
-						//         ],
-						//         "type": "object"
-						//       }
-						//     },
-						//     "required": [
-						//       "Key",
-						//       "Value"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "maxItems": 50,
-						//   "type": "array"
-						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 128,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "Source": {
-									//       "items": {
-									//         "maxLength": 256,
-									//         "minLength": 0,
-									//         "pattern": "",
-									//         "type": "string"
-									//       },
-									//       "maxItems": 1,
-									//       "type": "array"
-									//     }
-									//   },
-									//   "required": [
-									//     "Source"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"source": {
 												// Property: Source
-												// CloudFormation resource type schema:
-												// {
-												//   "items": {
-												//     "maxLength": 256,
-												//     "minLength": 0,
-												//     "pattern": "",
-												//     "type": "string"
-												//   },
-												//   "maxItems": 1,
-												//   "type": "array"
-												// }
 												Type:     types.ListType{ElemType: types.StringType},
 												Required: true,
 											},

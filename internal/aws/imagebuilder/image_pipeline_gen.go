@@ -111,22 +111,12 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]schema.Attribute{
 					"image_tests_enabled": {
 						// Property: ImageTestsEnabled
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Defines if tests should be executed when building this image.",
-						//   "type": "boolean"
-						// }
 						Description: "Defines if tests should be executed when building this image.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"timeout_minutes": {
 						// Property: TimeoutMinutes
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The maximum time in minutes that tests are permitted to run.",
-						//   "type": "integer"
-						// }
 						Description: "The maximum time in minutes that tests are permitted to run.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -186,26 +176,12 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]schema.Attribute{
 					"pipeline_execution_start_condition": {
 						// Property: PipelineExecutionStartCondition
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The condition configures when the pipeline should trigger a new image build.",
-						//   "enum": [
-						//     "EXPRESSION_MATCH_ONLY",
-						//     "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The condition configures when the pipeline should trigger a new image build.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"schedule_expression": {
 						// Property: ScheduleExpression
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.",
-						//   "type": "string"
-						// }
 						Description: "The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.",
 						Type:        types.StringType,
 						Optional:    true,

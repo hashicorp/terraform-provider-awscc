@@ -55,13 +55,6 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"style": {
 						// Property: Style
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 100,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

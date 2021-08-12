@@ -96,13 +96,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"vpc_id": {
 						// Property: VpcId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.",
-						//   "maxLength": 1024,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.",
 						Type:        types.StringType,
 						Optional:    true,

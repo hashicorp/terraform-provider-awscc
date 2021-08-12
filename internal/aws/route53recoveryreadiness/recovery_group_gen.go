@@ -103,24 +103,11 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "maxItems": 50,
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,

@@ -641,429 +641,20 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				map[string]schema.Attribute{
 					"connector_profile_credentials": {
 						// Property: ConnectorProfileCredentials
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Connector specific configuration needed to create connector profile based on Authentication mechanism",
-						//   "properties": {
-						//     "Amplitude": {
-						//       "properties": {
-						//         "ApiKey": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "SecretKey": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "ApiKey",
-						//         "SecretKey"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Datadog": {
-						//       "properties": {
-						//         "ApiKey": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ApplicationKey": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "ApiKey",
-						//         "ApplicationKey"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Dynatrace": {
-						//       "properties": {
-						//         "ApiToken": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "ApiToken"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "GoogleAnalytics": {
-						//       "properties": {
-						//         "AccessToken": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ClientId": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ClientSecret": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ConnectorOAuthRequest": {
-						//           "properties": {
-						//             "AuthCode": {
-						//               "description": "The code provided by the connector when it has been authenticated via the connected app.",
-						//               "type": "string"
-						//             },
-						//             "RedirectUri": {
-						//               "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-						//               "type": "string"
-						//             }
-						//           },
-						//           "type": "object"
-						//         },
-						//         "RefreshToken": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "ClientId",
-						//         "ClientSecret"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "InforNexus": {
-						//       "properties": {
-						//         "AccessKeyId": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "Datakey": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "SecretAccessKey": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "UserId": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "AccessKeyId",
-						//         "UserId",
-						//         "SecretAccessKey",
-						//         "Datakey"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Marketo": {
-						//       "properties": {
-						//         "AccessToken": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ClientId": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ClientSecret": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ConnectorOAuthRequest": {
-						//           "properties": {
-						//             "AuthCode": {
-						//               "description": "The code provided by the connector when it has been authenticated via the connected app.",
-						//               "type": "string"
-						//             },
-						//             "RedirectUri": {
-						//               "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-						//               "type": "string"
-						//             }
-						//           },
-						//           "type": "object"
-						//         }
-						//       },
-						//       "required": [
-						//         "ClientId",
-						//         "ClientSecret"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Redshift": {
-						//       "properties": {
-						//         "Password": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "Username": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "Username",
-						//         "Password"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Salesforce": {
-						//       "properties": {
-						//         "AccessToken": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ClientCredentialsArn": {
-						//           "maxLength": 2048,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ConnectorOAuthRequest": {
-						//           "properties": {
-						//             "AuthCode": {
-						//               "description": "The code provided by the connector when it has been authenticated via the connected app.",
-						//               "type": "string"
-						//             },
-						//             "RedirectUri": {
-						//               "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-						//               "type": "string"
-						//             }
-						//           },
-						//           "type": "object"
-						//         },
-						//         "RefreshToken": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "ServiceNow": {
-						//       "properties": {
-						//         "Password": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "Username": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "Username",
-						//         "Password"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Singular": {
-						//       "properties": {
-						//         "ApiKey": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "ApiKey"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Slack": {
-						//       "properties": {
-						//         "AccessToken": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ClientId": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ClientSecret": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ConnectorOAuthRequest": {
-						//           "properties": {
-						//             "AuthCode": {
-						//               "description": "The code provided by the connector when it has been authenticated via the connected app.",
-						//               "type": "string"
-						//             },
-						//             "RedirectUri": {
-						//               "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-						//               "type": "string"
-						//             }
-						//           },
-						//           "type": "object"
-						//         }
-						//       },
-						//       "required": [
-						//         "ClientId",
-						//         "ClientSecret"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Snowflake": {
-						//       "properties": {
-						//         "Password": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "Username": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "Username",
-						//         "Password"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Trendmicro": {
-						//       "properties": {
-						//         "ApiSecretKey": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "ApiSecretKey"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Veeva": {
-						//       "properties": {
-						//         "Password": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "Username": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "Username",
-						//         "Password"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Zendesk": {
-						//       "properties": {
-						//         "AccessToken": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ClientId": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ClientSecret": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "ConnectorOAuthRequest": {
-						//           "properties": {
-						//             "AuthCode": {
-						//               "description": "The code provided by the connector when it has been authenticated via the connected app.",
-						//               "type": "string"
-						//             },
-						//             "RedirectUri": {
-						//               "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-						//               "type": "string"
-						//             }
-						//           },
-						//           "type": "object"
-						//         }
-						//       },
-						//       "required": [
-						//         "ClientId",
-						//         "ClientSecret"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Connector specific configuration needed to create connector profile based on Authentication mechanism",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"amplitude": {
 									// Property: Amplitude
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "ApiKey": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "SecretKey": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "ApiKey",
-									//     "SecretKey"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"api_key": {
 												// Property: ApiKey
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"secret_key": {
 												// Property: SecretKey
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1073,47 +664,15 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"datadog": {
 									// Property: Datadog
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "ApiKey": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ApplicationKey": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "ApiKey",
-									//     "ApplicationKey"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"api_key": {
 												// Property: ApiKey
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"application_key": {
 												// Property: ApplicationKey
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1123,30 +682,10 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"dynatrace": {
 									// Property: Dynatrace
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "ApiToken": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "ApiToken"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"api_token": {
 												// Property: ApiToken
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1156,120 +695,35 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"google_analytics": {
 									// Property: GoogleAnalytics
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "AccessToken": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ClientId": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ClientSecret": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ConnectorOAuthRequest": {
-									//       "properties": {
-									//         "AuthCode": {
-									//           "description": "The code provided by the connector when it has been authenticated via the connected app.",
-									//           "type": "string"
-									//         },
-									//         "RedirectUri": {
-									//           "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-									//           "type": "string"
-									//         }
-									//       },
-									//       "type": "object"
-									//     },
-									//     "RefreshToken": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "ClientId",
-									//     "ClientSecret"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"access_token": {
 												// Property: AccessToken
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"client_id": {
 												// Property: ClientId
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"client_secret": {
 												// Property: ClientSecret
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
-												// CloudFormation resource type schema:
-												// {
-												//   "properties": {
-												//     "AuthCode": {
-												//       "description": "The code provided by the connector when it has been authenticated via the connected app.",
-												//       "type": "string"
-												//     },
-												//     "RedirectUri": {
-												//       "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-												//       "type": "string"
-												//     }
-												//   },
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"auth_code": {
 															// Property: AuthCode
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "The code provided by the connector when it has been authenticated via the connected app.",
-															//   "type": "string"
-															// }
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
 															Type:        types.StringType,
 															Optional:    true,
 														},
 														"redirect_uri": {
 															// Property: RedirectUri
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															//   "type": "string"
-															// }
 															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
 															Type:        types.StringType,
 															Optional:    true,
@@ -1280,12 +734,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											},
 											"refresh_token": {
 												// Property: RefreshToken
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -1295,81 +743,25 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"infor_nexus": {
 									// Property: InforNexus
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "AccessKeyId": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "Datakey": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "SecretAccessKey": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "UserId": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "AccessKeyId",
-									//     "UserId",
-									//     "SecretAccessKey",
-									//     "Datakey"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"access_key_id": {
 												// Property: AccessKeyId
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"datakey": {
 												// Property: Datakey
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"secret_access_key": {
 												// Property: SecretAccessKey
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"user_id": {
 												// Property: UserId
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1379,115 +771,35 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"marketo": {
 									// Property: Marketo
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "AccessToken": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ClientId": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ClientSecret": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ConnectorOAuthRequest": {
-									//       "properties": {
-									//         "AuthCode": {
-									//           "description": "The code provided by the connector when it has been authenticated via the connected app.",
-									//           "type": "string"
-									//         },
-									//         "RedirectUri": {
-									//           "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-									//           "type": "string"
-									//         }
-									//       },
-									//       "type": "object"
-									//     }
-									//   },
-									//   "required": [
-									//     "ClientId",
-									//     "ClientSecret"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"access_token": {
 												// Property: AccessToken
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"client_id": {
 												// Property: ClientId
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"client_secret": {
 												// Property: ClientSecret
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
-												// CloudFormation resource type schema:
-												// {
-												//   "properties": {
-												//     "AuthCode": {
-												//       "description": "The code provided by the connector when it has been authenticated via the connected app.",
-												//       "type": "string"
-												//     },
-												//     "RedirectUri": {
-												//       "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-												//       "type": "string"
-												//     }
-												//   },
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"auth_code": {
 															// Property: AuthCode
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "The code provided by the connector when it has been authenticated via the connected app.",
-															//   "type": "string"
-															// }
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
 															Type:        types.StringType,
 															Optional:    true,
 														},
 														"redirect_uri": {
 															// Property: RedirectUri
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															//   "type": "string"
-															// }
 															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
 															Type:        types.StringType,
 															Optional:    true,
@@ -1502,47 +814,15 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"redshift": {
 									// Property: Redshift
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "Password": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "Username": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "Username",
-									//     "Password"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"password": {
 												// Property: Password
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"username": {
 												// Property: Username
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1552,100 +832,30 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"salesforce": {
 									// Property: Salesforce
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "AccessToken": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ClientCredentialsArn": {
-									//       "maxLength": 2048,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ConnectorOAuthRequest": {
-									//       "properties": {
-									//         "AuthCode": {
-									//           "description": "The code provided by the connector when it has been authenticated via the connected app.",
-									//           "type": "string"
-									//         },
-									//         "RedirectUri": {
-									//           "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-									//           "type": "string"
-									//         }
-									//       },
-									//       "type": "object"
-									//     },
-									//     "RefreshToken": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"access_token": {
 												// Property: AccessToken
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"client_credentials_arn": {
 												// Property: ClientCredentialsArn
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 2048,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
-												// CloudFormation resource type schema:
-												// {
-												//   "properties": {
-												//     "AuthCode": {
-												//       "description": "The code provided by the connector when it has been authenticated via the connected app.",
-												//       "type": "string"
-												//     },
-												//     "RedirectUri": {
-												//       "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-												//       "type": "string"
-												//     }
-												//   },
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"auth_code": {
 															// Property: AuthCode
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "The code provided by the connector when it has been authenticated via the connected app.",
-															//   "type": "string"
-															// }
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
 															Type:        types.StringType,
 															Optional:    true,
 														},
 														"redirect_uri": {
 															// Property: RedirectUri
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															//   "type": "string"
-															// }
 															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
 															Type:        types.StringType,
 															Optional:    true,
@@ -1656,12 +866,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											},
 											"refresh_token": {
 												// Property: RefreshToken
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -1671,47 +875,15 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"service_now": {
 									// Property: ServiceNow
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "Password": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "Username": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "Username",
-									//     "Password"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"password": {
 												// Property: Password
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"username": {
 												// Property: Username
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1721,30 +893,10 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"singular": {
 									// Property: Singular
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "ApiKey": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "ApiKey"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"api_key": {
 												// Property: ApiKey
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1754,115 +906,35 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"slack": {
 									// Property: Slack
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "AccessToken": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ClientId": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ClientSecret": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ConnectorOAuthRequest": {
-									//       "properties": {
-									//         "AuthCode": {
-									//           "description": "The code provided by the connector when it has been authenticated via the connected app.",
-									//           "type": "string"
-									//         },
-									//         "RedirectUri": {
-									//           "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-									//           "type": "string"
-									//         }
-									//       },
-									//       "type": "object"
-									//     }
-									//   },
-									//   "required": [
-									//     "ClientId",
-									//     "ClientSecret"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"access_token": {
 												// Property: AccessToken
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"client_id": {
 												// Property: ClientId
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"client_secret": {
 												// Property: ClientSecret
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
-												// CloudFormation resource type schema:
-												// {
-												//   "properties": {
-												//     "AuthCode": {
-												//       "description": "The code provided by the connector when it has been authenticated via the connected app.",
-												//       "type": "string"
-												//     },
-												//     "RedirectUri": {
-												//       "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-												//       "type": "string"
-												//     }
-												//   },
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"auth_code": {
 															// Property: AuthCode
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "The code provided by the connector when it has been authenticated via the connected app.",
-															//   "type": "string"
-															// }
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
 															Type:        types.StringType,
 															Optional:    true,
 														},
 														"redirect_uri": {
 															// Property: RedirectUri
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															//   "type": "string"
-															// }
 															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
 															Type:        types.StringType,
 															Optional:    true,
@@ -1877,47 +949,15 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"snowflake": {
 									// Property: Snowflake
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "Password": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "Username": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "Username",
-									//     "Password"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"password": {
 												// Property: Password
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"username": {
 												// Property: Username
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1927,30 +967,10 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"trendmicro": {
 									// Property: Trendmicro
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "ApiSecretKey": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "ApiSecretKey"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"api_secret_key": {
 												// Property: ApiSecretKey
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1960,47 +980,15 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"veeva": {
 									// Property: Veeva
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "Password": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "Username": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "Username",
-									//     "Password"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"password": {
 												// Property: Password
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"username": {
 												// Property: Username
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2010,115 +998,35 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"zendesk": {
 									// Property: Zendesk
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "AccessToken": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ClientId": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ClientSecret": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "ConnectorOAuthRequest": {
-									//       "properties": {
-									//         "AuthCode": {
-									//           "description": "The code provided by the connector when it has been authenticated via the connected app.",
-									//           "type": "string"
-									//         },
-									//         "RedirectUri": {
-									//           "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-									//           "type": "string"
-									//         }
-									//       },
-									//       "type": "object"
-									//     }
-									//   },
-									//   "required": [
-									//     "ClientId",
-									//     "ClientSecret"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"access_token": {
 												// Property: AccessToken
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"client_id": {
 												// Property: ClientId
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"client_secret": {
 												// Property: ClientSecret
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
-												// CloudFormation resource type schema:
-												// {
-												//   "properties": {
-												//     "AuthCode": {
-												//       "description": "The code provided by the connector when it has been authenticated via the connected app.",
-												//       "type": "string"
-												//     },
-												//     "RedirectUri": {
-												//       "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-												//       "type": "string"
-												//     }
-												//   },
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"auth_code": {
 															// Property: AuthCode
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "The code provided by the connector when it has been authenticated via the connected app.",
-															//   "type": "string"
-															// }
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
 															Type:        types.StringType,
 															Optional:    true,
 														},
 														"redirect_uri": {
 															// Property: RedirectUri
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															//   "type": "string"
-															// }
 															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
 															Type:        types.StringType,
 															Optional:    true,
@@ -2137,234 +1045,15 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					},
 					"connector_profile_properties": {
 						// Property: ConnectorProfileProperties
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
-						//   "properties": {
-						//     "Datadog": {
-						//       "properties": {
-						//         "InstanceUrl": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "InstanceUrl"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Dynatrace": {
-						//       "properties": {
-						//         "InstanceUrl": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "InstanceUrl"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "InforNexus": {
-						//       "properties": {
-						//         "InstanceUrl": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "InstanceUrl"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Marketo": {
-						//       "properties": {
-						//         "InstanceUrl": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "InstanceUrl"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Redshift": {
-						//       "properties": {
-						//         "BucketName": {
-						//           "maxLength": 63,
-						//           "minLength": 3,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "BucketPrefix": {
-						//           "maxLength": 128,
-						//           "type": "string"
-						//         },
-						//         "DatabaseUrl": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "RoleArn": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "DatabaseUrl",
-						//         "BucketName",
-						//         "RoleArn"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Salesforce": {
-						//       "properties": {
-						//         "InstanceUrl": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "isSandboxEnvironment": {
-						//           "type": "boolean"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "ServiceNow": {
-						//       "properties": {
-						//         "InstanceUrl": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "InstanceUrl"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Slack": {
-						//       "properties": {
-						//         "InstanceUrl": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "InstanceUrl"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Snowflake": {
-						//       "properties": {
-						//         "AccountName": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "BucketName": {
-						//           "maxLength": 63,
-						//           "minLength": 3,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "BucketPrefix": {
-						//           "maxLength": 128,
-						//           "type": "string"
-						//         },
-						//         "PrivateLinkServiceName": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "Region": {
-						//           "maxLength": 64,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "Stage": {
-						//           "maxLength": 16,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "Warehouse": {
-						//           "maxLength": 512,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "Warehouse",
-						//         "Stage",
-						//         "BucketName"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Veeva": {
-						//       "properties": {
-						//         "InstanceUrl": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "InstanceUrl"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "Zendesk": {
-						//       "properties": {
-						//         "InstanceUrl": {
-						//           "maxLength": 256,
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "InstanceUrl"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"datadog": {
 									// Property: Datadog
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "InstanceUrl": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "InstanceUrl"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2374,30 +1063,10 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"dynatrace": {
 									// Property: Dynatrace
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "InstanceUrl": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "InstanceUrl"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2407,30 +1076,10 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"infor_nexus": {
 									// Property: InforNexus
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "InstanceUrl": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "InstanceUrl"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2440,30 +1089,10 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"marketo": {
 									// Property: Marketo
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "InstanceUrl": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "InstanceUrl"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2473,80 +1102,25 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"redshift": {
 									// Property: Redshift
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "BucketName": {
-									//       "maxLength": 63,
-									//       "minLength": 3,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "BucketPrefix": {
-									//       "maxLength": 128,
-									//       "type": "string"
-									//     },
-									//     "DatabaseUrl": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "RoleArn": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "DatabaseUrl",
-									//     "BucketName",
-									//     "RoleArn"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket_name": {
 												// Property: BucketName
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 63,
-												//   "minLength": 3,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 128,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"database_url": {
 												// Property: DatabaseUrl
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"role_arn": {
 												// Property: RoleArn
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2556,39 +1130,15 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"salesforce": {
 									// Property: Salesforce
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "InstanceUrl": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "isSandboxEnvironment": {
-									//       "type": "boolean"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"is_sandbox_environment": {
 												// Property: isSandboxEnvironment
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "boolean"
-												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
@@ -2598,30 +1148,10 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"service_now": {
 									// Property: ServiceNow
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "InstanceUrl": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "InstanceUrl"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2631,30 +1161,10 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"slack": {
 									// Property: Slack
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "InstanceUrl": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "InstanceUrl"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2664,128 +1174,40 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"snowflake": {
 									// Property: Snowflake
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "AccountName": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "BucketName": {
-									//       "maxLength": 63,
-									//       "minLength": 3,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "BucketPrefix": {
-									//       "maxLength": 128,
-									//       "type": "string"
-									//     },
-									//     "PrivateLinkServiceName": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "Region": {
-									//       "maxLength": 64,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "Stage": {
-									//       "maxLength": 16,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "Warehouse": {
-									//       "maxLength": 512,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "Warehouse",
-									//     "Stage",
-									//     "BucketName"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"account_name": {
 												// Property: AccountName
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"bucket_name": {
 												// Property: BucketName
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 63,
-												//   "minLength": 3,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 128,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"private_link_service_name": {
 												// Property: PrivateLinkServiceName
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"region": {
 												// Property: Region
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 64,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"stage": {
 												// Property: Stage
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 16,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"warehouse": {
 												// Property: Warehouse
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2795,30 +1217,10 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"veeva": {
 									// Property: Veeva
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "InstanceUrl": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "InstanceUrl"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2828,30 +1230,10 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"zendesk": {
 									// Property: Zendesk
-									// CloudFormation resource type schema:
-									// {
-									//   "properties": {
-									//     "InstanceUrl": {
-									//       "maxLength": 256,
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "InstanceUrl"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},

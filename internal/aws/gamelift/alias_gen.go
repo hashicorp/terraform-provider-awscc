@@ -93,38 +93,18 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"fleet_id": {
 						// Property: FleetId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"message": {
 						// Property: Message
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
-						//   "type": "string"
-						// }
 						Description: "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
-						//   "enum": [
-						//     "SIMPLE",
-						//     "TERMINAL"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
 						Type:        types.StringType,
 						Required:    true,

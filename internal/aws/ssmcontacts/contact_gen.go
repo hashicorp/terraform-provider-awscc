@@ -137,113 +137,28 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"duration_in_minutes": {
 						// Property: DurationInMinutes
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The time to wait until beginning the next stage.",
-						//   "type": "integer"
-						// }
 						Description: "The time to wait until beginning the next stage.",
 						Type:        types.NumberType,
 						Required:    true,
 					},
 					"targets": {
 						// Property: Targets
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
-						//     "properties": {
-						//       "ChannelTargetInfo": {
-						//         "additionalProperties": false,
-						//         "description": "Information about the contact channel that SSM Incident Manager uses to engage the contact.",
-						//         "properties": {
-						//           "ChannelId": {
-						//             "description": "The Amazon Resource Name (ARN) of the contact channel.",
-						//             "type": "string"
-						//           },
-						//           "RetryIntervalInMinutes": {
-						//             "description": "The number of minutes to wait to retry sending engagement in the case the engagement initially fails.",
-						//             "type": "integer"
-						//           }
-						//         },
-						//         "required": [
-						//           "ChannelId",
-						//           "RetryIntervalInMinutes"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "ContactTargetInfo": {
-						//         "additionalProperties": false,
-						//         "description": "The contact that SSM Incident Manager is engaging during an incident.",
-						//         "properties": {
-						//           "ContactId": {
-						//             "description": "The Amazon Resource Name (ARN) of the contact.",
-						//             "type": "string"
-						//           },
-						//           "IsEssential": {
-						//             "description": "A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.",
-						//             "type": "boolean"
-						//           }
-						//         },
-						//         "required": [
-						//           "ContactId",
-						//           "IsEssential"
-						//         ],
-						//         "type": "object"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"channel_target_info": {
 									// Property: ChannelTargetInfo
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "Information about the contact channel that SSM Incident Manager uses to engage the contact.",
-									//   "properties": {
-									//     "ChannelId": {
-									//       "description": "The Amazon Resource Name (ARN) of the contact channel.",
-									//       "type": "string"
-									//     },
-									//     "RetryIntervalInMinutes": {
-									//       "description": "The number of minutes to wait to retry sending engagement in the case the engagement initially fails.",
-									//       "type": "integer"
-									//     }
-									//   },
-									//   "required": [
-									//     "ChannelId",
-									//     "RetryIntervalInMinutes"
-									//   ],
-									//   "type": "object"
-									// }
 									Description: "Information about the contact channel that SSM Incident Manager uses to engage the contact.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"channel_id": {
 												// Property: ChannelId
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The Amazon Resource Name (ARN) of the contact channel.",
-												//   "type": "string"
-												// }
 												Description: "The Amazon Resource Name (ARN) of the contact channel.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"retry_interval_in_minutes": {
 												// Property: RetryIntervalInMinutes
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The number of minutes to wait to retry sending engagement in the case the engagement initially fails.",
-												//   "type": "integer"
-												// }
 												Description: "The number of minutes to wait to retry sending engagement in the case the engagement initially fails.",
 												Type:        types.NumberType,
 												Required:    true,
@@ -254,47 +169,17 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"contact_target_info": {
 									// Property: ContactTargetInfo
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "The contact that SSM Incident Manager is engaging during an incident.",
-									//   "properties": {
-									//     "ContactId": {
-									//       "description": "The Amazon Resource Name (ARN) of the contact.",
-									//       "type": "string"
-									//     },
-									//     "IsEssential": {
-									//       "description": "A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.",
-									//       "type": "boolean"
-									//     }
-									//   },
-									//   "required": [
-									//     "ContactId",
-									//     "IsEssential"
-									//   ],
-									//   "type": "object"
-									// }
 									Description: "The contact that SSM Incident Manager is engaging during an incident.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"contact_id": {
 												// Property: ContactId
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The Amazon Resource Name (ARN) of the contact.",
-												//   "type": "string"
-												// }
 												Description: "The Amazon Resource Name (ARN) of the contact.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"is_essential": {
 												// Property: IsEssential
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.",
-												//   "type": "boolean"
-												// }
 												Description: "A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.",
 												Type:        types.BoolType,
 												Required:    true,

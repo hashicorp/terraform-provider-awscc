@@ -126,18 +126,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"attributes": {
 						// Property: Attributes
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "$comment": "String to string map",
-						//   "description": "Matches attributes derived from the request.",
-						//   "patternProperties": {
-						//     "": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Matches attributes derived from the request.",
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
@@ -145,140 +133,72 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"fixed_rate": {
 						// Property: FixedRate
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-						//   "type": "number"
-						// }
 						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"http_method": {
 						// Property: HTTPMethod
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Matches the HTTP method from a request URL.",
-						//   "maxLength": 10,
-						//   "type": "string"
-						// }
 						Description: "Matches the HTTP method from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"host": {
 						// Property: Host
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Matches the hostname from a request URL.",
-						//   "maxLength": 64,
-						//   "type": "string"
-						// }
 						Description: "Matches the hostname from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"priority": {
 						// Property: Priority
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The priority of the sampling rule.",
-						//   "type": "integer"
-						// }
 						Description: "The priority of the sampling rule.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"reservoir_size": {
 						// Property: ReservoirSize
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-						//   "type": "integer"
-						// }
 						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"resource_arn": {
 						// Property: ResourceARN
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Matches the ARN of the AWS resource on which the service runs.",
-						//   "maxLength": 500,
-						//   "type": "string"
-						// }
 						Description: "Matches the ARN of the AWS resource on which the service runs.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"rule_arn": {
 						// Property: RuleARN
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-						//   "type": "string"
-						// }
 						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"rule_name": {
 						// Property: RuleName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-						//   "maxLength": 32,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"service_name": {
 						// Property: ServiceName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Matches the name that the service uses to identify itself in segments.",
-						//   "maxLength": 64,
-						//   "type": "string"
-						// }
 						Description: "Matches the name that the service uses to identify itself in segments.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"service_type": {
 						// Property: ServiceType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Matches the origin that the service uses to identify its type in segments.",
-						//   "maxLength": 64,
-						//   "type": "string"
-						// }
 						Description: "Matches the origin that the service uses to identify its type in segments.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"url_path": {
 						// Property: URLPath
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Matches the path from a request URL.",
-						//   "maxLength": 128,
-						//   "type": "string"
-						// }
 						Description: "Matches the path from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"version": {
 						// Property: Version
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The version of the sampling rule format (1)",
-						//   "type": "integer"
-						// }
 						Description: "The version of the sampling rule format (1)",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -381,118 +301,22 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"created_at": {
 						// Property: CreatedAt
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "When the rule was created, in Unix time seconds.",
-						//   "type": "string"
-						// }
 						Description: "When the rule was created, in Unix time seconds.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"modified_at": {
 						// Property: ModifiedAt
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "When the rule was modified, in Unix time seconds.",
-						//   "type": "string"
-						// }
 						Description: "When the rule was modified, in Unix time seconds.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"sampling_rule": {
 						// Property: SamplingRule
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Attributes": {
-						//       "additionalProperties": false,
-						//       "$comment": "String to string map",
-						//       "description": "Matches attributes derived from the request.",
-						//       "patternProperties": {
-						//         "": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "FixedRate": {
-						//       "description": "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-						//       "type": "number"
-						//     },
-						//     "HTTPMethod": {
-						//       "description": "Matches the HTTP method from a request URL.",
-						//       "maxLength": 10,
-						//       "type": "string"
-						//     },
-						//     "Host": {
-						//       "description": "Matches the hostname from a request URL.",
-						//       "maxLength": 64,
-						//       "type": "string"
-						//     },
-						//     "Priority": {
-						//       "description": "The priority of the sampling rule.",
-						//       "type": "integer"
-						//     },
-						//     "ReservoirSize": {
-						//       "description": "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-						//       "type": "integer"
-						//     },
-						//     "ResourceARN": {
-						//       "description": "Matches the ARN of the AWS resource on which the service runs.",
-						//       "maxLength": 500,
-						//       "type": "string"
-						//     },
-						//     "RuleARN": {
-						//       "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-						//       "type": "string"
-						//     },
-						//     "RuleName": {
-						//       "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-						//       "maxLength": 32,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     },
-						//     "ServiceName": {
-						//       "description": "Matches the name that the service uses to identify itself in segments.",
-						//       "maxLength": 64,
-						//       "type": "string"
-						//     },
-						//     "ServiceType": {
-						//       "description": "Matches the origin that the service uses to identify its type in segments.",
-						//       "maxLength": 64,
-						//       "type": "string"
-						//     },
-						//     "URLPath": {
-						//       "description": "Matches the path from a request URL.",
-						//       "maxLength": 128,
-						//       "type": "string"
-						//     },
-						//     "Version": {
-						//       "description": "The version of the sampling rule format (1)",
-						//       "type": "integer"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"attributes": {
 									// Property: Attributes
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "$comment": "String to string map",
-									//   "description": "Matches attributes derived from the request.",
-									//   "patternProperties": {
-									//     "": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Description: "Matches attributes derived from the request.",
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
@@ -500,140 +324,72 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"fixed_rate": {
 									// Property: FixedRate
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-									//   "type": "number"
-									// }
 									Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"http_method": {
 									// Property: HTTPMethod
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Matches the HTTP method from a request URL.",
-									//   "maxLength": 10,
-									//   "type": "string"
-									// }
 									Description: "Matches the HTTP method from a request URL.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"host": {
 									// Property: Host
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Matches the hostname from a request URL.",
-									//   "maxLength": 64,
-									//   "type": "string"
-									// }
 									Description: "Matches the hostname from a request URL.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"priority": {
 									// Property: Priority
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The priority of the sampling rule.",
-									//   "type": "integer"
-									// }
 									Description: "The priority of the sampling rule.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"reservoir_size": {
 									// Property: ReservoirSize
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-									//   "type": "integer"
-									// }
 									Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"resource_arn": {
 									// Property: ResourceARN
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Matches the ARN of the AWS resource on which the service runs.",
-									//   "maxLength": 500,
-									//   "type": "string"
-									// }
 									Description: "Matches the ARN of the AWS resource on which the service runs.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"rule_arn": {
 									// Property: RuleARN
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-									//   "type": "string"
-									// }
 									Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"rule_name": {
 									// Property: RuleName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-									//   "maxLength": 32,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"service_name": {
 									// Property: ServiceName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Matches the name that the service uses to identify itself in segments.",
-									//   "maxLength": 64,
-									//   "type": "string"
-									// }
 									Description: "Matches the name that the service uses to identify itself in segments.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"service_type": {
 									// Property: ServiceType
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Matches the origin that the service uses to identify its type in segments.",
-									//   "maxLength": 64,
-									//   "type": "string"
-									// }
 									Description: "Matches the origin that the service uses to identify its type in segments.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"url_path": {
 									// Property: URLPath
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Matches the path from a request URL.",
-									//   "maxLength": 128,
-									//   "type": "string"
-									// }
 									Description: "Matches the path from a request URL.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"version": {
 									// Property: Version
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The version of the sampling rule format (1)",
-									//   "type": "integer"
-									// }
 									Description: "The version of the sampling rule format (1)",
 									Type:        types.NumberType,
 									Optional:    true,
@@ -722,18 +478,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"attributes": {
 						// Property: Attributes
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "$comment": "String to string map",
-						//   "description": "Matches attributes derived from the request.",
-						//   "patternProperties": {
-						//     "": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Matches attributes derived from the request.",
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
@@ -741,129 +485,66 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"fixed_rate": {
 						// Property: FixedRate
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-						//   "type": "number"
-						// }
 						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"http_method": {
 						// Property: HTTPMethod
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Matches the HTTP method from a request URL.",
-						//   "maxLength": 10,
-						//   "type": "string"
-						// }
 						Description: "Matches the HTTP method from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"host": {
 						// Property: Host
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Matches the hostname from a request URL.",
-						//   "maxLength": 64,
-						//   "type": "string"
-						// }
 						Description: "Matches the hostname from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"priority": {
 						// Property: Priority
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The priority of the sampling rule.",
-						//   "type": "integer"
-						// }
 						Description: "The priority of the sampling rule.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"reservoir_size": {
 						// Property: ReservoirSize
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-						//   "type": "integer"
-						// }
 						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"resource_arn": {
 						// Property: ResourceARN
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Matches the ARN of the AWS resource on which the service runs.",
-						//   "maxLength": 500,
-						//   "type": "string"
-						// }
 						Description: "Matches the ARN of the AWS resource on which the service runs.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"rule_arn": {
 						// Property: RuleARN
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-						//   "type": "string"
-						// }
 						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"rule_name": {
 						// Property: RuleName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-						//   "maxLength": 32,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"service_name": {
 						// Property: ServiceName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Matches the name that the service uses to identify itself in segments.",
-						//   "maxLength": 64,
-						//   "type": "string"
-						// }
 						Description: "Matches the name that the service uses to identify itself in segments.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"service_type": {
 						// Property: ServiceType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Matches the origin that the service uses to identify its type in segments.",
-						//   "maxLength": 64,
-						//   "type": "string"
-						// }
 						Description: "Matches the origin that the service uses to identify its type in segments.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"url_path": {
 						// Property: URLPath
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Matches the path from a request URL.",
-						//   "maxLength": 128,
-						//   "type": "string"
-						// }
 						Description: "Matches the path from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -898,19 +579,11 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

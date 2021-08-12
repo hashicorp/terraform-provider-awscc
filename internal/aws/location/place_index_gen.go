@@ -75,14 +75,6 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"intended_use": {
 						// Property: IntendedUse
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "SingleUse",
-						//     "Storage"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

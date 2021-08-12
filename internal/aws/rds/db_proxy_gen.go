@@ -70,62 +70,30 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"auth_scheme": {
 						// Property: AuthScheme
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
-						//   "enum": [
-						//     "SECRETS"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"description": {
 						// Property: Description
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A user-specified description about the authentication used by a proxy to log in as a specific database user. ",
-						//   "type": "string"
-						// }
 						Description: "A user-specified description about the authentication used by a proxy to log in as a specific database user. ",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"iam_auth": {
 						// Property: IAMAuth
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. ",
-						//   "enum": [
-						//     "DISABLED",
-						//     "REQUIRED"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. ",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"secret_arn": {
 						// Property: SecretArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
-						//   "type": "string"
-						// }
 						Description: "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"user_name": {
 						// Property: UserName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The name of the database user to which the proxy connects.",
-						//   "type": "string"
-						// }
 						Description: "The name of the database user to which the proxy connects.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -263,23 +231,11 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

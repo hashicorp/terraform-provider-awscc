@@ -110,43 +110,21 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]schema.Attribute{
 					"clipboard_mode": {
 						// Property: ClipboardMode
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"ec_2_instance_types": {
 						// Property: Ec2InstanceTypes
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 					"max_session_length_in_minutes": {
 						// Property: MaxSessionLengthInMinutes
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "number"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"streaming_image_ids": {
 						// Property: StreamingImageIds
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},

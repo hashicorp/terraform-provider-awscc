@@ -77,50 +77,16 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"lambda_configuration": {
 						// Property: LambdaConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Configuration options for a Lambda alert action.",
-						//   "properties": {
-						//     "LambdaArn": {
-						//       "maxLength": 256,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "RoleArn": {
-						//       "maxLength": 256,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "RoleArn",
-						//     "LambdaArn"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "Configuration options for a Lambda alert action.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"lambda_arn": {
 									// Property: LambdaArn
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 256,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"role_arn": {
 									// Property: RoleArn
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 256,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -130,50 +96,16 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"sns_configuration": {
 						// Property: SNSConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Configuration options for an SNS alert action.",
-						//   "properties": {
-						//     "RoleArn": {
-						//       "maxLength": 256,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "SnsTopicArn": {
-						//       "maxLength": 256,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "RoleArn",
-						//     "SnsTopicArn"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "Configuration options for an SNS alert action.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"role_arn": {
 									// Property: RoleArn
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 256,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"sns_topic_arn": {
 									// Property: SnsTopicArn
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 256,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},

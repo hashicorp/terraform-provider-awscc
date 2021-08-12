@@ -132,26 +132,12 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Key of the tag. Value can be 1 to 127 characters.",
-						//   "maxLength": 127,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "Key of the tag. Value can be 1 to 127 characters.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Value for the tag. Value can be 1 to 255 characters.",
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "Value for the tag. Value can be 1 to 255 characters.",
 						Type:        types.StringType,
 						Required:    true,

@@ -63,19 +63,11 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"key_arn": {
 						// Property: KeyArn
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"key_type": {
 						// Property: KeyType
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

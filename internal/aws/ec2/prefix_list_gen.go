@@ -79,23 +79,11 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"cidr": {
 						// Property: Cidr
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 46,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"description": {
 						// Property: Description
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -180,22 +168,11 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

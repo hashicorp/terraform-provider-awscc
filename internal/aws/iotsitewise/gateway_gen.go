@@ -54,22 +54,12 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"capability_configuration": {
 						// Property: CapabilityConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The JSON document that defines the gateway capability's configuration.",
-						//   "type": "string"
-						// }
 						Description: "The JSON document that defines the gateway capability's configuration.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"capability_namespace": {
 						// Property: CapabilityNamespace
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The namespace of the capability configuration.",
-						//   "type": "string"
-						// }
 						Description: "The namespace of the capability configuration.",
 						Type:        types.StringType,
 						Required:    true,
@@ -133,31 +123,11 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"greengrass": {
 						// Property: Greengrass
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Contains the ARN of AWS IoT Greengrass Group that the gateway runs on.",
-						//   "properties": {
-						//     "GroupArn": {
-						//       "description": "The ARN of the Greengrass group.",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "GroupArn"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "Contains the ARN of AWS IoT Greengrass Group that the gateway runs on.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"group_arn": {
 									// Property: GroupArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ARN of the Greengrass group.",
-									//   "type": "string"
-									// }
 									Description: "The ARN of the Greengrass group.",
 									Type:        types.StringType,
 									Required:    true,
@@ -201,19 +171,11 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

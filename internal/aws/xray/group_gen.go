@@ -80,22 +80,12 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"insights_enabled": {
 						// Property: InsightsEnabled
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Set the InsightsEnabled value to true to enable insights or false to disable insights.",
-						//   "type": "boolean"
-						// }
 						Description: "Set the InsightsEnabled value to true to enable insights or false to disable insights.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"notifications_enabled": {
 						// Property: NotificationsEnabled
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.",
-						//   "type": "boolean"
-						// }
 						Description: "Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.",
 						Type:        types.BoolType,
 						Optional:    true,
@@ -130,19 +120,11 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

@@ -57,22 +57,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"enabled": {
 						// Property: Enabled
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.",
-						//   "type": "boolean"
-						// }
 						Description: "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"retain_stacks_on_account_removal": {
 						// Property: RetainStacksOnAccountRemoval
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True.",
-						//   "type": "boolean"
-						// }
 						Description: "If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True.",
 						Type:        types.BoolType,
 						Optional:    true,
@@ -185,65 +175,32 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"failure_tolerance_count": {
 						// Property: FailureToleranceCount
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"failure_tolerance_percentage": {
 						// Property: FailureTolerancePercentage
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"max_concurrent_count": {
 						// Property: MaxConcurrentCount
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"max_concurrent_percentage": {
 						// Property: MaxConcurrentPercentage
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"region_concurrency_type": {
 						// Property: RegionConcurrencyType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time",
-						//   "enum": [
-						//     "SEQUENTIAL",
-						//     "PARALLEL"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"region_order": {
 						// Property: RegionOrder
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
@@ -284,22 +241,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"parameter_key": {
 						// Property: ParameterKey
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
-						//   "type": "string"
-						// }
 						Description: "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"parameter_value": {
 						// Property: ParameterValue
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The input value associated with the parameter.",
-						//   "type": "string"
-						// }
 						Description: "The input value associated with the parameter.",
 						Type:        types.StringType,
 						Required:    true,
@@ -414,73 +361,17 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"deployment_targets": {
 						// Property: DeploymentTargets
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
-						//   "properties": {
-						//     "Accounts": {
-						//       "description": "AWS accounts that you want to create stack instances in the specified Region(s) for.",
-						//       "insertionOrder": false,
-						//       "items": {
-						//         "description": "AWS account that you want to create stack instances in the specified Region(s) for.",
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "minItems": 1,
-						//       "type": "array",
-						//       "uniqueItems": true
-						//     },
-						//     "OrganizationalUnitIds": {
-						//       "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
-						//       "insertionOrder": false,
-						//       "items": {
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "minItems": 1,
-						//       "type": "array",
-						//       "uniqueItems": true
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"accounts": {
 									// Property: Accounts
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "AWS accounts that you want to create stack instances in the specified Region(s) for.",
-									//   "insertionOrder": false,
-									//   "items": {
-									//     "description": "AWS account that you want to create stack instances in the specified Region(s) for.",
-									//     "pattern": "",
-									//     "type": "string"
-									//   },
-									//   "minItems": 1,
-									//   "type": "array",
-									//   "uniqueItems": true
-									// }
 									Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
 									Type:        providertypes.SetType{ElemType: types.StringType},
 									Optional:    true,
 								},
 								"organizational_unit_ids": {
 									// Property: OrganizationalUnitIds
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
-									//   "insertionOrder": false,
-									//   "items": {
-									//     "pattern": "",
-									//     "type": "string"
-									//   },
-									//   "minItems": 1,
-									//   "type": "array",
-									//   "uniqueItems": true
-									// }
 									Description: "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
 									Type:        providertypes.SetType{ElemType: types.StringType},
 									Optional:    true,
@@ -491,52 +382,17 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"parameter_overrides": {
 						// Property: ParameterOverrides
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A list of stack set parameters whose values you want to override in the selected stack instances.",
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "properties": {
-						//       "ParameterKey": {
-						//         "description": "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
-						//         "type": "string"
-						//       },
-						//       "ParameterValue": {
-						//         "description": "The input value associated with the parameter.",
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "ParameterKey",
-						//       "ParameterValue"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "type": "array",
-						//   "uniqueItems": true
-						// }
 						Description: "A list of stack set parameters whose values you want to override in the selected stack instances.",
 						Attributes: providertypes.SetNestedAttributes(
 							map[string]schema.Attribute{
 								"parameter_key": {
 									// Property: ParameterKey
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
-									//   "type": "string"
-									// }
 									Description: "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"parameter_value": {
 									// Property: ParameterValue
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The input value associated with the parameter.",
-									//   "type": "string"
-									// }
 									Description: "The input value associated with the parameter.",
 									Type:        types.StringType,
 									Required:    true,
@@ -548,18 +404,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"regions": {
 						// Property: Regions
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "minItems": 1,
-						//   "type": "array",
-						//   "uniqueItems": true
-						// }
 						Description: "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
 						Type:        providertypes.SetType{ElemType: types.StringType},
 						Required:    true,
@@ -633,27 +477,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
 						Type:        types.StringType,
 						Required:    true,

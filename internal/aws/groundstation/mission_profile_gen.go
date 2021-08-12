@@ -78,19 +78,11 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"destination": {
 						// Property: Destination
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"source": {
 						// Property: Source
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -166,21 +158,11 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

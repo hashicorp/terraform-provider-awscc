@@ -129,34 +129,11 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"ad_hoc_filtering_option": {
 						// Property: AdHocFilteringOption
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "\u003cp\u003eAd hoc (one-time) filtering option.\u003c/p\u003e",
-						//   "properties": {
-						//     "AvailabilityStatus": {
-						//       "enum": [
-						//         "ENABLED",
-						//         "DISABLED"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "<p>Ad hoc (one-time) filtering option.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"availability_status": {
 									// Property: AvailabilityStatus
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "ENABLED",
-									//     "DISABLED"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -166,34 +143,11 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"export_to_csv_option": {
 						// Property: ExportToCSVOption
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "\u003cp\u003eExport to .csv option.\u003c/p\u003e",
-						//   "properties": {
-						//     "AvailabilityStatus": {
-						//       "enum": [
-						//         "ENABLED",
-						//         "DISABLED"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "<p>Export to .csv option.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"availability_status": {
 									// Property: AvailabilityStatus
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "ENABLED",
-									//     "DISABLED"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -203,34 +157,11 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"sheet_controls_option": {
 						// Property: SheetControlsOption
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "\u003cp\u003eSheet controls option.\u003c/p\u003e",
-						//   "properties": {
-						//     "VisibilityState": {
-						//       "enum": [
-						//         "EXPANDED",
-						//         "COLLAPSED"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "<p>Sheet controls option.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"visibility_state": {
 									// Property: VisibilityState
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "EXPANDED",
-									//     "COLLAPSED"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -413,61 +344,17 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"date_time_parameters": {
 						// Property: DateTimeParameters
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eDate-time parameters.\u003c/p\u003e",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "\u003cp\u003eA date-time parameter.\u003c/p\u003e",
-						//     "properties": {
-						//       "Name": {
-						//         "description": "\u003cp\u003eA display name for the date-time parameter.\u003c/p\u003e",
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "Values": {
-						//         "description": "\u003cp\u003eThe values for the date-time parameter.\u003c/p\u003e",
-						//         "items": {
-						//           "type": "string"
-						//         },
-						//         "type": "array"
-						//       }
-						//     },
-						//     "required": [
-						//       "Name",
-						//       "Values"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "maxItems": 100,
-						//   "minItems": 0,
-						//   "type": "array"
-						// }
 						Description: "<p>Date-time parameters.</p>",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eA display name for the date-time parameter.\u003c/p\u003e",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "<p>A display name for the date-time parameter.</p>",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"values": {
 									// Property: Values
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eThe values for the date-time parameter.\u003c/p\u003e",
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "type": "array"
-									// }
 									Description: "<p>The values for the date-time parameter.</p>",
 									Type:        types.ListType{ElemType: types.StringType},
 									Required:    true,
@@ -482,61 +369,17 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"decimal_parameters": {
 						// Property: DecimalParameters
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eDecimal parameters.\u003c/p\u003e",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "\u003cp\u003eA decimal parameter.\u003c/p\u003e",
-						//     "properties": {
-						//       "Name": {
-						//         "description": "\u003cp\u003eA display name for the decimal parameter.\u003c/p\u003e",
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "Values": {
-						//         "description": "\u003cp\u003eThe values for the decimal parameter.\u003c/p\u003e",
-						//         "items": {
-						//           "type": "number"
-						//         },
-						//         "type": "array"
-						//       }
-						//     },
-						//     "required": [
-						//       "Name",
-						//       "Values"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "maxItems": 100,
-						//   "minItems": 0,
-						//   "type": "array"
-						// }
 						Description: "<p>Decimal parameters.</p>",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eA display name for the decimal parameter.\u003c/p\u003e",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "<p>A display name for the decimal parameter.</p>",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"values": {
 									// Property: Values
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eThe values for the decimal parameter.\u003c/p\u003e",
-									//   "items": {
-									//     "type": "number"
-									//   },
-									//   "type": "array"
-									// }
 									Description: "<p>The values for the decimal parameter.</p>",
 									Type:        types.ListType{ElemType: types.NumberType},
 									Required:    true,
@@ -551,61 +394,17 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"integer_parameters": {
 						// Property: IntegerParameters
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eInteger parameters.\u003c/p\u003e",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "\u003cp\u003eAn integer parameter.\u003c/p\u003e",
-						//     "properties": {
-						//       "Name": {
-						//         "description": "\u003cp\u003eThe name of the integer parameter.\u003c/p\u003e",
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "Values": {
-						//         "description": "\u003cp\u003eThe values for the integer parameter.\u003c/p\u003e",
-						//         "items": {
-						//           "type": "number"
-						//         },
-						//         "type": "array"
-						//       }
-						//     },
-						//     "required": [
-						//       "Name",
-						//       "Values"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "maxItems": 100,
-						//   "minItems": 0,
-						//   "type": "array"
-						// }
 						Description: "<p>Integer parameters.</p>",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eThe name of the integer parameter.\u003c/p\u003e",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "<p>The name of the integer parameter.</p>",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"values": {
 									// Property: Values
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eThe values for the integer parameter.\u003c/p\u003e",
-									//   "items": {
-									//     "type": "number"
-									//   },
-									//   "type": "array"
-									// }
 									Description: "<p>The values for the integer parameter.</p>",
 									Type:        types.ListType{ElemType: types.NumberType},
 									Required:    true,
@@ -620,61 +419,17 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"string_parameters": {
 						// Property: StringParameters
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eString parameters.\u003c/p\u003e",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "\u003cp\u003eA string parameter.\u003c/p\u003e",
-						//     "properties": {
-						//       "Name": {
-						//         "description": "\u003cp\u003eA display name for a string parameter.\u003c/p\u003e",
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "Values": {
-						//         "description": "\u003cp\u003eThe values of a string parameter.\u003c/p\u003e",
-						//         "items": {
-						//           "type": "string"
-						//         },
-						//         "type": "array"
-						//       }
-						//     },
-						//     "required": [
-						//       "Name",
-						//       "Values"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "maxItems": 100,
-						//   "minItems": 0,
-						//   "type": "array"
-						// }
 						Description: "<p>String parameters.</p>",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eA display name for a string parameter.\u003c/p\u003e",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "<p>A display name for a string parameter.</p>",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"values": {
 									// Property: Values
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eThe values of a string parameter.\u003c/p\u003e",
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "type": "array"
-									// }
 									Description: "<p>The values of a string parameter.</p>",
 									Type:        types.ListType{ElemType: types.StringType},
 									Required:    true,
@@ -732,29 +487,12 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"actions": {
 						// Property: Actions
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "maxItems": 16,
-						//   "minItems": 1,
-						//   "type": "array"
-						// }
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
 					},
 					"principal": {
 						// Property: Principal
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
 						Type:        types.StringType,
 						Required:    true,
@@ -822,111 +560,28 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"source_template": {
 						// Property: SourceTemplate
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "\u003cp\u003eDashboard source template.\u003c/p\u003e",
-						//   "properties": {
-						//     "Arn": {
-						//       "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
-						//       "type": "string"
-						//     },
-						//     "DataSetReferences": {
-						//       "description": "\u003cp\u003eDataset references.\u003c/p\u003e",
-						//       "items": {
-						//         "additionalProperties": false,
-						//         "description": "\u003cp\u003eDataset reference.\u003c/p\u003e",
-						//         "properties": {
-						//           "DataSetArn": {
-						//             "description": "\u003cp\u003eDataset Amazon Resource Name (ARN).\u003c/p\u003e",
-						//             "type": "string"
-						//           },
-						//           "DataSetPlaceholder": {
-						//             "description": "\u003cp\u003eDataset placeholder.\u003c/p\u003e",
-						//             "pattern": "",
-						//             "type": "string"
-						//           }
-						//         },
-						//         "required": [
-						//           "DataSetArn",
-						//           "DataSetPlaceholder"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "minItems": 1,
-						//       "type": "array"
-						//     }
-						//   },
-						//   "required": [
-						//     "Arn",
-						//     "DataSetReferences"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "<p>Dashboard source template.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
-									//   "type": "string"
-									// }
 									Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"data_set_references": {
 									// Property: DataSetReferences
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eDataset references.\u003c/p\u003e",
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "description": "\u003cp\u003eDataset reference.\u003c/p\u003e",
-									//     "properties": {
-									//       "DataSetArn": {
-									//         "description": "\u003cp\u003eDataset Amazon Resource Name (ARN).\u003c/p\u003e",
-									//         "type": "string"
-									//       },
-									//       "DataSetPlaceholder": {
-									//         "description": "\u003cp\u003eDataset placeholder.\u003c/p\u003e",
-									//         "pattern": "",
-									//         "type": "string"
-									//       }
-									//     },
-									//     "required": [
-									//       "DataSetArn",
-									//       "DataSetPlaceholder"
-									//     ],
-									//     "type": "object"
-									//   },
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Description: "<p>Dataset references.</p>",
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"data_set_arn": {
 												// Property: DataSetArn
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "\u003cp\u003eDataset Amazon Resource Name (ARN).\u003c/p\u003e",
-												//   "type": "string"
-												// }
 												Description: "<p>Dataset Amazon Resource Name (ARN).</p>",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"data_set_placeholder": {
 												// Property: DataSetPlaceholder
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "\u003cp\u003eDataset placeholder.\u003c/p\u003e",
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Description: "<p>Dataset placeholder.</p>",
 												Type:        types.StringType,
 												Required:    true,
@@ -984,26 +639,12 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eTag key.\u003c/p\u003e",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "<p>Tag key.</p>",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eTag value.\u003c/p\u003e",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "<p>Tag value.</p>",
 						Type:        types.StringType,
 						Required:    true,
@@ -1148,124 +789,41 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"arn": {
 						// Property: Arn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
-						//   "type": "string"
-						// }
 						Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"created_time": {
 						// Property: CreatedTime
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe time that this dashboard version was created.\u003c/p\u003e",
-						//   "format": "string",
-						//   "type": "string"
-						// }
 						Description: "<p>The time that this dashboard version was created.</p>",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"data_set_arns": {
 						// Property: DataSetArns
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe Amazon Resource Numbers (ARNs) for the datasets that are associated with this\n            version of the dashboard.\u003c/p\u003e",
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "maxItems": 100,
-						//   "minItems": 0,
-						//   "type": "array"
-						// }
 						Description: "<p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this\n            version of the dashboard.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 					},
 					"description": {
 						// Property: Description
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eDescription.\u003c/p\u003e",
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "<p>Description.</p>",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"errors": {
 						// Property: Errors
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eErrors associated with this dashboard version.\u003c/p\u003e",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "\u003cp\u003eDashboard error.\u003c/p\u003e",
-						//     "properties": {
-						//       "Message": {
-						//         "description": "\u003cp\u003eMessage.\u003c/p\u003e",
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "Type": {
-						//         "enum": [
-						//           "ACCESS_DENIED",
-						//           "SOURCE_NOT_FOUND",
-						//           "DATA_SET_NOT_FOUND",
-						//           "INTERNAL_FAILURE",
-						//           "PARAMETER_VALUE_INCOMPATIBLE",
-						//           "PARAMETER_TYPE_INVALID",
-						//           "PARAMETER_NOT_FOUND",
-						//           "COLUMN_TYPE_MISMATCH",
-						//           "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
-						//           "COLUMN_REPLACEMENT_MISSING"
-						//         ],
-						//         "type": "string"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "minItems": 1,
-						//   "type": "array"
-						// }
 						Description: "<p>Errors associated with this dashboard version.</p>",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"message": {
 									// Property: Message
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eMessage.\u003c/p\u003e",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "<p>Message.</p>",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"type": {
 									// Property: Type
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "ACCESS_DENIED",
-									//     "SOURCE_NOT_FOUND",
-									//     "DATA_SET_NOT_FOUND",
-									//     "INTERNAL_FAILURE",
-									//     "PARAMETER_VALUE_INCOMPATIBLE",
-									//     "PARAMETER_TYPE_INVALID",
-									//     "PARAMETER_NOT_FOUND",
-									//     "COLUMN_TYPE_MISMATCH",
-									//     "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
-									//     "COLUMN_REPLACEMENT_MISSING"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1278,57 +836,17 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"sheets": {
 						// Property: Sheets
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eA list of the associated sheets with the unique identifier and name of each sheet.\u003c/p\u003e",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "\u003cp\u003eA \u003ci\u003esheet\u003c/i\u003e, which is an object that contains a set of visuals that\n            are viewed together on one page in the Amazon QuickSight console. Every analysis and dashboard\n            contains at least one sheet. Each sheet contains at least one visualization widget, for\n            example a chart, pivot table, or narrative insight. Sheets can be associated with other\n            components, such as controls, filters, and so on.\u003c/p\u003e",
-						//     "properties": {
-						//       "Name": {
-						//         "description": "\u003cp\u003eThe name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.\u003c/p\u003e",
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "SheetId": {
-						//         "description": "\u003cp\u003eThe unique identifier associated with a sheet.\u003c/p\u003e",
-						//         "maxLength": 2048,
-						//         "minLength": 1,
-						//         "pattern": "",
-						//         "type": "string"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "maxItems": 20,
-						//   "minItems": 0,
-						//   "type": "array"
-						// }
 						Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eThe name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.\u003c/p\u003e",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"sheet_id": {
 									// Property: SheetId
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eThe unique identifier associated with a sheet.\u003c/p\u003e",
-									//   "maxLength": 2048,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "<p>The unique identifier associated with a sheet.</p>",
 									Type:        types.StringType,
 									Optional:    true,
@@ -1343,51 +861,23 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"source_entity_arn": {
 						// Property: SourceEntityArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eSource entity ARN.\u003c/p\u003e",
-						//   "type": "string"
-						// }
 						Description: "<p>Source entity ARN.</p>",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"status": {
 						// Property: Status
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "CREATION_IN_PROGRESS",
-						//     "CREATION_SUCCESSFUL",
-						//     "CREATION_FAILED",
-						//     "UPDATE_IN_PROGRESS",
-						//     "UPDATE_SUCCESSFUL",
-						//     "UPDATE_FAILED",
-						//     "DELETED"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"theme_arn": {
 						// Property: ThemeArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe ARN of the theme associated with a version of the dashboard.\u003c/p\u003e",
-						//   "type": "string"
-						// }
 						Description: "<p>The ARN of the theme associated with a version of the dashboard.</p>",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"version_number": {
 						// Property: VersionNumber
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eVersion number for this version of the dashboard.\u003c/p\u003e",
-						//   "type": "number"
-						// }
 						Description: "<p>Version number for this version of the dashboard.</p>",
 						Type:        types.NumberType,
 						Optional:    true,

@@ -69,48 +69,18 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key of a key-value pair that identifies the location of an attachment to a document.",
-						//   "enum": [
-						//     "SourceUrl",
-						//     "S3FileUrl",
-						//     "AttachmentReference"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The key of a key-value pair that identifies the location of an attachment to a document.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The name of the document attachment file.",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The name of the document attachment file.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"values": {
 						// Property: Values
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
-						//   "items": {
-						//     "maxLength": 100000,
-						//     "minLength": 1,
-						//     "type": "string"
-						//   },
-						//   "maxItems": 1,
-						//   "minItems": 1,
-						//   "type": "array"
-						// }
 						Description: "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
@@ -228,26 +198,12 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
-						//   "maxLength": 200,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"version": {
 						// Property: Version
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The document version required by the current document.",
-						//   "maxLength": 8,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The document version required by the current document.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -294,28 +250,12 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The name of the tag.",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The name of the tag.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value of the tag.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The value of the tag.",
 						Type:        types.StringType,
 						Optional:    true,

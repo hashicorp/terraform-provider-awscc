@@ -58,23 +58,11 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]schema.Attribute{
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "PERCENTAGE",
-						//     "ABSOLUTE_VALUE"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "number"
-						// }
 						Type:     types.NumberType,
 						Required: true,
 					},
@@ -219,93 +207,25 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]schema.Attribute{
 					"iam_action_definition": {
 						// Property: IamActionDefinition
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Groups": {
-						//       "items": {
-						//         "type": "string"
-						//       },
-						//       "maxItems": 100,
-						//       "minItems": 1,
-						//       "type": "array"
-						//     },
-						//     "PolicyArn": {
-						//       "type": "string"
-						//     },
-						//     "Roles": {
-						//       "items": {
-						//         "type": "string"
-						//       },
-						//       "maxItems": 100,
-						//       "minItems": 1,
-						//       "type": "array"
-						//     },
-						//     "Users": {
-						//       "items": {
-						//         "type": "string"
-						//       },
-						//       "maxItems": 100,
-						//       "minItems": 1,
-						//       "type": "array"
-						//     }
-						//   },
-						//   "required": [
-						//     "PolicyArn"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"groups": {
 									// Property: Groups
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "maxItems": 100,
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"policy_arn": {
 									// Property: PolicyArn
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"roles": {
 									// Property: Roles
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "maxItems": 100,
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"users": {
 									// Property: Users
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "maxItems": 100,
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -315,50 +235,15 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"scp_action_definition": {
 						// Property: ScpActionDefinition
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "PolicyId": {
-						//       "type": "string"
-						//     },
-						//     "TargetIds": {
-						//       "items": {
-						//         "type": "string"
-						//       },
-						//       "maxItems": 100,
-						//       "minItems": 1,
-						//       "type": "array"
-						//     }
-						//   },
-						//   "required": [
-						//     "PolicyId",
-						//     "TargetIds"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"policy_id": {
 									// Property: PolicyId
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"target_ids": {
 									// Property: TargetIds
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "maxItems": 100,
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Required: true,
 								},
@@ -368,71 +253,20 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"ssm_action_definition": {
 						// Property: SsmActionDefinition
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "InstanceIds": {
-						//       "items": {
-						//         "type": "string"
-						//       },
-						//       "maxItems": 100,
-						//       "minItems": 1,
-						//       "type": "array"
-						//     },
-						//     "Region": {
-						//       "type": "string"
-						//     },
-						//     "Subtype": {
-						//       "enum": [
-						//         "STOP_EC2_INSTANCES",
-						//         "STOP_RDS_INSTANCES"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "Subtype",
-						//     "Region",
-						//     "InstanceIds"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"instance_ids": {
 									// Property: InstanceIds
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "maxItems": 100,
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Required: true,
 								},
 								"region": {
 									// Property: Region
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"subtype": {
 									// Property: Subtype
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "STOP_EC2_INSTANCES",
-									//     "STOP_RDS_INSTANCES"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -498,23 +332,11 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]schema.Attribute{
 					"address": {
 						// Property: Address
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "SNS",
-						//     "EMAIL"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

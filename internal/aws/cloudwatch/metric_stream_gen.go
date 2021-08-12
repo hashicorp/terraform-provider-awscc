@@ -78,13 +78,6 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"namespace": {
 						// Property: Namespace
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Only metrics with Namespace matching this value will be streamed.",
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "Only metrics with Namespace matching this value will be streamed.",
 						Type:        types.StringType,
 						Required:    true,
@@ -140,13 +133,6 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"namespace": {
 						// Property: Namespace
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Only metrics with Namespace matching this value will be streamed.",
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "Only metrics with Namespace matching this value will be streamed.",
 						Type:        types.StringType,
 						Required:    true,
@@ -261,26 +247,12 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A unique identifier for the tag.",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "A unique identifier for the tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "An optional string, which you can use to describe or define the tag.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "An optional string, which you can use to describe or define the tag.",
 						Type:        types.StringType,
 						Optional:    true,

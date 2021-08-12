@@ -47,10 +47,6 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"days_before_expiry": {
 						// Property: DaysBeforeExpiry
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},

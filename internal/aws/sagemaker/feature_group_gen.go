@@ -90,27 +90,11 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"feature_name": {
 						// Property: FeatureName
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 64,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"feature_type": {
 						// Property: FeatureType
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "Integral",
-						//     "Fractional",
-						//     "String"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -204,71 +188,20 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"data_catalog_config": {
 						// Property: DataCatalogConfig
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Catalog": {
-						//       "maxLength": 255,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "Database": {
-						//       "maxLength": 255,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "TableName": {
-						//       "maxLength": 255,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "TableName",
-						//     "Catalog",
-						//     "Database"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"catalog": {
 									// Property: Catalog
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 255,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"database": {
 									// Property: Database
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 255,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"table_name": {
 									// Property: TableName
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 255,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -278,54 +211,20 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"disable_glue_table_creation": {
 						// Property: DisableGlueTableCreation
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"s3_storage_config": {
 						// Property: S3StorageConfig
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "KmsKeyId": {
-						//       "maxLength": 2048,
-						//       "type": "string"
-						//     },
-						//     "S3Uri": {
-						//       "maxLength": 1024,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "S3Uri"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"kms_key_id": {
 									// Property: KmsKeyId
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 2048,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"s3_uri": {
 									// Property: S3Uri
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -365,35 +264,15 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"enable_online_store": {
 						// Property: EnableOnlineStore
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"security_config": {
 						// Property: SecurityConfig
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "KmsKeyId": {
-						//       "maxLength": 2048,
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"kms_key_id": {
 									// Property: KmsKeyId
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 2048,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -469,19 +348,11 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

@@ -64,15 +64,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"encryption_type": {
 						// Property: EncryptionType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The encryption type to use.",
-						//   "enum": [
-						//     "AES256",
-						//     "KMS"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The encryption type to use.",
 						Type:        types.StringType,
 						Required:    true,
@@ -80,13 +71,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"kms_key": {
 						// Property: KmsKey
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.",
-						//   "maxLength": 2048,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -118,11 +102,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"scan_on_push": {
 						// Property: ScanOnPush
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The setting that determines whether images are scanned after being pushed to a repository.",
-						//   "type": "boolean"
-						// }
 						Description: "The setting that determines whether images are scanned after being pushed to a repository.",
 						Type:        types.BoolType,
 						Optional:    true,
@@ -174,27 +153,12 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"lifecycle_policy_text": {
 						// Property: LifecyclePolicyText
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The JSON repository policy text to apply to the repository.",
-						//   "maxLength": 30720,
-						//   "minLength": 100,
-						//   "type": "string"
-						// }
 						Description: "The JSON repository policy text to apply to the repository.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"registry_id": {
 						// Property: RegistryId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed. ",
-						//   "maxLength": 12,
-						//   "minLength": 12,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed. ",
 						Type:        types.StringType,
 						Optional:    true,
@@ -277,26 +241,12 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 127,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,

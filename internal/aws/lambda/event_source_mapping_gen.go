@@ -73,34 +73,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				map[string]schema.Attribute{
 					"on_failure": {
 						// Property: OnFailure
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A destination for events that failed processing.",
-						//   "properties": {
-						//     "Destination": {
-						//       "description": "The Amazon Resource Name (ARN) of the destination resource.",
-						//       "maxLength": 1024,
-						//       "minLength": 12,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "A destination for events that failed processing.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"destination": {
 									// Property: Destination
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The Amazon Resource Name (ARN) of the destination resource.",
-									//   "maxLength": 1024,
-									//   "minLength": 12,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The Amazon Resource Name (ARN) of the destination resource.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -290,48 +267,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				map[string]schema.Attribute{
 					"endpoints": {
 						// Property: Endpoints
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The endpoints used by AWS Lambda to access a self-managed event source.",
-						//   "properties": {
-						//     "KafkaBootstrapServers": {
-						//       "description": "A list of Kafka server endpoints.",
-						//       "items": {
-						//         "description": "The URL of a Kafka server.",
-						//         "maxLength": 300,
-						//         "minLength": 1,
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "maxItems": 10,
-						//       "minItems": 1,
-						//       "type": "array",
-						//       "uniqueItems": true
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The endpoints used by AWS Lambda to access a self-managed event source.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"kafka_bootstrap_servers": {
 									// Property: KafkaBootstrapServers
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "A list of Kafka server endpoints.",
-									//   "items": {
-									//     "description": "The URL of a Kafka server.",
-									//     "maxLength": 300,
-									//     "minLength": 1,
-									//     "pattern": "",
-									//     "type": "string"
-									//   },
-									//   "maxItems": 10,
-									//   "minItems": 1,
-									//   "type": "array",
-									//   "uniqueItems": true
-									// }
 									Description: "A list of Kafka server endpoints.",
 									// Ordered set.
 									Type:     types.ListType{ElemType: types.StringType},
@@ -389,33 +329,12 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				map[string]schema.Attribute{
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The type of source access configuration.",
-						//   "enum": [
-						//     "BASIC_AUTH",
-						//     "VPC_SUBNET",
-						//     "VPC_SECURITY_GROUP",
-						//     "SASL_SCRAM_512_AUTH",
-						//     "SASL_SCRAM_256_AUTH",
-						//     "VIRTUAL_HOST"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The type of source access configuration.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"uri": {
 						// Property: URI
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The URI for the source access configuration resource.",
-						//   "maxLength": 200,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The URI for the source access configuration resource.",
 						Type:        types.StringType,
 						Optional:    true,

@@ -71,35 +71,11 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 				map[string]schema.Attribute{
 					"s3": {
 						// Property: S3
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Recording S3 Destination Configuration.",
-						//   "properties": {
-						//     "BucketName": {
-						//       "maxLength": 63,
-						//       "minLength": 3,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "BucketName"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "Recording S3 Destination Configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"bucket_name": {
 									// Property: BucketName
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 63,
-									//   "minLength": 3,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 									// BucketName is a force-new attribute.
@@ -181,23 +157,11 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

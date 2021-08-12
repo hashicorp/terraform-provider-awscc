@@ -60,19 +60,6 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"security_group_arns": {
 						// Property: SecurityGroupArns
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "maxLength": 128,
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "maxItems": 5,
-						//   "minItems": 1,
-						//   "type": "array"
-						// }
 						Description: "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
 						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
@@ -80,13 +67,6 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"subnet_arn": {
 						// Property: SubnetArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ARN of the subnet that DataSync uses to access the target EFS file system.",
-						//   "maxLength": 128,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The ARN of the subnet that DataSync uses to access the target EFS file system.",
 						Type:        types.StringType,
 						Required:    true,
@@ -193,28 +173,12 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key for an AWS resource tag.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for an AWS resource tag.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,

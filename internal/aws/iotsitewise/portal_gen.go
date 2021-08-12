@@ -45,22 +45,12 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"alarm_role_arn": {
 						// Property: AlarmRoleArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources and services, such as AWS IoT Events.",
-						//   "type": "string"
-						// }
 						Description: "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources and services, such as AWS IoT Events.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"notification_lambda_arn": {
 						// Property: NotificationLambdaArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.",
-						//   "type": "string"
-						// }
 						Description: "The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -213,19 +203,11 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

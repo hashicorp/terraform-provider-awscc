@@ -126,29 +126,12 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"filter_type": {
 						// Property: FilterType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
-						//   "enum": [
-						//     "SIMPLE_PATTERN"
-						//   ],
-						//   "maxLength": 128,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
-						//   "maxLength": 409600,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
 						Type:        types.StringType,
 						Optional:    true,
@@ -306,214 +289,84 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"atime": {
 						// Property: Atime
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).",
-						//   "enum": [
-						//     "NONE",
-						//     "BEST_EFFORT"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"bytes_per_second": {
 						// Property: BytesPerSecond
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A value that limits the bandwidth used by AWS DataSync.",
-						//   "format": "int64",
-						//   "type": "integer"
-						// }
 						Description: "A value that limits the bandwidth used by AWS DataSync.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"gid": {
 						// Property: Gid
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The group ID (GID) of the file's owners.",
-						//   "enum": [
-						//     "NONE",
-						//     "INT_VALUE",
-						//     "NAME",
-						//     "BOTH"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The group ID (GID) of the file's owners.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"log_level": {
 						// Property: LogLevel
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.",
-						//   "enum": [
-						//     "OFF",
-						//     "BASIC",
-						//     "TRANSFER"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"mtime": {
 						// Property: Mtime
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
-						//   "enum": [
-						//     "NONE",
-						//     "PRESERVE"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"overwrite_mode": {
 						// Property: OverwriteMode
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
-						//   "enum": [
-						//     "ALWAYS",
-						//     "NEVER"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"posix_permissions": {
 						// Property: PosixPermissions
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.",
-						//   "enum": [
-						//     "NONE",
-						//     "PRESERVE"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"preserve_deleted_files": {
 						// Property: PreserveDeletedFiles
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A value that specifies whether files in the destination that don't exist in the source file system should be preserved.",
-						//   "enum": [
-						//     "PRESERVE",
-						//     "REMOVE"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "A value that specifies whether files in the destination that don't exist in the source file system should be preserved.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"preserve_devices": {
 						// Property: PreserveDevices
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.",
-						//   "enum": [
-						//     "NONE",
-						//     "PRESERVE"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"security_descriptor_copy_flags": {
 						// Property: SecurityDescriptorCopyFlags
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A value that determines which components of the SMB security descriptor are copied during transfer.",
-						//   "enum": [
-						//     "NONE",
-						//     "OWNER_DACL",
-						//     "OWNER_DACL_SACL"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "A value that determines which components of the SMB security descriptor are copied during transfer.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"task_queueing": {
 						// Property: TaskQueueing
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A value that determines whether tasks should be queued before executing the tasks.",
-						//   "enum": [
-						//     "ENABLED",
-						//     "DISABLED"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "A value that determines whether tasks should be queued before executing the tasks.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"transfer_mode": {
 						// Property: TransferMode
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.",
-						//   "enum": [
-						//     "CHANGED",
-						//     "ALL"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"uid": {
 						// Property: Uid
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The user ID (UID) of the file's owner.",
-						//   "enum": [
-						//     "NONE",
-						//     "INT_VALUE",
-						//     "NAME",
-						//     "BOTH"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The user ID (UID) of the file's owner.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"verify_mode": {
 						// Property: VerifyMode
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.",
-						//   "enum": [
-						//     "POINT_IN_TIME_CONSISTENT",
-						//     "ONLY_FILES_TRANSFERRED",
-						//     "NONE"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -546,13 +399,6 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"schedule_expression": {
 						// Property: ScheduleExpression
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
-						//   "maxLength": 256,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
 						Type:        types.StringType,
 						Required:    true,
@@ -651,28 +497,12 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key for an AWS resource tag.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for an AWS resource tag.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,

@@ -80,19 +80,11 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -148,121 +140,41 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"execute_command_configuration": {
 						// Property: ExecuteCommandConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The configuration for ExecuteCommand.",
-						//   "properties": {
-						//     "KmsKeyId": {
-						//       "type": "string"
-						//     },
-						//     "LogConfiguration": {
-						//       "description": "The session logging configuration for ExecuteCommand.",
-						//       "properties": {
-						//         "CloudWatchEncryptionEnabled": {
-						//           "type": "boolean"
-						//         },
-						//         "CloudWatchLogGroupName": {
-						//           "type": "string"
-						//         },
-						//         "S3BucketName": {
-						//           "type": "string"
-						//         },
-						//         "S3EncryptionEnabled": {
-						//           "type": "boolean"
-						//         },
-						//         "S3KeyPrefix": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "Logging": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for ExecuteCommand.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"kms_key_id": {
 									// Property: KmsKeyId
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"log_configuration": {
 									// Property: LogConfiguration
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The session logging configuration for ExecuteCommand.",
-									//   "properties": {
-									//     "CloudWatchEncryptionEnabled": {
-									//       "type": "boolean"
-									//     },
-									//     "CloudWatchLogGroupName": {
-									//       "type": "string"
-									//     },
-									//     "S3BucketName": {
-									//       "type": "string"
-									//     },
-									//     "S3EncryptionEnabled": {
-									//       "type": "boolean"
-									//     },
-									//     "S3KeyPrefix": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Description: "The session logging configuration for ExecuteCommand.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"cloud_watch_encryption_enabled": {
 												// Property: CloudWatchEncryptionEnabled
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "boolean"
-												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"cloud_watch_log_group_name": {
 												// Property: CloudWatchLogGroupName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"s3_bucket_name": {
 												// Property: S3BucketName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"s3_encryption_enabled": {
 												// Property: S3EncryptionEnabled
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "boolean"
-												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"s3_key_prefix": {
 												// Property: S3KeyPrefix
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -272,10 +184,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"logging": {
 									// Property: Logging
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -312,28 +220,16 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"base": {
 						// Property: Base
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"capacity_provider": {
 						// Property: CapacityProvider
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"weight": {
 						// Property: Weight
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
@@ -364,19 +260,11 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

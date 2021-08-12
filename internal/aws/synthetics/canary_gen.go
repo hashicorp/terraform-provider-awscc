@@ -65,49 +65,29 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"handler": {
 						// Property: Handler
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"s3_bucket": {
 						// Property: S3Bucket
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 						// S3Bucket is a write-only attribute.
 					},
 					"s3_key": {
 						// Property: S3Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 						// S3Key is a write-only attribute.
 					},
 					"s3_object_version": {
 						// Property: S3ObjectVersion
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 						// S3ObjectVersion is a write-only attribute.
 					},
 					"script": {
 						// Property: Script
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 						// Script is a write-only attribute.
@@ -197,28 +177,12 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"active_tracing": {
 						// Property: ActiveTracing
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Enable active tracing if set to true",
-						//   "type": "boolean"
-						// }
 						Description: "Enable active tracing if set to true",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"environment_variables": {
 						// Property: EnvironmentVariables
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Environment variable key-value pairs.",
-						//   "patternProperties": {
-						//     "": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Environment variable key-value pairs.",
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
@@ -226,22 +190,12 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"memory_in_mb": {
 						// Property: MemoryInMB
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Provide maximum memory available for canary in MB",
-						//   "type": "integer"
-						// }
 						Description: "Provide maximum memory available for canary in MB",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"timeout_in_seconds": {
 						// Property: TimeoutInSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Provide maximum canary timeout per run in seconds",
-						//   "type": "integer"
-						// }
 						Description: "Provide maximum canary timeout per run in seconds",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -283,19 +237,11 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"duration_in_seconds": {
 						// Property: DurationInSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"expression": {
 						// Property: Expression
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -370,26 +316,12 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
@@ -431,34 +363,16 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"security_group_ids": {
 						// Property: SecurityGroupIds
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 					"vpc_id": {
 						// Property: VpcId
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -510,67 +424,23 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"base_canary_run_id": {
 						// Property: BaseCanaryRunId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Canary run id to be used as base reference for visual testing",
-						//   "type": "string"
-						// }
 						Description: "Canary run id to be used as base reference for visual testing",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"base_screenshots": {
 						// Property: BaseScreenshots
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "List of screenshots used as base reference for visual testing",
-						//   "items": {
-						//     "properties": {
-						//       "IgnoreCoordinates": {
-						//         "description": "List of coordinates of rectangles to be ignored during visual testing",
-						//         "items": {
-						//           "description": "Coordinates of a rectangle to be ignored during visual testing",
-						//           "type": "string"
-						//         },
-						//         "type": "array"
-						//       },
-						//       "ScreenshotName": {
-						//         "description": "Name of the screenshot to be used as base reference for visual testing",
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "ScreenshotName"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "List of screenshots used as base reference for visual testing",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"ignore_coordinates": {
 									// Property: IgnoreCoordinates
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "List of coordinates of rectangles to be ignored during visual testing",
-									//   "items": {
-									//     "description": "Coordinates of a rectangle to be ignored during visual testing",
-									//     "type": "string"
-									//   },
-									//   "type": "array"
-									// }
 									Description: "List of coordinates of rectangles to be ignored during visual testing",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
 								},
 								"screenshot_name": {
 									// Property: ScreenshotName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Name of the screenshot to be used as base reference for visual testing",
-									//   "type": "string"
-									// }
 									Description: "Name of the screenshot to be used as base reference for visual testing",
 									Type:        types.StringType,
 									Required:    true,

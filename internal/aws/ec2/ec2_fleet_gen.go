@@ -147,54 +147,20 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"launch_template_specification": {
 						// Property: LaunchTemplateSpecification
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "LaunchTemplateId": {
-						//       "type": "string"
-						//     },
-						//     "LaunchTemplateName": {
-						//       "maxLength": 128,
-						//       "minLength": 3,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "Version": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"launch_template_id": {
 									// Property: LaunchTemplateId
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"launch_template_name": {
 									// Property: LaunchTemplateName
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 128,
-									//   "minLength": 3,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"version": {
 									// Property: Version
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -204,198 +170,64 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"overrides": {
 						// Property: Overrides
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "properties": {
-						//       "AvailabilityZone": {
-						//         "type": "string"
-						//       },
-						//       "InstanceType": {
-						//         "type": "string"
-						//       },
-						//       "MaxPrice": {
-						//         "type": "string"
-						//       },
-						//       "Placement": {
-						//         "additionalProperties": false,
-						//         "properties": {
-						//           "Affinity": {
-						//             "type": "string"
-						//           },
-						//           "AvailabilityZone": {
-						//             "type": "string"
-						//           },
-						//           "GroupName": {
-						//             "type": "string"
-						//           },
-						//           "HostId": {
-						//             "type": "string"
-						//           },
-						//           "HostResourceGroupArn": {
-						//             "type": "string"
-						//           },
-						//           "PartitionNumber": {
-						//             "type": "integer"
-						//           },
-						//           "SpreadDomain": {
-						//             "type": "string"
-						//           },
-						//           "Tenancy": {
-						//             "type": "string"
-						//           }
-						//         },
-						//         "type": "object"
-						//       },
-						//       "Priority": {
-						//         "type": "number"
-						//       },
-						//       "SubnetId": {
-						//         "type": "string"
-						//       },
-						//       "WeightedCapacity": {
-						//         "type": "number"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "type": "array",
-						//   "uniqueItems": false
-						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"availability_zone": {
 									// Property: AvailabilityZone
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"instance_type": {
 									// Property: InstanceType
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"max_price": {
 									// Property: MaxPrice
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"placement": {
 									// Property: Placement
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "Affinity": {
-									//       "type": "string"
-									//     },
-									//     "AvailabilityZone": {
-									//       "type": "string"
-									//     },
-									//     "GroupName": {
-									//       "type": "string"
-									//     },
-									//     "HostId": {
-									//       "type": "string"
-									//     },
-									//     "HostResourceGroupArn": {
-									//       "type": "string"
-									//     },
-									//     "PartitionNumber": {
-									//       "type": "integer"
-									//     },
-									//     "SpreadDomain": {
-									//       "type": "string"
-									//     },
-									//     "Tenancy": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"affinity": {
 												// Property: Affinity
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"availability_zone": {
 												// Property: AvailabilityZone
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"group_name": {
 												// Property: GroupName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"host_id": {
 												// Property: HostId
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"host_resource_group_arn": {
 												// Property: HostResourceGroupArn
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"partition_number": {
 												// Property: PartitionNumber
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"spread_domain": {
 												// Property: SpreadDomain
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"tenancy": {
 												// Property: Tenancy
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -405,28 +237,16 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"priority": {
 									// Property: Priority
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "number"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"subnet_id": {
 									// Property: SubnetId
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"weighted_capacity": {
 									// Property: WeightedCapacity
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "number"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -483,39 +303,15 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"allocation_strategy": {
 						// Property: AllocationStrategy
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"capacity_reservation_options": {
 						// Property: CapacityReservationOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "UsageStrategy": {
-						//       "enum": [
-						//         "use-capacity-reservations-first"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"usage_strategy": {
 									// Property: UsageStrategy
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "use-capacity-reservations-first"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -525,37 +321,21 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"max_total_price": {
 						// Property: MaxTotalPrice
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"min_target_capacity": {
 						// Property: MinTargetCapacity
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"single_availability_zone": {
 						// Property: SingleAvailabilityZone
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"single_instance_type": {
 						// Property: SingleInstanceType
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
@@ -620,74 +400,36 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"allocation_strategy": {
 						// Property: AllocationStrategy
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "lowestPrice",
-						//     "diversified",
-						//     "capacityOptimized"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"instance_interruption_behavior": {
 						// Property: InstanceInterruptionBehavior
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "hibernate",
-						//     "stop",
-						//     "terminate"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"instance_pools_to_use_count": {
 						// Property: InstancePoolsToUseCount
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"max_total_price": {
 						// Property: MaxTotalPrice
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"min_target_capacity": {
 						// Property: MinTargetCapacity
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"single_availability_zone": {
 						// Property: SingleAvailabilityZone
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"single_instance_type": {
 						// Property: SingleInstanceType
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
@@ -786,102 +528,20 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"resource_type": {
 						// Property: ResourceType
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "client-vpn-endpoint",
-						//     "customer-gateway",
-						//     "dedicated-host",
-						//     "dhcp-options",
-						//     "egress-only-internet-gateway",
-						//     "elastic-gpu",
-						//     "elastic-ip",
-						//     "export-image-task",
-						//     "export-instance-task",
-						//     "fleet",
-						//     "fpga-image",
-						//     "host-reservation",
-						//     "image",
-						//     "import-image-task",
-						//     "import-snapshot-task",
-						//     "instance",
-						//     "internet-gateway",
-						//     "key-pair",
-						//     "launch-template",
-						//     "local-gateway-route-table-vpc-association",
-						//     "natgateway",
-						//     "network-acl",
-						//     "network-insights-analysis",
-						//     "network-insights-path",
-						//     "network-interface",
-						//     "placement-group",
-						//     "reserved-instances",
-						//     "route-table",
-						//     "security-group",
-						//     "snapshot",
-						//     "spot-fleet-request",
-						//     "spot-instances-request",
-						//     "subnet",
-						//     "traffic-mirror-filter",
-						//     "traffic-mirror-session",
-						//     "traffic-mirror-target",
-						//     "transit-gateway",
-						//     "transit-gateway-attachment",
-						//     "transit-gateway-connect-peer",
-						//     "transit-gateway-multicast-domain",
-						//     "transit-gateway-route-table",
-						//     "volume",
-						//     "vpc",
-						//     "vpc-flow-log",
-						//     "vpc-peering-connection",
-						//     "vpn-connection",
-						//     "vpn-gateway"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"tags": {
 						// Property: Tags
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "properties": {
-						//       "Key": {
-						//         "type": "string"
-						//       },
-						//       "Value": {
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "Value",
-						//       "Key"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "type": "array",
-						//   "uniqueItems": false
-						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -929,41 +589,21 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"default_target_capacity_type": {
 						// Property: DefaultTargetCapacityType
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "on-demand",
-						//     "spot"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"on_demand_target_capacity": {
 						// Property: OnDemandTargetCapacity
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"spot_target_capacity": {
 						// Property: SpotTargetCapacity
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"total_target_capacity": {
 						// Property: TotalTargetCapacity
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Required: true,
 					},

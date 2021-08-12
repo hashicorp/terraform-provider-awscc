@@ -64,14 +64,6 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"log_group_name": {
 						// Property: LogGroupName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -122,77 +114,29 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"ingest_endpoints": {
 						// Property: ingestEndpoints
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A list of endpoints to which the source stream should be sent.",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "An endpoint for ingesting source content for a Channel.",
-						//     "properties": {
-						//       "Id": {
-						//         "description": "The system generated unique identifier for the IngestEndpoint",
-						//         "type": "string"
-						//       },
-						//       "Password": {
-						//         "description": "The system generated password for ingest authentication.",
-						//         "type": "string"
-						//       },
-						//       "Url": {
-						//         "description": "The ingest URL to which the source stream should be sent.",
-						//         "type": "string"
-						//       },
-						//       "Username": {
-						//         "description": "The system generated username for ingest authentication.",
-						//         "type": "string"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "A list of endpoints to which the source stream should be sent.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"id": {
 									// Property: Id
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The system generated unique identifier for the IngestEndpoint",
-									//   "type": "string"
-									// }
 									Description: "The system generated unique identifier for the IngestEndpoint",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"password": {
 									// Property: Password
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The system generated password for ingest authentication.",
-									//   "type": "string"
-									// }
 									Description: "The system generated password for ingest authentication.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"url": {
 									// Property: Url
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ingest URL to which the source stream should be sent.",
-									//   "type": "string"
-									// }
 									Description: "The ingest URL to which the source stream should be sent.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"username": {
 									// Property: Username
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The system generated username for ingest authentication.",
-									//   "type": "string"
-									// }
 									Description: "The system generated username for ingest authentication.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -241,14 +185,6 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"log_group_name": {
 						// Property: LogGroupName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -287,19 +223,11 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

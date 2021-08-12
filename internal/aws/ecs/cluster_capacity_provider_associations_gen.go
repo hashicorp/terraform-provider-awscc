@@ -84,30 +84,17 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 				map[string]schema.Attribute{
 					"base": {
 						// Property: Base
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"capacity_provider": {
 						// Property: CapacityProvider
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-						//   "type": "string"
-						// }
 						Description: "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"weight": {
 						// Property: Weight
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},

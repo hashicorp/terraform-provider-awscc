@@ -60,26 +60,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"key_arn": {
 						// Property: KeyARN
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"key_type": {
 						// Property: KeyType
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "AWS_OWNED_CMK",
-						//     "CUSTOMER_MANAGED_CMK"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -395,36 +380,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"buffering_hints": {
 						// Property: BufferingHints
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "IntervalInSeconds": {
-						//       "type": "integer"
-						//     },
-						//     "SizeInMBs": {
-						//       "type": "integer"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -434,48 +398,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"cloud_watch_logging_options": {
 						// Property: CloudWatchLoggingOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "LogGroupName": {
-						//       "type": "string"
-						//     },
-						//     "LogStreamName": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"log_group_name": {
 									// Property: LogGroupName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -485,203 +421,50 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"cluster_endpoint": {
 						// Property: ClusterEndpoint
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"domain_arn": {
 						// Property: DomainARN
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"index_name": {
 						// Property: IndexName
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 80,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"index_rotation_period": {
 						// Property: IndexRotationPeriod
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "NoRotation",
-						//     "OneHour",
-						//     "OneDay",
-						//     "OneWeek",
-						//     "OneMonth"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "Processors": {
-						//       "items": {
-						//         "additionalProperties": false,
-						//         "properties": {
-						//           "Parameters": {
-						//             "items": {
-						//               "additionalProperties": false,
-						//               "properties": {
-						//                 "ParameterName": {
-						//                   "type": "string"
-						//                 },
-						//                 "ParameterValue": {
-						//                   "type": "string"
-						//                 }
-						//               },
-						//               "required": [
-						//                 "ParameterValue",
-						//                 "ParameterName"
-						//               ],
-						//               "type": "object"
-						//             },
-						//             "type": "array",
-						//             "uniqueItems": true
-						//           },
-						//           "Type": {
-						//             "enum": [
-						//               "Lambda"
-						//             ],
-						//             "type": "string"
-						//           }
-						//         },
-						//         "required": [
-						//           "Type"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "type": "array",
-						//       "uniqueItems": true
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"processors": {
 									// Property: Processors
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "properties": {
-									//       "Parameters": {
-									//         "items": {
-									//           "additionalProperties": false,
-									//           "properties": {
-									//             "ParameterName": {
-									//               "type": "string"
-									//             },
-									//             "ParameterValue": {
-									//               "type": "string"
-									//             }
-									//           },
-									//           "required": [
-									//             "ParameterValue",
-									//             "ParameterName"
-									//           ],
-									//           "type": "object"
-									//         },
-									//         "type": "array",
-									//         "uniqueItems": true
-									//       },
-									//       "Type": {
-									//         "enum": [
-									//           "Lambda"
-									//         ],
-									//         "type": "string"
-									//       }
-									//     },
-									//     "required": [
-									//       "Type"
-									//     ],
-									//     "type": "object"
-									//   },
-									//   "type": "array",
-									//   "uniqueItems": true
-									// }
 									// Ordered set.
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"parameters": {
 												// Property: Parameters
-												// CloudFormation resource type schema:
-												// {
-												//   "items": {
-												//     "additionalProperties": false,
-												//     "properties": {
-												//       "ParameterName": {
-												//         "type": "string"
-												//       },
-												//       "ParameterValue": {
-												//         "type": "string"
-												//       }
-												//     },
-												//     "required": [
-												//       "ParameterValue",
-												//       "ParameterName"
-												//     ],
-												//     "type": "object"
-												//   },
-												//   "type": "array",
-												//   "uniqueItems": true
-												// }
 												// Ordered set.
 												Attributes: schema.ListNestedAttributes(
 													map[string]schema.Attribute{
 														"parameter_name": {
 															// Property: ParameterName
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
 														"parameter_value": {
 															// Property: ParameterValue
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -692,13 +475,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"type": {
 												// Property: Type
-												// CloudFormation resource type schema:
-												// {
-												//   "enum": [
-												//     "Lambda"
-												//   ],
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -713,24 +489,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"retry_options": {
 						// Property: RetryOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "DurationInSeconds": {
-						//       "type": "integer"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -740,171 +502,34 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"role_arn": {
 						// Property: RoleARN
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"s3_backup_mode": {
 						// Property: S3BackupMode
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "FailedDocumentsOnly",
-						//     "AllDocuments"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "BucketARN": {
-						//       "maxLength": 2048,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "BufferingHints": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "IntervalInSeconds": {
-						//           "type": "integer"
-						//         },
-						//         "SizeInMBs": {
-						//           "type": "integer"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "CloudWatchLoggingOptions": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "Enabled": {
-						//           "type": "boolean"
-						//         },
-						//         "LogGroupName": {
-						//           "type": "string"
-						//         },
-						//         "LogStreamName": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "CompressionFormat": {
-						//       "enum": [
-						//         "UNCOMPRESSED",
-						//         "GZIP",
-						//         "ZIP",
-						//         "Snappy",
-						//         "HADOOP_SNAPPY"
-						//       ],
-						//       "type": "string"
-						//     },
-						//     "EncryptionConfiguration": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "KMSEncryptionConfig": {
-						//           "additionalProperties": false,
-						//           "properties": {
-						//             "AWSKMSKeyARN": {
-						//               "type": "string"
-						//             }
-						//           },
-						//           "required": [
-						//             "AWSKMSKeyARN"
-						//           ],
-						//           "type": "object"
-						//         },
-						//         "NoEncryptionConfig": {
-						//           "enum": [
-						//             "NoEncryption"
-						//           ],
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "ErrorOutputPrefix": {
-						//       "maxLength": 1024,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "Prefix": {
-						//       "maxLength": 1024,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "RoleARN": {
-						//       "maxLength": 512,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "BucketARN",
-						//     "RoleARN"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"bucket_arn": {
 									// Property: BucketARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 2048,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "IntervalInSeconds": {
-									//       "type": "integer"
-									//     },
-									//     "SizeInMBs": {
-									//       "type": "integer"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -914,48 +539,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"cloud_watch_logging_options": {
 									// Property: CloudWatchLoggingOptions
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "Enabled": {
-									//       "type": "boolean"
-									//     },
-									//     "LogGroupName": {
-									//       "type": "string"
-									//     },
-									//     "LogStreamName": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"enabled": {
 												// Property: Enabled
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "boolean"
-												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"log_group_name": {
 												// Property: LogGroupName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -965,72 +562,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"compression_format": {
 									// Property: CompressionFormat
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "UNCOMPRESSED",
-									//     "GZIP",
-									//     "ZIP",
-									//     "Snappy",
-									//     "HADOOP_SNAPPY"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "KMSEncryptionConfig": {
-									//       "additionalProperties": false,
-									//       "properties": {
-									//         "AWSKMSKeyARN": {
-									//           "type": "string"
-									//         }
-									//       },
-									//       "required": [
-									//         "AWSKMSKeyARN"
-									//       ],
-									//       "type": "object"
-									//     },
-									//     "NoEncryptionConfig": {
-									//       "enum": [
-									//         "NoEncryption"
-									//       ],
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"kms_encryption_config": {
 												// Property: KMSEncryptionConfig
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "properties": {
-												//     "AWSKMSKeyARN": {
-												//       "type": "string"
-												//     }
-												//   },
-												//   "required": [
-												//     "AWSKMSKeyARN"
-												//   ],
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"awskms_key_arn": {
 															// Property: AWSKMSKeyARN
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -1040,13 +584,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
-												// CloudFormation resource type schema:
-												// {
-												//   "enum": [
-												//     "NoEncryption"
-												//   ],
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -1056,35 +593,16 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"prefix": {
 									// Property: Prefix
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"role_arn": {
 									// Property: RoleARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 512,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -1094,103 +612,26 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"type_name": {
 						// Property: TypeName
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 100,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"vpc_configuration": {
 						// Property: VpcConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "RoleARN": {
-						//       "maxLength": 512,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "SecurityGroupIds": {
-						//       "items": {
-						//         "maxLength": 1024,
-						//         "minLength": 1,
-						//         "type": "string"
-						//       },
-						//       "maxItems": 5,
-						//       "minItems": 1,
-						//       "type": "array",
-						//       "uniqueItems": true
-						//     },
-						//     "SubnetIds": {
-						//       "items": {
-						//         "maxLength": 1024,
-						//         "minLength": 1,
-						//         "type": "string"
-						//       },
-						//       "maxItems": 16,
-						//       "minItems": 1,
-						//       "type": "array",
-						//       "uniqueItems": true
-						//     }
-						//   },
-						//   "required": [
-						//     "RoleARN",
-						//     "SubnetIds",
-						//     "SecurityGroupIds"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"role_arn": {
 									// Property: RoleARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 512,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"security_group_ids": {
 									// Property: SecurityGroupIds
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "maxLength": 1024,
-									//     "minLength": 1,
-									//     "type": "string"
-									//   },
-									//   "maxItems": 5,
-									//   "minItems": 1,
-									//   "type": "array",
-									//   "uniqueItems": true
-									// }
 									// Ordered set.
 									Type:     types.ListType{ElemType: types.StringType},
 									Required: true,
 								},
 								"subnet_ids": {
 									// Property: SubnetIds
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "maxLength": 1024,
-									//     "minLength": 1,
-									//     "type": "string"
-									//   },
-									//   "maxItems": 16,
-									//   "minItems": 1,
-									//   "type": "array",
-									//   "uniqueItems": true
-									// }
 									// Ordered set.
 									Type:     types.ListType{ElemType: types.StringType},
 									Required: true,
@@ -1610,48 +1051,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"bucket_arn": {
 						// Property: BucketARN
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 2048,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"buffering_hints": {
 						// Property: BufferingHints
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "IntervalInSeconds": {
-						//       "type": "integer"
-						//     },
-						//     "SizeInMBs": {
-						//       "type": "integer"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -1661,48 +1074,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"cloud_watch_logging_options": {
 						// Property: CloudWatchLoggingOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "LogGroupName": {
-						//       "type": "string"
-						//     },
-						//     "LogStreamName": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"log_group_name": {
 									// Property: LogGroupName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1712,313 +1097,32 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"compression_format": {
 						// Property: CompressionFormat
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "UNCOMPRESSED",
-						//     "GZIP",
-						//     "ZIP",
-						//     "Snappy",
-						//     "HADOOP_SNAPPY"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"data_format_conversion_configuration": {
 						// Property: DataFormatConversionConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "InputFormatConfiguration": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "Deserializer": {
-						//           "additionalProperties": false,
-						//           "properties": {
-						//             "HiveJsonSerDe": {
-						//               "additionalProperties": false,
-						//               "properties": {
-						//                 "TimestampFormats": {
-						//                   "items": {
-						//                     "type": "string"
-						//                   },
-						//                   "type": "array",
-						//                   "uniqueItems": true
-						//                 }
-						//               },
-						//               "type": "object"
-						//             },
-						//             "OpenXJsonSerDe": {
-						//               "additionalProperties": false,
-						//               "properties": {
-						//                 "CaseInsensitive": {
-						//                   "type": "boolean"
-						//                 },
-						//                 "ColumnToJsonKeyMappings": {
-						//                   "patternProperties": {
-						//                     "": {
-						//                       "type": "string"
-						//                     }
-						//                   },
-						//                   "type": "object"
-						//                 },
-						//                 "ConvertDotsInJsonKeysToUnderscores": {
-						//                   "type": "boolean"
-						//                 }
-						//               },
-						//               "type": "object"
-						//             }
-						//           },
-						//           "type": "object"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "OutputFormatConfiguration": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "Serializer": {
-						//           "additionalProperties": false,
-						//           "properties": {
-						//             "OrcSerDe": {
-						//               "additionalProperties": false,
-						//               "properties": {
-						//                 "BlockSizeBytes": {
-						//                   "type": "integer"
-						//                 },
-						//                 "BloomFilterColumns": {
-						//                   "items": {
-						//                     "type": "string"
-						//                   },
-						//                   "type": "array",
-						//                   "uniqueItems": true
-						//                 },
-						//                 "BloomFilterFalsePositiveProbability": {
-						//                   "type": "number"
-						//                 },
-						//                 "Compression": {
-						//                   "type": "string"
-						//                 },
-						//                 "DictionaryKeyThreshold": {
-						//                   "type": "number"
-						//                 },
-						//                 "EnablePadding": {
-						//                   "type": "boolean"
-						//                 },
-						//                 "FormatVersion": {
-						//                   "type": "string"
-						//                 },
-						//                 "PaddingTolerance": {
-						//                   "type": "number"
-						//                 },
-						//                 "RowIndexStride": {
-						//                   "type": "integer"
-						//                 },
-						//                 "StripeSizeBytes": {
-						//                   "type": "integer"
-						//                 }
-						//               },
-						//               "type": "object"
-						//             },
-						//             "ParquetSerDe": {
-						//               "additionalProperties": false,
-						//               "properties": {
-						//                 "BlockSizeBytes": {
-						//                   "type": "integer"
-						//                 },
-						//                 "Compression": {
-						//                   "type": "string"
-						//                 },
-						//                 "EnableDictionaryCompression": {
-						//                   "type": "boolean"
-						//                 },
-						//                 "MaxPaddingBytes": {
-						//                   "type": "integer"
-						//                 },
-						//                 "PageSizeBytes": {
-						//                   "type": "integer"
-						//                 },
-						//                 "WriterVersion": {
-						//                   "type": "string"
-						//                 }
-						//               },
-						//               "type": "object"
-						//             }
-						//           },
-						//           "type": "object"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "SchemaConfiguration": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "CatalogId": {
-						//           "type": "string"
-						//         },
-						//         "DatabaseName": {
-						//           "type": "string"
-						//         },
-						//         "Region": {
-						//           "type": "string"
-						//         },
-						//         "RoleARN": {
-						//           "maxLength": 512,
-						//           "minLength": 1,
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "TableName": {
-						//           "type": "string"
-						//         },
-						//         "VersionId": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"input_format_configuration": {
 									// Property: InputFormatConfiguration
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "Deserializer": {
-									//       "additionalProperties": false,
-									//       "properties": {
-									//         "HiveJsonSerDe": {
-									//           "additionalProperties": false,
-									//           "properties": {
-									//             "TimestampFormats": {
-									//               "items": {
-									//                 "type": "string"
-									//               },
-									//               "type": "array",
-									//               "uniqueItems": true
-									//             }
-									//           },
-									//           "type": "object"
-									//         },
-									//         "OpenXJsonSerDe": {
-									//           "additionalProperties": false,
-									//           "properties": {
-									//             "CaseInsensitive": {
-									//               "type": "boolean"
-									//             },
-									//             "ColumnToJsonKeyMappings": {
-									//               "patternProperties": {
-									//                 "": {
-									//                   "type": "string"
-									//                 }
-									//               },
-									//               "type": "object"
-									//             },
-									//             "ConvertDotsInJsonKeysToUnderscores": {
-									//               "type": "boolean"
-									//             }
-									//           },
-									//           "type": "object"
-									//         }
-									//       },
-									//       "type": "object"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"deserializer": {
 												// Property: Deserializer
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "properties": {
-												//     "HiveJsonSerDe": {
-												//       "additionalProperties": false,
-												//       "properties": {
-												//         "TimestampFormats": {
-												//           "items": {
-												//             "type": "string"
-												//           },
-												//           "type": "array",
-												//           "uniqueItems": true
-												//         }
-												//       },
-												//       "type": "object"
-												//     },
-												//     "OpenXJsonSerDe": {
-												//       "additionalProperties": false,
-												//       "properties": {
-												//         "CaseInsensitive": {
-												//           "type": "boolean"
-												//         },
-												//         "ColumnToJsonKeyMappings": {
-												//           "patternProperties": {
-												//             "": {
-												//               "type": "string"
-												//             }
-												//           },
-												//           "type": "object"
-												//         },
-												//         "ConvertDotsInJsonKeysToUnderscores": {
-												//           "type": "boolean"
-												//         }
-												//       },
-												//       "type": "object"
-												//     }
-												//   },
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"hive_json_ser_de": {
 															// Property: HiveJsonSerDe
-															// CloudFormation resource type schema:
-															// {
-															//   "additionalProperties": false,
-															//   "properties": {
-															//     "TimestampFormats": {
-															//       "items": {
-															//         "type": "string"
-															//       },
-															//       "type": "array",
-															//       "uniqueItems": true
-															//     }
-															//   },
-															//   "type": "object"
-															// }
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"timestamp_formats": {
 																		// Property: TimestampFormats
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "items": {
-																		//     "type": "string"
-																		//   },
-																		//   "type": "array",
-																		//   "uniqueItems": true
-																		// }
 																		// Ordered set.
 																		Type:     types.ListType{ElemType: types.StringType},
 																		Optional: true,
@@ -2029,59 +1133,21 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 														},
 														"open_x_json_ser_de": {
 															// Property: OpenXJsonSerDe
-															// CloudFormation resource type schema:
-															// {
-															//   "additionalProperties": false,
-															//   "properties": {
-															//     "CaseInsensitive": {
-															//       "type": "boolean"
-															//     },
-															//     "ColumnToJsonKeyMappings": {
-															//       "patternProperties": {
-															//         "": {
-															//           "type": "string"
-															//         }
-															//       },
-															//       "type": "object"
-															//     },
-															//     "ConvertDotsInJsonKeysToUnderscores": {
-															//       "type": "boolean"
-															//     }
-															//   },
-															//   "type": "object"
-															// }
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"case_insensitive": {
 																		// Property: CaseInsensitive
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "boolean"
-																		// }
 																		Type:     types.BoolType,
 																		Optional: true,
 																	},
 																	"column_to_json_key_mappings": {
 																		// Property: ColumnToJsonKeyMappings
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "patternProperties": {
-																		//     "": {
-																		//       "type": "string"
-																		//     }
-																		//   },
-																		//   "type": "object"
-																		// }
 																		// Pattern: ""
 																		Type:     types.MapType{ElemType: types.StringType},
 																		Optional: true,
 																	},
 																	"convert_dots_in_json_keys_to_underscores": {
 																		// Property: ConvertDotsInJsonKeysToUnderscores
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "boolean"
-																		// }
 																		Type:     types.BoolType,
 																		Optional: true,
 																	},
@@ -2099,297 +1165,64 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"output_format_configuration": {
 									// Property: OutputFormatConfiguration
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "Serializer": {
-									//       "additionalProperties": false,
-									//       "properties": {
-									//         "OrcSerDe": {
-									//           "additionalProperties": false,
-									//           "properties": {
-									//             "BlockSizeBytes": {
-									//               "type": "integer"
-									//             },
-									//             "BloomFilterColumns": {
-									//               "items": {
-									//                 "type": "string"
-									//               },
-									//               "type": "array",
-									//               "uniqueItems": true
-									//             },
-									//             "BloomFilterFalsePositiveProbability": {
-									//               "type": "number"
-									//             },
-									//             "Compression": {
-									//               "type": "string"
-									//             },
-									//             "DictionaryKeyThreshold": {
-									//               "type": "number"
-									//             },
-									//             "EnablePadding": {
-									//               "type": "boolean"
-									//             },
-									//             "FormatVersion": {
-									//               "type": "string"
-									//             },
-									//             "PaddingTolerance": {
-									//               "type": "number"
-									//             },
-									//             "RowIndexStride": {
-									//               "type": "integer"
-									//             },
-									//             "StripeSizeBytes": {
-									//               "type": "integer"
-									//             }
-									//           },
-									//           "type": "object"
-									//         },
-									//         "ParquetSerDe": {
-									//           "additionalProperties": false,
-									//           "properties": {
-									//             "BlockSizeBytes": {
-									//               "type": "integer"
-									//             },
-									//             "Compression": {
-									//               "type": "string"
-									//             },
-									//             "EnableDictionaryCompression": {
-									//               "type": "boolean"
-									//             },
-									//             "MaxPaddingBytes": {
-									//               "type": "integer"
-									//             },
-									//             "PageSizeBytes": {
-									//               "type": "integer"
-									//             },
-									//             "WriterVersion": {
-									//               "type": "string"
-									//             }
-									//           },
-									//           "type": "object"
-									//         }
-									//       },
-									//       "type": "object"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"serializer": {
 												// Property: Serializer
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "properties": {
-												//     "OrcSerDe": {
-												//       "additionalProperties": false,
-												//       "properties": {
-												//         "BlockSizeBytes": {
-												//           "type": "integer"
-												//         },
-												//         "BloomFilterColumns": {
-												//           "items": {
-												//             "type": "string"
-												//           },
-												//           "type": "array",
-												//           "uniqueItems": true
-												//         },
-												//         "BloomFilterFalsePositiveProbability": {
-												//           "type": "number"
-												//         },
-												//         "Compression": {
-												//           "type": "string"
-												//         },
-												//         "DictionaryKeyThreshold": {
-												//           "type": "number"
-												//         },
-												//         "EnablePadding": {
-												//           "type": "boolean"
-												//         },
-												//         "FormatVersion": {
-												//           "type": "string"
-												//         },
-												//         "PaddingTolerance": {
-												//           "type": "number"
-												//         },
-												//         "RowIndexStride": {
-												//           "type": "integer"
-												//         },
-												//         "StripeSizeBytes": {
-												//           "type": "integer"
-												//         }
-												//       },
-												//       "type": "object"
-												//     },
-												//     "ParquetSerDe": {
-												//       "additionalProperties": false,
-												//       "properties": {
-												//         "BlockSizeBytes": {
-												//           "type": "integer"
-												//         },
-												//         "Compression": {
-												//           "type": "string"
-												//         },
-												//         "EnableDictionaryCompression": {
-												//           "type": "boolean"
-												//         },
-												//         "MaxPaddingBytes": {
-												//           "type": "integer"
-												//         },
-												//         "PageSizeBytes": {
-												//           "type": "integer"
-												//         },
-												//         "WriterVersion": {
-												//           "type": "string"
-												//         }
-												//       },
-												//       "type": "object"
-												//     }
-												//   },
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"orc_ser_de": {
 															// Property: OrcSerDe
-															// CloudFormation resource type schema:
-															// {
-															//   "additionalProperties": false,
-															//   "properties": {
-															//     "BlockSizeBytes": {
-															//       "type": "integer"
-															//     },
-															//     "BloomFilterColumns": {
-															//       "items": {
-															//         "type": "string"
-															//       },
-															//       "type": "array",
-															//       "uniqueItems": true
-															//     },
-															//     "BloomFilterFalsePositiveProbability": {
-															//       "type": "number"
-															//     },
-															//     "Compression": {
-															//       "type": "string"
-															//     },
-															//     "DictionaryKeyThreshold": {
-															//       "type": "number"
-															//     },
-															//     "EnablePadding": {
-															//       "type": "boolean"
-															//     },
-															//     "FormatVersion": {
-															//       "type": "string"
-															//     },
-															//     "PaddingTolerance": {
-															//       "type": "number"
-															//     },
-															//     "RowIndexStride": {
-															//       "type": "integer"
-															//     },
-															//     "StripeSizeBytes": {
-															//       "type": "integer"
-															//     }
-															//   },
-															//   "type": "object"
-															// }
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"block_size_bytes": {
 																		// Property: BlockSizeBytes
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "integer"
-																		// }
 																		Type:     types.NumberType,
 																		Optional: true,
 																	},
 																	"bloom_filter_columns": {
 																		// Property: BloomFilterColumns
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "items": {
-																		//     "type": "string"
-																		//   },
-																		//   "type": "array",
-																		//   "uniqueItems": true
-																		// }
 																		// Ordered set.
 																		Type:     types.ListType{ElemType: types.StringType},
 																		Optional: true,
 																	},
 																	"bloom_filter_false_positive_probability": {
 																		// Property: BloomFilterFalsePositiveProbability
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "number"
-																		// }
 																		Type:     types.NumberType,
 																		Optional: true,
 																	},
 																	"compression": {
 																		// Property: Compression
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "string"
-																		// }
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
 																	"dictionary_key_threshold": {
 																		// Property: DictionaryKeyThreshold
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "number"
-																		// }
 																		Type:     types.NumberType,
 																		Optional: true,
 																	},
 																	"enable_padding": {
 																		// Property: EnablePadding
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "boolean"
-																		// }
 																		Type:     types.BoolType,
 																		Optional: true,
 																	},
 																	"format_version": {
 																		// Property: FormatVersion
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "string"
-																		// }
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
 																	"padding_tolerance": {
 																		// Property: PaddingTolerance
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "number"
-																		// }
 																		Type:     types.NumberType,
 																		Optional: true,
 																	},
 																	"row_index_stride": {
 																		// Property: RowIndexStride
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "integer"
-																		// }
 																		Type:     types.NumberType,
 																		Optional: true,
 																	},
 																	"stripe_size_bytes": {
 																		// Property: StripeSizeBytes
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "integer"
-																		// }
 																		Type:     types.NumberType,
 																		Optional: true,
 																	},
@@ -2399,84 +1232,35 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 														},
 														"parquet_ser_de": {
 															// Property: ParquetSerDe
-															// CloudFormation resource type schema:
-															// {
-															//   "additionalProperties": false,
-															//   "properties": {
-															//     "BlockSizeBytes": {
-															//       "type": "integer"
-															//     },
-															//     "Compression": {
-															//       "type": "string"
-															//     },
-															//     "EnableDictionaryCompression": {
-															//       "type": "boolean"
-															//     },
-															//     "MaxPaddingBytes": {
-															//       "type": "integer"
-															//     },
-															//     "PageSizeBytes": {
-															//       "type": "integer"
-															//     },
-															//     "WriterVersion": {
-															//       "type": "string"
-															//     }
-															//   },
-															//   "type": "object"
-															// }
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"block_size_bytes": {
 																		// Property: BlockSizeBytes
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "integer"
-																		// }
 																		Type:     types.NumberType,
 																		Optional: true,
 																	},
 																	"compression": {
 																		// Property: Compression
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "string"
-																		// }
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
 																	"enable_dictionary_compression": {
 																		// Property: EnableDictionaryCompression
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "boolean"
-																		// }
 																		Type:     types.BoolType,
 																		Optional: true,
 																	},
 																	"max_padding_bytes": {
 																		// Property: MaxPaddingBytes
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "integer"
-																		// }
 																		Type:     types.NumberType,
 																		Optional: true,
 																	},
 																	"page_size_bytes": {
 																		// Property: PageSizeBytes
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "integer"
-																		// }
 																		Type:     types.NumberType,
 																		Optional: true,
 																	},
 																	"writer_version": {
 																		// Property: WriterVersion
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "type": "string"
-																		// }
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
@@ -2494,90 +1278,35 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"schema_configuration": {
 									// Property: SchemaConfiguration
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "CatalogId": {
-									//       "type": "string"
-									//     },
-									//     "DatabaseName": {
-									//       "type": "string"
-									//     },
-									//     "Region": {
-									//       "type": "string"
-									//     },
-									//     "RoleARN": {
-									//       "maxLength": 512,
-									//       "minLength": 1,
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "TableName": {
-									//       "type": "string"
-									//     },
-									//     "VersionId": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"catalog_id": {
 												// Property: CatalogId
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"database_name": {
 												// Property: DatabaseName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"region": {
 												// Property: Region
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"role_arn": {
 												// Property: RoleARN
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 512,
-												//   "minLength": 1,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"table_name": {
 												// Property: TableName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"version_id": {
 												// Property: VersionId
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -2591,56 +1320,14 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"encryption_configuration": {
 						// Property: EncryptionConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "KMSEncryptionConfig": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "AWSKMSKeyARN": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "AWSKMSKeyARN"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "NoEncryptionConfig": {
-						//       "enum": [
-						//         "NoEncryption"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"kms_encryption_config": {
 									// Property: KMSEncryptionConfig
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "AWSKMSKeyARN": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "AWSKMSKeyARN"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"awskms_key_arn": {
 												// Property: AWSKMSKeyARN
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2650,13 +1337,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"no_encryption_config": {
 									// Property: NoEncryptionConfig
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "NoEncryption"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2666,174 +1346,40 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"error_output_prefix": {
 						// Property: ErrorOutputPrefix
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 1024,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"prefix": {
 						// Property: Prefix
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 1024,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "Processors": {
-						//       "items": {
-						//         "additionalProperties": false,
-						//         "properties": {
-						//           "Parameters": {
-						//             "items": {
-						//               "additionalProperties": false,
-						//               "properties": {
-						//                 "ParameterName": {
-						//                   "type": "string"
-						//                 },
-						//                 "ParameterValue": {
-						//                   "type": "string"
-						//                 }
-						//               },
-						//               "required": [
-						//                 "ParameterValue",
-						//                 "ParameterName"
-						//               ],
-						//               "type": "object"
-						//             },
-						//             "type": "array",
-						//             "uniqueItems": true
-						//           },
-						//           "Type": {
-						//             "enum": [
-						//               "Lambda"
-						//             ],
-						//             "type": "string"
-						//           }
-						//         },
-						//         "required": [
-						//           "Type"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "type": "array",
-						//       "uniqueItems": true
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"processors": {
 									// Property: Processors
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "properties": {
-									//       "Parameters": {
-									//         "items": {
-									//           "additionalProperties": false,
-									//           "properties": {
-									//             "ParameterName": {
-									//               "type": "string"
-									//             },
-									//             "ParameterValue": {
-									//               "type": "string"
-									//             }
-									//           },
-									//           "required": [
-									//             "ParameterValue",
-									//             "ParameterName"
-									//           ],
-									//           "type": "object"
-									//         },
-									//         "type": "array",
-									//         "uniqueItems": true
-									//       },
-									//       "Type": {
-									//         "enum": [
-									//           "Lambda"
-									//         ],
-									//         "type": "string"
-									//       }
-									//     },
-									//     "required": [
-									//       "Type"
-									//     ],
-									//     "type": "object"
-									//   },
-									//   "type": "array",
-									//   "uniqueItems": true
-									// }
 									// Ordered set.
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"parameters": {
 												// Property: Parameters
-												// CloudFormation resource type schema:
-												// {
-												//   "items": {
-												//     "additionalProperties": false,
-												//     "properties": {
-												//       "ParameterName": {
-												//         "type": "string"
-												//       },
-												//       "ParameterValue": {
-												//         "type": "string"
-												//       }
-												//     },
-												//     "required": [
-												//       "ParameterValue",
-												//       "ParameterName"
-												//     ],
-												//     "type": "object"
-												//   },
-												//   "type": "array",
-												//   "uniqueItems": true
-												// }
 												// Ordered set.
 												Attributes: schema.ListNestedAttributes(
 													map[string]schema.Attribute{
 														"parameter_name": {
 															// Property: ParameterName
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
 														"parameter_value": {
 															// Property: ParameterValue
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -2844,13 +1390,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"type": {
 												// Property: Type
-												// CloudFormation resource type schema:
-												// {
-												//   "enum": [
-												//     "Lambda"
-												//   ],
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2865,158 +1404,29 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"role_arn": {
 						// Property: RoleARN
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"s3_backup_configuration": {
 						// Property: S3BackupConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "BucketARN": {
-						//       "maxLength": 2048,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "BufferingHints": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "IntervalInSeconds": {
-						//           "type": "integer"
-						//         },
-						//         "SizeInMBs": {
-						//           "type": "integer"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "CloudWatchLoggingOptions": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "Enabled": {
-						//           "type": "boolean"
-						//         },
-						//         "LogGroupName": {
-						//           "type": "string"
-						//         },
-						//         "LogStreamName": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "CompressionFormat": {
-						//       "enum": [
-						//         "UNCOMPRESSED",
-						//         "GZIP",
-						//         "ZIP",
-						//         "Snappy",
-						//         "HADOOP_SNAPPY"
-						//       ],
-						//       "type": "string"
-						//     },
-						//     "EncryptionConfiguration": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "KMSEncryptionConfig": {
-						//           "additionalProperties": false,
-						//           "properties": {
-						//             "AWSKMSKeyARN": {
-						//               "type": "string"
-						//             }
-						//           },
-						//           "required": [
-						//             "AWSKMSKeyARN"
-						//           ],
-						//           "type": "object"
-						//         },
-						//         "NoEncryptionConfig": {
-						//           "enum": [
-						//             "NoEncryption"
-						//           ],
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "ErrorOutputPrefix": {
-						//       "maxLength": 1024,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "Prefix": {
-						//       "maxLength": 1024,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "RoleARN": {
-						//       "maxLength": 512,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "BucketARN",
-						//     "RoleARN"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"bucket_arn": {
 									// Property: BucketARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 2048,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "IntervalInSeconds": {
-									//       "type": "integer"
-									//     },
-									//     "SizeInMBs": {
-									//       "type": "integer"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -3026,48 +1436,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"cloud_watch_logging_options": {
 									// Property: CloudWatchLoggingOptions
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "Enabled": {
-									//       "type": "boolean"
-									//     },
-									//     "LogGroupName": {
-									//       "type": "string"
-									//     },
-									//     "LogStreamName": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"enabled": {
 												// Property: Enabled
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "boolean"
-												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"log_group_name": {
 												// Property: LogGroupName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -3077,72 +1459,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"compression_format": {
 									// Property: CompressionFormat
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "UNCOMPRESSED",
-									//     "GZIP",
-									//     "ZIP",
-									//     "Snappy",
-									//     "HADOOP_SNAPPY"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "KMSEncryptionConfig": {
-									//       "additionalProperties": false,
-									//       "properties": {
-									//         "AWSKMSKeyARN": {
-									//           "type": "string"
-									//         }
-									//       },
-									//       "required": [
-									//         "AWSKMSKeyARN"
-									//       ],
-									//       "type": "object"
-									//     },
-									//     "NoEncryptionConfig": {
-									//       "enum": [
-									//         "NoEncryption"
-									//       ],
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"kms_encryption_config": {
 												// Property: KMSEncryptionConfig
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "properties": {
-												//     "AWSKMSKeyARN": {
-												//       "type": "string"
-												//     }
-												//   },
-												//   "required": [
-												//     "AWSKMSKeyARN"
-												//   ],
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"awskms_key_arn": {
 															// Property: AWSKMSKeyARN
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -3152,13 +1481,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
-												// CloudFormation resource type schema:
-												// {
-												//   "enum": [
-												//     "NoEncryption"
-												//   ],
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -3168,35 +1490,16 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"prefix": {
 									// Property: Prefix
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"role_arn": {
 									// Property: RoleARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 512,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -3206,14 +1509,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"s3_backup_mode": {
 						// Property: S3BackupMode
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "Disabled",
-						//     "Enabled"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -3487,36 +1782,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"buffering_hints": {
 						// Property: BufferingHints
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "IntervalInSeconds": {
-						//       "type": "integer"
-						//     },
-						//     "SizeInMBs": {
-						//       "type": "integer"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -3526,48 +1800,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"cloud_watch_logging_options": {
 						// Property: CloudWatchLoggingOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "LogGroupName": {
-						//       "type": "string"
-						//     },
-						//     "LogStreamName": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"log_group_name": {
 									// Property: LogGroupName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -3577,63 +1823,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"endpoint_configuration": {
 						// Property: EndpointConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "AccessKey": {
-						//       "maxLength": 4096,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "Name": {
-						//       "maxLength": 256,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     },
-						//     "Url": {
-						//       "maxLength": 1000,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "Url"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"access_key": {
 									// Property: AccessKey
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 4096,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 256,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"url": {
 									// Property: Url
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1000,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -3643,152 +1846,30 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "Processors": {
-						//       "items": {
-						//         "additionalProperties": false,
-						//         "properties": {
-						//           "Parameters": {
-						//             "items": {
-						//               "additionalProperties": false,
-						//               "properties": {
-						//                 "ParameterName": {
-						//                   "type": "string"
-						//                 },
-						//                 "ParameterValue": {
-						//                   "type": "string"
-						//                 }
-						//               },
-						//               "required": [
-						//                 "ParameterValue",
-						//                 "ParameterName"
-						//               ],
-						//               "type": "object"
-						//             },
-						//             "type": "array",
-						//             "uniqueItems": true
-						//           },
-						//           "Type": {
-						//             "enum": [
-						//               "Lambda"
-						//             ],
-						//             "type": "string"
-						//           }
-						//         },
-						//         "required": [
-						//           "Type"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "type": "array",
-						//       "uniqueItems": true
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"processors": {
 									// Property: Processors
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "properties": {
-									//       "Parameters": {
-									//         "items": {
-									//           "additionalProperties": false,
-									//           "properties": {
-									//             "ParameterName": {
-									//               "type": "string"
-									//             },
-									//             "ParameterValue": {
-									//               "type": "string"
-									//             }
-									//           },
-									//           "required": [
-									//             "ParameterValue",
-									//             "ParameterName"
-									//           ],
-									//           "type": "object"
-									//         },
-									//         "type": "array",
-									//         "uniqueItems": true
-									//       },
-									//       "Type": {
-									//         "enum": [
-									//           "Lambda"
-									//         ],
-									//         "type": "string"
-									//       }
-									//     },
-									//     "required": [
-									//       "Type"
-									//     ],
-									//     "type": "object"
-									//   },
-									//   "type": "array",
-									//   "uniqueItems": true
-									// }
 									// Ordered set.
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"parameters": {
 												// Property: Parameters
-												// CloudFormation resource type schema:
-												// {
-												//   "items": {
-												//     "additionalProperties": false,
-												//     "properties": {
-												//       "ParameterName": {
-												//         "type": "string"
-												//       },
-												//       "ParameterValue": {
-												//         "type": "string"
-												//       }
-												//     },
-												//     "required": [
-												//       "ParameterValue",
-												//       "ParameterName"
-												//     ],
-												//     "type": "object"
-												//   },
-												//   "type": "array",
-												//   "uniqueItems": true
-												// }
 												// Ordered set.
 												Attributes: schema.ListNestedAttributes(
 													map[string]schema.Attribute{
 														"parameter_name": {
 															// Property: ParameterName
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
 														"parameter_value": {
 															// Property: ParameterValue
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -3799,13 +1880,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"type": {
 												// Property: Type
-												// CloudFormation resource type schema:
-												// {
-												//   "enum": [
-												//     "Lambda"
-												//   ],
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3820,99 +1894,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"request_configuration": {
 						// Property: RequestConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "CommonAttributes": {
-						//       "items": {
-						//         "additionalProperties": false,
-						//         "properties": {
-						//           "AttributeName": {
-						//             "maxLength": 256,
-						//             "minLength": 1,
-						//             "type": "string"
-						//           },
-						//           "AttributeValue": {
-						//             "maxLength": 1024,
-						//             "minLength": 0,
-						//             "type": "string"
-						//           }
-						//         },
-						//         "required": [
-						//           "AttributeName",
-						//           "AttributeValue"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "maxItems": 50,
-						//       "minItems": 0,
-						//       "type": "array",
-						//       "uniqueItems": true
-						//     },
-						//     "ContentEncoding": {
-						//       "enum": [
-						//         "NONE",
-						//         "GZIP"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"common_attributes": {
 									// Property: CommonAttributes
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "properties": {
-									//       "AttributeName": {
-									//         "maxLength": 256,
-									//         "minLength": 1,
-									//         "type": "string"
-									//       },
-									//       "AttributeValue": {
-									//         "maxLength": 1024,
-									//         "minLength": 0,
-									//         "type": "string"
-									//       }
-									//     },
-									//     "required": [
-									//       "AttributeName",
-									//       "AttributeValue"
-									//     ],
-									//     "type": "object"
-									//   },
-									//   "maxItems": 50,
-									//   "minItems": 0,
-									//   "type": "array",
-									//   "uniqueItems": true
-									// }
 									// Ordered set.
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"attribute_name": {
 												// Property: AttributeName
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 256,
-												//   "minLength": 1,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"attribute_value": {
 												// Property: AttributeValue
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 1024,
-												//   "minLength": 0,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3926,14 +1921,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"content_encoding": {
 									// Property: ContentEncoding
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "NONE",
-									//     "GZIP"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -3943,24 +1930,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"retry_options": {
 						// Property: RetryOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "DurationInSeconds": {
-						//       "type": "integer"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -3970,167 +1943,34 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"role_arn": {
 						// Property: RoleARN
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"s3_backup_mode": {
 						// Property: S3BackupMode
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "BucketARN": {
-						//       "maxLength": 2048,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "BufferingHints": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "IntervalInSeconds": {
-						//           "type": "integer"
-						//         },
-						//         "SizeInMBs": {
-						//           "type": "integer"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "CloudWatchLoggingOptions": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "Enabled": {
-						//           "type": "boolean"
-						//         },
-						//         "LogGroupName": {
-						//           "type": "string"
-						//         },
-						//         "LogStreamName": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "CompressionFormat": {
-						//       "enum": [
-						//         "UNCOMPRESSED",
-						//         "GZIP",
-						//         "ZIP",
-						//         "Snappy",
-						//         "HADOOP_SNAPPY"
-						//       ],
-						//       "type": "string"
-						//     },
-						//     "EncryptionConfiguration": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "KMSEncryptionConfig": {
-						//           "additionalProperties": false,
-						//           "properties": {
-						//             "AWSKMSKeyARN": {
-						//               "type": "string"
-						//             }
-						//           },
-						//           "required": [
-						//             "AWSKMSKeyARN"
-						//           ],
-						//           "type": "object"
-						//         },
-						//         "NoEncryptionConfig": {
-						//           "enum": [
-						//             "NoEncryption"
-						//           ],
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "ErrorOutputPrefix": {
-						//       "maxLength": 1024,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "Prefix": {
-						//       "maxLength": 1024,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "RoleARN": {
-						//       "maxLength": 512,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "BucketARN",
-						//     "RoleARN"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"bucket_arn": {
 									// Property: BucketARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 2048,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "IntervalInSeconds": {
-									//       "type": "integer"
-									//     },
-									//     "SizeInMBs": {
-									//       "type": "integer"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -4140,48 +1980,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"cloud_watch_logging_options": {
 									// Property: CloudWatchLoggingOptions
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "Enabled": {
-									//       "type": "boolean"
-									//     },
-									//     "LogGroupName": {
-									//       "type": "string"
-									//     },
-									//     "LogStreamName": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"enabled": {
 												// Property: Enabled
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "boolean"
-												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"log_group_name": {
 												// Property: LogGroupName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -4191,72 +2003,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"compression_format": {
 									// Property: CompressionFormat
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "UNCOMPRESSED",
-									//     "GZIP",
-									//     "ZIP",
-									//     "Snappy",
-									//     "HADOOP_SNAPPY"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "KMSEncryptionConfig": {
-									//       "additionalProperties": false,
-									//       "properties": {
-									//         "AWSKMSKeyARN": {
-									//           "type": "string"
-									//         }
-									//       },
-									//       "required": [
-									//         "AWSKMSKeyARN"
-									//       ],
-									//       "type": "object"
-									//     },
-									//     "NoEncryptionConfig": {
-									//       "enum": [
-									//         "NoEncryption"
-									//       ],
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"kms_encryption_config": {
 												// Property: KMSEncryptionConfig
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "properties": {
-												//     "AWSKMSKeyARN": {
-												//       "type": "string"
-												//     }
-												//   },
-												//   "required": [
-												//     "AWSKMSKeyARN"
-												//   ],
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"awskms_key_arn": {
 															// Property: AWSKMSKeyARN
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -4266,13 +2025,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
-												// CloudFormation resource type schema:
-												// {
-												//   "enum": [
-												//     "NoEncryption"
-												//   ],
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -4282,35 +2034,16 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"prefix": {
 									// Property: Prefix
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"role_arn": {
 									// Property: RoleARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 512,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -4351,25 +2084,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"kinesis_stream_arn": {
 						// Property: KinesisStreamARN
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"role_arn": {
 						// Property: RoleARN
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -4710,48 +2429,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"cloud_watch_logging_options": {
 						// Property: CloudWatchLoggingOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "LogGroupName": {
-						//       "type": "string"
-						//     },
-						//     "LogStreamName": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"log_group_name": {
 									// Property: LogGroupName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -4761,74 +2452,25 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"cluster_jdbcurl": {
 						// Property: ClusterJDBCURL
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"copy_command": {
 						// Property: CopyCommand
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "CopyOptions": {
-						//       "maxLength": 204800,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "DataTableColumns": {
-						//       "maxLength": 204800,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "DataTableName": {
-						//       "maxLength": 512,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "DataTableName"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"copy_options": {
 									// Property: CopyOptions
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 204800,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"data_table_columns": {
 									// Property: DataTableColumns
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 204800,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"data_table_name": {
 									// Property: DataTableName
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 512,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -4838,163 +2480,35 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"password": {
 						// Property: Password
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 6,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "Processors": {
-						//       "items": {
-						//         "additionalProperties": false,
-						//         "properties": {
-						//           "Parameters": {
-						//             "items": {
-						//               "additionalProperties": false,
-						//               "properties": {
-						//                 "ParameterName": {
-						//                   "type": "string"
-						//                 },
-						//                 "ParameterValue": {
-						//                   "type": "string"
-						//                 }
-						//               },
-						//               "required": [
-						//                 "ParameterValue",
-						//                 "ParameterName"
-						//               ],
-						//               "type": "object"
-						//             },
-						//             "type": "array",
-						//             "uniqueItems": true
-						//           },
-						//           "Type": {
-						//             "enum": [
-						//               "Lambda"
-						//             ],
-						//             "type": "string"
-						//           }
-						//         },
-						//         "required": [
-						//           "Type"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "type": "array",
-						//       "uniqueItems": true
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"processors": {
 									// Property: Processors
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "properties": {
-									//       "Parameters": {
-									//         "items": {
-									//           "additionalProperties": false,
-									//           "properties": {
-									//             "ParameterName": {
-									//               "type": "string"
-									//             },
-									//             "ParameterValue": {
-									//               "type": "string"
-									//             }
-									//           },
-									//           "required": [
-									//             "ParameterValue",
-									//             "ParameterName"
-									//           ],
-									//           "type": "object"
-									//         },
-									//         "type": "array",
-									//         "uniqueItems": true
-									//       },
-									//       "Type": {
-									//         "enum": [
-									//           "Lambda"
-									//         ],
-									//         "type": "string"
-									//       }
-									//     },
-									//     "required": [
-									//       "Type"
-									//     ],
-									//     "type": "object"
-									//   },
-									//   "type": "array",
-									//   "uniqueItems": true
-									// }
 									// Ordered set.
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"parameters": {
 												// Property: Parameters
-												// CloudFormation resource type schema:
-												// {
-												//   "items": {
-												//     "additionalProperties": false,
-												//     "properties": {
-												//       "ParameterName": {
-												//         "type": "string"
-												//       },
-												//       "ParameterValue": {
-												//         "type": "string"
-												//       }
-												//     },
-												//     "required": [
-												//       "ParameterValue",
-												//       "ParameterName"
-												//     ],
-												//     "type": "object"
-												//   },
-												//   "type": "array",
-												//   "uniqueItems": true
-												// }
 												// Ordered set.
 												Attributes: schema.ListNestedAttributes(
 													map[string]schema.Attribute{
 														"parameter_name": {
 															// Property: ParameterName
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
 														"parameter_value": {
 															// Property: ParameterValue
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -5005,13 +2519,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"type": {
 												// Property: Type
-												// CloudFormation resource type schema:
-												// {
-												//   "enum": [
-												//     "Lambda"
-												//   ],
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -5026,24 +2533,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"retry_options": {
 						// Property: RetryOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "DurationInSeconds": {
-						//       "type": "integer"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -5053,158 +2546,29 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"role_arn": {
 						// Property: RoleARN
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"s3_backup_configuration": {
 						// Property: S3BackupConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "BucketARN": {
-						//       "maxLength": 2048,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "BufferingHints": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "IntervalInSeconds": {
-						//           "type": "integer"
-						//         },
-						//         "SizeInMBs": {
-						//           "type": "integer"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "CloudWatchLoggingOptions": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "Enabled": {
-						//           "type": "boolean"
-						//         },
-						//         "LogGroupName": {
-						//           "type": "string"
-						//         },
-						//         "LogStreamName": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "CompressionFormat": {
-						//       "enum": [
-						//         "UNCOMPRESSED",
-						//         "GZIP",
-						//         "ZIP",
-						//         "Snappy",
-						//         "HADOOP_SNAPPY"
-						//       ],
-						//       "type": "string"
-						//     },
-						//     "EncryptionConfiguration": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "KMSEncryptionConfig": {
-						//           "additionalProperties": false,
-						//           "properties": {
-						//             "AWSKMSKeyARN": {
-						//               "type": "string"
-						//             }
-						//           },
-						//           "required": [
-						//             "AWSKMSKeyARN"
-						//           ],
-						//           "type": "object"
-						//         },
-						//         "NoEncryptionConfig": {
-						//           "enum": [
-						//             "NoEncryption"
-						//           ],
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "ErrorOutputPrefix": {
-						//       "maxLength": 1024,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "Prefix": {
-						//       "maxLength": 1024,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "RoleARN": {
-						//       "maxLength": 512,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "BucketARN",
-						//     "RoleARN"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"bucket_arn": {
 									// Property: BucketARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 2048,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "IntervalInSeconds": {
-									//       "type": "integer"
-									//     },
-									//     "SizeInMBs": {
-									//       "type": "integer"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -5214,48 +2578,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"cloud_watch_logging_options": {
 									// Property: CloudWatchLoggingOptions
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "Enabled": {
-									//       "type": "boolean"
-									//     },
-									//     "LogGroupName": {
-									//       "type": "string"
-									//     },
-									//     "LogStreamName": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"enabled": {
 												// Property: Enabled
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "boolean"
-												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"log_group_name": {
 												// Property: LogGroupName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -5265,72 +2601,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"compression_format": {
 									// Property: CompressionFormat
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "UNCOMPRESSED",
-									//     "GZIP",
-									//     "ZIP",
-									//     "Snappy",
-									//     "HADOOP_SNAPPY"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "KMSEncryptionConfig": {
-									//       "additionalProperties": false,
-									//       "properties": {
-									//         "AWSKMSKeyARN": {
-									//           "type": "string"
-									//         }
-									//       },
-									//       "required": [
-									//         "AWSKMSKeyARN"
-									//       ],
-									//       "type": "object"
-									//     },
-									//     "NoEncryptionConfig": {
-									//       "enum": [
-									//         "NoEncryption"
-									//       ],
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"kms_encryption_config": {
 												// Property: KMSEncryptionConfig
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "properties": {
-												//     "AWSKMSKeyARN": {
-												//       "type": "string"
-												//     }
-												//   },
-												//   "required": [
-												//     "AWSKMSKeyARN"
-												//   ],
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"awskms_key_arn": {
 															// Property: AWSKMSKeyARN
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -5340,13 +2623,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
-												// CloudFormation resource type schema:
-												// {
-												//   "enum": [
-												//     "NoEncryption"
-												//   ],
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -5356,35 +2632,16 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"prefix": {
 									// Property: Prefix
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"role_arn": {
 									// Property: RoleARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 512,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -5394,159 +2651,29 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"s3_backup_mode": {
 						// Property: S3BackupMode
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "Disabled",
-						//     "Enabled"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "BucketARN": {
-						//       "maxLength": 2048,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "BufferingHints": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "IntervalInSeconds": {
-						//           "type": "integer"
-						//         },
-						//         "SizeInMBs": {
-						//           "type": "integer"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "CloudWatchLoggingOptions": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "Enabled": {
-						//           "type": "boolean"
-						//         },
-						//         "LogGroupName": {
-						//           "type": "string"
-						//         },
-						//         "LogStreamName": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "CompressionFormat": {
-						//       "enum": [
-						//         "UNCOMPRESSED",
-						//         "GZIP",
-						//         "ZIP",
-						//         "Snappy",
-						//         "HADOOP_SNAPPY"
-						//       ],
-						//       "type": "string"
-						//     },
-						//     "EncryptionConfiguration": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "KMSEncryptionConfig": {
-						//           "additionalProperties": false,
-						//           "properties": {
-						//             "AWSKMSKeyARN": {
-						//               "type": "string"
-						//             }
-						//           },
-						//           "required": [
-						//             "AWSKMSKeyARN"
-						//           ],
-						//           "type": "object"
-						//         },
-						//         "NoEncryptionConfig": {
-						//           "enum": [
-						//             "NoEncryption"
-						//           ],
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "ErrorOutputPrefix": {
-						//       "maxLength": 1024,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "Prefix": {
-						//       "maxLength": 1024,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "RoleARN": {
-						//       "maxLength": 512,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "BucketARN",
-						//     "RoleARN"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"bucket_arn": {
 									// Property: BucketARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 2048,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "IntervalInSeconds": {
-									//       "type": "integer"
-									//     },
-									//     "SizeInMBs": {
-									//       "type": "integer"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -5556,48 +2683,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"cloud_watch_logging_options": {
 									// Property: CloudWatchLoggingOptions
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "Enabled": {
-									//       "type": "boolean"
-									//     },
-									//     "LogGroupName": {
-									//       "type": "string"
-									//     },
-									//     "LogStreamName": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"enabled": {
 												// Property: Enabled
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "boolean"
-												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"log_group_name": {
 												// Property: LogGroupName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -5607,72 +2706,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"compression_format": {
 									// Property: CompressionFormat
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "UNCOMPRESSED",
-									//     "GZIP",
-									//     "ZIP",
-									//     "Snappy",
-									//     "HADOOP_SNAPPY"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "KMSEncryptionConfig": {
-									//       "additionalProperties": false,
-									//       "properties": {
-									//         "AWSKMSKeyARN": {
-									//           "type": "string"
-									//         }
-									//       },
-									//       "required": [
-									//         "AWSKMSKeyARN"
-									//       ],
-									//       "type": "object"
-									//     },
-									//     "NoEncryptionConfig": {
-									//       "enum": [
-									//         "NoEncryption"
-									//       ],
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"kms_encryption_config": {
 												// Property: KMSEncryptionConfig
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "properties": {
-												//     "AWSKMSKeyARN": {
-												//       "type": "string"
-												//     }
-												//   },
-												//   "required": [
-												//     "AWSKMSKeyARN"
-												//   ],
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"awskms_key_arn": {
 															// Property: AWSKMSKeyARN
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -5682,13 +2728,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
-												// CloudFormation resource type schema:
-												// {
-												//   "enum": [
-												//     "NoEncryption"
-												//   ],
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -5698,35 +2737,16 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"prefix": {
 									// Property: Prefix
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"role_arn": {
 									// Property: RoleARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 512,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -5736,12 +2756,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"username": {
 						// Property: Username
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -5849,48 +2863,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"bucket_arn": {
 						// Property: BucketARN
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 2048,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"buffering_hints": {
 						// Property: BufferingHints
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "IntervalInSeconds": {
-						//       "type": "integer"
-						//     },
-						//     "SizeInMBs": {
-						//       "type": "integer"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -5900,48 +2886,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"cloud_watch_logging_options": {
 						// Property: CloudWatchLoggingOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "LogGroupName": {
-						//       "type": "string"
-						//     },
-						//     "LogStreamName": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"log_group_name": {
 									// Property: LogGroupName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -5951,72 +2909,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"compression_format": {
 						// Property: CompressionFormat
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "UNCOMPRESSED",
-						//     "GZIP",
-						//     "ZIP",
-						//     "Snappy",
-						//     "HADOOP_SNAPPY"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"encryption_configuration": {
 						// Property: EncryptionConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "KMSEncryptionConfig": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "AWSKMSKeyARN": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "AWSKMSKeyARN"
-						//       ],
-						//       "type": "object"
-						//     },
-						//     "NoEncryptionConfig": {
-						//       "enum": [
-						//         "NoEncryption"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"kms_encryption_config": {
 									// Property: KMSEncryptionConfig
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "AWSKMSKeyARN": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "AWSKMSKeyARN"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"awskms_key_arn": {
 												// Property: AWSKMSKeyARN
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -6026,13 +2931,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"no_encryption_config": {
 									// Property: NoEncryptionConfig
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "NoEncryption"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -6042,35 +2940,16 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"error_output_prefix": {
 						// Property: ErrorOutputPrefix
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 1024,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"prefix": {
 						// Property: Prefix
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 1024,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"role_arn": {
 						// Property: RoleARN
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -6285,48 +3164,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"cloud_watch_logging_options": {
 						// Property: CloudWatchLoggingOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "LogGroupName": {
-						//       "type": "string"
-						//     },
-						//     "LogStreamName": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"log_group_name": {
 									// Property: LogGroupName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"log_stream_name": {
 									// Property: LogStreamName
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -6336,196 +3187,50 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"hec_acknowledgment_timeout_in_seconds": {
 						// Property: HECAcknowledgmentTimeoutInSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"hec_endpoint": {
 						// Property: HECEndpoint
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 2048,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"hec_endpoint_type": {
 						// Property: HECEndpointType
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "Raw",
-						//     "Event"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"hec_token": {
 						// Property: HECToken
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 2048,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "type": "boolean"
-						//     },
-						//     "Processors": {
-						//       "items": {
-						//         "additionalProperties": false,
-						//         "properties": {
-						//           "Parameters": {
-						//             "items": {
-						//               "additionalProperties": false,
-						//               "properties": {
-						//                 "ParameterName": {
-						//                   "type": "string"
-						//                 },
-						//                 "ParameterValue": {
-						//                   "type": "string"
-						//                 }
-						//               },
-						//               "required": [
-						//                 "ParameterValue",
-						//                 "ParameterName"
-						//               ],
-						//               "type": "object"
-						//             },
-						//             "type": "array",
-						//             "uniqueItems": true
-						//           },
-						//           "Type": {
-						//             "enum": [
-						//               "Lambda"
-						//             ],
-						//             "type": "string"
-						//           }
-						//         },
-						//         "required": [
-						//           "Type"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "type": "array",
-						//       "uniqueItems": true
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"processors": {
 									// Property: Processors
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "properties": {
-									//       "Parameters": {
-									//         "items": {
-									//           "additionalProperties": false,
-									//           "properties": {
-									//             "ParameterName": {
-									//               "type": "string"
-									//             },
-									//             "ParameterValue": {
-									//               "type": "string"
-									//             }
-									//           },
-									//           "required": [
-									//             "ParameterValue",
-									//             "ParameterName"
-									//           ],
-									//           "type": "object"
-									//         },
-									//         "type": "array",
-									//         "uniqueItems": true
-									//       },
-									//       "Type": {
-									//         "enum": [
-									//           "Lambda"
-									//         ],
-									//         "type": "string"
-									//       }
-									//     },
-									//     "required": [
-									//       "Type"
-									//     ],
-									//     "type": "object"
-									//   },
-									//   "type": "array",
-									//   "uniqueItems": true
-									// }
 									// Ordered set.
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"parameters": {
 												// Property: Parameters
-												// CloudFormation resource type schema:
-												// {
-												//   "items": {
-												//     "additionalProperties": false,
-												//     "properties": {
-												//       "ParameterName": {
-												//         "type": "string"
-												//       },
-												//       "ParameterValue": {
-												//         "type": "string"
-												//       }
-												//     },
-												//     "required": [
-												//       "ParameterValue",
-												//       "ParameterName"
-												//     ],
-												//     "type": "object"
-												//   },
-												//   "type": "array",
-												//   "uniqueItems": true
-												// }
 												// Ordered set.
 												Attributes: schema.ListNestedAttributes(
 													map[string]schema.Attribute{
 														"parameter_name": {
 															// Property: ParameterName
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
 														"parameter_value": {
 															// Property: ParameterValue
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -6536,13 +3241,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"type": {
 												// Property: Type
-												// CloudFormation resource type schema:
-												// {
-												//   "enum": [
-												//     "Lambda"
-												//   ],
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -6557,24 +3255,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"retry_options": {
 						// Property: RetryOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "DurationInSeconds": {
-						//       "type": "integer"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -6584,155 +3268,29 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"s3_backup_mode": {
 						// Property: S3BackupMode
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "BucketARN": {
-						//       "maxLength": 2048,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "BufferingHints": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "IntervalInSeconds": {
-						//           "type": "integer"
-						//         },
-						//         "SizeInMBs": {
-						//           "type": "integer"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "CloudWatchLoggingOptions": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "Enabled": {
-						//           "type": "boolean"
-						//         },
-						//         "LogGroupName": {
-						//           "type": "string"
-						//         },
-						//         "LogStreamName": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "CompressionFormat": {
-						//       "enum": [
-						//         "UNCOMPRESSED",
-						//         "GZIP",
-						//         "ZIP",
-						//         "Snappy",
-						//         "HADOOP_SNAPPY"
-						//       ],
-						//       "type": "string"
-						//     },
-						//     "EncryptionConfiguration": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "KMSEncryptionConfig": {
-						//           "additionalProperties": false,
-						//           "properties": {
-						//             "AWSKMSKeyARN": {
-						//               "type": "string"
-						//             }
-						//           },
-						//           "required": [
-						//             "AWSKMSKeyARN"
-						//           ],
-						//           "type": "object"
-						//         },
-						//         "NoEncryptionConfig": {
-						//           "enum": [
-						//             "NoEncryption"
-						//           ],
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "ErrorOutputPrefix": {
-						//       "maxLength": 1024,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "Prefix": {
-						//       "maxLength": 1024,
-						//       "minLength": 0,
-						//       "type": "string"
-						//     },
-						//     "RoleARN": {
-						//       "maxLength": 512,
-						//       "minLength": 1,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "BucketARN",
-						//     "RoleARN"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"bucket_arn": {
 									// Property: BucketARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 2048,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "IntervalInSeconds": {
-									//       "type": "integer"
-									//     },
-									//     "SizeInMBs": {
-									//       "type": "integer"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "integer"
-												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -6742,48 +3300,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"cloud_watch_logging_options": {
 									// Property: CloudWatchLoggingOptions
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "Enabled": {
-									//       "type": "boolean"
-									//     },
-									//     "LogGroupName": {
-									//       "type": "string"
-									//     },
-									//     "LogStreamName": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"enabled": {
 												// Property: Enabled
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "boolean"
-												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"log_group_name": {
 												// Property: LogGroupName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"log_stream_name": {
 												// Property: LogStreamName
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -6793,72 +3323,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"compression_format": {
 									// Property: CompressionFormat
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "UNCOMPRESSED",
-									//     "GZIP",
-									//     "ZIP",
-									//     "Snappy",
-									//     "HADOOP_SNAPPY"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "KMSEncryptionConfig": {
-									//       "additionalProperties": false,
-									//       "properties": {
-									//         "AWSKMSKeyARN": {
-									//           "type": "string"
-									//         }
-									//       },
-									//       "required": [
-									//         "AWSKMSKeyARN"
-									//       ],
-									//       "type": "object"
-									//     },
-									//     "NoEncryptionConfig": {
-									//       "enum": [
-									//         "NoEncryption"
-									//       ],
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"kms_encryption_config": {
 												// Property: KMSEncryptionConfig
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "properties": {
-												//     "AWSKMSKeyARN": {
-												//       "type": "string"
-												//     }
-												//   },
-												//   "required": [
-												//     "AWSKMSKeyARN"
-												//   ],
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"awskms_key_arn": {
 															// Property: AWSKMSKeyARN
-															// CloudFormation resource type schema:
-															// {
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -6868,13 +3345,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"no_encryption_config": {
 												// Property: NoEncryptionConfig
-												// CloudFormation resource type schema:
-												// {
-												//   "enum": [
-												//     "NoEncryption"
-												//   ],
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -6884,35 +3354,16 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"prefix": {
 									// Property: Prefix
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1024,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"role_arn": {
 									// Property: RoleARN
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 512,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -6956,25 +3407,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

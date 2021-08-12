@@ -116,22 +116,12 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"image_tests_enabled": {
 						// Property: ImageTestsEnabled
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "ImageTestsEnabled",
-						//   "type": "boolean"
-						// }
 						Description: "ImageTestsEnabled",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"timeout_minutes": {
 						// Property: TimeoutMinutes
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "TimeoutMinutes",
-						//   "type": "integer"
-						// }
 						Description: "TimeoutMinutes",
 						Type:        types.NumberType,
 						Optional:    true,

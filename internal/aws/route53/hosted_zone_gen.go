@@ -42,12 +42,6 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"comment": {
 						// Property: Comment
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Any comments that you want to include about the hosted zone.",
-						//   "maxLength": 256,
-						//   "type": "string"
-						// }
 						Description: "Any comments that you want to include about the hosted zone.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -90,24 +84,12 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag.",
-						//   "maxLength": 128,
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for the tag.",
-						//   "maxLength": 256,
-						//   "type": "string"
-						// }
 						Description: "The value for the tag.",
 						Type:        types.StringType,
 						Required:    true,
@@ -173,11 +155,6 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"cloud_watch_logs_log_group_arn": {
 						// Property: CloudWatchLogsLogGroupArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.",
-						//   "type": "string"
-						// }
 						Description: "The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.",
 						Type:        types.StringType,
 						Required:    true,
@@ -219,22 +196,12 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"vpc_id": {
 						// Property: VPCId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ID of an Amazon VPC.",
-						//   "type": "string"
-						// }
 						Description: "The ID of an Amazon VPC.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"vpc_region": {
 						// Property: VPCRegion
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The region that an Amazon VPC was created in. See https://docs.aws.amazon.com/general/latest/gr/rande.html for a list of up to date regions.",
-						//   "type": "string"
-						// }
 						Description: "The region that an Amazon VPC was created in. See https://docs.aws.amazon.com/general/latest/gr/rande.html for a list of up to date regions.",
 						Type:        types.StringType,
 						Required:    true,

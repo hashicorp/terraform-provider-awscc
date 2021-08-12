@@ -84,27 +84,12 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"log_group_name": {
 						// Property: LogGroupName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"log_role_arn": {
 						// Property: LogRoleArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.",
 						Type:        types.StringType,
 						Optional:    true,

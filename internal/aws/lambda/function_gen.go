@@ -74,62 +74,30 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"image_uri": {
 						// Property: ImageUri
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "ImageUri.",
-						//   "type": "string"
-						// }
 						Description: "ImageUri.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"s3_bucket": {
 						// Property: S3Bucket
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
-						//   "maxLength": 63,
-						//   "minLength": 3,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"s3_key": {
 						// Property: S3Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon S3 key of the deployment package.",
-						//   "maxLength": 1024,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The Amazon S3 key of the deployment package.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"s3_object_version": {
 						// Property: S3ObjectVersion
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "For versioned objects, the version of the deployment package object to use.",
-						//   "maxLength": 1024,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "For versioned objects, the version of the deployment package object to use.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"zip_file": {
 						// Property: ZipFile
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The source code of your Lambda function. If you include your function source inline with this parameter, AWS CloudFormation places it in a file named index and zips it to create a deployment package..",
-						//   "type": "string"
-						// }
 						Description: "The source code of your Lambda function. If you include your function source inline with this parameter, AWS CloudFormation places it in a file named index and zips it to create a deployment package..",
 						Type:        types.StringType,
 						Optional:    true,
@@ -171,12 +139,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"target_arn": {
 						// Property: TargetArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.",
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -222,17 +184,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"variables": {
 						// Property: Variables
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Environment variable key-value pairs.",
-						//   "patternProperties": {
-						//     "": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Environment variable key-value pairs.",
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
@@ -277,26 +228,12 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"arn": {
 						// Property: Arn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.",
-						//   "maxLength": 200,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"local_mount_path": {
 						// Property: LocalMountPath
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The path where the function can access the file system, starting with /mnt/.",
-						//   "maxLength": 160,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The path where the function can access the file system, starting with /mnt/.",
 						Type:        types.StringType,
 						Required:    true,
@@ -370,16 +307,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"command": {
 						// Property: Command
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Command.",
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "maxItems": 1500,
-						//   "type": "array",
-						//   "uniqueItems": true
-						// }
 						Description: "Command.",
 						// Ordered set.
 						Type:     types.ListType{ElemType: types.StringType},
@@ -387,16 +314,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"entry_point": {
 						// Property: EntryPoint
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "EntryPoint.",
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "maxItems": 1500,
-						//   "type": "array",
-						//   "uniqueItems": true
-						// }
 						Description: "EntryPoint.",
 						// Ordered set.
 						Type:     types.ListType{ElemType: types.StringType},
@@ -404,11 +321,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"working_directory": {
 						// Property: WorkingDirectory
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "WorkingDirectory.",
-						//   "type": "string"
-						// }
 						Description: "WorkingDirectory.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -539,26 +451,12 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -602,15 +500,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"mode": {
 						// Property: Mode
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The tracing mode.",
-						//   "enum": [
-						//     "Active",
-						//     "PassThrough"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The tracing mode.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -652,32 +541,12 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"security_group_ids": {
 						// Property: SecurityGroupIds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A list of VPC security groups IDs.",
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "maxItems": 5,
-						//   "type": "array",
-						//   "uniqueItems": false
-						// }
 						Description: "A list of VPC security groups IDs.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A list of VPC subnet IDs.",
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "maxItems": 16,
-						//   "type": "array",
-						//   "uniqueItems": false
-						// }
 						Description: "A list of VPC subnet IDs.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,

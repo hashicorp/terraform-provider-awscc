@@ -94,62 +94,17 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				map[string]schema.Attribute{
 					"client_association_metadata": {
 						// Property: ClientAssociationMetadata
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The metadata associated with the client.",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "properties": {
-						//       "Key": {
-						//         "description": "A key to identify the metadata.",
-						//         "maxLength": 255,
-						//         "minLength": 1,
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "Value": {
-						//         "description": "Corresponding metadata value for the key.",
-						//         "maxLength": 255,
-						//         "minLength": 1,
-						//         "pattern": "",
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "Key",
-						//       "Value"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "The metadata associated with the client.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "A key to identify the metadata.",
-									//   "maxLength": 255,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "A key to identify the metadata.",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Corresponding metadata value for the key.",
-									//   "maxLength": 255,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "Corresponding metadata value for the key.",
 									Type:        types.StringType,
 									Required:    true,
@@ -161,53 +116,24 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					},
 					"client_id": {
 						// Property: ClientId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The identifier for the client that is associated with the event integration.",
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The identifier for the client that is associated with the event integration.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"event_bridge_rule_name": {
 						// Property: EventBridgeRuleName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The name of the Eventbridge rule.",
-						//   "maxLength": 2048,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The name of the Eventbridge rule.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"event_integration_association_arn": {
 						// Property: EventIntegrationAssociationArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Resource Name (ARN) for the event integration association.",
-						//   "maxLength": 2048,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The Amazon Resource Name (ARN) for the event integration association.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"event_integration_association_id": {
 						// Property: EventIntegrationAssociationId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The identifier for the event integration association.",
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The identifier for the event integration association.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -270,14 +196,6 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				map[string]schema.Attribute{
 					"source": {
 						// Property: Source
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The source of the events.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The source of the events.",
 						Type:        types.StringType,
 						Required:    true,
@@ -353,27 +271,12 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A key to identify the tag.",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "A key to identify the tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Corresponding tag value for the key.",
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "Corresponding tag value for the key.",
 						Type:        types.StringType,
 						Required:    true,

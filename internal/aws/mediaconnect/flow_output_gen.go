@@ -102,52 +102,24 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"algorithm": {
 						// Property: Algorithm
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
-						//   "enum": [
-						//     "aes128",
-						//     "aes192",
-						//     "aes256"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"key_type": {
 						// Property: KeyType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-						//   "enum": [
-						//     "static-key"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"role_arn": {
 						// Property: RoleArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
-						//   "type": "string"
-						// }
 						Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"secret_arn": {
 						// Property: SecretArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
-						//   "type": "string"
-						// }
 						Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
 						Type:        types.StringType,
 						Required:    true,
@@ -283,11 +255,6 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"vpc_interface_name": {
 						// Property: VpcInterfaceName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The name of the VPC interface to use for this output.",
-						//   "type": "string"
-						// }
 						Description: "The name of the VPC interface to use for this output.",
 						Type:        types.StringType,
 						Optional:    true,

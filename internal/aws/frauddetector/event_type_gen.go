@@ -127,119 +127,50 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"arn": {
 						// Property: Arn
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"created_time": {
 						// Property: CreatedTime
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The time when the event type was created.",
-						//   "type": "string"
-						// }
 						Description: "The time when the event type was created.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"description": {
 						// Property: Description
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The description.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The description.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"inline": {
 						// Property: Inline
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"last_updated_time": {
 						// Property: LastUpdatedTime
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The time when the event type was last updated.",
-						//   "type": "string"
-						// }
 						Description: "The time when the event type was last updated.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"tags": {
 						// Property: Tags
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Tags associated with this event type.",
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "properties": {
-						//       "Key": {
-						//         "maxLength": 128,
-						//         "minLength": 1,
-						//         "type": "string"
-						//       },
-						//       "Value": {
-						//         "maxLength": 256,
-						//         "minLength": 0,
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "Key",
-						//       "Value"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "maxItems": 200,
-						//   "type": "array",
-						//   "uniqueItems": false
-						// }
 						Description: "Tags associated with this event type.",
 						// Multiset.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 128,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 256,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -383,155 +314,65 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"arn": {
 						// Property: Arn
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"created_time": {
 						// Property: CreatedTime
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The time when the event type was created.",
-						//   "type": "string"
-						// }
 						Description: "The time when the event type was created.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"data_source": {
 						// Property: DataSource
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "EVENT"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"data_type": {
 						// Property: DataType
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "STRING",
-						//     "INTEGER",
-						//     "FLOAT",
-						//     "BOOLEAN"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"default_value": {
 						// Property: DefaultValue
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"description": {
 						// Property: Description
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The description.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The description.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"inline": {
 						// Property: Inline
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"last_updated_time": {
 						// Property: LastUpdatedTime
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The time when the event type was last updated.",
-						//   "type": "string"
-						// }
 						Description: "The time when the event type was last updated.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"tags": {
 						// Property: Tags
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Tags associated with this event type.",
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "properties": {
-						//       "Key": {
-						//         "maxLength": 128,
-						//         "minLength": 1,
-						//         "type": "string"
-						//       },
-						//       "Value": {
-						//         "maxLength": 256,
-						//         "minLength": 0,
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "Key",
-						//       "Value"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "maxItems": 200,
-						//   "type": "array",
-						//   "uniqueItems": false
-						// }
 						Description: "Tags associated with this event type.",
 						// Multiset.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 128,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 256,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -544,45 +385,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"variable_type": {
 						// Property: VariableType
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "AUTH_CODE",
-						//     "AVS",
-						//     "BILLING_ADDRESS_L1",
-						//     "BILLING_ADDRESS_L2",
-						//     "BILLING_CITY",
-						//     "BILLING_COUNTRY",
-						//     "BILLING_NAME",
-						//     "BILLING_PHONE",
-						//     "BILLING_STATE",
-						//     "BILLING_ZIP",
-						//     "CARD_BIN",
-						//     "CATEGORICAL",
-						//     "CURRENCY_CODE",
-						//     "EMAIL_ADDRESS",
-						//     "FINGERPRINT",
-						//     "FRAUD_LABEL",
-						//     "FREE_FORM_TEXT",
-						//     "IP_ADDRESS",
-						//     "NUMERIC",
-						//     "ORDER_ID",
-						//     "PAYMENT_TYPE",
-						//     "PHONE_NUMBER",
-						//     "PRICE",
-						//     "PRODUCT_CATEGORY",
-						//     "SHIPPING_ADDRESS_L1",
-						//     "SHIPPING_ADDRESS_L2",
-						//     "SHIPPING_CITY",
-						//     "SHIPPING_COUNTRY",
-						//     "SHIPPING_NAME",
-						//     "SHIPPING_PHONE",
-						//     "SHIPPING_STATE",
-						//     "SHIPPING_ZIP",
-						//     "USERAGENT"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -663,119 +465,50 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"arn": {
 						// Property: Arn
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"created_time": {
 						// Property: CreatedTime
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The time when the event type was created.",
-						//   "type": "string"
-						// }
 						Description: "The time when the event type was created.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"description": {
 						// Property: Description
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The description.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The description.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"inline": {
 						// Property: Inline
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"last_updated_time": {
 						// Property: LastUpdatedTime
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The time when the event type was last updated.",
-						//   "type": "string"
-						// }
 						Description: "The time when the event type was last updated.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"tags": {
 						// Property: Tags
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Tags associated with this event type.",
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "properties": {
-						//       "Key": {
-						//         "maxLength": 128,
-						//         "minLength": 1,
-						//         "type": "string"
-						//       },
-						//       "Value": {
-						//         "maxLength": 256,
-						//         "minLength": 0,
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "Key",
-						//       "Value"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "maxItems": 200,
-						//   "type": "array",
-						//   "uniqueItems": false
-						// }
 						Description: "Tags associated with this event type.",
 						// Multiset.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 128,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 256,
-									//   "minLength": 0,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -855,23 +588,11 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

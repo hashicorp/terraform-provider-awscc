@@ -110,43 +110,17 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 				map[string]schema.Attribute{
 					"s3_logs": {
 						// Property: S3Logs
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The S3 path in which to store the logs.",
-						//   "properties": {
-						//     "S3BucketName": {
-						//       "description": "S3BucketName",
-						//       "type": "string"
-						//     },
-						//     "S3KeyPrefix": {
-						//       "description": "S3KeyPrefix",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The S3 path in which to store the logs.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"s3_bucket_name": {
 									// Property: S3BucketName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "S3BucketName",
-									//   "type": "string"
-									// }
 									Description: "S3BucketName",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"s3_key_prefix": {
 									// Property: S3KeyPrefix
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "S3KeyPrefix",
-									//   "type": "string"
-									// }
 									Description: "S3KeyPrefix",
 									Type:        types.StringType,
 									Optional:    true,

@@ -97,64 +97,22 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"device_permission_role_arn": {
 						// Property: DevicePermissionRoleArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The device permission role arn of the test suite.",
-						//   "maxLength": 2048,
-						//   "minLength": 20,
-						//   "type": "string"
-						// }
 						Description: "The device permission role arn of the test suite.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"devices": {
 						// Property: Devices
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The devices being tested in the test suite",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "properties": {
-						//       "CertificateArn": {
-						//         "maxLength": 2048,
-						//         "minLength": 20,
-						//         "type": "string"
-						//       },
-						//       "ThingArn": {
-						//         "maxLength": 2048,
-						//         "minLength": 20,
-						//         "type": "string"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "maxItems": 2,
-						//   "minItems": 0,
-						//   "type": "array"
-						// }
 						Description: "The devices being tested in the test suite",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"certificate_arn": {
 									// Property: CertificateArn
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 2048,
-									//   "minLength": 20,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"thing_arn": {
 									// Property: ThingArn
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 2048,
-									//   "minLength": 20,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -168,37 +126,18 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"intended_for_qualification": {
 						// Property: IntendedForQualification
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Whether the tests are intended for qualification in a suite.",
-						//   "type": "boolean"
-						// }
 						Description: "Whether the tests are intended for qualification in a suite.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"root_group": {
 						// Property: RootGroup
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The root group of the test suite.",
-						//   "maxLength": 2048,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The root group of the test suite.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"suite_definition_name": {
 						// Property: SuiteDefinitionName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Name of the suite definition.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The Name of the suite definition.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -270,26 +209,12 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,

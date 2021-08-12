@@ -80,33 +80,11 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"account": {
 						// Property: ACCOUNT
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "description": "An AWS account ID.",
-						//     "maxLength": 12,
-						//     "minLength": 12,
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"orgunit": {
 						// Property: ORGUNIT
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "description": "An Organizational Unit ID.",
-						//     "maxLength": 68,
-						//     "minLength": 16,
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
@@ -169,33 +147,11 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"account": {
 						// Property: ACCOUNT
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "description": "An AWS account ID.",
-						//     "maxLength": 12,
-						//     "minLength": 12,
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"orgunit": {
 						// Property: ORGUNIT
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "description": "An Organizational Unit ID.",
-						//     "maxLength": 68,
-						//     "minLength": 16,
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
@@ -253,22 +209,11 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -340,31 +285,11 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"managed_service_data": {
 						// Property: ManagedServiceData
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 4096,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "WAF",
-						//     "WAFV2",
-						//     "SHIELD_ADVANCED",
-						//     "SECURITY_GROUPS_COMMON",
-						//     "SECURITY_GROUPS_CONTENT_AUDIT",
-						//     "SECURITY_GROUPS_USAGE_AUDIT",
-						//     "NETWORK_FIREWALL",
-						//     "DNS_FIREWALL"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -403,24 +328,11 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

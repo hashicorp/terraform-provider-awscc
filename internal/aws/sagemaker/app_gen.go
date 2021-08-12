@@ -146,73 +146,18 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"instance_type": {
 						// Property: InstanceType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The instance type that the image version runs on.",
-						//   "enum": [
-						//     "system",
-						//     "ml.t3.micro",
-						//     "ml.t3.small",
-						//     "ml.t3.medium",
-						//     "ml.t3.large",
-						//     "ml.t3.xlarge",
-						//     "ml.t3.2xlarge",
-						//     "ml.m5.large",
-						//     "ml.m5.xlarge",
-						//     "ml.m5.2xlarge",
-						//     "ml.m5.4xlarge",
-						//     "ml.m5.8xlarge",
-						//     "ml.m5.12xlarge",
-						//     "ml.m5.16xlarge",
-						//     "ml.m5.24xlarge",
-						//     "ml.c5.large",
-						//     "ml.c5.xlarge",
-						//     "ml.c5.2xlarge",
-						//     "ml.c5.4xlarge",
-						//     "ml.c5.9xlarge",
-						//     "ml.c5.12xlarge",
-						//     "ml.c5.18xlarge",
-						//     "ml.c5.24xlarge",
-						//     "ml.p3.2xlarge",
-						//     "ml.p3.8xlarge",
-						//     "ml.p3.16xlarge",
-						//     "ml.g4dn.xlarge",
-						//     "ml.g4dn.2xlarge",
-						//     "ml.g4dn.4xlarge",
-						//     "ml.g4dn.8xlarge",
-						//     "ml.g4dn.12xlarge",
-						//     "ml.g4dn.16xlarge"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The instance type that the image version runs on.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"sage_maker_image_arn": {
 						// Property: SageMakerImageArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ARN of the SageMaker image that the image version belongs to.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The ARN of the SageMaker image that the image version belongs to.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"sage_maker_image_version_arn": {
 						// Property: SageMakerImageVersionArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ARN of the image version created on the instance.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The ARN of the image version created on the instance.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -256,23 +201,11 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

@@ -74,25 +74,12 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"destination": {
 						// Property: Destination
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The URL of the specified Amazon S3 bucket.",
-						//   "type": "string"
-						// }
 						Description: "The URL of the specified Amazon S3 bucket.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"destination_type": {
 						// Property: DestinationType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The destination type, such as Amazon S3.",
-						//   "enum": [
-						//     "S3"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The destination type, such as Amazon S3.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -137,42 +124,18 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"email_address": {
 						// Property: EmailAddress
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The unique identifier for the email account.",
-						//   "maxLength": 320,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The unique identifier for the email account.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"id": {
 						// Property: Id
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The identifier for the specified AWS account.",
-						//   "maxLength": 12,
-						//   "minLength": 12,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The identifier for the specified AWS account.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The name of the specified AWS account.",
-						//   "maxLength": 50,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The name of the specified AWS account.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -284,146 +247,64 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"assessment_id": {
 						// Property: AssessmentId
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 36,
-						//   "minLength": 36,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"assessment_name": {
 						// Property: AssessmentName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The name of the related assessment.",
-						//   "maxLength": 127,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The name of the related assessment.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"comment": {
 						// Property: Comment
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The comment related to the delegation.",
-						//   "maxLength": 350,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The comment related to the delegation.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"control_set_id": {
 						// Property: ControlSetId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The identifier for the specified control set.",
-						//   "maxLength": 300,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The identifier for the specified control set.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"created_by": {
 						// Property: CreatedBy
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The IAM user or role that performed the action.",
-						//   "maxLength": 100,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The IAM user or role that performed the action.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"creation_time": {
 						// Property: CreationTime
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The sequence of characters that identifies when the event occurred.",
-						//   "type": "number"
-						// }
 						Description: "The sequence of characters that identifies when the event occurred.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"id": {
 						// Property: Id
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 36,
-						//   "minLength": 36,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"last_updated": {
 						// Property: LastUpdated
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The sequence of characters that identifies when the event occurred.",
-						//   "type": "number"
-						// }
 						Description: "The sequence of characters that identifies when the event occurred.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"role_arn": {
 						// Property: RoleArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Resource Name (ARN) of the IAM user or role.",
-						//   "maxLength": 2048,
-						//   "minLength": 20,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The Amazon Resource Name (ARN) of the IAM user or role.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"role_type": {
 						// Property: RoleType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": " The IAM role type.",
-						//   "enum": [
-						//     "PROCESS_OWNER",
-						//     "RESOURCE_OWNER"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: " The IAM role type.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"status": {
 						// Property: Status
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The status of the delegation.",
-						//   "enum": [
-						//     "IN_PROGRESS",
-						//     "UNDER_REVIEW",
-						//     "COMPLETE"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The status of the delegation.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -510,29 +391,12 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"role_arn": {
 						// Property: RoleArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Resource Name (ARN) of the IAM user or role.",
-						//   "maxLength": 2048,
-						//   "minLength": 20,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The Amazon Resource Name (ARN) of the IAM user or role.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"role_type": {
 						// Property: RoleType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": " The IAM role type.",
-						//   "enum": [
-						//     "PROCESS_OWNER",
-						//     "RESOURCE_OWNER"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: " The IAM role type.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -604,80 +468,23 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"aws_accounts": {
 						// Property: AwsAccounts
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The AWS accounts included in scope.",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "The AWS account associated with the assessment.",
-						//     "properties": {
-						//       "EmailAddress": {
-						//         "description": "The unique identifier for the email account.",
-						//         "maxLength": 320,
-						//         "minLength": 1,
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "Id": {
-						//         "description": "The identifier for the specified AWS account.",
-						//         "maxLength": 12,
-						//         "minLength": 12,
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "Name": {
-						//         "description": "The name of the specified AWS account.",
-						//         "maxLength": 50,
-						//         "minLength": 1,
-						//         "pattern": "",
-						//         "type": "string"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "The AWS accounts included in scope.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"email_address": {
 									// Property: EmailAddress
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The unique identifier for the email account.",
-									//   "maxLength": 320,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The unique identifier for the email account.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"id": {
 									// Property: Id
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The identifier for the specified AWS account.",
-									//   "maxLength": 12,
-									//   "minLength": 12,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The identifier for the specified AWS account.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The name of the specified AWS account.",
-									//   "maxLength": 50,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The name of the specified AWS account.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -689,32 +496,11 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"aws_services": {
 						// Property: AwsServices
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The AWS services included in scope.",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "An AWS service such as Amazon S3, AWS CloudTrail, and so on.",
-						//     "properties": {
-						//       "ServiceName": {
-						//         "description": "The name of the AWS service.",
-						//         "type": "string"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "The AWS services included in scope.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"service_name": {
 									// Property: ServiceName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The name of the AWS service.",
-									//   "type": "string"
-									// }
 									Description: "The name of the AWS service.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -778,26 +564,12 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,

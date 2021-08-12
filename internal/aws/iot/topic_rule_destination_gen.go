@@ -49,10 +49,6 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				map[string]schema.Attribute{
 					"confirmation_url": {
 						// Property: ConfirmationUrl
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -120,47 +116,23 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				map[string]schema.Attribute{
 					"role_arn": {
 						// Property: RoleArn
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"security_groups": {
 						// Property: SecurityGroups
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "type": "array",
-						//   "uniqueItems": true
-						// }
 						// Ordered set.
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "type": "array",
-						//   "uniqueItems": true
-						// }
 						// Ordered set.
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"vpc_id": {
 						// Property: VpcId
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

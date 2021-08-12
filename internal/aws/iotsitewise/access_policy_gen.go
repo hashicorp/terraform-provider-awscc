@@ -92,28 +92,11 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"iam_role": {
 						// Property: IamRole
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Contains information for an IAM role identity in an access policy.",
-						//   "properties": {
-						//     "arn": {
-						//       "description": "The ARN of the IAM role.",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Contains information for an IAM role identity in an access policy.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: arn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ARN of the IAM role.",
-									//   "type": "string"
-									// }
 									Description: "The ARN of the IAM role.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -124,28 +107,11 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"iam_user": {
 						// Property: IamUser
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Contains information for an IAM user identity in an access policy.",
-						//   "properties": {
-						//     "arn": {
-						//       "description": "The ARN of the IAM user.",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Contains information for an IAM user identity in an access policy.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: arn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ARN of the IAM user.",
-									//   "type": "string"
-									// }
 									Description: "The ARN of the IAM user.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -156,28 +122,11 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"user": {
 						// Property: User
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Contains information for a user identity in an access policy.",
-						//   "properties": {
-						//     "id": {
-						//       "description": "The AWS SSO ID of the user.",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Contains information for a user identity in an access policy.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"id": {
 									// Property: id
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The AWS SSO ID of the user.",
-									//   "type": "string"
-									// }
 									Description: "The AWS SSO ID of the user.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -238,28 +187,11 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"portal": {
 						// Property: Portal
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A portal resource.",
-						//   "properties": {
-						//     "id": {
-						//       "description": "The ID of the portal.",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "A portal resource.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"id": {
 									// Property: id
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ID of the portal.",
-									//   "type": "string"
-									// }
 									Description: "The ID of the portal.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -270,28 +202,11 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"project": {
 						// Property: Project
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A project resource.",
-						//   "properties": {
-						//     "id": {
-						//       "description": "The ID of the project.",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "A project resource.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"id": {
 									// Property: id
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ID of the project.",
-									//   "type": "string"
-									// }
 									Description: "The ID of the project.",
 									Type:        types.StringType,
 									Optional:    true,

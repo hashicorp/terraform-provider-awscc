@@ -75,45 +75,17 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"estimated_instance_warmup": {
 						// Property: EstimatedInstanceWarmup
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
-						//   "type": "number"
-						// }
 						Description: "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"target_tracking_configuration": {
 						// Property: TargetTrackingConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Settings for a target-based scaling policy applied to Auto Scaling group.",
-						//   "properties": {
-						//     "TargetValue": {
-						//       "additionalProperties": false,
-						//       "description": "Desired value to use with a game server group target-based scaling policy.",
-						//       "type": "number"
-						//     }
-						//   },
-						//   "required": [
-						//     "TargetValue"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "Settings for a target-based scaling policy applied to Auto Scaling group.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"target_value": {
 									// Property: TargetValue
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "Desired value to use with a game server group target-based scaling policy.",
-									//   "type": "number"
-									// }
 									Description: "Desired value to use with a game server group target-based scaling policy.",
 									Type:        types.NumberType,
 									Required:    true,
@@ -242,24 +214,12 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"instance_type": {
 						// Property: InstanceType
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "An EC2 instance type designation.",
-						//   "type": "string"
-						// }
 						Description: "An EC2 instance type designation.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"weighted_capacity": {
 						// Property: WeightedCapacity
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.",
-						//   "type": "string"
-						// }
 						Description: "Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -302,36 +262,18 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"launch_template_id": {
 						// Property: LaunchTemplateId
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A unique identifier for an existing EC2 launch template.",
-						//   "type": "string"
-						// }
 						Description: "A unique identifier for an existing EC2 launch template.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"launch_template_name": {
 						// Property: LaunchTemplateName
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A readable identifier for an existing EC2 launch template.",
-						//   "type": "string"
-						// }
 						Description: "A readable identifier for an existing EC2 launch template.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"version": {
 						// Property: Version
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The version of the EC2 launch template to use.",
-						//   "type": "string"
-						// }
 						Description: "The version of the EC2 launch template to use.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -408,22 +350,12 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key for a developer-defined key:value pair for tagging an AWS resource.",
-						//   "type": "string"
-						// }
 						Description: "The key for a developer-defined key:value pair for tagging an AWS resource.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for a developer-defined key:value pair for tagging an AWS resource.",
-						//   "type": "string"
-						// }
 						Description: "The value for a developer-defined key:value pair for tagging an AWS resource.",
 						Type:        types.StringType,
 						Optional:    true,

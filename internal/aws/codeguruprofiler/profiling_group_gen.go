@@ -48,15 +48,6 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"principals": {
 						// Property: Principals
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The principals for the agent permissions.",
-						//   "items": {
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "The principals for the agent permissions.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
@@ -96,24 +87,12 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"channel_id": {
 						// Property: channelId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Unique identifier for each Channel in the notification configuration of a Profiling Group",
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "Unique identifier for each Channel in the notification configuration of a Profiling Group",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"channel_uri": {
 						// Property: channelUri
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.",
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.",
 						Type:        types.StringType,
 						Required:    true,
@@ -203,26 +182,12 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
 						Type:        types.StringType,
 						Required:    true,

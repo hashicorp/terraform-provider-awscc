@@ -121,57 +121,16 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"labels": {
 						// Property: Labels
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "A key-value pair to associate with a pod.",
-						//     "properties": {
-						//       "Key": {
-						//         "description": "The key name of the label.",
-						//         "maxLength": 127,
-						//         "minLength": 1,
-						//         "type": "string"
-						//       },
-						//       "Value": {
-						//         "description": "The value for the label. ",
-						//         "maxLength": 255,
-						//         "minLength": 1,
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "Key",
-						//       "Value"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "type": "array"
-						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The key name of the label.",
-									//   "maxLength": 127,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Description: "The key name of the label.",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The value for the label. ",
-									//   "maxLength": 255,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Description: "The value for the label. ",
 									Type:        types.StringType,
 									Required:    true,
@@ -183,11 +142,6 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"namespace": {
 						// Property: Namespace
-						// CloudFormation resource type schema:
-						// {
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -250,26 +204,12 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 127,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,

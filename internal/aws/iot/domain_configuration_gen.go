@@ -53,22 +53,11 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				map[string]schema.Attribute{
 					"allow_authorizer_override": {
 						// Property: AllowAuthorizerOverride
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"default_authorizer_name": {
 						// Property: DefaultAuthorizerName
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -182,35 +171,16 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				map[string]schema.Attribute{
 					"server_certificate_arn": {
 						// Property: ServerCertificateArn
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 2048,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"server_certificate_status": {
 						// Property: ServerCertificateStatus
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "INVALID",
-						//     "VALID"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"server_certificate_status_detail": {
 						// Property: ServerCertificateStatusDetail
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -261,19 +231,11 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

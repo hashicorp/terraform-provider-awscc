@@ -77,50 +77,21 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"associated_account_id": {
 						// Property: AssociatedAccountId
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"association_status": {
 						// Property: AssociationStatus
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "NOT_ASSOCIATED",
-						//     "PENDING_ASSOCIATION",
-						//     "ASSOCIATED_WITH_OWNER_ACCOUNT",
-						//     "ASSOCIATED_WITH_SHARED_ACCOUNT",
-						//     "PENDING_DISASSOCIATION"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"connection_identifier": {
 						// Property: ConnectionIdentifier
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 20,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"resource_id": {
 						// Property: ResourceId
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 1000,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -183,19 +154,11 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

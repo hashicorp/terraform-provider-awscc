@@ -47,28 +47,16 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"base": {
 						// Property: Base
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"capacity_provider": {
 						// Property: CapacityProvider
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"weight": {
 						// Property: Weight
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
@@ -123,40 +111,15 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"deployment_circuit_breaker": {
 						// Property: DeploymentCircuitBreaker
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enable": {
-						//       "type": "boolean"
-						//     },
-						//     "Rollback": {
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "required": [
-						//     "Enable",
-						//     "Rollback"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enable": {
 									// Property: Enable
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Required: true,
 								},
 								"rollback": {
 									// Property: Rollback
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Required: true,
 								},
@@ -166,19 +129,11 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"maximum_percent": {
 						// Property: MaximumPercent
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"minimum_healthy_percent": {
 						// Property: MinimumHealthyPercent
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
@@ -207,15 +162,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "CODE_DEPLOY",
-						//     "ECS",
-						//     "EXTERNAL"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -307,37 +253,21 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"container_name": {
 						// Property: ContainerName
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"container_port": {
 						// Property: ContainerPort
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"load_balancer_name": {
 						// Property: LoadBalancerName
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"target_group_arn": {
 						// Property: TargetGroupArn
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -395,68 +325,20 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"awsvpc_configuration": {
 						// Property: AwsvpcConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "AssignPublicIp": {
-						//       "enum": [
-						//         "DISABLED",
-						//         "ENABLED"
-						//       ],
-						//       "type": "string"
-						//     },
-						//     "SecurityGroups": {
-						//       "items": {
-						//         "type": "string"
-						//       },
-						//       "type": "array"
-						//     },
-						//     "Subnets": {
-						//       "items": {
-						//         "type": "string"
-						//       },
-						//       "type": "array"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"assign_public_ip": {
 									// Property: AssignPublicIp
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "DISABLED",
-									//     "ENABLED"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"security_groups": {
 									// Property: SecurityGroups
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"subnets": {
 									// Property: Subnets
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -497,23 +379,11 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"expression": {
 						// Property: Expression
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "distinctInstance",
-						//     "memberOf"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -554,24 +424,11 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"field": {
 						// Property: Field
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "binpack",
-						//     "random",
-						//     "spread"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -680,37 +537,21 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"container_name": {
 						// Property: ContainerName
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"container_port": {
 						// Property: ContainerPort
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"port": {
 						// Property: Port
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"registry_arn": {
 						// Property: RegistryArn
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -743,19 +584,11 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

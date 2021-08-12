@@ -67,25 +67,12 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"child_asset_id": {
 						// Property: ChildAssetId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ID of the child asset to be associated.",
-						//   "type": "string"
-						// }
 						Description: "The ID of the child asset to be associated.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"logical_id": {
 						// Property: LogicalId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The LogicalID of a hierarchy in the parent asset's model.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The LogicalID of a hierarchy in the parent asset's model.",
 						Type:        types.StringType,
 						Required:    true,
@@ -169,40 +156,18 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"alias": {
 						// Property: Alias
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The property alias that identifies the property.",
-						//   "type": "string"
-						// }
 						Description: "The property alias that identifies the property.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"logical_id": {
 						// Property: LogicalId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Customer provided ID for property.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "Customer provided ID for property.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"notification_state": {
 						// Property: NotificationState
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The MQTT notification state (ENABLED or DISABLED) for this asset property.",
-						//   "enum": [
-						//     "ENABLED",
-						//     "DISABLED"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The MQTT notification state (ENABLED or DISABLED) for this asset property.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -243,19 +208,11 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

@@ -157,33 +157,11 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"phone_config": {
 						// Property: PhoneConfig
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.",
-						//   "properties": {
-						//     "PhoneNumber": {
-						//       "description": "The phone number in E.164 format.",
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "PhoneNumber"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"phone_number": {
 									// Property: PhoneNumber
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The phone number in E.164 format.",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The phone number in E.164 format.",
 									Type:        types.StringType,
 									Required:    true,
@@ -194,51 +172,17 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"queue_config": {
 						// Property: QueueConfig
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The queue configuration. This is required only if QuickConnectType is QUEUE.",
-						//   "properties": {
-						//     "ContactFlowArn": {
-						//       "description": "The identifier of the contact flow.",
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "QueueArn": {
-						//       "description": "The identifier for the queue.",
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "ContactFlowArn",
-						//     "QueueArn"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "The queue configuration. This is required only if QuickConnectType is QUEUE.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"contact_flow_arn": {
 									// Property: ContactFlowArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The identifier of the contact flow.",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The identifier of the contact flow.",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"queue_arn": {
 									// Property: QueueArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The identifier for the queue.",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The identifier for the queue.",
 									Type:        types.StringType,
 									Required:    true,
@@ -249,67 +193,23 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"quick_connect_type": {
 						// Property: QuickConnectType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
-						//   "enum": [
-						//     "PHONE_NUMBER",
-						//     "QUEUE",
-						//     "USER"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"user_config": {
 						// Property: UserConfig
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The user configuration. This is required only if QuickConnectType is USER.",
-						//   "properties": {
-						//     "ContactFlowArn": {
-						//       "description": "The identifier of the contact flow.",
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "UserArn": {
-						//       "description": "The identifier of the user.",
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "ContactFlowArn",
-						//     "UserArn"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "The user configuration. This is required only if QuickConnectType is USER.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"contact_flow_arn": {
 									// Property: ContactFlowArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The identifier of the contact flow.",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The identifier of the contact flow.",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"user_arn": {
 									// Property: UserArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The identifier of the user.",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The identifier of the user.",
 									Type:        types.StringType,
 									Required:    true,
@@ -360,26 +260,12 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 256,
-						//   "type": "string"
-						// }
 						Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,

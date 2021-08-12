@@ -89,35 +89,11 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"region_configuration": {
 						// Property: RegionConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The ReplicationSet regional configuration.",
-						//   "properties": {
-						//     "SseKmsKeyId": {
-						//       "description": "The ARN of the ReplicationSet.",
-						//       "maxLength": 1000,
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "SseKmsKeyId"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "The ReplicationSet regional configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"sse_kms_key_id": {
 									// Property: SseKmsKeyId
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ARN of the ReplicationSet.",
-									//   "maxLength": 1000,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The ARN of the ReplicationSet.",
 									Type:        types.StringType,
 									Required:    true,
@@ -128,12 +104,6 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"region_name": {
 						// Property: RegionName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The AWS region name.",
-						//   "maxLength": 20,
-						//   "type": "string"
-						// }
 						Description: "The AWS region name.",
 						Type:        types.StringType,
 						Optional:    true,

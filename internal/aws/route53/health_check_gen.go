@@ -142,51 +142,17 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"alarm_identifier": {
 						// Property: AlarmIdentifier
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy.",
-						//   "properties": {
-						//     "Name": {
-						//       "description": "The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.",
-						//       "maxLength": 256,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     },
-						//     "Region": {
-						//       "description": "For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, the region that the alarm was created in.",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "Name",
-						//     "Region"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.",
-									//   "maxLength": 256,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Description: "The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"region": {
 									// Property: Region
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, the region that the alarm was created in.",
-									//   "type": "string"
-									// }
 									Description: "For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, the region that the alarm was created in.",
 									Type:        types.StringType,
 									Required:    true,
@@ -197,96 +163,47 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"child_health_checks": {
 						// Property: ChildHealthChecks
-						// CloudFormation resource type schema:
-						// {
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "maxItems": 256,
-						//   "type": "array"
-						// }
 						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"enable_sni": {
 						// Property: EnableSNI
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"failure_threshold": {
 						// Property: FailureThreshold
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"fully_qualified_domain_name": {
 						// Property: FullyQualifiedDomainName
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"health_threshold": {
 						// Property: HealthThreshold
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"ip_address": {
 						// Property: IPAddress
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 45,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"insufficient_data_health_status": {
 						// Property: InsufficientDataHealthStatus
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "Healthy",
-						//     "LastKnownStatus",
-						//     "Unhealthy"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"inverted": {
 						// Property: Inverted
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"measure_latency": {
 						// Property: MeasureLatency
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 						Computed: true,
@@ -294,34 +211,17 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"port": {
 						// Property: Port
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"regions": {
 						// Property: Regions
-						// CloudFormation resource type schema:
-						// {
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "maxItems": 64,
-						//   "type": "array"
-						// }
 						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"request_interval": {
 						// Property: RequestInterval
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Optional: true,
 						Computed: true,
@@ -329,51 +229,21 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"resource_path": {
 						// Property: ResourcePath
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"routing_control_arn": {
 						// Property: RoutingControlArn
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"search_string": {
 						// Property: SearchString
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "CALCULATED",
-						//     "CLOUDWATCH_METRIC",
-						//     "HTTP",
-						//     "HTTP_STR_MATCH",
-						//     "HTTPS",
-						//     "HTTPS_STR_MATCH",
-						//     "TCP",
-						//     "RECOVERY_CONTROL"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 						// Type is a force-new attribute.
@@ -426,24 +296,12 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag.",
-						//   "maxLength": 128,
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for the tag.",
-						//   "maxLength": 256,
-						//   "type": "string"
-						// }
 						Description: "The value for the tag.",
 						Type:        types.StringType,
 						Required:    true,

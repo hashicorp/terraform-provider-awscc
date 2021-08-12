@@ -88,13 +88,6 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"bucket_access_role_arn": {
 						// Property: BucketAccessRoleArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ARN of the IAM role of the Amazon S3 bucket.",
-						//   "maxLength": 2048,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The ARN of the IAM role of the Amazon S3 bucket.",
 						Type:        types.StringType,
 						Required:    true,
@@ -181,28 +174,12 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key for an AWS resource tag.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for an AWS resource tag.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,

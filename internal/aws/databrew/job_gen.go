@@ -116,109 +116,35 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"catalog_id": {
 						// Property: CatalogId
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"database_name": {
 						// Property: DatabaseName
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"database_options": {
 						// Property: DatabaseOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "TableName": {
-						//       "maxLength": 255,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     },
-						//     "TempDirectory": {
-						//       "additionalProperties": false,
-						//       "description": "S3 Output location",
-						//       "properties": {
-						//         "Bucket": {
-						//           "type": "string"
-						//         },
-						//         "Key": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "Bucket"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "required": [
-						//     "TableName"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"table_name": {
 									// Property: TableName
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 255,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"temp_directory": {
 									// Property: TempDirectory
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "S3 Output location",
-									//   "properties": {
-									//     "Bucket": {
-									//       "type": "string"
-									//     },
-									//     "Key": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "Bucket"
-									//   ],
-									//   "type": "object"
-									// }
 									Description: "S3 Output location",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket": {
 												// Property: Bucket
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -232,80 +158,25 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"overwrite": {
 						// Property: Overwrite
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"s3_options": {
 						// Property: S3Options
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Location": {
-						//       "additionalProperties": false,
-						//       "description": "S3 Output location",
-						//       "properties": {
-						//         "Bucket": {
-						//           "type": "string"
-						//         },
-						//         "Key": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "Bucket"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "required": [
-						//     "Location"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"location": {
 									// Property: Location
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "S3 Output location",
-									//   "properties": {
-									//     "Bucket": {
-									//       "type": "string"
-									//     },
-									//     "Key": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "Bucket"
-									//   ],
-									//   "type": "object"
-									// }
 									Description: "S3 Output location",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket": {
 												// Property: Bucket
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -319,12 +190,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"table_name": {
 						// Property: TableName
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -395,87 +260,25 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"database_options": {
 						// Property: DatabaseOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "TableName": {
-						//       "maxLength": 255,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     },
-						//     "TempDirectory": {
-						//       "additionalProperties": false,
-						//       "description": "S3 Output location",
-						//       "properties": {
-						//         "Bucket": {
-						//           "type": "string"
-						//         },
-						//         "Key": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "Bucket"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "required": [
-						//     "TableName"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"table_name": {
 									// Property: TableName
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 255,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"temp_directory": {
 									// Property: TempDirectory
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "S3 Output location",
-									//   "properties": {
-									//     "Bucket": {
-									//       "type": "string"
-									//     },
-									//     "Key": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "Bucket"
-									//   ],
-									//   "type": "object"
-									// }
 									Description: "S3 Output location",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket": {
 												// Property: Bucket
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -489,25 +292,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"database_output_mode": {
 						// Property: DatabaseOutputMode
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Database table name",
-						//   "enum": [
-						//     "NEW_TABLE"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "Database table name",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"glue_connection_name": {
 						// Property: GlueConnectionName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Glue connection name",
-						//   "type": "string"
-						// }
 						Description: "Glue connection name",
 						Type:        types.StringType,
 						Required:    true,
@@ -586,27 +376,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"mode": {
 						// Property: Mode
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Sample configuration mode for profile jobs.",
-						//   "enum": [
-						//     "FULL_DATASET",
-						//     "CUSTOM_ROWS"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "Sample configuration mode for profile jobs.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"size": {
 						// Property: Size
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Sample configuration size for profile jobs.",
-						//   "format": "int64",
-						//   "type": "integer"
-						// }
 						Description: "Sample configuration size for profile jobs.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -690,19 +465,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"bucket": {
 						// Property: Bucket
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -802,93 +569,26 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"compression_format": {
 						// Property: CompressionFormat
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "GZIP",
-						//     "LZ4",
-						//     "SNAPPY",
-						//     "BZIP2",
-						//     "DEFLATE",
-						//     "LZO",
-						//     "BROTLI",
-						//     "ZSTD",
-						//     "ZLIB"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"format": {
 						// Property: Format
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "CSV",
-						//     "JSON",
-						//     "PARQUET",
-						//     "GLUEPARQUET",
-						//     "AVRO",
-						//     "ORC",
-						//     "XML"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"format_options": {
 						// Property: FormatOptions
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Format options for job Output",
-						//   "properties": {
-						//     "Csv": {
-						//       "additionalProperties": false,
-						//       "description": "Output Csv options",
-						//       "properties": {
-						//         "Delimiter": {
-						//           "maxLength": 1,
-						//           "minLength": 1,
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Format options for job Output",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"csv": {
 									// Property: Csv
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "Output Csv options",
-									//   "properties": {
-									//     "Delimiter": {
-									//       "maxLength": 1,
-									//       "minLength": 1,
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Description: "Output Csv options",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"delimiter": {
 												// Property: Delimiter
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 1,
-												//   "minLength": 1,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -902,41 +602,16 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"location": {
 						// Property: Location
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "S3 Output location",
-						//   "properties": {
-						//     "Bucket": {
-						//       "type": "string"
-						//     },
-						//     "Key": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "Bucket"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "S3 Output location",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"bucket": {
 									// Property: Bucket
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -946,24 +621,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"overwrite": {
 						// Property: Overwrite
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"partition_columns": {
 						// Property: PartitionColumns
-						// CloudFormation resource type schema:
-						// {
-						//   "insertionOrder": true,
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "type": "array",
-						//   "uniqueItems": true
-						// }
 						// Ordered set.
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
@@ -1136,136 +798,19 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"column_statistics_configurations": {
 						// Property: ColumnStatisticsConfigurations
-						// CloudFormation resource type schema:
-						// {
-						//   "insertionOrder": true,
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "properties": {
-						//       "Selectors": {
-						//         "insertionOrder": true,
-						//         "items": {
-						//           "additionalProperties": false,
-						//           "properties": {
-						//             "Name": {
-						//               "maxLength": 255,
-						//               "minLength": 1,
-						//               "type": "string"
-						//             },
-						//             "Regex": {
-						//               "maxLength": 255,
-						//               "minLength": 1,
-						//               "type": "string"
-						//             }
-						//           },
-						//           "type": "object"
-						//         },
-						//         "minItems": 1,
-						//         "type": "array"
-						//       },
-						//       "Statistics": {
-						//         "additionalProperties": false,
-						//         "properties": {
-						//           "IncludedStatistics": {
-						//             "insertionOrder": true,
-						//             "items": {
-						//               "maxLength": 128,
-						//               "minLength": 1,
-						//               "pattern": "",
-						//               "type": "string"
-						//             },
-						//             "minItems": 1,
-						//             "type": "array"
-						//           },
-						//           "Overrides": {
-						//             "insertionOrder": true,
-						//             "items": {
-						//               "additionalProperties": false,
-						//               "properties": {
-						//                 "Parameters": {
-						//                   "additionalProperties": false,
-						//                   "patternProperties": {
-						//                     "": {
-						//                       "type": "string"
-						//                     }
-						//                   },
-						//                   "type": "object"
-						//                 },
-						//                 "Statistic": {
-						//                   "maxLength": 128,
-						//                   "minLength": 1,
-						//                   "pattern": "",
-						//                   "type": "string"
-						//                 }
-						//               },
-						//               "required": [
-						//                 "Statistic",
-						//                 "Parameters"
-						//               ],
-						//               "type": "object"
-						//             },
-						//             "minItems": 1,
-						//             "type": "array"
-						//           }
-						//         },
-						//         "type": "object"
-						//       }
-						//     },
-						//     "required": [
-						//       "Statistics"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "minItems": 1,
-						//   "type": "array"
-						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"selectors": {
 									// Property: Selectors
-									// CloudFormation resource type schema:
-									// {
-									//   "insertionOrder": true,
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "properties": {
-									//       "Name": {
-									//         "maxLength": 255,
-									//         "minLength": 1,
-									//         "type": "string"
-									//       },
-									//       "Regex": {
-									//         "maxLength": 255,
-									//         "minLength": 1,
-									//         "type": "string"
-									//       }
-									//     },
-									//     "type": "object"
-									//   },
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"name": {
 												// Property: Name
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 255,
-												//   "minLength": 1,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"regex": {
 												// Property: Regex
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 255,
-												//   "minLength": 1,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -1278,133 +823,25 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"statistics": {
 									// Property: Statistics
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "IncludedStatistics": {
-									//       "insertionOrder": true,
-									//       "items": {
-									//         "maxLength": 128,
-									//         "minLength": 1,
-									//         "pattern": "",
-									//         "type": "string"
-									//       },
-									//       "minItems": 1,
-									//       "type": "array"
-									//     },
-									//     "Overrides": {
-									//       "insertionOrder": true,
-									//       "items": {
-									//         "additionalProperties": false,
-									//         "properties": {
-									//           "Parameters": {
-									//             "additionalProperties": false,
-									//             "patternProperties": {
-									//               "": {
-									//                 "type": "string"
-									//               }
-									//             },
-									//             "type": "object"
-									//           },
-									//           "Statistic": {
-									//             "maxLength": 128,
-									//             "minLength": 1,
-									//             "pattern": "",
-									//             "type": "string"
-									//           }
-									//         },
-									//         "required": [
-									//           "Statistic",
-									//           "Parameters"
-									//         ],
-									//         "type": "object"
-									//       },
-									//       "minItems": 1,
-									//       "type": "array"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"included_statistics": {
 												// Property: IncludedStatistics
-												// CloudFormation resource type schema:
-												// {
-												//   "insertionOrder": true,
-												//   "items": {
-												//     "maxLength": 128,
-												//     "minLength": 1,
-												//     "pattern": "",
-												//     "type": "string"
-												//   },
-												//   "minItems": 1,
-												//   "type": "array"
-												// }
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 											},
 											"overrides": {
 												// Property: Overrides
-												// CloudFormation resource type schema:
-												// {
-												//   "insertionOrder": true,
-												//   "items": {
-												//     "additionalProperties": false,
-												//     "properties": {
-												//       "Parameters": {
-												//         "additionalProperties": false,
-												//         "patternProperties": {
-												//           "": {
-												//             "type": "string"
-												//           }
-												//         },
-												//         "type": "object"
-												//       },
-												//       "Statistic": {
-												//         "maxLength": 128,
-												//         "minLength": 1,
-												//         "pattern": "",
-												//         "type": "string"
-												//       }
-												//     },
-												//     "required": [
-												//       "Statistic",
-												//       "Parameters"
-												//     ],
-												//     "type": "object"
-												//   },
-												//   "minItems": 1,
-												//   "type": "array"
-												// }
 												Attributes: schema.ListNestedAttributes(
 													map[string]schema.Attribute{
 														"parameters": {
 															// Property: Parameters
-															// CloudFormation resource type schema:
-															// {
-															//   "additionalProperties": false,
-															//   "patternProperties": {
-															//     "": {
-															//       "type": "string"
-															//     }
-															//   },
-															//   "type": "object"
-															// }
 															// Pattern: ""
 															Type:     types.MapType{ElemType: types.StringType},
 															Required: true,
 														},
 														"statistic": {
 															// Property: Statistic
-															// CloudFormation resource type schema:
-															// {
-															//   "maxLength": 128,
-															//   "minLength": 1,
-															//   "pattern": "",
-															//   "type": "string"
-															// }
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -1428,133 +865,25 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"dataset_statistics_configuration": {
 						// Property: DatasetStatisticsConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "IncludedStatistics": {
-						//       "insertionOrder": true,
-						//       "items": {
-						//         "maxLength": 128,
-						//         "minLength": 1,
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "minItems": 1,
-						//       "type": "array"
-						//     },
-						//     "Overrides": {
-						//       "insertionOrder": true,
-						//       "items": {
-						//         "additionalProperties": false,
-						//         "properties": {
-						//           "Parameters": {
-						//             "additionalProperties": false,
-						//             "patternProperties": {
-						//               "": {
-						//                 "type": "string"
-						//               }
-						//             },
-						//             "type": "object"
-						//           },
-						//           "Statistic": {
-						//             "maxLength": 128,
-						//             "minLength": 1,
-						//             "pattern": "",
-						//             "type": "string"
-						//           }
-						//         },
-						//         "required": [
-						//           "Statistic",
-						//           "Parameters"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "minItems": 1,
-						//       "type": "array"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"included_statistics": {
 									// Property: IncludedStatistics
-									// CloudFormation resource type schema:
-									// {
-									//   "insertionOrder": true,
-									//   "items": {
-									//     "maxLength": 128,
-									//     "minLength": 1,
-									//     "pattern": "",
-									//     "type": "string"
-									//   },
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"overrides": {
 									// Property: Overrides
-									// CloudFormation resource type schema:
-									// {
-									//   "insertionOrder": true,
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "properties": {
-									//       "Parameters": {
-									//         "additionalProperties": false,
-									//         "patternProperties": {
-									//           "": {
-									//             "type": "string"
-									//           }
-									//         },
-									//         "type": "object"
-									//       },
-									//       "Statistic": {
-									//         "maxLength": 128,
-									//         "minLength": 1,
-									//         "pattern": "",
-									//         "type": "string"
-									//       }
-									//     },
-									//     "required": [
-									//       "Statistic",
-									//       "Parameters"
-									//     ],
-									//     "type": "object"
-									//   },
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"parameters": {
 												// Property: Parameters
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "patternProperties": {
-												//     "": {
-												//       "type": "string"
-												//     }
-												//   },
-												//   "type": "object"
-												// }
 												// Pattern: ""
 												Type:     types.MapType{ElemType: types.StringType},
 												Required: true,
 											},
 											"statistic": {
 												// Property: Statistic
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 128,
-												//   "minLength": 1,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1571,49 +900,15 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"profile_columns": {
 						// Property: ProfileColumns
-						// CloudFormation resource type schema:
-						// {
-						//   "insertionOrder": true,
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "properties": {
-						//       "Name": {
-						//         "maxLength": 255,
-						//         "minLength": 1,
-						//         "type": "string"
-						//       },
-						//       "Regex": {
-						//         "maxLength": 255,
-						//         "minLength": 1,
-						//         "type": "string"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "minItems": 1,
-						//   "type": "array"
-						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 255,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"regex": {
 									// Property: Regex
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 255,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1665,22 +960,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Recipe name",
-						//   "type": "string"
-						// }
 						Description: "Recipe name",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"version": {
 						// Property: Version
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Recipe version",
-						//   "type": "string"
-						// }
 						Description: "Recipe version",
 						Type:        types.StringType,
 						Optional:    true,
@@ -1734,23 +1019,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

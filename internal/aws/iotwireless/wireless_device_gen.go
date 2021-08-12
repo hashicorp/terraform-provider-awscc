@@ -222,91 +222,24 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"abp_v10_x": {
 						// Property: AbpV10x
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "DevAddr": {
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "SessionKeys": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "AppSKey": {
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "NwkSKey": {
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "NwkSKey",
-						//         "AppSKey"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "required": [
-						//     "DevAddr",
-						//     "SessionKeys"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"dev_addr": {
 									// Property: DevAddr
-									// CloudFormation resource type schema:
-									// {
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"session_keys": {
 									// Property: SessionKeys
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "AppSKey": {
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "NwkSKey": {
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "NwkSKey",
-									//     "AppSKey"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"app_s_key": {
 												// Property: AppSKey
-												// CloudFormation resource type schema:
-												// {
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"nwk_s_key": {
 												// Property: NwkSKey
-												// CloudFormation resource type schema:
-												// {
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -320,131 +253,34 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"abp_v11": {
 						// Property: AbpV11
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "DevAddr": {
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "SessionKeys": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "AppSKey": {
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "FNwkSIntKey": {
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "NwkSEncKey": {
-						//           "pattern": "",
-						//           "type": "string"
-						//         },
-						//         "SNwkSIntKey": {
-						//           "pattern": "",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "FNwkSIntKey",
-						//         "SNwkSIntKey",
-						//         "NwkSEncKey",
-						//         "AppSKey"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "required": [
-						//     "DevAddr",
-						//     "SessionKeys"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"dev_addr": {
 									// Property: DevAddr
-									// CloudFormation resource type schema:
-									// {
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"session_keys": {
 									// Property: SessionKeys
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "AppSKey": {
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "FNwkSIntKey": {
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "NwkSEncKey": {
-									//       "pattern": "",
-									//       "type": "string"
-									//     },
-									//     "SNwkSIntKey": {
-									//       "pattern": "",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "FNwkSIntKey",
-									//     "SNwkSIntKey",
-									//     "NwkSEncKey",
-									//     "AppSKey"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"app_s_key": {
 												// Property: AppSKey
-												// CloudFormation resource type schema:
-												// {
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"f_nwk_s_int_key": {
 												// Property: FNwkSIntKey
-												// CloudFormation resource type schema:
-												// {
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"nwk_s_enc_key": {
 												// Property: NwkSEncKey
-												// CloudFormation resource type schema:
-												// {
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"s_nwk_s_int_key": {
 												// Property: SNwkSIntKey
-												// CloudFormation resource type schema:
-												// {
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -458,64 +294,25 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"dev_eui": {
 						// Property: DevEui
-						// CloudFormation resource type schema:
-						// {
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"device_profile_id": {
 						// Property: DeviceProfileId
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"otaa_v10_x": {
 						// Property: OtaaV10x
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "AppEui": {
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "AppKey": {
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "AppKey",
-						//     "AppEui"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"app_eui": {
 									// Property: AppEui
-									// CloudFormation resource type schema:
-									// {
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"app_key": {
 									// Property: AppKey
-									// CloudFormation resource type schema:
-									// {
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -525,59 +322,20 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"otaa_v11": {
 						// Property: OtaaV11
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "AppKey": {
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "JoinEui": {
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "NwkKey": {
-						//       "pattern": "",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "AppKey",
-						//     "NwkKey",
-						//     "JoinEui"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"app_key": {
 									// Property: AppKey
-									// CloudFormation resource type schema:
-									// {
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"join_eui": {
 									// Property: JoinEui
-									// CloudFormation resource type schema:
-									// {
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"nwk_key": {
 									// Property: NwkKey
-									// CloudFormation resource type schema:
-									// {
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -587,11 +345,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"service_profile_id": {
 						// Property: ServiceProfileId
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -642,23 +395,11 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

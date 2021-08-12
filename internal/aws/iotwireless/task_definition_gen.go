@@ -112,60 +112,20 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"current_version": {
 						// Property: CurrentVersion
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Model": {
-						//       "maxLength": 4096,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     },
-						//     "PackageVersion": {
-						//       "maxLength": 32,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     },
-						//     "Station": {
-						//       "maxLength": 4096,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"model": {
 									// Property: Model
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 4096,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"package_version": {
 									// Property: PackageVersion
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 32,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"station": {
 									// Property: Station
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 4096,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -175,60 +135,20 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"update_version": {
 						// Property: UpdateVersion
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Model": {
-						//       "maxLength": 4096,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     },
-						//     "PackageVersion": {
-						//       "maxLength": 32,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     },
-						//     "Station": {
-						//       "maxLength": 4096,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"model": {
 									// Property: Model
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 4096,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"package_version": {
 									// Property: PackageVersion
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 32,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"station": {
 									// Property: Station
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 4096,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -284,23 +204,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 127,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -405,122 +313,24 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"lo_ra_wan": {
 						// Property: LoRaWAN
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "CurrentVersion": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "Model": {
-						//           "maxLength": 4096,
-						//           "minLength": 1,
-						//           "type": "string"
-						//         },
-						//         "PackageVersion": {
-						//           "maxLength": 32,
-						//           "minLength": 1,
-						//           "type": "string"
-						//         },
-						//         "Station": {
-						//           "maxLength": 4096,
-						//           "minLength": 1,
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     },
-						//     "SigKeyCrc": {
-						//       "format": "int64",
-						//       "type": "integer"
-						//     },
-						//     "UpdateSignature": {
-						//       "maxLength": 4096,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     },
-						//     "UpdateVersion": {
-						//       "additionalProperties": false,
-						//       "properties": {
-						//         "Model": {
-						//           "maxLength": 4096,
-						//           "minLength": 1,
-						//           "type": "string"
-						//         },
-						//         "PackageVersion": {
-						//           "maxLength": 32,
-						//           "minLength": 1,
-						//           "type": "string"
-						//         },
-						//         "Station": {
-						//           "maxLength": 4096,
-						//           "minLength": 1,
-						//           "type": "string"
-						//         }
-						//       },
-						//       "type": "object"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"current_version": {
 									// Property: CurrentVersion
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "Model": {
-									//       "maxLength": 4096,
-									//       "minLength": 1,
-									//       "type": "string"
-									//     },
-									//     "PackageVersion": {
-									//       "maxLength": 32,
-									//       "minLength": 1,
-									//       "type": "string"
-									//     },
-									//     "Station": {
-									//       "maxLength": 4096,
-									//       "minLength": 1,
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"model": {
 												// Property: Model
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 4096,
-												//   "minLength": 1,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"package_version": {
 												// Property: PackageVersion
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 32,
-												//   "minLength": 1,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"station": {
 												// Property: Station
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 4096,
-												//   "minLength": 1,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -530,81 +340,30 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"sig_key_crc": {
 									// Property: SigKeyCrc
-									// CloudFormation resource type schema:
-									// {
-									//   "format": "int64",
-									//   "type": "integer"
-									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"update_signature": {
 									// Property: UpdateSignature
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 4096,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"update_version": {
 									// Property: UpdateVersion
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "Model": {
-									//       "maxLength": 4096,
-									//       "minLength": 1,
-									//       "type": "string"
-									//     },
-									//     "PackageVersion": {
-									//       "maxLength": 32,
-									//       "minLength": 1,
-									//       "type": "string"
-									//     },
-									//     "Station": {
-									//       "maxLength": 4096,
-									//       "minLength": 1,
-									//       "type": "string"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"model": {
 												// Property: Model
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 4096,
-												//   "minLength": 1,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"package_version": {
 												// Property: PackageVersion
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 32,
-												//   "minLength": 1,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"station": {
 												// Property: Station
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 4096,
-												//   "minLength": 1,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -618,23 +377,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"update_data_role": {
 						// Property: UpdateDataRole
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 2048,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"update_data_source": {
 						// Property: UpdateDataSource
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 4096,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

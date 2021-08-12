@@ -104,107 +104,34 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"filter": {
 						// Property: Filter
-						// CloudFormation resource type schema:
-						// {
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "properties": {
-						//       "Contains": {
-						//         "insertionOrder": false,
-						//         "items": {
-						//           "type": "string"
-						//         },
-						//         "type": "array"
-						//       },
-						//       "Eq": {
-						//         "insertionOrder": false,
-						//         "items": {
-						//           "type": "string"
-						//         },
-						//         "type": "array"
-						//       },
-						//       "Exists": {
-						//         "type": "boolean"
-						//       },
-						//       "Neq": {
-						//         "insertionOrder": false,
-						//         "items": {
-						//           "type": "string"
-						//         },
-						//         "type": "array"
-						//       },
-						//       "Property": {
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "Property"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "minItems": 1,
-						//   "type": "array"
-						// }
 						// Multiset.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"contains": {
 									// Property: Contains
-									// CloudFormation resource type schema:
-									// {
-									//   "insertionOrder": false,
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "type": "array"
-									// }
 									// Multiset.
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"eq": {
 									// Property: Eq
-									// CloudFormation resource type schema:
-									// {
-									//   "insertionOrder": false,
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "type": "array"
-									// }
 									// Multiset.
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"exists": {
 									// Property: Exists
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"neq": {
 									// Property: Neq
-									// CloudFormation resource type schema:
-									// {
-									//   "insertionOrder": false,
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "type": "array"
-									// }
 									// Multiset.
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"property": {
 									// Property: Property
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -217,11 +144,6 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"rule_name": {
 						// Property: RuleName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The archive rule name",
-						//   "type": "string"
-						// }
 						Description: "The archive rule name",
 						Type:        types.StringType,
 						Required:    true,
@@ -281,26 +203,12 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 127,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,

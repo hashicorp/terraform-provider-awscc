@@ -156,75 +156,36 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"application_call_back_url": {
 						// Property: ApplicationCallBackURL
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "SAML metadata URL to link with the Environment",
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "SAML metadata URL to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"attribute_map": {
 						// Property: AttributeMap
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Attribute map for SAML configuration",
-						//   "type": "object"
-						// }
 						Description: "Attribute map for SAML configuration",
 						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
 					},
 					"federation_provider_name": {
 						// Property: FederationProviderName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Federation provider name to link with the Environment",
-						//   "maxLength": 32,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "Federation provider name to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"federation_urn": {
 						// Property: FederationURN
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "SAML metadata URL to link with the Environment",
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "SAML metadata URL to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"saml_metadata_document": {
 						// Property: SamlMetadataDocument
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "SAML metadata document to link the federation provider to the Environment",
-						//   "maxLength": 10000000,
-						//   "minLength": 1000,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "SAML metadata document to link the federation provider to the Environment",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"saml_metadata_url": {
 						// Property: SamlMetadataURL
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "SAML metadata URL to link with the Environment",
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "SAML metadata URL to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,

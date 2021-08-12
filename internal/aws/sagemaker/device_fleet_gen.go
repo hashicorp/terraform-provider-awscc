@@ -80,27 +80,12 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"kms_key_id": {
 						// Property: KmsKeyId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The KMS key id used for encryption on the S3 bucket",
-						//   "maxLength": 2048,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The KMS key id used for encryption on the S3 bucket",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"s3_output_location": {
 						// Property: S3OutputLocation
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Simple Storage (S3) bucket URI",
-						//   "maxLength": 1024,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The Amazon Simple Storage (S3) bucket URI",
 						Type:        types.StringType,
 						Required:    true,
@@ -160,28 +145,12 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,

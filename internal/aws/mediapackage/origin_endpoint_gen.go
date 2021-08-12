@@ -60,22 +60,12 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"cdn_identifier_secret": {
 						// Property: CdnIdentifierSecret
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.",
-						//   "type": "string"
-						// }
 						Description: "The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"secrets_role_arn": {
 						// Property: SecretsRoleArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.",
-						//   "type": "string"
-						// }
 						Description: "The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.",
 						Type:        types.StringType,
 						Required:    true,
@@ -283,188 +273,52 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"encryption": {
 						// Property: Encryption
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A Common Media Application Format (CMAF) encryption configuration.",
-						//   "properties": {
-						//     "ConstantInitializationVector": {
-						//       "description": "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
-						//       "maxLength": 32,
-						//       "minLength": 32,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "KeyRotationIntervalSeconds": {
-						//       "description": "Time (in seconds) between each encryption key rotation.",
-						//       "type": "integer"
-						//     },
-						//     "SpekeKeyProvider": {
-						//       "additionalProperties": false,
-						//       "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-						//       "properties": {
-						//         "CertificateArn": {
-						//           "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-						//           "type": "string"
-						//         },
-						//         "ResourceId": {
-						//           "description": "The resource ID to include in key requests.",
-						//           "type": "string"
-						//         },
-						//         "RoleArn": {
-						//           "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-						//           "type": "string"
-						//         },
-						//         "SystemIds": {
-						//           "description": "The system IDs to include in key requests.",
-						//           "items": {
-						//             "type": "string"
-						//           },
-						//           "type": "array"
-						//         },
-						//         "Url": {
-						//           "description": "The URL of the external key provider service.",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "ResourceId",
-						//         "SystemIds",
-						//         "Url",
-						//         "RoleArn"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "required": [
-						//     "SpekeKeyProvider"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "A Common Media Application Format (CMAF) encryption configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"constant_initialization_vector": {
 									// Property: ConstantInitializationVector
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
-									//   "maxLength": 32,
-									//   "minLength": 32,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"key_rotation_interval_seconds": {
 									// Property: KeyRotationIntervalSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Time (in seconds) between each encryption key rotation.",
-									//   "type": "integer"
-									// }
 									Description: "Time (in seconds) between each encryption key rotation.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									//   "properties": {
-									//     "CertificateArn": {
-									//       "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-									//       "type": "string"
-									//     },
-									//     "ResourceId": {
-									//       "description": "The resource ID to include in key requests.",
-									//       "type": "string"
-									//     },
-									//     "RoleArn": {
-									//       "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									//       "type": "string"
-									//     },
-									//     "SystemIds": {
-									//       "description": "The system IDs to include in key requests.",
-									//       "items": {
-									//         "type": "string"
-									//       },
-									//       "type": "array"
-									//     },
-									//     "Url": {
-									//       "description": "The URL of the external key provider service.",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "ResourceId",
-									//     "SystemIds",
-									//     "Url",
-									//     "RoleArn"
-									//   ],
-									//   "type": "object"
-									// }
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"certificate_arn": {
 												// Property: CertificateArn
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-												//   "type": "string"
-												// }
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 												Type:        types.StringType,
 												Optional:    true,
 											},
 											"resource_id": {
 												// Property: ResourceId
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The resource ID to include in key requests.",
-												//   "type": "string"
-												// }
 												Description: "The resource ID to include in key requests.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"role_arn": {
 												// Property: RoleArn
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												//   "type": "string"
-												// }
 												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"system_ids": {
 												// Property: SystemIds
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The system IDs to include in key requests.",
-												//   "items": {
-												//     "type": "string"
-												//   },
-												//   "type": "array"
-												// }
 												Description: "The system IDs to include in key requests.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Required:    true,
 											},
 											"url": {
 												// Property: Url
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The URL of the external key provider service.",
-												//   "type": "string"
-												// }
 												Description: "The URL of the external key provider service.",
 												Type:        types.StringType,
 												Required:    true,
@@ -479,230 +333,65 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"hls_manifests": {
 						// Property: HlsManifests
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A list of HLS manifest configurations",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "A HTTP Live Streaming (HLS) manifest configuration.",
-						//     "properties": {
-						//       "AdMarkers": {
-						//         "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
-						//         "enum": [
-						//           "NONE",
-						//           "SCTE35_ENHANCED",
-						//           "PASSTHROUGH",
-						//           "DATERANGE"
-						//         ],
-						//         "type": "string"
-						//       },
-						//       "AdTriggers": {
-						//         "description": "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
-						//         "items": {
-						//           "enum": [
-						//             "SPLICE_INSERT",
-						//             "BREAK",
-						//             "PROVIDER_ADVERTISEMENT",
-						//             "DISTRIBUTOR_ADVERTISEMENT",
-						//             "PROVIDER_PLACEMENT_OPPORTUNITY",
-						//             "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
-						//             "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
-						//             "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
-						//           ],
-						//           "type": "string"
-						//         },
-						//         "type": "array"
-						//       },
-						//       "AdsOnDeliveryRestrictions": {
-						//         "description": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
-						//         "enum": [
-						//           "NONE",
-						//           "RESTRICTED",
-						//           "UNRESTRICTED",
-						//           "BOTH"
-						//         ],
-						//         "type": "string"
-						//       },
-						//       "Id": {
-						//         "description": "The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.",
-						//         "type": "string"
-						//       },
-						//       "IncludeIframeOnlyStream": {
-						//         "description": "When enabled, an I-Frame only stream will be included in the output.",
-						//         "type": "boolean"
-						//       },
-						//       "ManifestName": {
-						//         "description": "An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.",
-						//         "type": "string"
-						//       },
-						//       "PlaylistType": {
-						//         "description": "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
-						//         "enum": [
-						//           "NONE",
-						//           "EVENT",
-						//           "VOD"
-						//         ],
-						//         "type": "string"
-						//       },
-						//       "PlaylistWindowSeconds": {
-						//         "description": "Time window (in seconds) contained in each parent manifest.",
-						//         "type": "integer"
-						//       },
-						//       "ProgramDateTimeIntervalSeconds": {
-						//         "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-						//         "type": "integer"
-						//       },
-						//       "Url": {
-						//         "description": "The URL of the packaged OriginEndpoint for consumption.",
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "Id"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "A list of HLS manifest configurations",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"ad_markers": {
 									// Property: AdMarkers
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
-									//   "enum": [
-									//     "NONE",
-									//     "SCTE35_ENHANCED",
-									//     "PASSTHROUGH",
-									//     "DATERANGE"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"ad_triggers": {
 									// Property: AdTriggers
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
-									//   "items": {
-									//     "enum": [
-									//       "SPLICE_INSERT",
-									//       "BREAK",
-									//       "PROVIDER_ADVERTISEMENT",
-									//       "DISTRIBUTOR_ADVERTISEMENT",
-									//       "PROVIDER_PLACEMENT_OPPORTUNITY",
-									//       "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
-									//       "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
-									//       "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
-									//     ],
-									//     "type": "string"
-									//   },
-									//   "type": "array"
-									// }
 									Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
 								},
 								"ads_on_delivery_restrictions": {
 									// Property: AdsOnDeliveryRestrictions
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
-									//   "enum": [
-									//     "NONE",
-									//     "RESTRICTED",
-									//     "UNRESTRICTED",
-									//     "BOTH"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"id": {
 									// Property: Id
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.",
-									//   "type": "string"
-									// }
 									Description: "The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"include_iframe_only_stream": {
 									// Property: IncludeIframeOnlyStream
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "When enabled, an I-Frame only stream will be included in the output.",
-									//   "type": "boolean"
-									// }
 									Description: "When enabled, an I-Frame only stream will be included in the output.",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"manifest_name": {
 									// Property: ManifestName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.",
-									//   "type": "string"
-									// }
 									Description: "An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"playlist_type": {
 									// Property: PlaylistType
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
-									//   "enum": [
-									//     "NONE",
-									//     "EVENT",
-									//     "VOD"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"playlist_window_seconds": {
 									// Property: PlaylistWindowSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Time window (in seconds) contained in each parent manifest.",
-									//   "type": "integer"
-									// }
 									Description: "Time window (in seconds) contained in each parent manifest.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"program_date_time_interval_seconds": {
 									// Property: ProgramDateTimeIntervalSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-									//   "type": "integer"
-									// }
 									Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"url": {
 									// Property: Url
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The URL of the packaged OriginEndpoint for consumption.",
-									//   "type": "string"
-									// }
 									Description: "The URL of the packaged OriginEndpoint for consumption.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -714,90 +403,35 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
-						//   "type": "integer"
-						// }
 						Description: "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"segment_prefix": {
 						// Property: SegmentPrefix
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.",
-						//   "type": "string"
-						// }
 						Description: "An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"stream_selection": {
 						// Property: StreamSelection
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A StreamSelection configuration.",
-						//   "properties": {
-						//     "MaxVideoBitsPerSecond": {
-						//       "description": "The maximum video bitrate (bps) to include in output.",
-						//       "type": "integer"
-						//     },
-						//     "MinVideoBitsPerSecond": {
-						//       "description": "The minimum video bitrate (bps) to include in output.",
-						//       "type": "integer"
-						//     },
-						//     "StreamOrder": {
-						//       "description": "A directive that determines the order of streams in the output.",
-						//       "enum": [
-						//         "ORIGINAL",
-						//         "VIDEO_BITRATE_ASCENDING",
-						//         "VIDEO_BITRATE_DESCENDING"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "A StreamSelection configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"max_video_bits_per_second": {
 									// Property: MaxVideoBitsPerSecond
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The maximum video bitrate (bps) to include in output.",
-									//   "type": "integer"
-									// }
 									Description: "The maximum video bitrate (bps) to include in output.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"min_video_bits_per_second": {
 									// Property: MinVideoBitsPerSecond
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The minimum video bitrate (bps) to include in output.",
-									//   "type": "integer"
-									// }
 									Description: "The minimum video bitrate (bps) to include in output.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"stream_order": {
 									// Property: StreamOrder
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "A directive that determines the order of streams in the output.",
-									//   "enum": [
-									//     "ORIGINAL",
-									//     "VIDEO_BITRATE_ASCENDING",
-									//     "VIDEO_BITRATE_DESCENDING"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "A directive that determines the order of streams in the output.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -994,208 +628,58 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"ad_triggers": {
 						// Property: AdTriggers
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
-						//   "items": {
-						//     "enum": [
-						//       "SPLICE_INSERT",
-						//       "BREAK",
-						//       "PROVIDER_ADVERTISEMENT",
-						//       "DISTRIBUTOR_ADVERTISEMENT",
-						//       "PROVIDER_PLACEMENT_OPPORTUNITY",
-						//       "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
-						//       "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
-						//       "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
-						//     ],
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 					},
 					"ads_on_delivery_restrictions": {
 						// Property: AdsOnDeliveryRestrictions
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
-						//   "enum": [
-						//     "NONE",
-						//     "RESTRICTED",
-						//     "UNRESTRICTED",
-						//     "BOTH"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"encryption": {
 						// Property: Encryption
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
-						//   "properties": {
-						//     "KeyRotationIntervalSeconds": {
-						//       "description": "Time (in seconds) between each encryption key rotation.",
-						//       "type": "integer"
-						//     },
-						//     "SpekeKeyProvider": {
-						//       "additionalProperties": false,
-						//       "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-						//       "properties": {
-						//         "CertificateArn": {
-						//           "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-						//           "type": "string"
-						//         },
-						//         "ResourceId": {
-						//           "description": "The resource ID to include in key requests.",
-						//           "type": "string"
-						//         },
-						//         "RoleArn": {
-						//           "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-						//           "type": "string"
-						//         },
-						//         "SystemIds": {
-						//           "description": "The system IDs to include in key requests.",
-						//           "items": {
-						//             "type": "string"
-						//           },
-						//           "type": "array"
-						//         },
-						//         "Url": {
-						//           "description": "The URL of the external key provider service.",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "ResourceId",
-						//         "SystemIds",
-						//         "Url",
-						//         "RoleArn"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "required": [
-						//     "SpekeKeyProvider"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"key_rotation_interval_seconds": {
 									// Property: KeyRotationIntervalSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Time (in seconds) between each encryption key rotation.",
-									//   "type": "integer"
-									// }
 									Description: "Time (in seconds) between each encryption key rotation.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									//   "properties": {
-									//     "CertificateArn": {
-									//       "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-									//       "type": "string"
-									//     },
-									//     "ResourceId": {
-									//       "description": "The resource ID to include in key requests.",
-									//       "type": "string"
-									//     },
-									//     "RoleArn": {
-									//       "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									//       "type": "string"
-									//     },
-									//     "SystemIds": {
-									//       "description": "The system IDs to include in key requests.",
-									//       "items": {
-									//         "type": "string"
-									//       },
-									//       "type": "array"
-									//     },
-									//     "Url": {
-									//       "description": "The URL of the external key provider service.",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "ResourceId",
-									//     "SystemIds",
-									//     "Url",
-									//     "RoleArn"
-									//   ],
-									//   "type": "object"
-									// }
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"certificate_arn": {
 												// Property: CertificateArn
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-												//   "type": "string"
-												// }
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 												Type:        types.StringType,
 												Optional:    true,
 											},
 											"resource_id": {
 												// Property: ResourceId
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The resource ID to include in key requests.",
-												//   "type": "string"
-												// }
 												Description: "The resource ID to include in key requests.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"role_arn": {
 												// Property: RoleArn
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												//   "type": "string"
-												// }
 												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"system_ids": {
 												// Property: SystemIds
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The system IDs to include in key requests.",
-												//   "items": {
-												//     "type": "string"
-												//   },
-												//   "type": "array"
-												// }
 												Description: "The system IDs to include in key requests.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Required:    true,
 											},
 											"url": {
 												// Property: Url
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The URL of the external key provider service.",
-												//   "type": "string"
-												// }
 												Description: "The URL of the external key provider service.",
 												Type:        types.StringType,
 												Required:    true,
@@ -1210,175 +694,71 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"manifest_layout": {
 						// Property: ManifestLayout
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
-						//   "enum": [
-						//     "FULL",
-						//     "COMPACT"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"manifest_window_seconds": {
 						// Property: ManifestWindowSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Time window (in seconds) contained in each manifest.",
-						//   "type": "integer"
-						// }
 						Description: "Time window (in seconds) contained in each manifest.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"min_buffer_time_seconds": {
 						// Property: MinBufferTimeSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
-						//   "type": "integer"
-						// }
 						Description: "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"min_update_period_seconds": {
 						// Property: MinUpdatePeriodSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).",
-						//   "type": "integer"
-						// }
 						Description: "Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"period_triggers": {
 						// Property: PeriodTriggers
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Channel source contains SCTE-35 ad markers.",
-						//   "items": {
-						//     "enum": [
-						//       "ADS"
-						//     ],
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Channel source contains SCTE-35 ad markers.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 					},
 					"profile": {
 						// Property: Profile
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
-						//   "enum": [
-						//     "NONE",
-						//     "HBBTV_1_5"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
-						//   "type": "integer"
-						// }
 						Description: "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"segment_template_format": {
 						// Property: SegmentTemplateFormat
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
-						//   "enum": [
-						//     "NUMBER_WITH_TIMELINE",
-						//     "TIME_WITH_TIMELINE",
-						//     "NUMBER_WITH_DURATION"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"stream_selection": {
 						// Property: StreamSelection
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A StreamSelection configuration.",
-						//   "properties": {
-						//     "MaxVideoBitsPerSecond": {
-						//       "description": "The maximum video bitrate (bps) to include in output.",
-						//       "type": "integer"
-						//     },
-						//     "MinVideoBitsPerSecond": {
-						//       "description": "The minimum video bitrate (bps) to include in output.",
-						//       "type": "integer"
-						//     },
-						//     "StreamOrder": {
-						//       "description": "A directive that determines the order of streams in the output.",
-						//       "enum": [
-						//         "ORIGINAL",
-						//         "VIDEO_BITRATE_ASCENDING",
-						//         "VIDEO_BITRATE_DESCENDING"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "A StreamSelection configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"max_video_bits_per_second": {
 									// Property: MaxVideoBitsPerSecond
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The maximum video bitrate (bps) to include in output.",
-									//   "type": "integer"
-									// }
 									Description: "The maximum video bitrate (bps) to include in output.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"min_video_bits_per_second": {
 									// Property: MinVideoBitsPerSecond
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The minimum video bitrate (bps) to include in output.",
-									//   "type": "integer"
-									// }
 									Description: "The minimum video bitrate (bps) to include in output.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"stream_order": {
 									// Property: StreamOrder
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "A directive that determines the order of streams in the output.",
-									//   "enum": [
-									//     "ORIGINAL",
-									//     "VIDEO_BITRATE_ASCENDING",
-									//     "VIDEO_BITRATE_DESCENDING"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "A directive that determines the order of streams in the output.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -1389,38 +769,18 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"suggested_presentation_delay_seconds": {
 						// Property: SuggestedPresentationDelaySeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Duration (in seconds) to delay live content before presentation.",
-						//   "type": "integer"
-						// }
 						Description: "Duration (in seconds) to delay live content before presentation.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"utc_timing": {
 						// Property: UtcTiming
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Determines the type of UTCTiming included in the Media Presentation Description (MPD)",
-						//   "enum": [
-						//     "HTTP-ISO",
-						//     "HTTP-HEAD",
-						//     "NONE"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "Determines the type of UTCTiming included in the Media Presentation Description (MPD)",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"utc_timing_uri": {
 						// Property: UtcTimingUri
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD",
-						//   "type": "string"
-						// }
 						Description: "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD",
 						Type:        types.StringType,
 						Optional:    true,
@@ -1611,278 +971,82 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"ad_markers": {
 						// Property: AdMarkers
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
-						//   "enum": [
-						//     "NONE",
-						//     "SCTE35_ENHANCED",
-						//     "PASSTHROUGH",
-						//     "DATERANGE"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"ad_triggers": {
 						// Property: AdTriggers
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
-						//   "items": {
-						//     "enum": [
-						//       "SPLICE_INSERT",
-						//       "BREAK",
-						//       "PROVIDER_ADVERTISEMENT",
-						//       "DISTRIBUTOR_ADVERTISEMENT",
-						//       "PROVIDER_PLACEMENT_OPPORTUNITY",
-						//       "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
-						//       "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
-						//       "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
-						//     ],
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 					},
 					"ads_on_delivery_restrictions": {
 						// Property: AdsOnDeliveryRestrictions
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
-						//   "enum": [
-						//     "NONE",
-						//     "RESTRICTED",
-						//     "UNRESTRICTED",
-						//     "BOTH"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"encryption": {
 						// Property: Encryption
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "An HTTP Live Streaming (HLS) encryption configuration.",
-						//   "properties": {
-						//     "ConstantInitializationVector": {
-						//       "description": "A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated.",
-						//       "type": "string"
-						//     },
-						//     "EncryptionMethod": {
-						//       "description": "The encryption method to use.",
-						//       "enum": [
-						//         "AES_128",
-						//         "SAMPLE_AES"
-						//       ],
-						//       "type": "string"
-						//     },
-						//     "KeyRotationIntervalSeconds": {
-						//       "description": "Interval (in seconds) between each encryption key rotation.",
-						//       "type": "integer"
-						//     },
-						//     "RepeatExtXKey": {
-						//       "description": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
-						//       "type": "boolean"
-						//     },
-						//     "SpekeKeyProvider": {
-						//       "additionalProperties": false,
-						//       "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-						//       "properties": {
-						//         "CertificateArn": {
-						//           "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-						//           "type": "string"
-						//         },
-						//         "ResourceId": {
-						//           "description": "The resource ID to include in key requests.",
-						//           "type": "string"
-						//         },
-						//         "RoleArn": {
-						//           "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-						//           "type": "string"
-						//         },
-						//         "SystemIds": {
-						//           "description": "The system IDs to include in key requests.",
-						//           "items": {
-						//             "type": "string"
-						//           },
-						//           "type": "array"
-						//         },
-						//         "Url": {
-						//           "description": "The URL of the external key provider service.",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "ResourceId",
-						//         "SystemIds",
-						//         "Url",
-						//         "RoleArn"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "required": [
-						//     "SpekeKeyProvider"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "An HTTP Live Streaming (HLS) encryption configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"constant_initialization_vector": {
 									// Property: ConstantInitializationVector
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated.",
-									//   "type": "string"
-									// }
 									Description: "A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"encryption_method": {
 									// Property: EncryptionMethod
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The encryption method to use.",
-									//   "enum": [
-									//     "AES_128",
-									//     "SAMPLE_AES"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "The encryption method to use.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"key_rotation_interval_seconds": {
 									// Property: KeyRotationIntervalSeconds
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Interval (in seconds) between each encryption key rotation.",
-									//   "type": "integer"
-									// }
 									Description: "Interval (in seconds) between each encryption key rotation.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"repeat_ext_x_key": {
 									// Property: RepeatExtXKey
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
-									//   "type": "boolean"
-									// }
 									Description: "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									//   "properties": {
-									//     "CertificateArn": {
-									//       "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-									//       "type": "string"
-									//     },
-									//     "ResourceId": {
-									//       "description": "The resource ID to include in key requests.",
-									//       "type": "string"
-									//     },
-									//     "RoleArn": {
-									//       "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									//       "type": "string"
-									//     },
-									//     "SystemIds": {
-									//       "description": "The system IDs to include in key requests.",
-									//       "items": {
-									//         "type": "string"
-									//       },
-									//       "type": "array"
-									//     },
-									//     "Url": {
-									//       "description": "The URL of the external key provider service.",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "ResourceId",
-									//     "SystemIds",
-									//     "Url",
-									//     "RoleArn"
-									//   ],
-									//   "type": "object"
-									// }
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"certificate_arn": {
 												// Property: CertificateArn
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-												//   "type": "string"
-												// }
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 												Type:        types.StringType,
 												Optional:    true,
 											},
 											"resource_id": {
 												// Property: ResourceId
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The resource ID to include in key requests.",
-												//   "type": "string"
-												// }
 												Description: "The resource ID to include in key requests.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"role_arn": {
 												// Property: RoleArn
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												//   "type": "string"
-												// }
 												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"system_ids": {
 												// Property: SystemIds
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The system IDs to include in key requests.",
-												//   "items": {
-												//     "type": "string"
-												//   },
-												//   "type": "array"
-												// }
 												Description: "The system IDs to include in key requests.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Required:    true,
 											},
 											"url": {
 												// Property: Url
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The URL of the external key provider service.",
-												//   "type": "string"
-												// }
 												Description: "The URL of the external key provider service.",
 												Type:        types.StringType,
 												Required:    true,
@@ -1897,128 +1061,53 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"include_iframe_only_stream": {
 						// Property: IncludeIframeOnlyStream
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "When enabled, an I-Frame only stream will be included in the output.",
-						//   "type": "boolean"
-						// }
 						Description: "When enabled, an I-Frame only stream will be included in the output.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"playlist_type": {
 						// Property: PlaylistType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
-						//   "enum": [
-						//     "NONE",
-						//     "EVENT",
-						//     "VOD"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"playlist_window_seconds": {
 						// Property: PlaylistWindowSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Time window (in seconds) contained in each parent manifest.",
-						//   "type": "integer"
-						// }
 						Description: "Time window (in seconds) contained in each parent manifest.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"program_date_time_interval_seconds": {
 						// Property: ProgramDateTimeIntervalSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-						//   "type": "integer"
-						// }
 						Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-						//   "type": "integer"
-						// }
 						Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"stream_selection": {
 						// Property: StreamSelection
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A StreamSelection configuration.",
-						//   "properties": {
-						//     "MaxVideoBitsPerSecond": {
-						//       "description": "The maximum video bitrate (bps) to include in output.",
-						//       "type": "integer"
-						//     },
-						//     "MinVideoBitsPerSecond": {
-						//       "description": "The minimum video bitrate (bps) to include in output.",
-						//       "type": "integer"
-						//     },
-						//     "StreamOrder": {
-						//       "description": "A directive that determines the order of streams in the output.",
-						//       "enum": [
-						//         "ORIGINAL",
-						//         "VIDEO_BITRATE_ASCENDING",
-						//         "VIDEO_BITRATE_DESCENDING"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "A StreamSelection configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"max_video_bits_per_second": {
 									// Property: MaxVideoBitsPerSecond
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The maximum video bitrate (bps) to include in output.",
-									//   "type": "integer"
-									// }
 									Description: "The maximum video bitrate (bps) to include in output.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"min_video_bits_per_second": {
 									// Property: MinVideoBitsPerSecond
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The minimum video bitrate (bps) to include in output.",
-									//   "type": "integer"
-									// }
 									Description: "The minimum video bitrate (bps) to include in output.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"stream_order": {
 									// Property: StreamOrder
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "A directive that determines the order of streams in the output.",
-									//   "enum": [
-									//     "ORIGINAL",
-									//     "VIDEO_BITRATE_ASCENDING",
-									//     "VIDEO_BITRATE_DESCENDING"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "A directive that determines the order of streams in the output.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -2029,11 +1118,6 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"use_audio_rendition_group": {
 						// Property: UseAudioRenditionGroup
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "When enabled, audio streams will be placed in rendition groups in the output.",
-						//   "type": "boolean"
-						// }
 						Description: "When enabled, audio streams will be placed in rendition groups in the output.",
 						Type:        types.BoolType,
 						Optional:    true,
@@ -2161,152 +1245,40 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"encryption": {
 						// Property: Encryption
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A Microsoft Smooth Streaming (MSS) encryption configuration.",
-						//   "properties": {
-						//     "SpekeKeyProvider": {
-						//       "additionalProperties": false,
-						//       "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-						//       "properties": {
-						//         "CertificateArn": {
-						//           "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-						//           "type": "string"
-						//         },
-						//         "ResourceId": {
-						//           "description": "The resource ID to include in key requests.",
-						//           "type": "string"
-						//         },
-						//         "RoleArn": {
-						//           "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-						//           "type": "string"
-						//         },
-						//         "SystemIds": {
-						//           "description": "The system IDs to include in key requests.",
-						//           "items": {
-						//             "type": "string"
-						//           },
-						//           "type": "array"
-						//         },
-						//         "Url": {
-						//           "description": "The URL of the external key provider service.",
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "ResourceId",
-						//         "SystemIds",
-						//         "Url",
-						//         "RoleArn"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "required": [
-						//     "SpekeKeyProvider"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "A Microsoft Smooth Streaming (MSS) encryption configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									//   "properties": {
-									//     "CertificateArn": {
-									//       "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-									//       "type": "string"
-									//     },
-									//     "ResourceId": {
-									//       "description": "The resource ID to include in key requests.",
-									//       "type": "string"
-									//     },
-									//     "RoleArn": {
-									//       "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									//       "type": "string"
-									//     },
-									//     "SystemIds": {
-									//       "description": "The system IDs to include in key requests.",
-									//       "items": {
-									//         "type": "string"
-									//       },
-									//       "type": "array"
-									//     },
-									//     "Url": {
-									//       "description": "The URL of the external key provider service.",
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "ResourceId",
-									//     "SystemIds",
-									//     "Url",
-									//     "RoleArn"
-									//   ],
-									//   "type": "object"
-									// }
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"certificate_arn": {
 												// Property: CertificateArn
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-												//   "type": "string"
-												// }
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 												Type:        types.StringType,
 												Optional:    true,
 											},
 											"resource_id": {
 												// Property: ResourceId
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The resource ID to include in key requests.",
-												//   "type": "string"
-												// }
 												Description: "The resource ID to include in key requests.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"role_arn": {
 												// Property: RoleArn
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												//   "type": "string"
-												// }
 												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"system_ids": {
 												// Property: SystemIds
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The system IDs to include in key requests.",
-												//   "items": {
-												//     "type": "string"
-												//   },
-												//   "type": "array"
-												// }
 												Description: "The system IDs to include in key requests.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Required:    true,
 											},
 											"url": {
 												// Property: Url
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "The URL of the external key provider service.",
-												//   "type": "string"
-												// }
 												Description: "The URL of the external key provider service.",
 												Type:        types.StringType,
 												Required:    true,
@@ -2321,90 +1293,35 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"manifest_window_seconds": {
 						// Property: ManifestWindowSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The time window (in seconds) contained in each manifest.",
-						//   "type": "integer"
-						// }
 						Description: "The time window (in seconds) contained in each manifest.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The duration (in seconds) of each segment.",
-						//   "type": "integer"
-						// }
 						Description: "The duration (in seconds) of each segment.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"stream_selection": {
 						// Property: StreamSelection
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A StreamSelection configuration.",
-						//   "properties": {
-						//     "MaxVideoBitsPerSecond": {
-						//       "description": "The maximum video bitrate (bps) to include in output.",
-						//       "type": "integer"
-						//     },
-						//     "MinVideoBitsPerSecond": {
-						//       "description": "The minimum video bitrate (bps) to include in output.",
-						//       "type": "integer"
-						//     },
-						//     "StreamOrder": {
-						//       "description": "A directive that determines the order of streams in the output.",
-						//       "enum": [
-						//         "ORIGINAL",
-						//         "VIDEO_BITRATE_ASCENDING",
-						//         "VIDEO_BITRATE_DESCENDING"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "A StreamSelection configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"max_video_bits_per_second": {
 									// Property: MaxVideoBitsPerSecond
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The maximum video bitrate (bps) to include in output.",
-									//   "type": "integer"
-									// }
 									Description: "The maximum video bitrate (bps) to include in output.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"min_video_bits_per_second": {
 									// Property: MinVideoBitsPerSecond
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The minimum video bitrate (bps) to include in output.",
-									//   "type": "integer"
-									// }
 									Description: "The minimum video bitrate (bps) to include in output.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"stream_order": {
 									// Property: StreamOrder
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "A directive that determines the order of streams in the output.",
-									//   "enum": [
-									//     "ORIGINAL",
-									//     "VIDEO_BITRATE_ASCENDING",
-									//     "VIDEO_BITRATE_DESCENDING"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "A directive that determines the order of streams in the output.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -2473,19 +1390,11 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

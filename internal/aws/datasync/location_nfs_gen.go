@@ -74,17 +74,6 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"version": {
 						// Property: Version
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The specific NFS version that you want DataSync to use to mount your NFS share.",
-						//   "enum": [
-						//     "AUTOMATIC",
-						//     "NFS3",
-						//     "NFS4_0",
-						//     "NFS4_1"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -123,19 +112,6 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"agent_arns": {
 						// Property: AgentArns
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "ARN(s) of the agent(s) to use for an NFS location.",
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "maxLength": 128,
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "maxItems": 4,
-						//   "minItems": 1,
-						//   "type": "array"
-						// }
 						Description: "ARN(s) of the agent(s) to use for an NFS location.",
 						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
@@ -214,28 +190,12 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key for an AWS resource tag.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for an AWS resource tag.",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,

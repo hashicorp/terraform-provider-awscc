@@ -50,11 +50,6 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 				map[string]schema.Attribute{
 					"protocol": {
 						// Property: Protocol
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The tunnel protocol.",
-						//   "type": "string"
-						// }
 						Description: "The tunnel protocol.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -101,22 +96,12 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
-						//   "type": "string"
-						// }
 						Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
-						//   "type": "string"
-						// }
 						Description: "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
 						Type:        types.StringType,
 						Optional:    true,

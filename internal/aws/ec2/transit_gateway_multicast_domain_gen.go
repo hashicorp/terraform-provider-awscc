@@ -61,33 +61,18 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 				map[string]schema.Attribute{
 					"auto_accept_shared_associations": {
 						// Property: AutoAcceptSharedAssociations
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain. Valid Values: enable | disable",
-						//   "type": "string"
-						// }
 						Description: "Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain. Valid Values: enable | disable",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"igmpv_2_support": {
 						// Property: Igmpv2Support
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Indicates whether Internet Group Management Protocol (IGMP) version 2 is turned on for the transit gateway multicast domain. Valid Values: enable | disable",
-						//   "type": "string"
-						// }
 						Description: "Indicates whether Internet Group Management Protocol (IGMP) version 2 is turned on for the transit gateway multicast domain. Valid Values: enable | disable",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"static_sources_support": {
 						// Property: StaticSourcesSupport
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Indicates whether support for statically configuring transit gateway multicast group sources is turned on. Valid Values: enable | disable",
-						//   "type": "string"
-						// }
 						Description: "Indicates whether support for statically configuring transit gateway multicast group sources is turned on. Valid Values: enable | disable",
 						Type:        types.StringType,
 						Optional:    true,
@@ -133,22 +118,12 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
-						//   "type": "string"
-						// }
 						Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
-						//   "type": "string"
-						// }
 						Description: "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
 						Type:        types.StringType,
 						Optional:    true,

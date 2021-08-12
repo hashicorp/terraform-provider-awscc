@@ -116,171 +116,33 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"ssm_automation": {
 						// Property: SsmAutomation
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration to use when starting the SSM automation document.",
-						//   "properties": {
-						//     "DocumentName": {
-						//       "description": "The document name to use when starting the SSM automation document.",
-						//       "maxLength": 128,
-						//       "type": "string"
-						//     },
-						//     "DocumentVersion": {
-						//       "description": "The version of the document to use when starting the SSM automation document.",
-						//       "maxLength": 128,
-						//       "type": "string"
-						//     },
-						//     "Parameters": {
-						//       "description": "The parameters to set when starting the SSM automation document.",
-						//       "insertionOrder": false,
-						//       "items": {
-						//         "additionalProperties": false,
-						//         "description": "A parameter to set when starting the SSM automation document.",
-						//         "properties": {
-						//           "Key": {
-						//             "maxLength": 50,
-						//             "minLength": 1,
-						//             "type": "string"
-						//           },
-						//           "Values": {
-						//             "insertionOrder": true,
-						//             "items": {
-						//               "description": "A value of the parameter to set when starting the SSM automation document.",
-						//               "maxLength": 10000,
-						//               "type": "string"
-						//             },
-						//             "maxItems": 10,
-						//             "minItems": 1,
-						//             "type": "array",
-						//             "uniqueItems": true
-						//           }
-						//         },
-						//         "required": [
-						//           "Values",
-						//           "Key"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "maxItems": 200,
-						//       "type": "array",
-						//       "uniqueItems": true
-						//     },
-						//     "RoleArn": {
-						//       "description": "The role ARN to use when starting the SSM automation document.",
-						//       "maxLength": 1000,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "TargetAccount": {
-						//       "description": "The account type to use when starting the SSM automation document.",
-						//       "enum": [
-						//         "IMPACTED_ACCOUNT",
-						//         "RESPONSE_PLAN_OWNER_ACCOUNT"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "RoleArn",
-						//     "DocumentName"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "The configuration to use when starting the SSM automation document.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"document_name": {
 									// Property: DocumentName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The document name to use when starting the SSM automation document.",
-									//   "maxLength": 128,
-									//   "type": "string"
-									// }
 									Description: "The document name to use when starting the SSM automation document.",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"document_version": {
 									// Property: DocumentVersion
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The version of the document to use when starting the SSM automation document.",
-									//   "maxLength": 128,
-									//   "type": "string"
-									// }
 									Description: "The version of the document to use when starting the SSM automation document.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"parameters": {
 									// Property: Parameters
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The parameters to set when starting the SSM automation document.",
-									//   "insertionOrder": false,
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "description": "A parameter to set when starting the SSM automation document.",
-									//     "properties": {
-									//       "Key": {
-									//         "maxLength": 50,
-									//         "minLength": 1,
-									//         "type": "string"
-									//       },
-									//       "Values": {
-									//         "insertionOrder": true,
-									//         "items": {
-									//           "description": "A value of the parameter to set when starting the SSM automation document.",
-									//           "maxLength": 10000,
-									//           "type": "string"
-									//         },
-									//         "maxItems": 10,
-									//         "minItems": 1,
-									//         "type": "array",
-									//         "uniqueItems": true
-									//       }
-									//     },
-									//     "required": [
-									//       "Values",
-									//       "Key"
-									//     ],
-									//     "type": "object"
-									//   },
-									//   "maxItems": 200,
-									//   "type": "array",
-									//   "uniqueItems": true
-									// }
 									Description: "The parameters to set when starting the SSM automation document.",
 									Attributes: providertypes.SetNestedAttributes(
 										map[string]schema.Attribute{
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 50,
-												//   "minLength": 1,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"values": {
 												// Property: Values
-												// CloudFormation resource type schema:
-												// {
-												//   "insertionOrder": true,
-												//   "items": {
-												//     "description": "A value of the parameter to set when starting the SSM automation document.",
-												//     "maxLength": 10000,
-												//     "type": "string"
-												//   },
-												//   "maxItems": 10,
-												//   "minItems": 1,
-												//   "type": "array",
-												//   "uniqueItems": true
-												// }
 												// Ordered set.
 												Type:     types.ListType{ElemType: types.StringType},
 												Required: true,
@@ -294,28 +156,12 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"role_arn": {
 									// Property: RoleArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The role ARN to use when starting the SSM automation document.",
-									//   "maxLength": 1000,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The role ARN to use when starting the SSM automation document.",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"target_account": {
 									// Property: TargetAccount
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The account type to use when starting the SSM automation document.",
-									//   "enum": [
-									//     "IMPACTED_ACCOUNT",
-									//     "RESPONSE_PLAN_OWNER_ACCOUNT"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "The account type to use when starting the SSM automation document.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -370,18 +216,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"chatbot_sns": {
 						// Property: ChatbotSns
-						// CloudFormation resource type schema:
-						// {
-						//   "insertionOrder": true,
-						//   "items": {
-						//     "description": "The ARN of the Chatbot SNS topic.",
-						//     "maxLength": 1000,
-						//     "pattern": "",
-						//     "type": "string"
-						//   },
-						//   "type": "array",
-						//   "uniqueItems": true
-						// }
 						// Ordered set.
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
@@ -482,61 +316,23 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"dedupe_string": {
 						// Property: DedupeString
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The deduplication string.",
-						//   "maxLength": 1000,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The deduplication string.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"impact": {
 						// Property: Impact
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The impact value.",
-						//   "type": "integer"
-						// }
 						Description: "The impact value.",
 						Type:        types.NumberType,
 						Required:    true,
 					},
 					"notification_targets": {
 						// Property: NotificationTargets
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The list of notification targets.",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "A notification target.",
-						//     "properties": {
-						//       "SnsTopicArn": {
-						//         "description": "The ARN of the Chatbot SNS topic.",
-						//         "maxLength": 1000,
-						//         "pattern": "",
-						//         "type": "string"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "maxItems": 10,
-						//   "type": "array"
-						// }
 						Description: "The list of notification targets.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"sns_topic_arn": {
 									// Property: SnsTopicArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ARN of the Chatbot SNS topic.",
-									//   "maxLength": 1000,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "The ARN of the Chatbot SNS topic.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -550,25 +346,12 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"summary": {
 						// Property: Summary
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The summary string.",
-						//   "maxLength": 4000,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The summary string.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"title": {
 						// Property: Title
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The title string.",
-						//   "maxLength": 200,
-						//   "type": "string"
-						// }
 						Description: "The title string.",
 						Type:        types.StringType,
 						Required:    true,
@@ -630,24 +413,11 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

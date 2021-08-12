@@ -57,22 +57,12 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"is_latest": {
 						// Property: IsLatest
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Indicates if the latest version needs to be updated.",
-						//   "type": "boolean"
-						// }
 						Description: "Indicates if the latest version needs to be updated.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"version_number": {
 						// Property: VersionNumber
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Indicates the version number in the schema to update.",
-						//   "type": "integer"
-						// }
 						Description: "Indicates the version number in the schema to update.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -183,25 +173,12 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"arn": {
 						// Property: Arn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Amazon Resource Name for the Registry.",
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "Amazon Resource Name for the Registry.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Name of the registry in which the schema will be created.",
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "Name of the registry in which the schema will be created.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -263,26 +240,12 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A key to identify the tag.",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "A key to identify the tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Corresponding tag value for the key.",
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "Corresponding tag value for the key.",
 						Type:        types.StringType,
 						Required:    true,

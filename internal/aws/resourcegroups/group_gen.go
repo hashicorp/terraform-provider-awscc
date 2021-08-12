@@ -68,44 +68,15 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"parameters": {
 						// Property: Parameters
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "properties": {
-						//       "Name": {
-						//         "type": "string"
-						//       },
-						//       "Values": {
-						//         "items": {
-						//           "type": "string"
-						//         },
-						//         "type": "array"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "type": "array"
-						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"values": {
 									// Property: Values
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -116,10 +87,6 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -203,101 +170,29 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"query": {
 						// Property: Query
-						// CloudFormation resource type schema:
-						// {
-						//   "properties": {
-						//     "ResourceTypeFilters": {
-						//       "items": {
-						//         "type": "string"
-						//       },
-						//       "type": "array"
-						//     },
-						//     "StackIdentifier": {
-						//       "type": "string"
-						//     },
-						//     "TagFilters": {
-						//       "items": {
-						//         "properties": {
-						//           "Key": {
-						//             "type": "string"
-						//           },
-						//           "Values": {
-						//             "items": {
-						//               "type": "string"
-						//             },
-						//             "type": "array"
-						//           }
-						//         },
-						//         "type": "object"
-						//       },
-						//       "type": "array"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"resource_type_filters": {
 									// Property: ResourceTypeFilters
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"stack_identifier": {
 									// Property: StackIdentifier
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"tag_filters": {
 									// Property: TagFilters
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "properties": {
-									//       "Key": {
-									//         "type": "string"
-									//       },
-									//       "Values": {
-									//         "items": {
-									//           "type": "string"
-									//         },
-									//         "type": "array"
-									//       }
-									//     },
-									//     "type": "object"
-									//   },
-									//   "type": "array"
-									// }
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"values": {
 												// Property: Values
-												// CloudFormation resource type schema:
-												// {
-												//   "items": {
-												//     "type": "string"
-												//   },
-												//   "type": "array"
-												// }
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 											},
@@ -312,14 +207,6 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "TAG_FILTERS_1_0",
-						//     "CLOUDFORMATION_STACK_1_0"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -361,20 +248,11 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

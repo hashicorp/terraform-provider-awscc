@@ -82,23 +82,11 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -155,47 +143,23 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"default_subscription_status": {
 						// Property: DefaultSubscriptionStatus
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"description": {
 						// Property: Description
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The description of the topic.",
-						//   "maxLength": 500,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "The description of the topic.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"display_name": {
 						// Property: DisplayName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The display name of the topic.",
-						//   "maxLength": 128,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "The display name of the topic.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"topic_name": {
 						// Property: TopicName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The name of the topic.",
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "The name of the topic.",
 						Type:        types.StringType,
 						Required:    true,

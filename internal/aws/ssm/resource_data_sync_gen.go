@@ -117,56 +117,26 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				map[string]schema.Attribute{
 					"bucket_name": {
 						// Property: BucketName
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 2048,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"bucket_prefix": {
 						// Property: BucketPrefix
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"bucket_region": {
 						// Property: BucketRegion
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 64,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"kms_key_arn": {
 						// Property: KMSKeyArn
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"sync_format": {
 						// Property: SyncFormat
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 1024,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -254,51 +224,15 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				map[string]schema.Attribute{
 					"aws_organizations_source": {
 						// Property: AwsOrganizationsSource
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "OrganizationSourceType": {
-						//       "maxLength": 64,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     },
-						//     "OrganizationalUnits": {
-						//       "items": {
-						//         "type": "string"
-						//       },
-						//       "type": "array",
-						//       "uniqueItems": false
-						//     }
-						//   },
-						//   "required": [
-						//     "OrganizationSourceType"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"organization_source_type": {
 									// Property: OrganizationSourceType
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 64,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"organizational_units": {
 									// Property: OrganizationalUnits
-									// CloudFormation resource type schema:
-									// {
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "type": "array",
-									//   "uniqueItems": false
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -308,34 +242,16 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					},
 					"include_future_regions": {
 						// Property: IncludeFutureRegions
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"source_regions": {
 						// Property: SourceRegions
-						// CloudFormation resource type schema:
-						// {
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "type": "array",
-						//   "uniqueItems": false
-						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 					"source_type": {
 						// Property: SourceType
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 64,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

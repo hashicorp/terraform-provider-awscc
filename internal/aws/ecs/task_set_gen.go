@@ -108,44 +108,24 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"container_name": {
 						// Property: ContainerName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The name of the container (as it appears in a container definition) to associate with the load balancer.",
-						//   "type": "string"
-						// }
 						Description: "The name of the container (as it appears in a container definition) to associate with the load balancer.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"container_port": {
 						// Property: ContainerPort
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The port on the container to associate with the load balancer. This port must correspond to a containerPort in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they are launched on must allow ingress traffic on the hostPort of the port mapping.",
-						//   "type": "integer"
-						// }
 						Description: "The port on the container to associate with the load balancer. This port must correspond to a containerPort in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they are launched on must allow ingress traffic on the hostPort of the port mapping.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"load_balancer_name": {
 						// Property: LoadBalancerName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The name of the load balancer to associate with the Amazon ECS service or task set. A load balancer name is only specified when using a Classic Load Balancer. If you are using an Application Load Balancer or a Network Load Balancer this should be omitted.",
-						//   "type": "string"
-						// }
 						Description: "The name of the load balancer to associate with the Amazon ECS service or task set. A load balancer name is only specified when using a Classic Load Balancer. If you are using an Application Load Balancer or a Network Load Balancer this should be omitted.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"target_group_arn": {
 						// Property: TargetGroupArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service or task set. A target group ARN is only specified when using an Application Load Balancer or Network Load Balancer. If you are using a Classic Load Balancer this should be omitted. For services using the ECS deployment controller, you can specify one or multiple target groups. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html in the Amazon Elastic Container Service Developer Guide. For services using the CODE_DEPLOY deployment controller, you are required to define two target groups for the load balancer. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html in the Amazon Elastic Container Service Developer Guide. If your service's task definition uses the awsvpc network mode (which is required for the Fargate launch type), you must choose ip as the target type, not instance, when creating your target groups because tasks that use the awsvpc network mode are associated with an elastic network interface, not an Amazon EC2 instance.",
-						//   "type": "string"
-						// }
 						Description: "The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service or task set. A target group ARN is only specified when using an Application Load Balancer or Network Load Balancer. If you are using a Classic Load Balancer this should be omitted. For services using the ECS deployment controller, you can specify one or multiple target groups. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html in the Amazon Elastic Container Service Developer Guide. For services using the CODE_DEPLOY deployment controller, you are required to define two target groups for the load balancer. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html in the Amazon Elastic Container Service Developer Guide. If your service's task definition uses the awsvpc network mode (which is required for the Fargate launch type), you must choose ip as the target type, not instance, when creating your target groups because tasks that use the awsvpc network mode are associated with an elastic network interface, not an Amazon EC2 instance.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -206,85 +186,23 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"aws_vpc_configuration": {
 						// Property: AwsVpcConfiguration
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The VPC subnets and security groups associated with a task. All specified subnets and security groups must be from the same VPC.",
-						//   "properties": {
-						//     "AssignPublicIp": {
-						//       "description": "Whether the task's elastic network interface receives a public IP address. The default value is DISABLED.",
-						//       "enum": [
-						//         "DISABLED",
-						//         "ENABLED"
-						//       ],
-						//       "type": "string"
-						//     },
-						//     "SecurityGroups": {
-						//       "description": "The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used. There is a limit of 5 security groups that can be specified per AwsVpcConfiguration.",
-						//       "items": {
-						//         "type": "string"
-						//       },
-						//       "maxItems": 5,
-						//       "type": "array"
-						//     },
-						//     "Subnets": {
-						//       "description": "The subnets associated with the task or service. There is a limit of 16 subnets that can be specified per AwsVpcConfiguration.",
-						//       "items": {
-						//         "type": "string"
-						//       },
-						//       "maxItems": 16,
-						//       "type": "array"
-						//     }
-						//   },
-						//   "required": [
-						//     "Subnets"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "The VPC subnets and security groups associated with a task. All specified subnets and security groups must be from the same VPC.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"assign_public_ip": {
 									// Property: AssignPublicIp
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Whether the task's elastic network interface receives a public IP address. The default value is DISABLED.",
-									//   "enum": [
-									//     "DISABLED",
-									//     "ENABLED"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "Whether the task's elastic network interface receives a public IP address. The default value is DISABLED.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"security_groups": {
 									// Property: SecurityGroups
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used. There is a limit of 5 security groups that can be specified per AwsVpcConfiguration.",
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "maxItems": 5,
-									//   "type": "array"
-									// }
 									Description: "The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used. There is a limit of 5 security groups that can be specified per AwsVpcConfiguration.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
 								},
 								"subnets": {
 									// Property: Subnets
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The subnets associated with the task or service. There is a limit of 16 subnets that can be specified per AwsVpcConfiguration.",
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "maxItems": 16,
-									//   "type": "array"
-									// }
 									Description: "The subnets associated with the task or service. There is a limit of 16 subnets that can be specified per AwsVpcConfiguration.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Required:    true,
@@ -336,25 +254,12 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"unit": {
 						// Property: Unit
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The unit of measure for the scale value.",
-						//   "enum": [
-						//     "PERCENT"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "The unit of measure for the scale value.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value, specified as a percent total of a service's desiredCount, to scale the task set. Accepted values are numbers between 0 and 100.",
-						//   "type": "number"
-						// }
 						Description: "The value, specified as a percent total of a service's desiredCount, to scale the task set. Accepted values are numbers between 0 and 100.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -409,44 +314,24 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"container_name": {
 						// Property: ContainerName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The container name value, already specified in the task definition, to be used for your service discovery service. If the task definition that your service task specifies uses the bridge or host network mode, you must specify a containerName and containerPort combination from the task definition. If the task definition that your service task specifies uses the awsvpc network mode and a type SRV DNS record is used, you must specify either a containerName and containerPort combination or a port value, but not both.",
-						//   "type": "string"
-						// }
 						Description: "The container name value, already specified in the task definition, to be used for your service discovery service. If the task definition that your service task specifies uses the bridge or host network mode, you must specify a containerName and containerPort combination from the task definition. If the task definition that your service task specifies uses the awsvpc network mode and a type SRV DNS record is used, you must specify either a containerName and containerPort combination or a port value, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"container_port": {
 						// Property: ContainerPort
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The port value, already specified in the task definition, to be used for your service discovery service. If the task definition your service task specifies uses the bridge or host network mode, you must specify a containerName and containerPort combination from the task definition. If the task definition your service task specifies uses the awsvpc network mode and a type SRV DNS record is used, you must specify either a containerName and containerPort combination or a port value, but not both.",
-						//   "type": "integer"
-						// }
 						Description: "The port value, already specified in the task definition, to be used for your service discovery service. If the task definition your service task specifies uses the bridge or host network mode, you must specify a containerName and containerPort combination from the task definition. If the task definition your service task specifies uses the awsvpc network mode and a type SRV DNS record is used, you must specify either a containerName and containerPort combination or a port value, but not both.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"port": {
 						// Property: Port
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The port value used if your service discovery service specified an SRV record. This field may be used if both the awsvpc network mode and SRV records are used.",
-						//   "type": "integer"
-						// }
 						Description: "The port value used if your service discovery service specified an SRV record. This field may be used if both the awsvpc network mode and SRV records are used.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"registry_arn": {
 						// Property: RegistryArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Resource Name (ARN) of the service registry. The currently supported service registry is AWS Cloud Map. For more information, see https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html",
-						//   "type": "string"
-						// }
 						Description: "The Amazon Resource Name (ARN) of the service registry. The currently supported service registry is AWS Cloud Map. For more information, see https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html",
 						Type:        types.StringType,
 						Optional:    true,

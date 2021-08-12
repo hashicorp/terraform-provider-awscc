@@ -126,29 +126,12 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"actions": {
 						// Property: Actions
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
-						//   "items": {
-						//     "type": "string"
-						//   },
-						//   "maxItems": 16,
-						//   "minItems": 1,
-						//   "type": "array"
-						// }
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
 					},
 					"principal": {
 						// Property: Principal
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
 						Type:        types.StringType,
 						Required:    true,
@@ -230,111 +213,28 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"source_analysis": {
 						// Property: SourceAnalysis
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "\u003cp\u003eThe source analysis of the template.\u003c/p\u003e",
-						//   "properties": {
-						//     "Arn": {
-						//       "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
-						//       "type": "string"
-						//     },
-						//     "DataSetReferences": {
-						//       "description": "\u003cp\u003eA structure containing information about the dataset references used as placeholders\n            in the template.\u003c/p\u003e",
-						//       "items": {
-						//         "additionalProperties": false,
-						//         "description": "\u003cp\u003eDataset reference.\u003c/p\u003e",
-						//         "properties": {
-						//           "DataSetArn": {
-						//             "description": "\u003cp\u003eDataset Amazon Resource Name (ARN).\u003c/p\u003e",
-						//             "type": "string"
-						//           },
-						//           "DataSetPlaceholder": {
-						//             "description": "\u003cp\u003eDataset placeholder.\u003c/p\u003e",
-						//             "pattern": "",
-						//             "type": "string"
-						//           }
-						//         },
-						//         "required": [
-						//           "DataSetArn",
-						//           "DataSetPlaceholder"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "minItems": 1,
-						//       "type": "array"
-						//     }
-						//   },
-						//   "required": [
-						//     "Arn",
-						//     "DataSetReferences"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "<p>The source analysis of the template.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
-									//   "type": "string"
-									// }
 									Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"data_set_references": {
 									// Property: DataSetReferences
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eA structure containing information about the dataset references used as placeholders\n            in the template.\u003c/p\u003e",
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "description": "\u003cp\u003eDataset reference.\u003c/p\u003e",
-									//     "properties": {
-									//       "DataSetArn": {
-									//         "description": "\u003cp\u003eDataset Amazon Resource Name (ARN).\u003c/p\u003e",
-									//         "type": "string"
-									//       },
-									//       "DataSetPlaceholder": {
-									//         "description": "\u003cp\u003eDataset placeholder.\u003c/p\u003e",
-									//         "pattern": "",
-									//         "type": "string"
-									//       }
-									//     },
-									//     "required": [
-									//       "DataSetArn",
-									//       "DataSetPlaceholder"
-									//     ],
-									//     "type": "object"
-									//   },
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Description: "<p>A structure containing information about the dataset references used as placeholders\n            in the template.</p>",
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"data_set_arn": {
 												// Property: DataSetArn
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "\u003cp\u003eDataset Amazon Resource Name (ARN).\u003c/p\u003e",
-												//   "type": "string"
-												// }
 												Description: "<p>Dataset Amazon Resource Name (ARN).</p>",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"data_set_placeholder": {
 												// Property: DataSetPlaceholder
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "\u003cp\u003eDataset placeholder.\u003c/p\u003e",
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Description: "<p>Dataset placeholder.</p>",
 												Type:        types.StringType,
 												Required:    true,
@@ -352,31 +252,11 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"source_template": {
 						// Property: SourceTemplate
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "\u003cp\u003eThe source template of the template.\u003c/p\u003e",
-						//   "properties": {
-						//     "Arn": {
-						//       "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "Arn"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "<p>The source template of the template.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
-									//   "type": "string"
-									// }
 									Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -427,26 +307,12 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eTag key.\u003c/p\u003e",
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "<p>Tag key.</p>",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eTag value.\u003c/p\u003e",
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "<p>Tag value.</p>",
 						Type:        types.StringType,
 						Required:    true,
@@ -656,175 +522,27 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"created_time": {
 						// Property: CreatedTime
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe time that this template version was created.\u003c/p\u003e",
-						//   "format": "string",
-						//   "type": "string"
-						// }
 						Description: "<p>The time that this template version was created.</p>",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"data_set_configurations": {
 						// Property: DataSetConfigurations
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eSchema of the dataset identified by the placeholder. Any dashboard created from this\n            template should be bound to new datasets matching the same schema described through this\n            API operation.\u003c/p\u003e",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "\u003cp\u003eDataset configuration.\u003c/p\u003e",
-						//     "properties": {
-						//       "ColumnGroupSchemaList": {
-						//         "description": "\u003cp\u003eA structure containing the list of column group schemas.\u003c/p\u003e",
-						//         "items": {
-						//           "additionalProperties": false,
-						//           "description": "\u003cp\u003eThe column group schema.\u003c/p\u003e",
-						//           "properties": {
-						//             "ColumnGroupColumnSchemaList": {
-						//               "description": "\u003cp\u003eA structure containing the list of schemas for column group columns.\u003c/p\u003e",
-						//               "items": {
-						//                 "additionalProperties": false,
-						//                 "description": "\u003cp\u003eA structure describing the name, data type, and geographic role of the columns.\u003c/p\u003e",
-						//                 "properties": {
-						//                   "Name": {
-						//                     "description": "\u003cp\u003eThe name of the column group's column schema.\u003c/p\u003e",
-						//                     "type": "string"
-						//                   }
-						//                 },
-						//                 "type": "object"
-						//               },
-						//               "maxItems": 500,
-						//               "minItems": 0,
-						//               "type": "array"
-						//             },
-						//             "Name": {
-						//               "description": "\u003cp\u003eThe name of the column group schema.\u003c/p\u003e",
-						//               "type": "string"
-						//             }
-						//           },
-						//           "type": "object"
-						//         },
-						//         "maxItems": 500,
-						//         "minItems": 0,
-						//         "type": "array"
-						//       },
-						//       "DataSetSchema": {
-						//         "additionalProperties": false,
-						//         "description": "\u003cp\u003eDataset schema.\u003c/p\u003e",
-						//         "properties": {
-						//           "ColumnSchemaList": {
-						//             "description": "\u003cp\u003eA structure containing the list of column schemas.\u003c/p\u003e",
-						//             "items": {
-						//               "additionalProperties": false,
-						//               "description": "\u003cp\u003eThe column schema.\u003c/p\u003e",
-						//               "properties": {
-						//                 "DataType": {
-						//                   "description": "\u003cp\u003eThe data type of the column schema.\u003c/p\u003e",
-						//                   "type": "string"
-						//                 },
-						//                 "GeographicRole": {
-						//                   "description": "\u003cp\u003eThe geographic role of the column schema.\u003c/p\u003e",
-						//                   "type": "string"
-						//                 },
-						//                 "Name": {
-						//                   "description": "\u003cp\u003eThe name of the column schema.\u003c/p\u003e",
-						//                   "type": "string"
-						//                 }
-						//               },
-						//               "type": "object"
-						//             },
-						//             "maxItems": 500,
-						//             "minItems": 0,
-						//             "type": "array"
-						//           }
-						//         },
-						//         "type": "object"
-						//       },
-						//       "Placeholder": {
-						//         "description": "\u003cp\u003ePlaceholder.\u003c/p\u003e",
-						//         "type": "string"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "maxItems": 30,
-						//   "minItems": 0,
-						//   "type": "array"
-						// }
 						Description: "<p>Schema of the dataset identified by the placeholder. Any dashboard created from this\n            template should be bound to new datasets matching the same schema described through this\n            API operation.</p>",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"column_group_schema_list": {
 									// Property: ColumnGroupSchemaList
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eA structure containing the list of column group schemas.\u003c/p\u003e",
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "description": "\u003cp\u003eThe column group schema.\u003c/p\u003e",
-									//     "properties": {
-									//       "ColumnGroupColumnSchemaList": {
-									//         "description": "\u003cp\u003eA structure containing the list of schemas for column group columns.\u003c/p\u003e",
-									//         "items": {
-									//           "additionalProperties": false,
-									//           "description": "\u003cp\u003eA structure describing the name, data type, and geographic role of the columns.\u003c/p\u003e",
-									//           "properties": {
-									//             "Name": {
-									//               "description": "\u003cp\u003eThe name of the column group's column schema.\u003c/p\u003e",
-									//               "type": "string"
-									//             }
-									//           },
-									//           "type": "object"
-									//         },
-									//         "maxItems": 500,
-									//         "minItems": 0,
-									//         "type": "array"
-									//       },
-									//       "Name": {
-									//         "description": "\u003cp\u003eThe name of the column group schema.\u003c/p\u003e",
-									//         "type": "string"
-									//       }
-									//     },
-									//     "type": "object"
-									//   },
-									//   "maxItems": 500,
-									//   "minItems": 0,
-									//   "type": "array"
-									// }
 									Description: "<p>A structure containing the list of column group schemas.</p>",
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"column_group_column_schema_list": {
 												// Property: ColumnGroupColumnSchemaList
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "\u003cp\u003eA structure containing the list of schemas for column group columns.\u003c/p\u003e",
-												//   "items": {
-												//     "additionalProperties": false,
-												//     "description": "\u003cp\u003eA structure describing the name, data type, and geographic role of the columns.\u003c/p\u003e",
-												//     "properties": {
-												//       "Name": {
-												//         "description": "\u003cp\u003eThe name of the column group's column schema.\u003c/p\u003e",
-												//         "type": "string"
-												//       }
-												//     },
-												//     "type": "object"
-												//   },
-												//   "maxItems": 500,
-												//   "minItems": 0,
-												//   "type": "array"
-												// }
 												Description: "<p>A structure containing the list of schemas for column group columns.</p>",
 												Attributes: schema.ListNestedAttributes(
 													map[string]schema.Attribute{
 														"name": {
 															// Property: Name
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "\u003cp\u003eThe name of the column group's column schema.\u003c/p\u003e",
-															//   "type": "string"
-															// }
 															Description: "<p>The name of the column group's column schema.</p>",
 															Type:        types.StringType,
 															Optional:    true,
@@ -839,11 +557,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"name": {
 												// Property: Name
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "\u003cp\u003eThe name of the column group schema.\u003c/p\u003e",
-												//   "type": "string"
-												// }
 												Description: "<p>The name of the column group schema.</p>",
 												Type:        types.StringType,
 												Optional:    true,
@@ -858,102 +571,28 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"data_set_schema": {
 									// Property: DataSetSchema
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "\u003cp\u003eDataset schema.\u003c/p\u003e",
-									//   "properties": {
-									//     "ColumnSchemaList": {
-									//       "description": "\u003cp\u003eA structure containing the list of column schemas.\u003c/p\u003e",
-									//       "items": {
-									//         "additionalProperties": false,
-									//         "description": "\u003cp\u003eThe column schema.\u003c/p\u003e",
-									//         "properties": {
-									//           "DataType": {
-									//             "description": "\u003cp\u003eThe data type of the column schema.\u003c/p\u003e",
-									//             "type": "string"
-									//           },
-									//           "GeographicRole": {
-									//             "description": "\u003cp\u003eThe geographic role of the column schema.\u003c/p\u003e",
-									//             "type": "string"
-									//           },
-									//           "Name": {
-									//             "description": "\u003cp\u003eThe name of the column schema.\u003c/p\u003e",
-									//             "type": "string"
-									//           }
-									//         },
-									//         "type": "object"
-									//       },
-									//       "maxItems": 500,
-									//       "minItems": 0,
-									//       "type": "array"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Description: "<p>Dataset schema.</p>",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"column_schema_list": {
 												// Property: ColumnSchemaList
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "\u003cp\u003eA structure containing the list of column schemas.\u003c/p\u003e",
-												//   "items": {
-												//     "additionalProperties": false,
-												//     "description": "\u003cp\u003eThe column schema.\u003c/p\u003e",
-												//     "properties": {
-												//       "DataType": {
-												//         "description": "\u003cp\u003eThe data type of the column schema.\u003c/p\u003e",
-												//         "type": "string"
-												//       },
-												//       "GeographicRole": {
-												//         "description": "\u003cp\u003eThe geographic role of the column schema.\u003c/p\u003e",
-												//         "type": "string"
-												//       },
-												//       "Name": {
-												//         "description": "\u003cp\u003eThe name of the column schema.\u003c/p\u003e",
-												//         "type": "string"
-												//       }
-												//     },
-												//     "type": "object"
-												//   },
-												//   "maxItems": 500,
-												//   "minItems": 0,
-												//   "type": "array"
-												// }
 												Description: "<p>A structure containing the list of column schemas.</p>",
 												Attributes: schema.ListNestedAttributes(
 													map[string]schema.Attribute{
 														"data_type": {
 															// Property: DataType
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "\u003cp\u003eThe data type of the column schema.\u003c/p\u003e",
-															//   "type": "string"
-															// }
 															Description: "<p>The data type of the column schema.</p>",
 															Type:        types.StringType,
 															Optional:    true,
 														},
 														"geographic_role": {
 															// Property: GeographicRole
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "\u003cp\u003eThe geographic role of the column schema.\u003c/p\u003e",
-															//   "type": "string"
-															// }
 															Description: "<p>The geographic role of the column schema.</p>",
 															Type:        types.StringType,
 															Optional:    true,
 														},
 														"name": {
 															// Property: Name
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "\u003cp\u003eThe name of the column schema.\u003c/p\u003e",
-															//   "type": "string"
-															// }
 															Description: "<p>The name of the column schema.</p>",
 															Type:        types.StringType,
 															Optional:    true,
@@ -972,11 +611,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"placeholder": {
 									// Property: Placeholder
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003ePlaceholder.\u003c/p\u003e",
-									//   "type": "string"
-									// }
 									Description: "<p>Placeholder.</p>",
 									Type:        types.StringType,
 									Optional:    true,
@@ -991,73 +625,23 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"description": {
 						// Property: Description
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe description of the template.\u003c/p\u003e",
-						//   "maxLength": 512,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "<p>The description of the template.</p>",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"errors": {
 						// Property: Errors
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eErrors associated with this template version.\u003c/p\u003e",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "\u003cp\u003eList of errors that occurred when the template version creation failed.\u003c/p\u003e",
-						//     "properties": {
-						//       "Message": {
-						//         "description": "\u003cp\u003eDescription of the error type.\u003c/p\u003e",
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "Type": {
-						//         "enum": [
-						//           "SOURCE_NOT_FOUND",
-						//           "DATA_SET_NOT_FOUND",
-						//           "INTERNAL_FAILURE",
-						//           "ACCESS_DENIED"
-						//         ],
-						//         "type": "string"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "minItems": 1,
-						//   "type": "array"
-						// }
 						Description: "<p>Errors associated with this template version.</p>",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"message": {
 									// Property: Message
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eDescription of the error type.\u003c/p\u003e",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "<p>Description of the error type.</p>",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"type": {
 									// Property: Type
-									// CloudFormation resource type schema:
-									// {
-									//   "enum": [
-									//     "SOURCE_NOT_FOUND",
-									//     "DATA_SET_NOT_FOUND",
-									//     "INTERNAL_FAILURE",
-									//     "ACCESS_DENIED"
-									//   ],
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1070,57 +654,17 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"sheets": {
 						// Property: Sheets
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eA list of the associated sheets with the unique identifier and name of each sheet.\u003c/p\u003e",
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "\u003cp\u003eA \u003ci\u003esheet\u003c/i\u003e, which is an object that contains a set of visuals that\n            are viewed together on one page in the Amazon QuickSight console. Every analysis and dashboard\n            contains at least one sheet. Each sheet contains at least one visualization widget, for\n            example a chart, pivot table, or narrative insight. Sheets can be associated with other\n            components, such as controls, filters, and so on.\u003c/p\u003e",
-						//     "properties": {
-						//       "Name": {
-						//         "description": "\u003cp\u003eThe name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.\u003c/p\u003e",
-						//         "pattern": "",
-						//         "type": "string"
-						//       },
-						//       "SheetId": {
-						//         "description": "\u003cp\u003eThe unique identifier associated with a sheet.\u003c/p\u003e",
-						//         "maxLength": 2048,
-						//         "minLength": 1,
-						//         "pattern": "",
-						//         "type": "string"
-						//       }
-						//     },
-						//     "type": "object"
-						//   },
-						//   "maxItems": 20,
-						//   "minItems": 0,
-						//   "type": "array"
-						// }
 						Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eThe name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.\u003c/p\u003e",
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"sheet_id": {
 									// Property: SheetId
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "\u003cp\u003eThe unique identifier associated with a sheet.\u003c/p\u003e",
-									//   "maxLength": 2048,
-									//   "minLength": 1,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "<p>The unique identifier associated with a sheet.</p>",
 									Type:        types.StringType,
 									Optional:    true,
@@ -1135,51 +679,23 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"source_entity_arn": {
 						// Property: SourceEntityArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of an analysis or template that was used to create this\n            template.\u003c/p\u003e",
-						//   "type": "string"
-						// }
 						Description: "<p>The Amazon Resource Name (ARN) of an analysis or template that was used to create this\n            template.</p>",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"status": {
 						// Property: Status
-						// CloudFormation resource type schema:
-						// {
-						//   "enum": [
-						//     "CREATION_IN_PROGRESS",
-						//     "CREATION_SUCCESSFUL",
-						//     "CREATION_FAILED",
-						//     "UPDATE_IN_PROGRESS",
-						//     "UPDATE_SUCCESSFUL",
-						//     "UPDATE_FAILED",
-						//     "DELETED"
-						//   ],
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"theme_arn": {
 						// Property: ThemeArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe ARN of the theme associated with this version of the template.\u003c/p\u003e",
-						//   "type": "string"
-						// }
 						Description: "<p>The ARN of the theme associated with this version of the template.</p>",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"version_number": {
 						// Property: VersionNumber
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "\u003cp\u003eThe version number of the template version.\u003c/p\u003e",
-						//   "type": "number"
-						// }
 						Description: "<p>The version number of the template version.</p>",
 						Type:        types.NumberType,
 						Optional:    true,

@@ -102,22 +102,12 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 				map[string]schema.Attribute{
 					"code": {
 						// Property: Code
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The status code.",
-						//   "type": "string"
-						// }
 						Description: "The status code.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"message": {
 						// Property: Message
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The status message, if applicable.",
-						//   "type": "string"
-						// }
 						Description: "The status message, if applicable.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -152,22 +142,12 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
-						//   "type": "string"
-						// }
 						Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
-						//   "type": "string"
-						// }
 						Description: "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
 						Type:        types.StringType,
 						Optional:    true,

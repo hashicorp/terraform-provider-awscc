@@ -133,94 +133,42 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				map[string]schema.Attribute{
 					"action": {
 						// Property: Action
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Rule Action",
-						//   "enum": [
-						//     "ALLOW",
-						//     "BLOCK",
-						//     "ALERT"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "Rule Action",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"block_override_dns_type": {
 						// Property: BlockOverrideDnsType
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "BlockOverrideDnsType",
-						//   "enum": [
-						//     "CNAME"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "BlockOverrideDnsType",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"block_override_domain": {
 						// Property: BlockOverrideDomain
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "BlockOverrideDomain",
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "BlockOverrideDomain",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"block_override_ttl": {
 						// Property: BlockOverrideTtl
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "BlockOverrideTtl",
-						//   "type": "integer"
-						// }
 						Description: "BlockOverrideTtl",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"block_response": {
 						// Property: BlockResponse
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "BlockResponse",
-						//   "enum": [
-						//     "NODATA",
-						//     "NXDOMAIN",
-						//     "OVERRIDE"
-						//   ],
-						//   "type": "string"
-						// }
 						Description: "BlockResponse",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"firewall_domain_list_id": {
 						// Property: FirewallDomainListId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "ResourceId",
-						//   "maxLength": 64,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "ResourceId",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"priority": {
 						// Property: Priority
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Rule Priority",
-						//   "type": "integer"
-						// }
 						Description: "Rule Priority",
 						Type:        types.NumberType,
 						Required:    true,
@@ -377,26 +325,12 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						//   "maxLength": 127,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						//   "maxLength": 255,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,

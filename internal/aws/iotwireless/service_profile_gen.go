@@ -116,172 +116,96 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"add_gw_metadata": {
 						// Property: AddGwMetadata
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"channel_mask": {
 						// Property: ChannelMask
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Computed: true,
 					},
 					"dev_status_req_freq": {
 						// Property: DevStatusReqFreq
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"dl_bucket_size": {
 						// Property: DlBucketSize
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"dl_rate": {
 						// Property: DlRate
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"dl_rate_policy": {
 						// Property: DlRatePolicy
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Computed: true,
 					},
 					"dr_max": {
 						// Property: DrMax
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"dr_min": {
 						// Property: DrMin
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"hr_allowed": {
 						// Property: HrAllowed
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Computed: true,
 					},
 					"min_gw_diversity": {
 						// Property: MinGwDiversity
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"nwk_geo_loc": {
 						// Property: NwkGeoLoc
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Computed: true,
 					},
 					"pr_allowed": {
 						// Property: PrAllowed
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Computed: true,
 					},
 					"ra_allowed": {
 						// Property: RaAllowed
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Computed: true,
 					},
 					"report_dev_status_battery": {
 						// Property: ReportDevStatusBattery
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Computed: true,
 					},
 					"report_dev_status_margin": {
 						// Property: ReportDevStatusMargin
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "boolean"
-						// }
 						Type:     types.BoolType,
 						Computed: true,
 					},
 					"target_per": {
 						// Property: TargetPer
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"ul_bucket_size": {
 						// Property: UlBucketSize
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"ul_rate": {
 						// Property: UlRate
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "integer"
-						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"ul_rate_policy": {
 						// Property: UlRatePolicy
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Computed: true,
 					},
@@ -332,23 +256,11 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

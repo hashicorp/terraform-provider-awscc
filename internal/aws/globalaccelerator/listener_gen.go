@@ -88,22 +88,12 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"from_port": {
 						// Property: FromPort
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A network port number",
-						//   "type": "integer"
-						// }
 						Description: "A network port number",
 						Type:        types.NumberType,
 						Required:    true,
 					},
 					"to_port": {
 						// Property: ToPort
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A network port number",
-						//   "type": "integer"
-						// }
 						Description: "A network port number",
 						Type:        types.NumberType,
 						Required:    true,

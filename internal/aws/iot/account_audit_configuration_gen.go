@@ -205,28 +205,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 				map[string]schema.Attribute{
 					"authenticated_cognito_role_overly_permissive_check": {
 						// Property: AuthenticatedCognitoRoleOverlyPermissiveCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -237,28 +220,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"ca_certificate_expiring_check": {
 						// Property: CaCertificateExpiringCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -269,28 +235,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"ca_certificate_key_quality_check": {
 						// Property: CaCertificateKeyQualityCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -301,28 +250,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"conflicting_client_ids_check": {
 						// Property: ConflictingClientIdsCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -333,28 +265,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"device_certificate_expiring_check": {
 						// Property: DeviceCertificateExpiringCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -365,28 +280,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"device_certificate_key_quality_check": {
 						// Property: DeviceCertificateKeyQualityCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -397,28 +295,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"device_certificate_shared_check": {
 						// Property: DeviceCertificateSharedCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -429,28 +310,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"iot_policy_overly_permissive_check": {
 						// Property: IotPolicyOverlyPermissiveCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -461,28 +325,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"iot_role_alias_allows_access_to_unused_services_check": {
 						// Property: IotRoleAliasAllowsAccessToUnusedServicesCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -493,28 +340,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"iot_role_alias_overly_permissive_check": {
 						// Property: IotRoleAliasOverlyPermissiveCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -525,28 +355,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"logging_disabled_check": {
 						// Property: LoggingDisabledCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -557,28 +370,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"revoked_ca_certificate_still_active_check": {
 						// Property: RevokedCaCertificateStillActiveCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -589,28 +385,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"revoked_device_certificate_still_active_check": {
 						// Property: RevokedDeviceCertificateStillActiveCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -621,28 +400,11 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"unauthenticated_cognito_role_overly_permissive_check": {
 						// Property: UnauthenticatedCognitoRoleOverlyPermissiveCheck
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "The configuration for a specific audit check.",
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if the check is enabled.",
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "The configuration for a specific audit check.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if the check is enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if the check is enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -691,62 +453,22 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 				map[string]schema.Attribute{
 					"sns": {
 						// Property: Sns
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Enabled": {
-						//       "description": "True if notifications to the target are enabled.",
-						//       "type": "boolean"
-						//     },
-						//     "RoleArn": {
-						//       "description": "The ARN of the role that grants permission to send notifications to the target.",
-						//       "maxLength": 2048,
-						//       "minLength": 20,
-						//       "type": "string"
-						//     },
-						//     "TargetArn": {
-						//       "description": "The ARN of the target (SNS topic) to which audit notifications are sent.",
-						//       "maxLength": 2048,
-						//       "type": "string"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "True if notifications to the target are enabled.",
-									//   "type": "boolean"
-									// }
 									Description: "True if notifications to the target are enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"role_arn": {
 									// Property: RoleArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ARN of the role that grants permission to send notifications to the target.",
-									//   "maxLength": 2048,
-									//   "minLength": 20,
-									//   "type": "string"
-									// }
 									Description: "The ARN of the role that grants permission to send notifications to the target.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"target_arn": {
 									// Property: TargetArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The ARN of the target (SNS topic) to which audit notifications are sent.",
-									//   "maxLength": 2048,
-									//   "type": "string"
-									// }
 									Description: "The ARN of the target (SNS topic) to which audit notifications are sent.",
 									Type:        types.StringType,
 									Optional:    true,

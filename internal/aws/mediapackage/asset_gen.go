@@ -75,22 +75,12 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"packaging_configuration_id": {
 						// Property: PackagingConfigurationId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The ID of the PackagingConfiguration being applied to the Asset.",
-						//   "type": "string"
-						// }
 						Description: "The ID of the PackagingConfiguration being applied to the Asset.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"url": {
 						// Property: Url
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The URL of the parent manifest for the repackaged Asset.",
-						//   "type": "string"
-						// }
 						Description: "The URL of the parent manifest for the repackaged Asset.",
 						Type:        types.StringType,
 						Required:    true,
@@ -185,19 +175,11 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

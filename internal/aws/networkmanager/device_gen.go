@@ -94,33 +94,18 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"address": {
 						// Property: Address
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The physical address.",
-						//   "type": "string"
-						// }
 						Description: "The physical address.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"latitude": {
 						// Property: Latitude
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The latitude.",
-						//   "type": "string"
-						// }
 						Description: "The latitude.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"longitude": {
 						// Property: Longitude
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The longitude.",
-						//   "type": "string"
-						// }
 						Description: "The longitude.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -187,19 +172,11 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

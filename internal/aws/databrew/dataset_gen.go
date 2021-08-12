@@ -106,42 +106,16 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"csv": {
 						// Property: Csv
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Csv options",
-						//   "properties": {
-						//     "Delimiter": {
-						//       "maxLength": 1,
-						//       "minLength": 1,
-						//       "type": "string"
-						//     },
-						//     "HeaderRow": {
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Csv options",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"delimiter": {
 									// Property: Delimiter
-									// CloudFormation resource type schema:
-									// {
-									//   "maxLength": 1,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"header_row": {
 									// Property: HeaderRow
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
@@ -151,72 +125,20 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"excel": {
 						// Property: Excel
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "HeaderRow": {
-						//       "type": "boolean"
-						//     },
-						//     "SheetIndexes": {
-						//       "insertionOrder": true,
-						//       "items": {
-						//         "type": "integer"
-						//       },
-						//       "maxItems": 1,
-						//       "minItems": 1,
-						//       "type": "array"
-						//     },
-						//     "SheetNames": {
-						//       "insertionOrder": true,
-						//       "items": {
-						//         "type": "string"
-						//       },
-						//       "maxItems": 1,
-						//       "minItems": 1,
-						//       "type": "array"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"header_row": {
 									// Property: HeaderRow
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"sheet_indexes": {
 									// Property: SheetIndexes
-									// CloudFormation resource type schema:
-									// {
-									//   "insertionOrder": true,
-									//   "items": {
-									//     "type": "integer"
-									//   },
-									//   "maxItems": 1,
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.NumberType},
 									Optional: true,
 								},
 								"sheet_names": {
 									// Property: SheetNames
-									// CloudFormation resource type schema:
-									// {
-									//   "insertionOrder": true,
-									//   "items": {
-									//     "type": "string"
-									//   },
-									//   "maxItems": 1,
-									//   "minItems": 1,
-									//   "type": "array"
-									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -226,26 +148,11 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"json": {
 						// Property: Json
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Json options",
-						//   "properties": {
-						//     "MultiLine": {
-						//       "type": "boolean"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "Json options",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"multi_line": {
 									// Property: MultiLine
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "boolean"
-									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
@@ -352,113 +259,38 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"data_catalog_input_definition": {
 						// Property: DataCatalogInputDefinition
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "CatalogId": {
-						//       "description": "Catalog id",
-						//       "type": "string"
-						//     },
-						//     "DatabaseName": {
-						//       "description": "Database name",
-						//       "type": "string"
-						//     },
-						//     "TableName": {
-						//       "description": "Table name",
-						//       "type": "string"
-						//     },
-						//     "TempDirectory": {
-						//       "additionalProperties": false,
-						//       "description": "Input location",
-						//       "properties": {
-						//         "Bucket": {
-						//           "type": "string"
-						//         },
-						//         "Key": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "Bucket"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"catalog_id": {
 									// Property: CatalogId
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Catalog id",
-									//   "type": "string"
-									// }
 									Description: "Catalog id",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"database_name": {
 									// Property: DatabaseName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Database name",
-									//   "type": "string"
-									// }
 									Description: "Database name",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"table_name": {
 									// Property: TableName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Table name",
-									//   "type": "string"
-									// }
 									Description: "Table name",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"temp_directory": {
 									// Property: TempDirectory
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "Input location",
-									//   "properties": {
-									//     "Bucket": {
-									//       "type": "string"
-									//     },
-									//     "Key": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "Bucket"
-									//   ],
-									//   "type": "object"
-									// }
 									Description: "Input location",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket": {
 												// Property: Bucket
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -472,98 +304,32 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"database_input_definition": {
 						// Property: DatabaseInputDefinition
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "DatabaseTableName": {
-						//       "description": "Database table name",
-						//       "type": "string"
-						//     },
-						//     "GlueConnectionName": {
-						//       "description": "Glue connection name",
-						//       "type": "string"
-						//     },
-						//     "TempDirectory": {
-						//       "additionalProperties": false,
-						//       "description": "Input location",
-						//       "properties": {
-						//         "Bucket": {
-						//           "type": "string"
-						//         },
-						//         "Key": {
-						//           "type": "string"
-						//         }
-						//       },
-						//       "required": [
-						//         "Bucket"
-						//       ],
-						//       "type": "object"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database_table_name": {
 									// Property: DatabaseTableName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Database table name",
-									//   "type": "string"
-									// }
 									Description: "Database table name",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"glue_connection_name": {
 									// Property: GlueConnectionName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Glue connection name",
-									//   "type": "string"
-									// }
 									Description: "Glue connection name",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"temp_directory": {
 									// Property: TempDirectory
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "Input location",
-									//   "properties": {
-									//     "Bucket": {
-									//       "type": "string"
-									//     },
-									//     "Key": {
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "Bucket"
-									//   ],
-									//   "type": "object"
-									// }
 									Description: "Input location",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket": {
 												// Property: Bucket
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												// {
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -577,41 +343,16 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"s3_input_definition": {
 						// Property: S3InputDefinition
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "Input location",
-						//   "properties": {
-						//     "Bucket": {
-						//       "type": "string"
-						//     },
-						//     "Key": {
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "Bucket"
-						//   ],
-						//   "type": "object"
-						// }
 						Description: "Input location",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"bucket": {
 									// Property: Bucket
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									// {
-									//   "type": "string"
-									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -847,73 +588,22 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"files_limit": {
 						// Property: FilesLimit
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "MaxFiles": {
-						//       "description": "Maximum number of files",
-						//       "type": "integer"
-						//     },
-						//     "Order": {
-						//       "description": "Order",
-						//       "enum": [
-						//         "ASCENDING",
-						//         "DESCENDING"
-						//       ],
-						//       "type": "string"
-						//     },
-						//     "OrderedBy": {
-						//       "description": "Ordered by",
-						//       "enum": [
-						//         "LAST_MODIFIED_DATE"
-						//       ],
-						//       "type": "string"
-						//     }
-						//   },
-						//   "required": [
-						//     "MaxFiles"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"max_files": {
 									// Property: MaxFiles
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Maximum number of files",
-									//   "type": "integer"
-									// }
 									Description: "Maximum number of files",
 									Type:        types.NumberType,
 									Required:    true,
 								},
 								"order": {
 									// Property: Order
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Order",
-									//   "enum": [
-									//     "ASCENDING",
-									//     "DESCENDING"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "Order",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"ordered_by": {
 									// Property: OrderedBy
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Ordered by",
-									//   "enum": [
-									//     "LAST_MODIFIED_DATE"
-									//   ],
-									//   "type": "string"
-									// }
 									Description: "Ordered by",
 									Type:        types.StringType,
 									Optional:    true,
@@ -924,120 +614,25 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"last_modified_date_condition": {
 						// Property: LastModifiedDateCondition
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "properties": {
-						//     "Expression": {
-						//       "description": "Filtering expression for a parameter",
-						//       "maxLength": 1024,
-						//       "minLength": 4,
-						//       "pattern": "",
-						//       "type": "string"
-						//     },
-						//     "ValuesMap": {
-						//       "insertionOrder": true,
-						//       "items": {
-						//         "additionalProperties": false,
-						//         "description": "A key-value pair to associate expression variable names with their values",
-						//         "properties": {
-						//           "Value": {
-						//             "maxLength": 1024,
-						//             "minLength": 0,
-						//             "type": "string"
-						//           },
-						//           "ValueReference": {
-						//             "description": "Variable name",
-						//             "maxLength": 128,
-						//             "minLength": 2,
-						//             "pattern": "",
-						//             "type": "string"
-						//           }
-						//         },
-						//         "required": [
-						//           "ValueReference",
-						//           "Value"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "type": "array"
-						//     }
-						//   },
-						//   "required": [
-						//     "Expression",
-						//     "ValuesMap"
-						//   ],
-						//   "type": "object"
-						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"expression": {
 									// Property: Expression
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Filtering expression for a parameter",
-									//   "maxLength": 1024,
-									//   "minLength": 4,
-									//   "pattern": "",
-									//   "type": "string"
-									// }
 									Description: "Filtering expression for a parameter",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"values_map": {
 									// Property: ValuesMap
-									// CloudFormation resource type schema:
-									// {
-									//   "insertionOrder": true,
-									//   "items": {
-									//     "additionalProperties": false,
-									//     "description": "A key-value pair to associate expression variable names with their values",
-									//     "properties": {
-									//       "Value": {
-									//         "maxLength": 1024,
-									//         "minLength": 0,
-									//         "type": "string"
-									//       },
-									//       "ValueReference": {
-									//         "description": "Variable name",
-									//         "maxLength": 128,
-									//         "minLength": 2,
-									//         "pattern": "",
-									//         "type": "string"
-									//       }
-									//     },
-									//     "required": [
-									//       "ValueReference",
-									//       "Value"
-									//     ],
-									//     "type": "object"
-									//   },
-									//   "type": "array"
-									// }
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"value": {
 												// Property: Value
-												// CloudFormation resource type schema:
-												// {
-												//   "maxLength": 1024,
-												//   "minLength": 0,
-												//   "type": "string"
-												// }
 												Type:     types.StringType,
 												Required: true,
 											},
 											"value_reference": {
 												// Property: ValueReference
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "Variable name",
-												//   "maxLength": 128,
-												//   "minLength": 2,
-												//   "pattern": "",
-												//   "type": "string"
-												// }
 												Description: "Variable name",
 												Type:        types.StringType,
 												Required:    true,
@@ -1053,321 +648,36 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"parameters": {
 						// Property: Parameters
-						// CloudFormation resource type schema:
-						// {
-						//   "insertionOrder": true,
-						//   "items": {
-						//     "additionalProperties": false,
-						//     "description": "A key-value pair to associate dataset parameter name with its definition.",
-						//     "properties": {
-						//       "DatasetParameter": {
-						//         "additionalProperties": false,
-						//         "properties": {
-						//           "CreateColumn": {
-						//             "description": "Add the value of this parameter as a column in a dataset.",
-						//             "type": "boolean"
-						//           },
-						//           "DatetimeOptions": {
-						//             "additionalProperties": false,
-						//             "properties": {
-						//               "Format": {
-						//                 "description": "Date/time format of a date parameter",
-						//                 "maxLength": 100,
-						//                 "minLength": 2,
-						//                 "type": "string"
-						//               },
-						//               "LocaleCode": {
-						//                 "description": "Locale code for a date parameter",
-						//                 "maxLength": 100,
-						//                 "minLength": 2,
-						//                 "pattern": "",
-						//                 "type": "string"
-						//               },
-						//               "TimezoneOffset": {
-						//                 "description": "Timezone offset",
-						//                 "maxLength": 6,
-						//                 "minLength": 1,
-						//                 "pattern": "",
-						//                 "type": "string"
-						//               }
-						//             },
-						//             "required": [
-						//               "Format"
-						//             ],
-						//             "type": "object"
-						//           },
-						//           "Filter": {
-						//             "additionalProperties": false,
-						//             "properties": {
-						//               "Expression": {
-						//                 "description": "Filtering expression for a parameter",
-						//                 "maxLength": 1024,
-						//                 "minLength": 4,
-						//                 "pattern": "",
-						//                 "type": "string"
-						//               },
-						//               "ValuesMap": {
-						//                 "insertionOrder": true,
-						//                 "items": {
-						//                   "additionalProperties": false,
-						//                   "description": "A key-value pair to associate expression variable names with their values",
-						//                   "properties": {
-						//                     "Value": {
-						//                       "maxLength": 1024,
-						//                       "minLength": 0,
-						//                       "type": "string"
-						//                     },
-						//                     "ValueReference": {
-						//                       "description": "Variable name",
-						//                       "maxLength": 128,
-						//                       "minLength": 2,
-						//                       "pattern": "",
-						//                       "type": "string"
-						//                     }
-						//                   },
-						//                   "required": [
-						//                     "ValueReference",
-						//                     "Value"
-						//                   ],
-						//                   "type": "object"
-						//                 },
-						//                 "type": "array"
-						//               }
-						//             },
-						//             "required": [
-						//               "Expression",
-						//               "ValuesMap"
-						//             ],
-						//             "type": "object"
-						//           },
-						//           "Name": {
-						//             "description": "Parameter name",
-						//             "maxLength": 255,
-						//             "minLength": 1,
-						//             "type": "string"
-						//           },
-						//           "Type": {
-						//             "description": "Parameter type",
-						//             "enum": [
-						//               "String",
-						//               "Number",
-						//               "Datetime"
-						//             ],
-						//             "type": "string"
-						//           }
-						//         },
-						//         "required": [
-						//           "Name",
-						//           "Type"
-						//         ],
-						//         "type": "object"
-						//       },
-						//       "PathParameterName": {
-						//         "description": "Parameter name",
-						//         "maxLength": 255,
-						//         "minLength": 1,
-						//         "type": "string"
-						//       }
-						//     },
-						//     "required": [
-						//       "PathParameterName",
-						//       "DatasetParameter"
-						//     ],
-						//     "type": "object"
-						//   },
-						//   "type": "array"
-						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"dataset_parameter": {
 									// Property: DatasetParameter
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "properties": {
-									//     "CreateColumn": {
-									//       "description": "Add the value of this parameter as a column in a dataset.",
-									//       "type": "boolean"
-									//     },
-									//     "DatetimeOptions": {
-									//       "additionalProperties": false,
-									//       "properties": {
-									//         "Format": {
-									//           "description": "Date/time format of a date parameter",
-									//           "maxLength": 100,
-									//           "minLength": 2,
-									//           "type": "string"
-									//         },
-									//         "LocaleCode": {
-									//           "description": "Locale code for a date parameter",
-									//           "maxLength": 100,
-									//           "minLength": 2,
-									//           "pattern": "",
-									//           "type": "string"
-									//         },
-									//         "TimezoneOffset": {
-									//           "description": "Timezone offset",
-									//           "maxLength": 6,
-									//           "minLength": 1,
-									//           "pattern": "",
-									//           "type": "string"
-									//         }
-									//       },
-									//       "required": [
-									//         "Format"
-									//       ],
-									//       "type": "object"
-									//     },
-									//     "Filter": {
-									//       "additionalProperties": false,
-									//       "properties": {
-									//         "Expression": {
-									//           "description": "Filtering expression for a parameter",
-									//           "maxLength": 1024,
-									//           "minLength": 4,
-									//           "pattern": "",
-									//           "type": "string"
-									//         },
-									//         "ValuesMap": {
-									//           "insertionOrder": true,
-									//           "items": {
-									//             "additionalProperties": false,
-									//             "description": "A key-value pair to associate expression variable names with their values",
-									//             "properties": {
-									//               "Value": {
-									//                 "maxLength": 1024,
-									//                 "minLength": 0,
-									//                 "type": "string"
-									//               },
-									//               "ValueReference": {
-									//                 "description": "Variable name",
-									//                 "maxLength": 128,
-									//                 "minLength": 2,
-									//                 "pattern": "",
-									//                 "type": "string"
-									//               }
-									//             },
-									//             "required": [
-									//               "ValueReference",
-									//               "Value"
-									//             ],
-									//             "type": "object"
-									//           },
-									//           "type": "array"
-									//         }
-									//       },
-									//       "required": [
-									//         "Expression",
-									//         "ValuesMap"
-									//       ],
-									//       "type": "object"
-									//     },
-									//     "Name": {
-									//       "description": "Parameter name",
-									//       "maxLength": 255,
-									//       "minLength": 1,
-									//       "type": "string"
-									//     },
-									//     "Type": {
-									//       "description": "Parameter type",
-									//       "enum": [
-									//         "String",
-									//         "Number",
-									//         "Datetime"
-									//       ],
-									//       "type": "string"
-									//     }
-									//   },
-									//   "required": [
-									//     "Name",
-									//     "Type"
-									//   ],
-									//   "type": "object"
-									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"create_column": {
 												// Property: CreateColumn
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "Add the value of this parameter as a column in a dataset.",
-												//   "type": "boolean"
-												// }
 												Description: "Add the value of this parameter as a column in a dataset.",
 												Type:        types.BoolType,
 												Optional:    true,
 											},
 											"datetime_options": {
 												// Property: DatetimeOptions
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "properties": {
-												//     "Format": {
-												//       "description": "Date/time format of a date parameter",
-												//       "maxLength": 100,
-												//       "minLength": 2,
-												//       "type": "string"
-												//     },
-												//     "LocaleCode": {
-												//       "description": "Locale code for a date parameter",
-												//       "maxLength": 100,
-												//       "minLength": 2,
-												//       "pattern": "",
-												//       "type": "string"
-												//     },
-												//     "TimezoneOffset": {
-												//       "description": "Timezone offset",
-												//       "maxLength": 6,
-												//       "minLength": 1,
-												//       "pattern": "",
-												//       "type": "string"
-												//     }
-												//   },
-												//   "required": [
-												//     "Format"
-												//   ],
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"format": {
 															// Property: Format
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "Date/time format of a date parameter",
-															//   "maxLength": 100,
-															//   "minLength": 2,
-															//   "type": "string"
-															// }
 															Description: "Date/time format of a date parameter",
 															Type:        types.StringType,
 															Required:    true,
 														},
 														"locale_code": {
 															// Property: LocaleCode
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "Locale code for a date parameter",
-															//   "maxLength": 100,
-															//   "minLength": 2,
-															//   "pattern": "",
-															//   "type": "string"
-															// }
 															Description: "Locale code for a date parameter",
 															Type:        types.StringType,
 															Optional:    true,
 														},
 														"timezone_offset": {
 															// Property: TimezoneOffset
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "Timezone offset",
-															//   "maxLength": 6,
-															//   "minLength": 1,
-															//   "pattern": "",
-															//   "type": "string"
-															// }
 															Description: "Timezone offset",
 															Type:        types.StringType,
 															Optional:    true,
@@ -1378,120 +688,25 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"filter": {
 												// Property: Filter
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "properties": {
-												//     "Expression": {
-												//       "description": "Filtering expression for a parameter",
-												//       "maxLength": 1024,
-												//       "minLength": 4,
-												//       "pattern": "",
-												//       "type": "string"
-												//     },
-												//     "ValuesMap": {
-												//       "insertionOrder": true,
-												//       "items": {
-												//         "additionalProperties": false,
-												//         "description": "A key-value pair to associate expression variable names with their values",
-												//         "properties": {
-												//           "Value": {
-												//             "maxLength": 1024,
-												//             "minLength": 0,
-												//             "type": "string"
-												//           },
-												//           "ValueReference": {
-												//             "description": "Variable name",
-												//             "maxLength": 128,
-												//             "minLength": 2,
-												//             "pattern": "",
-												//             "type": "string"
-												//           }
-												//         },
-												//         "required": [
-												//           "ValueReference",
-												//           "Value"
-												//         ],
-												//         "type": "object"
-												//       },
-												//       "type": "array"
-												//     }
-												//   },
-												//   "required": [
-												//     "Expression",
-												//     "ValuesMap"
-												//   ],
-												//   "type": "object"
-												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"expression": {
 															// Property: Expression
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "Filtering expression for a parameter",
-															//   "maxLength": 1024,
-															//   "minLength": 4,
-															//   "pattern": "",
-															//   "type": "string"
-															// }
 															Description: "Filtering expression for a parameter",
 															Type:        types.StringType,
 															Required:    true,
 														},
 														"values_map": {
 															// Property: ValuesMap
-															// CloudFormation resource type schema:
-															// {
-															//   "insertionOrder": true,
-															//   "items": {
-															//     "additionalProperties": false,
-															//     "description": "A key-value pair to associate expression variable names with their values",
-															//     "properties": {
-															//       "Value": {
-															//         "maxLength": 1024,
-															//         "minLength": 0,
-															//         "type": "string"
-															//       },
-															//       "ValueReference": {
-															//         "description": "Variable name",
-															//         "maxLength": 128,
-															//         "minLength": 2,
-															//         "pattern": "",
-															//         "type": "string"
-															//       }
-															//     },
-															//     "required": [
-															//       "ValueReference",
-															//       "Value"
-															//     ],
-															//     "type": "object"
-															//   },
-															//   "type": "array"
-															// }
 															Attributes: schema.ListNestedAttributes(
 																map[string]schema.Attribute{
 																	"value": {
 																		// Property: Value
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "maxLength": 1024,
-																		//   "minLength": 0,
-																		//   "type": "string"
-																		// }
 																		Type:     types.StringType,
 																		Required: true,
 																	},
 																	"value_reference": {
 																		// Property: ValueReference
-																		// CloudFormation resource type schema:
-																		// {
-																		//   "description": "Variable name",
-																		//   "maxLength": 128,
-																		//   "minLength": 2,
-																		//   "pattern": "",
-																		//   "type": "string"
-																		// }
 																		Description: "Variable name",
 																		Type:        types.StringType,
 																		Required:    true,
@@ -1507,29 +722,12 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"name": {
 												// Property: Name
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "Parameter name",
-												//   "maxLength": 255,
-												//   "minLength": 1,
-												//   "type": "string"
-												// }
 												Description: "Parameter name",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"type": {
 												// Property: Type
-												// CloudFormation resource type schema:
-												// {
-												//   "description": "Parameter type",
-												//   "enum": [
-												//     "String",
-												//     "Number",
-												//     "Datetime"
-												//   ],
-												//   "type": "string"
-												// }
 												Description: "Parameter type",
 												Type:        types.StringType,
 												Required:    true,
@@ -1540,13 +738,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"path_parameter_name": {
 									// Property: PathParameterName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "Parameter name",
-									//   "maxLength": 255,
-									//   "minLength": 1,
-									//   "type": "string"
-									// }
 									Description: "Parameter name",
 									Type:        types.StringType,
 									Required:    true,
@@ -1594,23 +785,11 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},

@@ -155,184 +155,51 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"component_id": {
 						// Property: ComponentId
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The component identifier of the resource, generated when DNS target resource is used.",
-						//   "type": "string"
-						// }
 						Description: "The component identifier of the resource, generated when DNS target resource is used.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"dns_target_resource": {
 						// Property: DnsTargetResource
-						// CloudFormation resource type schema:
-						// {
-						//   "additionalProperties": false,
-						//   "description": "A component for DNS/routing control readiness checks.",
-						//   "properties": {
-						//     "DomainName": {
-						//       "description": "The domain name that acts as an ingress point to a portion of the customer application.",
-						//       "type": "string"
-						//     },
-						//     "HostedZoneArn": {
-						//       "description": "The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the provided name of the target resource.",
-						//       "type": "string"
-						//     },
-						//     "RecordSetId": {
-						//       "description": "The Route 53 record set ID that will uniquely identify a DNS record, given a name and a type.",
-						//       "type": "string"
-						//     },
-						//     "RecordType": {
-						//       "description": "The type of DNS record of the target resource.",
-						//       "type": "string"
-						//     },
-						//     "TargetResource": {
-						//       "additionalProperties": false,
-						//       "description": "The target resource that the Route 53 record points to.",
-						//       "properties": {
-						//         "NLBResource": {
-						//           "additionalProperties": false,
-						//           "description": "The Network Load Balancer resource that a DNS target resource points to.",
-						//           "properties": {
-						//             "Arn": {
-						//               "description": "A Network Load Balancer resource Amazon Resource Name (ARN).",
-						//               "type": "string"
-						//             }
-						//           },
-						//           "type": "object"
-						//         },
-						//         "R53Resource": {
-						//           "additionalProperties": false,
-						//           "description": "The Route 53 resource that a DNS target resource record points to.",
-						//           "properties": {
-						//             "DomainName": {
-						//               "description": "The DNS target domain name.",
-						//               "type": "string"
-						//             },
-						//             "RecordSetId": {
-						//               "description": "The Resource Record set id.",
-						//               "type": "string"
-						//             }
-						//           },
-						//           "type": "object"
-						//         }
-						//       },
-						//       "type": "object"
-						//     }
-						//   },
-						//   "type": "object"
-						// }
 						Description: "A component for DNS/routing control readiness checks.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"domain_name": {
 									// Property: DomainName
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The domain name that acts as an ingress point to a portion of the customer application.",
-									//   "type": "string"
-									// }
 									Description: "The domain name that acts as an ingress point to a portion of the customer application.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"hosted_zone_arn": {
 									// Property: HostedZoneArn
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the provided name of the target resource.",
-									//   "type": "string"
-									// }
 									Description: "The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the provided name of the target resource.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"record_set_id": {
 									// Property: RecordSetId
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The Route 53 record set ID that will uniquely identify a DNS record, given a name and a type.",
-									//   "type": "string"
-									// }
 									Description: "The Route 53 record set ID that will uniquely identify a DNS record, given a name and a type.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"record_type": {
 									// Property: RecordType
-									// CloudFormation resource type schema:
-									// {
-									//   "description": "The type of DNS record of the target resource.",
-									//   "type": "string"
-									// }
 									Description: "The type of DNS record of the target resource.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"target_resource": {
 									// Property: TargetResource
-									// CloudFormation resource type schema:
-									// {
-									//   "additionalProperties": false,
-									//   "description": "The target resource that the Route 53 record points to.",
-									//   "properties": {
-									//     "NLBResource": {
-									//       "additionalProperties": false,
-									//       "description": "The Network Load Balancer resource that a DNS target resource points to.",
-									//       "properties": {
-									//         "Arn": {
-									//           "description": "A Network Load Balancer resource Amazon Resource Name (ARN).",
-									//           "type": "string"
-									//         }
-									//       },
-									//       "type": "object"
-									//     },
-									//     "R53Resource": {
-									//       "additionalProperties": false,
-									//       "description": "The Route 53 resource that a DNS target resource record points to.",
-									//       "properties": {
-									//         "DomainName": {
-									//           "description": "The DNS target domain name.",
-									//           "type": "string"
-									//         },
-									//         "RecordSetId": {
-									//           "description": "The Resource Record set id.",
-									//           "type": "string"
-									//         }
-									//       },
-									//       "type": "object"
-									//     }
-									//   },
-									//   "type": "object"
-									// }
 									Description: "The target resource that the Route 53 record points to.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"nlb_resource": {
 												// Property: NLBResource
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "description": "The Network Load Balancer resource that a DNS target resource points to.",
-												//   "properties": {
-												//     "Arn": {
-												//       "description": "A Network Load Balancer resource Amazon Resource Name (ARN).",
-												//       "type": "string"
-												//     }
-												//   },
-												//   "type": "object"
-												// }
 												Description: "The Network Load Balancer resource that a DNS target resource points to.",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"arn": {
 															// Property: Arn
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "A Network Load Balancer resource Amazon Resource Name (ARN).",
-															//   "type": "string"
-															// }
 															Description: "A Network Load Balancer resource Amazon Resource Name (ARN).",
 															Type:        types.StringType,
 															Optional:    true,
@@ -343,43 +210,17 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"r53_resource": {
 												// Property: R53Resource
-												// CloudFormation resource type schema:
-												// {
-												//   "additionalProperties": false,
-												//   "description": "The Route 53 resource that a DNS target resource record points to.",
-												//   "properties": {
-												//     "DomainName": {
-												//       "description": "The DNS target domain name.",
-												//       "type": "string"
-												//     },
-												//     "RecordSetId": {
-												//       "description": "The Resource Record set id.",
-												//       "type": "string"
-												//     }
-												//   },
-												//   "type": "object"
-												// }
 												Description: "The Route 53 resource that a DNS target resource record points to.",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"domain_name": {
 															// Property: DomainName
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "The DNS target domain name.",
-															//   "type": "string"
-															// }
 															Description: "The DNS target domain name.",
 															Type:        types.StringType,
 															Optional:    true,
 														},
 														"record_set_id": {
 															// Property: RecordSetId
-															// CloudFormation resource type schema:
-															// {
-															//   "description": "The Resource Record set id.",
-															//   "type": "string"
-															// }
 															Description: "The Resource Record set id.",
 															Type:        types.StringType,
 															Optional:    true,
@@ -398,16 +239,6 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"readiness_scopes": {
 						// Property: ReadinessScopes
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "maxItems": 5,
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						Description: "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
 						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
@@ -415,11 +246,6 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"resource_arn": {
 						// Property: ResourceArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The Amazon Resource Name (ARN) of the AWS resource.",
-						//   "type": "string"
-						// }
 						Description: "The Amazon Resource Name (ARN) of the AWS resource.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -467,24 +293,11 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "insertionOrder": false,
-						//   "items": {
-						//     "maxItems": 50,
-						//     "type": "string"
-						//   },
-						//   "type": "array"
-						// }
 						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,

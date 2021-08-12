@@ -54,38 +54,18 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]schema.Attribute{
 					"registry_name": {
 						// Property: RegistryName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Name of the registry to identify where the Schema is located.",
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "Name of the registry to identify where the Schema is located.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"schema_arn": {
 						// Property: SchemaArn
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
-						//   "pattern": "",
-						//   "type": "string"
-						// }
 						Description: "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"schema_name": {
 						// Property: SchemaName
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "Name of the schema. This parameter requires RegistryName to be provided.",
-						//   "maxLength": 255,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Description: "Name of the schema. This parameter requires RegistryName to be provided.",
 						Type:        types.StringType,
 						Optional:    true,

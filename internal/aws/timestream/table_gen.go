@@ -78,22 +78,12 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"magnetic_store_retention_period_in_days": {
 						// Property: MagneticStoreRetentionPeriodInDays
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The duration for which data must be stored in the magnetic store.",
-						//   "type": "string"
-						// }
 						Description: "The duration for which data must be stored in the magnetic store.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"memory_store_retention_period_in_hours": {
 						// Property: MemoryStoreRetentionPeriodInHours
-						// CloudFormation resource type schema:
-						// {
-						//   "description": "The duration for which data must be stored in the memory store.",
-						//   "type": "string"
-						// }
 						Description: "The duration for which data must be stored in the memory store.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -146,23 +136,11 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 128,
-						//   "minLength": 1,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						// {
-						//   "maxLength": 256,
-						//   "minLength": 0,
-						//   "type": "string"
-						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
