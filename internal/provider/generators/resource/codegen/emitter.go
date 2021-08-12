@@ -241,9 +241,13 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 
 			// Ignore all but the first pattern.
 			pattern := patterns[0]
+			patternProperty := patternProperties[pattern]
 
 			e.printf("// Pattern: %q\n", pattern)
-			switch propertyType := patternProperties[pattern].Type.String(); propertyType {
+			switch propertyType := patternProperty.Type.String(); propertyType {
+			//
+			// Primitive types.
+			//
 			case cfschema.PropertyTypeBoolean:
 				e.printf("Type: types.MapType{ElemType:types.BoolType},\n")
 
@@ -252,6 +256,79 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 
 			case cfschema.PropertyTypeString:
 				e.printf("Type: types.MapType{ElemType:types.StringType},\n")
+
+			//
+			// Complex types.
+			//
+			case cfschema.PropertyTypeArray:
+				if aggregateType(patternProperty) == aggregateSet {
+					switch itemType := patternProperty.Items.Type.String(); itemType {
+					// Sets of primitive types use provider-local Set type until tfsdk support is available.
+					case cfschema.PropertyTypeBoolean:
+						features |= UsesInternalTypes
+						e.printf("Type: types.MapType{ElemType:providertypes.SetType{ElemType:types.BoolType}},\n")
+
+					case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+						features |= UsesInternalTypes
+						e.printf("Type: types.MapType{ElemType:providertypes.SetType{ElemType:types.NumberType}},\n")
+
+					case cfschema.PropertyTypeString:
+						features |= UsesInternalTypes
+						e.printf("Type: types.MapType{ElemType:providertypes.SetType{ElemType:types.StringType}},\n")
+
+					default:
+						return 0, fmt.Errorf("%s is of unsupported type: key-value map of set of %s", name, itemType)
+					}
+				} else {
+					switch itemType := patternProperty.Items.Type.String(); itemType {
+					case cfschema.PropertyTypeBoolean:
+						e.printf("Type: types.MapType{ElemType:types.ListType{ElemType:types.BoolType}},\n")
+
+					case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+						e.printf("Type: types.MapType{ElemType:types.ListType{ElemType:types.NumberType}},\n")
+
+					case cfschema.PropertyTypeString:
+						e.printf("Type: types.MapType{ElemType:types.ListType{ElemType:types.StringType}},\n")
+
+					default:
+						return 0, fmt.Errorf("%s is of unsupported type: key-value map of list of %s", name, itemType)
+					}
+				}
+
+			case cfschema.PropertyTypeObject:
+				if len(patternProperty.PatternProperties) > 0 {
+					return 0, fmt.Errorf("%s is of unsupported type: key-value map of key-value map", name)
+				}
+
+				if len(patternProperty.Properties) == 0 {
+					return 0, fmt.Errorf("%s is of unsupported type: key-value map of undefined schema", name)
+				}
+
+				e.printf("Attributes: schema.MapNestedAttributes(\n")
+
+				f, err := e.emitSchema(
+					parent{
+						path: path,
+						reqd: property.Items,
+					},
+					patternProperty.Properties)
+
+				if err != nil {
+					return 0, err
+				}
+
+				features |= f
+
+				e.printf(",\n")
+				e.printf("schema.MapNestedAttributesOptions{\n")
+				if patternProperty.MinItems != nil {
+					e.printf("MinItems: %d,\n", *patternProperty.MinItems)
+				}
+				if patternProperty.MaxItems != nil {
+					e.printf("MaxItems: %d,\n", *patternProperty.MaxItems)
+				}
+				e.printf("},\n")
+				e.printf("),\n")
 
 			default:
 				return 0, fmt.Errorf("%s is of unsupported type: key-value map of %s", name, propertyType)
@@ -366,4 +443,45 @@ func (e *Emitter) printf(format string, a ...interface{}) (int, error) {
 // warnf emits a formatted warning message to the UI.
 func (e *Emitter) warnf(format string, a ...interface{}) {
 	e.Ui.Warn(fmt.Sprintf(format, a...))
+}
+
+type aggregate int
+
+const (
+	aggregateNone aggregate = iota
+	aggregateList
+	aggregateSet
+	aggregateMultiset
+	aggregateOrderedSet
+)
+
+// aggregate returns the type of a Property.
+func aggregateType(property *cfschema.Property) aggregate {
+	if property.Type.String() != cfschema.PropertyTypeArray {
+		return aggregateNone
+	}
+
+	// https://github.com/aws-cloudformation/cloudformation-resource-schema#insertionorder
+	insertionOrder := true
+	if property.InsertionOrder != nil {
+		insertionOrder = *property.InsertionOrder
+	}
+	uniqueItems := false
+	if property.UniqueItems != nil {
+		uniqueItems = *property.UniqueItems
+	}
+
+	if uniqueItems && !insertionOrder {
+		return aggregateSet
+	}
+
+	if uniqueItems && insertionOrder {
+		return aggregateOrderedSet
+	}
+
+	if !uniqueItems && !insertionOrder {
+		return aggregateMultiset
+	}
+
+	return aggregateList
 }
