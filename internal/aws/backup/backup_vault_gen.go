@@ -25,34 +25,28 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"access_policy": {
 			// Property: AccessPolicy
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"backup_vault_arn": {
 			// Property: BackupVaultArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"backup_vault_name": {
 			// Property: BackupVaultName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// BackupVaultName is a force-new attribute.
@@ -60,17 +54,15 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"backup_vault_tags": {
 			// Property: BackupVaultTags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "patternProperties": {
-			       "": {
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "patternProperties": {
+			//     "": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
@@ -78,11 +70,9 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"encryption_key_arn": {
 			// Property: EncryptionKeyArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -91,53 +81,47 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"notifications": {
 			// Property: Notifications
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "BackupVaultEvents": {
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "SNSTopicArn": {
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "SNSTopicArn",
-			       "BackupVaultEvents"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "BackupVaultEvents": {
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "SNSTopicArn": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "SNSTopicArn",
+			//     "BackupVaultEvents"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"backup_vault_events": {
 						// Property: BackupVaultEvents
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": false
+						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 					"sns_topic_arn": {
 						// Property: SNSTopicArn
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},

@@ -25,16 +25,14 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"address_family": {
 			// Property: AddressFamily
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Ip Version of Prefix List.",
-			     "enum": [
-			       "IPv4",
-			       "IPv6"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Ip Version of Prefix List.",
+			//   "enum": [
+			//     "IPv4",
+			//     "IPv6"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "Ip Version of Prefix List.",
 			Type:        types.StringType,
 			Required:    true,
@@ -42,12 +40,10 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the Prefix List.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the Prefix List.",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the Prefix List.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -55,57 +51,51 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"entries": {
 			// Property: Entries
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Entries of Prefix List.",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Cidr": {
-			           "maxLength": 46,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Description": {
-			           "maxLength": 255,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Cidr"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "Entries of Prefix List.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Cidr": {
+			//         "maxLength": 46,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Description": {
+			//         "maxLength": 255,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Cidr"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "Entries of Prefix List.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"cidr": {
 						// Property: Cidr
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 46,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 46,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"description": {
 						// Property: Description
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 255,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 255,
+						//   "minLength": 0,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -117,12 +107,10 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"max_entries": {
 			// Property: MaxEntries
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Max Entries of Prefix List.",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "Max Entries of Prefix List.",
+			//   "type": "integer"
+			// }
 			Description: "Max Entries of Prefix List.",
 			Type:        types.NumberType,
 			Required:    true,
@@ -130,12 +118,10 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"owner_id": {
 			// Property: OwnerId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Owner Id of Prefix List.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Owner Id of Prefix List.",
+			//   "type": "string"
+			// }
 			Description: "Owner Id of Prefix List.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -143,12 +129,10 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"prefix_list_id": {
 			// Property: PrefixListId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Id of Prefix List.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Id of Prefix List.",
+			//   "type": "string"
+			// }
 			Description: "Id of Prefix List.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -156,14 +140,12 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"prefix_list_name": {
 			// Property: PrefixListName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of Prefix List.",
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of Prefix List.",
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Name of Prefix List.",
 			Type:        types.StringType,
 			Required:    true,
@@ -171,55 +153,49 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Tags for Prefix List",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "Tags for Prefix List",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "Tags for Prefix List",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 256,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -231,12 +207,10 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Version of Prefix List.",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "Version of Prefix List.",
+			//   "type": "integer"
+			// }
 			Description: "Version of Prefix List.",
 			Type:        types.NumberType,
 			Computed:    true,

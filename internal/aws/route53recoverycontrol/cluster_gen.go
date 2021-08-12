@@ -25,14 +25,12 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"cluster_arn": {
 			// Property: ClusterArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the cluster.",
-			     "maxLength": 2048,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the cluster.",
+			//   "maxLength": 2048,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the cluster.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -40,29 +38,27 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"cluster_endpoints": {
 			// Property: ClusterEndpoints
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Endpoints for the cluster.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Endpoint": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Region": {
-			           "maxLength": 32,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "Endpoints for the cluster.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Endpoint": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Region": {
+			//         "maxLength": 32,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "Endpoints for the cluster.",
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
@@ -70,26 +66,22 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"endpoint": {
 						// Property: Endpoint
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"region": {
 						// Property: Region
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 32,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 32,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -101,14 +93,12 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of a Cluster. You can use any non-white space character in the name",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of a Cluster. You can use any non-white space character in the name",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Name of a Cluster. You can use any non-white space character in the name",
 			Type:        types.StringType,
 			Optional:    true,
@@ -118,17 +108,15 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Deployment status of a resource. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
-			     "enum": [
-			       "PENDING",
-			       "DEPLOYED",
-			       "PENDING_DELETION"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Deployment status of a resource. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
+			//   "enum": [
+			//     "PENDING",
+			//     "DEPLOYED",
+			//     "PENDING_DELETION"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "Deployment status of a resource. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
 			Type:        types.StringType,
 			Computed:    true,

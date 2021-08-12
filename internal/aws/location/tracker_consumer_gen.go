@@ -25,13 +25,11 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"consumer_arn": {
 			// Property: ConsumerArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1600,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1600,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// ConsumerArn is a force-new attribute.
@@ -39,14 +37,12 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"tracker_name": {
 			// Property: TrackerName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 100,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 100,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// TrackerName is a force-new attribute.

@@ -25,12 +25,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"asset_model_arn": {
 			// Property: AssetModelArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ARN of the asset model, which has the following format.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ARN of the asset model, which has the following format.",
+			//   "type": "string"
+			// }
 			Description: "The ARN of the asset model, which has the following format.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,247 +36,245 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"asset_model_composite_models": {
 			// Property: AssetModelCompositeModels
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.",
-			       "properties": {
-			         "CompositeModelProperties": {
-			           "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-			           "insertionOrder": false,
-			           "items": {
-			             "additionalProperties": false,
-			             "description": "Contains information about an asset model property.",
-			             "properties": {
-			               "DataType": {
-			                 "enum": [
-			                   "STRING",
-			                   "INTEGER",
-			                   "DOUBLE",
-			                   "BOOLEAN",
-			                   "STRUCT"
-			                 ],
-			                 "type": "string"
-			               },
-			               "DataTypeSpec": {
-			                 "enum": [
-			                   "AWS/ALARM_STATE"
-			                 ],
-			                 "type": "string"
-			               },
-			               "LogicalId": {
-			                 "description": "Customer provided ID for property.",
-			                 "maxLength": 256,
-			                 "minLength": 1,
-			                 "pattern": "",
-			                 "type": "string"
-			               },
-			               "Name": {
-			                 "description": "The name of the asset model property.",
-			                 "type": "string"
-			               },
-			               "Type": {
-			                 "additionalProperties": false,
-			                 "description": "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
-			                 "properties": {
-			                   "Attribute": {
-			                     "additionalProperties": false,
-			                     "properties": {
-			                       "DefaultValue": {
-			                         "type": "string"
-			                       }
-			                     },
-			                     "type": "object"
-			                   },
-			                   "Metric": {
-			                     "additionalProperties": false,
-			                     "properties": {
-			                       "Expression": {
-			                         "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-			                         "type": "string"
-			                       },
-			                       "Variables": {
-			                         "description": "The list of variables used in the expression.",
-			                         "insertionOrder": false,
-			                         "items": {
-			                           "additionalProperties": false,
-			                           "properties": {
-			                             "Name": {
-			                               "description": "The friendly name of the variable to be used in the expression.",
-			                               "type": "string"
-			                             },
-			                             "Value": {
-			                               "additionalProperties": false,
-			                               "properties": {
-			                                 "HierarchyLogicalId": {
-			                                   "maxLength": 256,
-			                                   "minLength": 1,
-			                                   "pattern": "",
-			                                   "type": "string"
-			                                 },
-			                                 "PropertyLogicalId": {
-			                                   "maxLength": 256,
-			                                   "minLength": 1,
-			                                   "pattern": "",
-			                                   "type": "string"
-			                                 }
-			                               },
-			                               "required": [
-			                                 "PropertyLogicalId"
-			                               ],
-			                               "type": "object"
-			                             }
-			                           },
-			                           "required": [
-			                             "Name",
-			                             "Value"
-			                           ],
-			                           "type": "object"
-			                         },
-			                         "type": "array"
-			                       },
-			                       "Window": {
-			                         "additionalProperties": false,
-			                         "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
-			                         "properties": {
-			                           "Tumbling": {
-			                             "additionalProperties": false,
-			                             "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-			                             "properties": {
-			                               "Interval": {
-			                                 "description": "The time interval for the tumbling window.",
-			                                 "type": "string"
-			                               },
-			                               "Offset": {
-			                                 "description": "The shift or reference point on timeline for the contiguous time intervals.",
-			                                 "type": "string"
-			                               }
-			                             },
-			                             "required": [
-			                               "Interval"
-			                             ],
-			                             "type": "object"
-			                           }
-			                         },
-			                         "type": "object"
-			                       }
-			                     },
-			                     "required": [
-			                       "Expression",
-			                       "Variables",
-			                       "Window"
-			                     ],
-			                     "type": "object"
-			                   },
-			                   "Transform": {
-			                     "additionalProperties": false,
-			                     "properties": {
-			                       "Expression": {
-			                         "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-			                         "type": "string"
-			                       },
-			                       "Variables": {
-			                         "description": "The list of variables used in the expression.",
-			                         "insertionOrder": false,
-			                         "items": {
-			                           "additionalProperties": false,
-			                           "properties": {
-			                             "Name": {
-			                               "description": "The friendly name of the variable to be used in the expression.",
-			                               "type": "string"
-			                             },
-			                             "Value": {
-			                               "additionalProperties": false,
-			                               "properties": {
-			                                 "HierarchyLogicalId": {
-			                                   "maxLength": 256,
-			                                   "minLength": 1,
-			                                   "pattern": "",
-			                                   "type": "string"
-			                                 },
-			                                 "PropertyLogicalId": {
-			                                   "maxLength": 256,
-			                                   "minLength": 1,
-			                                   "pattern": "",
-			                                   "type": "string"
-			                                 }
-			                               },
-			                               "required": [
-			                                 "PropertyLogicalId"
-			                               ],
-			                               "type": "object"
-			                             }
-			                           },
-			                           "required": [
-			                             "Name",
-			                             "Value"
-			                           ],
-			                           "type": "object"
-			                         },
-			                         "type": "array"
-			                       }
-			                     },
-			                     "required": [
-			                       "Expression",
-			                       "Variables"
-			                     ],
-			                     "type": "object"
-			                   },
-			                   "TypeName": {
-			                     "enum": [
-			                       "Measurement",
-			                       "Attribute",
-			                       "Transform",
-			                       "Metric"
-			                     ],
-			                     "type": "string"
-			                   }
-			                 },
-			                 "required": [
-			                   "TypeName"
-			                 ],
-			                 "type": "object"
-			               },
-			               "Unit": {
-			                 "description": "The unit of the asset model property, such as Newtons or RPM.",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "LogicalId",
-			               "Name",
-			               "DataType",
-			               "Type"
-			             ],
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "Description": {
-			           "description": "A description for the asset composite model.",
-			           "type": "string"
-			         },
-			         "Name": {
-			           "description": "A unique, friendly name for the asset composite model.",
-			           "type": "string"
-			         },
-			         "Type": {
-			           "description": "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Name",
-			         "Type"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.",
+			//     "properties": {
+			//       "CompositeModelProperties": {
+			//         "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
+			//         "insertionOrder": false,
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "description": "Contains information about an asset model property.",
+			//           "properties": {
+			//             "DataType": {
+			//               "enum": [
+			//                 "STRING",
+			//                 "INTEGER",
+			//                 "DOUBLE",
+			//                 "BOOLEAN",
+			//                 "STRUCT"
+			//               ],
+			//               "type": "string"
+			//             },
+			//             "DataTypeSpec": {
+			//               "enum": [
+			//                 "AWS/ALARM_STATE"
+			//               ],
+			//               "type": "string"
+			//             },
+			//             "LogicalId": {
+			//               "description": "Customer provided ID for property.",
+			//               "maxLength": 256,
+			//               "minLength": 1,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "Name": {
+			//               "description": "The name of the asset model property.",
+			//               "type": "string"
+			//             },
+			//             "Type": {
+			//               "additionalProperties": false,
+			//               "description": "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
+			//               "properties": {
+			//                 "Attribute": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "DefaultValue": {
+			//                       "type": "string"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "Metric": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Expression": {
+			//                       "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+			//                       "type": "string"
+			//                     },
+			//                     "Variables": {
+			//                       "description": "The list of variables used in the expression.",
+			//                       "insertionOrder": false,
+			//                       "items": {
+			//                         "additionalProperties": false,
+			//                         "properties": {
+			//                           "Name": {
+			//                             "description": "The friendly name of the variable to be used in the expression.",
+			//                             "type": "string"
+			//                           },
+			//                           "Value": {
+			//                             "additionalProperties": false,
+			//                             "properties": {
+			//                               "HierarchyLogicalId": {
+			//                                 "maxLength": 256,
+			//                                 "minLength": 1,
+			//                                 "pattern": "",
+			//                                 "type": "string"
+			//                               },
+			//                               "PropertyLogicalId": {
+			//                                 "maxLength": 256,
+			//                                 "minLength": 1,
+			//                                 "pattern": "",
+			//                                 "type": "string"
+			//                               }
+			//                             },
+			//                             "required": [
+			//                               "PropertyLogicalId"
+			//                             ],
+			//                             "type": "object"
+			//                           }
+			//                         },
+			//                         "required": [
+			//                           "Name",
+			//                           "Value"
+			//                         ],
+			//                         "type": "object"
+			//                       },
+			//                       "type": "array"
+			//                     },
+			//                     "Window": {
+			//                       "additionalProperties": false,
+			//                       "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+			//                       "properties": {
+			//                         "Tumbling": {
+			//                           "additionalProperties": false,
+			//                           "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+			//                           "properties": {
+			//                             "Interval": {
+			//                               "description": "The time interval for the tumbling window.",
+			//                               "type": "string"
+			//                             },
+			//                             "Offset": {
+			//                               "description": "The shift or reference point on timeline for the contiguous time intervals.",
+			//                               "type": "string"
+			//                             }
+			//                           },
+			//                           "required": [
+			//                             "Interval"
+			//                           ],
+			//                           "type": "object"
+			//                         }
+			//                       },
+			//                       "type": "object"
+			//                     }
+			//                   },
+			//                   "required": [
+			//                     "Expression",
+			//                     "Variables",
+			//                     "Window"
+			//                   ],
+			//                   "type": "object"
+			//                 },
+			//                 "Transform": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Expression": {
+			//                       "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+			//                       "type": "string"
+			//                     },
+			//                     "Variables": {
+			//                       "description": "The list of variables used in the expression.",
+			//                       "insertionOrder": false,
+			//                       "items": {
+			//                         "additionalProperties": false,
+			//                         "properties": {
+			//                           "Name": {
+			//                             "description": "The friendly name of the variable to be used in the expression.",
+			//                             "type": "string"
+			//                           },
+			//                           "Value": {
+			//                             "additionalProperties": false,
+			//                             "properties": {
+			//                               "HierarchyLogicalId": {
+			//                                 "maxLength": 256,
+			//                                 "minLength": 1,
+			//                                 "pattern": "",
+			//                                 "type": "string"
+			//                               },
+			//                               "PropertyLogicalId": {
+			//                                 "maxLength": 256,
+			//                                 "minLength": 1,
+			//                                 "pattern": "",
+			//                                 "type": "string"
+			//                               }
+			//                             },
+			//                             "required": [
+			//                               "PropertyLogicalId"
+			//                             ],
+			//                             "type": "object"
+			//                           }
+			//                         },
+			//                         "required": [
+			//                           "Name",
+			//                           "Value"
+			//                         ],
+			//                         "type": "object"
+			//                       },
+			//                       "type": "array"
+			//                     }
+			//                   },
+			//                   "required": [
+			//                     "Expression",
+			//                     "Variables"
+			//                   ],
+			//                   "type": "object"
+			//                 },
+			//                 "TypeName": {
+			//                   "enum": [
+			//                     "Measurement",
+			//                     "Attribute",
+			//                     "Transform",
+			//                     "Metric"
+			//                   ],
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "TypeName"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "Unit": {
+			//               "description": "The unit of the asset model property, such as Newtons or RPM.",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "LogicalId",
+			//             "Name",
+			//             "DataType",
+			//             "Type"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "Description": {
+			//         "description": "A description for the asset composite model.",
+			//         "type": "string"
+			//       },
+			//       "Name": {
+			//         "description": "A unique, friendly name for the asset composite model.",
+			//         "type": "string"
+			//       },
+			//       "Type": {
+			//         "description": "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Name",
+			//       "Type"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
@@ -286,219 +282,217 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"composite_model_properties": {
 						// Property: CompositeModelProperties
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "description": "Contains information about an asset model property.",
-						       "properties": {
-						         "DataType": {
-						           "enum": [
-						             "STRING",
-						             "INTEGER",
-						             "DOUBLE",
-						             "BOOLEAN",
-						             "STRUCT"
-						           ],
-						           "type": "string"
-						         },
-						         "DataTypeSpec": {
-						           "enum": [
-						             "AWS/ALARM_STATE"
-						           ],
-						           "type": "string"
-						         },
-						         "LogicalId": {
-						           "description": "Customer provided ID for property.",
-						           "maxLength": 256,
-						           "minLength": 1,
-						           "pattern": "",
-						           "type": "string"
-						         },
-						         "Name": {
-						           "description": "The name of the asset model property.",
-						           "type": "string"
-						         },
-						         "Type": {
-						           "additionalProperties": false,
-						           "description": "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
-						           "properties": {
-						             "Attribute": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "DefaultValue": {
-						                   "type": "string"
-						                 }
-						               },
-						               "type": "object"
-						             },
-						             "Metric": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "Expression": {
-						                   "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-						                   "type": "string"
-						                 },
-						                 "Variables": {
-						                   "description": "The list of variables used in the expression.",
-						                   "insertionOrder": false,
-						                   "items": {
-						                     "additionalProperties": false,
-						                     "properties": {
-						                       "Name": {
-						                         "description": "The friendly name of the variable to be used in the expression.",
-						                         "type": "string"
-						                       },
-						                       "Value": {
-						                         "additionalProperties": false,
-						                         "properties": {
-						                           "HierarchyLogicalId": {
-						                             "maxLength": 256,
-						                             "minLength": 1,
-						                             "pattern": "",
-						                             "type": "string"
-						                           },
-						                           "PropertyLogicalId": {
-						                             "maxLength": 256,
-						                             "minLength": 1,
-						                             "pattern": "",
-						                             "type": "string"
-						                           }
-						                         },
-						                         "required": [
-						                           "PropertyLogicalId"
-						                         ],
-						                         "type": "object"
-						                       }
-						                     },
-						                     "required": [
-						                       "Name",
-						                       "Value"
-						                     ],
-						                     "type": "object"
-						                   },
-						                   "type": "array"
-						                 },
-						                 "Window": {
-						                   "additionalProperties": false,
-						                   "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
-						                   "properties": {
-						                     "Tumbling": {
-						                       "additionalProperties": false,
-						                       "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-						                       "properties": {
-						                         "Interval": {
-						                           "description": "The time interval for the tumbling window.",
-						                           "type": "string"
-						                         },
-						                         "Offset": {
-						                           "description": "The shift or reference point on timeline for the contiguous time intervals.",
-						                           "type": "string"
-						                         }
-						                       },
-						                       "required": [
-						                         "Interval"
-						                       ],
-						                       "type": "object"
-						                     }
-						                   },
-						                   "type": "object"
-						                 }
-						               },
-						               "required": [
-						                 "Expression",
-						                 "Variables",
-						                 "Window"
-						               ],
-						               "type": "object"
-						             },
-						             "Transform": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "Expression": {
-						                   "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-						                   "type": "string"
-						                 },
-						                 "Variables": {
-						                   "description": "The list of variables used in the expression.",
-						                   "insertionOrder": false,
-						                   "items": {
-						                     "additionalProperties": false,
-						                     "properties": {
-						                       "Name": {
-						                         "description": "The friendly name of the variable to be used in the expression.",
-						                         "type": "string"
-						                       },
-						                       "Value": {
-						                         "additionalProperties": false,
-						                         "properties": {
-						                           "HierarchyLogicalId": {
-						                             "maxLength": 256,
-						                             "minLength": 1,
-						                             "pattern": "",
-						                             "type": "string"
-						                           },
-						                           "PropertyLogicalId": {
-						                             "maxLength": 256,
-						                             "minLength": 1,
-						                             "pattern": "",
-						                             "type": "string"
-						                           }
-						                         },
-						                         "required": [
-						                           "PropertyLogicalId"
-						                         ],
-						                         "type": "object"
-						                       }
-						                     },
-						                     "required": [
-						                       "Name",
-						                       "Value"
-						                     ],
-						                     "type": "object"
-						                   },
-						                   "type": "array"
-						                 }
-						               },
-						               "required": [
-						                 "Expression",
-						                 "Variables"
-						               ],
-						               "type": "object"
-						             },
-						             "TypeName": {
-						               "enum": [
-						                 "Measurement",
-						                 "Attribute",
-						                 "Transform",
-						                 "Metric"
-						               ],
-						               "type": "string"
-						             }
-						           },
-						           "required": [
-						             "TypeName"
-						           ],
-						           "type": "object"
-						         },
-						         "Unit": {
-						           "description": "The unit of the asset model property, such as Newtons or RPM.",
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "LogicalId",
-						         "Name",
-						         "DataType",
-						         "Type"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
+						//   "insertionOrder": false,
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "description": "Contains information about an asset model property.",
+						//     "properties": {
+						//       "DataType": {
+						//         "enum": [
+						//           "STRING",
+						//           "INTEGER",
+						//           "DOUBLE",
+						//           "BOOLEAN",
+						//           "STRUCT"
+						//         ],
+						//         "type": "string"
+						//       },
+						//       "DataTypeSpec": {
+						//         "enum": [
+						//           "AWS/ALARM_STATE"
+						//         ],
+						//         "type": "string"
+						//       },
+						//       "LogicalId": {
+						//         "description": "Customer provided ID for property.",
+						//         "maxLength": 256,
+						//         "minLength": 1,
+						//         "pattern": "",
+						//         "type": "string"
+						//       },
+						//       "Name": {
+						//         "description": "The name of the asset model property.",
+						//         "type": "string"
+						//       },
+						//       "Type": {
+						//         "additionalProperties": false,
+						//         "description": "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
+						//         "properties": {
+						//           "Attribute": {
+						//             "additionalProperties": false,
+						//             "properties": {
+						//               "DefaultValue": {
+						//                 "type": "string"
+						//               }
+						//             },
+						//             "type": "object"
+						//           },
+						//           "Metric": {
+						//             "additionalProperties": false,
+						//             "properties": {
+						//               "Expression": {
+						//                 "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+						//                 "type": "string"
+						//               },
+						//               "Variables": {
+						//                 "description": "The list of variables used in the expression.",
+						//                 "insertionOrder": false,
+						//                 "items": {
+						//                   "additionalProperties": false,
+						//                   "properties": {
+						//                     "Name": {
+						//                       "description": "The friendly name of the variable to be used in the expression.",
+						//                       "type": "string"
+						//                     },
+						//                     "Value": {
+						//                       "additionalProperties": false,
+						//                       "properties": {
+						//                         "HierarchyLogicalId": {
+						//                           "maxLength": 256,
+						//                           "minLength": 1,
+						//                           "pattern": "",
+						//                           "type": "string"
+						//                         },
+						//                         "PropertyLogicalId": {
+						//                           "maxLength": 256,
+						//                           "minLength": 1,
+						//                           "pattern": "",
+						//                           "type": "string"
+						//                         }
+						//                       },
+						//                       "required": [
+						//                         "PropertyLogicalId"
+						//                       ],
+						//                       "type": "object"
+						//                     }
+						//                   },
+						//                   "required": [
+						//                     "Name",
+						//                     "Value"
+						//                   ],
+						//                   "type": "object"
+						//                 },
+						//                 "type": "array"
+						//               },
+						//               "Window": {
+						//                 "additionalProperties": false,
+						//                 "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+						//                 "properties": {
+						//                   "Tumbling": {
+						//                     "additionalProperties": false,
+						//                     "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+						//                     "properties": {
+						//                       "Interval": {
+						//                         "description": "The time interval for the tumbling window.",
+						//                         "type": "string"
+						//                       },
+						//                       "Offset": {
+						//                         "description": "The shift or reference point on timeline for the contiguous time intervals.",
+						//                         "type": "string"
+						//                       }
+						//                     },
+						//                     "required": [
+						//                       "Interval"
+						//                     ],
+						//                     "type": "object"
+						//                   }
+						//                 },
+						//                 "type": "object"
+						//               }
+						//             },
+						//             "required": [
+						//               "Expression",
+						//               "Variables",
+						//               "Window"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "Transform": {
+						//             "additionalProperties": false,
+						//             "properties": {
+						//               "Expression": {
+						//                 "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+						//                 "type": "string"
+						//               },
+						//               "Variables": {
+						//                 "description": "The list of variables used in the expression.",
+						//                 "insertionOrder": false,
+						//                 "items": {
+						//                   "additionalProperties": false,
+						//                   "properties": {
+						//                     "Name": {
+						//                       "description": "The friendly name of the variable to be used in the expression.",
+						//                       "type": "string"
+						//                     },
+						//                     "Value": {
+						//                       "additionalProperties": false,
+						//                       "properties": {
+						//                         "HierarchyLogicalId": {
+						//                           "maxLength": 256,
+						//                           "minLength": 1,
+						//                           "pattern": "",
+						//                           "type": "string"
+						//                         },
+						//                         "PropertyLogicalId": {
+						//                           "maxLength": 256,
+						//                           "minLength": 1,
+						//                           "pattern": "",
+						//                           "type": "string"
+						//                         }
+						//                       },
+						//                       "required": [
+						//                         "PropertyLogicalId"
+						//                       ],
+						//                       "type": "object"
+						//                     }
+						//                   },
+						//                   "required": [
+						//                     "Name",
+						//                     "Value"
+						//                   ],
+						//                   "type": "object"
+						//                 },
+						//                 "type": "array"
+						//               }
+						//             },
+						//             "required": [
+						//               "Expression",
+						//               "Variables"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "TypeName": {
+						//             "enum": [
+						//               "Measurement",
+						//               "Attribute",
+						//               "Transform",
+						//               "Metric"
+						//             ],
+						//             "type": "string"
+						//           }
+						//         },
+						//         "required": [
+						//           "TypeName"
+						//         ],
+						//         "type": "object"
+						//       },
+						//       "Unit": {
+						//         "description": "The unit of the asset model property, such as Newtons or RPM.",
+						//         "type": "string"
+						//       }
+						//     },
+						//     "required": [
+						//       "LogicalId",
+						//       "Name",
+						//       "DataType",
+						//       "Type"
+						//     ],
+						//     "type": "object"
+						//   },
+						//   "type": "array"
+						// }
 						Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
 						// Multiset.
 						Attributes: schema.ListNestedAttributes(
@@ -506,47 +500,41 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"data_type": {
 									// Property: DataType
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "STRING",
-									       "INTEGER",
-									       "DOUBLE",
-									       "BOOLEAN",
-									       "STRUCT"
-									     ],
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "enum": [
+									//     "STRING",
+									//     "INTEGER",
+									//     "DOUBLE",
+									//     "BOOLEAN",
+									//     "STRUCT"
+									//   ],
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"data_type_spec": {
 									// Property: DataTypeSpec
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "AWS/ALARM_STATE"
-									     ],
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "enum": [
+									//     "AWS/ALARM_STATE"
+									//   ],
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"logical_id": {
 									// Property: LogicalId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Customer provided ID for property.",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "Customer provided ID for property.",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "pattern": "",
+									//   "type": "string"
+									// }
 									Description: "Customer provided ID for property.",
 									Type:        types.StringType,
 									Required:    true,
@@ -554,12 +542,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"name": {
 									// Property: Name
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The name of the asset model property.",
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "The name of the asset model property.",
+									//   "type": "string"
+									// }
 									Description: "The name of the asset model property.",
 									Type:        types.StringType,
 									Required:    true,
@@ -567,197 +553,191 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"type": {
 									// Property: Type
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
-									     "properties": {
-									       "Attribute": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "DefaultValue": {
-									             "type": "string"
-									           }
-									         },
-									         "type": "object"
-									       },
-									       "Metric": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "Expression": {
-									             "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-									             "type": "string"
-									           },
-									           "Variables": {
-									             "description": "The list of variables used in the expression.",
-									             "insertionOrder": false,
-									             "items": {
-									               "additionalProperties": false,
-									               "properties": {
-									                 "Name": {
-									                   "description": "The friendly name of the variable to be used in the expression.",
-									                   "type": "string"
-									                 },
-									                 "Value": {
-									                   "additionalProperties": false,
-									                   "properties": {
-									                     "HierarchyLogicalId": {
-									                       "maxLength": 256,
-									                       "minLength": 1,
-									                       "pattern": "",
-									                       "type": "string"
-									                     },
-									                     "PropertyLogicalId": {
-									                       "maxLength": 256,
-									                       "minLength": 1,
-									                       "pattern": "",
-									                       "type": "string"
-									                     }
-									                   },
-									                   "required": [
-									                     "PropertyLogicalId"
-									                   ],
-									                   "type": "object"
-									                 }
-									               },
-									               "required": [
-									                 "Name",
-									                 "Value"
-									               ],
-									               "type": "object"
-									             },
-									             "type": "array"
-									           },
-									           "Window": {
-									             "additionalProperties": false,
-									             "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
-									             "properties": {
-									               "Tumbling": {
-									                 "additionalProperties": false,
-									                 "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-									                 "properties": {
-									                   "Interval": {
-									                     "description": "The time interval for the tumbling window.",
-									                     "type": "string"
-									                   },
-									                   "Offset": {
-									                     "description": "The shift or reference point on timeline for the contiguous time intervals.",
-									                     "type": "string"
-									                   }
-									                 },
-									                 "required": [
-									                   "Interval"
-									                 ],
-									                 "type": "object"
-									               }
-									             },
-									             "type": "object"
-									           }
-									         },
-									         "required": [
-									           "Expression",
-									           "Variables",
-									           "Window"
-									         ],
-									         "type": "object"
-									       },
-									       "Transform": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "Expression": {
-									             "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-									             "type": "string"
-									           },
-									           "Variables": {
-									             "description": "The list of variables used in the expression.",
-									             "insertionOrder": false,
-									             "items": {
-									               "additionalProperties": false,
-									               "properties": {
-									                 "Name": {
-									                   "description": "The friendly name of the variable to be used in the expression.",
-									                   "type": "string"
-									                 },
-									                 "Value": {
-									                   "additionalProperties": false,
-									                   "properties": {
-									                     "HierarchyLogicalId": {
-									                       "maxLength": 256,
-									                       "minLength": 1,
-									                       "pattern": "",
-									                       "type": "string"
-									                     },
-									                     "PropertyLogicalId": {
-									                       "maxLength": 256,
-									                       "minLength": 1,
-									                       "pattern": "",
-									                       "type": "string"
-									                     }
-									                   },
-									                   "required": [
-									                     "PropertyLogicalId"
-									                   ],
-									                   "type": "object"
-									                 }
-									               },
-									               "required": [
-									                 "Name",
-									                 "Value"
-									               ],
-									               "type": "object"
-									             },
-									             "type": "array"
-									           }
-									         },
-									         "required": [
-									           "Expression",
-									           "Variables"
-									         ],
-									         "type": "object"
-									       },
-									       "TypeName": {
-									         "enum": [
-									           "Measurement",
-									           "Attribute",
-									           "Transform",
-									           "Metric"
-									         ],
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "TypeName"
-									     ],
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "description": "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
+									//   "properties": {
+									//     "Attribute": {
+									//       "additionalProperties": false,
+									//       "properties": {
+									//         "DefaultValue": {
+									//           "type": "string"
+									//         }
+									//       },
+									//       "type": "object"
+									//     },
+									//     "Metric": {
+									//       "additionalProperties": false,
+									//       "properties": {
+									//         "Expression": {
+									//           "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+									//           "type": "string"
+									//         },
+									//         "Variables": {
+									//           "description": "The list of variables used in the expression.",
+									//           "insertionOrder": false,
+									//           "items": {
+									//             "additionalProperties": false,
+									//             "properties": {
+									//               "Name": {
+									//                 "description": "The friendly name of the variable to be used in the expression.",
+									//                 "type": "string"
+									//               },
+									//               "Value": {
+									//                 "additionalProperties": false,
+									//                 "properties": {
+									//                   "HierarchyLogicalId": {
+									//                     "maxLength": 256,
+									//                     "minLength": 1,
+									//                     "pattern": "",
+									//                     "type": "string"
+									//                   },
+									//                   "PropertyLogicalId": {
+									//                     "maxLength": 256,
+									//                     "minLength": 1,
+									//                     "pattern": "",
+									//                     "type": "string"
+									//                   }
+									//                 },
+									//                 "required": [
+									//                   "PropertyLogicalId"
+									//                 ],
+									//                 "type": "object"
+									//               }
+									//             },
+									//             "required": [
+									//               "Name",
+									//               "Value"
+									//             ],
+									//             "type": "object"
+									//           },
+									//           "type": "array"
+									//         },
+									//         "Window": {
+									//           "additionalProperties": false,
+									//           "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+									//           "properties": {
+									//             "Tumbling": {
+									//               "additionalProperties": false,
+									//               "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+									//               "properties": {
+									//                 "Interval": {
+									//                   "description": "The time interval for the tumbling window.",
+									//                   "type": "string"
+									//                 },
+									//                 "Offset": {
+									//                   "description": "The shift or reference point on timeline for the contiguous time intervals.",
+									//                   "type": "string"
+									//                 }
+									//               },
+									//               "required": [
+									//                 "Interval"
+									//               ],
+									//               "type": "object"
+									//             }
+									//           },
+									//           "type": "object"
+									//         }
+									//       },
+									//       "required": [
+									//         "Expression",
+									//         "Variables",
+									//         "Window"
+									//       ],
+									//       "type": "object"
+									//     },
+									//     "Transform": {
+									//       "additionalProperties": false,
+									//       "properties": {
+									//         "Expression": {
+									//           "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+									//           "type": "string"
+									//         },
+									//         "Variables": {
+									//           "description": "The list of variables used in the expression.",
+									//           "insertionOrder": false,
+									//           "items": {
+									//             "additionalProperties": false,
+									//             "properties": {
+									//               "Name": {
+									//                 "description": "The friendly name of the variable to be used in the expression.",
+									//                 "type": "string"
+									//               },
+									//               "Value": {
+									//                 "additionalProperties": false,
+									//                 "properties": {
+									//                   "HierarchyLogicalId": {
+									//                     "maxLength": 256,
+									//                     "minLength": 1,
+									//                     "pattern": "",
+									//                     "type": "string"
+									//                   },
+									//                   "PropertyLogicalId": {
+									//                     "maxLength": 256,
+									//                     "minLength": 1,
+									//                     "pattern": "",
+									//                     "type": "string"
+									//                   }
+									//                 },
+									//                 "required": [
+									//                   "PropertyLogicalId"
+									//                 ],
+									//                 "type": "object"
+									//               }
+									//             },
+									//             "required": [
+									//               "Name",
+									//               "Value"
+									//             ],
+									//             "type": "object"
+									//           },
+									//           "type": "array"
+									//         }
+									//       },
+									//       "required": [
+									//         "Expression",
+									//         "Variables"
+									//       ],
+									//       "type": "object"
+									//     },
+									//     "TypeName": {
+									//       "enum": [
+									//         "Measurement",
+									//         "Attribute",
+									//         "Transform",
+									//         "Metric"
+									//       ],
+									//       "type": "string"
+									//     }
+									//   },
+									//   "required": [
+									//     "TypeName"
+									//   ],
+									//   "type": "object"
+									// }
 									Description: "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"attribute": {
 												// Property: Attribute
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "DefaultValue": {
-												         "type": "string"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "additionalProperties": false,
+												//   "properties": {
+												//     "DefaultValue": {
+												//       "type": "string"
+												//     }
+												//   },
+												//   "type": "object"
+												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"default_value": {
 															// Property: DefaultValue
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "type": "string"
+															// }
 															Type:     types.StringType,
 															Optional: true,
 														},
@@ -768,99 +748,95 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"metric": {
 												// Property: Metric
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "Expression": {
-												         "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-												         "type": "string"
-												       },
-												       "Variables": {
-												         "description": "The list of variables used in the expression.",
-												         "insertionOrder": false,
-												         "items": {
-												           "additionalProperties": false,
-												           "properties": {
-												             "Name": {
-												               "description": "The friendly name of the variable to be used in the expression.",
-												               "type": "string"
-												             },
-												             "Value": {
-												               "additionalProperties": false,
-												               "properties": {
-												                 "HierarchyLogicalId": {
-												                   "maxLength": 256,
-												                   "minLength": 1,
-												                   "pattern": "",
-												                   "type": "string"
-												                 },
-												                 "PropertyLogicalId": {
-												                   "maxLength": 256,
-												                   "minLength": 1,
-												                   "pattern": "",
-												                   "type": "string"
-												                 }
-												               },
-												               "required": [
-												                 "PropertyLogicalId"
-												               ],
-												               "type": "object"
-												             }
-												           },
-												           "required": [
-												             "Name",
-												             "Value"
-												           ],
-												           "type": "object"
-												         },
-												         "type": "array"
-												       },
-												       "Window": {
-												         "additionalProperties": false,
-												         "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
-												         "properties": {
-												           "Tumbling": {
-												             "additionalProperties": false,
-												             "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-												             "properties": {
-												               "Interval": {
-												                 "description": "The time interval for the tumbling window.",
-												                 "type": "string"
-												               },
-												               "Offset": {
-												                 "description": "The shift or reference point on timeline for the contiguous time intervals.",
-												                 "type": "string"
-												               }
-												             },
-												             "required": [
-												               "Interval"
-												             ],
-												             "type": "object"
-												           }
-												         },
-												         "type": "object"
-												       }
-												     },
-												     "required": [
-												       "Expression",
-												       "Variables",
-												       "Window"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "additionalProperties": false,
+												//   "properties": {
+												//     "Expression": {
+												//       "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+												//       "type": "string"
+												//     },
+												//     "Variables": {
+												//       "description": "The list of variables used in the expression.",
+												//       "insertionOrder": false,
+												//       "items": {
+												//         "additionalProperties": false,
+												//         "properties": {
+												//           "Name": {
+												//             "description": "The friendly name of the variable to be used in the expression.",
+												//             "type": "string"
+												//           },
+												//           "Value": {
+												//             "additionalProperties": false,
+												//             "properties": {
+												//               "HierarchyLogicalId": {
+												//                 "maxLength": 256,
+												//                 "minLength": 1,
+												//                 "pattern": "",
+												//                 "type": "string"
+												//               },
+												//               "PropertyLogicalId": {
+												//                 "maxLength": 256,
+												//                 "minLength": 1,
+												//                 "pattern": "",
+												//                 "type": "string"
+												//               }
+												//             },
+												//             "required": [
+												//               "PropertyLogicalId"
+												//             ],
+												//             "type": "object"
+												//           }
+												//         },
+												//         "required": [
+												//           "Name",
+												//           "Value"
+												//         ],
+												//         "type": "object"
+												//       },
+												//       "type": "array"
+												//     },
+												//     "Window": {
+												//       "additionalProperties": false,
+												//       "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+												//       "properties": {
+												//         "Tumbling": {
+												//           "additionalProperties": false,
+												//           "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+												//           "properties": {
+												//             "Interval": {
+												//               "description": "The time interval for the tumbling window.",
+												//               "type": "string"
+												//             },
+												//             "Offset": {
+												//               "description": "The shift or reference point on timeline for the contiguous time intervals.",
+												//               "type": "string"
+												//             }
+												//           },
+												//           "required": [
+												//             "Interval"
+												//           ],
+												//           "type": "object"
+												//         }
+												//       },
+												//       "type": "object"
+												//     }
+												//   },
+												//   "required": [
+												//     "Expression",
+												//     "Variables",
+												//     "Window"
+												//   ],
+												//   "type": "object"
+												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"expression": {
 															// Property: Expression
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+															//   "type": "string"
+															// }
 															Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
 															Type:        types.StringType,
 															Required:    true,
@@ -868,48 +844,46 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"variables": {
 															// Property: Variables
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "The list of variables used in the expression.",
-															     "insertionOrder": false,
-															     "items": {
-															       "additionalProperties": false,
-															       "properties": {
-															         "Name": {
-															           "description": "The friendly name of the variable to be used in the expression.",
-															           "type": "string"
-															         },
-															         "Value": {
-															           "additionalProperties": false,
-															           "properties": {
-															             "HierarchyLogicalId": {
-															               "maxLength": 256,
-															               "minLength": 1,
-															               "pattern": "",
-															               "type": "string"
-															             },
-															             "PropertyLogicalId": {
-															               "maxLength": 256,
-															               "minLength": 1,
-															               "pattern": "",
-															               "type": "string"
-															             }
-															           },
-															           "required": [
-															             "PropertyLogicalId"
-															           ],
-															           "type": "object"
-															         }
-															       },
-															       "required": [
-															         "Name",
-															         "Value"
-															       ],
-															       "type": "object"
-															     },
-															     "type": "array"
-															   }
-															*/
+															// {
+															//   "description": "The list of variables used in the expression.",
+															//   "insertionOrder": false,
+															//   "items": {
+															//     "additionalProperties": false,
+															//     "properties": {
+															//       "Name": {
+															//         "description": "The friendly name of the variable to be used in the expression.",
+															//         "type": "string"
+															//       },
+															//       "Value": {
+															//         "additionalProperties": false,
+															//         "properties": {
+															//           "HierarchyLogicalId": {
+															//             "maxLength": 256,
+															//             "minLength": 1,
+															//             "pattern": "",
+															//             "type": "string"
+															//           },
+															//           "PropertyLogicalId": {
+															//             "maxLength": 256,
+															//             "minLength": 1,
+															//             "pattern": "",
+															//             "type": "string"
+															//           }
+															//         },
+															//         "required": [
+															//           "PropertyLogicalId"
+															//         ],
+															//         "type": "object"
+															//       }
+															//     },
+															//     "required": [
+															//       "Name",
+															//       "Value"
+															//     ],
+															//     "type": "object"
+															//   },
+															//   "type": "array"
+															// }
 															Description: "The list of variables used in the expression.",
 															// Multiset.
 															Attributes: schema.ListNestedAttributes(
@@ -917,12 +891,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	"name": {
 																		// Property: Name
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "description": "The friendly name of the variable to be used in the expression.",
-																		     "type": "string"
-																		   }
-																		*/
+																		// {
+																		//   "description": "The friendly name of the variable to be used in the expression.",
+																		//   "type": "string"
+																		// }
 																		Description: "The friendly name of the variable to be used in the expression.",
 																		Type:        types.StringType,
 																		Required:    true,
@@ -930,56 +902,50 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	"value": {
 																		// Property: Value
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "additionalProperties": false,
-																		     "properties": {
-																		       "HierarchyLogicalId": {
-																		         "maxLength": 256,
-																		         "minLength": 1,
-																		         "pattern": "",
-																		         "type": "string"
-																		       },
-																		       "PropertyLogicalId": {
-																		         "maxLength": 256,
-																		         "minLength": 1,
-																		         "pattern": "",
-																		         "type": "string"
-																		       }
-																		     },
-																		     "required": [
-																		       "PropertyLogicalId"
-																		     ],
-																		     "type": "object"
-																		   }
-																		*/
+																		// {
+																		//   "additionalProperties": false,
+																		//   "properties": {
+																		//     "HierarchyLogicalId": {
+																		//       "maxLength": 256,
+																		//       "minLength": 1,
+																		//       "pattern": "",
+																		//       "type": "string"
+																		//     },
+																		//     "PropertyLogicalId": {
+																		//       "maxLength": 256,
+																		//       "minLength": 1,
+																		//       "pattern": "",
+																		//       "type": "string"
+																		//     }
+																		//   },
+																		//   "required": [
+																		//     "PropertyLogicalId"
+																		//   ],
+																		//   "type": "object"
+																		// }
 																		Attributes: schema.SingleNestedAttributes(
 																			map[string]schema.Attribute{
 																				"hierarchy_logical_id": {
 																					// Property: HierarchyLogicalId
 																					// CloudFormation resource type schema:
-																					/*
-																					   {
-																					     "maxLength": 256,
-																					     "minLength": 1,
-																					     "pattern": "",
-																					     "type": "string"
-																					   }
-																					*/
+																					// {
+																					//   "maxLength": 256,
+																					//   "minLength": 1,
+																					//   "pattern": "",
+																					//   "type": "string"
+																					// }
 																					Type:     types.StringType,
 																					Optional: true,
 																				},
 																				"property_logical_id": {
 																					// Property: PropertyLogicalId
 																					// CloudFormation resource type schema:
-																					/*
-																					   {
-																					     "maxLength": 256,
-																					     "minLength": 1,
-																					     "pattern": "",
-																					     "type": "string"
-																					   }
-																					*/
+																					// {
+																					//   "maxLength": 256,
+																					//   "minLength": 1,
+																					//   "pattern": "",
+																					//   "type": "string"
+																					// }
 																					Type:     types.StringType,
 																					Required: true,
 																				},
@@ -995,71 +961,65 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"window": {
 															// Property: Window
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "additionalProperties": false,
-															     "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
-															     "properties": {
-															       "Tumbling": {
-															         "additionalProperties": false,
-															         "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-															         "properties": {
-															           "Interval": {
-															             "description": "The time interval for the tumbling window.",
-															             "type": "string"
-															           },
-															           "Offset": {
-															             "description": "The shift or reference point on timeline for the contiguous time intervals.",
-															             "type": "string"
-															           }
-															         },
-															         "required": [
-															           "Interval"
-															         ],
-															         "type": "object"
-															       }
-															     },
-															     "type": "object"
-															   }
-															*/
+															// {
+															//   "additionalProperties": false,
+															//   "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+															//   "properties": {
+															//     "Tumbling": {
+															//       "additionalProperties": false,
+															//       "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+															//       "properties": {
+															//         "Interval": {
+															//           "description": "The time interval for the tumbling window.",
+															//           "type": "string"
+															//         },
+															//         "Offset": {
+															//           "description": "The shift or reference point on timeline for the contiguous time intervals.",
+															//           "type": "string"
+															//         }
+															//       },
+															//       "required": [
+															//         "Interval"
+															//       ],
+															//       "type": "object"
+															//     }
+															//   },
+															//   "type": "object"
+															// }
 															Description: "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"tumbling": {
 																		// Property: Tumbling
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "additionalProperties": false,
-																		     "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-																		     "properties": {
-																		       "Interval": {
-																		         "description": "The time interval for the tumbling window.",
-																		         "type": "string"
-																		       },
-																		       "Offset": {
-																		         "description": "The shift or reference point on timeline for the contiguous time intervals.",
-																		         "type": "string"
-																		       }
-																		     },
-																		     "required": [
-																		       "Interval"
-																		     ],
-																		     "type": "object"
-																		   }
-																		*/
+																		// {
+																		//   "additionalProperties": false,
+																		//   "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+																		//   "properties": {
+																		//     "Interval": {
+																		//       "description": "The time interval for the tumbling window.",
+																		//       "type": "string"
+																		//     },
+																		//     "Offset": {
+																		//       "description": "The shift or reference point on timeline for the contiguous time intervals.",
+																		//       "type": "string"
+																		//     }
+																		//   },
+																		//   "required": [
+																		//     "Interval"
+																		//   ],
+																		//   "type": "object"
+																		// }
 																		Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
 																		Attributes: schema.SingleNestedAttributes(
 																			map[string]schema.Attribute{
 																				"interval": {
 																					// Property: Interval
 																					// CloudFormation resource type schema:
-																					/*
-																					   {
-																					     "description": "The time interval for the tumbling window.",
-																					     "type": "string"
-																					   }
-																					*/
+																					// {
+																					//   "description": "The time interval for the tumbling window.",
+																					//   "type": "string"
+																					// }
 																					Description: "The time interval for the tumbling window.",
 																					Type:        types.StringType,
 																					Required:    true,
@@ -1067,12 +1027,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																				"offset": {
 																					// Property: Offset
 																					// CloudFormation resource type schema:
-																					/*
-																					   {
-																					     "description": "The shift or reference point on timeline for the contiguous time intervals.",
-																					     "type": "string"
-																					   }
-																					*/
+																					// {
+																					//   "description": "The shift or reference point on timeline for the contiguous time intervals.",
+																					//   "type": "string"
+																					// }
 																					Description: "The shift or reference point on timeline for the contiguous time intervals.",
 																					Type:        types.StringType,
 																					Optional:    true,
@@ -1092,73 +1050,69 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"transform": {
 												// Property: Transform
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "Expression": {
-												         "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-												         "type": "string"
-												       },
-												       "Variables": {
-												         "description": "The list of variables used in the expression.",
-												         "insertionOrder": false,
-												         "items": {
-												           "additionalProperties": false,
-												           "properties": {
-												             "Name": {
-												               "description": "The friendly name of the variable to be used in the expression.",
-												               "type": "string"
-												             },
-												             "Value": {
-												               "additionalProperties": false,
-												               "properties": {
-												                 "HierarchyLogicalId": {
-												                   "maxLength": 256,
-												                   "minLength": 1,
-												                   "pattern": "",
-												                   "type": "string"
-												                 },
-												                 "PropertyLogicalId": {
-												                   "maxLength": 256,
-												                   "minLength": 1,
-												                   "pattern": "",
-												                   "type": "string"
-												                 }
-												               },
-												               "required": [
-												                 "PropertyLogicalId"
-												               ],
-												               "type": "object"
-												             }
-												           },
-												           "required": [
-												             "Name",
-												             "Value"
-												           ],
-												           "type": "object"
-												         },
-												         "type": "array"
-												       }
-												     },
-												     "required": [
-												       "Expression",
-												       "Variables"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "additionalProperties": false,
+												//   "properties": {
+												//     "Expression": {
+												//       "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+												//       "type": "string"
+												//     },
+												//     "Variables": {
+												//       "description": "The list of variables used in the expression.",
+												//       "insertionOrder": false,
+												//       "items": {
+												//         "additionalProperties": false,
+												//         "properties": {
+												//           "Name": {
+												//             "description": "The friendly name of the variable to be used in the expression.",
+												//             "type": "string"
+												//           },
+												//           "Value": {
+												//             "additionalProperties": false,
+												//             "properties": {
+												//               "HierarchyLogicalId": {
+												//                 "maxLength": 256,
+												//                 "minLength": 1,
+												//                 "pattern": "",
+												//                 "type": "string"
+												//               },
+												//               "PropertyLogicalId": {
+												//                 "maxLength": 256,
+												//                 "minLength": 1,
+												//                 "pattern": "",
+												//                 "type": "string"
+												//               }
+												//             },
+												//             "required": [
+												//               "PropertyLogicalId"
+												//             ],
+												//             "type": "object"
+												//           }
+												//         },
+												//         "required": [
+												//           "Name",
+												//           "Value"
+												//         ],
+												//         "type": "object"
+												//       },
+												//       "type": "array"
+												//     }
+												//   },
+												//   "required": [
+												//     "Expression",
+												//     "Variables"
+												//   ],
+												//   "type": "object"
+												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"expression": {
 															// Property: Expression
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+															//   "type": "string"
+															// }
 															Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
 															Type:        types.StringType,
 															Required:    true,
@@ -1166,48 +1120,46 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"variables": {
 															// Property: Variables
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "The list of variables used in the expression.",
-															     "insertionOrder": false,
-															     "items": {
-															       "additionalProperties": false,
-															       "properties": {
-															         "Name": {
-															           "description": "The friendly name of the variable to be used in the expression.",
-															           "type": "string"
-															         },
-															         "Value": {
-															           "additionalProperties": false,
-															           "properties": {
-															             "HierarchyLogicalId": {
-															               "maxLength": 256,
-															               "minLength": 1,
-															               "pattern": "",
-															               "type": "string"
-															             },
-															             "PropertyLogicalId": {
-															               "maxLength": 256,
-															               "minLength": 1,
-															               "pattern": "",
-															               "type": "string"
-															             }
-															           },
-															           "required": [
-															             "PropertyLogicalId"
-															           ],
-															           "type": "object"
-															         }
-															       },
-															       "required": [
-															         "Name",
-															         "Value"
-															       ],
-															       "type": "object"
-															     },
-															     "type": "array"
-															   }
-															*/
+															// {
+															//   "description": "The list of variables used in the expression.",
+															//   "insertionOrder": false,
+															//   "items": {
+															//     "additionalProperties": false,
+															//     "properties": {
+															//       "Name": {
+															//         "description": "The friendly name of the variable to be used in the expression.",
+															//         "type": "string"
+															//       },
+															//       "Value": {
+															//         "additionalProperties": false,
+															//         "properties": {
+															//           "HierarchyLogicalId": {
+															//             "maxLength": 256,
+															//             "minLength": 1,
+															//             "pattern": "",
+															//             "type": "string"
+															//           },
+															//           "PropertyLogicalId": {
+															//             "maxLength": 256,
+															//             "minLength": 1,
+															//             "pattern": "",
+															//             "type": "string"
+															//           }
+															//         },
+															//         "required": [
+															//           "PropertyLogicalId"
+															//         ],
+															//         "type": "object"
+															//       }
+															//     },
+															//     "required": [
+															//       "Name",
+															//       "Value"
+															//     ],
+															//     "type": "object"
+															//   },
+															//   "type": "array"
+															// }
 															Description: "The list of variables used in the expression.",
 															// Multiset.
 															Attributes: schema.ListNestedAttributes(
@@ -1215,12 +1167,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	"name": {
 																		// Property: Name
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "description": "The friendly name of the variable to be used in the expression.",
-																		     "type": "string"
-																		   }
-																		*/
+																		// {
+																		//   "description": "The friendly name of the variable to be used in the expression.",
+																		//   "type": "string"
+																		// }
 																		Description: "The friendly name of the variable to be used in the expression.",
 																		Type:        types.StringType,
 																		Required:    true,
@@ -1228,56 +1178,50 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	"value": {
 																		// Property: Value
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "additionalProperties": false,
-																		     "properties": {
-																		       "HierarchyLogicalId": {
-																		         "maxLength": 256,
-																		         "minLength": 1,
-																		         "pattern": "",
-																		         "type": "string"
-																		       },
-																		       "PropertyLogicalId": {
-																		         "maxLength": 256,
-																		         "minLength": 1,
-																		         "pattern": "",
-																		         "type": "string"
-																		       }
-																		     },
-																		     "required": [
-																		       "PropertyLogicalId"
-																		     ],
-																		     "type": "object"
-																		   }
-																		*/
+																		// {
+																		//   "additionalProperties": false,
+																		//   "properties": {
+																		//     "HierarchyLogicalId": {
+																		//       "maxLength": 256,
+																		//       "minLength": 1,
+																		//       "pattern": "",
+																		//       "type": "string"
+																		//     },
+																		//     "PropertyLogicalId": {
+																		//       "maxLength": 256,
+																		//       "minLength": 1,
+																		//       "pattern": "",
+																		//       "type": "string"
+																		//     }
+																		//   },
+																		//   "required": [
+																		//     "PropertyLogicalId"
+																		//   ],
+																		//   "type": "object"
+																		// }
 																		Attributes: schema.SingleNestedAttributes(
 																			map[string]schema.Attribute{
 																				"hierarchy_logical_id": {
 																					// Property: HierarchyLogicalId
 																					// CloudFormation resource type schema:
-																					/*
-																					   {
-																					     "maxLength": 256,
-																					     "minLength": 1,
-																					     "pattern": "",
-																					     "type": "string"
-																					   }
-																					*/
+																					// {
+																					//   "maxLength": 256,
+																					//   "minLength": 1,
+																					//   "pattern": "",
+																					//   "type": "string"
+																					// }
 																					Type:     types.StringType,
 																					Optional: true,
 																				},
 																				"property_logical_id": {
 																					// Property: PropertyLogicalId
 																					// CloudFormation resource type schema:
-																					/*
-																					   {
-																					     "maxLength": 256,
-																					     "minLength": 1,
-																					     "pattern": "",
-																					     "type": "string"
-																					   }
-																					*/
+																					// {
+																					//   "maxLength": 256,
+																					//   "minLength": 1,
+																					//   "pattern": "",
+																					//   "type": "string"
+																					// }
 																					Type:     types.StringType,
 																					Required: true,
 																				},
@@ -1297,17 +1241,15 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"type_name": {
 												// Property: TypeName
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "enum": [
-												       "Measurement",
-												       "Attribute",
-												       "Transform",
-												       "Metric"
-												     ],
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "enum": [
+												//     "Measurement",
+												//     "Attribute",
+												//     "Transform",
+												//     "Metric"
+												//   ],
+												//   "type": "string"
+												// }
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1318,12 +1260,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"unit": {
 									// Property: Unit
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The unit of the asset model property, such as Newtons or RPM.",
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "The unit of the asset model property, such as Newtons or RPM.",
+									//   "type": "string"
+									// }
 									Description: "The unit of the asset model property, such as Newtons or RPM.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -1336,12 +1276,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"description": {
 						// Property: Description
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A description for the asset composite model.",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "A description for the asset composite model.",
+						//   "type": "string"
+						// }
 						Description: "A description for the asset composite model.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -1349,12 +1287,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"name": {
 						// Property: Name
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A unique, friendly name for the asset composite model.",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "A unique, friendly name for the asset composite model.",
+						//   "type": "string"
+						// }
 						Description: "A unique, friendly name for the asset composite model.",
 						Type:        types.StringType,
 						Required:    true,
@@ -1362,12 +1298,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"type": {
 						// Property: Type
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
+						//   "type": "string"
+						// }
 						Description: "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
 						Type:        types.StringType,
 						Required:    true,
@@ -1380,12 +1314,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"asset_model_description": {
 			// Property: AssetModelDescription
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A description for the asset model.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A description for the asset model.",
+			//   "type": "string"
+			// }
 			Description: "A description for the asset model.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -1393,40 +1325,38 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"asset_model_hierarchies": {
 			// Property: AssetModelHierarchies
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "Contains information about an asset model hierarchy.",
-			       "properties": {
-			         "ChildAssetModelId": {
-			           "description": "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
-			           "type": "string"
-			         },
-			         "LogicalId": {
-			           "description": "Customer provided ID for hierarchy.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Name": {
-			           "description": "The name of the asset model hierarchy.",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "LogicalId",
-			         "Name",
-			         "ChildAssetModelId"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "Contains information about an asset model hierarchy.",
+			//     "properties": {
+			//       "ChildAssetModelId": {
+			//         "description": "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
+			//         "type": "string"
+			//       },
+			//       "LogicalId": {
+			//         "description": "Customer provided ID for hierarchy.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Name": {
+			//         "description": "The name of the asset model hierarchy.",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "LogicalId",
+			//       "Name",
+			//       "ChildAssetModelId"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
@@ -1434,12 +1364,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"child_asset_model_id": {
 						// Property: ChildAssetModelId
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
+						//   "type": "string"
+						// }
 						Description: "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
 						Type:        types.StringType,
 						Required:    true,
@@ -1447,15 +1375,13 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"logical_id": {
 						// Property: LogicalId
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Customer provided ID for hierarchy.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "Customer provided ID for hierarchy.",
+						//   "maxLength": 256,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "Customer provided ID for hierarchy.",
 						Type:        types.StringType,
 						Required:    true,
@@ -1463,12 +1389,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"name": {
 						// Property: Name
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The name of the asset model hierarchy.",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The name of the asset model hierarchy.",
+						//   "type": "string"
+						// }
 						Description: "The name of the asset model hierarchy.",
 						Type:        types.StringType,
 						Required:    true,
@@ -1481,12 +1405,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"asset_model_id": {
 			// Property: AssetModelId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the asset model.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the asset model.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the asset model.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1494,12 +1416,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"asset_model_name": {
 			// Property: AssetModelName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A unique, friendly name for the asset model.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A unique, friendly name for the asset model.",
+			//   "type": "string"
+			// }
 			Description: "A unique, friendly name for the asset model.",
 			Type:        types.StringType,
 			Required:    true,
@@ -1507,219 +1427,217 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"asset_model_properties": {
 			// Property: AssetModelProperties
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "Contains information about an asset model property.",
-			       "properties": {
-			         "DataType": {
-			           "enum": [
-			             "STRING",
-			             "INTEGER",
-			             "DOUBLE",
-			             "BOOLEAN",
-			             "STRUCT"
-			           ],
-			           "type": "string"
-			         },
-			         "DataTypeSpec": {
-			           "enum": [
-			             "AWS/ALARM_STATE"
-			           ],
-			           "type": "string"
-			         },
-			         "LogicalId": {
-			           "description": "Customer provided ID for property.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Name": {
-			           "description": "The name of the asset model property.",
-			           "type": "string"
-			         },
-			         "Type": {
-			           "additionalProperties": false,
-			           "description": "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
-			           "properties": {
-			             "Attribute": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "DefaultValue": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "Metric": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "Expression": {
-			                   "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-			                   "type": "string"
-			                 },
-			                 "Variables": {
-			                   "description": "The list of variables used in the expression.",
-			                   "insertionOrder": false,
-			                   "items": {
-			                     "additionalProperties": false,
-			                     "properties": {
-			                       "Name": {
-			                         "description": "The friendly name of the variable to be used in the expression.",
-			                         "type": "string"
-			                       },
-			                       "Value": {
-			                         "additionalProperties": false,
-			                         "properties": {
-			                           "HierarchyLogicalId": {
-			                             "maxLength": 256,
-			                             "minLength": 1,
-			                             "pattern": "",
-			                             "type": "string"
-			                           },
-			                           "PropertyLogicalId": {
-			                             "maxLength": 256,
-			                             "minLength": 1,
-			                             "pattern": "",
-			                             "type": "string"
-			                           }
-			                         },
-			                         "required": [
-			                           "PropertyLogicalId"
-			                         ],
-			                         "type": "object"
-			                       }
-			                     },
-			                     "required": [
-			                       "Name",
-			                       "Value"
-			                     ],
-			                     "type": "object"
-			                   },
-			                   "type": "array"
-			                 },
-			                 "Window": {
-			                   "additionalProperties": false,
-			                   "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
-			                   "properties": {
-			                     "Tumbling": {
-			                       "additionalProperties": false,
-			                       "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-			                       "properties": {
-			                         "Interval": {
-			                           "description": "The time interval for the tumbling window.",
-			                           "type": "string"
-			                         },
-			                         "Offset": {
-			                           "description": "The shift or reference point on timeline for the contiguous time intervals.",
-			                           "type": "string"
-			                         }
-			                       },
-			                       "required": [
-			                         "Interval"
-			                       ],
-			                       "type": "object"
-			                     }
-			                   },
-			                   "type": "object"
-			                 }
-			               },
-			               "required": [
-			                 "Expression",
-			                 "Variables",
-			                 "Window"
-			               ],
-			               "type": "object"
-			             },
-			             "Transform": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "Expression": {
-			                   "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-			                   "type": "string"
-			                 },
-			                 "Variables": {
-			                   "description": "The list of variables used in the expression.",
-			                   "insertionOrder": false,
-			                   "items": {
-			                     "additionalProperties": false,
-			                     "properties": {
-			                       "Name": {
-			                         "description": "The friendly name of the variable to be used in the expression.",
-			                         "type": "string"
-			                       },
-			                       "Value": {
-			                         "additionalProperties": false,
-			                         "properties": {
-			                           "HierarchyLogicalId": {
-			                             "maxLength": 256,
-			                             "minLength": 1,
-			                             "pattern": "",
-			                             "type": "string"
-			                           },
-			                           "PropertyLogicalId": {
-			                             "maxLength": 256,
-			                             "minLength": 1,
-			                             "pattern": "",
-			                             "type": "string"
-			                           }
-			                         },
-			                         "required": [
-			                           "PropertyLogicalId"
-			                         ],
-			                         "type": "object"
-			                       }
-			                     },
-			                     "required": [
-			                       "Name",
-			                       "Value"
-			                     ],
-			                     "type": "object"
-			                   },
-			                   "type": "array"
-			                 }
-			               },
-			               "required": [
-			                 "Expression",
-			                 "Variables"
-			               ],
-			               "type": "object"
-			             },
-			             "TypeName": {
-			               "enum": [
-			                 "Measurement",
-			                 "Attribute",
-			                 "Transform",
-			                 "Metric"
-			               ],
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "TypeName"
-			           ],
-			           "type": "object"
-			         },
-			         "Unit": {
-			           "description": "The unit of the asset model property, such as Newtons or RPM.",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "LogicalId",
-			         "Name",
-			         "DataType",
-			         "Type"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "Contains information about an asset model property.",
+			//     "properties": {
+			//       "DataType": {
+			//         "enum": [
+			//           "STRING",
+			//           "INTEGER",
+			//           "DOUBLE",
+			//           "BOOLEAN",
+			//           "STRUCT"
+			//         ],
+			//         "type": "string"
+			//       },
+			//       "DataTypeSpec": {
+			//         "enum": [
+			//           "AWS/ALARM_STATE"
+			//         ],
+			//         "type": "string"
+			//       },
+			//       "LogicalId": {
+			//         "description": "Customer provided ID for property.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Name": {
+			//         "description": "The name of the asset model property.",
+			//         "type": "string"
+			//       },
+			//       "Type": {
+			//         "additionalProperties": false,
+			//         "description": "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
+			//         "properties": {
+			//           "Attribute": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "DefaultValue": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "Metric": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "Expression": {
+			//                 "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+			//                 "type": "string"
+			//               },
+			//               "Variables": {
+			//                 "description": "The list of variables used in the expression.",
+			//                 "insertionOrder": false,
+			//                 "items": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Name": {
+			//                       "description": "The friendly name of the variable to be used in the expression.",
+			//                       "type": "string"
+			//                     },
+			//                     "Value": {
+			//                       "additionalProperties": false,
+			//                       "properties": {
+			//                         "HierarchyLogicalId": {
+			//                           "maxLength": 256,
+			//                           "minLength": 1,
+			//                           "pattern": "",
+			//                           "type": "string"
+			//                         },
+			//                         "PropertyLogicalId": {
+			//                           "maxLength": 256,
+			//                           "minLength": 1,
+			//                           "pattern": "",
+			//                           "type": "string"
+			//                         }
+			//                       },
+			//                       "required": [
+			//                         "PropertyLogicalId"
+			//                       ],
+			//                       "type": "object"
+			//                     }
+			//                   },
+			//                   "required": [
+			//                     "Name",
+			//                     "Value"
+			//                   ],
+			//                   "type": "object"
+			//                 },
+			//                 "type": "array"
+			//               },
+			//               "Window": {
+			//                 "additionalProperties": false,
+			//                 "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+			//                 "properties": {
+			//                   "Tumbling": {
+			//                     "additionalProperties": false,
+			//                     "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+			//                     "properties": {
+			//                       "Interval": {
+			//                         "description": "The time interval for the tumbling window.",
+			//                         "type": "string"
+			//                       },
+			//                       "Offset": {
+			//                         "description": "The shift or reference point on timeline for the contiguous time intervals.",
+			//                         "type": "string"
+			//                       }
+			//                     },
+			//                     "required": [
+			//                       "Interval"
+			//                     ],
+			//                     "type": "object"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               }
+			//             },
+			//             "required": [
+			//               "Expression",
+			//               "Variables",
+			//               "Window"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "Transform": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "Expression": {
+			//                 "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+			//                 "type": "string"
+			//               },
+			//               "Variables": {
+			//                 "description": "The list of variables used in the expression.",
+			//                 "insertionOrder": false,
+			//                 "items": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Name": {
+			//                       "description": "The friendly name of the variable to be used in the expression.",
+			//                       "type": "string"
+			//                     },
+			//                     "Value": {
+			//                       "additionalProperties": false,
+			//                       "properties": {
+			//                         "HierarchyLogicalId": {
+			//                           "maxLength": 256,
+			//                           "minLength": 1,
+			//                           "pattern": "",
+			//                           "type": "string"
+			//                         },
+			//                         "PropertyLogicalId": {
+			//                           "maxLength": 256,
+			//                           "minLength": 1,
+			//                           "pattern": "",
+			//                           "type": "string"
+			//                         }
+			//                       },
+			//                       "required": [
+			//                         "PropertyLogicalId"
+			//                       ],
+			//                       "type": "object"
+			//                     }
+			//                   },
+			//                   "required": [
+			//                     "Name",
+			//                     "Value"
+			//                   ],
+			//                   "type": "object"
+			//                 },
+			//                 "type": "array"
+			//               }
+			//             },
+			//             "required": [
+			//               "Expression",
+			//               "Variables"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "TypeName": {
+			//             "enum": [
+			//               "Measurement",
+			//               "Attribute",
+			//               "Transform",
+			//               "Metric"
+			//             ],
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "TypeName"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "Unit": {
+			//         "description": "The unit of the asset model property, such as Newtons or RPM.",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "LogicalId",
+			//       "Name",
+			//       "DataType",
+			//       "Type"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
@@ -1727,47 +1645,41 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"data_type": {
 						// Property: DataType
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "STRING",
-						       "INTEGER",
-						       "DOUBLE",
-						       "BOOLEAN",
-						       "STRUCT"
-						     ],
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "enum": [
+						//     "STRING",
+						//     "INTEGER",
+						//     "DOUBLE",
+						//     "BOOLEAN",
+						//     "STRUCT"
+						//   ],
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"data_type_spec": {
 						// Property: DataTypeSpec
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "AWS/ALARM_STATE"
-						     ],
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "enum": [
+						//     "AWS/ALARM_STATE"
+						//   ],
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"logical_id": {
 						// Property: LogicalId
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Customer provided ID for property.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "Customer provided ID for property.",
+						//   "maxLength": 256,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "Customer provided ID for property.",
 						Type:        types.StringType,
 						Required:    true,
@@ -1775,12 +1687,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"name": {
 						// Property: Name
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The name of the asset model property.",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The name of the asset model property.",
+						//   "type": "string"
+						// }
 						Description: "The name of the asset model property.",
 						Type:        types.StringType,
 						Required:    true,
@@ -1788,197 +1698,191 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"type": {
 						// Property: Type
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
-						     "properties": {
-						       "Attribute": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "DefaultValue": {
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "Metric": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Expression": {
-						             "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-						             "type": "string"
-						           },
-						           "Variables": {
-						             "description": "The list of variables used in the expression.",
-						             "insertionOrder": false,
-						             "items": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "Name": {
-						                   "description": "The friendly name of the variable to be used in the expression.",
-						                   "type": "string"
-						                 },
-						                 "Value": {
-						                   "additionalProperties": false,
-						                   "properties": {
-						                     "HierarchyLogicalId": {
-						                       "maxLength": 256,
-						                       "minLength": 1,
-						                       "pattern": "",
-						                       "type": "string"
-						                     },
-						                     "PropertyLogicalId": {
-						                       "maxLength": 256,
-						                       "minLength": 1,
-						                       "pattern": "",
-						                       "type": "string"
-						                     }
-						                   },
-						                   "required": [
-						                     "PropertyLogicalId"
-						                   ],
-						                   "type": "object"
-						                 }
-						               },
-						               "required": [
-						                 "Name",
-						                 "Value"
-						               ],
-						               "type": "object"
-						             },
-						             "type": "array"
-						           },
-						           "Window": {
-						             "additionalProperties": false,
-						             "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
-						             "properties": {
-						               "Tumbling": {
-						                 "additionalProperties": false,
-						                 "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-						                 "properties": {
-						                   "Interval": {
-						                     "description": "The time interval for the tumbling window.",
-						                     "type": "string"
-						                   },
-						                   "Offset": {
-						                     "description": "The shift or reference point on timeline for the contiguous time intervals.",
-						                     "type": "string"
-						                   }
-						                 },
-						                 "required": [
-						                   "Interval"
-						                 ],
-						                 "type": "object"
-						               }
-						             },
-						             "type": "object"
-						           }
-						         },
-						         "required": [
-						           "Expression",
-						           "Variables",
-						           "Window"
-						         ],
-						         "type": "object"
-						       },
-						       "Transform": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Expression": {
-						             "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-						             "type": "string"
-						           },
-						           "Variables": {
-						             "description": "The list of variables used in the expression.",
-						             "insertionOrder": false,
-						             "items": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "Name": {
-						                   "description": "The friendly name of the variable to be used in the expression.",
-						                   "type": "string"
-						                 },
-						                 "Value": {
-						                   "additionalProperties": false,
-						                   "properties": {
-						                     "HierarchyLogicalId": {
-						                       "maxLength": 256,
-						                       "minLength": 1,
-						                       "pattern": "",
-						                       "type": "string"
-						                     },
-						                     "PropertyLogicalId": {
-						                       "maxLength": 256,
-						                       "minLength": 1,
-						                       "pattern": "",
-						                       "type": "string"
-						                     }
-						                   },
-						                   "required": [
-						                     "PropertyLogicalId"
-						                   ],
-						                   "type": "object"
-						                 }
-						               },
-						               "required": [
-						                 "Name",
-						                 "Value"
-						               ],
-						               "type": "object"
-						             },
-						             "type": "array"
-						           }
-						         },
-						         "required": [
-						           "Expression",
-						           "Variables"
-						         ],
-						         "type": "object"
-						       },
-						       "TypeName": {
-						         "enum": [
-						           "Measurement",
-						           "Attribute",
-						           "Transform",
-						           "Metric"
-						         ],
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "TypeName"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "description": "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
+						//   "properties": {
+						//     "Attribute": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "DefaultValue": {
+						//           "type": "string"
+						//         }
+						//       },
+						//       "type": "object"
+						//     },
+						//     "Metric": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "Expression": {
+						//           "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+						//           "type": "string"
+						//         },
+						//         "Variables": {
+						//           "description": "The list of variables used in the expression.",
+						//           "insertionOrder": false,
+						//           "items": {
+						//             "additionalProperties": false,
+						//             "properties": {
+						//               "Name": {
+						//                 "description": "The friendly name of the variable to be used in the expression.",
+						//                 "type": "string"
+						//               },
+						//               "Value": {
+						//                 "additionalProperties": false,
+						//                 "properties": {
+						//                   "HierarchyLogicalId": {
+						//                     "maxLength": 256,
+						//                     "minLength": 1,
+						//                     "pattern": "",
+						//                     "type": "string"
+						//                   },
+						//                   "PropertyLogicalId": {
+						//                     "maxLength": 256,
+						//                     "minLength": 1,
+						//                     "pattern": "",
+						//                     "type": "string"
+						//                   }
+						//                 },
+						//                 "required": [
+						//                   "PropertyLogicalId"
+						//                 ],
+						//                 "type": "object"
+						//               }
+						//             },
+						//             "required": [
+						//               "Name",
+						//               "Value"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "type": "array"
+						//         },
+						//         "Window": {
+						//           "additionalProperties": false,
+						//           "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+						//           "properties": {
+						//             "Tumbling": {
+						//               "additionalProperties": false,
+						//               "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+						//               "properties": {
+						//                 "Interval": {
+						//                   "description": "The time interval for the tumbling window.",
+						//                   "type": "string"
+						//                 },
+						//                 "Offset": {
+						//                   "description": "The shift or reference point on timeline for the contiguous time intervals.",
+						//                   "type": "string"
+						//                 }
+						//               },
+						//               "required": [
+						//                 "Interval"
+						//               ],
+						//               "type": "object"
+						//             }
+						//           },
+						//           "type": "object"
+						//         }
+						//       },
+						//       "required": [
+						//         "Expression",
+						//         "Variables",
+						//         "Window"
+						//       ],
+						//       "type": "object"
+						//     },
+						//     "Transform": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "Expression": {
+						//           "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+						//           "type": "string"
+						//         },
+						//         "Variables": {
+						//           "description": "The list of variables used in the expression.",
+						//           "insertionOrder": false,
+						//           "items": {
+						//             "additionalProperties": false,
+						//             "properties": {
+						//               "Name": {
+						//                 "description": "The friendly name of the variable to be used in the expression.",
+						//                 "type": "string"
+						//               },
+						//               "Value": {
+						//                 "additionalProperties": false,
+						//                 "properties": {
+						//                   "HierarchyLogicalId": {
+						//                     "maxLength": 256,
+						//                     "minLength": 1,
+						//                     "pattern": "",
+						//                     "type": "string"
+						//                   },
+						//                   "PropertyLogicalId": {
+						//                     "maxLength": 256,
+						//                     "minLength": 1,
+						//                     "pattern": "",
+						//                     "type": "string"
+						//                   }
+						//                 },
+						//                 "required": [
+						//                   "PropertyLogicalId"
+						//                 ],
+						//                 "type": "object"
+						//               }
+						//             },
+						//             "required": [
+						//               "Name",
+						//               "Value"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "type": "array"
+						//         }
+						//       },
+						//       "required": [
+						//         "Expression",
+						//         "Variables"
+						//       ],
+						//       "type": "object"
+						//     },
+						//     "TypeName": {
+						//       "enum": [
+						//         "Measurement",
+						//         "Attribute",
+						//         "Transform",
+						//         "Metric"
+						//       ],
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "TypeName"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"attribute": {
 									// Property: Attribute
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "DefaultValue": {
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "DefaultValue": {
+									//       "type": "string"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"default_value": {
 												// Property: DefaultValue
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "type": "string"
+												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -1989,99 +1893,95 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"metric": {
 									// Property: Metric
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Expression": {
-									         "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-									         "type": "string"
-									       },
-									       "Variables": {
-									         "description": "The list of variables used in the expression.",
-									         "insertionOrder": false,
-									         "items": {
-									           "additionalProperties": false,
-									           "properties": {
-									             "Name": {
-									               "description": "The friendly name of the variable to be used in the expression.",
-									               "type": "string"
-									             },
-									             "Value": {
-									               "additionalProperties": false,
-									               "properties": {
-									                 "HierarchyLogicalId": {
-									                   "maxLength": 256,
-									                   "minLength": 1,
-									                   "pattern": "",
-									                   "type": "string"
-									                 },
-									                 "PropertyLogicalId": {
-									                   "maxLength": 256,
-									                   "minLength": 1,
-									                   "pattern": "",
-									                   "type": "string"
-									                 }
-									               },
-									               "required": [
-									                 "PropertyLogicalId"
-									               ],
-									               "type": "object"
-									             }
-									           },
-									           "required": [
-									             "Name",
-									             "Value"
-									           ],
-									           "type": "object"
-									         },
-									         "type": "array"
-									       },
-									       "Window": {
-									         "additionalProperties": false,
-									         "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
-									         "properties": {
-									           "Tumbling": {
-									             "additionalProperties": false,
-									             "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-									             "properties": {
-									               "Interval": {
-									                 "description": "The time interval for the tumbling window.",
-									                 "type": "string"
-									               },
-									               "Offset": {
-									                 "description": "The shift or reference point on timeline for the contiguous time intervals.",
-									                 "type": "string"
-									               }
-									             },
-									             "required": [
-									               "Interval"
-									             ],
-									             "type": "object"
-									           }
-									         },
-									         "type": "object"
-									       }
-									     },
-									     "required": [
-									       "Expression",
-									       "Variables",
-									       "Window"
-									     ],
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "Expression": {
+									//       "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+									//       "type": "string"
+									//     },
+									//     "Variables": {
+									//       "description": "The list of variables used in the expression.",
+									//       "insertionOrder": false,
+									//       "items": {
+									//         "additionalProperties": false,
+									//         "properties": {
+									//           "Name": {
+									//             "description": "The friendly name of the variable to be used in the expression.",
+									//             "type": "string"
+									//           },
+									//           "Value": {
+									//             "additionalProperties": false,
+									//             "properties": {
+									//               "HierarchyLogicalId": {
+									//                 "maxLength": 256,
+									//                 "minLength": 1,
+									//                 "pattern": "",
+									//                 "type": "string"
+									//               },
+									//               "PropertyLogicalId": {
+									//                 "maxLength": 256,
+									//                 "minLength": 1,
+									//                 "pattern": "",
+									//                 "type": "string"
+									//               }
+									//             },
+									//             "required": [
+									//               "PropertyLogicalId"
+									//             ],
+									//             "type": "object"
+									//           }
+									//         },
+									//         "required": [
+									//           "Name",
+									//           "Value"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "type": "array"
+									//     },
+									//     "Window": {
+									//       "additionalProperties": false,
+									//       "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+									//       "properties": {
+									//         "Tumbling": {
+									//           "additionalProperties": false,
+									//           "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+									//           "properties": {
+									//             "Interval": {
+									//               "description": "The time interval for the tumbling window.",
+									//               "type": "string"
+									//             },
+									//             "Offset": {
+									//               "description": "The shift or reference point on timeline for the contiguous time intervals.",
+									//               "type": "string"
+									//             }
+									//           },
+									//           "required": [
+									//             "Interval"
+									//           ],
+									//           "type": "object"
+									//         }
+									//       },
+									//       "type": "object"
+									//     }
+									//   },
+									//   "required": [
+									//     "Expression",
+									//     "Variables",
+									//     "Window"
+									//   ],
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"expression": {
 												// Property: Expression
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+												//   "type": "string"
+												// }
 												Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
 												Type:        types.StringType,
 												Required:    true,
@@ -2089,48 +1989,46 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"variables": {
 												// Property: Variables
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The list of variables used in the expression.",
-												     "insertionOrder": false,
-												     "items": {
-												       "additionalProperties": false,
-												       "properties": {
-												         "Name": {
-												           "description": "The friendly name of the variable to be used in the expression.",
-												           "type": "string"
-												         },
-												         "Value": {
-												           "additionalProperties": false,
-												           "properties": {
-												             "HierarchyLogicalId": {
-												               "maxLength": 256,
-												               "minLength": 1,
-												               "pattern": "",
-												               "type": "string"
-												             },
-												             "PropertyLogicalId": {
-												               "maxLength": 256,
-												               "minLength": 1,
-												               "pattern": "",
-												               "type": "string"
-												             }
-												           },
-												           "required": [
-												             "PropertyLogicalId"
-												           ],
-												           "type": "object"
-												         }
-												       },
-												       "required": [
-												         "Name",
-												         "Value"
-												       ],
-												       "type": "object"
-												     },
-												     "type": "array"
-												   }
-												*/
+												// {
+												//   "description": "The list of variables used in the expression.",
+												//   "insertionOrder": false,
+												//   "items": {
+												//     "additionalProperties": false,
+												//     "properties": {
+												//       "Name": {
+												//         "description": "The friendly name of the variable to be used in the expression.",
+												//         "type": "string"
+												//       },
+												//       "Value": {
+												//         "additionalProperties": false,
+												//         "properties": {
+												//           "HierarchyLogicalId": {
+												//             "maxLength": 256,
+												//             "minLength": 1,
+												//             "pattern": "",
+												//             "type": "string"
+												//           },
+												//           "PropertyLogicalId": {
+												//             "maxLength": 256,
+												//             "minLength": 1,
+												//             "pattern": "",
+												//             "type": "string"
+												//           }
+												//         },
+												//         "required": [
+												//           "PropertyLogicalId"
+												//         ],
+												//         "type": "object"
+												//       }
+												//     },
+												//     "required": [
+												//       "Name",
+												//       "Value"
+												//     ],
+												//     "type": "object"
+												//   },
+												//   "type": "array"
+												// }
 												Description: "The list of variables used in the expression.",
 												// Multiset.
 												Attributes: schema.ListNestedAttributes(
@@ -2138,12 +2036,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"name": {
 															// Property: Name
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "The friendly name of the variable to be used in the expression.",
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "The friendly name of the variable to be used in the expression.",
+															//   "type": "string"
+															// }
 															Description: "The friendly name of the variable to be used in the expression.",
 															Type:        types.StringType,
 															Required:    true,
@@ -2151,56 +2047,50 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"value": {
 															// Property: Value
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "additionalProperties": false,
-															     "properties": {
-															       "HierarchyLogicalId": {
-															         "maxLength": 256,
-															         "minLength": 1,
-															         "pattern": "",
-															         "type": "string"
-															       },
-															       "PropertyLogicalId": {
-															         "maxLength": 256,
-															         "minLength": 1,
-															         "pattern": "",
-															         "type": "string"
-															       }
-															     },
-															     "required": [
-															       "PropertyLogicalId"
-															     ],
-															     "type": "object"
-															   }
-															*/
+															// {
+															//   "additionalProperties": false,
+															//   "properties": {
+															//     "HierarchyLogicalId": {
+															//       "maxLength": 256,
+															//       "minLength": 1,
+															//       "pattern": "",
+															//       "type": "string"
+															//     },
+															//     "PropertyLogicalId": {
+															//       "maxLength": 256,
+															//       "minLength": 1,
+															//       "pattern": "",
+															//       "type": "string"
+															//     }
+															//   },
+															//   "required": [
+															//     "PropertyLogicalId"
+															//   ],
+															//   "type": "object"
+															// }
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"hierarchy_logical_id": {
 																		// Property: HierarchyLogicalId
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "maxLength": 256,
-																		     "minLength": 1,
-																		     "pattern": "",
-																		     "type": "string"
-																		   }
-																		*/
+																		// {
+																		//   "maxLength": 256,
+																		//   "minLength": 1,
+																		//   "pattern": "",
+																		//   "type": "string"
+																		// }
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
 																	"property_logical_id": {
 																		// Property: PropertyLogicalId
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "maxLength": 256,
-																		     "minLength": 1,
-																		     "pattern": "",
-																		     "type": "string"
-																		   }
-																		*/
+																		// {
+																		//   "maxLength": 256,
+																		//   "minLength": 1,
+																		//   "pattern": "",
+																		//   "type": "string"
+																		// }
 																		Type:     types.StringType,
 																		Required: true,
 																	},
@@ -2216,71 +2106,65 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"window": {
 												// Property: Window
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
-												     "properties": {
-												       "Tumbling": {
-												         "additionalProperties": false,
-												         "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-												         "properties": {
-												           "Interval": {
-												             "description": "The time interval for the tumbling window.",
-												             "type": "string"
-												           },
-												           "Offset": {
-												             "description": "The shift or reference point on timeline for the contiguous time intervals.",
-												             "type": "string"
-												           }
-												         },
-												         "required": [
-												           "Interval"
-												         ],
-												         "type": "object"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "additionalProperties": false,
+												//   "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+												//   "properties": {
+												//     "Tumbling": {
+												//       "additionalProperties": false,
+												//       "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+												//       "properties": {
+												//         "Interval": {
+												//           "description": "The time interval for the tumbling window.",
+												//           "type": "string"
+												//         },
+												//         "Offset": {
+												//           "description": "The shift or reference point on timeline for the contiguous time intervals.",
+												//           "type": "string"
+												//         }
+												//       },
+												//       "required": [
+												//         "Interval"
+												//       ],
+												//       "type": "object"
+												//     }
+												//   },
+												//   "type": "object"
+												// }
 												Description: "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"tumbling": {
 															// Property: Tumbling
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "additionalProperties": false,
-															     "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-															     "properties": {
-															       "Interval": {
-															         "description": "The time interval for the tumbling window.",
-															         "type": "string"
-															       },
-															       "Offset": {
-															         "description": "The shift or reference point on timeline for the contiguous time intervals.",
-															         "type": "string"
-															       }
-															     },
-															     "required": [
-															       "Interval"
-															     ],
-															     "type": "object"
-															   }
-															*/
+															// {
+															//   "additionalProperties": false,
+															//   "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+															//   "properties": {
+															//     "Interval": {
+															//       "description": "The time interval for the tumbling window.",
+															//       "type": "string"
+															//     },
+															//     "Offset": {
+															//       "description": "The shift or reference point on timeline for the contiguous time intervals.",
+															//       "type": "string"
+															//     }
+															//   },
+															//   "required": [
+															//     "Interval"
+															//   ],
+															//   "type": "object"
+															// }
 															Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"interval": {
 																		// Property: Interval
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "description": "The time interval for the tumbling window.",
-																		     "type": "string"
-																		   }
-																		*/
+																		// {
+																		//   "description": "The time interval for the tumbling window.",
+																		//   "type": "string"
+																		// }
 																		Description: "The time interval for the tumbling window.",
 																		Type:        types.StringType,
 																		Required:    true,
@@ -2288,12 +2172,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	"offset": {
 																		// Property: Offset
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "description": "The shift or reference point on timeline for the contiguous time intervals.",
-																		     "type": "string"
-																		   }
-																		*/
+																		// {
+																		//   "description": "The shift or reference point on timeline for the contiguous time intervals.",
+																		//   "type": "string"
+																		// }
 																		Description: "The shift or reference point on timeline for the contiguous time intervals.",
 																		Type:        types.StringType,
 																		Optional:    true,
@@ -2313,73 +2195,69 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"transform": {
 									// Property: Transform
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Expression": {
-									         "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-									         "type": "string"
-									       },
-									       "Variables": {
-									         "description": "The list of variables used in the expression.",
-									         "insertionOrder": false,
-									         "items": {
-									           "additionalProperties": false,
-									           "properties": {
-									             "Name": {
-									               "description": "The friendly name of the variable to be used in the expression.",
-									               "type": "string"
-									             },
-									             "Value": {
-									               "additionalProperties": false,
-									               "properties": {
-									                 "HierarchyLogicalId": {
-									                   "maxLength": 256,
-									                   "minLength": 1,
-									                   "pattern": "",
-									                   "type": "string"
-									                 },
-									                 "PropertyLogicalId": {
-									                   "maxLength": 256,
-									                   "minLength": 1,
-									                   "pattern": "",
-									                   "type": "string"
-									                 }
-									               },
-									               "required": [
-									                 "PropertyLogicalId"
-									               ],
-									               "type": "object"
-									             }
-									           },
-									           "required": [
-									             "Name",
-									             "Value"
-									           ],
-									           "type": "object"
-									         },
-									         "type": "array"
-									       }
-									     },
-									     "required": [
-									       "Expression",
-									       "Variables"
-									     ],
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "Expression": {
+									//       "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+									//       "type": "string"
+									//     },
+									//     "Variables": {
+									//       "description": "The list of variables used in the expression.",
+									//       "insertionOrder": false,
+									//       "items": {
+									//         "additionalProperties": false,
+									//         "properties": {
+									//           "Name": {
+									//             "description": "The friendly name of the variable to be used in the expression.",
+									//             "type": "string"
+									//           },
+									//           "Value": {
+									//             "additionalProperties": false,
+									//             "properties": {
+									//               "HierarchyLogicalId": {
+									//                 "maxLength": 256,
+									//                 "minLength": 1,
+									//                 "pattern": "",
+									//                 "type": "string"
+									//               },
+									//               "PropertyLogicalId": {
+									//                 "maxLength": 256,
+									//                 "minLength": 1,
+									//                 "pattern": "",
+									//                 "type": "string"
+									//               }
+									//             },
+									//             "required": [
+									//               "PropertyLogicalId"
+									//             ],
+									//             "type": "object"
+									//           }
+									//         },
+									//         "required": [
+									//           "Name",
+									//           "Value"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "type": "array"
+									//     }
+									//   },
+									//   "required": [
+									//     "Expression",
+									//     "Variables"
+									//   ],
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"expression": {
 												// Property: Expression
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+												//   "type": "string"
+												// }
 												Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
 												Type:        types.StringType,
 												Required:    true,
@@ -2387,48 +2265,46 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"variables": {
 												// Property: Variables
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The list of variables used in the expression.",
-												     "insertionOrder": false,
-												     "items": {
-												       "additionalProperties": false,
-												       "properties": {
-												         "Name": {
-												           "description": "The friendly name of the variable to be used in the expression.",
-												           "type": "string"
-												         },
-												         "Value": {
-												           "additionalProperties": false,
-												           "properties": {
-												             "HierarchyLogicalId": {
-												               "maxLength": 256,
-												               "minLength": 1,
-												               "pattern": "",
-												               "type": "string"
-												             },
-												             "PropertyLogicalId": {
-												               "maxLength": 256,
-												               "minLength": 1,
-												               "pattern": "",
-												               "type": "string"
-												             }
-												           },
-												           "required": [
-												             "PropertyLogicalId"
-												           ],
-												           "type": "object"
-												         }
-												       },
-												       "required": [
-												         "Name",
-												         "Value"
-												       ],
-												       "type": "object"
-												     },
-												     "type": "array"
-												   }
-												*/
+												// {
+												//   "description": "The list of variables used in the expression.",
+												//   "insertionOrder": false,
+												//   "items": {
+												//     "additionalProperties": false,
+												//     "properties": {
+												//       "Name": {
+												//         "description": "The friendly name of the variable to be used in the expression.",
+												//         "type": "string"
+												//       },
+												//       "Value": {
+												//         "additionalProperties": false,
+												//         "properties": {
+												//           "HierarchyLogicalId": {
+												//             "maxLength": 256,
+												//             "minLength": 1,
+												//             "pattern": "",
+												//             "type": "string"
+												//           },
+												//           "PropertyLogicalId": {
+												//             "maxLength": 256,
+												//             "minLength": 1,
+												//             "pattern": "",
+												//             "type": "string"
+												//           }
+												//         },
+												//         "required": [
+												//           "PropertyLogicalId"
+												//         ],
+												//         "type": "object"
+												//       }
+												//     },
+												//     "required": [
+												//       "Name",
+												//       "Value"
+												//     ],
+												//     "type": "object"
+												//   },
+												//   "type": "array"
+												// }
 												Description: "The list of variables used in the expression.",
 												// Multiset.
 												Attributes: schema.ListNestedAttributes(
@@ -2436,12 +2312,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"name": {
 															// Property: Name
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "The friendly name of the variable to be used in the expression.",
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "The friendly name of the variable to be used in the expression.",
+															//   "type": "string"
+															// }
 															Description: "The friendly name of the variable to be used in the expression.",
 															Type:        types.StringType,
 															Required:    true,
@@ -2449,56 +2323,50 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"value": {
 															// Property: Value
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "additionalProperties": false,
-															     "properties": {
-															       "HierarchyLogicalId": {
-															         "maxLength": 256,
-															         "minLength": 1,
-															         "pattern": "",
-															         "type": "string"
-															       },
-															       "PropertyLogicalId": {
-															         "maxLength": 256,
-															         "minLength": 1,
-															         "pattern": "",
-															         "type": "string"
-															       }
-															     },
-															     "required": [
-															       "PropertyLogicalId"
-															     ],
-															     "type": "object"
-															   }
-															*/
+															// {
+															//   "additionalProperties": false,
+															//   "properties": {
+															//     "HierarchyLogicalId": {
+															//       "maxLength": 256,
+															//       "minLength": 1,
+															//       "pattern": "",
+															//       "type": "string"
+															//     },
+															//     "PropertyLogicalId": {
+															//       "maxLength": 256,
+															//       "minLength": 1,
+															//       "pattern": "",
+															//       "type": "string"
+															//     }
+															//   },
+															//   "required": [
+															//     "PropertyLogicalId"
+															//   ],
+															//   "type": "object"
+															// }
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"hierarchy_logical_id": {
 																		// Property: HierarchyLogicalId
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "maxLength": 256,
-																		     "minLength": 1,
-																		     "pattern": "",
-																		     "type": "string"
-																		   }
-																		*/
+																		// {
+																		//   "maxLength": 256,
+																		//   "minLength": 1,
+																		//   "pattern": "",
+																		//   "type": "string"
+																		// }
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
 																	"property_logical_id": {
 																		// Property: PropertyLogicalId
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "maxLength": 256,
-																		     "minLength": 1,
-																		     "pattern": "",
-																		     "type": "string"
-																		   }
-																		*/
+																		// {
+																		//   "maxLength": 256,
+																		//   "minLength": 1,
+																		//   "pattern": "",
+																		//   "type": "string"
+																		// }
 																		Type:     types.StringType,
 																		Required: true,
 																	},
@@ -2518,17 +2386,15 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"type_name": {
 									// Property: TypeName
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "Measurement",
-									       "Attribute",
-									       "Transform",
-									       "Metric"
-									     ],
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "enum": [
+									//     "Measurement",
+									//     "Attribute",
+									//     "Transform",
+									//     "Metric"
+									//   ],
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -2539,12 +2405,10 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"unit": {
 						// Property: Unit
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The unit of the asset model property, such as Newtons or RPM.",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The unit of the asset model property, such as Newtons or RPM.",
+						//   "type": "string"
+						// }
 						Description: "The unit of the asset model property, such as Newtons or RPM.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -2557,29 +2421,27 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of key-value pairs that contain metadata for the asset model.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "A list of key-value pairs that contain metadata for the asset model.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
@@ -2587,22 +2449,18 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},

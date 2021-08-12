@@ -25,26 +25,22 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1600,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1600,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"create_time": {
 			// Property: CreateTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Type:        types.StringType,
 			Computed:    true,
@@ -52,11 +48,9 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"data_source": {
 			// Property: DataSource
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// DataSource is a force-new attribute.
@@ -64,35 +58,31 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"data_source_configuration": {
 			// Property: DataSourceConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "IntendedUse": {
-			         "enum": [
-			           "SingleUse",
-			           "Storage"
-			         ],
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "IntendedUse": {
+			//       "enum": [
+			//         "SingleUse",
+			//         "Storage"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"intended_use": {
 						// Property: IntendedUse
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "SingleUse",
-						       "Storage"
-						     ],
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "enum": [
+						//     "SingleUse",
+						//     "Storage"
+						//   ],
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -105,13 +95,11 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1000,
-			     "minLength": 0,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1000,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -120,27 +108,23 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"index_arn": {
 			// Property: IndexArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1600,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1600,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"index_name": {
 			// Property: IndexName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 100,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 100,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// IndexName is a force-new attribute.
@@ -148,16 +132,14 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"pricing_plan": {
 			// Property: PricingPlan
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "RequestBasedUsage",
-			       "MobileAssetTracking",
-			       "MobileAssetManagement"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "RequestBasedUsage",
+			//     "MobileAssetTracking",
+			//     "MobileAssetManagement"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// PricingPlan is a force-new attribute.
@@ -165,13 +147,11 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"update_time": {
 			// Property: UpdateTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Type:        types.StringType,
 			Computed:    true,

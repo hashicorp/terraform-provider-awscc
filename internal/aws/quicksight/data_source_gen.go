@@ -25,456 +25,450 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"alternate_data_source_parameters": {
 			// Property: AlternateDataSourceParameters
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for the credentials\n            stored with this data source. The credentials are applied in tandem with the data source\n            parameters when you copy a data source by using a create or update request. The API\n            operation compares the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request\n            with the structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the credentials from this\n            existing data source. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is null,\n            the \u003ccode\u003eCredentials\u003c/code\u003e originally used with this \u003ccode\u003eDataSourceParameters\u003c/code\u003e\n            are automatically allowed.\u003c/p\u003e",
-			     "items": {
-			       "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
-			       "properties": {
-			         "AmazonElasticsearchParameters": {
-			           "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
-			           "properties": {
-			             "Domain": {
-			               "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-			               "maxLength": 64,
-			               "minLength": 1,
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "Domain"
-			           ],
-			           "type": "object"
-			         },
-			         "AthenaParameters": {
-			           "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
-			           "properties": {
-			             "WorkGroup": {
-			               "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "AuroraParameters": {
-			           "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
-			           "properties": {
-			             "Database": {
-			               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Host": {
-			               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Port": {
-			               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			               "type": "number"
-			             }
-			           },
-			           "required": [
-			             "Database",
-			             "Host",
-			             "Port"
-			           ],
-			           "type": "object"
-			         },
-			         "AuroraPostgreSqlParameters": {
-			           "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
-			           "properties": {
-			             "Database": {
-			               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Host": {
-			               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Port": {
-			               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			               "type": "number"
-			             }
-			           },
-			           "required": [
-			             "Database",
-			             "Host",
-			             "Port"
-			           ],
-			           "type": "object"
-			         },
-			         "MariaDbParameters": {
-			           "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
-			           "properties": {
-			             "Database": {
-			               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Host": {
-			               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Port": {
-			               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			               "type": "number"
-			             }
-			           },
-			           "required": [
-			             "Database",
-			             "Host",
-			             "Port"
-			           ],
-			           "type": "object"
-			         },
-			         "MySqlParameters": {
-			           "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
-			           "properties": {
-			             "Database": {
-			               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Host": {
-			               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Port": {
-			               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			               "type": "number"
-			             }
-			           },
-			           "required": [
-			             "Database",
-			             "Host",
-			             "Port"
-			           ],
-			           "type": "object"
-			         },
-			         "OracleParameters": {
-			           "properties": {
-			             "Database": {
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Host": {
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Port": {
-			               "type": "number"
-			             }
-			           },
-			           "required": [
-			             "Database",
-			             "Host",
-			             "Port"
-			           ],
-			           "type": "object"
-			         },
-			         "PostgreSqlParameters": {
-			           "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
-			           "properties": {
-			             "Database": {
-			               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Host": {
-			               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Port": {
-			               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			               "type": "number"
-			             }
-			           },
-			           "required": [
-			             "Database",
-			             "Host",
-			             "Port"
-			           ],
-			           "type": "object"
-			         },
-			         "PrestoParameters": {
-			           "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
-			           "properties": {
-			             "Catalog": {
-			               "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 0,
-			               "type": "string"
-			             },
-			             "Host": {
-			               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Port": {
-			               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			               "type": "number"
-			             }
-			           },
-			           "required": [
-			             "Catalog",
-			             "Host",
-			             "Port"
-			           ],
-			           "type": "object"
-			         },
-			         "RdsParameters": {
-			           "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
-			           "properties": {
-			             "Database": {
-			               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "InstanceId": {
-			               "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-			               "maxLength": 64,
-			               "minLength": 1,
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "Database",
-			             "InstanceId"
-			           ],
-			           "type": "object"
-			         },
-			         "RedshiftParameters": {
-			           "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
-			           "properties": {
-			             "ClusterId": {
-			               "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-			               "maxLength": 64,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Database": {
-			               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Host": {
-			               "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Port": {
-			               "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-			               "type": "number"
-			             }
-			           },
-			           "required": [
-			             "Database"
-			           ],
-			           "type": "object"
-			         },
-			         "S3Parameters": {
-			           "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
-			           "properties": {
-			             "ManifestFileLocation": {
-			               "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-			               "properties": {
-			                 "Bucket": {
-			                   "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-			                   "maxLength": 1024,
-			                   "minLength": 1,
-			                   "type": "string"
-			                 },
-			                 "Key": {
-			                   "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-			                   "maxLength": 1024,
-			                   "minLength": 1,
-			                   "type": "string"
-			                 }
-			               },
-			               "required": [
-			                 "Bucket",
-			                 "Key"
-			               ],
-			               "type": "object"
-			             }
-			           },
-			           "required": [
-			             "ManifestFileLocation"
-			           ],
-			           "type": "object"
-			         },
-			         "SnowflakeParameters": {
-			           "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
-			           "properties": {
-			             "Database": {
-			               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Host": {
-			               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Warehouse": {
-			               "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 0,
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "Database",
-			             "Host",
-			             "Warehouse"
-			           ],
-			           "type": "object"
-			         },
-			         "SparkParameters": {
-			           "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
-			           "properties": {
-			             "Host": {
-			               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Port": {
-			               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			               "type": "number"
-			             }
-			           },
-			           "required": [
-			             "Host",
-			             "Port"
-			           ],
-			           "type": "object"
-			         },
-			         "SqlServerParameters": {
-			           "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
-			           "properties": {
-			             "Database": {
-			               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Host": {
-			               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Port": {
-			               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			               "type": "number"
-			             }
-			           },
-			           "required": [
-			             "Database",
-			             "Host",
-			             "Port"
-			           ],
-			           "type": "object"
-			         },
-			         "TeradataParameters": {
-			           "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
-			           "properties": {
-			             "Database": {
-			               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Host": {
-			               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Port": {
-			               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			               "type": "number"
-			             }
-			           },
-			           "required": [
-			             "Database",
-			             "Host",
-			             "Port"
-			           ],
-			           "type": "object"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "minItems": 1,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for the credentials\n            stored with this data source. The credentials are applied in tandem with the data source\n            parameters when you copy a data source by using a create or update request. The API\n            operation compares the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request\n            with the structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the credentials from this\n            existing data source. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is null,\n            the \u003ccode\u003eCredentials\u003c/code\u003e originally used with this \u003ccode\u003eDataSourceParameters\u003c/code\u003e\n            are automatically allowed.\u003c/p\u003e",
+			//   "items": {
+			//     "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
+			//     "properties": {
+			//       "AmazonElasticsearchParameters": {
+			//         "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Domain": {
+			//             "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+			//             "maxLength": 64,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "Domain"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "AthenaParameters": {
+			//         "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "WorkGroup": {
+			//             "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "AuroraParameters": {
+			//         "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Database": {
+			//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Host": {
+			//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Port": {
+			//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//             "type": "number"
+			//           }
+			//         },
+			//         "required": [
+			//           "Database",
+			//           "Host",
+			//           "Port"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "AuroraPostgreSqlParameters": {
+			//         "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Database": {
+			//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Host": {
+			//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Port": {
+			//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//             "type": "number"
+			//           }
+			//         },
+			//         "required": [
+			//           "Database",
+			//           "Host",
+			//           "Port"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "MariaDbParameters": {
+			//         "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Database": {
+			//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Host": {
+			//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Port": {
+			//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//             "type": "number"
+			//           }
+			//         },
+			//         "required": [
+			//           "Database",
+			//           "Host",
+			//           "Port"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "MySqlParameters": {
+			//         "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Database": {
+			//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Host": {
+			//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Port": {
+			//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//             "type": "number"
+			//           }
+			//         },
+			//         "required": [
+			//           "Database",
+			//           "Host",
+			//           "Port"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "OracleParameters": {
+			//         "properties": {
+			//           "Database": {
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Host": {
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Port": {
+			//             "type": "number"
+			//           }
+			//         },
+			//         "required": [
+			//           "Database",
+			//           "Host",
+			//           "Port"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "PostgreSqlParameters": {
+			//         "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Database": {
+			//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Host": {
+			//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Port": {
+			//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//             "type": "number"
+			//           }
+			//         },
+			//         "required": [
+			//           "Database",
+			//           "Host",
+			//           "Port"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "PrestoParameters": {
+			//         "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Catalog": {
+			//             "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 0,
+			//             "type": "string"
+			//           },
+			//           "Host": {
+			//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Port": {
+			//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//             "type": "number"
+			//           }
+			//         },
+			//         "required": [
+			//           "Catalog",
+			//           "Host",
+			//           "Port"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "RdsParameters": {
+			//         "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Database": {
+			//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "InstanceId": {
+			//             "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+			//             "maxLength": 64,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "Database",
+			//           "InstanceId"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "RedshiftParameters": {
+			//         "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+			//         "properties": {
+			//           "ClusterId": {
+			//             "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+			//             "maxLength": 64,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Database": {
+			//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Host": {
+			//             "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Port": {
+			//             "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+			//             "type": "number"
+			//           }
+			//         },
+			//         "required": [
+			//           "Database"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "S3Parameters": {
+			//         "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "ManifestFileLocation": {
+			//             "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+			//             "properties": {
+			//               "Bucket": {
+			//                 "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+			//                 "maxLength": 1024,
+			//                 "minLength": 1,
+			//                 "type": "string"
+			//               },
+			//               "Key": {
+			//                 "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+			//                 "maxLength": 1024,
+			//                 "minLength": 1,
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Bucket",
+			//               "Key"
+			//             ],
+			//             "type": "object"
+			//           }
+			//         },
+			//         "required": [
+			//           "ManifestFileLocation"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "SnowflakeParameters": {
+			//         "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Database": {
+			//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Host": {
+			//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Warehouse": {
+			//             "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 0,
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "Database",
+			//           "Host",
+			//           "Warehouse"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "SparkParameters": {
+			//         "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Host": {
+			//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Port": {
+			//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//             "type": "number"
+			//           }
+			//         },
+			//         "required": [
+			//           "Host",
+			//           "Port"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "SqlServerParameters": {
+			//         "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Database": {
+			//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Host": {
+			//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Port": {
+			//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//             "type": "number"
+			//           }
+			//         },
+			//         "required": [
+			//           "Database",
+			//           "Host",
+			//           "Port"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "TeradataParameters": {
+			//         "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Database": {
+			//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Host": {
+			//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Port": {
+			//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//             "type": "number"
+			//           }
+			//         },
+			//         "required": [
+			//           "Database",
+			//           "Host",
+			//           "Port"
+			//         ],
+			//         "type": "object"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "minItems": 1,
+			//   "type": "array"
+			// }
 			Description: "<p>A set of alternate data source parameters that you want to share for the credentials\n            stored with this data source. The credentials are applied in tandem with the data source\n            parameters when you copy a data source by using a create or update request. The API\n            operation compares the <code>DataSourceParameters</code> structure that's in the request\n            with the structures in the <code>AlternateDataSourceParameters</code> allow list. If the\n            structures are an exact match, the request is allowed to use the credentials from this\n            existing data source. If the <code>AlternateDataSourceParameters</code> list is null,\n            the <code>Credentials</code> originally used with this <code>DataSourceParameters</code>\n            are automatically allowed.</p>",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"amazon_elasticsearch_parameters": {
 						// Property: AmazonElasticsearchParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Domain": {
-						         "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-						         "maxLength": 64,
-						         "minLength": 1,
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "Domain"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Domain": {
+						//       "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+						//       "maxLength": 64,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "Domain"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Amazon Elasticsearch Service parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"domain": {
 									// Property: Domain
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-									     "maxLength": 64,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+									//   "maxLength": 64,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>The Amazon Elasticsearch Service domain.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -486,34 +480,30 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"athena_parameters": {
 						// Property: AthenaParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
-						     "properties": {
-						       "WorkGroup": {
-						         "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "WorkGroup": {
+						//       "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Description: "<p>Amazon Athena parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"work_group": {
 									// Property: WorkGroup
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>The workgroup that Amazon Athena uses.</p>",
 									Type:        types.StringType,
 									Optional:    true,
@@ -525,49 +515,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"aurora_parameters": {
 						// Property: AuroraParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Amazon Aurora parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -575,14 +561,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -590,12 +574,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -607,49 +589,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"aurora_postgre_sql_parameters": {
 						// Property: AuroraPostgreSqlParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -657,14 +635,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -672,12 +648,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -689,49 +663,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"maria_db_parameters": {
 						// Property: MariaDbParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>MariaDB parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -739,14 +709,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -754,12 +722,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -771,49 +737,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"my_sql_parameters": {
 						// Property: MySqlParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>MySQL parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -821,14 +783,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -836,12 +796,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -853,67 +811,59 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"oracle_parameters": {
 						// Property: OracleParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "properties": {
-						       "Database": {
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "properties": {
+						//     "Database": {
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "type": "number"
+									// }
 									Type:     types.NumberType,
 									Required: true,
 								},
@@ -924,49 +874,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"postgre_sql_parameters": {
 						// Property: PostgreSqlParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>PostgreSQL parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -974,14 +920,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -989,12 +933,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -1006,49 +948,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"presto_parameters": {
 						// Property: PrestoParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Catalog": {
-						         "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 0,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Catalog",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Catalog": {
+						//       "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 0,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Catalog",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Presto parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"catalog": {
 									// Property: Catalog
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 0,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 0,
+									//   "type": "string"
+									// }
 									Description: "<p>Catalog.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1056,14 +994,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1071,12 +1007,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -1088,44 +1022,40 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"rds_parameters": {
 						// Property: RdsParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "InstanceId": {
-						         "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-						         "maxLength": 64,
-						         "minLength": 1,
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "InstanceId"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "InstanceId": {
+						//       "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+						//       "maxLength": 64,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "InstanceId"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Amazon RDS parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1133,14 +1063,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"instance_id": {
 									// Property: InstanceId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-									     "maxLength": 64,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+									//   "maxLength": 64,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Instance ID.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1152,53 +1080,49 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"redshift_parameters": {
 						// Property: RedshiftParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
-						     "properties": {
-						       "ClusterId": {
-						         "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-						         "maxLength": 64,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+						//   "properties": {
+						//     "ClusterId": {
+						//       "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+						//       "maxLength": 64,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cluster_id": {
 									// Property: ClusterId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-									     "maxLength": 64,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+									//   "maxLength": 64,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
 									Type:        types.StringType,
 									Optional:    true,
@@ -1206,14 +1130,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1221,14 +1143,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
 									Type:        types.StringType,
 									Optional:    true,
@@ -1236,12 +1156,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
 									Type:        types.NumberType,
 									Optional:    true,
@@ -1253,83 +1171,77 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"s3_parameters": {
 						// Property: S3Parameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
-						     "properties": {
-						       "ManifestFileLocation": {
-						         "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-						         "properties": {
-						           "Bucket": {
-						             "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-						             "maxLength": 1024,
-						             "minLength": 1,
-						             "type": "string"
-						           },
-						           "Key": {
-						             "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-						             "maxLength": 1024,
-						             "minLength": 1,
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Bucket",
-						           "Key"
-						         ],
-						         "type": "object"
-						       }
-						     },
-						     "required": [
-						       "ManifestFileLocation"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "ManifestFileLocation": {
+						//       "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+						//       "properties": {
+						//         "Bucket": {
+						//           "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+						//           "maxLength": 1024,
+						//           "minLength": 1,
+						//           "type": "string"
+						//         },
+						//         "Key": {
+						//           "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+						//           "maxLength": 1024,
+						//           "minLength": 1,
+						//           "type": "string"
+						//         }
+						//       },
+						//       "required": [
+						//         "Bucket",
+						//         "Key"
+						//       ],
+						//       "type": "object"
+						//     }
+						//   },
+						//   "required": [
+						//     "ManifestFileLocation"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>S3 parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"manifest_file_location": {
 									// Property: ManifestFileLocation
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-									     "properties": {
-									       "Bucket": {
-									         "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-									         "maxLength": 1024,
-									         "minLength": 1,
-									         "type": "string"
-									       },
-									       "Key": {
-									         "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-									         "maxLength": 1024,
-									         "minLength": 1,
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Bucket",
-									       "Key"
-									     ],
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+									//   "properties": {
+									//     "Bucket": {
+									//       "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+									//       "maxLength": 1024,
+									//       "minLength": 1,
+									//       "type": "string"
+									//     },
+									//     "Key": {
+									//       "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+									//       "maxLength": 1024,
+									//       "minLength": 1,
+									//       "type": "string"
+									//     }
+									//   },
+									//   "required": [
+									//     "Bucket",
+									//     "Key"
+									//   ],
+									//   "type": "object"
+									// }
 									Description: "<p>Amazon S3 manifest file location.</p>",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket": {
 												// Property: Bucket
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-												     "maxLength": 1024,
-												     "minLength": 1,
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+												//   "maxLength": 1024,
+												//   "minLength": 1,
+												//   "type": "string"
+												// }
 												Description: "<p>Amazon S3 bucket.</p>",
 												Type:        types.StringType,
 												Required:    true,
@@ -1337,14 +1249,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"key": {
 												// Property: Key
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-												     "maxLength": 1024,
-												     "minLength": 1,
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+												//   "maxLength": 1024,
+												//   "minLength": 1,
+												//   "type": "string"
+												// }
 												Description: "<p>Amazon S3 key that identifies an object.</p>",
 												Type:        types.StringType,
 												Required:    true,
@@ -1360,51 +1270,47 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"snowflake_parameters": {
 						// Property: SnowflakeParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Warehouse": {
-						         "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 0,
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Warehouse"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Warehouse": {
+						//       "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 0,
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Warehouse"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Snowflake parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1412,14 +1318,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1427,14 +1331,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"warehouse": {
 									// Property: Warehouse
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 0,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 0,
+									//   "type": "string"
+									// }
 									Description: "<p>Warehouse.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1446,42 +1348,38 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"spark_parameters": {
 						// Property: SparkParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Spark parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1489,12 +1387,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -1506,49 +1402,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"sql_server_parameters": {
 						// Property: SqlServerParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>SQL Server parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1556,14 +1448,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1571,12 +1461,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -1588,49 +1476,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"teradata_parameters": {
 						// Property: TeradataParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Teradata parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1638,14 +1522,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -1653,12 +1535,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -1678,12 +1558,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the data source.\u003c/p\u003e",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the data source.\u003c/p\u003e",
+			//   "type": "string"
+			// }
 			Description: "<p>The Amazon Resource Name (ARN) of the data source.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1691,14 +1569,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"aws_account_id": {
 			// Property: AwsAccountId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 12,
-			     "minLength": 12,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 12,
+			//   "minLength": 12,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -1707,13 +1583,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "\u003cp\u003eThe time that this data source was created.\u003c/p\u003e",
-			     "format": "date-time",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "\u003cp\u003eThe time that this data source was created.\u003c/p\u003e",
+			//   "format": "date-time",
+			//   "type": "string"
+			// }
 			Description: "<p>The time that this data source was created.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1721,465 +1595,461 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"credentials": {
 			// Property: Credentials
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "\u003cp\u003eData source credentials. This is a variant type structure. For this structure to be\n            valid, only one of the attributes can be non-null.\u003c/p\u003e",
-			     "properties": {
-			       "CopySourceArn": {
-			         "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When \u003ccode\u003eCopySourceArn\u003c/code\u003e is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            \u003ccode\u003eDataSourceCredentials\u003c/code\u003e structure.\u003c/p\u003e",
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "CredentialPair": {
-			         "description": "\u003cp\u003eThe combination of user name and password that are used as credentials.\u003c/p\u003e",
-			         "properties": {
-			           "AlternateDataSourceParameters": {
-			             "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request with the\n            structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is\n            null, the \u003ccode\u003eDataSourceParameters\u003c/code\u003e originally used with these\n                \u003ccode\u003eCredentials\u003c/code\u003e is automatically allowed.\u003c/p\u003e",
-			             "items": {
-			               "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
-			               "properties": {
-			                 "AmazonElasticsearchParameters": {
-			                   "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "Domain": {
-			                       "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-			                       "maxLength": 64,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     }
-			                   },
-			                   "required": [
-			                     "Domain"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "AthenaParameters": {
-			                   "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "WorkGroup": {
-			                       "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     }
-			                   },
-			                   "type": "object"
-			                 },
-			                 "AuroraParameters": {
-			                   "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "Database": {
-			                       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Host": {
-			                       "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			                       "maxLength": 256,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Port": {
-			                       "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "Database",
-			                     "Host",
-			                     "Port"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "AuroraPostgreSqlParameters": {
-			                   "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "Database": {
-			                       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Host": {
-			                       "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			                       "maxLength": 256,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Port": {
-			                       "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "Database",
-			                     "Host",
-			                     "Port"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "MariaDbParameters": {
-			                   "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "Database": {
-			                       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Host": {
-			                       "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			                       "maxLength": 256,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Port": {
-			                       "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "Database",
-			                     "Host",
-			                     "Port"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "MySqlParameters": {
-			                   "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "Database": {
-			                       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Host": {
-			                       "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			                       "maxLength": 256,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Port": {
-			                       "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "Database",
-			                     "Host",
-			                     "Port"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "OracleParameters": {
-			                   "properties": {
-			                     "Database": {
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Host": {
-			                       "maxLength": 256,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Port": {
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "Database",
-			                     "Host",
-			                     "Port"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "PostgreSqlParameters": {
-			                   "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "Database": {
-			                       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Host": {
-			                       "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			                       "maxLength": 256,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Port": {
-			                       "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "Database",
-			                     "Host",
-			                     "Port"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "PrestoParameters": {
-			                   "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "Catalog": {
-			                       "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 0,
-			                       "type": "string"
-			                     },
-			                     "Host": {
-			                       "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			                       "maxLength": 256,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Port": {
-			                       "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "Catalog",
-			                     "Host",
-			                     "Port"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "RdsParameters": {
-			                   "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "Database": {
-			                       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "InstanceId": {
-			                       "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-			                       "maxLength": 64,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     }
-			                   },
-			                   "required": [
-			                     "Database",
-			                     "InstanceId"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "RedshiftParameters": {
-			                   "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
-			                   "properties": {
-			                     "ClusterId": {
-			                       "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-			                       "maxLength": 64,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Database": {
-			                       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Host": {
-			                       "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-			                       "maxLength": 256,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Port": {
-			                       "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "Database"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "S3Parameters": {
-			                   "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "ManifestFileLocation": {
-			                       "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-			                       "properties": {
-			                         "Bucket": {
-			                           "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-			                           "maxLength": 1024,
-			                           "minLength": 1,
-			                           "type": "string"
-			                         },
-			                         "Key": {
-			                           "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-			                           "maxLength": 1024,
-			                           "minLength": 1,
-			                           "type": "string"
-			                         }
-			                       },
-			                       "required": [
-			                         "Bucket",
-			                         "Key"
-			                       ],
-			                       "type": "object"
-			                     }
-			                   },
-			                   "required": [
-			                     "ManifestFileLocation"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "SnowflakeParameters": {
-			                   "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "Database": {
-			                       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Host": {
-			                       "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			                       "maxLength": 256,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Warehouse": {
-			                       "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 0,
-			                       "type": "string"
-			                     }
-			                   },
-			                   "required": [
-			                     "Database",
-			                     "Host",
-			                     "Warehouse"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "SparkParameters": {
-			                   "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "Host": {
-			                       "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			                       "maxLength": 256,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Port": {
-			                       "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "Host",
-			                     "Port"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "SqlServerParameters": {
-			                   "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "Database": {
-			                       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Host": {
-			                       "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			                       "maxLength": 256,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Port": {
-			                       "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "Database",
-			                     "Host",
-			                     "Port"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "TeradataParameters": {
-			                   "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
-			                   "properties": {
-			                     "Database": {
-			                       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Host": {
-			                       "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			                       "maxLength": 256,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Port": {
-			                       "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "Database",
-			                     "Host",
-			                     "Port"
-			                   ],
-			                   "type": "object"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "maxItems": 50,
-			             "minItems": 1,
-			             "type": "array"
-			           },
-			           "Password": {
-			             "description": "\u003cp\u003ePassword.\u003c/p\u003e",
-			             "maxLength": 1024,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Username": {
-			             "description": "\u003cp\u003eUser name.\u003c/p\u003e",
-			             "maxLength": 64,
-			             "minLength": 1,
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "Password",
-			           "Username"
-			         ],
-			         "type": "object"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "description": "\u003cp\u003eData source credentials. This is a variant type structure. For this structure to be\n            valid, only one of the attributes can be non-null.\u003c/p\u003e",
+			//   "properties": {
+			//     "CopySourceArn": {
+			//       "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When \u003ccode\u003eCopySourceArn\u003c/code\u003e is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            \u003ccode\u003eDataSourceCredentials\u003c/code\u003e structure.\u003c/p\u003e",
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "CredentialPair": {
+			//       "description": "\u003cp\u003eThe combination of user name and password that are used as credentials.\u003c/p\u003e",
+			//       "properties": {
+			//         "AlternateDataSourceParameters": {
+			//           "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request with the\n            structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is\n            null, the \u003ccode\u003eDataSourceParameters\u003c/code\u003e originally used with these\n                \u003ccode\u003eCredentials\u003c/code\u003e is automatically allowed.\u003c/p\u003e",
+			//           "items": {
+			//             "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
+			//             "properties": {
+			//               "AmazonElasticsearchParameters": {
+			//                 "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Domain": {
+			//                     "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+			//                     "maxLength": 64,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Domain"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "AthenaParameters": {
+			//                 "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "WorkGroup": {
+			//                     "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "AuroraParameters": {
+			//                 "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Database": {
+			//                     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Host": {
+			//                     "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//                     "maxLength": 256,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Port": {
+			//                     "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Database",
+			//                   "Host",
+			//                   "Port"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "AuroraPostgreSqlParameters": {
+			//                 "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Database": {
+			//                     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Host": {
+			//                     "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//                     "maxLength": 256,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Port": {
+			//                     "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Database",
+			//                   "Host",
+			//                   "Port"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "MariaDbParameters": {
+			//                 "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Database": {
+			//                     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Host": {
+			//                     "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//                     "maxLength": 256,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Port": {
+			//                     "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Database",
+			//                   "Host",
+			//                   "Port"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "MySqlParameters": {
+			//                 "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Database": {
+			//                     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Host": {
+			//                     "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//                     "maxLength": 256,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Port": {
+			//                     "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Database",
+			//                   "Host",
+			//                   "Port"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "OracleParameters": {
+			//                 "properties": {
+			//                   "Database": {
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Host": {
+			//                     "maxLength": 256,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Port": {
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Database",
+			//                   "Host",
+			//                   "Port"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "PostgreSqlParameters": {
+			//                 "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Database": {
+			//                     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Host": {
+			//                     "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//                     "maxLength": 256,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Port": {
+			//                     "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Database",
+			//                   "Host",
+			//                   "Port"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "PrestoParameters": {
+			//                 "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Catalog": {
+			//                     "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 0,
+			//                     "type": "string"
+			//                   },
+			//                   "Host": {
+			//                     "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//                     "maxLength": 256,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Port": {
+			//                     "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Catalog",
+			//                   "Host",
+			//                   "Port"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "RdsParameters": {
+			//                 "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Database": {
+			//                     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "InstanceId": {
+			//                     "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+			//                     "maxLength": 64,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Database",
+			//                   "InstanceId"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "RedshiftParameters": {
+			//                 "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "ClusterId": {
+			//                     "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+			//                     "maxLength": 64,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Database": {
+			//                     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Host": {
+			//                     "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+			//                     "maxLength": 256,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Port": {
+			//                     "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Database"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "S3Parameters": {
+			//                 "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "ManifestFileLocation": {
+			//                     "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+			//                     "properties": {
+			//                       "Bucket": {
+			//                         "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+			//                         "maxLength": 1024,
+			//                         "minLength": 1,
+			//                         "type": "string"
+			//                       },
+			//                       "Key": {
+			//                         "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+			//                         "maxLength": 1024,
+			//                         "minLength": 1,
+			//                         "type": "string"
+			//                       }
+			//                     },
+			//                     "required": [
+			//                       "Bucket",
+			//                       "Key"
+			//                     ],
+			//                     "type": "object"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "ManifestFileLocation"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "SnowflakeParameters": {
+			//                 "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Database": {
+			//                     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Host": {
+			//                     "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//                     "maxLength": 256,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Warehouse": {
+			//                     "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 0,
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Database",
+			//                   "Host",
+			//                   "Warehouse"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "SparkParameters": {
+			//                 "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Host": {
+			//                     "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//                     "maxLength": 256,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Port": {
+			//                     "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Host",
+			//                   "Port"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "SqlServerParameters": {
+			//                 "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Database": {
+			//                     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Host": {
+			//                     "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//                     "maxLength": 256,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Port": {
+			//                     "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Database",
+			//                   "Host",
+			//                   "Port"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "TeradataParameters": {
+			//                 "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Database": {
+			//                     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Host": {
+			//                     "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//                     "maxLength": 256,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Port": {
+			//                     "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Database",
+			//                   "Host",
+			//                   "Port"
+			//                 ],
+			//                 "type": "object"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "maxItems": 50,
+			//           "minItems": 1,
+			//           "type": "array"
+			//         },
+			//         "Password": {
+			//           "description": "\u003cp\u003ePassword.\u003c/p\u003e",
+			//           "maxLength": 1024,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Username": {
+			//           "description": "\u003cp\u003eUser name.\u003c/p\u003e",
+			//           "maxLength": 64,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "Password",
+			//         "Username"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "<p>Data source credentials. This is a variant type structure. For this structure to be\n            valid, only one of the attributes can be non-null.</p>",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"copy_source_arn": {
 						// Property: CopySourceArn
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When \u003ccode\u003eCopySourceArn\u003c/code\u003e is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            \u003ccode\u003eDataSourceCredentials\u003c/code\u003e structure.\u003c/p\u003e",
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When \u003ccode\u003eCopySourceArn\u003c/code\u003e is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            \u003ccode\u003eDataSourceCredentials\u003c/code\u003e structure.\u003c/p\u003e",
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "<p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When <code>CopySourceArn</code> is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            <code>DataSourceCredentials</code> structure.</p>",
 						Type:        types.StringType,
 						Optional:    true,
@@ -2187,897 +2057,889 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"credential_pair": {
 						// Property: CredentialPair
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eThe combination of user name and password that are used as credentials.\u003c/p\u003e",
-						     "properties": {
-						       "AlternateDataSourceParameters": {
-						         "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request with the\n            structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is\n            null, the \u003ccode\u003eDataSourceParameters\u003c/code\u003e originally used with these\n                \u003ccode\u003eCredentials\u003c/code\u003e is automatically allowed.\u003c/p\u003e",
-						         "items": {
-						           "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
-						           "properties": {
-						             "AmazonElasticsearchParameters": {
-						               "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "Domain": {
-						                   "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-						                   "maxLength": 64,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 }
-						               },
-						               "required": [
-						                 "Domain"
-						               ],
-						               "type": "object"
-						             },
-						             "AthenaParameters": {
-						               "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "WorkGroup": {
-						                   "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 }
-						               },
-						               "type": "object"
-						             },
-						             "AuroraParameters": {
-						               "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "Database": {
-						                   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Host": {
-						                   "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						                   "maxLength": 256,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Port": {
-						                   "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						                   "type": "number"
-						                 }
-						               },
-						               "required": [
-						                 "Database",
-						                 "Host",
-						                 "Port"
-						               ],
-						               "type": "object"
-						             },
-						             "AuroraPostgreSqlParameters": {
-						               "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "Database": {
-						                   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Host": {
-						                   "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						                   "maxLength": 256,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Port": {
-						                   "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						                   "type": "number"
-						                 }
-						               },
-						               "required": [
-						                 "Database",
-						                 "Host",
-						                 "Port"
-						               ],
-						               "type": "object"
-						             },
-						             "MariaDbParameters": {
-						               "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "Database": {
-						                   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Host": {
-						                   "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						                   "maxLength": 256,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Port": {
-						                   "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						                   "type": "number"
-						                 }
-						               },
-						               "required": [
-						                 "Database",
-						                 "Host",
-						                 "Port"
-						               ],
-						               "type": "object"
-						             },
-						             "MySqlParameters": {
-						               "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "Database": {
-						                   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Host": {
-						                   "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						                   "maxLength": 256,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Port": {
-						                   "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						                   "type": "number"
-						                 }
-						               },
-						               "required": [
-						                 "Database",
-						                 "Host",
-						                 "Port"
-						               ],
-						               "type": "object"
-						             },
-						             "OracleParameters": {
-						               "properties": {
-						                 "Database": {
-						                   "maxLength": 128,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Host": {
-						                   "maxLength": 256,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Port": {
-						                   "type": "number"
-						                 }
-						               },
-						               "required": [
-						                 "Database",
-						                 "Host",
-						                 "Port"
-						               ],
-						               "type": "object"
-						             },
-						             "PostgreSqlParameters": {
-						               "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "Database": {
-						                   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Host": {
-						                   "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						                   "maxLength": 256,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Port": {
-						                   "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						                   "type": "number"
-						                 }
-						               },
-						               "required": [
-						                 "Database",
-						                 "Host",
-						                 "Port"
-						               ],
-						               "type": "object"
-						             },
-						             "PrestoParameters": {
-						               "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "Catalog": {
-						                   "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 0,
-						                   "type": "string"
-						                 },
-						                 "Host": {
-						                   "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						                   "maxLength": 256,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Port": {
-						                   "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						                   "type": "number"
-						                 }
-						               },
-						               "required": [
-						                 "Catalog",
-						                 "Host",
-						                 "Port"
-						               ],
-						               "type": "object"
-						             },
-						             "RdsParameters": {
-						               "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "Database": {
-						                   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "InstanceId": {
-						                   "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-						                   "maxLength": 64,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 }
-						               },
-						               "required": [
-						                 "Database",
-						                 "InstanceId"
-						               ],
-						               "type": "object"
-						             },
-						             "RedshiftParameters": {
-						               "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
-						               "properties": {
-						                 "ClusterId": {
-						                   "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-						                   "maxLength": 64,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Database": {
-						                   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Host": {
-						                   "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-						                   "maxLength": 256,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Port": {
-						                   "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-						                   "type": "number"
-						                 }
-						               },
-						               "required": [
-						                 "Database"
-						               ],
-						               "type": "object"
-						             },
-						             "S3Parameters": {
-						               "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "ManifestFileLocation": {
-						                   "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-						                   "properties": {
-						                     "Bucket": {
-						                       "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-						                       "maxLength": 1024,
-						                       "minLength": 1,
-						                       "type": "string"
-						                     },
-						                     "Key": {
-						                       "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-						                       "maxLength": 1024,
-						                       "minLength": 1,
-						                       "type": "string"
-						                     }
-						                   },
-						                   "required": [
-						                     "Bucket",
-						                     "Key"
-						                   ],
-						                   "type": "object"
-						                 }
-						               },
-						               "required": [
-						                 "ManifestFileLocation"
-						               ],
-						               "type": "object"
-						             },
-						             "SnowflakeParameters": {
-						               "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "Database": {
-						                   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Host": {
-						                   "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						                   "maxLength": 256,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Warehouse": {
-						                   "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 0,
-						                   "type": "string"
-						                 }
-						               },
-						               "required": [
-						                 "Database",
-						                 "Host",
-						                 "Warehouse"
-						               ],
-						               "type": "object"
-						             },
-						             "SparkParameters": {
-						               "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "Host": {
-						                   "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						                   "maxLength": 256,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Port": {
-						                   "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						                   "type": "number"
-						                 }
-						               },
-						               "required": [
-						                 "Host",
-						                 "Port"
-						               ],
-						               "type": "object"
-						             },
-						             "SqlServerParameters": {
-						               "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "Database": {
-						                   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Host": {
-						                   "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						                   "maxLength": 256,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Port": {
-						                   "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						                   "type": "number"
-						                 }
-						               },
-						               "required": [
-						                 "Database",
-						                 "Host",
-						                 "Port"
-						               ],
-						               "type": "object"
-						             },
-						             "TeradataParameters": {
-						               "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
-						               "properties": {
-						                 "Database": {
-						                   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						                   "maxLength": 128,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Host": {
-						                   "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						                   "maxLength": 256,
-						                   "minLength": 1,
-						                   "type": "string"
-						                 },
-						                 "Port": {
-						                   "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						                   "type": "number"
-						                 }
-						               },
-						               "required": [
-						                 "Database",
-						                 "Host",
-						                 "Port"
-						               ],
-						               "type": "object"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "maxItems": 50,
-						         "minItems": 1,
-						         "type": "array"
-						       },
-						       "Password": {
-						         "description": "\u003cp\u003ePassword.\u003c/p\u003e",
-						         "maxLength": 1024,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Username": {
-						         "description": "\u003cp\u003eUser name.\u003c/p\u003e",
-						         "maxLength": 64,
-						         "minLength": 1,
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "Password",
-						       "Username"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eThe combination of user name and password that are used as credentials.\u003c/p\u003e",
+						//   "properties": {
+						//     "AlternateDataSourceParameters": {
+						//       "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request with the\n            structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is\n            null, the \u003ccode\u003eDataSourceParameters\u003c/code\u003e originally used with these\n                \u003ccode\u003eCredentials\u003c/code\u003e is automatically allowed.\u003c/p\u003e",
+						//       "items": {
+						//         "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
+						//         "properties": {
+						//           "AmazonElasticsearchParameters": {
+						//             "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "Domain": {
+						//                 "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+						//                 "maxLength": 64,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               }
+						//             },
+						//             "required": [
+						//               "Domain"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "AthenaParameters": {
+						//             "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "WorkGroup": {
+						//                 "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               }
+						//             },
+						//             "type": "object"
+						//           },
+						//           "AuroraParameters": {
+						//             "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "Database": {
+						//                 "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Host": {
+						//                 "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//                 "maxLength": 256,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Port": {
+						//                 "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//                 "type": "number"
+						//               }
+						//             },
+						//             "required": [
+						//               "Database",
+						//               "Host",
+						//               "Port"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "AuroraPostgreSqlParameters": {
+						//             "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "Database": {
+						//                 "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Host": {
+						//                 "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//                 "maxLength": 256,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Port": {
+						//                 "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//                 "type": "number"
+						//               }
+						//             },
+						//             "required": [
+						//               "Database",
+						//               "Host",
+						//               "Port"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "MariaDbParameters": {
+						//             "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "Database": {
+						//                 "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Host": {
+						//                 "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//                 "maxLength": 256,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Port": {
+						//                 "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//                 "type": "number"
+						//               }
+						//             },
+						//             "required": [
+						//               "Database",
+						//               "Host",
+						//               "Port"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "MySqlParameters": {
+						//             "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "Database": {
+						//                 "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Host": {
+						//                 "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//                 "maxLength": 256,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Port": {
+						//                 "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//                 "type": "number"
+						//               }
+						//             },
+						//             "required": [
+						//               "Database",
+						//               "Host",
+						//               "Port"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "OracleParameters": {
+						//             "properties": {
+						//               "Database": {
+						//                 "maxLength": 128,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Host": {
+						//                 "maxLength": 256,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Port": {
+						//                 "type": "number"
+						//               }
+						//             },
+						//             "required": [
+						//               "Database",
+						//               "Host",
+						//               "Port"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "PostgreSqlParameters": {
+						//             "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "Database": {
+						//                 "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Host": {
+						//                 "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//                 "maxLength": 256,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Port": {
+						//                 "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//                 "type": "number"
+						//               }
+						//             },
+						//             "required": [
+						//               "Database",
+						//               "Host",
+						//               "Port"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "PrestoParameters": {
+						//             "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "Catalog": {
+						//                 "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 0,
+						//                 "type": "string"
+						//               },
+						//               "Host": {
+						//                 "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//                 "maxLength": 256,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Port": {
+						//                 "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//                 "type": "number"
+						//               }
+						//             },
+						//             "required": [
+						//               "Catalog",
+						//               "Host",
+						//               "Port"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "RdsParameters": {
+						//             "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "Database": {
+						//                 "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "InstanceId": {
+						//                 "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+						//                 "maxLength": 64,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               }
+						//             },
+						//             "required": [
+						//               "Database",
+						//               "InstanceId"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "RedshiftParameters": {
+						//             "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+						//             "properties": {
+						//               "ClusterId": {
+						//                 "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+						//                 "maxLength": 64,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Database": {
+						//                 "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Host": {
+						//                 "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+						//                 "maxLength": 256,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Port": {
+						//                 "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+						//                 "type": "number"
+						//               }
+						//             },
+						//             "required": [
+						//               "Database"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "S3Parameters": {
+						//             "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "ManifestFileLocation": {
+						//                 "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+						//                 "properties": {
+						//                   "Bucket": {
+						//                     "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+						//                     "maxLength": 1024,
+						//                     "minLength": 1,
+						//                     "type": "string"
+						//                   },
+						//                   "Key": {
+						//                     "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+						//                     "maxLength": 1024,
+						//                     "minLength": 1,
+						//                     "type": "string"
+						//                   }
+						//                 },
+						//                 "required": [
+						//                   "Bucket",
+						//                   "Key"
+						//                 ],
+						//                 "type": "object"
+						//               }
+						//             },
+						//             "required": [
+						//               "ManifestFileLocation"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "SnowflakeParameters": {
+						//             "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "Database": {
+						//                 "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Host": {
+						//                 "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//                 "maxLength": 256,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Warehouse": {
+						//                 "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 0,
+						//                 "type": "string"
+						//               }
+						//             },
+						//             "required": [
+						//               "Database",
+						//               "Host",
+						//               "Warehouse"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "SparkParameters": {
+						//             "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "Host": {
+						//                 "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//                 "maxLength": 256,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Port": {
+						//                 "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//                 "type": "number"
+						//               }
+						//             },
+						//             "required": [
+						//               "Host",
+						//               "Port"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "SqlServerParameters": {
+						//             "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "Database": {
+						//                 "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Host": {
+						//                 "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//                 "maxLength": 256,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Port": {
+						//                 "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//                 "type": "number"
+						//               }
+						//             },
+						//             "required": [
+						//               "Database",
+						//               "Host",
+						//               "Port"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "TeradataParameters": {
+						//             "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+						//             "properties": {
+						//               "Database": {
+						//                 "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//                 "maxLength": 128,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Host": {
+						//                 "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//                 "maxLength": 256,
+						//                 "minLength": 1,
+						//                 "type": "string"
+						//               },
+						//               "Port": {
+						//                 "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//                 "type": "number"
+						//               }
+						//             },
+						//             "required": [
+						//               "Database",
+						//               "Host",
+						//               "Port"
+						//             ],
+						//             "type": "object"
+						//           }
+						//         },
+						//         "type": "object"
+						//       },
+						//       "maxItems": 50,
+						//       "minItems": 1,
+						//       "type": "array"
+						//     },
+						//     "Password": {
+						//       "description": "\u003cp\u003ePassword.\u003c/p\u003e",
+						//       "maxLength": 1024,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Username": {
+						//       "description": "\u003cp\u003eUser name.\u003c/p\u003e",
+						//       "maxLength": 64,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "Password",
+						//     "Username"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>The combination of user name and password that are used as credentials.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"alternate_data_source_parameters": {
 									// Property: AlternateDataSourceParameters
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request with the\n            structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is\n            null, the \u003ccode\u003eDataSourceParameters\u003c/code\u003e originally used with these\n                \u003ccode\u003eCredentials\u003c/code\u003e is automatically allowed.\u003c/p\u003e",
-									     "items": {
-									       "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
-									       "properties": {
-									         "AmazonElasticsearchParameters": {
-									           "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
-									           "properties": {
-									             "Domain": {
-									               "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-									               "maxLength": 64,
-									               "minLength": 1,
-									               "type": "string"
-									             }
-									           },
-									           "required": [
-									             "Domain"
-									           ],
-									           "type": "object"
-									         },
-									         "AthenaParameters": {
-									           "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
-									           "properties": {
-									             "WorkGroup": {
-									               "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 1,
-									               "type": "string"
-									             }
-									           },
-									           "type": "object"
-									         },
-									         "AuroraParameters": {
-									           "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
-									           "properties": {
-									             "Database": {
-									               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Host": {
-									               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									               "maxLength": 256,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Port": {
-									               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									               "type": "number"
-									             }
-									           },
-									           "required": [
-									             "Database",
-									             "Host",
-									             "Port"
-									           ],
-									           "type": "object"
-									         },
-									         "AuroraPostgreSqlParameters": {
-									           "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
-									           "properties": {
-									             "Database": {
-									               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Host": {
-									               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									               "maxLength": 256,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Port": {
-									               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									               "type": "number"
-									             }
-									           },
-									           "required": [
-									             "Database",
-									             "Host",
-									             "Port"
-									           ],
-									           "type": "object"
-									         },
-									         "MariaDbParameters": {
-									           "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
-									           "properties": {
-									             "Database": {
-									               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Host": {
-									               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									               "maxLength": 256,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Port": {
-									               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									               "type": "number"
-									             }
-									           },
-									           "required": [
-									             "Database",
-									             "Host",
-									             "Port"
-									           ],
-									           "type": "object"
-									         },
-									         "MySqlParameters": {
-									           "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
-									           "properties": {
-									             "Database": {
-									               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Host": {
-									               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									               "maxLength": 256,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Port": {
-									               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									               "type": "number"
-									             }
-									           },
-									           "required": [
-									             "Database",
-									             "Host",
-									             "Port"
-									           ],
-									           "type": "object"
-									         },
-									         "OracleParameters": {
-									           "properties": {
-									             "Database": {
-									               "maxLength": 128,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Host": {
-									               "maxLength": 256,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Port": {
-									               "type": "number"
-									             }
-									           },
-									           "required": [
-									             "Database",
-									             "Host",
-									             "Port"
-									           ],
-									           "type": "object"
-									         },
-									         "PostgreSqlParameters": {
-									           "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
-									           "properties": {
-									             "Database": {
-									               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Host": {
-									               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									               "maxLength": 256,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Port": {
-									               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									               "type": "number"
-									             }
-									           },
-									           "required": [
-									             "Database",
-									             "Host",
-									             "Port"
-									           ],
-									           "type": "object"
-									         },
-									         "PrestoParameters": {
-									           "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
-									           "properties": {
-									             "Catalog": {
-									               "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 0,
-									               "type": "string"
-									             },
-									             "Host": {
-									               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									               "maxLength": 256,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Port": {
-									               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									               "type": "number"
-									             }
-									           },
-									           "required": [
-									             "Catalog",
-									             "Host",
-									             "Port"
-									           ],
-									           "type": "object"
-									         },
-									         "RdsParameters": {
-									           "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
-									           "properties": {
-									             "Database": {
-									               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "InstanceId": {
-									               "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-									               "maxLength": 64,
-									               "minLength": 1,
-									               "type": "string"
-									             }
-									           },
-									           "required": [
-									             "Database",
-									             "InstanceId"
-									           ],
-									           "type": "object"
-									         },
-									         "RedshiftParameters": {
-									           "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
-									           "properties": {
-									             "ClusterId": {
-									               "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-									               "maxLength": 64,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Database": {
-									               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Host": {
-									               "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-									               "maxLength": 256,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Port": {
-									               "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-									               "type": "number"
-									             }
-									           },
-									           "required": [
-									             "Database"
-									           ],
-									           "type": "object"
-									         },
-									         "S3Parameters": {
-									           "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
-									           "properties": {
-									             "ManifestFileLocation": {
-									               "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-									               "properties": {
-									                 "Bucket": {
-									                   "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-									                   "maxLength": 1024,
-									                   "minLength": 1,
-									                   "type": "string"
-									                 },
-									                 "Key": {
-									                   "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-									                   "maxLength": 1024,
-									                   "minLength": 1,
-									                   "type": "string"
-									                 }
-									               },
-									               "required": [
-									                 "Bucket",
-									                 "Key"
-									               ],
-									               "type": "object"
-									             }
-									           },
-									           "required": [
-									             "ManifestFileLocation"
-									           ],
-									           "type": "object"
-									         },
-									         "SnowflakeParameters": {
-									           "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
-									           "properties": {
-									             "Database": {
-									               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Host": {
-									               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									               "maxLength": 256,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Warehouse": {
-									               "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 0,
-									               "type": "string"
-									             }
-									           },
-									           "required": [
-									             "Database",
-									             "Host",
-									             "Warehouse"
-									           ],
-									           "type": "object"
-									         },
-									         "SparkParameters": {
-									           "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
-									           "properties": {
-									             "Host": {
-									               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									               "maxLength": 256,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Port": {
-									               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									               "type": "number"
-									             }
-									           },
-									           "required": [
-									             "Host",
-									             "Port"
-									           ],
-									           "type": "object"
-									         },
-									         "SqlServerParameters": {
-									           "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
-									           "properties": {
-									             "Database": {
-									               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Host": {
-									               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									               "maxLength": 256,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Port": {
-									               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									               "type": "number"
-									             }
-									           },
-									           "required": [
-									             "Database",
-									             "Host",
-									             "Port"
-									           ],
-									           "type": "object"
-									         },
-									         "TeradataParameters": {
-									           "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
-									           "properties": {
-									             "Database": {
-									               "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									               "maxLength": 128,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Host": {
-									               "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									               "maxLength": 256,
-									               "minLength": 1,
-									               "type": "string"
-									             },
-									             "Port": {
-									               "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									               "type": "number"
-									             }
-									           },
-									           "required": [
-									             "Database",
-									             "Host",
-									             "Port"
-									           ],
-									           "type": "object"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "maxItems": 50,
-									     "minItems": 1,
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request with the\n            structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is\n            null, the \u003ccode\u003eDataSourceParameters\u003c/code\u003e originally used with these\n                \u003ccode\u003eCredentials\u003c/code\u003e is automatically allowed.\u003c/p\u003e",
+									//   "items": {
+									//     "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
+									//     "properties": {
+									//       "AmazonElasticsearchParameters": {
+									//         "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "Domain": {
+									//             "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+									//             "maxLength": 64,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           }
+									//         },
+									//         "required": [
+									//           "Domain"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "AthenaParameters": {
+									//         "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "WorkGroup": {
+									//             "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           }
+									//         },
+									//         "type": "object"
+									//       },
+									//       "AuroraParameters": {
+									//         "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "Database": {
+									//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Host": {
+									//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//             "maxLength": 256,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Port": {
+									//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//             "type": "number"
+									//           }
+									//         },
+									//         "required": [
+									//           "Database",
+									//           "Host",
+									//           "Port"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "AuroraPostgreSqlParameters": {
+									//         "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "Database": {
+									//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Host": {
+									//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//             "maxLength": 256,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Port": {
+									//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//             "type": "number"
+									//           }
+									//         },
+									//         "required": [
+									//           "Database",
+									//           "Host",
+									//           "Port"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "MariaDbParameters": {
+									//         "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "Database": {
+									//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Host": {
+									//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//             "maxLength": 256,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Port": {
+									//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//             "type": "number"
+									//           }
+									//         },
+									//         "required": [
+									//           "Database",
+									//           "Host",
+									//           "Port"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "MySqlParameters": {
+									//         "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "Database": {
+									//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Host": {
+									//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//             "maxLength": 256,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Port": {
+									//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//             "type": "number"
+									//           }
+									//         },
+									//         "required": [
+									//           "Database",
+									//           "Host",
+									//           "Port"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "OracleParameters": {
+									//         "properties": {
+									//           "Database": {
+									//             "maxLength": 128,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Host": {
+									//             "maxLength": 256,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Port": {
+									//             "type": "number"
+									//           }
+									//         },
+									//         "required": [
+									//           "Database",
+									//           "Host",
+									//           "Port"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "PostgreSqlParameters": {
+									//         "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "Database": {
+									//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Host": {
+									//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//             "maxLength": 256,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Port": {
+									//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//             "type": "number"
+									//           }
+									//         },
+									//         "required": [
+									//           "Database",
+									//           "Host",
+									//           "Port"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "PrestoParameters": {
+									//         "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "Catalog": {
+									//             "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 0,
+									//             "type": "string"
+									//           },
+									//           "Host": {
+									//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//             "maxLength": 256,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Port": {
+									//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//             "type": "number"
+									//           }
+									//         },
+									//         "required": [
+									//           "Catalog",
+									//           "Host",
+									//           "Port"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "RdsParameters": {
+									//         "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "Database": {
+									//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "InstanceId": {
+									//             "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+									//             "maxLength": 64,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           }
+									//         },
+									//         "required": [
+									//           "Database",
+									//           "InstanceId"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "RedshiftParameters": {
+									//         "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+									//         "properties": {
+									//           "ClusterId": {
+									//             "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+									//             "maxLength": 64,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Database": {
+									//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Host": {
+									//             "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+									//             "maxLength": 256,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Port": {
+									//             "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+									//             "type": "number"
+									//           }
+									//         },
+									//         "required": [
+									//           "Database"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "S3Parameters": {
+									//         "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "ManifestFileLocation": {
+									//             "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+									//             "properties": {
+									//               "Bucket": {
+									//                 "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+									//                 "maxLength": 1024,
+									//                 "minLength": 1,
+									//                 "type": "string"
+									//               },
+									//               "Key": {
+									//                 "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+									//                 "maxLength": 1024,
+									//                 "minLength": 1,
+									//                 "type": "string"
+									//               }
+									//             },
+									//             "required": [
+									//               "Bucket",
+									//               "Key"
+									//             ],
+									//             "type": "object"
+									//           }
+									//         },
+									//         "required": [
+									//           "ManifestFileLocation"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "SnowflakeParameters": {
+									//         "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "Database": {
+									//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Host": {
+									//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//             "maxLength": 256,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Warehouse": {
+									//             "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 0,
+									//             "type": "string"
+									//           }
+									//         },
+									//         "required": [
+									//           "Database",
+									//           "Host",
+									//           "Warehouse"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "SparkParameters": {
+									//         "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "Host": {
+									//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//             "maxLength": 256,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Port": {
+									//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//             "type": "number"
+									//           }
+									//         },
+									//         "required": [
+									//           "Host",
+									//           "Port"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "SqlServerParameters": {
+									//         "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "Database": {
+									//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Host": {
+									//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//             "maxLength": 256,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Port": {
+									//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//             "type": "number"
+									//           }
+									//         },
+									//         "required": [
+									//           "Database",
+									//           "Host",
+									//           "Port"
+									//         ],
+									//         "type": "object"
+									//       },
+									//       "TeradataParameters": {
+									//         "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+									//         "properties": {
+									//           "Database": {
+									//             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//             "maxLength": 128,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Host": {
+									//             "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//             "maxLength": 256,
+									//             "minLength": 1,
+									//             "type": "string"
+									//           },
+									//           "Port": {
+									//             "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//             "type": "number"
+									//           }
+									//         },
+									//         "required": [
+									//           "Database",
+									//           "Host",
+									//           "Port"
+									//         ],
+									//         "type": "object"
+									//       }
+									//     },
+									//     "type": "object"
+									//   },
+									//   "maxItems": 50,
+									//   "minItems": 1,
+									//   "type": "array"
+									// }
 									Description: "<p>A set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the <code>DataSourceParameters</code> structure that's in the request with the\n            structures in the <code>AlternateDataSourceParameters</code> allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the <code>AlternateDataSourceParameters</code> list is\n            null, the <code>DataSourceParameters</code> originally used with these\n                <code>Credentials</code> is automatically allowed.</p>",
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"amazon_elasticsearch_parameters": {
 												// Property: AmazonElasticsearchParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
-												     "properties": {
-												       "Domain": {
-												         "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-												         "maxLength": 64,
-												         "minLength": 1,
-												         "type": "string"
-												       }
-												     },
-												     "required": [
-												       "Domain"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "Domain": {
+												//       "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+												//       "maxLength": 64,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     }
+												//   },
+												//   "required": [
+												//     "Domain"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>Amazon Elasticsearch Service parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"domain": {
 															// Property: Domain
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-															     "maxLength": 64,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+															//   "maxLength": 64,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>The Amazon Elasticsearch Service domain.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3089,34 +2951,30 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"athena_parameters": {
 												// Property: AthenaParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
-												     "properties": {
-												       "WorkGroup": {
-												         "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 1,
-												         "type": "string"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "WorkGroup": {
+												//       "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     }
+												//   },
+												//   "type": "object"
+												// }
 												Description: "<p>Amazon Athena parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"work_group": {
 															// Property: WorkGroup
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>The workgroup that Amazon Athena uses.</p>",
 															Type:        types.StringType,
 															Optional:    true,
@@ -3128,49 +2986,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"aurora_parameters": {
 												// Property: AuroraParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
-												     "properties": {
-												       "Database": {
-												         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Host": {
-												         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-												         "maxLength": 256,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Port": {
-												         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "Database",
-												       "Host",
-												       "Port"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "Database": {
+												//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Host": {
+												//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+												//       "maxLength": 256,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Port": {
+												//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "Database",
+												//     "Host",
+												//     "Port"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>Amazon Aurora parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"database": {
 															// Property: Database
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3178,14 +3032,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"host": {
 															// Property: Host
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-															     "maxLength": 256,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+															//   "maxLength": 256,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3193,12 +3045,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"port": {
 															// Property: Port
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+															//   "type": "number"
+															// }
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
@@ -3210,49 +3060,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"aurora_postgre_sql_parameters": {
 												// Property: AuroraPostgreSqlParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
-												     "properties": {
-												       "Database": {
-												         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Host": {
-												         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-												         "maxLength": 256,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Port": {
-												         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "Database",
-												       "Host",
-												       "Port"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "Database": {
+												//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Host": {
+												//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+												//       "maxLength": 256,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Port": {
+												//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "Database",
+												//     "Host",
+												//     "Port"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"database": {
 															// Property: Database
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3260,14 +3106,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"host": {
 															// Property: Host
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-															     "maxLength": 256,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+															//   "maxLength": 256,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3275,12 +3119,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"port": {
 															// Property: Port
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+															//   "type": "number"
+															// }
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
@@ -3292,49 +3134,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"maria_db_parameters": {
 												// Property: MariaDbParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
-												     "properties": {
-												       "Database": {
-												         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Host": {
-												         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-												         "maxLength": 256,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Port": {
-												         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "Database",
-												       "Host",
-												       "Port"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "Database": {
+												//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Host": {
+												//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+												//       "maxLength": 256,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Port": {
+												//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "Database",
+												//     "Host",
+												//     "Port"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>MariaDB parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"database": {
 															// Property: Database
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3342,14 +3180,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"host": {
 															// Property: Host
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-															     "maxLength": 256,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+															//   "maxLength": 256,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3357,12 +3193,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"port": {
 															// Property: Port
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+															//   "type": "number"
+															// }
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
@@ -3374,49 +3208,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"my_sql_parameters": {
 												// Property: MySqlParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
-												     "properties": {
-												       "Database": {
-												         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Host": {
-												         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-												         "maxLength": 256,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Port": {
-												         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "Database",
-												       "Host",
-												       "Port"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "Database": {
+												//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Host": {
+												//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+												//       "maxLength": 256,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Port": {
+												//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "Database",
+												//     "Host",
+												//     "Port"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>MySQL parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"database": {
 															// Property: Database
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3424,14 +3254,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"host": {
 															// Property: Host
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-															     "maxLength": 256,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+															//   "maxLength": 256,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3439,12 +3267,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"port": {
 															// Property: Port
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+															//   "type": "number"
+															// }
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
@@ -3456,67 +3282,59 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"oracle_parameters": {
 												// Property: OracleParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "properties": {
-												       "Database": {
-												         "maxLength": 128,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Host": {
-												         "maxLength": 256,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Port": {
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "Database",
-												       "Host",
-												       "Port"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "properties": {
+												//     "Database": {
+												//       "maxLength": 128,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Host": {
+												//       "maxLength": 256,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Port": {
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "Database",
+												//     "Host",
+												//     "Port"
+												//   ],
+												//   "type": "object"
+												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"database": {
 															// Property: Database
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "maxLength": 128,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "maxLength": 128,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Type:     types.StringType,
 															Required: true,
 														},
 														"host": {
 															// Property: Host
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "maxLength": 256,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "maxLength": 256,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Type:     types.StringType,
 															Required: true,
 														},
 														"port": {
 															// Property: Port
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "type": "number"
+															// }
 															Type:     types.NumberType,
 															Required: true,
 														},
@@ -3527,49 +3345,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"postgre_sql_parameters": {
 												// Property: PostgreSqlParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
-												     "properties": {
-												       "Database": {
-												         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Host": {
-												         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-												         "maxLength": 256,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Port": {
-												         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "Database",
-												       "Host",
-												       "Port"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "Database": {
+												//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Host": {
+												//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+												//       "maxLength": 256,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Port": {
+												//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "Database",
+												//     "Host",
+												//     "Port"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>PostgreSQL parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"database": {
 															// Property: Database
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3577,14 +3391,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"host": {
 															// Property: Host
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-															     "maxLength": 256,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+															//   "maxLength": 256,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3592,12 +3404,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"port": {
 															// Property: Port
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+															//   "type": "number"
+															// }
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
@@ -3609,49 +3419,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"presto_parameters": {
 												// Property: PrestoParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
-												     "properties": {
-												       "Catalog": {
-												         "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 0,
-												         "type": "string"
-												       },
-												       "Host": {
-												         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-												         "maxLength": 256,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Port": {
-												         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "Catalog",
-												       "Host",
-												       "Port"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "Catalog": {
+												//       "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 0,
+												//       "type": "string"
+												//     },
+												//     "Host": {
+												//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+												//       "maxLength": 256,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Port": {
+												//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "Catalog",
+												//     "Host",
+												//     "Port"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>Presto parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"catalog": {
 															// Property: Catalog
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 0,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 0,
+															//   "type": "string"
+															// }
 															Description: "<p>Catalog.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3659,14 +3465,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"host": {
 															// Property: Host
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-															     "maxLength": 256,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+															//   "maxLength": 256,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3674,12 +3478,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"port": {
 															// Property: Port
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+															//   "type": "number"
+															// }
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
@@ -3691,44 +3493,40 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"rds_parameters": {
 												// Property: RdsParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
-												     "properties": {
-												       "Database": {
-												         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "InstanceId": {
-												         "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-												         "maxLength": 64,
-												         "minLength": 1,
-												         "type": "string"
-												       }
-												     },
-												     "required": [
-												       "Database",
-												       "InstanceId"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "Database": {
+												//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "InstanceId": {
+												//       "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+												//       "maxLength": 64,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     }
+												//   },
+												//   "required": [
+												//     "Database",
+												//     "InstanceId"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>Amazon RDS parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"database": {
 															// Property: Database
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3736,14 +3534,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"instance_id": {
 															// Property: InstanceId
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-															     "maxLength": 64,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+															//   "maxLength": 64,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Instance ID.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3755,53 +3551,49 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"redshift_parameters": {
 												// Property: RedshiftParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
-												     "properties": {
-												       "ClusterId": {
-												         "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-												         "maxLength": 64,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Database": {
-												         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Host": {
-												         "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-												         "maxLength": 256,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Port": {
-												         "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "Database"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+												//   "properties": {
+												//     "ClusterId": {
+												//       "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+												//       "maxLength": 64,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Database": {
+												//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Host": {
+												//       "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+												//       "maxLength": 256,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Port": {
+												//       "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "Database"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"cluster_id": {
 															// Property: ClusterId
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-															     "maxLength": 64,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+															//   "maxLength": 64,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
 															Type:        types.StringType,
 															Optional:    true,
@@ -3809,14 +3601,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"database": {
 															// Property: Database
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -3824,14 +3614,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"host": {
 															// Property: Host
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-															     "maxLength": 256,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+															//   "maxLength": 256,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
 															Type:        types.StringType,
 															Optional:    true,
@@ -3839,12 +3627,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"port": {
 															// Property: Port
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+															//   "type": "number"
+															// }
 															Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
 															Type:        types.NumberType,
 															Optional:    true,
@@ -3856,83 +3642,77 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"s3_parameters": {
 												// Property: S3Parameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
-												     "properties": {
-												       "ManifestFileLocation": {
-												         "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-												         "properties": {
-												           "Bucket": {
-												             "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-												             "maxLength": 1024,
-												             "minLength": 1,
-												             "type": "string"
-												           },
-												           "Key": {
-												             "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-												             "maxLength": 1024,
-												             "minLength": 1,
-												             "type": "string"
-												           }
-												         },
-												         "required": [
-												           "Bucket",
-												           "Key"
-												         ],
-												         "type": "object"
-												       }
-												     },
-												     "required": [
-												       "ManifestFileLocation"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "ManifestFileLocation": {
+												//       "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+												//       "properties": {
+												//         "Bucket": {
+												//           "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+												//           "maxLength": 1024,
+												//           "minLength": 1,
+												//           "type": "string"
+												//         },
+												//         "Key": {
+												//           "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+												//           "maxLength": 1024,
+												//           "minLength": 1,
+												//           "type": "string"
+												//         }
+												//       },
+												//       "required": [
+												//         "Bucket",
+												//         "Key"
+												//       ],
+												//       "type": "object"
+												//     }
+												//   },
+												//   "required": [
+												//     "ManifestFileLocation"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>S3 parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"manifest_file_location": {
 															// Property: ManifestFileLocation
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-															     "properties": {
-															       "Bucket": {
-															         "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-															         "maxLength": 1024,
-															         "minLength": 1,
-															         "type": "string"
-															       },
-															       "Key": {
-															         "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-															         "maxLength": 1024,
-															         "minLength": 1,
-															         "type": "string"
-															       }
-															     },
-															     "required": [
-															       "Bucket",
-															       "Key"
-															     ],
-															     "type": "object"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+															//   "properties": {
+															//     "Bucket": {
+															//       "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+															//       "maxLength": 1024,
+															//       "minLength": 1,
+															//       "type": "string"
+															//     },
+															//     "Key": {
+															//       "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+															//       "maxLength": 1024,
+															//       "minLength": 1,
+															//       "type": "string"
+															//     }
+															//   },
+															//   "required": [
+															//     "Bucket",
+															//     "Key"
+															//   ],
+															//   "type": "object"
+															// }
 															Description: "<p>Amazon S3 manifest file location.</p>",
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"bucket": {
 																		// Property: Bucket
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-																		     "maxLength": 1024,
-																		     "minLength": 1,
-																		     "type": "string"
-																		   }
-																		*/
+																		// {
+																		//   "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+																		//   "maxLength": 1024,
+																		//   "minLength": 1,
+																		//   "type": "string"
+																		// }
 																		Description: "<p>Amazon S3 bucket.</p>",
 																		Type:        types.StringType,
 																		Required:    true,
@@ -3940,14 +3720,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	"key": {
 																		// Property: Key
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-																		     "maxLength": 1024,
-																		     "minLength": 1,
-																		     "type": "string"
-																		   }
-																		*/
+																		// {
+																		//   "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+																		//   "maxLength": 1024,
+																		//   "minLength": 1,
+																		//   "type": "string"
+																		// }
 																		Description: "<p>Amazon S3 key that identifies an object.</p>",
 																		Type:        types.StringType,
 																		Required:    true,
@@ -3963,51 +3741,47 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"snowflake_parameters": {
 												// Property: SnowflakeParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
-												     "properties": {
-												       "Database": {
-												         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Host": {
-												         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-												         "maxLength": 256,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Warehouse": {
-												         "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 0,
-												         "type": "string"
-												       }
-												     },
-												     "required": [
-												       "Database",
-												       "Host",
-												       "Warehouse"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "Database": {
+												//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Host": {
+												//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+												//       "maxLength": 256,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Warehouse": {
+												//       "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 0,
+												//       "type": "string"
+												//     }
+												//   },
+												//   "required": [
+												//     "Database",
+												//     "Host",
+												//     "Warehouse"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>Snowflake parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"database": {
 															// Property: Database
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -4015,14 +3789,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"host": {
 															// Property: Host
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-															     "maxLength": 256,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+															//   "maxLength": 256,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -4030,14 +3802,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"warehouse": {
 															// Property: Warehouse
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 0,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 0,
+															//   "type": "string"
+															// }
 															Description: "<p>Warehouse.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -4049,42 +3819,38 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"spark_parameters": {
 												// Property: SparkParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
-												     "properties": {
-												       "Host": {
-												         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-												         "maxLength": 256,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Port": {
-												         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "Host",
-												       "Port"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "Host": {
+												//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+												//       "maxLength": 256,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Port": {
+												//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "Host",
+												//     "Port"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>Spark parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"host": {
 															// Property: Host
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-															     "maxLength": 256,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+															//   "maxLength": 256,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -4092,12 +3858,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"port": {
 															// Property: Port
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+															//   "type": "number"
+															// }
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
@@ -4109,49 +3873,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"sql_server_parameters": {
 												// Property: SqlServerParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
-												     "properties": {
-												       "Database": {
-												         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Host": {
-												         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-												         "maxLength": 256,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Port": {
-												         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "Database",
-												       "Host",
-												       "Port"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "Database": {
+												//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Host": {
+												//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+												//       "maxLength": 256,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Port": {
+												//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "Database",
+												//     "Host",
+												//     "Port"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>SQL Server parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"database": {
 															// Property: Database
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -4159,14 +3919,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"host": {
 															// Property: Host
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-															     "maxLength": 256,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+															//   "maxLength": 256,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -4174,12 +3932,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"port": {
 															// Property: Port
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+															//   "type": "number"
+															// }
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
@@ -4191,49 +3947,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"teradata_parameters": {
 												// Property: TeradataParameters
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
-												     "properties": {
-												       "Database": {
-												         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-												         "maxLength": 128,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Host": {
-												         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-												         "maxLength": 256,
-												         "minLength": 1,
-												         "type": "string"
-												       },
-												       "Port": {
-												         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "Database",
-												       "Host",
-												       "Port"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+												//   "properties": {
+												//     "Database": {
+												//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+												//       "maxLength": 128,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Host": {
+												//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+												//       "maxLength": 256,
+												//       "minLength": 1,
+												//       "type": "string"
+												//     },
+												//     "Port": {
+												//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "Database",
+												//     "Host",
+												//     "Port"
+												//   ],
+												//   "type": "object"
+												// }
 												Description: "<p>Teradata parameters.</p>",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"database": {
 															// Property: Database
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-															     "maxLength": 128,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+															//   "maxLength": 128,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -4241,14 +3993,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"host": {
 															// Property: Host
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-															     "maxLength": 256,
-															     "minLength": 1,
-															     "type": "string"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+															//   "maxLength": 256,
+															//   "minLength": 1,
+															//   "type": "string"
+															// }
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
 															Required:    true,
@@ -4256,12 +4006,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"port": {
 															// Property: Port
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+															//   "type": "number"
+															// }
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
@@ -4281,14 +4029,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"password": {
 									// Property: Password
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePassword.\u003c/p\u003e",
-									     "maxLength": 1024,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePassword.\u003c/p\u003e",
+									//   "maxLength": 1024,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Password.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -4296,14 +4042,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"username": {
 									// Property: Username
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eUser name.\u003c/p\u003e",
-									     "maxLength": 64,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eUser name.\u003c/p\u003e",
+									//   "maxLength": 64,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>User name.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -4320,11 +4064,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"data_source_id": {
 			// Property: DataSourceId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -4333,450 +4075,444 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"data_source_parameters": {
 			// Property: DataSourceParameters
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
-			     "properties": {
-			       "AmazonElasticsearchParameters": {
-			         "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
-			         "properties": {
-			           "Domain": {
-			             "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-			             "maxLength": 64,
-			             "minLength": 1,
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "Domain"
-			         ],
-			         "type": "object"
-			       },
-			       "AthenaParameters": {
-			         "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
-			         "properties": {
-			           "WorkGroup": {
-			             "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 1,
-			             "type": "string"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "AuroraParameters": {
-			         "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
-			         "properties": {
-			           "Database": {
-			             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Host": {
-			             "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Port": {
-			             "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			             "type": "number"
-			           }
-			         },
-			         "required": [
-			           "Database",
-			           "Host",
-			           "Port"
-			         ],
-			         "type": "object"
-			       },
-			       "AuroraPostgreSqlParameters": {
-			         "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
-			         "properties": {
-			           "Database": {
-			             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Host": {
-			             "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Port": {
-			             "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			             "type": "number"
-			           }
-			         },
-			         "required": [
-			           "Database",
-			           "Host",
-			           "Port"
-			         ],
-			         "type": "object"
-			       },
-			       "MariaDbParameters": {
-			         "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
-			         "properties": {
-			           "Database": {
-			             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Host": {
-			             "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Port": {
-			             "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			             "type": "number"
-			           }
-			         },
-			         "required": [
-			           "Database",
-			           "Host",
-			           "Port"
-			         ],
-			         "type": "object"
-			       },
-			       "MySqlParameters": {
-			         "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
-			         "properties": {
-			           "Database": {
-			             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Host": {
-			             "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Port": {
-			             "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			             "type": "number"
-			           }
-			         },
-			         "required": [
-			           "Database",
-			           "Host",
-			           "Port"
-			         ],
-			         "type": "object"
-			       },
-			       "OracleParameters": {
-			         "properties": {
-			           "Database": {
-			             "maxLength": 128,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Host": {
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Port": {
-			             "type": "number"
-			           }
-			         },
-			         "required": [
-			           "Database",
-			           "Host",
-			           "Port"
-			         ],
-			         "type": "object"
-			       },
-			       "PostgreSqlParameters": {
-			         "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
-			         "properties": {
-			           "Database": {
-			             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Host": {
-			             "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Port": {
-			             "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			             "type": "number"
-			           }
-			         },
-			         "required": [
-			           "Database",
-			           "Host",
-			           "Port"
-			         ],
-			         "type": "object"
-			       },
-			       "PrestoParameters": {
-			         "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
-			         "properties": {
-			           "Catalog": {
-			             "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 0,
-			             "type": "string"
-			           },
-			           "Host": {
-			             "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Port": {
-			             "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			             "type": "number"
-			           }
-			         },
-			         "required": [
-			           "Catalog",
-			           "Host",
-			           "Port"
-			         ],
-			         "type": "object"
-			       },
-			       "RdsParameters": {
-			         "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
-			         "properties": {
-			           "Database": {
-			             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "InstanceId": {
-			             "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-			             "maxLength": 64,
-			             "minLength": 1,
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "Database",
-			           "InstanceId"
-			         ],
-			         "type": "object"
-			       },
-			       "RedshiftParameters": {
-			         "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
-			         "properties": {
-			           "ClusterId": {
-			             "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-			             "maxLength": 64,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Database": {
-			             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Host": {
-			             "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Port": {
-			             "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-			             "type": "number"
-			           }
-			         },
-			         "required": [
-			           "Database"
-			         ],
-			         "type": "object"
-			       },
-			       "S3Parameters": {
-			         "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
-			         "properties": {
-			           "ManifestFileLocation": {
-			             "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-			             "properties": {
-			               "Bucket": {
-			                 "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-			                 "maxLength": 1024,
-			                 "minLength": 1,
-			                 "type": "string"
-			               },
-			               "Key": {
-			                 "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-			                 "maxLength": 1024,
-			                 "minLength": 1,
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Bucket",
-			               "Key"
-			             ],
-			             "type": "object"
-			           }
-			         },
-			         "required": [
-			           "ManifestFileLocation"
-			         ],
-			         "type": "object"
-			       },
-			       "SnowflakeParameters": {
-			         "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
-			         "properties": {
-			           "Database": {
-			             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Host": {
-			             "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Warehouse": {
-			             "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 0,
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "Database",
-			           "Host",
-			           "Warehouse"
-			         ],
-			         "type": "object"
-			       },
-			       "SparkParameters": {
-			         "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
-			         "properties": {
-			           "Host": {
-			             "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Port": {
-			             "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			             "type": "number"
-			           }
-			         },
-			         "required": [
-			           "Host",
-			           "Port"
-			         ],
-			         "type": "object"
-			       },
-			       "SqlServerParameters": {
-			         "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
-			         "properties": {
-			           "Database": {
-			             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Host": {
-			             "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Port": {
-			             "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			             "type": "number"
-			           }
-			         },
-			         "required": [
-			           "Database",
-			           "Host",
-			           "Port"
-			         ],
-			         "type": "object"
-			       },
-			       "TeradataParameters": {
-			         "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
-			         "properties": {
-			           "Database": {
-			             "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			             "maxLength": 128,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Host": {
-			             "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "Port": {
-			             "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			             "type": "number"
-			           }
-			         },
-			         "required": [
-			           "Database",
-			           "Host",
-			           "Port"
-			         ],
-			         "type": "object"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
+			//   "properties": {
+			//     "AmazonElasticsearchParameters": {
+			//       "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Domain": {
+			//           "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+			//           "maxLength": 64,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "Domain"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "AthenaParameters": {
+			//       "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "WorkGroup": {
+			//           "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "AuroraParameters": {
+			//       "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Database": {
+			//           "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Host": {
+			//           "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Port": {
+			//           "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Database",
+			//         "Host",
+			//         "Port"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "AuroraPostgreSqlParameters": {
+			//       "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Database": {
+			//           "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Host": {
+			//           "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Port": {
+			//           "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Database",
+			//         "Host",
+			//         "Port"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "MariaDbParameters": {
+			//       "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Database": {
+			//           "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Host": {
+			//           "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Port": {
+			//           "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Database",
+			//         "Host",
+			//         "Port"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "MySqlParameters": {
+			//       "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Database": {
+			//           "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Host": {
+			//           "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Port": {
+			//           "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Database",
+			//         "Host",
+			//         "Port"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "OracleParameters": {
+			//       "properties": {
+			//         "Database": {
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Host": {
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Port": {
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Database",
+			//         "Host",
+			//         "Port"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "PostgreSqlParameters": {
+			//       "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Database": {
+			//           "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Host": {
+			//           "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Port": {
+			//           "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Database",
+			//         "Host",
+			//         "Port"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "PrestoParameters": {
+			//       "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Catalog": {
+			//           "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 0,
+			//           "type": "string"
+			//         },
+			//         "Host": {
+			//           "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Port": {
+			//           "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Catalog",
+			//         "Host",
+			//         "Port"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "RdsParameters": {
+			//       "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Database": {
+			//           "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "InstanceId": {
+			//           "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+			//           "maxLength": 64,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "Database",
+			//         "InstanceId"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "RedshiftParameters": {
+			//       "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+			//       "properties": {
+			//         "ClusterId": {
+			//           "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+			//           "maxLength": 64,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Database": {
+			//           "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Host": {
+			//           "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Port": {
+			//           "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Database"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "S3Parameters": {
+			//       "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "ManifestFileLocation": {
+			//           "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+			//           "properties": {
+			//             "Bucket": {
+			//               "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+			//               "maxLength": 1024,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             },
+			//             "Key": {
+			//               "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+			//               "maxLength": 1024,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Bucket",
+			//             "Key"
+			//           ],
+			//           "type": "object"
+			//         }
+			//       },
+			//       "required": [
+			//         "ManifestFileLocation"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "SnowflakeParameters": {
+			//       "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Database": {
+			//           "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Host": {
+			//           "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Warehouse": {
+			//           "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 0,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "Database",
+			//         "Host",
+			//         "Warehouse"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "SparkParameters": {
+			//       "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Host": {
+			//           "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Port": {
+			//           "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Host",
+			//         "Port"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "SqlServerParameters": {
+			//       "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Database": {
+			//           "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Host": {
+			//           "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Port": {
+			//           "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Database",
+			//         "Host",
+			//         "Port"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "TeradataParameters": {
+			//       "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Database": {
+			//           "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+			//           "maxLength": 128,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Host": {
+			//           "description": "\u003cp\u003eHost.\u003c/p\u003e",
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "Port": {
+			//           "description": "\u003cp\u003ePort.\u003c/p\u003e",
+			//           "type": "number"
+			//         }
+			//       },
+			//       "required": [
+			//         "Database",
+			//         "Host",
+			//         "Port"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "<p>The parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.</p>",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"amazon_elasticsearch_parameters": {
 						// Property: AmazonElasticsearchParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Domain": {
-						         "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-						         "maxLength": 64,
-						         "minLength": 1,
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "Domain"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Domain": {
+						//       "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+						//       "maxLength": 64,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "Domain"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Amazon Elasticsearch Service parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"domain": {
 									// Property: Domain
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-									     "maxLength": 64,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+									//   "maxLength": 64,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>The Amazon Elasticsearch Service domain.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -4788,34 +4524,30 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"athena_parameters": {
 						// Property: AthenaParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
-						     "properties": {
-						       "WorkGroup": {
-						         "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "WorkGroup": {
+						//       "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Description: "<p>Amazon Athena parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"work_group": {
 									// Property: WorkGroup
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>The workgroup that Amazon Athena uses.</p>",
 									Type:        types.StringType,
 									Optional:    true,
@@ -4827,49 +4559,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"aurora_parameters": {
 						// Property: AuroraParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Amazon Aurora parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -4877,14 +4605,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -4892,12 +4618,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -4909,49 +4633,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"aurora_postgre_sql_parameters": {
 						// Property: AuroraPostgreSqlParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -4959,14 +4679,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -4974,12 +4692,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -4991,49 +4707,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"maria_db_parameters": {
 						// Property: MariaDbParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>MariaDB parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5041,14 +4753,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5056,12 +4766,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -5073,49 +4781,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"my_sql_parameters": {
 						// Property: MySqlParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>MySQL parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5123,14 +4827,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5138,12 +4840,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -5155,67 +4855,59 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"oracle_parameters": {
 						// Property: OracleParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "properties": {
-						       "Database": {
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "properties": {
+						//     "Database": {
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "type": "number"
+									// }
 									Type:     types.NumberType,
 									Required: true,
 								},
@@ -5226,49 +4918,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"postgre_sql_parameters": {
 						// Property: PostgreSqlParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>PostgreSQL parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5276,14 +4964,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5291,12 +4977,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -5308,49 +4992,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"presto_parameters": {
 						// Property: PrestoParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Catalog": {
-						         "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 0,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Catalog",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Catalog": {
+						//       "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 0,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Catalog",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Presto parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"catalog": {
 									// Property: Catalog
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 0,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 0,
+									//   "type": "string"
+									// }
 									Description: "<p>Catalog.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5358,14 +5038,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5373,12 +5051,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -5390,44 +5066,40 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"rds_parameters": {
 						// Property: RdsParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "InstanceId": {
-						         "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-						         "maxLength": 64,
-						         "minLength": 1,
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "InstanceId"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "InstanceId": {
+						//       "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+						//       "maxLength": 64,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "InstanceId"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Amazon RDS parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5435,14 +5107,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"instance_id": {
 									// Property: InstanceId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-									     "maxLength": 64,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+									//   "maxLength": 64,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Instance ID.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5454,53 +5124,49 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"redshift_parameters": {
 						// Property: RedshiftParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
-						     "properties": {
-						       "ClusterId": {
-						         "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-						         "maxLength": 64,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+						//   "properties": {
+						//     "ClusterId": {
+						//       "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+						//       "maxLength": 64,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cluster_id": {
 									// Property: ClusterId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-									     "maxLength": 64,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+									//   "maxLength": 64,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
 									Type:        types.StringType,
 									Optional:    true,
@@ -5508,14 +5174,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5523,14 +5187,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
 									Type:        types.StringType,
 									Optional:    true,
@@ -5538,12 +5200,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
 									Type:        types.NumberType,
 									Optional:    true,
@@ -5555,83 +5215,77 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"s3_parameters": {
 						// Property: S3Parameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
-						     "properties": {
-						       "ManifestFileLocation": {
-						         "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-						         "properties": {
-						           "Bucket": {
-						             "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-						             "maxLength": 1024,
-						             "minLength": 1,
-						             "type": "string"
-						           },
-						           "Key": {
-						             "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-						             "maxLength": 1024,
-						             "minLength": 1,
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Bucket",
-						           "Key"
-						         ],
-						         "type": "object"
-						       }
-						     },
-						     "required": [
-						       "ManifestFileLocation"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "ManifestFileLocation": {
+						//       "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+						//       "properties": {
+						//         "Bucket": {
+						//           "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+						//           "maxLength": 1024,
+						//           "minLength": 1,
+						//           "type": "string"
+						//         },
+						//         "Key": {
+						//           "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+						//           "maxLength": 1024,
+						//           "minLength": 1,
+						//           "type": "string"
+						//         }
+						//       },
+						//       "required": [
+						//         "Bucket",
+						//         "Key"
+						//       ],
+						//       "type": "object"
+						//     }
+						//   },
+						//   "required": [
+						//     "ManifestFileLocation"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>S3 parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"manifest_file_location": {
 									// Property: ManifestFileLocation
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-									     "properties": {
-									       "Bucket": {
-									         "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-									         "maxLength": 1024,
-									         "minLength": 1,
-									         "type": "string"
-									       },
-									       "Key": {
-									         "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-									         "maxLength": 1024,
-									         "minLength": 1,
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Bucket",
-									       "Key"
-									     ],
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+									//   "properties": {
+									//     "Bucket": {
+									//       "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+									//       "maxLength": 1024,
+									//       "minLength": 1,
+									//       "type": "string"
+									//     },
+									//     "Key": {
+									//       "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+									//       "maxLength": 1024,
+									//       "minLength": 1,
+									//       "type": "string"
+									//     }
+									//   },
+									//   "required": [
+									//     "Bucket",
+									//     "Key"
+									//   ],
+									//   "type": "object"
+									// }
 									Description: "<p>Amazon S3 manifest file location.</p>",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket": {
 												// Property: Bucket
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-												     "maxLength": 1024,
-												     "minLength": 1,
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+												//   "maxLength": 1024,
+												//   "minLength": 1,
+												//   "type": "string"
+												// }
 												Description: "<p>Amazon S3 bucket.</p>",
 												Type:        types.StringType,
 												Required:    true,
@@ -5639,14 +5293,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"key": {
 												// Property: Key
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-												     "maxLength": 1024,
-												     "minLength": 1,
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+												//   "maxLength": 1024,
+												//   "minLength": 1,
+												//   "type": "string"
+												// }
 												Description: "<p>Amazon S3 key that identifies an object.</p>",
 												Type:        types.StringType,
 												Required:    true,
@@ -5662,51 +5314,47 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"snowflake_parameters": {
 						// Property: SnowflakeParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Warehouse": {
-						         "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 0,
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Warehouse"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Warehouse": {
+						//       "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 0,
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Warehouse"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Snowflake parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5714,14 +5362,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5729,14 +5375,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"warehouse": {
 									// Property: Warehouse
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 0,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 0,
+									//   "type": "string"
+									// }
 									Description: "<p>Warehouse.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5748,42 +5392,38 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"spark_parameters": {
 						// Property: SparkParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Spark parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5791,12 +5431,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -5808,49 +5446,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"sql_server_parameters": {
 						// Property: SqlServerParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>SQL Server parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5858,14 +5492,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5873,12 +5505,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -5890,49 +5520,45 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"teradata_parameters": {
 						// Property: TeradataParameters
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
-						     "properties": {
-						       "Database": {
-						         "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-						         "maxLength": 128,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Host": {
-						         "description": "\u003cp\u003eHost.\u003c/p\u003e",
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "Port": {
-						         "description": "\u003cp\u003ePort.\u003c/p\u003e",
-						         "type": "number"
-						       }
-						     },
-						     "required": [
-						       "Database",
-						       "Host",
-						       "Port"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+						//   "properties": {
+						//     "Database": {
+						//       "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+						//       "maxLength": 128,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Host": {
+						//       "description": "\u003cp\u003eHost.\u003c/p\u003e",
+						//       "maxLength": 256,
+						//       "minLength": 1,
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "description": "\u003cp\u003ePort.\u003c/p\u003e",
+						//       "type": "number"
+						//     }
+						//   },
+						//   "required": [
+						//     "Database",
+						//     "Host",
+						//     "Port"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "<p>Teradata parameters.</p>",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"database": {
 									// Property: Database
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5940,14 +5566,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003eHost.\u003c/p\u003e",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003eHost.\u003c/p\u003e",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
 									Required:    true,
@@ -5955,12 +5579,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "\u003cp\u003ePort.\u003c/p\u003e",
-									     "type": "number"
-									   }
-									*/
+									// {
+									//   "description": "\u003cp\u003ePort.\u003c/p\u003e",
+									//   "type": "number"
+									// }
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
@@ -5976,43 +5598,39 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"error_info": {
 			// Property: ErrorInfo
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "\u003cp\u003eError information for the data source creation or update.\u003c/p\u003e",
-			     "properties": {
-			       "Message": {
-			         "description": "\u003cp\u003eError message.\u003c/p\u003e",
-			         "type": "string"
-			       },
-			       "Type": {
-			         "enum": [
-			           "ACCESS_DENIED",
-			           "COPY_SOURCE_NOT_FOUND",
-			           "TIMEOUT",
-			           "ENGINE_VERSION_NOT_SUPPORTED",
-			           "UNKNOWN_HOST",
-			           "GENERIC_SQL_FAILURE",
-			           "CONFLICT",
-			           "UNKNOWN"
-			         ],
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "description": "\u003cp\u003eError information for the data source creation or update.\u003c/p\u003e",
+			//   "properties": {
+			//     "Message": {
+			//       "description": "\u003cp\u003eError message.\u003c/p\u003e",
+			//       "type": "string"
+			//     },
+			//     "Type": {
+			//       "enum": [
+			//         "ACCESS_DENIED",
+			//         "COPY_SOURCE_NOT_FOUND",
+			//         "TIMEOUT",
+			//         "ENGINE_VERSION_NOT_SUPPORTED",
+			//         "UNKNOWN_HOST",
+			//         "GENERIC_SQL_FAILURE",
+			//         "CONFLICT",
+			//         "UNKNOWN"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "<p>Error information for the data source creation or update.</p>",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"message": {
 						// Property: Message
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eError message.\u003c/p\u003e",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eError message.\u003c/p\u003e",
+						//   "type": "string"
+						// }
 						Description: "<p>Error message.</p>",
 						Type:        types.StringType,
 						Optional:    true,
@@ -6020,21 +5638,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"type": {
 						// Property: Type
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "ACCESS_DENIED",
-						       "COPY_SOURCE_NOT_FOUND",
-						       "TIMEOUT",
-						       "ENGINE_VERSION_NOT_SUPPORTED",
-						       "UNKNOWN_HOST",
-						       "GENERIC_SQL_FAILURE",
-						       "CONFLICT",
-						       "UNKNOWN"
-						     ],
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "enum": [
+						//     "ACCESS_DENIED",
+						//     "COPY_SOURCE_NOT_FOUND",
+						//     "TIMEOUT",
+						//     "ENGINE_VERSION_NOT_SUPPORTED",
+						//     "UNKNOWN_HOST",
+						//     "GENERIC_SQL_FAILURE",
+						//     "CONFLICT",
+						//     "UNKNOWN"
+						//   ],
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -6045,13 +5661,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"last_updated_time": {
 			// Property: LastUpdatedTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "\u003cp\u003eThe last time that this data source was updated.\u003c/p\u003e",
-			     "format": "date-time",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "\u003cp\u003eThe last time that this data source was updated.\u003c/p\u003e",
+			//   "format": "date-time",
+			//   "type": "string"
+			// }
 			Description: "<p>The last time that this data source was updated.</p>",
 			Type:        types.StringType,
 			Computed:    true,
@@ -6059,14 +5673,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "\u003cp\u003eA display name for the data source.\u003c/p\u003e",
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "\u003cp\u003eA display name for the data source.\u003c/p\u003e",
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "<p>A display name for the data source.</p>",
 			Type:        types.StringType,
 			Optional:    true,
@@ -6074,56 +5686,52 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"permissions": {
 			// Property: Permissions
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "\u003cp\u003eA list of resource permissions on the data source.\u003c/p\u003e",
-			     "items": {
-			       "description": "\u003cp\u003ePermission for the resource.\u003c/p\u003e",
-			       "properties": {
-			         "Actions": {
-			           "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
-			           "items": {
-			             "type": "string"
-			           },
-			           "maxItems": 16,
-			           "minItems": 1,
-			           "type": "array"
-			         },
-			         "Principal": {
-			           "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Actions",
-			         "Principal"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 64,
-			     "minItems": 1,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "\u003cp\u003eA list of resource permissions on the data source.\u003c/p\u003e",
+			//   "items": {
+			//     "description": "\u003cp\u003ePermission for the resource.\u003c/p\u003e",
+			//     "properties": {
+			//       "Actions": {
+			//         "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "maxItems": 16,
+			//         "minItems": 1,
+			//         "type": "array"
+			//       },
+			//       "Principal": {
+			//         "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Actions",
+			//       "Principal"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 64,
+			//   "minItems": 1,
+			//   "type": "array"
+			// }
 			Description: "<p>A list of resource permissions on the data source.</p>",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"actions": {
 						// Property: Actions
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
-						     "items": {
-						       "type": "string"
-						     },
-						     "maxItems": 16,
-						     "minItems": 1,
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "maxItems": 16,
+						//   "minItems": 1,
+						//   "type": "array"
+						// }
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
@@ -6131,14 +5739,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"principal": {
 						// Property: Principal
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
+						//   "maxLength": 256,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
 						Type:        types.StringType,
 						Required:    true,
@@ -6154,30 +5760,26 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"ssl_properties": {
 			// Property: SslProperties
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "\u003cp\u003eSecure Socket Layer (SSL) properties that apply when QuickSight connects to your\n            underlying data source.\u003c/p\u003e",
-			     "properties": {
-			       "DisableSsl": {
-			         "description": "\u003cp\u003eA Boolean option to control whether SSL should be disabled.\u003c/p\u003e",
-			         "type": "boolean"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "description": "\u003cp\u003eSecure Socket Layer (SSL) properties that apply when QuickSight connects to your\n            underlying data source.\u003c/p\u003e",
+			//   "properties": {
+			//     "DisableSsl": {
+			//       "description": "\u003cp\u003eA Boolean option to control whether SSL should be disabled.\u003c/p\u003e",
+			//       "type": "boolean"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "<p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your\n            underlying data source.</p>",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"disable_ssl": {
 						// Property: DisableSsl
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eA Boolean option to control whether SSL should be disabled.\u003c/p\u003e",
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eA Boolean option to control whether SSL should be disabled.\u003c/p\u003e",
+						//   "type": "boolean"
+						// }
 						Description: "<p>A Boolean option to control whether SSL should be disabled.</p>",
 						Type:        types.BoolType,
 						Optional:    true,
@@ -6189,70 +5791,64 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "CREATION_IN_PROGRESS",
-			       "CREATION_SUCCESSFUL",
-			       "CREATION_FAILED",
-			       "UPDATE_IN_PROGRESS",
-			       "UPDATE_SUCCESSFUL",
-			       "UPDATE_FAILED",
-			       "DELETED"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "CREATION_IN_PROGRESS",
+			//     "CREATION_SUCCESSFUL",
+			//     "CREATION_FAILED",
+			//     "UPDATE_IN_PROGRESS",
+			//     "UPDATE_SUCCESSFUL",
+			//     "UPDATE_FAILED",
+			//     "DELETED"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "\u003cp\u003eContains a map of the key-value pairs for the resource tag or tags assigned to the data source.\u003c/p\u003e",
-			     "items": {
-			       "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
-			       "properties": {
-			         "Key": {
-			           "description": "\u003cp\u003eTag key.\u003c/p\u003e",
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "\u003cp\u003eTag value.\u003c/p\u003e",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 200,
-			     "minItems": 1,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "\u003cp\u003eContains a map of the key-value pairs for the resource tag or tags assigned to the data source.\u003c/p\u003e",
+			//   "items": {
+			//     "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "\u003cp\u003eTag key.\u003c/p\u003e",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "\u003cp\u003eTag value.\u003c/p\u003e",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 200,
+			//   "minItems": 1,
+			//   "type": "array"
+			// }
 			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p>",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eTag key.\u003c/p\u003e",
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eTag key.\u003c/p\u003e",
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Description: "<p>Tag key.</p>",
 						Type:        types.StringType,
 						Required:    true,
@@ -6260,14 +5856,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eTag value.\u003c/p\u003e",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eTag value.\u003c/p\u003e",
+						//   "maxLength": 256,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Description: "<p>Tag value.</p>",
 						Type:        types.StringType,
 						Required:    true,
@@ -6283,36 +5877,34 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "ADOBE_ANALYTICS",
-			       "AMAZON_ELASTICSEARCH",
-			       "ATHENA",
-			       "AURORA",
-			       "AURORA_POSTGRESQL",
-			       "AWS_IOT_ANALYTICS",
-			       "GITHUB",
-			       "JIRA",
-			       "MARIADB",
-			       "MYSQL",
-			       "ORACLE",
-			       "POSTGRESQL",
-			       "PRESTO",
-			       "REDSHIFT",
-			       "S3",
-			       "SALESFORCE",
-			       "SERVICENOW",
-			       "SNOWFLAKE",
-			       "SPARK",
-			       "SQLSERVER",
-			       "TERADATA",
-			       "TWITTER",
-			       "TIMESTREAM"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "ADOBE_ANALYTICS",
+			//     "AMAZON_ELASTICSEARCH",
+			//     "ATHENA",
+			//     "AURORA",
+			//     "AURORA_POSTGRESQL",
+			//     "AWS_IOT_ANALYTICS",
+			//     "GITHUB",
+			//     "JIRA",
+			//     "MARIADB",
+			//     "MYSQL",
+			//     "ORACLE",
+			//     "POSTGRESQL",
+			//     "PRESTO",
+			//     "REDSHIFT",
+			//     "S3",
+			//     "SALESFORCE",
+			//     "SERVICENOW",
+			//     "SNOWFLAKE",
+			//     "SPARK",
+			//     "SQLSERVER",
+			//     "TERADATA",
+			//     "TWITTER",
+			//     "TIMESTREAM"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -6321,33 +5913,29 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"vpc_connection_properties": {
 			// Property: VpcConnectionProperties
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
-			     "properties": {
-			       "VpcConnectionArn": {
-			         "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "VpcConnectionArn"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
+			//   "properties": {
+			//     "VpcConnectionArn": {
+			//       "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "VpcConnectionArn"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "<p>VPC connection properties.</p>",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"vpc_connection_arn": {
 						// Property: VpcConnectionArn
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
+						//   "type": "string"
+						// }
 						Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
 						Type:        types.StringType,
 						Required:    true,

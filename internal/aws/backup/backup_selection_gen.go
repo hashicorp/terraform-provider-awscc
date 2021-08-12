@@ -25,11 +25,9 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"backup_plan_id": {
 			// Property: BackupPlanId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// BackupPlanId is a force-new attribute.
@@ -37,129 +35,117 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"backup_selection": {
 			// Property: BackupSelection
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "IamRoleArn": {
-			         "type": "string"
-			       },
-			       "ListOfTags": {
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "ConditionKey": {
-			               "type": "string"
-			             },
-			             "ConditionType": {
-			               "type": "string"
-			             },
-			             "ConditionValue": {
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "ConditionValue",
-			             "ConditionKey",
-			             "ConditionType"
-			           ],
-			           "type": "object"
-			         },
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "Resources": {
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "SelectionName": {
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "SelectionName",
-			       "IamRoleArn"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "IamRoleArn": {
+			//       "type": "string"
+			//     },
+			//     "ListOfTags": {
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "ConditionKey": {
+			//             "type": "string"
+			//           },
+			//           "ConditionType": {
+			//             "type": "string"
+			//           },
+			//           "ConditionValue": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "ConditionValue",
+			//           "ConditionKey",
+			//           "ConditionType"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "Resources": {
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "SelectionName": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "SelectionName",
+			//     "IamRoleArn"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"iam_role_arn": {
 						// Property: IamRoleArn
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"list_of_tags": {
 						// Property: ListOfTags
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "ConditionKey": {
-						           "type": "string"
-						         },
-						         "ConditionType": {
-						           "type": "string"
-						         },
-						         "ConditionValue": {
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "ConditionValue",
-						         "ConditionKey",
-						         "ConditionType"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "properties": {
+						//       "ConditionKey": {
+						//         "type": "string"
+						//       },
+						//       "ConditionType": {
+						//         "type": "string"
+						//       },
+						//       "ConditionValue": {
+						//         "type": "string"
+						//       }
+						//     },
+						//     "required": [
+						//       "ConditionValue",
+						//       "ConditionKey",
+						//       "ConditionType"
+						//     ],
+						//     "type": "object"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": false
+						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"condition_key": {
 									// Property: ConditionKey
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"condition_type": {
 									// Property: ConditionType
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"condition_value": {
 									// Property: ConditionValue
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -171,26 +157,22 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"resources": {
 						// Property: Resources
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": false
+						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"selection_name": {
 						// Property: SelectionName
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -202,22 +184,18 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"selection_id": {
 			// Property: SelectionId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},

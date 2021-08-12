@@ -25,13 +25,11 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"readiness_check_arn": {
 			// Property: ReadinessCheckArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the readiness check.",
-			     "maxLength": 256,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the readiness check.",
+			//   "maxLength": 256,
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the readiness check.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,15 +37,13 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"readiness_check_name": {
 			// Property: ReadinessCheckName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of the ReadinessCheck to create.",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of the ReadinessCheck to create.",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Name of the ReadinessCheck to create.",
 			Type:        types.StringType,
 			Required:    true,
@@ -56,15 +52,13 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"resource_set_name": {
 			// Property: ResourceSetName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the resource set to check.",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the resource set to check.",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the resource set to check.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -72,34 +66,32 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A collection of tags associated with a resource.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "insertionOrder": false,
-			           "items": {
-			             "maxItems": 50,
-			             "type": "string"
-			           },
-			           "type": "array"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "A collection of tags associated with a resource.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "insertionOrder": false,
+			//         "items": {
+			//           "maxItems": 50,
+			//           "type": "string"
+			//         },
+			//         "type": "array"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "A collection of tags associated with a resource.",
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
@@ -107,27 +99,23 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "maxItems": 50,
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "insertionOrder": false,
+						//   "items": {
+						//     "maxItems": 50,
+						//     "type": "string"
+						//   },
+						//   "type": "array"
+						// }
 						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,

@@ -25,12 +25,10 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"aws_account_id": {
 			// Property: AwsAccountId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "AWS account ID of customer",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "AWS account ID of customer",
+			//   "type": "string"
+			// }
 			Description: "AWS account ID of customer",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,17 +36,15 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"finding_publishing_frequency": {
 			// Property: FindingPublishingFrequency
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A enumeration value that specifies how frequently finding updates are published.",
-			     "enum": [
-			       "FIFTEEN_MINUTES",
-			       "ONE_HOUR",
-			       "SIX_HOURS"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A enumeration value that specifies how frequently finding updates are published.",
+			//   "enum": [
+			//     "FIFTEEN_MINUTES",
+			//     "ONE_HOUR",
+			//     "SIX_HOURS"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "A enumeration value that specifies how frequently finding updates are published.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -56,12 +52,10 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"service_role": {
 			// Property: ServiceRole
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Service role used by Macie",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Service role used by Macie",
+			//   "type": "string"
+			// }
 			Description: "Service role used by Macie",
 			Type:        types.StringType,
 			Computed:    true,
@@ -69,16 +63,14 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A enumeration value that specifies the status of the Macie Session.",
-			     "enum": [
-			       "ENABLED",
-			       "PAUSED"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A enumeration value that specifies the status of the Macie Session.",
+			//   "enum": [
+			//     "ENABLED",
+			//     "PAUSED"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "A enumeration value that specifies the status of the Macie Session.",
 			Type:        types.StringType,
 			Optional:    true,

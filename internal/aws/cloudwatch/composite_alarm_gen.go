@@ -25,12 +25,10 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"actions_enabled": {
 			// Property: ActionsEnabled
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "description": "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
+			//   "type": "boolean"
+			// }
 			Description: "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -38,19 +36,17 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"alarm_actions": {
 			// Property: AlarmActions
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN).",
-			     "items": {
-			       "description": "Amazon Resource Name (ARN) of the action",
-			       "maxLength": 1024,
-			       "minLength": 1,
-			       "type": "string"
-			     },
-			     "maxItems": 5,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN).",
+			//   "items": {
+			//     "description": "Amazon Resource Name (ARN) of the action",
+			//     "maxLength": 1024,
+			//     "minLength": 1,
+			//     "type": "string"
+			//   },
+			//   "maxItems": 5,
+			//   "type": "array"
+			// }
 			Description: "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN).",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -58,14 +54,12 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"alarm_description": {
 			// Property: AlarmDescription
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The description of the alarm",
-			     "maxLength": 1024,
-			     "minLength": 0,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The description of the alarm",
+			//   "maxLength": 1024,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
 			Description: "The description of the alarm",
 			Type:        types.StringType,
 			Optional:    true,
@@ -73,14 +67,12 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"alarm_name": {
 			// Property: AlarmName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the Composite Alarm",
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the Composite Alarm",
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The name of the Composite Alarm",
 			Type:        types.StringType,
 			Required:    true,
@@ -89,14 +81,12 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"alarm_rule": {
 			// Property: AlarmRule
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Expression which aggregates the state of other Alarms (Metric or Composite Alarms)",
-			     "maxLength": 10240,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Expression which aggregates the state of other Alarms (Metric or Composite Alarms)",
+			//   "maxLength": 10240,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Expression which aggregates the state of other Alarms (Metric or Composite Alarms)",
 			Type:        types.StringType,
 			Required:    true,
@@ -104,14 +94,12 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Amazon Resource Name (ARN) of the alarm",
-			     "maxLength": 1600,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Amazon Resource Name (ARN) of the alarm",
+			//   "maxLength": 1600,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Amazon Resource Name (ARN) of the alarm",
 			Type:        types.StringType,
 			Computed:    true,
@@ -119,19 +107,17 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"insufficient_data_actions": {
 			// Property: InsufficientDataActions
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
-			     "items": {
-			       "description": "Amazon Resource Name (ARN) of the action",
-			       "maxLength": 1024,
-			       "minLength": 1,
-			       "type": "string"
-			     },
-			     "maxItems": 5,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
+			//   "items": {
+			//     "description": "Amazon Resource Name (ARN) of the action",
+			//     "maxLength": 1024,
+			//     "minLength": 1,
+			//     "type": "string"
+			//   },
+			//   "maxItems": 5,
+			//   "type": "array"
+			// }
 			Description: "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -139,19 +125,17 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"ok_actions": {
 			// Property: OKActions
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
-			     "items": {
-			       "description": "Amazon Resource Name (ARN) of the action",
-			       "maxLength": 1024,
-			       "minLength": 1,
-			       "type": "string"
-			     },
-			     "maxItems": 5,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
+			//   "items": {
+			//     "description": "Amazon Resource Name (ARN) of the action",
+			//     "maxLength": 1024,
+			//     "minLength": 1,
+			//     "type": "string"
+			//   },
+			//   "maxItems": 5,
+			//   "type": "array"
+			// }
 			Description: "The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,

@@ -25,12 +25,10 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ARN of the WAF entity.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ARN of the WAF entity.",
+			//   "type": "string"
+			// }
 			Description: "ARN of the WAF entity.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,13 +36,11 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Description of the entity.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Description of the entity.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Description of the entity.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -52,13 +48,11 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Id of the RegexPatternSet",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Id of the RegexPatternSet",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Id of the RegexPatternSet",
 			Type:        types.StringType,
 			Computed:    true,
@@ -66,13 +60,11 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of the RegexPatternSet.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of the RegexPatternSet.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Name of the RegexPatternSet.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -82,30 +74,26 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"regular_expression_list": {
 			// Property: RegularExpressionList
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Required: true,
 		},
 		"scope": {
 			// Property: Scope
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Use CLOUDFRONT for CloudFront RegexPatternSet, use REGIONAL for Application Load Balancer and API Gateway.",
-			     "enum": [
-			       "CLOUDFRONT",
-			       "REGIONAL"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Use CLOUDFRONT for CloudFront RegexPatternSet, use REGIONAL for Application Load Balancer and API Gateway.",
+			//   "enum": [
+			//     "CLOUDFRONT",
+			//     "REGIONAL"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "Use CLOUDFRONT for CloudFront RegexPatternSet, use REGIONAL for Application Load Balancer and API Gateway.",
 			Type:        types.StringType,
 			Required:    true,
@@ -114,53 +102,47 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "minItems": 1,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 256,
+						//   "minLength": 0,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

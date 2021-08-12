@@ -25,27 +25,23 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"collection_arn": {
 			// Property: CollectionArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1600,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1600,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"collection_name": {
 			// Property: CollectionName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 100,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 100,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// CollectionName is a force-new attribute.
@@ -53,13 +49,11 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"create_time": {
 			// Property: CreateTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,13 +61,11 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1000,
-			     "minLength": 0,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1000,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -82,29 +74,25 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"kms_key_id": {
 			// Property: KmsKeyId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 2048,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 2048,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"pricing_plan": {
 			// Property: PricingPlan
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "RequestBasedUsage",
-			       "MobileAssetTracking",
-			       "MobileAssetManagement"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "RequestBasedUsage",
+			//     "MobileAssetTracking",
+			//     "MobileAssetManagement"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// PricingPlan is a force-new attribute.
@@ -112,11 +100,9 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"pricing_plan_data_source": {
 			// Property: PricingPlanDataSource
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -125,13 +111,11 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"update_time": {
 			// Property: UpdateTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Type:        types.StringType,
 			Computed:    true,

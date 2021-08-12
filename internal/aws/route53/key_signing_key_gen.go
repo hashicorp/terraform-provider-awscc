@@ -25,13 +25,11 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"hosted_zone_id": {
 			// Property: HostedZoneId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The unique string (ID) used to identify a hosted zone.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The unique string (ID) used to identify a hosted zone.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The unique string (ID) used to identify a hosted zone.",
 			Type:        types.StringType,
 			Required:    true,
@@ -40,14 +38,12 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"key_management_service_arn": {
 			// Property: KeyManagementServiceArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The KeyManagementServiceArn must be unique for each key signing key (KSK) in a single hosted zone.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The KeyManagementServiceArn must be unique for each key signing key (KSK) in a single hosted zone.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The KeyManagementServiceArn must be unique for each key signing key (KSK) in a single hosted zone.",
 			Type:        types.StringType,
 			Required:    true,
@@ -56,13 +52,11 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.",
 			Type:        types.StringType,
 			Required:    true,
@@ -71,16 +65,14 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A string specifying the initial status of the key signing key (KSK). You can set the value to ACTIVE or INACTIVE.",
-			     "enum": [
-			       "ACTIVE",
-			       "INACTIVE"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A string specifying the initial status of the key signing key (KSK). You can set the value to ACTIVE or INACTIVE.",
+			//   "enum": [
+			//     "ACTIVE",
+			//     "INACTIVE"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "A string specifying the initial status of the key signing key (KSK). You can set the value to ACTIVE or INACTIVE.",
 			Type:        types.StringType,
 			Required:    true,

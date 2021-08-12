@@ -25,13 +25,11 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Cost category ARN",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Cost category ARN",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Cost category ARN",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,14 +37,12 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"default_value": {
 			// Property: DefaultValue
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The default value for the cost category",
-			     "maxLength": 50,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The default value for the cost category",
+			//   "maxLength": 50,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The default value for the cost category",
 			Type:        types.StringType,
 			Optional:    true,
@@ -54,15 +50,13 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"effective_start": {
 			// Property: EffectiveStart
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ISO 8601 date time with offset format",
-			     "maxLength": 25,
-			     "minLength": 20,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ISO 8601 date time with offset format",
+			//   "maxLength": 25,
+			//   "minLength": 20,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "ISO 8601 date time with offset format",
 			Type:        types.StringType,
 			Computed:    true,
@@ -70,13 +64,11 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 50,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 50,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// Name is a force-new attribute.
@@ -84,26 +76,22 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"rule_version": {
 			// Property: RuleVersion
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "CostCategoryExpression.v1"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "CostCategoryExpression.v1"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 		},
 		"rules": {
 			// Property: Rules
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "JSON array format of Expression in Billing and Cost Management API",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "JSON array format of Expression in Billing and Cost Management API",
+			//   "type": "string"
+			// }
 			Description: "JSON array format of Expression in Billing and Cost Management API",
 			Type:        types.StringType,
 			Required:    true,

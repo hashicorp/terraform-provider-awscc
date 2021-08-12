@@ -25,13 +25,11 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"aws_account_id": {
 			// Property: AwsAccountId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "AWS account ID associated with the Environment",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "AWS account ID associated with the Environment",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "AWS account ID associated with the Environment",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,13 +37,11 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"dedicated_service_account_id": {
 			// Property: DedicatedServiceAccountId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ID for FinSpace created account used to store Environment artifacts",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ID for FinSpace created account used to store Environment artifacts",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "ID for FinSpace created account used to store Environment artifacts",
 			Type:        types.StringType,
 			Computed:    true,
@@ -53,13 +49,11 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Description of the Environment",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Description of the Environment",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Description of the Environment",
 			Type:        types.StringType,
 			Optional:    true,
@@ -67,13 +61,11 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"environment_arn": {
 			// Property: EnvironmentArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ARN of the Environment",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ARN of the Environment",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "ARN of the Environment",
 			Type:        types.StringType,
 			Computed:    true,
@@ -81,13 +73,11 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"environment_id": {
 			// Property: EnvironmentId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Unique identifier for representing FinSpace Environment",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Unique identifier for representing FinSpace Environment",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Unique identifier for representing FinSpace Environment",
 			Type:        types.StringType,
 			Computed:    true,
@@ -95,13 +85,11 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"environment_url": {
 			// Property: EnvironmentUrl
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "URL used to login to the Environment",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "URL used to login to the Environment",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "URL used to login to the Environment",
 			Type:        types.StringType,
 			Computed:    true,
@@ -109,16 +97,14 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"federation_mode": {
 			// Property: FederationMode
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Federation mode used with the Environment",
-			     "enum": [
-			       "LOCAL",
-			       "FEDERATED"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Federation mode used with the Environment",
+			//   "enum": [
+			//     "LOCAL",
+			//     "FEDERATED"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "Federation mode used with the Environment",
 			Type:        types.StringType,
 			Optional:    true,
@@ -126,60 +112,56 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"federation_parameters": {
 			// Property: FederationParameters
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Additional parameters to identify Federation mode",
-			     "properties": {
-			       "ApplicationCallBackURL": {
-			         "description": "SAML metadata URL to link with the Environment",
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "AttributeMap": {
-			         "description": "Attribute map for SAML configuration",
-			         "type": "object"
-			       },
-			       "FederationProviderName": {
-			         "description": "Federation provider name to link with the Environment",
-			         "maxLength": 32,
-			         "minLength": 1,
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "FederationURN": {
-			         "description": "SAML metadata URL to link with the Environment",
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "SamlMetadataDocument": {
-			         "description": "SAML metadata document to link the federation provider to the Environment",
-			         "maxLength": 10000000,
-			         "minLength": 1000,
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "SamlMetadataURL": {
-			         "description": "SAML metadata URL to link with the Environment",
-			         "pattern": "",
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "description": "Additional parameters to identify Federation mode",
+			//   "properties": {
+			//     "ApplicationCallBackURL": {
+			//       "description": "SAML metadata URL to link with the Environment",
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "AttributeMap": {
+			//       "description": "Attribute map for SAML configuration",
+			//       "type": "object"
+			//     },
+			//     "FederationProviderName": {
+			//       "description": "Federation provider name to link with the Environment",
+			//       "maxLength": 32,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "FederationURN": {
+			//       "description": "SAML metadata URL to link with the Environment",
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "SamlMetadataDocument": {
+			//       "description": "SAML metadata document to link the federation provider to the Environment",
+			//       "maxLength": 10000000,
+			//       "minLength": 1000,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "SamlMetadataURL": {
+			//       "description": "SAML metadata URL to link with the Environment",
+			//       "pattern": "",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "Additional parameters to identify Federation mode",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"application_call_back_url": {
 						// Property: ApplicationCallBackURL
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "SAML metadata URL to link with the Environment",
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "SAML metadata URL to link with the Environment",
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "SAML metadata URL to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
@@ -187,12 +169,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"attribute_map": {
 						// Property: AttributeMap
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Attribute map for SAML configuration",
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "Attribute map for SAML configuration",
+						//   "type": "object"
+						// }
 						Description: "Attribute map for SAML configuration",
 						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
@@ -200,15 +180,13 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"federation_provider_name": {
 						// Property: FederationProviderName
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Federation provider name to link with the Environment",
-						     "maxLength": 32,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "Federation provider name to link with the Environment",
+						//   "maxLength": 32,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "Federation provider name to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
@@ -216,13 +194,11 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"federation_urn": {
 						// Property: FederationURN
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "SAML metadata URL to link with the Environment",
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "SAML metadata URL to link with the Environment",
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "SAML metadata URL to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
@@ -230,15 +206,13 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"saml_metadata_document": {
 						// Property: SamlMetadataDocument
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "SAML metadata document to link the federation provider to the Environment",
-						     "maxLength": 10000000,
-						     "minLength": 1000,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "SAML metadata document to link the federation provider to the Environment",
+						//   "maxLength": 10000000,
+						//   "minLength": 1000,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "SAML metadata document to link the federation provider to the Environment",
 						Type:        types.StringType,
 						Optional:    true,
@@ -246,13 +220,11 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"saml_metadata_url": {
 						// Property: SamlMetadataURL
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "SAML metadata URL to link with the Environment",
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "SAML metadata URL to link with the Environment",
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "SAML metadata URL to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
@@ -264,13 +236,11 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"kms_key_id": {
 			// Property: KmsKeyId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "KMS key used to encrypt customer data within FinSpace Environment infrastructure",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "KMS key used to encrypt customer data within FinSpace Environment infrastructure",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "KMS key used to encrypt customer data within FinSpace Environment infrastructure",
 			Type:        types.StringType,
 			Optional:    true,
@@ -280,13 +250,11 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of the Environment",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of the Environment",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Name of the Environment",
 			Type:        types.StringType,
 			Required:    true,
@@ -294,13 +262,11 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"sage_maker_studio_domain_url": {
 			// Property: SageMakerStudioDomainUrl
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "SageMaker Studio Domain URL associated with the Environment",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "SageMaker Studio Domain URL associated with the Environment",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "SageMaker Studio Domain URL associated with the Environment",
 			Type:        types.StringType,
 			Computed:    true,
@@ -308,24 +274,22 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "State of the Environment",
-			     "enum": [
-			       "CREATE_REQUESTED",
-			       "CREATING",
-			       "CREATED",
-			       "DELETE_REQUESTED",
-			       "DELETING",
-			       "DELETED",
-			       "FAILED_CREATION",
-			       "FAILED_DELETION",
-			       "RETRY_DELETION",
-			       "SUSPENDED"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "State of the Environment",
+			//   "enum": [
+			//     "CREATE_REQUESTED",
+			//     "CREATING",
+			//     "CREATED",
+			//     "DELETE_REQUESTED",
+			//     "DELETING",
+			//     "DELETED",
+			//     "FAILED_CREATION",
+			//     "FAILED_DELETION",
+			//     "RETRY_DELETION",
+			//     "SUSPENDED"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "State of the Environment",
 			Type:        types.StringType,
 			Computed:    true,

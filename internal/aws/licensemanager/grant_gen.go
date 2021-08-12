@@ -25,15 +25,13 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"allowed_operations": {
 			// Property: AllowedOperations
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			// Ordered set.
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
@@ -42,24 +40,20 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"grant_arn": {
 			// Property: GrantArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 2048,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 2048,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"grant_name": {
 			// Property: GrantName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name for the created Grant.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name for the created Grant.",
+			//   "type": "string"
+			// }
 			Description: "Name for the created Grant.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -67,12 +61,10 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"home_region": {
 			// Property: HomeRegion
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Home region for the created grant.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Home region for the created grant.",
+			//   "type": "string"
+			// }
 			Description: "Home region for the created grant.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -80,28 +72,24 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"license_arn": {
 			// Property: LicenseArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 2048,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 2048,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"principals": {
 			// Property: Principals
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "maxLength": 2048,
-			       "type": "string"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "maxLength": 2048,
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			// Ordered set.
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
@@ -110,23 +98,19 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The version of the grant.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The version of the grant.",
+			//   "type": "string"
+			// }
 			Description: "The version of the grant.",
 			Type:        types.StringType,
 			Computed:    true,

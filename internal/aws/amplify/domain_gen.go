@@ -25,14 +25,12 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"app_id": {
 			// Property: AppId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 20,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 20,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// AppId is a force-new attribute.
@@ -40,69 +38,59 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1000,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1000,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"auto_sub_domain_creation_patterns": {
 			// Property: AutoSubDomainCreationPatterns
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "maxLength": 2048,
-			       "minLength": 1,
-			       "pattern": "",
-			       "type": "string"
-			     },
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "maxLength": 2048,
+			//     "minLength": 1,
+			//     "pattern": "",
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 		},
 		"auto_sub_domain_iam_role": {
 			// Property: AutoSubDomainIAMRole
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1000,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1000,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"certificate_record": {
 			// Property: CertificateRecord
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1000,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1000,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 255,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 255,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// DomainName is a force-new attribute.
@@ -110,94 +98,82 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"domain_status": {
 			// Property: DomainStatus
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"enable_auto_sub_domain": {
 			// Property: EnableAutoSubDomain
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "type": "boolean"
+			// }
 			Type:     types.BoolType,
 			Optional: true,
 		},
 		"status_reason": {
 			// Property: StatusReason
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1000,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1000,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"sub_domain_settings": {
 			// Property: SubDomainSettings
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "BranchName": {
-			           "maxLength": 255,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Prefix": {
-			           "maxLength": 255,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Prefix",
-			         "BranchName"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 255,
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "BranchName": {
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Prefix": {
+			//         "maxLength": 255,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Prefix",
+			//       "BranchName"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 255,
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"branch_name": {
 						// Property: BranchName
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 255,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 255,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"prefix": {
 						// Property: Prefix
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 255,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 255,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},

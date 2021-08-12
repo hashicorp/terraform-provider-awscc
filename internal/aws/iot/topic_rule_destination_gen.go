@@ -25,12 +25,10 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Amazon Resource Name (ARN).",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Amazon Resource Name (ARN).",
+			//   "type": "string"
+			// }
 			Description: "Amazon Resource Name (ARN).",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,27 +36,23 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"http_url_properties": {
 			// Property: HttpUrlProperties
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "ConfirmationUrl": {
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "ConfirmationUrl": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"confirmation_url": {
 						// Property: ConfirmationUrl
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -71,28 +65,24 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "ENABLED",
-			       "IN_PROGRESS",
-			       "DISABLED"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "ENABLED",
+			//     "IN_PROGRESS",
+			//     "DISABLED"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"status_reason": {
 			// Property: StatusReason
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The reasoning for the current status of the TopicRuleDestination.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The reasoning for the current status of the TopicRuleDestination.",
+			//   "type": "string"
+			// }
 			Description: "The reasoning for the current status of the TopicRuleDestination.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -100,59 +90,53 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"vpc_properties": {
 			// Property: VpcProperties
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "RoleArn": {
-			         "type": "string"
-			       },
-			       "SecurityGroups": {
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array",
-			         "uniqueItems": true
-			       },
-			       "SubnetIds": {
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array",
-			         "uniqueItems": true
-			       },
-			       "VpcId": {
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "RoleArn": {
+			//       "type": "string"
+			//     },
+			//     "SecurityGroups": {
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
+			//     "SubnetIds": {
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
+			//     "VpcId": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"role_arn": {
 						// Property: RoleArn
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"security_groups": {
 						// Property: SecurityGroups
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": true
+						// }
 						// Ordered set.
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
@@ -160,15 +144,13 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					"subnet_ids": {
 						// Property: SubnetIds
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": true
+						// }
 						// Ordered set.
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
@@ -176,11 +158,9 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					"vpc_id": {
 						// Property: VpcId
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

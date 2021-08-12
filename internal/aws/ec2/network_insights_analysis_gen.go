@@ -25,44 +25,38 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		"alternate_path_hints": {
 			// Property: AlternatePathHints
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "ComponentArn": {
-			           "type": "string"
-			         },
-			         "ComponentId": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "ComponentArn": {
+			//         "type": "string"
+			//       },
+			//       "ComponentId": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"component_arn": {
 						// Property: ComponentArn
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"component_id": {
 						// Property: ComponentId
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -74,573 +68,565 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		"explanations": {
 			// Property: Explanations
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Acl": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "AclRule": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Cidr": {
-			               "type": "string"
-			             },
-			             "Egress": {
-			               "type": "boolean"
-			             },
-			             "PortRange": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "From": {
-			                   "type": "integer"
-			                 },
-			                 "To": {
-			                   "type": "integer"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "Protocol": {
-			               "type": "string"
-			             },
-			             "RuleAction": {
-			               "type": "string"
-			             },
-			             "RuleNumber": {
-			               "type": "integer"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Address": {
-			           "type": "string"
-			         },
-			         "Addresses": {
-			           "items": {
-			             "type": "string"
-			           },
-			           "type": "array"
-			         },
-			         "AttachedTo": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "AvailabilityZones": {
-			           "items": {
-			             "type": "string"
-			           },
-			           "type": "array"
-			         },
-			         "Cidrs": {
-			           "items": {
-			             "type": "string"
-			           },
-			           "type": "array"
-			         },
-			         "ClassicLoadBalancerListener": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "InstancePort": {
-			               "type": "integer"
-			             },
-			             "LoadBalancerPort": {
-			               "type": "integer"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Component": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "CustomerGateway": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Destination": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "DestinationVpc": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Direction": {
-			           "type": "string"
-			         },
-			         "ElasticLoadBalancerListener": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "ExplanationCode": {
-			           "type": "string"
-			         },
-			         "IngressRouteTable": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "InternetGateway": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "LoadBalancerArn": {
-			           "type": "string"
-			         },
-			         "LoadBalancerListenerPort": {
-			           "type": "integer"
-			         },
-			         "LoadBalancerTarget": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Address": {
-			               "type": "string"
-			             },
-			             "AvailabilityZone": {
-			               "type": "string"
-			             },
-			             "Instance": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "Arn": {
-			                   "type": "string"
-			                 },
-			                 "Id": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "Port": {
-			               "type": "integer"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "LoadBalancerTargetGroup": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "LoadBalancerTargetGroups": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Arn": {
-			                 "type": "string"
-			               },
-			               "Id": {
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "LoadBalancerTargetPort": {
-			           "type": "integer"
-			         },
-			         "MissingComponent": {
-			           "type": "string"
-			         },
-			         "NatGateway": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "NetworkInterface": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "PacketField": {
-			           "type": "string"
-			         },
-			         "Port": {
-			           "type": "integer"
-			         },
-			         "PortRanges": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "From": {
-			                 "type": "integer"
-			               },
-			               "To": {
-			                 "type": "integer"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "PrefixList": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Protocols": {
-			           "items": {
-			             "type": "string"
-			           },
-			           "type": "array"
-			         },
-			         "RouteTable": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "RouteTableRoute": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "NatGatewayId": {
-			               "type": "string"
-			             },
-			             "NetworkInterfaceId": {
-			               "type": "string"
-			             },
-			             "Origin": {
-			               "type": "string"
-			             },
-			             "TransitGatewayId": {
-			               "type": "string"
-			             },
-			             "VpcPeeringConnectionId": {
-			               "type": "string"
-			             },
-			             "destinationCidr": {
-			               "type": "string"
-			             },
-			             "destinationPrefixListId": {
-			               "type": "string"
-			             },
-			             "egressOnlyInternetGatewayId": {
-			               "type": "string"
-			             },
-			             "gatewayId": {
-			               "type": "string"
-			             },
-			             "instanceId": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "SecurityGroup": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "SecurityGroupRule": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Cidr": {
-			               "type": "string"
-			             },
-			             "Direction": {
-			               "type": "string"
-			             },
-			             "PortRange": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "From": {
-			                   "type": "integer"
-			                 },
-			                 "To": {
-			                   "type": "integer"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "PrefixListId": {
-			               "type": "string"
-			             },
-			             "Protocol": {
-			               "type": "string"
-			             },
-			             "SecurityGroupId": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "SecurityGroups": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Arn": {
-			                 "type": "string"
-			               },
-			               "Id": {
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "SourceVpc": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "State": {
-			           "type": "string"
-			         },
-			         "Subnet": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "SubnetRouteTable": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Vpc": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "VpcPeeringConnection": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "VpnConnection": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "VpnGateway": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "vpcEndpoint": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Acl": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "AclRule": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Cidr": {
+			//             "type": "string"
+			//           },
+			//           "Egress": {
+			//             "type": "boolean"
+			//           },
+			//           "PortRange": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "From": {
+			//                 "type": "integer"
+			//               },
+			//               "To": {
+			//                 "type": "integer"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "Protocol": {
+			//             "type": "string"
+			//           },
+			//           "RuleAction": {
+			//             "type": "string"
+			//           },
+			//           "RuleNumber": {
+			//             "type": "integer"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Address": {
+			//         "type": "string"
+			//       },
+			//       "Addresses": {
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "AttachedTo": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "AvailabilityZones": {
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "Cidrs": {
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "ClassicLoadBalancerListener": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "InstancePort": {
+			//             "type": "integer"
+			//           },
+			//           "LoadBalancerPort": {
+			//             "type": "integer"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Component": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "CustomerGateway": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Destination": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "DestinationVpc": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Direction": {
+			//         "type": "string"
+			//       },
+			//       "ElasticLoadBalancerListener": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "ExplanationCode": {
+			//         "type": "string"
+			//       },
+			//       "IngressRouteTable": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "InternetGateway": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "LoadBalancerArn": {
+			//         "type": "string"
+			//       },
+			//       "LoadBalancerListenerPort": {
+			//         "type": "integer"
+			//       },
+			//       "LoadBalancerTarget": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Address": {
+			//             "type": "string"
+			//           },
+			//           "AvailabilityZone": {
+			//             "type": "string"
+			//           },
+			//           "Instance": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "Arn": {
+			//                 "type": "string"
+			//               },
+			//               "Id": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "Port": {
+			//             "type": "integer"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "LoadBalancerTargetGroup": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "LoadBalancerTargetGroups": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Arn": {
+			//               "type": "string"
+			//             },
+			//             "Id": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "LoadBalancerTargetPort": {
+			//         "type": "integer"
+			//       },
+			//       "MissingComponent": {
+			//         "type": "string"
+			//       },
+			//       "NatGateway": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "NetworkInterface": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "PacketField": {
+			//         "type": "string"
+			//       },
+			//       "Port": {
+			//         "type": "integer"
+			//       },
+			//       "PortRanges": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "From": {
+			//               "type": "integer"
+			//             },
+			//             "To": {
+			//               "type": "integer"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "PrefixList": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Protocols": {
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "RouteTable": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "RouteTableRoute": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "NatGatewayId": {
+			//             "type": "string"
+			//           },
+			//           "NetworkInterfaceId": {
+			//             "type": "string"
+			//           },
+			//           "Origin": {
+			//             "type": "string"
+			//           },
+			//           "TransitGatewayId": {
+			//             "type": "string"
+			//           },
+			//           "VpcPeeringConnectionId": {
+			//             "type": "string"
+			//           },
+			//           "destinationCidr": {
+			//             "type": "string"
+			//           },
+			//           "destinationPrefixListId": {
+			//             "type": "string"
+			//           },
+			//           "egressOnlyInternetGatewayId": {
+			//             "type": "string"
+			//           },
+			//           "gatewayId": {
+			//             "type": "string"
+			//           },
+			//           "instanceId": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "SecurityGroup": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "SecurityGroupRule": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Cidr": {
+			//             "type": "string"
+			//           },
+			//           "Direction": {
+			//             "type": "string"
+			//           },
+			//           "PortRange": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "From": {
+			//                 "type": "integer"
+			//               },
+			//               "To": {
+			//                 "type": "integer"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "PrefixListId": {
+			//             "type": "string"
+			//           },
+			//           "Protocol": {
+			//             "type": "string"
+			//           },
+			//           "SecurityGroupId": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "SecurityGroups": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Arn": {
+			//               "type": "string"
+			//             },
+			//             "Id": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "SourceVpc": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "State": {
+			//         "type": "string"
+			//       },
+			//       "Subnet": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "SubnetRouteTable": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Vpc": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "VpcPeeringConnection": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "VpnConnection": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "VpnGateway": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "vpcEndpoint": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"acl": {
 						// Property: Acl
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -651,103 +637,91 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"acl_rule": {
 						// Property: AclRule
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Cidr": {
-						         "type": "string"
-						       },
-						       "Egress": {
-						         "type": "boolean"
-						       },
-						       "PortRange": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "From": {
-						             "type": "integer"
-						           },
-						           "To": {
-						             "type": "integer"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "Protocol": {
-						         "type": "string"
-						       },
-						       "RuleAction": {
-						         "type": "string"
-						       },
-						       "RuleNumber": {
-						         "type": "integer"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Cidr": {
+						//       "type": "string"
+						//     },
+						//     "Egress": {
+						//       "type": "boolean"
+						//     },
+						//     "PortRange": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "From": {
+						//           "type": "integer"
+						//         },
+						//         "To": {
+						//           "type": "integer"
+						//         }
+						//       },
+						//       "type": "object"
+						//     },
+						//     "Protocol": {
+						//       "type": "string"
+						//     },
+						//     "RuleAction": {
+						//       "type": "string"
+						//     },
+						//     "RuleNumber": {
+						//       "type": "integer"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cidr": {
 									// Property: Cidr
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"egress": {
 									// Property: Egress
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
+									// {
+									//   "type": "boolean"
+									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"port_range": {
 									// Property: PortRange
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "From": {
-									         "type": "integer"
-									       },
-									       "To": {
-									         "type": "integer"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "From": {
+									//       "type": "integer"
+									//     },
+									//     "To": {
+									//       "type": "integer"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -758,33 +732,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								"protocol": {
 									// Property: Protocol
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"rule_action": {
 									// Property: RuleAction
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"rule_number": {
 									// Property: RuleNumber
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -795,66 +763,56 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"address": {
 						// Property: Address
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"addresses": {
 						// Property: Addresses
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array"
+						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"attached_to": {
 						// Property: AttachedTo
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -865,69 +823,59 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"availability_zones": {
 						// Property: AvailabilityZones
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array"
+						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"cidrs": {
 						// Property: Cidrs
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array"
+						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"classic_load_balancer_listener": {
 						// Property: ClassicLoadBalancerListener
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "InstancePort": {
-						         "type": "integer"
-						       },
-						       "LoadBalancerPort": {
-						         "type": "integer"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "InstancePort": {
+						//       "type": "integer"
+						//     },
+						//     "LoadBalancerPort": {
+						//       "type": "integer"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"instance_port": {
 									// Property: InstancePort
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"load_balancer_port": {
 									// Property: LoadBalancerPort
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -938,41 +886,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"component": {
 						// Property: Component
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -983,41 +925,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"customer_gateway": {
 						// Property: CustomerGateway
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1028,41 +964,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"destination": {
 						// Property: Destination
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1073,41 +1003,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"destination_vpc": {
 						// Property: DestinationVpc
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1118,52 +1042,44 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"direction": {
 						// Property: Direction
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"elastic_load_balancer_listener": {
 						// Property: ElasticLoadBalancerListener
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1174,52 +1090,44 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"explanation_code": {
 						// Property: ExplanationCode
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"ingress_route_table": {
 						// Property: IngressRouteTable
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1230,41 +1138,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"internet_gateway": {
 						// Property: InternetGateway
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1275,119 +1177,103 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"load_balancer_arn": {
 						// Property: LoadBalancerArn
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"load_balancer_listener_port": {
 						// Property: LoadBalancerListenerPort
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"load_balancer_target": {
 						// Property: LoadBalancerTarget
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Address": {
-						         "type": "string"
-						       },
-						       "AvailabilityZone": {
-						         "type": "string"
-						       },
-						       "Instance": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Arn": {
-						             "type": "string"
-						           },
-						           "Id": {
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "Port": {
-						         "type": "integer"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Address": {
+						//       "type": "string"
+						//     },
+						//     "AvailabilityZone": {
+						//       "type": "string"
+						//     },
+						//     "Instance": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "Arn": {
+						//           "type": "string"
+						//         },
+						//         "Id": {
+						//           "type": "string"
+						//         }
+						//       },
+						//       "type": "object"
+						//     },
+						//     "Port": {
+						//       "type": "integer"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"address": {
 									// Property: Address
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"availability_zone": {
 									// Property: AvailabilityZone
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"instance": {
 									// Property: Instance
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Arn": {
-									         "type": "string"
-									       },
-									       "Id": {
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "Arn": {
+									//       "type": "string"
+									//     },
+									//     "Id": {
+									//       "type": "string"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"arn": {
 												// Property: Arn
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "type": "string"
+												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"id": {
 												// Property: Id
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "type": "string"
+												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -1398,11 +1284,9 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -1413,41 +1297,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"load_balancer_target_group": {
 						// Property: LoadBalancerTargetGroup
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1458,44 +1336,38 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"load_balancer_target_groups": {
 						// Property: LoadBalancerTargetGroups
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Arn": {
-						           "type": "string"
-						         },
-						         "Id": {
-						           "type": "string"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "properties": {
+						//       "Arn": {
+						//         "type": "string"
+						//       },
+						//       "Id": {
+						//         "type": "string"
+						//       }
+						//     },
+						//     "type": "object"
+						//   },
+						//   "type": "array"
+						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1507,63 +1379,53 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"load_balancer_target_port": {
 						// Property: LoadBalancerTargetPort
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"missing_component": {
 						// Property: MissingComponent
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"nat_gateway": {
 						// Property: NatGateway
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1574,41 +1436,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"network_interface": {
 						// Property: NetworkInterface
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1619,66 +1475,56 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"packet_field": {
 						// Property: PacketField
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"port": {
 						// Property: Port
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"port_ranges": {
 						// Property: PortRanges
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "From": {
-						           "type": "integer"
-						         },
-						         "To": {
-						           "type": "integer"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "properties": {
+						//       "From": {
+						//         "type": "integer"
+						//       },
+						//       "To": {
+						//         "type": "integer"
+						//       }
+						//     },
+						//     "type": "object"
+						//   },
+						//   "type": "array"
+						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"from": {
 									// Property: From
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"to": {
 									// Property: To
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -1690,41 +1536,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"prefix_list": {
 						// Property: PrefixList
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1735,55 +1575,47 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"protocols": {
 						// Property: Protocols
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array"
+						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"route_table": {
 						// Property: RouteTable
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1794,153 +1626,131 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"route_table_route": {
 						// Property: RouteTableRoute
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "NatGatewayId": {
-						         "type": "string"
-						       },
-						       "NetworkInterfaceId": {
-						         "type": "string"
-						       },
-						       "Origin": {
-						         "type": "string"
-						       },
-						       "TransitGatewayId": {
-						         "type": "string"
-						       },
-						       "VpcPeeringConnectionId": {
-						         "type": "string"
-						       },
-						       "destinationCidr": {
-						         "type": "string"
-						       },
-						       "destinationPrefixListId": {
-						         "type": "string"
-						       },
-						       "egressOnlyInternetGatewayId": {
-						         "type": "string"
-						       },
-						       "gatewayId": {
-						         "type": "string"
-						       },
-						       "instanceId": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "NatGatewayId": {
+						//       "type": "string"
+						//     },
+						//     "NetworkInterfaceId": {
+						//       "type": "string"
+						//     },
+						//     "Origin": {
+						//       "type": "string"
+						//     },
+						//     "TransitGatewayId": {
+						//       "type": "string"
+						//     },
+						//     "VpcPeeringConnectionId": {
+						//       "type": "string"
+						//     },
+						//     "destinationCidr": {
+						//       "type": "string"
+						//     },
+						//     "destinationPrefixListId": {
+						//       "type": "string"
+						//     },
+						//     "egressOnlyInternetGatewayId": {
+						//       "type": "string"
+						//     },
+						//     "gatewayId": {
+						//       "type": "string"
+						//     },
+						//     "instanceId": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"nat_gateway_id": {
 									// Property: NatGatewayId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"network_interface_id": {
 									// Property: NetworkInterfaceId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"origin": {
 									// Property: Origin
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"transit_gateway_id": {
 									// Property: TransitGatewayId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"vpc_peering_connection_id": {
 									// Property: VpcPeeringConnectionId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"destination_cidr": {
 									// Property: destinationCidr
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"destination_prefix_list_id": {
 									// Property: destinationPrefixListId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"egress_only_internet_gateway_id": {
 									// Property: egressOnlyInternetGatewayId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"gateway_id": {
 									// Property: gatewayId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"instance_id": {
 									// Property: instanceId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1951,41 +1761,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"security_group": {
 						// Property: SecurityGroup
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1996,103 +1800,91 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"security_group_rule": {
 						// Property: SecurityGroupRule
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Cidr": {
-						         "type": "string"
-						       },
-						       "Direction": {
-						         "type": "string"
-						       },
-						       "PortRange": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "From": {
-						             "type": "integer"
-						           },
-						           "To": {
-						             "type": "integer"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "PrefixListId": {
-						         "type": "string"
-						       },
-						       "Protocol": {
-						         "type": "string"
-						       },
-						       "SecurityGroupId": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Cidr": {
+						//       "type": "string"
+						//     },
+						//     "Direction": {
+						//       "type": "string"
+						//     },
+						//     "PortRange": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "From": {
+						//           "type": "integer"
+						//         },
+						//         "To": {
+						//           "type": "integer"
+						//         }
+						//       },
+						//       "type": "object"
+						//     },
+						//     "PrefixListId": {
+						//       "type": "string"
+						//     },
+						//     "Protocol": {
+						//       "type": "string"
+						//     },
+						//     "SecurityGroupId": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cidr": {
 									// Property: Cidr
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"direction": {
 									// Property: Direction
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"port_range": {
 									// Property: PortRange
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "From": {
-									         "type": "integer"
-									       },
-									       "To": {
-									         "type": "integer"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "From": {
+									//       "type": "integer"
+									//     },
+									//     "To": {
+									//       "type": "integer"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -2103,33 +1895,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								"prefix_list_id": {
 									// Property: PrefixListId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"protocol": {
 									// Property: Protocol
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"security_group_id": {
 									// Property: SecurityGroupId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2140,44 +1926,38 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"security_groups": {
 						// Property: SecurityGroups
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Arn": {
-						           "type": "string"
-						         },
-						         "Id": {
-						           "type": "string"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "properties": {
+						//       "Arn": {
+						//         "type": "string"
+						//       },
+						//       "Id": {
+						//         "type": "string"
+						//       }
+						//     },
+						//     "type": "object"
+						//   },
+						//   "type": "array"
+						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2189,41 +1969,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"source_vpc": {
 						// Property: SourceVpc
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2234,52 +2008,44 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"state": {
 						// Property: State
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"subnet": {
 						// Property: Subnet
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2290,41 +2056,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"subnet_route_table": {
 						// Property: SubnetRouteTable
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2335,41 +2095,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"vpc": {
 						// Property: Vpc
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2380,41 +2134,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"vpc_peering_connection": {
 						// Property: VpcPeeringConnection
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2425,41 +2173,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"vpn_connection": {
 						// Property: VpnConnection
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2470,41 +2212,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"vpn_gateway": {
 						// Property: VpnGateway
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2515,41 +2251,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"vpc_endpoint": {
 						// Property: vpcEndpoint
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2565,14 +2295,12 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		"filter_in_arns": {
 			// Property: FilterInArns
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -2581,386 +2309,372 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		"forward_path_components": {
 			// Property: ForwardPathComponents
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "AclRule": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Cidr": {
-			               "type": "string"
-			             },
-			             "Egress": {
-			               "type": "boolean"
-			             },
-			             "PortRange": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "From": {
-			                   "type": "integer"
-			                 },
-			                 "To": {
-			                   "type": "integer"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "Protocol": {
-			               "type": "string"
-			             },
-			             "RuleAction": {
-			               "type": "string"
-			             },
-			             "RuleNumber": {
-			               "type": "integer"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Component": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "DestinationVpc": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "InboundHeader": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "DestinationAddresses": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array"
-			             },
-			             "DestinationPortRanges": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "From": {
-			                     "type": "integer"
-			                   },
-			                   "To": {
-			                     "type": "integer"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "type": "array"
-			             },
-			             "Protocol": {
-			               "type": "string"
-			             },
-			             "SourceAddresses": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array"
-			             },
-			             "SourcePortRanges": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "From": {
-			                     "type": "integer"
-			                   },
-			                   "To": {
-			                     "type": "integer"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "type": "array"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "OutboundHeader": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "DestinationAddresses": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array"
-			             },
-			             "DestinationPortRanges": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "From": {
-			                     "type": "integer"
-			                   },
-			                   "To": {
-			                     "type": "integer"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "type": "array"
-			             },
-			             "Protocol": {
-			               "type": "string"
-			             },
-			             "SourceAddresses": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array"
-			             },
-			             "SourcePortRanges": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "From": {
-			                     "type": "integer"
-			                   },
-			                   "To": {
-			                     "type": "integer"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "type": "array"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "RouteTableRoute": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "NatGatewayId": {
-			               "type": "string"
-			             },
-			             "NetworkInterfaceId": {
-			               "type": "string"
-			             },
-			             "Origin": {
-			               "type": "string"
-			             },
-			             "TransitGatewayId": {
-			               "type": "string"
-			             },
-			             "VpcPeeringConnectionId": {
-			               "type": "string"
-			             },
-			             "destinationCidr": {
-			               "type": "string"
-			             },
-			             "destinationPrefixListId": {
-			               "type": "string"
-			             },
-			             "egressOnlyInternetGatewayId": {
-			               "type": "string"
-			             },
-			             "gatewayId": {
-			               "type": "string"
-			             },
-			             "instanceId": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "SecurityGroupRule": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Cidr": {
-			               "type": "string"
-			             },
-			             "Direction": {
-			               "type": "string"
-			             },
-			             "PortRange": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "From": {
-			                   "type": "integer"
-			                 },
-			                 "To": {
-			                   "type": "integer"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "PrefixListId": {
-			               "type": "string"
-			             },
-			             "Protocol": {
-			               "type": "string"
-			             },
-			             "SecurityGroupId": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "SequenceNumber": {
-			           "type": "integer"
-			         },
-			         "SourceVpc": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Subnet": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Vpc": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "AclRule": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Cidr": {
+			//             "type": "string"
+			//           },
+			//           "Egress": {
+			//             "type": "boolean"
+			//           },
+			//           "PortRange": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "From": {
+			//                 "type": "integer"
+			//               },
+			//               "To": {
+			//                 "type": "integer"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "Protocol": {
+			//             "type": "string"
+			//           },
+			//           "RuleAction": {
+			//             "type": "string"
+			//           },
+			//           "RuleNumber": {
+			//             "type": "integer"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Component": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "DestinationVpc": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "InboundHeader": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "DestinationAddresses": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "DestinationPortRanges": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "From": {
+			//                   "type": "integer"
+			//                 },
+			//                 "To": {
+			//                   "type": "integer"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "Protocol": {
+			//             "type": "string"
+			//           },
+			//           "SourceAddresses": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "SourcePortRanges": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "From": {
+			//                   "type": "integer"
+			//                 },
+			//                 "To": {
+			//                   "type": "integer"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "type": "array"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "OutboundHeader": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "DestinationAddresses": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "DestinationPortRanges": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "From": {
+			//                   "type": "integer"
+			//                 },
+			//                 "To": {
+			//                   "type": "integer"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "Protocol": {
+			//             "type": "string"
+			//           },
+			//           "SourceAddresses": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "SourcePortRanges": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "From": {
+			//                   "type": "integer"
+			//                 },
+			//                 "To": {
+			//                   "type": "integer"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "type": "array"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "RouteTableRoute": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "NatGatewayId": {
+			//             "type": "string"
+			//           },
+			//           "NetworkInterfaceId": {
+			//             "type": "string"
+			//           },
+			//           "Origin": {
+			//             "type": "string"
+			//           },
+			//           "TransitGatewayId": {
+			//             "type": "string"
+			//           },
+			//           "VpcPeeringConnectionId": {
+			//             "type": "string"
+			//           },
+			//           "destinationCidr": {
+			//             "type": "string"
+			//           },
+			//           "destinationPrefixListId": {
+			//             "type": "string"
+			//           },
+			//           "egressOnlyInternetGatewayId": {
+			//             "type": "string"
+			//           },
+			//           "gatewayId": {
+			//             "type": "string"
+			//           },
+			//           "instanceId": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "SecurityGroupRule": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Cidr": {
+			//             "type": "string"
+			//           },
+			//           "Direction": {
+			//             "type": "string"
+			//           },
+			//           "PortRange": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "From": {
+			//                 "type": "integer"
+			//               },
+			//               "To": {
+			//                 "type": "integer"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "PrefixListId": {
+			//             "type": "string"
+			//           },
+			//           "Protocol": {
+			//             "type": "string"
+			//           },
+			//           "SecurityGroupId": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "SequenceNumber": {
+			//         "type": "integer"
+			//       },
+			//       "SourceVpc": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Subnet": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Vpc": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"acl_rule": {
 						// Property: AclRule
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Cidr": {
-						         "type": "string"
-						       },
-						       "Egress": {
-						         "type": "boolean"
-						       },
-						       "PortRange": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "From": {
-						             "type": "integer"
-						           },
-						           "To": {
-						             "type": "integer"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "Protocol": {
-						         "type": "string"
-						       },
-						       "RuleAction": {
-						         "type": "string"
-						       },
-						       "RuleNumber": {
-						         "type": "integer"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Cidr": {
+						//       "type": "string"
+						//     },
+						//     "Egress": {
+						//       "type": "boolean"
+						//     },
+						//     "PortRange": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "From": {
+						//           "type": "integer"
+						//         },
+						//         "To": {
+						//           "type": "integer"
+						//         }
+						//       },
+						//       "type": "object"
+						//     },
+						//     "Protocol": {
+						//       "type": "string"
+						//     },
+						//     "RuleAction": {
+						//       "type": "string"
+						//     },
+						//     "RuleNumber": {
+						//       "type": "integer"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cidr": {
 									// Property: Cidr
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"egress": {
 									// Property: Egress
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
+									// {
+									//   "type": "boolean"
+									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"port_range": {
 									// Property: PortRange
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "From": {
-									         "type": "integer"
-									       },
-									       "To": {
-									         "type": "integer"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "From": {
+									//       "type": "integer"
+									//     },
+									//     "To": {
+									//       "type": "integer"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -2971,33 +2685,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								"protocol": {
 									// Property: Protocol
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"rule_action": {
 									// Property: RuleAction
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"rule_number": {
 									// Property: RuleNumber
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -3008,41 +2716,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"component": {
 						// Property: Component
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -3053,41 +2755,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"destination_vpc": {
 						// Property: DestinationVpc
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -3098,116 +2794,106 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"inbound_header": {
 						// Property: InboundHeader
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "DestinationAddresses": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array"
-						       },
-						       "DestinationPortRanges": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "From": {
-						               "type": "integer"
-						             },
-						             "To": {
-						               "type": "integer"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "type": "array"
-						       },
-						       "Protocol": {
-						         "type": "string"
-						       },
-						       "SourceAddresses": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array"
-						       },
-						       "SourcePortRanges": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "From": {
-						               "type": "integer"
-						             },
-						             "To": {
-						               "type": "integer"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "type": "array"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "DestinationAddresses": {
+						//       "items": {
+						//         "type": "string"
+						//       },
+						//       "type": "array"
+						//     },
+						//     "DestinationPortRanges": {
+						//       "items": {
+						//         "additionalProperties": false,
+						//         "properties": {
+						//           "From": {
+						//             "type": "integer"
+						//           },
+						//           "To": {
+						//             "type": "integer"
+						//           }
+						//         },
+						//         "type": "object"
+						//       },
+						//       "type": "array"
+						//     },
+						//     "Protocol": {
+						//       "type": "string"
+						//     },
+						//     "SourceAddresses": {
+						//       "items": {
+						//         "type": "string"
+						//       },
+						//       "type": "array"
+						//     },
+						//     "SourcePortRanges": {
+						//       "items": {
+						//         "additionalProperties": false,
+						//         "properties": {
+						//           "From": {
+						//             "type": "integer"
+						//           },
+						//           "To": {
+						//             "type": "integer"
+						//           }
+						//         },
+						//         "type": "object"
+						//       },
+						//       "type": "array"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"destination_addresses": {
 									// Property: DestinationAddresses
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "type": "string"
+									//   },
+									//   "type": "array"
+									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"destination_port_ranges": {
 									// Property: DestinationPortRanges
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "From": {
-									           "type": "integer"
-									         },
-									         "To": {
-									           "type": "integer"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "additionalProperties": false,
+									//     "properties": {
+									//       "From": {
+									//         "type": "integer"
+									//       },
+									//       "To": {
+									//         "type": "integer"
+									//       }
+									//     },
+									//     "type": "object"
+									//   },
+									//   "type": "array"
+									// }
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -3219,69 +2905,59 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								"protocol": {
 									// Property: Protocol
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"source_addresses": {
 									// Property: SourceAddresses
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "type": "string"
+									//   },
+									//   "type": "array"
+									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"source_port_ranges": {
 									// Property: SourcePortRanges
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "From": {
-									           "type": "integer"
-									         },
-									         "To": {
-									           "type": "integer"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "additionalProperties": false,
+									//     "properties": {
+									//       "From": {
+									//         "type": "integer"
+									//       },
+									//       "To": {
+									//         "type": "integer"
+									//       }
+									//     },
+									//     "type": "object"
+									//   },
+									//   "type": "array"
+									// }
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -3297,116 +2973,106 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"outbound_header": {
 						// Property: OutboundHeader
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "DestinationAddresses": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array"
-						       },
-						       "DestinationPortRanges": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "From": {
-						               "type": "integer"
-						             },
-						             "To": {
-						               "type": "integer"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "type": "array"
-						       },
-						       "Protocol": {
-						         "type": "string"
-						       },
-						       "SourceAddresses": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array"
-						       },
-						       "SourcePortRanges": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "From": {
-						               "type": "integer"
-						             },
-						             "To": {
-						               "type": "integer"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "type": "array"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "DestinationAddresses": {
+						//       "items": {
+						//         "type": "string"
+						//       },
+						//       "type": "array"
+						//     },
+						//     "DestinationPortRanges": {
+						//       "items": {
+						//         "additionalProperties": false,
+						//         "properties": {
+						//           "From": {
+						//             "type": "integer"
+						//           },
+						//           "To": {
+						//             "type": "integer"
+						//           }
+						//         },
+						//         "type": "object"
+						//       },
+						//       "type": "array"
+						//     },
+						//     "Protocol": {
+						//       "type": "string"
+						//     },
+						//     "SourceAddresses": {
+						//       "items": {
+						//         "type": "string"
+						//       },
+						//       "type": "array"
+						//     },
+						//     "SourcePortRanges": {
+						//       "items": {
+						//         "additionalProperties": false,
+						//         "properties": {
+						//           "From": {
+						//             "type": "integer"
+						//           },
+						//           "To": {
+						//             "type": "integer"
+						//           }
+						//         },
+						//         "type": "object"
+						//       },
+						//       "type": "array"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"destination_addresses": {
 									// Property: DestinationAddresses
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "type": "string"
+									//   },
+									//   "type": "array"
+									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"destination_port_ranges": {
 									// Property: DestinationPortRanges
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "From": {
-									           "type": "integer"
-									         },
-									         "To": {
-									           "type": "integer"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "additionalProperties": false,
+									//     "properties": {
+									//       "From": {
+									//         "type": "integer"
+									//       },
+									//       "To": {
+									//         "type": "integer"
+									//       }
+									//     },
+									//     "type": "object"
+									//   },
+									//   "type": "array"
+									// }
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -3418,69 +3084,59 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								"protocol": {
 									// Property: Protocol
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"source_addresses": {
 									// Property: SourceAddresses
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "type": "string"
+									//   },
+									//   "type": "array"
+									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"source_port_ranges": {
 									// Property: SourcePortRanges
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "From": {
-									           "type": "integer"
-									         },
-									         "To": {
-									           "type": "integer"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "additionalProperties": false,
+									//     "properties": {
+									//       "From": {
+									//         "type": "integer"
+									//       },
+									//       "To": {
+									//         "type": "integer"
+									//       }
+									//     },
+									//     "type": "object"
+									//   },
+									//   "type": "array"
+									// }
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -3496,153 +3152,131 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"route_table_route": {
 						// Property: RouteTableRoute
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "NatGatewayId": {
-						         "type": "string"
-						       },
-						       "NetworkInterfaceId": {
-						         "type": "string"
-						       },
-						       "Origin": {
-						         "type": "string"
-						       },
-						       "TransitGatewayId": {
-						         "type": "string"
-						       },
-						       "VpcPeeringConnectionId": {
-						         "type": "string"
-						       },
-						       "destinationCidr": {
-						         "type": "string"
-						       },
-						       "destinationPrefixListId": {
-						         "type": "string"
-						       },
-						       "egressOnlyInternetGatewayId": {
-						         "type": "string"
-						       },
-						       "gatewayId": {
-						         "type": "string"
-						       },
-						       "instanceId": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "NatGatewayId": {
+						//       "type": "string"
+						//     },
+						//     "NetworkInterfaceId": {
+						//       "type": "string"
+						//     },
+						//     "Origin": {
+						//       "type": "string"
+						//     },
+						//     "TransitGatewayId": {
+						//       "type": "string"
+						//     },
+						//     "VpcPeeringConnectionId": {
+						//       "type": "string"
+						//     },
+						//     "destinationCidr": {
+						//       "type": "string"
+						//     },
+						//     "destinationPrefixListId": {
+						//       "type": "string"
+						//     },
+						//     "egressOnlyInternetGatewayId": {
+						//       "type": "string"
+						//     },
+						//     "gatewayId": {
+						//       "type": "string"
+						//     },
+						//     "instanceId": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"nat_gateway_id": {
 									// Property: NatGatewayId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"network_interface_id": {
 									// Property: NetworkInterfaceId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"origin": {
 									// Property: Origin
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"transit_gateway_id": {
 									// Property: TransitGatewayId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"vpc_peering_connection_id": {
 									// Property: VpcPeeringConnectionId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"destination_cidr": {
 									// Property: destinationCidr
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"destination_prefix_list_id": {
 									// Property: destinationPrefixListId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"egress_only_internet_gateway_id": {
 									// Property: egressOnlyInternetGatewayId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"gateway_id": {
 									// Property: gatewayId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"instance_id": {
 									// Property: instanceId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -3653,103 +3287,91 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"security_group_rule": {
 						// Property: SecurityGroupRule
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Cidr": {
-						         "type": "string"
-						       },
-						       "Direction": {
-						         "type": "string"
-						       },
-						       "PortRange": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "From": {
-						             "type": "integer"
-						           },
-						           "To": {
-						             "type": "integer"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "PrefixListId": {
-						         "type": "string"
-						       },
-						       "Protocol": {
-						         "type": "string"
-						       },
-						       "SecurityGroupId": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Cidr": {
+						//       "type": "string"
+						//     },
+						//     "Direction": {
+						//       "type": "string"
+						//     },
+						//     "PortRange": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "From": {
+						//           "type": "integer"
+						//         },
+						//         "To": {
+						//           "type": "integer"
+						//         }
+						//       },
+						//       "type": "object"
+						//     },
+						//     "PrefixListId": {
+						//       "type": "string"
+						//     },
+						//     "Protocol": {
+						//       "type": "string"
+						//     },
+						//     "SecurityGroupId": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cidr": {
 									// Property: Cidr
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"direction": {
 									// Property: Direction
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"port_range": {
 									// Property: PortRange
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "From": {
-									         "type": "integer"
-									       },
-									       "To": {
-									         "type": "integer"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "From": {
+									//       "type": "integer"
+									//     },
+									//     "To": {
+									//       "type": "integer"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -3760,33 +3382,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								"prefix_list_id": {
 									// Property: PrefixListId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"protocol": {
 									// Property: Protocol
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"security_group_id": {
 									// Property: SecurityGroupId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -3797,52 +3413,44 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"sequence_number": {
 						// Property: SequenceNumber
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"source_vpc": {
 						// Property: SourceVpc
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -3853,41 +3461,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"subnet": {
 						// Property: Subnet
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -3898,41 +3500,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"vpc": {
 						// Property: Vpc
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -3948,33 +3544,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		"network_insights_analysis_arn": {
 			// Property: NetworkInsightsAnalysisArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"network_insights_analysis_id": {
 			// Property: NetworkInsightsAnalysisId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"network_insights_path_id": {
 			// Property: NetworkInsightsPathId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// NetworkInsightsPathId is a force-new attribute.
@@ -3982,397 +3572,381 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		"network_path_found": {
 			// Property: NetworkPathFound
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "type": "boolean"
+			// }
 			Type:     types.BoolType,
 			Computed: true,
 		},
 		"return_path_components": {
 			// Property: ReturnPathComponents
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "AclRule": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Cidr": {
-			               "type": "string"
-			             },
-			             "Egress": {
-			               "type": "boolean"
-			             },
-			             "PortRange": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "From": {
-			                   "type": "integer"
-			                 },
-			                 "To": {
-			                   "type": "integer"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "Protocol": {
-			               "type": "string"
-			             },
-			             "RuleAction": {
-			               "type": "string"
-			             },
-			             "RuleNumber": {
-			               "type": "integer"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Component": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "DestinationVpc": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "InboundHeader": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "DestinationAddresses": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array"
-			             },
-			             "DestinationPortRanges": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "From": {
-			                     "type": "integer"
-			                   },
-			                   "To": {
-			                     "type": "integer"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "type": "array"
-			             },
-			             "Protocol": {
-			               "type": "string"
-			             },
-			             "SourceAddresses": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array"
-			             },
-			             "SourcePortRanges": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "From": {
-			                     "type": "integer"
-			                   },
-			                   "To": {
-			                     "type": "integer"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "type": "array"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "OutboundHeader": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "DestinationAddresses": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array"
-			             },
-			             "DestinationPortRanges": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "From": {
-			                     "type": "integer"
-			                   },
-			                   "To": {
-			                     "type": "integer"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "type": "array"
-			             },
-			             "Protocol": {
-			               "type": "string"
-			             },
-			             "SourceAddresses": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array"
-			             },
-			             "SourcePortRanges": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "From": {
-			                     "type": "integer"
-			                   },
-			                   "To": {
-			                     "type": "integer"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "type": "array"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "RouteTableRoute": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "NatGatewayId": {
-			               "type": "string"
-			             },
-			             "NetworkInterfaceId": {
-			               "type": "string"
-			             },
-			             "Origin": {
-			               "type": "string"
-			             },
-			             "TransitGatewayId": {
-			               "type": "string"
-			             },
-			             "VpcPeeringConnectionId": {
-			               "type": "string"
-			             },
-			             "destinationCidr": {
-			               "type": "string"
-			             },
-			             "destinationPrefixListId": {
-			               "type": "string"
-			             },
-			             "egressOnlyInternetGatewayId": {
-			               "type": "string"
-			             },
-			             "gatewayId": {
-			               "type": "string"
-			             },
-			             "instanceId": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "SecurityGroupRule": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Cidr": {
-			               "type": "string"
-			             },
-			             "Direction": {
-			               "type": "string"
-			             },
-			             "PortRange": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "From": {
-			                   "type": "integer"
-			                 },
-			                 "To": {
-			                   "type": "integer"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "PrefixListId": {
-			               "type": "string"
-			             },
-			             "Protocol": {
-			               "type": "string"
-			             },
-			             "SecurityGroupId": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "SequenceNumber": {
-			           "type": "integer"
-			         },
-			         "SourceVpc": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Subnet": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Vpc": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "AclRule": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Cidr": {
+			//             "type": "string"
+			//           },
+			//           "Egress": {
+			//             "type": "boolean"
+			//           },
+			//           "PortRange": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "From": {
+			//                 "type": "integer"
+			//               },
+			//               "To": {
+			//                 "type": "integer"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "Protocol": {
+			//             "type": "string"
+			//           },
+			//           "RuleAction": {
+			//             "type": "string"
+			//           },
+			//           "RuleNumber": {
+			//             "type": "integer"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Component": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "DestinationVpc": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "InboundHeader": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "DestinationAddresses": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "DestinationPortRanges": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "From": {
+			//                   "type": "integer"
+			//                 },
+			//                 "To": {
+			//                   "type": "integer"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "Protocol": {
+			//             "type": "string"
+			//           },
+			//           "SourceAddresses": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "SourcePortRanges": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "From": {
+			//                   "type": "integer"
+			//                 },
+			//                 "To": {
+			//                   "type": "integer"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "type": "array"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "OutboundHeader": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "DestinationAddresses": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "DestinationPortRanges": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "From": {
+			//                   "type": "integer"
+			//                 },
+			//                 "To": {
+			//                   "type": "integer"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "Protocol": {
+			//             "type": "string"
+			//           },
+			//           "SourceAddresses": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "SourcePortRanges": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "From": {
+			//                   "type": "integer"
+			//                 },
+			//                 "To": {
+			//                   "type": "integer"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "type": "array"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "RouteTableRoute": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "NatGatewayId": {
+			//             "type": "string"
+			//           },
+			//           "NetworkInterfaceId": {
+			//             "type": "string"
+			//           },
+			//           "Origin": {
+			//             "type": "string"
+			//           },
+			//           "TransitGatewayId": {
+			//             "type": "string"
+			//           },
+			//           "VpcPeeringConnectionId": {
+			//             "type": "string"
+			//           },
+			//           "destinationCidr": {
+			//             "type": "string"
+			//           },
+			//           "destinationPrefixListId": {
+			//             "type": "string"
+			//           },
+			//           "egressOnlyInternetGatewayId": {
+			//             "type": "string"
+			//           },
+			//           "gatewayId": {
+			//             "type": "string"
+			//           },
+			//           "instanceId": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "SecurityGroupRule": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Cidr": {
+			//             "type": "string"
+			//           },
+			//           "Direction": {
+			//             "type": "string"
+			//           },
+			//           "PortRange": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "From": {
+			//                 "type": "integer"
+			//               },
+			//               "To": {
+			//                 "type": "integer"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "PrefixListId": {
+			//             "type": "string"
+			//           },
+			//           "Protocol": {
+			//             "type": "string"
+			//           },
+			//           "SecurityGroupId": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "SequenceNumber": {
+			//         "type": "integer"
+			//       },
+			//       "SourceVpc": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Subnet": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Vpc": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"acl_rule": {
 						// Property: AclRule
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Cidr": {
-						         "type": "string"
-						       },
-						       "Egress": {
-						         "type": "boolean"
-						       },
-						       "PortRange": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "From": {
-						             "type": "integer"
-						           },
-						           "To": {
-						             "type": "integer"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "Protocol": {
-						         "type": "string"
-						       },
-						       "RuleAction": {
-						         "type": "string"
-						       },
-						       "RuleNumber": {
-						         "type": "integer"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Cidr": {
+						//       "type": "string"
+						//     },
+						//     "Egress": {
+						//       "type": "boolean"
+						//     },
+						//     "PortRange": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "From": {
+						//           "type": "integer"
+						//         },
+						//         "To": {
+						//           "type": "integer"
+						//         }
+						//       },
+						//       "type": "object"
+						//     },
+						//     "Protocol": {
+						//       "type": "string"
+						//     },
+						//     "RuleAction": {
+						//       "type": "string"
+						//     },
+						//     "RuleNumber": {
+						//       "type": "integer"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cidr": {
 									// Property: Cidr
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"egress": {
 									// Property: Egress
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
+									// {
+									//   "type": "boolean"
+									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"port_range": {
 									// Property: PortRange
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "From": {
-									         "type": "integer"
-									       },
-									       "To": {
-									         "type": "integer"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "From": {
+									//       "type": "integer"
+									//     },
+									//     "To": {
+									//       "type": "integer"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -4383,33 +3957,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								"protocol": {
 									// Property: Protocol
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"rule_action": {
 									// Property: RuleAction
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"rule_number": {
 									// Property: RuleNumber
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -4420,41 +3988,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"component": {
 						// Property: Component
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -4465,41 +4027,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"destination_vpc": {
 						// Property: DestinationVpc
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -4510,116 +4066,106 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"inbound_header": {
 						// Property: InboundHeader
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "DestinationAddresses": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array"
-						       },
-						       "DestinationPortRanges": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "From": {
-						               "type": "integer"
-						             },
-						             "To": {
-						               "type": "integer"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "type": "array"
-						       },
-						       "Protocol": {
-						         "type": "string"
-						       },
-						       "SourceAddresses": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array"
-						       },
-						       "SourcePortRanges": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "From": {
-						               "type": "integer"
-						             },
-						             "To": {
-						               "type": "integer"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "type": "array"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "DestinationAddresses": {
+						//       "items": {
+						//         "type": "string"
+						//       },
+						//       "type": "array"
+						//     },
+						//     "DestinationPortRanges": {
+						//       "items": {
+						//         "additionalProperties": false,
+						//         "properties": {
+						//           "From": {
+						//             "type": "integer"
+						//           },
+						//           "To": {
+						//             "type": "integer"
+						//           }
+						//         },
+						//         "type": "object"
+						//       },
+						//       "type": "array"
+						//     },
+						//     "Protocol": {
+						//       "type": "string"
+						//     },
+						//     "SourceAddresses": {
+						//       "items": {
+						//         "type": "string"
+						//       },
+						//       "type": "array"
+						//     },
+						//     "SourcePortRanges": {
+						//       "items": {
+						//         "additionalProperties": false,
+						//         "properties": {
+						//           "From": {
+						//             "type": "integer"
+						//           },
+						//           "To": {
+						//             "type": "integer"
+						//           }
+						//         },
+						//         "type": "object"
+						//       },
+						//       "type": "array"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"destination_addresses": {
 									// Property: DestinationAddresses
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "type": "string"
+									//   },
+									//   "type": "array"
+									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"destination_port_ranges": {
 									// Property: DestinationPortRanges
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "From": {
-									           "type": "integer"
-									         },
-									         "To": {
-									           "type": "integer"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "additionalProperties": false,
+									//     "properties": {
+									//       "From": {
+									//         "type": "integer"
+									//       },
+									//       "To": {
+									//         "type": "integer"
+									//       }
+									//     },
+									//     "type": "object"
+									//   },
+									//   "type": "array"
+									// }
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -4631,69 +4177,59 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								"protocol": {
 									// Property: Protocol
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"source_addresses": {
 									// Property: SourceAddresses
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "type": "string"
+									//   },
+									//   "type": "array"
+									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"source_port_ranges": {
 									// Property: SourcePortRanges
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "From": {
-									           "type": "integer"
-									         },
-									         "To": {
-									           "type": "integer"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "additionalProperties": false,
+									//     "properties": {
+									//       "From": {
+									//         "type": "integer"
+									//       },
+									//       "To": {
+									//         "type": "integer"
+									//       }
+									//     },
+									//     "type": "object"
+									//   },
+									//   "type": "array"
+									// }
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -4709,116 +4245,106 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"outbound_header": {
 						// Property: OutboundHeader
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "DestinationAddresses": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array"
-						       },
-						       "DestinationPortRanges": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "From": {
-						               "type": "integer"
-						             },
-						             "To": {
-						               "type": "integer"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "type": "array"
-						       },
-						       "Protocol": {
-						         "type": "string"
-						       },
-						       "SourceAddresses": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array"
-						       },
-						       "SourcePortRanges": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "From": {
-						               "type": "integer"
-						             },
-						             "To": {
-						               "type": "integer"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "type": "array"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "DestinationAddresses": {
+						//       "items": {
+						//         "type": "string"
+						//       },
+						//       "type": "array"
+						//     },
+						//     "DestinationPortRanges": {
+						//       "items": {
+						//         "additionalProperties": false,
+						//         "properties": {
+						//           "From": {
+						//             "type": "integer"
+						//           },
+						//           "To": {
+						//             "type": "integer"
+						//           }
+						//         },
+						//         "type": "object"
+						//       },
+						//       "type": "array"
+						//     },
+						//     "Protocol": {
+						//       "type": "string"
+						//     },
+						//     "SourceAddresses": {
+						//       "items": {
+						//         "type": "string"
+						//       },
+						//       "type": "array"
+						//     },
+						//     "SourcePortRanges": {
+						//       "items": {
+						//         "additionalProperties": false,
+						//         "properties": {
+						//           "From": {
+						//             "type": "integer"
+						//           },
+						//           "To": {
+						//             "type": "integer"
+						//           }
+						//         },
+						//         "type": "object"
+						//       },
+						//       "type": "array"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"destination_addresses": {
 									// Property: DestinationAddresses
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "type": "string"
+									//   },
+									//   "type": "array"
+									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"destination_port_ranges": {
 									// Property: DestinationPortRanges
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "From": {
-									           "type": "integer"
-									         },
-									         "To": {
-									           "type": "integer"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "additionalProperties": false,
+									//     "properties": {
+									//       "From": {
+									//         "type": "integer"
+									//       },
+									//       "To": {
+									//         "type": "integer"
+									//       }
+									//     },
+									//     "type": "object"
+									//   },
+									//   "type": "array"
+									// }
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -4830,69 +4356,59 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								"protocol": {
 									// Property: Protocol
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"source_addresses": {
 									// Property: SourceAddresses
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "type": "string"
+									//   },
+									//   "type": "array"
+									// }
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"source_port_ranges": {
 									// Property: SourcePortRanges
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "From": {
-									           "type": "integer"
-									         },
-									         "To": {
-									           "type": "integer"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "additionalProperties": false,
+									//     "properties": {
+									//       "From": {
+									//         "type": "integer"
+									//       },
+									//       "To": {
+									//         "type": "integer"
+									//       }
+									//     },
+									//     "type": "object"
+									//   },
+									//   "type": "array"
+									// }
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -4908,153 +4424,131 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"route_table_route": {
 						// Property: RouteTableRoute
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "NatGatewayId": {
-						         "type": "string"
-						       },
-						       "NetworkInterfaceId": {
-						         "type": "string"
-						       },
-						       "Origin": {
-						         "type": "string"
-						       },
-						       "TransitGatewayId": {
-						         "type": "string"
-						       },
-						       "VpcPeeringConnectionId": {
-						         "type": "string"
-						       },
-						       "destinationCidr": {
-						         "type": "string"
-						       },
-						       "destinationPrefixListId": {
-						         "type": "string"
-						       },
-						       "egressOnlyInternetGatewayId": {
-						         "type": "string"
-						       },
-						       "gatewayId": {
-						         "type": "string"
-						       },
-						       "instanceId": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "NatGatewayId": {
+						//       "type": "string"
+						//     },
+						//     "NetworkInterfaceId": {
+						//       "type": "string"
+						//     },
+						//     "Origin": {
+						//       "type": "string"
+						//     },
+						//     "TransitGatewayId": {
+						//       "type": "string"
+						//     },
+						//     "VpcPeeringConnectionId": {
+						//       "type": "string"
+						//     },
+						//     "destinationCidr": {
+						//       "type": "string"
+						//     },
+						//     "destinationPrefixListId": {
+						//       "type": "string"
+						//     },
+						//     "egressOnlyInternetGatewayId": {
+						//       "type": "string"
+						//     },
+						//     "gatewayId": {
+						//       "type": "string"
+						//     },
+						//     "instanceId": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"nat_gateway_id": {
 									// Property: NatGatewayId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"network_interface_id": {
 									// Property: NetworkInterfaceId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"origin": {
 									// Property: Origin
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"transit_gateway_id": {
 									// Property: TransitGatewayId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"vpc_peering_connection_id": {
 									// Property: VpcPeeringConnectionId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"destination_cidr": {
 									// Property: destinationCidr
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"destination_prefix_list_id": {
 									// Property: destinationPrefixListId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"egress_only_internet_gateway_id": {
 									// Property: egressOnlyInternetGatewayId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"gateway_id": {
 									// Property: gatewayId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"instance_id": {
 									// Property: instanceId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -5065,103 +4559,91 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"security_group_rule": {
 						// Property: SecurityGroupRule
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Cidr": {
-						         "type": "string"
-						       },
-						       "Direction": {
-						         "type": "string"
-						       },
-						       "PortRange": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "From": {
-						             "type": "integer"
-						           },
-						           "To": {
-						             "type": "integer"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "PrefixListId": {
-						         "type": "string"
-						       },
-						       "Protocol": {
-						         "type": "string"
-						       },
-						       "SecurityGroupId": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Cidr": {
+						//       "type": "string"
+						//     },
+						//     "Direction": {
+						//       "type": "string"
+						//     },
+						//     "PortRange": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "From": {
+						//           "type": "integer"
+						//         },
+						//         "To": {
+						//           "type": "integer"
+						//         }
+						//       },
+						//       "type": "object"
+						//     },
+						//     "PrefixListId": {
+						//       "type": "string"
+						//     },
+						//     "Protocol": {
+						//       "type": "string"
+						//     },
+						//     "SecurityGroupId": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cidr": {
 									// Property: Cidr
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"direction": {
 									// Property: Direction
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"port_range": {
 									// Property: PortRange
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "From": {
-									         "type": "integer"
-									       },
-									       "To": {
-									         "type": "integer"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "From": {
+									//       "type": "integer"
+									//     },
+									//     "To": {
+									//       "type": "integer"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"from": {
 												// Property: From
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"to": {
 												// Property: To
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -5172,33 +4654,27 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								"prefix_list_id": {
 									// Property: PrefixListId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"protocol": {
 									// Property: Protocol
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"security_group_id": {
 									// Property: SecurityGroupId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -5209,52 +4685,44 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"sequence_number": {
 						// Property: SequenceNumber
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"source_vpc": {
 						// Property: SourceVpc
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -5265,41 +4733,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"subnet": {
 						// Property: Subnet
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -5310,41 +4772,35 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					"vpc": {
 						// Property: Vpc
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Arn": {
-						         "type": "string"
-						       },
-						       "Id": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Arn": {
+						//       "type": "string"
+						//     },
+						//     "Id": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"id": {
 									// Property: Id
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -5360,85 +4816,73 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		"start_date": {
 			// Property: StartDate
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "running",
-			       "failed",
-			       "succeeded"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "running",
+			//     "failed",
+			//     "succeeded"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"status_message": {
 			// Property: StatusMessage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

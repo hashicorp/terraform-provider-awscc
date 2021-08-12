@@ -26,12 +26,10 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Service profile Arn. Returned after successful create.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Service profile Arn. Returned after successful create.",
+			//   "type": "string"
+			// }
 			Description: "Service profile Arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,13 +37,11 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Service profile Id. Returned after successful create.",
-			     "maxLength": 256,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Service profile Id. Returned after successful create.",
+			//   "maxLength": 256,
+			//   "type": "string"
+			// }
 			Description: "Service profile Id. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -53,215 +49,185 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"lo_ra_wan": {
 			// Property: LoRaWAN
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "ClassBTimeout": {
-			         "type": "integer"
-			       },
-			       "ClassCTimeout": {
-			         "type": "integer"
-			       },
-			       "MacVersion": {
-			         "maxLength": 64,
-			         "type": "string"
-			       },
-			       "MaxDutyCycle": {
-			         "type": "integer"
-			       },
-			       "MaxEirp": {
-			         "type": "integer"
-			       },
-			       "PingSlotDr": {
-			         "type": "integer"
-			       },
-			       "PingSlotFreq": {
-			         "type": "integer"
-			       },
-			       "PingSlotPeriod": {
-			         "type": "integer"
-			       },
-			       "RegParamsRevision": {
-			         "maxLength": 64,
-			         "type": "string"
-			       },
-			       "RfRegion": {
-			         "maxLength": 64,
-			         "type": "string"
-			       },
-			       "Supports32BitFCnt": {
-			         "type": "boolean"
-			       },
-			       "SupportsClassB": {
-			         "type": "boolean"
-			       },
-			       "SupportsClassC": {
-			         "type": "boolean"
-			       },
-			       "SupportsJoin": {
-			         "type": "boolean"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "ClassBTimeout": {
+			//       "type": "integer"
+			//     },
+			//     "ClassCTimeout": {
+			//       "type": "integer"
+			//     },
+			//     "MacVersion": {
+			//       "maxLength": 64,
+			//       "type": "string"
+			//     },
+			//     "MaxDutyCycle": {
+			//       "type": "integer"
+			//     },
+			//     "MaxEirp": {
+			//       "type": "integer"
+			//     },
+			//     "PingSlotDr": {
+			//       "type": "integer"
+			//     },
+			//     "PingSlotFreq": {
+			//       "type": "integer"
+			//     },
+			//     "PingSlotPeriod": {
+			//       "type": "integer"
+			//     },
+			//     "RegParamsRevision": {
+			//       "maxLength": 64,
+			//       "type": "string"
+			//     },
+			//     "RfRegion": {
+			//       "maxLength": 64,
+			//       "type": "string"
+			//     },
+			//     "Supports32BitFCnt": {
+			//       "type": "boolean"
+			//     },
+			//     "SupportsClassB": {
+			//       "type": "boolean"
+			//     },
+			//     "SupportsClassC": {
+			//       "type": "boolean"
+			//     },
+			//     "SupportsJoin": {
+			//       "type": "boolean"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"class_b_timeout": {
 						// Property: ClassBTimeout
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"class_c_timeout": {
 						// Property: ClassCTimeout
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"mac_version": {
 						// Property: MacVersion
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 64,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 64,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"max_duty_cycle": {
 						// Property: MaxDutyCycle
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"max_eirp": {
 						// Property: MaxEirp
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"ping_slot_dr": {
 						// Property: PingSlotDr
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"ping_slot_freq": {
 						// Property: PingSlotFreq
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"ping_slot_period": {
 						// Property: PingSlotPeriod
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"reg_params_revision": {
 						// Property: RegParamsRevision
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 64,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 64,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"rf_region": {
 						// Property: RfRegion
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 64,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 64,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"supports_32_bit_f_cnt": {
 						// Property: Supports32BitFCnt
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"supports_class_b": {
 						// Property: SupportsClassB
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"supports_class_c": {
 						// Property: SupportsClassC
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"supports_join": {
 						// Property: SupportsJoin
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
@@ -272,13 +238,11 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of service profile",
-			     "maxLength": 256,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of service profile",
+			//   "maxLength": 256,
+			//   "type": "string"
+			// }
 			Description: "Name of service profile",
 			Type:        types.StringType,
 			Optional:    true,
@@ -286,57 +250,51 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of key-value pairs that contain metadata for the device profile.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "A list of key-value pairs that contain metadata for the device profile.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "A list of key-value pairs that contain metadata for the device profile.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 256,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

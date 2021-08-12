@@ -25,11 +25,9 @@ func warmPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"auto_scaling_group_name": {
 			// Property: AutoScalingGroupName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// AutoScalingGroupName is a force-new attribute.
@@ -37,33 +35,27 @@ func warmPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"max_group_prepared_capacity": {
 			// Property: MaxGroupPreparedCapacity
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "type": "integer"
+			// }
 			Type:     types.NumberType,
 			Optional: true,
 		},
 		"min_size": {
 			// Property: MinSize
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "type": "integer"
+			// }
 			Type:     types.NumberType,
 			Optional: true,
 		},
 		"pool_state": {
 			// Property: PoolState
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},

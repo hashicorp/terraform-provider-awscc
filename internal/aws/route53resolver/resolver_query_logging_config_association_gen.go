@@ -25,14 +25,12 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Rfc3339TimeString",
-			     "maxLength": 40,
-			     "minLength": 20,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Rfc3339TimeString",
+			//   "maxLength": 40,
+			//   "minLength": 20,
+			//   "type": "string"
+			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
@@ -40,17 +38,15 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 		"error": {
 			// Property: Error
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ResolverQueryLogConfigAssociationError",
-			     "enum": [
-			       "NONE",
-			       "DESTINATION_NOT_FOUND",
-			       "ACCESS_DENIED"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ResolverQueryLogConfigAssociationError",
+			//   "enum": [
+			//     "NONE",
+			//     "DESTINATION_NOT_FOUND",
+			//     "ACCESS_DENIED"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "ResolverQueryLogConfigAssociationError",
 			Type:        types.StringType,
 			Computed:    true,
@@ -58,12 +54,10 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 		"error_message": {
 			// Property: ErrorMessage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ResolverQueryLogConfigAssociationErrorMessage",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ResolverQueryLogConfigAssociationErrorMessage",
+			//   "type": "string"
+			// }
 			Description: "ResolverQueryLogConfigAssociationErrorMessage",
 			Type:        types.StringType,
 			Computed:    true,
@@ -71,14 +65,12 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Id",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Id",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Id",
 			Type:        types.StringType,
 			Computed:    true,
@@ -86,14 +78,12 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 		"resolver_query_log_config_id": {
 			// Property: ResolverQueryLogConfigId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ResolverQueryLogConfigId",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ResolverQueryLogConfigId",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "ResolverQueryLogConfigId",
 			Type:        types.StringType,
 			Optional:    true,
@@ -103,14 +93,12 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 		"resource_id": {
 			// Property: ResourceId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ResourceId",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ResourceId",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "ResourceId",
 			Type:        types.StringType,
 			Optional:    true,
@@ -120,20 +108,18 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ResolverQueryLogConfigAssociationStatus",
-			     "enum": [
-			       "CREATING",
-			       "ACTIVE",
-			       "ACTION_NEEDED",
-			       "DELETING",
-			       "FAILED",
-			       "OVERRIDDEN"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ResolverQueryLogConfigAssociationStatus",
+			//   "enum": [
+			//     "CREATING",
+			//     "ACTIVE",
+			//     "ACTION_NEEDED",
+			//     "DELETING",
+			//     "FAILED",
+			//     "OVERRIDDEN"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "ResolverQueryLogConfigAssociationStatus",
 			Type:        types.StringType,
 			Computed:    true,

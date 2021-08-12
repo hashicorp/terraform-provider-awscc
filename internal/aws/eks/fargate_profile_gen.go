@@ -25,24 +25,20 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"cluster_name": {
 			// Property: ClusterName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of the Cluster",
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of the Cluster",
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Name of the Cluster",
 			Type:        types.StringType,
 			Required:    true,
@@ -51,13 +47,11 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"fargate_profile_name": {
 			// Property: FargateProfileName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of FargateProfile",
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of FargateProfile",
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Name of FargateProfile",
 			Type:        types.StringType,
 			Optional:    true,
@@ -67,13 +61,11 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"pod_execution_role_arn": {
 			// Property: PodExecutionRoleArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The IAM policy arn for pods",
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The IAM policy arn for pods",
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The IAM policy arn for pods",
 			Type:        types.StringType,
 			Required:    true,
@@ -82,97 +74,91 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"selectors": {
 			// Property: Selectors
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Labels": {
-			           "items": {
-			             "additionalProperties": false,
-			             "description": "A key-value pair to associate with a pod.",
-			             "properties": {
-			               "Key": {
-			                 "description": "The key name of the label.",
-			                 "maxLength": 127,
-			                 "minLength": 1,
-			                 "type": "string"
-			               },
-			               "Value": {
-			                 "description": "The value for the label. ",
-			                 "maxLength": 255,
-			                 "minLength": 1,
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Key",
-			               "Value"
-			             ],
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "Namespace": {
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Namespace"
-			       ],
-			       "type": "object"
-			     },
-			     "minItems": 1,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Labels": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "description": "A key-value pair to associate with a pod.",
+			//           "properties": {
+			//             "Key": {
+			//               "description": "The key name of the label.",
+			//               "maxLength": 127,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             },
+			//             "Value": {
+			//               "description": "The value for the label. ",
+			//               "maxLength": 255,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Key",
+			//             "Value"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "Namespace": {
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Namespace"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"labels": {
 						// Property: Labels
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "description": "A key-value pair to associate with a pod.",
-						       "properties": {
-						         "Key": {
-						           "description": "The key name of the label.",
-						           "maxLength": 127,
-						           "minLength": 1,
-						           "type": "string"
-						         },
-						         "Value": {
-						           "description": "The value for the label. ",
-						           "maxLength": 255,
-						           "minLength": 1,
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "Key",
-						         "Value"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "description": "A key-value pair to associate with a pod.",
+						//     "properties": {
+						//       "Key": {
+						//         "description": "The key name of the label.",
+						//         "maxLength": 127,
+						//         "minLength": 1,
+						//         "type": "string"
+						//       },
+						//       "Value": {
+						//         "description": "The value for the label. ",
+						//         "maxLength": 255,
+						//         "minLength": 1,
+						//         "type": "string"
+						//       }
+						//     },
+						//     "required": [
+						//       "Key",
+						//       "Value"
+						//     ],
+						//     "type": "object"
+						//   },
+						//   "type": "array"
+						// }
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The key name of the label.",
-									     "maxLength": 127,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "The key name of the label.",
+									//   "maxLength": 127,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "The key name of the label.",
 									Type:        types.StringType,
 									Required:    true,
@@ -180,14 +166,12 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"value": {
 									// Property: Value
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The value for the label. ",
-									     "maxLength": 255,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "The value for the label. ",
+									//   "maxLength": 255,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Description: "The value for the label. ",
 									Type:        types.StringType,
 									Required:    true,
@@ -200,12 +184,10 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"namespace": {
 						// Property: Namespace
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -220,14 +202,12 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"subnets": {
 			// Property: Subnets
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -236,36 +216,34 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource.",
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			           "maxLength": 127,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			           "maxLength": 255,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//         "maxLength": 127,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
@@ -273,14 +251,12 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						     "maxLength": 127,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						//   "maxLength": 127,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
@@ -288,14 +264,12 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						     "maxLength": 255,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						//   "maxLength": 255,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,

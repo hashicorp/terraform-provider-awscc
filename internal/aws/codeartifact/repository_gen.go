@@ -25,14 +25,12 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ARN of the repository.",
-			     "maxLength": 2048,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ARN of the repository.",
+			//   "maxLength": 2048,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The ARN of the repository.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -40,13 +38,11 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A text description of the repository.",
-			     "maxLength": 1000,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A text description of the repository.",
+			//   "maxLength": 1000,
+			//   "type": "string"
+			// }
 			Description: "A text description of the repository.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -54,15 +50,13 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the domain that contains the repository.",
-			     "maxLength": 50,
-			     "minLength": 2,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the domain that contains the repository.",
+			//   "maxLength": 50,
+			//   "minLength": 2,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the domain that contains the repository.",
 			Type:        types.StringType,
 			Required:    true,
@@ -71,13 +65,11 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"domain_owner": {
 			// Property: DomainOwner
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The 12-digit account ID of the AWS account that owns the domain.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The 12-digit account ID of the AWS account that owns the domain.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The 12-digit account ID of the AWS account that owns the domain.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -86,15 +78,13 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"external_connections": {
 			// Property: ExternalConnections
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of external connections associated with the repository.",
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "A list of external connections associated with the repository.",
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "A list of external connections associated with the repository.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -102,15 +92,13 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the repository. This is used for GetAtt",
-			     "maxLength": 100,
-			     "minLength": 2,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the repository. This is used for GetAtt",
+			//   "maxLength": 100,
+			//   "minLength": 2,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the repository. This is used for GetAtt",
 			Type:        types.StringType,
 			Computed:    true,
@@ -118,14 +106,12 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"permissions_policy_document": {
 			// Property: PermissionsPolicyDocument
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The access control resource policy on the provided repository.",
-			     "maxLength": 5120,
-			     "minLength": 2,
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "description": "The access control resource policy on the provided repository.",
+			//   "maxLength": 5120,
+			//   "minLength": 2,
+			//   "type": "object"
+			// }
 			Description: "The access control resource policy on the provided repository.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Optional:    true,
@@ -133,15 +119,13 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"repository_name": {
 			// Property: RepositoryName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the repository.",
-			     "maxLength": 100,
-			     "minLength": 2,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the repository.",
+			//   "maxLength": 100,
+			//   "minLength": 2,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the repository.",
 			Type:        types.StringType,
 			Required:    true,
@@ -150,49 +134,45 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource.",
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
@@ -200,14 +180,12 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						//   "maxLength": 256,
+						//   "minLength": 0,
+						//   "type": "string"
+						// }
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
@@ -220,15 +198,13 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"upstreams": {
 			// Property: Upstreams
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of upstream repositories associated with the repository.",
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "A list of upstream repositories associated with the repository.",
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "A list of upstream repositories associated with the repository.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,

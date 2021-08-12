@@ -25,12 +25,10 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 		"customer_gateway_arn": {
 			// Property: CustomerGatewayArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the customer gateway.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the customer gateway.",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the customer gateway.",
 			Type:        types.StringType,
 			Required:    true,
@@ -39,12 +37,10 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 		"device_id": {
 			// Property: DeviceId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the device",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the device",
+			//   "type": "string"
+			// }
 			Description: "The ID of the device",
 			Type:        types.StringType,
 			Required:    true,
@@ -53,12 +49,10 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 		"global_network_id": {
 			// Property: GlobalNetworkId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the global network.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the global network.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Required:    true,
@@ -67,12 +61,10 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 		"link_id": {
 			// Property: LinkId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the link",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the link",
+			//   "type": "string"
+			// }
 			Description: "The ID of the link",
 			Type:        types.StringType,
 			Optional:    true,

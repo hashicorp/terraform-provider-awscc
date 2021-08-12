@@ -25,35 +25,31 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"bandwidth": {
 			// Property: Bandwidth
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "The bandwidth for the link.",
-			     "properties": {
-			       "DownloadSpeed": {
-			         "description": "Download speed in Mbps.",
-			         "type": "integer"
-			       },
-			       "UploadSpeed": {
-			         "description": "Upload speed in Mbps.",
-			         "type": "integer"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The bandwidth for the link.",
+			//   "properties": {
+			//     "DownloadSpeed": {
+			//       "description": "Download speed in Mbps.",
+			//       "type": "integer"
+			//     },
+			//     "UploadSpeed": {
+			//       "description": "Upload speed in Mbps.",
+			//       "type": "integer"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "The bandwidth for the link.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"download_speed": {
 						// Property: DownloadSpeed
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Download speed in Mbps.",
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "description": "Download speed in Mbps.",
+						//   "type": "integer"
+						// }
 						Description: "Download speed in Mbps.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -61,12 +57,10 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"upload_speed": {
 						// Property: UploadSpeed
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Upload speed in Mbps.",
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "description": "Upload speed in Mbps.",
+						//   "type": "integer"
+						// }
 						Description: "Upload speed in Mbps.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -78,12 +72,10 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The description of the link.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The description of the link.",
+			//   "type": "string"
+			// }
 			Description: "The description of the link.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -91,12 +83,10 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"global_network_id": {
 			// Property: GlobalNetworkId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the global network.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the global network.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Required:    true,
@@ -105,12 +95,10 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"link_arn": {
 			// Property: LinkArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the link.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the link.",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the link.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -118,12 +106,10 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"link_id": {
 			// Property: LinkId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the link.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the link.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the link.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -131,12 +117,10 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"provider": {
 			// Property: Provider
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The provider of the link.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The provider of the link.",
+			//   "type": "string"
+			// }
 			Description: "The provider of the link.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -144,12 +128,10 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"site_id": {
 			// Property: SiteId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the site",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the site",
+			//   "type": "string"
+			// }
 			Description: "The ID of the site",
 			Type:        types.StringType,
 			Required:    true,
@@ -158,47 +140,41 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The tags for the link.",
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a link resource.",
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The tags for the link.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a link resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "The tags for the link.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -210,12 +186,10 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The type of the link.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The type of the link.",
+			//   "type": "string"
+			// }
 			Description: "The type of the link.",
 			Type:        types.StringType,
 			Optional:    true,

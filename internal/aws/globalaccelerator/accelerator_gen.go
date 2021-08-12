@@ -25,12 +25,10 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"accelerator_arn": {
 			// Property: AcceleratorArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the accelerator.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the accelerator.",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the accelerator.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,12 +36,10 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"dns_name": {
 			// Property: DnsName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.",
+			//   "type": "string"
+			// }
 			Description: "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,12 +47,10 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"enabled": {
 			// Property: Enabled
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Indicates whether an accelerator is enabled. The value is true or false.",
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "description": "Indicates whether an accelerator is enabled. The value is true or false.",
+			//   "type": "boolean"
+			// }
 			Description: "Indicates whether an accelerator is enabled. The value is true or false.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -64,16 +58,14 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"ip_address_type": {
 			// Property: IpAddressType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "IP Address type.",
-			     "enum": [
-			       "IPV4",
-			       "IPV6"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "IP Address type.",
+			//   "enum": [
+			//     "IPV4",
+			//     "IPV6"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "IP Address type.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -81,17 +73,15 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"ip_addresses": {
 			// Property: IpAddresses
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The IP addresses from BYOIP Prefix pool.",
-			     "items": {
-			       "description": "The IP addresses from BYOIP Prefix pool.",
-			       "pattern": "",
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The IP addresses from BYOIP Prefix pool.",
+			//   "items": {
+			//     "description": "The IP addresses from BYOIP Prefix pool.",
+			//     "pattern": "",
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "The IP addresses from BYOIP Prefix pool.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -99,15 +89,13 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of accelerator.",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of accelerator.",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Name of accelerator.",
 			Type:        types.StringType,
 			Required:    true,
@@ -115,46 +103,42 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "description": "Tag is a key-value pair associated with accelerator.",
-			       "properties": {
-			         "Key": {
-			           "description": "Key of the tag. Value can be 1 to 127 characters.",
-			           "maxLength": 127,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "Value for the tag. Value can be 1 to 255 characters.",
-			           "maxLength": 255,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "description": "Tag is a key-value pair associated with accelerator.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "Key of the tag. Value can be 1 to 127 characters.",
+			//         "maxLength": 127,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "Value for the tag. Value can be 1 to 255 characters.",
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Key of the tag. Value can be 1 to 127 characters.",
-						     "maxLength": 127,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "Key of the tag. Value can be 1 to 127 characters.",
+						//   "maxLength": 127,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Description: "Key of the tag. Value can be 1 to 127 characters.",
 						Type:        types.StringType,
 						Required:    true,
@@ -162,14 +146,12 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Value for the tag. Value can be 1 to 255 characters.",
-						     "maxLength": 255,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "Value for the tag. Value can be 1 to 255 characters.",
+						//   "maxLength": 255,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Description: "Value for the tag. Value can be 1 to 255 characters.",
 						Type:        types.StringType,
 						Required:    true,

@@ -26,15 +26,13 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"action_name": {
 			// Property: ActionName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A unique identifier for the mitigation action.",
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A unique identifier for the mitigation action.",
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "A unique identifier for the mitigation action.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -44,180 +42,174 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"action_params": {
 			// Property: ActionParams
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).",
-			     "properties": {
-			       "AddThingsToThingGroupParams": {
-			         "additionalProperties": false,
-			         "description": "Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.",
-			         "properties": {
-			           "OverrideDynamicGroups": {
-			             "description": "Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.",
-			             "type": "boolean"
-			           },
-			           "ThingGroupNames": {
-			             "description": "The list of groups to which you want to add the things that triggered the mitigation action.",
-			             "insertionOrder": false,
-			             "items": {
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "maxItems": 10,
-			             "minItems": 1,
-			             "type": "array",
-			             "uniqueItems": true
-			           }
-			         },
-			         "required": [
-			           "ThingGroupNames"
-			         ],
-			         "type": "object"
-			       },
-			       "EnableIoTLoggingParams": {
-			         "additionalProperties": false,
-			         "description": "Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.",
-			         "properties": {
-			           "LogLevel": {
-			             "description": " Specifies which types of information are logged.",
-			             "enum": [
-			               "DEBUG",
-			               "INFO",
-			               "ERROR",
-			               "WARN"
-			             ],
-			             "type": "string"
-			           },
-			           "RoleArnForLogging": {
-			             "description": " The ARN of the IAM role used for logging.",
-			             "maxLength": 2048,
-			             "minLength": 20,
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "LogLevel",
-			           "RoleArnForLogging"
-			         ],
-			         "type": "object"
-			       },
-			       "PublishFindingToSnsParams": {
-			         "additionalProperties": false,
-			         "description": "Parameters, to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.",
-			         "properties": {
-			           "TopicArn": {
-			             "description": "The ARN of the topic to which you want to publish the findings.",
-			             "maxLength": 2048,
-			             "minLength": 20,
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "TopicArn"
-			         ],
-			         "type": "object"
-			       },
-			       "ReplaceDefaultPolicyVersionParams": {
-			         "additionalProperties": false,
-			         "description": "Parameters to define a mitigation action that adds a blank policy to restrict permissions.",
-			         "properties": {
-			           "TemplateName": {
-			             "enum": [
-			               "BLANK_POLICY"
-			             ],
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "TemplateName"
-			         ],
-			         "type": "object"
-			       },
-			       "UpdateCACertificateParams": {
-			         "additionalProperties": false,
-			         "description": "Parameters to define a mitigation action that changes the state of the CA certificate to inactive.",
-			         "properties": {
-			           "Action": {
-			             "enum": [
-			               "DEACTIVATE"
-			             ],
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "Action"
-			         ],
-			         "type": "object"
-			       },
-			       "UpdateDeviceCertificateParams": {
-			         "additionalProperties": false,
-			         "description": "Parameters to define a mitigation action that changes the state of the device certificate to inactive.",
-			         "properties": {
-			           "Action": {
-			             "enum": [
-			               "DEACTIVATE"
-			             ],
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "Action"
-			         ],
-			         "type": "object"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).",
+			//   "properties": {
+			//     "AddThingsToThingGroupParams": {
+			//       "additionalProperties": false,
+			//       "description": "Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.",
+			//       "properties": {
+			//         "OverrideDynamicGroups": {
+			//           "description": "Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.",
+			//           "type": "boolean"
+			//         },
+			//         "ThingGroupNames": {
+			//           "description": "The list of groups to which you want to add the things that triggered the mitigation action.",
+			//           "insertionOrder": false,
+			//           "items": {
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "maxItems": 10,
+			//           "minItems": 1,
+			//           "type": "array",
+			//           "uniqueItems": true
+			//         }
+			//       },
+			//       "required": [
+			//         "ThingGroupNames"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "EnableIoTLoggingParams": {
+			//       "additionalProperties": false,
+			//       "description": "Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.",
+			//       "properties": {
+			//         "LogLevel": {
+			//           "description": " Specifies which types of information are logged.",
+			//           "enum": [
+			//             "DEBUG",
+			//             "INFO",
+			//             "ERROR",
+			//             "WARN"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "RoleArnForLogging": {
+			//           "description": " The ARN of the IAM role used for logging.",
+			//           "maxLength": 2048,
+			//           "minLength": 20,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "LogLevel",
+			//         "RoleArnForLogging"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "PublishFindingToSnsParams": {
+			//       "additionalProperties": false,
+			//       "description": "Parameters, to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.",
+			//       "properties": {
+			//         "TopicArn": {
+			//           "description": "The ARN of the topic to which you want to publish the findings.",
+			//           "maxLength": 2048,
+			//           "minLength": 20,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "TopicArn"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "ReplaceDefaultPolicyVersionParams": {
+			//       "additionalProperties": false,
+			//       "description": "Parameters to define a mitigation action that adds a blank policy to restrict permissions.",
+			//       "properties": {
+			//         "TemplateName": {
+			//           "enum": [
+			//             "BLANK_POLICY"
+			//           ],
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "TemplateName"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "UpdateCACertificateParams": {
+			//       "additionalProperties": false,
+			//       "description": "Parameters to define a mitigation action that changes the state of the CA certificate to inactive.",
+			//       "properties": {
+			//         "Action": {
+			//           "enum": [
+			//             "DEACTIVATE"
+			//           ],
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "Action"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "UpdateDeviceCertificateParams": {
+			//       "additionalProperties": false,
+			//       "description": "Parameters to define a mitigation action that changes the state of the device certificate to inactive.",
+			//       "properties": {
+			//         "Action": {
+			//           "enum": [
+			//             "DEACTIVATE"
+			//           ],
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "Action"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"add_things_to_thing_group_params": {
 						// Property: AddThingsToThingGroupParams
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.",
-						     "properties": {
-						       "OverrideDynamicGroups": {
-						         "description": "Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.",
-						         "type": "boolean"
-						       },
-						       "ThingGroupNames": {
-						         "description": "The list of groups to which you want to add the things that triggered the mitigation action.",
-						         "insertionOrder": false,
-						         "items": {
-						           "maxLength": 128,
-						           "minLength": 1,
-						           "type": "string"
-						         },
-						         "maxItems": 10,
-						         "minItems": 1,
-						         "type": "array",
-						         "uniqueItems": true
-						       }
-						     },
-						     "required": [
-						       "ThingGroupNames"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "description": "Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.",
+						//   "properties": {
+						//     "OverrideDynamicGroups": {
+						//       "description": "Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.",
+						//       "type": "boolean"
+						//     },
+						//     "ThingGroupNames": {
+						//       "description": "The list of groups to which you want to add the things that triggered the mitigation action.",
+						//       "insertionOrder": false,
+						//       "items": {
+						//         "maxLength": 128,
+						//         "minLength": 1,
+						//         "type": "string"
+						//       },
+						//       "maxItems": 10,
+						//       "minItems": 1,
+						//       "type": "array",
+						//       "uniqueItems": true
+						//     }
+						//   },
+						//   "required": [
+						//     "ThingGroupNames"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"override_dynamic_groups": {
 									// Property: OverrideDynamicGroups
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.",
-									     "type": "boolean"
-									   }
-									*/
+									// {
+									//   "description": "Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.",
+									//   "type": "boolean"
+									// }
 									Description: "Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.",
 									Type:        types.BoolType,
 									Optional:    true,
@@ -225,21 +217,19 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								"thing_group_names": {
 									// Property: ThingGroupNames
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The list of groups to which you want to add the things that triggered the mitigation action.",
-									     "insertionOrder": false,
-									     "items": {
-									       "maxLength": 128,
-									       "minLength": 1,
-									       "type": "string"
-									     },
-									     "maxItems": 10,
-									     "minItems": 1,
-									     "type": "array",
-									     "uniqueItems": true
-									   }
-									*/
+									// {
+									//   "description": "The list of groups to which you want to add the things that triggered the mitigation action.",
+									//   "insertionOrder": false,
+									//   "items": {
+									//     "maxLength": 128,
+									//     "minLength": 1,
+									//     "type": "string"
+									//   },
+									//   "maxItems": 10,
+									//   "minItems": 1,
+									//   "type": "array",
+									//   "uniqueItems": true
+									// }
 									Description: "The list of groups to which you want to add the things that triggered the mitigation action.",
 									Type:        providertypes.SetType{ElemType: types.StringType},
 									Required:    true,
@@ -251,53 +241,49 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"enable_io_t_logging_params": {
 						// Property: EnableIoTLoggingParams
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.",
-						     "properties": {
-						       "LogLevel": {
-						         "description": " Specifies which types of information are logged.",
-						         "enum": [
-						           "DEBUG",
-						           "INFO",
-						           "ERROR",
-						           "WARN"
-						         ],
-						         "type": "string"
-						       },
-						       "RoleArnForLogging": {
-						         "description": " The ARN of the IAM role used for logging.",
-						         "maxLength": 2048,
-						         "minLength": 20,
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "LogLevel",
-						       "RoleArnForLogging"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "description": "Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.",
+						//   "properties": {
+						//     "LogLevel": {
+						//       "description": " Specifies which types of information are logged.",
+						//       "enum": [
+						//         "DEBUG",
+						//         "INFO",
+						//         "ERROR",
+						//         "WARN"
+						//       ],
+						//       "type": "string"
+						//     },
+						//     "RoleArnForLogging": {
+						//       "description": " The ARN of the IAM role used for logging.",
+						//       "maxLength": 2048,
+						//       "minLength": 20,
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "LogLevel",
+						//     "RoleArnForLogging"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"log_level": {
 									// Property: LogLevel
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": " Specifies which types of information are logged.",
-									     "enum": [
-									       "DEBUG",
-									       "INFO",
-									       "ERROR",
-									       "WARN"
-									     ],
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": " Specifies which types of information are logged.",
+									//   "enum": [
+									//     "DEBUG",
+									//     "INFO",
+									//     "ERROR",
+									//     "WARN"
+									//   ],
+									//   "type": "string"
+									// }
 									Description: " Specifies which types of information are logged.",
 									Type:        types.StringType,
 									Required:    true,
@@ -305,14 +291,12 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								"role_arn_for_logging": {
 									// Property: RoleArnForLogging
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": " The ARN of the IAM role used for logging.",
-									     "maxLength": 2048,
-									     "minLength": 20,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": " The ARN of the IAM role used for logging.",
+									//   "maxLength": 2048,
+									//   "minLength": 20,
+									//   "type": "string"
+									// }
 									Description: " The ARN of the IAM role used for logging.",
 									Type:        types.StringType,
 									Required:    true,
@@ -324,38 +308,34 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"publish_finding_to_sns_params": {
 						// Property: PublishFindingToSnsParams
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Parameters, to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.",
-						     "properties": {
-						       "TopicArn": {
-						         "description": "The ARN of the topic to which you want to publish the findings.",
-						         "maxLength": 2048,
-						         "minLength": 20,
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "TopicArn"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "description": "Parameters, to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.",
+						//   "properties": {
+						//     "TopicArn": {
+						//       "description": "The ARN of the topic to which you want to publish the findings.",
+						//       "maxLength": 2048,
+						//       "minLength": 20,
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "TopicArn"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "Parameters, to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"topic_arn": {
 									// Property: TopicArn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The ARN of the topic to which you want to publish the findings.",
-									     "maxLength": 2048,
-									     "minLength": 20,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "The ARN of the topic to which you want to publish the findings.",
+									//   "maxLength": 2048,
+									//   "minLength": 20,
+									//   "type": "string"
+									// }
 									Description: "The ARN of the topic to which you want to publish the findings.",
 									Type:        types.StringType,
 									Required:    true,
@@ -367,38 +347,34 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"replace_default_policy_version_params": {
 						// Property: ReplaceDefaultPolicyVersionParams
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Parameters to define a mitigation action that adds a blank policy to restrict permissions.",
-						     "properties": {
-						       "TemplateName": {
-						         "enum": [
-						           "BLANK_POLICY"
-						         ],
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "TemplateName"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "description": "Parameters to define a mitigation action that adds a blank policy to restrict permissions.",
+						//   "properties": {
+						//     "TemplateName": {
+						//       "enum": [
+						//         "BLANK_POLICY"
+						//       ],
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "TemplateName"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "Parameters to define a mitigation action that adds a blank policy to restrict permissions.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"template_name": {
 									// Property: TemplateName
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "BLANK_POLICY"
-									     ],
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "enum": [
+									//     "BLANK_POLICY"
+									//   ],
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -409,38 +385,34 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"update_ca_certificate_params": {
 						// Property: UpdateCACertificateParams
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Parameters to define a mitigation action that changes the state of the CA certificate to inactive.",
-						     "properties": {
-						       "Action": {
-						         "enum": [
-						           "DEACTIVATE"
-						         ],
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "Action"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "description": "Parameters to define a mitigation action that changes the state of the CA certificate to inactive.",
+						//   "properties": {
+						//     "Action": {
+						//       "enum": [
+						//         "DEACTIVATE"
+						//       ],
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "Action"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "Parameters to define a mitigation action that changes the state of the CA certificate to inactive.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"action": {
 									// Property: Action
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "DEACTIVATE"
-									     ],
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "enum": [
+									//     "DEACTIVATE"
+									//   ],
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -451,38 +423,34 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"update_device_certificate_params": {
 						// Property: UpdateDeviceCertificateParams
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Parameters to define a mitigation action that changes the state of the device certificate to inactive.",
-						     "properties": {
-						       "Action": {
-						         "enum": [
-						           "DEACTIVATE"
-						         ],
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "Action"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "description": "Parameters to define a mitigation action that changes the state of the device certificate to inactive.",
+						//   "properties": {
+						//     "Action": {
+						//       "enum": [
+						//         "DEACTIVATE"
+						//       ],
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "Action"
+						//   ],
+						//   "type": "object"
+						// }
 						Description: "Parameters to define a mitigation action that changes the state of the device certificate to inactive.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"action": {
 									// Property: Action
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "DEACTIVATE"
-									     ],
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "enum": [
+									//     "DEACTIVATE"
+									//   ],
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -497,85 +465,75 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"mitigation_action_arn": {
 			// Property: MitigationActionArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"mitigation_action_id": {
 			// Property: MitigationActionId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The tag's key.",
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The tag's value.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The tag's key.",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The tag's value.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The tag's key.",
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The tag's key.",
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Description: "The tag's key.",
 						Type:        types.StringType,
 						Required:    true,
@@ -583,14 +541,12 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The tag's value.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The tag's value.",
+						//   "maxLength": 256,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Description: "The tag's value.",
 						Type:        types.StringType,
 						Required:    true,

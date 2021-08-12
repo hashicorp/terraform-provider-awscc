@@ -25,97 +25,87 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"end_points": {
 			// Property: EndPoints
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "KinesisStreamConfig": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "RoleArn": {
-			               "type": "string"
-			             },
-			             "StreamArn": {
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "RoleArn",
-			             "StreamArn"
-			           ],
-			           "type": "object"
-			         },
-			         "StreamType": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "KinesisStreamConfig",
-			         "StreamType"
-			       ],
-			       "type": "object"
-			     },
-			     "minItems": 1,
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "KinesisStreamConfig": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "RoleArn": {
+			//             "type": "string"
+			//           },
+			//           "StreamArn": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "RoleArn",
+			//           "StreamArn"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "StreamType": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "KinesisStreamConfig",
+			//       "StreamType"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"kinesis_stream_config": {
 						// Property: KinesisStreamConfig
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "RoleArn": {
-						         "type": "string"
-						       },
-						       "StreamArn": {
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "RoleArn",
-						       "StreamArn"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "RoleArn": {
+						//       "type": "string"
+						//     },
+						//     "StreamArn": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "RoleArn",
+						//     "StreamArn"
+						//   ],
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"role_arn": {
 									// Property: RoleArn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"stream_arn": {
 									// Property: StreamArn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -126,11 +116,9 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 					"stream_type": {
 						// Property: StreamType
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -144,27 +132,23 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"fields": {
 			// Property: Fields
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "type": "string"
-			     },
-			     "minItems": 1,
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Required: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// Name is a force-new attribute.
@@ -172,11 +156,9 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"sampling_rate": {
 			// Property: SamplingRate
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "number"
-			   }
-			*/
+			// {
+			//   "type": "number"
+			// }
 			Type:     types.NumberType,
 			Required: true,
 		},

@@ -25,24 +25,20 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"database_name": {
 			// Property: DatabaseName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name for the database which the table to be created belongs to.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name for the database which the table to be created belongs to.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name for the database which the table to be created belongs to.",
 			Type:        types.StringType,
 			Required:    true,
@@ -51,12 +47,10 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The table name exposed as a read-only attribute.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The table name exposed as a read-only attribute.",
+			//   "type": "string"
+			// }
 			Description: "The table name exposed as a read-only attribute.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -64,35 +58,31 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"retention_properties": {
 			// Property: RetentionProperties
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "The retention duration of the memory store and the magnetic store.",
-			     "properties": {
-			       "MagneticStoreRetentionPeriodInDays": {
-			         "description": "The duration for which data must be stored in the magnetic store.",
-			         "type": "string"
-			       },
-			       "MemoryStoreRetentionPeriodInHours": {
-			         "description": "The duration for which data must be stored in the memory store.",
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The retention duration of the memory store and the magnetic store.",
+			//   "properties": {
+			//     "MagneticStoreRetentionPeriodInDays": {
+			//       "description": "The duration for which data must be stored in the magnetic store.",
+			//       "type": "string"
+			//     },
+			//     "MemoryStoreRetentionPeriodInHours": {
+			//       "description": "The duration for which data must be stored in the memory store.",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "The retention duration of the memory store and the magnetic store.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"magnetic_store_retention_period_in_days": {
 						// Property: MagneticStoreRetentionPeriodInDays
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The duration for which data must be stored in the magnetic store.",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The duration for which data must be stored in the magnetic store.",
+						//   "type": "string"
+						// }
 						Description: "The duration for which data must be stored in the magnetic store.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -100,12 +90,10 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"memory_store_retention_period_in_hours": {
 						// Property: MemoryStoreRetentionPeriodInHours
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The duration for which data must be stored in the memory store.",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The duration for which data must be stored in the memory store.",
+						//   "type": "string"
+						// }
 						Description: "The duration for which data must be stored in the memory store.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -117,13 +105,11 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"table_name": {
 			// Property: TableName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -133,56 +119,50 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource.",
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "You can use the Resource Tags property to apply tags to resources, which can help you identify and categorize those resources.",
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "maxItems": 200,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "You can use the Resource Tags property to apply tags to resources, which can help you identify and categorize those resources.",
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "maxItems": 200,
+			//   "type": "array"
+			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 256,
+						//   "minLength": 0,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

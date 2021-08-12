@@ -25,13 +25,11 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"contact_list_name": {
 			// Property: ContactListName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the contact list.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the contact list.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the contact list.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -41,13 +39,11 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The description of the contact list.",
-			     "maxLength": 500,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The description of the contact list.",
+			//   "maxLength": 500,
+			//   "type": "string"
+			// }
 			Description: "The description of the contact list.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -55,60 +51,54 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The tags (keys and values) associated with the contact list.",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "minItems": 0,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The tags (keys and values) associated with the contact list.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "minItems": 0,
+			//   "type": "array"
+			// }
 			Description: "The tags (keys and values) associated with the contact list.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 256,
+						//   "minLength": 0,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -123,70 +113,64 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"topics": {
 			// Property: Topics
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The topics associated with the contact list.",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "DefaultSubscriptionStatus": {
-			           "type": "string"
-			         },
-			         "Description": {
-			           "description": "The description of the topic.",
-			           "maxLength": 500,
-			           "minLength": 0,
-			           "type": "string"
-			         },
-			         "DisplayName": {
-			           "description": "The display name of the topic.",
-			           "maxLength": 128,
-			           "minLength": 0,
-			           "type": "string"
-			         },
-			         "TopicName": {
-			           "description": "The name of the topic.",
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "TopicName",
-			         "DisplayName",
-			         "DefaultSubscriptionStatus"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 20,
-			     "minItems": 0,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The topics associated with the contact list.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "DefaultSubscriptionStatus": {
+			//         "type": "string"
+			//       },
+			//       "Description": {
+			//         "description": "The description of the topic.",
+			//         "maxLength": 500,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       },
+			//       "DisplayName": {
+			//         "description": "The display name of the topic.",
+			//         "maxLength": 128,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       },
+			//       "TopicName": {
+			//         "description": "The name of the topic.",
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "TopicName",
+			//       "DisplayName",
+			//       "DefaultSubscriptionStatus"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 20,
+			//   "minItems": 0,
+			//   "type": "array"
+			// }
 			Description: "The topics associated with the contact list.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"default_subscription_status": {
 						// Property: DefaultSubscriptionStatus
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"description": {
 						// Property: Description
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The description of the topic.",
-						     "maxLength": 500,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The description of the topic.",
+						//   "maxLength": 500,
+						//   "minLength": 0,
+						//   "type": "string"
+						// }
 						Description: "The description of the topic.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -194,14 +178,12 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"display_name": {
 						// Property: DisplayName
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The display name of the topic.",
-						     "maxLength": 128,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The display name of the topic.",
+						//   "maxLength": 128,
+						//   "minLength": 0,
+						//   "type": "string"
+						// }
 						Description: "The display name of the topic.",
 						Type:        types.StringType,
 						Required:    true,
@@ -209,13 +191,11 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"topic_name": {
 						// Property: TopicName
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The name of the topic.",
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The name of the topic.",
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "The name of the topic.",
 						Type:        types.StringType,
 						Required:    true,

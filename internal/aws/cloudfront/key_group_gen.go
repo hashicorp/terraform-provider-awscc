@@ -25,78 +25,68 @@ func keyGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"key_group_config": {
 			// Property: KeyGroupConfig
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Comment": {
-			         "type": "string"
-			       },
-			       "Items": {
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "Name": {
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "Name",
-			       "Items"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Comment": {
+			//       "type": "string"
+			//     },
+			//     "Items": {
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "Name": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "Name",
+			//     "Items"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"comment": {
 						// Property: Comment
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"items": {
 						// Property: Items
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": false
+						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 					"name": {
 						// Property: Name
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -107,11 +97,9 @@ func keyGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"last_modified_time": {
 			// Property: LastModifiedTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},

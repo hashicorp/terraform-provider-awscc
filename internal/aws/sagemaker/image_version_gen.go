@@ -25,15 +25,13 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"base_image": {
 			// Property: BaseImage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The registry path of the container image on which this image version is based.",
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The registry path of the container image on which this image version is based.",
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The registry path of the container image on which this image version is based.",
 			Type:        types.StringType,
 			Required:    true,
@@ -42,15 +40,13 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"container_image": {
 			// Property: ContainerImage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The registry path of the container image that contains this image version.",
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The registry path of the container image that contains this image version.",
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The registry path of the container image that contains this image version.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -58,15 +54,13 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"image_arn": {
 			// Property: ImageArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the parent image.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the parent image.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the parent image.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -74,15 +68,13 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"image_name": {
 			// Property: ImageName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the image this version belongs to.",
-			     "maxLength": 63,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the image this version belongs to.",
+			//   "maxLength": 63,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the image this version belongs to.",
 			Type:        types.StringType,
 			Required:    true,
@@ -91,15 +83,13 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"image_version_arn": {
 			// Property: ImageVersionArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the image version.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the image version.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the image version.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -107,12 +97,10 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"version": {
 			// Property: Version
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The version number of the image version.",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "The version number of the image version.",
+			//   "type": "integer"
+			// }
 			Description: "The version number of the image version.",
 			Type:        types.NumberType,
 			Computed:    true,

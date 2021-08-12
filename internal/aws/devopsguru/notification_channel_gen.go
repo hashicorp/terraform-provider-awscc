@@ -25,63 +25,57 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"config": {
 			// Property: Config
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Information about notification channels you have configured with DevOps Guru.",
-			     "properties": {
-			       "Sns": {
-			         "additionalProperties": false,
-			         "description": "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
-			         "properties": {
-			           "TopicArn": {
-			             "maxLength": 1024,
-			             "minLength": 36,
-			             "pattern": "",
-			             "type": "string"
-			           }
-			         },
-			         "type": "object"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Information about notification channels you have configured with DevOps Guru.",
+			//   "properties": {
+			//     "Sns": {
+			//       "additionalProperties": false,
+			//       "description": "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
+			//       "properties": {
+			//         "TopicArn": {
+			//           "maxLength": 1024,
+			//           "minLength": 36,
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "Information about notification channels you have configured with DevOps Guru.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"sns": {
 						// Property: Sns
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
-						     "properties": {
-						       "TopicArn": {
-						         "maxLength": 1024,
-						         "minLength": 36,
-						         "pattern": "",
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "description": "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
+						//   "properties": {
+						//     "TopicArn": {
+						//       "maxLength": 1024,
+						//       "minLength": 36,
+						//       "pattern": "",
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Description: "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"topic_arn": {
 									// Property: TopicArn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 1024,
-									     "minLength": 36,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "maxLength": 1024,
+									//   "minLength": 36,
+									//   "pattern": "",
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -97,15 +91,13 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of a notification channel.",
-			     "maxLength": 36,
-			     "minLength": 36,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of a notification channel.",
+			//   "maxLength": 36,
+			//   "minLength": 36,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The ID of a notification channel.",
 			Type:        types.StringType,
 			Computed:    true,

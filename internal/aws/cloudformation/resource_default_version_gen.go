@@ -25,13 +25,11 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a ResourceDefaultVersion",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a ResourceDefaultVersion",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a ResourceDefaultVersion",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,13 +37,11 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 		"type_name": {
 			// Property: TypeName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -53,13 +49,11 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 		"type_version_arn": {
 			// Property: TypeVersionArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the type version.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the type version.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the type version.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -67,13 +61,11 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 		"version_id": {
 			// Property: VersionId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of an existing version of the resource to set as the default.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of an existing version of the resource to set as the default.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The ID of an existing version of the resource to set as the default.",
 			Type:        types.StringType,
 			Optional:    true,

@@ -25,11 +25,9 @@ func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"archive_name": {
 			// Property: ArchiveName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 			// ArchiveName is a force-new attribute.
@@ -37,55 +35,45 @@ func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"event_pattern": {
 			// Property: EventPattern
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "type": "object"
+			// }
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 		},
 		"retention_days": {
 			// Property: RetentionDays
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "type": "integer"
+			// }
 			Type:     types.NumberType,
 			Optional: true,
 		},
 		"source_arn": {
 			// Property: SourceArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// SourceArn is a force-new attribute.

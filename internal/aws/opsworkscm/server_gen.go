@@ -25,23 +25,19 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 10000,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 10000,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"associate_public_ip_address": {
 			// Property: AssociatePublicIpAddress
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "type": "boolean"
+			// }
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
@@ -50,13 +46,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"backup_id": {
 			// Property: BackupId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 79,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 79,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -65,25 +59,21 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"backup_retention_count": {
 			// Property: BackupRetentionCount
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "minLength": 1,
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "minLength": 1,
+			//   "type": "integer"
+			// }
 			Type:     types.NumberType,
 			Optional: true,
 		},
 		"custom_certificate": {
 			// Property: CustomCertificate
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 2097152,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 2097152,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -92,13 +82,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"custom_domain": {
 			// Property: CustomDomain
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 253,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 253,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -107,13 +95,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"custom_private_key": {
 			// Property: CustomPrivateKey
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 4096,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 4096,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -123,35 +109,29 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"disable_automated_backup": {
 			// Property: DisableAutomatedBackup
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "type": "boolean"
+			// }
 			Type:     types.BoolType,
 			Optional: true,
 		},
 		"endpoint": {
 			// Property: Endpoint
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 10000,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 10000,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"engine": {
 			// Property: Engine
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 10000,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 10000,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -161,53 +141,47 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"engine_attributes": {
 			// Property: EngineAttributes
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Name": {
-			           "maxLength": 10000,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 10000,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Name": {
+			//         "maxLength": 10000,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 10000,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"name": {
 						// Property: Name
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 10000,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 10000,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 10000,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 10000,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -220,12 +194,10 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"engine_model": {
 			// Property: EngineModel
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 10000,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 10000,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -234,12 +206,10 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"engine_version": {
 			// Property: EngineVersion
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 10000,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 10000,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -248,25 +218,21 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 10000,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 10000,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"instance_profile_arn": {
 			// Property: InstanceProfileArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 10000,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 10000,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// InstanceProfileArn is a force-new attribute.
@@ -274,12 +240,10 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"instance_type": {
 			// Property: InstanceType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 10000,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 10000,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// InstanceType is a force-new attribute.
@@ -287,13 +251,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"key_pair": {
 			// Property: KeyPair
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 10000,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 10000,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -302,42 +264,36 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"preferred_backup_window": {
 			// Property: PreferredBackupWindow
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 10000,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 10000,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"preferred_maintenance_window": {
 			// Property: PreferredMaintenanceWindow
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 10000,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 10000,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"security_group_ids": {
 			// Property: SecurityGroupIds
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "maxLength": 10000,
-			       "type": "string"
-			     },
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "maxLength": 10000,
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -346,14 +302,12 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"server_name": {
 			// Property: ServerName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 40,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 40,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -362,13 +316,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"service_role_arn": {
 			// Property: ServiceRoleArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 10000,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 10000,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// ServiceRoleArn is a force-new attribute.
@@ -376,16 +328,14 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"subnet_ids": {
 			// Property: SubnetIds
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "maxLength": 10000,
-			       "type": "string"
-			     },
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "maxLength": 10000,
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -394,61 +344,55 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 256,
+						//   "minLength": 0,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},

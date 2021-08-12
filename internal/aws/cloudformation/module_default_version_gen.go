@@ -25,13 +25,11 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the module version to set as the default version.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the module version to set as the default version.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the module version to set as the default version.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -41,13 +39,11 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"module_name": {
 			// Property: ModuleName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of a module existing in the registry.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of a module existing in the registry.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of a module existing in the registry.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -58,13 +54,11 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"version_id": {
 			// Property: VersionId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of an existing version of the named module to set as the default.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of an existing version of the named module to set as the default.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The ID of an existing version of the named module to set as the default.",
 			Type:        types.StringType,
 			Optional:    true,

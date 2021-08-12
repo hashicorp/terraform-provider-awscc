@@ -26,66 +26,58 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"attribute_definitions": {
 			// Property: AttributeDefinitions
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "AttributeName": {
-			           "maxLength": 255,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "AttributeType": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "AttributeName",
-			         "AttributeType"
-			       ],
-			       "type": "object"
-			     },
-			     "minItems": 1,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "AttributeName": {
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "AttributeType": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "AttributeName",
+			//       "AttributeType"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"attribute_name": {
 						// Property: AttributeName
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 255,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 255,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"attribute_type": {
 						// Property: AttributeType
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -99,198 +91,186 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"billing_mode": {
 			// Property: BillingMode
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"global_secondary_indexes": {
 			// Property: GlobalSecondaryIndexes
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "IndexName": {
-			           "maxLength": 255,
-			           "minLength": 3,
-			           "type": "string"
-			         },
-			         "KeySchema": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "AttributeName": {
-			                 "maxLength": 255,
-			                 "minLength": 1,
-			                 "type": "string"
-			               },
-			               "KeyType": {
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "KeyType",
-			               "AttributeName"
-			             ],
-			             "type": "object"
-			           },
-			           "maxItems": 2,
-			           "minItems": 1,
-			           "type": "array",
-			           "uniqueItems": true
-			         },
-			         "Projection": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "NonKeyAttributes": {
-			               "insertionOrder": false,
-			               "items": {
-			                 "type": "string"
-			               },
-			               "maxItems": 20,
-			               "type": "array",
-			               "uniqueItems": true
-			             },
-			             "ProjectionType": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "WriteProvisionedThroughputSettings": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "WriteCapacityAutoScalingSettings": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "MaxCapacity": {
-			                   "type": "integer"
-			                 },
-			                 "MinCapacity": {
-			                   "type": "integer"
-			                 },
-			                 "SeedCapacity": {
-			                   "type": "integer"
-			                 },
-			                 "TargetTrackingScalingPolicyConfiguration": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "DisableScaleIn": {
-			                       "type": "boolean"
-			                     },
-			                     "ScaleInCooldown": {
-			                       "type": "integer"
-			                     },
-			                     "ScaleOutCooldown": {
-			                       "type": "integer"
-			                     },
-			                     "TargetValue": {
-			                       "format": "double",
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "TargetValue"
-			                   ],
-			                   "type": "object"
-			                 }
-			               },
-			               "required": [
-			                 "MinCapacity",
-			                 "MaxCapacity",
-			                 "TargetTrackingScalingPolicyConfiguration"
-			               ],
-			               "type": "object"
-			             }
-			           },
-			           "type": "object"
-			         }
-			       },
-			       "required": [
-			         "IndexName",
-			         "Projection",
-			         "KeySchema"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "IndexName": {
+			//         "maxLength": 255,
+			//         "minLength": 3,
+			//         "type": "string"
+			//       },
+			//       "KeySchema": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "AttributeName": {
+			//               "maxLength": 255,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             },
+			//             "KeyType": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "KeyType",
+			//             "AttributeName"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "maxItems": 2,
+			//         "minItems": 1,
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       },
+			//       "Projection": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "NonKeyAttributes": {
+			//             "insertionOrder": false,
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "maxItems": 20,
+			//             "type": "array",
+			//             "uniqueItems": true
+			//           },
+			//           "ProjectionType": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "WriteProvisionedThroughputSettings": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "WriteCapacityAutoScalingSettings": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "MaxCapacity": {
+			//                 "type": "integer"
+			//               },
+			//               "MinCapacity": {
+			//                 "type": "integer"
+			//               },
+			//               "SeedCapacity": {
+			//                 "type": "integer"
+			//               },
+			//               "TargetTrackingScalingPolicyConfiguration": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "DisableScaleIn": {
+			//                     "type": "boolean"
+			//                   },
+			//                   "ScaleInCooldown": {
+			//                     "type": "integer"
+			//                   },
+			//                   "ScaleOutCooldown": {
+			//                     "type": "integer"
+			//                   },
+			//                   "TargetValue": {
+			//                     "format": "double",
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "TargetValue"
+			//                 ],
+			//                 "type": "object"
+			//               }
+			//             },
+			//             "required": [
+			//               "MinCapacity",
+			//               "MaxCapacity",
+			//               "TargetTrackingScalingPolicyConfiguration"
+			//             ],
+			//             "type": "object"
+			//           }
+			//         },
+			//         "type": "object"
+			//       }
+			//     },
+			//     "required": [
+			//       "IndexName",
+			//       "Projection",
+			//       "KeySchema"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"index_name": {
 						// Property: IndexName
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 255,
-						     "minLength": 3,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 255,
+						//   "minLength": 3,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"key_schema": {
 						// Property: KeySchema
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "AttributeName": {
-						           "maxLength": 255,
-						           "minLength": 1,
-						           "type": "string"
-						         },
-						         "KeyType": {
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "KeyType",
-						         "AttributeName"
-						       ],
-						       "type": "object"
-						     },
-						     "maxItems": 2,
-						     "minItems": 1,
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "properties": {
+						//       "AttributeName": {
+						//         "maxLength": 255,
+						//         "minLength": 1,
+						//         "type": "string"
+						//       },
+						//       "KeyType": {
+						//         "type": "string"
+						//       }
+						//     },
+						//     "required": [
+						//       "KeyType",
+						//       "AttributeName"
+						//     ],
+						//     "type": "object"
+						//   },
+						//   "maxItems": 2,
+						//   "minItems": 1,
+						//   "type": "array",
+						//   "uniqueItems": true
+						// }
 						// Ordered set.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"attribute_name": {
 									// Property: AttributeName
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 255,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "maxLength": 255,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"key_type": {
 									// Property: KeyType
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -305,53 +285,47 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"projection": {
 						// Property: Projection
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "NonKeyAttributes": {
-						         "insertionOrder": false,
-						         "items": {
-						           "type": "string"
-						         },
-						         "maxItems": 20,
-						         "type": "array",
-						         "uniqueItems": true
-						       },
-						       "ProjectionType": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "NonKeyAttributes": {
+						//       "insertionOrder": false,
+						//       "items": {
+						//         "type": "string"
+						//       },
+						//       "maxItems": 20,
+						//       "type": "array",
+						//       "uniqueItems": true
+						//     },
+						//     "ProjectionType": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"non_key_attributes": {
 									// Property: NonKeyAttributes
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "insertionOrder": false,
-									     "items": {
-									       "type": "string"
-									     },
-									     "maxItems": 20,
-									     "type": "array",
-									     "uniqueItems": true
-									   }
-									*/
+									// {
+									//   "insertionOrder": false,
+									//   "items": {
+									//     "type": "string"
+									//   },
+									//   "maxItems": 20,
+									//   "type": "array",
+									//   "uniqueItems": true
+									// }
 									Type:     providertypes.SetType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"projection_type": {
 									// Property: ProjectionType
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -362,211 +336,191 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"write_provisioned_throughput_settings": {
 						// Property: WriteProvisionedThroughputSettings
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "WriteCapacityAutoScalingSettings": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "MaxCapacity": {
-						             "type": "integer"
-						           },
-						           "MinCapacity": {
-						             "type": "integer"
-						           },
-						           "SeedCapacity": {
-						             "type": "integer"
-						           },
-						           "TargetTrackingScalingPolicyConfiguration": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "DisableScaleIn": {
-						                 "type": "boolean"
-						               },
-						               "ScaleInCooldown": {
-						                 "type": "integer"
-						               },
-						               "ScaleOutCooldown": {
-						                 "type": "integer"
-						               },
-						               "TargetValue": {
-						                 "format": "double",
-						                 "type": "number"
-						               }
-						             },
-						             "required": [
-						               "TargetValue"
-						             ],
-						             "type": "object"
-						           }
-						         },
-						         "required": [
-						           "MinCapacity",
-						           "MaxCapacity",
-						           "TargetTrackingScalingPolicyConfiguration"
-						         ],
-						         "type": "object"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "WriteCapacityAutoScalingSettings": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "MaxCapacity": {
+						//           "type": "integer"
+						//         },
+						//         "MinCapacity": {
+						//           "type": "integer"
+						//         },
+						//         "SeedCapacity": {
+						//           "type": "integer"
+						//         },
+						//         "TargetTrackingScalingPolicyConfiguration": {
+						//           "additionalProperties": false,
+						//           "properties": {
+						//             "DisableScaleIn": {
+						//               "type": "boolean"
+						//             },
+						//             "ScaleInCooldown": {
+						//               "type": "integer"
+						//             },
+						//             "ScaleOutCooldown": {
+						//               "type": "integer"
+						//             },
+						//             "TargetValue": {
+						//               "format": "double",
+						//               "type": "number"
+						//             }
+						//           },
+						//           "required": [
+						//             "TargetValue"
+						//           ],
+						//           "type": "object"
+						//         }
+						//       },
+						//       "required": [
+						//         "MinCapacity",
+						//         "MaxCapacity",
+						//         "TargetTrackingScalingPolicyConfiguration"
+						//       ],
+						//       "type": "object"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"write_capacity_auto_scaling_settings": {
 									// Property: WriteCapacityAutoScalingSettings
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "MaxCapacity": {
-									         "type": "integer"
-									       },
-									       "MinCapacity": {
-									         "type": "integer"
-									       },
-									       "SeedCapacity": {
-									         "type": "integer"
-									       },
-									       "TargetTrackingScalingPolicyConfiguration": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "DisableScaleIn": {
-									             "type": "boolean"
-									           },
-									           "ScaleInCooldown": {
-									             "type": "integer"
-									           },
-									           "ScaleOutCooldown": {
-									             "type": "integer"
-									           },
-									           "TargetValue": {
-									             "format": "double",
-									             "type": "number"
-									           }
-									         },
-									         "required": [
-									           "TargetValue"
-									         ],
-									         "type": "object"
-									       }
-									     },
-									     "required": [
-									       "MinCapacity",
-									       "MaxCapacity",
-									       "TargetTrackingScalingPolicyConfiguration"
-									     ],
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "MaxCapacity": {
+									//       "type": "integer"
+									//     },
+									//     "MinCapacity": {
+									//       "type": "integer"
+									//     },
+									//     "SeedCapacity": {
+									//       "type": "integer"
+									//     },
+									//     "TargetTrackingScalingPolicyConfiguration": {
+									//       "additionalProperties": false,
+									//       "properties": {
+									//         "DisableScaleIn": {
+									//           "type": "boolean"
+									//         },
+									//         "ScaleInCooldown": {
+									//           "type": "integer"
+									//         },
+									//         "ScaleOutCooldown": {
+									//           "type": "integer"
+									//         },
+									//         "TargetValue": {
+									//           "format": "double",
+									//           "type": "number"
+									//         }
+									//       },
+									//       "required": [
+									//         "TargetValue"
+									//       ],
+									//       "type": "object"
+									//     }
+									//   },
+									//   "required": [
+									//     "MinCapacity",
+									//     "MaxCapacity",
+									//     "TargetTrackingScalingPolicyConfiguration"
+									//   ],
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"max_capacity": {
 												// Property: MaxCapacity
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Required: true,
 											},
 											"min_capacity": {
 												// Property: MinCapacity
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Required: true,
 											},
 											"seed_capacity": {
 												// Property: SeedCapacity
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"target_tracking_scaling_policy_configuration": {
 												// Property: TargetTrackingScalingPolicyConfiguration
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "DisableScaleIn": {
-												         "type": "boolean"
-												       },
-												       "ScaleInCooldown": {
-												         "type": "integer"
-												       },
-												       "ScaleOutCooldown": {
-												         "type": "integer"
-												       },
-												       "TargetValue": {
-												         "format": "double",
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "TargetValue"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "additionalProperties": false,
+												//   "properties": {
+												//     "DisableScaleIn": {
+												//       "type": "boolean"
+												//     },
+												//     "ScaleInCooldown": {
+												//       "type": "integer"
+												//     },
+												//     "ScaleOutCooldown": {
+												//       "type": "integer"
+												//     },
+												//     "TargetValue": {
+												//       "format": "double",
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "TargetValue"
+												//   ],
+												//   "type": "object"
+												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"disable_scale_in": {
 															// Property: DisableScaleIn
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "boolean"
-															   }
-															*/
+															// {
+															//   "type": "boolean"
+															// }
 															Type:     types.BoolType,
 															Optional: true,
 														},
 														"scale_in_cooldown": {
 															// Property: ScaleInCooldown
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "integer"
-															   }
-															*/
+															// {
+															//   "type": "integer"
+															// }
 															Type:     types.NumberType,
 															Optional: true,
 														},
 														"scale_out_cooldown": {
 															// Property: ScaleOutCooldown
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "integer"
-															   }
-															*/
+															// {
+															//   "type": "integer"
+															// }
 															Type:     types.NumberType,
 															Optional: true,
 														},
 														"target_value": {
 															// Property: TargetValue
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "format": "double",
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "format": "double",
+															//   "type": "number"
+															// }
 															Type:     types.NumberType,
 															Required: true,
 														},
@@ -590,56 +544,50 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"key_schema": {
 			// Property: KeySchema
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "AttributeName": {
-			           "maxLength": 255,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "KeyType": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "KeyType",
-			         "AttributeName"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 2,
-			     "minItems": 1,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "AttributeName": {
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "KeyType": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "KeyType",
+			//       "AttributeName"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 2,
+			//   "minItems": 1,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"attribute_name": {
 						// Property: AttributeName
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 255,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 255,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"key_type": {
 						// Property: KeyType
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -655,137 +603,127 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"local_secondary_indexes": {
 			// Property: LocalSecondaryIndexes
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "IndexName": {
-			           "maxLength": 255,
-			           "minLength": 3,
-			           "type": "string"
-			         },
-			         "KeySchema": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "AttributeName": {
-			                 "maxLength": 255,
-			                 "minLength": 1,
-			                 "type": "string"
-			               },
-			               "KeyType": {
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "KeyType",
-			               "AttributeName"
-			             ],
-			             "type": "object"
-			           },
-			           "maxItems": 2,
-			           "type": "array",
-			           "uniqueItems": true
-			         },
-			         "Projection": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "NonKeyAttributes": {
-			               "insertionOrder": false,
-			               "items": {
-			                 "type": "string"
-			               },
-			               "maxItems": 20,
-			               "type": "array",
-			               "uniqueItems": true
-			             },
-			             "ProjectionType": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         }
-			       },
-			       "required": [
-			         "IndexName",
-			         "Projection",
-			         "KeySchema"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "IndexName": {
+			//         "maxLength": 255,
+			//         "minLength": 3,
+			//         "type": "string"
+			//       },
+			//       "KeySchema": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "AttributeName": {
+			//               "maxLength": 255,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             },
+			//             "KeyType": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "KeyType",
+			//             "AttributeName"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "maxItems": 2,
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       },
+			//       "Projection": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "NonKeyAttributes": {
+			//             "insertionOrder": false,
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "maxItems": 20,
+			//             "type": "array",
+			//             "uniqueItems": true
+			//           },
+			//           "ProjectionType": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       }
+			//     },
+			//     "required": [
+			//       "IndexName",
+			//       "Projection",
+			//       "KeySchema"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"index_name": {
 						// Property: IndexName
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 255,
-						     "minLength": 3,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 255,
+						//   "minLength": 3,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"key_schema": {
 						// Property: KeySchema
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "AttributeName": {
-						           "maxLength": 255,
-						           "minLength": 1,
-						           "type": "string"
-						         },
-						         "KeyType": {
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "KeyType",
-						         "AttributeName"
-						       ],
-						       "type": "object"
-						     },
-						     "maxItems": 2,
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "properties": {
+						//       "AttributeName": {
+						//         "maxLength": 255,
+						//         "minLength": 1,
+						//         "type": "string"
+						//       },
+						//       "KeyType": {
+						//         "type": "string"
+						//       }
+						//     },
+						//     "required": [
+						//       "KeyType",
+						//       "AttributeName"
+						//     ],
+						//     "type": "object"
+						//   },
+						//   "maxItems": 2,
+						//   "type": "array",
+						//   "uniqueItems": true
+						// }
 						// Ordered set.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"attribute_name": {
 									// Property: AttributeName
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 255,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "maxLength": 255,
+									//   "minLength": 1,
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"key_type": {
 									// Property: KeyType
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -799,53 +737,47 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"projection": {
 						// Property: Projection
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "NonKeyAttributes": {
-						         "insertionOrder": false,
-						         "items": {
-						           "type": "string"
-						         },
-						         "maxItems": 20,
-						         "type": "array",
-						         "uniqueItems": true
-						       },
-						       "ProjectionType": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "NonKeyAttributes": {
+						//       "insertionOrder": false,
+						//       "items": {
+						//         "type": "string"
+						//       },
+						//       "maxItems": 20,
+						//       "type": "array",
+						//       "uniqueItems": true
+						//     },
+						//     "ProjectionType": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"non_key_attributes": {
 									// Property: NonKeyAttributes
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "insertionOrder": false,
-									     "items": {
-									       "type": "string"
-									     },
-									     "maxItems": 20,
-									     "type": "array",
-									     "uniqueItems": true
-									   }
-									*/
+									// {
+									//   "insertionOrder": false,
+									//   "items": {
+									//     "type": "string"
+									//   },
+									//   "maxItems": 20,
+									//   "type": "array",
+									//   "uniqueItems": true
+									// }
 									Type:     providertypes.SetType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"projection_type": {
 									// Property: ProjectionType
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -863,242 +795,236 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"replicas": {
 			// Property: Replicas
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "ContributorInsightsSpecification": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Enabled": {
-			               "type": "boolean"
-			             }
-			           },
-			           "required": [
-			             "Enabled"
-			           ],
-			           "type": "object"
-			         },
-			         "GlobalSecondaryIndexes": {
-			           "insertionOrder": false,
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "ContributorInsightsSpecification": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "Enabled": {
-			                     "type": "boolean"
-			                   }
-			                 },
-			                 "required": [
-			                   "Enabled"
-			                 ],
-			                 "type": "object"
-			               },
-			               "IndexName": {
-			                 "maxLength": 255,
-			                 "minLength": 3,
-			                 "type": "string"
-			               },
-			               "ReadProvisionedThroughputSettings": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "ReadCapacityAutoScalingSettings": {
-			                     "additionalProperties": false,
-			                     "properties": {
-			                       "MaxCapacity": {
-			                         "type": "integer"
-			                       },
-			                       "MinCapacity": {
-			                         "type": "integer"
-			                       },
-			                       "SeedCapacity": {
-			                         "type": "integer"
-			                       },
-			                       "TargetTrackingScalingPolicyConfiguration": {
-			                         "additionalProperties": false,
-			                         "properties": {
-			                           "DisableScaleIn": {
-			                             "type": "boolean"
-			                           },
-			                           "ScaleInCooldown": {
-			                             "type": "integer"
-			                           },
-			                           "ScaleOutCooldown": {
-			                             "type": "integer"
-			                           },
-			                           "TargetValue": {
-			                             "format": "double",
-			                             "type": "number"
-			                           }
-			                         },
-			                         "required": [
-			                           "TargetValue"
-			                         ],
-			                         "type": "object"
-			                       }
-			                     },
-			                     "required": [
-			                       "MinCapacity",
-			                       "MaxCapacity",
-			                       "TargetTrackingScalingPolicyConfiguration"
-			                     ],
-			                     "type": "object"
-			                   },
-			                   "ReadCapacityUnits": {
-			                     "type": "integer"
-			                   }
-			                 },
-			                 "type": "object"
-			               }
-			             },
-			             "required": [
-			               "IndexName"
-			             ],
-			             "type": "object"
-			           },
-			           "type": "array",
-			           "uniqueItems": true
-			         },
-			         "PointInTimeRecoverySpecification": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "PointInTimeRecoveryEnabled": {
-			               "type": "boolean"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "ReadProvisionedThroughputSettings": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "ReadCapacityAutoScalingSettings": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "MaxCapacity": {
-			                   "type": "integer"
-			                 },
-			                 "MinCapacity": {
-			                   "type": "integer"
-			                 },
-			                 "SeedCapacity": {
-			                   "type": "integer"
-			                 },
-			                 "TargetTrackingScalingPolicyConfiguration": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "DisableScaleIn": {
-			                       "type": "boolean"
-			                     },
-			                     "ScaleInCooldown": {
-			                       "type": "integer"
-			                     },
-			                     "ScaleOutCooldown": {
-			                       "type": "integer"
-			                     },
-			                     "TargetValue": {
-			                       "format": "double",
-			                       "type": "number"
-			                     }
-			                   },
-			                   "required": [
-			                     "TargetValue"
-			                   ],
-			                   "type": "object"
-			                 }
-			               },
-			               "required": [
-			                 "MinCapacity",
-			                 "MaxCapacity",
-			                 "TargetTrackingScalingPolicyConfiguration"
-			               ],
-			               "type": "object"
-			             },
-			             "ReadCapacityUnits": {
-			               "type": "integer"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Region": {
-			           "type": "string"
-			         },
-			         "SSESpecification": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "KMSMasterKeyId": {
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "KMSMasterKeyId"
-			           ],
-			           "type": "object"
-			         },
-			         "Tags": {
-			           "insertionOrder": false,
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Key": {
-			                 "type": "string"
-			               },
-			               "Value": {
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Value",
-			               "Key"
-			             ],
-			             "type": "object"
-			           },
-			           "type": "array",
-			           "uniqueItems": true
-			         }
-			       },
-			       "required": [
-			         "Region"
-			       ],
-			       "type": "object"
-			     },
-			     "minItems": 1,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "ContributorInsightsSpecification": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Enabled": {
+			//             "type": "boolean"
+			//           }
+			//         },
+			//         "required": [
+			//           "Enabled"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "GlobalSecondaryIndexes": {
+			//         "insertionOrder": false,
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "ContributorInsightsSpecification": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Enabled": {
+			//                   "type": "boolean"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Enabled"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "IndexName": {
+			//               "maxLength": 255,
+			//               "minLength": 3,
+			//               "type": "string"
+			//             },
+			//             "ReadProvisionedThroughputSettings": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "ReadCapacityAutoScalingSettings": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "MaxCapacity": {
+			//                       "type": "integer"
+			//                     },
+			//                     "MinCapacity": {
+			//                       "type": "integer"
+			//                     },
+			//                     "SeedCapacity": {
+			//                       "type": "integer"
+			//                     },
+			//                     "TargetTrackingScalingPolicyConfiguration": {
+			//                       "additionalProperties": false,
+			//                       "properties": {
+			//                         "DisableScaleIn": {
+			//                           "type": "boolean"
+			//                         },
+			//                         "ScaleInCooldown": {
+			//                           "type": "integer"
+			//                         },
+			//                         "ScaleOutCooldown": {
+			//                           "type": "integer"
+			//                         },
+			//                         "TargetValue": {
+			//                           "format": "double",
+			//                           "type": "number"
+			//                         }
+			//                       },
+			//                       "required": [
+			//                         "TargetValue"
+			//                       ],
+			//                       "type": "object"
+			//                     }
+			//                   },
+			//                   "required": [
+			//                     "MinCapacity",
+			//                     "MaxCapacity",
+			//                     "TargetTrackingScalingPolicyConfiguration"
+			//                   ],
+			//                   "type": "object"
+			//                 },
+			//                 "ReadCapacityUnits": {
+			//                   "type": "integer"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             }
+			//           },
+			//           "required": [
+			//             "IndexName"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       },
+			//       "PointInTimeRecoverySpecification": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "PointInTimeRecoveryEnabled": {
+			//             "type": "boolean"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "ReadProvisionedThroughputSettings": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "ReadCapacityAutoScalingSettings": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "MaxCapacity": {
+			//                 "type": "integer"
+			//               },
+			//               "MinCapacity": {
+			//                 "type": "integer"
+			//               },
+			//               "SeedCapacity": {
+			//                 "type": "integer"
+			//               },
+			//               "TargetTrackingScalingPolicyConfiguration": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "DisableScaleIn": {
+			//                     "type": "boolean"
+			//                   },
+			//                   "ScaleInCooldown": {
+			//                     "type": "integer"
+			//                   },
+			//                   "ScaleOutCooldown": {
+			//                     "type": "integer"
+			//                   },
+			//                   "TargetValue": {
+			//                     "format": "double",
+			//                     "type": "number"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "TargetValue"
+			//                 ],
+			//                 "type": "object"
+			//               }
+			//             },
+			//             "required": [
+			//               "MinCapacity",
+			//               "MaxCapacity",
+			//               "TargetTrackingScalingPolicyConfiguration"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "ReadCapacityUnits": {
+			//             "type": "integer"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Region": {
+			//         "type": "string"
+			//       },
+			//       "SSESpecification": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "KMSMasterKeyId": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "KMSMasterKeyId"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "Tags": {
+			//         "insertionOrder": false,
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Key": {
+			//               "type": "string"
+			//             },
+			//             "Value": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Value",
+			//             "Key"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       }
+			//     },
+			//     "required": [
+			//       "Region"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"contributor_insights_specification": {
 						// Property: ContributorInsightsSpecification
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Enabled": {
-						         "type": "boolean"
-						       }
-						     },
-						     "required": [
-						       "Enabled"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Enabled": {
+						//       "type": "boolean"
+						//     }
+						//   },
+						//   "required": [
+						//     "Enabled"
+						//   ],
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"enabled": {
 									// Property: Enabled
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
+									// {
+									//   "type": "boolean"
+									// }
 									Type:     types.BoolType,
 									Required: true,
 								},
@@ -1109,119 +1035,113 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"global_secondary_indexes": {
 						// Property: GlobalSecondaryIndexes
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "ContributorInsightsSpecification": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "Enabled": {
-						               "type": "boolean"
-						             }
-						           },
-						           "required": [
-						             "Enabled"
-						           ],
-						           "type": "object"
-						         },
-						         "IndexName": {
-						           "maxLength": 255,
-						           "minLength": 3,
-						           "type": "string"
-						         },
-						         "ReadProvisionedThroughputSettings": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "ReadCapacityAutoScalingSettings": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "MaxCapacity": {
-						                   "type": "integer"
-						                 },
-						                 "MinCapacity": {
-						                   "type": "integer"
-						                 },
-						                 "SeedCapacity": {
-						                   "type": "integer"
-						                 },
-						                 "TargetTrackingScalingPolicyConfiguration": {
-						                   "additionalProperties": false,
-						                   "properties": {
-						                     "DisableScaleIn": {
-						                       "type": "boolean"
-						                     },
-						                     "ScaleInCooldown": {
-						                       "type": "integer"
-						                     },
-						                     "ScaleOutCooldown": {
-						                       "type": "integer"
-						                     },
-						                     "TargetValue": {
-						                       "format": "double",
-						                       "type": "number"
-						                     }
-						                   },
-						                   "required": [
-						                     "TargetValue"
-						                   ],
-						                   "type": "object"
-						                 }
-						               },
-						               "required": [
-						                 "MinCapacity",
-						                 "MaxCapacity",
-						                 "TargetTrackingScalingPolicyConfiguration"
-						               ],
-						               "type": "object"
-						             },
-						             "ReadCapacityUnits": {
-						               "type": "integer"
-						             }
-						           },
-						           "type": "object"
-						         }
-						       },
-						       "required": [
-						         "IndexName"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
+						// {
+						//   "insertionOrder": false,
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "properties": {
+						//       "ContributorInsightsSpecification": {
+						//         "additionalProperties": false,
+						//         "properties": {
+						//           "Enabled": {
+						//             "type": "boolean"
+						//           }
+						//         },
+						//         "required": [
+						//           "Enabled"
+						//         ],
+						//         "type": "object"
+						//       },
+						//       "IndexName": {
+						//         "maxLength": 255,
+						//         "minLength": 3,
+						//         "type": "string"
+						//       },
+						//       "ReadProvisionedThroughputSettings": {
+						//         "additionalProperties": false,
+						//         "properties": {
+						//           "ReadCapacityAutoScalingSettings": {
+						//             "additionalProperties": false,
+						//             "properties": {
+						//               "MaxCapacity": {
+						//                 "type": "integer"
+						//               },
+						//               "MinCapacity": {
+						//                 "type": "integer"
+						//               },
+						//               "SeedCapacity": {
+						//                 "type": "integer"
+						//               },
+						//               "TargetTrackingScalingPolicyConfiguration": {
+						//                 "additionalProperties": false,
+						//                 "properties": {
+						//                   "DisableScaleIn": {
+						//                     "type": "boolean"
+						//                   },
+						//                   "ScaleInCooldown": {
+						//                     "type": "integer"
+						//                   },
+						//                   "ScaleOutCooldown": {
+						//                     "type": "integer"
+						//                   },
+						//                   "TargetValue": {
+						//                     "format": "double",
+						//                     "type": "number"
+						//                   }
+						//                 },
+						//                 "required": [
+						//                   "TargetValue"
+						//                 ],
+						//                 "type": "object"
+						//               }
+						//             },
+						//             "required": [
+						//               "MinCapacity",
+						//               "MaxCapacity",
+						//               "TargetTrackingScalingPolicyConfiguration"
+						//             ],
+						//             "type": "object"
+						//           },
+						//           "ReadCapacityUnits": {
+						//             "type": "integer"
+						//           }
+						//         },
+						//         "type": "object"
+						//       }
+						//     },
+						//     "required": [
+						//       "IndexName"
+						//     ],
+						//     "type": "object"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": true
+						// }
 						Attributes: providertypes.SetNestedAttributes(
 							map[string]schema.Attribute{
 								"contributor_insights_specification": {
 									// Property: ContributorInsightsSpecification
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Enabled": {
-									         "type": "boolean"
-									       }
-									     },
-									     "required": [
-									       "Enabled"
-									     ],
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "Enabled": {
+									//       "type": "boolean"
+									//     }
+									//   },
+									//   "required": [
+									//     "Enabled"
+									//   ],
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"enabled": {
 												// Property: Enabled
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
+												// {
+												//   "type": "boolean"
+												// }
 												Type:     types.BoolType,
 												Required: true,
 											},
@@ -1232,227 +1152,205 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"index_name": {
 									// Property: IndexName
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 255,
-									     "minLength": 3,
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "maxLength": 255,
+									//   "minLength": 3,
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"read_provisioned_throughput_settings": {
 									// Property: ReadProvisionedThroughputSettings
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "ReadCapacityAutoScalingSettings": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "MaxCapacity": {
-									             "type": "integer"
-									           },
-									           "MinCapacity": {
-									             "type": "integer"
-									           },
-									           "SeedCapacity": {
-									             "type": "integer"
-									           },
-									           "TargetTrackingScalingPolicyConfiguration": {
-									             "additionalProperties": false,
-									             "properties": {
-									               "DisableScaleIn": {
-									                 "type": "boolean"
-									               },
-									               "ScaleInCooldown": {
-									                 "type": "integer"
-									               },
-									               "ScaleOutCooldown": {
-									                 "type": "integer"
-									               },
-									               "TargetValue": {
-									                 "format": "double",
-									                 "type": "number"
-									               }
-									             },
-									             "required": [
-									               "TargetValue"
-									             ],
-									             "type": "object"
-									           }
-									         },
-									         "required": [
-									           "MinCapacity",
-									           "MaxCapacity",
-									           "TargetTrackingScalingPolicyConfiguration"
-									         ],
-									         "type": "object"
-									       },
-									       "ReadCapacityUnits": {
-									         "type": "integer"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "ReadCapacityAutoScalingSettings": {
+									//       "additionalProperties": false,
+									//       "properties": {
+									//         "MaxCapacity": {
+									//           "type": "integer"
+									//         },
+									//         "MinCapacity": {
+									//           "type": "integer"
+									//         },
+									//         "SeedCapacity": {
+									//           "type": "integer"
+									//         },
+									//         "TargetTrackingScalingPolicyConfiguration": {
+									//           "additionalProperties": false,
+									//           "properties": {
+									//             "DisableScaleIn": {
+									//               "type": "boolean"
+									//             },
+									//             "ScaleInCooldown": {
+									//               "type": "integer"
+									//             },
+									//             "ScaleOutCooldown": {
+									//               "type": "integer"
+									//             },
+									//             "TargetValue": {
+									//               "format": "double",
+									//               "type": "number"
+									//             }
+									//           },
+									//           "required": [
+									//             "TargetValue"
+									//           ],
+									//           "type": "object"
+									//         }
+									//       },
+									//       "required": [
+									//         "MinCapacity",
+									//         "MaxCapacity",
+									//         "TargetTrackingScalingPolicyConfiguration"
+									//       ],
+									//       "type": "object"
+									//     },
+									//     "ReadCapacityUnits": {
+									//       "type": "integer"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"read_capacity_auto_scaling_settings": {
 												// Property: ReadCapacityAutoScalingSettings
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "MaxCapacity": {
-												         "type": "integer"
-												       },
-												       "MinCapacity": {
-												         "type": "integer"
-												       },
-												       "SeedCapacity": {
-												         "type": "integer"
-												       },
-												       "TargetTrackingScalingPolicyConfiguration": {
-												         "additionalProperties": false,
-												         "properties": {
-												           "DisableScaleIn": {
-												             "type": "boolean"
-												           },
-												           "ScaleInCooldown": {
-												             "type": "integer"
-												           },
-												           "ScaleOutCooldown": {
-												             "type": "integer"
-												           },
-												           "TargetValue": {
-												             "format": "double",
-												             "type": "number"
-												           }
-												         },
-												         "required": [
-												           "TargetValue"
-												         ],
-												         "type": "object"
-												       }
-												     },
-												     "required": [
-												       "MinCapacity",
-												       "MaxCapacity",
-												       "TargetTrackingScalingPolicyConfiguration"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "additionalProperties": false,
+												//   "properties": {
+												//     "MaxCapacity": {
+												//       "type": "integer"
+												//     },
+												//     "MinCapacity": {
+												//       "type": "integer"
+												//     },
+												//     "SeedCapacity": {
+												//       "type": "integer"
+												//     },
+												//     "TargetTrackingScalingPolicyConfiguration": {
+												//       "additionalProperties": false,
+												//       "properties": {
+												//         "DisableScaleIn": {
+												//           "type": "boolean"
+												//         },
+												//         "ScaleInCooldown": {
+												//           "type": "integer"
+												//         },
+												//         "ScaleOutCooldown": {
+												//           "type": "integer"
+												//         },
+												//         "TargetValue": {
+												//           "format": "double",
+												//           "type": "number"
+												//         }
+												//       },
+												//       "required": [
+												//         "TargetValue"
+												//       ],
+												//       "type": "object"
+												//     }
+												//   },
+												//   "required": [
+												//     "MinCapacity",
+												//     "MaxCapacity",
+												//     "TargetTrackingScalingPolicyConfiguration"
+												//   ],
+												//   "type": "object"
+												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"max_capacity": {
 															// Property: MaxCapacity
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "integer"
-															   }
-															*/
+															// {
+															//   "type": "integer"
+															// }
 															Type:     types.NumberType,
 															Required: true,
 														},
 														"min_capacity": {
 															// Property: MinCapacity
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "integer"
-															   }
-															*/
+															// {
+															//   "type": "integer"
+															// }
 															Type:     types.NumberType,
 															Required: true,
 														},
 														"seed_capacity": {
 															// Property: SeedCapacity
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "integer"
-															   }
-															*/
+															// {
+															//   "type": "integer"
+															// }
 															Type:     types.NumberType,
 															Optional: true,
 														},
 														"target_tracking_scaling_policy_configuration": {
 															// Property: TargetTrackingScalingPolicyConfiguration
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "additionalProperties": false,
-															     "properties": {
-															       "DisableScaleIn": {
-															         "type": "boolean"
-															       },
-															       "ScaleInCooldown": {
-															         "type": "integer"
-															       },
-															       "ScaleOutCooldown": {
-															         "type": "integer"
-															       },
-															       "TargetValue": {
-															         "format": "double",
-															         "type": "number"
-															       }
-															     },
-															     "required": [
-															       "TargetValue"
-															     ],
-															     "type": "object"
-															   }
-															*/
+															// {
+															//   "additionalProperties": false,
+															//   "properties": {
+															//     "DisableScaleIn": {
+															//       "type": "boolean"
+															//     },
+															//     "ScaleInCooldown": {
+															//       "type": "integer"
+															//     },
+															//     "ScaleOutCooldown": {
+															//       "type": "integer"
+															//     },
+															//     "TargetValue": {
+															//       "format": "double",
+															//       "type": "number"
+															//     }
+															//   },
+															//   "required": [
+															//     "TargetValue"
+															//   ],
+															//   "type": "object"
+															// }
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"disable_scale_in": {
 																		// Property: DisableScaleIn
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "type": "boolean"
-																		   }
-																		*/
+																		// {
+																		//   "type": "boolean"
+																		// }
 																		Type:     types.BoolType,
 																		Optional: true,
 																	},
 																	"scale_in_cooldown": {
 																		// Property: ScaleInCooldown
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "type": "integer"
-																		   }
-																		*/
+																		// {
+																		//   "type": "integer"
+																		// }
 																		Type:     types.NumberType,
 																		Optional: true,
 																	},
 																	"scale_out_cooldown": {
 																		// Property: ScaleOutCooldown
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "type": "integer"
-																		   }
-																		*/
+																		// {
+																		//   "type": "integer"
+																		// }
 																		Type:     types.NumberType,
 																		Optional: true,
 																	},
 																	"target_value": {
 																		// Property: TargetValue
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "format": "double",
-																		     "type": "number"
-																		   }
-																		*/
+																		// {
+																		//   "format": "double",
+																		//   "type": "number"
+																		// }
 																		Type:     types.NumberType,
 																		Required: true,
 																	},
@@ -1467,11 +1365,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"read_capacity_units": {
 												// Property: ReadCapacityUnits
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -1487,27 +1383,23 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"point_in_time_recovery_specification": {
 						// Property: PointInTimeRecoverySpecification
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "PointInTimeRecoveryEnabled": {
-						         "type": "boolean"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "PointInTimeRecoveryEnabled": {
+						//       "type": "boolean"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"point_in_time_recovery_enabled": {
 									// Property: PointInTimeRecoveryEnabled
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
+									// {
+									//   "type": "boolean"
+									// }
 									Type:     types.BoolType,
 									Optional: true,
 								},
@@ -1518,214 +1410,194 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"read_provisioned_throughput_settings": {
 						// Property: ReadProvisionedThroughputSettings
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "ReadCapacityAutoScalingSettings": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "MaxCapacity": {
-						             "type": "integer"
-						           },
-						           "MinCapacity": {
-						             "type": "integer"
-						           },
-						           "SeedCapacity": {
-						             "type": "integer"
-						           },
-						           "TargetTrackingScalingPolicyConfiguration": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "DisableScaleIn": {
-						                 "type": "boolean"
-						               },
-						               "ScaleInCooldown": {
-						                 "type": "integer"
-						               },
-						               "ScaleOutCooldown": {
-						                 "type": "integer"
-						               },
-						               "TargetValue": {
-						                 "format": "double",
-						                 "type": "number"
-						               }
-						             },
-						             "required": [
-						               "TargetValue"
-						             ],
-						             "type": "object"
-						           }
-						         },
-						         "required": [
-						           "MinCapacity",
-						           "MaxCapacity",
-						           "TargetTrackingScalingPolicyConfiguration"
-						         ],
-						         "type": "object"
-						       },
-						       "ReadCapacityUnits": {
-						         "type": "integer"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "ReadCapacityAutoScalingSettings": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "MaxCapacity": {
+						//           "type": "integer"
+						//         },
+						//         "MinCapacity": {
+						//           "type": "integer"
+						//         },
+						//         "SeedCapacity": {
+						//           "type": "integer"
+						//         },
+						//         "TargetTrackingScalingPolicyConfiguration": {
+						//           "additionalProperties": false,
+						//           "properties": {
+						//             "DisableScaleIn": {
+						//               "type": "boolean"
+						//             },
+						//             "ScaleInCooldown": {
+						//               "type": "integer"
+						//             },
+						//             "ScaleOutCooldown": {
+						//               "type": "integer"
+						//             },
+						//             "TargetValue": {
+						//               "format": "double",
+						//               "type": "number"
+						//             }
+						//           },
+						//           "required": [
+						//             "TargetValue"
+						//           ],
+						//           "type": "object"
+						//         }
+						//       },
+						//       "required": [
+						//         "MinCapacity",
+						//         "MaxCapacity",
+						//         "TargetTrackingScalingPolicyConfiguration"
+						//       ],
+						//       "type": "object"
+						//     },
+						//     "ReadCapacityUnits": {
+						//       "type": "integer"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"read_capacity_auto_scaling_settings": {
 									// Property: ReadCapacityAutoScalingSettings
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "MaxCapacity": {
-									         "type": "integer"
-									       },
-									       "MinCapacity": {
-									         "type": "integer"
-									       },
-									       "SeedCapacity": {
-									         "type": "integer"
-									       },
-									       "TargetTrackingScalingPolicyConfiguration": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "DisableScaleIn": {
-									             "type": "boolean"
-									           },
-									           "ScaleInCooldown": {
-									             "type": "integer"
-									           },
-									           "ScaleOutCooldown": {
-									             "type": "integer"
-									           },
-									           "TargetValue": {
-									             "format": "double",
-									             "type": "number"
-									           }
-									         },
-									         "required": [
-									           "TargetValue"
-									         ],
-									         "type": "object"
-									       }
-									     },
-									     "required": [
-									       "MinCapacity",
-									       "MaxCapacity",
-									       "TargetTrackingScalingPolicyConfiguration"
-									     ],
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "MaxCapacity": {
+									//       "type": "integer"
+									//     },
+									//     "MinCapacity": {
+									//       "type": "integer"
+									//     },
+									//     "SeedCapacity": {
+									//       "type": "integer"
+									//     },
+									//     "TargetTrackingScalingPolicyConfiguration": {
+									//       "additionalProperties": false,
+									//       "properties": {
+									//         "DisableScaleIn": {
+									//           "type": "boolean"
+									//         },
+									//         "ScaleInCooldown": {
+									//           "type": "integer"
+									//         },
+									//         "ScaleOutCooldown": {
+									//           "type": "integer"
+									//         },
+									//         "TargetValue": {
+									//           "format": "double",
+									//           "type": "number"
+									//         }
+									//       },
+									//       "required": [
+									//         "TargetValue"
+									//       ],
+									//       "type": "object"
+									//     }
+									//   },
+									//   "required": [
+									//     "MinCapacity",
+									//     "MaxCapacity",
+									//     "TargetTrackingScalingPolicyConfiguration"
+									//   ],
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"max_capacity": {
 												// Property: MaxCapacity
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Required: true,
 											},
 											"min_capacity": {
 												// Property: MinCapacity
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Required: true,
 											},
 											"seed_capacity": {
 												// Property: SeedCapacity
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"target_tracking_scaling_policy_configuration": {
 												// Property: TargetTrackingScalingPolicyConfiguration
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "DisableScaleIn": {
-												         "type": "boolean"
-												       },
-												       "ScaleInCooldown": {
-												         "type": "integer"
-												       },
-												       "ScaleOutCooldown": {
-												         "type": "integer"
-												       },
-												       "TargetValue": {
-												         "format": "double",
-												         "type": "number"
-												       }
-												     },
-												     "required": [
-												       "TargetValue"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "additionalProperties": false,
+												//   "properties": {
+												//     "DisableScaleIn": {
+												//       "type": "boolean"
+												//     },
+												//     "ScaleInCooldown": {
+												//       "type": "integer"
+												//     },
+												//     "ScaleOutCooldown": {
+												//       "type": "integer"
+												//     },
+												//     "TargetValue": {
+												//       "format": "double",
+												//       "type": "number"
+												//     }
+												//   },
+												//   "required": [
+												//     "TargetValue"
+												//   ],
+												//   "type": "object"
+												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"disable_scale_in": {
 															// Property: DisableScaleIn
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "boolean"
-															   }
-															*/
+															// {
+															//   "type": "boolean"
+															// }
 															Type:     types.BoolType,
 															Optional: true,
 														},
 														"scale_in_cooldown": {
 															// Property: ScaleInCooldown
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "integer"
-															   }
-															*/
+															// {
+															//   "type": "integer"
+															// }
 															Type:     types.NumberType,
 															Optional: true,
 														},
 														"scale_out_cooldown": {
 															// Property: ScaleOutCooldown
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "integer"
-															   }
-															*/
+															// {
+															//   "type": "integer"
+															// }
 															Type:     types.NumberType,
 															Optional: true,
 														},
 														"target_value": {
 															// Property: TargetValue
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "format": "double",
-															     "type": "number"
-															   }
-															*/
+															// {
+															//   "format": "double",
+															//   "type": "number"
+															// }
 															Type:     types.NumberType,
 															Required: true,
 														},
@@ -1740,11 +1612,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"read_capacity_units": {
 									// Property: ReadCapacityUnits
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -1755,41 +1625,35 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"region": {
 						// Property: Region
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"sse_specification": {
 						// Property: SSESpecification
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "KMSMasterKeyId": {
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "KMSMasterKeyId"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "KMSMasterKeyId": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "KMSMasterKeyId"
+						//   ],
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"kms_master_key_id": {
 									// Property: KMSMasterKeyId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -1800,50 +1664,44 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"tags": {
 						// Property: Tags
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Key": {
-						           "type": "string"
-						         },
-						         "Value": {
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "Value",
-						         "Key"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
+						// {
+						//   "insertionOrder": false,
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "properties": {
+						//       "Key": {
+						//         "type": "string"
+						//       },
+						//       "Value": {
+						//         "type": "string"
+						//       }
+						//     },
+						//     "required": [
+						//       "Value",
+						//       "Key"
+						//     ],
+						//     "type": "object"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": true
+						// }
 						Attributes: providertypes.SetNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"value": {
 									// Property: Value
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -1862,44 +1720,38 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"sse_specification": {
 			// Property: SSESpecification
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "SSEEnabled": {
-			         "type": "boolean"
-			       },
-			       "SSEType": {
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "SSEEnabled"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "SSEEnabled": {
+			//       "type": "boolean"
+			//     },
+			//     "SSEType": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "SSEEnabled"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"sse_enabled": {
 						// Property: SSEEnabled
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Required: true,
 					},
 					"sse_type": {
 						// Property: SSEType
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -1910,41 +1762,35 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"stream_arn": {
 			// Property: StreamArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"stream_specification": {
 			// Property: StreamSpecification
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "StreamViewType": {
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "StreamViewType"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "StreamViewType": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "StreamViewType"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"stream_view_type": {
 						// Property: StreamViewType
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -1955,22 +1801,18 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"table_id": {
 			// Property: TableId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"table_name": {
 			// Property: TableName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -1979,44 +1821,38 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"time_to_live_specification": {
 			// Property: TimeToLiveSpecification
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "AttributeName": {
-			         "type": "string"
-			       },
-			       "Enabled": {
-			         "type": "boolean"
-			       }
-			     },
-			     "required": [
-			       "Enabled"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "AttributeName": {
+			//       "type": "string"
+			//     },
+			//     "Enabled": {
+			//       "type": "boolean"
+			//     }
+			//   },
+			//   "required": [
+			//     "Enabled"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"attribute_name": {
 						// Property: AttributeName
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"enabled": {
 						// Property: Enabled
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Required: true,
 					},
@@ -2027,211 +1863,191 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"write_provisioned_throughput_settings": {
 			// Property: WriteProvisionedThroughputSettings
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "WriteCapacityAutoScalingSettings": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "MaxCapacity": {
-			             "type": "integer"
-			           },
-			           "MinCapacity": {
-			             "type": "integer"
-			           },
-			           "SeedCapacity": {
-			             "type": "integer"
-			           },
-			           "TargetTrackingScalingPolicyConfiguration": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "DisableScaleIn": {
-			                 "type": "boolean"
-			               },
-			               "ScaleInCooldown": {
-			                 "type": "integer"
-			               },
-			               "ScaleOutCooldown": {
-			                 "type": "integer"
-			               },
-			               "TargetValue": {
-			                 "format": "double",
-			                 "type": "number"
-			               }
-			             },
-			             "required": [
-			               "TargetValue"
-			             ],
-			             "type": "object"
-			           }
-			         },
-			         "required": [
-			           "MinCapacity",
-			           "MaxCapacity",
-			           "TargetTrackingScalingPolicyConfiguration"
-			         ],
-			         "type": "object"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "WriteCapacityAutoScalingSettings": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "MaxCapacity": {
+			//           "type": "integer"
+			//         },
+			//         "MinCapacity": {
+			//           "type": "integer"
+			//         },
+			//         "SeedCapacity": {
+			//           "type": "integer"
+			//         },
+			//         "TargetTrackingScalingPolicyConfiguration": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "DisableScaleIn": {
+			//               "type": "boolean"
+			//             },
+			//             "ScaleInCooldown": {
+			//               "type": "integer"
+			//             },
+			//             "ScaleOutCooldown": {
+			//               "type": "integer"
+			//             },
+			//             "TargetValue": {
+			//               "format": "double",
+			//               "type": "number"
+			//             }
+			//           },
+			//           "required": [
+			//             "TargetValue"
+			//           ],
+			//           "type": "object"
+			//         }
+			//       },
+			//       "required": [
+			//         "MinCapacity",
+			//         "MaxCapacity",
+			//         "TargetTrackingScalingPolicyConfiguration"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"write_capacity_auto_scaling_settings": {
 						// Property: WriteCapacityAutoScalingSettings
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "MaxCapacity": {
-						         "type": "integer"
-						       },
-						       "MinCapacity": {
-						         "type": "integer"
-						       },
-						       "SeedCapacity": {
-						         "type": "integer"
-						       },
-						       "TargetTrackingScalingPolicyConfiguration": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "DisableScaleIn": {
-						             "type": "boolean"
-						           },
-						           "ScaleInCooldown": {
-						             "type": "integer"
-						           },
-						           "ScaleOutCooldown": {
-						             "type": "integer"
-						           },
-						           "TargetValue": {
-						             "format": "double",
-						             "type": "number"
-						           }
-						         },
-						         "required": [
-						           "TargetValue"
-						         ],
-						         "type": "object"
-						       }
-						     },
-						     "required": [
-						       "MinCapacity",
-						       "MaxCapacity",
-						       "TargetTrackingScalingPolicyConfiguration"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "MaxCapacity": {
+						//       "type": "integer"
+						//     },
+						//     "MinCapacity": {
+						//       "type": "integer"
+						//     },
+						//     "SeedCapacity": {
+						//       "type": "integer"
+						//     },
+						//     "TargetTrackingScalingPolicyConfiguration": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "DisableScaleIn": {
+						//           "type": "boolean"
+						//         },
+						//         "ScaleInCooldown": {
+						//           "type": "integer"
+						//         },
+						//         "ScaleOutCooldown": {
+						//           "type": "integer"
+						//         },
+						//         "TargetValue": {
+						//           "format": "double",
+						//           "type": "number"
+						//         }
+						//       },
+						//       "required": [
+						//         "TargetValue"
+						//       ],
+						//       "type": "object"
+						//     }
+						//   },
+						//   "required": [
+						//     "MinCapacity",
+						//     "MaxCapacity",
+						//     "TargetTrackingScalingPolicyConfiguration"
+						//   ],
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"max_capacity": {
 									// Property: MaxCapacity
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Required: true,
 								},
 								"min_capacity": {
 									// Property: MinCapacity
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Required: true,
 								},
 								"seed_capacity": {
 									// Property: SeedCapacity
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"target_tracking_scaling_policy_configuration": {
 									// Property: TargetTrackingScalingPolicyConfiguration
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "DisableScaleIn": {
-									         "type": "boolean"
-									       },
-									       "ScaleInCooldown": {
-									         "type": "integer"
-									       },
-									       "ScaleOutCooldown": {
-									         "type": "integer"
-									       },
-									       "TargetValue": {
-									         "format": "double",
-									         "type": "number"
-									       }
-									     },
-									     "required": [
-									       "TargetValue"
-									     ],
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "DisableScaleIn": {
+									//       "type": "boolean"
+									//     },
+									//     "ScaleInCooldown": {
+									//       "type": "integer"
+									//     },
+									//     "ScaleOutCooldown": {
+									//       "type": "integer"
+									//     },
+									//     "TargetValue": {
+									//       "format": "double",
+									//       "type": "number"
+									//     }
+									//   },
+									//   "required": [
+									//     "TargetValue"
+									//   ],
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"disable_scale_in": {
 												// Property: DisableScaleIn
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
+												// {
+												//   "type": "boolean"
+												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"scale_in_cooldown": {
 												// Property: ScaleInCooldown
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"scale_out_cooldown": {
 												// Property: ScaleOutCooldown
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"target_value": {
 												// Property: TargetValue
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "format": "double",
-												     "type": "number"
-												   }
-												*/
+												// {
+												//   "format": "double",
+												//   "type": "number"
+												// }
 												Type:     types.NumberType,
 												Required: true,
 											},

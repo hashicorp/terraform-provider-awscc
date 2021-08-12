@@ -26,12 +26,10 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Arn for Wireless Gateway. Returned upon successful create.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Arn for Wireless Gateway. Returned upon successful create.",
+			//   "type": "string"
+			// }
 			Description: "Arn for Wireless Gateway. Returned upon successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,13 +37,11 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Description of Wireless Gateway.",
-			     "maxLength": 2048,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Description of Wireless Gateway.",
+			//   "maxLength": 2048,
+			//   "type": "string"
+			// }
 			Description: "Description of Wireless Gateway.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -53,13 +49,11 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Id for Wireless Gateway. Returned upon successful create.",
-			     "maxLength": 256,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Id for Wireless Gateway. Returned upon successful create.",
+			//   "maxLength": 256,
+			//   "type": "string"
+			// }
 			Description: "Id for Wireless Gateway. Returned upon successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -67,13 +61,11 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"last_uplink_received_at": {
 			// Property: LastUplinkReceivedAt
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The date and time when the most recent uplink was received.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The date and time when the most recent uplink was received.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The date and time when the most recent uplink was received.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -81,49 +73,43 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"lo_ra_wan": {
 			// Property: LoRaWAN
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "GatewayEui": {
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "RfRegion": {
-			         "maxLength": 64,
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "GatewayEui",
-			       "RfRegion"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "GatewayEui": {
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "RfRegion": {
+			//       "maxLength": 64,
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "GatewayEui",
+			//     "RfRegion"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"gateway_eui": {
 						// Property: GatewayEui
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"rf_region": {
 						// Property: RfRegion
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 64,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 64,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -134,13 +120,11 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of Wireless Gateway.",
-			     "maxLength": 256,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of Wireless Gateway.",
+			//   "maxLength": 256,
+			//   "type": "string"
+			// }
 			Description: "Name of Wireless Gateway.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -148,57 +132,51 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of key-value pairs that contain metadata for the gateway.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "A list of key-value pairs that contain metadata for the gateway.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "A list of key-value pairs that contain metadata for the gateway.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 256,
+						//   "minLength": 0,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -212,12 +190,10 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"thing_arn": {
 			// Property: ThingArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.",
+			//   "type": "string"
+			// }
 			Description: "Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -225,12 +201,10 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"thing_name": {
 			// Property: ThingName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
+			//   "type": "string"
+			// }
 			Description: "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
 			Type:        types.StringType,
 			Computed:    true,

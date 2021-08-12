@@ -26,65 +26,57 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"access_point_id": {
 			// Property: AccessPointId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"access_point_tags": {
 			// Property: AccessPointTags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 256,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -96,23 +88,19 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"client_token": {
 			// Property: ClientToken
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "(optional) A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "(optional) A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.",
+			//   "type": "string"
+			// }
 			Description: "(optional) A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -122,12 +110,10 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"file_system_id": {
 			// Property: FileSystemId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the EFS file system that the access point provides access to.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the EFS file system that the access point provides access to.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the EFS file system that the access point provides access to.",
 			Type:        types.StringType,
 			Required:    true,
@@ -136,44 +122,40 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"posix_user": {
 			// Property: PosixUser
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Gid": {
-			         "description": "The POSIX group ID used for all file system operations using this access point.",
-			         "type": "string"
-			       },
-			       "SecondaryGids": {
-			         "description": "Secondary POSIX group IDs used for all file system operations using this access point.",
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array"
-			       },
-			       "Uid": {
-			         "description": "The POSIX user ID used for all file system operations using this access point.",
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "Uid",
-			       "Gid"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Gid": {
+			//       "description": "The POSIX group ID used for all file system operations using this access point.",
+			//       "type": "string"
+			//     },
+			//     "SecondaryGids": {
+			//       "description": "Secondary POSIX group IDs used for all file system operations using this access point.",
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array"
+			//     },
+			//     "Uid": {
+			//       "description": "The POSIX user ID used for all file system operations using this access point.",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "Uid",
+			//     "Gid"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"gid": {
 						// Property: Gid
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The POSIX group ID used for all file system operations using this access point.",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The POSIX group ID used for all file system operations using this access point.",
+						//   "type": "string"
+						// }
 						Description: "The POSIX group ID used for all file system operations using this access point.",
 						Type:        types.StringType,
 						Required:    true,
@@ -182,15 +164,13 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"secondary_gids": {
 						// Property: SecondaryGids
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Secondary POSIX group IDs used for all file system operations using this access point.",
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "description": "Secondary POSIX group IDs used for all file system operations using this access point.",
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array"
+						// }
 						Description: "Secondary POSIX group IDs used for all file system operations using this access point.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
@@ -200,12 +180,10 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"uid": {
 						// Property: Uid
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The POSIX user ID used for all file system operations using this access point.",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The POSIX user ID used for all file system operations using this access point.",
+						//   "type": "string"
+						// }
 						Description: "The POSIX user ID used for all file system operations using this access point.",
 						Type:        types.StringType,
 						Required:    true,
@@ -220,86 +198,80 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"root_directory": {
 			// Property: RootDirectory
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "CreationInfo": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "OwnerGid": {
-			             "description": "Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
-			             "type": "string"
-			           },
-			           "OwnerUid": {
-			             "description": "Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
-			             "type": "string"
-			           },
-			           "Permissions": {
-			             "description": "Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.",
-			             "pattern": "",
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "OwnerUid",
-			           "OwnerGid",
-			           "Permissions"
-			         ],
-			         "type": "object"
-			       },
-			       "Path": {
-			         "description": "Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationInfo.",
-			         "maxLength": 100,
-			         "minLength": 1,
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "CreationInfo": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "OwnerGid": {
+			//           "description": "Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
+			//           "type": "string"
+			//         },
+			//         "OwnerUid": {
+			//           "description": "Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
+			//           "type": "string"
+			//         },
+			//         "Permissions": {
+			//           "description": "Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.",
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "OwnerUid",
+			//         "OwnerGid",
+			//         "Permissions"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "Path": {
+			//       "description": "Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationInfo.",
+			//       "maxLength": 100,
+			//       "minLength": 1,
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"creation_info": {
 						// Property: CreationInfo
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "OwnerGid": {
-						         "description": "Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
-						         "type": "string"
-						       },
-						       "OwnerUid": {
-						         "description": "Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
-						         "type": "string"
-						       },
-						       "Permissions": {
-						         "description": "Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.",
-						         "pattern": "",
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "OwnerUid",
-						       "OwnerGid",
-						       "Permissions"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "OwnerGid": {
+						//       "description": "Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
+						//       "type": "string"
+						//     },
+						//     "OwnerUid": {
+						//       "description": "Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
+						//       "type": "string"
+						//     },
+						//     "Permissions": {
+						//       "description": "Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.",
+						//       "pattern": "",
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "OwnerUid",
+						//     "OwnerGid",
+						//     "Permissions"
+						//   ],
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"owner_gid": {
 									// Property: OwnerGid
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
+									//   "type": "string"
+									// }
 									Description: "Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
 									Type:        types.StringType,
 									Required:    true,
@@ -307,12 +279,10 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"owner_uid": {
 									// Property: OwnerUid
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
+									//   "type": "string"
+									// }
 									Description: "Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
 									Type:        types.StringType,
 									Required:    true,
@@ -320,13 +290,11 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"permissions": {
 									// Property: Permissions
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.",
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.",
+									//   "pattern": "",
+									//   "type": "string"
+									// }
 									Description: "Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.",
 									Type:        types.StringType,
 									Required:    true,
@@ -340,14 +308,12 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"path": {
 						// Property: Path
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationInfo.",
-						     "maxLength": 100,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationInfo.",
+						//   "maxLength": 100,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Description: "Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationInfo.",
 						Type:        types.StringType,
 						Optional:    true,

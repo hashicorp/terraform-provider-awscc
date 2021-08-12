@@ -26,192 +26,184 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 512,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 512,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"firewall_policy": {
 			// Property: FirewallPolicy
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "StatefulRuleGroupReferences": {
-			         "insertionOrder": false,
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "ResourceArn": {
-			               "description": "A resource ARN.",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "pattern": "",
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "ResourceArn"
-			           ],
-			           "type": "object"
-			         },
-			         "type": "array",
-			         "uniqueItems": true
-			       },
-			       "StatelessCustomActions": {
-			         "insertionOrder": false,
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "ActionDefinition": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "PublishMetricAction": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "Dimensions": {
-			                       "insertionOrder": false,
-			                       "items": {
-			                         "additionalProperties": false,
-			                         "properties": {
-			                           "Value": {
-			                             "maxLength": 128,
-			                             "minLength": 1,
-			                             "pattern": "",
-			                             "type": "string"
-			                           }
-			                         },
-			                         "required": [
-			                           "Value"
-			                         ],
-			                         "type": "object"
-			                       },
-			                       "type": "array",
-			                       "uniqueItems": true
-			                     }
-			                   },
-			                   "required": [
-			                     "Dimensions"
-			                   ],
-			                   "type": "object"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "ActionName": {
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "pattern": "",
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "ActionName",
-			             "ActionDefinition"
-			           ],
-			           "type": "object"
-			         },
-			         "type": "array",
-			         "uniqueItems": true
-			       },
-			       "StatelessDefaultActions": {
-			         "insertionOrder": false,
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array",
-			         "uniqueItems": true
-			       },
-			       "StatelessFragmentDefaultActions": {
-			         "insertionOrder": false,
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array",
-			         "uniqueItems": true
-			       },
-			       "StatelessRuleGroupReferences": {
-			         "insertionOrder": false,
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Priority": {
-			               "type": "integer"
-			             },
-			             "ResourceArn": {
-			               "description": "A resource ARN.",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "pattern": "",
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "ResourceArn",
-			             "Priority"
-			           ],
-			           "type": "object"
-			         },
-			         "type": "array",
-			         "uniqueItems": true
-			       }
-			     },
-			     "required": [
-			       "StatelessDefaultActions",
-			       "StatelessFragmentDefaultActions"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "StatefulRuleGroupReferences": {
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "ResourceArn": {
+			//             "description": "A resource ARN.",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "pattern": "",
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "ResourceArn"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
+			//     "StatelessCustomActions": {
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "ActionDefinition": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "PublishMetricAction": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "Dimensions": {
+			//                     "insertionOrder": false,
+			//                     "items": {
+			//                       "additionalProperties": false,
+			//                       "properties": {
+			//                         "Value": {
+			//                           "maxLength": 128,
+			//                           "minLength": 1,
+			//                           "pattern": "",
+			//                           "type": "string"
+			//                         }
+			//                       },
+			//                       "required": [
+			//                         "Value"
+			//                       ],
+			//                       "type": "object"
+			//                     },
+			//                     "type": "array",
+			//                     "uniqueItems": true
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Dimensions"
+			//                 ],
+			//                 "type": "object"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "ActionName": {
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "pattern": "",
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "ActionName",
+			//           "ActionDefinition"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
+			//     "StatelessDefaultActions": {
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
+			//     "StatelessFragmentDefaultActions": {
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
+			//     "StatelessRuleGroupReferences": {
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Priority": {
+			//             "type": "integer"
+			//           },
+			//           "ResourceArn": {
+			//             "description": "A resource ARN.",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "pattern": "",
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "ResourceArn",
+			//           "Priority"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     }
+			//   },
+			//   "required": [
+			//     "StatelessDefaultActions",
+			//     "StatelessFragmentDefaultActions"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"stateful_rule_group_references": {
 						// Property: StatefulRuleGroupReferences
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "ResourceArn": {
-						           "description": "A resource ARN.",
-						           "maxLength": 256,
-						           "minLength": 1,
-						           "pattern": "",
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "ResourceArn"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
+						// {
+						//   "insertionOrder": false,
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "properties": {
+						//       "ResourceArn": {
+						//         "description": "A resource ARN.",
+						//         "maxLength": 256,
+						//         "minLength": 1,
+						//         "pattern": "",
+						//         "type": "string"
+						//       }
+						//     },
+						//     "required": [
+						//       "ResourceArn"
+						//     ],
+						//     "type": "object"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": true
+						// }
 						Attributes: providertypes.SetNestedAttributes(
 							map[string]schema.Attribute{
 								"resource_arn": {
 									// Property: ResourceArn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "A resource ARN.",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "A resource ARN.",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "pattern": "",
+									//   "type": "string"
+									// }
 									Description: "A resource ARN.",
 									Type:        types.StringType,
 									Required:    true,
@@ -224,182 +216,172 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"stateless_custom_actions": {
 						// Property: StatelessCustomActions
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "ActionDefinition": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "PublishMetricAction": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "Dimensions": {
-						                   "insertionOrder": false,
-						                   "items": {
-						                     "additionalProperties": false,
-						                     "properties": {
-						                       "Value": {
-						                         "maxLength": 128,
-						                         "minLength": 1,
-						                         "pattern": "",
-						                         "type": "string"
-						                       }
-						                     },
-						                     "required": [
-						                       "Value"
-						                     ],
-						                     "type": "object"
-						                   },
-						                   "type": "array",
-						                   "uniqueItems": true
-						                 }
-						               },
-						               "required": [
-						                 "Dimensions"
-						               ],
-						               "type": "object"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "ActionName": {
-						           "maxLength": 128,
-						           "minLength": 1,
-						           "pattern": "",
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "ActionName",
-						         "ActionDefinition"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
+						// {
+						//   "insertionOrder": false,
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "properties": {
+						//       "ActionDefinition": {
+						//         "additionalProperties": false,
+						//         "properties": {
+						//           "PublishMetricAction": {
+						//             "additionalProperties": false,
+						//             "properties": {
+						//               "Dimensions": {
+						//                 "insertionOrder": false,
+						//                 "items": {
+						//                   "additionalProperties": false,
+						//                   "properties": {
+						//                     "Value": {
+						//                       "maxLength": 128,
+						//                       "minLength": 1,
+						//                       "pattern": "",
+						//                       "type": "string"
+						//                     }
+						//                   },
+						//                   "required": [
+						//                     "Value"
+						//                   ],
+						//                   "type": "object"
+						//                 },
+						//                 "type": "array",
+						//                 "uniqueItems": true
+						//               }
+						//             },
+						//             "required": [
+						//               "Dimensions"
+						//             ],
+						//             "type": "object"
+						//           }
+						//         },
+						//         "type": "object"
+						//       },
+						//       "ActionName": {
+						//         "maxLength": 128,
+						//         "minLength": 1,
+						//         "pattern": "",
+						//         "type": "string"
+						//       }
+						//     },
+						//     "required": [
+						//       "ActionName",
+						//       "ActionDefinition"
+						//     ],
+						//     "type": "object"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": true
+						// }
 						Attributes: providertypes.SetNestedAttributes(
 							map[string]schema.Attribute{
 								"action_definition": {
 									// Property: ActionDefinition
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "PublishMetricAction": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "Dimensions": {
-									             "insertionOrder": false,
-									             "items": {
-									               "additionalProperties": false,
-									               "properties": {
-									                 "Value": {
-									                   "maxLength": 128,
-									                   "minLength": 1,
-									                   "pattern": "",
-									                   "type": "string"
-									                 }
-									               },
-									               "required": [
-									                 "Value"
-									               ],
-									               "type": "object"
-									             },
-									             "type": "array",
-									             "uniqueItems": true
-									           }
-									         },
-									         "required": [
-									           "Dimensions"
-									         ],
-									         "type": "object"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "PublishMetricAction": {
+									//       "additionalProperties": false,
+									//       "properties": {
+									//         "Dimensions": {
+									//           "insertionOrder": false,
+									//           "items": {
+									//             "additionalProperties": false,
+									//             "properties": {
+									//               "Value": {
+									//                 "maxLength": 128,
+									//                 "minLength": 1,
+									//                 "pattern": "",
+									//                 "type": "string"
+									//               }
+									//             },
+									//             "required": [
+									//               "Value"
+									//             ],
+									//             "type": "object"
+									//           },
+									//           "type": "array",
+									//           "uniqueItems": true
+									//         }
+									//       },
+									//       "required": [
+									//         "Dimensions"
+									//       ],
+									//       "type": "object"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"publish_metric_action": {
 												// Property: PublishMetricAction
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "Dimensions": {
-												         "insertionOrder": false,
-												         "items": {
-												           "additionalProperties": false,
-												           "properties": {
-												             "Value": {
-												               "maxLength": 128,
-												               "minLength": 1,
-												               "pattern": "",
-												               "type": "string"
-												             }
-												           },
-												           "required": [
-												             "Value"
-												           ],
-												           "type": "object"
-												         },
-												         "type": "array",
-												         "uniqueItems": true
-												       }
-												     },
-												     "required": [
-												       "Dimensions"
-												     ],
-												     "type": "object"
-												   }
-												*/
+												// {
+												//   "additionalProperties": false,
+												//   "properties": {
+												//     "Dimensions": {
+												//       "insertionOrder": false,
+												//       "items": {
+												//         "additionalProperties": false,
+												//         "properties": {
+												//           "Value": {
+												//             "maxLength": 128,
+												//             "minLength": 1,
+												//             "pattern": "",
+												//             "type": "string"
+												//           }
+												//         },
+												//         "required": [
+												//           "Value"
+												//         ],
+												//         "type": "object"
+												//       },
+												//       "type": "array",
+												//       "uniqueItems": true
+												//     }
+												//   },
+												//   "required": [
+												//     "Dimensions"
+												//   ],
+												//   "type": "object"
+												// }
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"dimensions": {
 															// Property: Dimensions
 															// CloudFormation resource type schema:
-															/*
-															   {
-															     "insertionOrder": false,
-															     "items": {
-															       "additionalProperties": false,
-															       "properties": {
-															         "Value": {
-															           "maxLength": 128,
-															           "minLength": 1,
-															           "pattern": "",
-															           "type": "string"
-															         }
-															       },
-															       "required": [
-															         "Value"
-															       ],
-															       "type": "object"
-															     },
-															     "type": "array",
-															     "uniqueItems": true
-															   }
-															*/
+															// {
+															//   "insertionOrder": false,
+															//   "items": {
+															//     "additionalProperties": false,
+															//     "properties": {
+															//       "Value": {
+															//         "maxLength": 128,
+															//         "minLength": 1,
+															//         "pattern": "",
+															//         "type": "string"
+															//       }
+															//     },
+															//     "required": [
+															//       "Value"
+															//     ],
+															//     "type": "object"
+															//   },
+															//   "type": "array",
+															//   "uniqueItems": true
+															// }
 															Attributes: providertypes.SetNestedAttributes(
 																map[string]schema.Attribute{
 																	"value": {
 																		// Property: Value
 																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "maxLength": 128,
-																		     "minLength": 1,
-																		     "pattern": "",
-																		     "type": "string"
-																		   }
-																		*/
+																		// {
+																		//   "maxLength": 128,
+																		//   "minLength": 1,
+																		//   "pattern": "",
+																		//   "type": "string"
+																		// }
 																		Type:     types.StringType,
 																		Required: true,
 																	},
@@ -419,14 +401,12 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"action_name": {
 									// Property: ActionName
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "maxLength": 128,
+									//   "minLength": 1,
+									//   "pattern": "",
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -438,90 +418,80 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"stateless_default_actions": {
 						// Property: StatelessDefaultActions
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
+						// {
+						//   "insertionOrder": false,
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": true
+						// }
 						Type:     providertypes.SetType{ElemType: types.StringType},
 						Required: true,
 					},
 					"stateless_fragment_default_actions": {
 						// Property: StatelessFragmentDefaultActions
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
+						// {
+						//   "insertionOrder": false,
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": true
+						// }
 						Type:     providertypes.SetType{ElemType: types.StringType},
 						Required: true,
 					},
 					"stateless_rule_group_references": {
 						// Property: StatelessRuleGroupReferences
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Priority": {
-						           "type": "integer"
-						         },
-						         "ResourceArn": {
-						           "description": "A resource ARN.",
-						           "maxLength": 256,
-						           "minLength": 1,
-						           "pattern": "",
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "ResourceArn",
-						         "Priority"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
+						// {
+						//   "insertionOrder": false,
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "properties": {
+						//       "Priority": {
+						//         "type": "integer"
+						//       },
+						//       "ResourceArn": {
+						//         "description": "A resource ARN.",
+						//         "maxLength": 256,
+						//         "minLength": 1,
+						//         "pattern": "",
+						//         "type": "string"
+						//       }
+						//     },
+						//     "required": [
+						//       "ResourceArn",
+						//       "Priority"
+						//     ],
+						//     "type": "object"
+						//   },
+						//   "type": "array",
+						//   "uniqueItems": true
+						// }
 						Attributes: providertypes.SetNestedAttributes(
 							map[string]schema.Attribute{
 								"priority": {
 									// Property: Priority
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
+									// {
+									//   "type": "integer"
+									// }
 									Type:     types.NumberType,
 									Required: true,
 								},
 								"resource_arn": {
 									// Property: ResourceArn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "A resource ARN.",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "A resource ARN.",
+									//   "maxLength": 256,
+									//   "minLength": 1,
+									//   "pattern": "",
+									//   "type": "string"
+									// }
 									Description: "A resource ARN.",
 									Type:        types.StringType,
 									Required:    true,
@@ -539,15 +509,13 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"firewall_policy_arn": {
 			// Property: FirewallPolicyArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A resource ARN.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A resource ARN.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -555,28 +523,24 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"firewall_policy_id": {
 			// Property: FirewallPolicyId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 36,
-			     "minLength": 36,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 36,
+			//   "minLength": 36,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"firewall_policy_name": {
 			// Property: FirewallPolicyName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// FirewallPolicyName is a force-new attribute.
@@ -584,62 +548,56 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 255,
-			           "minLength": 0,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 255,
+			//         "minLength": 0,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 255,
-						     "minLength": 0,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 255,
+						//   "minLength": 0,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},

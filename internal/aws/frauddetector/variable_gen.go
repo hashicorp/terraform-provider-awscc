@@ -25,12 +25,10 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ARN of the variable.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ARN of the variable.",
+			//   "type": "string"
+			// }
 			Description: "The ARN of the variable.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,12 +36,10 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The time when the variable was created.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The time when the variable was created.",
+			//   "type": "string"
+			// }
 			Description: "The time when the variable was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -51,16 +47,14 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"data_source": {
 			// Property: DataSource
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The source of the data.",
-			     "enum": [
-			       "EVENT",
-			       "EXTERNAL_MODEL_SCORE"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The source of the data.",
+			//   "enum": [
+			//     "EVENT",
+			//     "EXTERNAL_MODEL_SCORE"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The source of the data.",
 			Type:        types.StringType,
 			Required:    true,
@@ -68,18 +62,16 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"data_type": {
 			// Property: DataType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The data type.",
-			     "enum": [
-			       "STRING",
-			       "INTEGER",
-			       "FLOAT",
-			       "BOOLEAN"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The data type.",
+			//   "enum": [
+			//     "STRING",
+			//     "INTEGER",
+			//     "FLOAT",
+			//     "BOOLEAN"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The data type.",
 			Type:        types.StringType,
 			Required:    true,
@@ -87,12 +79,10 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"default_value": {
 			// Property: DefaultValue
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The default value for the variable when no value is received.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The default value for the variable when no value is received.",
+			//   "type": "string"
+			// }
 			Description: "The default value for the variable when no value is received.",
 			Type:        types.StringType,
 			Required:    true,
@@ -100,14 +90,12 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The description.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The description.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The description.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -115,12 +103,10 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"last_updated_time": {
 			// Property: LastUpdatedTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The time when the variable was last updated.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The time when the variable was last updated.",
+			//   "type": "string"
+			// }
 			Description: "The time when the variable was last updated.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -128,13 +114,11 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the variable.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the variable.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the variable.",
 			Type:        types.StringType,
 			Required:    true,
@@ -143,35 +127,33 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Tags associated with this variable.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 200,
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "description": "Tags associated with this variable.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 200,
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Description: "Tags associated with this variable.",
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
@@ -179,26 +161,22 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 256,
+						//   "minLength": 0,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -212,47 +190,45 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"variable_type": {
 			// Property: VariableType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The variable type. For more information see https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types",
-			     "enum": [
-			       "AUTH_CODE",
-			       "AVS",
-			       "BILLING_ADDRESS_L1",
-			       "BILLING_ADDRESS_L2",
-			       "BILLING_CITY",
-			       "BILLING_COUNTRY",
-			       "BILLING_NAME",
-			       "BILLING_PHONE",
-			       "BILLING_STATE",
-			       "BILLING_ZIP",
-			       "CARD_BIN",
-			       "CATEGORICAL",
-			       "CURRENCY_CODE",
-			       "EMAIL_ADDRESS",
-			       "FINGERPRINT",
-			       "FRAUD_LABEL",
-			       "FREE_FORM_TEXT",
-			       "IP_ADDRESS",
-			       "NUMERIC",
-			       "ORDER_ID",
-			       "PAYMENT_TYPE",
-			       "PHONE_NUMBER",
-			       "PRICE",
-			       "PRODUCT_CATEGORY",
-			       "SHIPPING_ADDRESS_L1",
-			       "SHIPPING_ADDRESS_L2",
-			       "SHIPPING_CITY",
-			       "SHIPPING_COUNTRY",
-			       "SHIPPING_NAME",
-			       "SHIPPING_PHONE",
-			       "SHIPPING_STATE",
-			       "SHIPPING_ZIP",
-			       "USERAGENT"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The variable type. For more information see https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types",
+			//   "enum": [
+			//     "AUTH_CODE",
+			//     "AVS",
+			//     "BILLING_ADDRESS_L1",
+			//     "BILLING_ADDRESS_L2",
+			//     "BILLING_CITY",
+			//     "BILLING_COUNTRY",
+			//     "BILLING_NAME",
+			//     "BILLING_PHONE",
+			//     "BILLING_STATE",
+			//     "BILLING_ZIP",
+			//     "CARD_BIN",
+			//     "CATEGORICAL",
+			//     "CURRENCY_CODE",
+			//     "EMAIL_ADDRESS",
+			//     "FINGERPRINT",
+			//     "FRAUD_LABEL",
+			//     "FREE_FORM_TEXT",
+			//     "IP_ADDRESS",
+			//     "NUMERIC",
+			//     "ORDER_ID",
+			//     "PAYMENT_TYPE",
+			//     "PHONE_NUMBER",
+			//     "PRICE",
+			//     "PRODUCT_CATEGORY",
+			//     "SHIPPING_ADDRESS_L1",
+			//     "SHIPPING_ADDRESS_L2",
+			//     "SHIPPING_CITY",
+			//     "SHIPPING_COUNTRY",
+			//     "SHIPPING_NAME",
+			//     "SHIPPING_PHONE",
+			//     "SHIPPING_STATE",
+			//     "SHIPPING_ZIP",
+			//     "USERAGENT"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The variable type. For more information see https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types",
 			Type:        types.StringType,
 			Optional:    true,

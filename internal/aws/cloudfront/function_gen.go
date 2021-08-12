@@ -25,11 +25,9 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"auto_publish": {
 			// Property: AutoPublish
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "type": "boolean"
+			// }
 			Type:     types.BoolType,
 			Optional: true,
 			// AutoPublish is a write-only attribute.
@@ -37,22 +35,18 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"function_arn": {
 			// Property: FunctionARN
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"function_code": {
 			// Property: FunctionCode
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			// FunctionCode is a write-only attribute.
@@ -60,45 +54,39 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"function_config": {
 			// Property: FunctionConfig
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Comment": {
-			         "type": "string"
-			       },
-			       "Runtime": {
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "Comment",
-			       "Runtime"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Comment": {
+			//       "type": "string"
+			//     },
+			//     "Runtime": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "Comment",
+			//     "Runtime"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"comment": {
 						// Property: Comment
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"runtime": {
 						// Property: Runtime
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -109,27 +97,23 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"function_metadata": {
 			// Property: FunctionMetadata
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "FunctionARN": {
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "FunctionARN": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"function_arn": {
 						// Property: FunctionARN
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Computed: true,
 					},
@@ -140,22 +124,18 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 		},
 		"stage": {
 			// Property: Stage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},

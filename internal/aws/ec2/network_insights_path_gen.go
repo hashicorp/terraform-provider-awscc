@@ -25,22 +25,18 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"created_date": {
 			// Property: CreatedDate
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"destination": {
 			// Property: Destination
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// Destination is a force-new attribute.
@@ -48,11 +44,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"destination_ip": {
 			// Property: DestinationIp
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -61,11 +55,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"destination_port": {
 			// Property: DestinationPort
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "type": "integer"
+			// }
 			Type:     types.NumberType,
 			Optional: true,
 			Computed: true,
@@ -74,37 +66,31 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"network_insights_path_arn": {
 			// Property: NetworkInsightsPathArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"network_insights_path_id": {
 			// Property: NetworkInsightsPathId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"protocol": {
 			// Property: Protocol
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "tcp",
-			       "udp"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "tcp",
+			//     "udp"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// Protocol is a force-new attribute.
@@ -112,11 +98,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"source": {
 			// Property: Source
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// Source is a force-new attribute.
@@ -124,11 +108,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"source_ip": {
 			// Property: SourceIp
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -137,49 +119,43 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

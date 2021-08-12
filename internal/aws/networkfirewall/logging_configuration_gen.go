@@ -25,15 +25,13 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"firewall_arn": {
 			// Property: FirewallArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A resource ARN.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A resource ARN.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Required:    true,
@@ -42,14 +40,12 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"firewall_name": {
 			// Property: FirewallName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -58,133 +54,127 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"logging_configuration": {
 			// Property: LoggingConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "LogDestinationConfigs": {
-			         "insertionOrder": false,
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "LogDestination": {
-			               "additionalProperties": false,
-			               "description": "A key-value pair to configure the logDestinations.",
-			               "minItems": 1,
-			               "patternProperties": {
-			                 "": {
-			                   "maxLength": 1024,
-			                   "minLength": 1,
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "LogDestinationType": {
-			               "enum": [
-			                 "S3",
-			                 "CloudWatchLogs",
-			                 "KinesisDataFirehose"
-			               ],
-			               "type": "string"
-			             },
-			             "LogType": {
-			               "enum": [
-			                 "ALERT",
-			                 "FLOW"
-			               ],
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "LogType",
-			             "LogDestinationType",
-			             "LogDestination"
-			           ],
-			           "type": "object"
-			         },
-			         "minItems": 1,
-			         "type": "array"
-			       }
-			     },
-			     "required": [
-			       "LogDestinationConfigs"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "LogDestinationConfigs": {
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "LogDestination": {
+			//             "additionalProperties": false,
+			//             "description": "A key-value pair to configure the logDestinations.",
+			//             "minItems": 1,
+			//             "patternProperties": {
+			//               "": {
+			//                 "maxLength": 1024,
+			//                 "minLength": 1,
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "LogDestinationType": {
+			//             "enum": [
+			//               "S3",
+			//               "CloudWatchLogs",
+			//               "KinesisDataFirehose"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "LogType": {
+			//             "enum": [
+			//               "ALERT",
+			//               "FLOW"
+			//             ],
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "LogType",
+			//           "LogDestinationType",
+			//           "LogDestination"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "minItems": 1,
+			//       "type": "array"
+			//     }
+			//   },
+			//   "required": [
+			//     "LogDestinationConfigs"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"log_destination_configs": {
 						// Property: LogDestinationConfigs
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "LogDestination": {
-						           "additionalProperties": false,
-						           "description": "A key-value pair to configure the logDestinations.",
-						           "minItems": 1,
-						           "patternProperties": {
-						             "": {
-						               "maxLength": 1024,
-						               "minLength": 1,
-						               "type": "string"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "LogDestinationType": {
-						           "enum": [
-						             "S3",
-						             "CloudWatchLogs",
-						             "KinesisDataFirehose"
-						           ],
-						           "type": "string"
-						         },
-						         "LogType": {
-						           "enum": [
-						             "ALERT",
-						             "FLOW"
-						           ],
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "LogType",
-						         "LogDestinationType",
-						         "LogDestination"
-						       ],
-						       "type": "object"
-						     },
-						     "minItems": 1,
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "insertionOrder": false,
+						//   "items": {
+						//     "additionalProperties": false,
+						//     "properties": {
+						//       "LogDestination": {
+						//         "additionalProperties": false,
+						//         "description": "A key-value pair to configure the logDestinations.",
+						//         "minItems": 1,
+						//         "patternProperties": {
+						//           "": {
+						//             "maxLength": 1024,
+						//             "minLength": 1,
+						//             "type": "string"
+						//           }
+						//         },
+						//         "type": "object"
+						//       },
+						//       "LogDestinationType": {
+						//         "enum": [
+						//           "S3",
+						//           "CloudWatchLogs",
+						//           "KinesisDataFirehose"
+						//         ],
+						//         "type": "string"
+						//       },
+						//       "LogType": {
+						//         "enum": [
+						//           "ALERT",
+						//           "FLOW"
+						//         ],
+						//         "type": "string"
+						//       }
+						//     },
+						//     "required": [
+						//       "LogType",
+						//       "LogDestinationType",
+						//       "LogDestination"
+						//     ],
+						//     "type": "object"
+						//   },
+						//   "minItems": 1,
+						//   "type": "array"
+						// }
 						// Multiset.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"log_destination": {
 									// Property: LogDestination
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "A key-value pair to configure the logDestinations.",
-									     "minItems": 1,
-									     "patternProperties": {
-									       "": {
-									         "maxLength": 1024,
-									         "minLength": 1,
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "description": "A key-value pair to configure the logDestinations.",
+									//   "minItems": 1,
+									//   "patternProperties": {
+									//     "": {
+									//       "maxLength": 1024,
+									//       "minLength": 1,
+									//       "type": "string"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Description: "A key-value pair to configure the logDestinations.",
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
@@ -193,31 +183,27 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 								"log_destination_type": {
 									// Property: LogDestinationType
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "S3",
-									       "CloudWatchLogs",
-									       "KinesisDataFirehose"
-									     ],
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "enum": [
+									//     "S3",
+									//     "CloudWatchLogs",
+									//     "KinesisDataFirehose"
+									//   ],
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"log_type": {
 									// Property: LogType
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "ALERT",
-									       "FLOW"
-									     ],
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "enum": [
+									//     "ALERT",
+									//     "FLOW"
+									//   ],
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},

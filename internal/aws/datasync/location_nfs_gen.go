@@ -26,14 +26,12 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"location_arn": {
 			// Property: LocationArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the NFS location.",
-			     "maxLength": 128,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the NFS location.",
+			//   "maxLength": 128,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the NFS location.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -41,14 +39,12 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"location_uri": {
 			// Property: LocationUri
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The URL of the NFS location that was described.",
-			     "maxLength": 4356,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The URL of the NFS location that was described.",
+			//   "maxLength": 4356,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The URL of the NFS location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,43 +52,39 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"mount_options": {
 			// Property: MountOptions
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "The NFS mount options that DataSync can use to mount your NFS share.",
-			     "properties": {
-			       "Version": {
-			         "description": "The specific NFS version that you want DataSync to use to mount your NFS share.",
-			         "enum": [
-			           "AUTOMATIC",
-			           "NFS3",
-			           "NFS4_0",
-			           "NFS4_1"
-			         ],
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The NFS mount options that DataSync can use to mount your NFS share.",
+			//   "properties": {
+			//     "Version": {
+			//       "description": "The specific NFS version that you want DataSync to use to mount your NFS share.",
+			//       "enum": [
+			//         "AUTOMATIC",
+			//         "NFS3",
+			//         "NFS4_0",
+			//         "NFS4_1"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "The NFS mount options that DataSync can use to mount your NFS share.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"version": {
 						// Property: Version
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The specific NFS version that you want DataSync to use to mount your NFS share.",
-						     "enum": [
-						       "AUTOMATIC",
-						       "NFS3",
-						       "NFS4_0",
-						       "NFS4_1"
-						     ],
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The specific NFS version that you want DataSync to use to mount your NFS share.",
+						//   "enum": [
+						//     "AUTOMATIC",
+						//     "NFS3",
+						//     "NFS4_0",
+						//     "NFS4_1"
+						//   ],
+						//   "type": "string"
+						// }
 						Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -104,50 +96,46 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"on_prem_config": {
 			// Property: OnPremConfig
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect an NFS server.",
-			     "properties": {
-			       "AgentArns": {
-			         "description": "ARN(s) of the agent(s) to use for an NFS location.",
-			         "insertionOrder": false,
-			         "items": {
-			           "maxLength": 128,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "maxItems": 4,
-			         "minItems": 1,
-			         "type": "array"
-			       }
-			     },
-			     "required": [
-			       "AgentArns"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect an NFS server.",
+			//   "properties": {
+			//     "AgentArns": {
+			//       "description": "ARN(s) of the agent(s) to use for an NFS location.",
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "maxLength": 128,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "maxItems": 4,
+			//       "minItems": 1,
+			//       "type": "array"
+			//     }
+			//   },
+			//   "required": [
+			//     "AgentArns"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect an NFS server.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"agent_arns": {
 						// Property: AgentArns
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "ARN(s) of the agent(s) to use for an NFS location.",
-						     "insertionOrder": false,
-						     "items": {
-						       "maxLength": 128,
-						       "pattern": "",
-						       "type": "string"
-						     },
-						     "maxItems": 4,
-						     "minItems": 1,
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "description": "ARN(s) of the agent(s) to use for an NFS location.",
+						//   "insertionOrder": false,
+						//   "items": {
+						//     "maxLength": 128,
+						//     "pattern": "",
+						//     "type": "string"
+						//   },
+						//   "maxItems": 4,
+						//   "minItems": 1,
+						//   "type": "array"
+						// }
 						Description: "ARN(s) of the agent(s) to use for an NFS location.",
 						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
@@ -160,14 +148,12 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"server_hostname": {
 			// Property: ServerHostname
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the NFS server. This value is the IP address or DNS name of the NFS server.",
-			     "maxLength": 255,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the NFS server. This value is the IP address or DNS name of the NFS server.",
+			//   "maxLength": 255,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the NFS server. This value is the IP address or DNS name of the NFS server.",
 			Type:        types.StringType,
 			Required:    true,
@@ -177,14 +163,12 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"subdirectory": {
 			// Property: Subdirectory
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.",
-			     "maxLength": 4096,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.",
+			//   "maxLength": 4096,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.",
 			Type:        types.StringType,
 			Required:    true,
@@ -193,55 +177,51 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key for an AWS resource tag.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for an AWS resource tag.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key for an AWS resource tag.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for an AWS resource tag.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key for an AWS resource tag.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The key for an AWS resource tag.",
+						//   "maxLength": 256,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
@@ -249,15 +229,13 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for an AWS resource tag.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The value for an AWS resource tag.",
+						//   "maxLength": 256,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,

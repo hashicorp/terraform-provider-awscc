@@ -26,14 +26,12 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"domain": {
 			// Property: Domain
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the Windows domain that the FSx for Windows server belongs to.",
-			     "maxLength": 253,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the Windows domain that the FSx for Windows server belongs to.",
+			//   "maxLength": 253,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the Windows domain that the FSx for Windows server belongs to.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -43,14 +41,12 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"fsx_filesystem_arn": {
 			// Property: FsxFilesystemArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
-			     "maxLength": 128,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
+			//   "maxLength": 128,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
 			Type:        types.StringType,
 			Required:    true,
@@ -60,14 +56,12 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"location_arn": {
 			// Property: LocationArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
-			     "maxLength": 128,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
+			//   "maxLength": 128,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -75,14 +69,12 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"location_uri": {
 			// Property: LocationUri
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The URL of the FSx for Windows location that was described.",
-			     "maxLength": 4356,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The URL of the FSx for Windows location that was described.",
+			//   "maxLength": 4356,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The URL of the FSx for Windows location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -90,14 +82,12 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"password": {
 			// Property: Password
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
-			     "maxLength": 104,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
+			//   "maxLength": 104,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
 			Type:        types.StringType,
 			Required:    true,
@@ -107,18 +97,16 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"security_group_arns": {
 			// Property: SecurityGroupArns
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ARNs of the security groups that are to use to configure the FSx for Windows file system.",
-			     "insertionOrder": false,
-			     "items": {
-			       "maxLength": 128,
-			       "pattern": "",
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The ARNs of the security groups that are to use to configure the FSx for Windows file system.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "maxLength": 128,
+			//     "pattern": "",
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "The ARNs of the security groups that are to use to configure the FSx for Windows file system.",
 			// Multiset.
 			Type:     types.ListType{ElemType: types.StringType},
@@ -128,14 +116,12 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"subdirectory": {
 			// Property: Subdirectory
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A subdirectory in the location's path.",
-			     "maxLength": 4096,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A subdirectory in the location's path.",
+			//   "maxLength": 4096,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "A subdirectory in the location's path.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -146,55 +132,51 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key for an AWS resource tag.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for an AWS resource tag.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key for an AWS resource tag.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for an AWS resource tag.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key for an AWS resource tag.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The key for an AWS resource tag.",
+						//   "maxLength": 256,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
@@ -202,15 +184,13 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for an AWS resource tag.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The value for an AWS resource tag.",
+						//   "maxLength": 256,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
@@ -225,14 +205,12 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"user": {
 			// Property: User
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The user who has the permissions to access files and folders in the FSx for Windows file system.",
-			     "maxLength": 104,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The user who has the permissions to access files and folders in the FSx for Windows file system.",
+			//   "maxLength": 104,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The user who has the permissions to access files and folders in the FSx for Windows file system.",
 			Type:        types.StringType,
 			Required:    true,

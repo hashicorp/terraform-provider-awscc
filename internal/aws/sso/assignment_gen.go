@@ -25,15 +25,13 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"instance_arn": {
 			// Property: InstanceArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The sso instance that the permission set is owned.",
-			     "maxLength": 1224,
-			     "minLength": 10,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The sso instance that the permission set is owned.",
+			//   "maxLength": 1224,
+			//   "minLength": 10,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The sso instance that the permission set is owned.",
 			Type:        types.StringType,
 			Required:    true,
@@ -42,15 +40,13 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"permission_set_arn": {
 			// Property: PermissionSetArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The permission set that the assignemt will be assigned",
-			     "maxLength": 1224,
-			     "minLength": 10,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The permission set that the assignemt will be assigned",
+			//   "maxLength": 1224,
+			//   "minLength": 10,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The permission set that the assignemt will be assigned",
 			Type:        types.StringType,
 			Required:    true,
@@ -59,15 +55,13 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"principal_id": {
 			// Property: PrincipalId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The assignee's identifier, user id/group id",
-			     "maxLength": 47,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The assignee's identifier, user id/group id",
+			//   "maxLength": 47,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The assignee's identifier, user id/group id",
 			Type:        types.StringType,
 			Required:    true,
@@ -76,16 +70,14 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"principal_type": {
 			// Property: PrincipalType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The assignee's type, user/group",
-			     "enum": [
-			       "USER",
-			       "GROUP"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The assignee's type, user/group",
+			//   "enum": [
+			//     "USER",
+			//     "GROUP"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The assignee's type, user/group",
 			Type:        types.StringType,
 			Required:    true,
@@ -94,13 +86,11 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"target_id": {
 			// Property: TargetId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The account id to be provisioned.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The account id to be provisioned.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The account id to be provisioned.",
 			Type:        types.StringType,
 			Required:    true,
@@ -109,15 +99,13 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"target_type": {
 			// Property: TargetType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The type of resource to be provsioned to, only aws account now",
-			     "enum": [
-			       "AWS_ACCOUNT"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The type of resource to be provsioned to, only aws account now",
+			//   "enum": [
+			//     "AWS_ACCOUNT"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The type of resource to be provsioned to, only aws account now",
 			Type:        types.StringType,
 			Required:    true,

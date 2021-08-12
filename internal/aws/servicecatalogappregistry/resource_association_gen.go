@@ -25,15 +25,13 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"application": {
 			// Property: Application
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name or the Id of the Application.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name or the Id of the Application.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name or the Id of the Application.",
 			Type:        types.StringType,
 			Required:    true,
@@ -41,36 +39,30 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"application_arn": {
 			// Property: ApplicationArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"resource": {
 			// Property: Resource
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name or the Id of the Resource.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name or the Id of the Resource.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name or the Id of the Resource.",
 			Type:        types.StringType,
 			Required:    true,
@@ -78,27 +70,23 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"resource_arn": {
 			// Property: ResourceArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"resource_type": {
 			// Property: ResourceType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The type of the CFN Resource for now it's enum CFN_STACK.",
-			     "enum": [
-			       "CFN_STACK"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The type of the CFN Resource for now it's enum CFN_STACK.",
+			//   "enum": [
+			//     "CFN_STACK"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The type of the CFN Resource for now it's enum CFN_STACK.",
 			Type:        types.StringType,
 			Required:    true,

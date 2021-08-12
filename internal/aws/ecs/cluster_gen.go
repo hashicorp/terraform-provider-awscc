@@ -25,12 +25,10 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the Amazon ECS cluster, such as arn:aws:ecs:us-east-2:123456789012:cluster/MyECSCluster.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the Amazon ECS cluster, such as arn:aws:ecs:us-east-2:123456789012:cluster/MyECSCluster.",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon ECS cluster, such as arn:aws:ecs:us-east-2:123456789012:cluster/MyECSCluster.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,26 +36,22 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"capacity_providers": {
 			// Property: CapacityProviders
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 		},
 		"cluster_name": {
 			// Property: ClusterName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A user-generated string that you use to identify your cluster. If you don't specify a name, AWS CloudFormation generates a unique physical ID for the name.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A user-generated string that you use to identify your cluster. If you don't specify a name, AWS CloudFormation generates a unique physical ID for the name.",
+			//   "type": "string"
+			// }
 			Description: "A user-generated string that you use to identify your cluster. If you don't specify a name, AWS CloudFormation generates a unique physical ID for the name.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -67,44 +61,38 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"cluster_settings": {
 			// Property: ClusterSettings
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "description": "The setting to use when creating a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster. If this value is specified, it will override the containerInsights value set with PutAccountSetting or PutAccountSettingDefault.",
-			       "properties": {
-			         "Name": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "description": "The setting to use when creating a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster. If this value is specified, it will override the containerInsights value set with PutAccountSetting or PutAccountSettingDefault.",
+			//     "properties": {
+			//       "Name": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"name": {
 						// Property: Name
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -116,183 +104,165 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"configuration": {
 			// Property: Configuration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The configurations to be set at cluster level.",
-			     "properties": {
-			       "ExecuteCommandConfiguration": {
-			         "description": "The configuration for ExecuteCommand.",
-			         "properties": {
-			           "KmsKeyId": {
-			             "type": "string"
-			           },
-			           "LogConfiguration": {
-			             "description": "The session logging configuration for ExecuteCommand.",
-			             "properties": {
-			               "CloudWatchEncryptionEnabled": {
-			                 "type": "boolean"
-			               },
-			               "CloudWatchLogGroupName": {
-			                 "type": "string"
-			               },
-			               "S3BucketName": {
-			                 "type": "string"
-			               },
-			               "S3EncryptionEnabled": {
-			                 "type": "boolean"
-			               },
-			               "S3KeyPrefix": {
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "Logging": {
-			             "type": "string"
-			           }
-			         },
-			         "type": "object"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "description": "The configurations to be set at cluster level.",
+			//   "properties": {
+			//     "ExecuteCommandConfiguration": {
+			//       "description": "The configuration for ExecuteCommand.",
+			//       "properties": {
+			//         "KmsKeyId": {
+			//           "type": "string"
+			//         },
+			//         "LogConfiguration": {
+			//           "description": "The session logging configuration for ExecuteCommand.",
+			//           "properties": {
+			//             "CloudWatchEncryptionEnabled": {
+			//               "type": "boolean"
+			//             },
+			//             "CloudWatchLogGroupName": {
+			//               "type": "string"
+			//             },
+			//             "S3BucketName": {
+			//               "type": "string"
+			//             },
+			//             "S3EncryptionEnabled": {
+			//               "type": "boolean"
+			//             },
+			//             "S3KeyPrefix": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "Logging": {
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "The configurations to be set at cluster level.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"execute_command_configuration": {
 						// Property: ExecuteCommandConfiguration
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The configuration for ExecuteCommand.",
-						     "properties": {
-						       "KmsKeyId": {
-						         "type": "string"
-						       },
-						       "LogConfiguration": {
-						         "description": "The session logging configuration for ExecuteCommand.",
-						         "properties": {
-						           "CloudWatchEncryptionEnabled": {
-						             "type": "boolean"
-						           },
-						           "CloudWatchLogGroupName": {
-						             "type": "string"
-						           },
-						           "S3BucketName": {
-						             "type": "string"
-						           },
-						           "S3EncryptionEnabled": {
-						             "type": "boolean"
-						           },
-						           "S3KeyPrefix": {
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "Logging": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "description": "The configuration for ExecuteCommand.",
+						//   "properties": {
+						//     "KmsKeyId": {
+						//       "type": "string"
+						//     },
+						//     "LogConfiguration": {
+						//       "description": "The session logging configuration for ExecuteCommand.",
+						//       "properties": {
+						//         "CloudWatchEncryptionEnabled": {
+						//           "type": "boolean"
+						//         },
+						//         "CloudWatchLogGroupName": {
+						//           "type": "string"
+						//         },
+						//         "S3BucketName": {
+						//           "type": "string"
+						//         },
+						//         "S3EncryptionEnabled": {
+						//           "type": "boolean"
+						//         },
+						//         "S3KeyPrefix": {
+						//           "type": "string"
+						//         }
+						//       },
+						//       "type": "object"
+						//     },
+						//     "Logging": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Description: "The configuration for ExecuteCommand.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"kms_key_id": {
 									// Property: KmsKeyId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"log_configuration": {
 									// Property: LogConfiguration
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The session logging configuration for ExecuteCommand.",
-									     "properties": {
-									       "CloudWatchEncryptionEnabled": {
-									         "type": "boolean"
-									       },
-									       "CloudWatchLogGroupName": {
-									         "type": "string"
-									       },
-									       "S3BucketName": {
-									         "type": "string"
-									       },
-									       "S3EncryptionEnabled": {
-									         "type": "boolean"
-									       },
-									       "S3KeyPrefix": {
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "description": "The session logging configuration for ExecuteCommand.",
+									//   "properties": {
+									//     "CloudWatchEncryptionEnabled": {
+									//       "type": "boolean"
+									//     },
+									//     "CloudWatchLogGroupName": {
+									//       "type": "string"
+									//     },
+									//     "S3BucketName": {
+									//       "type": "string"
+									//     },
+									//     "S3EncryptionEnabled": {
+									//       "type": "boolean"
+									//     },
+									//     "S3KeyPrefix": {
+									//       "type": "string"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Description: "The session logging configuration for ExecuteCommand.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"cloud_watch_encryption_enabled": {
 												// Property: CloudWatchEncryptionEnabled
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
+												// {
+												//   "type": "boolean"
+												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"cloud_watch_log_group_name": {
 												// Property: CloudWatchLogGroupName
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "type": "string"
+												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"s3_bucket_name": {
 												// Property: S3BucketName
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "type": "string"
+												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"s3_encryption_enabled": {
 												// Property: S3EncryptionEnabled
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
+												// {
+												//   "type": "boolean"
+												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"s3_key_prefix": {
 												// Property: S3KeyPrefix
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "type": "string"
+												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -303,11 +273,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"logging": {
 									// Property: Logging
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -322,58 +290,50 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"default_capacity_provider_strategy": {
 			// Property: DefaultCapacityProviderStrategy
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "description": "A capacity provider strategy consists of one or more capacity providers along with the `base` and `weight` to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProviders API is used to associate a capacity provider with a cluster. Only capacity providers with an `ACTIVE` or `UPDATING` status can be used.",
-			       "properties": {
-			         "Base": {
-			           "type": "integer"
-			         },
-			         "CapacityProvider": {
-			           "type": "string"
-			         },
-			         "Weight": {
-			           "type": "integer"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "description": "A capacity provider strategy consists of one or more capacity providers along with the `base` and `weight` to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProviders API is used to associate a capacity provider with a cluster. Only capacity providers with an `ACTIVE` or `UPDATING` status can be used.",
+			//     "properties": {
+			//       "Base": {
+			//         "type": "integer"
+			//       },
+			//       "CapacityProvider": {
+			//         "type": "string"
+			//       },
+			//       "Weight": {
+			//         "type": "integer"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"base": {
 						// Property: Base
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"capacity_provider": {
 						// Property: CapacityProvider
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"weight": {
 						// Property: Weight
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
@@ -385,44 +345,38 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "description": "The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.",
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "description": "The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.",
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

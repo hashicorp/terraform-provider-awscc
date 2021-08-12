@@ -25,15 +25,13 @@ func bucketPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"bucket": {
 			// Property: Bucket
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the specified bucket.",
-			     "maxLength": 2048,
-			     "minLength": 20,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the specified bucket.",
+			//   "maxLength": 2048,
+			//   "minLength": 20,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
 			Type:        types.StringType,
 			Required:    true,
@@ -42,12 +40,10 @@ func bucketPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"policy_document": {
 			// Property: PolicyDocument
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A policy document containing permissions to add to the specified bucket.",
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "description": "A policy document containing permissions to add to the specified bucket.",
+			//   "type": "object"
+			// }
 			Description: "A policy document containing permissions to add to the specified bucket.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Required:    true,

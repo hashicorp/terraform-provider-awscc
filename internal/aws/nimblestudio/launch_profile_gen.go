@@ -25,25 +25,21 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"ec_2_subnet_ids": {
 			// Property: Ec2SubnetIds
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Required: true,
 			// Ec2SubnetIds is a force-new attribute.
@@ -51,122 +47,106 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"launch_profile_id": {
 			// Property: LaunchProfileId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"launch_profile_protocol_versions": {
 			// Property: LaunchProfileProtocolVersions
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Required: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 		},
 		"stream_configuration": {
 			// Property: StreamConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "ClipboardMode": {
-			         "type": "string"
-			       },
-			       "Ec2InstanceTypes": {
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array"
-			       },
-			       "MaxSessionLengthInMinutes": {
-			         "type": "number"
-			       },
-			       "StreamingImageIds": {
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array"
-			       }
-			     },
-			     "required": [
-			       "Ec2InstanceTypes",
-			       "StreamingImageIds",
-			       "ClipboardMode"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "ClipboardMode": {
+			//       "type": "string"
+			//     },
+			//     "Ec2InstanceTypes": {
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array"
+			//     },
+			//     "MaxSessionLengthInMinutes": {
+			//       "type": "number"
+			//     },
+			//     "StreamingImageIds": {
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array"
+			//     }
+			//   },
+			//   "required": [
+			//     "Ec2InstanceTypes",
+			//     "StreamingImageIds",
+			//     "ClipboardMode"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"clipboard_mode": {
 						// Property: ClipboardMode
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"ec_2_instance_types": {
 						// Property: Ec2InstanceTypes
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array"
+						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 					"max_session_length_in_minutes": {
 						// Property: MaxSessionLengthInMinutes
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "number"
-						   }
-						*/
+						// {
+						//   "type": "number"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"streaming_image_ids": {
 						// Property: StreamingImageIds
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
+						// {
+						//   "items": {
+						//     "type": "string"
+						//   },
+						//   "type": "array"
+						// }
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
@@ -177,25 +157,21 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"studio_component_ids": {
 			// Property: StudioComponentIds
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Required: true,
 		},
 		"studio_id": {
 			// Property: StudioId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// StudioId is a force-new attribute.
@@ -203,17 +179,15 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "patternProperties": {
-			       "": {
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "patternProperties": {
+			//     "": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,

@@ -25,12 +25,10 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The time at which the model package group was created.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The time at which the model package group was created.",
+			//   "type": "string"
+			// }
 			Description: "The time at which the model package group was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,15 +36,13 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"model_package_group_arn": {
 			// Property: ModelPackageGroupArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the model package group.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the model package group.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the model package group.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -54,14 +50,12 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"model_package_group_description": {
 			// Property: ModelPackageGroupDescription
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The description of the model package group.",
-			     "maxLength": 1024,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The description of the model package group.",
+			//   "maxLength": 1024,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The description of the model package group.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -71,14 +65,12 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"model_package_group_name": {
 			// Property: ModelPackageGroupName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the model package group.",
-			     "maxLength": 63,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the model package group.",
+			//   "maxLength": 63,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the model package group.",
 			Type:        types.StringType,
 			Required:    true,
@@ -87,31 +79,27 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"model_package_group_policy": {
 			// Property: ModelPackageGroupPolicy
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"model_package_group_status": {
 			// Property: ModelPackageGroupStatus
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The status of a modelpackage group job.",
-			     "enum": [
-			       "Pending",
-			       "InProgress",
-			       "Completed",
-			       "Failed",
-			       "Deleting",
-			       "DeleteFailed"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The status of a modelpackage group job.",
+			//   "enum": [
+			//     "Pending",
+			//     "InProgress",
+			//     "Completed",
+			//     "Failed",
+			//     "Deleting",
+			//     "DeleteFailed"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The status of a modelpackage group job.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -119,52 +107,48 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource.",
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			           "maxLength": 256,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//         "maxLength": 256,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array"
+			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
@@ -172,14 +156,12 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						     "maxLength": 256,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						//   "maxLength": 256,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,

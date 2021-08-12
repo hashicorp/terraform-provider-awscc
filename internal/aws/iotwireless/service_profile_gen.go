@@ -26,12 +26,10 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Service profile Arn. Returned after successful create.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Service profile Arn. Returned after successful create.",
+			//   "type": "string"
+			// }
 			Description: "Service profile Arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,13 +37,11 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Service profile Id. Returned after successful create.",
-			     "maxLength": 256,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Service profile Id. Returned after successful create.",
+			//   "maxLength": 256,
+			//   "type": "string"
+			// }
 			Description: "Service profile Id. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -53,279 +49,239 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"lo_ra_wan": {
 			// Property: LoRaWAN
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "AddGwMetadata": {
-			         "type": "boolean"
-			       },
-			       "ChannelMask": {
-			         "type": "string"
-			       },
-			       "DevStatusReqFreq": {
-			         "type": "integer"
-			       },
-			       "DlBucketSize": {
-			         "type": "integer"
-			       },
-			       "DlRate": {
-			         "type": "integer"
-			       },
-			       "DlRatePolicy": {
-			         "type": "string"
-			       },
-			       "DrMax": {
-			         "type": "integer"
-			       },
-			       "DrMin": {
-			         "type": "integer"
-			       },
-			       "HrAllowed": {
-			         "type": "boolean"
-			       },
-			       "MinGwDiversity": {
-			         "type": "integer"
-			       },
-			       "NwkGeoLoc": {
-			         "type": "boolean"
-			       },
-			       "PrAllowed": {
-			         "type": "boolean"
-			       },
-			       "RaAllowed": {
-			         "type": "boolean"
-			       },
-			       "ReportDevStatusBattery": {
-			         "type": "boolean"
-			       },
-			       "ReportDevStatusMargin": {
-			         "type": "boolean"
-			       },
-			       "TargetPer": {
-			         "type": "integer"
-			       },
-			       "UlBucketSize": {
-			         "type": "integer"
-			       },
-			       "UlRate": {
-			         "type": "integer"
-			       },
-			       "UlRatePolicy": {
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "AddGwMetadata": {
+			//       "type": "boolean"
+			//     },
+			//     "ChannelMask": {
+			//       "type": "string"
+			//     },
+			//     "DevStatusReqFreq": {
+			//       "type": "integer"
+			//     },
+			//     "DlBucketSize": {
+			//       "type": "integer"
+			//     },
+			//     "DlRate": {
+			//       "type": "integer"
+			//     },
+			//     "DlRatePolicy": {
+			//       "type": "string"
+			//     },
+			//     "DrMax": {
+			//       "type": "integer"
+			//     },
+			//     "DrMin": {
+			//       "type": "integer"
+			//     },
+			//     "HrAllowed": {
+			//       "type": "boolean"
+			//     },
+			//     "MinGwDiversity": {
+			//       "type": "integer"
+			//     },
+			//     "NwkGeoLoc": {
+			//       "type": "boolean"
+			//     },
+			//     "PrAllowed": {
+			//       "type": "boolean"
+			//     },
+			//     "RaAllowed": {
+			//       "type": "boolean"
+			//     },
+			//     "ReportDevStatusBattery": {
+			//       "type": "boolean"
+			//     },
+			//     "ReportDevStatusMargin": {
+			//       "type": "boolean"
+			//     },
+			//     "TargetPer": {
+			//       "type": "integer"
+			//     },
+			//     "UlBucketSize": {
+			//       "type": "integer"
+			//     },
+			//     "UlRate": {
+			//       "type": "integer"
+			//     },
+			//     "UlRatePolicy": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"add_gw_metadata": {
 						// Property: AddGwMetadata
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"channel_mask": {
 						// Property: ChannelMask
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Computed: true,
 					},
 					"dev_status_req_freq": {
 						// Property: DevStatusReqFreq
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"dl_bucket_size": {
 						// Property: DlBucketSize
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"dl_rate": {
 						// Property: DlRate
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"dl_rate_policy": {
 						// Property: DlRatePolicy
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Computed: true,
 					},
 					"dr_max": {
 						// Property: DrMax
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"dr_min": {
 						// Property: DrMin
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"hr_allowed": {
 						// Property: HrAllowed
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Computed: true,
 					},
 					"min_gw_diversity": {
 						// Property: MinGwDiversity
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"nwk_geo_loc": {
 						// Property: NwkGeoLoc
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Computed: true,
 					},
 					"pr_allowed": {
 						// Property: PrAllowed
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Computed: true,
 					},
 					"ra_allowed": {
 						// Property: RaAllowed
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Computed: true,
 					},
 					"report_dev_status_battery": {
 						// Property: ReportDevStatusBattery
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Computed: true,
 					},
 					"report_dev_status_margin": {
 						// Property: ReportDevStatusMargin
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "type": "boolean"
+						// }
 						Type:     types.BoolType,
 						Computed: true,
 					},
 					"target_per": {
 						// Property: TargetPer
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"ul_bucket_size": {
 						// Property: UlBucketSize
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"ul_rate": {
 						// Property: UlRate
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"ul_rate_policy": {
 						// Property: UlRatePolicy
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Computed: true,
 					},
@@ -336,13 +292,11 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of service profile",
-			     "maxLength": 256,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of service profile",
+			//   "maxLength": 256,
+			//   "type": "string"
+			// }
 			Description: "Name of service profile",
 			Type:        types.StringType,
 			Optional:    true,
@@ -350,57 +304,51 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of key-value pairs that contain metadata for the service profile.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "A list of key-value pairs that contain metadata for the service profile.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "A list of key-value pairs that contain metadata for the service profile.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 256,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},

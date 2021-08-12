@@ -25,14 +25,12 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"domain_id": {
 			// Property: DomainId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the associated Domain.",
-			     "maxLength": 63,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the associated Domain.",
+			//   "maxLength": 63,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The ID of the associated Domain.",
 			Type:        types.StringType,
 			Required:    true,
@@ -41,13 +39,11 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"single_sign_on_user_identifier": {
 			// Property: SingleSignOnUserIdentifier
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is \"UserName\". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is \"UserName\". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is \"UserName\". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -57,14 +53,12 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"single_sign_on_user_value": {
 			// Property: SingleSignOnUserValue
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The username of the associated AWS Single Sign-On User for this UserProfile. If the Domain's AuthMode is SSO, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not SSO, this field cannot be specified.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The username of the associated AWS Single Sign-On User for this UserProfile. If the Domain's AuthMode is SSO, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not SSO, this field cannot be specified.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The username of the associated AWS Single Sign-On User for this UserProfile. If the Domain's AuthMode is SSO, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not SSO, this field cannot be specified.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -74,61 +68,55 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of tags to apply to the user profile.",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "minItems": 0,
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "description": "A list of tags to apply to the user profile.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "minItems": 0,
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Description: "A list of tags to apply to the user profile.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 128,
+						//   "minLength": 1,
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -146,14 +134,12 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"user_profile_arn": {
 			// Property: UserProfileArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The user profile Amazon Resource Name (ARN).",
-			     "maxLength": 256,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The user profile Amazon Resource Name (ARN).",
+			//   "maxLength": 256,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The user profile Amazon Resource Name (ARN).",
 			Type:        types.StringType,
 			Computed:    true,
@@ -161,14 +147,12 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"user_profile_name": {
 			// Property: UserProfileName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A name for the UserProfile.",
-			     "maxLength": 63,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A name for the UserProfile.",
+			//   "maxLength": 63,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "A name for the UserProfile.",
 			Type:        types.StringType,
 			Required:    true,
@@ -177,236 +161,232 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"user_settings": {
 			// Property: UserSettings
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "A collection of settings that apply to users of Amazon SageMaker Studio. These settings are specified when the CreateUserProfile API is called, and as DefaultUserSettings when the CreateDomain API is called.",
-			     "properties": {
-			       "ExecutionRole": {
-			         "description": "The user profile Amazon Resource Name (ARN).",
-			         "maxLength": 2048,
-			         "minLength": 20,
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "JupyterServerAppSettings": {
-			         "additionalProperties": false,
-			         "description": "The JupyterServer app settings.",
-			         "properties": {
-			           "DefaultResourceSpec": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "InstanceType": {
-			                 "description": "The instance type that the image version runs on.",
-			                 "enum": [
-			                   "system",
-			                   "ml.t3.micro",
-			                   "ml.t3.small",
-			                   "ml.t3.medium",
-			                   "ml.t3.large",
-			                   "ml.t3.xlarge",
-			                   "ml.t3.2xlarge",
-			                   "ml.m5.large",
-			                   "ml.m5.xlarge",
-			                   "ml.m5.2xlarge",
-			                   "ml.m5.4xlarge",
-			                   "ml.m5.8xlarge",
-			                   "ml.m5.12xlarge",
-			                   "ml.m5.16xlarge",
-			                   "ml.m5.24xlarge",
-			                   "ml.c5.large",
-			                   "ml.c5.xlarge",
-			                   "ml.c5.2xlarge",
-			                   "ml.c5.4xlarge",
-			                   "ml.c5.9xlarge",
-			                   "ml.c5.12xlarge",
-			                   "ml.c5.18xlarge",
-			                   "ml.c5.24xlarge",
-			                   "ml.p3.2xlarge",
-			                   "ml.p3.8xlarge",
-			                   "ml.p3.16xlarge",
-			                   "ml.g4dn.xlarge",
-			                   "ml.g4dn.2xlarge",
-			                   "ml.g4dn.4xlarge",
-			                   "ml.g4dn.8xlarge",
-			                   "ml.g4dn.12xlarge",
-			                   "ml.g4dn.16xlarge"
-			                 ],
-			                 "type": "string"
-			               },
-			               "SageMakerImageArn": {
-			                 "description": "The ARN of the SageMaker image that the image version belongs to.",
-			                 "maxLength": 256,
-			                 "pattern": "",
-			                 "type": "string"
-			               },
-			               "SageMakerImageVersionArn": {
-			                 "description": "The ARN of the image version created on the instance.",
-			                 "maxLength": 256,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "KernelGatewayAppSettings": {
-			         "additionalProperties": false,
-			         "description": "The kernel gateway app settings.",
-			         "properties": {
-			           "CustomImages": {
-			             "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-			             "items": {
-			               "additionalProperties": false,
-			               "description": "A custom SageMaker image.",
-			               "properties": {
-			                 "AppImageConfigName": {
-			                   "description": "The Name of the AppImageConfig.",
-			                   "maxLength": 63,
-			                   "pattern": "",
-			                   "type": "string"
-			                 },
-			                 "ImageName": {
-			                   "description": "The name of the CustomImage. Must be unique to your account.",
-			                   "maxLength": 63,
-			                   "pattern": "",
-			                   "type": "string"
-			                 },
-			                 "ImageVersionNumber": {
-			                   "description": "The version number of the CustomImage.",
-			                   "type": "integer"
-			                 }
-			               },
-			               "required": [
-			                 "AppImageConfigName",
-			                 "ImageName"
-			               ],
-			               "type": "object"
-			             },
-			             "maxItems": 30,
-			             "minItems": 0,
-			             "type": "array",
-			             "uniqueItems": false
-			           },
-			           "DefaultResourceSpec": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "InstanceType": {
-			                 "description": "The instance type that the image version runs on.",
-			                 "enum": [
-			                   "system",
-			                   "ml.t3.micro",
-			                   "ml.t3.small",
-			                   "ml.t3.medium",
-			                   "ml.t3.large",
-			                   "ml.t3.xlarge",
-			                   "ml.t3.2xlarge",
-			                   "ml.m5.large",
-			                   "ml.m5.xlarge",
-			                   "ml.m5.2xlarge",
-			                   "ml.m5.4xlarge",
-			                   "ml.m5.8xlarge",
-			                   "ml.m5.12xlarge",
-			                   "ml.m5.16xlarge",
-			                   "ml.m5.24xlarge",
-			                   "ml.c5.large",
-			                   "ml.c5.xlarge",
-			                   "ml.c5.2xlarge",
-			                   "ml.c5.4xlarge",
-			                   "ml.c5.9xlarge",
-			                   "ml.c5.12xlarge",
-			                   "ml.c5.18xlarge",
-			                   "ml.c5.24xlarge",
-			                   "ml.p3.2xlarge",
-			                   "ml.p3.8xlarge",
-			                   "ml.p3.16xlarge",
-			                   "ml.g4dn.xlarge",
-			                   "ml.g4dn.2xlarge",
-			                   "ml.g4dn.4xlarge",
-			                   "ml.g4dn.8xlarge",
-			                   "ml.g4dn.12xlarge",
-			                   "ml.g4dn.16xlarge"
-			                 ],
-			                 "type": "string"
-			               },
-			               "SageMakerImageArn": {
-			                 "description": "The ARN of the SageMaker image that the image version belongs to.",
-			                 "maxLength": 256,
-			                 "pattern": "",
-			                 "type": "string"
-			               },
-			               "SageMakerImageVersionArn": {
-			                 "description": "The ARN of the image version created on the instance.",
-			                 "maxLength": 256,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "SecurityGroups": {
-			         "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
-			         "items": {
-			           "maxLength": 32,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "maxItems": 5,
-			         "minItems": 0,
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "SharingSettings": {
-			         "additionalProperties": false,
-			         "description": "Specifies options when sharing an Amazon SageMaker Studio notebook. These settings are specified as part of DefaultUserSettings when the CreateDomain API is called, and as part of UserSettings when the CreateUserProfile API is called.",
-			         "properties": {
-			           "NotebookOutputOption": {
-			             "description": "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
-			             "enum": [
-			               "Allowed",
-			               "Disabled"
-			             ],
-			             "type": "string"
-			           },
-			           "S3KmsKeyId": {
-			             "description": "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
-			             "maxLength": 2048,
-			             "pattern": "",
-			             "type": "string"
-			           },
-			           "S3OutputPath": {
-			             "description": "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
-			             "maxLength": 1024,
-			             "pattern": "",
-			             "type": "string"
-			           }
-			         },
-			         "type": "object"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "A collection of settings that apply to users of Amazon SageMaker Studio. These settings are specified when the CreateUserProfile API is called, and as DefaultUserSettings when the CreateDomain API is called.",
+			//   "properties": {
+			//     "ExecutionRole": {
+			//       "description": "The user profile Amazon Resource Name (ARN).",
+			//       "maxLength": 2048,
+			//       "minLength": 20,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "JupyterServerAppSettings": {
+			//       "additionalProperties": false,
+			//       "description": "The JupyterServer app settings.",
+			//       "properties": {
+			//         "DefaultResourceSpec": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "InstanceType": {
+			//               "description": "The instance type that the image version runs on.",
+			//               "enum": [
+			//                 "system",
+			//                 "ml.t3.micro",
+			//                 "ml.t3.small",
+			//                 "ml.t3.medium",
+			//                 "ml.t3.large",
+			//                 "ml.t3.xlarge",
+			//                 "ml.t3.2xlarge",
+			//                 "ml.m5.large",
+			//                 "ml.m5.xlarge",
+			//                 "ml.m5.2xlarge",
+			//                 "ml.m5.4xlarge",
+			//                 "ml.m5.8xlarge",
+			//                 "ml.m5.12xlarge",
+			//                 "ml.m5.16xlarge",
+			//                 "ml.m5.24xlarge",
+			//                 "ml.c5.large",
+			//                 "ml.c5.xlarge",
+			//                 "ml.c5.2xlarge",
+			//                 "ml.c5.4xlarge",
+			//                 "ml.c5.9xlarge",
+			//                 "ml.c5.12xlarge",
+			//                 "ml.c5.18xlarge",
+			//                 "ml.c5.24xlarge",
+			//                 "ml.p3.2xlarge",
+			//                 "ml.p3.8xlarge",
+			//                 "ml.p3.16xlarge",
+			//                 "ml.g4dn.xlarge",
+			//                 "ml.g4dn.2xlarge",
+			//                 "ml.g4dn.4xlarge",
+			//                 "ml.g4dn.8xlarge",
+			//                 "ml.g4dn.12xlarge",
+			//                 "ml.g4dn.16xlarge"
+			//               ],
+			//               "type": "string"
+			//             },
+			//             "SageMakerImageArn": {
+			//               "description": "The ARN of the SageMaker image that the image version belongs to.",
+			//               "maxLength": 256,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "SageMakerImageVersionArn": {
+			//               "description": "The ARN of the image version created on the instance.",
+			//               "maxLength": 256,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "KernelGatewayAppSettings": {
+			//       "additionalProperties": false,
+			//       "description": "The kernel gateway app settings.",
+			//       "properties": {
+			//         "CustomImages": {
+			//           "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "description": "A custom SageMaker image.",
+			//             "properties": {
+			//               "AppImageConfigName": {
+			//                 "description": "The Name of the AppImageConfig.",
+			//                 "maxLength": 63,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               },
+			//               "ImageName": {
+			//                 "description": "The name of the CustomImage. Must be unique to your account.",
+			//                 "maxLength": 63,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               },
+			//               "ImageVersionNumber": {
+			//                 "description": "The version number of the CustomImage.",
+			//                 "type": "integer"
+			//               }
+			//             },
+			//             "required": [
+			//               "AppImageConfigName",
+			//               "ImageName"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "maxItems": 30,
+			//           "minItems": 0,
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "DefaultResourceSpec": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "InstanceType": {
+			//               "description": "The instance type that the image version runs on.",
+			//               "enum": [
+			//                 "system",
+			//                 "ml.t3.micro",
+			//                 "ml.t3.small",
+			//                 "ml.t3.medium",
+			//                 "ml.t3.large",
+			//                 "ml.t3.xlarge",
+			//                 "ml.t3.2xlarge",
+			//                 "ml.m5.large",
+			//                 "ml.m5.xlarge",
+			//                 "ml.m5.2xlarge",
+			//                 "ml.m5.4xlarge",
+			//                 "ml.m5.8xlarge",
+			//                 "ml.m5.12xlarge",
+			//                 "ml.m5.16xlarge",
+			//                 "ml.m5.24xlarge",
+			//                 "ml.c5.large",
+			//                 "ml.c5.xlarge",
+			//                 "ml.c5.2xlarge",
+			//                 "ml.c5.4xlarge",
+			//                 "ml.c5.9xlarge",
+			//                 "ml.c5.12xlarge",
+			//                 "ml.c5.18xlarge",
+			//                 "ml.c5.24xlarge",
+			//                 "ml.p3.2xlarge",
+			//                 "ml.p3.8xlarge",
+			//                 "ml.p3.16xlarge",
+			//                 "ml.g4dn.xlarge",
+			//                 "ml.g4dn.2xlarge",
+			//                 "ml.g4dn.4xlarge",
+			//                 "ml.g4dn.8xlarge",
+			//                 "ml.g4dn.12xlarge",
+			//                 "ml.g4dn.16xlarge"
+			//               ],
+			//               "type": "string"
+			//             },
+			//             "SageMakerImageArn": {
+			//               "description": "The ARN of the SageMaker image that the image version belongs to.",
+			//               "maxLength": 256,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "SageMakerImageVersionArn": {
+			//               "description": "The ARN of the image version created on the instance.",
+			//               "maxLength": 256,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "SecurityGroups": {
+			//       "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+			//       "items": {
+			//         "maxLength": 32,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "maxItems": 5,
+			//       "minItems": 0,
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "SharingSettings": {
+			//       "additionalProperties": false,
+			//       "description": "Specifies options when sharing an Amazon SageMaker Studio notebook. These settings are specified as part of DefaultUserSettings when the CreateDomain API is called, and as part of UserSettings when the CreateUserProfile API is called.",
+			//       "properties": {
+			//         "NotebookOutputOption": {
+			//           "description": "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
+			//           "enum": [
+			//             "Allowed",
+			//             "Disabled"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "S3KmsKeyId": {
+			//           "description": "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
+			//           "maxLength": 2048,
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "S3OutputPath": {
+			//           "description": "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
+			//           "maxLength": 1024,
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "A collection of settings that apply to users of Amazon SageMaker Studio. These settings are specified when the CreateUserProfile API is called, and as DefaultUserSettings when the CreateDomain API is called.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"execution_role": {
 						// Property: ExecutionRole
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The user profile Amazon Resource Name (ARN).",
-						     "maxLength": 2048,
-						     "minLength": 20,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "The user profile Amazon Resource Name (ARN).",
+						//   "maxLength": 2048,
+						//   "minLength": 20,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Description: "The user profile Amazon Resource Name (ARN).",
 						Type:        types.StringType,
 						Optional:    true,
@@ -414,180 +394,174 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"jupyter_server_app_settings": {
 						// Property: JupyterServerAppSettings
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "The JupyterServer app settings.",
-						     "properties": {
-						       "DefaultResourceSpec": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "InstanceType": {
-						             "description": "The instance type that the image version runs on.",
-						             "enum": [
-						               "system",
-						               "ml.t3.micro",
-						               "ml.t3.small",
-						               "ml.t3.medium",
-						               "ml.t3.large",
-						               "ml.t3.xlarge",
-						               "ml.t3.2xlarge",
-						               "ml.m5.large",
-						               "ml.m5.xlarge",
-						               "ml.m5.2xlarge",
-						               "ml.m5.4xlarge",
-						               "ml.m5.8xlarge",
-						               "ml.m5.12xlarge",
-						               "ml.m5.16xlarge",
-						               "ml.m5.24xlarge",
-						               "ml.c5.large",
-						               "ml.c5.xlarge",
-						               "ml.c5.2xlarge",
-						               "ml.c5.4xlarge",
-						               "ml.c5.9xlarge",
-						               "ml.c5.12xlarge",
-						               "ml.c5.18xlarge",
-						               "ml.c5.24xlarge",
-						               "ml.p3.2xlarge",
-						               "ml.p3.8xlarge",
-						               "ml.p3.16xlarge",
-						               "ml.g4dn.xlarge",
-						               "ml.g4dn.2xlarge",
-						               "ml.g4dn.4xlarge",
-						               "ml.g4dn.8xlarge",
-						               "ml.g4dn.12xlarge",
-						               "ml.g4dn.16xlarge"
-						             ],
-						             "type": "string"
-						           },
-						           "SageMakerImageArn": {
-						             "description": "The ARN of the SageMaker image that the image version belongs to.",
-						             "maxLength": 256,
-						             "pattern": "",
-						             "type": "string"
-						           },
-						           "SageMakerImageVersionArn": {
-						             "description": "The ARN of the image version created on the instance.",
-						             "maxLength": 256,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "description": "The JupyterServer app settings.",
+						//   "properties": {
+						//     "DefaultResourceSpec": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "InstanceType": {
+						//           "description": "The instance type that the image version runs on.",
+						//           "enum": [
+						//             "system",
+						//             "ml.t3.micro",
+						//             "ml.t3.small",
+						//             "ml.t3.medium",
+						//             "ml.t3.large",
+						//             "ml.t3.xlarge",
+						//             "ml.t3.2xlarge",
+						//             "ml.m5.large",
+						//             "ml.m5.xlarge",
+						//             "ml.m5.2xlarge",
+						//             "ml.m5.4xlarge",
+						//             "ml.m5.8xlarge",
+						//             "ml.m5.12xlarge",
+						//             "ml.m5.16xlarge",
+						//             "ml.m5.24xlarge",
+						//             "ml.c5.large",
+						//             "ml.c5.xlarge",
+						//             "ml.c5.2xlarge",
+						//             "ml.c5.4xlarge",
+						//             "ml.c5.9xlarge",
+						//             "ml.c5.12xlarge",
+						//             "ml.c5.18xlarge",
+						//             "ml.c5.24xlarge",
+						//             "ml.p3.2xlarge",
+						//             "ml.p3.8xlarge",
+						//             "ml.p3.16xlarge",
+						//             "ml.g4dn.xlarge",
+						//             "ml.g4dn.2xlarge",
+						//             "ml.g4dn.4xlarge",
+						//             "ml.g4dn.8xlarge",
+						//             "ml.g4dn.12xlarge",
+						//             "ml.g4dn.16xlarge"
+						//           ],
+						//           "type": "string"
+						//         },
+						//         "SageMakerImageArn": {
+						//           "description": "The ARN of the SageMaker image that the image version belongs to.",
+						//           "maxLength": 256,
+						//           "pattern": "",
+						//           "type": "string"
+						//         },
+						//         "SageMakerImageVersionArn": {
+						//           "description": "The ARN of the image version created on the instance.",
+						//           "maxLength": 256,
+						//           "pattern": "",
+						//           "type": "string"
+						//         }
+						//       },
+						//       "type": "object"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Description: "The JupyterServer app settings.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"default_resource_spec": {
 									// Property: DefaultResourceSpec
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "InstanceType": {
-									         "description": "The instance type that the image version runs on.",
-									         "enum": [
-									           "system",
-									           "ml.t3.micro",
-									           "ml.t3.small",
-									           "ml.t3.medium",
-									           "ml.t3.large",
-									           "ml.t3.xlarge",
-									           "ml.t3.2xlarge",
-									           "ml.m5.large",
-									           "ml.m5.xlarge",
-									           "ml.m5.2xlarge",
-									           "ml.m5.4xlarge",
-									           "ml.m5.8xlarge",
-									           "ml.m5.12xlarge",
-									           "ml.m5.16xlarge",
-									           "ml.m5.24xlarge",
-									           "ml.c5.large",
-									           "ml.c5.xlarge",
-									           "ml.c5.2xlarge",
-									           "ml.c5.4xlarge",
-									           "ml.c5.9xlarge",
-									           "ml.c5.12xlarge",
-									           "ml.c5.18xlarge",
-									           "ml.c5.24xlarge",
-									           "ml.p3.2xlarge",
-									           "ml.p3.8xlarge",
-									           "ml.p3.16xlarge",
-									           "ml.g4dn.xlarge",
-									           "ml.g4dn.2xlarge",
-									           "ml.g4dn.4xlarge",
-									           "ml.g4dn.8xlarge",
-									           "ml.g4dn.12xlarge",
-									           "ml.g4dn.16xlarge"
-									         ],
-									         "type": "string"
-									       },
-									       "SageMakerImageArn": {
-									         "description": "The ARN of the SageMaker image that the image version belongs to.",
-									         "maxLength": 256,
-									         "pattern": "",
-									         "type": "string"
-									       },
-									       "SageMakerImageVersionArn": {
-									         "description": "The ARN of the image version created on the instance.",
-									         "maxLength": 256,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "InstanceType": {
+									//       "description": "The instance type that the image version runs on.",
+									//       "enum": [
+									//         "system",
+									//         "ml.t3.micro",
+									//         "ml.t3.small",
+									//         "ml.t3.medium",
+									//         "ml.t3.large",
+									//         "ml.t3.xlarge",
+									//         "ml.t3.2xlarge",
+									//         "ml.m5.large",
+									//         "ml.m5.xlarge",
+									//         "ml.m5.2xlarge",
+									//         "ml.m5.4xlarge",
+									//         "ml.m5.8xlarge",
+									//         "ml.m5.12xlarge",
+									//         "ml.m5.16xlarge",
+									//         "ml.m5.24xlarge",
+									//         "ml.c5.large",
+									//         "ml.c5.xlarge",
+									//         "ml.c5.2xlarge",
+									//         "ml.c5.4xlarge",
+									//         "ml.c5.9xlarge",
+									//         "ml.c5.12xlarge",
+									//         "ml.c5.18xlarge",
+									//         "ml.c5.24xlarge",
+									//         "ml.p3.2xlarge",
+									//         "ml.p3.8xlarge",
+									//         "ml.p3.16xlarge",
+									//         "ml.g4dn.xlarge",
+									//         "ml.g4dn.2xlarge",
+									//         "ml.g4dn.4xlarge",
+									//         "ml.g4dn.8xlarge",
+									//         "ml.g4dn.12xlarge",
+									//         "ml.g4dn.16xlarge"
+									//       ],
+									//       "type": "string"
+									//     },
+									//     "SageMakerImageArn": {
+									//       "description": "The ARN of the SageMaker image that the image version belongs to.",
+									//       "maxLength": 256,
+									//       "pattern": "",
+									//       "type": "string"
+									//     },
+									//     "SageMakerImageVersionArn": {
+									//       "description": "The ARN of the image version created on the instance.",
+									//       "maxLength": 256,
+									//       "pattern": "",
+									//       "type": "string"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"instance_type": {
 												// Property: InstanceType
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The instance type that the image version runs on.",
-												     "enum": [
-												       "system",
-												       "ml.t3.micro",
-												       "ml.t3.small",
-												       "ml.t3.medium",
-												       "ml.t3.large",
-												       "ml.t3.xlarge",
-												       "ml.t3.2xlarge",
-												       "ml.m5.large",
-												       "ml.m5.xlarge",
-												       "ml.m5.2xlarge",
-												       "ml.m5.4xlarge",
-												       "ml.m5.8xlarge",
-												       "ml.m5.12xlarge",
-												       "ml.m5.16xlarge",
-												       "ml.m5.24xlarge",
-												       "ml.c5.large",
-												       "ml.c5.xlarge",
-												       "ml.c5.2xlarge",
-												       "ml.c5.4xlarge",
-												       "ml.c5.9xlarge",
-												       "ml.c5.12xlarge",
-												       "ml.c5.18xlarge",
-												       "ml.c5.24xlarge",
-												       "ml.p3.2xlarge",
-												       "ml.p3.8xlarge",
-												       "ml.p3.16xlarge",
-												       "ml.g4dn.xlarge",
-												       "ml.g4dn.2xlarge",
-												       "ml.g4dn.4xlarge",
-												       "ml.g4dn.8xlarge",
-												       "ml.g4dn.12xlarge",
-												       "ml.g4dn.16xlarge"
-												     ],
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "The instance type that the image version runs on.",
+												//   "enum": [
+												//     "system",
+												//     "ml.t3.micro",
+												//     "ml.t3.small",
+												//     "ml.t3.medium",
+												//     "ml.t3.large",
+												//     "ml.t3.xlarge",
+												//     "ml.t3.2xlarge",
+												//     "ml.m5.large",
+												//     "ml.m5.xlarge",
+												//     "ml.m5.2xlarge",
+												//     "ml.m5.4xlarge",
+												//     "ml.m5.8xlarge",
+												//     "ml.m5.12xlarge",
+												//     "ml.m5.16xlarge",
+												//     "ml.m5.24xlarge",
+												//     "ml.c5.large",
+												//     "ml.c5.xlarge",
+												//     "ml.c5.2xlarge",
+												//     "ml.c5.4xlarge",
+												//     "ml.c5.9xlarge",
+												//     "ml.c5.12xlarge",
+												//     "ml.c5.18xlarge",
+												//     "ml.c5.24xlarge",
+												//     "ml.p3.2xlarge",
+												//     "ml.p3.8xlarge",
+												//     "ml.p3.16xlarge",
+												//     "ml.g4dn.xlarge",
+												//     "ml.g4dn.2xlarge",
+												//     "ml.g4dn.4xlarge",
+												//     "ml.g4dn.8xlarge",
+												//     "ml.g4dn.12xlarge",
+												//     "ml.g4dn.16xlarge"
+												//   ],
+												//   "type": "string"
+												// }
 												Description: "The instance type that the image version runs on.",
 												Type:        types.StringType,
 												Optional:    true,
@@ -595,14 +569,12 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"sage_maker_image_arn": {
 												// Property: SageMakerImageArn
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The ARN of the SageMaker image that the image version belongs to.",
-												     "maxLength": 256,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "The ARN of the SageMaker image that the image version belongs to.",
+												//   "maxLength": 256,
+												//   "pattern": "",
+												//   "type": "string"
+												// }
 												Description: "The ARN of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
 												Optional:    true,
@@ -610,14 +582,12 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The ARN of the image version created on the instance.",
-												     "maxLength": 256,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "The ARN of the image version created on the instance.",
+												//   "maxLength": 256,
+												//   "pattern": "",
+												//   "type": "string"
+												// }
 												Description: "The ARN of the image version created on the instance.",
 												Type:        types.StringType,
 												Optional:    true,
@@ -633,161 +603,155 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"kernel_gateway_app_settings": {
 						// Property: KernelGatewayAppSettings
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "The kernel gateway app settings.",
-						     "properties": {
-						       "CustomImages": {
-						         "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-						         "items": {
-						           "additionalProperties": false,
-						           "description": "A custom SageMaker image.",
-						           "properties": {
-						             "AppImageConfigName": {
-						               "description": "The Name of the AppImageConfig.",
-						               "maxLength": 63,
-						               "pattern": "",
-						               "type": "string"
-						             },
-						             "ImageName": {
-						               "description": "The name of the CustomImage. Must be unique to your account.",
-						               "maxLength": 63,
-						               "pattern": "",
-						               "type": "string"
-						             },
-						             "ImageVersionNumber": {
-						               "description": "The version number of the CustomImage.",
-						               "type": "integer"
-						             }
-						           },
-						           "required": [
-						             "AppImageConfigName",
-						             "ImageName"
-						           ],
-						           "type": "object"
-						         },
-						         "maxItems": 30,
-						         "minItems": 0,
-						         "type": "array",
-						         "uniqueItems": false
-						       },
-						       "DefaultResourceSpec": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "InstanceType": {
-						             "description": "The instance type that the image version runs on.",
-						             "enum": [
-						               "system",
-						               "ml.t3.micro",
-						               "ml.t3.small",
-						               "ml.t3.medium",
-						               "ml.t3.large",
-						               "ml.t3.xlarge",
-						               "ml.t3.2xlarge",
-						               "ml.m5.large",
-						               "ml.m5.xlarge",
-						               "ml.m5.2xlarge",
-						               "ml.m5.4xlarge",
-						               "ml.m5.8xlarge",
-						               "ml.m5.12xlarge",
-						               "ml.m5.16xlarge",
-						               "ml.m5.24xlarge",
-						               "ml.c5.large",
-						               "ml.c5.xlarge",
-						               "ml.c5.2xlarge",
-						               "ml.c5.4xlarge",
-						               "ml.c5.9xlarge",
-						               "ml.c5.12xlarge",
-						               "ml.c5.18xlarge",
-						               "ml.c5.24xlarge",
-						               "ml.p3.2xlarge",
-						               "ml.p3.8xlarge",
-						               "ml.p3.16xlarge",
-						               "ml.g4dn.xlarge",
-						               "ml.g4dn.2xlarge",
-						               "ml.g4dn.4xlarge",
-						               "ml.g4dn.8xlarge",
-						               "ml.g4dn.12xlarge",
-						               "ml.g4dn.16xlarge"
-						             ],
-						             "type": "string"
-						           },
-						           "SageMakerImageArn": {
-						             "description": "The ARN of the SageMaker image that the image version belongs to.",
-						             "maxLength": 256,
-						             "pattern": "",
-						             "type": "string"
-						           },
-						           "SageMakerImageVersionArn": {
-						             "description": "The ARN of the image version created on the instance.",
-						             "maxLength": 256,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "description": "The kernel gateway app settings.",
+						//   "properties": {
+						//     "CustomImages": {
+						//       "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+						//       "items": {
+						//         "additionalProperties": false,
+						//         "description": "A custom SageMaker image.",
+						//         "properties": {
+						//           "AppImageConfigName": {
+						//             "description": "The Name of the AppImageConfig.",
+						//             "maxLength": 63,
+						//             "pattern": "",
+						//             "type": "string"
+						//           },
+						//           "ImageName": {
+						//             "description": "The name of the CustomImage. Must be unique to your account.",
+						//             "maxLength": 63,
+						//             "pattern": "",
+						//             "type": "string"
+						//           },
+						//           "ImageVersionNumber": {
+						//             "description": "The version number of the CustomImage.",
+						//             "type": "integer"
+						//           }
+						//         },
+						//         "required": [
+						//           "AppImageConfigName",
+						//           "ImageName"
+						//         ],
+						//         "type": "object"
+						//       },
+						//       "maxItems": 30,
+						//       "minItems": 0,
+						//       "type": "array",
+						//       "uniqueItems": false
+						//     },
+						//     "DefaultResourceSpec": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "InstanceType": {
+						//           "description": "The instance type that the image version runs on.",
+						//           "enum": [
+						//             "system",
+						//             "ml.t3.micro",
+						//             "ml.t3.small",
+						//             "ml.t3.medium",
+						//             "ml.t3.large",
+						//             "ml.t3.xlarge",
+						//             "ml.t3.2xlarge",
+						//             "ml.m5.large",
+						//             "ml.m5.xlarge",
+						//             "ml.m5.2xlarge",
+						//             "ml.m5.4xlarge",
+						//             "ml.m5.8xlarge",
+						//             "ml.m5.12xlarge",
+						//             "ml.m5.16xlarge",
+						//             "ml.m5.24xlarge",
+						//             "ml.c5.large",
+						//             "ml.c5.xlarge",
+						//             "ml.c5.2xlarge",
+						//             "ml.c5.4xlarge",
+						//             "ml.c5.9xlarge",
+						//             "ml.c5.12xlarge",
+						//             "ml.c5.18xlarge",
+						//             "ml.c5.24xlarge",
+						//             "ml.p3.2xlarge",
+						//             "ml.p3.8xlarge",
+						//             "ml.p3.16xlarge",
+						//             "ml.g4dn.xlarge",
+						//             "ml.g4dn.2xlarge",
+						//             "ml.g4dn.4xlarge",
+						//             "ml.g4dn.8xlarge",
+						//             "ml.g4dn.12xlarge",
+						//             "ml.g4dn.16xlarge"
+						//           ],
+						//           "type": "string"
+						//         },
+						//         "SageMakerImageArn": {
+						//           "description": "The ARN of the SageMaker image that the image version belongs to.",
+						//           "maxLength": 256,
+						//           "pattern": "",
+						//           "type": "string"
+						//         },
+						//         "SageMakerImageVersionArn": {
+						//           "description": "The ARN of the image version created on the instance.",
+						//           "maxLength": 256,
+						//           "pattern": "",
+						//           "type": "string"
+						//         }
+						//       },
+						//       "type": "object"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Description: "The kernel gateway app settings.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"custom_images": {
 									// Property: CustomImages
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-									     "items": {
-									       "additionalProperties": false,
-									       "description": "A custom SageMaker image.",
-									       "properties": {
-									         "AppImageConfigName": {
-									           "description": "The Name of the AppImageConfig.",
-									           "maxLength": 63,
-									           "pattern": "",
-									           "type": "string"
-									         },
-									         "ImageName": {
-									           "description": "The name of the CustomImage. Must be unique to your account.",
-									           "maxLength": 63,
-									           "pattern": "",
-									           "type": "string"
-									         },
-									         "ImageVersionNumber": {
-									           "description": "The version number of the CustomImage.",
-									           "type": "integer"
-									         }
-									       },
-									       "required": [
-									         "AppImageConfigName",
-									         "ImageName"
-									       ],
-									       "type": "object"
-									     },
-									     "maxItems": 30,
-									     "minItems": 0,
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
+									// {
+									//   "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+									//   "items": {
+									//     "additionalProperties": false,
+									//     "description": "A custom SageMaker image.",
+									//     "properties": {
+									//       "AppImageConfigName": {
+									//         "description": "The Name of the AppImageConfig.",
+									//         "maxLength": 63,
+									//         "pattern": "",
+									//         "type": "string"
+									//       },
+									//       "ImageName": {
+									//         "description": "The name of the CustomImage. Must be unique to your account.",
+									//         "maxLength": 63,
+									//         "pattern": "",
+									//         "type": "string"
+									//       },
+									//       "ImageVersionNumber": {
+									//         "description": "The version number of the CustomImage.",
+									//         "type": "integer"
+									//       }
+									//     },
+									//     "required": [
+									//       "AppImageConfigName",
+									//       "ImageName"
+									//     ],
+									//     "type": "object"
+									//   },
+									//   "maxItems": 30,
+									//   "minItems": 0,
+									//   "type": "array",
+									//   "uniqueItems": false
+									// }
 									Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"app_image_config_name": {
 												// Property: AppImageConfigName
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The Name of the AppImageConfig.",
-												     "maxLength": 63,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "The Name of the AppImageConfig.",
+												//   "maxLength": 63,
+												//   "pattern": "",
+												//   "type": "string"
+												// }
 												Description: "The Name of the AppImageConfig.",
 												Type:        types.StringType,
 												Required:    true,
@@ -795,14 +759,12 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"image_name": {
 												// Property: ImageName
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The name of the CustomImage. Must be unique to your account.",
-												     "maxLength": 63,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "The name of the CustomImage. Must be unique to your account.",
+												//   "maxLength": 63,
+												//   "pattern": "",
+												//   "type": "string"
+												// }
 												Description: "The name of the CustomImage. Must be unique to your account.",
 												Type:        types.StringType,
 												Required:    true,
@@ -810,12 +772,10 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"image_version_number": {
 												// Property: ImageVersionNumber
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The version number of the CustomImage.",
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "description": "The version number of the CustomImage.",
+												//   "type": "integer"
+												// }
 												Description: "The version number of the CustomImage.",
 												Type:        types.NumberType,
 												Optional:    true,
@@ -831,109 +791,105 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"default_resource_spec": {
 									// Property: DefaultResourceSpec
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "InstanceType": {
-									         "description": "The instance type that the image version runs on.",
-									         "enum": [
-									           "system",
-									           "ml.t3.micro",
-									           "ml.t3.small",
-									           "ml.t3.medium",
-									           "ml.t3.large",
-									           "ml.t3.xlarge",
-									           "ml.t3.2xlarge",
-									           "ml.m5.large",
-									           "ml.m5.xlarge",
-									           "ml.m5.2xlarge",
-									           "ml.m5.4xlarge",
-									           "ml.m5.8xlarge",
-									           "ml.m5.12xlarge",
-									           "ml.m5.16xlarge",
-									           "ml.m5.24xlarge",
-									           "ml.c5.large",
-									           "ml.c5.xlarge",
-									           "ml.c5.2xlarge",
-									           "ml.c5.4xlarge",
-									           "ml.c5.9xlarge",
-									           "ml.c5.12xlarge",
-									           "ml.c5.18xlarge",
-									           "ml.c5.24xlarge",
-									           "ml.p3.2xlarge",
-									           "ml.p3.8xlarge",
-									           "ml.p3.16xlarge",
-									           "ml.g4dn.xlarge",
-									           "ml.g4dn.2xlarge",
-									           "ml.g4dn.4xlarge",
-									           "ml.g4dn.8xlarge",
-									           "ml.g4dn.12xlarge",
-									           "ml.g4dn.16xlarge"
-									         ],
-									         "type": "string"
-									       },
-									       "SageMakerImageArn": {
-									         "description": "The ARN of the SageMaker image that the image version belongs to.",
-									         "maxLength": 256,
-									         "pattern": "",
-									         "type": "string"
-									       },
-									       "SageMakerImageVersionArn": {
-									         "description": "The ARN of the image version created on the instance.",
-									         "maxLength": 256,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "InstanceType": {
+									//       "description": "The instance type that the image version runs on.",
+									//       "enum": [
+									//         "system",
+									//         "ml.t3.micro",
+									//         "ml.t3.small",
+									//         "ml.t3.medium",
+									//         "ml.t3.large",
+									//         "ml.t3.xlarge",
+									//         "ml.t3.2xlarge",
+									//         "ml.m5.large",
+									//         "ml.m5.xlarge",
+									//         "ml.m5.2xlarge",
+									//         "ml.m5.4xlarge",
+									//         "ml.m5.8xlarge",
+									//         "ml.m5.12xlarge",
+									//         "ml.m5.16xlarge",
+									//         "ml.m5.24xlarge",
+									//         "ml.c5.large",
+									//         "ml.c5.xlarge",
+									//         "ml.c5.2xlarge",
+									//         "ml.c5.4xlarge",
+									//         "ml.c5.9xlarge",
+									//         "ml.c5.12xlarge",
+									//         "ml.c5.18xlarge",
+									//         "ml.c5.24xlarge",
+									//         "ml.p3.2xlarge",
+									//         "ml.p3.8xlarge",
+									//         "ml.p3.16xlarge",
+									//         "ml.g4dn.xlarge",
+									//         "ml.g4dn.2xlarge",
+									//         "ml.g4dn.4xlarge",
+									//         "ml.g4dn.8xlarge",
+									//         "ml.g4dn.12xlarge",
+									//         "ml.g4dn.16xlarge"
+									//       ],
+									//       "type": "string"
+									//     },
+									//     "SageMakerImageArn": {
+									//       "description": "The ARN of the SageMaker image that the image version belongs to.",
+									//       "maxLength": 256,
+									//       "pattern": "",
+									//       "type": "string"
+									//     },
+									//     "SageMakerImageVersionArn": {
+									//       "description": "The ARN of the image version created on the instance.",
+									//       "maxLength": 256,
+									//       "pattern": "",
+									//       "type": "string"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"instance_type": {
 												// Property: InstanceType
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The instance type that the image version runs on.",
-												     "enum": [
-												       "system",
-												       "ml.t3.micro",
-												       "ml.t3.small",
-												       "ml.t3.medium",
-												       "ml.t3.large",
-												       "ml.t3.xlarge",
-												       "ml.t3.2xlarge",
-												       "ml.m5.large",
-												       "ml.m5.xlarge",
-												       "ml.m5.2xlarge",
-												       "ml.m5.4xlarge",
-												       "ml.m5.8xlarge",
-												       "ml.m5.12xlarge",
-												       "ml.m5.16xlarge",
-												       "ml.m5.24xlarge",
-												       "ml.c5.large",
-												       "ml.c5.xlarge",
-												       "ml.c5.2xlarge",
-												       "ml.c5.4xlarge",
-												       "ml.c5.9xlarge",
-												       "ml.c5.12xlarge",
-												       "ml.c5.18xlarge",
-												       "ml.c5.24xlarge",
-												       "ml.p3.2xlarge",
-												       "ml.p3.8xlarge",
-												       "ml.p3.16xlarge",
-												       "ml.g4dn.xlarge",
-												       "ml.g4dn.2xlarge",
-												       "ml.g4dn.4xlarge",
-												       "ml.g4dn.8xlarge",
-												       "ml.g4dn.12xlarge",
-												       "ml.g4dn.16xlarge"
-												     ],
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "The instance type that the image version runs on.",
+												//   "enum": [
+												//     "system",
+												//     "ml.t3.micro",
+												//     "ml.t3.small",
+												//     "ml.t3.medium",
+												//     "ml.t3.large",
+												//     "ml.t3.xlarge",
+												//     "ml.t3.2xlarge",
+												//     "ml.m5.large",
+												//     "ml.m5.xlarge",
+												//     "ml.m5.2xlarge",
+												//     "ml.m5.4xlarge",
+												//     "ml.m5.8xlarge",
+												//     "ml.m5.12xlarge",
+												//     "ml.m5.16xlarge",
+												//     "ml.m5.24xlarge",
+												//     "ml.c5.large",
+												//     "ml.c5.xlarge",
+												//     "ml.c5.2xlarge",
+												//     "ml.c5.4xlarge",
+												//     "ml.c5.9xlarge",
+												//     "ml.c5.12xlarge",
+												//     "ml.c5.18xlarge",
+												//     "ml.c5.24xlarge",
+												//     "ml.p3.2xlarge",
+												//     "ml.p3.8xlarge",
+												//     "ml.p3.16xlarge",
+												//     "ml.g4dn.xlarge",
+												//     "ml.g4dn.2xlarge",
+												//     "ml.g4dn.4xlarge",
+												//     "ml.g4dn.8xlarge",
+												//     "ml.g4dn.12xlarge",
+												//     "ml.g4dn.16xlarge"
+												//   ],
+												//   "type": "string"
+												// }
 												Description: "The instance type that the image version runs on.",
 												Type:        types.StringType,
 												Optional:    true,
@@ -941,14 +897,12 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"sage_maker_image_arn": {
 												// Property: SageMakerImageArn
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The ARN of the SageMaker image that the image version belongs to.",
-												     "maxLength": 256,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "The ARN of the SageMaker image that the image version belongs to.",
+												//   "maxLength": 256,
+												//   "pattern": "",
+												//   "type": "string"
+												// }
 												Description: "The ARN of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
 												Optional:    true,
@@ -956,14 +910,12 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The ARN of the image version created on the instance.",
-												     "maxLength": 256,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "description": "The ARN of the image version created on the instance.",
+												//   "maxLength": 256,
+												//   "pattern": "",
+												//   "type": "string"
+												// }
 												Description: "The ARN of the image version created on the instance.",
 												Type:        types.StringType,
 												Optional:    true,
@@ -979,20 +931,18 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"security_groups": {
 						// Property: SecurityGroups
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
-						     "items": {
-						       "maxLength": 32,
-						       "pattern": "",
-						       "type": "string"
-						     },
-						     "maxItems": 5,
-						     "minItems": 0,
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
+						// {
+						//   "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+						//   "items": {
+						//     "maxLength": 32,
+						//     "pattern": "",
+						//     "type": "string"
+						//   },
+						//   "maxItems": 5,
+						//   "minItems": 0,
+						//   "type": "array",
+						//   "uniqueItems": false
+						// }
 						Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
@@ -1000,51 +950,47 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"sharing_settings": {
 						// Property: SharingSettings
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Specifies options when sharing an Amazon SageMaker Studio notebook. These settings are specified as part of DefaultUserSettings when the CreateDomain API is called, and as part of UserSettings when the CreateUserProfile API is called.",
-						     "properties": {
-						       "NotebookOutputOption": {
-						         "description": "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
-						         "enum": [
-						           "Allowed",
-						           "Disabled"
-						         ],
-						         "type": "string"
-						       },
-						       "S3KmsKeyId": {
-						         "description": "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
-						         "maxLength": 2048,
-						         "pattern": "",
-						         "type": "string"
-						       },
-						       "S3OutputPath": {
-						         "description": "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
-						         "maxLength": 1024,
-						         "pattern": "",
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "description": "Specifies options when sharing an Amazon SageMaker Studio notebook. These settings are specified as part of DefaultUserSettings when the CreateDomain API is called, and as part of UserSettings when the CreateUserProfile API is called.",
+						//   "properties": {
+						//     "NotebookOutputOption": {
+						//       "description": "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
+						//       "enum": [
+						//         "Allowed",
+						//         "Disabled"
+						//       ],
+						//       "type": "string"
+						//     },
+						//     "S3KmsKeyId": {
+						//       "description": "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
+						//       "maxLength": 2048,
+						//       "pattern": "",
+						//       "type": "string"
+						//     },
+						//     "S3OutputPath": {
+						//       "description": "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
+						//       "maxLength": 1024,
+						//       "pattern": "",
+						//       "type": "string"
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Description: "Specifies options when sharing an Amazon SageMaker Studio notebook. These settings are specified as part of DefaultUserSettings when the CreateDomain API is called, and as part of UserSettings when the CreateUserProfile API is called.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"notebook_output_option": {
 									// Property: NotebookOutputOption
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
-									     "enum": [
-									       "Allowed",
-									       "Disabled"
-									     ],
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
+									//   "enum": [
+									//     "Allowed",
+									//     "Disabled"
+									//   ],
+									//   "type": "string"
+									// }
 									Description: "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -1052,14 +998,12 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"s3_kms_key_id": {
 									// Property: S3KmsKeyId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
-									     "maxLength": 2048,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
+									//   "maxLength": 2048,
+									//   "pattern": "",
+									//   "type": "string"
+									// }
 									Description: "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -1067,14 +1011,12 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"s3_output_path": {
 									// Property: S3OutputPath
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
-									     "maxLength": 1024,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "description": "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
+									//   "maxLength": 1024,
+									//   "pattern": "",
+									//   "type": "string"
+									// }
 									Description: "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
 									Type:        types.StringType,
 									Optional:    true,

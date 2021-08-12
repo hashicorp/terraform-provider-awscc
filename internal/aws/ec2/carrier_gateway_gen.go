@@ -26,12 +26,10 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"carrier_gateway_id": {
 			// Property: CarrierGatewayId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the carrier gateway.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the carrier gateway.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the carrier gateway.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,12 +37,10 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"owner_id": {
 			// Property: OwnerId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the owner.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the owner.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the owner.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -52,12 +48,10 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The state of the carrier gateway.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The state of the carrier gateway.",
+			//   "type": "string"
+			// }
 			Description: "The state of the carrier gateway.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -65,58 +59,52 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 127,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 255,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 127,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 127,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 127,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 255,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "maxLength": 255,
+						//   "minLength": 1,
+						//   "pattern": "",
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -128,12 +116,10 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the VPC.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the VPC.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the VPC.",
 			Type:        types.StringType,
 			Required:    true,

@@ -25,14 +25,12 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"database": {
 			// Property: Database
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The database to which the query belongs.",
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The database to which the query belongs.",
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The database to which the query belongs.",
 			Type:        types.StringType,
 			Required:    true,
@@ -41,14 +39,12 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The query description.",
-			     "maxLength": 1024,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The query description.",
+			//   "maxLength": 1024,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The query description.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -58,14 +54,12 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The query name.",
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The query name.",
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The query name.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -74,12 +68,10 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"named_query_id": {
 			// Property: NamedQueryId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The unique ID of the query.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The unique ID of the query.",
+			//   "type": "string"
+			// }
 			Description: "The unique ID of the query.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -87,14 +79,12 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"query_string": {
 			// Property: QueryString
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The contents of the query with all query statements.",
-			     "maxLength": 262144,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The contents of the query with all query statements.",
+			//   "maxLength": 262144,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The contents of the query with all query statements.",
 			Type:        types.StringType,
 			Required:    true,
@@ -103,14 +93,12 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"work_group": {
 			// Property: WorkGroup
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the workgroup that contains the named query.",
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the workgroup that contains the named query.",
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The name of the workgroup that contains the named query.",
 			Type:        types.StringType,
 			Optional:    true,

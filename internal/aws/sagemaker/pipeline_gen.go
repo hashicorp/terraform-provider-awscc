@@ -25,25 +25,21 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"pipeline_definition": {
 			// Property: PipelineDefinition
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "type": "object"
+			// }
 			Type:     types.MapType{ElemType: types.StringType},
 			Required: true,
 		},
 		"pipeline_description": {
 			// Property: PipelineDescription
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The description of the Pipeline.",
-			     "maxLength": 3072,
-			     "minLength": 0,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The description of the Pipeline.",
+			//   "maxLength": 3072,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
 			Description: "The description of the Pipeline.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -51,15 +47,13 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"pipeline_display_name": {
 			// Property: PipelineDisplayName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The display name of the Pipeline.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The display name of the Pipeline.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The display name of the Pipeline.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -67,15 +61,13 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"pipeline_name": {
 			// Property: PipelineName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the Pipeline.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the Pipeline.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the Pipeline.",
 			Type:        types.StringType,
 			Required:    true,
@@ -84,15 +76,13 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Role Arn",
-			     "maxLength": 2048,
-			     "minLength": 20,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Role Arn",
+			//   "maxLength": 2048,
+			//   "minLength": 20,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Role Arn",
 			Type:        types.StringType,
 			Required:    true,
@@ -100,49 +90,43 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},

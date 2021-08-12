@@ -25,12 +25,10 @@ func registryPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"policy_text": {
 			// Property: PolicyText
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the Amazon Elastic Container Registry User Guide.",
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "description": "The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the Amazon Elastic Container Registry User Guide.",
+			//   "type": "object"
+			// }
 			Description: "The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the Amazon Elastic Container Registry User Guide.",
 			Type:        types.MapType{ElemType: types.StringType},
 			Required:    true,
@@ -38,15 +36,13 @@ func registryPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"registry_id": {
 			// Property: RegistryId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The registry id.",
-			     "maxLength": 12,
-			     "minLength": 12,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The registry id.",
+			//   "maxLength": 12,
+			//   "minLength": 12,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The registry id.",
 			Type:        types.StringType,
 			Computed:    true,

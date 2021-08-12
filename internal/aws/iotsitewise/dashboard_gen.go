@@ -25,12 +25,10 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"dashboard_arn": {
 			// Property: DashboardArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ARN of the dashboard.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ARN of the dashboard.",
+			//   "type": "string"
+			// }
 			Description: "The ARN of the dashboard.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,12 +36,10 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"dashboard_definition": {
 			// Property: DashboardDefinition
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The dashboard definition specified in a JSON literal.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The dashboard definition specified in a JSON literal.",
+			//   "type": "string"
+			// }
 			Description: "The dashboard definition specified in a JSON literal.",
 			Type:        types.StringType,
 			Required:    true,
@@ -51,12 +47,10 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"dashboard_description": {
 			// Property: DashboardDescription
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A description for the dashboard.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A description for the dashboard.",
+			//   "type": "string"
+			// }
 			Description: "A description for the dashboard.",
 			Type:        types.StringType,
 			Required:    true,
@@ -64,12 +58,10 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"dashboard_id": {
 			// Property: DashboardId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the dashboard.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the dashboard.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the dashboard.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -77,12 +69,10 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"dashboard_name": {
 			// Property: DashboardName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A friendly name for the dashboard.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A friendly name for the dashboard.",
+			//   "type": "string"
+			// }
 			Description: "A friendly name for the dashboard.",
 			Type:        types.StringType,
 			Required:    true,
@@ -90,12 +80,10 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"project_id": {
 			// Property: ProjectId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the project in which to create the dashboard.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the project in which to create the dashboard.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the project in which to create the dashboard.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -105,31 +93,29 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of key-value pairs that contain metadata for the dashboard.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted",
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "description": "A list of key-value pairs that contain metadata for the dashboard.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted",
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Description: "A list of key-value pairs that contain metadata for the dashboard.",
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
@@ -137,22 +123,18 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},

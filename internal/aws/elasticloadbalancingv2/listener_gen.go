@@ -25,46 +25,40 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"alpn_policy": {
 			// Property: AlpnPolicy
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 		},
 		"certificates": {
 			// Property: Certificates
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "CertificateArn": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "CertificateArn": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"certificate_arn": {
 						// Property: CertificateArn
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -76,264 +70,258 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"default_actions": {
 			// Property: DefaultActions
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "AuthenticateCognitoConfig": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "AuthenticationRequestExtraParams": {
-			               "patternProperties": {
-			                 "": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "OnUnauthenticatedRequest": {
-			               "type": "string"
-			             },
-			             "Scope": {
-			               "type": "string"
-			             },
-			             "SessionCookieName": {
-			               "type": "string"
-			             },
-			             "SessionTimeout": {
-			               "type": "string"
-			             },
-			             "UserPoolArn": {
-			               "type": "string"
-			             },
-			             "UserPoolClientId": {
-			               "type": "string"
-			             },
-			             "UserPoolDomain": {
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "UserPoolClientId",
-			             "UserPoolDomain",
-			             "UserPoolArn"
-			           ],
-			           "type": "object"
-			         },
-			         "AuthenticateOidcConfig": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "AuthenticationRequestExtraParams": {
-			               "patternProperties": {
-			                 "": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "AuthorizationEndpoint": {
-			               "type": "string"
-			             },
-			             "ClientId": {
-			               "type": "string"
-			             },
-			             "ClientSecret": {
-			               "type": "string"
-			             },
-			             "Issuer": {
-			               "type": "string"
-			             },
-			             "OnUnauthenticatedRequest": {
-			               "type": "string"
-			             },
-			             "Scope": {
-			               "type": "string"
-			             },
-			             "SessionCookieName": {
-			               "type": "string"
-			             },
-			             "SessionTimeout": {
-			               "type": "string"
-			             },
-			             "TokenEndpoint": {
-			               "type": "string"
-			             },
-			             "UserInfoEndpoint": {
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "TokenEndpoint",
-			             "Issuer",
-			             "ClientSecret",
-			             "UserInfoEndpoint",
-			             "ClientId",
-			             "AuthorizationEndpoint"
-			           ],
-			           "type": "object"
-			         },
-			         "FixedResponseConfig": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "ContentType": {
-			               "type": "string"
-			             },
-			             "MessageBody": {
-			               "type": "string"
-			             },
-			             "StatusCode": {
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "StatusCode"
-			           ],
-			           "type": "object"
-			         },
-			         "ForwardConfig": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "TargetGroupStickinessConfig": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "DurationSeconds": {
-			                   "type": "integer"
-			                 },
-			                 "Enabled": {
-			                   "type": "boolean"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "TargetGroups": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "TargetGroupArn": {
-			                     "type": "string"
-			                   },
-			                   "Weight": {
-			                     "type": "integer"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "type": "array",
-			               "uniqueItems": true
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Order": {
-			           "type": "integer"
-			         },
-			         "RedirectConfig": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Host": {
-			               "type": "string"
-			             },
-			             "Path": {
-			               "type": "string"
-			             },
-			             "Port": {
-			               "type": "string"
-			             },
-			             "Protocol": {
-			               "type": "string"
-			             },
-			             "Query": {
-			               "type": "string"
-			             },
-			             "StatusCode": {
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "StatusCode"
-			           ],
-			           "type": "object"
-			         },
-			         "TargetGroupArn": {
-			           "type": "string"
-			         },
-			         "Type": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Type"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "AuthenticateCognitoConfig": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "AuthenticationRequestExtraParams": {
+			//             "patternProperties": {
+			//               "": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "OnUnauthenticatedRequest": {
+			//             "type": "string"
+			//           },
+			//           "Scope": {
+			//             "type": "string"
+			//           },
+			//           "SessionCookieName": {
+			//             "type": "string"
+			//           },
+			//           "SessionTimeout": {
+			//             "type": "string"
+			//           },
+			//           "UserPoolArn": {
+			//             "type": "string"
+			//           },
+			//           "UserPoolClientId": {
+			//             "type": "string"
+			//           },
+			//           "UserPoolDomain": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "UserPoolClientId",
+			//           "UserPoolDomain",
+			//           "UserPoolArn"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "AuthenticateOidcConfig": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "AuthenticationRequestExtraParams": {
+			//             "patternProperties": {
+			//               "": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "AuthorizationEndpoint": {
+			//             "type": "string"
+			//           },
+			//           "ClientId": {
+			//             "type": "string"
+			//           },
+			//           "ClientSecret": {
+			//             "type": "string"
+			//           },
+			//           "Issuer": {
+			//             "type": "string"
+			//           },
+			//           "OnUnauthenticatedRequest": {
+			//             "type": "string"
+			//           },
+			//           "Scope": {
+			//             "type": "string"
+			//           },
+			//           "SessionCookieName": {
+			//             "type": "string"
+			//           },
+			//           "SessionTimeout": {
+			//             "type": "string"
+			//           },
+			//           "TokenEndpoint": {
+			//             "type": "string"
+			//           },
+			//           "UserInfoEndpoint": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "TokenEndpoint",
+			//           "Issuer",
+			//           "ClientSecret",
+			//           "UserInfoEndpoint",
+			//           "ClientId",
+			//           "AuthorizationEndpoint"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "FixedResponseConfig": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "ContentType": {
+			//             "type": "string"
+			//           },
+			//           "MessageBody": {
+			//             "type": "string"
+			//           },
+			//           "StatusCode": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "StatusCode"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "ForwardConfig": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "TargetGroupStickinessConfig": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "DurationSeconds": {
+			//                 "type": "integer"
+			//               },
+			//               "Enabled": {
+			//                 "type": "boolean"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "TargetGroups": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "TargetGroupArn": {
+			//                   "type": "string"
+			//                 },
+			//                 "Weight": {
+			//                   "type": "integer"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "type": "array",
+			//             "uniqueItems": true
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Order": {
+			//         "type": "integer"
+			//       },
+			//       "RedirectConfig": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Host": {
+			//             "type": "string"
+			//           },
+			//           "Path": {
+			//             "type": "string"
+			//           },
+			//           "Port": {
+			//             "type": "string"
+			//           },
+			//           "Protocol": {
+			//             "type": "string"
+			//           },
+			//           "Query": {
+			//             "type": "string"
+			//           },
+			//           "StatusCode": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "StatusCode"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "TargetGroupArn": {
+			//         "type": "string"
+			//       },
+			//       "Type": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Type"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"authenticate_cognito_config": {
 						// Property: AuthenticateCognitoConfig
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "AuthenticationRequestExtraParams": {
-						         "patternProperties": {
-						           "": {
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "OnUnauthenticatedRequest": {
-						         "type": "string"
-						       },
-						       "Scope": {
-						         "type": "string"
-						       },
-						       "SessionCookieName": {
-						         "type": "string"
-						       },
-						       "SessionTimeout": {
-						         "type": "string"
-						       },
-						       "UserPoolArn": {
-						         "type": "string"
-						       },
-						       "UserPoolClientId": {
-						         "type": "string"
-						       },
-						       "UserPoolDomain": {
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "UserPoolClientId",
-						       "UserPoolDomain",
-						       "UserPoolArn"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "AuthenticationRequestExtraParams": {
+						//       "patternProperties": {
+						//         "": {
+						//           "type": "string"
+						//         }
+						//       },
+						//       "type": "object"
+						//     },
+						//     "OnUnauthenticatedRequest": {
+						//       "type": "string"
+						//     },
+						//     "Scope": {
+						//       "type": "string"
+						//     },
+						//     "SessionCookieName": {
+						//       "type": "string"
+						//     },
+						//     "SessionTimeout": {
+						//       "type": "string"
+						//     },
+						//     "UserPoolArn": {
+						//       "type": "string"
+						//     },
+						//     "UserPoolClientId": {
+						//       "type": "string"
+						//     },
+						//     "UserPoolDomain": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "UserPoolClientId",
+						//     "UserPoolDomain",
+						//     "UserPoolArn"
+						//   ],
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"authentication_request_extra_params": {
 									// Property: AuthenticationRequestExtraParams
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "patternProperties": {
-									       "": {
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "patternProperties": {
+									//     "": {
+									//       "type": "string"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
@@ -341,77 +329,63 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"on_unauthenticated_request": {
 									// Property: OnUnauthenticatedRequest
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"scope": {
 									// Property: Scope
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"session_cookie_name": {
 									// Property: SessionCookieName
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"session_timeout": {
 									// Property: SessionTimeout
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"user_pool_arn": {
 									// Property: UserPoolArn
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"user_pool_client_id": {
 									// Property: UserPoolClientId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"user_pool_domain": {
 									// Property: UserPoolDomain
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -422,75 +396,71 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"authenticate_oidc_config": {
 						// Property: AuthenticateOidcConfig
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "AuthenticationRequestExtraParams": {
-						         "patternProperties": {
-						           "": {
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "AuthorizationEndpoint": {
-						         "type": "string"
-						       },
-						       "ClientId": {
-						         "type": "string"
-						       },
-						       "ClientSecret": {
-						         "type": "string"
-						       },
-						       "Issuer": {
-						         "type": "string"
-						       },
-						       "OnUnauthenticatedRequest": {
-						         "type": "string"
-						       },
-						       "Scope": {
-						         "type": "string"
-						       },
-						       "SessionCookieName": {
-						         "type": "string"
-						       },
-						       "SessionTimeout": {
-						         "type": "string"
-						       },
-						       "TokenEndpoint": {
-						         "type": "string"
-						       },
-						       "UserInfoEndpoint": {
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "TokenEndpoint",
-						       "Issuer",
-						       "ClientSecret",
-						       "UserInfoEndpoint",
-						       "ClientId",
-						       "AuthorizationEndpoint"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "AuthenticationRequestExtraParams": {
+						//       "patternProperties": {
+						//         "": {
+						//           "type": "string"
+						//         }
+						//       },
+						//       "type": "object"
+						//     },
+						//     "AuthorizationEndpoint": {
+						//       "type": "string"
+						//     },
+						//     "ClientId": {
+						//       "type": "string"
+						//     },
+						//     "ClientSecret": {
+						//       "type": "string"
+						//     },
+						//     "Issuer": {
+						//       "type": "string"
+						//     },
+						//     "OnUnauthenticatedRequest": {
+						//       "type": "string"
+						//     },
+						//     "Scope": {
+						//       "type": "string"
+						//     },
+						//     "SessionCookieName": {
+						//       "type": "string"
+						//     },
+						//     "SessionTimeout": {
+						//       "type": "string"
+						//     },
+						//     "TokenEndpoint": {
+						//       "type": "string"
+						//     },
+						//     "UserInfoEndpoint": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "TokenEndpoint",
+						//     "Issuer",
+						//     "ClientSecret",
+						//     "UserInfoEndpoint",
+						//     "ClientId",
+						//     "AuthorizationEndpoint"
+						//   ],
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"authentication_request_extra_params": {
 									// Property: AuthenticationRequestExtraParams
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "patternProperties": {
-									       "": {
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "patternProperties": {
+									//     "": {
+									//       "type": "string"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
@@ -498,110 +468,90 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"authorization_endpoint": {
 									// Property: AuthorizationEndpoint
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"client_id": {
 									// Property: ClientId
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"client_secret": {
 									// Property: ClientSecret
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"issuer": {
 									// Property: Issuer
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"on_unauthenticated_request": {
 									// Property: OnUnauthenticatedRequest
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"scope": {
 									// Property: Scope
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"session_cookie_name": {
 									// Property: SessionCookieName
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"session_timeout": {
 									// Property: SessionTimeout
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"token_endpoint": {
 									// Property: TokenEndpoint
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
 								"user_info_endpoint": {
 									// Property: UserInfoEndpoint
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -612,58 +562,50 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"fixed_response_config": {
 						// Property: FixedResponseConfig
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "ContentType": {
-						         "type": "string"
-						       },
-						       "MessageBody": {
-						         "type": "string"
-						       },
-						       "StatusCode": {
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "StatusCode"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "ContentType": {
+						//       "type": "string"
+						//     },
+						//     "MessageBody": {
+						//       "type": "string"
+						//     },
+						//     "StatusCode": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "StatusCode"
+						//   ],
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"content_type": {
 									// Property: ContentType
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"message_body": {
 									// Property: MessageBody
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"status_code": {
 									// Property: StatusCode
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -674,82 +616,74 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"forward_config": {
 						// Property: ForwardConfig
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "TargetGroupStickinessConfig": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "DurationSeconds": {
-						             "type": "integer"
-						           },
-						           "Enabled": {
-						             "type": "boolean"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "TargetGroups": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "TargetGroupArn": {
-						               "type": "string"
-						             },
-						             "Weight": {
-						               "type": "integer"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "type": "array",
-						         "uniqueItems": true
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "TargetGroupStickinessConfig": {
+						//       "additionalProperties": false,
+						//       "properties": {
+						//         "DurationSeconds": {
+						//           "type": "integer"
+						//         },
+						//         "Enabled": {
+						//           "type": "boolean"
+						//         }
+						//       },
+						//       "type": "object"
+						//     },
+						//     "TargetGroups": {
+						//       "items": {
+						//         "additionalProperties": false,
+						//         "properties": {
+						//           "TargetGroupArn": {
+						//             "type": "string"
+						//           },
+						//           "Weight": {
+						//             "type": "integer"
+						//           }
+						//         },
+						//         "type": "object"
+						//       },
+						//       "type": "array",
+						//       "uniqueItems": true
+						//     }
+						//   },
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"target_group_stickiness_config": {
 									// Property: TargetGroupStickinessConfig
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "DurationSeconds": {
-									         "type": "integer"
-									       },
-									       "Enabled": {
-									         "type": "boolean"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
+									// {
+									//   "additionalProperties": false,
+									//   "properties": {
+									//     "DurationSeconds": {
+									//       "type": "integer"
+									//     },
+									//     "Enabled": {
+									//       "type": "boolean"
+									//     }
+									//   },
+									//   "type": "object"
+									// }
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"duration_seconds": {
 												// Property: DurationSeconds
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"enabled": {
 												// Property: Enabled
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
+												// {
+												//   "type": "boolean"
+												// }
 												Type:     types.BoolType,
 												Optional: true,
 											},
@@ -760,46 +694,40 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"target_groups": {
 									// Property: TargetGroups
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "TargetGroupArn": {
-									           "type": "string"
-									         },
-									         "Weight": {
-									           "type": "integer"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array",
-									     "uniqueItems": true
-									   }
-									*/
+									// {
+									//   "items": {
+									//     "additionalProperties": false,
+									//     "properties": {
+									//       "TargetGroupArn": {
+									//         "type": "string"
+									//       },
+									//       "Weight": {
+									//         "type": "integer"
+									//       }
+									//     },
+									//     "type": "object"
+									//   },
+									//   "type": "array",
+									//   "uniqueItems": true
+									// }
 									// Ordered set.
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"target_group_arn": {
 												// Property: TargetGroupArn
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
+												// {
+												//   "type": "string"
+												// }
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"weight": {
 												// Property: Weight
 												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
+												// {
+												//   "type": "integer"
+												// }
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -815,111 +743,95 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"order": {
 						// Property: Order
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "type": "integer"
+						// }
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"redirect_config": {
 						// Property: RedirectConfig
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Host": {
-						         "type": "string"
-						       },
-						       "Path": {
-						         "type": "string"
-						       },
-						       "Port": {
-						         "type": "string"
-						       },
-						       "Protocol": {
-						         "type": "string"
-						       },
-						       "Query": {
-						         "type": "string"
-						       },
-						       "StatusCode": {
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "StatusCode"
-						     ],
-						     "type": "object"
-						   }
-						*/
+						// {
+						//   "additionalProperties": false,
+						//   "properties": {
+						//     "Host": {
+						//       "type": "string"
+						//     },
+						//     "Path": {
+						//       "type": "string"
+						//     },
+						//     "Port": {
+						//       "type": "string"
+						//     },
+						//     "Protocol": {
+						//       "type": "string"
+						//     },
+						//     "Query": {
+						//       "type": "string"
+						//     },
+						//     "StatusCode": {
+						//       "type": "string"
+						//     }
+						//   },
+						//   "required": [
+						//     "StatusCode"
+						//   ],
+						//   "type": "object"
+						// }
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"host": {
 									// Property: Host
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"path": {
 									// Property: Path
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"port": {
 									// Property: Port
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"protocol": {
 									// Property: Protocol
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"query": {
 									// Property: Query
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"status_code": {
 									// Property: StatusCode
 									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
+									// {
+									//   "type": "string"
+									// }
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -930,22 +842,18 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"target_group_arn": {
 						// Property: TargetGroupArn
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"type": {
 						// Property: Type
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "type": "string"
+						// }
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -957,22 +865,18 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"listener_arn": {
 			// Property: ListenerArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"load_balancer_arn": {
 			// Property: LoadBalancerArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// LoadBalancerArn is a force-new attribute.
@@ -980,33 +884,27 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"port": {
 			// Property: Port
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "type": "integer"
+			// }
 			Type:     types.NumberType,
 			Optional: true,
 		},
 		"protocol": {
 			// Property: Protocol
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"ssl_policy": {
 			// Property: SslPolicy
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},

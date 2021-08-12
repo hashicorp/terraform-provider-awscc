@@ -25,15 +25,13 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 		"application": {
 			// Property: Application
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name or the Id of the Application.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name or the Id of the Application.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name or the Id of the Application.",
 			Type:        types.StringType,
 			Required:    true,
@@ -41,27 +39,23 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 		"application_arn": {
 			// Property: ApplicationArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"attribute_group": {
 			// Property: AttributeGroup
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name or the Id of the AttributeGroup.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name or the Id of the AttributeGroup.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name or the Id of the AttributeGroup.",
 			Type:        types.StringType,
 			Required:    true,
@@ -69,23 +63,19 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 		"attribute_group_arn": {
 			// Property: AttributeGroupArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},

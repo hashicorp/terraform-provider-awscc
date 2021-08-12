@@ -25,45 +25,41 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"endpoint_configurations": {
 			// Property: EndpointConfigurations
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The list of endpoint objects.",
-			     "items": {
-			       "description": "The configuration for a given endpoint",
-			       "properties": {
-			         "ClientIPPreservationEnabled": {
-			           "description": "true if client ip should be preserved",
-			           "type": "boolean"
-			         },
-			         "EndpointId": {
-			           "description": "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
-			           "type": "string"
-			         },
-			         "Weight": {
-			           "description": "The weight for the endpoint.",
-			           "type": "integer"
-			         }
-			       },
-			       "required": [
-			         "EndpointId"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The list of endpoint objects.",
+			//   "items": {
+			//     "description": "The configuration for a given endpoint",
+			//     "properties": {
+			//       "ClientIPPreservationEnabled": {
+			//         "description": "true if client ip should be preserved",
+			//         "type": "boolean"
+			//       },
+			//       "EndpointId": {
+			//         "description": "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
+			//         "type": "string"
+			//       },
+			//       "Weight": {
+			//         "description": "The weight for the endpoint.",
+			//         "type": "integer"
+			//       }
+			//     },
+			//     "required": [
+			//       "EndpointId"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "The list of endpoint objects.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"client_ip_preservation_enabled": {
 						// Property: ClientIPPreservationEnabled
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "true if client ip should be preserved",
-						     "type": "boolean"
-						   }
-						*/
+						// {
+						//   "description": "true if client ip should be preserved",
+						//   "type": "boolean"
+						// }
 						Description: "true if client ip should be preserved",
 						Type:        types.BoolType,
 						Optional:    true,
@@ -71,12 +67,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"endpoint_id": {
 						// Property: EndpointId
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
-						     "type": "string"
-						   }
-						*/
+						// {
+						//   "description": "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
+						//   "type": "string"
+						// }
 						Description: "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
 						Type:        types.StringType,
 						Required:    true,
@@ -84,12 +78,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"weight": {
 						// Property: Weight
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The weight for the endpoint.",
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "description": "The weight for the endpoint.",
+						//   "type": "integer"
+						// }
 						Description: "The weight for the endpoint.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -102,12 +94,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"endpoint_group_arn": {
 			// Property: EndpointGroupArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the endpoint group",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the endpoint group",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the endpoint group",
 			Type:        types.StringType,
 			Computed:    true,
@@ -115,12 +105,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"endpoint_group_region": {
 			// Property: EndpointGroupRegion
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the AWS Region where the endpoint group is located",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the AWS Region where the endpoint group is located",
+			//   "type": "string"
+			// }
 			Description: "The name of the AWS Region where the endpoint group is located",
 			Type:        types.StringType,
 			Required:    true,
@@ -129,12 +117,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"health_check_interval_seconds": {
 			// Property: HealthCheckIntervalSeconds
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
+			//   "type": "integer"
+			// }
 			Description: "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
 			Type:        types.NumberType,
 			Optional:    true,
@@ -142,12 +128,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"health_check_path": {
 			// Property: HealthCheckPath
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "",
+			//   "type": "string"
+			// }
 			Description: "",
 			Type:        types.StringType,
 			Optional:    true,
@@ -155,12 +139,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"health_check_port": {
 			// Property: HealthCheckPort
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
+			//   "type": "integer"
+			// }
 			Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			Type:        types.NumberType,
 			Optional:    true,
@@ -168,17 +150,15 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"health_check_protocol": {
 			// Property: HealthCheckProtocol
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
-			     "enum": [
-			       "TCP",
-			       "HTTP",
-			       "HTTPS"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
+			//   "enum": [
+			//     "TCP",
+			//     "HTTP",
+			//     "HTTPS"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -186,13 +166,11 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"listener_arn": {
 			// Property: ListenerArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the listener",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the listener",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the listener",
 			Type:        types.StringType,
 			Required:    true,
@@ -201,40 +179,36 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"port_overrides": {
 			// Property: PortOverrides
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "description": "listener to endpoint port mapping.",
-			       "properties": {
-			         "EndpointPort": {
-			           "description": "A network port number",
-			           "type": "integer"
-			         },
-			         "ListenerPort": {
-			           "description": "A network port number",
-			           "type": "integer"
-			         }
-			       },
-			       "required": [
-			         "ListenerPort",
-			         "EndpointPort"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "description": "listener to endpoint port mapping.",
+			//     "properties": {
+			//       "EndpointPort": {
+			//         "description": "A network port number",
+			//         "type": "integer"
+			//       },
+			//       "ListenerPort": {
+			//         "description": "A network port number",
+			//         "type": "integer"
+			//       }
+			//     },
+			//     "required": [
+			//       "ListenerPort",
+			//       "EndpointPort"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"endpoint_port": {
 						// Property: EndpointPort
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A network port number",
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "description": "A network port number",
+						//   "type": "integer"
+						// }
 						Description: "A network port number",
 						Type:        types.NumberType,
 						Required:    true,
@@ -242,12 +216,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"listener_port": {
 						// Property: ListenerPort
 						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A network port number",
-						     "type": "integer"
-						   }
-						*/
+						// {
+						//   "description": "A network port number",
+						//   "type": "integer"
+						// }
 						Description: "A network port number",
 						Type:        types.NumberType,
 						Required:    true,
@@ -260,12 +232,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"threshold_count": {
 			// Property: ThresholdCount
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
+			//   "type": "integer"
+			// }
 			Description: "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
 			Type:        types.NumberType,
 			Optional:    true,
@@ -273,12 +243,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"traffic_dial_percentage": {
 			// Property: TrafficDialPercentage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The percentage of traffic to sent to an AWS Region",
-			     "type": "number"
-			   }
-			*/
+			// {
+			//   "description": "The percentage of traffic to sent to an AWS Region",
+			//   "type": "number"
+			// }
 			Description: "The percentage of traffic to sent to an AWS Region",
 			Type:        types.NumberType,
 			Optional:    true,
