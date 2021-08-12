@@ -10,7 +10,7 @@ require (
 	github.com/aws/smithy-go v1.6.0
 	github.com/evanphx/json-patch v0.5.2 // indirect
 	github.com/google/go-cmp v0.5.6
-	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.5.1-0.20210811213128-31347010a3af
+	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.5.1-0.20210812175631-62a019b0503b
 	github.com/hashicorp/go-hclog v0.16.1
 	github.com/hashicorp/hcl/v2 v2.10.0
 	github.com/hashicorp/terraform-plugin-framework v0.2.0

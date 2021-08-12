@@ -208,6 +208,8 @@ github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.5.1-0.20210811
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.5.1-0.20210811191652-3b3973994f63/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.5.1-0.20210811213128-31347010a3af h1:0bWdOrtqOxmaqxBQy3DMV6IKZgyPWHajHpah/E7S0UI=
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.5.1-0.20210811213128-31347010a3af/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
+github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.5.1-0.20210812175631-62a019b0503b h1:9zu7fx/b4o9oMYya3fxgl8vl9aueDB41iTHAzNxVuSg=
+github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.5.1-0.20210812175631-62a019b0503b/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
 github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210723211334-303716fc7a60 h1:6KeuK3Ehh1uVDa4yu/ytCqR6pzKeTvYHYcwjd704How=
 github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210723211334-303716fc7a60/go.mod h1:8zny46nRFfMGgQAVJd15u96AEVxI9+Gd7xBVZZ5VYDk=
 github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=
