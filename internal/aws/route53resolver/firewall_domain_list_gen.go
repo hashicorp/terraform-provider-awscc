@@ -26,14 +26,12 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Arn",
-			     "maxLength": 600,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Arn",
+			//   "maxLength": 600,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Arn",
 			Type:        types.StringType,
 			Computed:    true,
@@ -41,14 +39,12 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Rfc3339TimeString",
-			     "maxLength": 40,
-			     "minLength": 20,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Rfc3339TimeString",
+			//   "maxLength": 40,
+			//   "minLength": 20,
+			//   "type": "string"
+			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,14 +52,12 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"creator_request_id": {
 			// Property: CreatorRequestId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The id of the creator request.",
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The id of the creator request.",
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -71,12 +65,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"domain_count": {
 			// Property: DomainCount
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Count",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "Count",
+			//   "type": "integer"
+			// }
 			Description: "Count",
 			Type:        types.NumberType,
 			Computed:    true,
@@ -84,14 +76,12 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"domain_file_url": {
 			// Property: DomainFileUrl
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "S3 URL to import domains from.",
-			     "maxLength": 1024,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "S3 URL to import domains from.",
+			//   "maxLength": 1024,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "S3 URL to import domains from.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -100,19 +90,17 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"domains": {
 			// Property: Domains
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An inline list of domains to use for this domain list.",
-			     "items": {
-			       "description": "FirewallDomainName",
-			       "maxLength": 255,
-			       "minLength": 1,
-			       "type": "string"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "An inline list of domains to use for this domain list.",
+			//   "items": {
+			//     "description": "FirewallDomainName",
+			//     "maxLength": 255,
+			//     "minLength": 1,
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "An inline list of domains to use for this domain list.",
 			// Ordered set.
 			Type:     types.ListType{ElemType: types.StringType},
@@ -122,14 +110,12 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ResourceId",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ResourceId",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "ResourceId",
 			Type:        types.StringType,
 			Computed:    true,
@@ -137,14 +123,12 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"managed_owner_name": {
 			// Property: ManagedOwnerName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ServicePrincipal",
-			     "maxLength": 512,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ServicePrincipal",
+			//   "maxLength": 512,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "ServicePrincipal",
 			Type:        types.StringType,
 			Computed:    true,
@@ -152,14 +136,12 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"modification_time": {
 			// Property: ModificationTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Rfc3339TimeString",
-			     "maxLength": 40,
-			     "minLength": 20,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Rfc3339TimeString",
+			//   "maxLength": 40,
+			//   "minLength": 20,
+			//   "type": "string"
+			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
@@ -167,15 +149,13 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "FirewallDomainListName",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "FirewallDomainListName",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "FirewallDomainListName",
 			Type:        types.StringType,
 			Optional:    true,
@@ -185,20 +165,18 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ResolverFirewallDomainList, possible values are COMPLETE, DELETING, UPDATING, COMPLETE_IMPORT_FAILED, IMPORTING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
-			     "enum": [
-			       "COMPLETE",
-			       "DELETING",
-			       "UPDATING",
-			       "COMPLETE_IMPORT_FAILED",
-			       "IMPORTING",
-			       "INACTIVE_OWNER_ACCOUNT_CLOSED"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ResolverFirewallDomainList, possible values are COMPLETE, DELETING, UPDATING, COMPLETE_IMPORT_FAILED, IMPORTING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
+			//   "enum": [
+			//     "COMPLETE",
+			//     "DELETING",
+			//     "UPDATING",
+			//     "COMPLETE_IMPORT_FAILED",
+			//     "IMPORTING",
+			//     "INACTIVE_OWNER_ACCOUNT_CLOSED"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "ResolverFirewallDomainList, possible values are COMPLETE, DELETING, UPDATING, COMPLETE_IMPORT_FAILED, IMPORTING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -206,12 +184,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"status_message": {
 			// Property: StatusMessage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "FirewallDomainListAssociationStatus",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "FirewallDomainListAssociationStatus",
+			//   "type": "string"
+			// }
 			Description: "FirewallDomainListAssociationStatus",
 			Type:        types.StringType,
 			Computed:    true,
@@ -219,66 +195,46 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Tags",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			           "maxLength": 127,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			           "maxLength": 255,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "Tags",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//         "maxLength": 127,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//         "maxLength": 255,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "Tags",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						     "maxLength": 127,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						     "maxLength": 255,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,

@@ -25,15 +25,13 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"auto_scaling_configuration_arn": {
 			// Property: AutoScalingConfigurationArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Autoscaling configuration ARN",
-			     "maxLength": 1011,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Autoscaling configuration ARN",
+			//   "maxLength": 1011,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Autoscaling configuration ARN",
 			Type:        types.StringType,
 			Optional:    true,
@@ -42,40 +40,28 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"encryption_configuration": {
 			// Property: EncryptionConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Encryption configuration (KMS key)",
-			     "properties": {
-			       "KmsKey": {
-			         "description": "The KMS Key",
-			         "maxLength": 256,
-			         "minLength": 0,
-			         "pattern": "",
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "KmsKey"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Encryption configuration (KMS key)",
+			//   "properties": {
+			//     "KmsKey": {
+			//       "description": "The KMS Key",
+			//       "maxLength": 256,
+			//       "minLength": 0,
+			//       "pattern": "",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "KmsKey"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "Encryption configuration (KMS key)",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"kms_key": {
 						// Property: KmsKey
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The KMS Key",
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The KMS Key",
 						Type:        types.StringType,
 						Required:    true,
@@ -89,124 +75,76 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"health_check_configuration": {
 			// Property: HealthCheckConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Health check configuration",
-			     "properties": {
-			       "HealthyThreshold": {
-			         "description": "Health check Healthy Threshold",
-			         "type": "integer"
-			       },
-			       "Interval": {
-			         "description": "Health check Interval",
-			         "type": "integer"
-			       },
-			       "Path": {
-			         "description": "Health check Path",
-			         "type": "string"
-			       },
-			       "Protocol": {
-			         "description": "Health Check Protocol",
-			         "enum": [
-			           "TCP",
-			           "HTTP"
-			         ],
-			         "type": "string"
-			       },
-			       "Timeout": {
-			         "description": "Health check Timeout",
-			         "type": "integer"
-			       },
-			       "UnhealthyThreshold": {
-			         "description": "Health check Unhealthy Threshold",
-			         "type": "integer"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Health check configuration",
+			//   "properties": {
+			//     "HealthyThreshold": {
+			//       "description": "Health check Healthy Threshold",
+			//       "type": "integer"
+			//     },
+			//     "Interval": {
+			//       "description": "Health check Interval",
+			//       "type": "integer"
+			//     },
+			//     "Path": {
+			//       "description": "Health check Path",
+			//       "type": "string"
+			//     },
+			//     "Protocol": {
+			//       "description": "Health Check Protocol",
+			//       "enum": [
+			//         "TCP",
+			//         "HTTP"
+			//       ],
+			//       "type": "string"
+			//     },
+			//     "Timeout": {
+			//       "description": "Health check Timeout",
+			//       "type": "integer"
+			//     },
+			//     "UnhealthyThreshold": {
+			//       "description": "Health check Unhealthy Threshold",
+			//       "type": "integer"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "Health check configuration",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"healthy_threshold": {
 						// Property: HealthyThreshold
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Health check Healthy Threshold",
-						     "type": "integer"
-						   }
-						*/
 						Description: "Health check Healthy Threshold",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"interval": {
 						// Property: Interval
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Health check Interval",
-						     "type": "integer"
-						   }
-						*/
 						Description: "Health check Interval",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"path": {
 						// Property: Path
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Health check Path",
-						     "type": "string"
-						   }
-						*/
 						Description: "Health check Path",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"protocol": {
 						// Property: Protocol
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Health Check Protocol",
-						     "enum": [
-						       "TCP",
-						       "HTTP"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Description: "Health Check Protocol",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"timeout": {
 						// Property: Timeout
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Health check Timeout",
-						     "type": "integer"
-						   }
-						*/
 						Description: "Health check Timeout",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"unhealthy_threshold": {
 						// Property: UnhealthyThreshold
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Health check Unhealthy Threshold",
-						     "type": "integer"
-						   }
-						*/
 						Description: "Health check Unhealthy Threshold",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -218,80 +156,49 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"instance_configuration": {
 			// Property: InstanceConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Instance Configuration",
-			     "properties": {
-			       "Cpu": {
-			         "description": "CPU",
-			         "maxLength": 6,
-			         "minLength": 4,
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "InstanceRoleArn": {
-			         "maxLength": 102,
-			         "minLength": 29,
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "Memory": {
-			         "description": "Memory",
-			         "maxLength": 4,
-			         "minLength": 4,
-			         "pattern": "",
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Instance Configuration",
+			//   "properties": {
+			//     "Cpu": {
+			//       "description": "CPU",
+			//       "maxLength": 6,
+			//       "minLength": 4,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "InstanceRoleArn": {
+			//       "maxLength": 102,
+			//       "minLength": 29,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "Memory": {
+			//       "description": "Memory",
+			//       "maxLength": 4,
+			//       "minLength": 4,
+			//       "pattern": "",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "Instance Configuration",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"cpu": {
 						// Property: Cpu
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "CPU",
-						     "maxLength": 6,
-						     "minLength": 4,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "CPU",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"instance_role_arn": {
 						// Property: InstanceRoleArn
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 102,
-						     "minLength": 29,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"memory": {
 						// Property: Memory
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Memory",
-						     "maxLength": 4,
-						     "minLength": 4,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "Memory",
 						Type:        types.StringType,
 						Optional:    true,
@@ -303,15 +210,13 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"service_arn": {
 			// Property: ServiceArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the AppRunner Service.",
-			     "maxLength": 1011,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the AppRunner Service.",
+			//   "maxLength": 1011,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the AppRunner Service.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -319,14 +224,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"service_id": {
 			// Property: ServiceId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The AppRunner Service Id",
-			     "maxLength": 32,
-			     "minLength": 32,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The AppRunner Service Id",
+			//   "maxLength": 32,
+			//   "minLength": 32,
+			//   "type": "string"
+			// }
 			Description: "The AppRunner Service Id",
 			Type:        types.StringType,
 			Computed:    true,
@@ -334,15 +237,13 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"service_name": {
 			// Property: ServiceName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The AppRunner Service Name.",
-			     "maxLength": 40,
-			     "minLength": 4,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The AppRunner Service Name.",
+			//   "maxLength": 40,
+			//   "minLength": 4,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The AppRunner Service Name.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -352,12 +253,10 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"service_url": {
 			// Property: ServiceUrl
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Service Url of the AppRunner Service.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Service Url of the AppRunner Service.",
+			//   "type": "string"
+			// }
 			Description: "The Service Url of the AppRunner Service.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -365,252 +264,208 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"source_configuration": {
 			// Property: SourceConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Source Code configuration",
-			     "properties": {
-			       "AuthenticationConfiguration": {
-			         "additionalProperties": false,
-			         "description": "Authentication Configuration",
-			         "properties": {
-			           "AccessRoleArn": {
-			             "maxLength": 102,
-			             "minLength": 29,
-			             "pattern": "",
-			             "type": "string"
-			           },
-			           "ConnectionArn": {
-			             "description": "Connection Arn",
-			             "maxLength": 1011,
-			             "minLength": 1,
-			             "pattern": "",
-			             "type": "string"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "AutoDeploymentsEnabled": {
-			         "description": "Auto Deployment enabled",
-			         "type": "boolean"
-			       },
-			       "CodeRepository": {
-			         "additionalProperties": false,
-			         "description": "Source Code Repository",
-			         "properties": {
-			           "CodeConfiguration": {
-			             "additionalProperties": false,
-			             "description": "Code Configuration",
-			             "properties": {
-			               "CodeConfigurationValues": {
-			                 "additionalProperties": false,
-			                 "description": "Code Configuration Values",
-			                 "properties": {
-			                   "BuildCommand": {
-			                     "description": "Build Command",
-			                     "type": "string"
-			                   },
-			                   "Port": {
-			                     "description": "Port",
-			                     "type": "string"
-			                   },
-			                   "Runtime": {
-			                     "description": "Runtime",
-			                     "enum": [
-			                       "PYTHON_3",
-			                       "NODEJS_12"
-			                     ],
-			                     "type": "string"
-			                   },
-			                   "RuntimeEnvironmentVariables": {
-			                     "items": {
-			                       "additionalProperties": false,
-			                       "properties": {
-			                         "Name": {
-			                           "type": "string"
-			                         },
-			                         "Value": {
-			                           "type": "string"
-			                         }
-			                       },
-			                       "type": "object"
-			                     },
-			                     "type": "array"
-			                   },
-			                   "StartCommand": {
-			                     "description": "Start Command",
-			                     "type": "string"
-			                   }
-			                 },
-			                 "required": [
-			                   "Runtime"
-			                 ],
-			                 "type": "object"
-			               },
-			               "ConfigurationSource": {
-			                 "description": "Configuration Source",
-			                 "enum": [
-			                   "REPOSITORY",
-			                   "API"
-			                 ],
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "ConfigurationSource"
-			             ],
-			             "type": "object"
-			           },
-			           "RepositoryUrl": {
-			             "description": "Repository Url",
-			             "type": "string"
-			           },
-			           "SourceCodeVersion": {
-			             "additionalProperties": false,
-			             "description": "Source Code Version",
-			             "properties": {
-			               "Type": {
-			                 "description": "Source Code Version Type",
-			                 "enum": [
-			                   "BRANCH"
-			                 ],
-			                 "type": "string"
-			               },
-			               "Value": {
-			                 "description": "Source Code Version Value",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Type",
-			               "Value"
-			             ],
-			             "type": "object"
-			           }
-			         },
-			         "required": [
-			           "RepositoryUrl",
-			           "SourceCodeVersion"
-			         ],
-			         "type": "object"
-			       },
-			       "ImageRepository": {
-			         "additionalProperties": false,
-			         "description": "Image Repository",
-			         "properties": {
-			           "ImageConfiguration": {
-			             "additionalProperties": false,
-			             "description": "Image Configuration",
-			             "properties": {
-			               "Port": {
-			                 "description": "Port",
-			                 "type": "string"
-			               },
-			               "RuntimeEnvironmentVariables": {
-			                 "items": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "Name": {
-			                       "type": "string"
-			                     },
-			                     "Value": {
-			                       "type": "string"
-			                     }
-			                   },
-			                   "type": "object"
-			                 },
-			                 "type": "array"
-			               },
-			               "StartCommand": {
-			                 "description": "Start Command",
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "ImageIdentifier": {
-			             "description": "Image Identifier",
-			             "maxLength": 1024,
-			             "minLength": 1,
-			             "pattern": "",
-			             "type": "string"
-			           },
-			           "ImageRepositoryType": {
-			             "description": "Image Repository Type",
-			             "enum": [
-			               "ECR",
-			               "ECR_PUBLIC"
-			             ],
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "ImageIdentifier",
-			           "ImageRepositoryType"
-			         ],
-			         "type": "object"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Source Code configuration",
+			//   "properties": {
+			//     "AuthenticationConfiguration": {
+			//       "additionalProperties": false,
+			//       "description": "Authentication Configuration",
+			//       "properties": {
+			//         "AccessRoleArn": {
+			//           "maxLength": 102,
+			//           "minLength": 29,
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "ConnectionArn": {
+			//           "description": "Connection Arn",
+			//           "maxLength": 1011,
+			//           "minLength": 1,
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "AutoDeploymentsEnabled": {
+			//       "description": "Auto Deployment enabled",
+			//       "type": "boolean"
+			//     },
+			//     "CodeRepository": {
+			//       "additionalProperties": false,
+			//       "description": "Source Code Repository",
+			//       "properties": {
+			//         "CodeConfiguration": {
+			//           "additionalProperties": false,
+			//           "description": "Code Configuration",
+			//           "properties": {
+			//             "CodeConfigurationValues": {
+			//               "additionalProperties": false,
+			//               "description": "Code Configuration Values",
+			//               "properties": {
+			//                 "BuildCommand": {
+			//                   "description": "Build Command",
+			//                   "type": "string"
+			//                 },
+			//                 "Port": {
+			//                   "description": "Port",
+			//                   "type": "string"
+			//                 },
+			//                 "Runtime": {
+			//                   "description": "Runtime",
+			//                   "enum": [
+			//                     "PYTHON_3",
+			//                     "NODEJS_12"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "RuntimeEnvironmentVariables": {
+			//                   "items": {
+			//                     "additionalProperties": false,
+			//                     "properties": {
+			//                       "Name": {
+			//                         "type": "string"
+			//                       },
+			//                       "Value": {
+			//                         "type": "string"
+			//                       }
+			//                     },
+			//                     "type": "object"
+			//                   },
+			//                   "type": "array"
+			//                 },
+			//                 "StartCommand": {
+			//                   "description": "Start Command",
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Runtime"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "ConfigurationSource": {
+			//               "description": "Configuration Source",
+			//               "enum": [
+			//                 "REPOSITORY",
+			//                 "API"
+			//               ],
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "ConfigurationSource"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "RepositoryUrl": {
+			//           "description": "Repository Url",
+			//           "type": "string"
+			//         },
+			//         "SourceCodeVersion": {
+			//           "additionalProperties": false,
+			//           "description": "Source Code Version",
+			//           "properties": {
+			//             "Type": {
+			//               "description": "Source Code Version Type",
+			//               "enum": [
+			//                 "BRANCH"
+			//               ],
+			//               "type": "string"
+			//             },
+			//             "Value": {
+			//               "description": "Source Code Version Value",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Type",
+			//             "Value"
+			//           ],
+			//           "type": "object"
+			//         }
+			//       },
+			//       "required": [
+			//         "RepositoryUrl",
+			//         "SourceCodeVersion"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "ImageRepository": {
+			//       "additionalProperties": false,
+			//       "description": "Image Repository",
+			//       "properties": {
+			//         "ImageConfiguration": {
+			//           "additionalProperties": false,
+			//           "description": "Image Configuration",
+			//           "properties": {
+			//             "Port": {
+			//               "description": "Port",
+			//               "type": "string"
+			//             },
+			//             "RuntimeEnvironmentVariables": {
+			//               "items": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "Name": {
+			//                     "type": "string"
+			//                   },
+			//                   "Value": {
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "type": "array"
+			//             },
+			//             "StartCommand": {
+			//               "description": "Start Command",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "ImageIdentifier": {
+			//           "description": "Image Identifier",
+			//           "maxLength": 1024,
+			//           "minLength": 1,
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "ImageRepositoryType": {
+			//           "description": "Image Repository Type",
+			//           "enum": [
+			//             "ECR",
+			//             "ECR_PUBLIC"
+			//           ],
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "ImageIdentifier",
+			//         "ImageRepositoryType"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "Source Code configuration",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"authentication_configuration": {
 						// Property: AuthenticationConfiguration
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Authentication Configuration",
-						     "properties": {
-						       "AccessRoleArn": {
-						         "maxLength": 102,
-						         "minLength": 29,
-						         "pattern": "",
-						         "type": "string"
-						       },
-						       "ConnectionArn": {
-						         "description": "Connection Arn",
-						         "maxLength": 1011,
-						         "minLength": 1,
-						         "pattern": "",
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Description: "Authentication Configuration",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"access_role_arn": {
 									// Property: AccessRoleArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 102,
-									     "minLength": 29,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"connection_arn": {
 									// Property: ConnectionArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Connection Arn",
-									     "maxLength": 1011,
-									     "minLength": 1,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Description: "Connection Arn",
 									Type:        types.StringType,
 									Optional:    true,
@@ -621,333 +476,54 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"auto_deployments_enabled": {
 						// Property: AutoDeploymentsEnabled
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Auto Deployment enabled",
-						     "type": "boolean"
-						   }
-						*/
 						Description: "Auto Deployment enabled",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"code_repository": {
 						// Property: CodeRepository
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Source Code Repository",
-						     "properties": {
-						       "CodeConfiguration": {
-						         "additionalProperties": false,
-						         "description": "Code Configuration",
-						         "properties": {
-						           "CodeConfigurationValues": {
-						             "additionalProperties": false,
-						             "description": "Code Configuration Values",
-						             "properties": {
-						               "BuildCommand": {
-						                 "description": "Build Command",
-						                 "type": "string"
-						               },
-						               "Port": {
-						                 "description": "Port",
-						                 "type": "string"
-						               },
-						               "Runtime": {
-						                 "description": "Runtime",
-						                 "enum": [
-						                   "PYTHON_3",
-						                   "NODEJS_12"
-						                 ],
-						                 "type": "string"
-						               },
-						               "RuntimeEnvironmentVariables": {
-						                 "items": {
-						                   "additionalProperties": false,
-						                   "properties": {
-						                     "Name": {
-						                       "type": "string"
-						                     },
-						                     "Value": {
-						                       "type": "string"
-						                     }
-						                   },
-						                   "type": "object"
-						                 },
-						                 "type": "array"
-						               },
-						               "StartCommand": {
-						                 "description": "Start Command",
-						                 "type": "string"
-						               }
-						             },
-						             "required": [
-						               "Runtime"
-						             ],
-						             "type": "object"
-						           },
-						           "ConfigurationSource": {
-						             "description": "Configuration Source",
-						             "enum": [
-						               "REPOSITORY",
-						               "API"
-						             ],
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "ConfigurationSource"
-						         ],
-						         "type": "object"
-						       },
-						       "RepositoryUrl": {
-						         "description": "Repository Url",
-						         "type": "string"
-						       },
-						       "SourceCodeVersion": {
-						         "additionalProperties": false,
-						         "description": "Source Code Version",
-						         "properties": {
-						           "Type": {
-						             "description": "Source Code Version Type",
-						             "enum": [
-						               "BRANCH"
-						             ],
-						             "type": "string"
-						           },
-						           "Value": {
-						             "description": "Source Code Version Value",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Type",
-						           "Value"
-						         ],
-						         "type": "object"
-						       }
-						     },
-						     "required": [
-						       "RepositoryUrl",
-						       "SourceCodeVersion"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Description: "Source Code Repository",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"code_configuration": {
 									// Property: CodeConfiguration
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "Code Configuration",
-									     "properties": {
-									       "CodeConfigurationValues": {
-									         "additionalProperties": false,
-									         "description": "Code Configuration Values",
-									         "properties": {
-									           "BuildCommand": {
-									             "description": "Build Command",
-									             "type": "string"
-									           },
-									           "Port": {
-									             "description": "Port",
-									             "type": "string"
-									           },
-									           "Runtime": {
-									             "description": "Runtime",
-									             "enum": [
-									               "PYTHON_3",
-									               "NODEJS_12"
-									             ],
-									             "type": "string"
-									           },
-									           "RuntimeEnvironmentVariables": {
-									             "items": {
-									               "additionalProperties": false,
-									               "properties": {
-									                 "Name": {
-									                   "type": "string"
-									                 },
-									                 "Value": {
-									                   "type": "string"
-									                 }
-									               },
-									               "type": "object"
-									             },
-									             "type": "array"
-									           },
-									           "StartCommand": {
-									             "description": "Start Command",
-									             "type": "string"
-									           }
-									         },
-									         "required": [
-									           "Runtime"
-									         ],
-									         "type": "object"
-									       },
-									       "ConfigurationSource": {
-									         "description": "Configuration Source",
-									         "enum": [
-									           "REPOSITORY",
-									           "API"
-									         ],
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "ConfigurationSource"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Description: "Code Configuration",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"code_configuration_values": {
 												// Property: CodeConfigurationValues
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "description": "Code Configuration Values",
-												     "properties": {
-												       "BuildCommand": {
-												         "description": "Build Command",
-												         "type": "string"
-												       },
-												       "Port": {
-												         "description": "Port",
-												         "type": "string"
-												       },
-												       "Runtime": {
-												         "description": "Runtime",
-												         "enum": [
-												           "PYTHON_3",
-												           "NODEJS_12"
-												         ],
-												         "type": "string"
-												       },
-												       "RuntimeEnvironmentVariables": {
-												         "items": {
-												           "additionalProperties": false,
-												           "properties": {
-												             "Name": {
-												               "type": "string"
-												             },
-												             "Value": {
-												               "type": "string"
-												             }
-												           },
-												           "type": "object"
-												         },
-												         "type": "array"
-												       },
-												       "StartCommand": {
-												         "description": "Start Command",
-												         "type": "string"
-												       }
-												     },
-												     "required": [
-												       "Runtime"
-												     ],
-												     "type": "object"
-												   }
-												*/
 												Description: "Code Configuration Values",
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"build_command": {
 															// Property: BuildCommand
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "Build Command",
-															     "type": "string"
-															   }
-															*/
 															Description: "Build Command",
 															Type:        types.StringType,
 															Optional:    true,
 														},
 														"port": {
 															// Property: Port
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "Port",
-															     "type": "string"
-															   }
-															*/
 															Description: "Port",
 															Type:        types.StringType,
 															Optional:    true,
 														},
 														"runtime": {
 															// Property: Runtime
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "Runtime",
-															     "enum": [
-															       "PYTHON_3",
-															       "NODEJS_12"
-															     ],
-															     "type": "string"
-															   }
-															*/
 															Description: "Runtime",
 															Type:        types.StringType,
 															Required:    true,
 														},
 														"runtime_environment_variables": {
 															// Property: RuntimeEnvironmentVariables
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "items": {
-															       "additionalProperties": false,
-															       "properties": {
-															         "Name": {
-															           "type": "string"
-															         },
-															         "Value": {
-															           "type": "string"
-															         }
-															       },
-															       "type": "object"
-															     },
-															     "type": "array"
-															   }
-															*/
 															Attributes: schema.ListNestedAttributes(
 																map[string]schema.Attribute{
 																	"name": {
 																		// Property: Name
-																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "type": "string"
-																		   }
-																		*/
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
 																	"value": {
 																		// Property: Value
-																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "type": "string"
-																		   }
-																		*/
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
@@ -958,13 +534,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"start_command": {
 															// Property: StartCommand
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "description": "Start Command",
-															     "type": "string"
-															   }
-															*/
 															Description: "Start Command",
 															Type:        types.StringType,
 															Optional:    true,
@@ -975,17 +544,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"configuration_source": {
 												// Property: ConfigurationSource
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "Configuration Source",
-												     "enum": [
-												       "REPOSITORY",
-												       "API"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Description: "Configuration Source",
 												Type:        types.StringType,
 												Required:    true,
@@ -996,72 +554,23 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"repository_url": {
 									// Property: RepositoryUrl
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Repository Url",
-									     "type": "string"
-									   }
-									*/
 									Description: "Repository Url",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"source_code_version": {
 									// Property: SourceCodeVersion
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "Source Code Version",
-									     "properties": {
-									       "Type": {
-									         "description": "Source Code Version Type",
-									         "enum": [
-									           "BRANCH"
-									         ],
-									         "type": "string"
-									       },
-									       "Value": {
-									         "description": "Source Code Version Value",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Type",
-									       "Value"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Description: "Source Code Version",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"type": {
 												// Property: Type
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "Source Code Version Type",
-												     "enum": [
-												       "BRANCH"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Description: "Source Code Version Type",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"value": {
 												// Property: Value
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "Source Code Version Value",
-												     "type": "string"
-												   }
-												*/
 												Description: "Source Code Version Value",
 												Type:        types.StringType,
 												Required:    true,
@@ -1076,160 +585,31 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"image_repository": {
 						// Property: ImageRepository
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Image Repository",
-						     "properties": {
-						       "ImageConfiguration": {
-						         "additionalProperties": false,
-						         "description": "Image Configuration",
-						         "properties": {
-						           "Port": {
-						             "description": "Port",
-						             "type": "string"
-						           },
-						           "RuntimeEnvironmentVariables": {
-						             "items": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "Name": {
-						                   "type": "string"
-						                 },
-						                 "Value": {
-						                   "type": "string"
-						                 }
-						               },
-						               "type": "object"
-						             },
-						             "type": "array"
-						           },
-						           "StartCommand": {
-						             "description": "Start Command",
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "ImageIdentifier": {
-						         "description": "Image Identifier",
-						         "maxLength": 1024,
-						         "minLength": 1,
-						         "pattern": "",
-						         "type": "string"
-						       },
-						       "ImageRepositoryType": {
-						         "description": "Image Repository Type",
-						         "enum": [
-						           "ECR",
-						           "ECR_PUBLIC"
-						         ],
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "ImageIdentifier",
-						       "ImageRepositoryType"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Description: "Image Repository",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"image_configuration": {
 									// Property: ImageConfiguration
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "Image Configuration",
-									     "properties": {
-									       "Port": {
-									         "description": "Port",
-									         "type": "string"
-									       },
-									       "RuntimeEnvironmentVariables": {
-									         "items": {
-									           "additionalProperties": false,
-									           "properties": {
-									             "Name": {
-									               "type": "string"
-									             },
-									             "Value": {
-									               "type": "string"
-									             }
-									           },
-									           "type": "object"
-									         },
-									         "type": "array"
-									       },
-									       "StartCommand": {
-									         "description": "Start Command",
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Description: "Image Configuration",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"port": {
 												// Property: Port
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "Port",
-												     "type": "string"
-												   }
-												*/
 												Description: "Port",
 												Type:        types.StringType,
 												Optional:    true,
 											},
 											"runtime_environment_variables": {
 												// Property: RuntimeEnvironmentVariables
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "additionalProperties": false,
-												       "properties": {
-												         "Name": {
-												           "type": "string"
-												         },
-												         "Value": {
-												           "type": "string"
-												         }
-												       },
-												       "type": "object"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Attributes: schema.ListNestedAttributes(
 													map[string]schema.Attribute{
 														"name": {
 															// Property: Name
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"value": {
 															// Property: Value
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
@@ -1240,13 +620,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"start_command": {
 												// Property: StartCommand
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "Start Command",
-												     "type": "string"
-												   }
-												*/
 												Description: "Start Command",
 												Type:        types.StringType,
 												Optional:    true,
@@ -1257,33 +630,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"image_identifier": {
 									// Property: ImageIdentifier
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Image Identifier",
-									     "maxLength": 1024,
-									     "minLength": 1,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Description: "Image Identifier",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"image_repository_type": {
 									// Property: ImageRepositoryType
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Image Repository Type",
-									     "enum": [
-									       "ECR",
-									       "ECR_PUBLIC"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Description: "Image Repository Type",
 									Type:        types.StringType,
 									Required:    true,
@@ -1299,12 +651,10 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "AppRunner Service status.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "AppRunner Service status.",
+			//   "type": "string"
+			// }
 			Description: "AppRunner Service status.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1312,44 +662,30 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},

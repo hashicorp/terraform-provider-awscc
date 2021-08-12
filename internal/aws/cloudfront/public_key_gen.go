@@ -25,96 +25,66 @@ func publicKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"public_key_config": {
 			// Property: PublicKeyConfig
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "CallerReference": {
-			         "type": "string"
-			       },
-			       "Comment": {
-			         "type": "string"
-			       },
-			       "EncodedKey": {
-			         "type": "string"
-			       },
-			       "Name": {
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "CallerReference",
-			       "Name",
-			       "EncodedKey"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "CallerReference": {
+			//       "type": "string"
+			//     },
+			//     "Comment": {
+			//       "type": "string"
+			//     },
+			//     "EncodedKey": {
+			//       "type": "string"
+			//     },
+			//     "Name": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "CallerReference",
+			//     "Name",
+			//     "EncodedKey"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"caller_reference": {
 						// Property: CallerReference
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"comment": {
 						// Property: Comment
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"encoded_key": {
 						// Property: EncodedKey
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

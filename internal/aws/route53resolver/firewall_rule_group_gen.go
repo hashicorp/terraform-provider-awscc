@@ -26,14 +26,12 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Arn",
-			     "maxLength": 600,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Arn",
+			//   "maxLength": 600,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Arn",
 			Type:        types.StringType,
 			Computed:    true,
@@ -41,14 +39,12 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Rfc3339TimeString",
-			     "maxLength": 40,
-			     "minLength": 20,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Rfc3339TimeString",
+			//   "maxLength": 40,
+			//   "minLength": 20,
+			//   "type": "string"
+			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
@@ -56,14 +52,12 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"creator_request_id": {
 			// Property: CreatorRequestId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The id of the creator request.",
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The id of the creator request.",
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -71,178 +65,110 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"firewall_rules": {
 			// Property: FirewallRules
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "FirewallRules",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "Firewall Rule associating the Rule Group to a Domain List",
-			       "properties": {
-			         "Action": {
-			           "description": "Rule Action",
-			           "enum": [
-			             "ALLOW",
-			             "BLOCK",
-			             "ALERT"
-			           ],
-			           "type": "string"
-			         },
-			         "BlockOverrideDnsType": {
-			           "description": "BlockOverrideDnsType",
-			           "enum": [
-			             "CNAME"
-			           ],
-			           "type": "string"
-			         },
-			         "BlockOverrideDomain": {
-			           "description": "BlockOverrideDomain",
-			           "maxLength": 255,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "BlockOverrideTtl": {
-			           "description": "BlockOverrideTtl",
-			           "type": "integer"
-			         },
-			         "BlockResponse": {
-			           "description": "BlockResponse",
-			           "enum": [
-			             "NODATA",
-			             "NXDOMAIN",
-			             "OVERRIDE"
-			           ],
-			           "type": "string"
-			         },
-			         "FirewallDomainListId": {
-			           "description": "ResourceId",
-			           "maxLength": 64,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Priority": {
-			           "description": "Rule Priority",
-			           "type": "integer"
-			         }
-			       },
-			       "required": [
-			         "FirewallDomainListId",
-			         "Priority",
-			         "Action"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "FirewallRules",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "Firewall Rule associating the Rule Group to a Domain List",
+			//     "properties": {
+			//       "Action": {
+			//         "description": "Rule Action",
+			//         "enum": [
+			//           "ALLOW",
+			//           "BLOCK",
+			//           "ALERT"
+			//         ],
+			//         "type": "string"
+			//       },
+			//       "BlockOverrideDnsType": {
+			//         "description": "BlockOverrideDnsType",
+			//         "enum": [
+			//           "CNAME"
+			//         ],
+			//         "type": "string"
+			//       },
+			//       "BlockOverrideDomain": {
+			//         "description": "BlockOverrideDomain",
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "BlockOverrideTtl": {
+			//         "description": "BlockOverrideTtl",
+			//         "type": "integer"
+			//       },
+			//       "BlockResponse": {
+			//         "description": "BlockResponse",
+			//         "enum": [
+			//           "NODATA",
+			//           "NXDOMAIN",
+			//           "OVERRIDE"
+			//         ],
+			//         "type": "string"
+			//       },
+			//       "FirewallDomainListId": {
+			//         "description": "ResourceId",
+			//         "maxLength": 64,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Priority": {
+			//         "description": "Rule Priority",
+			//         "type": "integer"
+			//       }
+			//     },
+			//     "required": [
+			//       "FirewallDomainListId",
+			//       "Priority",
+			//       "Action"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "FirewallRules",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"action": {
 						// Property: Action
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Rule Action",
-						     "enum": [
-						       "ALLOW",
-						       "BLOCK",
-						       "ALERT"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Description: "Rule Action",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"block_override_dns_type": {
 						// Property: BlockOverrideDnsType
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "BlockOverrideDnsType",
-						     "enum": [
-						       "CNAME"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Description: "BlockOverrideDnsType",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"block_override_domain": {
 						// Property: BlockOverrideDomain
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "BlockOverrideDomain",
-						     "maxLength": 255,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "BlockOverrideDomain",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"block_override_ttl": {
 						// Property: BlockOverrideTtl
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "BlockOverrideTtl",
-						     "type": "integer"
-						   }
-						*/
 						Description: "BlockOverrideTtl",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"block_response": {
 						// Property: BlockResponse
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "BlockResponse",
-						     "enum": [
-						       "NODATA",
-						       "NXDOMAIN",
-						       "OVERRIDE"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Description: "BlockResponse",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"firewall_domain_list_id": {
 						// Property: FirewallDomainListId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "ResourceId",
-						     "maxLength": 64,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "ResourceId",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"priority": {
 						// Property: Priority
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Rule Priority",
-						     "type": "integer"
-						   }
-						*/
 						Description: "Rule Priority",
 						Type:        types.NumberType,
 						Required:    true,
@@ -255,14 +181,12 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ResourceId",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ResourceId",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "ResourceId",
 			Type:        types.StringType,
 			Computed:    true,
@@ -270,14 +194,12 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"modification_time": {
 			// Property: ModificationTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Rfc3339TimeString",
-			     "maxLength": 40,
-			     "minLength": 20,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Rfc3339TimeString",
+			//   "maxLength": 40,
+			//   "minLength": 20,
+			//   "type": "string"
+			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
@@ -285,15 +207,13 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "FirewallRuleGroupName",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "FirewallRuleGroupName",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "FirewallRuleGroupName",
 			Type:        types.StringType,
 			Optional:    true,
@@ -303,14 +223,12 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"owner_id": {
 			// Property: OwnerId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "AccountId",
-			     "maxLength": 32,
-			     "minLength": 12,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "AccountId",
+			//   "maxLength": 32,
+			//   "minLength": 12,
+			//   "type": "string"
+			// }
 			Description: "AccountId",
 			Type:        types.StringType,
 			Computed:    true,
@@ -318,12 +236,10 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"rule_count": {
 			// Property: RuleCount
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Count",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "Count",
+			//   "type": "integer"
+			// }
 			Description: "Count",
 			Type:        types.NumberType,
 			Computed:    true,
@@ -331,17 +247,15 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"share_status": {
 			// Property: ShareStatus
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
-			     "enum": [
-			       "NOT_SHARED",
-			       "SHARED_WITH_ME",
-			       "SHARED_BY_ME"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
+			//   "enum": [
+			//     "NOT_SHARED",
+			//     "SHARED_WITH_ME",
+			//     "SHARED_BY_ME"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -349,18 +263,16 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
-			     "enum": [
-			       "COMPLETE",
-			       "DELETING",
-			       "UPDATING",
-			       "INACTIVE_OWNER_ACCOUNT_CLOSED"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
+			//   "enum": [
+			//     "COMPLETE",
+			//     "DELETING",
+			//     "UPDATING",
+			//     "INACTIVE_OWNER_ACCOUNT_CLOSED"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -368,12 +280,10 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"status_message": {
 			// Property: StatusMessage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "FirewallRuleGroupStatus",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "FirewallRuleGroupStatus",
+			//   "type": "string"
+			// }
 			Description: "FirewallRuleGroupStatus",
 			Type:        types.StringType,
 			Computed:    true,
@@ -381,66 +291,46 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Tags",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			           "maxLength": 127,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			           "maxLength": 255,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "Tags",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//         "maxLength": 127,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+			//         "maxLength": 255,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "Tags",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						     "maxLength": 127,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						     "maxLength": 255,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,

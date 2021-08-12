@@ -25,100 +25,62 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"attachments": {
 			// Property: Attachments
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of key and value pairs that describe attachments to a version of a document.",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "description": "The key of a key-value pair that identifies the location of an attachment to a document.",
-			           "enum": [
-			             "SourceUrl",
-			             "S3FileUrl",
-			             "AttachmentReference"
-			           ],
-			           "type": "string"
-			         },
-			         "Name": {
-			           "description": "The name of the document attachment file.",
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Values": {
-			           "description": "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
-			           "items": {
-			             "maxLength": 100000,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "maxItems": 1,
-			           "minItems": 1,
-			           "type": "array"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "maxItems": 20,
-			     "minItems": 0,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "A list of key and value pairs that describe attachments to a version of a document.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key of a key-value pair that identifies the location of an attachment to a document.",
+			//         "enum": [
+			//           "SourceUrl",
+			//           "S3FileUrl",
+			//           "AttachmentReference"
+			//         ],
+			//         "type": "string"
+			//       },
+			//       "Name": {
+			//         "description": "The name of the document attachment file.",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Values": {
+			//         "description": "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
+			//         "items": {
+			//           "maxLength": 100000,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "maxItems": 1,
+			//         "minItems": 1,
+			//         "type": "array"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "maxItems": 20,
+			//   "minItems": 0,
+			//   "type": "array"
+			// }
 			Description: "A list of key and value pairs that describe attachments to a version of a document.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key of a key-value pair that identifies the location of an attachment to a document.",
-						     "enum": [
-						       "SourceUrl",
-						       "S3FileUrl",
-						       "AttachmentReference"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Description: "The key of a key-value pair that identifies the location of an attachment to a document.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The name of the document attachment file.",
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The name of the document attachment file.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"values": {
 						// Property: Values
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
-						     "items": {
-						       "maxLength": 100000,
-						       "minLength": 1,
-						       "type": "string"
-						     },
-						     "maxItems": 1,
-						     "minItems": 1,
-						     "type": "array"
-						   }
-						*/
 						Description: "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
@@ -136,12 +98,10 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"content": {
 			// Property: Content
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The content for the Systems Manager document in JSON, YAML or String format.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The content for the Systems Manager document in JSON, YAML or String format.",
+			//   "type": "string"
+			// }
 			Description: "The content for the Systems Manager document in JSON, YAML or String format.",
 			Type:        types.StringType,
 			Required:    true,
@@ -150,17 +110,15 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"document_format": {
 			// Property: DocumentFormat
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
-			     "enum": [
-			       "YAML",
-			       "JSON",
-			       "TEXT"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
+			//   "enum": [
+			//     "YAML",
+			//     "JSON",
+			//     "TEXT"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -170,27 +128,25 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"document_type": {
 			// Property: DocumentType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The type of document to create.",
-			     "enum": [
-			       "ApplicationConfiguration",
-			       "ApplicationConfigurationSchema",
-			       "Automation",
-			       "Automation.ChangeTemplate",
-			       "ChangeCalendar",
-			       "CloudFormation",
-			       "Command",
-			       "DeploymentStrategy",
-			       "Package",
-			       "Policy",
-			       "ProblemAnalysis",
-			       "ProblemAnalysisTemplate",
-			       "Session"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The type of document to create.",
+			//   "enum": [
+			//     "ApplicationConfiguration",
+			//     "ApplicationConfigurationSchema",
+			//     "Automation",
+			//     "Automation.ChangeTemplate",
+			//     "ChangeCalendar",
+			//     "CloudFormation",
+			//     "Command",
+			//     "DeploymentStrategy",
+			//     "Package",
+			//     "Policy",
+			//     "ProblemAnalysis",
+			//     "ProblemAnalysisTemplate",
+			//     "Session"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The type of document to create.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -200,13 +156,11 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A name for the Systems Manager document.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A name for the Systems Manager document.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "A name for the Systems Manager document.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -216,60 +170,40 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"requires": {
 			// Property: Requires
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Name": {
-			           "description": "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
-			           "maxLength": 200,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Version": {
-			           "description": "The document version required by the current document.",
-			           "maxLength": 8,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "minItems": 1,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Name": {
+			//         "description": "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
+			//         "maxLength": 200,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Version": {
+			//         "description": "The document version required by the current document.",
+			//         "maxLength": 8,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array"
+			// }
 			Description: "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
-						     "maxLength": 200,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"version": {
 						// Property: Version
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The document version required by the current document.",
-						     "maxLength": 8,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The document version required by the current document.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -286,64 +220,42 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "description": "The name of the tag.",
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value of the tag.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "maxItems": 1000,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The name of the tag.",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value of the tag.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "maxItems": 1000,
+			//   "type": "array"
+			// }
 			Description: "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The name of the tag.",
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The name of the tag.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value of the tag.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The value of the tag.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -358,13 +270,11 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"target_type": {
 			// Property: TargetType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Specify a target type to define the kinds of resources the document can run on.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Specify a target type to define the kinds of resources the document can run on.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Specify a target type to define the kinds of resources the document can run on.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -374,13 +284,11 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"version_name": {
 			// Property: VersionName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
 			Type:        types.StringType,
 			Optional:    true,

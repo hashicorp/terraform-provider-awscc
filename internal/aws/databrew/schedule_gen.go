@@ -25,14 +25,12 @@ func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"cron_expression": {
 			// Property: CronExpression
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Schedule cron",
-			     "maxLength": 512,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Schedule cron",
+			//   "maxLength": 512,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Schedule cron",
 			Type:        types.StringType,
 			Required:    true,
@@ -40,19 +38,17 @@ func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"job_names": {
 			// Property: JobNames
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": true,
-			     "items": {
-			       "description": "Job name",
-			       "maxLength": 255,
-			       "minLength": 1,
-			       "type": "string"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "insertionOrder": true,
+			//   "items": {
+			//     "description": "Job name",
+			//     "maxLength": 255,
+			//     "minLength": 1,
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			// Ordered set.
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
@@ -60,14 +56,12 @@ func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Schedule Name",
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Schedule Name",
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Schedule Name",
 			Type:        types.StringType,
 			Required:    true,
@@ -76,60 +70,42 @@ func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

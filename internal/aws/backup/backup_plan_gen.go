@@ -25,170 +25,133 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"backup_plan": {
 			// Property: BackupPlan
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "AdvancedBackupSettings": {
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "BackupOptions": {
-			               "type": "object"
-			             },
-			             "ResourceType": {
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "BackupOptions",
-			             "ResourceType"
-			           ],
-			           "type": "object"
-			         },
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "BackupPlanName": {
-			         "type": "string"
-			       },
-			       "BackupPlanRule": {
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "CompletionWindowMinutes": {
-			               "type": "number"
-			             },
-			             "CopyActions": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "DestinationBackupVaultArn": {
-			                     "type": "string"
-			                   },
-			                   "Lifecycle": {
-			                     "additionalProperties": false,
-			                     "properties": {
-			                       "DeleteAfterDays": {
-			                         "type": "number"
-			                       },
-			                       "MoveToColdStorageAfterDays": {
-			                         "type": "number"
-			                       }
-			                     },
-			                     "type": "object"
-			                   }
-			                 },
-			                 "required": [
-			                   "DestinationBackupVaultArn"
-			                 ],
-			                 "type": "object"
-			               },
-			               "type": "array",
-			               "uniqueItems": false
-			             },
-			             "EnableContinuousBackup": {
-			               "type": "boolean"
-			             },
-			             "Lifecycle": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "DeleteAfterDays": {
-			                   "type": "number"
-			                 },
-			                 "MoveToColdStorageAfterDays": {
-			                   "type": "number"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "RecoveryPointTags": {
-			               "additionalProperties": false,
-			               "patternProperties": {
-			                 "": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "RuleName": {
-			               "type": "string"
-			             },
-			             "ScheduleExpression": {
-			               "type": "string"
-			             },
-			             "StartWindowMinutes": {
-			               "type": "number"
-			             },
-			             "TargetBackupVault": {
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "TargetBackupVault",
-			             "RuleName"
-			           ],
-			           "type": "object"
-			         },
-			         "type": "array",
-			         "uniqueItems": false
-			       }
-			     },
-			     "required": [
-			       "BackupPlanName",
-			       "BackupPlanRule"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "AdvancedBackupSettings": {
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "BackupOptions": {
+			//             "type": "object"
+			//           },
+			//           "ResourceType": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "BackupOptions",
+			//           "ResourceType"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "BackupPlanName": {
+			//       "type": "string"
+			//     },
+			//     "BackupPlanRule": {
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "CompletionWindowMinutes": {
+			//             "type": "number"
+			//           },
+			//           "CopyActions": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "DestinationBackupVaultArn": {
+			//                   "type": "string"
+			//                 },
+			//                 "Lifecycle": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "DeleteAfterDays": {
+			//                       "type": "number"
+			//                     },
+			//                     "MoveToColdStorageAfterDays": {
+			//                       "type": "number"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "DestinationBackupVaultArn"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           },
+			//           "EnableContinuousBackup": {
+			//             "type": "boolean"
+			//           },
+			//           "Lifecycle": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "DeleteAfterDays": {
+			//                 "type": "number"
+			//               },
+			//               "MoveToColdStorageAfterDays": {
+			//                 "type": "number"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "RecoveryPointTags": {
+			//             "additionalProperties": false,
+			//             "patternProperties": {
+			//               "": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "RuleName": {
+			//             "type": "string"
+			//           },
+			//           "ScheduleExpression": {
+			//             "type": "string"
+			//           },
+			//           "StartWindowMinutes": {
+			//             "type": "number"
+			//           },
+			//           "TargetBackupVault": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "TargetBackupVault",
+			//           "RuleName"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     }
+			//   },
+			//   "required": [
+			//     "BackupPlanName",
+			//     "BackupPlanRule"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"advanced_backup_settings": {
 						// Property: AdvancedBackupSettings
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "BackupOptions": {
-						           "type": "object"
-						         },
-						         "ResourceType": {
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "BackupOptions",
-						         "ResourceType"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"backup_options": {
 									// Property: BackupOptions
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "object"
-									   }
-									*/
 									Type:     types.MapType{ElemType: types.StringType},
 									Required: true,
 								},
 								"resource_type": {
 									// Property: ResourceType
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -199,198 +162,38 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"backup_plan_name": {
 						// Property: BackupPlanName
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"backup_plan_rule": {
 						// Property: BackupPlanRule
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "CompletionWindowMinutes": {
-						           "type": "number"
-						         },
-						         "CopyActions": {
-						           "items": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "DestinationBackupVaultArn": {
-						                 "type": "string"
-						               },
-						               "Lifecycle": {
-						                 "additionalProperties": false,
-						                 "properties": {
-						                   "DeleteAfterDays": {
-						                     "type": "number"
-						                   },
-						                   "MoveToColdStorageAfterDays": {
-						                     "type": "number"
-						                   }
-						                 },
-						                 "type": "object"
-						               }
-						             },
-						             "required": [
-						               "DestinationBackupVaultArn"
-						             ],
-						             "type": "object"
-						           },
-						           "type": "array",
-						           "uniqueItems": false
-						         },
-						         "EnableContinuousBackup": {
-						           "type": "boolean"
-						         },
-						         "Lifecycle": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "DeleteAfterDays": {
-						               "type": "number"
-						             },
-						             "MoveToColdStorageAfterDays": {
-						               "type": "number"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "RecoveryPointTags": {
-						           "additionalProperties": false,
-						           "patternProperties": {
-						             "": {
-						               "type": "string"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "RuleName": {
-						           "type": "string"
-						         },
-						         "ScheduleExpression": {
-						           "type": "string"
-						         },
-						         "StartWindowMinutes": {
-						           "type": "number"
-						         },
-						         "TargetBackupVault": {
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "TargetBackupVault",
-						         "RuleName"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"completion_window_minutes": {
 									// Property: CompletionWindowMinutes
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"copy_actions": {
 									// Property: CopyActions
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "DestinationBackupVaultArn": {
-									           "type": "string"
-									         },
-									         "Lifecycle": {
-									           "additionalProperties": false,
-									           "properties": {
-									             "DeleteAfterDays": {
-									               "type": "number"
-									             },
-									             "MoveToColdStorageAfterDays": {
-									               "type": "number"
-									             }
-									           },
-									           "type": "object"
-									         }
-									       },
-									       "required": [
-									         "DestinationBackupVaultArn"
-									       ],
-									       "type": "object"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"destination_backup_vault_arn": {
 												// Property: DestinationBackupVaultArn
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"lifecycle": {
 												// Property: Lifecycle
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "DeleteAfterDays": {
-												         "type": "number"
-												       },
-												       "MoveToColdStorageAfterDays": {
-												         "type": "number"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"delete_after_days": {
 															// Property: DeleteAfterDays
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "number"
-															   }
-															*/
 															Type:     types.NumberType,
 															Optional: true,
 														},
 														"move_to_cold_storage_after_days": {
 															// Property: MoveToColdStorageAfterDays
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "number"
-															   }
-															*/
 															Type:     types.NumberType,
 															Optional: true,
 														},
@@ -405,53 +208,20 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"enable_continuous_backup": {
 									// Property: EnableContinuousBackup
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"lifecycle": {
 									// Property: Lifecycle
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "DeleteAfterDays": {
-									         "type": "number"
-									       },
-									       "MoveToColdStorageAfterDays": {
-									         "type": "number"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"delete_after_days": {
 												// Property: DeleteAfterDays
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "number"
-												   }
-												*/
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"move_to_cold_storage_after_days": {
 												// Property: MoveToColdStorageAfterDays
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "number"
-												   }
-												*/
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -461,63 +231,27 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"recovery_point_tags": {
 									// Property: RecoveryPointTags
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "patternProperties": {
-									       "": {
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"rule_name": {
 									// Property: RuleName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"schedule_expression": {
 									// Property: ScheduleExpression
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"start_window_minutes": {
 									// Property: StartWindowMinutes
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"target_backup_vault": {
 									// Property: TargetBackupVault
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -533,39 +267,33 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"backup_plan_arn": {
 			// Property: BackupPlanArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"backup_plan_id": {
 			// Property: BackupPlanId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"backup_plan_tags": {
 			// Property: BackupPlanTags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "patternProperties": {
-			       "": {
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "patternProperties": {
+			//     "": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
@@ -573,11 +301,9 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"version_id": {
 			// Property: VersionId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},

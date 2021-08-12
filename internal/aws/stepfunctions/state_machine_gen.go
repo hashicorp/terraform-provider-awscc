@@ -25,83 +25,59 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 2048,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 2048,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"definition": {
 			// Property: Definition
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "type": "object"
+			// }
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 		},
 		"definition_s3_location": {
 			// Property: DefinitionS3Location
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Bucket": {
-			         "type": "string"
-			       },
-			       "Key": {
-			         "type": "string"
-			       },
-			       "Version": {
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "Bucket",
-			       "Key"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Bucket": {
+			//       "type": "string"
+			//     },
+			//     "Key": {
+			//       "type": "string"
+			//     },
+			//     "Version": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "Bucket",
+			//     "Key"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"bucket": {
 						// Property: Bucket
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"version": {
 						// Property: Version
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -112,30 +88,26 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"definition_string": {
 			// Property: DefinitionString
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1048576,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1048576,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"definition_substitutions": {
 			// Property: DefinitionSubstitutions
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "patternProperties": {
-			       "": {
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "patternProperties": {
+			//     "": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
@@ -143,105 +115,57 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"logging_configuration": {
 			// Property: LoggingConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Destinations": {
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "CloudWatchLogsLogGroup": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "LogGroupArn": {
-			                   "maxLength": 256,
-			                   "minLength": 1,
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "minItems": 1,
-			         "type": "array"
-			       },
-			       "IncludeExecutionData": {
-			         "type": "boolean"
-			       },
-			       "Level": {
-			         "enum": [
-			           "ALL",
-			           "ERROR",
-			           "FATAL",
-			           "OFF"
-			         ],
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Destinations": {
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "CloudWatchLogsLogGroup": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "LogGroupArn": {
+			//                 "maxLength": 256,
+			//                 "minLength": 1,
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "minItems": 1,
+			//       "type": "array"
+			//     },
+			//     "IncludeExecutionData": {
+			//       "type": "boolean"
+			//     },
+			//     "Level": {
+			//       "enum": [
+			//         "ALL",
+			//         "ERROR",
+			//         "FATAL",
+			//         "OFF"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"destinations": {
 						// Property: Destinations
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "CloudWatchLogsLogGroup": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "LogGroupArn": {
-						               "maxLength": 256,
-						               "minLength": 1,
-						               "type": "string"
-						             }
-						           },
-						           "type": "object"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "minItems": 1,
-						     "type": "array"
-						   }
-						*/
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"cloud_watch_logs_log_group": {
 									// Property: CloudWatchLogsLogGroup
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "LogGroupArn": {
-									         "maxLength": 256,
-									         "minLength": 1,
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"log_group_arn": {
 												// Property: LogGroupArn
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 256,
-												     "minLength": 1,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -258,29 +182,11 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"include_execution_data": {
 						// Property: IncludeExecutionData
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"level": {
 						// Property: Level
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "ALL",
-						       "ERROR",
-						       "FATAL",
-						       "OFF"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -291,39 +197,33 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 80,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 80,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 		},
 		"state_machine_name": {
 			// Property: StateMachineName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 80,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 80,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -332,72 +232,52 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"state_machine_type": {
 			// Property: StateMachineType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "STANDARD",
-			       "EXPRESS"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "STANDARD",
+			//     "EXPRESS"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -409,27 +289,19 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tracing_configuration": {
 			// Property: TracingConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Enabled": {
-			         "type": "boolean"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Enabled": {
+			//       "type": "boolean"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"enabled": {
 						// Property: Enabled
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},

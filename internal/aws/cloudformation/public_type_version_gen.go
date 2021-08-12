@@ -25,13 +25,11 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Number (ARN) of the extension.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Number (ARN) of the extension.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Number (ARN) of the extension.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -41,12 +39,10 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"log_delivery_bucket": {
 			// Property: LogDeliveryBucket
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A url to the S3 bucket where logs for the testType run will be available",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A url to the S3 bucket where logs for the testType run will be available",
+			//   "type": "string"
+			// }
 			Description: "A url to the S3 bucket where logs for the testType run will be available",
 			Type:        types.StringType,
 			Optional:    true,
@@ -56,14 +52,12 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"public_type_arn": {
 			// Property: PublicTypeArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
-			     "maxLength": 1024,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
+			//   "maxLength": 1024,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
 			Type:        types.StringType,
 			Computed:    true,
@@ -71,14 +65,12 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"public_version_number": {
 			// Property: PublicVersionNumber
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The version number of a public third-party extension",
-			     "maxLength": 64,
-			     "minLength": 5,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The version number of a public third-party extension",
+			//   "maxLength": 64,
+			//   "minLength": 5,
+			//   "type": "string"
+			// }
 			Description: "The version number of a public third-party extension",
 			Type:        types.StringType,
 			Optional:    true,
@@ -88,15 +80,13 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"publisher_id": {
 			// Property: PublisherId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The publisher id assigned by CloudFormation for publishing in this region.",
-			     "maxLength": 40,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The publisher id assigned by CloudFormation for publishing in this region.",
+			//   "maxLength": 40,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -104,16 +94,14 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The kind of extension",
-			     "enum": [
-			       "RESOURCE",
-			       "MODULE"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The kind of extension",
+			//   "enum": [
+			//     "RESOURCE",
+			//     "MODULE"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The kind of extension",
 			Type:        types.StringType,
 			Computed:    true,
@@ -122,13 +110,11 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"type_name": {
 			// Property: TypeName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -138,13 +124,11 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"type_version_arn": {
 			// Property: TypeVersionArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Number (ARN) of the extension with the versionId.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Number (ARN) of the extension with the versionId.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Number (ARN) of the extension with the versionId.",
 			Type:        types.StringType,
 			Computed:    true,

@@ -25,44 +25,36 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"certificate_arn": {
 			// Property: CertificateArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"distribution_domain_name": {
 			// Property: DistributionDomainName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"distribution_hosted_zone_id": {
 			// Property: DistributionHostedZoneId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -71,33 +63,22 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"endpoint_configuration": {
 			// Property: EndpointConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Types": {
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Types": {
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"types": {
 						// Property: Types
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
@@ -108,41 +89,27 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"mutual_tls_authentication": {
 			// Property: MutualTlsAuthentication
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "TruststoreUri": {
-			         "type": "string"
-			       },
-			       "TruststoreVersion": {
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "TruststoreUri": {
+			//       "type": "string"
+			//     },
+			//     "TruststoreVersion": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"truststore_uri": {
 						// Property: TruststoreUri
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"truststore_version": {
 						// Property: TruststoreVersion
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -153,99 +120,75 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"ownership_verification_certificate_arn": {
 			// Property: OwnershipVerificationCertificateArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"regional_certificate_arn": {
 			// Property: RegionalCertificateArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"regional_domain_name": {
 			// Property: RegionalDomainName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"regional_hosted_zone_id": {
 			// Property: RegionalHostedZoneId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"security_policy": {
 			// Property: SecurityPolicy
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},

@@ -25,428 +25,279 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"config_data": {
 			// Property: ConfigData
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "AntennaDownlinkConfig": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "SpectrumConfig": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Bandwidth": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "Units": {
-			                     "enum": [
-			                       "GHz",
-			                       "MHz",
-			                       "kHz"
-			                     ],
-			                     "type": "string"
-			                   },
-			                   "Value": {
-			                     "type": "number"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "CenterFrequency": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "Units": {
-			                     "enum": [
-			                       "GHz",
-			                       "MHz",
-			                       "kHz"
-			                     ],
-			                     "type": "string"
-			                   },
-			                   "Value": {
-			                     "type": "number"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "Polarization": {
-			                 "enum": [
-			                   "LEFT_HAND",
-			                   "RIGHT_HAND",
-			                   "NONE"
-			                 ],
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "AntennaDownlinkDemodDecodeConfig": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "DecodeConfig": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "UnvalidatedJSON": {
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "DemodulationConfig": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "UnvalidatedJSON": {
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "SpectrumConfig": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Bandwidth": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "Units": {
-			                     "enum": [
-			                       "GHz",
-			                       "MHz",
-			                       "kHz"
-			                     ],
-			                     "type": "string"
-			                   },
-			                   "Value": {
-			                     "type": "number"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "CenterFrequency": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "Units": {
-			                     "enum": [
-			                       "GHz",
-			                       "MHz",
-			                       "kHz"
-			                     ],
-			                     "type": "string"
-			                   },
-			                   "Value": {
-			                     "type": "number"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "Polarization": {
-			                 "enum": [
-			                   "LEFT_HAND",
-			                   "RIGHT_HAND",
-			                   "NONE"
-			                 ],
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "AntennaUplinkConfig": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "SpectrumConfig": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "CenterFrequency": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "Units": {
-			                     "enum": [
-			                       "GHz",
-			                       "MHz",
-			                       "kHz"
-			                     ],
-			                     "type": "string"
-			                   },
-			                   "Value": {
-			                     "type": "number"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "Polarization": {
-			                 "enum": [
-			                   "LEFT_HAND",
-			                   "RIGHT_HAND",
-			                   "NONE"
-			                 ],
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "TargetEirp": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Units": {
-			                 "enum": [
-			                   "dBW"
-			                 ],
-			                 "type": "string"
-			               },
-			               "Value": {
-			                 "type": "number"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "TransmitDisabled": {
-			             "type": "boolean"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "DataflowEndpointConfig": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "DataflowEndpointName": {
-			             "type": "string"
-			           },
-			           "DataflowEndpointRegion": {
-			             "type": "string"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "S3RecordingConfig": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "BucketArn": {
-			             "type": "string"
-			           },
-			           "Prefix": {
-			             "pattern": "",
-			             "type": "string"
-			           },
-			           "RoleArn": {
-			             "type": "string"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "TrackingConfig": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "Autotrack": {
-			             "enum": [
-			               "REQUIRED",
-			               "PREFERRED",
-			               "REMOVED"
-			             ],
-			             "type": "string"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "UplinkEchoConfig": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "AntennaUplinkConfigArn": {
-			             "type": "string"
-			           },
-			           "Enabled": {
-			             "type": "boolean"
-			           }
-			         },
-			         "type": "object"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "AntennaDownlinkConfig": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "SpectrumConfig": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Bandwidth": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Units": {
+			//                   "enum": [
+			//                     "GHz",
+			//                     "MHz",
+			//                     "kHz"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "Value": {
+			//                   "type": "number"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "CenterFrequency": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Units": {
+			//                   "enum": [
+			//                     "GHz",
+			//                     "MHz",
+			//                     "kHz"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "Value": {
+			//                   "type": "number"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "Polarization": {
+			//               "enum": [
+			//                 "LEFT_HAND",
+			//                 "RIGHT_HAND",
+			//                 "NONE"
+			//               ],
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "AntennaDownlinkDemodDecodeConfig": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "DecodeConfig": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "UnvalidatedJSON": {
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "DemodulationConfig": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "UnvalidatedJSON": {
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "SpectrumConfig": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Bandwidth": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Units": {
+			//                   "enum": [
+			//                     "GHz",
+			//                     "MHz",
+			//                     "kHz"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "Value": {
+			//                   "type": "number"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "CenterFrequency": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Units": {
+			//                   "enum": [
+			//                     "GHz",
+			//                     "MHz",
+			//                     "kHz"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "Value": {
+			//                   "type": "number"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "Polarization": {
+			//               "enum": [
+			//                 "LEFT_HAND",
+			//                 "RIGHT_HAND",
+			//                 "NONE"
+			//               ],
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "AntennaUplinkConfig": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "SpectrumConfig": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "CenterFrequency": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Units": {
+			//                   "enum": [
+			//                     "GHz",
+			//                     "MHz",
+			//                     "kHz"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "Value": {
+			//                   "type": "number"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "Polarization": {
+			//               "enum": [
+			//                 "LEFT_HAND",
+			//                 "RIGHT_HAND",
+			//                 "NONE"
+			//               ],
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "TargetEirp": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Units": {
+			//               "enum": [
+			//                 "dBW"
+			//               ],
+			//               "type": "string"
+			//             },
+			//             "Value": {
+			//               "type": "number"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "TransmitDisabled": {
+			//           "type": "boolean"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "DataflowEndpointConfig": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "DataflowEndpointName": {
+			//           "type": "string"
+			//         },
+			//         "DataflowEndpointRegion": {
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "S3RecordingConfig": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "BucketArn": {
+			//           "type": "string"
+			//         },
+			//         "Prefix": {
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "RoleArn": {
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "TrackingConfig": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "Autotrack": {
+			//           "enum": [
+			//             "REQUIRED",
+			//             "PREFERRED",
+			//             "REMOVED"
+			//           ],
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "UplinkEchoConfig": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "AntennaUplinkConfigArn": {
+			//           "type": "string"
+			//         },
+			//         "Enabled": {
+			//           "type": "boolean"
+			//         }
+			//       },
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"antenna_downlink_config": {
 						// Property: AntennaDownlinkConfig
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "SpectrumConfig": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Bandwidth": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "Units": {
-						                 "enum": [
-						                   "GHz",
-						                   "MHz",
-						                   "kHz"
-						                 ],
-						                 "type": "string"
-						               },
-						               "Value": {
-						                 "type": "number"
-						               }
-						             },
-						             "type": "object"
-						           },
-						           "CenterFrequency": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "Units": {
-						                 "enum": [
-						                   "GHz",
-						                   "MHz",
-						                   "kHz"
-						                 ],
-						                 "type": "string"
-						               },
-						               "Value": {
-						                 "type": "number"
-						               }
-						             },
-						             "type": "object"
-						           },
-						           "Polarization": {
-						             "enum": [
-						               "LEFT_HAND",
-						               "RIGHT_HAND",
-						               "NONE"
-						             ],
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"spectrum_config": {
 									// Property: SpectrumConfig
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Bandwidth": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "Units": {
-									             "enum": [
-									               "GHz",
-									               "MHz",
-									               "kHz"
-									             ],
-									             "type": "string"
-									           },
-									           "Value": {
-									             "type": "number"
-									           }
-									         },
-									         "type": "object"
-									       },
-									       "CenterFrequency": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "Units": {
-									             "enum": [
-									               "GHz",
-									               "MHz",
-									               "kHz"
-									             ],
-									             "type": "string"
-									           },
-									           "Value": {
-									             "type": "number"
-									           }
-									         },
-									         "type": "object"
-									       },
-									       "Polarization": {
-									         "enum": [
-									           "LEFT_HAND",
-									           "RIGHT_HAND",
-									           "NONE"
-									         ],
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bandwidth": {
 												// Property: Bandwidth
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "Units": {
-												         "enum": [
-												           "GHz",
-												           "MHz",
-												           "kHz"
-												         ],
-												         "type": "string"
-												       },
-												       "Value": {
-												         "type": "number"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"units": {
 															// Property: Units
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "enum": [
-															       "GHz",
-															       "MHz",
-															       "kHz"
-															     ],
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"value": {
 															// Property: Value
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "number"
-															   }
-															*/
 															Type:     types.NumberType,
 															Optional: true,
 														},
@@ -456,52 +307,15 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"center_frequency": {
 												// Property: CenterFrequency
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "Units": {
-												         "enum": [
-												           "GHz",
-												           "MHz",
-												           "kHz"
-												         ],
-												         "type": "string"
-												       },
-												       "Value": {
-												         "type": "number"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"units": {
 															// Property: Units
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "enum": [
-															       "GHz",
-															       "MHz",
-															       "kHz"
-															     ],
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"value": {
 															// Property: Value
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "number"
-															   }
-															*/
 															Type:     types.NumberType,
 															Optional: true,
 														},
@@ -511,17 +325,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"polarization": {
 												// Property: Polarization
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "enum": [
-												       "LEFT_HAND",
-												       "RIGHT_HAND",
-												       "NONE"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -535,111 +338,14 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"antenna_downlink_demod_decode_config": {
 						// Property: AntennaDownlinkDemodDecodeConfig
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "DecodeConfig": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "UnvalidatedJSON": {
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "DemodulationConfig": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "UnvalidatedJSON": {
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "SpectrumConfig": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Bandwidth": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "Units": {
-						                 "enum": [
-						                   "GHz",
-						                   "MHz",
-						                   "kHz"
-						                 ],
-						                 "type": "string"
-						               },
-						               "Value": {
-						                 "type": "number"
-						               }
-						             },
-						             "type": "object"
-						           },
-						           "CenterFrequency": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "Units": {
-						                 "enum": [
-						                   "GHz",
-						                   "MHz",
-						                   "kHz"
-						                 ],
-						                 "type": "string"
-						               },
-						               "Value": {
-						                 "type": "number"
-						               }
-						             },
-						             "type": "object"
-						           },
-						           "Polarization": {
-						             "enum": [
-						               "LEFT_HAND",
-						               "RIGHT_HAND",
-						               "NONE"
-						             ],
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"decode_config": {
 									// Property: DecodeConfig
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "UnvalidatedJSON": {
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"unvalidated_json": {
 												// Property: UnvalidatedJSON
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -649,30 +355,10 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"demodulation_config": {
 									// Property: DemodulationConfig
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "UnvalidatedJSON": {
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"unvalidated_json": {
 												// Property: UnvalidatedJSON
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -682,107 +368,19 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"spectrum_config": {
 									// Property: SpectrumConfig
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Bandwidth": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "Units": {
-									             "enum": [
-									               "GHz",
-									               "MHz",
-									               "kHz"
-									             ],
-									             "type": "string"
-									           },
-									           "Value": {
-									             "type": "number"
-									           }
-									         },
-									         "type": "object"
-									       },
-									       "CenterFrequency": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "Units": {
-									             "enum": [
-									               "GHz",
-									               "MHz",
-									               "kHz"
-									             ],
-									             "type": "string"
-									           },
-									           "Value": {
-									             "type": "number"
-									           }
-									         },
-									         "type": "object"
-									       },
-									       "Polarization": {
-									         "enum": [
-									           "LEFT_HAND",
-									           "RIGHT_HAND",
-									           "NONE"
-									         ],
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bandwidth": {
 												// Property: Bandwidth
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "Units": {
-												         "enum": [
-												           "GHz",
-												           "MHz",
-												           "kHz"
-												         ],
-												         "type": "string"
-												       },
-												       "Value": {
-												         "type": "number"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"units": {
 															// Property: Units
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "enum": [
-															       "GHz",
-															       "MHz",
-															       "kHz"
-															     ],
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"value": {
 															// Property: Value
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "number"
-															   }
-															*/
 															Type:     types.NumberType,
 															Optional: true,
 														},
@@ -792,52 +390,15 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"center_frequency": {
 												// Property: CenterFrequency
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "Units": {
-												         "enum": [
-												           "GHz",
-												           "MHz",
-												           "kHz"
-												         ],
-												         "type": "string"
-												       },
-												       "Value": {
-												         "type": "number"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"units": {
 															// Property: Units
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "enum": [
-															       "GHz",
-															       "MHz",
-															       "kHz"
-															     ],
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"value": {
 															// Property: Value
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "number"
-															   }
-															*/
 															Type:     types.NumberType,
 															Optional: true,
 														},
@@ -847,17 +408,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"polarization": {
 												// Property: Polarization
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "enum": [
-												       "LEFT_HAND",
-												       "RIGHT_HAND",
-												       "NONE"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -871,152 +421,23 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"antenna_uplink_config": {
 						// Property: AntennaUplinkConfig
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "SpectrumConfig": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "CenterFrequency": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "Units": {
-						                 "enum": [
-						                   "GHz",
-						                   "MHz",
-						                   "kHz"
-						                 ],
-						                 "type": "string"
-						               },
-						               "Value": {
-						                 "type": "number"
-						               }
-						             },
-						             "type": "object"
-						           },
-						           "Polarization": {
-						             "enum": [
-						               "LEFT_HAND",
-						               "RIGHT_HAND",
-						               "NONE"
-						             ],
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "TargetEirp": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Units": {
-						             "enum": [
-						               "dBW"
-						             ],
-						             "type": "string"
-						           },
-						           "Value": {
-						             "type": "number"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "TransmitDisabled": {
-						         "type": "boolean"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"spectrum_config": {
 									// Property: SpectrumConfig
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "CenterFrequency": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "Units": {
-									             "enum": [
-									               "GHz",
-									               "MHz",
-									               "kHz"
-									             ],
-									             "type": "string"
-									           },
-									           "Value": {
-									             "type": "number"
-									           }
-									         },
-									         "type": "object"
-									       },
-									       "Polarization": {
-									         "enum": [
-									           "LEFT_HAND",
-									           "RIGHT_HAND",
-									           "NONE"
-									         ],
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"center_frequency": {
 												// Property: CenterFrequency
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "Units": {
-												         "enum": [
-												           "GHz",
-												           "MHz",
-												           "kHz"
-												         ],
-												         "type": "string"
-												       },
-												       "Value": {
-												         "type": "number"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"units": {
 															// Property: Units
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "enum": [
-															       "GHz",
-															       "MHz",
-															       "kHz"
-															     ],
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"value": {
 															// Property: Value
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "number"
-															   }
-															*/
 															Type:     types.NumberType,
 															Optional: true,
 														},
@@ -1026,17 +447,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"polarization": {
 												// Property: Polarization
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "enum": [
-												       "LEFT_HAND",
-												       "RIGHT_HAND",
-												       "NONE"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -1046,48 +456,15 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"target_eirp": {
 									// Property: TargetEirp
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Units": {
-									         "enum": [
-									           "dBW"
-									         ],
-									         "type": "string"
-									       },
-									       "Value": {
-									         "type": "number"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"units": {
 												// Property: Units
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "enum": [
-												       "dBW"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"value": {
 												// Property: Value
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "number"
-												   }
-												*/
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -1097,12 +474,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"transmit_disabled": {
 									// Property: TransmitDisabled
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
@@ -1112,42 +483,15 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"dataflow_endpoint_config": {
 						// Property: DataflowEndpointConfig
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "DataflowEndpointName": {
-						         "type": "string"
-						       },
-						       "DataflowEndpointRegion": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"dataflow_endpoint_name": {
 									// Property: DataflowEndpointName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"dataflow_endpoint_region": {
 									// Property: DataflowEndpointRegion
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1157,58 +501,20 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"s3_recording_config": {
 						// Property: S3RecordingConfig
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "BucketArn": {
-						         "type": "string"
-						       },
-						       "Prefix": {
-						         "pattern": "",
-						         "type": "string"
-						       },
-						       "RoleArn": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"bucket_arn": {
 									// Property: BucketArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"prefix": {
 									// Property: Prefix
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"role_arn": {
 									// Property: RoleArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1218,38 +524,10 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"tracking_config": {
 						// Property: TrackingConfig
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Autotrack": {
-						         "enum": [
-						           "REQUIRED",
-						           "PREFERRED",
-						           "REMOVED"
-						         ],
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"autotrack": {
 									// Property: Autotrack
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "REQUIRED",
-									       "PREFERRED",
-									       "REMOVED"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1259,42 +537,15 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"uplink_echo_config": {
 						// Property: UplinkEchoConfig
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "AntennaUplinkConfigArn": {
-						         "type": "string"
-						       },
-						       "Enabled": {
-						         "type": "boolean"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"antenna_uplink_config_arn": {
 									// Property: AntennaUplinkConfigArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"enabled": {
 									// Property: Enabled
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
@@ -1309,71 +560,51 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -1385,11 +616,9 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},

@@ -25,11 +25,9 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"action": {
 			// Property: Action
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// Action is a force-new attribute.
@@ -37,11 +35,9 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"principal": {
 			// Property: Principal
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// Principal is a force-new attribute.
@@ -49,11 +45,9 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"profile_name": {
 			// Property: ProfileName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// ProfileName is a force-new attribute.
@@ -61,12 +55,10 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"profile_version": {
 			// Property: ProfileVersion
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -75,11 +67,9 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		"statement_id": {
 			// Property: StatementId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// StatementId is a force-new attribute.

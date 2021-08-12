@@ -25,12 +25,10 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 		"group_ip_address": {
 			// Property: GroupIpAddress
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The IP address assigned to the transit gateway multicast group.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The IP address assigned to the transit gateway multicast group.",
+			//   "type": "string"
+			// }
 			Description: "The IP address assigned to the transit gateway multicast group.",
 			Type:        types.StringType,
 			Required:    true,
@@ -39,12 +37,10 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 		"group_member": {
 			// Property: GroupMember
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Indicates that the resource is a transit gateway multicast group member.",
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "description": "Indicates that the resource is a transit gateway multicast group member.",
+			//   "type": "boolean"
+			// }
 			Description: "Indicates that the resource is a transit gateway multicast group member.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -52,12 +48,10 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 		"group_source": {
 			// Property: GroupSource
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Indicates that the resource is a transit gateway multicast group member.",
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "description": "Indicates that the resource is a transit gateway multicast group member.",
+			//   "type": "boolean"
+			// }
 			Description: "Indicates that the resource is a transit gateway multicast group member.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -65,12 +59,10 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 		"member_type": {
 			// Property: MemberType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The member type (for example, static).",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The member type (for example, static).",
+			//   "type": "string"
+			// }
 			Description: "The member type (for example, static).",
 			Type:        types.StringType,
 			Computed:    true,
@@ -78,12 +70,10 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 		"network_interface_id": {
 			// Property: NetworkInterfaceId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the transit gateway attachment.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the transit gateway attachment.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the transit gateway attachment.",
 			Type:        types.StringType,
 			Required:    true,
@@ -92,12 +82,10 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 		"resource_id": {
 			// Property: ResourceId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the resource.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the resource.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -105,12 +93,10 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 		"resource_type": {
 			// Property: ResourceType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The type of resource, for example a VPC attachment.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The type of resource, for example a VPC attachment.",
+			//   "type": "string"
+			// }
 			Description: "The type of resource, for example a VPC attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -118,12 +104,10 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 		"source_type": {
 			// Property: SourceType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The source type.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The source type.",
+			//   "type": "string"
+			// }
 			Description: "The source type.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -131,12 +115,10 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 		"subnet_id": {
 			// Property: SubnetId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the subnet.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the subnet.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the subnet.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -144,12 +126,10 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 		"transit_gateway_attachment_id": {
 			// Property: TransitGatewayAttachmentId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the transit gateway attachment.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the transit gateway attachment.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the transit gateway attachment.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -157,12 +137,10 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 		"transit_gateway_multicast_domain_id": {
 			// Property: TransitGatewayMulticastDomainId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the transit gateway multicast domain.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the transit gateway multicast domain.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the transit gateway multicast domain.",
 			Type:        types.StringType,
 			Required:    true,

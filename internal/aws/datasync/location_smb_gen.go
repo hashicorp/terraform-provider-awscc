@@ -26,20 +26,18 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"agent_arns": {
 			// Property: AgentArns
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.",
-			     "insertionOrder": false,
-			     "items": {
-			       "maxLength": 128,
-			       "pattern": "",
-			       "type": "string"
-			     },
-			     "maxItems": 4,
-			     "minItems": 1,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "maxLength": 128,
+			//     "pattern": "",
+			//     "type": "string"
+			//   },
+			//   "maxItems": 4,
+			//   "minItems": 1,
+			//   "type": "array"
+			// }
 			Description: "The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.",
 			// Multiset.
 			Type:     types.ListType{ElemType: types.StringType},
@@ -48,14 +46,12 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"domain": {
 			// Property: Domain
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the Windows domain that the SMB server belongs to.",
-			     "maxLength": 253,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the Windows domain that the SMB server belongs to.",
+			//   "maxLength": 253,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the Windows domain that the SMB server belongs to.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -63,14 +59,12 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"location_arn": {
 			// Property: LocationArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the SMB location that is created.",
-			     "maxLength": 128,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the SMB location that is created.",
+			//   "maxLength": 128,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the SMB location that is created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -78,14 +72,12 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"location_uri": {
 			// Property: LocationUri
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The URL of the SMB location that was described.",
-			     "maxLength": 4356,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The URL of the SMB location that was described.",
+			//   "maxLength": 4356,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The URL of the SMB location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -93,41 +85,27 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"mount_options": {
 			// Property: MountOptions
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "The mount options used by DataSync to access the SMB server.",
-			     "properties": {
-			       "Version": {
-			         "description": "The specific SMB version that you want DataSync to use to mount your SMB share.",
-			         "enum": [
-			           "AUTOMATIC",
-			           "SMB2",
-			           "SMB3"
-			         ],
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The mount options used by DataSync to access the SMB server.",
+			//   "properties": {
+			//     "Version": {
+			//       "description": "The specific SMB version that you want DataSync to use to mount your SMB share.",
+			//       "enum": [
+			//         "AUTOMATIC",
+			//         "SMB2",
+			//         "SMB3"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "The mount options used by DataSync to access the SMB server.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"version": {
 						// Property: Version
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The specific SMB version that you want DataSync to use to mount your SMB share.",
-						     "enum": [
-						       "AUTOMATIC",
-						       "SMB2",
-						       "SMB3"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Description: "The specific SMB version that you want DataSync to use to mount your SMB share.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -139,14 +117,12 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"password": {
 			// Property: Password
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
-			     "maxLength": 104,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
+			//   "maxLength": 104,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
 			Type:        types.StringType,
 			Required:    true,
@@ -155,14 +131,12 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"server_hostname": {
 			// Property: ServerHostname
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server.",
-			     "maxLength": 255,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server.",
+			//   "maxLength": 255,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server.",
 			Type:        types.StringType,
 			Required:    true,
@@ -172,14 +146,12 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"subdirectory": {
 			// Property: Subdirectory
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination",
-			     "maxLength": 4096,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination",
+			//   "maxLength": 4096,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination",
 			Type:        types.StringType,
 			Required:    true,
@@ -188,71 +160,49 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key for an AWS resource tag.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for an AWS resource tag.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key for an AWS resource tag.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for an AWS resource tag.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key for an AWS resource tag.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for an AWS resource tag.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
@@ -267,14 +217,12 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"user": {
 			// Property: User
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
-			     "maxLength": 104,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
+			//   "maxLength": 104,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
 			Type:        types.StringType,
 			Required:    true,

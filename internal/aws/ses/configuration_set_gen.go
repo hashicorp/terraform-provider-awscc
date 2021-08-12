@@ -25,15 +25,13 @@ func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the configuration set.",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the configuration set.",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the configuration set.",
 			Type:        types.StringType,
 			Optional:    true,

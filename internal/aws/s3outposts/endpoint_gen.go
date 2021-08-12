@@ -25,16 +25,14 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"access_type": {
 			// Property: AccessType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The type of access for the on-premise network connectivity for the Outpost endpoint. To access endpoint from an on-premises network, you must specify the access type and provide the customer owned Ipv4 pool.",
-			     "enum": [
-			       "CustomerOwnedIp",
-			       "Private"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The type of access for the on-premise network connectivity for the Outpost endpoint. To access endpoint from an on-premises network, you must specify the access type and provide the customer owned Ipv4 pool.",
+			//   "enum": [
+			//     "CustomerOwnedIp",
+			//     "Private"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The type of access for the on-premise network connectivity for the Outpost endpoint. To access endpoint from an on-premises network, you must specify the access type and provide the customer owned Ipv4 pool.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -44,15 +42,13 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the endpoint.",
-			     "maxLength": 500,
-			     "minLength": 5,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the endpoint.",
+			//   "maxLength": 500,
+			//   "minLength": 5,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the endpoint.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -60,14 +56,12 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"cidr_block": {
 			// Property: CidrBlock
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The VPC CIDR committed by this endpoint.",
-			     "maxLength": 20,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The VPC CIDR committed by this endpoint.",
+			//   "maxLength": 20,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The VPC CIDR committed by this endpoint.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -75,13 +69,11 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
 			Type:        types.StringType,
 			Computed:    true,
@@ -89,13 +81,11 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"customer_owned_ipv_4_pool": {
 			// Property: CustomerOwnedIpv4Pool
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the customer-owned IPv4 pool for the Endpoint. IP addresses will be allocated from this pool for the endpoint.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the customer-owned IPv4 pool for the Endpoint. IP addresses will be allocated from this pool for the endpoint.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The ID of the customer-owned IPv4 pool for the Endpoint. IP addresses will be allocated from this pool for the endpoint.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -105,15 +95,13 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the endpoint.",
-			     "maxLength": 500,
-			     "minLength": 5,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the endpoint.",
+			//   "maxLength": 500,
+			//   "minLength": 5,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The ID of the endpoint.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -121,42 +109,32 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"network_interfaces": {
 			// Property: NetworkInterfaces
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The network interfaces of the endpoint.",
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "The container for the network interface.",
-			       "properties": {
-			         "NetworkInterfaceId": {
-			           "maxLength": 100,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "NetworkInterfaceId"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "The network interfaces of the endpoint.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "The container for the network interface.",
+			//     "properties": {
+			//       "NetworkInterfaceId": {
+			//         "maxLength": 100,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "NetworkInterfaceId"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "The network interfaces of the endpoint.",
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"network_interface_id": {
 						// Property: NetworkInterfaceId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 100,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -168,13 +146,11 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"outpost_id": {
 			// Property: OutpostId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The id of the customer outpost on which the bucket resides.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The id of the customer outpost on which the bucket resides.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The id of the customer outpost on which the bucket resides.",
 			Type:        types.StringType,
 			Required:    true,
@@ -183,15 +159,13 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"security_group_id": {
 			// Property: SecurityGroupId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the security group to use with the endpoint.",
-			     "maxLength": 100,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the security group to use with the endpoint.",
+			//   "maxLength": 100,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The ID of the security group to use with the endpoint.",
 			Type:        types.StringType,
 			Required:    true,
@@ -200,31 +174,27 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "Available",
-			       "Pending",
-			       "Deleting"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "Available",
+			//     "Pending",
+			//     "Deleting"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"subnet_id": {
 			// Property: SubnetId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the subnet in the selected VPC. The subnet must belong to the Outpost.",
-			     "maxLength": 100,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the subnet in the selected VPC. The subnet must belong to the Outpost.",
+			//   "maxLength": 100,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The ID of the subnet in the selected VPC. The subnet must belong to the Outpost.",
 			Type:        types.StringType,
 			Required:    true,

@@ -25,23 +25,19 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"contact_post_pass_duration_seconds": {
 			// Property: ContactPostPassDurationSeconds
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Post-pass time needed after the contact.",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "Post-pass time needed after the contact.",
+			//   "type": "integer"
+			// }
 			Description: "Post-pass time needed after the contact.",
 			Type:        types.NumberType,
 			Optional:    true,
@@ -49,12 +45,10 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"contact_pre_pass_duration_seconds": {
 			// Property: ContactPrePassDurationSeconds
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Pre-pass time needed before the contact.",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "Pre-pass time needed before the contact.",
+			//   "type": "integer"
+			// }
 			Description: "Pre-pass time needed before the contact.",
 			Type:        types.NumberType,
 			Optional:    true,
@@ -62,47 +56,33 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"dataflow_edges": {
 			// Property: DataflowEdges
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Destination": {
-			           "type": "string"
-			         },
-			         "Source": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "minItems": 1,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Destination": {
+			//         "type": "string"
+			//       },
+			//       "Source": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array"
+			// }
 			Description: "",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"destination": {
 						// Property: Destination
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"source": {
 						// Property: Source
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -116,23 +96,19 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"minimum_viable_contact_duration_seconds": {
 			// Property: MinimumViableContactDurationSeconds
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.",
+			//   "type": "integer"
+			// }
 			Description: "Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.",
 			Type:        types.NumberType,
 			Required:    true,
@@ -140,13 +116,11 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A name used to identify a mission profile.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A name used to identify a mission profile.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "A name used to identify a mission profile.",
 			Type:        types.StringType,
 			Required:    true,
@@ -154,59 +128,41 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"region": {
 			// Property: Region
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -218,11 +174,9 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"tracking_config_arn": {
 			// Property: TrackingConfigArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 		},

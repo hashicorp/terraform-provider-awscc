@@ -26,15 +26,13 @@ func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -42,13 +40,11 @@ func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"channel_arn": {
 			// Property: ChannelArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Channel ARN for the stream.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Channel ARN for the stream.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Channel ARN for the stream.",
 			Type:        types.StringType,
 			Required:    true,
@@ -57,61 +53,43 @@ func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of key-value pairs that contain metadata for the asset model.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "A list of key-value pairs that contain metadata for the asset model.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -125,12 +103,10 @@ func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"value": {
 			// Property: Value
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Stream-key value.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Stream-key value.",
+			//   "type": "string"
+			// }
 			Description: "Stream-key value.",
 			Type:        types.StringType,
 			Computed:    true,

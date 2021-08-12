@@ -26,14 +26,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"administration_role_arn": {
 			// Property: AdministrationRoleARN
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account.",
-			     "maxLength": 2048,
-			     "minLength": 20,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account.",
+			//   "maxLength": 2048,
+			//   "minLength": 20,
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -41,46 +39,30 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"auto_deployment": {
 			// Property: AutoDeployment
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Enabled": {
-			         "description": "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.",
-			         "type": "boolean"
-			       },
-			       "RetainStacksOnAccountRemoval": {
-			         "description": "If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True.",
-			         "type": "boolean"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Enabled": {
+			//       "description": "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.",
+			//       "type": "boolean"
+			//     },
+			//     "RetainStacksOnAccountRemoval": {
+			//       "description": "If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True.",
+			//       "type": "boolean"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"enabled": {
 						// Property: Enabled
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.",
-						     "type": "boolean"
-						   }
-						*/
 						Description: "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"retain_stacks_on_account_removal": {
 						// Property: RetainStacksOnAccountRemoval
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True.",
-						     "type": "boolean"
-						   }
-						*/
 						Description: "If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True.",
 						Type:        types.BoolType,
 						Optional:    true,
@@ -92,16 +74,14 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"call_as": {
 			// Property: CallAs
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN.",
-			     "enum": [
-			       "SELF",
-			       "DELEGATED_ADMIN"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN.",
+			//   "enum": [
+			//     "SELF",
+			//     "DELEGATED_ADMIN"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -110,22 +90,20 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"capabilities": {
 			// Property: Capabilities
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.",
-			     "insertionOrder": false,
-			     "items": {
-			       "enum": [
-			         "CAPABILITY_IAM",
-			         "CAPABILITY_NAMED_IAM",
-			         "CAPABILITY_AUTO_EXPAND"
-			       ],
-			       "type": "string"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "enum": [
+			//       "CAPABILITY_IAM",
+			//       "CAPABILITY_NAMED_IAM",
+			//       "CAPABILITY_AUTO_EXPAND"
+			//     ],
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.",
 			Type:        providertypes.SetType{ElemType: types.StringType},
 			Optional:    true,
@@ -133,14 +111,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A description of the stack set. You can use the description to identify the stack set's purpose or other important information.",
-			     "maxLength": 1024,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A description of the stack set. You can use the description to identify the stack set's purpose or other important information.",
+			//   "maxLength": 1024,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "A description of the stack set. You can use the description to identify the stack set's purpose or other important information.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -148,14 +124,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"execution_role_name": {
 			// Property: ExecutionRoleName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the IAM execution role to use to create the stack set. If you do not specify an execution role, AWS CloudFormation uses the AWSCloudFormationStackSetExecutionRole role for the stack set operation.",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the IAM execution role to use to create the stack set. If you do not specify an execution role, AWS CloudFormation uses the AWSCloudFormationStackSetExecutionRole role for the stack set operation.",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The name of the IAM execution role to use to create the stack set. If you do not specify an execution role, AWS CloudFormation uses the AWSCloudFormationStackSetExecutionRole role for the stack set operation.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -163,117 +137,70 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"operation_preferences": {
 			// Property: OperationPreferences
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The user-specified preferences for how AWS CloudFormation performs a stack set operation.",
-			     "properties": {
-			       "FailureToleranceCount": {
-			         "type": "integer"
-			       },
-			       "FailureTolerancePercentage": {
-			         "type": "integer"
-			       },
-			       "MaxConcurrentCount": {
-			         "type": "integer"
-			       },
-			       "MaxConcurrentPercentage": {
-			         "type": "integer"
-			       },
-			       "RegionConcurrencyType": {
-			         "description": "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time",
-			         "enum": [
-			           "SEQUENTIAL",
-			           "PARALLEL"
-			         ],
-			         "type": "string"
-			       },
-			       "RegionOrder": {
-			         "items": {
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "type": "array"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "description": "The user-specified preferences for how AWS CloudFormation performs a stack set operation.",
+			//   "properties": {
+			//     "FailureToleranceCount": {
+			//       "type": "integer"
+			//     },
+			//     "FailureTolerancePercentage": {
+			//       "type": "integer"
+			//     },
+			//     "MaxConcurrentCount": {
+			//       "type": "integer"
+			//     },
+			//     "MaxConcurrentPercentage": {
+			//       "type": "integer"
+			//     },
+			//     "RegionConcurrencyType": {
+			//       "description": "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time",
+			//       "enum": [
+			//         "SEQUENTIAL",
+			//         "PARALLEL"
+			//       ],
+			//       "type": "string"
+			//     },
+			//     "RegionOrder": {
+			//       "items": {
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "type": "array"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "The user-specified preferences for how AWS CloudFormation performs a stack set operation.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"failure_tolerance_count": {
 						// Property: FailureToleranceCount
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"failure_tolerance_percentage": {
 						// Property: FailureTolerancePercentage
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"max_concurrent_count": {
 						// Property: MaxConcurrentCount
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"max_concurrent_percentage": {
 						// Property: MaxConcurrentPercentage
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"region_concurrency_type": {
 						// Property: RegionConcurrencyType
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time",
-						     "enum": [
-						       "SEQUENTIAL",
-						       "PARALLEL"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Description: "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"region_order": {
 						// Property: RegionOrder
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "pattern": "",
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
@@ -285,57 +212,41 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"parameters": {
 			// Property: Parameters
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The input parameters for the stack set template.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "ParameterKey": {
-			           "description": "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
-			           "type": "string"
-			         },
-			         "ParameterValue": {
-			           "description": "The input value associated with the parameter.",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "ParameterKey",
-			         "ParameterValue"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "The input parameters for the stack set template.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "ParameterKey": {
+			//         "description": "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
+			//         "type": "string"
+			//       },
+			//       "ParameterValue": {
+			//         "description": "The input value associated with the parameter.",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "ParameterKey",
+			//       "ParameterValue"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "The input parameters for the stack set template.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"parameter_key": {
 						// Property: ParameterKey
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
-						     "type": "string"
-						   }
-						*/
 						Description: "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"parameter_value": {
 						// Property: ParameterValue
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The input value associated with the parameter.",
-						     "type": "string"
-						   }
-						*/
 						Description: "The input value associated with the parameter.",
 						Type:        types.StringType,
 						Required:    true,
@@ -348,16 +259,14 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"permission_model": {
 			// Property: PermissionModel
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified.",
-			     "enum": [
-			       "SERVICE_MANAGED",
-			       "SELF_MANAGED"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified.",
+			//   "enum": [
+			//     "SERVICE_MANAGED",
+			//     "SELF_MANAGED"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified.",
 			Type:        types.StringType,
 			Required:    true,
@@ -366,167 +275,103 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"stack_instances_group": {
 			// Property: StackInstancesGroup
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A group of stack instances with parameters in some specific accounts and regions.",
-			     "insertionOrder": false,
-			     "items": {
-			       "description": "Stack instances in some specific accounts and Regions.",
-			       "properties": {
-			         "DeploymentTargets": {
-			           "additionalProperties": false,
-			           "description": " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
-			           "properties": {
-			             "Accounts": {
-			               "description": "AWS accounts that you want to create stack instances in the specified Region(s) for.",
-			               "insertionOrder": false,
-			               "items": {
-			                 "description": "AWS account that you want to create stack instances in the specified Region(s) for.",
-			                 "pattern": "",
-			                 "type": "string"
-			               },
-			               "minItems": 1,
-			               "type": "array",
-			               "uniqueItems": true
-			             },
-			             "OrganizationalUnitIds": {
-			               "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
-			               "insertionOrder": false,
-			               "items": {
-			                 "pattern": "",
-			                 "type": "string"
-			               },
-			               "minItems": 1,
-			               "type": "array",
-			               "uniqueItems": true
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "ParameterOverrides": {
-			           "description": "A list of stack set parameters whose values you want to override in the selected stack instances.",
-			           "insertionOrder": false,
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "ParameterKey": {
-			                 "description": "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
-			                 "type": "string"
-			               },
-			               "ParameterValue": {
-			                 "description": "The input value associated with the parameter.",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "ParameterKey",
-			               "ParameterValue"
-			             ],
-			             "type": "object"
-			           },
-			           "type": "array",
-			           "uniqueItems": true
-			         },
-			         "Regions": {
-			           "description": "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
-			           "insertionOrder": false,
-			           "items": {
-			             "pattern": "",
-			             "type": "string"
-			           },
-			           "minItems": 1,
-			           "type": "array",
-			           "uniqueItems": true
-			         }
-			       },
-			       "required": [
-			         "DeploymentTargets",
-			         "Regions"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "A group of stack instances with parameters in some specific accounts and regions.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "description": "Stack instances in some specific accounts and Regions.",
+			//     "properties": {
+			//       "DeploymentTargets": {
+			//         "additionalProperties": false,
+			//         "description": " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
+			//         "properties": {
+			//           "Accounts": {
+			//             "description": "AWS accounts that you want to create stack instances in the specified Region(s) for.",
+			//             "insertionOrder": false,
+			//             "items": {
+			//               "description": "AWS account that you want to create stack instances in the specified Region(s) for.",
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "minItems": 1,
+			//             "type": "array",
+			//             "uniqueItems": true
+			//           },
+			//           "OrganizationalUnitIds": {
+			//             "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
+			//             "insertionOrder": false,
+			//             "items": {
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "minItems": 1,
+			//             "type": "array",
+			//             "uniqueItems": true
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "ParameterOverrides": {
+			//         "description": "A list of stack set parameters whose values you want to override in the selected stack instances.",
+			//         "insertionOrder": false,
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "ParameterKey": {
+			//               "description": "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
+			//               "type": "string"
+			//             },
+			//             "ParameterValue": {
+			//               "description": "The input value associated with the parameter.",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "ParameterKey",
+			//             "ParameterValue"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       },
+			//       "Regions": {
+			//         "description": "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
+			//         "insertionOrder": false,
+			//         "items": {
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "minItems": 1,
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       }
+			//     },
+			//     "required": [
+			//       "DeploymentTargets",
+			//       "Regions"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "A group of stack instances with parameters in some specific accounts and regions.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"deployment_targets": {
 						// Property: DeploymentTargets
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
-						     "properties": {
-						       "Accounts": {
-						         "description": "AWS accounts that you want to create stack instances in the specified Region(s) for.",
-						         "insertionOrder": false,
-						         "items": {
-						           "description": "AWS account that you want to create stack instances in the specified Region(s) for.",
-						           "pattern": "",
-						           "type": "string"
-						         },
-						         "minItems": 1,
-						         "type": "array",
-						         "uniqueItems": true
-						       },
-						       "OrganizationalUnitIds": {
-						         "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
-						         "insertionOrder": false,
-						         "items": {
-						           "pattern": "",
-						           "type": "string"
-						         },
-						         "minItems": 1,
-						         "type": "array",
-						         "uniqueItems": true
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Description: " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"accounts": {
 									// Property: Accounts
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "AWS accounts that you want to create stack instances in the specified Region(s) for.",
-									     "insertionOrder": false,
-									     "items": {
-									       "description": "AWS account that you want to create stack instances in the specified Region(s) for.",
-									       "pattern": "",
-									       "type": "string"
-									     },
-									     "minItems": 1,
-									     "type": "array",
-									     "uniqueItems": true
-									   }
-									*/
 									Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
 									Type:        providertypes.SetType{ElemType: types.StringType},
 									Optional:    true,
 								},
 								"organizational_unit_ids": {
 									// Property: OrganizationalUnitIds
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
-									     "insertionOrder": false,
-									     "items": {
-									       "pattern": "",
-									       "type": "string"
-									     },
-									     "minItems": 1,
-									     "type": "array",
-									     "uniqueItems": true
-									   }
-									*/
 									Description: "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
 									Type:        providertypes.SetType{ElemType: types.StringType},
 									Optional:    true,
@@ -537,58 +382,17 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"parameter_overrides": {
 						// Property: ParameterOverrides
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A list of stack set parameters whose values you want to override in the selected stack instances.",
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "ParameterKey": {
-						           "description": "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
-						           "type": "string"
-						         },
-						         "ParameterValue": {
-						           "description": "The input value associated with the parameter.",
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "ParameterKey",
-						         "ParameterValue"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
 						Description: "A list of stack set parameters whose values you want to override in the selected stack instances.",
 						Attributes: providertypes.SetNestedAttributes(
 							map[string]schema.Attribute{
 								"parameter_key": {
 									// Property: ParameterKey
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
-									     "type": "string"
-									   }
-									*/
 									Description: "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"parameter_value": {
 									// Property: ParameterValue
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The input value associated with the parameter.",
-									     "type": "string"
-									   }
-									*/
 									Description: "The input value associated with the parameter.",
 									Type:        types.StringType,
 									Required:    true,
@@ -600,20 +404,6 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"regions": {
 						// Property: Regions
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
-						     "insertionOrder": false,
-						     "items": {
-						       "pattern": "",
-						       "type": "string"
-						     },
-						     "minItems": 1,
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
 						Description: "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
 						Type:        providertypes.SetType{ElemType: types.StringType},
 						Required:    true,
@@ -626,12 +416,10 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"stack_set_id": {
 			// Property: StackSetId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the stack set that you're creating.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the stack set that you're creating.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the stack set that you're creating.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -639,14 +427,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"stack_set_name": {
 			// Property: StackSetName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name to associate with the stack set. The name must be unique in the Region where you create your stack set.",
-			     "maxLength": 128,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name to associate with the stack set. The name must be unique in the Region where you create your stack set.",
+			//   "maxLength": 128,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name to associate with the stack set. The name must be unique in the Region where you create your stack set.",
 			Type:        types.StringType,
 			Required:    true,
@@ -655,69 +441,48 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "Tag type enables you to specify a key-value pair that can be used to store information about an AWS CloudFormation StackSet.",
-			       "properties": {
-			         "Key": {
-			           "description": "A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.",
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "Tag type enables you to specify a key-value pair that can be used to store information about an AWS CloudFormation StackSet.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.",
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
 						Type:        types.StringType,
 						Required:    true,
@@ -732,14 +497,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"template_body": {
 			// Property: TemplateBody
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.",
-			     "maxLength": 51200,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.",
+			//   "maxLength": 51200,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -747,14 +510,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"template_url": {
 			// Property: TemplateURL
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket.",
-			     "maxLength": 1024,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket.",
+			//   "maxLength": 1024,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,

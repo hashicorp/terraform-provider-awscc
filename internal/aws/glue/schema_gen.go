@@ -25,13 +25,11 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Amazon Resource Name for the Schema.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Amazon Resource Name for the Schema.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Amazon Resource Name for the Schema.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,48 +37,32 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"checkpoint_version": {
 			// Property: CheckpointVersion
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Specify checkpoint version for update. This is only required to update the Compatibility.",
-			     "properties": {
-			       "IsLatest": {
-			         "description": "Indicates if the latest version needs to be updated.",
-			         "type": "boolean"
-			       },
-			       "VersionNumber": {
-			         "description": "Indicates the version number in the schema to update.",
-			         "type": "integer"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Specify checkpoint version for update. This is only required to update the Compatibility.",
+			//   "properties": {
+			//     "IsLatest": {
+			//       "description": "Indicates if the latest version needs to be updated.",
+			//       "type": "boolean"
+			//     },
+			//     "VersionNumber": {
+			//       "description": "Indicates the version number in the schema to update.",
+			//       "type": "integer"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "Specify checkpoint version for update. This is only required to update the Compatibility.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"is_latest": {
 						// Property: IsLatest
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Indicates if the latest version needs to be updated.",
-						     "type": "boolean"
-						   }
-						*/
 						Description: "Indicates if the latest version needs to be updated.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"version_number": {
 						// Property: VersionNumber
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Indicates the version number in the schema to update.",
-						     "type": "integer"
-						   }
-						*/
 						Description: "Indicates the version number in the schema to update.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -92,22 +74,20 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"compatibility": {
 			// Property: Compatibility
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Compatibility setting for the schema.",
-			     "enum": [
-			       "NONE",
-			       "DISABLED",
-			       "BACKWARD",
-			       "BACKWARD_ALL",
-			       "FORWARD",
-			       "FORWARD_ALL",
-			       "FULL",
-			       "FULL_ALL"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Compatibility setting for the schema.",
+			//   "enum": [
+			//     "NONE",
+			//     "DISABLED",
+			//     "BACKWARD",
+			//     "BACKWARD_ALL",
+			//     "FORWARD",
+			//     "FORWARD_ALL",
+			//     "FULL",
+			//     "FULL_ALL"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "Compatibility setting for the schema.",
 			Type:        types.StringType,
 			Required:    true,
@@ -115,16 +95,14 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"data_format": {
 			// Property: DataFormat
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Data format name to use for the schema. Accepted values: 'AVRO', 'JSON'",
-			     "enum": [
-			       "AVRO",
-			       "JSON"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Data format name to use for the schema. Accepted values: 'AVRO', 'JSON'",
+			//   "enum": [
+			//     "AVRO",
+			//     "JSON"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "Data format name to use for the schema. Accepted values: 'AVRO', 'JSON'",
 			Type:        types.StringType,
 			Required:    true,
@@ -133,14 +111,12 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A description of the schema. If description is not provided, there will not be any default value for this.",
-			     "maxLength": 1000,
-			     "minLength": 0,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A description of the schema. If description is not provided, there will not be any default value for this.",
+			//   "maxLength": 1000,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
 			Description: "A description of the schema. If description is not provided, there will not be any default value for this.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -148,13 +124,11 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"initial_schema_version_id": {
 			// Property: InitialSchemaVersionId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Represents the version ID associated with the initial schema version.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Represents the version ID associated with the initial schema version.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Represents the version ID associated with the initial schema version.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -162,14 +136,12 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of the schema.",
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of the schema.",
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Name of the schema.",
 			Type:        types.StringType,
 			Required:    true,
@@ -178,54 +150,35 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"registry": {
 			// Property: Registry
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Identifier for the registry which the schema is part of.",
-			     "properties": {
-			       "Arn": {
-			         "description": "Amazon Resource Name for the Registry.",
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "Name": {
-			         "description": "Name of the registry in which the schema will be created.",
-			         "maxLength": 255,
-			         "minLength": 1,
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Identifier for the registry which the schema is part of.",
+			//   "properties": {
+			//     "Arn": {
+			//       "description": "Amazon Resource Name for the Registry.",
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "Name": {
+			//       "description": "Name of the registry in which the schema will be created.",
+			//       "maxLength": 255,
+			//       "minLength": 1,
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "Identifier for the registry which the schema is part of.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"arn": {
 						// Property: Arn
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Amazon Resource Name for the Registry.",
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "Amazon Resource Name for the Registry.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Name of the registry in which the schema will be created.",
-						     "maxLength": 255,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "Name of the registry in which the schema will be created.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -239,14 +192,12 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"schema_definition": {
 			// Property: SchemaDefinition
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Definition for the initial schema version in plain-text.",
-			     "maxLength": 170000,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Definition for the initial schema version in plain-text.",
+			//   "maxLength": 170000,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Definition for the initial schema version in plain-text.",
 			Type:        types.StringType,
 			Required:    true,
@@ -256,65 +207,45 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "List of tags to tag the schema",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "description": "A key to identify the tag.",
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "Corresponding tag value for the key.",
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 10,
-			     "minItems": 0,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "List of tags to tag the schema",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "description": "A key to identify the tag.",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "Corresponding tag value for the key.",
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 10,
+			//   "minItems": 0,
+			//   "type": "array"
+			// }
 			Description: "List of tags to tag the schema",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A key to identify the tag.",
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "A key to identify the tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Corresponding tag value for the key.",
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
 						Description: "Corresponding tag value for the key.",
 						Type:        types.StringType,
 						Required:    true,

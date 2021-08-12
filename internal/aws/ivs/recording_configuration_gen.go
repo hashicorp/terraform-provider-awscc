@@ -26,15 +26,13 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -42,72 +40,42 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"destination_configuration": {
 			// Property: DestinationConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Recording Destination Configuration.",
-			     "properties": {
-			       "S3": {
-			         "additionalProperties": false,
-			         "description": "Recording S3 Destination Configuration.",
-			         "properties": {
-			           "BucketName": {
-			             "maxLength": 63,
-			             "minLength": 3,
-			             "pattern": "",
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "BucketName"
-			         ],
-			         "type": "object"
-			       }
-			     },
-			     "required": [
-			       "S3"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Recording Destination Configuration.",
+			//   "properties": {
+			//     "S3": {
+			//       "additionalProperties": false,
+			//       "description": "Recording S3 Destination Configuration.",
+			//       "properties": {
+			//         "BucketName": {
+			//           "maxLength": 63,
+			//           "minLength": 3,
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "BucketName"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "required": [
+			//     "S3"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "Recording Destination Configuration.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"s3": {
 						// Property: S3
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Recording S3 Destination Configuration.",
-						     "properties": {
-						       "BucketName": {
-						         "maxLength": 63,
-						         "minLength": 3,
-						         "pattern": "",
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "BucketName"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Description: "Recording S3 Destination Configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"bucket_name": {
 									// Property: BucketName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 63,
-									     "minLength": 3,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 									// BucketName is a force-new attribute.
@@ -125,15 +93,13 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Recording Configuration Name.",
-			     "maxLength": 128,
-			     "minLength": 0,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Recording Configuration Name.",
+			//   "maxLength": 128,
+			//   "minLength": 0,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Recording Configuration Name.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -143,17 +109,15 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Recording Configuration State.",
-			     "enum": [
-			       "CREATING",
-			       "CREATE_FAILED",
-			       "ACTIVE"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Recording Configuration State.",
+			//   "enum": [
+			//     "CREATING",
+			//     "CREATE_FAILED",
+			//     "ACTIVE"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "Recording Configuration State.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -161,61 +125,43 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of key-value pairs that contain metadata for the asset model.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "A list of key-value pairs that contain metadata for the asset model.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

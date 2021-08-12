@@ -26,54 +26,46 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"delete_protection": {
 			// Property: DeleteProtection
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "type": "boolean"
+			// }
 			Type:     types.BoolType,
 			Optional: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 512,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 512,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"endpoint_ids": {
 			// Property: EndpointIds
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "description": "An endpoint Id.",
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "description": "An endpoint Id.",
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
 		"firewall_arn": {
 			// Property: FirewallArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A resource ARN.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A resource ARN.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -81,28 +73,24 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"firewall_id": {
 			// Property: FirewallId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 36,
-			     "minLength": 36,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 36,
+			//   "minLength": 36,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"firewall_name": {
 			// Property: FirewallName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// FirewallName is a force-new attribute.
@@ -110,15 +98,13 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"firewall_policy_arn": {
 			// Property: FirewallPolicyArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A resource ARN.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A resource ARN.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Required:    true,
@@ -126,60 +112,47 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"firewall_policy_change_protection": {
 			// Property: FirewallPolicyChangeProtection
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "type": "boolean"
+			// }
 			Type:     types.BoolType,
 			Optional: true,
 		},
 		"subnet_change_protection": {
 			// Property: SubnetChangeProtection
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "type": "boolean"
+			// }
 			Type:     types.BoolType,
 			Optional: true,
 		},
 		"subnet_mappings": {
 			// Property: SubnetMappings
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "SubnetId": {
-			           "description": "A SubnetId.",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "SubnetId"
-			       ],
-			       "type": "object"
-			     },
-			     "minItems": 1,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "SubnetId": {
+			//         "description": "A SubnetId.",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "SubnetId"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"subnet_id": {
 						// Property: SubnetId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A SubnetId.",
-						     "type": "string"
-						   }
-						*/
 						Description: "A SubnetId.",
 						Type:        types.StringType,
 						Required:    true,
@@ -194,58 +167,40 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 255,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 255,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 255,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -257,14 +212,12 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// VpcId is a force-new attribute.

@@ -25,15 +25,13 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 		"certificate_arn": {
 			// Property: CertificateArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.",
-			     "maxLength": 1283,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.",
+			//   "maxLength": 1283,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.",
 			Type:        types.StringType,
 			Required:    true,
@@ -42,12 +40,10 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 		"certificate_s3_bucket_name": {
 			// Property: CertificateS3BucketName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the Amazon S3 bucket to which the certificate was uploaded.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the Amazon S3 bucket to which the certificate was uploaded.",
+			//   "type": "string"
+			// }
 			Description: "The name of the Amazon S3 bucket to which the certificate was uploaded.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -55,12 +51,10 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 		"certificate_s3_object_key": {
 			// Property: CertificateS3ObjectKey
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored.",
+			//   "type": "string"
+			// }
 			Description: "The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -68,12 +62,10 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 		"encryption_kms_key_id": {
 			// Property: EncryptionKmsKeyId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the AWS KMS CMK used to encrypt the private key of the certificate.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the AWS KMS CMK used to encrypt the private key of the certificate.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the AWS KMS CMK used to encrypt the private key of the certificate.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -81,15 +73,13 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.",
-			     "maxLength": 1283,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.",
+			//   "maxLength": 1283,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.",
 			Type:        types.StringType,
 			Required:    true,

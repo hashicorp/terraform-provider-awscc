@@ -26,15 +26,13 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"access_key": {
 			// Property: AccessKey
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
-			     "maxLength": 200,
-			     "minLength": 8,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
+			//   "maxLength": 200,
+			//   "minLength": 8,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -42,20 +40,18 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"agent_arns": {
 			// Property: AgentArns
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.",
-			     "insertionOrder": false,
-			     "items": {
-			       "maxLength": 128,
-			       "pattern": "",
-			       "type": "string"
-			     },
-			     "maxItems": 4,
-			     "minItems": 1,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "maxLength": 128,
+			//     "pattern": "",
+			//     "type": "string"
+			//   },
+			//   "maxItems": 4,
+			//   "minItems": 1,
+			//   "type": "array"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.",
 			// Multiset.
 			Type:     types.ListType{ElemType: types.StringType},
@@ -64,15 +60,13 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"bucket_name": {
 			// Property: BucketName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the bucket on the self-managed object storage server.",
-			     "maxLength": 63,
-			     "minLength": 3,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the bucket on the self-managed object storage server.",
+			//   "maxLength": 63,
+			//   "minLength": 3,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the bucket on the self-managed object storage server.",
 			Type:        types.StringType,
 			Required:    true,
@@ -82,14 +76,12 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"location_arn": {
 			// Property: LocationArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the location that is created.",
-			     "maxLength": 128,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the location that is created.",
+			//   "maxLength": 128,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the location that is created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -97,14 +89,12 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"location_uri": {
 			// Property: LocationUri
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The URL of the object storage location that was described.",
-			     "maxLength": 4356,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The URL of the object storage location that was described.",
+			//   "maxLength": 4356,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The URL of the object storage location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -112,15 +102,13 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"secret_key": {
 			// Property: SecretKey
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
-			     "maxLength": 200,
-			     "minLength": 8,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
+			//   "maxLength": 200,
+			//   "minLength": 8,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -129,14 +117,12 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"server_hostname": {
 			// Property: ServerHostname
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.",
-			     "maxLength": 255,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.",
+			//   "maxLength": 255,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.",
 			Type:        types.StringType,
 			Required:    true,
@@ -146,12 +132,10 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"server_port": {
 			// Property: ServerPort
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The port that your self-managed server accepts inbound network traffic on.",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "The port that your self-managed server accepts inbound network traffic on.",
+			//   "type": "integer"
+			// }
 			Description: "The port that your self-managed server accepts inbound network traffic on.",
 			Type:        types.NumberType,
 			Optional:    true,
@@ -159,16 +143,14 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"server_protocol": {
 			// Property: ServerProtocol
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The protocol that the object storage server uses to communicate.",
-			     "enum": [
-			       "HTTPS",
-			       "HTTP"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The protocol that the object storage server uses to communicate.",
+			//   "enum": [
+			//     "HTTPS",
+			//     "HTTP"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The protocol that the object storage server uses to communicate.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -176,14 +158,12 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"subdirectory": {
 			// Property: Subdirectory
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The subdirectory in the self-managed object storage server that is used to read data from.",
-			     "maxLength": 4096,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The subdirectory in the self-managed object storage server that is used to read data from.",
+			//   "maxLength": 4096,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The subdirectory in the self-managed object storage server that is used to read data from.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -192,71 +172,49 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key for an AWS resource tag.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for an AWS resource tag.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key for an AWS resource tag.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for an AWS resource tag.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key for an AWS resource tag.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for an AWS resource tag.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,

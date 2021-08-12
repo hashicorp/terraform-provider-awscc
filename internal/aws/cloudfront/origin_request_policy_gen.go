@@ -25,172 +25,120 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"last_modified_time": {
 			// Property: LastModifiedTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"origin_request_policy_config": {
 			// Property: OriginRequestPolicyConfig
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Comment": {
-			         "type": "string"
-			       },
-			       "CookiesConfig": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "CookieBehavior": {
-			             "pattern": "",
-			             "type": "string"
-			           },
-			           "Cookies": {
-			             "items": {
-			               "type": "string"
-			             },
-			             "type": "array",
-			             "uniqueItems": false
-			           }
-			         },
-			         "required": [
-			           "CookieBehavior"
-			         ],
-			         "type": "object"
-			       },
-			       "HeadersConfig": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "HeaderBehavior": {
-			             "pattern": "",
-			             "type": "string"
-			           },
-			           "Headers": {
-			             "items": {
-			               "type": "string"
-			             },
-			             "type": "array",
-			             "uniqueItems": false
-			           }
-			         },
-			         "required": [
-			           "HeaderBehavior"
-			         ],
-			         "type": "object"
-			       },
-			       "Name": {
-			         "type": "string"
-			       },
-			       "QueryStringsConfig": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "QueryStringBehavior": {
-			             "pattern": "",
-			             "type": "string"
-			           },
-			           "QueryStrings": {
-			             "items": {
-			               "type": "string"
-			             },
-			             "type": "array",
-			             "uniqueItems": false
-			           }
-			         },
-			         "required": [
-			           "QueryStringBehavior"
-			         ],
-			         "type": "object"
-			       }
-			     },
-			     "required": [
-			       "Name",
-			       "HeadersConfig",
-			       "CookiesConfig",
-			       "QueryStringsConfig"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Comment": {
+			//       "type": "string"
+			//     },
+			//     "CookiesConfig": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "CookieBehavior": {
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "Cookies": {
+			//           "items": {
+			//             "type": "string"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         }
+			//       },
+			//       "required": [
+			//         "CookieBehavior"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "HeadersConfig": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "HeaderBehavior": {
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "Headers": {
+			//           "items": {
+			//             "type": "string"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         }
+			//       },
+			//       "required": [
+			//         "HeaderBehavior"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "Name": {
+			//       "type": "string"
+			//     },
+			//     "QueryStringsConfig": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "QueryStringBehavior": {
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "QueryStrings": {
+			//           "items": {
+			//             "type": "string"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         }
+			//       },
+			//       "required": [
+			//         "QueryStringBehavior"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "required": [
+			//     "Name",
+			//     "HeadersConfig",
+			//     "CookiesConfig",
+			//     "QueryStringsConfig"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"comment": {
 						// Property: Comment
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"cookies_config": {
 						// Property: CookiesConfig
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "CookieBehavior": {
-						         "pattern": "",
-						         "type": "string"
-						       },
-						       "Cookies": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array",
-						         "uniqueItems": false
-						       }
-						     },
-						     "required": [
-						       "CookieBehavior"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"cookie_behavior": {
 									// Property: CookieBehavior
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"cookies": {
 									// Property: Cookies
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -200,55 +148,15 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 					},
 					"headers_config": {
 						// Property: HeadersConfig
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "HeaderBehavior": {
-						         "pattern": "",
-						         "type": "string"
-						       },
-						       "Headers": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array",
-						         "uniqueItems": false
-						       }
-						     },
-						     "required": [
-						       "HeaderBehavior"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"header_behavior": {
 									// Property: HeaderBehavior
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"headers": {
 									// Property: Headers
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -258,66 +166,20 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"query_strings_config": {
 						// Property: QueryStringsConfig
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "QueryStringBehavior": {
-						         "pattern": "",
-						         "type": "string"
-						       },
-						       "QueryStrings": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array",
-						         "uniqueItems": false
-						       }
-						     },
-						     "required": [
-						       "QueryStringBehavior"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"query_string_behavior": {
 									// Property: QueryStringBehavior
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"query_strings": {
 									// Property: QueryStrings
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},

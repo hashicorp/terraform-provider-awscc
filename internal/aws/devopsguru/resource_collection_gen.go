@@ -25,81 +25,42 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"resource_collection_filter": {
 			// Property: ResourceCollectionFilter
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
-			     "properties": {
-			       "CloudFormation": {
-			         "additionalProperties": false,
-			         "description": "CloudFormation resource for DevOps Guru to monitor",
-			         "properties": {
-			           "StackNames": {
-			             "description": "An array of CloudFormation stack names.",
-			             "items": {
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "pattern": "",
-			               "type": "string"
-			             },
-			             "maxItems": 200,
-			             "minItems": 1,
-			             "type": "array"
-			           }
-			         },
-			         "type": "object"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
+			//   "properties": {
+			//     "CloudFormation": {
+			//       "additionalProperties": false,
+			//       "description": "CloudFormation resource for DevOps Guru to monitor",
+			//       "properties": {
+			//         "StackNames": {
+			//           "description": "An array of CloudFormation stack names.",
+			//           "items": {
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "pattern": "",
+			//             "type": "string"
+			//           },
+			//           "maxItems": 200,
+			//           "minItems": 1,
+			//           "type": "array"
+			//         }
+			//       },
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"cloud_formation": {
 						// Property: CloudFormation
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "CloudFormation resource for DevOps Guru to monitor",
-						     "properties": {
-						       "StackNames": {
-						         "description": "An array of CloudFormation stack names.",
-						         "items": {
-						           "maxLength": 128,
-						           "minLength": 1,
-						           "pattern": "",
-						           "type": "string"
-						         },
-						         "maxItems": 200,
-						         "minItems": 1,
-						         "type": "array"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Description: "CloudFormation resource for DevOps Guru to monitor",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"stack_names": {
 									// Property: StackNames
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "An array of CloudFormation stack names.",
-									     "items": {
-									       "maxLength": 128,
-									       "minLength": 1,
-									       "pattern": "",
-									       "type": "string"
-									     },
-									     "maxItems": 200,
-									     "minItems": 1,
-									     "type": "array"
-									   }
-									*/
 									Description: "An array of CloudFormation stack names.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
@@ -115,15 +76,13 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"resource_collection_type": {
 			// Property: ResourceCollectionType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The type of ResourceCollection",
-			     "enum": [
-			       "AWS_CLOUD_FORMATION"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The type of ResourceCollection",
+			//   "enum": [
+			//     "AWS_CLOUD_FORMATION"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The type of ResourceCollection",
 			Type:        types.StringType,
 			Computed:    true,

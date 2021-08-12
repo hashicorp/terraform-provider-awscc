@@ -25,558 +25,511 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"container_definitions": {
 			// Property: ContainerDefinitions
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "List of container definitions that are passed to the Docker daemon on a container instance",
-			       "properties": {
-			         "Command": {
-			           "items": {
-			             "type": "string"
-			           },
-			           "type": "array"
-			         },
-			         "Cpu": {
-			           "type": "integer"
-			         },
-			         "DependsOn": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Condition": {
-			                 "type": "string"
-			               },
-			               "ContainerName": {
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "DisableNetworking": {
-			           "type": "boolean"
-			         },
-			         "DnsSearchDomains": {
-			           "items": {
-			             "type": "string"
-			           },
-			           "type": "array"
-			         },
-			         "DnsServers": {
-			           "items": {
-			             "type": "string"
-			           },
-			           "type": "array"
-			         },
-			         "DockerLabels": {
-			           "additionalProperties": false,
-			           "patternProperties": {
-			             "": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "DockerSecurityOptions": {
-			           "items": {
-			             "type": "string"
-			           },
-			           "type": "array"
-			         },
-			         "EntryPoint": {
-			           "items": {
-			             "type": "string"
-			           },
-			           "type": "array"
-			         },
-			         "Environment": {
-			           "description": "The environment variables to pass to a container",
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Name": {
-			                 "type": "string"
-			               },
-			               "Value": {
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "type": "array",
-			           "uniqueItems": true
-			         },
-			         "EnvironmentFiles": {
-			           "description": "The list of one or more files that contain the environment variables to pass to a container",
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Type": {
-			                 "type": "string"
-			               },
-			               "Value": {
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "Essential": {
-			           "type": "boolean"
-			         },
-			         "ExtraHosts": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Hostname": {
-			                 "type": "string"
-			               },
-			               "IpAddress": {
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "FirelensConfiguration": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Options": {
-			               "additionalProperties": false,
-			               "patternProperties": {
-			                 "": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "Type": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "HealthCheck": {
-			           "additionalProperties": false,
-			           "description": "The health check command and associated configuration parameters for the container.",
-			           "properties": {
-			             "Command": {
-			               "description": "A string array representing the command that the container runs to determine if it is healthy.",
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array"
-			             },
-			             "Interval": {
-			               "description": "The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.",
-			               "type": "integer"
-			             },
-			             "Retries": {
-			               "description": "The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries.",
-			               "type": "integer"
-			             },
-			             "StartPeriod": {
-			               "description": "The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default.",
-			               "type": "integer"
-			             },
-			             "Timeout": {
-			               "description": "The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds.",
-			               "type": "integer"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Hostname": {
-			           "type": "string"
-			         },
-			         "Image": {
-			           "description": "The image used to start a container. This string is passed directly to the Docker daemon.",
-			           "type": "string"
-			         },
-			         "Interactive": {
-			           "type": "boolean"
-			         },
-			         "Links": {
-			           "items": {
-			             "type": "string"
-			           },
-			           "type": "array",
-			           "uniqueItems": true
-			         },
-			         "LinuxParameters": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Capabilities": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "Add": {
-			                   "items": {
-			                     "type": "string"
-			                   },
-			                   "type": "array"
-			                 },
-			                 "Drop": {
-			                   "items": {
-			                     "type": "string"
-			                   },
-			                   "type": "array"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "Devices": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "ContainerPath": {
-			                     "type": "string"
-			                   },
-			                   "HostPath": {
-			                     "type": "string"
-			                   },
-			                   "Permissions": {
-			                     "items": {
-			                       "type": "string"
-			                     },
-			                     "type": "array",
-			                     "uniqueItems": true
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "type": "array"
-			             },
-			             "InitProcessEnabled": {
-			               "type": "boolean"
-			             },
-			             "MaxSwap": {
-			               "type": "integer"
-			             },
-			             "SharedMemorySize": {
-			               "type": "integer"
-			             },
-			             "Swappiness": {
-			               "type": "integer"
-			             },
-			             "Tmpfs": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "ContainerPath": {
-			                     "type": "string"
-			                   },
-			                   "MountOptions": {
-			                     "items": {
-			                       "type": "string"
-			                     },
-			                     "type": "array"
-			                   },
-			                   "Size": {
-			                     "type": "integer"
-			                   }
-			                 },
-			                 "required": [
-			                   "Size"
-			                 ],
-			                 "type": "object"
-			               },
-			               "type": "array"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "LogConfiguration": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "LogDriver": {
-			               "type": "string"
-			             },
-			             "Options": {
-			               "additionalProperties": false,
-			               "patternProperties": {
-			                 "": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "SecretOptions": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "Name": {
-			                     "type": "string"
-			                   },
-			                   "ValueFrom": {
-			                     "type": "string"
-			                   }
-			                 },
-			                 "required": [
-			                   "Name",
-			                   "ValueFrom"
-			                 ],
-			                 "type": "object"
-			               },
-			               "type": "array"
-			             }
-			           },
-			           "required": [
-			             "LogDriver"
-			           ],
-			           "type": "object"
-			         },
-			         "Memory": {
-			           "description": "The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.",
-			           "type": "integer"
-			         },
-			         "MemoryReservation": {
-			           "type": "integer"
-			         },
-			         "MountPoints": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "ContainerPath": {
-			                 "type": "string"
-			               },
-			               "ReadOnly": {
-			                 "type": "boolean"
-			               },
-			               "SourceVolume": {
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "type": "array",
-			           "uniqueItems": true
-			         },
-			         "Name": {
-			           "description": "The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed",
-			           "type": "string"
-			         },
-			         "PortMappings": {
-			           "description": "Port mappings allow containers to access ports on the host container instance to send or receive traffic.",
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "ContainerPort": {
-			                 "type": "integer"
-			               },
-			               "HostPort": {
-			                 "type": "integer"
-			               },
-			               "Protocol": {
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "type": "array",
-			           "uniqueItems": true
-			         },
-			         "Privileged": {
-			           "type": "boolean"
-			         },
-			         "PseudoTerminal": {
-			           "type": "boolean"
-			         },
-			         "ReadonlyRootFilesystem": {
-			           "type": "boolean"
-			         },
-			         "RepositoryCredentials": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "CredentialsParameter": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "ResourceRequirements": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Type": {
-			                 "type": "string"
-			               },
-			               "Value": {
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Type",
-			               "Value"
-			             ],
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "Secrets": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Name": {
-			                 "type": "string"
-			               },
-			               "ValueFrom": {
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Name",
-			               "ValueFrom"
-			             ],
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "StartTimeout": {
-			           "type": "integer"
-			         },
-			         "StopTimeout": {
-			           "type": "integer"
-			         },
-			         "SystemControls": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Namespace": {
-			                 "type": "string"
-			               },
-			               "Value": {
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "Ulimits": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "HardLimit": {
-			                 "type": "integer"
-			               },
-			               "Name": {
-			                 "type": "string"
-			               },
-			               "SoftLimit": {
-			                 "type": "integer"
-			               }
-			             },
-			             "required": [
-			               "HardLimit",
-			               "Name",
-			               "SoftLimit"
-			             ],
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "User": {
-			           "type": "string"
-			         },
-			         "VolumesFrom": {
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "ReadOnly": {
-			                 "type": "boolean"
-			               },
-			               "SourceContainer": {
-			                 "type": "string"
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "type": "array",
-			           "uniqueItems": true
-			         },
-			         "WorkingDirectory": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "List of container definitions that are passed to the Docker daemon on a container instance",
+			//     "properties": {
+			//       "Command": {
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "Cpu": {
+			//         "type": "integer"
+			//       },
+			//       "DependsOn": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Condition": {
+			//               "type": "string"
+			//             },
+			//             "ContainerName": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "DisableNetworking": {
+			//         "type": "boolean"
+			//       },
+			//       "DnsSearchDomains": {
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "DnsServers": {
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "DockerLabels": {
+			//         "additionalProperties": false,
+			//         "patternProperties": {
+			//           "": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "DockerSecurityOptions": {
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "EntryPoint": {
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "Environment": {
+			//         "description": "The environment variables to pass to a container",
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Name": {
+			//               "type": "string"
+			//             },
+			//             "Value": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       },
+			//       "EnvironmentFiles": {
+			//         "description": "The list of one or more files that contain the environment variables to pass to a container",
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Type": {
+			//               "type": "string"
+			//             },
+			//             "Value": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "Essential": {
+			//         "type": "boolean"
+			//       },
+			//       "ExtraHosts": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Hostname": {
+			//               "type": "string"
+			//             },
+			//             "IpAddress": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "FirelensConfiguration": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Options": {
+			//             "additionalProperties": false,
+			//             "patternProperties": {
+			//               "": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "Type": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "HealthCheck": {
+			//         "additionalProperties": false,
+			//         "description": "The health check command and associated configuration parameters for the container.",
+			//         "properties": {
+			//           "Command": {
+			//             "description": "A string array representing the command that the container runs to determine if it is healthy.",
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "Interval": {
+			//             "description": "The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.",
+			//             "type": "integer"
+			//           },
+			//           "Retries": {
+			//             "description": "The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries.",
+			//             "type": "integer"
+			//           },
+			//           "StartPeriod": {
+			//             "description": "The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default.",
+			//             "type": "integer"
+			//           },
+			//           "Timeout": {
+			//             "description": "The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds.",
+			//             "type": "integer"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Hostname": {
+			//         "type": "string"
+			//       },
+			//       "Image": {
+			//         "description": "The image used to start a container. This string is passed directly to the Docker daemon.",
+			//         "type": "string"
+			//       },
+			//       "Interactive": {
+			//         "type": "boolean"
+			//       },
+			//       "Links": {
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       },
+			//       "LinuxParameters": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Capabilities": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "Add": {
+			//                 "items": {
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array"
+			//               },
+			//               "Drop": {
+			//                 "items": {
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "Devices": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "ContainerPath": {
+			//                   "type": "string"
+			//                 },
+			//                 "HostPath": {
+			//                   "type": "string"
+			//                 },
+			//                 "Permissions": {
+			//                   "items": {
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array",
+			//                   "uniqueItems": true
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "InitProcessEnabled": {
+			//             "type": "boolean"
+			//           },
+			//           "MaxSwap": {
+			//             "type": "integer"
+			//           },
+			//           "SharedMemorySize": {
+			//             "type": "integer"
+			//           },
+			//           "Swappiness": {
+			//             "type": "integer"
+			//           },
+			//           "Tmpfs": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "ContainerPath": {
+			//                   "type": "string"
+			//                 },
+			//                 "MountOptions": {
+			//                   "items": {
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array"
+			//                 },
+			//                 "Size": {
+			//                   "type": "integer"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Size"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "type": "array"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "LogConfiguration": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "LogDriver": {
+			//             "type": "string"
+			//           },
+			//           "Options": {
+			//             "additionalProperties": false,
+			//             "patternProperties": {
+			//               "": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "SecretOptions": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Name": {
+			//                   "type": "string"
+			//                 },
+			//                 "ValueFrom": {
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Name",
+			//                 "ValueFrom"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "type": "array"
+			//           }
+			//         },
+			//         "required": [
+			//           "LogDriver"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "Memory": {
+			//         "description": "The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.",
+			//         "type": "integer"
+			//       },
+			//       "MemoryReservation": {
+			//         "type": "integer"
+			//       },
+			//       "MountPoints": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "ContainerPath": {
+			//               "type": "string"
+			//             },
+			//             "ReadOnly": {
+			//               "type": "boolean"
+			//             },
+			//             "SourceVolume": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       },
+			//       "Name": {
+			//         "description": "The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed",
+			//         "type": "string"
+			//       },
+			//       "PortMappings": {
+			//         "description": "Port mappings allow containers to access ports on the host container instance to send or receive traffic.",
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "ContainerPort": {
+			//               "type": "integer"
+			//             },
+			//             "HostPort": {
+			//               "type": "integer"
+			//             },
+			//             "Protocol": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       },
+			//       "Privileged": {
+			//         "type": "boolean"
+			//       },
+			//       "PseudoTerminal": {
+			//         "type": "boolean"
+			//       },
+			//       "ReadonlyRootFilesystem": {
+			//         "type": "boolean"
+			//       },
+			//       "RepositoryCredentials": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "CredentialsParameter": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "ResourceRequirements": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Type": {
+			//               "type": "string"
+			//             },
+			//             "Value": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Type",
+			//             "Value"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "Secrets": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Name": {
+			//               "type": "string"
+			//             },
+			//             "ValueFrom": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Name",
+			//             "ValueFrom"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "StartTimeout": {
+			//         "type": "integer"
+			//       },
+			//       "StopTimeout": {
+			//         "type": "integer"
+			//       },
+			//       "SystemControls": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Namespace": {
+			//               "type": "string"
+			//             },
+			//             "Value": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "Ulimits": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "HardLimit": {
+			//               "type": "integer"
+			//             },
+			//             "Name": {
+			//               "type": "string"
+			//             },
+			//             "SoftLimit": {
+			//               "type": "integer"
+			//             }
+			//           },
+			//           "required": [
+			//             "HardLimit",
+			//             "Name",
+			//             "SoftLimit"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "User": {
+			//         "type": "string"
+			//       },
+			//       "VolumesFrom": {
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "ReadOnly": {
+			//               "type": "boolean"
+			//             },
+			//             "SourceContainer": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "type": "array",
+			//         "uniqueItems": true
+			//       },
+			//       "WorkingDirectory": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"command": {
 						// Property: Command
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"cpu": {
 						// Property: Cpu
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"depends_on": {
 						// Property: DependsOn
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Condition": {
-						           "type": "string"
-						         },
-						         "ContainerName": {
-						           "type": "string"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"condition": {
 									// Property: Condition
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"container_name": {
 									// Property: ContainerName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -587,134 +540,48 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"disable_networking": {
 						// Property: DisableNetworking
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"dns_search_domains": {
 						// Property: DnsSearchDomains
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"dns_servers": {
 						// Property: DnsServers
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"docker_labels": {
 						// Property: DockerLabels
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "patternProperties": {
-						       "": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						// Pattern: ""
 						Type:     types.MapType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"docker_security_options": {
 						// Property: DockerSecurityOptions
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"entry_point": {
 						// Property: EntryPoint
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"environment": {
 						// Property: Environment
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The environment variables to pass to a container",
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Name": {
-						           "type": "string"
-						         },
-						         "Value": {
-						           "type": "string"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
 						Description: "The environment variables to pass to a container",
 						// Ordered set.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -725,47 +592,16 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"environment_files": {
 						// Property: EnvironmentFiles
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The list of one or more files that contain the environment variables to pass to a container",
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Type": {
-						           "type": "string"
-						         },
-						         "Value": {
-						           "type": "string"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Description: "The list of one or more files that contain the environment variables to pass to a container",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"type": {
 									// Property: Type
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -776,56 +612,20 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"essential": {
 						// Property: Essential
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"extra_hosts": {
 						// Property: ExtraHosts
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Hostname": {
-						           "type": "string"
-						         },
-						         "IpAddress": {
-						           "type": "string"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"hostname": {
 									// Property: Hostname
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"ip_address": {
 									// Property: IpAddress
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -836,55 +636,16 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"firelens_configuration": {
 						// Property: FirelensConfiguration
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Options": {
-						         "additionalProperties": false,
-						         "patternProperties": {
-						           "": {
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "Type": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"options": {
 									// Property: Options
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "patternProperties": {
-									       "": {
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"type": {
 									// Property: Type
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -894,106 +655,35 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"health_check": {
 						// Property: HealthCheck
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "The health check command and associated configuration parameters for the container.",
-						     "properties": {
-						       "Command": {
-						         "description": "A string array representing the command that the container runs to determine if it is healthy.",
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array"
-						       },
-						       "Interval": {
-						         "description": "The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.",
-						         "type": "integer"
-						       },
-						       "Retries": {
-						         "description": "The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries.",
-						         "type": "integer"
-						       },
-						       "StartPeriod": {
-						         "description": "The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default.",
-						         "type": "integer"
-						       },
-						       "Timeout": {
-						         "description": "The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds.",
-						         "type": "integer"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Description: "The health check command and associated configuration parameters for the container.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"command": {
 									// Property: Command
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "A string array representing the command that the container runs to determine if it is healthy.",
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array"
-									   }
-									*/
 									Description: "A string array representing the command that the container runs to determine if it is healthy.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
 								},
 								"interval": {
 									// Property: Interval
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.",
-									     "type": "integer"
-									   }
-									*/
 									Description: "The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"retries": {
 									// Property: Retries
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries.",
-									     "type": "integer"
-									   }
-									*/
 									Description: "The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"start_period": {
 									// Property: StartPeriod
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default.",
-									     "type": "integer"
-									   }
-									*/
 									Description: "The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"timeout": {
 									// Property: Timeout
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds.",
-									     "type": "integer"
-									   }
-									*/
 									Description: "The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds.",
 									Type:        types.NumberType,
 									Optional:    true,
@@ -1004,194 +694,41 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"hostname": {
 						// Property: Hostname
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"image": {
 						// Property: Image
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The image used to start a container. This string is passed directly to the Docker daemon.",
-						     "type": "string"
-						   }
-						*/
 						Description: "The image used to start a container. This string is passed directly to the Docker daemon.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"interactive": {
 						// Property: Interactive
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"links": {
 						// Property: Links
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
 						// Ordered set.
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"linux_parameters": {
 						// Property: LinuxParameters
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Capabilities": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Add": {
-						             "items": {
-						               "type": "string"
-						             },
-						             "type": "array"
-						           },
-						           "Drop": {
-						             "items": {
-						               "type": "string"
-						             },
-						             "type": "array"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "Devices": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "ContainerPath": {
-						               "type": "string"
-						             },
-						             "HostPath": {
-						               "type": "string"
-						             },
-						             "Permissions": {
-						               "items": {
-						                 "type": "string"
-						               },
-						               "type": "array",
-						               "uniqueItems": true
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "type": "array"
-						       },
-						       "InitProcessEnabled": {
-						         "type": "boolean"
-						       },
-						       "MaxSwap": {
-						         "type": "integer"
-						       },
-						       "SharedMemorySize": {
-						         "type": "integer"
-						       },
-						       "Swappiness": {
-						         "type": "integer"
-						       },
-						       "Tmpfs": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "ContainerPath": {
-						               "type": "string"
-						             },
-						             "MountOptions": {
-						               "items": {
-						                 "type": "string"
-						               },
-						               "type": "array"
-						             },
-						             "Size": {
-						               "type": "integer"
-						             }
-						           },
-						           "required": [
-						             "Size"
-						           ],
-						           "type": "object"
-						         },
-						         "type": "array"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"capabilities": {
 									// Property: Capabilities
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Add": {
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array"
-									       },
-									       "Drop": {
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"add": {
 												// Property: Add
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 											},
 											"drop": {
 												// Property: Drop
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 											},
@@ -1201,67 +738,20 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"devices": {
 									// Property: Devices
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "ContainerPath": {
-									           "type": "string"
-									         },
-									         "HostPath": {
-									           "type": "string"
-									         },
-									         "Permissions": {
-									           "items": {
-									             "type": "string"
-									           },
-									           "type": "array",
-									           "uniqueItems": true
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"container_path": {
 												// Property: ContainerPath
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"host_path": {
 												// Property: HostPath
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"permissions": {
 												// Property: Permissions
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array",
-												     "uniqueItems": true
-												   }
-												*/
 												// Ordered set.
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
@@ -1273,112 +763,40 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"init_process_enabled": {
 									// Property: InitProcessEnabled
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"max_swap": {
 									// Property: MaxSwap
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"shared_memory_size": {
 									// Property: SharedMemorySize
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"swappiness": {
 									// Property: Swappiness
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"tmpfs": {
 									// Property: Tmpfs
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "ContainerPath": {
-									           "type": "string"
-									         },
-									         "MountOptions": {
-									           "items": {
-									             "type": "string"
-									           },
-									           "type": "array"
-									         },
-									         "Size": {
-									           "type": "integer"
-									         }
-									       },
-									       "required": [
-									         "Size"
-									       ],
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"container_path": {
 												// Property: ContainerPath
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"mount_options": {
 												// Property: MountOptions
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 											},
 											"size": {
 												// Property: Size
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
 												Type:     types.NumberType,
 												Required: true,
 											},
@@ -1393,125 +811,30 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"log_configuration": {
 						// Property: LogConfiguration
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "LogDriver": {
-						         "type": "string"
-						       },
-						       "Options": {
-						         "additionalProperties": false,
-						         "patternProperties": {
-						           "": {
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "SecretOptions": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "Name": {
-						               "type": "string"
-						             },
-						             "ValueFrom": {
-						               "type": "string"
-						             }
-						           },
-						           "required": [
-						             "Name",
-						             "ValueFrom"
-						           ],
-						           "type": "object"
-						         },
-						         "type": "array"
-						       }
-						     },
-						     "required": [
-						       "LogDriver"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"log_driver": {
 									// Property: LogDriver
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"options": {
 									// Property: Options
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "patternProperties": {
-									       "": {
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"secret_options": {
 									// Property: SecretOptions
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "Name": {
-									           "type": "string"
-									         },
-									         "ValueFrom": {
-									           "type": "string"
-									         }
-									       },
-									       "required": [
-									         "Name",
-									         "ValueFrom"
-									       ],
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"name": {
 												// Property: Name
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"value_from": {
 												// Property: ValueFrom
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1526,85 +849,32 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"memory": {
 						// Property: Memory
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.",
-						     "type": "integer"
-						   }
-						*/
 						Description: "The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"memory_reservation": {
 						// Property: MemoryReservation
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"mount_points": {
 						// Property: MountPoints
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "ContainerPath": {
-						           "type": "string"
-						         },
-						         "ReadOnly": {
-						           "type": "boolean"
-						         },
-						         "SourceVolume": {
-						           "type": "string"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
 						// Ordered set.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"container_path": {
 									// Property: ContainerPath
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"read_only": {
 									// Property: ReadOnly
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"source_volume": {
 									// Property: SourceVolume
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1615,76 +885,28 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed",
-						     "type": "string"
-						   }
-						*/
 						Description: "The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"port_mappings": {
 						// Property: PortMappings
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Port mappings allow containers to access ports on the host container instance to send or receive traffic.",
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "ContainerPort": {
-						           "type": "integer"
-						         },
-						         "HostPort": {
-						           "type": "integer"
-						         },
-						         "Protocol": {
-						           "type": "string"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
 						Description: "Port mappings allow containers to access ports on the host container instance to send or receive traffic.",
 						// Ordered set.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"container_port": {
 									// Property: ContainerPort
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"host_port": {
 									// Property: HostPort
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"protocol": {
 									// Property: Protocol
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1695,61 +917,25 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"privileged": {
 						// Property: Privileged
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"pseudo_terminal": {
 						// Property: PseudoTerminal
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"readonly_root_filesystem": {
 						// Property: ReadonlyRootFilesystem
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"repository_credentials": {
 						// Property: RepositoryCredentials
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "CredentialsParameter": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"credentials_parameter": {
 									// Property: CredentialsParameter
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1759,49 +945,15 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"resource_requirements": {
 						// Property: ResourceRequirements
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Type": {
-						           "type": "string"
-						         },
-						         "Value": {
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "Type",
-						         "Value"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"type": {
 									// Property: Type
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -1812,49 +964,15 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"secrets": {
 						// Property: Secrets
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Name": {
-						           "type": "string"
-						         },
-						         "ValueFrom": {
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "Name",
-						         "ValueFrom"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"value_from": {
 									// Property: ValueFrom
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -1865,67 +983,25 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"start_timeout": {
 						// Property: StartTimeout
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"stop_timeout": {
 						// Property: StopTimeout
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"system_controls": {
 						// Property: SystemControls
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Namespace": {
-						           "type": "string"
-						         },
-						         "Value": {
-						           "type": "string"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"namespace": {
 									// Property: Namespace
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1936,64 +1012,20 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"ulimits": {
 						// Property: Ulimits
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "HardLimit": {
-						           "type": "integer"
-						         },
-						         "Name": {
-						           "type": "string"
-						         },
-						         "SoftLimit": {
-						           "type": "integer"
-						         }
-						       },
-						       "required": [
-						         "HardLimit",
-						         "Name",
-						         "SoftLimit"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"hard_limit": {
 									// Property: HardLimit
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Required: true,
 								},
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"soft_limit": {
 									// Property: SoftLimit
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Required: true,
 								},
@@ -2004,58 +1036,21 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"user": {
 						// Property: User
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"volumes_from": {
 						// Property: VolumesFrom
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "ReadOnly": {
-						           "type": "boolean"
-						         },
-						         "SourceContainer": {
-						           "type": "string"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
 						// Ordered set.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"read_only": {
 									// Property: ReadOnly
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"source_container": {
 									// Property: SourceContainer
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2066,12 +1061,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"working_directory": {
 						// Property: WorkingDirectory
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -2085,11 +1074,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"cpu": {
 			// Property: Cpu
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -2098,27 +1085,19 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"ephemeral_storage": {
 			// Property: EphemeralStorage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "SizeInGiB": {
-			         "type": "integer"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "SizeInGiB": {
+			//       "type": "integer"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"size_in_gi_b": {
 						// Property: SizeInGiB
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
 						Type:     types.NumberType,
 						Optional: true,
 					},
@@ -2131,11 +1110,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"execution_role_arn": {
 			// Property: ExecutionRoleArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -2144,11 +1121,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"family": {
 			// Property: Family
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -2157,46 +1132,32 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"inference_accelerators": {
 			// Property: InferenceAccelerators
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "DeviceName": {
-			           "type": "string"
-			         },
-			         "DeviceType": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "DeviceName": {
+			//         "type": "string"
+			//       },
+			//       "DeviceType": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"device_name": {
 						// Property: DeviceName
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"device_type": {
 						// Property: DeviceType
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -2210,11 +1171,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"ipc_mode": {
 			// Property: IpcMode
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -2223,11 +1182,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"memory": {
 			// Property: Memory
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -2236,11 +1193,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"network_mode": {
 			// Property: NetworkMode
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -2249,11 +1204,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"pid_mode": {
 			// Property: PidMode
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -2262,49 +1215,35 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"placement_constraints": {
 			// Property: PlacementConstraints
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Expression": {
-			           "type": "string"
-			         },
-			         "Type": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Type"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Expression": {
+			//         "type": "string"
+			//       },
+			//       "Type": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Type"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"expression": {
 						// Property: Expression
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -2318,95 +1257,56 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"proxy_configuration": {
 			// Property: ProxyConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "ContainerName": {
-			         "type": "string"
-			       },
-			       "ProxyConfigurationProperties": {
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Name": {
-			               "type": "string"
-			             },
-			             "Value": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "type": "array",
-			         "uniqueItems": true
-			       },
-			       "Type": {
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "ContainerName"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "ContainerName": {
+			//       "type": "string"
+			//     },
+			//     "ProxyConfigurationProperties": {
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Name": {
+			//             "type": "string"
+			//           },
+			//           "Value": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
+			//     "Type": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "ContainerName"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"container_name": {
 						// Property: ContainerName
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"proxy_configuration_properties": {
 						// Property: ProxyConfigurationProperties
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Name": {
-						           "type": "string"
-						         },
-						         "Value": {
-						           "type": "string"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": true
-						   }
-						*/
 						// Ordered set.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2417,12 +1317,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -2435,15 +1329,13 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"requires_compatibilities": {
 			// Property: RequiresCompatibilities
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			// Ordered set.
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
@@ -2453,44 +1345,30 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -2502,12 +1380,10 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"task_definition_arn": {
 			// Property: TaskDefinitionArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the Amazon ECS task definition",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the Amazon ECS task definition",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon ECS task definition",
 			Type:        types.StringType,
 			Computed:    true,
@@ -2515,11 +1391,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"task_role_arn": {
 			// Property: TaskRoleArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -2528,213 +1402,133 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"volumes": {
 			// Property: Volumes
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "DockerVolumeConfiguration": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Autoprovision": {
-			               "type": "boolean"
-			             },
-			             "Driver": {
-			               "type": "string"
-			             },
-			             "DriverOpts": {
-			               "additionalProperties": false,
-			               "patternProperties": {
-			                 "": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "Labels": {
-			               "additionalProperties": false,
-			               "patternProperties": {
-			                 "": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "Scope": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "EFSVolumeConfiguration": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "AuthorizationConfig": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "AccessPointId": {
-			                   "type": "string"
-			                 },
-			                 "IAM": {
-			                   "enum": [
-			                     "ENABLED",
-			                     "DISABLED"
-			                   ],
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "FilesystemId": {
-			               "type": "string"
-			             },
-			             "RootDirectory": {
-			               "type": "string"
-			             },
-			             "TransitEncryption": {
-			               "enum": [
-			                 "ENABLED",
-			                 "DISABLED"
-			               ],
-			               "type": "string"
-			             },
-			             "TransitEncryptionPort": {
-			               "type": "integer"
-			             }
-			           },
-			           "required": [
-			             "FilesystemId"
-			           ],
-			           "type": "object"
-			         },
-			         "Host": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "SourcePath": {
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "Name": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "DockerVolumeConfiguration": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Autoprovision": {
+			//             "type": "boolean"
+			//           },
+			//           "Driver": {
+			//             "type": "string"
+			//           },
+			//           "DriverOpts": {
+			//             "additionalProperties": false,
+			//             "patternProperties": {
+			//               "": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "Labels": {
+			//             "additionalProperties": false,
+			//             "patternProperties": {
+			//               "": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "Scope": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "EFSVolumeConfiguration": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "AuthorizationConfig": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "AccessPointId": {
+			//                 "type": "string"
+			//               },
+			//               "IAM": {
+			//                 "enum": [
+			//                   "ENABLED",
+			//                   "DISABLED"
+			//                 ],
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "FilesystemId": {
+			//             "type": "string"
+			//           },
+			//           "RootDirectory": {
+			//             "type": "string"
+			//           },
+			//           "TransitEncryption": {
+			//             "enum": [
+			//               "ENABLED",
+			//               "DISABLED"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "TransitEncryptionPort": {
+			//             "type": "integer"
+			//           }
+			//         },
+			//         "required": [
+			//           "FilesystemId"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "Host": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "SourcePath": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "Name": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"docker_volume_configuration": {
 						// Property: DockerVolumeConfiguration
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Autoprovision": {
-						         "type": "boolean"
-						       },
-						       "Driver": {
-						         "type": "string"
-						       },
-						       "DriverOpts": {
-						         "additionalProperties": false,
-						         "patternProperties": {
-						           "": {
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "Labels": {
-						         "additionalProperties": false,
-						         "patternProperties": {
-						           "": {
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "Scope": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"autoprovision": {
 									// Property: Autoprovision
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"driver": {
 									// Property: Driver
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"driver_opts": {
 									// Property: DriverOpts
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "patternProperties": {
-									       "": {
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"labels": {
 									// Property: Labels
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "patternProperties": {
-									       "": {
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									// Pattern: ""
 									Type:     types.MapType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"scope": {
 									// Property: Scope
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2744,98 +1538,19 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"efs_volume_configuration": {
 						// Property: EFSVolumeConfiguration
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "AuthorizationConfig": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "AccessPointId": {
-						             "type": "string"
-						           },
-						           "IAM": {
-						             "enum": [
-						               "ENABLED",
-						               "DISABLED"
-						             ],
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "FilesystemId": {
-						         "type": "string"
-						       },
-						       "RootDirectory": {
-						         "type": "string"
-						       },
-						       "TransitEncryption": {
-						         "enum": [
-						           "ENABLED",
-						           "DISABLED"
-						         ],
-						         "type": "string"
-						       },
-						       "TransitEncryptionPort": {
-						         "type": "integer"
-						       }
-						     },
-						     "required": [
-						       "FilesystemId"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"authorization_config": {
 									// Property: AuthorizationConfig
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "AccessPointId": {
-									         "type": "string"
-									       },
-									       "IAM": {
-									         "enum": [
-									           "ENABLED",
-									           "DISABLED"
-									         ],
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"access_point_id": {
 												// Property: AccessPointId
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"iam": {
 												// Property: IAM
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "enum": [
-												       "ENABLED",
-												       "DISABLED"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -2845,49 +1560,21 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"filesystem_id": {
 									// Property: FilesystemId
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"root_directory": {
 									// Property: RootDirectory
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"transit_encryption": {
 									// Property: TransitEncryption
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "ENABLED",
-									       "DISABLED"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"transit_encryption_port": {
 									// Property: TransitEncryptionPort
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -2897,28 +1584,10 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"host": {
 						// Property: Host
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "SourcePath": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"source_path": {
 									// Property: SourcePath
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2928,12 +1597,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},

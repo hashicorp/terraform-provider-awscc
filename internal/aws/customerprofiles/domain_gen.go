@@ -25,12 +25,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"created_at": {
 			// Property: CreatedAt
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The time of this integration got created",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The time of this integration got created",
+			//   "type": "string"
+			// }
 			Description: "The time of this integration got created",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,14 +36,12 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"dead_letter_queue_url": {
 			// Property: DeadLetterQueueUrl
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The URL of the SQS dead letter queue",
-			     "maxLength": 255,
-			     "minLength": 0,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The URL of the SQS dead letter queue",
+			//   "maxLength": 255,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
 			Description: "The URL of the SQS dead letter queue",
 			Type:        types.StringType,
 			Optional:    true,
@@ -53,14 +49,12 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"default_encryption_key": {
 			// Property: DefaultEncryptionKey
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The default encryption key",
-			     "maxLength": 255,
-			     "minLength": 0,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The default encryption key",
+			//   "maxLength": 255,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
 			Description: "The default encryption key",
 			Type:        types.StringType,
 			Optional:    true,
@@ -68,12 +62,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"default_expiration_days": {
 			// Property: DefaultExpirationDays
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The default number of days until the data within the domain expires.",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "The default number of days until the data within the domain expires.",
+			//   "type": "integer"
+			// }
 			Description: "The default number of days until the data within the domain expires.",
 			Type:        types.NumberType,
 			Optional:    true,
@@ -81,15 +73,13 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The unique name of the domain.",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The unique name of the domain.",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The unique name of the domain.",
 			Type:        types.StringType,
 			Required:    true,
@@ -98,12 +88,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"last_updated_at": {
 			// Property: LastUpdatedAt
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The time of this integration got last updated at",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The time of this integration got last updated at",
+			//   "type": "string"
+			// }
 			Description: "The time of this integration got last updated at",
 			Type:        types.StringType,
 			Computed:    true,
@@ -111,62 +99,43 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The tags (keys and values) associated with the domain",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "minItems": 0,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The tags (keys and values) associated with the domain",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "minItems": 0,
+			//   "type": "array"
+			// }
 			Description: "The tags (keys and values) associated with the domain",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

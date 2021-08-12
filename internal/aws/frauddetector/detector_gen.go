@@ -25,12 +25,10 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ARN of the detector.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ARN of the detector.",
+			//   "type": "string"
+			// }
 			Description: "The ARN of the detector.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,37 +36,29 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"associated_models": {
 			// Property: AssociatedModels
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The models to associate with this detector.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A model to associate with a detector.",
-			       "properties": {
-			         "Arn": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "maxItems": 10,
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "description": "The models to associate with this detector.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A model to associate with a detector.",
+			//     "properties": {
+			//       "Arn": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "maxItems": 10,
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Description: "The models to associate with this detector.",
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"arn": {
 						// Property: Arn
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -82,12 +72,10 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"created_time": {
 			// Property: CreatedTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The time when the detector was created.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The time when the detector was created.",
+			//   "type": "string"
+			// }
 			Description: "The time when the detector was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -95,14 +83,12 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The description of the detector.",
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The description of the detector.",
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The description of the detector.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -110,15 +96,13 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"detector_id": {
 			// Property: DetectorId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the detector",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the detector",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The ID of the detector",
 			Type:        types.StringType,
 			Required:    true,
@@ -127,12 +111,10 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"detector_version_id": {
 			// Property: DetectorVersionId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The active version ID of the detector",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The active version ID of the detector",
+			//   "type": "string"
+			// }
 			Description: "The active version ID of the detector",
 			Type:        types.StringType,
 			Computed:    true,
@@ -140,16 +122,14 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"detector_version_status": {
 			// Property: DetectorVersionStatus
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The desired detector version status for the detector",
-			     "enum": [
-			       "DRAFT",
-			       "ACTIVE"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The desired detector version status for the detector",
+			//   "enum": [
+			//     "DRAFT",
+			//     "ACTIVE"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The desired detector version status for the detector",
 			Type:        types.StringType,
 			Optional:    true,
@@ -157,557 +137,380 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"event_type": {
 			// Property: EventType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Arn": {
-			         "description": "The ARN of the event type.",
-			         "type": "string"
-			       },
-			       "CreatedTime": {
-			         "description": "The time when the event type was created.",
-			         "type": "string"
-			       },
-			       "Description": {
-			         "description": "The description of the event type.",
-			         "maxLength": 128,
-			         "minLength": 1,
-			         "type": "string"
-			       },
-			       "EntityTypes": {
-			         "insertionOrder": false,
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "CreatedTime": {
-			               "description": "The time when the entity type was created.",
-			               "type": "string"
-			             },
-			             "Description": {
-			               "description": "The description.",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Inline": {
-			               "type": "boolean"
-			             },
-			             "LastUpdatedTime": {
-			               "description": "The time when the entity type was last updated.",
-			               "type": "string"
-			             },
-			             "Name": {
-			               "type": "string"
-			             },
-			             "Tags": {
-			               "description": "Tags associated with this entity type.",
-			               "insertionOrder": false,
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "Key": {
-			                     "maxLength": 128,
-			                     "minLength": 1,
-			                     "type": "string"
-			                   },
-			                   "Value": {
-			                     "maxLength": 256,
-			                     "minLength": 0,
-			                     "type": "string"
-			                   }
-			                 },
-			                 "required": [
-			                   "Key",
-			                   "Value"
-			                 ],
-			                 "type": "object"
-			               },
-			               "maxItems": 200,
-			               "type": "array",
-			               "uniqueItems": false
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "minItems": 1,
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "EventVariables": {
-			         "insertionOrder": false,
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "CreatedTime": {
-			               "description": "The time when the event variable was created.",
-			               "type": "string"
-			             },
-			             "DataSource": {
-			               "enum": [
-			                 "EVENT"
-			               ],
-			               "type": "string"
-			             },
-			             "DataType": {
-			               "enum": [
-			                 "STRING",
-			                 "INTEGER",
-			                 "FLOAT",
-			                 "BOOLEAN"
-			               ],
-			               "type": "string"
-			             },
-			             "DefaultValue": {
-			               "type": "string"
-			             },
-			             "Description": {
-			               "description": "The description.",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Inline": {
-			               "type": "boolean"
-			             },
-			             "LastUpdatedTime": {
-			               "description": "The time when the event variable was last updated.",
-			               "type": "string"
-			             },
-			             "Name": {
-			               "type": "string"
-			             },
-			             "Tags": {
-			               "description": "Tags associated with this event variable.",
-			               "insertionOrder": false,
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "Key": {
-			                     "maxLength": 128,
-			                     "minLength": 1,
-			                     "type": "string"
-			                   },
-			                   "Value": {
-			                     "maxLength": 256,
-			                     "minLength": 0,
-			                     "type": "string"
-			                   }
-			                 },
-			                 "required": [
-			                   "Key",
-			                   "Value"
-			                 ],
-			                 "type": "object"
-			               },
-			               "maxItems": 200,
-			               "type": "array",
-			               "uniqueItems": false
-			             },
-			             "VariableType": {
-			               "enum": [
-			                 "AUTH_CODE",
-			                 "AVS",
-			                 "BILLING_ADDRESS_L1",
-			                 "BILLING_ADDRESS_L2",
-			                 "BILLING_CITY",
-			                 "BILLING_COUNTRY",
-			                 "BILLING_NAME",
-			                 "BILLING_PHONE",
-			                 "BILLING_STATE",
-			                 "BILLING_ZIP",
-			                 "CARD_BIN",
-			                 "CATEGORICAL",
-			                 "CURRENCY_CODE",
-			                 "EMAIL_ADDRESS",
-			                 "FINGERPRINT",
-			                 "FRAUD_LABEL",
-			                 "FREE_FORM_TEXT",
-			                 "IP_ADDRESS",
-			                 "NUMERIC",
-			                 "ORDER_ID",
-			                 "PAYMENT_TYPE",
-			                 "PHONE_NUMBER",
-			                 "PRICE",
-			                 "PRODUCT_CATEGORY",
-			                 "SHIPPING_ADDRESS_L1",
-			                 "SHIPPING_ADDRESS_L2",
-			                 "SHIPPING_CITY",
-			                 "SHIPPING_COUNTRY",
-			                 "SHIPPING_NAME",
-			                 "SHIPPING_PHONE",
-			                 "SHIPPING_STATE",
-			                 "SHIPPING_ZIP",
-			                 "USERAGENT"
-			               ],
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "minItems": 1,
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "Inline": {
-			         "type": "boolean"
-			       },
-			       "Labels": {
-			         "insertionOrder": false,
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Arn": {
-			               "type": "string"
-			             },
-			             "CreatedTime": {
-			               "description": "The time when the label was created.",
-			               "type": "string"
-			             },
-			             "Description": {
-			               "description": "The description.",
-			               "maxLength": 256,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Inline": {
-			               "type": "boolean"
-			             },
-			             "LastUpdatedTime": {
-			               "description": "The time when the label was last updated.",
-			               "type": "string"
-			             },
-			             "Name": {
-			               "type": "string"
-			             },
-			             "Tags": {
-			               "description": "Tags associated with this label.",
-			               "insertionOrder": false,
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "Key": {
-			                     "maxLength": 128,
-			                     "minLength": 1,
-			                     "type": "string"
-			                   },
-			                   "Value": {
-			                     "maxLength": 256,
-			                     "minLength": 0,
-			                     "type": "string"
-			                   }
-			                 },
-			                 "required": [
-			                   "Key",
-			                   "Value"
-			                 ],
-			                 "type": "object"
-			               },
-			               "maxItems": 200,
-			               "type": "array",
-			               "uniqueItems": false
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "minItems": 2,
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "LastUpdatedTime": {
-			         "description": "The time when the event type was last updated.",
-			         "type": "string"
-			       },
-			       "Name": {
-			         "description": "The name for the event type",
-			         "maxLength": 64,
-			         "minLength": 1,
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "Tags": {
-			         "description": "Tags associated with this event type.",
-			         "insertionOrder": false,
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Key": {
-			               "maxLength": 128,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Value": {
-			               "maxLength": 256,
-			               "minLength": 0,
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "Key",
-			             "Value"
-			           ],
-			           "type": "object"
-			         },
-			         "maxItems": 200,
-			         "type": "array",
-			         "uniqueItems": false
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Arn": {
+			//       "description": "The ARN of the event type.",
+			//       "type": "string"
+			//     },
+			//     "CreatedTime": {
+			//       "description": "The time when the event type was created.",
+			//       "type": "string"
+			//     },
+			//     "Description": {
+			//       "description": "The description of the event type.",
+			//       "maxLength": 128,
+			//       "minLength": 1,
+			//       "type": "string"
+			//     },
+			//     "EntityTypes": {
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "CreatedTime": {
+			//             "description": "The time when the entity type was created.",
+			//             "type": "string"
+			//           },
+			//           "Description": {
+			//             "description": "The description.",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Inline": {
+			//             "type": "boolean"
+			//           },
+			//           "LastUpdatedTime": {
+			//             "description": "The time when the entity type was last updated.",
+			//             "type": "string"
+			//           },
+			//           "Name": {
+			//             "type": "string"
+			//           },
+			//           "Tags": {
+			//             "description": "Tags associated with this entity type.",
+			//             "insertionOrder": false,
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Key": {
+			//                   "maxLength": 128,
+			//                   "minLength": 1,
+			//                   "type": "string"
+			//                 },
+			//                 "Value": {
+			//                   "maxLength": 256,
+			//                   "minLength": 0,
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Key",
+			//                 "Value"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "maxItems": 200,
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "minItems": 1,
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "EventVariables": {
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "CreatedTime": {
+			//             "description": "The time when the event variable was created.",
+			//             "type": "string"
+			//           },
+			//           "DataSource": {
+			//             "enum": [
+			//               "EVENT"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "DataType": {
+			//             "enum": [
+			//               "STRING",
+			//               "INTEGER",
+			//               "FLOAT",
+			//               "BOOLEAN"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "DefaultValue": {
+			//             "type": "string"
+			//           },
+			//           "Description": {
+			//             "description": "The description.",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Inline": {
+			//             "type": "boolean"
+			//           },
+			//           "LastUpdatedTime": {
+			//             "description": "The time when the event variable was last updated.",
+			//             "type": "string"
+			//           },
+			//           "Name": {
+			//             "type": "string"
+			//           },
+			//           "Tags": {
+			//             "description": "Tags associated with this event variable.",
+			//             "insertionOrder": false,
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Key": {
+			//                   "maxLength": 128,
+			//                   "minLength": 1,
+			//                   "type": "string"
+			//                 },
+			//                 "Value": {
+			//                   "maxLength": 256,
+			//                   "minLength": 0,
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Key",
+			//                 "Value"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "maxItems": 200,
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           },
+			//           "VariableType": {
+			//             "enum": [
+			//               "AUTH_CODE",
+			//               "AVS",
+			//               "BILLING_ADDRESS_L1",
+			//               "BILLING_ADDRESS_L2",
+			//               "BILLING_CITY",
+			//               "BILLING_COUNTRY",
+			//               "BILLING_NAME",
+			//               "BILLING_PHONE",
+			//               "BILLING_STATE",
+			//               "BILLING_ZIP",
+			//               "CARD_BIN",
+			//               "CATEGORICAL",
+			//               "CURRENCY_CODE",
+			//               "EMAIL_ADDRESS",
+			//               "FINGERPRINT",
+			//               "FRAUD_LABEL",
+			//               "FREE_FORM_TEXT",
+			//               "IP_ADDRESS",
+			//               "NUMERIC",
+			//               "ORDER_ID",
+			//               "PAYMENT_TYPE",
+			//               "PHONE_NUMBER",
+			//               "PRICE",
+			//               "PRODUCT_CATEGORY",
+			//               "SHIPPING_ADDRESS_L1",
+			//               "SHIPPING_ADDRESS_L2",
+			//               "SHIPPING_CITY",
+			//               "SHIPPING_COUNTRY",
+			//               "SHIPPING_NAME",
+			//               "SHIPPING_PHONE",
+			//               "SHIPPING_STATE",
+			//               "SHIPPING_ZIP",
+			//               "USERAGENT"
+			//             ],
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "minItems": 1,
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "Inline": {
+			//       "type": "boolean"
+			//     },
+			//     "Labels": {
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Arn": {
+			//             "type": "string"
+			//           },
+			//           "CreatedTime": {
+			//             "description": "The time when the label was created.",
+			//             "type": "string"
+			//           },
+			//           "Description": {
+			//             "description": "The description.",
+			//             "maxLength": 256,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Inline": {
+			//             "type": "boolean"
+			//           },
+			//           "LastUpdatedTime": {
+			//             "description": "The time when the label was last updated.",
+			//             "type": "string"
+			//           },
+			//           "Name": {
+			//             "type": "string"
+			//           },
+			//           "Tags": {
+			//             "description": "Tags associated with this label.",
+			//             "insertionOrder": false,
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Key": {
+			//                   "maxLength": 128,
+			//                   "minLength": 1,
+			//                   "type": "string"
+			//                 },
+			//                 "Value": {
+			//                   "maxLength": 256,
+			//                   "minLength": 0,
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Key",
+			//                 "Value"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "maxItems": 200,
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "minItems": 2,
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "LastUpdatedTime": {
+			//       "description": "The time when the event type was last updated.",
+			//       "type": "string"
+			//     },
+			//     "Name": {
+			//       "description": "The name for the event type",
+			//       "maxLength": 64,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "Tags": {
+			//       "description": "Tags associated with this event type.",
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Key": {
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Value": {
+			//             "maxLength": 256,
+			//             "minLength": 0,
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "Key",
+			//           "Value"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "maxItems": 200,
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"arn": {
 						// Property: Arn
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The ARN of the event type.",
-						     "type": "string"
-						   }
-						*/
 						Description: "The ARN of the event type.",
 						Type:        types.StringType,
 						Computed:    true,
 					},
 					"created_time": {
 						// Property: CreatedTime
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The time when the event type was created.",
-						     "type": "string"
-						   }
-						*/
 						Description: "The time when the event type was created.",
 						Type:        types.StringType,
 						Computed:    true,
 					},
 					"description": {
 						// Property: Description
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The description of the event type.",
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "The description of the event type.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"entity_types": {
 						// Property: EntityTypes
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Arn": {
-						           "type": "string"
-						         },
-						         "CreatedTime": {
-						           "description": "The time when the entity type was created.",
-						           "type": "string"
-						         },
-						         "Description": {
-						           "description": "The description.",
-						           "maxLength": 256,
-						           "minLength": 1,
-						           "type": "string"
-						         },
-						         "Inline": {
-						           "type": "boolean"
-						         },
-						         "LastUpdatedTime": {
-						           "description": "The time when the entity type was last updated.",
-						           "type": "string"
-						         },
-						         "Name": {
-						           "type": "string"
-						         },
-						         "Tags": {
-						           "description": "Tags associated with this entity type.",
-						           "insertionOrder": false,
-						           "items": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "Key": {
-						                 "maxLength": 128,
-						                 "minLength": 1,
-						                 "type": "string"
-						               },
-						               "Value": {
-						                 "maxLength": 256,
-						                 "minLength": 0,
-						                 "type": "string"
-						               }
-						             },
-						             "required": [
-						               "Key",
-						               "Value"
-						             ],
-						             "type": "object"
-						           },
-						           "maxItems": 200,
-						           "type": "array",
-						           "uniqueItems": false
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "minItems": 1,
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						// Multiset.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"created_time": {
 									// Property: CreatedTime
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The time when the entity type was created.",
-									     "type": "string"
-									   }
-									*/
 									Description: "The time when the entity type was created.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"description": {
 									// Property: Description
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The description.",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
 									Description: "The description.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"inline": {
 									// Property: Inline
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"last_updated_time": {
 									// Property: LastUpdatedTime
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The time when the entity type was last updated.",
-									     "type": "string"
-									   }
-									*/
 									Description: "The time when the entity type was last updated.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"tags": {
 									// Property: Tags
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Tags associated with this entity type.",
-									     "insertionOrder": false,
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "Key": {
-									           "maxLength": 128,
-									           "minLength": 1,
-									           "type": "string"
-									         },
-									         "Value": {
-									           "maxLength": 256,
-									           "minLength": 0,
-									           "type": "string"
-									         }
-									       },
-									       "required": [
-									         "Key",
-									         "Value"
-									       ],
-									       "type": "object"
-									     },
-									     "maxItems": 200,
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Description: "Tags associated with this entity type.",
 									// Multiset.
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 128,
-												     "minLength": 1,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"value": {
 												// Property: Value
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 256,
-												     "minLength": 0,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -727,305 +530,70 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"event_variables": {
 						// Property: EventVariables
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Arn": {
-						           "type": "string"
-						         },
-						         "CreatedTime": {
-						           "description": "The time when the event variable was created.",
-						           "type": "string"
-						         },
-						         "DataSource": {
-						           "enum": [
-						             "EVENT"
-						           ],
-						           "type": "string"
-						         },
-						         "DataType": {
-						           "enum": [
-						             "STRING",
-						             "INTEGER",
-						             "FLOAT",
-						             "BOOLEAN"
-						           ],
-						           "type": "string"
-						         },
-						         "DefaultValue": {
-						           "type": "string"
-						         },
-						         "Description": {
-						           "description": "The description.",
-						           "maxLength": 256,
-						           "minLength": 1,
-						           "type": "string"
-						         },
-						         "Inline": {
-						           "type": "boolean"
-						         },
-						         "LastUpdatedTime": {
-						           "description": "The time when the event variable was last updated.",
-						           "type": "string"
-						         },
-						         "Name": {
-						           "type": "string"
-						         },
-						         "Tags": {
-						           "description": "Tags associated with this event variable.",
-						           "insertionOrder": false,
-						           "items": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "Key": {
-						                 "maxLength": 128,
-						                 "minLength": 1,
-						                 "type": "string"
-						               },
-						               "Value": {
-						                 "maxLength": 256,
-						                 "minLength": 0,
-						                 "type": "string"
-						               }
-						             },
-						             "required": [
-						               "Key",
-						               "Value"
-						             ],
-						             "type": "object"
-						           },
-						           "maxItems": 200,
-						           "type": "array",
-						           "uniqueItems": false
-						         },
-						         "VariableType": {
-						           "enum": [
-						             "AUTH_CODE",
-						             "AVS",
-						             "BILLING_ADDRESS_L1",
-						             "BILLING_ADDRESS_L2",
-						             "BILLING_CITY",
-						             "BILLING_COUNTRY",
-						             "BILLING_NAME",
-						             "BILLING_PHONE",
-						             "BILLING_STATE",
-						             "BILLING_ZIP",
-						             "CARD_BIN",
-						             "CATEGORICAL",
-						             "CURRENCY_CODE",
-						             "EMAIL_ADDRESS",
-						             "FINGERPRINT",
-						             "FRAUD_LABEL",
-						             "FREE_FORM_TEXT",
-						             "IP_ADDRESS",
-						             "NUMERIC",
-						             "ORDER_ID",
-						             "PAYMENT_TYPE",
-						             "PHONE_NUMBER",
-						             "PRICE",
-						             "PRODUCT_CATEGORY",
-						             "SHIPPING_ADDRESS_L1",
-						             "SHIPPING_ADDRESS_L2",
-						             "SHIPPING_CITY",
-						             "SHIPPING_COUNTRY",
-						             "SHIPPING_NAME",
-						             "SHIPPING_PHONE",
-						             "SHIPPING_STATE",
-						             "SHIPPING_ZIP",
-						             "USERAGENT"
-						           ],
-						           "type": "string"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "minItems": 1,
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						// Multiset.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"created_time": {
 									// Property: CreatedTime
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The time when the event variable was created.",
-									     "type": "string"
-									   }
-									*/
 									Description: "The time when the event variable was created.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"data_source": {
 									// Property: DataSource
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "EVENT"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"data_type": {
 									// Property: DataType
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "STRING",
-									       "INTEGER",
-									       "FLOAT",
-									       "BOOLEAN"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"default_value": {
 									// Property: DefaultValue
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"description": {
 									// Property: Description
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The description.",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
 									Description: "The description.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"inline": {
 									// Property: Inline
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"last_updated_time": {
 									// Property: LastUpdatedTime
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The time when the event variable was last updated.",
-									     "type": "string"
-									   }
-									*/
 									Description: "The time when the event variable was last updated.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"tags": {
 									// Property: Tags
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Tags associated with this event variable.",
-									     "insertionOrder": false,
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "Key": {
-									           "maxLength": 128,
-									           "minLength": 1,
-									           "type": "string"
-									         },
-									         "Value": {
-									           "maxLength": 256,
-									           "minLength": 0,
-									           "type": "string"
-									         }
-									       },
-									       "required": [
-									         "Key",
-									         "Value"
-									       ],
-									       "type": "object"
-									     },
-									     "maxItems": 200,
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Description: "Tags associated with this event variable.",
 									// Multiset.
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 128,
-												     "minLength": 1,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"value": {
 												// Property: Value
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 256,
-												     "minLength": 0,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1038,47 +606,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"variable_type": {
 									// Property: VariableType
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "AUTH_CODE",
-									       "AVS",
-									       "BILLING_ADDRESS_L1",
-									       "BILLING_ADDRESS_L2",
-									       "BILLING_CITY",
-									       "BILLING_COUNTRY",
-									       "BILLING_NAME",
-									       "BILLING_PHONE",
-									       "BILLING_STATE",
-									       "BILLING_ZIP",
-									       "CARD_BIN",
-									       "CATEGORICAL",
-									       "CURRENCY_CODE",
-									       "EMAIL_ADDRESS",
-									       "FINGERPRINT",
-									       "FRAUD_LABEL",
-									       "FREE_FORM_TEXT",
-									       "IP_ADDRESS",
-									       "NUMERIC",
-									       "ORDER_ID",
-									       "PAYMENT_TYPE",
-									       "PHONE_NUMBER",
-									       "PRICE",
-									       "PRODUCT_CATEGORY",
-									       "SHIPPING_ADDRESS_L1",
-									       "SHIPPING_ADDRESS_L2",
-									       "SHIPPING_CITY",
-									       "SHIPPING_COUNTRY",
-									       "SHIPPING_NAME",
-									       "SHIPPING_PHONE",
-									       "SHIPPING_STATE",
-									       "SHIPPING_ZIP",
-									       "USERAGENT"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1091,218 +618,60 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"inline": {
 						// Property: Inline
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"labels": {
 						// Property: Labels
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Arn": {
-						           "type": "string"
-						         },
-						         "CreatedTime": {
-						           "description": "The time when the label was created.",
-						           "type": "string"
-						         },
-						         "Description": {
-						           "description": "The description.",
-						           "maxLength": 256,
-						           "minLength": 1,
-						           "type": "string"
-						         },
-						         "Inline": {
-						           "type": "boolean"
-						         },
-						         "LastUpdatedTime": {
-						           "description": "The time when the label was last updated.",
-						           "type": "string"
-						         },
-						         "Name": {
-						           "type": "string"
-						         },
-						         "Tags": {
-						           "description": "Tags associated with this label.",
-						           "insertionOrder": false,
-						           "items": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "Key": {
-						                 "maxLength": 128,
-						                 "minLength": 1,
-						                 "type": "string"
-						               },
-						               "Value": {
-						                 "maxLength": 256,
-						                 "minLength": 0,
-						                 "type": "string"
-						               }
-						             },
-						             "required": [
-						               "Key",
-						               "Value"
-						             ],
-						             "type": "object"
-						           },
-						           "maxItems": 200,
-						           "type": "array",
-						           "uniqueItems": false
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "minItems": 2,
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						// Multiset.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"created_time": {
 									// Property: CreatedTime
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The time when the label was created.",
-									     "type": "string"
-									   }
-									*/
 									Description: "The time when the label was created.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"description": {
 									// Property: Description
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The description.",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
 									Description: "The description.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"inline": {
 									// Property: Inline
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"last_updated_time": {
 									// Property: LastUpdatedTime
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The time when the label was last updated.",
-									     "type": "string"
-									   }
-									*/
 									Description: "The time when the label was last updated.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"tags": {
 									// Property: Tags
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Tags associated with this label.",
-									     "insertionOrder": false,
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "Key": {
-									           "maxLength": 128,
-									           "minLength": 1,
-									           "type": "string"
-									         },
-									         "Value": {
-									           "maxLength": 256,
-									           "minLength": 0,
-									           "type": "string"
-									         }
-									       },
-									       "required": [
-									         "Key",
-									         "Value"
-									       ],
-									       "type": "object"
-									     },
-									     "maxItems": 200,
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Description: "Tags associated with this label.",
 									// Multiset.
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 128,
-												     "minLength": 1,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"value": {
 												// Property: Value
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 256,
-												     "minLength": 0,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1322,92 +691,29 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"last_updated_time": {
 						// Property: LastUpdatedTime
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The time when the event type was last updated.",
-						     "type": "string"
-						   }
-						*/
 						Description: "The time when the event type was last updated.",
 						Type:        types.StringType,
 						Computed:    true,
 					},
 					"name": {
 						// Property: Name
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The name for the event type",
-						     "maxLength": 64,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The name for the event type",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"tags": {
 						// Property: Tags
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Tags associated with this event type.",
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Key": {
-						           "maxLength": 128,
-						           "minLength": 1,
-						           "type": "string"
-						         },
-						         "Value": {
-						           "maxLength": 256,
-						           "minLength": 0,
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "Key",
-						         "Value"
-						       ],
-						       "type": "object"
-						     },
-						     "maxItems": 200,
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						Description: "Tags associated with this event type.",
 						// Multiset.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 256,
-									     "minLength": 0,
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -1425,12 +731,10 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"last_updated_time": {
 			// Property: LastUpdatedTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The time when the detector was last updated.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The time when the detector was last updated.",
+			//   "type": "string"
+			// }
 			Description: "The time when the detector was last updated.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -1438,453 +742,247 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"rule_execution_mode": {
 			// Property: RuleExecutionMode
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "FIRST_MATCHED",
-			       "ALL_MATCHED"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "FIRST_MATCHED",
+			//     "ALL_MATCHED"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"rules": {
 			// Property: Rules
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Arn": {
-			           "type": "string"
-			         },
-			         "CreatedTime": {
-			           "description": "The time when the event type was created.",
-			           "type": "string"
-			         },
-			         "Description": {
-			           "description": "The description.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "DetectorId": {
-			           "type": "string"
-			         },
-			         "Expression": {
-			           "type": "string"
-			         },
-			         "Language": {
-			           "enum": [
-			             "DETECTORPL"
-			           ],
-			           "type": "string"
-			         },
-			         "LastUpdatedTime": {
-			           "description": "The time when the event type was last updated.",
-			           "type": "string"
-			         },
-			         "Outcomes": {
-			           "insertionOrder": false,
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Arn": {
-			                 "type": "string"
-			               },
-			               "CreatedTime": {
-			                 "description": "The time when the outcome was created.",
-			                 "type": "string"
-			               },
-			               "Description": {
-			                 "description": "The description.",
-			                 "maxLength": 256,
-			                 "minLength": 1,
-			                 "type": "string"
-			               },
-			               "Inline": {
-			                 "type": "boolean"
-			               },
-			               "LastUpdatedTime": {
-			                 "description": "The time when the outcome was last updated.",
-			                 "type": "string"
-			               },
-			               "Name": {
-			                 "type": "string"
-			               },
-			               "Tags": {
-			                 "description": "Tags associated with this outcome.",
-			                 "insertionOrder": false,
-			                 "items": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "Key": {
-			                       "maxLength": 128,
-			                       "minLength": 1,
-			                       "type": "string"
-			                     },
-			                     "Value": {
-			                       "maxLength": 256,
-			                       "minLength": 0,
-			                       "type": "string"
-			                     }
-			                   },
-			                   "required": [
-			                     "Key",
-			                     "Value"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "maxItems": 200,
-			                 "type": "array",
-			                 "uniqueItems": false
-			               }
-			             },
-			             "type": "object"
-			           },
-			           "minItems": 1,
-			           "type": "array",
-			           "uniqueItems": false
-			         },
-			         "RuleId": {
-			           "type": "string"
-			         },
-			         "RuleVersion": {
-			           "type": "string"
-			         },
-			         "Tags": {
-			           "description": "Tags associated with this event type.",
-			           "insertionOrder": false,
-			           "items": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Key": {
-			                 "maxLength": 128,
-			                 "minLength": 1,
-			                 "type": "string"
-			               },
-			               "Value": {
-			                 "maxLength": 256,
-			                 "minLength": 0,
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Key",
-			               "Value"
-			             ],
-			             "type": "object"
-			           },
-			           "maxItems": 200,
-			           "type": "array",
-			           "uniqueItems": false
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "minItems": 1,
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Arn": {
+			//         "type": "string"
+			//       },
+			//       "CreatedTime": {
+			//         "description": "The time when the event type was created.",
+			//         "type": "string"
+			//       },
+			//       "Description": {
+			//         "description": "The description.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "DetectorId": {
+			//         "type": "string"
+			//       },
+			//       "Expression": {
+			//         "type": "string"
+			//       },
+			//       "Language": {
+			//         "enum": [
+			//           "DETECTORPL"
+			//         ],
+			//         "type": "string"
+			//       },
+			//       "LastUpdatedTime": {
+			//         "description": "The time when the event type was last updated.",
+			//         "type": "string"
+			//       },
+			//       "Outcomes": {
+			//         "insertionOrder": false,
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Arn": {
+			//               "type": "string"
+			//             },
+			//             "CreatedTime": {
+			//               "description": "The time when the outcome was created.",
+			//               "type": "string"
+			//             },
+			//             "Description": {
+			//               "description": "The description.",
+			//               "maxLength": 256,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             },
+			//             "Inline": {
+			//               "type": "boolean"
+			//             },
+			//             "LastUpdatedTime": {
+			//               "description": "The time when the outcome was last updated.",
+			//               "type": "string"
+			//             },
+			//             "Name": {
+			//               "type": "string"
+			//             },
+			//             "Tags": {
+			//               "description": "Tags associated with this outcome.",
+			//               "insertionOrder": false,
+			//               "items": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "Key": {
+			//                     "maxLength": 128,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "Value": {
+			//                     "maxLength": 256,
+			//                     "minLength": 0,
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Key",
+			//                   "Value"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "maxItems": 200,
+			//               "type": "array",
+			//               "uniqueItems": false
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "minItems": 1,
+			//         "type": "array",
+			//         "uniqueItems": false
+			//       },
+			//       "RuleId": {
+			//         "type": "string"
+			//       },
+			//       "RuleVersion": {
+			//         "type": "string"
+			//       },
+			//       "Tags": {
+			//         "description": "Tags associated with this event type.",
+			//         "insertionOrder": false,
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Key": {
+			//               "maxLength": 128,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             },
+			//             "Value": {
+			//               "maxLength": 256,
+			//               "minLength": 0,
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Key",
+			//             "Value"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "maxItems": 200,
+			//         "type": "array",
+			//         "uniqueItems": false
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"arn": {
 						// Property: Arn
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"created_time": {
 						// Property: CreatedTime
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The time when the event type was created.",
-						     "type": "string"
-						   }
-						*/
 						Description: "The time when the event type was created.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"description": {
 						// Property: Description
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The description.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "The description.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"detector_id": {
 						// Property: DetectorId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"expression": {
 						// Property: Expression
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"language": {
 						// Property: Language
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "DETECTORPL"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"last_updated_time": {
 						// Property: LastUpdatedTime
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The time when the event type was last updated.",
-						     "type": "string"
-						   }
-						*/
 						Description: "The time when the event type was last updated.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"outcomes": {
 						// Property: Outcomes
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Arn": {
-						           "type": "string"
-						         },
-						         "CreatedTime": {
-						           "description": "The time when the outcome was created.",
-						           "type": "string"
-						         },
-						         "Description": {
-						           "description": "The description.",
-						           "maxLength": 256,
-						           "minLength": 1,
-						           "type": "string"
-						         },
-						         "Inline": {
-						           "type": "boolean"
-						         },
-						         "LastUpdatedTime": {
-						           "description": "The time when the outcome was last updated.",
-						           "type": "string"
-						         },
-						         "Name": {
-						           "type": "string"
-						         },
-						         "Tags": {
-						           "description": "Tags associated with this outcome.",
-						           "insertionOrder": false,
-						           "items": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "Key": {
-						                 "maxLength": 128,
-						                 "minLength": 1,
-						                 "type": "string"
-						               },
-						               "Value": {
-						                 "maxLength": 256,
-						                 "minLength": 0,
-						                 "type": "string"
-						               }
-						             },
-						             "required": [
-						               "Key",
-						               "Value"
-						             ],
-						             "type": "object"
-						           },
-						           "maxItems": 200,
-						           "type": "array",
-						           "uniqueItems": false
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "minItems": 1,
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						// Multiset.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"arn": {
 									// Property: Arn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"created_time": {
 									// Property: CreatedTime
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The time when the outcome was created.",
-									     "type": "string"
-									   }
-									*/
 									Description: "The time when the outcome was created.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"description": {
 									// Property: Description
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The description.",
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
 									Description: "The description.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"inline": {
 									// Property: Inline
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"last_updated_time": {
 									// Property: LastUpdatedTime
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The time when the outcome was last updated.",
-									     "type": "string"
-									   }
-									*/
 									Description: "The time when the outcome was last updated.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"tags": {
 									// Property: Tags
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Tags associated with this outcome.",
-									     "insertionOrder": false,
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "Key": {
-									           "maxLength": 128,
-									           "minLength": 1,
-									           "type": "string"
-									         },
-									         "Value": {
-									           "maxLength": 256,
-									           "minLength": 0,
-									           "type": "string"
-									         }
-									       },
-									       "required": [
-									         "Key",
-									         "Value"
-									       ],
-									       "type": "object"
-									     },
-									     "maxItems": 200,
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Description: "Tags associated with this outcome.",
 									// Multiset.
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 128,
-												     "minLength": 1,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"value": {
 												// Property: Value
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 256,
-												     "minLength": 0,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1904,85 +1002,27 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"rule_id": {
 						// Property: RuleId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"rule_version": {
 						// Property: RuleVersion
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"tags": {
 						// Property: Tags
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Tags associated with this event type.",
-						     "insertionOrder": false,
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "Key": {
-						           "maxLength": 128,
-						           "minLength": 1,
-						           "type": "string"
-						         },
-						         "Value": {
-						           "maxLength": 256,
-						           "minLength": 0,
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "Key",
-						         "Value"
-						       ],
-						       "type": "object"
-						     },
-						     "maxItems": 200,
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						Description: "Tags associated with this event type.",
 						// Multiset.
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 128,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 256,
-									     "minLength": 0,
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -2003,62 +1043,44 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Tags associated with this detector.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 200,
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "description": "Tags associated with this detector.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 200,
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Description: "Tags associated with this detector.",
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

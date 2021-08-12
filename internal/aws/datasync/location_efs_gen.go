@@ -26,57 +26,40 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"ec_2_config": {
 			// Property: Ec2Config
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "The subnet and security group that DataSync uses to access target EFS file system.",
-			     "properties": {
-			       "SecurityGroupArns": {
-			         "description": "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
-			         "insertionOrder": false,
-			         "items": {
-			           "maxLength": 128,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "maxItems": 5,
-			         "minItems": 1,
-			         "type": "array"
-			       },
-			       "SubnetArn": {
-			         "description": "The ARN of the subnet that DataSync uses to access the target EFS file system.",
-			         "maxLength": 128,
-			         "pattern": "",
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "SecurityGroupArns",
-			       "SubnetArn"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The subnet and security group that DataSync uses to access target EFS file system.",
+			//   "properties": {
+			//     "SecurityGroupArns": {
+			//       "description": "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "maxLength": 128,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "maxItems": 5,
+			//       "minItems": 1,
+			//       "type": "array"
+			//     },
+			//     "SubnetArn": {
+			//       "description": "The ARN of the subnet that DataSync uses to access the target EFS file system.",
+			//       "maxLength": 128,
+			//       "pattern": "",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "SecurityGroupArns",
+			//     "SubnetArn"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "The subnet and security group that DataSync uses to access target EFS file system.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"security_group_arns": {
 						// Property: SecurityGroupArns
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
-						     "insertionOrder": false,
-						     "items": {
-						       "maxLength": 128,
-						       "pattern": "",
-						       "type": "string"
-						     },
-						     "maxItems": 5,
-						     "minItems": 1,
-						     "type": "array"
-						   }
-						*/
 						Description: "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
 						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
@@ -84,15 +67,6 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"subnet_arn": {
 						// Property: SubnetArn
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The ARN of the subnet that DataSync uses to access the target EFS file system.",
-						     "maxLength": 128,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The ARN of the subnet that DataSync uses to access the target EFS file system.",
 						Type:        types.StringType,
 						Required:    true,
@@ -105,14 +79,12 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"efs_filesystem_arn": {
 			// Property: EfsFilesystemArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
-			     "maxLength": 128,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
+			//   "maxLength": 128,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
 			Type:        types.StringType,
 			Required:    true,
@@ -122,14 +94,12 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"location_arn": {
 			// Property: LocationArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
-			     "maxLength": 128,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
+			//   "maxLength": 128,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -137,14 +107,12 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"location_uri": {
 			// Property: LocationUri
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The URL of the EFS location that was described.",
-			     "maxLength": 4356,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The URL of the EFS location that was described.",
+			//   "maxLength": 4356,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The URL of the EFS location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -152,14 +120,12 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"subdirectory": {
 			// Property: Subdirectory
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.",
-			     "maxLength": 4096,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.",
+			//   "maxLength": 4096,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -170,71 +136,49 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key for an AWS resource tag.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for an AWS resource tag.",
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key for an AWS resource tag.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for an AWS resource tag.",
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key for an AWS resource tag.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for an AWS resource tag.",
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,

@@ -25,12 +25,10 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ARN of the PackagingConfiguration.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ARN of the PackagingConfiguration.",
+			//   "type": "string"
+			// }
 			Description: "The ARN of the PackagingConfiguration.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,244 +36,148 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"cmaf_package": {
 			// Property: CmafPackage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "A CMAF packaging configuration.",
-			     "properties": {
-			       "Encryption": {
-			         "additionalProperties": false,
-			         "description": "A CMAF encryption configuration.",
-			         "properties": {
-			           "SpekeKeyProvider": {
-			             "additionalProperties": false,
-			             "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-			             "properties": {
-			               "RoleArn": {
-			                 "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-			                 "type": "string"
-			               },
-			               "SystemIds": {
-			                 "description": "The system IDs to include in key requests.",
-			                 "items": {
-			                   "type": "string"
-			                 },
-			                 "type": "array"
-			               },
-			               "Url": {
-			                 "description": "The URL of the external key provider service.",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "RoleArn",
-			               "SystemIds",
-			               "Url"
-			             ],
-			             "type": "object"
-			           }
-			         },
-			         "required": [
-			           "SpekeKeyProvider"
-			         ],
-			         "type": "object"
-			       },
-			       "HlsManifests": {
-			         "description": "A list of HLS manifest configurations.",
-			         "items": {
-			           "additionalProperties": false,
-			           "description": "An HTTP Live Streaming (HLS) manifest configuration.",
-			           "properties": {
-			             "AdMarkers": {
-			               "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
-			               "enum": [
-			                 "NONE",
-			                 "SCTE35_ENHANCED",
-			                 "PASSTHROUGH"
-			               ],
-			               "type": "string"
-			             },
-			             "IncludeIframeOnlyStream": {
-			               "description": "When enabled, an I-Frame only stream will be included in the output.",
-			               "type": "boolean"
-			             },
-			             "ManifestName": {
-			               "description": "An optional string to include in the name of the manifest.",
-			               "type": "string"
-			             },
-			             "ProgramDateTimeIntervalSeconds": {
-			               "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-			               "type": "integer"
-			             },
-			             "RepeatExtXKey": {
-			               "description": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
-			               "type": "boolean"
-			             },
-			             "StreamSelection": {
-			               "additionalProperties": false,
-			               "description": "A StreamSelection configuration.",
-			               "properties": {
-			                 "MaxVideoBitsPerSecond": {
-			                   "description": "The maximum video bitrate (bps) to include in output.",
-			                   "type": "integer"
-			                 },
-			                 "MinVideoBitsPerSecond": {
-			                   "description": "The minimum video bitrate (bps) to include in output.",
-			                   "type": "integer"
-			                 },
-			                 "StreamOrder": {
-			                   "description": "A directive that determines the order of streams in the output.",
-			                   "enum": [
-			                     "ORIGINAL",
-			                     "VIDEO_BITRATE_ASCENDING",
-			                     "VIDEO_BITRATE_DESCENDING"
-			                   ],
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "type": "array"
-			       },
-			       "IncludeEncoderConfigurationInSegments": {
-			         "description": "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
-			         "type": "boolean"
-			       },
-			       "SegmentDurationSeconds": {
-			         "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-			         "type": "integer"
-			       }
-			     },
-			     "required": [
-			       "HlsManifests"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "A CMAF packaging configuration.",
+			//   "properties": {
+			//     "Encryption": {
+			//       "additionalProperties": false,
+			//       "description": "A CMAF encryption configuration.",
+			//       "properties": {
+			//         "SpekeKeyProvider": {
+			//           "additionalProperties": false,
+			//           "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+			//           "properties": {
+			//             "RoleArn": {
+			//               "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+			//               "type": "string"
+			//             },
+			//             "SystemIds": {
+			//               "description": "The system IDs to include in key requests.",
+			//               "items": {
+			//                 "type": "string"
+			//               },
+			//               "type": "array"
+			//             },
+			//             "Url": {
+			//               "description": "The URL of the external key provider service.",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "RoleArn",
+			//             "SystemIds",
+			//             "Url"
+			//           ],
+			//           "type": "object"
+			//         }
+			//       },
+			//       "required": [
+			//         "SpekeKeyProvider"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "HlsManifests": {
+			//       "description": "A list of HLS manifest configurations.",
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "An HTTP Live Streaming (HLS) manifest configuration.",
+			//         "properties": {
+			//           "AdMarkers": {
+			//             "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
+			//             "enum": [
+			//               "NONE",
+			//               "SCTE35_ENHANCED",
+			//               "PASSTHROUGH"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "IncludeIframeOnlyStream": {
+			//             "description": "When enabled, an I-Frame only stream will be included in the output.",
+			//             "type": "boolean"
+			//           },
+			//           "ManifestName": {
+			//             "description": "An optional string to include in the name of the manifest.",
+			//             "type": "string"
+			//           },
+			//           "ProgramDateTimeIntervalSeconds": {
+			//             "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
+			//             "type": "integer"
+			//           },
+			//           "RepeatExtXKey": {
+			//             "description": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
+			//             "type": "boolean"
+			//           },
+			//           "StreamSelection": {
+			//             "additionalProperties": false,
+			//             "description": "A StreamSelection configuration.",
+			//             "properties": {
+			//               "MaxVideoBitsPerSecond": {
+			//                 "description": "The maximum video bitrate (bps) to include in output.",
+			//                 "type": "integer"
+			//               },
+			//               "MinVideoBitsPerSecond": {
+			//                 "description": "The minimum video bitrate (bps) to include in output.",
+			//                 "type": "integer"
+			//               },
+			//               "StreamOrder": {
+			//                 "description": "A directive that determines the order of streams in the output.",
+			//                 "enum": [
+			//                   "ORIGINAL",
+			//                   "VIDEO_BITRATE_ASCENDING",
+			//                   "VIDEO_BITRATE_DESCENDING"
+			//                 ],
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "type": "array"
+			//     },
+			//     "IncludeEncoderConfigurationInSegments": {
+			//       "description": "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
+			//       "type": "boolean"
+			//     },
+			//     "SegmentDurationSeconds": {
+			//       "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
+			//       "type": "integer"
+			//     }
+			//   },
+			//   "required": [
+			//     "HlsManifests"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "A CMAF packaging configuration.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"encryption": {
 						// Property: Encryption
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "A CMAF encryption configuration.",
-						     "properties": {
-						       "SpekeKeyProvider": {
-						         "additionalProperties": false,
-						         "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-						         "properties": {
-						           "RoleArn": {
-						             "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-						             "type": "string"
-						           },
-						           "SystemIds": {
-						             "description": "The system IDs to include in key requests.",
-						             "items": {
-						               "type": "string"
-						             },
-						             "type": "array"
-						           },
-						           "Url": {
-						             "description": "The URL of the external key provider service.",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "RoleArn",
-						           "SystemIds",
-						           "Url"
-						         ],
-						         "type": "object"
-						       }
-						     },
-						     "required": [
-						       "SpekeKeyProvider"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Description: "A CMAF encryption configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									     "properties": {
-									       "RoleArn": {
-									         "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									         "type": "string"
-									       },
-									       "SystemIds": {
-									         "description": "The system IDs to include in key requests.",
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array"
-									       },
-									       "Url": {
-									         "description": "The URL of the external key provider service.",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "RoleArn",
-									       "SystemIds",
-									       "Url"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"role_arn": {
 												// Property: RoleArn
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												     "type": "string"
-												   }
-												*/
 												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"system_ids": {
 												// Property: SystemIds
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The system IDs to include in key requests.",
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Description: "The system IDs to include in key requests.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Required:    true,
 											},
 											"url": {
 												// Property: Url
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The URL of the external key provider service.",
-												     "type": "string"
-												   }
-												*/
 												Description: "The URL of the external key provider service.",
 												Type:        types.StringType,
 												Required:    true,
@@ -290,214 +192,58 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					},
 					"hls_manifests": {
 						// Property: HlsManifests
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A list of HLS manifest configurations.",
-						     "items": {
-						       "additionalProperties": false,
-						       "description": "An HTTP Live Streaming (HLS) manifest configuration.",
-						       "properties": {
-						         "AdMarkers": {
-						           "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
-						           "enum": [
-						             "NONE",
-						             "SCTE35_ENHANCED",
-						             "PASSTHROUGH"
-						           ],
-						           "type": "string"
-						         },
-						         "IncludeIframeOnlyStream": {
-						           "description": "When enabled, an I-Frame only stream will be included in the output.",
-						           "type": "boolean"
-						         },
-						         "ManifestName": {
-						           "description": "An optional string to include in the name of the manifest.",
-						           "type": "string"
-						         },
-						         "ProgramDateTimeIntervalSeconds": {
-						           "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-						           "type": "integer"
-						         },
-						         "RepeatExtXKey": {
-						           "description": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
-						           "type": "boolean"
-						         },
-						         "StreamSelection": {
-						           "additionalProperties": false,
-						           "description": "A StreamSelection configuration.",
-						           "properties": {
-						             "MaxVideoBitsPerSecond": {
-						               "description": "The maximum video bitrate (bps) to include in output.",
-						               "type": "integer"
-						             },
-						             "MinVideoBitsPerSecond": {
-						               "description": "The minimum video bitrate (bps) to include in output.",
-						               "type": "integer"
-						             },
-						             "StreamOrder": {
-						               "description": "A directive that determines the order of streams in the output.",
-						               "enum": [
-						                 "ORIGINAL",
-						                 "VIDEO_BITRATE_ASCENDING",
-						                 "VIDEO_BITRATE_DESCENDING"
-						               ],
-						               "type": "string"
-						             }
-						           },
-						           "type": "object"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Description: "A list of HLS manifest configurations.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"ad_markers": {
 									// Property: AdMarkers
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
-									     "enum": [
-									       "NONE",
-									       "SCTE35_ENHANCED",
-									       "PASSTHROUGH"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"include_iframe_only_stream": {
 									// Property: IncludeIframeOnlyStream
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "When enabled, an I-Frame only stream will be included in the output.",
-									     "type": "boolean"
-									   }
-									*/
 									Description: "When enabled, an I-Frame only stream will be included in the output.",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"manifest_name": {
 									// Property: ManifestName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "An optional string to include in the name of the manifest.",
-									     "type": "string"
-									   }
-									*/
 									Description: "An optional string to include in the name of the manifest.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"program_date_time_interval_seconds": {
 									// Property: ProgramDateTimeIntervalSeconds
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-									     "type": "integer"
-									   }
-									*/
 									Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"repeat_ext_x_key": {
 									// Property: RepeatExtXKey
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
-									     "type": "boolean"
-									   }
-									*/
 									Description: "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"stream_selection": {
 									// Property: StreamSelection
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "A StreamSelection configuration.",
-									     "properties": {
-									       "MaxVideoBitsPerSecond": {
-									         "description": "The maximum video bitrate (bps) to include in output.",
-									         "type": "integer"
-									       },
-									       "MinVideoBitsPerSecond": {
-									         "description": "The minimum video bitrate (bps) to include in output.",
-									         "type": "integer"
-									       },
-									       "StreamOrder": {
-									         "description": "A directive that determines the order of streams in the output.",
-									         "enum": [
-									           "ORIGINAL",
-									           "VIDEO_BITRATE_ASCENDING",
-									           "VIDEO_BITRATE_DESCENDING"
-									         ],
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Description: "A StreamSelection configuration.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"max_video_bits_per_second": {
 												// Property: MaxVideoBitsPerSecond
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The maximum video bitrate (bps) to include in output.",
-												     "type": "integer"
-												   }
-												*/
 												Description: "The maximum video bitrate (bps) to include in output.",
 												Type:        types.NumberType,
 												Optional:    true,
 											},
 											"min_video_bits_per_second": {
 												// Property: MinVideoBitsPerSecond
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The minimum video bitrate (bps) to include in output.",
-												     "type": "integer"
-												   }
-												*/
 												Description: "The minimum video bitrate (bps) to include in output.",
 												Type:        types.NumberType,
 												Optional:    true,
 											},
 											"stream_order": {
 												// Property: StreamOrder
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "A directive that determines the order of streams in the output.",
-												     "enum": [
-												       "ORIGINAL",
-												       "VIDEO_BITRATE_ASCENDING",
-												       "VIDEO_BITRATE_DESCENDING"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Description: "A directive that determines the order of streams in the output.",
 												Type:        types.StringType,
 												Optional:    true,
@@ -513,26 +259,12 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					},
 					"include_encoder_configuration_in_segments": {
 						// Property: IncludeEncoderConfigurationInSegments
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
-						     "type": "boolean"
-						   }
-						*/
 						Description: "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-						     "type": "integer"
-						   }
-						*/
 						Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -544,343 +276,190 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"dash_package": {
 			// Property: DashPackage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.",
-			     "properties": {
-			       "DashManifests": {
-			         "description": "A list of DASH manifest configurations.",
-			         "items": {
-			           "additionalProperties": false,
-			           "description": "A DASH manifest configuration.",
-			           "properties": {
-			             "ManifestLayout": {
-			               "description": "Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
-			               "enum": [
-			                 "FULL",
-			                 "COMPACT"
-			               ],
-			               "type": "string"
-			             },
-			             "ManifestName": {
-			               "description": "An optional string to include in the name of the manifest.",
-			               "type": "string"
-			             },
-			             "MinBufferTimeSeconds": {
-			               "description": "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
-			               "type": "integer"
-			             },
-			             "Profile": {
-			               "description": "The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
-			               "enum": [
-			                 "NONE",
-			                 "HBBTV_1_5"
-			               ],
-			               "type": "string"
-			             },
-			             "StreamSelection": {
-			               "additionalProperties": false,
-			               "description": "A StreamSelection configuration.",
-			               "properties": {
-			                 "MaxVideoBitsPerSecond": {
-			                   "description": "The maximum video bitrate (bps) to include in output.",
-			                   "type": "integer"
-			                 },
-			                 "MinVideoBitsPerSecond": {
-			                   "description": "The minimum video bitrate (bps) to include in output.",
-			                   "type": "integer"
-			                 },
-			                 "StreamOrder": {
-			                   "description": "A directive that determines the order of streams in the output.",
-			                   "enum": [
-			                     "ORIGINAL",
-			                     "VIDEO_BITRATE_ASCENDING",
-			                     "VIDEO_BITRATE_DESCENDING"
-			                   ],
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "type": "array"
-			       },
-			       "Encryption": {
-			         "additionalProperties": false,
-			         "description": "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
-			         "properties": {
-			           "SpekeKeyProvider": {
-			             "additionalProperties": false,
-			             "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-			             "properties": {
-			               "RoleArn": {
-			                 "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-			                 "type": "string"
-			               },
-			               "SystemIds": {
-			                 "description": "The system IDs to include in key requests.",
-			                 "items": {
-			                   "type": "string"
-			                 },
-			                 "type": "array"
-			               },
-			               "Url": {
-			                 "description": "The URL of the external key provider service.",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "RoleArn",
-			               "SystemIds",
-			               "Url"
-			             ],
-			             "type": "object"
-			           }
-			         },
-			         "required": [
-			           "SpekeKeyProvider"
-			         ],
-			         "type": "object"
-			       },
-			       "IncludeEncoderConfigurationInSegments": {
-			         "description": "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
-			         "type": "boolean"
-			       },
-			       "PeriodTriggers": {
-			         "description": "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Asset contains SCTE-35 ad markers.",
-			         "enum": [
-			           "ADS"
-			         ],
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array"
-			       },
-			       "SegmentDurationSeconds": {
-			         "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-			         "type": "integer"
-			       },
-			       "SegmentTemplateFormat": {
-			         "description": "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
-			         "enum": [
-			           "NUMBER_WITH_TIMELINE",
-			           "TIME_WITH_TIMELINE",
-			           "NUMBER_WITH_DURATION"
-			         ],
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "DashManifests"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.",
+			//   "properties": {
+			//     "DashManifests": {
+			//       "description": "A list of DASH manifest configurations.",
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "A DASH manifest configuration.",
+			//         "properties": {
+			//           "ManifestLayout": {
+			//             "description": "Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
+			//             "enum": [
+			//               "FULL",
+			//               "COMPACT"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "ManifestName": {
+			//             "description": "An optional string to include in the name of the manifest.",
+			//             "type": "string"
+			//           },
+			//           "MinBufferTimeSeconds": {
+			//             "description": "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
+			//             "type": "integer"
+			//           },
+			//           "Profile": {
+			//             "description": "The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
+			//             "enum": [
+			//               "NONE",
+			//               "HBBTV_1_5"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "StreamSelection": {
+			//             "additionalProperties": false,
+			//             "description": "A StreamSelection configuration.",
+			//             "properties": {
+			//               "MaxVideoBitsPerSecond": {
+			//                 "description": "The maximum video bitrate (bps) to include in output.",
+			//                 "type": "integer"
+			//               },
+			//               "MinVideoBitsPerSecond": {
+			//                 "description": "The minimum video bitrate (bps) to include in output.",
+			//                 "type": "integer"
+			//               },
+			//               "StreamOrder": {
+			//                 "description": "A directive that determines the order of streams in the output.",
+			//                 "enum": [
+			//                   "ORIGINAL",
+			//                   "VIDEO_BITRATE_ASCENDING",
+			//                   "VIDEO_BITRATE_DESCENDING"
+			//                 ],
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "type": "array"
+			//     },
+			//     "Encryption": {
+			//       "additionalProperties": false,
+			//       "description": "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
+			//       "properties": {
+			//         "SpekeKeyProvider": {
+			//           "additionalProperties": false,
+			//           "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+			//           "properties": {
+			//             "RoleArn": {
+			//               "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+			//               "type": "string"
+			//             },
+			//             "SystemIds": {
+			//               "description": "The system IDs to include in key requests.",
+			//               "items": {
+			//                 "type": "string"
+			//               },
+			//               "type": "array"
+			//             },
+			//             "Url": {
+			//               "description": "The URL of the external key provider service.",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "RoleArn",
+			//             "SystemIds",
+			//             "Url"
+			//           ],
+			//           "type": "object"
+			//         }
+			//       },
+			//       "required": [
+			//         "SpekeKeyProvider"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "IncludeEncoderConfigurationInSegments": {
+			//       "description": "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
+			//       "type": "boolean"
+			//     },
+			//     "PeriodTriggers": {
+			//       "description": "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Asset contains SCTE-35 ad markers.",
+			//       "enum": [
+			//         "ADS"
+			//       ],
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array"
+			//     },
+			//     "SegmentDurationSeconds": {
+			//       "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
+			//       "type": "integer"
+			//     },
+			//     "SegmentTemplateFormat": {
+			//       "description": "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
+			//       "enum": [
+			//         "NUMBER_WITH_TIMELINE",
+			//         "TIME_WITH_TIMELINE",
+			//         "NUMBER_WITH_DURATION"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "DashManifests"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"dash_manifests": {
 						// Property: DashManifests
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A list of DASH manifest configurations.",
-						     "items": {
-						       "additionalProperties": false,
-						       "description": "A DASH manifest configuration.",
-						       "properties": {
-						         "ManifestLayout": {
-						           "description": "Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
-						           "enum": [
-						             "FULL",
-						             "COMPACT"
-						           ],
-						           "type": "string"
-						         },
-						         "ManifestName": {
-						           "description": "An optional string to include in the name of the manifest.",
-						           "type": "string"
-						         },
-						         "MinBufferTimeSeconds": {
-						           "description": "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
-						           "type": "integer"
-						         },
-						         "Profile": {
-						           "description": "The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
-						           "enum": [
-						             "NONE",
-						             "HBBTV_1_5"
-						           ],
-						           "type": "string"
-						         },
-						         "StreamSelection": {
-						           "additionalProperties": false,
-						           "description": "A StreamSelection configuration.",
-						           "properties": {
-						             "MaxVideoBitsPerSecond": {
-						               "description": "The maximum video bitrate (bps) to include in output.",
-						               "type": "integer"
-						             },
-						             "MinVideoBitsPerSecond": {
-						               "description": "The minimum video bitrate (bps) to include in output.",
-						               "type": "integer"
-						             },
-						             "StreamOrder": {
-						               "description": "A directive that determines the order of streams in the output.",
-						               "enum": [
-						                 "ORIGINAL",
-						                 "VIDEO_BITRATE_ASCENDING",
-						                 "VIDEO_BITRATE_DESCENDING"
-						               ],
-						               "type": "string"
-						             }
-						           },
-						           "type": "object"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Description: "A list of DASH manifest configurations.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"manifest_layout": {
 									// Property: ManifestLayout
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
-									     "enum": [
-									       "FULL",
-									       "COMPACT"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Description: "Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"manifest_name": {
 									// Property: ManifestName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "An optional string to include in the name of the manifest.",
-									     "type": "string"
-									   }
-									*/
 									Description: "An optional string to include in the name of the manifest.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"min_buffer_time_seconds": {
 									// Property: MinBufferTimeSeconds
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
-									     "type": "integer"
-									   }
-									*/
 									Description: "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"profile": {
 									// Property: Profile
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
-									     "enum": [
-									       "NONE",
-									       "HBBTV_1_5"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Description: "The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"stream_selection": {
 									// Property: StreamSelection
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "A StreamSelection configuration.",
-									     "properties": {
-									       "MaxVideoBitsPerSecond": {
-									         "description": "The maximum video bitrate (bps) to include in output.",
-									         "type": "integer"
-									       },
-									       "MinVideoBitsPerSecond": {
-									         "description": "The minimum video bitrate (bps) to include in output.",
-									         "type": "integer"
-									       },
-									       "StreamOrder": {
-									         "description": "A directive that determines the order of streams in the output.",
-									         "enum": [
-									           "ORIGINAL",
-									           "VIDEO_BITRATE_ASCENDING",
-									           "VIDEO_BITRATE_DESCENDING"
-									         ],
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Description: "A StreamSelection configuration.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"max_video_bits_per_second": {
 												// Property: MaxVideoBitsPerSecond
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The maximum video bitrate (bps) to include in output.",
-												     "type": "integer"
-												   }
-												*/
 												Description: "The maximum video bitrate (bps) to include in output.",
 												Type:        types.NumberType,
 												Optional:    true,
 											},
 											"min_video_bits_per_second": {
 												// Property: MinVideoBitsPerSecond
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The minimum video bitrate (bps) to include in output.",
-												     "type": "integer"
-												   }
-												*/
 												Description: "The minimum video bitrate (bps) to include in output.",
 												Type:        types.NumberType,
 												Optional:    true,
 											},
 											"stream_order": {
 												// Property: StreamOrder
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "A directive that determines the order of streams in the output.",
-												     "enum": [
-												       "ORIGINAL",
-												       "VIDEO_BITRATE_ASCENDING",
-												       "VIDEO_BITRATE_DESCENDING"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Description: "A directive that determines the order of streams in the output.",
 												Type:        types.StringType,
 												Optional:    true,
@@ -896,122 +475,28 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					},
 					"encryption": {
 						// Property: Encryption
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
-						     "properties": {
-						       "SpekeKeyProvider": {
-						         "additionalProperties": false,
-						         "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-						         "properties": {
-						           "RoleArn": {
-						             "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-						             "type": "string"
-						           },
-						           "SystemIds": {
-						             "description": "The system IDs to include in key requests.",
-						             "items": {
-						               "type": "string"
-						             },
-						             "type": "array"
-						           },
-						           "Url": {
-						             "description": "The URL of the external key provider service.",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "RoleArn",
-						           "SystemIds",
-						           "Url"
-						         ],
-						         "type": "object"
-						       }
-						     },
-						     "required": [
-						       "SpekeKeyProvider"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Description: "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									     "properties": {
-									       "RoleArn": {
-									         "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									         "type": "string"
-									       },
-									       "SystemIds": {
-									         "description": "The system IDs to include in key requests.",
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array"
-									       },
-									       "Url": {
-									         "description": "The URL of the external key provider service.",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "RoleArn",
-									       "SystemIds",
-									       "Url"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"role_arn": {
 												// Property: RoleArn
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												     "type": "string"
-												   }
-												*/
 												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"system_ids": {
 												// Property: SystemIds
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The system IDs to include in key requests.",
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Description: "The system IDs to include in key requests.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Required:    true,
 											},
 											"url": {
 												// Property: Url
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The URL of the external key provider service.",
-												     "type": "string"
-												   }
-												*/
 												Description: "The URL of the external key provider service.",
 												Type:        types.StringType,
 												Required:    true,
@@ -1026,63 +511,24 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					},
 					"include_encoder_configuration_in_segments": {
 						// Property: IncludeEncoderConfigurationInSegments
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
-						     "type": "boolean"
-						   }
-						*/
 						Description: "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
 						Type:        types.BoolType,
 						Optional:    true,
 					},
 					"period_triggers": {
 						// Property: PeriodTriggers
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Asset contains SCTE-35 ad markers.",
-						     "enum": [
-						       "ADS"
-						     ],
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Description: "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Asset contains SCTE-35 ad markers.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-						     "type": "integer"
-						   }
-						*/
 						Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"segment_template_format": {
 						// Property: SegmentTemplateFormat
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
-						     "enum": [
-						       "NUMBER_WITH_TIMELINE",
-						       "TIME_WITH_TIMELINE",
-						       "NUMBER_WITH_DURATION"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Description: "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
 						Type:        types.StringType,
 						Optional:    true,
@@ -1094,298 +540,172 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"hls_package": {
 			// Property: HlsPackage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "An HTTP Live Streaming (HLS) packaging configuration.",
-			     "properties": {
-			       "Encryption": {
-			         "additionalProperties": false,
-			         "description": "An HTTP Live Streaming (HLS) encryption configuration.",
-			         "properties": {
-			           "ConstantInitializationVector": {
-			             "description": "An HTTP Live Streaming (HLS) encryption configuration.",
-			             "type": "string"
-			           },
-			           "EncryptionMethod": {
-			             "description": "The encryption method to use.",
-			             "enum": [
-			               "AES_128",
-			               "SAMPLE_AES"
-			             ],
-			             "type": "string"
-			           },
-			           "SpekeKeyProvider": {
-			             "additionalProperties": false,
-			             "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-			             "properties": {
-			               "RoleArn": {
-			                 "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-			                 "type": "string"
-			               },
-			               "SystemIds": {
-			                 "description": "The system IDs to include in key requests.",
-			                 "items": {
-			                   "type": "string"
-			                 },
-			                 "type": "array"
-			               },
-			               "Url": {
-			                 "description": "The URL of the external key provider service.",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "RoleArn",
-			               "SystemIds",
-			               "Url"
-			             ],
-			             "type": "object"
-			           }
-			         },
-			         "required": [
-			           "SpekeKeyProvider"
-			         ],
-			         "type": "object"
-			       },
-			       "HlsManifests": {
-			         "description": "A list of HLS manifest configurations.",
-			         "items": {
-			           "additionalProperties": false,
-			           "description": "An HTTP Live Streaming (HLS) manifest configuration.",
-			           "properties": {
-			             "AdMarkers": {
-			               "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
-			               "enum": [
-			                 "NONE",
-			                 "SCTE35_ENHANCED",
-			                 "PASSTHROUGH"
-			               ],
-			               "type": "string"
-			             },
-			             "IncludeIframeOnlyStream": {
-			               "description": "When enabled, an I-Frame only stream will be included in the output.",
-			               "type": "boolean"
-			             },
-			             "ManifestName": {
-			               "description": "An optional string to include in the name of the manifest.",
-			               "type": "string"
-			             },
-			             "ProgramDateTimeIntervalSeconds": {
-			               "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-			               "type": "integer"
-			             },
-			             "RepeatExtXKey": {
-			               "description": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
-			               "type": "boolean"
-			             },
-			             "StreamSelection": {
-			               "additionalProperties": false,
-			               "description": "A StreamSelection configuration.",
-			               "properties": {
-			                 "MaxVideoBitsPerSecond": {
-			                   "description": "The maximum video bitrate (bps) to include in output.",
-			                   "type": "integer"
-			                 },
-			                 "MinVideoBitsPerSecond": {
-			                   "description": "The minimum video bitrate (bps) to include in output.",
-			                   "type": "integer"
-			                 },
-			                 "StreamOrder": {
-			                   "description": "A directive that determines the order of streams in the output.",
-			                   "enum": [
-			                     "ORIGINAL",
-			                     "VIDEO_BITRATE_ASCENDING",
-			                     "VIDEO_BITRATE_DESCENDING"
-			                   ],
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "type": "array"
-			       },
-			       "SegmentDurationSeconds": {
-			         "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-			         "type": "integer"
-			       },
-			       "UseAudioRenditionGroup": {
-			         "description": "When enabled, audio streams will be placed in rendition groups in the output.",
-			         "type": "boolean"
-			       }
-			     },
-			     "required": [
-			       "HlsManifests"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "An HTTP Live Streaming (HLS) packaging configuration.",
+			//   "properties": {
+			//     "Encryption": {
+			//       "additionalProperties": false,
+			//       "description": "An HTTP Live Streaming (HLS) encryption configuration.",
+			//       "properties": {
+			//         "ConstantInitializationVector": {
+			//           "description": "An HTTP Live Streaming (HLS) encryption configuration.",
+			//           "type": "string"
+			//         },
+			//         "EncryptionMethod": {
+			//           "description": "The encryption method to use.",
+			//           "enum": [
+			//             "AES_128",
+			//             "SAMPLE_AES"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "SpekeKeyProvider": {
+			//           "additionalProperties": false,
+			//           "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+			//           "properties": {
+			//             "RoleArn": {
+			//               "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+			//               "type": "string"
+			//             },
+			//             "SystemIds": {
+			//               "description": "The system IDs to include in key requests.",
+			//               "items": {
+			//                 "type": "string"
+			//               },
+			//               "type": "array"
+			//             },
+			//             "Url": {
+			//               "description": "The URL of the external key provider service.",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "RoleArn",
+			//             "SystemIds",
+			//             "Url"
+			//           ],
+			//           "type": "object"
+			//         }
+			//       },
+			//       "required": [
+			//         "SpekeKeyProvider"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "HlsManifests": {
+			//       "description": "A list of HLS manifest configurations.",
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "An HTTP Live Streaming (HLS) manifest configuration.",
+			//         "properties": {
+			//           "AdMarkers": {
+			//             "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
+			//             "enum": [
+			//               "NONE",
+			//               "SCTE35_ENHANCED",
+			//               "PASSTHROUGH"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "IncludeIframeOnlyStream": {
+			//             "description": "When enabled, an I-Frame only stream will be included in the output.",
+			//             "type": "boolean"
+			//           },
+			//           "ManifestName": {
+			//             "description": "An optional string to include in the name of the manifest.",
+			//             "type": "string"
+			//           },
+			//           "ProgramDateTimeIntervalSeconds": {
+			//             "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
+			//             "type": "integer"
+			//           },
+			//           "RepeatExtXKey": {
+			//             "description": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
+			//             "type": "boolean"
+			//           },
+			//           "StreamSelection": {
+			//             "additionalProperties": false,
+			//             "description": "A StreamSelection configuration.",
+			//             "properties": {
+			//               "MaxVideoBitsPerSecond": {
+			//                 "description": "The maximum video bitrate (bps) to include in output.",
+			//                 "type": "integer"
+			//               },
+			//               "MinVideoBitsPerSecond": {
+			//                 "description": "The minimum video bitrate (bps) to include in output.",
+			//                 "type": "integer"
+			//               },
+			//               "StreamOrder": {
+			//                 "description": "A directive that determines the order of streams in the output.",
+			//                 "enum": [
+			//                   "ORIGINAL",
+			//                   "VIDEO_BITRATE_ASCENDING",
+			//                   "VIDEO_BITRATE_DESCENDING"
+			//                 ],
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "type": "array"
+			//     },
+			//     "SegmentDurationSeconds": {
+			//       "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
+			//       "type": "integer"
+			//     },
+			//     "UseAudioRenditionGroup": {
+			//       "description": "When enabled, audio streams will be placed in rendition groups in the output.",
+			//       "type": "boolean"
+			//     }
+			//   },
+			//   "required": [
+			//     "HlsManifests"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "An HTTP Live Streaming (HLS) packaging configuration.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"encryption": {
 						// Property: Encryption
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "An HTTP Live Streaming (HLS) encryption configuration.",
-						     "properties": {
-						       "ConstantInitializationVector": {
-						         "description": "An HTTP Live Streaming (HLS) encryption configuration.",
-						         "type": "string"
-						       },
-						       "EncryptionMethod": {
-						         "description": "The encryption method to use.",
-						         "enum": [
-						           "AES_128",
-						           "SAMPLE_AES"
-						         ],
-						         "type": "string"
-						       },
-						       "SpekeKeyProvider": {
-						         "additionalProperties": false,
-						         "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-						         "properties": {
-						           "RoleArn": {
-						             "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-						             "type": "string"
-						           },
-						           "SystemIds": {
-						             "description": "The system IDs to include in key requests.",
-						             "items": {
-						               "type": "string"
-						             },
-						             "type": "array"
-						           },
-						           "Url": {
-						             "description": "The URL of the external key provider service.",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "RoleArn",
-						           "SystemIds",
-						           "Url"
-						         ],
-						         "type": "object"
-						       }
-						     },
-						     "required": [
-						       "SpekeKeyProvider"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Description: "An HTTP Live Streaming (HLS) encryption configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"constant_initialization_vector": {
 									// Property: ConstantInitializationVector
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "An HTTP Live Streaming (HLS) encryption configuration.",
-									     "type": "string"
-									   }
-									*/
 									Description: "An HTTP Live Streaming (HLS) encryption configuration.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"encryption_method": {
 									// Property: EncryptionMethod
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The encryption method to use.",
-									     "enum": [
-									       "AES_128",
-									       "SAMPLE_AES"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Description: "The encryption method to use.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									     "properties": {
-									       "RoleArn": {
-									         "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									         "type": "string"
-									       },
-									       "SystemIds": {
-									         "description": "The system IDs to include in key requests.",
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array"
-									       },
-									       "Url": {
-									         "description": "The URL of the external key provider service.",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "RoleArn",
-									       "SystemIds",
-									       "Url"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"role_arn": {
 												// Property: RoleArn
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												     "type": "string"
-												   }
-												*/
 												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"system_ids": {
 												// Property: SystemIds
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The system IDs to include in key requests.",
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Description: "The system IDs to include in key requests.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Required:    true,
 											},
 											"url": {
 												// Property: Url
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The URL of the external key provider service.",
-												     "type": "string"
-												   }
-												*/
 												Description: "The URL of the external key provider service.",
 												Type:        types.StringType,
 												Required:    true,
@@ -1400,214 +720,58 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					},
 					"hls_manifests": {
 						// Property: HlsManifests
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A list of HLS manifest configurations.",
-						     "items": {
-						       "additionalProperties": false,
-						       "description": "An HTTP Live Streaming (HLS) manifest configuration.",
-						       "properties": {
-						         "AdMarkers": {
-						           "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
-						           "enum": [
-						             "NONE",
-						             "SCTE35_ENHANCED",
-						             "PASSTHROUGH"
-						           ],
-						           "type": "string"
-						         },
-						         "IncludeIframeOnlyStream": {
-						           "description": "When enabled, an I-Frame only stream will be included in the output.",
-						           "type": "boolean"
-						         },
-						         "ManifestName": {
-						           "description": "An optional string to include in the name of the manifest.",
-						           "type": "string"
-						         },
-						         "ProgramDateTimeIntervalSeconds": {
-						           "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-						           "type": "integer"
-						         },
-						         "RepeatExtXKey": {
-						           "description": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
-						           "type": "boolean"
-						         },
-						         "StreamSelection": {
-						           "additionalProperties": false,
-						           "description": "A StreamSelection configuration.",
-						           "properties": {
-						             "MaxVideoBitsPerSecond": {
-						               "description": "The maximum video bitrate (bps) to include in output.",
-						               "type": "integer"
-						             },
-						             "MinVideoBitsPerSecond": {
-						               "description": "The minimum video bitrate (bps) to include in output.",
-						               "type": "integer"
-						             },
-						             "StreamOrder": {
-						               "description": "A directive that determines the order of streams in the output.",
-						               "enum": [
-						                 "ORIGINAL",
-						                 "VIDEO_BITRATE_ASCENDING",
-						                 "VIDEO_BITRATE_DESCENDING"
-						               ],
-						               "type": "string"
-						             }
-						           },
-						           "type": "object"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Description: "A list of HLS manifest configurations.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"ad_markers": {
 									// Property: AdMarkers
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
-									     "enum": [
-									       "NONE",
-									       "SCTE35_ENHANCED",
-									       "PASSTHROUGH"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"include_iframe_only_stream": {
 									// Property: IncludeIframeOnlyStream
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "When enabled, an I-Frame only stream will be included in the output.",
-									     "type": "boolean"
-									   }
-									*/
 									Description: "When enabled, an I-Frame only stream will be included in the output.",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"manifest_name": {
 									// Property: ManifestName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "An optional string to include in the name of the manifest.",
-									     "type": "string"
-									   }
-									*/
 									Description: "An optional string to include in the name of the manifest.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"program_date_time_interval_seconds": {
 									// Property: ProgramDateTimeIntervalSeconds
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-									     "type": "integer"
-									   }
-									*/
 									Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"repeat_ext_x_key": {
 									// Property: RepeatExtXKey
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
-									     "type": "boolean"
-									   }
-									*/
 									Description: "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"stream_selection": {
 									// Property: StreamSelection
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "A StreamSelection configuration.",
-									     "properties": {
-									       "MaxVideoBitsPerSecond": {
-									         "description": "The maximum video bitrate (bps) to include in output.",
-									         "type": "integer"
-									       },
-									       "MinVideoBitsPerSecond": {
-									         "description": "The minimum video bitrate (bps) to include in output.",
-									         "type": "integer"
-									       },
-									       "StreamOrder": {
-									         "description": "A directive that determines the order of streams in the output.",
-									         "enum": [
-									           "ORIGINAL",
-									           "VIDEO_BITRATE_ASCENDING",
-									           "VIDEO_BITRATE_DESCENDING"
-									         ],
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Description: "A StreamSelection configuration.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"max_video_bits_per_second": {
 												// Property: MaxVideoBitsPerSecond
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The maximum video bitrate (bps) to include in output.",
-												     "type": "integer"
-												   }
-												*/
 												Description: "The maximum video bitrate (bps) to include in output.",
 												Type:        types.NumberType,
 												Optional:    true,
 											},
 											"min_video_bits_per_second": {
 												// Property: MinVideoBitsPerSecond
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The minimum video bitrate (bps) to include in output.",
-												     "type": "integer"
-												   }
-												*/
 												Description: "The minimum video bitrate (bps) to include in output.",
 												Type:        types.NumberType,
 												Optional:    true,
 											},
 											"stream_order": {
 												// Property: StreamOrder
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "A directive that determines the order of streams in the output.",
-												     "enum": [
-												       "ORIGINAL",
-												       "VIDEO_BITRATE_ASCENDING",
-												       "VIDEO_BITRATE_DESCENDING"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Description: "A directive that determines the order of streams in the output.",
 												Type:        types.StringType,
 												Optional:    true,
@@ -1623,26 +787,12 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-						     "type": "integer"
-						   }
-						*/
 						Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"use_audio_rendition_group": {
 						// Property: UseAudioRenditionGroup
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "When enabled, audio streams will be placed in rendition groups in the output.",
-						     "type": "boolean"
-						   }
-						*/
 						Description: "When enabled, audio streams will be placed in rendition groups in the output.",
 						Type:        types.BoolType,
 						Optional:    true,
@@ -1654,12 +804,10 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the PackagingConfiguration.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the PackagingConfiguration.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the PackagingConfiguration.",
 			Type:        types.StringType,
 			Required:    true,
@@ -1668,219 +816,123 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"mss_package": {
 			// Property: MssPackage
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "A Microsoft Smooth Streaming (MSS) PackagingConfiguration.",
-			     "properties": {
-			       "Encryption": {
-			         "additionalProperties": false,
-			         "description": "A CMAF encryption configuration.",
-			         "properties": {
-			           "SpekeKeyProvider": {
-			             "additionalProperties": false,
-			             "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-			             "properties": {
-			               "RoleArn": {
-			                 "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-			                 "type": "string"
-			               },
-			               "SystemIds": {
-			                 "description": "The system IDs to include in key requests.",
-			                 "items": {
-			                   "type": "string"
-			                 },
-			                 "type": "array"
-			               },
-			               "Url": {
-			                 "description": "The URL of the external key provider service.",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "RoleArn",
-			               "SystemIds",
-			               "Url"
-			             ],
-			             "type": "object"
-			           }
-			         },
-			         "required": [
-			           "SpekeKeyProvider"
-			         ],
-			         "type": "object"
-			       },
-			       "MssManifests": {
-			         "description": "A list of MSS manifest configurations.",
-			         "items": {
-			           "additionalProperties": false,
-			           "description": "A Microsoft Smooth Streaming (MSS) manifest configuration.",
-			           "properties": {
-			             "ManifestName": {
-			               "description": "An optional string to include in the name of the manifest.",
-			               "type": "string"
-			             },
-			             "StreamSelection": {
-			               "additionalProperties": false,
-			               "description": "A StreamSelection configuration.",
-			               "properties": {
-			                 "MaxVideoBitsPerSecond": {
-			                   "description": "The maximum video bitrate (bps) to include in output.",
-			                   "type": "integer"
-			                 },
-			                 "MinVideoBitsPerSecond": {
-			                   "description": "The minimum video bitrate (bps) to include in output.",
-			                   "type": "integer"
-			                 },
-			                 "StreamOrder": {
-			                   "description": "A directive that determines the order of streams in the output.",
-			                   "enum": [
-			                     "ORIGINAL",
-			                     "VIDEO_BITRATE_ASCENDING",
-			                     "VIDEO_BITRATE_DESCENDING"
-			                   ],
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "type": "array"
-			       },
-			       "SegmentDurationSeconds": {
-			         "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-			         "type": "integer"
-			       }
-			     },
-			     "required": [
-			       "MssManifests"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "A Microsoft Smooth Streaming (MSS) PackagingConfiguration.",
+			//   "properties": {
+			//     "Encryption": {
+			//       "additionalProperties": false,
+			//       "description": "A CMAF encryption configuration.",
+			//       "properties": {
+			//         "SpekeKeyProvider": {
+			//           "additionalProperties": false,
+			//           "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+			//           "properties": {
+			//             "RoleArn": {
+			//               "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+			//               "type": "string"
+			//             },
+			//             "SystemIds": {
+			//               "description": "The system IDs to include in key requests.",
+			//               "items": {
+			//                 "type": "string"
+			//               },
+			//               "type": "array"
+			//             },
+			//             "Url": {
+			//               "description": "The URL of the external key provider service.",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "RoleArn",
+			//             "SystemIds",
+			//             "Url"
+			//           ],
+			//           "type": "object"
+			//         }
+			//       },
+			//       "required": [
+			//         "SpekeKeyProvider"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "MssManifests": {
+			//       "description": "A list of MSS manifest configurations.",
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "A Microsoft Smooth Streaming (MSS) manifest configuration.",
+			//         "properties": {
+			//           "ManifestName": {
+			//             "description": "An optional string to include in the name of the manifest.",
+			//             "type": "string"
+			//           },
+			//           "StreamSelection": {
+			//             "additionalProperties": false,
+			//             "description": "A StreamSelection configuration.",
+			//             "properties": {
+			//               "MaxVideoBitsPerSecond": {
+			//                 "description": "The maximum video bitrate (bps) to include in output.",
+			//                 "type": "integer"
+			//               },
+			//               "MinVideoBitsPerSecond": {
+			//                 "description": "The minimum video bitrate (bps) to include in output.",
+			//                 "type": "integer"
+			//               },
+			//               "StreamOrder": {
+			//                 "description": "A directive that determines the order of streams in the output.",
+			//                 "enum": [
+			//                   "ORIGINAL",
+			//                   "VIDEO_BITRATE_ASCENDING",
+			//                   "VIDEO_BITRATE_DESCENDING"
+			//                 ],
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "type": "array"
+			//     },
+			//     "SegmentDurationSeconds": {
+			//       "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
+			//       "type": "integer"
+			//     }
+			//   },
+			//   "required": [
+			//     "MssManifests"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "A Microsoft Smooth Streaming (MSS) PackagingConfiguration.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"encryption": {
 						// Property: Encryption
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "A CMAF encryption configuration.",
-						     "properties": {
-						       "SpekeKeyProvider": {
-						         "additionalProperties": false,
-						         "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-						         "properties": {
-						           "RoleArn": {
-						             "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-						             "type": "string"
-						           },
-						           "SystemIds": {
-						             "description": "The system IDs to include in key requests.",
-						             "items": {
-						               "type": "string"
-						             },
-						             "type": "array"
-						           },
-						           "Url": {
-						             "description": "The URL of the external key provider service.",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "RoleArn",
-						           "SystemIds",
-						           "Url"
-						         ],
-						         "type": "object"
-						       }
-						     },
-						     "required": [
-						       "SpekeKeyProvider"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Description: "A CMAF encryption configuration.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									     "properties": {
-									       "RoleArn": {
-									         "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									         "type": "string"
-									       },
-									       "SystemIds": {
-									         "description": "The system IDs to include in key requests.",
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array"
-									       },
-									       "Url": {
-									         "description": "The URL of the external key provider service.",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "RoleArn",
-									       "SystemIds",
-									       "Url"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"role_arn": {
 												// Property: RoleArn
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												     "type": "string"
-												   }
-												*/
 												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
 												Type:        types.StringType,
 												Required:    true,
 											},
 											"system_ids": {
 												// Property: SystemIds
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The system IDs to include in key requests.",
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Description: "The system IDs to include in key requests.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Required:    true,
 											},
 											"url": {
 												// Property: Url
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The URL of the external key provider service.",
-												     "type": "string"
-												   }
-												*/
 												Description: "The URL of the external key provider service.",
 												Type:        types.StringType,
 												Required:    true,
@@ -1895,136 +947,34 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					},
 					"mss_manifests": {
 						// Property: MssManifests
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A list of MSS manifest configurations.",
-						     "items": {
-						       "additionalProperties": false,
-						       "description": "A Microsoft Smooth Streaming (MSS) manifest configuration.",
-						       "properties": {
-						         "ManifestName": {
-						           "description": "An optional string to include in the name of the manifest.",
-						           "type": "string"
-						         },
-						         "StreamSelection": {
-						           "additionalProperties": false,
-						           "description": "A StreamSelection configuration.",
-						           "properties": {
-						             "MaxVideoBitsPerSecond": {
-						               "description": "The maximum video bitrate (bps) to include in output.",
-						               "type": "integer"
-						             },
-						             "MinVideoBitsPerSecond": {
-						               "description": "The minimum video bitrate (bps) to include in output.",
-						               "type": "integer"
-						             },
-						             "StreamOrder": {
-						               "description": "A directive that determines the order of streams in the output.",
-						               "enum": [
-						                 "ORIGINAL",
-						                 "VIDEO_BITRATE_ASCENDING",
-						                 "VIDEO_BITRATE_DESCENDING"
-						               ],
-						               "type": "string"
-						             }
-						           },
-						           "type": "object"
-						         }
-						       },
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Description: "A list of MSS manifest configurations.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"manifest_name": {
 									// Property: ManifestName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "An optional string to include in the name of the manifest.",
-									     "type": "string"
-									   }
-									*/
 									Description: "An optional string to include in the name of the manifest.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"stream_selection": {
 									// Property: StreamSelection
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "description": "A StreamSelection configuration.",
-									     "properties": {
-									       "MaxVideoBitsPerSecond": {
-									         "description": "The maximum video bitrate (bps) to include in output.",
-									         "type": "integer"
-									       },
-									       "MinVideoBitsPerSecond": {
-									         "description": "The minimum video bitrate (bps) to include in output.",
-									         "type": "integer"
-									       },
-									       "StreamOrder": {
-									         "description": "A directive that determines the order of streams in the output.",
-									         "enum": [
-									           "ORIGINAL",
-									           "VIDEO_BITRATE_ASCENDING",
-									           "VIDEO_BITRATE_DESCENDING"
-									         ],
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Description: "A StreamSelection configuration.",
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"max_video_bits_per_second": {
 												// Property: MaxVideoBitsPerSecond
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The maximum video bitrate (bps) to include in output.",
-												     "type": "integer"
-												   }
-												*/
 												Description: "The maximum video bitrate (bps) to include in output.",
 												Type:        types.NumberType,
 												Optional:    true,
 											},
 											"min_video_bits_per_second": {
 												// Property: MinVideoBitsPerSecond
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "The minimum video bitrate (bps) to include in output.",
-												     "type": "integer"
-												   }
-												*/
 												Description: "The minimum video bitrate (bps) to include in output.",
 												Type:        types.NumberType,
 												Optional:    true,
 											},
 											"stream_order": {
 												// Property: StreamOrder
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "A directive that determines the order of streams in the output.",
-												     "enum": [
-												       "ORIGINAL",
-												       "VIDEO_BITRATE_ASCENDING",
-												       "VIDEO_BITRATE_DESCENDING"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Description: "A directive that determines the order of streams in the output.",
 												Type:        types.StringType,
 												Optional:    true,
@@ -2040,13 +990,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-						     "type": "integer"
-						   }
-						*/
 						Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
 						Type:        types.NumberType,
 						Optional:    true,
@@ -2058,12 +1001,10 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"packaging_group_id": {
 			// Property: PackagingGroupId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of a PackagingGroup.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of a PackagingGroup.",
+			//   "type": "string"
+			// }
 			Description: "The ID of a PackagingGroup.",
 			Type:        types.StringType,
 			Required:    true,
@@ -2071,52 +1012,38 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A collection of tags associated with a resource",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "A collection of tags associated with a resource",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "A collection of tags associated with a resource",
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

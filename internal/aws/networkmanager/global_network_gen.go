@@ -25,12 +25,10 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the global network.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the global network.",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the global network.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,12 +36,10 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The description of the global network.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The description of the global network.",
+			//   "type": "string"
+			// }
 			Description: "The description of the global network.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -51,12 +47,10 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the global network.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the global network.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -64,47 +58,33 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The tags for the global network.",
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a global network resource.",
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "The tags for the global network.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a global network resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "The tags for the global network.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},

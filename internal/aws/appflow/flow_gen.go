@@ -25,14 +25,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Description of the flow.",
-			     "maxLength": 2048,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Description of the flow.",
+			//   "maxLength": 2048,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Description of the flow.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -40,963 +38,466 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"destination_flow_config_list": {
 			// Property: DestinationFlowConfigList
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "List of Destination connectors of the flow.",
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "Configurations of destination connector.",
-			       "properties": {
-			         "ConnectorProfileName": {
-			           "description": "Name of connector profile",
-			           "maxLength": 256,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "ConnectorType": {
-			           "enum": [
-			             "Salesforce",
-			             "Singular",
-			             "Slack",
-			             "Redshift",
-			             "S3",
-			             "Marketo",
-			             "Googleanalytics",
-			             "Zendesk",
-			             "Servicenow",
-			             "Datadog",
-			             "Trendmicro",
-			             "Snowflake",
-			             "Dynatrace",
-			             "Infornexus",
-			             "Amplitude",
-			             "Veeva",
-			             "EventBridge",
-			             "Upsolver",
-			             "LookoutMetrics"
-			           ],
-			           "type": "string"
-			         },
-			         "DestinationConnectorProperties": {
-			           "description": "Destination connector details",
-			           "properties": {
-			             "EventBridge": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "ErrorHandlingConfig": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "BucketName": {
-			                       "maxLength": 63,
-			                       "minLength": 3,
-			                       "pattern": "",
-			                       "type": "string"
-			                     },
-			                     "BucketPrefix": {
-			                       "maxLength": 512,
-			                       "type": "string"
-			                     },
-			                     "FailOnFirstError": {
-			                       "type": "boolean"
-			                     }
-			                   },
-			                   "type": "object"
-			                 },
-			                 "Object": {
-			                   "maxLength": 512,
-			                   "pattern": "",
-			                   "type": "string"
-			                 }
-			               },
-			               "required": [
-			                 "Object"
-			               ],
-			               "type": "object"
-			             },
-			             "LookoutMetrics": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "Object": {
-			                   "maxLength": 512,
-			                   "pattern": "",
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "Redshift": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "BucketPrefix": {
-			                   "maxLength": 512,
-			                   "type": "string"
-			                 },
-			                 "ErrorHandlingConfig": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "BucketName": {
-			                       "maxLength": 63,
-			                       "minLength": 3,
-			                       "pattern": "",
-			                       "type": "string"
-			                     },
-			                     "BucketPrefix": {
-			                       "maxLength": 512,
-			                       "type": "string"
-			                     },
-			                     "FailOnFirstError": {
-			                       "type": "boolean"
-			                     }
-			                   },
-			                   "type": "object"
-			                 },
-			                 "IntermediateBucketName": {
-			                   "maxLength": 63,
-			                   "minLength": 3,
-			                   "pattern": "",
-			                   "type": "string"
-			                 },
-			                 "Object": {
-			                   "maxLength": 512,
-			                   "pattern": "",
-			                   "type": "string"
-			                 }
-			               },
-			               "required": [
-			                 "Object",
-			                 "IntermediateBucketName"
-			               ],
-			               "type": "object"
-			             },
-			             "S3": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "BucketName": {
-			                   "maxLength": 63,
-			                   "minLength": 3,
-			                   "pattern": "",
-			                   "type": "string"
-			                 },
-			                 "BucketPrefix": {
-			                   "maxLength": 512,
-			                   "type": "string"
-			                 },
-			                 "S3OutputFormatConfig": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "AggregationConfig": {
-			                       "properties": {
-			                         "AggregationType": {
-			                           "enum": [
-			                             "None",
-			                             "SingleFile"
-			                           ],
-			                           "type": "string"
-			                         }
-			                       },
-			                       "type": "object"
-			                     },
-			                     "FileType": {
-			                       "enum": [
-			                         "CSV",
-			                         "JSON",
-			                         "PARQUET"
-			                       ],
-			                       "type": "string"
-			                     },
-			                     "PrefixConfig": {
-			                       "additionalProperties": false,
-			                       "properties": {
-			                         "PrefixFormat": {
-			                           "enum": [
-			                             "YEAR",
-			                             "MONTH",
-			                             "DAY",
-			                             "HOUR",
-			                             "MINUTE"
-			                           ],
-			                           "type": "string"
-			                         },
-			                         "PrefixType": {
-			                           "enum": [
-			                             "FILENAME",
-			                             "PATH",
-			                             "PATH_AND_FILENAME"
-			                           ],
-			                           "type": "string"
-			                         }
-			                       },
-			                       "type": "object"
-			                     }
-			                   },
-			                   "type": "object"
-			                 }
-			               },
-			               "required": [
-			                 "BucketName"
-			               ],
-			               "type": "object"
-			             },
-			             "Salesforce": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "ErrorHandlingConfig": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "BucketName": {
-			                       "maxLength": 63,
-			                       "minLength": 3,
-			                       "pattern": "",
-			                       "type": "string"
-			                     },
-			                     "BucketPrefix": {
-			                       "maxLength": 512,
-			                       "type": "string"
-			                     },
-			                     "FailOnFirstError": {
-			                       "type": "boolean"
-			                     }
-			                   },
-			                   "type": "object"
-			                 },
-			                 "IdFieldNames": {
-			                   "description": "List of fields used as ID when performing a write operation.",
-			                   "items": {
-			                     "type": "string"
-			                   },
-			                   "type": "array"
-			                 },
-			                 "Object": {
-			                   "maxLength": 512,
-			                   "pattern": "",
-			                   "type": "string"
-			                 },
-			                 "WriteOperationType": {
-			                   "enum": [
-			                     "INSERT",
-			                     "UPSERT",
-			                     "UPDATE"
-			                   ],
-			                   "type": "string"
-			                 }
-			               },
-			               "required": [
-			                 "Object"
-			               ],
-			               "type": "object"
-			             },
-			             "Snowflake": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "BucketPrefix": {
-			                   "maxLength": 512,
-			                   "type": "string"
-			                 },
-			                 "ErrorHandlingConfig": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "BucketName": {
-			                       "maxLength": 63,
-			                       "minLength": 3,
-			                       "pattern": "",
-			                       "type": "string"
-			                     },
-			                     "BucketPrefix": {
-			                       "maxLength": 512,
-			                       "type": "string"
-			                     },
-			                     "FailOnFirstError": {
-			                       "type": "boolean"
-			                     }
-			                   },
-			                   "type": "object"
-			                 },
-			                 "IntermediateBucketName": {
-			                   "maxLength": 63,
-			                   "minLength": 3,
-			                   "pattern": "",
-			                   "type": "string"
-			                 },
-			                 "Object": {
-			                   "maxLength": 512,
-			                   "pattern": "",
-			                   "type": "string"
-			                 }
-			               },
-			               "required": [
-			                 "Object",
-			                 "IntermediateBucketName"
-			               ],
-			               "type": "object"
-			             },
-			             "Upsolver": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "BucketName": {
-			                   "maxLength": 63,
-			                   "minLength": 16,
-			                   "pattern": "",
-			                   "type": "string"
-			                 },
-			                 "BucketPrefix": {
-			                   "maxLength": 512,
-			                   "type": "string"
-			                 },
-			                 "S3OutputFormatConfig": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "AggregationConfig": {
-			                       "properties": {
-			                         "AggregationType": {
-			                           "enum": [
-			                             "None",
-			                             "SingleFile"
-			                           ],
-			                           "type": "string"
-			                         }
-			                       },
-			                       "type": "object"
-			                     },
-			                     "FileType": {
-			                       "enum": [
-			                         "CSV",
-			                         "JSON",
-			                         "PARQUET"
-			                       ],
-			                       "type": "string"
-			                     },
-			                     "PrefixConfig": {
-			                       "additionalProperties": false,
-			                       "properties": {
-			                         "PrefixFormat": {
-			                           "enum": [
-			                             "YEAR",
-			                             "MONTH",
-			                             "DAY",
-			                             "HOUR",
-			                             "MINUTE"
-			                           ],
-			                           "type": "string"
-			                         },
-			                         "PrefixType": {
-			                           "enum": [
-			                             "FILENAME",
-			                             "PATH",
-			                             "PATH_AND_FILENAME"
-			                           ],
-			                           "type": "string"
-			                         }
-			                       },
-			                       "type": "object"
-			                     }
-			                   },
-			                   "required": [
-			                     "PrefixConfig"
-			                   ],
-			                   "type": "object"
-			                 }
-			               },
-			               "required": [
-			                 "BucketName",
-			                 "S3OutputFormatConfig"
-			               ],
-			               "type": "object"
-			             },
-			             "Zendesk": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "ErrorHandlingConfig": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "BucketName": {
-			                       "maxLength": 63,
-			                       "minLength": 3,
-			                       "pattern": "",
-			                       "type": "string"
-			                     },
-			                     "BucketPrefix": {
-			                       "maxLength": 512,
-			                       "type": "string"
-			                     },
-			                     "FailOnFirstError": {
-			                       "type": "boolean"
-			                     }
-			                   },
-			                   "type": "object"
-			                 },
-			                 "IdFieldNames": {
-			                   "description": "List of fields used as ID when performing a write operation.",
-			                   "items": {
-			                     "type": "string"
-			                   },
-			                   "type": "array"
-			                 },
-			                 "Object": {
-			                   "maxLength": 512,
-			                   "pattern": "",
-			                   "type": "string"
-			                 },
-			                 "WriteOperationType": {
-			                   "enum": [
-			                     "INSERT",
-			                     "UPSERT",
-			                     "UPDATE"
-			                   ],
-			                   "type": "string"
-			                 }
-			               },
-			               "required": [
-			                 "Object"
-			               ],
-			               "type": "object"
-			             }
-			           },
-			           "type": "object"
-			         }
-			       },
-			       "required": [
-			         "ConnectorType",
-			         "DestinationConnectorProperties"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "List of Destination connectors of the flow.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "Configurations of destination connector.",
+			//     "properties": {
+			//       "ConnectorProfileName": {
+			//         "description": "Name of connector profile",
+			//         "maxLength": 256,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "ConnectorType": {
+			//         "enum": [
+			//           "Salesforce",
+			//           "Singular",
+			//           "Slack",
+			//           "Redshift",
+			//           "S3",
+			//           "Marketo",
+			//           "Googleanalytics",
+			//           "Zendesk",
+			//           "Servicenow",
+			//           "Datadog",
+			//           "Trendmicro",
+			//           "Snowflake",
+			//           "Dynatrace",
+			//           "Infornexus",
+			//           "Amplitude",
+			//           "Veeva",
+			//           "EventBridge",
+			//           "Upsolver",
+			//           "LookoutMetrics"
+			//         ],
+			//         "type": "string"
+			//       },
+			//       "DestinationConnectorProperties": {
+			//         "description": "Destination connector details",
+			//         "properties": {
+			//           "EventBridge": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ErrorHandlingConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "BucketName": {
+			//                     "maxLength": 63,
+			//                     "minLength": 3,
+			//                     "pattern": "",
+			//                     "type": "string"
+			//                   },
+			//                   "BucketPrefix": {
+			//                     "maxLength": 512,
+			//                     "type": "string"
+			//                   },
+			//                   "FailOnFirstError": {
+			//                     "type": "boolean"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "Object": {
+			//                 "maxLength": 512,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Object"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "LookoutMetrics": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "Object": {
+			//                 "maxLength": 512,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "Redshift": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "BucketPrefix": {
+			//                 "maxLength": 512,
+			//                 "type": "string"
+			//               },
+			//               "ErrorHandlingConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "BucketName": {
+			//                     "maxLength": 63,
+			//                     "minLength": 3,
+			//                     "pattern": "",
+			//                     "type": "string"
+			//                   },
+			//                   "BucketPrefix": {
+			//                     "maxLength": 512,
+			//                     "type": "string"
+			//                   },
+			//                   "FailOnFirstError": {
+			//                     "type": "boolean"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "IntermediateBucketName": {
+			//                 "maxLength": 63,
+			//                 "minLength": 3,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               },
+			//               "Object": {
+			//                 "maxLength": 512,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Object",
+			//               "IntermediateBucketName"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "S3": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "BucketName": {
+			//                 "maxLength": 63,
+			//                 "minLength": 3,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               },
+			//               "BucketPrefix": {
+			//                 "maxLength": 512,
+			//                 "type": "string"
+			//               },
+			//               "S3OutputFormatConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "AggregationConfig": {
+			//                     "properties": {
+			//                       "AggregationType": {
+			//                         "enum": [
+			//                           "None",
+			//                           "SingleFile"
+			//                         ],
+			//                         "type": "string"
+			//                       }
+			//                     },
+			//                     "type": "object"
+			//                   },
+			//                   "FileType": {
+			//                     "enum": [
+			//                       "CSV",
+			//                       "JSON",
+			//                       "PARQUET"
+			//                     ],
+			//                     "type": "string"
+			//                   },
+			//                   "PrefixConfig": {
+			//                     "additionalProperties": false,
+			//                     "properties": {
+			//                       "PrefixFormat": {
+			//                         "enum": [
+			//                           "YEAR",
+			//                           "MONTH",
+			//                           "DAY",
+			//                           "HOUR",
+			//                           "MINUTE"
+			//                         ],
+			//                         "type": "string"
+			//                       },
+			//                       "PrefixType": {
+			//                         "enum": [
+			//                           "FILENAME",
+			//                           "PATH",
+			//                           "PATH_AND_FILENAME"
+			//                         ],
+			//                         "type": "string"
+			//                       }
+			//                     },
+			//                     "type": "object"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               }
+			//             },
+			//             "required": [
+			//               "BucketName"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "Salesforce": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ErrorHandlingConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "BucketName": {
+			//                     "maxLength": 63,
+			//                     "minLength": 3,
+			//                     "pattern": "",
+			//                     "type": "string"
+			//                   },
+			//                   "BucketPrefix": {
+			//                     "maxLength": 512,
+			//                     "type": "string"
+			//                   },
+			//                   "FailOnFirstError": {
+			//                     "type": "boolean"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "IdFieldNames": {
+			//                 "description": "List of fields used as ID when performing a write operation.",
+			//                 "items": {
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array"
+			//               },
+			//               "Object": {
+			//                 "maxLength": 512,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               },
+			//               "WriteOperationType": {
+			//                 "enum": [
+			//                   "INSERT",
+			//                   "UPSERT",
+			//                   "UPDATE"
+			//                 ],
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Object"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "Snowflake": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "BucketPrefix": {
+			//                 "maxLength": 512,
+			//                 "type": "string"
+			//               },
+			//               "ErrorHandlingConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "BucketName": {
+			//                     "maxLength": 63,
+			//                     "minLength": 3,
+			//                     "pattern": "",
+			//                     "type": "string"
+			//                   },
+			//                   "BucketPrefix": {
+			//                     "maxLength": 512,
+			//                     "type": "string"
+			//                   },
+			//                   "FailOnFirstError": {
+			//                     "type": "boolean"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "IntermediateBucketName": {
+			//                 "maxLength": 63,
+			//                 "minLength": 3,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               },
+			//               "Object": {
+			//                 "maxLength": 512,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Object",
+			//               "IntermediateBucketName"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "Upsolver": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "BucketName": {
+			//                 "maxLength": 63,
+			//                 "minLength": 16,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               },
+			//               "BucketPrefix": {
+			//                 "maxLength": 512,
+			//                 "type": "string"
+			//               },
+			//               "S3OutputFormatConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "AggregationConfig": {
+			//                     "properties": {
+			//                       "AggregationType": {
+			//                         "enum": [
+			//                           "None",
+			//                           "SingleFile"
+			//                         ],
+			//                         "type": "string"
+			//                       }
+			//                     },
+			//                     "type": "object"
+			//                   },
+			//                   "FileType": {
+			//                     "enum": [
+			//                       "CSV",
+			//                       "JSON",
+			//                       "PARQUET"
+			//                     ],
+			//                     "type": "string"
+			//                   },
+			//                   "PrefixConfig": {
+			//                     "additionalProperties": false,
+			//                     "properties": {
+			//                       "PrefixFormat": {
+			//                         "enum": [
+			//                           "YEAR",
+			//                           "MONTH",
+			//                           "DAY",
+			//                           "HOUR",
+			//                           "MINUTE"
+			//                         ],
+			//                         "type": "string"
+			//                       },
+			//                       "PrefixType": {
+			//                         "enum": [
+			//                           "FILENAME",
+			//                           "PATH",
+			//                           "PATH_AND_FILENAME"
+			//                         ],
+			//                         "type": "string"
+			//                       }
+			//                     },
+			//                     "type": "object"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "PrefixConfig"
+			//                 ],
+			//                 "type": "object"
+			//               }
+			//             },
+			//             "required": [
+			//               "BucketName",
+			//               "S3OutputFormatConfig"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "Zendesk": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ErrorHandlingConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "BucketName": {
+			//                     "maxLength": 63,
+			//                     "minLength": 3,
+			//                     "pattern": "",
+			//                     "type": "string"
+			//                   },
+			//                   "BucketPrefix": {
+			//                     "maxLength": 512,
+			//                     "type": "string"
+			//                   },
+			//                   "FailOnFirstError": {
+			//                     "type": "boolean"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "IdFieldNames": {
+			//                 "description": "List of fields used as ID when performing a write operation.",
+			//                 "items": {
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array"
+			//               },
+			//               "Object": {
+			//                 "maxLength": 512,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               },
+			//               "WriteOperationType": {
+			//                 "enum": [
+			//                   "INSERT",
+			//                   "UPSERT",
+			//                   "UPDATE"
+			//                 ],
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Object"
+			//             ],
+			//             "type": "object"
+			//           }
+			//         },
+			//         "type": "object"
+			//       }
+			//     },
+			//     "required": [
+			//       "ConnectorType",
+			//       "DestinationConnectorProperties"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "List of Destination connectors of the flow.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"connector_profile_name": {
 						// Property: ConnectorProfileName
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Name of connector profile",
-						     "maxLength": 256,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "Name of connector profile",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"connector_type": {
 						// Property: ConnectorType
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "Salesforce",
-						       "Singular",
-						       "Slack",
-						       "Redshift",
-						       "S3",
-						       "Marketo",
-						       "Googleanalytics",
-						       "Zendesk",
-						       "Servicenow",
-						       "Datadog",
-						       "Trendmicro",
-						       "Snowflake",
-						       "Dynatrace",
-						       "Infornexus",
-						       "Amplitude",
-						       "Veeva",
-						       "EventBridge",
-						       "Upsolver",
-						       "LookoutMetrics"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"destination_connector_properties": {
 						// Property: DestinationConnectorProperties
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Destination connector details",
-						     "properties": {
-						       "EventBridge": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "ErrorHandlingConfig": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "BucketName": {
-						                 "maxLength": 63,
-						                 "minLength": 3,
-						                 "pattern": "",
-						                 "type": "string"
-						               },
-						               "BucketPrefix": {
-						                 "maxLength": 512,
-						                 "type": "string"
-						               },
-						               "FailOnFirstError": {
-						                 "type": "boolean"
-						               }
-						             },
-						             "type": "object"
-						           },
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "LookoutMetrics": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "Redshift": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "BucketPrefix": {
-						             "maxLength": 512,
-						             "type": "string"
-						           },
-						           "ErrorHandlingConfig": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "BucketName": {
-						                 "maxLength": 63,
-						                 "minLength": 3,
-						                 "pattern": "",
-						                 "type": "string"
-						               },
-						               "BucketPrefix": {
-						                 "maxLength": 512,
-						                 "type": "string"
-						               },
-						               "FailOnFirstError": {
-						                 "type": "boolean"
-						               }
-						             },
-						             "type": "object"
-						           },
-						           "IntermediateBucketName": {
-						             "maxLength": 63,
-						             "minLength": 3,
-						             "pattern": "",
-						             "type": "string"
-						           },
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object",
-						           "IntermediateBucketName"
-						         ],
-						         "type": "object"
-						       },
-						       "S3": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "BucketName": {
-						             "maxLength": 63,
-						             "minLength": 3,
-						             "pattern": "",
-						             "type": "string"
-						           },
-						           "BucketPrefix": {
-						             "maxLength": 512,
-						             "type": "string"
-						           },
-						           "S3OutputFormatConfig": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "AggregationConfig": {
-						                 "properties": {
-						                   "AggregationType": {
-						                     "enum": [
-						                       "None",
-						                       "SingleFile"
-						                     ],
-						                     "type": "string"
-						                   }
-						                 },
-						                 "type": "object"
-						               },
-						               "FileType": {
-						                 "enum": [
-						                   "CSV",
-						                   "JSON",
-						                   "PARQUET"
-						                 ],
-						                 "type": "string"
-						               },
-						               "PrefixConfig": {
-						                 "additionalProperties": false,
-						                 "properties": {
-						                   "PrefixFormat": {
-						                     "enum": [
-						                       "YEAR",
-						                       "MONTH",
-						                       "DAY",
-						                       "HOUR",
-						                       "MINUTE"
-						                     ],
-						                     "type": "string"
-						                   },
-						                   "PrefixType": {
-						                     "enum": [
-						                       "FILENAME",
-						                       "PATH",
-						                       "PATH_AND_FILENAME"
-						                     ],
-						                     "type": "string"
-						                   }
-						                 },
-						                 "type": "object"
-						               }
-						             },
-						             "type": "object"
-						           }
-						         },
-						         "required": [
-						           "BucketName"
-						         ],
-						         "type": "object"
-						       },
-						       "Salesforce": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "ErrorHandlingConfig": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "BucketName": {
-						                 "maxLength": 63,
-						                 "minLength": 3,
-						                 "pattern": "",
-						                 "type": "string"
-						               },
-						               "BucketPrefix": {
-						                 "maxLength": 512,
-						                 "type": "string"
-						               },
-						               "FailOnFirstError": {
-						                 "type": "boolean"
-						               }
-						             },
-						             "type": "object"
-						           },
-						           "IdFieldNames": {
-						             "description": "List of fields used as ID when performing a write operation.",
-						             "items": {
-						               "type": "string"
-						             },
-						             "type": "array"
-						           },
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           },
-						           "WriteOperationType": {
-						             "enum": [
-						               "INSERT",
-						               "UPSERT",
-						               "UPDATE"
-						             ],
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "Snowflake": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "BucketPrefix": {
-						             "maxLength": 512,
-						             "type": "string"
-						           },
-						           "ErrorHandlingConfig": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "BucketName": {
-						                 "maxLength": 63,
-						                 "minLength": 3,
-						                 "pattern": "",
-						                 "type": "string"
-						               },
-						               "BucketPrefix": {
-						                 "maxLength": 512,
-						                 "type": "string"
-						               },
-						               "FailOnFirstError": {
-						                 "type": "boolean"
-						               }
-						             },
-						             "type": "object"
-						           },
-						           "IntermediateBucketName": {
-						             "maxLength": 63,
-						             "minLength": 3,
-						             "pattern": "",
-						             "type": "string"
-						           },
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object",
-						           "IntermediateBucketName"
-						         ],
-						         "type": "object"
-						       },
-						       "Upsolver": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "BucketName": {
-						             "maxLength": 63,
-						             "minLength": 16,
-						             "pattern": "",
-						             "type": "string"
-						           },
-						           "BucketPrefix": {
-						             "maxLength": 512,
-						             "type": "string"
-						           },
-						           "S3OutputFormatConfig": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "AggregationConfig": {
-						                 "properties": {
-						                   "AggregationType": {
-						                     "enum": [
-						                       "None",
-						                       "SingleFile"
-						                     ],
-						                     "type": "string"
-						                   }
-						                 },
-						                 "type": "object"
-						               },
-						               "FileType": {
-						                 "enum": [
-						                   "CSV",
-						                   "JSON",
-						                   "PARQUET"
-						                 ],
-						                 "type": "string"
-						               },
-						               "PrefixConfig": {
-						                 "additionalProperties": false,
-						                 "properties": {
-						                   "PrefixFormat": {
-						                     "enum": [
-						                       "YEAR",
-						                       "MONTH",
-						                       "DAY",
-						                       "HOUR",
-						                       "MINUTE"
-						                     ],
-						                     "type": "string"
-						                   },
-						                   "PrefixType": {
-						                     "enum": [
-						                       "FILENAME",
-						                       "PATH",
-						                       "PATH_AND_FILENAME"
-						                     ],
-						                     "type": "string"
-						                   }
-						                 },
-						                 "type": "object"
-						               }
-						             },
-						             "required": [
-						               "PrefixConfig"
-						             ],
-						             "type": "object"
-						           }
-						         },
-						         "required": [
-						           "BucketName",
-						           "S3OutputFormatConfig"
-						         ],
-						         "type": "object"
-						       },
-						       "Zendesk": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "ErrorHandlingConfig": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "BucketName": {
-						                 "maxLength": 63,
-						                 "minLength": 3,
-						                 "pattern": "",
-						                 "type": "string"
-						               },
-						               "BucketPrefix": {
-						                 "maxLength": 512,
-						                 "type": "string"
-						               },
-						               "FailOnFirstError": {
-						                 "type": "boolean"
-						               }
-						             },
-						             "type": "object"
-						           },
-						           "IdFieldNames": {
-						             "description": "List of fields used as ID when performing a write operation.",
-						             "items": {
-						               "type": "string"
-						             },
-						             "type": "array"
-						           },
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           },
-						           "WriteOperationType": {
-						             "enum": [
-						               "INSERT",
-						               "UPSERT",
-						               "UPDATE"
-						             ],
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Description: "Destination connector details",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"event_bridge": {
 									// Property: EventBridge
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "ErrorHandlingConfig": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "BucketName": {
-									             "maxLength": 63,
-									             "minLength": 3,
-									             "pattern": "",
-									             "type": "string"
-									           },
-									           "BucketPrefix": {
-									             "maxLength": 512,
-									             "type": "string"
-									           },
-									           "FailOnFirstError": {
-									             "type": "boolean"
-									           }
-									         },
-									         "type": "object"
-									       },
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "BucketName": {
-												         "maxLength": 63,
-												         "minLength": 3,
-												         "pattern": "",
-												         "type": "string"
-												       },
-												       "BucketPrefix": {
-												         "maxLength": 512,
-												         "type": "string"
-												       },
-												       "FailOnFirstError": {
-												         "type": "boolean"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"bucket_name": {
 															// Property: BucketName
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "maxLength": 63,
-															     "minLength": 3,
-															     "pattern": "",
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "maxLength": 512,
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"fail_on_first_error": {
 															// Property: FailOnFirstError
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "boolean"
-															   }
-															*/
 															Type:     types.BoolType,
 															Optional: true,
 														},
@@ -1006,14 +507,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1023,32 +516,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"lookout_metrics": {
 									// Property: LookoutMetrics
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -1058,127 +529,29 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"redshift": {
 									// Property: Redshift
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "BucketPrefix": {
-									         "maxLength": 512,
-									         "type": "string"
-									       },
-									       "ErrorHandlingConfig": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "BucketName": {
-									             "maxLength": 63,
-									             "minLength": 3,
-									             "pattern": "",
-									             "type": "string"
-									           },
-									           "BucketPrefix": {
-									             "maxLength": 512,
-									             "type": "string"
-									           },
-									           "FailOnFirstError": {
-									             "type": "boolean"
-									           }
-									         },
-									         "type": "object"
-									       },
-									       "IntermediateBucketName": {
-									         "maxLength": 63,
-									         "minLength": 3,
-									         "pattern": "",
-									         "type": "string"
-									       },
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object",
-									       "IntermediateBucketName"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket_prefix": {
 												// Property: BucketPrefix
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "BucketName": {
-												         "maxLength": 63,
-												         "minLength": 3,
-												         "pattern": "",
-												         "type": "string"
-												       },
-												       "BucketPrefix": {
-												         "maxLength": 512,
-												         "type": "string"
-												       },
-												       "FailOnFirstError": {
-												         "type": "boolean"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"bucket_name": {
 															// Property: BucketName
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "maxLength": 63,
-															     "minLength": 3,
-															     "pattern": "",
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "maxLength": 512,
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"fail_on_first_error": {
 															// Property: FailOnFirstError
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "boolean"
-															   }
-															*/
 															Type:     types.BoolType,
 															Optional: true,
 														},
@@ -1188,28 +561,11 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"intermediate_bucket_name": {
 												// Property: IntermediateBucketName
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 63,
-												     "minLength": 3,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1219,194 +575,28 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"s3": {
 									// Property: S3
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "BucketName": {
-									         "maxLength": 63,
-									         "minLength": 3,
-									         "pattern": "",
-									         "type": "string"
-									       },
-									       "BucketPrefix": {
-									         "maxLength": 512,
-									         "type": "string"
-									       },
-									       "S3OutputFormatConfig": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "AggregationConfig": {
-									             "properties": {
-									               "AggregationType": {
-									                 "enum": [
-									                   "None",
-									                   "SingleFile"
-									                 ],
-									                 "type": "string"
-									               }
-									             },
-									             "type": "object"
-									           },
-									           "FileType": {
-									             "enum": [
-									               "CSV",
-									               "JSON",
-									               "PARQUET"
-									             ],
-									             "type": "string"
-									           },
-									           "PrefixConfig": {
-									             "additionalProperties": false,
-									             "properties": {
-									               "PrefixFormat": {
-									                 "enum": [
-									                   "YEAR",
-									                   "MONTH",
-									                   "DAY",
-									                   "HOUR",
-									                   "MINUTE"
-									                 ],
-									                 "type": "string"
-									               },
-									               "PrefixType": {
-									                 "enum": [
-									                   "FILENAME",
-									                   "PATH",
-									                   "PATH_AND_FILENAME"
-									                 ],
-									                 "type": "string"
-									               }
-									             },
-									             "type": "object"
-									           }
-									         },
-									         "type": "object"
-									       }
-									     },
-									     "required": [
-									       "BucketName"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket_name": {
 												// Property: BucketName
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 63,
-												     "minLength": 3,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"s3_output_format_config": {
 												// Property: S3OutputFormatConfig
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "AggregationConfig": {
-												         "properties": {
-												           "AggregationType": {
-												             "enum": [
-												               "None",
-												               "SingleFile"
-												             ],
-												             "type": "string"
-												           }
-												         },
-												         "type": "object"
-												       },
-												       "FileType": {
-												         "enum": [
-												           "CSV",
-												           "JSON",
-												           "PARQUET"
-												         ],
-												         "type": "string"
-												       },
-												       "PrefixConfig": {
-												         "additionalProperties": false,
-												         "properties": {
-												           "PrefixFormat": {
-												             "enum": [
-												               "YEAR",
-												               "MONTH",
-												               "DAY",
-												               "HOUR",
-												               "MINUTE"
-												             ],
-												             "type": "string"
-												           },
-												           "PrefixType": {
-												             "enum": [
-												               "FILENAME",
-												               "PATH",
-												               "PATH_AND_FILENAME"
-												             ],
-												             "type": "string"
-												           }
-												         },
-												         "type": "object"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"aggregation_config": {
 															// Property: AggregationConfig
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "properties": {
-															       "AggregationType": {
-															         "enum": [
-															           "None",
-															           "SingleFile"
-															         ],
-															         "type": "string"
-															       }
-															     },
-															     "type": "object"
-															   }
-															*/
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"aggregation_type": {
 																		// Property: AggregationType
-																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "enum": [
-																		       "None",
-																		       "SingleFile"
-																		     ],
-																		     "type": "string"
-																		   }
-																		*/
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
@@ -1416,82 +606,20 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"file_type": {
 															// Property: FileType
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "enum": [
-															       "CSV",
-															       "JSON",
-															       "PARQUET"
-															     ],
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"prefix_config": {
 															// Property: PrefixConfig
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "additionalProperties": false,
-															     "properties": {
-															       "PrefixFormat": {
-															         "enum": [
-															           "YEAR",
-															           "MONTH",
-															           "DAY",
-															           "HOUR",
-															           "MINUTE"
-															         ],
-															         "type": "string"
-															       },
-															       "PrefixType": {
-															         "enum": [
-															           "FILENAME",
-															           "PATH",
-															           "PATH_AND_FILENAME"
-															         ],
-															         "type": "string"
-															       }
-															     },
-															     "type": "object"
-															   }
-															*/
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"prefix_format": {
 																		// Property: PrefixFormat
-																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "enum": [
-																		       "YEAR",
-																		       "MONTH",
-																		       "DAY",
-																		       "HOUR",
-																		       "MINUTE"
-																		     ],
-																		     "type": "string"
-																		   }
-																		*/
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
 																	"prefix_type": {
 																		// Property: PrefixType
-																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "enum": [
-																		       "FILENAME",
-																		       "PATH",
-																		       "PATH_AND_FILENAME"
-																		     ],
-																		     "type": "string"
-																		   }
-																		*/
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
@@ -1509,119 +637,24 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"salesforce": {
 									// Property: Salesforce
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "ErrorHandlingConfig": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "BucketName": {
-									             "maxLength": 63,
-									             "minLength": 3,
-									             "pattern": "",
-									             "type": "string"
-									           },
-									           "BucketPrefix": {
-									             "maxLength": 512,
-									             "type": "string"
-									           },
-									           "FailOnFirstError": {
-									             "type": "boolean"
-									           }
-									         },
-									         "type": "object"
-									       },
-									       "IdFieldNames": {
-									         "description": "List of fields used as ID when performing a write operation.",
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array"
-									       },
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       },
-									       "WriteOperationType": {
-									         "enum": [
-									           "INSERT",
-									           "UPSERT",
-									           "UPDATE"
-									         ],
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "BucketName": {
-												         "maxLength": 63,
-												         "minLength": 3,
-												         "pattern": "",
-												         "type": "string"
-												       },
-												       "BucketPrefix": {
-												         "maxLength": 512,
-												         "type": "string"
-												       },
-												       "FailOnFirstError": {
-												         "type": "boolean"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"bucket_name": {
 															// Property: BucketName
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "maxLength": 63,
-															     "minLength": 3,
-															     "pattern": "",
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "maxLength": 512,
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"fail_on_first_error": {
 															// Property: FailOnFirstError
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "boolean"
-															   }
-															*/
 															Type:     types.BoolType,
 															Optional: true,
 														},
@@ -1631,46 +664,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"id_field_names": {
 												// Property: IdFieldNames
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "List of fields used as ID when performing a write operation.",
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Description: "List of fields used as ID when performing a write operation.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
 											},
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"write_operation_type": {
 												// Property: WriteOperationType
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "enum": [
-												       "INSERT",
-												       "UPSERT",
-												       "UPDATE"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -1680,127 +684,29 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"snowflake": {
 									// Property: Snowflake
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "BucketPrefix": {
-									         "maxLength": 512,
-									         "type": "string"
-									       },
-									       "ErrorHandlingConfig": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "BucketName": {
-									             "maxLength": 63,
-									             "minLength": 3,
-									             "pattern": "",
-									             "type": "string"
-									           },
-									           "BucketPrefix": {
-									             "maxLength": 512,
-									             "type": "string"
-									           },
-									           "FailOnFirstError": {
-									             "type": "boolean"
-									           }
-									         },
-									         "type": "object"
-									       },
-									       "IntermediateBucketName": {
-									         "maxLength": 63,
-									         "minLength": 3,
-									         "pattern": "",
-									         "type": "string"
-									       },
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object",
-									       "IntermediateBucketName"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket_prefix": {
 												// Property: BucketPrefix
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "BucketName": {
-												         "maxLength": 63,
-												         "minLength": 3,
-												         "pattern": "",
-												         "type": "string"
-												       },
-												       "BucketPrefix": {
-												         "maxLength": 512,
-												         "type": "string"
-												       },
-												       "FailOnFirstError": {
-												         "type": "boolean"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"bucket_name": {
 															// Property: BucketName
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "maxLength": 63,
-															     "minLength": 3,
-															     "pattern": "",
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "maxLength": 512,
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"fail_on_first_error": {
 															// Property: FailOnFirstError
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "boolean"
-															   }
-															*/
 															Type:     types.BoolType,
 															Optional: true,
 														},
@@ -1810,28 +716,11 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"intermediate_bucket_name": {
 												// Property: IntermediateBucketName
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 63,
-												     "minLength": 3,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -1841,201 +730,28 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"upsolver": {
 									// Property: Upsolver
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "BucketName": {
-									         "maxLength": 63,
-									         "minLength": 16,
-									         "pattern": "",
-									         "type": "string"
-									       },
-									       "BucketPrefix": {
-									         "maxLength": 512,
-									         "type": "string"
-									       },
-									       "S3OutputFormatConfig": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "AggregationConfig": {
-									             "properties": {
-									               "AggregationType": {
-									                 "enum": [
-									                   "None",
-									                   "SingleFile"
-									                 ],
-									                 "type": "string"
-									               }
-									             },
-									             "type": "object"
-									           },
-									           "FileType": {
-									             "enum": [
-									               "CSV",
-									               "JSON",
-									               "PARQUET"
-									             ],
-									             "type": "string"
-									           },
-									           "PrefixConfig": {
-									             "additionalProperties": false,
-									             "properties": {
-									               "PrefixFormat": {
-									                 "enum": [
-									                   "YEAR",
-									                   "MONTH",
-									                   "DAY",
-									                   "HOUR",
-									                   "MINUTE"
-									                 ],
-									                 "type": "string"
-									               },
-									               "PrefixType": {
-									                 "enum": [
-									                   "FILENAME",
-									                   "PATH",
-									                   "PATH_AND_FILENAME"
-									                 ],
-									                 "type": "string"
-									               }
-									             },
-									             "type": "object"
-									           }
-									         },
-									         "required": [
-									           "PrefixConfig"
-									         ],
-									         "type": "object"
-									       }
-									     },
-									     "required": [
-									       "BucketName",
-									       "S3OutputFormatConfig"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket_name": {
 												// Property: BucketName
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 63,
-												     "minLength": 16,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"s3_output_format_config": {
 												// Property: S3OutputFormatConfig
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "AggregationConfig": {
-												         "properties": {
-												           "AggregationType": {
-												             "enum": [
-												               "None",
-												               "SingleFile"
-												             ],
-												             "type": "string"
-												           }
-												         },
-												         "type": "object"
-												       },
-												       "FileType": {
-												         "enum": [
-												           "CSV",
-												           "JSON",
-												           "PARQUET"
-												         ],
-												         "type": "string"
-												       },
-												       "PrefixConfig": {
-												         "additionalProperties": false,
-												         "properties": {
-												           "PrefixFormat": {
-												             "enum": [
-												               "YEAR",
-												               "MONTH",
-												               "DAY",
-												               "HOUR",
-												               "MINUTE"
-												             ],
-												             "type": "string"
-												           },
-												           "PrefixType": {
-												             "enum": [
-												               "FILENAME",
-												               "PATH",
-												               "PATH_AND_FILENAME"
-												             ],
-												             "type": "string"
-												           }
-												         },
-												         "type": "object"
-												       }
-												     },
-												     "required": [
-												       "PrefixConfig"
-												     ],
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"aggregation_config": {
 															// Property: AggregationConfig
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "properties": {
-															       "AggregationType": {
-															         "enum": [
-															           "None",
-															           "SingleFile"
-															         ],
-															         "type": "string"
-															       }
-															     },
-															     "type": "object"
-															   }
-															*/
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"aggregation_type": {
 																		// Property: AggregationType
-																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "enum": [
-																		       "None",
-																		       "SingleFile"
-																		     ],
-																		     "type": "string"
-																		   }
-																		*/
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
@@ -2045,82 +761,20 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"file_type": {
 															// Property: FileType
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "enum": [
-															       "CSV",
-															       "JSON",
-															       "PARQUET"
-															     ],
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"prefix_config": {
 															// Property: PrefixConfig
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "additionalProperties": false,
-															     "properties": {
-															       "PrefixFormat": {
-															         "enum": [
-															           "YEAR",
-															           "MONTH",
-															           "DAY",
-															           "HOUR",
-															           "MINUTE"
-															         ],
-															         "type": "string"
-															       },
-															       "PrefixType": {
-															         "enum": [
-															           "FILENAME",
-															           "PATH",
-															           "PATH_AND_FILENAME"
-															         ],
-															         "type": "string"
-															       }
-															     },
-															     "type": "object"
-															   }
-															*/
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"prefix_format": {
 																		// Property: PrefixFormat
-																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "enum": [
-																		       "YEAR",
-																		       "MONTH",
-																		       "DAY",
-																		       "HOUR",
-																		       "MINUTE"
-																		     ],
-																		     "type": "string"
-																		   }
-																		*/
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
 																	"prefix_type": {
 																		// Property: PrefixType
-																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "enum": [
-																		       "FILENAME",
-																		       "PATH",
-																		       "PATH_AND_FILENAME"
-																		     ],
-																		     "type": "string"
-																		   }
-																		*/
 																		Type:     types.StringType,
 																		Optional: true,
 																	},
@@ -2138,119 +792,24 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"zendesk": {
 									// Property: Zendesk
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "ErrorHandlingConfig": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "BucketName": {
-									             "maxLength": 63,
-									             "minLength": 3,
-									             "pattern": "",
-									             "type": "string"
-									           },
-									           "BucketPrefix": {
-									             "maxLength": 512,
-									             "type": "string"
-									           },
-									           "FailOnFirstError": {
-									             "type": "boolean"
-									           }
-									         },
-									         "type": "object"
-									       },
-									       "IdFieldNames": {
-									         "description": "List of fields used as ID when performing a write operation.",
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array"
-									       },
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       },
-									       "WriteOperationType": {
-									         "enum": [
-									           "INSERT",
-									           "UPSERT",
-									           "UPDATE"
-									         ],
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "BucketName": {
-												         "maxLength": 63,
-												         "minLength": 3,
-												         "pattern": "",
-												         "type": "string"
-												       },
-												       "BucketPrefix": {
-												         "maxLength": 512,
-												         "type": "string"
-												       },
-												       "FailOnFirstError": {
-												         "type": "boolean"
-												       }
-												     },
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"bucket_name": {
 															// Property: BucketName
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "maxLength": 63,
-															     "minLength": 3,
-															     "pattern": "",
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "maxLength": 512,
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Optional: true,
 														},
 														"fail_on_first_error": {
 															// Property: FailOnFirstError
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "boolean"
-															   }
-															*/
 															Type:     types.BoolType,
 															Optional: true,
 														},
@@ -2260,46 +819,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"id_field_names": {
 												// Property: IdFieldNames
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "description": "List of fields used as ID when performing a write operation.",
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Description: "List of fields used as ID when performing a write operation.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
 											},
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"write_operation_type": {
 												// Property: WriteOperationType
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "enum": [
-												       "INSERT",
-												       "UPSERT",
-												       "UPDATE"
-												     ],
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -2319,14 +849,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"flow_arn": {
 			// Property: FlowArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "ARN identifier of the flow.",
-			     "maxLength": 512,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "ARN identifier of the flow.",
+			//   "maxLength": 512,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "ARN identifier of the flow.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -2334,15 +862,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"flow_name": {
 			// Property: FlowName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of the flow.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of the flow.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Name of the flow.",
 			Type:        types.StringType,
 			Required:    true,
@@ -2351,15 +877,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"kms_arn": {
 			// Property: KMSArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
-			     "maxLength": 2048,
-			     "minLength": 20,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
+			//   "maxLength": 2048,
+			//   "minLength": 20,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -2369,353 +893,293 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"source_flow_config": {
 			// Property: SourceFlowConfig
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Configurations of Source connector of the flow.",
-			     "properties": {
-			       "ConnectorProfileName": {
-			         "description": "Name of connector profile",
-			         "maxLength": 256,
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "ConnectorType": {
-			         "enum": [
-			           "Salesforce",
-			           "Singular",
-			           "Slack",
-			           "Redshift",
-			           "S3",
-			           "Marketo",
-			           "Googleanalytics",
-			           "Zendesk",
-			           "Servicenow",
-			           "Datadog",
-			           "Trendmicro",
-			           "Snowflake",
-			           "Dynatrace",
-			           "Infornexus",
-			           "Amplitude",
-			           "Veeva",
-			           "EventBridge",
-			           "Upsolver",
-			           "LookoutMetrics"
-			         ],
-			         "type": "string"
-			       },
-			       "IncrementalPullConfig": {
-			         "description": "Configuration for scheduled incremental data pull",
-			         "properties": {
-			           "DatetimeTypeFieldName": {
-			             "description": "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",
-			             "maxLength": 256,
-			             "type": "string"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "SourceConnectorProperties": {
-			         "description": "Source connector details required to query a connector",
-			         "properties": {
-			           "Amplitude": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           },
-			           "Datadog": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           },
-			           "Dynatrace": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           },
-			           "GoogleAnalytics": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           },
-			           "InforNexus": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           },
-			           "Marketo": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           },
-			           "S3": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "BucketName": {
-			                 "maxLength": 63,
-			                 "minLength": 3,
-			                 "pattern": "",
-			                 "type": "string"
-			               },
-			               "BucketPrefix": {
-			                 "maxLength": 512,
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "BucketName",
-			               "BucketPrefix"
-			             ],
-			             "type": "object"
-			           },
-			           "Salesforce": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "EnableDynamicFieldUpdate": {
-			                 "type": "boolean"
-			               },
-			               "IncludeDeletedRecords": {
-			                 "type": "boolean"
-			               },
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           },
-			           "ServiceNow": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           },
-			           "Singular": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           },
-			           "Slack": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           },
-			           "Trendmicro": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           },
-			           "Veeva": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           },
-			           "Zendesk": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Object": {
-			                 "maxLength": 512,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Object"
-			             ],
-			             "type": "object"
-			           }
-			         },
-			         "type": "object"
-			       }
-			     },
-			     "required": [
-			       "ConnectorType",
-			       "SourceConnectorProperties"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Configurations of Source connector of the flow.",
+			//   "properties": {
+			//     "ConnectorProfileName": {
+			//       "description": "Name of connector profile",
+			//       "maxLength": 256,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "ConnectorType": {
+			//       "enum": [
+			//         "Salesforce",
+			//         "Singular",
+			//         "Slack",
+			//         "Redshift",
+			//         "S3",
+			//         "Marketo",
+			//         "Googleanalytics",
+			//         "Zendesk",
+			//         "Servicenow",
+			//         "Datadog",
+			//         "Trendmicro",
+			//         "Snowflake",
+			//         "Dynatrace",
+			//         "Infornexus",
+			//         "Amplitude",
+			//         "Veeva",
+			//         "EventBridge",
+			//         "Upsolver",
+			//         "LookoutMetrics"
+			//       ],
+			//       "type": "string"
+			//     },
+			//     "IncrementalPullConfig": {
+			//       "description": "Configuration for scheduled incremental data pull",
+			//       "properties": {
+			//         "DatetimeTypeFieldName": {
+			//           "description": "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",
+			//           "maxLength": 256,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "SourceConnectorProperties": {
+			//       "description": "Source connector details required to query a connector",
+			//       "properties": {
+			//         "Amplitude": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "Datadog": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "Dynatrace": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "GoogleAnalytics": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "InforNexus": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "Marketo": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "S3": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "BucketName": {
+			//               "maxLength": 63,
+			//               "minLength": 3,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "BucketPrefix": {
+			//               "maxLength": 512,
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "BucketName",
+			//             "BucketPrefix"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "Salesforce": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "EnableDynamicFieldUpdate": {
+			//               "type": "boolean"
+			//             },
+			//             "IncludeDeletedRecords": {
+			//               "type": "boolean"
+			//             },
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "ServiceNow": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "Singular": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "Slack": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "Trendmicro": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "Veeva": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "Zendesk": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Object": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Object"
+			//           ],
+			//           "type": "object"
+			//         }
+			//       },
+			//       "type": "object"
+			//     }
+			//   },
+			//   "required": [
+			//     "ConnectorType",
+			//     "SourceConnectorProperties"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "Configurations of Source connector of the flow.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"connector_profile_name": {
 						// Property: ConnectorProfileName
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Name of connector profile",
-						     "maxLength": 256,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "Name of connector profile",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"connector_type": {
 						// Property: ConnectorType
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "Salesforce",
-						       "Singular",
-						       "Slack",
-						       "Redshift",
-						       "S3",
-						       "Marketo",
-						       "Googleanalytics",
-						       "Zendesk",
-						       "Servicenow",
-						       "Datadog",
-						       "Trendmicro",
-						       "Snowflake",
-						       "Dynatrace",
-						       "Infornexus",
-						       "Amplitude",
-						       "Veeva",
-						       "EventBridge",
-						       "Upsolver",
-						       "LookoutMetrics"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"incremental_pull_config": {
 						// Property: IncrementalPullConfig
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Configuration for scheduled incremental data pull",
-						     "properties": {
-						       "DatetimeTypeFieldName": {
-						         "description": "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",
-						         "maxLength": 256,
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Description: "Configuration for scheduled incremental data pull",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"datetime_type_field_name": {
 									// Property: DatetimeTypeFieldName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",
-									     "maxLength": 256,
-									     "type": "string"
-									   }
-									*/
 									Description: "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",
 									Type:        types.StringType,
 									Optional:    true,
@@ -2726,257 +1190,15 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"source_connector_properties": {
 						// Property: SourceConnectorProperties
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Source connector details required to query a connector",
-						     "properties": {
-						       "Amplitude": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "Datadog": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "Dynatrace": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "GoogleAnalytics": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "InforNexus": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "Marketo": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "S3": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "BucketName": {
-						             "maxLength": 63,
-						             "minLength": 3,
-						             "pattern": "",
-						             "type": "string"
-						           },
-						           "BucketPrefix": {
-						             "maxLength": 512,
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "BucketName",
-						           "BucketPrefix"
-						         ],
-						         "type": "object"
-						       },
-						       "Salesforce": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "EnableDynamicFieldUpdate": {
-						             "type": "boolean"
-						           },
-						           "IncludeDeletedRecords": {
-						             "type": "boolean"
-						           },
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "ServiceNow": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "Singular": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "Slack": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "Trendmicro": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "Veeva": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       },
-						       "Zendesk": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Object": {
-						             "maxLength": 512,
-						             "pattern": "",
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "Object"
-						         ],
-						         "type": "object"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Description: "Source connector details required to query a connector",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"amplitude": {
 									// Property: Amplitude
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2986,35 +1208,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"datadog": {
 									// Property: Datadog
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3024,35 +1221,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"dynatrace": {
 									// Property: Dynatrace
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3062,35 +1234,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"google_analytics": {
 									// Property: GoogleAnalytics
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3100,35 +1247,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"infor_nexus": {
 									// Property: InforNexus
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3138,35 +1260,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"marketo": {
 									// Property: Marketo
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3176,54 +1273,15 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"s3": {
 									// Property: S3
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "BucketName": {
-									         "maxLength": 63,
-									         "minLength": 3,
-									         "pattern": "",
-									         "type": "string"
-									       },
-									       "BucketPrefix": {
-									         "maxLength": 512,
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "BucketName",
-									       "BucketPrefix"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"bucket_name": {
 												// Property: BucketName
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 63,
-												     "minLength": 3,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3233,63 +1291,20 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"salesforce": {
 									// Property: Salesforce
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "EnableDynamicFieldUpdate": {
-									         "type": "boolean"
-									       },
-									       "IncludeDeletedRecords": {
-									         "type": "boolean"
-									       },
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"enable_dynamic_field_update": {
 												// Property: EnableDynamicFieldUpdate
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"include_deleted_records": {
 												// Property: IncludeDeletedRecords
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3299,35 +1314,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"service_now": {
 									// Property: ServiceNow
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3337,35 +1327,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"singular": {
 									// Property: Singular
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3375,35 +1340,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"slack": {
 									// Property: Slack
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3413,35 +1353,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"trendmicro": {
 									// Property: Trendmicro
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3451,35 +1366,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"veeva": {
 									// Property: Veeva
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3489,35 +1379,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"zendesk": {
 									// Property: Zendesk
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Object": {
-									         "maxLength": 512,
-									         "pattern": "",
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "Object"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"object": {
 												// Property: Object
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "maxLength": 512,
-												     "pattern": "",
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3536,64 +1401,44 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "List of Tags.",
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A label for tagging AppFlow resources",
-			       "properties": {
-			         "Key": {
-			           "description": "A string used to identify this tag",
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "A string containing the value for the tag",
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "List of Tags.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A label for tagging AppFlow resources",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "A string used to identify this tag",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "A string containing the value for the tag",
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "List of Tags.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A string used to identify this tag",
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "A string used to identify this tag",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A string containing the value for the tag",
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
 						Description: "A string containing the value for the tag",
 						Type:        types.StringType,
 						Required:    true,
@@ -3606,1039 +1451,440 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tasks": {
 			// Property: Tasks
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "List of tasks for the flow.",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "ConnectorOperator": {
-			           "description": "Operation to be performed on provided source fields",
-			           "properties": {
-			             "Amplitude": {
-			               "enum": [
-			                 "BETWEEN"
-			               ],
-			               "type": "string"
-			             },
-			             "Datadog": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "BETWEEN",
-			                 "EQUAL_TO",
-			                 "ADDITION",
-			                 "MULTIPLICATION",
-			                 "DIVISION",
-			                 "SUBTRACTION",
-			                 "MASK_ALL",
-			                 "MASK_FIRST_N",
-			                 "MASK_LAST_N",
-			                 "VALIDATE_NON_NULL",
-			                 "VALIDATE_NON_ZERO",
-			                 "VALIDATE_NON_NEGATIVE",
-			                 "VALIDATE_NUMERIC",
-			                 "NO_OP"
-			               ],
-			               "type": "string"
-			             },
-			             "Dynatrace": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "BETWEEN",
-			                 "EQUAL_TO",
-			                 "ADDITION",
-			                 "MULTIPLICATION",
-			                 "DIVISION",
-			                 "SUBTRACTION",
-			                 "MASK_ALL",
-			                 "MASK_FIRST_N",
-			                 "MASK_LAST_N",
-			                 "VALIDATE_NON_NULL",
-			                 "VALIDATE_NON_ZERO",
-			                 "VALIDATE_NON_NEGATIVE",
-			                 "VALIDATE_NUMERIC",
-			                 "NO_OP"
-			               ],
-			               "type": "string"
-			             },
-			             "GoogleAnalytics": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "BETWEEN"
-			               ],
-			               "type": "string"
-			             },
-			             "InforNexus": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "BETWEEN",
-			                 "EQUAL_TO",
-			                 "ADDITION",
-			                 "MULTIPLICATION",
-			                 "DIVISION",
-			                 "SUBTRACTION",
-			                 "MASK_ALL",
-			                 "MASK_FIRST_N",
-			                 "MASK_LAST_N",
-			                 "VALIDATE_NON_NULL",
-			                 "VALIDATE_NON_ZERO",
-			                 "VALIDATE_NON_NEGATIVE",
-			                 "VALIDATE_NUMERIC",
-			                 "NO_OP"
-			               ],
-			               "type": "string"
-			             },
-			             "Marketo": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "LESS_THAN",
-			                 "GREATER_THAN",
-			                 "BETWEEN",
-			                 "ADDITION",
-			                 "MULTIPLICATION",
-			                 "DIVISION",
-			                 "SUBTRACTION",
-			                 "MASK_ALL",
-			                 "MASK_FIRST_N",
-			                 "MASK_LAST_N",
-			                 "VALIDATE_NON_NULL",
-			                 "VALIDATE_NON_ZERO",
-			                 "VALIDATE_NON_NEGATIVE",
-			                 "VALIDATE_NUMERIC",
-			                 "NO_OP"
-			               ],
-			               "type": "string"
-			             },
-			             "S3": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "LESS_THAN",
-			                 "GREATER_THAN",
-			                 "BETWEEN",
-			                 "LESS_THAN_OR_EQUAL_TO",
-			                 "GREATER_THAN_OR_EQUAL_TO",
-			                 "EQUAL_TO",
-			                 "NOT_EQUAL_TO",
-			                 "ADDITION",
-			                 "MULTIPLICATION",
-			                 "DIVISION",
-			                 "SUBTRACTION",
-			                 "MASK_ALL",
-			                 "MASK_FIRST_N",
-			                 "MASK_LAST_N",
-			                 "VALIDATE_NON_NULL",
-			                 "VALIDATE_NON_ZERO",
-			                 "VALIDATE_NON_NEGATIVE",
-			                 "VALIDATE_NUMERIC",
-			                 "NO_OP"
-			               ],
-			               "type": "string"
-			             },
-			             "Salesforce": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "LESS_THAN",
-			                 "CONTAINS",
-			                 "GREATER_THAN",
-			                 "BETWEEN",
-			                 "LESS_THAN_OR_EQUAL_TO",
-			                 "GREATER_THAN_OR_EQUAL_TO",
-			                 "EQUAL_TO",
-			                 "NOT_EQUAL_TO",
-			                 "ADDITION",
-			                 "MULTIPLICATION",
-			                 "DIVISION",
-			                 "SUBTRACTION",
-			                 "MASK_ALL",
-			                 "MASK_FIRST_N",
-			                 "MASK_LAST_N",
-			                 "VALIDATE_NON_NULL",
-			                 "VALIDATE_NON_ZERO",
-			                 "VALIDATE_NON_NEGATIVE",
-			                 "VALIDATE_NUMERIC",
-			                 "NO_OP"
-			               ],
-			               "type": "string"
-			             },
-			             "ServiceNow": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "LESS_THAN",
-			                 "CONTAINS",
-			                 "GREATER_THAN",
-			                 "BETWEEN",
-			                 "LESS_THAN_OR_EQUAL_TO",
-			                 "GREATER_THAN_OR_EQUAL_TO",
-			                 "EQUAL_TO",
-			                 "NOT_EQUAL_TO",
-			                 "ADDITION",
-			                 "MULTIPLICATION",
-			                 "DIVISION",
-			                 "SUBTRACTION",
-			                 "MASK_ALL",
-			                 "MASK_FIRST_N",
-			                 "MASK_LAST_N",
-			                 "VALIDATE_NON_NULL",
-			                 "VALIDATE_NON_ZERO",
-			                 "VALIDATE_NON_NEGATIVE",
-			                 "VALIDATE_NUMERIC",
-			                 "NO_OP"
-			               ],
-			               "type": "string"
-			             },
-			             "Singular": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "EQUAL_TO",
-			                 "ADDITION",
-			                 "MULTIPLICATION",
-			                 "DIVISION",
-			                 "SUBTRACTION",
-			                 "MASK_ALL",
-			                 "MASK_FIRST_N",
-			                 "MASK_LAST_N",
-			                 "VALIDATE_NON_NULL",
-			                 "VALIDATE_NON_ZERO",
-			                 "VALIDATE_NON_NEGATIVE",
-			                 "VALIDATE_NUMERIC",
-			                 "NO_OP"
-			               ],
-			               "type": "string"
-			             },
-			             "Slack": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "BETWEEN",
-			                 "EQUAL_TO",
-			                 "ADDITION",
-			                 "MULTIPLICATION",
-			                 "DIVISION",
-			                 "SUBTRACTION",
-			                 "MASK_ALL",
-			                 "MASK_FIRST_N",
-			                 "MASK_LAST_N",
-			                 "VALIDATE_NON_NULL",
-			                 "VALIDATE_NON_ZERO",
-			                 "VALIDATE_NON_NEGATIVE",
-			                 "VALIDATE_NUMERIC",
-			                 "NO_OP"
-			               ],
-			               "type": "string"
-			             },
-			             "Trendmicro": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "EQUAL_TO",
-			                 "ADDITION",
-			                 "MULTIPLICATION",
-			                 "DIVISION",
-			                 "SUBTRACTION",
-			                 "MASK_ALL",
-			                 "MASK_FIRST_N",
-			                 "MASK_LAST_N",
-			                 "VALIDATE_NON_NULL",
-			                 "VALIDATE_NON_ZERO",
-			                 "VALIDATE_NON_NEGATIVE",
-			                 "VALIDATE_NUMERIC",
-			                 "NO_OP"
-			               ],
-			               "type": "string"
-			             },
-			             "Veeva": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "LESS_THAN",
-			                 "GREATER_THAN",
-			                 "BETWEEN",
-			                 "LESS_THAN_OR_EQUAL_TO",
-			                 "GREATER_THAN_OR_EQUAL_TO",
-			                 "EQUAL_TO",
-			                 "NOT_EQUAL_TO",
-			                 "ADDITION",
-			                 "MULTIPLICATION",
-			                 "DIVISION",
-			                 "SUBTRACTION",
-			                 "MASK_ALL",
-			                 "MASK_FIRST_N",
-			                 "MASK_LAST_N",
-			                 "VALIDATE_NON_NULL",
-			                 "VALIDATE_NON_ZERO",
-			                 "VALIDATE_NON_NEGATIVE",
-			                 "VALIDATE_NUMERIC",
-			                 "NO_OP"
-			               ],
-			               "type": "string"
-			             },
-			             "Zendesk": {
-			               "enum": [
-			                 "PROJECTION",
-			                 "GREATER_THAN",
-			                 "ADDITION",
-			                 "MULTIPLICATION",
-			                 "DIVISION",
-			                 "SUBTRACTION",
-			                 "MASK_ALL",
-			                 "MASK_FIRST_N",
-			                 "MASK_LAST_N",
-			                 "VALIDATE_NON_NULL",
-			                 "VALIDATE_NON_ZERO",
-			                 "VALIDATE_NON_NEGATIVE",
-			                 "VALIDATE_NUMERIC",
-			                 "NO_OP"
-			               ],
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "DestinationField": {
-			           "description": "A field value on which source field should be validated",
-			           "maxLength": 256,
-			           "type": "string"
-			         },
-			         "SourceFields": {
-			           "description": "Source fields on which particular task will be applied",
-			           "items": {
-			             "type": "string"
-			           },
-			           "type": "array"
-			         },
-			         "TaskProperties": {
-			           "additionalProperties": false,
-			           "description": "A Map used to store task related info",
-			           "items": {
-			             "additionalProperties": false,
-			             "description": "An object used to store task related info",
-			             "properties": {
-			               "Key": {
-			                 "enum": [
-			                   "VALUE",
-			                   "VALUES",
-			                   "DATA_TYPE",
-			                   "UPPER_BOUND",
-			                   "LOWER_BOUND",
-			                   "SOURCE_DATA_TYPE",
-			                   "DESTINATION_DATA_TYPE",
-			                   "VALIDATION_ACTION",
-			                   "MASK_VALUE",
-			                   "MASK_LENGTH",
-			                   "TRUNCATE_LENGTH",
-			                   "MATH_OPERATION_FIELDS_ORDER",
-			                   "CONCAT_FORMAT",
-			                   "SUBFIELD_CATEGORY_MAP",
-			                   "EXCLUDE_SOURCE_FIELDS_LIST"
-			                 ],
-			                 "type": "string"
-			               },
-			               "Value": {
-			                 "maxLength": 2048,
-			                 "pattern": "",
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "Key",
-			               "Value"
-			             ],
-			             "type": "object"
-			           },
-			           "type": "array"
-			         },
-			         "TaskType": {
-			           "enum": [
-			             "Arithmetic",
-			             "Filter",
-			             "Map",
-			             "Map_all",
-			             "Mask",
-			             "Merge",
-			             "Truncate",
-			             "Validate"
-			           ],
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "SourceFields",
-			         "TaskType"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "List of tasks for the flow.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "ConnectorOperator": {
+			//         "description": "Operation to be performed on provided source fields",
+			//         "properties": {
+			//           "Amplitude": {
+			//             "enum": [
+			//               "BETWEEN"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "Datadog": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "BETWEEN",
+			//               "EQUAL_TO",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "Dynatrace": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "BETWEEN",
+			//               "EQUAL_TO",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "GoogleAnalytics": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "BETWEEN"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "InforNexus": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "BETWEEN",
+			//               "EQUAL_TO",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "Marketo": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "LESS_THAN",
+			//               "GREATER_THAN",
+			//               "BETWEEN",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "S3": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "LESS_THAN",
+			//               "GREATER_THAN",
+			//               "BETWEEN",
+			//               "LESS_THAN_OR_EQUAL_TO",
+			//               "GREATER_THAN_OR_EQUAL_TO",
+			//               "EQUAL_TO",
+			//               "NOT_EQUAL_TO",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "Salesforce": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "LESS_THAN",
+			//               "CONTAINS",
+			//               "GREATER_THAN",
+			//               "BETWEEN",
+			//               "LESS_THAN_OR_EQUAL_TO",
+			//               "GREATER_THAN_OR_EQUAL_TO",
+			//               "EQUAL_TO",
+			//               "NOT_EQUAL_TO",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "ServiceNow": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "LESS_THAN",
+			//               "CONTAINS",
+			//               "GREATER_THAN",
+			//               "BETWEEN",
+			//               "LESS_THAN_OR_EQUAL_TO",
+			//               "GREATER_THAN_OR_EQUAL_TO",
+			//               "EQUAL_TO",
+			//               "NOT_EQUAL_TO",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "Singular": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "EQUAL_TO",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "Slack": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "BETWEEN",
+			//               "EQUAL_TO",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "Trendmicro": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "EQUAL_TO",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "Veeva": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "LESS_THAN",
+			//               "GREATER_THAN",
+			//               "BETWEEN",
+			//               "LESS_THAN_OR_EQUAL_TO",
+			//               "GREATER_THAN_OR_EQUAL_TO",
+			//               "EQUAL_TO",
+			//               "NOT_EQUAL_TO",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           },
+			//           "Zendesk": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "GREATER_THAN",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "DestinationField": {
+			//         "description": "A field value on which source field should be validated",
+			//         "maxLength": 256,
+			//         "type": "string"
+			//       },
+			//       "SourceFields": {
+			//         "description": "Source fields on which particular task will be applied",
+			//         "items": {
+			//           "type": "string"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "TaskProperties": {
+			//         "additionalProperties": false,
+			//         "description": "A Map used to store task related info",
+			//         "items": {
+			//           "additionalProperties": false,
+			//           "description": "An object used to store task related info",
+			//           "properties": {
+			//             "Key": {
+			//               "enum": [
+			//                 "VALUE",
+			//                 "VALUES",
+			//                 "DATA_TYPE",
+			//                 "UPPER_BOUND",
+			//                 "LOWER_BOUND",
+			//                 "SOURCE_DATA_TYPE",
+			//                 "DESTINATION_DATA_TYPE",
+			//                 "VALIDATION_ACTION",
+			//                 "MASK_VALUE",
+			//                 "MASK_LENGTH",
+			//                 "TRUNCATE_LENGTH",
+			//                 "MATH_OPERATION_FIELDS_ORDER",
+			//                 "CONCAT_FORMAT",
+			//                 "SUBFIELD_CATEGORY_MAP",
+			//                 "EXCLUDE_SOURCE_FIELDS_LIST"
+			//               ],
+			//               "type": "string"
+			//             },
+			//             "Value": {
+			//               "maxLength": 2048,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Key",
+			//             "Value"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "type": "array"
+			//       },
+			//       "TaskType": {
+			//         "enum": [
+			//           "Arithmetic",
+			//           "Filter",
+			//           "Map",
+			//           "Map_all",
+			//           "Mask",
+			//           "Merge",
+			//           "Truncate",
+			//           "Validate"
+			//         ],
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "SourceFields",
+			//       "TaskType"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "List of tasks for the flow.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"connector_operator": {
 						// Property: ConnectorOperator
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Operation to be performed on provided source fields",
-						     "properties": {
-						       "Amplitude": {
-						         "enum": [
-						           "BETWEEN"
-						         ],
-						         "type": "string"
-						       },
-						       "Datadog": {
-						         "enum": [
-						           "PROJECTION",
-						           "BETWEEN",
-						           "EQUAL_TO",
-						           "ADDITION",
-						           "MULTIPLICATION",
-						           "DIVISION",
-						           "SUBTRACTION",
-						           "MASK_ALL",
-						           "MASK_FIRST_N",
-						           "MASK_LAST_N",
-						           "VALIDATE_NON_NULL",
-						           "VALIDATE_NON_ZERO",
-						           "VALIDATE_NON_NEGATIVE",
-						           "VALIDATE_NUMERIC",
-						           "NO_OP"
-						         ],
-						         "type": "string"
-						       },
-						       "Dynatrace": {
-						         "enum": [
-						           "PROJECTION",
-						           "BETWEEN",
-						           "EQUAL_TO",
-						           "ADDITION",
-						           "MULTIPLICATION",
-						           "DIVISION",
-						           "SUBTRACTION",
-						           "MASK_ALL",
-						           "MASK_FIRST_N",
-						           "MASK_LAST_N",
-						           "VALIDATE_NON_NULL",
-						           "VALIDATE_NON_ZERO",
-						           "VALIDATE_NON_NEGATIVE",
-						           "VALIDATE_NUMERIC",
-						           "NO_OP"
-						         ],
-						         "type": "string"
-						       },
-						       "GoogleAnalytics": {
-						         "enum": [
-						           "PROJECTION",
-						           "BETWEEN"
-						         ],
-						         "type": "string"
-						       },
-						       "InforNexus": {
-						         "enum": [
-						           "PROJECTION",
-						           "BETWEEN",
-						           "EQUAL_TO",
-						           "ADDITION",
-						           "MULTIPLICATION",
-						           "DIVISION",
-						           "SUBTRACTION",
-						           "MASK_ALL",
-						           "MASK_FIRST_N",
-						           "MASK_LAST_N",
-						           "VALIDATE_NON_NULL",
-						           "VALIDATE_NON_ZERO",
-						           "VALIDATE_NON_NEGATIVE",
-						           "VALIDATE_NUMERIC",
-						           "NO_OP"
-						         ],
-						         "type": "string"
-						       },
-						       "Marketo": {
-						         "enum": [
-						           "PROJECTION",
-						           "LESS_THAN",
-						           "GREATER_THAN",
-						           "BETWEEN",
-						           "ADDITION",
-						           "MULTIPLICATION",
-						           "DIVISION",
-						           "SUBTRACTION",
-						           "MASK_ALL",
-						           "MASK_FIRST_N",
-						           "MASK_LAST_N",
-						           "VALIDATE_NON_NULL",
-						           "VALIDATE_NON_ZERO",
-						           "VALIDATE_NON_NEGATIVE",
-						           "VALIDATE_NUMERIC",
-						           "NO_OP"
-						         ],
-						         "type": "string"
-						       },
-						       "S3": {
-						         "enum": [
-						           "PROJECTION",
-						           "LESS_THAN",
-						           "GREATER_THAN",
-						           "BETWEEN",
-						           "LESS_THAN_OR_EQUAL_TO",
-						           "GREATER_THAN_OR_EQUAL_TO",
-						           "EQUAL_TO",
-						           "NOT_EQUAL_TO",
-						           "ADDITION",
-						           "MULTIPLICATION",
-						           "DIVISION",
-						           "SUBTRACTION",
-						           "MASK_ALL",
-						           "MASK_FIRST_N",
-						           "MASK_LAST_N",
-						           "VALIDATE_NON_NULL",
-						           "VALIDATE_NON_ZERO",
-						           "VALIDATE_NON_NEGATIVE",
-						           "VALIDATE_NUMERIC",
-						           "NO_OP"
-						         ],
-						         "type": "string"
-						       },
-						       "Salesforce": {
-						         "enum": [
-						           "PROJECTION",
-						           "LESS_THAN",
-						           "CONTAINS",
-						           "GREATER_THAN",
-						           "BETWEEN",
-						           "LESS_THAN_OR_EQUAL_TO",
-						           "GREATER_THAN_OR_EQUAL_TO",
-						           "EQUAL_TO",
-						           "NOT_EQUAL_TO",
-						           "ADDITION",
-						           "MULTIPLICATION",
-						           "DIVISION",
-						           "SUBTRACTION",
-						           "MASK_ALL",
-						           "MASK_FIRST_N",
-						           "MASK_LAST_N",
-						           "VALIDATE_NON_NULL",
-						           "VALIDATE_NON_ZERO",
-						           "VALIDATE_NON_NEGATIVE",
-						           "VALIDATE_NUMERIC",
-						           "NO_OP"
-						         ],
-						         "type": "string"
-						       },
-						       "ServiceNow": {
-						         "enum": [
-						           "PROJECTION",
-						           "LESS_THAN",
-						           "CONTAINS",
-						           "GREATER_THAN",
-						           "BETWEEN",
-						           "LESS_THAN_OR_EQUAL_TO",
-						           "GREATER_THAN_OR_EQUAL_TO",
-						           "EQUAL_TO",
-						           "NOT_EQUAL_TO",
-						           "ADDITION",
-						           "MULTIPLICATION",
-						           "DIVISION",
-						           "SUBTRACTION",
-						           "MASK_ALL",
-						           "MASK_FIRST_N",
-						           "MASK_LAST_N",
-						           "VALIDATE_NON_NULL",
-						           "VALIDATE_NON_ZERO",
-						           "VALIDATE_NON_NEGATIVE",
-						           "VALIDATE_NUMERIC",
-						           "NO_OP"
-						         ],
-						         "type": "string"
-						       },
-						       "Singular": {
-						         "enum": [
-						           "PROJECTION",
-						           "EQUAL_TO",
-						           "ADDITION",
-						           "MULTIPLICATION",
-						           "DIVISION",
-						           "SUBTRACTION",
-						           "MASK_ALL",
-						           "MASK_FIRST_N",
-						           "MASK_LAST_N",
-						           "VALIDATE_NON_NULL",
-						           "VALIDATE_NON_ZERO",
-						           "VALIDATE_NON_NEGATIVE",
-						           "VALIDATE_NUMERIC",
-						           "NO_OP"
-						         ],
-						         "type": "string"
-						       },
-						       "Slack": {
-						         "enum": [
-						           "PROJECTION",
-						           "BETWEEN",
-						           "EQUAL_TO",
-						           "ADDITION",
-						           "MULTIPLICATION",
-						           "DIVISION",
-						           "SUBTRACTION",
-						           "MASK_ALL",
-						           "MASK_FIRST_N",
-						           "MASK_LAST_N",
-						           "VALIDATE_NON_NULL",
-						           "VALIDATE_NON_ZERO",
-						           "VALIDATE_NON_NEGATIVE",
-						           "VALIDATE_NUMERIC",
-						           "NO_OP"
-						         ],
-						         "type": "string"
-						       },
-						       "Trendmicro": {
-						         "enum": [
-						           "PROJECTION",
-						           "EQUAL_TO",
-						           "ADDITION",
-						           "MULTIPLICATION",
-						           "DIVISION",
-						           "SUBTRACTION",
-						           "MASK_ALL",
-						           "MASK_FIRST_N",
-						           "MASK_LAST_N",
-						           "VALIDATE_NON_NULL",
-						           "VALIDATE_NON_ZERO",
-						           "VALIDATE_NON_NEGATIVE",
-						           "VALIDATE_NUMERIC",
-						           "NO_OP"
-						         ],
-						         "type": "string"
-						       },
-						       "Veeva": {
-						         "enum": [
-						           "PROJECTION",
-						           "LESS_THAN",
-						           "GREATER_THAN",
-						           "BETWEEN",
-						           "LESS_THAN_OR_EQUAL_TO",
-						           "GREATER_THAN_OR_EQUAL_TO",
-						           "EQUAL_TO",
-						           "NOT_EQUAL_TO",
-						           "ADDITION",
-						           "MULTIPLICATION",
-						           "DIVISION",
-						           "SUBTRACTION",
-						           "MASK_ALL",
-						           "MASK_FIRST_N",
-						           "MASK_LAST_N",
-						           "VALIDATE_NON_NULL",
-						           "VALIDATE_NON_ZERO",
-						           "VALIDATE_NON_NEGATIVE",
-						           "VALIDATE_NUMERIC",
-						           "NO_OP"
-						         ],
-						         "type": "string"
-						       },
-						       "Zendesk": {
-						         "enum": [
-						           "PROJECTION",
-						           "GREATER_THAN",
-						           "ADDITION",
-						           "MULTIPLICATION",
-						           "DIVISION",
-						           "SUBTRACTION",
-						           "MASK_ALL",
-						           "MASK_FIRST_N",
-						           "MASK_LAST_N",
-						           "VALIDATE_NON_NULL",
-						           "VALIDATE_NON_ZERO",
-						           "VALIDATE_NON_NEGATIVE",
-						           "VALIDATE_NUMERIC",
-						           "NO_OP"
-						         ],
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Description: "Operation to be performed on provided source fields",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"amplitude": {
 									// Property: Amplitude
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "BETWEEN"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"datadog": {
 									// Property: Datadog
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "BETWEEN",
-									       "EQUAL_TO",
-									       "ADDITION",
-									       "MULTIPLICATION",
-									       "DIVISION",
-									       "SUBTRACTION",
-									       "MASK_ALL",
-									       "MASK_FIRST_N",
-									       "MASK_LAST_N",
-									       "VALIDATE_NON_NULL",
-									       "VALIDATE_NON_ZERO",
-									       "VALIDATE_NON_NEGATIVE",
-									       "VALIDATE_NUMERIC",
-									       "NO_OP"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"dynatrace": {
 									// Property: Dynatrace
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "BETWEEN",
-									       "EQUAL_TO",
-									       "ADDITION",
-									       "MULTIPLICATION",
-									       "DIVISION",
-									       "SUBTRACTION",
-									       "MASK_ALL",
-									       "MASK_FIRST_N",
-									       "MASK_LAST_N",
-									       "VALIDATE_NON_NULL",
-									       "VALIDATE_NON_ZERO",
-									       "VALIDATE_NON_NEGATIVE",
-									       "VALIDATE_NUMERIC",
-									       "NO_OP"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"google_analytics": {
 									// Property: GoogleAnalytics
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "BETWEEN"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"infor_nexus": {
 									// Property: InforNexus
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "BETWEEN",
-									       "EQUAL_TO",
-									       "ADDITION",
-									       "MULTIPLICATION",
-									       "DIVISION",
-									       "SUBTRACTION",
-									       "MASK_ALL",
-									       "MASK_FIRST_N",
-									       "MASK_LAST_N",
-									       "VALIDATE_NON_NULL",
-									       "VALIDATE_NON_ZERO",
-									       "VALIDATE_NON_NEGATIVE",
-									       "VALIDATE_NUMERIC",
-									       "NO_OP"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"marketo": {
 									// Property: Marketo
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "LESS_THAN",
-									       "GREATER_THAN",
-									       "BETWEEN",
-									       "ADDITION",
-									       "MULTIPLICATION",
-									       "DIVISION",
-									       "SUBTRACTION",
-									       "MASK_ALL",
-									       "MASK_FIRST_N",
-									       "MASK_LAST_N",
-									       "VALIDATE_NON_NULL",
-									       "VALIDATE_NON_ZERO",
-									       "VALIDATE_NON_NEGATIVE",
-									       "VALIDATE_NUMERIC",
-									       "NO_OP"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"s3": {
 									// Property: S3
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "LESS_THAN",
-									       "GREATER_THAN",
-									       "BETWEEN",
-									       "LESS_THAN_OR_EQUAL_TO",
-									       "GREATER_THAN_OR_EQUAL_TO",
-									       "EQUAL_TO",
-									       "NOT_EQUAL_TO",
-									       "ADDITION",
-									       "MULTIPLICATION",
-									       "DIVISION",
-									       "SUBTRACTION",
-									       "MASK_ALL",
-									       "MASK_FIRST_N",
-									       "MASK_LAST_N",
-									       "VALIDATE_NON_NULL",
-									       "VALIDATE_NON_ZERO",
-									       "VALIDATE_NON_NEGATIVE",
-									       "VALIDATE_NUMERIC",
-									       "NO_OP"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"salesforce": {
 									// Property: Salesforce
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "LESS_THAN",
-									       "CONTAINS",
-									       "GREATER_THAN",
-									       "BETWEEN",
-									       "LESS_THAN_OR_EQUAL_TO",
-									       "GREATER_THAN_OR_EQUAL_TO",
-									       "EQUAL_TO",
-									       "NOT_EQUAL_TO",
-									       "ADDITION",
-									       "MULTIPLICATION",
-									       "DIVISION",
-									       "SUBTRACTION",
-									       "MASK_ALL",
-									       "MASK_FIRST_N",
-									       "MASK_LAST_N",
-									       "VALIDATE_NON_NULL",
-									       "VALIDATE_NON_ZERO",
-									       "VALIDATE_NON_NEGATIVE",
-									       "VALIDATE_NUMERIC",
-									       "NO_OP"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"service_now": {
 									// Property: ServiceNow
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "LESS_THAN",
-									       "CONTAINS",
-									       "GREATER_THAN",
-									       "BETWEEN",
-									       "LESS_THAN_OR_EQUAL_TO",
-									       "GREATER_THAN_OR_EQUAL_TO",
-									       "EQUAL_TO",
-									       "NOT_EQUAL_TO",
-									       "ADDITION",
-									       "MULTIPLICATION",
-									       "DIVISION",
-									       "SUBTRACTION",
-									       "MASK_ALL",
-									       "MASK_FIRST_N",
-									       "MASK_LAST_N",
-									       "VALIDATE_NON_NULL",
-									       "VALIDATE_NON_ZERO",
-									       "VALIDATE_NON_NEGATIVE",
-									       "VALIDATE_NUMERIC",
-									       "NO_OP"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"singular": {
 									// Property: Singular
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "EQUAL_TO",
-									       "ADDITION",
-									       "MULTIPLICATION",
-									       "DIVISION",
-									       "SUBTRACTION",
-									       "MASK_ALL",
-									       "MASK_FIRST_N",
-									       "MASK_LAST_N",
-									       "VALIDATE_NON_NULL",
-									       "VALIDATE_NON_ZERO",
-									       "VALIDATE_NON_NEGATIVE",
-									       "VALIDATE_NUMERIC",
-									       "NO_OP"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"slack": {
 									// Property: Slack
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "BETWEEN",
-									       "EQUAL_TO",
-									       "ADDITION",
-									       "MULTIPLICATION",
-									       "DIVISION",
-									       "SUBTRACTION",
-									       "MASK_ALL",
-									       "MASK_FIRST_N",
-									       "MASK_LAST_N",
-									       "VALIDATE_NON_NULL",
-									       "VALIDATE_NON_ZERO",
-									       "VALIDATE_NON_NEGATIVE",
-									       "VALIDATE_NUMERIC",
-									       "NO_OP"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"trendmicro": {
 									// Property: Trendmicro
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "EQUAL_TO",
-									       "ADDITION",
-									       "MULTIPLICATION",
-									       "DIVISION",
-									       "SUBTRACTION",
-									       "MASK_ALL",
-									       "MASK_FIRST_N",
-									       "MASK_LAST_N",
-									       "VALIDATE_NON_NULL",
-									       "VALIDATE_NON_ZERO",
-									       "VALIDATE_NON_NEGATIVE",
-									       "VALIDATE_NUMERIC",
-									       "NO_OP"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"veeva": {
 									// Property: Veeva
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "LESS_THAN",
-									       "GREATER_THAN",
-									       "BETWEEN",
-									       "LESS_THAN_OR_EQUAL_TO",
-									       "GREATER_THAN_OR_EQUAL_TO",
-									       "EQUAL_TO",
-									       "NOT_EQUAL_TO",
-									       "ADDITION",
-									       "MULTIPLICATION",
-									       "DIVISION",
-									       "SUBTRACTION",
-									       "MASK_ALL",
-									       "MASK_FIRST_N",
-									       "MASK_LAST_N",
-									       "VALIDATE_NON_NULL",
-									       "VALIDATE_NON_ZERO",
-									       "VALIDATE_NON_NEGATIVE",
-									       "VALIDATE_NUMERIC",
-									       "NO_OP"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"zendesk": {
 									// Property: Zendesk
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "PROJECTION",
-									       "GREATER_THAN",
-									       "ADDITION",
-									       "MULTIPLICATION",
-									       "DIVISION",
-									       "SUBTRACTION",
-									       "MASK_ALL",
-									       "MASK_FIRST_N",
-									       "MASK_LAST_N",
-									       "VALIDATE_NON_NULL",
-									       "VALIDATE_NON_ZERO",
-									       "VALIDATE_NON_NEGATIVE",
-									       "VALIDATE_NUMERIC",
-									       "NO_OP"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -4648,121 +1894,28 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"destination_field": {
 						// Property: DestinationField
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A field value on which source field should be validated",
-						     "maxLength": 256,
-						     "type": "string"
-						   }
-						*/
 						Description: "A field value on which source field should be validated",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"source_fields": {
 						// Property: SourceFields
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Source fields on which particular task will be applied",
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Description: "Source fields on which particular task will be applied",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
 					},
 					"task_properties": {
 						// Property: TaskProperties
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "A Map used to store task related info",
-						     "items": {
-						       "additionalProperties": false,
-						       "description": "An object used to store task related info",
-						       "properties": {
-						         "Key": {
-						           "enum": [
-						             "VALUE",
-						             "VALUES",
-						             "DATA_TYPE",
-						             "UPPER_BOUND",
-						             "LOWER_BOUND",
-						             "SOURCE_DATA_TYPE",
-						             "DESTINATION_DATA_TYPE",
-						             "VALIDATION_ACTION",
-						             "MASK_VALUE",
-						             "MASK_LENGTH",
-						             "TRUNCATE_LENGTH",
-						             "MATH_OPERATION_FIELDS_ORDER",
-						             "CONCAT_FORMAT",
-						             "SUBFIELD_CATEGORY_MAP",
-						             "EXCLUDE_SOURCE_FIELDS_LIST"
-						           ],
-						           "type": "string"
-						         },
-						         "Value": {
-						           "maxLength": 2048,
-						           "pattern": "",
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "Key",
-						         "Value"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Description: "A Map used to store task related info",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "VALUE",
-									       "VALUES",
-									       "DATA_TYPE",
-									       "UPPER_BOUND",
-									       "LOWER_BOUND",
-									       "SOURCE_DATA_TYPE",
-									       "DESTINATION_DATA_TYPE",
-									       "VALIDATION_ACTION",
-									       "MASK_VALUE",
-									       "MASK_LENGTH",
-									       "TRUNCATE_LENGTH",
-									       "MATH_OPERATION_FIELDS_ORDER",
-									       "CONCAT_FORMAT",
-									       "SUBFIELD_CATEGORY_MAP",
-									       "EXCLUDE_SOURCE_FIELDS_LIST"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 2048,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -4773,22 +1926,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"task_type": {
 						// Property: TaskType
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "Arithmetic",
-						       "Filter",
-						       "Map",
-						       "Map_all",
-						       "Mask",
-						       "Merge",
-						       "Truncate",
-						       "Validate"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -4800,160 +1937,86 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"trigger_config": {
 			// Property: TriggerConfig
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Trigger settings of the flow.",
-			     "properties": {
-			       "TriggerProperties": {
-			         "additionalProperties": false,
-			         "description": "Details required for scheduled trigger type",
-			         "properties": {
-			           "DataPullMode": {
-			             "enum": [
-			               "Incremental",
-			               "Complete"
-			             ],
-			             "type": "string"
-			           },
-			           "ScheduleEndTime": {
-			             "type": "number"
-			           },
-			           "ScheduleExpression": {
-			             "maxLength": 256,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "ScheduleStartTime": {
-			             "type": "number"
-			           },
-			           "TimeZone": {
-			             "maxLength": 256,
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "ScheduleExpression"
-			         ],
-			         "type": "object"
-			       },
-			       "TriggerType": {
-			         "enum": [
-			           "Scheduled",
-			           "Event",
-			           "OnDemand"
-			         ],
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "TriggerType"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Trigger settings of the flow.",
+			//   "properties": {
+			//     "TriggerProperties": {
+			//       "additionalProperties": false,
+			//       "description": "Details required for scheduled trigger type",
+			//       "properties": {
+			//         "DataPullMode": {
+			//           "enum": [
+			//             "Incremental",
+			//             "Complete"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "ScheduleEndTime": {
+			//           "type": "number"
+			//         },
+			//         "ScheduleExpression": {
+			//           "maxLength": 256,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "ScheduleStartTime": {
+			//           "type": "number"
+			//         },
+			//         "TimeZone": {
+			//           "maxLength": 256,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "ScheduleExpression"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "TriggerType": {
+			//       "enum": [
+			//         "Scheduled",
+			//         "Event",
+			//         "OnDemand"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "TriggerType"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "Trigger settings of the flow.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"trigger_properties": {
 						// Property: TriggerProperties
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Details required for scheduled trigger type",
-						     "properties": {
-						       "DataPullMode": {
-						         "enum": [
-						           "Incremental",
-						           "Complete"
-						         ],
-						         "type": "string"
-						       },
-						       "ScheduleEndTime": {
-						         "type": "number"
-						       },
-						       "ScheduleExpression": {
-						         "maxLength": 256,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "ScheduleStartTime": {
-						         "type": "number"
-						       },
-						       "TimeZone": {
-						         "maxLength": 256,
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "ScheduleExpression"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Description: "Details required for scheduled trigger type",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"data_pull_mode": {
 									// Property: DataPullMode
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "Incremental",
-									       "Complete"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"schedule_end_time": {
 									// Property: ScheduleEndTime
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"schedule_expression": {
 									// Property: ScheduleExpression
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 256,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"schedule_start_time": {
 									// Property: ScheduleStartTime
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"time_zone": {
 									// Property: TimeZone
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 256,
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -4963,17 +2026,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"trigger_type": {
 						// Property: TriggerType
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "Scheduled",
-						       "Event",
-						       "OnDemand"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

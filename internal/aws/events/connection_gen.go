@@ -25,12 +25,10 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The arn of the connection resource.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The arn of the connection resource.",
+			//   "type": "string"
+			// }
 			Description: "The arn of the connection resource.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,274 +36,241 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"auth_parameters": {
 			// Property: AuthParameters
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "ApiKeyAuthParameters": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "ApiKeyName": {
-			             "type": "string"
-			           },
-			           "ApiKeyValue": {
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "ApiKeyName",
-			           "ApiKeyValue"
-			         ],
-			         "type": "object"
-			       },
-			       "BasicAuthParameters": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "Password": {
-			             "type": "string"
-			           },
-			           "Username": {
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "Username",
-			           "Password"
-			         ],
-			         "type": "object"
-			       },
-			       "InvocationHttpParameters": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "BodyParameters": {
-			             "items": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "IsValueSecret": {
-			                   "type": "boolean"
-			                 },
-			                 "Key": {
-			                   "type": "string"
-			                 },
-			                 "Value": {
-			                   "type": "string"
-			                 }
-			               },
-			               "required": [
-			                 "Key",
-			                 "Value"
-			               ],
-			               "type": "object"
-			             },
-			             "type": "array"
-			           },
-			           "HeaderParameters": {
-			             "items": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "IsValueSecret": {
-			                   "type": "boolean"
-			                 },
-			                 "Key": {
-			                   "type": "string"
-			                 },
-			                 "Value": {
-			                   "type": "string"
-			                 }
-			               },
-			               "required": [
-			                 "Key",
-			                 "Value"
-			               ],
-			               "type": "object"
-			             },
-			             "type": "array"
-			           },
-			           "QueryStringParameters": {
-			             "items": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "IsValueSecret": {
-			                   "type": "boolean"
-			                 },
-			                 "Key": {
-			                   "type": "string"
-			                 },
-			                 "Value": {
-			                   "type": "string"
-			                 }
-			               },
-			               "required": [
-			                 "Key",
-			                 "Value"
-			               ],
-			               "type": "object"
-			             },
-			             "type": "array"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "OAuthParameters": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "AuthorizationEndpoint": {
-			             "maxLength": 2048,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "ClientParameters": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "ClientID": {
-			                 "type": "string"
-			               },
-			               "ClientSecret": {
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "ClientID",
-			               "ClientSecret"
-			             ],
-			             "type": "object"
-			           },
-			           "HttpMethod": {
-			             "enum": [
-			               "GET",
-			               "POST",
-			               "PUT"
-			             ],
-			             "type": "string"
-			           },
-			           "OAuthHttpParameters": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "BodyParameters": {
-			                 "items": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "IsValueSecret": {
-			                       "type": "boolean"
-			                     },
-			                     "Key": {
-			                       "type": "string"
-			                     },
-			                     "Value": {
-			                       "type": "string"
-			                     }
-			                   },
-			                   "required": [
-			                     "Key",
-			                     "Value"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "type": "array"
-			               },
-			               "HeaderParameters": {
-			                 "items": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "IsValueSecret": {
-			                       "type": "boolean"
-			                     },
-			                     "Key": {
-			                       "type": "string"
-			                     },
-			                     "Value": {
-			                       "type": "string"
-			                     }
-			                   },
-			                   "required": [
-			                     "Key",
-			                     "Value"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "type": "array"
-			               },
-			               "QueryStringParameters": {
-			                 "items": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "IsValueSecret": {
-			                       "type": "boolean"
-			                     },
-			                     "Key": {
-			                       "type": "string"
-			                     },
-			                     "Value": {
-			                       "type": "string"
-			                     }
-			                   },
-			                   "required": [
-			                     "Key",
-			                     "Value"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "type": "array"
-			               }
-			             },
-			             "type": "object"
-			           }
-			         },
-			         "required": [
-			           "ClientParameters",
-			           "AuthorizationEndpoint",
-			           "HttpMethod"
-			         ],
-			         "type": "object"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "ApiKeyAuthParameters": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "ApiKeyName": {
+			//           "type": "string"
+			//         },
+			//         "ApiKeyValue": {
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "ApiKeyName",
+			//         "ApiKeyValue"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "BasicAuthParameters": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "Password": {
+			//           "type": "string"
+			//         },
+			//         "Username": {
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "Username",
+			//         "Password"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "InvocationHttpParameters": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "BodyParameters": {
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "IsValueSecret": {
+			//                 "type": "boolean"
+			//               },
+			//               "Key": {
+			//                 "type": "string"
+			//               },
+			//               "Value": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Key",
+			//               "Value"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "type": "array"
+			//         },
+			//         "HeaderParameters": {
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "IsValueSecret": {
+			//                 "type": "boolean"
+			//               },
+			//               "Key": {
+			//                 "type": "string"
+			//               },
+			//               "Value": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Key",
+			//               "Value"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "type": "array"
+			//         },
+			//         "QueryStringParameters": {
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "IsValueSecret": {
+			//                 "type": "boolean"
+			//               },
+			//               "Key": {
+			//                 "type": "string"
+			//               },
+			//               "Value": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Key",
+			//               "Value"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "type": "array"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "OAuthParameters": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "AuthorizationEndpoint": {
+			//           "maxLength": 2048,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "ClientParameters": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "ClientID": {
+			//               "type": "string"
+			//             },
+			//             "ClientSecret": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "ClientID",
+			//             "ClientSecret"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "HttpMethod": {
+			//           "enum": [
+			//             "GET",
+			//             "POST",
+			//             "PUT"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "OAuthHttpParameters": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "BodyParameters": {
+			//               "items": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "IsValueSecret": {
+			//                     "type": "boolean"
+			//                   },
+			//                   "Key": {
+			//                     "type": "string"
+			//                   },
+			//                   "Value": {
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Key",
+			//                   "Value"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "type": "array"
+			//             },
+			//             "HeaderParameters": {
+			//               "items": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "IsValueSecret": {
+			//                     "type": "boolean"
+			//                   },
+			//                   "Key": {
+			//                     "type": "string"
+			//                   },
+			//                   "Value": {
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Key",
+			//                   "Value"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "type": "array"
+			//             },
+			//             "QueryStringParameters": {
+			//               "items": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "IsValueSecret": {
+			//                     "type": "boolean"
+			//                   },
+			//                   "Key": {
+			//                     "type": "string"
+			//                   },
+			//                   "Value": {
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Key",
+			//                   "Value"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "type": "array"
+			//             }
+			//           },
+			//           "type": "object"
+			//         }
+			//       },
+			//       "required": [
+			//         "ClientParameters",
+			//         "AuthorizationEndpoint",
+			//         "HttpMethod"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"api_key_auth_parameters": {
 						// Property: ApiKeyAuthParameters
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "ApiKeyName": {
-						         "type": "string"
-						       },
-						       "ApiKeyValue": {
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "ApiKeyName",
-						       "ApiKeyValue"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"api_key_name": {
 									// Property: ApiKeyName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"api_key_value": {
 									// Property: ApiKeyValue
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -315,46 +280,15 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"basic_auth_parameters": {
 						// Property: BasicAuthParameters
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Password": {
-						         "type": "string"
-						       },
-						       "Username": {
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "Username",
-						       "Password"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"password": {
 									// Property: Password
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"username": {
 									// Property: Username
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -364,142 +298,24 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"invocation_http_parameters": {
 						// Property: InvocationHttpParameters
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "BodyParameters": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "IsValueSecret": {
-						               "type": "boolean"
-						             },
-						             "Key": {
-						               "type": "string"
-						             },
-						             "Value": {
-						               "type": "string"
-						             }
-						           },
-						           "required": [
-						             "Key",
-						             "Value"
-						           ],
-						           "type": "object"
-						         },
-						         "type": "array"
-						       },
-						       "HeaderParameters": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "IsValueSecret": {
-						               "type": "boolean"
-						             },
-						             "Key": {
-						               "type": "string"
-						             },
-						             "Value": {
-						               "type": "string"
-						             }
-						           },
-						           "required": [
-						             "Key",
-						             "Value"
-						           ],
-						           "type": "object"
-						         },
-						         "type": "array"
-						       },
-						       "QueryStringParameters": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "IsValueSecret": {
-						               "type": "boolean"
-						             },
-						             "Key": {
-						               "type": "string"
-						             },
-						             "Value": {
-						               "type": "string"
-						             }
-						           },
-						           "required": [
-						             "Key",
-						             "Value"
-						           ],
-						           "type": "object"
-						         },
-						         "type": "array"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"body_parameters": {
 									// Property: BodyParameters
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "IsValueSecret": {
-									           "type": "boolean"
-									         },
-									         "Key": {
-									           "type": "string"
-									         },
-									         "Value": {
-									           "type": "string"
-									         }
-									       },
-									       "required": [
-									         "Key",
-									         "Value"
-									       ],
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"is_value_secret": {
 												// Property: IsValueSecret
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"value": {
 												// Property: Value
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -510,63 +326,20 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"header_parameters": {
 									// Property: HeaderParameters
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "IsValueSecret": {
-									           "type": "boolean"
-									         },
-									         "Key": {
-									           "type": "string"
-									         },
-									         "Value": {
-									           "type": "string"
-									         }
-									       },
-									       "required": [
-									         "Key",
-									         "Value"
-									       ],
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"is_value_secret": {
 												// Property: IsValueSecret
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"value": {
 												// Property: Value
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -577,63 +350,20 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"query_string_parameters": {
 									// Property: QueryStringParameters
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "IsValueSecret": {
-									           "type": "boolean"
-									         },
-									         "Key": {
-									           "type": "string"
-									         },
-									         "Value": {
-									           "type": "string"
-									         }
-									       },
-									       "required": [
-									         "Key",
-									         "Value"
-									       ],
-									       "type": "object"
-									     },
-									     "type": "array"
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"is_value_secret": {
 												// Property: IsValueSecret
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"key": {
 												// Property: Key
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"value": {
 												// Property: Value
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -648,178 +378,24 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"o_auth_parameters": {
 						// Property: OAuthParameters
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "AuthorizationEndpoint": {
-						         "maxLength": 2048,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "ClientParameters": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "ClientID": {
-						             "type": "string"
-						           },
-						           "ClientSecret": {
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "ClientID",
-						           "ClientSecret"
-						         ],
-						         "type": "object"
-						       },
-						       "HttpMethod": {
-						         "enum": [
-						           "GET",
-						           "POST",
-						           "PUT"
-						         ],
-						         "type": "string"
-						       },
-						       "OAuthHttpParameters": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "BodyParameters": {
-						             "items": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "IsValueSecret": {
-						                   "type": "boolean"
-						                 },
-						                 "Key": {
-						                   "type": "string"
-						                 },
-						                 "Value": {
-						                   "type": "string"
-						                 }
-						               },
-						               "required": [
-						                 "Key",
-						                 "Value"
-						               ],
-						               "type": "object"
-						             },
-						             "type": "array"
-						           },
-						           "HeaderParameters": {
-						             "items": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "IsValueSecret": {
-						                   "type": "boolean"
-						                 },
-						                 "Key": {
-						                   "type": "string"
-						                 },
-						                 "Value": {
-						                   "type": "string"
-						                 }
-						               },
-						               "required": [
-						                 "Key",
-						                 "Value"
-						               ],
-						               "type": "object"
-						             },
-						             "type": "array"
-						           },
-						           "QueryStringParameters": {
-						             "items": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "IsValueSecret": {
-						                   "type": "boolean"
-						                 },
-						                 "Key": {
-						                   "type": "string"
-						                 },
-						                 "Value": {
-						                   "type": "string"
-						                 }
-						               },
-						               "required": [
-						                 "Key",
-						                 "Value"
-						               ],
-						               "type": "object"
-						             },
-						             "type": "array"
-						           }
-						         },
-						         "type": "object"
-						       }
-						     },
-						     "required": [
-						       "ClientParameters",
-						       "AuthorizationEndpoint",
-						       "HttpMethod"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"authorization_endpoint": {
 									// Property: AuthorizationEndpoint
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 2048,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"client_parameters": {
 									// Property: ClientParameters
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "ClientID": {
-									         "type": "string"
-									       },
-									       "ClientSecret": {
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "ClientID",
-									       "ClientSecret"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"client_id": {
 												// Property: ClientID
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"client_secret": {
 												// Property: ClientSecret
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -829,158 +405,29 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"http_method": {
 									// Property: HttpMethod
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "GET",
-									       "POST",
-									       "PUT"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"o_auth_http_parameters": {
 									// Property: OAuthHttpParameters
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "BodyParameters": {
-									         "items": {
-									           "additionalProperties": false,
-									           "properties": {
-									             "IsValueSecret": {
-									               "type": "boolean"
-									             },
-									             "Key": {
-									               "type": "string"
-									             },
-									             "Value": {
-									               "type": "string"
-									             }
-									           },
-									           "required": [
-									             "Key",
-									             "Value"
-									           ],
-									           "type": "object"
-									         },
-									         "type": "array"
-									       },
-									       "HeaderParameters": {
-									         "items": {
-									           "additionalProperties": false,
-									           "properties": {
-									             "IsValueSecret": {
-									               "type": "boolean"
-									             },
-									             "Key": {
-									               "type": "string"
-									             },
-									             "Value": {
-									               "type": "string"
-									             }
-									           },
-									           "required": [
-									             "Key",
-									             "Value"
-									           ],
-									           "type": "object"
-									         },
-									         "type": "array"
-									       },
-									       "QueryStringParameters": {
-									         "items": {
-									           "additionalProperties": false,
-									           "properties": {
-									             "IsValueSecret": {
-									               "type": "boolean"
-									             },
-									             "Key": {
-									               "type": "string"
-									             },
-									             "Value": {
-									               "type": "string"
-									             }
-									           },
-									           "required": [
-									             "Key",
-									             "Value"
-									           ],
-									           "type": "object"
-									         },
-									         "type": "array"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"body_parameters": {
 												// Property: BodyParameters
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "additionalProperties": false,
-												       "properties": {
-												         "IsValueSecret": {
-												           "type": "boolean"
-												         },
-												         "Key": {
-												           "type": "string"
-												         },
-												         "Value": {
-												           "type": "string"
-												         }
-												       },
-												       "required": [
-												         "Key",
-												         "Value"
-												       ],
-												       "type": "object"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Attributes: schema.ListNestedAttributes(
 													map[string]schema.Attribute{
 														"is_value_secret": {
 															// Property: IsValueSecret
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "boolean"
-															   }
-															*/
 															Type:     types.BoolType,
 															Optional: true,
 														},
 														"key": {
 															// Property: Key
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Required: true,
 														},
 														"value": {
 															// Property: Value
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -991,63 +438,20 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"header_parameters": {
 												// Property: HeaderParameters
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "additionalProperties": false,
-												       "properties": {
-												         "IsValueSecret": {
-												           "type": "boolean"
-												         },
-												         "Key": {
-												           "type": "string"
-												         },
-												         "Value": {
-												           "type": "string"
-												         }
-												       },
-												       "required": [
-												         "Key",
-												         "Value"
-												       ],
-												       "type": "object"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Attributes: schema.ListNestedAttributes(
 													map[string]schema.Attribute{
 														"is_value_secret": {
 															// Property: IsValueSecret
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "boolean"
-															   }
-															*/
 															Type:     types.BoolType,
 															Optional: true,
 														},
 														"key": {
 															// Property: Key
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Required: true,
 														},
 														"value": {
 															// Property: Value
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -1058,63 +462,20 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"query_string_parameters": {
 												// Property: QueryStringParameters
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "additionalProperties": false,
-												       "properties": {
-												         "IsValueSecret": {
-												           "type": "boolean"
-												         },
-												         "Key": {
-												           "type": "string"
-												         },
-												         "Value": {
-												           "type": "string"
-												         }
-												       },
-												       "required": [
-												         "Key",
-												         "Value"
-												       ],
-												       "type": "object"
-												     },
-												     "type": "array"
-												   }
-												*/
 												Attributes: schema.ListNestedAttributes(
 													map[string]schema.Attribute{
 														"is_value_secret": {
 															// Property: IsValueSecret
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "boolean"
-															   }
-															*/
 															Type:     types.BoolType,
 															Optional: true,
 														},
 														"key": {
 															// Property: Key
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Required: true,
 														},
 														"value": {
 															// Property: Value
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Required: true,
 														},
@@ -1138,29 +499,25 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"authorization_type": {
 			// Property: AuthorizationType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "API_KEY",
-			       "BASIC",
-			       "OAUTH_CLIENT_CREDENTIALS"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "API_KEY",
+			//     "BASIC",
+			//     "OAUTH_CLIENT_CREDENTIALS"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Description of the connection.",
-			     "maxLength": 512,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Description of the connection.",
+			//   "maxLength": 512,
+			//   "type": "string"
+			// }
 			Description: "Description of the connection.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -1168,14 +525,12 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of the connection.",
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of the connection.",
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Name of the connection.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -1185,12 +540,10 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"secret_arn": {
 			// Property: SecretArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The arn of the secrets manager secret created in the customer account.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The arn of the secrets manager secret created in the customer account.",
+			//   "type": "string"
+			// }
 			Description: "The arn of the secrets manager secret created in the customer account.",
 			Type:        types.StringType,
 			Computed:    true,

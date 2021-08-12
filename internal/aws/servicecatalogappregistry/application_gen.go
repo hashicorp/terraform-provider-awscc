@@ -25,25 +25,21 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The description of the application. ",
-			     "maxLength": 1024,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The description of the application. ",
+			//   "maxLength": 1024,
+			//   "type": "string"
+			// }
 			Description: "The description of the application. ",
 			Type:        types.StringType,
 			Optional:    true,
@@ -51,27 +47,23 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the application. ",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the application. ",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the application. ",
 			Type:        types.StringType,
 			Required:    true,
@@ -79,18 +71,16 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "patternProperties": {
-			       "": {
-			         "maxLength": 256,
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "patternProperties": {
+			//     "": {
+			//       "maxLength": 256,
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,

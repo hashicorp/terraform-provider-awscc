@@ -25,12 +25,10 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Custom data identifier ARN.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Custom data identifier ARN.",
+			//   "type": "string"
+			// }
 			Description: "Custom data identifier ARN.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,13 +36,11 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"created_at": {
 			// Property: CreatedAt
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Date-time at which the custom data identifier was created.",
-			     "format": "date-time",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Date-time at which the custom data identifier was created.",
+			//   "format": "date-time",
+			//   "type": "string"
+			// }
 			Description: "Date-time at which the custom data identifier was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -52,12 +48,10 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"deleted": {
 			// Property: Deleted
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Whether the customer data identifier has been deleted.",
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "description": "Whether the customer data identifier has been deleted.",
+			//   "type": "boolean"
+			// }
 			Description: "Whether the customer data identifier has been deleted.",
 			Type:        types.BoolType,
 			Computed:    true,
@@ -65,12 +59,10 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Description of custom data identifier.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Description of custom data identifier.",
+			//   "type": "string"
+			// }
 			Description: "Description of custom data identifier.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -80,12 +72,10 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Custom data identifier ID.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Custom data identifier ID.",
+			//   "type": "string"
+			// }
 			Description: "Custom data identifier ID.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -93,15 +83,13 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"ignore_words": {
 			// Property: IgnoreWords
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Words to be ignored.",
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "Words to be ignored.",
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "Words to be ignored.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -111,15 +99,13 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"keywords": {
 			// Property: Keywords
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Keywords to be matched against.",
-			     "items": {
-			       "type": "string"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "Keywords to be matched against.",
+			//   "items": {
+			//     "type": "string"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "Keywords to be matched against.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
@@ -129,12 +115,10 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"maximum_match_distance": {
 			// Property: MaximumMatchDistance
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Maximum match distance.",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "Maximum match distance.",
+			//   "type": "integer"
+			// }
 			Description: "Maximum match distance.",
 			Type:        types.NumberType,
 			Optional:    true,
@@ -144,12 +128,10 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of custom data identifier.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of custom data identifier.",
+			//   "type": "string"
+			// }
 			Description: "Name of custom data identifier.",
 			Type:        types.StringType,
 			Required:    true,
@@ -158,12 +140,10 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"regex": {
 			// Property: Regex
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Regular expression for custom data identifier.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Regular expression for custom data identifier.",
+			//   "type": "string"
+			// }
 			Description: "Regular expression for custom data identifier.",
 			Type:        types.StringType,
 			Required:    true,

@@ -26,23 +26,19 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"exclusive_end_time": {
 			// Property: ExclusiveEndTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -51,22 +47,18 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"inclusive_start_time": {
 			// Property: InclusiveStartTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// InclusiveStartTime is a force-new attribute.
@@ -74,43 +66,28 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"kinesis_configuration": {
 			// Property: KinesisConfiguration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "AggregationEnabled": {
-			         "type": "boolean"
-			       },
-			       "StreamArn": {
-			         "pattern": "",
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "AggregationEnabled": {
+			//       "type": "boolean"
+			//     },
+			//     "StreamArn": {
+			//       "pattern": "",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"aggregation_enabled": {
 						// Property: AggregationEnabled
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"stream_arn": {
 						// Property: StreamArn
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -122,11 +99,9 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"ledger_name": {
 			// Property: LedgerName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// LedgerName is a force-new attribute.
@@ -134,12 +109,10 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// RoleArn is a force-new attribute.
@@ -147,11 +120,9 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"stream_name": {
 			// Property: StreamName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// StreamName is a force-new attribute.
@@ -159,67 +130,47 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			           "maxLength": 127,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			           "maxLength": 255,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//         "maxLength": 127,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						     "maxLength": 127,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						     "maxLength": 255,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,

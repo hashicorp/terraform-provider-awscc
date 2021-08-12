@@ -25,147 +25,88 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"endpoint_details": {
 			// Property: EndpointDetails
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Endpoint": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "Address": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "Name": {
-			                   "type": "string"
-			                 },
-			                 "Port": {
-			                   "type": "integer"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "Mtu": {
-			               "type": "integer"
-			             },
-			             "Name": {
-			               "pattern": "",
-			               "type": "string"
-			             }
-			           },
-			           "type": "object"
-			         },
-			         "SecurityDetails": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "RoleArn": {
-			               "type": "string"
-			             },
-			             "SecurityGroupIds": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array"
-			             },
-			             "SubnetIds": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array"
-			             }
-			           },
-			           "type": "object"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "minItems": 1,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Endpoint": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Address": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "Name": {
+			//                 "type": "string"
+			//               },
+			//               "Port": {
+			//                 "type": "integer"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "Mtu": {
+			//             "type": "integer"
+			//           },
+			//           "Name": {
+			//             "pattern": "",
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "SecurityDetails": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "RoleArn": {
+			//             "type": "string"
+			//           },
+			//           "SecurityGroupIds": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array"
+			//           },
+			//           "SubnetIds": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array"
+			//           }
+			//         },
+			//         "type": "object"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"endpoint": {
 						// Property: Endpoint
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Address": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Name": {
-						             "type": "string"
-						           },
-						           "Port": {
-						             "type": "integer"
-						           }
-						         },
-						         "type": "object"
-						       },
-						       "Mtu": {
-						         "type": "integer"
-						       },
-						       "Name": {
-						         "pattern": "",
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"address": {
 									// Property: Address
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Name": {
-									         "type": "string"
-									       },
-									       "Port": {
-									         "type": "integer"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"name": {
 												// Property: Name
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"port": {
 												// Property: Port
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
 												Type:     types.NumberType,
 												Optional: true,
 											},
@@ -175,24 +116,11 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 								},
 								"mtu": {
 									// Property: Mtu
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -202,68 +130,20 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 					},
 					"security_details": {
 						// Property: SecurityDetails
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "RoleArn": {
-						         "type": "string"
-						       },
-						       "SecurityGroupIds": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array"
-						       },
-						       "SubnetIds": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"role_arn": {
 									// Property: RoleArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"security_group_ids": {
 									// Property: SecurityGroupIds
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array"
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"subnet_ids": {
 									// Property: SubnetIds
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array"
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -281,59 +161,41 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},

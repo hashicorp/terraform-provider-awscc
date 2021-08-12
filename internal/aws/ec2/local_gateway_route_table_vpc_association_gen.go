@@ -26,12 +26,10 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 		"local_gateway_id": {
 			// Property: LocalGatewayId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the local gateway.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the local gateway.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the local gateway.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -39,12 +37,10 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 		"local_gateway_route_table_id": {
 			// Property: LocalGatewayRouteTableId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the local gateway route table.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the local gateway route table.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the local gateway route table.",
 			Type:        types.StringType,
 			Required:    true,
@@ -53,12 +49,10 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 		"local_gateway_route_table_vpc_association_id": {
 			// Property: LocalGatewayRouteTableVpcAssociationId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the association.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the association.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the association.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -66,12 +60,10 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 		"state": {
 			// Property: State
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The state of the association.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The state of the association.",
+			//   "type": "string"
+			// }
 			Description: "The state of the association.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -79,58 +71,38 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 127,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 255,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 127,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 127,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 255,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -142,12 +114,10 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 		"vpc_id": {
 			// Property: VpcId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the VPC.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the VPC.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the VPC.",
 			Type:        types.StringType,
 			Required:    true,

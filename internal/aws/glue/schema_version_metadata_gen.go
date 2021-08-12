@@ -25,14 +25,12 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"key": {
 			// Property: Key
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Metadata key",
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Metadata key",
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Metadata key",
 			Type:        types.StringType,
 			Required:    true,
@@ -41,13 +39,11 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"schema_version_id": {
 			// Property: SchemaVersionId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Represents the version ID associated with the schema version.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Represents the version ID associated with the schema version.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Represents the version ID associated with the schema version.",
 			Type:        types.StringType,
 			Required:    true,
@@ -56,14 +52,12 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"value": {
 			// Property: Value
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Metadata value",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Metadata value",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Metadata value",
 			Type:        types.StringType,
 			Required:    true,

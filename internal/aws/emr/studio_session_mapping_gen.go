@@ -25,12 +25,10 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"identity_name": {
 			// Property: IdentityName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
+			//   "type": "string"
+			// }
 			Description: "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
 			Type:        types.StringType,
 			Required:    true,
@@ -39,16 +37,14 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"identity_type": {
 			// Property: IdentityType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Specifies whether the identity to map to the Studio is a user or a group.",
-			     "enum": [
-			       "USER",
-			       "GROUP"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Specifies whether the identity to map to the Studio is a user or a group.",
+			//   "enum": [
+			//     "USER",
+			//     "GROUP"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "Specifies whether the identity to map to the Studio is a user or a group.",
 			Type:        types.StringType,
 			Required:    true,
@@ -57,27 +53,23 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"session_policy_arn": {
 			// Property: SessionPolicyArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 		},
 		"studio_id": {
 			// Property: StudioId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
-			     "maxLength": 256,
-			     "minLength": 4,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
+			//   "maxLength": 256,
+			//   "minLength": 4,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
 			Type:        types.StringType,
 			Required:    true,

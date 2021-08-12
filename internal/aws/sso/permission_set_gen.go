@@ -25,15 +25,13 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The permission set description.",
-			     "maxLength": 700,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The permission set description.",
+			//   "maxLength": 700,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The permission set description.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -41,12 +39,10 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"inline_policy": {
 			// Property: InlinePolicy
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The inline policy to put in permission set.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The inline policy to put in permission set.",
+			//   "type": "string"
+			// }
 			Description: "The inline policy to put in permission set.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -54,15 +50,13 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"instance_arn": {
 			// Property: InstanceArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The sso instance arn that the permission set is owned.",
-			     "maxLength": 1224,
-			     "minLength": 10,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The sso instance arn that the permission set is owned.",
+			//   "maxLength": 1224,
+			//   "minLength": 10,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The sso instance arn that the permission set is owned.",
 			Type:        types.StringType,
 			Required:    true,
@@ -71,19 +65,17 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"managed_policies": {
 			// Property: ManagedPolicies
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "description": "The managed policy to attach.",
-			       "maxLength": 2048,
-			       "minLength": 20,
-			       "type": "string"
-			     },
-			     "maxItems": 20,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "description": "The managed policy to attach.",
+			//     "maxLength": 2048,
+			//     "minLength": 20,
+			//     "type": "string"
+			//   },
+			//   "maxItems": 20,
+			//   "type": "array"
+			// }
 			// Multiset.
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
@@ -91,15 +83,13 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name you want to assign to this permission set.",
-			     "maxLength": 32,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name you want to assign to this permission set.",
+			//   "maxLength": 32,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name you want to assign to this permission set.",
 			Type:        types.StringType,
 			Required:    true,
@@ -108,15 +98,13 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"permission_set_arn": {
 			// Property: PermissionSetArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The permission set that the policy will be attached to",
-			     "maxLength": 1224,
-			     "minLength": 10,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The permission set that the policy will be attached to",
+			//   "maxLength": 1224,
+			//   "minLength": 10,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The permission set that the policy will be attached to",
 			Type:        types.StringType,
 			Computed:    true,
@@ -124,15 +112,13 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"relay_state_type": {
 			// Property: RelayStateType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The relay state URL that redirect links to any service in the AWS Management Console.",
-			     "maxLength": 240,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The relay state URL that redirect links to any service in the AWS Management Console.",
+			//   "maxLength": 240,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The relay state URL that redirect links to any service in the AWS Management Console.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -140,15 +126,13 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"session_duration": {
 			// Property: SessionDuration
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The length of time that a user can be signed in to an AWS account.",
-			     "maxLength": 100,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The length of time that a user can be signed in to an AWS account.",
+			//   "maxLength": 100,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The length of time that a user can be signed in to an AWS account.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -156,64 +140,44 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "The metadata that you apply to the permission set to help you categorize and organize them.",
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "The metadata that you apply to the permission set to help you categorize and organize them.",
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array"
+			// }
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

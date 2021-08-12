@@ -25,114 +25,73 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"alias_id": {
 			// Property: AliasId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 68,
-			     "minLength": 13,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 68,
+			//   "minLength": 13,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"associations": {
 			// Property: Associations
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "AssociatedAccountId": {
-			           "type": "string"
-			         },
-			         "AssociationStatus": {
-			           "enum": [
-			             "NOT_ASSOCIATED",
-			             "PENDING_ASSOCIATION",
-			             "ASSOCIATED_WITH_OWNER_ACCOUNT",
-			             "ASSOCIATED_WITH_SHARED_ACCOUNT",
-			             "PENDING_DISASSOCIATION"
-			           ],
-			           "type": "string"
-			         },
-			         "ConnectionIdentifier": {
-			           "maxLength": 20,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "ResourceId": {
-			           "maxLength": 1000,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "maxLength": 25,
-			     "minLength": 1,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "AssociatedAccountId": {
+			//         "type": "string"
+			//       },
+			//       "AssociationStatus": {
+			//         "enum": [
+			//           "NOT_ASSOCIATED",
+			//           "PENDING_ASSOCIATION",
+			//           "ASSOCIATED_WITH_OWNER_ACCOUNT",
+			//           "ASSOCIATED_WITH_SHARED_ACCOUNT",
+			//           "PENDING_DISASSOCIATION"
+			//         ],
+			//         "type": "string"
+			//       },
+			//       "ConnectionIdentifier": {
+			//         "maxLength": 20,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "ResourceId": {
+			//         "maxLength": 1000,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "maxLength": 25,
+			//   "minLength": 1,
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"associated_account_id": {
 						// Property: AssociatedAccountId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"association_status": {
 						// Property: AssociationStatus
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "NOT_ASSOCIATED",
-						       "PENDING_ASSOCIATION",
-						       "ASSOCIATED_WITH_OWNER_ACCOUNT",
-						       "ASSOCIATED_WITH_SHARED_ACCOUNT",
-						       "PENDING_DISASSOCIATION"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"connection_identifier": {
 						// Property: ConnectionIdentifier
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 20,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"resource_id": {
 						// Property: ResourceId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 1000,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -144,30 +103,26 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"connection_alias_state": {
 			// Property: ConnectionAliasState
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "CREATING",
-			       "CREATED",
-			       "DELETING"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "CREATING",
+			//     "CREATED",
+			//     "DELETING"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"connection_string": {
 			// Property: ConnectionString
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// ConnectionString is a force-new attribute.
@@ -175,49 +130,35 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

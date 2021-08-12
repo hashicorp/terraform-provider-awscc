@@ -25,17 +25,15 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 		"capacity_providers": {
 			// Property: CapacityProviders
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "List of capacity providers to associate with the cluster",
-			     "items": {
-			       "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-			       "type": "string"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "List of capacity providers to associate with the cluster",
+			//   "items": {
+			//     "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "List of capacity providers to associate with the cluster",
 			// Ordered set.
 			Type:     types.ListType{ElemType: types.StringType},
@@ -44,14 +42,12 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 		"cluster": {
 			// Property: Cluster
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the cluster",
-			     "maxLength": 2048,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the cluster",
+			//   "maxLength": 2048,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "The name of the cluster",
 			Type:        types.StringType,
 			Required:    true,
@@ -60,66 +56,45 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 		"default_capacity_provider_strategy": {
 			// Property: DefaultCapacityProviderStrategy
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "List of capacity providers to associate with the cluster",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Base": {
-			           "type": "integer"
-			         },
-			         "CapacityProvider": {
-			           "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-			           "type": "string"
-			         },
-			         "Weight": {
-			           "type": "integer"
-			         }
-			       },
-			       "required": [
-			         "CapacityProvider"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "List of capacity providers to associate with the cluster",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Base": {
+			//         "type": "integer"
+			//       },
+			//       "CapacityProvider": {
+			//         "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
+			//         "type": "string"
+			//       },
+			//       "Weight": {
+			//         "type": "integer"
+			//       }
+			//     },
+			//     "required": [
+			//       "CapacityProvider"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "List of capacity providers to associate with the cluster",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"base": {
 						// Property: Base
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
 						Type:     types.NumberType,
 						Optional: true,
 					},
 					"capacity_provider": {
 						// Property: CapacityProvider
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-						     "type": "string"
-						   }
-						*/
 						Description: "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"weight": {
 						// Property: Weight
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
 						Type:     types.NumberType,
 						Optional: true,
 					},

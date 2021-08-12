@@ -25,12 +25,10 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 		"global_network_id": {
 			// Property: GlobalNetworkId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ID of the global network.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ID of the global network.",
+			//   "type": "string"
+			// }
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Required:    true,
@@ -39,12 +37,10 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 		"transit_gateway_arn": {
 			// Property: TransitGatewayArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the transit gateway.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the transit gateway.",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the transit gateway.",
 			Type:        types.StringType,
 			Required:    true,

@@ -25,13 +25,11 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"bucket_name": {
 			// Property: BucketName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 2048,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 2048,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -40,13 +38,11 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"bucket_prefix": {
 			// Property: BucketPrefix
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 64,
-			     "minLength": 0,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 64,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -55,13 +51,11 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"bucket_region": {
 			// Property: BucketRegion
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -70,13 +64,11 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"kms_key_arn": {
 			// Property: KMSKeyArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 512,
-			     "minLength": 0,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 512,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -85,108 +77,66 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"s3_destination": {
 			// Property: S3Destination
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "BucketName": {
-			         "maxLength": 2048,
-			         "minLength": 1,
-			         "type": "string"
-			       },
-			       "BucketPrefix": {
-			         "maxLength": 256,
-			         "minLength": 1,
-			         "type": "string"
-			       },
-			       "BucketRegion": {
-			         "maxLength": 64,
-			         "minLength": 1,
-			         "type": "string"
-			       },
-			       "KMSKeyArn": {
-			         "maxLength": 512,
-			         "minLength": 1,
-			         "type": "string"
-			       },
-			       "SyncFormat": {
-			         "maxLength": 1024,
-			         "minLength": 1,
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "BucketName",
-			       "BucketRegion",
-			       "SyncFormat"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "BucketName": {
+			//       "maxLength": 2048,
+			//       "minLength": 1,
+			//       "type": "string"
+			//     },
+			//     "BucketPrefix": {
+			//       "maxLength": 256,
+			//       "minLength": 1,
+			//       "type": "string"
+			//     },
+			//     "BucketRegion": {
+			//       "maxLength": 64,
+			//       "minLength": 1,
+			//       "type": "string"
+			//     },
+			//     "KMSKeyArn": {
+			//       "maxLength": 512,
+			//       "minLength": 1,
+			//       "type": "string"
+			//     },
+			//     "SyncFormat": {
+			//       "maxLength": 1024,
+			//       "minLength": 1,
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "BucketName",
+			//     "BucketRegion",
+			//     "SyncFormat"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"bucket_name": {
 						// Property: BucketName
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 2048,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"bucket_prefix": {
 						// Property: BucketPrefix
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"bucket_region": {
 						// Property: BucketRegion
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 64,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"kms_key_arn": {
 						// Property: KMSKeyArn
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 512,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"sync_format": {
 						// Property: SyncFormat
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 1024,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -199,13 +149,11 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"sync_format": {
 			// Property: SyncFormat
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1024,
-			     "minLength": 0,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1024,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -214,13 +162,11 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"sync_name": {
 			// Property: SyncName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// SyncName is a force-new attribute.
@@ -228,109 +174,65 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"sync_source": {
 			// Property: SyncSource
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "AwsOrganizationsSource": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "OrganizationSourceType": {
-			             "maxLength": 64,
-			             "minLength": 1,
-			             "type": "string"
-			           },
-			           "OrganizationalUnits": {
-			             "items": {
-			               "type": "string"
-			             },
-			             "type": "array",
-			             "uniqueItems": false
-			           }
-			         },
-			         "required": [
-			           "OrganizationSourceType"
-			         ],
-			         "type": "object"
-			       },
-			       "IncludeFutureRegions": {
-			         "type": "boolean"
-			       },
-			       "SourceRegions": {
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "SourceType": {
-			         "maxLength": 64,
-			         "minLength": 1,
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "SourceType",
-			       "SourceRegions"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "AwsOrganizationsSource": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "OrganizationSourceType": {
+			//           "maxLength": 64,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "OrganizationalUnits": {
+			//           "items": {
+			//             "type": "string"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         }
+			//       },
+			//       "required": [
+			//         "OrganizationSourceType"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "IncludeFutureRegions": {
+			//       "type": "boolean"
+			//     },
+			//     "SourceRegions": {
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "SourceType": {
+			//       "maxLength": 64,
+			//       "minLength": 1,
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "SourceType",
+			//     "SourceRegions"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"aws_organizations_source": {
 						// Property: AwsOrganizationsSource
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "OrganizationSourceType": {
-						         "maxLength": 64,
-						         "minLength": 1,
-						         "type": "string"
-						       },
-						       "OrganizationalUnits": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array",
-						         "uniqueItems": false
-						       }
-						     },
-						     "required": [
-						       "OrganizationSourceType"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"organization_source_type": {
 									// Property: OrganizationSourceType
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 64,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"organizational_units": {
 									// Property: OrganizationalUnits
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -340,40 +242,16 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					},
 					"include_future_regions": {
 						// Property: IncludeFutureRegions
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"source_regions": {
 						// Property: SourceRegions
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 					"source_type": {
 						// Property: SourceType
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 64,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -384,13 +262,11 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"sync_type": {
 			// Property: SyncType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 64,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 64,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,

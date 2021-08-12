@@ -25,40 +25,34 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1600,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1600,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"calculator_arn": {
 			// Property: CalculatorArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1600,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1600,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"calculator_name": {
 			// Property: CalculatorName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 100,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 100,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// CalculatorName is a force-new attribute.
@@ -66,13 +60,11 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"create_time": {
 			// Property: CreateTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Type:        types.StringType,
 			Computed:    true,
@@ -80,11 +72,9 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"data_source": {
 			// Property: DataSource
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// DataSource is a force-new attribute.
@@ -92,13 +82,11 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 1000,
-			     "minLength": 0,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 1000,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -107,15 +95,13 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"pricing_plan": {
 			// Property: PricingPlan
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "RequestBasedUsage",
-			       "MobileAssetManagement"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "RequestBasedUsage",
+			//     "MobileAssetManagement"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// PricingPlan is a force-new attribute.
@@ -123,13 +109,11 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"update_time": {
 			// Property: UpdateTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Type:        types.StringType,
 			Computed:    true,

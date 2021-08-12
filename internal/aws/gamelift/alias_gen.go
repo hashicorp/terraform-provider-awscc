@@ -25,12 +25,10 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"alias_id": {
 			// Property: AliasId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Unique alias ID",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Unique alias ID",
+			//   "type": "string"
+			// }
 			Description: "Unique alias ID",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,14 +36,12 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A human-readable description of the alias.",
-			     "maxLength": 1024,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A human-readable description of the alias.",
+			//   "maxLength": 1024,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "A human-readable description of the alias.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -53,15 +49,13 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
-			     "maxLength": 1024,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
+			//   "maxLength": 1024,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
 			Type:        types.StringType,
 			Required:    true,
@@ -69,76 +63,48 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"routing_strategy": {
 			// Property: RoutingStrategy
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "FleetId": {
-			         "description": "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "Message": {
-			         "description": "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
-			         "type": "string"
-			       },
-			       "Type": {
-			         "description": "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
-			         "enum": [
-			           "SIMPLE",
-			           "TERMINAL"
-			         ],
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "Type"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "FleetId": {
+			//       "description": "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "Message": {
+			//       "description": "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
+			//       "type": "string"
+			//     },
+			//     "Type": {
+			//       "description": "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
+			//       "enum": [
+			//         "SIMPLE",
+			//         "TERMINAL"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "Type"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"fleet_id": {
 						// Property: FleetId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"message": {
 						// Property: Message
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
-						     "type": "string"
-						   }
-						*/
 						Description: "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
-						     "enum": [
-						       "SIMPLE",
-						       "TERMINAL"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Description: "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
 						Type:        types.StringType,
 						Required:    true,

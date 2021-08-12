@@ -25,1061 +25,747 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"distribution_config": {
 			// Property: DistributionConfig
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Aliases": {
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "CNAMEs": {
-			         "items": {
-			           "type": "string"
-			         },
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "CacheBehaviors": {
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "AllowedMethods": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array",
-			               "uniqueItems": false
-			             },
-			             "CachePolicyId": {
-			               "type": "string"
-			             },
-			             "CachedMethods": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array",
-			               "uniqueItems": false
-			             },
-			             "Compress": {
-			               "type": "boolean"
-			             },
-			             "DefaultTTL": {
-			               "type": "number"
-			             },
-			             "FieldLevelEncryptionId": {
-			               "type": "string"
-			             },
-			             "ForwardedValues": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "Cookies": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "Forward": {
-			                       "type": "string"
-			                     },
-			                     "WhitelistedNames": {
-			                       "items": {
-			                         "type": "string"
-			                       },
-			                       "type": "array",
-			                       "uniqueItems": false
-			                     }
-			                   },
-			                   "required": [
-			                     "Forward"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "Headers": {
-			                   "items": {
-			                     "type": "string"
-			                   },
-			                   "type": "array",
-			                   "uniqueItems": false
-			                 },
-			                 "QueryString": {
-			                   "type": "boolean"
-			                 },
-			                 "QueryStringCacheKeys": {
-			                   "items": {
-			                     "type": "string"
-			                   },
-			                   "type": "array",
-			                   "uniqueItems": false
-			                 }
-			               },
-			               "required": [
-			                 "QueryString"
-			               ],
-			               "type": "object"
-			             },
-			             "FunctionAssociations": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "EventType": {
-			                     "type": "string"
-			                   },
-			                   "FunctionARN": {
-			                     "type": "string"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "type": "array",
-			               "uniqueItems": false
-			             },
-			             "LambdaFunctionAssociations": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "EventType": {
-			                     "type": "string"
-			                   },
-			                   "IncludeBody": {
-			                     "type": "boolean"
-			                   },
-			                   "LambdaFunctionARN": {
-			                     "type": "string"
-			                   }
-			                 },
-			                 "type": "object"
-			               },
-			               "type": "array",
-			               "uniqueItems": false
-			             },
-			             "MaxTTL": {
-			               "type": "number"
-			             },
-			             "MinTTL": {
-			               "type": "number"
-			             },
-			             "OriginRequestPolicyId": {
-			               "type": "string"
-			             },
-			             "PathPattern": {
-			               "type": "string"
-			             },
-			             "RealtimeLogConfigArn": {
-			               "type": "string"
-			             },
-			             "SmoothStreaming": {
-			               "type": "boolean"
-			             },
-			             "TargetOriginId": {
-			               "type": "string"
-			             },
-			             "TrustedKeyGroups": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array",
-			               "uniqueItems": false
-			             },
-			             "TrustedSigners": {
-			               "items": {
-			                 "type": "string"
-			               },
-			               "type": "array",
-			               "uniqueItems": false
-			             },
-			             "ViewerProtocolPolicy": {
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "PathPattern",
-			             "TargetOriginId",
-			             "ViewerProtocolPolicy"
-			           ],
-			           "type": "object"
-			         },
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "Comment": {
-			         "type": "string"
-			       },
-			       "CustomErrorResponses": {
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "ErrorCachingMinTTL": {
-			               "type": "number"
-			             },
-			             "ErrorCode": {
-			               "type": "integer"
-			             },
-			             "ResponseCode": {
-			               "type": "integer"
-			             },
-			             "ResponsePagePath": {
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "ErrorCode"
-			           ],
-			           "type": "object"
-			         },
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "CustomOrigin": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "DNSName": {
-			             "type": "string"
-			           },
-			           "HTTPPort": {
-			             "type": "integer"
-			           },
-			           "HTTPSPort": {
-			             "type": "integer"
-			           },
-			           "OriginProtocolPolicy": {
-			             "type": "string"
-			           },
-			           "OriginSSLProtocols": {
-			             "items": {
-			               "type": "string"
-			             },
-			             "type": "array",
-			             "uniqueItems": false
-			           }
-			         },
-			         "required": [
-			           "DNSName",
-			           "OriginProtocolPolicy",
-			           "OriginSSLProtocols"
-			         ],
-			         "type": "object"
-			       },
-			       "DefaultCacheBehavior": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "AllowedMethods": {
-			             "items": {
-			               "type": "string"
-			             },
-			             "type": "array",
-			             "uniqueItems": false
-			           },
-			           "CachePolicyId": {
-			             "type": "string"
-			           },
-			           "CachedMethods": {
-			             "items": {
-			               "type": "string"
-			             },
-			             "type": "array",
-			             "uniqueItems": false
-			           },
-			           "Compress": {
-			             "type": "boolean"
-			           },
-			           "DefaultTTL": {
-			             "type": "number"
-			           },
-			           "FieldLevelEncryptionId": {
-			             "type": "string"
-			           },
-			           "ForwardedValues": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Cookies": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "Forward": {
-			                     "type": "string"
-			                   },
-			                   "WhitelistedNames": {
-			                     "items": {
-			                       "type": "string"
-			                     },
-			                     "type": "array",
-			                     "uniqueItems": false
-			                   }
-			                 },
-			                 "required": [
-			                   "Forward"
-			                 ],
-			                 "type": "object"
-			               },
-			               "Headers": {
-			                 "items": {
-			                   "type": "string"
-			                 },
-			                 "type": "array",
-			                 "uniqueItems": false
-			               },
-			               "QueryString": {
-			                 "type": "boolean"
-			               },
-			               "QueryStringCacheKeys": {
-			                 "items": {
-			                   "type": "string"
-			                 },
-			                 "type": "array",
-			                 "uniqueItems": false
-			               }
-			             },
-			             "required": [
-			               "QueryString"
-			             ],
-			             "type": "object"
-			           },
-			           "FunctionAssociations": {
-			             "items": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "EventType": {
-			                   "type": "string"
-			                 },
-			                 "FunctionARN": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "type": "array",
-			             "uniqueItems": false
-			           },
-			           "LambdaFunctionAssociations": {
-			             "items": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "EventType": {
-			                   "type": "string"
-			                 },
-			                 "IncludeBody": {
-			                   "type": "boolean"
-			                 },
-			                 "LambdaFunctionARN": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "type": "array",
-			             "uniqueItems": false
-			           },
-			           "MaxTTL": {
-			             "type": "number"
-			           },
-			           "MinTTL": {
-			             "type": "number"
-			           },
-			           "OriginRequestPolicyId": {
-			             "type": "string"
-			           },
-			           "RealtimeLogConfigArn": {
-			             "type": "string"
-			           },
-			           "SmoothStreaming": {
-			             "type": "boolean"
-			           },
-			           "TargetOriginId": {
-			             "type": "string"
-			           },
-			           "TrustedKeyGroups": {
-			             "items": {
-			               "type": "string"
-			             },
-			             "type": "array",
-			             "uniqueItems": false
-			           },
-			           "TrustedSigners": {
-			             "items": {
-			               "type": "string"
-			             },
-			             "type": "array",
-			             "uniqueItems": false
-			           },
-			           "ViewerProtocolPolicy": {
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "TargetOriginId",
-			           "ViewerProtocolPolicy"
-			         ],
-			         "type": "object"
-			       },
-			       "DefaultRootObject": {
-			         "type": "string"
-			       },
-			       "Enabled": {
-			         "type": "boolean"
-			       },
-			       "HttpVersion": {
-			         "type": "string"
-			       },
-			       "IPV6Enabled": {
-			         "type": "boolean"
-			       },
-			       "Logging": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "Bucket": {
-			             "type": "string"
-			           },
-			           "IncludeCookies": {
-			             "type": "boolean"
-			           },
-			           "Prefix": {
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "Bucket"
-			         ],
-			         "type": "object"
-			       },
-			       "OriginGroups": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "Items": {
-			             "items": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "FailoverCriteria": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "StatusCodes": {
-			                       "additionalProperties": false,
-			                       "properties": {
-			                         "Items": {
-			                           "items": {
-			                             "type": "integer"
-			                           },
-			                           "type": "array",
-			                           "uniqueItems": false
-			                         },
-			                         "Quantity": {
-			                           "type": "integer"
-			                         }
-			                       },
-			                       "required": [
-			                         "Quantity",
-			                         "Items"
-			                       ],
-			                       "type": "object"
-			                     }
-			                   },
-			                   "required": [
-			                     "StatusCodes"
-			                   ],
-			                   "type": "object"
-			                 },
-			                 "Id": {
-			                   "type": "string"
-			                 },
-			                 "Members": {
-			                   "additionalProperties": false,
-			                   "properties": {
-			                     "Items": {
-			                       "items": {
-			                         "additionalProperties": false,
-			                         "properties": {
-			                           "OriginId": {
-			                             "type": "string"
-			                           }
-			                         },
-			                         "required": [
-			                           "OriginId"
-			                         ],
-			                         "type": "object"
-			                       },
-			                       "type": "array",
-			                       "uniqueItems": false
-			                     },
-			                     "Quantity": {
-			                       "type": "integer"
-			                     }
-			                   },
-			                   "required": [
-			                     "Quantity",
-			                     "Items"
-			                   ],
-			                   "type": "object"
-			                 }
-			               },
-			               "required": [
-			                 "Id",
-			                 "FailoverCriteria",
-			                 "Members"
-			               ],
-			               "type": "object"
-			             },
-			             "type": "array",
-			             "uniqueItems": false
-			           },
-			           "Quantity": {
-			             "type": "integer"
-			           }
-			         },
-			         "required": [
-			           "Quantity"
-			         ],
-			         "type": "object"
-			       },
-			       "Origins": {
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "ConnectionAttempts": {
-			               "type": "integer"
-			             },
-			             "ConnectionTimeout": {
-			               "type": "integer"
-			             },
-			             "CustomOriginConfig": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "HTTPPort": {
-			                   "type": "integer"
-			                 },
-			                 "HTTPSPort": {
-			                   "type": "integer"
-			                 },
-			                 "OriginKeepaliveTimeout": {
-			                   "type": "integer"
-			                 },
-			                 "OriginProtocolPolicy": {
-			                   "type": "string"
-			                 },
-			                 "OriginReadTimeout": {
-			                   "type": "integer"
-			                 },
-			                 "OriginSSLProtocols": {
-			                   "items": {
-			                     "type": "string"
-			                   },
-			                   "type": "array",
-			                   "uniqueItems": false
-			                 }
-			               },
-			               "required": [
-			                 "OriginProtocolPolicy"
-			               ],
-			               "type": "object"
-			             },
-			             "DomainName": {
-			               "type": "string"
-			             },
-			             "Id": {
-			               "type": "string"
-			             },
-			             "OriginCustomHeaders": {
-			               "items": {
-			                 "additionalProperties": false,
-			                 "properties": {
-			                   "HeaderName": {
-			                     "type": "string"
-			                   },
-			                   "HeaderValue": {
-			                     "type": "string"
-			                   }
-			                 },
-			                 "required": [
-			                   "HeaderValue",
-			                   "HeaderName"
-			                 ],
-			                 "type": "object"
-			               },
-			               "type": "array",
-			               "uniqueItems": false
-			             },
-			             "OriginPath": {
-			               "type": "string"
-			             },
-			             "OriginShield": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "Enabled": {
-			                   "type": "boolean"
-			                 },
-			                 "OriginShieldRegion": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             },
-			             "S3OriginConfig": {
-			               "additionalProperties": false,
-			               "properties": {
-			                 "OriginAccessIdentity": {
-			                   "type": "string"
-			                 }
-			               },
-			               "type": "object"
-			             }
-			           },
-			           "required": [
-			             "DomainName",
-			             "Id"
-			           ],
-			           "type": "object"
-			         },
-			         "type": "array",
-			         "uniqueItems": false
-			       },
-			       "PriceClass": {
-			         "type": "string"
-			       },
-			       "Restrictions": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "GeoRestriction": {
-			             "additionalProperties": false,
-			             "properties": {
-			               "Locations": {
-			                 "items": {
-			                   "type": "string"
-			                 },
-			                 "type": "array",
-			                 "uniqueItems": false
-			               },
-			               "RestrictionType": {
-			                 "type": "string"
-			               }
-			             },
-			             "required": [
-			               "RestrictionType"
-			             ],
-			             "type": "object"
-			           }
-			         },
-			         "required": [
-			           "GeoRestriction"
-			         ],
-			         "type": "object"
-			       },
-			       "S3Origin": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "DNSName": {
-			             "type": "string"
-			           },
-			           "OriginAccessIdentity": {
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "DNSName"
-			         ],
-			         "type": "object"
-			       },
-			       "ViewerCertificate": {
-			         "additionalProperties": false,
-			         "properties": {
-			           "AcmCertificateArn": {
-			             "type": "string"
-			           },
-			           "CloudFrontDefaultCertificate": {
-			             "type": "boolean"
-			           },
-			           "IamCertificateId": {
-			             "type": "string"
-			           },
-			           "MinimumProtocolVersion": {
-			             "type": "string"
-			           },
-			           "SslSupportMethod": {
-			             "type": "string"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "WebACLId": {
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "Enabled"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Aliases": {
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "CNAMEs": {
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "CacheBehaviors": {
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "AllowedMethods": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           },
+			//           "CachePolicyId": {
+			//             "type": "string"
+			//           },
+			//           "CachedMethods": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           },
+			//           "Compress": {
+			//             "type": "boolean"
+			//           },
+			//           "DefaultTTL": {
+			//             "type": "number"
+			//           },
+			//           "FieldLevelEncryptionId": {
+			//             "type": "string"
+			//           },
+			//           "ForwardedValues": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "Cookies": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "Forward": {
+			//                     "type": "string"
+			//                   },
+			//                   "WhitelistedNames": {
+			//                     "items": {
+			//                       "type": "string"
+			//                     },
+			//                     "type": "array",
+			//                     "uniqueItems": false
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Forward"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "Headers": {
+			//                 "items": {
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array",
+			//                 "uniqueItems": false
+			//               },
+			//               "QueryString": {
+			//                 "type": "boolean"
+			//               },
+			//               "QueryStringCacheKeys": {
+			//                 "items": {
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array",
+			//                 "uniqueItems": false
+			//               }
+			//             },
+			//             "required": [
+			//               "QueryString"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "FunctionAssociations": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "EventType": {
+			//                   "type": "string"
+			//                 },
+			//                 "FunctionARN": {
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           },
+			//           "LambdaFunctionAssociations": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "EventType": {
+			//                   "type": "string"
+			//                 },
+			//                 "IncludeBody": {
+			//                   "type": "boolean"
+			//                 },
+			//                 "LambdaFunctionARN": {
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           },
+			//           "MaxTTL": {
+			//             "type": "number"
+			//           },
+			//           "MinTTL": {
+			//             "type": "number"
+			//           },
+			//           "OriginRequestPolicyId": {
+			//             "type": "string"
+			//           },
+			//           "PathPattern": {
+			//             "type": "string"
+			//           },
+			//           "RealtimeLogConfigArn": {
+			//             "type": "string"
+			//           },
+			//           "SmoothStreaming": {
+			//             "type": "boolean"
+			//           },
+			//           "TargetOriginId": {
+			//             "type": "string"
+			//           },
+			//           "TrustedKeyGroups": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           },
+			//           "TrustedSigners": {
+			//             "items": {
+			//               "type": "string"
+			//             },
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           },
+			//           "ViewerProtocolPolicy": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "PathPattern",
+			//           "TargetOriginId",
+			//           "ViewerProtocolPolicy"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "Comment": {
+			//       "type": "string"
+			//     },
+			//     "CustomErrorResponses": {
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "ErrorCachingMinTTL": {
+			//             "type": "number"
+			//           },
+			//           "ErrorCode": {
+			//             "type": "integer"
+			//           },
+			//           "ResponseCode": {
+			//             "type": "integer"
+			//           },
+			//           "ResponsePagePath": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "ErrorCode"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "CustomOrigin": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "DNSName": {
+			//           "type": "string"
+			//         },
+			//         "HTTPPort": {
+			//           "type": "integer"
+			//         },
+			//         "HTTPSPort": {
+			//           "type": "integer"
+			//         },
+			//         "OriginProtocolPolicy": {
+			//           "type": "string"
+			//         },
+			//         "OriginSSLProtocols": {
+			//           "items": {
+			//             "type": "string"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         }
+			//       },
+			//       "required": [
+			//         "DNSName",
+			//         "OriginProtocolPolicy",
+			//         "OriginSSLProtocols"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "DefaultCacheBehavior": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "AllowedMethods": {
+			//           "items": {
+			//             "type": "string"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "CachePolicyId": {
+			//           "type": "string"
+			//         },
+			//         "CachedMethods": {
+			//           "items": {
+			//             "type": "string"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "Compress": {
+			//           "type": "boolean"
+			//         },
+			//         "DefaultTTL": {
+			//           "type": "number"
+			//         },
+			//         "FieldLevelEncryptionId": {
+			//           "type": "string"
+			//         },
+			//         "ForwardedValues": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Cookies": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "Forward": {
+			//                   "type": "string"
+			//                 },
+			//                 "WhitelistedNames": {
+			//                   "items": {
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array",
+			//                   "uniqueItems": false
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Forward"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "Headers": {
+			//               "items": {
+			//                 "type": "string"
+			//               },
+			//               "type": "array",
+			//               "uniqueItems": false
+			//             },
+			//             "QueryString": {
+			//               "type": "boolean"
+			//             },
+			//             "QueryStringCacheKeys": {
+			//               "items": {
+			//                 "type": "string"
+			//               },
+			//               "type": "array",
+			//               "uniqueItems": false
+			//             }
+			//           },
+			//           "required": [
+			//             "QueryString"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "FunctionAssociations": {
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "EventType": {
+			//                 "type": "string"
+			//               },
+			//               "FunctionARN": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "LambdaFunctionAssociations": {
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "EventType": {
+			//                 "type": "string"
+			//               },
+			//               "IncludeBody": {
+			//                 "type": "boolean"
+			//               },
+			//               "LambdaFunctionARN": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "MaxTTL": {
+			//           "type": "number"
+			//         },
+			//         "MinTTL": {
+			//           "type": "number"
+			//         },
+			//         "OriginRequestPolicyId": {
+			//           "type": "string"
+			//         },
+			//         "RealtimeLogConfigArn": {
+			//           "type": "string"
+			//         },
+			//         "SmoothStreaming": {
+			//           "type": "boolean"
+			//         },
+			//         "TargetOriginId": {
+			//           "type": "string"
+			//         },
+			//         "TrustedKeyGroups": {
+			//           "items": {
+			//             "type": "string"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "TrustedSigners": {
+			//           "items": {
+			//             "type": "string"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "ViewerProtocolPolicy": {
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "TargetOriginId",
+			//         "ViewerProtocolPolicy"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "DefaultRootObject": {
+			//       "type": "string"
+			//     },
+			//     "Enabled": {
+			//       "type": "boolean"
+			//     },
+			//     "HttpVersion": {
+			//       "type": "string"
+			//     },
+			//     "IPV6Enabled": {
+			//       "type": "boolean"
+			//     },
+			//     "Logging": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "Bucket": {
+			//           "type": "string"
+			//         },
+			//         "IncludeCookies": {
+			//           "type": "boolean"
+			//         },
+			//         "Prefix": {
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "Bucket"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "OriginGroups": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "Items": {
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "FailoverCriteria": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "StatusCodes": {
+			//                     "additionalProperties": false,
+			//                     "properties": {
+			//                       "Items": {
+			//                         "items": {
+			//                           "type": "integer"
+			//                         },
+			//                         "type": "array",
+			//                         "uniqueItems": false
+			//                       },
+			//                       "Quantity": {
+			//                         "type": "integer"
+			//                       }
+			//                     },
+			//                     "required": [
+			//                       "Quantity",
+			//                       "Items"
+			//                     ],
+			//                     "type": "object"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "StatusCodes"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "Id": {
+			//                 "type": "string"
+			//               },
+			//               "Members": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "Items": {
+			//                     "items": {
+			//                       "additionalProperties": false,
+			//                       "properties": {
+			//                         "OriginId": {
+			//                           "type": "string"
+			//                         }
+			//                       },
+			//                       "required": [
+			//                         "OriginId"
+			//                       ],
+			//                       "type": "object"
+			//                     },
+			//                     "type": "array",
+			//                     "uniqueItems": false
+			//                   },
+			//                   "Quantity": {
+			//                     "type": "integer"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Quantity",
+			//                   "Items"
+			//                 ],
+			//                 "type": "object"
+			//               }
+			//             },
+			//             "required": [
+			//               "Id",
+			//               "FailoverCriteria",
+			//               "Members"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "Quantity": {
+			//           "type": "integer"
+			//         }
+			//       },
+			//       "required": [
+			//         "Quantity"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "Origins": {
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "ConnectionAttempts": {
+			//             "type": "integer"
+			//           },
+			//           "ConnectionTimeout": {
+			//             "type": "integer"
+			//           },
+			//           "CustomOriginConfig": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "HTTPPort": {
+			//                 "type": "integer"
+			//               },
+			//               "HTTPSPort": {
+			//                 "type": "integer"
+			//               },
+			//               "OriginKeepaliveTimeout": {
+			//                 "type": "integer"
+			//               },
+			//               "OriginProtocolPolicy": {
+			//                 "type": "string"
+			//               },
+			//               "OriginReadTimeout": {
+			//                 "type": "integer"
+			//               },
+			//               "OriginSSLProtocols": {
+			//                 "items": {
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array",
+			//                 "uniqueItems": false
+			//               }
+			//             },
+			//             "required": [
+			//               "OriginProtocolPolicy"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "DomainName": {
+			//             "type": "string"
+			//           },
+			//           "Id": {
+			//             "type": "string"
+			//           },
+			//           "OriginCustomHeaders": {
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "HeaderName": {
+			//                   "type": "string"
+			//                 },
+			//                 "HeaderValue": {
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "HeaderValue",
+			//                 "HeaderName"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "type": "array",
+			//             "uniqueItems": false
+			//           },
+			//           "OriginPath": {
+			//             "type": "string"
+			//           },
+			//           "OriginShield": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "Enabled": {
+			//                 "type": "boolean"
+			//               },
+			//               "OriginShieldRegion": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "S3OriginConfig": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "OriginAccessIdentity": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           }
+			//         },
+			//         "required": [
+			//           "DomainName",
+			//           "Id"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
+			//     "PriceClass": {
+			//       "type": "string"
+			//     },
+			//     "Restrictions": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "GeoRestriction": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Locations": {
+			//               "items": {
+			//                 "type": "string"
+			//               },
+			//               "type": "array",
+			//               "uniqueItems": false
+			//             },
+			//             "RestrictionType": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "RestrictionType"
+			//           ],
+			//           "type": "object"
+			//         }
+			//       },
+			//       "required": [
+			//         "GeoRestriction"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "S3Origin": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "DNSName": {
+			//           "type": "string"
+			//         },
+			//         "OriginAccessIdentity": {
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "DNSName"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "ViewerCertificate": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "AcmCertificateArn": {
+			//           "type": "string"
+			//         },
+			//         "CloudFrontDefaultCertificate": {
+			//           "type": "boolean"
+			//         },
+			//         "IamCertificateId": {
+			//           "type": "string"
+			//         },
+			//         "MinimumProtocolVersion": {
+			//           "type": "string"
+			//         },
+			//         "SslSupportMethod": {
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "WebACLId": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "Enabled"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"aliases": {
 						// Property: Aliases
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"cnam_es": {
 						// Property: CNAMEs
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "type": "string"
-						     },
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"cache_behaviors": {
 						// Property: CacheBehaviors
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "AllowedMethods": {
-						           "items": {
-						             "type": "string"
-						           },
-						           "type": "array",
-						           "uniqueItems": false
-						         },
-						         "CachePolicyId": {
-						           "type": "string"
-						         },
-						         "CachedMethods": {
-						           "items": {
-						             "type": "string"
-						           },
-						           "type": "array",
-						           "uniqueItems": false
-						         },
-						         "Compress": {
-						           "type": "boolean"
-						         },
-						         "DefaultTTL": {
-						           "type": "number"
-						         },
-						         "FieldLevelEncryptionId": {
-						           "type": "string"
-						         },
-						         "ForwardedValues": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "Cookies": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "Forward": {
-						                   "type": "string"
-						                 },
-						                 "WhitelistedNames": {
-						                   "items": {
-						                     "type": "string"
-						                   },
-						                   "type": "array",
-						                   "uniqueItems": false
-						                 }
-						               },
-						               "required": [
-						                 "Forward"
-						               ],
-						               "type": "object"
-						             },
-						             "Headers": {
-						               "items": {
-						                 "type": "string"
-						               },
-						               "type": "array",
-						               "uniqueItems": false
-						             },
-						             "QueryString": {
-						               "type": "boolean"
-						             },
-						             "QueryStringCacheKeys": {
-						               "items": {
-						                 "type": "string"
-						               },
-						               "type": "array",
-						               "uniqueItems": false
-						             }
-						           },
-						           "required": [
-						             "QueryString"
-						           ],
-						           "type": "object"
-						         },
-						         "FunctionAssociations": {
-						           "items": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "EventType": {
-						                 "type": "string"
-						               },
-						               "FunctionARN": {
-						                 "type": "string"
-						               }
-						             },
-						             "type": "object"
-						           },
-						           "type": "array",
-						           "uniqueItems": false
-						         },
-						         "LambdaFunctionAssociations": {
-						           "items": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "EventType": {
-						                 "type": "string"
-						               },
-						               "IncludeBody": {
-						                 "type": "boolean"
-						               },
-						               "LambdaFunctionARN": {
-						                 "type": "string"
-						               }
-						             },
-						             "type": "object"
-						           },
-						           "type": "array",
-						           "uniqueItems": false
-						         },
-						         "MaxTTL": {
-						           "type": "number"
-						         },
-						         "MinTTL": {
-						           "type": "number"
-						         },
-						         "OriginRequestPolicyId": {
-						           "type": "string"
-						         },
-						         "PathPattern": {
-						           "type": "string"
-						         },
-						         "RealtimeLogConfigArn": {
-						           "type": "string"
-						         },
-						         "SmoothStreaming": {
-						           "type": "boolean"
-						         },
-						         "TargetOriginId": {
-						           "type": "string"
-						         },
-						         "TrustedKeyGroups": {
-						           "items": {
-						             "type": "string"
-						           },
-						           "type": "array",
-						           "uniqueItems": false
-						         },
-						         "TrustedSigners": {
-						           "items": {
-						             "type": "string"
-						           },
-						           "type": "array",
-						           "uniqueItems": false
-						         },
-						         "ViewerProtocolPolicy": {
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "PathPattern",
-						         "TargetOriginId",
-						         "ViewerProtocolPolicy"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"allowed_methods": {
 									// Property: AllowedMethods
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"cache_policy_id": {
 									// Property: CachePolicyId
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"cached_methods": {
 									// Property: CachedMethods
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"compress": {
 									// Property: Compress
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"default_ttl": {
 									// Property: DefaultTTL
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"field_level_encryption_id": {
 									// Property: FieldLevelEncryptionId
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"forwarded_values": {
 									// Property: ForwardedValues
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Cookies": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "Forward": {
-									             "type": "string"
-									           },
-									           "WhitelistedNames": {
-									             "items": {
-									               "type": "string"
-									             },
-									             "type": "array",
-									             "uniqueItems": false
-									           }
-									         },
-									         "required": [
-									           "Forward"
-									         ],
-									         "type": "object"
-									       },
-									       "Headers": {
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array",
-									         "uniqueItems": false
-									       },
-									       "QueryString": {
-									         "type": "boolean"
-									       },
-									       "QueryStringCacheKeys": {
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array",
-									         "uniqueItems": false
-									       }
-									     },
-									     "required": [
-									       "QueryString"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"cookies": {
 												// Property: Cookies
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "Forward": {
-												         "type": "string"
-												       },
-												       "WhitelistedNames": {
-												         "items": {
-												           "type": "string"
-												         },
-												         "type": "array",
-												         "uniqueItems": false
-												       }
-												     },
-												     "required": [
-												       "Forward"
-												     ],
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"forward": {
 															// Property: Forward
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Required: true,
 														},
 														"whitelisted_names": {
 															// Property: WhitelistedNames
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "items": {
-															       "type": "string"
-															     },
-															     "type": "array",
-															     "uniqueItems": false
-															   }
-															*/
 															Type:     types.ListType{ElemType: types.StringType},
 															Optional: true,
 														},
@@ -1089,42 +775,16 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"headers": {
 												// Property: Headers
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array",
-												     "uniqueItems": false
-												   }
-												*/
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 											},
 											"query_string": {
 												// Property: QueryString
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
 												Type:     types.BoolType,
 												Required: true,
 											},
 											"query_string_cache_keys": {
 												// Property: QueryStringCacheKeys
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array",
-												     "uniqueItems": false
-												   }
-												*/
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 											},
@@ -1134,46 +794,15 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"function_associations": {
 									// Property: FunctionAssociations
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "EventType": {
-									           "type": "string"
-									         },
-									         "FunctionARN": {
-									           "type": "string"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"event_type": {
 												// Property: EventType
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"function_arn": {
 												// Property: FunctionARN
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -1184,60 +813,20 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"lambda_function_associations": {
 									// Property: LambdaFunctionAssociations
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "EventType": {
-									           "type": "string"
-									         },
-									         "IncludeBody": {
-									           "type": "boolean"
-									         },
-									         "LambdaFunctionARN": {
-									           "type": "string"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"event_type": {
 												// Property: EventType
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"include_body": {
 												// Property: IncludeBody
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"lambda_function_arn": {
 												// Property: LambdaFunctionARN
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -1248,119 +837,51 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"max_ttl": {
 									// Property: MaxTTL
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"min_ttl": {
 									// Property: MinTTL
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"origin_request_policy_id": {
 									// Property: OriginRequestPolicyId
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"path_pattern": {
 									// Property: PathPattern
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"realtime_log_config_arn": {
 									// Property: RealtimeLogConfigArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"smooth_streaming": {
 									// Property: SmoothStreaming
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"target_origin_id": {
 									// Property: TargetOriginId
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"trusted_key_groups": {
 									// Property: TrustedKeyGroups
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"trusted_signers": {
 									// Property: TrustedSigners
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"viewer_protocol_policy": {
 									// Property: ViewerProtocolPolicy
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -1371,88 +892,30 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"comment": {
 						// Property: Comment
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"custom_error_responses": {
 						// Property: CustomErrorResponses
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "ErrorCachingMinTTL": {
-						           "type": "number"
-						         },
-						         "ErrorCode": {
-						           "type": "integer"
-						         },
-						         "ResponseCode": {
-						           "type": "integer"
-						         },
-						         "ResponsePagePath": {
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "ErrorCode"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"error_caching_min_ttl": {
 									// Property: ErrorCachingMinTTL
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"error_code": {
 									// Property: ErrorCode
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Required: true,
 								},
 								"response_code": {
 									// Property: ResponseCode
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"response_page_path": {
 									// Property: ResponsePagePath
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -1463,97 +926,30 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"custom_origin": {
 						// Property: CustomOrigin
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "DNSName": {
-						         "type": "string"
-						       },
-						       "HTTPPort": {
-						         "type": "integer"
-						       },
-						       "HTTPSPort": {
-						         "type": "integer"
-						       },
-						       "OriginProtocolPolicy": {
-						         "type": "string"
-						       },
-						       "OriginSSLProtocols": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array",
-						         "uniqueItems": false
-						       }
-						     },
-						     "required": [
-						       "DNSName",
-						       "OriginProtocolPolicy",
-						       "OriginSSLProtocols"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"dns_name": {
 									// Property: DNSName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"http_port": {
 									// Property: HTTPPort
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"https_port": {
 									// Property: HTTPSPort
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"origin_protocol_policy": {
 									// Property: OriginProtocolPolicy
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"origin_ssl_protocols": {
 									// Property: OriginSSLProtocols
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Required: true,
 								},
@@ -1563,337 +959,53 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"default_cache_behavior": {
 						// Property: DefaultCacheBehavior
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "AllowedMethods": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array",
-						         "uniqueItems": false
-						       },
-						       "CachePolicyId": {
-						         "type": "string"
-						       },
-						       "CachedMethods": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array",
-						         "uniqueItems": false
-						       },
-						       "Compress": {
-						         "type": "boolean"
-						       },
-						       "DefaultTTL": {
-						         "type": "number"
-						       },
-						       "FieldLevelEncryptionId": {
-						         "type": "string"
-						       },
-						       "ForwardedValues": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Cookies": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "Forward": {
-						                 "type": "string"
-						               },
-						               "WhitelistedNames": {
-						                 "items": {
-						                   "type": "string"
-						                 },
-						                 "type": "array",
-						                 "uniqueItems": false
-						               }
-						             },
-						             "required": [
-						               "Forward"
-						             ],
-						             "type": "object"
-						           },
-						           "Headers": {
-						             "items": {
-						               "type": "string"
-						             },
-						             "type": "array",
-						             "uniqueItems": false
-						           },
-						           "QueryString": {
-						             "type": "boolean"
-						           },
-						           "QueryStringCacheKeys": {
-						             "items": {
-						               "type": "string"
-						             },
-						             "type": "array",
-						             "uniqueItems": false
-						           }
-						         },
-						         "required": [
-						           "QueryString"
-						         ],
-						         "type": "object"
-						       },
-						       "FunctionAssociations": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "EventType": {
-						               "type": "string"
-						             },
-						             "FunctionARN": {
-						               "type": "string"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "type": "array",
-						         "uniqueItems": false
-						       },
-						       "LambdaFunctionAssociations": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "EventType": {
-						               "type": "string"
-						             },
-						             "IncludeBody": {
-						               "type": "boolean"
-						             },
-						             "LambdaFunctionARN": {
-						               "type": "string"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "type": "array",
-						         "uniqueItems": false
-						       },
-						       "MaxTTL": {
-						         "type": "number"
-						       },
-						       "MinTTL": {
-						         "type": "number"
-						       },
-						       "OriginRequestPolicyId": {
-						         "type": "string"
-						       },
-						       "RealtimeLogConfigArn": {
-						         "type": "string"
-						       },
-						       "SmoothStreaming": {
-						         "type": "boolean"
-						       },
-						       "TargetOriginId": {
-						         "type": "string"
-						       },
-						       "TrustedKeyGroups": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array",
-						         "uniqueItems": false
-						       },
-						       "TrustedSigners": {
-						         "items": {
-						           "type": "string"
-						         },
-						         "type": "array",
-						         "uniqueItems": false
-						       },
-						       "ViewerProtocolPolicy": {
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "TargetOriginId",
-						       "ViewerProtocolPolicy"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"allowed_methods": {
 									// Property: AllowedMethods
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"cache_policy_id": {
 									// Property: CachePolicyId
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"cached_methods": {
 									// Property: CachedMethods
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"compress": {
 									// Property: Compress
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"default_ttl": {
 									// Property: DefaultTTL
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"field_level_encryption_id": {
 									// Property: FieldLevelEncryptionId
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"forwarded_values": {
 									// Property: ForwardedValues
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Cookies": {
-									         "additionalProperties": false,
-									         "properties": {
-									           "Forward": {
-									             "type": "string"
-									           },
-									           "WhitelistedNames": {
-									             "items": {
-									               "type": "string"
-									             },
-									             "type": "array",
-									             "uniqueItems": false
-									           }
-									         },
-									         "required": [
-									           "Forward"
-									         ],
-									         "type": "object"
-									       },
-									       "Headers": {
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array",
-									         "uniqueItems": false
-									       },
-									       "QueryString": {
-									         "type": "boolean"
-									       },
-									       "QueryStringCacheKeys": {
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array",
-									         "uniqueItems": false
-									       }
-									     },
-									     "required": [
-									       "QueryString"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"cookies": {
 												// Property: Cookies
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "Forward": {
-												         "type": "string"
-												       },
-												       "WhitelistedNames": {
-												         "items": {
-												           "type": "string"
-												         },
-												         "type": "array",
-												         "uniqueItems": false
-												       }
-												     },
-												     "required": [
-												       "Forward"
-												     ],
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"forward": {
 															// Property: Forward
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "string"
-															   }
-															*/
 															Type:     types.StringType,
 															Required: true,
 														},
 														"whitelisted_names": {
 															// Property: WhitelistedNames
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "items": {
-															       "type": "string"
-															     },
-															     "type": "array",
-															     "uniqueItems": false
-															   }
-															*/
 															Type:     types.ListType{ElemType: types.StringType},
 															Optional: true,
 														},
@@ -1903,42 +1015,16 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"headers": {
 												// Property: Headers
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array",
-												     "uniqueItems": false
-												   }
-												*/
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 											},
 											"query_string": {
 												// Property: QueryString
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
 												Type:     types.BoolType,
 												Required: true,
 											},
 											"query_string_cache_keys": {
 												// Property: QueryStringCacheKeys
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array",
-												     "uniqueItems": false
-												   }
-												*/
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 											},
@@ -1948,46 +1034,15 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"function_associations": {
 									// Property: FunctionAssociations
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "EventType": {
-									           "type": "string"
-									         },
-									         "FunctionARN": {
-									           "type": "string"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"event_type": {
 												// Property: EventType
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"function_arn": {
 												// Property: FunctionARN
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -1998,60 +1053,20 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"lambda_function_associations": {
 									// Property: LambdaFunctionAssociations
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "EventType": {
-									           "type": "string"
-									         },
-									         "IncludeBody": {
-									           "type": "boolean"
-									         },
-									         "LambdaFunctionARN": {
-									           "type": "string"
-									         }
-									       },
-									       "type": "object"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"event_type": {
 												// Property: EventType
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
 											"include_body": {
 												// Property: IncludeBody
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"lambda_function_arn": {
 												// Property: LambdaFunctionARN
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -2062,108 +1077,46 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"max_ttl": {
 									// Property: MaxTTL
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"min_ttl": {
 									// Property: MinTTL
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "number"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"origin_request_policy_id": {
 									// Property: OriginRequestPolicyId
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"realtime_log_config_arn": {
 									// Property: RealtimeLogConfigArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"smooth_streaming": {
 									// Property: SmoothStreaming
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"target_origin_id": {
 									// Property: TargetOriginId
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"trusted_key_groups": {
 									// Property: TrustedKeyGroups
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"trusted_signers": {
 									// Property: TrustedSigners
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "type": "string"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"viewer_protocol_policy": {
 									// Property: ViewerProtocolPolicy
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -2173,103 +1126,40 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"default_root_object": {
 						// Property: DefaultRootObject
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"enabled": {
 						// Property: Enabled
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Required: true,
 					},
 					"http_version": {
 						// Property: HttpVersion
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"ipv6_enabled": {
 						// Property: IPV6Enabled
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"logging": {
 						// Property: Logging
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Bucket": {
-						         "type": "string"
-						       },
-						       "IncludeCookies": {
-						         "type": "boolean"
-						       },
-						       "Prefix": {
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "Bucket"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"bucket": {
 									// Property: Bucket
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"include_cookies": {
 									// Property: IncludeCookies
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"prefix": {
 									// Property: Prefix
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -2279,268 +1169,27 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"origin_groups": {
 						// Property: OriginGroups
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "Items": {
-						         "items": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "FailoverCriteria": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "StatusCodes": {
-						                   "additionalProperties": false,
-						                   "properties": {
-						                     "Items": {
-						                       "items": {
-						                         "type": "integer"
-						                       },
-						                       "type": "array",
-						                       "uniqueItems": false
-						                     },
-						                     "Quantity": {
-						                       "type": "integer"
-						                     }
-						                   },
-						                   "required": [
-						                     "Quantity",
-						                     "Items"
-						                   ],
-						                   "type": "object"
-						                 }
-						               },
-						               "required": [
-						                 "StatusCodes"
-						               ],
-						               "type": "object"
-						             },
-						             "Id": {
-						               "type": "string"
-						             },
-						             "Members": {
-						               "additionalProperties": false,
-						               "properties": {
-						                 "Items": {
-						                   "items": {
-						                     "additionalProperties": false,
-						                     "properties": {
-						                       "OriginId": {
-						                         "type": "string"
-						                       }
-						                     },
-						                     "required": [
-						                       "OriginId"
-						                     ],
-						                     "type": "object"
-						                   },
-						                   "type": "array",
-						                   "uniqueItems": false
-						                 },
-						                 "Quantity": {
-						                   "type": "integer"
-						                 }
-						               },
-						               "required": [
-						                 "Quantity",
-						                 "Items"
-						               ],
-						               "type": "object"
-						             }
-						           },
-						           "required": [
-						             "Id",
-						             "FailoverCriteria",
-						             "Members"
-						           ],
-						           "type": "object"
-						         },
-						         "type": "array",
-						         "uniqueItems": false
-						       },
-						       "Quantity": {
-						         "type": "integer"
-						       }
-						     },
-						     "required": [
-						       "Quantity"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"items": {
 									// Property: Items
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "FailoverCriteria": {
-									           "additionalProperties": false,
-									           "properties": {
-									             "StatusCodes": {
-									               "additionalProperties": false,
-									               "properties": {
-									                 "Items": {
-									                   "items": {
-									                     "type": "integer"
-									                   },
-									                   "type": "array",
-									                   "uniqueItems": false
-									                 },
-									                 "Quantity": {
-									                   "type": "integer"
-									                 }
-									               },
-									               "required": [
-									                 "Quantity",
-									                 "Items"
-									               ],
-									               "type": "object"
-									             }
-									           },
-									           "required": [
-									             "StatusCodes"
-									           ],
-									           "type": "object"
-									         },
-									         "Id": {
-									           "type": "string"
-									         },
-									         "Members": {
-									           "additionalProperties": false,
-									           "properties": {
-									             "Items": {
-									               "items": {
-									                 "additionalProperties": false,
-									                 "properties": {
-									                   "OriginId": {
-									                     "type": "string"
-									                   }
-									                 },
-									                 "required": [
-									                   "OriginId"
-									                 ],
-									                 "type": "object"
-									               },
-									               "type": "array",
-									               "uniqueItems": false
-									             },
-									             "Quantity": {
-									               "type": "integer"
-									             }
-									           },
-									           "required": [
-									             "Quantity",
-									             "Items"
-									           ],
-									           "type": "object"
-									         }
-									       },
-									       "required": [
-									         "Id",
-									         "FailoverCriteria",
-									         "Members"
-									       ],
-									       "type": "object"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"failover_criteria": {
 												// Property: FailoverCriteria
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "StatusCodes": {
-												         "additionalProperties": false,
-												         "properties": {
-												           "Items": {
-												             "items": {
-												               "type": "integer"
-												             },
-												             "type": "array",
-												             "uniqueItems": false
-												           },
-												           "Quantity": {
-												             "type": "integer"
-												           }
-												         },
-												         "required": [
-												           "Quantity",
-												           "Items"
-												         ],
-												         "type": "object"
-												       }
-												     },
-												     "required": [
-												       "StatusCodes"
-												     ],
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"status_codes": {
 															// Property: StatusCodes
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "additionalProperties": false,
-															     "properties": {
-															       "Items": {
-															         "items": {
-															           "type": "integer"
-															         },
-															         "type": "array",
-															         "uniqueItems": false
-															       },
-															       "Quantity": {
-															         "type": "integer"
-															       }
-															     },
-															     "required": [
-															       "Quantity",
-															       "Items"
-															     ],
-															     "type": "object"
-															   }
-															*/
 															Attributes: schema.SingleNestedAttributes(
 																map[string]schema.Attribute{
 																	"items": {
 																		// Property: Items
-																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "items": {
-																		       "type": "integer"
-																		     },
-																		     "type": "array",
-																		     "uniqueItems": false
-																		   }
-																		*/
 																		Type:     types.ListType{ElemType: types.NumberType},
 																		Required: true,
 																	},
 																	"quantity": {
 																		// Property: Quantity
-																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "type": "integer"
-																		   }
-																		*/
 																		Type:     types.NumberType,
 																		Required: true,
 																	},
@@ -2554,82 +1203,19 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"id": {
 												// Property: Id
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"members": {
 												// Property: Members
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "additionalProperties": false,
-												     "properties": {
-												       "Items": {
-												         "items": {
-												           "additionalProperties": false,
-												           "properties": {
-												             "OriginId": {
-												               "type": "string"
-												             }
-												           },
-												           "required": [
-												             "OriginId"
-												           ],
-												           "type": "object"
-												         },
-												         "type": "array",
-												         "uniqueItems": false
-												       },
-												       "Quantity": {
-												         "type": "integer"
-												       }
-												     },
-												     "required": [
-												       "Quantity",
-												       "Items"
-												     ],
-												     "type": "object"
-												   }
-												*/
 												Attributes: schema.SingleNestedAttributes(
 													map[string]schema.Attribute{
 														"items": {
 															// Property: Items
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "items": {
-															       "additionalProperties": false,
-															       "properties": {
-															         "OriginId": {
-															           "type": "string"
-															         }
-															       },
-															       "required": [
-															         "OriginId"
-															       ],
-															       "type": "object"
-															     },
-															     "type": "array",
-															     "uniqueItems": false
-															   }
-															*/
 															Attributes: schema.ListNestedAttributes(
 																map[string]schema.Attribute{
 																	"origin_id": {
 																		// Property: OriginId
-																		// CloudFormation resource type schema:
-																		/*
-																		   {
-																		     "type": "string"
-																		   }
-																		*/
 																		Type:     types.StringType,
 																		Required: true,
 																	},
@@ -2640,12 +1226,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"quantity": {
 															// Property: Quantity
-															// CloudFormation resource type schema:
-															/*
-															   {
-															     "type": "integer"
-															   }
-															*/
 															Type:     types.NumberType,
 															Required: true,
 														},
@@ -2660,12 +1240,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"quantity": {
 									// Property: Quantity
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Required: true,
 								},
@@ -2675,239 +1249,49 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"origins": {
 						// Property: Origins
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "ConnectionAttempts": {
-						           "type": "integer"
-						         },
-						         "ConnectionTimeout": {
-						           "type": "integer"
-						         },
-						         "CustomOriginConfig": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "HTTPPort": {
-						               "type": "integer"
-						             },
-						             "HTTPSPort": {
-						               "type": "integer"
-						             },
-						             "OriginKeepaliveTimeout": {
-						               "type": "integer"
-						             },
-						             "OriginProtocolPolicy": {
-						               "type": "string"
-						             },
-						             "OriginReadTimeout": {
-						               "type": "integer"
-						             },
-						             "OriginSSLProtocols": {
-						               "items": {
-						                 "type": "string"
-						               },
-						               "type": "array",
-						               "uniqueItems": false
-						             }
-						           },
-						           "required": [
-						             "OriginProtocolPolicy"
-						           ],
-						           "type": "object"
-						         },
-						         "DomainName": {
-						           "type": "string"
-						         },
-						         "Id": {
-						           "type": "string"
-						         },
-						         "OriginCustomHeaders": {
-						           "items": {
-						             "additionalProperties": false,
-						             "properties": {
-						               "HeaderName": {
-						                 "type": "string"
-						               },
-						               "HeaderValue": {
-						                 "type": "string"
-						               }
-						             },
-						             "required": [
-						               "HeaderValue",
-						               "HeaderName"
-						             ],
-						             "type": "object"
-						           },
-						           "type": "array",
-						           "uniqueItems": false
-						         },
-						         "OriginPath": {
-						           "type": "string"
-						         },
-						         "OriginShield": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "Enabled": {
-						               "type": "boolean"
-						             },
-						             "OriginShieldRegion": {
-						               "type": "string"
-						             }
-						           },
-						           "type": "object"
-						         },
-						         "S3OriginConfig": {
-						           "additionalProperties": false,
-						           "properties": {
-						             "OriginAccessIdentity": {
-						               "type": "string"
-						             }
-						           },
-						           "type": "object"
-						         }
-						       },
-						       "required": [
-						         "DomainName",
-						         "Id"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array",
-						     "uniqueItems": false
-						   }
-						*/
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"connection_attempts": {
 									// Property: ConnectionAttempts
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"connection_timeout": {
 									// Property: ConnectionTimeout
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"custom_origin_config": {
 									// Property: CustomOriginConfig
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "HTTPPort": {
-									         "type": "integer"
-									       },
-									       "HTTPSPort": {
-									         "type": "integer"
-									       },
-									       "OriginKeepaliveTimeout": {
-									         "type": "integer"
-									       },
-									       "OriginProtocolPolicy": {
-									         "type": "string"
-									       },
-									       "OriginReadTimeout": {
-									         "type": "integer"
-									       },
-									       "OriginSSLProtocols": {
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array",
-									         "uniqueItems": false
-									       }
-									     },
-									     "required": [
-									       "OriginProtocolPolicy"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"http_port": {
 												// Property: HTTPPort
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"https_port": {
 												// Property: HTTPSPort
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"origin_keepalive_timeout": {
 												// Property: OriginKeepaliveTimeout
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"origin_protocol_policy": {
 												// Property: OriginProtocolPolicy
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"origin_read_timeout": {
 												// Property: OriginReadTimeout
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "integer"
-												   }
-												*/
 												Type:     types.NumberType,
 												Optional: true,
 											},
 											"origin_ssl_protocols": {
 												// Property: OriginSSLProtocols
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array",
-												     "uniqueItems": false
-												   }
-												*/
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 											},
@@ -2917,72 +1301,25 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"domain_name": {
 									// Property: DomainName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"id": {
 									// Property: Id
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"origin_custom_headers": {
 									// Property: OriginCustomHeaders
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "items": {
-									       "additionalProperties": false,
-									       "properties": {
-									         "HeaderName": {
-									           "type": "string"
-									         },
-									         "HeaderValue": {
-									           "type": "string"
-									         }
-									       },
-									       "required": [
-									         "HeaderValue",
-									         "HeaderName"
-									       ],
-									       "type": "object"
-									     },
-									     "type": "array",
-									     "uniqueItems": false
-									   }
-									*/
 									Attributes: schema.ListNestedAttributes(
 										map[string]schema.Attribute{
 											"header_name": {
 												// Property: HeaderName
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
 											"header_value": {
 												// Property: HeaderValue
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -2993,53 +1330,20 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"origin_path": {
 									// Property: OriginPath
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"origin_shield": {
 									// Property: OriginShield
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Enabled": {
-									         "type": "boolean"
-									       },
-									       "OriginShieldRegion": {
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"enabled": {
 												// Property: Enabled
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "boolean"
-												   }
-												*/
 												Type:     types.BoolType,
 												Optional: true,
 											},
 											"origin_shield_region": {
 												// Property: OriginShieldRegion
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -3049,28 +1353,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"s3_origin_config": {
 									// Property: S3OriginConfig
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "OriginAccessIdentity": {
-									         "type": "string"
-									       }
-									     },
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"origin_access_identity": {
 												// Property: OriginAccessIdentity
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Optional: true,
 											},
@@ -3085,99 +1371,24 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"price_class": {
 						// Property: PriceClass
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"restrictions": {
 						// Property: Restrictions
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "GeoRestriction": {
-						         "additionalProperties": false,
-						         "properties": {
-						           "Locations": {
-						             "items": {
-						               "type": "string"
-						             },
-						             "type": "array",
-						             "uniqueItems": false
-						           },
-						           "RestrictionType": {
-						             "type": "string"
-						           }
-						         },
-						         "required": [
-						           "RestrictionType"
-						         ],
-						         "type": "object"
-						       }
-						     },
-						     "required": [
-						       "GeoRestriction"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"geo_restriction": {
 									// Property: GeoRestriction
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "additionalProperties": false,
-									     "properties": {
-									       "Locations": {
-									         "items": {
-									           "type": "string"
-									         },
-									         "type": "array",
-									         "uniqueItems": false
-									       },
-									       "RestrictionType": {
-									         "type": "string"
-									       }
-									     },
-									     "required": [
-									       "RestrictionType"
-									     ],
-									     "type": "object"
-									   }
-									*/
 									Attributes: schema.SingleNestedAttributes(
 										map[string]schema.Attribute{
 											"locations": {
 												// Property: Locations
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "items": {
-												       "type": "string"
-												     },
-												     "type": "array",
-												     "uniqueItems": false
-												   }
-												*/
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 											},
 											"restriction_type": {
 												// Property: RestrictionType
-												// CloudFormation resource type schema:
-												/*
-												   {
-												     "type": "string"
-												   }
-												*/
 												Type:     types.StringType,
 												Required: true,
 											},
@@ -3191,45 +1402,15 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"s3_origin": {
 						// Property: S3Origin
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "DNSName": {
-						         "type": "string"
-						       },
-						       "OriginAccessIdentity": {
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "DNSName"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"dns_name": {
 									// Property: DNSName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"origin_access_identity": {
 									// Property: OriginAccessIdentity
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -3239,84 +1420,30 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"viewer_certificate": {
 						// Property: ViewerCertificate
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "AcmCertificateArn": {
-						         "type": "string"
-						       },
-						       "CloudFrontDefaultCertificate": {
-						         "type": "boolean"
-						       },
-						       "IamCertificateId": {
-						         "type": "string"
-						       },
-						       "MinimumProtocolVersion": {
-						         "type": "string"
-						       },
-						       "SslSupportMethod": {
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"acm_certificate_arn": {
 									// Property: AcmCertificateArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"cloud_front_default_certificate": {
 									// Property: CloudFrontDefaultCertificate
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "boolean"
-									   }
-									*/
 									Type:     types.BoolType,
 									Optional: true,
 								},
 								"iam_certificate_id": {
 									// Property: IamCertificateId
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"minimum_protocol_version": {
 									// Property: MinimumProtocolVersion
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"ssl_support_method": {
 									// Property: SslSupportMethod
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
@@ -3326,12 +1453,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"web_acl_id": {
 						// Property: WebACLId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -3342,71 +1463,53 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

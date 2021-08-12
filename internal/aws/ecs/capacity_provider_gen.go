@@ -25,157 +25,86 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"auto_scaling_group_provider": {
 			// Property: AutoScalingGroupProvider
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "AutoScalingGroupArn": {
-			         "type": "string"
-			       },
-			       "ManagedScaling": {
-			         "additionalProperties": false,
-			         "description": "The managed scaling settings for the Auto Scaling group capacity provider.",
-			         "properties": {
-			           "InstanceWarmupPeriod": {
-			             "type": "integer"
-			           },
-			           "MaximumScalingStepSize": {
-			             "type": "integer"
-			           },
-			           "MinimumScalingStepSize": {
-			             "type": "integer"
-			           },
-			           "Status": {
-			             "enum": [
-			               "DISABLED",
-			               "ENABLED"
-			             ],
-			             "type": "string"
-			           },
-			           "TargetCapacity": {
-			             "type": "integer"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "ManagedTerminationProtection": {
-			         "enum": [
-			           "DISABLED",
-			           "ENABLED"
-			         ],
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "AutoScalingGroupArn"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "AutoScalingGroupArn": {
+			//       "type": "string"
+			//     },
+			//     "ManagedScaling": {
+			//       "additionalProperties": false,
+			//       "description": "The managed scaling settings for the Auto Scaling group capacity provider.",
+			//       "properties": {
+			//         "InstanceWarmupPeriod": {
+			//           "type": "integer"
+			//         },
+			//         "MaximumScalingStepSize": {
+			//           "type": "integer"
+			//         },
+			//         "MinimumScalingStepSize": {
+			//           "type": "integer"
+			//         },
+			//         "Status": {
+			//           "enum": [
+			//             "DISABLED",
+			//             "ENABLED"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "TargetCapacity": {
+			//           "type": "integer"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "ManagedTerminationProtection": {
+			//       "enum": [
+			//         "DISABLED",
+			//         "ENABLED"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "AutoScalingGroupArn"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"auto_scaling_group_arn": {
 						// Property: AutoScalingGroupArn
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 						// AutoScalingGroupArn is a force-new attribute.
 					},
 					"managed_scaling": {
 						// Property: ManagedScaling
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "The managed scaling settings for the Auto Scaling group capacity provider.",
-						     "properties": {
-						       "InstanceWarmupPeriod": {
-						         "type": "integer"
-						       },
-						       "MaximumScalingStepSize": {
-						         "type": "integer"
-						       },
-						       "MinimumScalingStepSize": {
-						         "type": "integer"
-						       },
-						       "Status": {
-						         "enum": [
-						           "DISABLED",
-						           "ENABLED"
-						         ],
-						         "type": "string"
-						       },
-						       "TargetCapacity": {
-						         "type": "integer"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Description: "The managed scaling settings for the Auto Scaling group capacity provider.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"instance_warmup_period": {
 									// Property: InstanceWarmupPeriod
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"maximum_scaling_step_size": {
 									// Property: MaximumScalingStepSize
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"minimum_scaling_step_size": {
 									// Property: MinimumScalingStepSize
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
 								"status": {
 									// Property: Status
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "enum": [
-									       "DISABLED",
-									       "ENABLED"
-									     ],
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Optional: true,
 								},
 								"target_capacity": {
 									// Property: TargetCapacity
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Optional: true,
 								},
@@ -185,16 +114,6 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					},
 					"managed_termination_protection": {
 						// Property: ManagedTerminationProtection
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "DISABLED",
-						       "ENABLED"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -205,11 +124,9 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -218,48 +135,32 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},

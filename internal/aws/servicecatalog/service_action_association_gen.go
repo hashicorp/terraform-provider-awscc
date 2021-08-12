@@ -25,14 +25,12 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		"product_id": {
 			// Property: ProductId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 100,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 100,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// ProductId is a force-new attribute.
@@ -40,14 +38,12 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		"provisioning_artifact_id": {
 			// Property: ProvisioningArtifactId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 100,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 100,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// ProvisioningArtifactId is a force-new attribute.
@@ -55,14 +51,12 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		"service_action_id": {
 			// Property: ServiceActionId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 100,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 100,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// ServiceActionId is a force-new attribute.

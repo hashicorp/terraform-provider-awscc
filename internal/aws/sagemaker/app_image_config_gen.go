@@ -25,15 +25,13 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"app_image_config_arn": {
 			// Property: AppImageConfigArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the AppImageConfig.",
-			     "maxLength": 256,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the AppImageConfig.",
+			//   "maxLength": 256,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the AppImageConfig.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -41,15 +39,13 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"app_image_config_name": {
 			// Property: AppImageConfigName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Name of the AppImageConfig.",
-			     "maxLength": 63,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Name of the AppImageConfig.",
+			//   "maxLength": 63,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Name of the AppImageConfig.",
 			Type:        types.StringType,
 			Required:    true,
@@ -58,138 +54,87 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"kernel_gateway_image_config": {
 			// Property: KernelGatewayImageConfig
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app.",
-			     "properties": {
-			       "FileSystemConfig": {
-			         "additionalProperties": false,
-			         "description": "The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.",
-			         "properties": {
-			           "DefaultGid": {
-			             "description": "The default POSIX group ID (GID). If not specified, defaults to 100.",
-			             "type": "integer"
-			           },
-			           "DefaultUid": {
-			             "description": "The default POSIX user ID (UID). If not specified, defaults to 1000.",
-			             "type": "integer"
-			           },
-			           "MountPath": {
-			             "description": "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
-			             "maxLength": 1024,
-			             "minLength": 1,
-			             "pattern": "",
-			             "type": "string"
-			           }
-			         },
-			         "type": "object"
-			       },
-			       "KernelSpecs": {
-			         "description": "The specification of the Jupyter kernels in the image.",
-			         "items": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "DisplayName": {
-			               "description": "The display name of the kernel.",
-			               "maxLength": 1024,
-			               "minLength": 1,
-			               "type": "string"
-			             },
-			             "Name": {
-			               "description": "The name of the kernel.",
-			               "maxLength": 1024,
-			               "minLength": 1,
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "Name"
-			           ],
-			           "type": "object"
-			         },
-			         "maxItems": 1,
-			         "minItems": 1,
-			         "type": "array"
-			       }
-			     },
-			     "required": [
-			       "KernelSpecs"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app.",
+			//   "properties": {
+			//     "FileSystemConfig": {
+			//       "additionalProperties": false,
+			//       "description": "The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.",
+			//       "properties": {
+			//         "DefaultGid": {
+			//           "description": "The default POSIX group ID (GID). If not specified, defaults to 100.",
+			//           "type": "integer"
+			//         },
+			//         "DefaultUid": {
+			//           "description": "The default POSIX user ID (UID). If not specified, defaults to 1000.",
+			//           "type": "integer"
+			//         },
+			//         "MountPath": {
+			//           "description": "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
+			//           "maxLength": 1024,
+			//           "minLength": 1,
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "KernelSpecs": {
+			//       "description": "The specification of the Jupyter kernels in the image.",
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "DisplayName": {
+			//             "description": "The display name of the kernel.",
+			//             "maxLength": 1024,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "Name": {
+			//             "description": "The name of the kernel.",
+			//             "maxLength": 1024,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "Name"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "maxItems": 1,
+			//       "minItems": 1,
+			//       "type": "array"
+			//     }
+			//   },
+			//   "required": [
+			//     "KernelSpecs"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app.",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"file_system_config": {
 						// Property: FileSystemConfig
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.",
-						     "properties": {
-						       "DefaultGid": {
-						         "description": "The default POSIX group ID (GID). If not specified, defaults to 100.",
-						         "type": "integer"
-						       },
-						       "DefaultUid": {
-						         "description": "The default POSIX user ID (UID). If not specified, defaults to 1000.",
-						         "type": "integer"
-						       },
-						       "MountPath": {
-						         "description": "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
-						         "maxLength": 1024,
-						         "minLength": 1,
-						         "pattern": "",
-						         "type": "string"
-						       }
-						     },
-						     "type": "object"
-						   }
-						*/
 						Description: "The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"default_gid": {
 									// Property: DefaultGid
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The default POSIX group ID (GID). If not specified, defaults to 100.",
-									     "type": "integer"
-									   }
-									*/
 									Description: "The default POSIX group ID (GID). If not specified, defaults to 100.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"default_uid": {
 									// Property: DefaultUid
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The default POSIX user ID (UID). If not specified, defaults to 1000.",
-									     "type": "integer"
-									   }
-									*/
 									Description: "The default POSIX user ID (UID). If not specified, defaults to 1000.",
 									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"mount_path": {
 									// Property: MountPath
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
-									     "maxLength": 1024,
-									     "minLength": 1,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Description: "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
 									Type:        types.StringType,
 									Optional:    true,
@@ -200,65 +145,17 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"kernel_specs": {
 						// Property: KernelSpecs
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The specification of the Jupyter kernels in the image.",
-						     "items": {
-						       "additionalProperties": false,
-						       "properties": {
-						         "DisplayName": {
-						           "description": "The display name of the kernel.",
-						           "maxLength": 1024,
-						           "minLength": 1,
-						           "type": "string"
-						         },
-						         "Name": {
-						           "description": "The name of the kernel.",
-						           "maxLength": 1024,
-						           "minLength": 1,
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "Name"
-						       ],
-						       "type": "object"
-						     },
-						     "maxItems": 1,
-						     "minItems": 1,
-						     "type": "array"
-						   }
-						*/
 						Description: "The specification of the Jupyter kernels in the image.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"display_name": {
 									// Property: DisplayName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The display name of the kernel.",
-									     "maxLength": 1024,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
 									Description: "The display name of the kernel.",
 									Type:        types.StringType,
 									Optional:    true,
 								},
 								"name": {
 									// Property: Name
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The name of the kernel.",
-									     "maxLength": 1024,
-									     "minLength": 1,
-									     "type": "string"
-									   }
-									*/
 									Description: "The name of the kernel.",
 									Type:        types.StringType,
 									Required:    true,
@@ -278,61 +175,43 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of tags to apply to the AppImageConfig.",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "minItems": 0,
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "description": "A list of tags to apply to the AppImageConfig.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "minItems": 0,
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Description: "A list of tags to apply to the AppImageConfig.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

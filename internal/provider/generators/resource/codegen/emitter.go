@@ -3,6 +3,7 @@ package codegen
 import (
 	"fmt"
 	"io"
+	"regexp"
 	"sort"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
@@ -62,10 +63,13 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 
 	e.printf("{\n")
 	e.printf("// Property: %s\n", name)
-	e.printf("// CloudFormation resource type schema:\n")
-	e.printf("/*\n")
-	e.printf("%v\n", property)
-	e.printf("*/\n")
+
+	// Only dump top-level property schemas as nested properties have been expanded here.
+	if len(path) == 1 {
+		e.printf("// CloudFormation resource type schema:\n")
+		// Comment out each line.
+		e.printf("%s\n", regexp.MustCompile(`(?m)^`).ReplaceAllString(fmt.Sprintf("%v", property), "// "))
+	}
 
 	if description := property.Description; description != nil {
 		e.printf("Description: %q,\n", *description)

@@ -25,36 +25,30 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"authorizer_function_arn": {
 			// Property: AuthorizerFunctionArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 		},
 		"authorizer_name": {
 			// Property: AuthorizerName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -63,11 +57,9 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"signing_disabled": {
 			// Property: SigningDisabled
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "type": "boolean"
+			// }
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
@@ -76,63 +68,47 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"status": {
 			// Property: Status
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "ACTIVE",
-			       "INACTIVE"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "ACTIVE",
+			//     "INACTIVE"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -144,28 +120,24 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"token_key_name": {
 			// Property: TokenKeyName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"token_signing_public_keys": {
 			// Property: TokenSigningPublicKeys
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "patternProperties": {
-			       "": {
-			         "maxLength": 5120,
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "patternProperties": {
+			//     "": {
+			//       "maxLength": 5120,
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,

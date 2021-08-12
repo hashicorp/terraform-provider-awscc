@@ -25,12 +25,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The time at which the project was created.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The time at which the project was created.",
+			//   "type": "string"
+			// }
 			Description: "The time at which the project was created.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -38,15 +36,13 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"project_arn": {
 			// Property: ProjectArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the Project.",
-			     "maxLength": 2048,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the Project.",
+			//   "maxLength": 2048,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the Project.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -54,14 +50,12 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"project_description": {
 			// Property: ProjectDescription
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The description of the project.",
-			     "maxLength": 1024,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The description of the project.",
+			//   "maxLength": 1024,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The description of the project.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -71,14 +65,12 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"project_id": {
 			// Property: ProjectId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Project Id.",
-			     "maxLength": 20,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Project Id.",
+			//   "maxLength": 20,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Project Id.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -86,15 +78,13 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"project_name": {
 			// Property: ProjectName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the project.",
-			     "maxLength": 32,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the project.",
+			//   "maxLength": 32,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the project.",
 			Type:        types.StringType,
 			Required:    true,
@@ -103,21 +93,19 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"project_status": {
 			// Property: ProjectStatus
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The status of a project.",
-			     "enum": [
-			       "Pending",
-			       "CreateInProgress",
-			       "CreateCompleted",
-			       "CreateFailed",
-			       "DeleteInProgress",
-			       "DeleteFailed",
-			       "DeleteCompleted"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The status of a project.",
+			//   "enum": [
+			//     "Pending",
+			//     "CreateInProgress",
+			//     "CreateCompleted",
+			//     "CreateFailed",
+			//     "DeleteInProgress",
+			//     "DeleteFailed",
+			//     "DeleteCompleted"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The status of a project.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -125,52 +113,34 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"service_catalog_provisioned_product_details": {
 			// Property: ServiceCatalogProvisionedProductDetails
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Provisioned ServiceCatalog  Details",
-			     "properties": {
-			       "ProvisionedProductId": {
-			         "description": "The identifier of the provisioning artifact (also known as a version).",
-			         "maxLength": 100,
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "ProvisionedProductStatusMessage": {
-			         "description": "Provisioned Product Status Message",
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Provisioned ServiceCatalog  Details",
+			//   "properties": {
+			//     "ProvisionedProductId": {
+			//       "description": "The identifier of the provisioning artifact (also known as a version).",
+			//       "maxLength": 100,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "ProvisionedProductStatusMessage": {
+			//       "description": "Provisioned Product Status Message",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Description: "Provisioned ServiceCatalog  Details",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"provisioned_product_id": {
 						// Property: ProvisionedProductId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The identifier of the provisioning artifact (also known as a version).",
-						     "maxLength": 100,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The identifier of the provisioning artifact (also known as a version).",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"provisioned_product_status_message": {
 						// Property: ProvisionedProductStatusMessage
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Provisioned Product Status Message",
-						     "type": "string"
-						   }
-						*/
 						Description: "Provisioned Product Status Message",
 						Type:        types.StringType,
 						Optional:    true,
@@ -182,176 +152,97 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"service_catalog_provisioning_details": {
 			// Property: ServiceCatalogProvisioningDetails
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Input ServiceCatalog Provisioning Details",
-			     "properties": {
-			       "PathId": {
-			         "description": "The path identifier of the product.",
-			         "maxLength": 100,
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "ProductId": {
-			         "description": "Service Catalog product identifier.",
-			         "maxLength": 100,
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "ProvisioningArtifactId": {
-			         "description": "The identifier of the provisioning artifact (also known as a version).",
-			         "maxLength": 100,
-			         "pattern": "",
-			         "type": "string"
-			       },
-			       "ProvisioningParameters": {
-			         "description": "Parameters specified by the administrator that are required for provisioning the product.",
-			         "items": {
-			           "additionalProperties": false,
-			           "description": "Information about a parameter used to provision a product.",
-			           "properties": {
-			             "Key": {
-			               "description": "The parameter key.",
-			               "maxLength": 1000,
-			               "minLength": 1,
-			               "pattern": "",
-			               "type": "string"
-			             },
-			             "Value": {
-			               "description": "The parameter value.",
-			               "maxLength": 4096,
-			               "pattern": "",
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "Key",
-			             "Value"
-			           ],
-			           "type": "object"
-			         },
-			         "type": "array"
-			       }
-			     },
-			     "required": [
-			       "ProductId",
-			       "ProvisioningArtifactId"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Input ServiceCatalog Provisioning Details",
+			//   "properties": {
+			//     "PathId": {
+			//       "description": "The path identifier of the product.",
+			//       "maxLength": 100,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "ProductId": {
+			//       "description": "Service Catalog product identifier.",
+			//       "maxLength": 100,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "ProvisioningArtifactId": {
+			//       "description": "The identifier of the provisioning artifact (also known as a version).",
+			//       "maxLength": 100,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "ProvisioningParameters": {
+			//       "description": "Parameters specified by the administrator that are required for provisioning the product.",
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "Information about a parameter used to provision a product.",
+			//         "properties": {
+			//           "Key": {
+			//             "description": "The parameter key.",
+			//             "maxLength": 1000,
+			//             "minLength": 1,
+			//             "pattern": "",
+			//             "type": "string"
+			//           },
+			//           "Value": {
+			//             "description": "The parameter value.",
+			//             "maxLength": 4096,
+			//             "pattern": "",
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "Key",
+			//           "Value"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "type": "array"
+			//     }
+			//   },
+			//   "required": [
+			//     "ProductId",
+			//     "ProvisioningArtifactId"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "Input ServiceCatalog Provisioning Details",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"path_id": {
 						// Property: PathId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The path identifier of the product.",
-						     "maxLength": 100,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The path identifier of the product.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"product_id": {
 						// Property: ProductId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Service Catalog product identifier.",
-						     "maxLength": 100,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "Service Catalog product identifier.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"provisioning_artifact_id": {
 						// Property: ProvisioningArtifactId
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The identifier of the provisioning artifact (also known as a version).",
-						     "maxLength": 100,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The identifier of the provisioning artifact (also known as a version).",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"provisioning_parameters": {
 						// Property: ProvisioningParameters
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Parameters specified by the administrator that are required for provisioning the product.",
-						     "items": {
-						       "additionalProperties": false,
-						       "description": "Information about a parameter used to provision a product.",
-						       "properties": {
-						         "Key": {
-						           "description": "The parameter key.",
-						           "maxLength": 1000,
-						           "minLength": 1,
-						           "pattern": "",
-						           "type": "string"
-						         },
-						         "Value": {
-						           "description": "The parameter value.",
-						           "maxLength": 4096,
-						           "pattern": "",
-						           "type": "string"
-						         }
-						       },
-						       "required": [
-						         "Key",
-						         "Value"
-						       ],
-						       "type": "object"
-						     },
-						     "type": "array"
-						   }
-						*/
 						Description: "Parameters specified by the administrator that are required for provisioning the product.",
 						Attributes: schema.ListNestedAttributes(
 							map[string]schema.Attribute{
 								"key": {
 									// Property: Key
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The parameter key.",
-									     "maxLength": 1000,
-									     "minLength": 1,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Description: "The parameter key.",
 									Type:        types.StringType,
 									Required:    true,
 								},
 								"value": {
 									// Property: Value
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "description": "The parameter value.",
-									     "maxLength": 4096,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Description: "The parameter value.",
 									Type:        types.StringType,
 									Required:    true,
@@ -369,67 +260,46 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource.",
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			           "maxLength": 256,
-			           "pattern": "",
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 40,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+			//         "maxLength": 256,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 40,
+			//   "type": "array"
+			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						     "maxLength": 256,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,

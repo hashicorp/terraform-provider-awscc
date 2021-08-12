@@ -26,105 +26,60 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"billing_mode": {
 			// Property: BillingMode
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Mode": {
-			         "description": "Capacity mode for the specified table",
-			         "enum": [
-			           "PROVISIONED",
-			           "ON_DEMAND"
-			         ],
-			         "type": "string"
-			       },
-			       "ProvisionedThroughput": {
-			         "additionalProperties": false,
-			         "description": "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
-			         "properties": {
-			           "ReadCapacityUnits": {
-			             "type": "integer"
-			           },
-			           "WriteCapacityUnits": {
-			             "type": "integer"
-			           }
-			         },
-			         "required": [
-			           "ReadCapacityUnits",
-			           "WriteCapacityUnits"
-			         ],
-			         "type": "object"
-			       }
-			     },
-			     "required": [
-			       "Mode"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Mode": {
+			//       "description": "Capacity mode for the specified table",
+			//       "enum": [
+			//         "PROVISIONED",
+			//         "ON_DEMAND"
+			//       ],
+			//       "type": "string"
+			//     },
+			//     "ProvisionedThroughput": {
+			//       "additionalProperties": false,
+			//       "description": "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
+			//       "properties": {
+			//         "ReadCapacityUnits": {
+			//           "type": "integer"
+			//         },
+			//         "WriteCapacityUnits": {
+			//           "type": "integer"
+			//         }
+			//       },
+			//       "required": [
+			//         "ReadCapacityUnits",
+			//         "WriteCapacityUnits"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "required": [
+			//     "Mode"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"mode": {
 						// Property: Mode
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Capacity mode for the specified table",
-						     "enum": [
-						       "PROVISIONED",
-						       "ON_DEMAND"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Description: "Capacity mode for the specified table",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"provisioned_throughput": {
 						// Property: ProvisionedThroughput
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
-						     "properties": {
-						       "ReadCapacityUnits": {
-						         "type": "integer"
-						       },
-						       "WriteCapacityUnits": {
-						         "type": "integer"
-						       }
-						     },
-						     "required": [
-						       "ReadCapacityUnits",
-						       "WriteCapacityUnits"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Description: "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"read_capacity_units": {
 									// Property: ReadCapacityUnits
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Required: true,
 								},
 								"write_capacity_units": {
 									// Property: WriteCapacityUnits
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "integer"
-									   }
-									*/
 									Type:     types.NumberType,
 									Required: true,
 								},
@@ -139,95 +94,60 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"clustering_key_columns": {
 			// Property: ClusteringKeyColumns
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Clustering key columns of the table",
-			     "insertionOrder": true,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Column": {
-			           "additionalProperties": false,
-			           "properties": {
-			             "ColumnName": {
-			               "pattern": "",
-			               "type": "string"
-			             },
-			             "ColumnType": {
-			               "type": "string"
-			             }
-			           },
-			           "required": [
-			             "ColumnName",
-			             "ColumnType"
-			           ],
-			           "type": "object"
-			         },
-			         "OrderBy": {
-			           "enum": [
-			             "ASC",
-			             "DESC"
-			           ],
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Column"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "Clustering key columns of the table",
+			//   "insertionOrder": true,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Column": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "ColumnName": {
+			//             "pattern": "",
+			//             "type": "string"
+			//           },
+			//           "ColumnType": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "ColumnName",
+			//           "ColumnType"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "OrderBy": {
+			//         "enum": [
+			//           "ASC",
+			//           "DESC"
+			//         ],
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Column"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "Clustering key columns of the table",
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"column": {
 						// Property: Column
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "properties": {
-						       "ColumnName": {
-						         "pattern": "",
-						         "type": "string"
-						       },
-						       "ColumnType": {
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "ColumnName",
-						       "ColumnType"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"column_name": {
 									// Property: ColumnName
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"column_type": {
 									// Property: ColumnType
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -237,16 +157,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"order_by": {
 						// Property: OrderBy
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "ASC",
-						       "DESC"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -260,59 +170,39 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"encryption_specification": {
 			// Property: EncryptionSpecification
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "description": "Represents the settings used to enable server-side encryption",
-			     "properties": {
-			       "EncryptionType": {
-			         "description": "Server-side encryption type",
-			         "enum": [
-			           "AWS_OWNED_KMS_KEY",
-			           "CUSTOMER_MANAGED_KMS_KEY"
-			         ],
-			         "type": "string"
-			       },
-			       "KmsKeyIdentifier": {
-			         "description": "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "EncryptionType"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Represents the settings used to enable server-side encryption",
+			//   "properties": {
+			//     "EncryptionType": {
+			//       "description": "Server-side encryption type",
+			//       "enum": [
+			//         "AWS_OWNED_KMS_KEY",
+			//         "CUSTOMER_MANAGED_KMS_KEY"
+			//       ],
+			//       "type": "string"
+			//     },
+			//     "KmsKeyIdentifier": {
+			//       "description": "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "EncryptionType"
+			//   ],
+			//   "type": "object"
+			// }
 			Description: "Represents the settings used to enable server-side encryption",
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"encryption_type": {
 						// Property: EncryptionType
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Server-side encryption type",
-						     "enum": [
-						       "AWS_OWNED_KMS_KEY",
-						       "CUSTOMER_MANAGED_KMS_KEY"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Description: "Server-side encryption type",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"kms_key_identifier": {
 						// Property: KmsKeyIdentifier
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
-						     "type": "string"
-						   }
-						*/
 						Description: "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
 						Type:        types.StringType,
 						Optional:    true,
@@ -324,13 +214,11 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"keyspace_name": {
 			// Property: KeyspaceName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name for Cassandra keyspace",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name for Cassandra keyspace",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Name for Cassandra keyspace",
 			Type:        types.StringType,
 			Required:    true,
@@ -339,56 +227,41 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"partition_key_columns": {
 			// Property: PartitionKeyColumns
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Partition key columns of the table",
-			     "insertionOrder": true,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "ColumnName": {
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "ColumnType": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "ColumnName",
-			         "ColumnType"
-			       ],
-			       "type": "object"
-			     },
-			     "minItems": 1,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "Partition key columns of the table",
+			//   "insertionOrder": true,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "ColumnName": {
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "ColumnType": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "ColumnName",
+			//       "ColumnType"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "Partition key columns of the table",
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"column_name": {
 						// Property: ColumnName
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"column_type": {
 						// Property: ColumnType
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -403,12 +276,10 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"point_in_time_recovery_enabled": {
 			// Property: PointInTimeRecoveryEnabled
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table",
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "description": "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table",
+			//   "type": "boolean"
+			// }
 			Description: "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -416,54 +287,39 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"regular_columns": {
 			// Property: RegularColumns
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Non-key columns of the table",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "ColumnName": {
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "ColumnType": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "ColumnName",
-			         "ColumnType"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "Non-key columns of the table",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "ColumnName": {
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "ColumnType": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "ColumnName",
+			//       "ColumnType"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "Non-key columns of the table",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"column_name": {
 						// Property: ColumnName
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"column_type": {
 						// Property: ColumnType
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -475,13 +331,11 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"table_name": {
 			// Property: TableName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name for Cassandra table",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name for Cassandra table",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Name for Cassandra table",
 			Type:        types.StringType,
 			Optional:    true,
@@ -491,63 +345,45 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An array of key-value pairs to apply to this resource",
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to apply to the resource",
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "minItems": 0,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to apply to the resource",
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "minItems": 0,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "An array of key-value pairs to apply to this resource",
 			// Ordered set.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

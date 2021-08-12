@@ -25,15 +25,13 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"association_arn": {
 			// Property: AssociationArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the repository association.",
-			     "maxLength": 256,
-			     "minLength": 0,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the repository association.",
+			//   "maxLength": 256,
+			//   "minLength": 0,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the repository association.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -41,15 +39,13 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"bucket_name": {
 			// Property: BucketName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.",
-			     "maxLength": 63,
-			     "minLength": 3,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.",
+			//   "maxLength": 63,
+			//   "minLength": 3,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -59,15 +55,13 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"connection_arn": {
 			// Property: ConnectionArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.",
-			     "maxLength": 256,
-			     "minLength": 0,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.",
+			//   "maxLength": 256,
+			//   "minLength": 0,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -77,15 +71,13 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Name of the repository to be associated.",
-			     "maxLength": 100,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Name of the repository to be associated.",
+			//   "maxLength": 100,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Name of the repository to be associated.",
 			Type:        types.StringType,
 			Required:    true,
@@ -94,15 +86,13 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"owner": {
 			// Property: Owner
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.",
-			     "maxLength": 100,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.",
+			//   "maxLength": 100,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -112,66 +102,46 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The tags associated with a repository association.",
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "description": "The tags associated with a repository association.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			Description: "The tags associated with a repository association.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
 						Type:        types.StringType,
 						Required:    true,
@@ -188,18 +158,16 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		"type": {
 			// Property: Type
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The type of repository to be associated.",
-			     "enum": [
-			       "CodeCommit",
-			       "Bitbucket",
-			       "GitHubEnterpriseServer",
-			       "S3Bucket"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The type of repository to be associated.",
+			//   "enum": [
+			//     "CodeCommit",
+			//     "Bitbucket",
+			//     "GitHubEnterpriseServer",
+			//     "S3Bucket"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The type of repository to be associated.",
 			Type:        types.StringType,
 			Required:    true,

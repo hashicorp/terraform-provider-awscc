@@ -25,12 +25,10 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"disable_email_notification": {
 			// Property: DisableEmailNotification
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
-			     "type": "boolean"
-			   }
-			*/
+			// {
+			//   "description": "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
+			//   "type": "boolean"
+			// }
 			Description: "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
 			Type:        types.BoolType,
 			Optional:    true,
@@ -38,13 +36,11 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"graph_arn": {
 			// Property: GraphArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The ARN of the graph to which the member account will be invited",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The ARN of the graph to which the member account will be invited",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The ARN of the graph to which the member account will be invited",
 			Type:        types.StringType,
 			Required:    true,
@@ -53,13 +49,11 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"member_email_address": {
 			// Property: MemberEmailAddress
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The root email address for the account to be invited, for validation. Updating this field has no effect.",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The root email address for the account to be invited, for validation. Updating this field has no effect.",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The root email address for the account to be invited, for validation. Updating this field has no effect.",
 			Type:        types.StringType,
 			Required:    true,
@@ -67,13 +61,11 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"member_id": {
 			// Property: MemberId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The AWS account ID to be invited to join the graph as a member",
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The AWS account ID to be invited to join the graph as a member",
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The AWS account ID to be invited to join the graph as a member",
 			Type:        types.StringType,
 			Required:    true,
@@ -82,14 +74,12 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"message": {
 			// Property: Message
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
-			     "maxLength": 1000,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
+			//   "maxLength": 1000,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
 			Type:        types.StringType,
 			Optional:    true,

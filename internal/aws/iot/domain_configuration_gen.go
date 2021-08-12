@@ -25,58 +25,39 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"authorizer_config": {
 			// Property: AuthorizerConfig
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "AllowAuthorizerOverride": {
-			         "type": "boolean"
-			       },
-			       "DefaultAuthorizerName": {
-			         "maxLength": 128,
-			         "minLength": 1,
-			         "pattern": "",
-			         "type": "string"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "AllowAuthorizerOverride": {
+			//       "type": "boolean"
+			//     },
+			//     "DefaultAuthorizerName": {
+			//       "maxLength": 128,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"allow_authorizer_override": {
 						// Property: AllowAuthorizerOverride
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "boolean"
-						   }
-						*/
 						Type:     types.BoolType,
 						Optional: true,
 					},
 					"default_authorizer_name": {
 						// Property: DefaultAuthorizerName
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -87,14 +68,12 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"domain_configuration_name": {
 			// Property: DomainConfigurationName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -103,28 +82,24 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"domain_configuration_status": {
 			// Property: DomainConfigurationStatus
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "ENABLED",
-			       "DISABLED"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "ENABLED",
+			//     "DISABLED"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 		},
 		"domain_name": {
 			// Property: DomainName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 253,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 253,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -133,35 +108,31 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"domain_type": {
 			// Property: DomainType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "ENDPOINT",
-			       "AWS_MANAGED",
-			       "CUSTOMER_MANAGED"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "ENDPOINT",
+			//     "AWS_MANAGED",
+			//     "CUSTOMER_MANAGED"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"server_certificate_arns": {
 			// Property: ServerCertificateArns
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "maxLength": 2048,
-			       "minLength": 1,
-			       "pattern": "",
-			       "type": "string"
-			     },
-			     "maxItems": 1,
-			     "minItems": 0,
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "maxLength": 2048,
+			//     "minLength": 1,
+			//     "pattern": "",
+			//     "type": "string"
+			//   },
+			//   "maxItems": 1,
+			//   "minItems": 0,
+			//   "type": "array"
+			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
@@ -171,72 +142,45 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"server_certificates": {
 			// Property: ServerCertificates
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "ServerCertificateArn": {
-			           "maxLength": 2048,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "ServerCertificateStatus": {
-			           "enum": [
-			             "INVALID",
-			             "VALID"
-			           ],
-			           "type": "string"
-			         },
-			         "ServerCertificateStatusDetail": {
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "ServerCertificateArn": {
+			//         "maxLength": 2048,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "ServerCertificateStatus": {
+			//         "enum": [
+			//           "INVALID",
+			//           "VALID"
+			//         ],
+			//         "type": "string"
+			//       },
+			//       "ServerCertificateStatusDetail": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"server_certificate_arn": {
 						// Property: ServerCertificateArn
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 2048,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"server_certificate_status": {
 						// Property: ServerCertificateStatus
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "INVALID",
-						       "VALID"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"server_certificate_status_detail": {
 						// Property: ServerCertificateStatusDetail
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
@@ -248,16 +192,14 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"service_type": {
 			// Property: ServiceType
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "DATA",
-			       "CREDENTIAL_PROVIDER",
-			       "JOBS"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "DATA",
+			//     "CREDENTIAL_PROVIDER",
+			//     "JOBS"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
@@ -266,48 +208,34 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "type": "string"
-			         },
-			         "Value": {
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Key",
-			         "Value"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
@@ -319,12 +247,10 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		"validation_certificate_arn": {
 			// Property: ValidationCertificateArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,

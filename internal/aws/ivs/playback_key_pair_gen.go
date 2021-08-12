@@ -26,15 +26,13 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Key-pair identifier.",
-			     "maxLength": 128,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Key-pair identifier.",
+			//   "maxLength": 128,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "Key-pair identifier.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -42,12 +40,10 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"fingerprint": {
 			// Property: Fingerprint
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Key-pair identifier.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Key-pair identifier.",
+			//   "type": "string"
+			// }
 			Description: "Key-pair identifier.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -55,15 +51,13 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.",
-			     "maxLength": 128,
-			     "minLength": 0,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.",
+			//   "maxLength": 128,
+			//   "minLength": 0,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -73,12 +67,10 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"public_key_material": {
 			// Property: PublicKeyMaterial
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The public portion of a customer-generated key pair.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The public portion of a customer-generated key pair.",
+			//   "type": "string"
+			// }
 			Description: "The public portion of a customer-generated key pair.",
 			Type:        types.StringType,
 			Required:    true,
@@ -87,61 +79,43 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of key-value pairs that contain metadata for the asset model.",
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "maxItems": 50,
-			     "type": "array",
-			     "uniqueItems": true
-			   }
-			*/
+			// {
+			//   "description": "A list of key-value pairs that contain metadata for the asset model.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "maxItems": 50,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
 			Attributes: providertypes.SetNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

@@ -25,26 +25,22 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"platform_id": {
 			// Property: PlatformId
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "enum": [
-			       "AWSLambda-SHA384-ECDSA"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "enum": [
+			//     "AWSLambda-SHA384-ECDSA"
+			//   ],
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Required: true,
 			// PlatformId is a force-new attribute.
@@ -52,12 +48,10 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"profile_name": {
 			// Property: ProfileName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A name for the signing profile. AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name. ",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A name for the signing profile. AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name. ",
+			//   "type": "string"
+			// }
 			Description: "A name for the signing profile. AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name. ",
 			Type:        types.StringType,
 			Computed:    true,
@@ -65,75 +59,52 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"profile_version": {
 			// Property: ProfileVersion
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"profile_version_arn": {
 			// Property: ProfileVersionArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
 		"signature_validity_period": {
 			// Property: SignatureValidityPeriod
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Type": {
-			         "enum": [
-			           "DAYS",
-			           "MONTHS",
-			           "YEARS"
-			         ],
-			         "type": "string"
-			       },
-			       "Value": {
-			         "type": "integer"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Type": {
+			//       "enum": [
+			//         "DAYS",
+			//         "MONTHS",
+			//         "YEARS"
+			//       ],
+			//       "type": "string"
+			//     },
+			//     "Value": {
+			//       "type": "integer"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "enum": [
-						       "DAYS",
-						       "MONTHS",
-						       "YEARS"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "type": "integer"
-						   }
-						*/
 						Type:     types.NumberType,
 						Optional: true,
 					},
@@ -146,56 +117,37 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A list of tags associated with the signing profile.",
-			     "items": {
-			       "additionalProperties": false,
-			       "properties": {
-			         "Key": {
-			           "maxLength": 127,
-			           "minLength": 1,
-			           "pattern": "",
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 255,
-			           "minLength": 1,
-			           "type": "string"
-			         }
-			       },
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "description": "A list of tags associated with the signing profile.",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 127,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Description: "A list of tags associated with the signing profile.",
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 127,
-						     "minLength": 1,
-						     "pattern": "",
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 255,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Optional: true,
 					},

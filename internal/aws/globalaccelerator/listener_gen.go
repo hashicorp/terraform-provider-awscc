@@ -25,12 +25,10 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"accelerator_arn": {
 			// Property: AcceleratorArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the accelerator.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the accelerator.",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the accelerator.",
 			Type:        types.StringType,
 			Required:    true,
@@ -39,16 +37,14 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"client_affinity": {
 			// Property: ClientAffinity
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Client affinity lets you direct all requests from a user to the same endpoint.",
-			     "enum": [
-			       "NONE",
-			       "SOURCE_IP"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Client affinity lets you direct all requests from a user to the same endpoint.",
+			//   "enum": [
+			//     "NONE",
+			//     "SOURCE_IP"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "Client affinity lets you direct all requests from a user to the same endpoint.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -56,12 +52,10 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"listener_arn": {
 			// Property: ListenerArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon Resource Name (ARN) of the listener.",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon Resource Name (ARN) of the listener.",
+			//   "type": "string"
+			// }
 			Description: "The Amazon Resource Name (ARN) of the listener.",
 			Type:        types.StringType,
 			Computed:    true,
@@ -69,53 +63,37 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"port_ranges": {
 			// Property: PortRanges
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "items": {
-			       "description": "A port range to support for connections from  clients to your accelerator.",
-			       "properties": {
-			         "FromPort": {
-			           "description": "A network port number",
-			           "type": "integer"
-			         },
-			         "ToPort": {
-			           "description": "A network port number",
-			           "type": "integer"
-			         }
-			       },
-			       "required": [
-			         "FromPort",
-			         "ToPort"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array"
-			   }
-			*/
+			// {
+			//   "items": {
+			//     "description": "A port range to support for connections from  clients to your accelerator.",
+			//     "properties": {
+			//       "FromPort": {
+			//         "description": "A network port number",
+			//         "type": "integer"
+			//       },
+			//       "ToPort": {
+			//         "description": "A network port number",
+			//         "type": "integer"
+			//       }
+			//     },
+			//     "required": [
+			//       "FromPort",
+			//       "ToPort"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"from_port": {
 						// Property: FromPort
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A network port number",
-						     "type": "integer"
-						   }
-						*/
 						Description: "A network port number",
 						Type:        types.NumberType,
 						Required:    true,
 					},
 					"to_port": {
 						// Property: ToPort
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "A network port number",
-						     "type": "integer"
-						   }
-						*/
 						Description: "A network port number",
 						Type:        types.NumberType,
 						Required:    true,
@@ -128,16 +106,14 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"protocol": {
 			// Property: Protocol
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The protocol for the listener.",
-			     "enum": [
-			       "TCP",
-			       "UDP"
-			     ],
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The protocol for the listener.",
+			//   "enum": [
+			//     "TCP",
+			//     "UDP"
+			//   ],
+			//   "type": "string"
+			// }
 			Description: "The protocol for the listener.",
 			Type:        types.StringType,
 			Required:    true,

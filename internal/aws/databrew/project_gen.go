@@ -25,14 +25,12 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"dataset_name": {
 			// Property: DatasetName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Dataset name",
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Dataset name",
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Dataset name",
 			Type:        types.StringType,
 			Required:    true,
@@ -40,14 +38,12 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Project name",
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Project name",
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Project name",
 			Type:        types.StringType,
 			Required:    true,
@@ -56,14 +52,12 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"recipe_name": {
 			// Property: RecipeName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Recipe name",
-			     "maxLength": 255,
-			     "minLength": 1,
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Recipe name",
+			//   "maxLength": 255,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
 			Description: "Recipe name",
 			Type:        types.StringType,
 			Required:    true,
@@ -71,12 +65,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "Role arn",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "Role arn",
+			//   "type": "string"
+			// }
 			Description: "Role arn",
 			Type:        types.StringType,
 			Required:    true,
@@ -84,59 +76,38 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"sample": {
 			// Property: Sample
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "Size": {
-			         "description": "Sample size",
-			         "type": "integer"
-			       },
-			       "Type": {
-			         "description": "Sample type",
-			         "enum": [
-			           "FIRST_N",
-			           "LAST_N",
-			           "RANDOM"
-			         ],
-			         "type": "string"
-			       }
-			     },
-			     "required": [
-			       "Type"
-			     ],
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "Size": {
+			//       "description": "Sample size",
+			//       "type": "integer"
+			//     },
+			//     "Type": {
+			//       "description": "Sample type",
+			//       "enum": [
+			//         "FIRST_N",
+			//         "LAST_N",
+			//         "RANDOM"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "Type"
+			//   ],
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"size": {
 						// Property: Size
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Sample size",
-						     "type": "integer"
-						   }
-						*/
 						Description: "Sample size",
 						Type:        types.NumberType,
 						Optional:    true,
 					},
 					"type": {
 						// Property: Type
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "description": "Sample type",
-						     "enum": [
-						       "FIRST_N",
-						       "LAST_N",
-						       "RANDOM"
-						     ],
-						     "type": "string"
-						   }
-						*/
 						Description: "Sample type",
 						Type:        types.StringType,
 						Required:    true,
@@ -148,60 +119,42 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "insertionOrder": false,
-			     "items": {
-			       "additionalProperties": false,
-			       "description": "A key-value pair to associate with a resource.",
-			       "properties": {
-			         "Key": {
-			           "maxLength": 128,
-			           "minLength": 1,
-			           "type": "string"
-			         },
-			         "Value": {
-			           "maxLength": 256,
-			           "minLength": 0,
-			           "type": "string"
-			         }
-			       },
-			       "required": [
-			         "Value",
-			         "Key"
-			       ],
-			       "type": "object"
-			     },
-			     "type": "array",
-			     "uniqueItems": false
-			   }
-			*/
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
 			// Multiset.
 			Attributes: schema.ListNestedAttributes(
 				map[string]schema.Attribute{
 					"key": {
 						// Property: Key
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 128,
-						     "minLength": 1,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},
 					"value": {
 						// Property: Value
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "maxLength": 256,
-						     "minLength": 0,
-						     "type": "string"
-						   }
-						*/
 						Type:     types.StringType,
 						Required: true,
 					},

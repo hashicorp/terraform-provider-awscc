@@ -25,110 +25,68 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"action": {
 			// Property: Action
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "additionalProperties": false,
-			     "properties": {
-			       "LambdaConfiguration": {
-			         "additionalProperties": false,
-			         "description": "Configuration options for a Lambda alert action.",
-			         "properties": {
-			           "LambdaArn": {
-			             "maxLength": 256,
-			             "pattern": "",
-			             "type": "string"
-			           },
-			           "RoleArn": {
-			             "maxLength": 256,
-			             "pattern": "",
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "RoleArn",
-			           "LambdaArn"
-			         ],
-			         "type": "object"
-			       },
-			       "SNSConfiguration": {
-			         "additionalProperties": false,
-			         "description": "Configuration options for an SNS alert action.",
-			         "properties": {
-			           "RoleArn": {
-			             "maxLength": 256,
-			             "pattern": "",
-			             "type": "string"
-			           },
-			           "SnsTopicArn": {
-			             "maxLength": 256,
-			             "pattern": "",
-			             "type": "string"
-			           }
-			         },
-			         "required": [
-			           "RoleArn",
-			           "SnsTopicArn"
-			         ],
-			         "type": "object"
-			       }
-			     },
-			     "type": "object"
-			   }
-			*/
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "LambdaConfiguration": {
+			//       "additionalProperties": false,
+			//       "description": "Configuration options for a Lambda alert action.",
+			//       "properties": {
+			//         "LambdaArn": {
+			//           "maxLength": 256,
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "RoleArn": {
+			//           "maxLength": 256,
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "RoleArn",
+			//         "LambdaArn"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "SNSConfiguration": {
+			//       "additionalProperties": false,
+			//       "description": "Configuration options for an SNS alert action.",
+			//       "properties": {
+			//         "RoleArn": {
+			//           "maxLength": 256,
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "SnsTopicArn": {
+			//           "maxLength": 256,
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "RoleArn",
+			//         "SnsTopicArn"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
 			Attributes: schema.SingleNestedAttributes(
 				map[string]schema.Attribute{
 					"lambda_configuration": {
 						// Property: LambdaConfiguration
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Configuration options for a Lambda alert action.",
-						     "properties": {
-						       "LambdaArn": {
-						         "maxLength": 256,
-						         "pattern": "",
-						         "type": "string"
-						       },
-						       "RoleArn": {
-						         "maxLength": 256,
-						         "pattern": "",
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "RoleArn",
-						       "LambdaArn"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Description: "Configuration options for a Lambda alert action.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"lambda_arn": {
 									// Property: LambdaArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 256,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"role_arn": {
 									// Property: RoleArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 256,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -138,56 +96,16 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"sns_configuration": {
 						// Property: SNSConfiguration
-						// CloudFormation resource type schema:
-						/*
-						   {
-						     "additionalProperties": false,
-						     "description": "Configuration options for an SNS alert action.",
-						     "properties": {
-						       "RoleArn": {
-						         "maxLength": 256,
-						         "pattern": "",
-						         "type": "string"
-						       },
-						       "SnsTopicArn": {
-						         "maxLength": 256,
-						         "pattern": "",
-						         "type": "string"
-						       }
-						     },
-						     "required": [
-						       "RoleArn",
-						       "SnsTopicArn"
-						     ],
-						     "type": "object"
-						   }
-						*/
 						Description: "Configuration options for an SNS alert action.",
 						Attributes: schema.SingleNestedAttributes(
 							map[string]schema.Attribute{
 								"role_arn": {
 									// Property: RoleArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 256,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
 								"sns_topic_arn": {
 									// Property: SnsTopicArn
-									// CloudFormation resource type schema:
-									/*
-									   {
-									     "maxLength": 256,
-									     "pattern": "",
-									     "type": "string"
-									   }
-									*/
 									Type:     types.StringType,
 									Required: true,
 								},
@@ -203,14 +121,12 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"alert_description": {
 			// Property: AlertDescription
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A description for the alert.",
-			     "maxLength": 256,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "A description for the alert.",
+			//   "maxLength": 256,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "A description for the alert.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -220,15 +136,13 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"alert_name": {
 			// Property: AlertName
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The name of the alert. If not provided, a name is generated automatically.",
-			     "maxLength": 63,
-			     "minLength": 1,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The name of the alert. If not provided, a name is generated automatically.",
+			//   "maxLength": 63,
+			//   "minLength": 1,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The name of the alert. If not provided, a name is generated automatically.",
 			Type:        types.StringType,
 			Optional:    true,
@@ -238,12 +152,10 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"alert_sensitivity_threshold": {
 			// Property: AlertSensitivityThreshold
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
-			     "type": "integer"
-			   }
-			*/
+			// {
+			//   "description": "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
+			//   "type": "integer"
+			// }
 			Description: "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
 			Type:        types.NumberType,
 			Required:    true,
@@ -252,14 +164,12 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"anomaly_detector_arn": {
 			// Property: AnomalyDetectorArn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "description": "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
-			     "maxLength": 256,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "description": "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
+			//   "maxLength": 256,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Description: "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
 			Type:        types.StringType,
 			Required:    true,
@@ -268,13 +178,11 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
-			/*
-			   {
-			     "maxLength": 256,
-			     "pattern": "",
-			     "type": "string"
-			   }
-			*/
+			// {
+			//   "maxLength": 256,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
 			Type:     types.StringType,
 			Computed: true,
 		},
