@@ -661,10 +661,9 @@ resource_schema "aws_imagebuilder_container_recipe" {
   cloudformation_type_name = "AWS::ImageBuilder::ContainerRecipe"
 }
 
-# TargetRepository property causes problems (???).
-# resource_schema "aws_imagebuilder_distribution_configuration" {
-#   cloudformation_type_name = "AWS::ImageBuilder::DistributionConfiguration"
-# }
+resource_schema "aws_imagebuilder_distribution_configuration" {
+  cloudformation_type_name = "AWS::ImageBuilder::DistributionConfiguration"
+}
 
 resource_schema "aws_imagebuilder_image" {
   cloudformation_type_name = "AWS::ImageBuilder::Image"
