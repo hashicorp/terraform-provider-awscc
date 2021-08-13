@@ -278,7 +278,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 		schema = regexp.MustCompile(`(?m)^(\s+"pattern"\s*:\s*)".*"`).ReplaceAllString(schema, `$1""`)
 		schema = regexp.MustCompile(`(?m)^(\s+"patternProperties"\s*:\s*{\s*)".*?"`).ReplaceAllString(schema, `$1""`)
 
-		err = ioutil.WriteFile(dst, []byte(schema), 0644)
+		err = ioutil.WriteFile(dst, []byte(schema), 0644) //nolint:gomnd
 
 		if err != nil {
 			return "", "", fmt.Errorf("error writing schema to %q: %w", dst, err)
