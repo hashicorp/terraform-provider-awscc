@@ -6,7 +6,7 @@ ACCTEST_PARALLELISM?=20
 
 default: build
 
-.PHONY: all build resources schemas test testacc tools
+.PHONY: all build default golangci-lint lint resources schemas test testacc tools
 
 all: schemas resources build
 
@@ -32,7 +32,6 @@ lint: golangci-lint
 
 golangci-lint:
 	@golangci-lint run ./internal/...
-
 
 tools:
 	cd tools && go install github.com/golangci/golangci-lint/cmd/golangci-lint
