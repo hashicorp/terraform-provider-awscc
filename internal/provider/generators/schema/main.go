@@ -47,10 +47,6 @@ type ResourceSchema struct {
 	ResourceTypeName         string `hcl:"resource_type_name,label"`
 }
 
-type Source struct {
-	Url string `hcl:"url"`
-}
-
 var (
 	configFile        = flag.String("config", "", "configuration file; required")
 	generatedCodeRoot = flag.String("generated-code-root", "", "directory root for generated resource code")
