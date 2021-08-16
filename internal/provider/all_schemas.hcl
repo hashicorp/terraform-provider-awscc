@@ -523,9 +523,10 @@ resource_schema "aws_events_archive" {
   cloudformation_type_name = "AWS::Events::Archive"
 }
 
-resource_schema "aws_events_connection" {
-  cloudformation_type_name = "AWS::Events::Connection"
-}
+# error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
+# resource_schema "aws_events_connection" {
+#   cloudformation_type_name = "AWS::Events::Connection"
+# }
 
 resource_schema "aws_fis_experiment_template" {
   cloudformation_type_name = "AWS::FIS::ExperimentTemplate"
