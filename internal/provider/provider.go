@@ -3,6 +3,8 @@ package provider
 import (
 	"context"
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	awsbase "github.com/hashicorp/aws-sdk-go-base"
@@ -10,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
-	tflog "github.com/hashicorp/terraform-plugin-log"
+	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
 )
 
@@ -111,15 +113,57 @@ func (p *awsCloudAPIProvider) Configure(ctx context.Context, request tfsdk.Confi
 		return
 	}
 
-	if config.Region.Unknown {
-		tflog.Info(ctx, "AWS Region is Unknown")
+	// TODO
+	// TODO Is this the correct thing to do for any Unknown values?
+	// TODO
+	anyUnknownConfigValues := false
 
-		return
+	if config.AccessKey.Unknown {
+		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("access_key"), "Unknown Value", "Attribute value is not yet known")
+		anyUnknownConfigValues = true
+	}
+
+	if config.CredsFilename.Unknown {
+		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("shared_credentials_file"), "Unknown Value", "Attribute value is not yet known")
+		anyUnknownConfigValues = true
+	}
+
+	if config.Insecure.Unknown {
+		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("insecure"), "Unknown Value", "Attribute value is not yet known")
+		anyUnknownConfigValues = true
+	}
+
+	if config.Profile.Unknown {
+		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("profile"), "Unknown Value", "Attribute value is not yet known")
+		anyUnknownConfigValues = true
+	}
+
+	if config.Region.Unknown {
+		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("region"), "Unknown Value", "Attribute value is not yet known")
+		anyUnknownConfigValues = true
 	}
 
 	if config.RoleARN.Unknown {
-		tflog.Info(ctx, "Role ARN is Unknown")
+		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("role_arn"), "Unknown Value", "Attribute value is not yet known")
+		anyUnknownConfigValues = true
+	}
 
+	if config.SecretKey.Unknown {
+		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("secret_key"), "Unknown Value", "Attribute value is not yet known")
+		anyUnknownConfigValues = true
+	}
+
+	if config.SkipMetadataApiCheck.Unknown {
+		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("skip_medatadata_api_check"), "Unknown Value", "Attribute value is not yet known")
+		anyUnknownConfigValues = true
+	}
+
+	if config.Token.Unknown {
+		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("token"), "Unknown Value", "Attribute value is not yet known")
+		anyUnknownConfigValues = true
+	}
+
+	if anyUnknownConfigValues {
 		return
 	}
 
@@ -176,10 +220,11 @@ func (p *awsCloudAPIProvider) RoleARN(_ context.Context) string {
 
 // newCloudFormationClient configures and returns a fully initialized AWS CloudFormation client.
 func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudformation.Client, error) {
+	logLevel := os.Getenv("TF_LOG")
 	config := awsbase.Config{
 		AccessKey:            pd.AccessKey.Value,
 		CredsFilename:        pd.CredsFilename.Value,
-		DebugLogging:         true, // TODO: Custom logger - https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/logging/.
+		DebugLogging:         strings.EqualFold(logLevel, "DEBUG") || strings.EqualFold(logLevel, "TRACE"),
 		Insecure:             pd.Insecure.Value,
 		Profile:              pd.Profile.Value,
 		Region:               pd.Region.Value,
