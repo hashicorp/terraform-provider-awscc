@@ -139,6 +139,8 @@ github.com/fatih/color v1.7.0 h1:DkWD4oS2D8LGGgTQ6IvwJJXSL5Vp2ffcQg58nFV38Ys=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
 github.com/flynn/go-shlex v0.0.0-20150515145356-3f9db97f8568 h1:BHsljHzVlRcyQhjrss6TZTdY2VfCqZPbv5k3iBFa2ZQ=
 github.com/flynn/go-shlex v0.0.0-20150515145356-3f9db97f8568/go.mod h1:xEzjJPgXI435gkrCt3MPfRiAkVrwSbHsst4LCFVfpJc=
+github.com/gdavison/aws-sdk-go-v2/credentials v1.2.2-0.20210811194025-146c1ad6c3b2 h1:855GkanVHNPQbQ3s1KJu21oSURr+vQZVthCt++CuJrY=
+github.com/gdavison/aws-sdk-go-v2/credentials v1.2.2-0.20210811194025-146c1ad6c3b2/go.mod h1:PACKuTJdt6AlXvEq8rFI4eDmoqDFC5DpVKQbWysaDgM=
 github.com/gliderlabs/ssh v0.2.2 h1:6zsha5zo/TWhRhwqCD3+EarCAgZ2yN28ipRnGPnwkI0=
 github.com/gliderlabs/ssh v0.2.2/go.mod h1:U7qILu1NlMHj9FlMhZLlkCdDnU1DBEAqr0aevW3Awn0=
 github.com/go-git/gcfg v1.5.0 h1:Q5ViNfGF8zFgyJWPqYwA7qGFoMTEiBmdlkcfRmpIMa4=
@@ -230,6 +232,8 @@ github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.5.1-0.20210812
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.5.1-0.20210812175631-62a019b0503b/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.6.0 h1:ACCjDNfxPVq5TzDVDZYf9sOYhsFOAcMH9PB/K07f+BY=
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.6.0/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
+github.com/hashicorp/aws-sdk-go-base v0.7.2-0.20210812222230-308b29e49974 h1:nP8GUCBRDCgWQK/L08YdzAK9h8KBn8Y8LEoH4WLxCw4=
+github.com/hashicorp/aws-sdk-go-base v0.7.2-0.20210812222230-308b29e49974/go.mod h1:EnOBtiLoKJYce3L2SKwusJ52x9x4jtMmQYrmtqOWcfo=
 github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210723211334-303716fc7a60 h1:6KeuK3Ehh1uVDa4yu/ytCqR6pzKeTvYHYcwjd704How=
 github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210723211334-303716fc7a60/go.mod h1:8zny46nRFfMGgQAVJd15u96AEVxI9+Gd7xBVZZ5VYDk=
 github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=

@@ -11,6 +11,7 @@ require (
 	github.com/evanphx/json-patch v0.5.2 // indirect
 	github.com/google/go-cmp v0.5.6
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.6.0
+	github.com/hashicorp/aws-sdk-go-base v0.7.2-0.20210812222230-308b29e49974 // indirect
 	github.com/hashicorp/go-hclog v0.16.1
 	github.com/hashicorp/hcl/v2 v2.10.0
 	github.com/hashicorp/terraform-plugin-framework v0.2.0
@@ -25,3 +26,5 @@ require (
 replace github.com/aws/aws-sdk-go-v2/service/cloudformation => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210723211334-303716fc7a60
 
 replace github.com/hashicorp/terraform-plugin-framework => github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210726180547-0f2fe477353e
+
+replace github.com/aws/aws-sdk-go-v2/credentials => github.com/gdavison/aws-sdk-go-v2/credentials v1.2.2-0.20210811194025-146c1ad6c3b2
