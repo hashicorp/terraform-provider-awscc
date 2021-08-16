@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
+	awsbase "github.com/hashicorp/aws-sdk-go-base"
 	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,6 +27,24 @@ func (p *awsCloudAPIProvider) GetSchema(ctx context.Context) (schema.Schema, []*
 	return schema.Schema{
 		Version: 1,
 		Attributes: map[string]schema.Attribute{
+			"access_key": {
+				Type:        types.StringType,
+				Description: "The access key for API operations.",
+				Optional:    true,
+			},
+
+			"insecure": {
+				Type:        types.BoolType,
+				Description: "Explicitly allow the provider to perform \"insecure\" SSL requests. If omitted, default value is `false`.",
+				Optional:    true,
+			},
+
+			"profile": {
+				Type:        types.StringType,
+				Description: "The profile for API operations. If not set, the default profile created with `aws configure` will be used.",
+				Optional:    true,
+			},
+
 			"region": {
 				Type:        types.StringType,
 				Description: "The region where AWS operations will take place.",
@@ -38,13 +56,44 @@ func (p *awsCloudAPIProvider) GetSchema(ctx context.Context) (schema.Schema, []*
 				Description: "Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.",
 				Optional:    true,
 			},
+
+			"secret_key": {
+				Type:        types.StringType,
+				Description: "The secret key for API operations.",
+				Optional:    true,
+			},
+
+			"shared_credentials_file": {
+				Type:        types.StringType,
+				Description: "The path to the shared credentials file. If not set this defaults to ~/.aws/credentials.",
+				Optional:    true,
+			},
+
+			"skip_medatadata_api_check": {
+				Type:        types.BoolType,
+				Description: "Skip the AWS Metadata API check. Used for AWS API implementations that do not have a Metadata API endpoint.",
+				Optional:    true,
+			},
+
+			"token": {
+				Type:        types.StringType,
+				Description: "Session token. A session token is only required if you are using temporary security credentials.",
+				Optional:    true,
+			},
 		},
 	}, nil
 }
 
 type providerData struct {
-	Region  types.String `tfsdk:"region"`
-	RoleARN types.String `tfsdk:"role_arn"`
+	AccessKey            types.String `tfsdk:"access_key"`
+	CredsFilename        types.String `tfsdk:"shared_credentials_file"`
+	Insecure             types.Bool   `tfsdk:"insecure"`
+	Profile              types.String `tfsdk:"profile"`
+	Region               types.String `tfsdk:"region"`
+	RoleARN              types.String `tfsdk:"role_arn"`
+	SecretKey            types.String `tfsdk:"secret_key"`
+	SkipMetadataApiCheck types.Bool   `tfsdk:"skip_medatadata_api_check"`
+	Token                types.String `tfsdk:"token"`
 }
 
 func (p *awsCloudAPIProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
@@ -127,13 +176,19 @@ func (p *awsCloudAPIProvider) RoleARN(_ context.Context) string {
 
 // newCloudFormationClient configures and returns a fully initialized AWS CloudFormation client.
 func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudformation.Client, error) {
-	optFns := make([]func(*config.LoadOptions) error, 0)
-
-	if region := pd.Region.Value; region != "" {
-		optFns = append(optFns, config.WithRegion(region))
+	config := awsbase.Config{
+		AccessKey:            pd.AccessKey.Value,
+		CredsFilename:        pd.CredsFilename.Value,
+		DebugLogging:         true, // TODO: Custom logger - https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/logging/.
+		Insecure:             pd.Insecure.Value,
+		Profile:              pd.Profile.Value,
+		Region:               pd.Region.Value,
+		SecretKey:            pd.SecretKey.Value,
+		SkipMetadataApiCheck: pd.SkipMetadataApiCheck.Value,
+		Token:                pd.Token.Value,
 	}
 
-	cfg, err := config.LoadDefaultConfig(ctx, optFns...)
+	cfg, err := awsbase.GetAwsConfig(ctx, &config)
 
 	if err != nil {
 		return nil, err
