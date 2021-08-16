@@ -501,13 +501,15 @@ resource_schema "aws_elasticache_user_group" {
   cloudformation_type_name = "AWS::ElastiCache::UserGroup"
 }
 
-resource_schema "aws_elasticloadbalancingv2_listener" {
-  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
-}
+# error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
+# resource_schema "aws_elasticloadbalancingv2_listener" {
+#  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
+# }
 
-resource_schema "aws_elasticloadbalancingv2_listener_rule" {
-  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::ListenerRule"
-}
+# error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
+# resource_schema "aws_elasticloadbalancingv2_listener_rule" {
+#   cloudformation_type_name = "AWS::ElasticLoadBalancingV2::ListenerRule"
+# }
 
 resource_schema "aws_eventschemas_registry_policy" {
   cloudformation_type_name = "AWS::EventSchemas::RegistryPolicy"
