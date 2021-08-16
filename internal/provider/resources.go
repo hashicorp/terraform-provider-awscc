@@ -121,8 +121,6 @@
 //go:generate go run generators/resource/main.go -resource aws_elasticache_global_replication_group -cfschema ../service/cloudformation/schemas/AWS_ElastiCache_GlobalReplicationGroup.json -package elasticache -- ../aws/elasticache/global_replication_group_gen.go ../aws/elasticache/global_replication_group_gen_test.go
 //go:generate go run generators/resource/main.go -resource aws_elasticache_user -cfschema ../service/cloudformation/schemas/AWS_ElastiCache_User.json -package elasticache -- ../aws/elasticache/user_gen.go ../aws/elasticache/user_gen_test.go
 //go:generate go run generators/resource/main.go -resource aws_elasticache_user_group -cfschema ../service/cloudformation/schemas/AWS_ElastiCache_UserGroup.json -package elasticache -- ../aws/elasticache/user_group_gen.go ../aws/elasticache/user_group_gen_test.go
-//go:generate go run generators/resource/main.go -resource aws_elasticloadbalancingv2_listener -cfschema ../service/cloudformation/schemas/AWS_ElasticLoadBalancingV2_Listener.json -package elasticloadbalancingv2 -- ../aws/elasticloadbalancingv2/listener_gen.go ../aws/elasticloadbalancingv2/listener_gen_test.go
-//go:generate go run generators/resource/main.go -resource aws_elasticloadbalancingv2_listener_rule -cfschema ../service/cloudformation/schemas/AWS_ElasticLoadBalancingV2_ListenerRule.json -package elasticloadbalancingv2 -- ../aws/elasticloadbalancingv2/listener_rule_gen.go ../aws/elasticloadbalancingv2/listener_rule_gen_test.go
 //go:generate go run generators/resource/main.go -resource aws_eventschemas_registry_policy -cfschema ../service/cloudformation/schemas/AWS_EventSchemas_RegistryPolicy.json -package eventschemas -- ../aws/eventschemas/registry_policy_gen.go ../aws/eventschemas/registry_policy_gen_test.go
 //go:generate go run generators/resource/main.go -resource aws_events_api_destination -cfschema ../service/cloudformation/schemas/AWS_Events_ApiDestination.json -package events -- ../aws/events/api_destination_gen.go ../aws/events/api_destination_gen_test.go
 //go:generate go run generators/resource/main.go -resource aws_events_archive -cfschema ../service/cloudformation/schemas/AWS_Events_Archive.json -package events -- ../aws/events/archive_gen.go ../aws/events/archive_gen_test.go
@@ -379,7 +377,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/efs"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/eks"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/elasticache"
-	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/elasticloadbalancingv2"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/emr"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/emrcontainers"
 	_ "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/aws/events"
