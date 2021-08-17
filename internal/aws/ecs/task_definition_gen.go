@@ -712,7 +712,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"links": {
 						// Property: Links
 						// Ordered set.
-						Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
 					"linux_parameters": {
@@ -754,7 +754,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											"permissions": {
 												// Property: Permissions
 												// Ordered set.
-												Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+												Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 												Optional: true,
 											},
 										},
@@ -1338,7 +1338,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "uniqueItems": true
 			// }
 			// Ordered set.
-			Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 			Optional: true,
 			Computed: true,
 			// RequiresCompatibilities is a force-new attribute.

@@ -628,13 +628,13 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"security_group_ids": {
 									// Property: SecurityGroupIds
 									// Ordered set.
-									Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+									Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 									Required: true,
 								},
 								"subnet_ids": {
 									// Property: SubnetIds
 									// Ordered set.
-									Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+									Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 									Required: true,
 								},
 							},
@@ -1125,7 +1125,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	"timestamp_formats": {
 																		// Property: TimestampFormats
 																		// Ordered set.
-																		Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+																		Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 																		Optional: true,
 																	},
 																},
@@ -1184,7 +1184,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	"bloom_filter_columns": {
 																		// Property: BloomFilterColumns
 																		// Ordered set.
-																		Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+																		Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 																		Optional: true,
 																	},
 																	"bloom_filter_false_positive_probability": {

@@ -744,7 +744,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"groups": {
 												// Property: Groups
 												// Ordered set.
-												Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+												Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 												Optional: true,
 											},
 											"ipv_6_address_count": {

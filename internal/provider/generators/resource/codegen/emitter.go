@@ -170,7 +170,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 			case cfschema.PropertyTypeBoolean:
 				if arrayType == aggregateOrderedSet {
 					features |= UsesInternalTypes
-					e.printf("Type: providertypes.OrderedSetType{types.ListType{ElemType:types.BoolType}},\n")
+					e.printf("Type: providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.BoolType}},\n")
 				} else {
 					e.printf("Type: types.ListType{ElemType:types.BoolType},\n")
 				}
@@ -178,7 +178,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
 				if arrayType == aggregateOrderedSet {
 					features |= UsesInternalTypes
-					e.printf("Type: providertypes.OrderedSetType{types.ListType{ElemType:types.NumberType}},\n")
+					e.printf("Type: providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.NumberType}},\n")
 				} else {
 					e.printf("Type: types.ListType{ElemType:types.NumberType},\n")
 				}
@@ -186,7 +186,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 			case cfschema.PropertyTypeString:
 				if arrayType == aggregateOrderedSet {
 					features |= UsesInternalTypes
-					e.printf("Type: providertypes.OrderedSetType{types.ListType{ElemType:types.StringType}},\n")
+					e.printf("Type: providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.StringType}},\n")
 				} else {
 					e.printf("Type: types.ListType{ElemType:types.StringType},\n")
 				}

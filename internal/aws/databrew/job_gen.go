@@ -628,7 +628,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"partition_columns": {
 						// Property: PartitionColumns
 						// Ordered set.
-						Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
 				},

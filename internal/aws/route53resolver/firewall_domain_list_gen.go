@@ -103,7 +103,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "An inline list of domains to use for this domain list.",
 			// Ordered set.
-			Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 			Optional: true,
 			// Domains is a write-only attribute.
 		},

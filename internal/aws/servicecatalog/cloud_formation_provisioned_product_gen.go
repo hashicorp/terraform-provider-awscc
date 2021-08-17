@@ -60,7 +60,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "uniqueItems": true
 			// }
 			// Ordered set.
-			Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 			Optional: true,
 			Computed: true,
 			// NotificationArns is a force-new attribute.
@@ -263,7 +263,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 					"stack_set_accounts": {
 						// Property: StackSetAccounts
 						// Ordered set.
-						Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
 					"stack_set_failure_tolerance_count": {
@@ -294,7 +294,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 					"stack_set_regions": {
 						// Property: StackSetRegions
 						// Ordered set.
-						Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
 				},

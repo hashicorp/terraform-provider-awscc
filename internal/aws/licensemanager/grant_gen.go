@@ -34,7 +34,7 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			// Ordered set.
-			Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 			Optional: true,
 			// AllowedOperations is a write-only attribute.
 		},
@@ -92,7 +92,7 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			// Ordered set.
-			Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 			Optional: true,
 			// Principals is a write-only attribute.
 		},

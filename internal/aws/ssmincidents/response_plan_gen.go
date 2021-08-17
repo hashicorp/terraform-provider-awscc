@@ -144,7 +144,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"values": {
 												// Property: Values
 												// Ordered set.
-												Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+												Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 												Required: true,
 											},
 										},
@@ -217,7 +217,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"chatbot_sns": {
 						// Property: ChatbotSns
 						// Ordered set.
-						Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
 				},

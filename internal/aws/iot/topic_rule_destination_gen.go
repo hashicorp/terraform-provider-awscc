@@ -123,13 +123,13 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					"security_groups": {
 						// Property: SecurityGroups
 						// Ordered set.
-						Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
 						// Ordered set.
-						Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
 					"vpc_id": {

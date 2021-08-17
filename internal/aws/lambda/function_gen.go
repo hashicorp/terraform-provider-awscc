@@ -309,14 +309,14 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Command
 						Description: "Command.",
 						// Ordered set.
-						Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
 					"entry_point": {
 						// Property: EntryPoint
 						Description: "EntryPoint.",
 						// Ordered set.
-						Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
+						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
 					"working_directory": {
