@@ -44,6 +44,9 @@ func (t OrderedSetType) Validate(ctx context.Context, in tftypes.Value) []*tfpro
 	duplicatesMap := make(map[string]struct{})
 	valsMap := make(map[string]struct{})
 
+	// TODO
+	// TODO val.String() is dangerous as attribute names aren't sorted.
+	// TODO
 	for _, val := range vals {
 		if _, ok := valsMap[val.String()]; ok {
 			if _, ok := duplicatesMap[val.String()]; ok {
