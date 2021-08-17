@@ -168,13 +168,28 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 			//
 			switch itemType := property.Items.Type.String(); itemType {
 			case cfschema.PropertyTypeBoolean:
-				e.printf("Type: types.ListType{ElemType:types.BoolType},\n")
+				if arrayType == aggregateOrderedSet {
+					features |= UsesInternalTypes
+					e.printf("Type: providertypes.OrderedSetType{types.ListType{ElemType:types.BoolType}},\n")
+				} else {
+					e.printf("Type: types.ListType{ElemType:types.BoolType},\n")
+				}
 
 			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-				e.printf("Type: types.ListType{ElemType:types.NumberType},\n")
+				if arrayType == aggregateOrderedSet {
+					features |= UsesInternalTypes
+					e.printf("Type: providertypes.OrderedSetType{types.ListType{ElemType:types.NumberType}},\n")
+				} else {
+					e.printf("Type: types.ListType{ElemType:types.NumberType},\n")
+				}
 
 			case cfschema.PropertyTypeString:
-				e.printf("Type: types.ListType{ElemType:types.StringType},\n")
+				if arrayType == aggregateOrderedSet {
+					features |= UsesInternalTypes
+					e.printf("Type: providertypes.OrderedSetType{types.ListType{ElemType:types.StringType}},\n")
+				} else {
+					e.printf("Type: types.ListType{ElemType:types.StringType},\n")
+				}
 
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {

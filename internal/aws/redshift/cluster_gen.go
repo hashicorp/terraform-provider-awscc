@@ -12,6 +12,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -237,7 +238,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request",
 			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
+			Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 			Optional: true,
 		},
 		"id": {

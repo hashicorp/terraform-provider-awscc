@@ -12,6 +12,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -711,7 +712,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"links": {
 						// Property: Links
 						// Ordered set.
-						Type:     types.ListType{ElemType: types.StringType},
+						Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
 					"linux_parameters": {
@@ -753,7 +754,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											"permissions": {
 												// Property: Permissions
 												// Ordered set.
-												Type:     types.ListType{ElemType: types.StringType},
+												Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 												Optional: true,
 											},
 										},
@@ -1337,7 +1338,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "uniqueItems": true
 			// }
 			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
+			Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 			Optional: true,
 			Computed: true,
 			// RequiresCompatibilities is a force-new attribute.

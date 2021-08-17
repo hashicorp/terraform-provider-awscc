@@ -12,6 +12,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -86,7 +87,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Passwords used for this user account. You can create up to two passwords for each user.",
 			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
+			Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 			Optional: true,
 			// Passwords is a write-only attribute.
 		},

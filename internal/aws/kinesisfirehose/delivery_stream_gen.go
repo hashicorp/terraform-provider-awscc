@@ -12,6 +12,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -627,13 +628,13 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"security_group_ids": {
 									// Property: SecurityGroupIds
 									// Ordered set.
-									Type:     types.ListType{ElemType: types.StringType},
+									Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 									Required: true,
 								},
 								"subnet_ids": {
 									// Property: SubnetIds
 									// Ordered set.
-									Type:     types.ListType{ElemType: types.StringType},
+									Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 									Required: true,
 								},
 							},
@@ -1124,7 +1125,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	"timestamp_formats": {
 																		// Property: TimestampFormats
 																		// Ordered set.
-																		Type:     types.ListType{ElemType: types.StringType},
+																		Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 																		Optional: true,
 																	},
 																},
@@ -1183,7 +1184,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	"bloom_filter_columns": {
 																		// Property: BloomFilterColumns
 																		// Ordered set.
-																		Type:     types.ListType{ElemType: types.StringType},
+																		Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 																		Optional: true,
 																	},
 																	"bloom_filter_false_positive_probability": {

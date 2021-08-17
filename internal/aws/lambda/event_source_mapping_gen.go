@@ -12,6 +12,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -149,7 +150,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) A list of response types supported by the function.",
 			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
+			Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 			Optional: true,
 		},
 		"id": {
@@ -228,7 +229,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(ActiveMQ) A list of ActiveMQ queues.",
 			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
+			Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 			Optional: true,
 		},
 		"self_managed_event_source": {
@@ -274,7 +275,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									// Property: KafkaBootstrapServers
 									Description: "A list of Kafka server endpoints.",
 									// Ordered set.
-									Type:     types.ListType{ElemType: types.StringType},
+									Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 									Optional: true,
 								},
 							},
@@ -392,7 +393,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Kafka) A list of Kafka topics.",
 			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
+			Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 			Optional: true,
 		},
 		"tumbling_window_in_seconds": {

@@ -12,6 +12,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -86,7 +87,7 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "List of users associated to this user group.",
 			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
+			Type:     providertypes.OrderedSetType{types.ListType{ElemType: types.StringType}},
 			Optional: true,
 		},
 	}
