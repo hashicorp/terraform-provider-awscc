@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // safetyRuleResourceType returns the Terraform awscc_route53recoverycontrol_safety_rule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryControl::SafetyRule resource type.
 func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"assertion_rule": {
 			// Property: AssertionRule
 			// CloudFormation resource type schema:
@@ -49,8 +48,8 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "An assertion rule enforces that, when a routing control state is changed, that the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"asserted_controls": {
 						// Property: AssertedControls
 						Description: "The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three AWS Regions.",
@@ -117,8 +116,8 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"gating_controls": {
 						// Property: GatingControls
 						Description: "The gating controls for the gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.",
@@ -187,8 +186,8 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The rule configuration for an assertion rule or gating rule. This is the criteria that you set for specific assertion controls (routing controls) or gating controls. This configuration specifies how many controls must be enabled after a transaction completes.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"inverted": {
 						// Property: Inverted
 						Description: "Logical negation of the rule. If the rule would usually evaluate true, it's evaluated as false, and vice versa.",
@@ -243,13 +242,13 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS Route53 Recovery Control basic constructs and validation rules.",
 		Version:     1,
 		Attributes:  attributes,

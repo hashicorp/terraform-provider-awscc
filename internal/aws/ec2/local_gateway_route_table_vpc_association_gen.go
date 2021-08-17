@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -22,7 +21,7 @@ func init() {
 // localGatewayRouteTableVPCAssociationResourceType returns the Terraform awscc_ec2_local_gateway_route_table_vpc_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::LocalGatewayRouteTableVPCAssociation resource type.
 func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"local_gateway_id": {
 			// Property: LocalGatewayId
 			// CloudFormation resource type schema:
@@ -95,7 +94,7 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -126,13 +125,13 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Describes an association between a local gateway route table and a VPC.",
 		Version:     1,
 		Attributes:  attributes,

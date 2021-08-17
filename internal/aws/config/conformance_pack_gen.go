@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // conformancePackResourceType returns the Terraform awscc_config_conformance_pack resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::ConformancePack resource type.
 func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"conformance_pack_input_parameters": {
 			// Property: ConformancePackInputParameters
 			// CloudFormation resource type schema:
@@ -54,8 +53,8 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array"
 			// }
 			Description: "A list of ConformancePackInputParameter objects.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"parameter_name": {
 						// Property: ParameterName
 						Description: "Key part of key-value pair with value being parameter value",
@@ -69,7 +68,7 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 60,
 				},
@@ -149,13 +148,13 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A conformance pack is a collection of AWS Config rules and remediation actions that can be easily deployed as a single entity in an account and a region or across an entire AWS Organization.",
 		Version:     1,
 		Attributes:  attributes,

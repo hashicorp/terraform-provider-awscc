@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // contactResourceType returns the Terraform awscc_ssmcontacts_contact resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSMContacts::Contact resource type.
 func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"alias": {
 			// Property: Alias
 			// CloudFormation resource type schema:
@@ -133,8 +132,8 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The stages that an escalation plan or engagement plan engages contacts and contact methods in.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"duration_in_minutes": {
 						// Property: DurationInMinutes
 						Description: "The time to wait until beginning the next stage.",
@@ -144,13 +143,13 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"targets": {
 						// Property: Targets
 						Description: "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"channel_target_info": {
 									// Property: ChannelTargetInfo
 									Description: "Information about the contact channel that SSM Incident Manager uses to engage the contact.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"channel_id": {
 												// Property: ChannelId
 												Description: "The Amazon Resource Name (ARN) of the contact channel.",
@@ -170,8 +169,8 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"contact_target_info": {
 									// Property: ContactTargetInfo
 									Description: "The contact that SSM Incident Manager is engaging during an incident.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"contact_id": {
 												// Property: ContactId
 												Description: "The Amazon Resource Name (ARN) of the contact.",
@@ -189,12 +188,12 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 			// Plan is a write-only attribute.
@@ -220,13 +219,13 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::SSMContacts::Contact",
 		Version:     1,
 		Attributes:  attributes,

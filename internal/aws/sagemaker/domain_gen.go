@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // domainResourceType returns the Terraform awscc_sagemaker_domain resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::Domain resource type.
 func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"app_network_access_type": {
 			// Property: AppNetworkAccessType
 			// CloudFormation resource type schema:
@@ -272,8 +271,8 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "A collection of settings that apply to users of Amazon SageMaker Studio. These settings are specified when the CreateUserProfile API is called, and as DefaultUserSettings when the CreateDomain API is called.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"execution_role": {
 						// Property: ExecutionRole
 						Description: "The user profile Amazon Resource Name (ARN).",
@@ -283,12 +282,12 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"jupyter_server_app_settings": {
 						// Property: JupyterServerAppSettings
 						Description: "The JupyterServer app settings.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"default_resource_spec": {
 									// Property: DefaultResourceSpec
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"instance_type": {
 												// Property: InstanceType
 												Description: "The instance type that the image version runs on.",
@@ -318,13 +317,13 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"kernel_gateway_app_settings": {
 						// Property: KernelGatewayAppSettings
 						Description: "The kernel gateway app settings.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"custom_images": {
 									// Property: CustomImages
 									Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"app_image_config_name": {
 												// Property: AppImageConfigName
 												Description: "The Name of the AppImageConfig.",
@@ -344,7 +343,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional:    true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 0,
 											MaxItems: 30,
 										},
@@ -353,8 +352,8 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"default_resource_spec": {
 									// Property: DefaultResourceSpec
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"instance_type": {
 												// Property: InstanceType
 												Description: "The instance type that the image version runs on.",
@@ -390,8 +389,8 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"sharing_settings": {
 						// Property: SharingSettings
 						Description: "Specifies options when sharing an Amazon SageMaker Studio notebook. These settings are specified as part of DefaultUserSettings when the CreateDomain API is called, and as part of UserSettings when the CreateUserProfile API is called.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"notebook_output_option": {
 									// Property: NotebookOutputOption
 									Description: "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
@@ -548,8 +547,8 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "A list of tags to apply to the user profile.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -561,7 +560,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 50,
 				},
@@ -600,13 +599,13 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::SageMaker::Domain",
 		Version:     1,
 		Attributes:  attributes,

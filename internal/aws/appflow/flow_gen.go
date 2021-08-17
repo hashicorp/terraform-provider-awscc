@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // flowResourceType returns the Terraform awscc_appflow_flow resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppFlow::Flow resource type.
 func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -460,8 +459,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "List of Destination connectors of the flow.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"connector_profile_name": {
 						// Property: ConnectorProfileName
 						Description: "Name of connector profile",
@@ -476,16 +475,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"destination_connector_properties": {
 						// Property: DestinationConnectorProperties
 						Description: "Destination connector details",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"event_bridge": {
 									// Property: EventBridge
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"bucket_name": {
 															// Property: BucketName
 															Type:     types.StringType,
@@ -516,8 +515,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"lookout_metrics": {
 									// Property: LookoutMetrics
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -529,8 +528,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"redshift": {
 									// Property: Redshift
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket_prefix": {
 												// Property: BucketPrefix
 												Type:     types.StringType,
@@ -538,8 +537,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"bucket_name": {
 															// Property: BucketName
 															Type:     types.StringType,
@@ -575,8 +574,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"s3": {
 									// Property: S3
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket_name": {
 												// Property: BucketName
 												Type:     types.StringType,
@@ -589,12 +588,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"s3_output_format_config": {
 												// Property: S3OutputFormatConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"aggregation_config": {
 															// Property: AggregationConfig
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"aggregation_type": {
 																		// Property: AggregationType
 																		Type:     types.StringType,
@@ -611,8 +610,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"prefix_config": {
 															// Property: PrefixConfig
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"prefix_format": {
 																		// Property: PrefixFormat
 																		Type:     types.StringType,
@@ -637,12 +636,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"salesforce": {
 									// Property: Salesforce
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"bucket_name": {
 															// Property: BucketName
 															Type:     types.StringType,
@@ -684,8 +683,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"snowflake": {
 									// Property: Snowflake
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket_prefix": {
 												// Property: BucketPrefix
 												Type:     types.StringType,
@@ -693,8 +692,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"bucket_name": {
 															// Property: BucketName
 															Type:     types.StringType,
@@ -730,8 +729,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"upsolver": {
 									// Property: Upsolver
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket_name": {
 												// Property: BucketName
 												Type:     types.StringType,
@@ -744,12 +743,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"s3_output_format_config": {
 												// Property: S3OutputFormatConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"aggregation_config": {
 															// Property: AggregationConfig
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"aggregation_type": {
 																		// Property: AggregationType
 																		Type:     types.StringType,
@@ -766,8 +765,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"prefix_config": {
 															// Property: PrefixConfig
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"prefix_format": {
 																		// Property: PrefixFormat
 																		Type:     types.StringType,
@@ -792,12 +791,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"zendesk": {
 									// Property: Zendesk
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"bucket_name": {
 															// Property: BucketName
 															Type:     types.StringType,
@@ -842,7 +841,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 		},
@@ -1160,8 +1159,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Configurations of Source connector of the flow.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"connector_profile_name": {
 						// Property: ConnectorProfileName
 						Description: "Name of connector profile",
@@ -1176,8 +1175,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"incremental_pull_config": {
 						// Property: IncrementalPullConfig
 						Description: "Configuration for scheduled incremental data pull",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"datetime_type_field_name": {
 									// Property: DatetimeTypeFieldName
 									Description: "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",
@@ -1191,12 +1190,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"source_connector_properties": {
 						// Property: SourceConnectorProperties
 						Description: "Source connector details required to query a connector",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"amplitude": {
 									// Property: Amplitude
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1208,8 +1207,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"datadog": {
 									// Property: Datadog
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1221,8 +1220,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"dynatrace": {
 									// Property: Dynatrace
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1234,8 +1233,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"google_analytics": {
 									// Property: GoogleAnalytics
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1247,8 +1246,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"infor_nexus": {
 									// Property: InforNexus
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1260,8 +1259,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"marketo": {
 									// Property: Marketo
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1273,8 +1272,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"s3": {
 									// Property: S3
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket_name": {
 												// Property: BucketName
 												Type:     types.StringType,
@@ -1291,8 +1290,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"salesforce": {
 									// Property: Salesforce
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"enable_dynamic_field_update": {
 												// Property: EnableDynamicFieldUpdate
 												Type:     types.BoolType,
@@ -1314,8 +1313,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"service_now": {
 									// Property: ServiceNow
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1327,8 +1326,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"singular": {
 									// Property: Singular
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1340,8 +1339,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"slack": {
 									// Property: Slack
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1353,8 +1352,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"trendmicro": {
 									// Property: Trendmicro
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1366,8 +1365,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"veeva": {
 									// Property: Veeva
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1379,8 +1378,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"zendesk": {
 									// Property: Zendesk
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1429,8 +1428,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "List of Tags.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "A string used to identify this tag",
@@ -1444,7 +1443,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -1811,13 +1810,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "List of tasks for the flow.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"connector_operator": {
 						// Property: ConnectorOperator
 						Description: "Operation to be performed on provided source fields",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"amplitude": {
 									// Property: Amplitude
 									Type:     types.StringType,
@@ -1907,8 +1906,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"task_properties": {
 						// Property: TaskProperties
 						Description: "A Map used to store task related info",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
 									Type:     types.StringType,
@@ -1920,7 +1919,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -1930,7 +1929,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 		},
@@ -1988,13 +1987,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Trigger settings of the flow.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"trigger_properties": {
 						// Property: TriggerProperties
 						Description: "Details required for scheduled trigger type",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"data_pull_mode": {
 									// Property: DataPullMode
 									Type:     types.StringType,
@@ -2036,13 +2035,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::AppFlow::Flow.",
 		Version:     1,
 		Attributes:  attributes,

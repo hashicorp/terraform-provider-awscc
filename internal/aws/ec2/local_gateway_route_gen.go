@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // localGatewayRouteResourceType returns the Terraform awscc_ec2_local_gateway_route resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::LocalGatewayRoute resource type.
 func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"destination_cidr_block": {
 			// Property: DestinationCidrBlock
 			// CloudFormation resource type schema:
@@ -83,13 +82,13 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Describes a route for a local gateway route table.",
 		Version:     1,
 		Attributes:  attributes,

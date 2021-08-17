@@ -58,16 +58,3 @@ func (t OrderedSetType) Validate(ctx context.Context, in tftypes.Value) []*tfpro
 
 	return nil
 }
-
-func DiagsHasError(diags []*tfprotov6.Diagnostic) bool {
-	for _, diag := range diags {
-		if diag == nil {
-			continue
-		}
-		if diag.Severity == tfprotov6.DiagnosticSeverityError {
-			return true
-		}
-	}
-
-	return false
-}

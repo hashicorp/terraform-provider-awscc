@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // detectorResourceType returns the Terraform awscc_frauddetector_detector resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FraudDetector::Detector resource type.
 func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -55,15 +54,15 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The models to associate with this detector.",
 			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"arn": {
 						// Property: Arn
 						Type:     types.StringType,
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 10,
 				},
 			),
@@ -440,8 +439,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"arn": {
 						// Property: Arn
 						Description: "The ARN of the event type.",
@@ -463,8 +462,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"entity_types": {
 						// Property: EntityTypes
 						// Multiset.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -502,8 +501,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Tags
 									Description: "Tags associated with this entity type.",
 									// Multiset.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
 												Type:     types.StringType,
@@ -515,14 +514,14 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MaxItems: 200,
 										},
 									),
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -531,8 +530,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"event_variables": {
 						// Property: EventVariables
 						// Multiset.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -585,8 +584,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Tags
 									Description: "Tags associated with this event variable.",
 									// Multiset.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
 												Type:     types.StringType,
@@ -598,7 +597,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MaxItems: 200,
 										},
 									),
@@ -610,7 +609,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -624,8 +623,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"labels": {
 						// Property: Labels
 						// Multiset.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -663,8 +662,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Tags
 									Description: "Tags associated with this label.",
 									// Multiset.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
 												Type:     types.StringType,
@@ -676,14 +675,14 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MaxItems: 200,
 										},
 									),
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 2,
 							},
 						),
@@ -705,8 +704,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Tags
 						Description: "Tags associated with this event type.",
 						// Multiset.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
 									Type:     types.StringType,
@@ -718,7 +717,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MaxItems: 200,
 							},
 						),
@@ -892,8 +891,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"arn": {
 						// Property: Arn
 						Type:     types.StringType,
@@ -935,8 +934,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"outcomes": {
 						// Property: Outcomes
 						// Multiset.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -974,8 +973,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Tags
 									Description: "Tags associated with this outcome.",
 									// Multiset.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
 												Type:     types.StringType,
@@ -987,14 +986,14 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MaxItems: 200,
 										},
 									),
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -1014,8 +1013,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Tags
 						Description: "Tags associated with this event type.",
 						// Multiset.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
 									Type:     types.StringType,
@@ -1027,14 +1026,14 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MaxItems: 200,
 							},
 						),
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -1072,8 +1071,8 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Tags associated with this detector.",
 			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -1085,7 +1084,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 200,
 				},
 			),
@@ -1094,13 +1093,13 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A resource schema for a Detector in Amazon Fraud Detector.",
 		Version:     1,
 		Attributes:  attributes,

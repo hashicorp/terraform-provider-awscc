@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // datasetResourceType returns the Terraform awscc_databrew_dataset resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataBrew::Dataset resource type.
 func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"format": {
 			// Property: Format
 			// CloudFormation resource type schema:
@@ -102,13 +101,13 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Format options for dataset",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"csv": {
 						// Property: Csv
 						Description: "Csv options",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"delimiter": {
 									// Property: Delimiter
 									Type:     types.StringType,
@@ -125,8 +124,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"excel": {
 						// Property: Excel
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"header_row": {
 									// Property: HeaderRow
 									Type:     types.BoolType,
@@ -149,8 +148,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"json": {
 						// Property: Json
 						Description: "Json options",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"multi_line": {
 									// Property: MultiLine
 									Type:     types.BoolType,
@@ -255,12 +254,12 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Input",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"data_catalog_input_definition": {
 						// Property: DataCatalogInputDefinition
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"catalog_id": {
 									// Property: CatalogId
 									Description: "Catalog id",
@@ -282,8 +281,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"temp_directory": {
 									// Property: TempDirectory
 									Description: "Input location",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket": {
 												// Property: Bucket
 												Type:     types.StringType,
@@ -304,8 +303,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"database_input_definition": {
 						// Property: DatabaseInputDefinition
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database_table_name": {
 									// Property: DatabaseTableName
 									Description: "Database table name",
@@ -321,8 +320,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"temp_directory": {
 									// Property: TempDirectory
 									Description: "Input location",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket": {
 												// Property: Bucket
 												Type:     types.StringType,
@@ -344,8 +343,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"s3_input_definition": {
 						// Property: S3InputDefinition
 						Description: "Input location",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"bucket": {
 									// Property: Bucket
 									Type:     types.StringType,
@@ -584,12 +583,12 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Path options for dataset",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"files_limit": {
 						// Property: FilesLimit
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"max_files": {
 									// Property: MaxFiles
 									Description: "Maximum number of files",
@@ -614,8 +613,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"last_modified_date_condition": {
 						// Property: LastModifiedDateCondition
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"expression": {
 									// Property: Expression
 									Description: "Filtering expression for a parameter",
@@ -624,8 +623,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"values_map": {
 									// Property: ValuesMap
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"value": {
 												// Property: Value
 												Type:     types.StringType,
@@ -638,7 +637,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Required: true,
 								},
@@ -648,12 +647,12 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"parameters": {
 						// Property: Parameters
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"dataset_parameter": {
 									// Property: DatasetParameter
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"create_column": {
 												// Property: CreateColumn
 												Description: "Add the value of this parameter as a column in a dataset.",
@@ -662,8 +661,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"datetime_options": {
 												// Property: DatetimeOptions
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"format": {
 															// Property: Format
 															Description: "Date/time format of a date parameter",
@@ -688,8 +687,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"filter": {
 												// Property: Filter
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"expression": {
 															// Property: Expression
 															Description: "Filtering expression for a parameter",
@@ -698,8 +697,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"values_map": {
 															// Property: ValuesMap
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"value": {
 																		// Property: Value
 																		Type:     types.StringType,
@@ -712,7 +711,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
 														},
@@ -743,7 +742,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -781,8 +780,8 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -794,7 +793,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -803,13 +802,13 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::DataBrew::Dataset.",
 		Version:     1,
 		Attributes:  attributes,

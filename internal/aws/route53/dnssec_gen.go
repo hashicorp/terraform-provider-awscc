@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // dNSSECResourceType returns the Terraform awscc_route53_dnssec resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53::DNSSEC resource type.
 func dNSSECResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"hosted_zone_id": {
 			// Property: HostedZoneId
 			// CloudFormation resource type schema:
@@ -38,13 +37,13 @@ func dNSSECResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource used to control (enable/disable) DNSSEC in a specific hosted zone.",
 		Version:     1,
 		Attributes:  attributes,

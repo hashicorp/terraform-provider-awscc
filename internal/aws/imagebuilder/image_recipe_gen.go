@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // imageRecipeResourceType returns the Terraform awscc_imagebuilder_image_recipe resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::ImageRecipe resource type.
 func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"additional_instance_configuration": {
 			// Property: AdditionalInstanceConfiguration
 			// CloudFormation resource type schema:
@@ -54,13 +53,13 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Specify additional settings and launch scripts for your build instances.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"systems_manager_agent": {
 						// Property: SystemsManagerAgent
 						Description: "Contains settings for the SSM agent on your build instance.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"uninstall_after_build": {
 									// Property: UninstallAfterBuild
 									Description: "This property defaults to true. If Image Builder installs the SSM agent on a build instance, it removes the agent before creating a snapshot for the AMI. To ensure that the AMI you create includes the SSM agent, set this property to false.",
@@ -163,8 +162,8 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The block device mappings to apply when creating images from this recipe.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"device_name": {
 						// Property: DeviceName
 						Description: "The device to which these mappings apply.",
@@ -174,8 +173,8 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"ebs": {
 						// Property: Ebs
 						Description: "Amazon EBS-specific block device mapping specifications. ",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"delete_on_termination": {
 									// Property: DeleteOnTermination
 									Description: "Use to configure delete on termination of the associated device.",
@@ -235,7 +234,7 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -286,8 +285,8 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The components of the image recipe.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"component_arn": {
 						// Property: ComponentArn
 						Description: "The Amazon Resource Name (ARN) of the component.",
@@ -297,8 +296,8 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"parameters": {
 						// Property: Parameters
 						Description: "A group of parameter settings that are used to configure the component for a specific recipe.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "The name of the component parameter to set.",
@@ -312,12 +311,12 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 			// Components is a force-new attribute.
@@ -407,13 +406,13 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::ImageBuilder::ImageRecipe",
 		Version:     1,
 		Attributes:  attributes,

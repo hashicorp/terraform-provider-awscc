@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -22,7 +21,7 @@ func init() {
 // mitigationActionResourceType returns the Terraform awscc_iot_mitigation_action resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::MitigationAction resource type.
 func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"action_name": {
 			// Property: ActionName
 			// CloudFormation resource type schema:
@@ -168,13 +167,13 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "type": "object"
 			// }
 			Description: "The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"add_things_to_thing_group_params": {
 						// Property: AddThingsToThingGroupParams
 						Description: "Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"override_dynamic_groups": {
 									// Property: OverrideDynamicGroups
 									Description: "Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.",
@@ -194,8 +193,8 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"enable_io_t_logging_params": {
 						// Property: EnableIoTLoggingParams
 						Description: "Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"log_level": {
 									// Property: LogLevel
 									Description: " Specifies which types of information are logged.",
@@ -215,8 +214,8 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"publish_finding_to_sns_params": {
 						// Property: PublishFindingToSnsParams
 						Description: "Parameters, to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"topic_arn": {
 									// Property: TopicArn
 									Description: "The ARN of the topic to which you want to publish the findings.",
@@ -230,8 +229,8 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"replace_default_policy_version_params": {
 						// Property: ReplaceDefaultPolicyVersionParams
 						Description: "Parameters to define a mitigation action that adds a blank policy to restrict permissions.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"template_name": {
 									// Property: TemplateName
 									Type:     types.StringType,
@@ -244,8 +243,8 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"update_ca_certificate_params": {
 						// Property: UpdateCACertificateParams
 						Description: "Parameters to define a mitigation action that changes the state of the CA certificate to inactive.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"action": {
 									// Property: Action
 									Type:     types.StringType,
@@ -258,8 +257,8 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"update_device_certificate_params": {
 						// Property: UpdateDeviceCertificateParams
 						Description: "Parameters to define a mitigation action that changes the state of the device certificate to inactive.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"action": {
 									// Property: Action
 									Type:     types.StringType,
@@ -335,7 +334,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The tag's key.",
@@ -358,13 +357,13 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Mitigation actions can be used to take actions to mitigate issues that were found in an Audit finding or Detect violation.",
 		Version:     1,
 		Attributes:  attributes,

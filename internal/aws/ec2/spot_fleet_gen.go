@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -22,7 +21,7 @@ func init() {
 // spotFleetResourceType returns the Terraform awscc_ec2_spot_fleet resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::SpotFleet resource type.
 func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
@@ -558,8 +557,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"allocation_strategy": {
 						// Property: AllocationStrategy
 						Type:     types.StringType,
@@ -600,13 +599,13 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"launch_specifications": {
 						// Property: LaunchSpecifications
 						// Ordered set.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"block_device_mappings": {
 									// Property: BlockDeviceMappings
 									// Ordered set.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"device_name": {
 												// Property: DeviceName
 												Type:     types.StringType,
@@ -614,8 +613,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"ebs": {
 												// Property: Ebs
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"delete_on_termination": {
 															// Property: DeleteOnTermination
 															Type:     types.BoolType,
@@ -661,7 +660,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -672,8 +671,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"iam_instance_profile": {
 									// Property: IamInstanceProfile
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"arn": {
 												// Property: Arn
 												Type:     types.StringType,
@@ -705,8 +704,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"monitoring": {
 									// Property: Monitoring
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"enabled": {
 												// Property: Enabled
 												Type:     types.BoolType,
@@ -719,8 +718,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"network_interfaces": {
 									// Property: NetworkInterfaces
 									// Ordered set.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"associate_public_ip_address": {
 												// Property: AssociatePublicIpAddress
 												Type:     types.BoolType,
@@ -755,15 +754,15 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"ipv_6_addresses": {
 												// Property: Ipv6Addresses
 												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"ipv_6_address": {
 															// Property: Ipv6Address
 															Type:     types.StringType,
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
@@ -775,8 +774,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"private_ip_addresses": {
 												// Property: PrivateIpAddresses
 												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"primary": {
 															// Property: Primary
 															Type:     types.BoolType,
@@ -788,7 +787,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
@@ -803,14 +802,14 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
 								"placement": {
 									// Property: Placement
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"availability_zone": {
 												// Property: AvailabilityZone
 												Type:     types.StringType,
@@ -838,15 +837,15 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"security_groups": {
 									// Property: SecurityGroups
 									// Ordered set.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"group_id": {
 												// Property: GroupId
 												Type:     types.StringType,
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -863,8 +862,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"tag_specifications": {
 									// Property: TagSpecifications
 									// Ordered set.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"resource_type": {
 												// Property: ResourceType
 												Type:     types.StringType,
@@ -872,8 +871,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"tags": {
 												// Property: Tags
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"key": {
 															// Property: Key
 															Type:     types.StringType,
@@ -885,12 +884,12 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -905,7 +904,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Computed: true,
@@ -914,12 +913,12 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"launch_template_configs": {
 						// Property: LaunchTemplateConfigs
 						// Ordered set.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"launch_template_specification": {
 									// Property: LaunchTemplateSpecification
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"launch_template_id": {
 												// Property: LaunchTemplateId
 												Type:     types.StringType,
@@ -942,8 +941,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"overrides": {
 									// Property: Overrides
 									// Ordered set.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"availability_zone": {
 												// Property: AvailabilityZone
 												Type:     types.StringType,
@@ -970,12 +969,12 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 						Computed: true,
@@ -983,24 +982,24 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"load_balancers_config": {
 						// Property: LoadBalancersConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"classic_load_balancers_config": {
 									// Property: ClassicLoadBalancersConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"classic_load_balancers": {
 												// Property: ClassicLoadBalancers
 												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"name": {
 															// Property: Name
 															Type:     types.StringType,
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 											},
@@ -1010,20 +1009,20 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"target_groups_config": {
 									// Property: TargetGroupsConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"target_groups": {
 												// Property: TargetGroups
 												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"arn": {
 															// Property: Arn
 															Type:     types.StringType,
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 											},
@@ -1067,12 +1066,12 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"spot_maintenance_strategies": {
 						// Property: SpotMaintenanceStrategies
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"capacity_rebalance": {
 									// Property: CapacityRebalance
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"replacement_strategy": {
 												// Property: ReplacementStrategy
 												Type:     types.StringType,
@@ -1142,13 +1141,13 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::EC2::SpotFleet",
 		Version:     1,
 		Attributes:  attributes,

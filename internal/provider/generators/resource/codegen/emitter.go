@@ -73,7 +73,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 	}
 
 	if description := property.Description; description != nil {
-		e.printf("Description: %q,\n", *description)
+		e.printf("Description:%q,\n", *description)
 	}
 
 	switch propertyType := property.Type.String(); propertyType {
@@ -81,13 +81,13 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 	// Primitive types.
 	//
 	case cfschema.PropertyTypeBoolean:
-		e.printf("Type: types.BoolType,\n")
+		e.printf("Type:types.BoolType,\n")
 
 	case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-		e.printf("Type: types.NumberType,\n")
+		e.printf("Type:types.NumberType,\n")
 
 	case cfschema.PropertyTypeString:
-		e.printf("Type: types.StringType,\n")
+		e.printf("Type:types.StringType,\n")
 
 	//
 	// Complex types.
@@ -103,15 +103,15 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 			// Sets of primitive types use provider-local Set type until tfsdk support is available.
 			case cfschema.PropertyTypeBoolean:
 				features |= UsesInternalTypes
-				e.printf("Type: providertypes.SetType{ElemType:types.BoolType},\n")
+				e.printf("Type:providertypes.SetType{ElemType:types.BoolType},\n")
 
 			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
 				features |= UsesInternalTypes
-				e.printf("Type: providertypes.SetType{ElemType:types.NumberType},\n")
+				e.printf("Type:providertypes.SetType{ElemType:types.NumberType},\n")
 
 			case cfschema.PropertyTypeString:
 				features |= UsesInternalTypes
-				e.printf("Type: providertypes.SetType{ElemType:types.StringType},\n")
+				e.printf("Type:providertypes.SetType{ElemType:types.StringType},\n")
 
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
@@ -123,7 +123,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				}
 
 				features |= UsesInternalTypes
-				e.printf("Attributes: providertypes.SetNestedAttributes(\n")
+				e.printf("Attributes:providertypes.SetNestedAttributes(\n")
 
 				f, err := e.emitSchema(
 					parent{
@@ -141,10 +141,10 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				e.printf(",\n")
 				e.printf("providertypes.SetNestedAttributesOptions{\n")
 				if property.MinItems != nil {
-					e.printf("MinItems: %d,\n", *property.MinItems)
+					e.printf("MinItems:%d,\n", *property.MinItems)
 				}
 				if property.MaxItems != nil {
-					e.printf("MaxItems: %d,\n", *property.MaxItems)
+					e.printf("MaxItems:%d,\n", *property.MaxItems)
 				}
 				e.printf("},\n")
 				e.printf("),\n")
@@ -170,25 +170,25 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 			case cfschema.PropertyTypeBoolean:
 				if arrayType == aggregateOrderedSet {
 					features |= UsesInternalTypes
-					e.printf("Type: providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.BoolType}},\n")
+					e.printf("Type:providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.BoolType}},\n")
 				} else {
-					e.printf("Type: types.ListType{ElemType:types.BoolType},\n")
+					e.printf("Type:types.ListType{ElemType:types.BoolType},\n")
 				}
 
 			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
 				if arrayType == aggregateOrderedSet {
 					features |= UsesInternalTypes
-					e.printf("Type: providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.NumberType}},\n")
+					e.printf("Type:providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.NumberType}},\n")
 				} else {
-					e.printf("Type: types.ListType{ElemType:types.NumberType},\n")
+					e.printf("Type:types.ListType{ElemType:types.NumberType},\n")
 				}
 
 			case cfschema.PropertyTypeString:
 				if arrayType == aggregateOrderedSet {
 					features |= UsesInternalTypes
-					e.printf("Type: providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.StringType}},\n")
+					e.printf("Type:providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.StringType}},\n")
 				} else {
-					e.printf("Type: types.ListType{ElemType:types.StringType},\n")
+					e.printf("Type:types.ListType{ElemType:types.StringType},\n")
 				}
 
 			case cfschema.PropertyTypeObject:
@@ -200,7 +200,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 					return 0, unsupportedTypeError(path, "list of undefined schema")
 				}
 
-				e.printf("Attributes: schema.ListNestedAttributes(\n")
+				e.printf("Attributes:tfsdk.ListNestedAttributes(\n")
 
 				f, err := e.emitSchema(
 					parent{
@@ -216,12 +216,12 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				features |= f
 
 				e.printf(",\n")
-				e.printf("schema.ListNestedAttributesOptions{\n")
+				e.printf("tfsdk.ListNestedAttributesOptions{\n")
 				if property.MinItems != nil {
-					e.printf("MinItems: %d,\n", *property.MinItems)
+					e.printf("MinItems:%d,\n", *property.MinItems)
 				}
 				if property.MaxItems != nil {
-					e.printf("MaxItems: %d,\n", *property.MaxItems)
+					e.printf("MaxItems:%d,\n", *property.MaxItems)
 				}
 				e.printf("},\n")
 				e.printf("),\n")
@@ -257,13 +257,13 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 			// Primitive types.
 			//
 			case cfschema.PropertyTypeBoolean:
-				e.printf("Type: types.MapType{ElemType:types.BoolType},\n")
+				e.printf("Type:types.MapType{ElemType:types.BoolType},\n")
 
 			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-				e.printf("Type: types.MapType{ElemType:types.NumberType},\n")
+				e.printf("Type:types.MapType{ElemType:types.NumberType},\n")
 
 			case cfschema.PropertyTypeString:
-				e.printf("Type: types.MapType{ElemType:types.StringType},\n")
+				e.printf("Type:types.MapType{ElemType:types.StringType},\n")
 
 			//
 			// Complex types.
@@ -290,13 +290,13 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				} else {
 					switch itemType := patternProperty.Items.Type.String(); itemType {
 					case cfschema.PropertyTypeBoolean:
-						e.printf("Type: types.MapType{ElemType:types.ListType{ElemType:types.BoolType}},\n")
+						e.printf("Type:types.MapType{ElemType:types.ListType{ElemType:types.BoolType}},\n")
 
 					case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-						e.printf("Type: types.MapType{ElemType:types.ListType{ElemType:types.NumberType}},\n")
+						e.printf("Type:types.MapType{ElemType:types.ListType{ElemType:types.NumberType}},\n")
 
 					case cfschema.PropertyTypeString:
-						e.printf("Type: types.MapType{ElemType:types.ListType{ElemType:types.StringType}},\n")
+						e.printf("Type:types.MapType{ElemType:types.ListType{ElemType:types.StringType}},\n")
 
 					default:
 						return 0, unsupportedTypeError(path, fmt.Sprintf("key-value map of list of %s", itemType))
@@ -312,7 +312,7 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 					return 0, unsupportedTypeError(path, "key-value map of undefined schema")
 				}
 
-				e.printf("Attributes: schema.MapNestedAttributes(\n")
+				e.printf("Attributes:tfsdk.MapNestedAttributes(\n")
 
 				f, err := e.emitSchema(
 					parent{
@@ -328,12 +328,12 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				features |= f
 
 				e.printf(",\n")
-				e.printf("schema.MapNestedAttributesOptions{\n")
+				e.printf("tfsdk.MapNestedAttributesOptions{\n")
 				if patternProperty.MinItems != nil {
-					e.printf("MinItems: %d,\n", *patternProperty.MinItems)
+					e.printf("MinItems:%d,\n", *patternProperty.MinItems)
 				}
 				if patternProperty.MaxItems != nil {
-					e.printf("MaxItems: %d,\n", *patternProperty.MaxItems)
+					e.printf("MaxItems:%d,\n", *patternProperty.MaxItems)
 				}
 				e.printf("},\n")
 				e.printf("),\n")
@@ -354,12 +354,12 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 		//
 		if len(property.Properties) == 0 {
 			// Schemaless object => key-value map of string.
-			e.printf("Type: types.MapType{ElemType:types.StringType},\n")
+			e.printf("Type:types.MapType{ElemType:types.StringType},\n")
 
 			break
 		}
 
-		e.printf("Attributes: schema.SingleNestedAttributes(\n")
+		e.printf("Attributes:tfsdk.SingleNestedAttributes(\n")
 		f, err := e.emitSchema(
 			parent{
 				path: path,
@@ -385,13 +385,13 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
 
 	if required {
-		e.printf("Required: true,\n")
+		e.printf("Required:true,\n")
 	} else if !readOnly {
-		e.printf("Optional: true,\n")
+		e.printf("Optional:true,\n")
 	}
 
 	if (readOnly || createOnly) && !required {
-		e.printf("Computed: true,\n")
+		e.printf("Computed:true,\n")
 	}
 
 	if createOnly {
@@ -424,9 +424,9 @@ func (e *Emitter) emitSchema(parent parent, properties map[string]*cfschema.Prop
 
 	var features Features
 
-	e.printf("map[string]schema.Attribute{\n")
+	e.printf("map[string]tfsdk.Attribute{\n")
 	for _, name := range names {
-		e.printf("%q: ", naming.CloudFormationPropertyToTerraformAttribute(name))
+		e.printf("%q:", naming.CloudFormationPropertyToTerraformAttribute(name))
 
 		f, err := e.emitAttribute(append(parent.path, name), name, properties[name], parent.reqd.IsRequired(name))
 

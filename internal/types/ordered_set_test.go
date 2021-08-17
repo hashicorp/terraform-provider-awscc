@@ -6,6 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/tfresource"
 )
 
 func TestOrderedSetTypeValidate(t *testing.T) {
@@ -58,11 +59,11 @@ func TestOrderedSetTypeValidate(t *testing.T) {
 			test.set.ElemType = types.ListType{ElemType: types.BoolType}
 			diags := test.set.Validate(context.TODO(), test.in)
 
-			if !DiagsHasError(diags) && test.expectError {
+			if !tfresource.DiagsHasError(diags) && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if DiagsHasError(diags) && !test.expectError {
+			if tfresource.DiagsHasError(diags) && !test.expectError {
 				t.Fatal("got unexpected error")
 			}
 		})

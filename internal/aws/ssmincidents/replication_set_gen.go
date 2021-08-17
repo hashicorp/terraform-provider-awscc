@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -22,7 +21,7 @@ func init() {
 // replicationSetResourceType returns the Terraform awscc_ssmincidents_replication_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSMIncidents::ReplicationSet resource type.
 func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -86,12 +85,12 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"region_configuration": {
 						// Property: RegionConfiguration
 						Description: "The ReplicationSet regional configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"sse_kms_key_id": {
 									// Property: SseKmsKeyId
 									Description: "The ARN of the ReplicationSet.",
@@ -119,13 +118,13 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource type definition for AWS::SSMIncidents::ReplicationSet",
 		Version:     1,
 		Attributes:  attributes,

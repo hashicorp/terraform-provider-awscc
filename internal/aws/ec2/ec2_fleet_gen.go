@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // eC2FleetResourceType returns the Terraform awscc_ec2_ec2_fleet resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::EC2Fleet resource type.
 func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"context": {
 			// Property: Context
 			// CloudFormation resource type schema:
@@ -143,12 +142,12 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"launch_template_specification": {
 						// Property: LaunchTemplateSpecification
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"launch_template_id": {
 									// Property: LaunchTemplateId
 									Type:     types.StringType,
@@ -170,8 +169,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"overrides": {
 						// Property: Overrides
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"availability_zone": {
 									// Property: AvailabilityZone
 									Type:     types.StringType,
@@ -189,8 +188,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"placement": {
 									// Property: Placement
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"affinity": {
 												// Property: Affinity
 												Type:     types.StringType,
@@ -251,12 +250,12 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -299,8 +298,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"allocation_strategy": {
 						// Property: AllocationStrategy
 						Type:     types.StringType,
@@ -308,8 +307,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"capacity_reservation_options": {
 						// Property: CapacityReservationOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"usage_strategy": {
 									// Property: UsageStrategy
 									Type:     types.StringType,
@@ -396,8 +395,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"allocation_strategy": {
 						// Property: AllocationStrategy
 						Type:     types.StringType,
@@ -524,8 +523,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"resource_type": {
 						// Property: ResourceType
 						Type:     types.StringType,
@@ -533,8 +532,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"tags": {
 						// Property: Tags
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
 									Type:     types.StringType,
@@ -546,12 +545,12 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -585,8 +584,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"default_target_capacity_type": {
 						// Property: DefaultTargetCapacityType
 						Type:     types.StringType,
@@ -663,13 +662,13 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::EC2::EC2Fleet",
 		Version:     1,
 		Attributes:  attributes,

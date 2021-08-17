@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -22,7 +21,7 @@ func init() {
 // clusterCapacityProviderAssociationsResourceType returns the Terraform awscc_ecs_cluster_capacity_provider_associations resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::ClusterCapacityProviderAssociations resource type.
 func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"capacity_providers": {
 			// Property: CapacityProviders
 			// CloudFormation resource type schema:
@@ -81,8 +80,8 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			//   "type": "array"
 			// }
 			Description: "List of capacity providers to associate with the cluster",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"base": {
 						// Property: Base
 						Type:     types.NumberType,
@@ -100,20 +99,20 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 		},
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Associate a set of ECS Capacity Providers with a specified ECS Cluster",
 		Version:     1,
 		Attributes:  attributes,

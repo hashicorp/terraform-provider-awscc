@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // indexResourceType returns the Terraform awscc_kendra_index resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Kendra::Index resource type.
 func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -51,8 +50,8 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"query_capacity_units": {
 						// Property: QueryCapacityUnits
 						Type:     types.NumberType,
@@ -168,8 +167,8 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxItems": 500,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
 						Type:     types.StringType,
@@ -177,8 +176,8 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"relevance": {
 						// Property: Relevance
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"duration": {
 									// Property: Duration
 									Type:     types.StringType,
@@ -201,8 +200,8 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"value_importance_items": {
 									// Property: ValueImportanceItems
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
 												Type:     types.StringType,
@@ -214,7 +213,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -224,8 +223,8 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"search": {
 						// Property: Search
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"displayable": {
 									// Property: Displayable
 									Type:     types.BoolType,
@@ -256,7 +255,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 500,
 				},
 			),
@@ -332,8 +331,8 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"kms_key_id": {
 						// Property: KmsKeyId
 						Type:     types.StringType,
@@ -377,8 +376,8 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "List of tags",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "A string used to identify this tag",
@@ -392,7 +391,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 200,
 				},
 			),
@@ -493,12 +492,12 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxItems": 1,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"json_token_type_configuration": {
 						// Property: JsonTokenTypeConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"group_attribute_field": {
 									// Property: GroupAttributeField
 									Type:     types.StringType,
@@ -515,8 +514,8 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"jwt_token_type_configuration": {
 						// Property: JwtTokenTypeConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"claim_regex": {
 									// Property: ClaimRegex
 									Type:     types.StringType,
@@ -558,7 +557,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 1,
 				},
 			),
@@ -567,13 +566,13 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A Kendra index",
 		Version:     1,
 		Attributes:  attributes,

@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // dBProxyResourceType returns the Terraform awscc_rds_db_proxy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBProxy resource type.
 func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"auth": {
 			// Property: Auth
 			// CloudFormation resource type schema:
@@ -66,8 +65,8 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The authorization mechanism that the proxy uses.",
 			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"auth_scheme": {
 						// Property: AuthScheme
 						Description: "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
@@ -99,7 +98,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -227,8 +226,8 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
 			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -240,7 +239,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -293,13 +292,13 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::RDS::DBProxy",
 		Version:     1,
 		Attributes:  attributes,

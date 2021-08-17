@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // containerRecipeResourceType returns the Terraform awscc_imagebuilder_container_recipe resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::ContainerRecipe resource type.
 func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -52,8 +51,8 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array"
 			// }
 			Description: "Components for build and test that are included in the container recipe.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"component_arn": {
 						// Property: ComponentArn
 						Description: "The Amazon Resource Name (ARN) of the component.",
@@ -61,7 +60,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -219,13 +218,13 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "object"
 			// }
 			Description: "A group of options that can be used to configure an instance for building and testing container images.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"block_device_mappings": {
 						// Property: BlockDeviceMappings
 						Description: "Defines the block devices to attach for building an instance from this Image Builder AMI.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"device_name": {
 									// Property: DeviceName
 									Description: "The device to which these mappings apply.",
@@ -235,8 +234,8 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								"ebs": {
 									// Property: Ebs
 									Description: "Amazon EBS-specific block device mapping specifications. ",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"delete_on_termination": {
 												// Property: DeleteOnTermination
 												Description: "Use to configure delete on termination of the associated device.",
@@ -296,7 +295,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Optional:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -410,8 +409,8 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "object"
 			// }
 			Description: "The container repository where the output container image is stored.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"repository_name": {
 						// Property: RepositoryName
 						Description: "The name of the container repository where the output container image is stored. This name is prefixed by the repository location.",
@@ -459,13 +458,13 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::ImageBuilder::ContainerRecipe",
 		Version:     1,
 		Attributes:  attributes,

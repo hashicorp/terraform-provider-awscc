@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // accessPointPolicyResourceType returns the Terraform awscc_s3objectlambda_access_point_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3ObjectLambda::AccessPointPolicy resource type.
 func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"object_lambda_access_point": {
 			// Property: ObjectLambdaAccessPoint
 			// CloudFormation resource type schema:
@@ -51,13 +50,13 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "AWS::S3ObjectLambda::AccessPointPolicy resource is an Amazon S3ObjectLambda policy type that you can use to control permissions for your S3ObjectLambda",
 		Version:     1,
 		Attributes:  attributes,

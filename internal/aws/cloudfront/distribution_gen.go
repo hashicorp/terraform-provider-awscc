@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // distributionResourceType returns the Terraform awscc_cloudfront_distribution resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::Distribution resource type.
 func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"distribution_config": {
 			// Property: DistributionConfig
 			// CloudFormation resource type schema:
@@ -705,8 +704,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"aliases": {
 						// Property: Aliases
 						Type:     types.ListType{ElemType: types.StringType},
@@ -719,8 +718,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"cache_behaviors": {
 						// Property: CacheBehaviors
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"allowed_methods": {
 									// Property: AllowedMethods
 									Type:     types.ListType{ElemType: types.StringType},
@@ -753,12 +752,12 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"forwarded_values": {
 									// Property: ForwardedValues
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"cookies": {
 												// Property: Cookies
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"forward": {
 															// Property: Forward
 															Type:     types.StringType,
@@ -794,8 +793,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"function_associations": {
 									// Property: FunctionAssociations
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"event_type": {
 												// Property: EventType
 												Type:     types.StringType,
@@ -807,14 +806,14 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
 								"lambda_function_associations": {
 									// Property: LambdaFunctionAssociations
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"event_type": {
 												// Property: EventType
 												Type:     types.StringType,
@@ -831,7 +830,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -886,7 +885,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -897,8 +896,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"custom_error_responses": {
 						// Property: CustomErrorResponses
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"error_caching_min_ttl": {
 									// Property: ErrorCachingMinTTL
 									Type:     types.NumberType,
@@ -920,14 +919,14 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 					"custom_origin": {
 						// Property: CustomOrigin
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"dns_name": {
 									// Property: DNSName
 									Type:     types.StringType,
@@ -959,8 +958,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"default_cache_behavior": {
 						// Property: DefaultCacheBehavior
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"allowed_methods": {
 									// Property: AllowedMethods
 									Type:     types.ListType{ElemType: types.StringType},
@@ -993,12 +992,12 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"forwarded_values": {
 									// Property: ForwardedValues
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"cookies": {
 												// Property: Cookies
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"forward": {
 															// Property: Forward
 															Type:     types.StringType,
@@ -1034,8 +1033,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"function_associations": {
 									// Property: FunctionAssociations
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"event_type": {
 												// Property: EventType
 												Type:     types.StringType,
@@ -1047,14 +1046,14 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
 								"lambda_function_associations": {
 									// Property: LambdaFunctionAssociations
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"event_type": {
 												// Property: EventType
 												Type:     types.StringType,
@@ -1071,7 +1070,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -1146,8 +1145,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"logging": {
 						// Property: Logging
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"bucket": {
 									// Property: Bucket
 									Type:     types.StringType,
@@ -1169,20 +1168,20 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"origin_groups": {
 						// Property: OriginGroups
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"items": {
 									// Property: Items
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"failover_criteria": {
 												// Property: FailoverCriteria
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"status_codes": {
 															// Property: StatusCodes
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"items": {
 																		// Property: Items
 																		Type:     types.ListType{ElemType: types.NumberType},
@@ -1208,19 +1207,19 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"members": {
 												// Property: Members
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"items": {
 															// Property: Items
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"origin_id": {
 																		// Property: OriginId
 																		Type:     types.StringType,
 																		Required: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
 														},
@@ -1234,7 +1233,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -1249,8 +1248,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"origins": {
 						// Property: Origins
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"connection_attempts": {
 									// Property: ConnectionAttempts
 									Type:     types.NumberType,
@@ -1263,8 +1262,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"custom_origin_config": {
 									// Property: CustomOriginConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"http_port": {
 												// Property: HTTPPort
 												Type:     types.NumberType,
@@ -1311,8 +1310,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"origin_custom_headers": {
 									// Property: OriginCustomHeaders
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"header_name": {
 												// Property: HeaderName
 												Type:     types.StringType,
@@ -1324,7 +1323,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -1335,8 +1334,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"origin_shield": {
 									// Property: OriginShield
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"enabled": {
 												// Property: Enabled
 												Type:     types.BoolType,
@@ -1353,8 +1352,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"s3_origin_config": {
 									// Property: S3OriginConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"origin_access_identity": {
 												// Property: OriginAccessIdentity
 												Type:     types.StringType,
@@ -1365,7 +1364,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -1376,12 +1375,12 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"restrictions": {
 						// Property: Restrictions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"geo_restriction": {
 									// Property: GeoRestriction
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"locations": {
 												// Property: Locations
 												Type:     types.ListType{ElemType: types.StringType},
@@ -1402,8 +1401,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"s3_origin": {
 						// Property: S3Origin
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"dns_name": {
 									// Property: DNSName
 									Type:     types.StringType,
@@ -1420,8 +1419,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"viewer_certificate": {
 						// Property: ViewerCertificate
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"acm_certificate_arn": {
 									// Property: AcmCertificateArn
 									Type:     types.StringType,
@@ -1501,8 +1500,8 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -1514,20 +1513,20 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::Distribution",
 		Version:     1,
 		Attributes:  attributes,

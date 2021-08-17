@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // capacityProviderResourceType returns the Terraform awscc_ecs_capacity_provider resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::CapacityProvider resource type.
 func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"auto_scaling_group_provider": {
 			// Property: AutoScalingGroupProvider
 			// CloudFormation resource type schema:
@@ -70,8 +69,8 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"auto_scaling_group_arn": {
 						// Property: AutoScalingGroupArn
 						Type:     types.StringType,
@@ -81,8 +80,8 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"managed_scaling": {
 						// Property: ManagedScaling
 						Description: "The managed scaling settings for the Auto Scaling group capacity provider.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"instance_warmup_period": {
 									// Property: InstanceWarmupPeriod
 									Type:     types.NumberType,
@@ -152,8 +151,8 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -165,20 +164,20 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::ECS::CapacityProvider.",
 		Version:     1,
 		Attributes:  attributes,

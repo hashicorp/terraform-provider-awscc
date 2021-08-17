@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // dataflowEndpointGroupResourceType returns the Terraform awscc_groundstation_dataflow_endpoint_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GroundStation::DataflowEndpointGroup resource type.
 func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -90,16 +89,16 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "minItems": 1,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"endpoint": {
 						// Property: Endpoint
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"address": {
 									// Property: Address
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"name": {
 												// Property: Name
 												Type:     types.StringType,
@@ -130,8 +129,8 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 					},
 					"security_details": {
 						// Property: SecurityDetails
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"role_arn": {
 									// Property: RoleArn
 									Type:     types.StringType,
@@ -152,7 +151,7 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -187,8 +186,8 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -200,20 +199,20 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "AWS Ground Station DataflowEndpointGroup schema for CloudFormation",
 		Version:     1,
 		Attributes:  attributes,

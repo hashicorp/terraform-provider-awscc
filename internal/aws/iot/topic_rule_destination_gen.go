@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -22,7 +21,7 @@ func init() {
 // topicRuleDestinationResourceType returns the Terraform awscc_iot_topic_rule_destination resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::TopicRuleDestination resource type.
 func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -46,8 +45,8 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"confirmation_url": {
 						// Property: ConfirmationUrl
 						Type:     types.StringType,
@@ -113,8 +112,8 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"role_arn": {
 						// Property: RoleArn
 						Type:     types.StringType,
@@ -146,13 +145,13 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::IoT::TopicRuleDestination",
 		Version:     1,
 		Attributes:  attributes,

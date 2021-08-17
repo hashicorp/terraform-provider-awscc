@@ -7,15 +7,14 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
-var testSimpleSchema = schema.Schema{
-	Attributes: map[string]schema.Attribute{
+var testSimpleSchema = tfsdk.Schema{
+	Attributes: map[string]tfsdk.Attribute{
 		"arn": {
 			Type:     types.StringType,
 			Computed: true,
@@ -35,8 +34,8 @@ var testSimpleSchema = schema.Schema{
 	},
 }
 
-var testSimpleSchemaWithList = schema.Schema{
-	Attributes: map[string]schema.Attribute{
+var testSimpleSchemaWithList = tfsdk.Schema{
+	Attributes: map[string]tfsdk.Attribute{
 		"arn": {
 			Type:     types.StringType,
 			Computed: true,
@@ -62,8 +61,8 @@ var testSimpleSchemaWithList = schema.Schema{
 	},
 }
 
-var testSimpleSchemaWithOrderedSet = schema.Schema{
-	Attributes: map[string]schema.Attribute{
+var testSimpleSchemaWithOrderedSet = tfsdk.Schema{
+	Attributes: map[string]tfsdk.Attribute{
 		"arn": {
 			Type:     types.StringType,
 			Computed: true,
@@ -90,8 +89,8 @@ var testSimpleSchemaWithOrderedSet = schema.Schema{
 }
 
 // Adapted from https://github.com/hashicorp/terraform-plugin-framework/blob/1a7927fec93459115be87f283dd1ee7941b30578/tfsdk/state_test.go.
-var testComplexSchema = schema.Schema{
-	Attributes: map[string]schema.Attribute{
+var testComplexSchema = tfsdk.Schema{
+	Attributes: map[string]tfsdk.Attribute{
 		"name": {
 			Type:     types.StringType,
 			Required: true,
@@ -113,7 +112,7 @@ var testComplexSchema = schema.Schema{
 			Required: true,
 		},
 		"disks": {
-			Attributes: schema.ListNestedAttributes(map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(map[string]tfsdk.Attribute{
 				"id": {
 					Type:     types.StringType,
 					Required: true,
@@ -122,12 +121,12 @@ var testComplexSchema = schema.Schema{
 					Type:     types.BoolType,
 					Optional: true,
 				},
-			}, schema.ListNestedAttributesOptions{}),
+			}, tfsdk.ListNestedAttributesOptions{}),
 			Optional: true,
 			Computed: true,
 		},
 		"boot_disk": {
-			Attributes: schema.SingleNestedAttributes(map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(map[string]tfsdk.Attribute{
 				"id": {
 					Type:     types.StringType,
 					Required: true,
@@ -147,7 +146,7 @@ var testComplexSchema = schema.Schema{
 			Optional: true,
 		},
 		"video_ports": {
-			Attributes: providertypes.SetNestedAttributes(map[string]schema.Attribute{
+			Attributes: providertypes.SetNestedAttributes(map[string]tfsdk.Attribute{
 				"id": {
 					Type:     types.NumberType,
 					Required: true,
@@ -264,7 +263,7 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 func TestGetCloudFormationResourceModelValue(t *testing.T) {
 	testCases := []struct {
 		TestName      string
-		Schema        schema.Schema
+		Schema        tfsdk.Schema
 		ResourceModel map[string]interface{}
 		ExpectedError bool
 		ExpectedValue tftypes.Value

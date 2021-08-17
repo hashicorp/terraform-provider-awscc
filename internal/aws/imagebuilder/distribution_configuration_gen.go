@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // distributionConfigurationResourceType returns the Terraform awscc_imagebuilder_distribution_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::DistributionConfiguration resource type.
 func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -190,13 +189,13 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//   "type": "array"
 			// }
 			Description: "The distributions of the distribution configuration.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"ami_distribution_configuration": {
 						// Property: AmiDistributionConfiguration
 						Description: "The specific AMI settings (for example, launch permissions, AMI tags).",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"ami_tags": {
 									// Property: AmiTags
 									Description: "The tags to apply to AMIs distributed to this Region.",
@@ -219,8 +218,8 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 								"launch_permission_configuration": {
 									// Property: LaunchPermissionConfiguration
 									Description: "Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"user_groups": {
 												// Property: UserGroups
 												Description: "The name of the group.",
@@ -256,8 +255,8 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"container_distribution_configuration": {
 						// Property: ContainerDistributionConfiguration
 						Description: "Container distribution settings for encryption, licensing, and sharing in a specific Region.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"container_tags": {
 									// Property: ContainerTags
 									Description: "Tags that are attached to the container distribution configuration.",
@@ -273,8 +272,8 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 								"target_repository": {
 									// Property: TargetRepository
 									Description: "The destination repository for the container image.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"repository_name": {
 												// Property: RepositoryName
 												Description: "The repository name of target container repository.",
@@ -298,8 +297,8 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"launch_template_configurations": {
 						// Property: LaunchTemplateConfigurations
 						Description: "A group of launchTemplateConfiguration settings that apply to image distribution.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"account_id": {
 									// Property: AccountId
 									Description: "The account ID that this configuration applies to.",
@@ -319,7 +318,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 									Optional:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -336,7 +335,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 		},
@@ -373,13 +372,13 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::ImageBuilder::DistributionConfiguration",
 		Version:     1,
 		Attributes:  attributes,

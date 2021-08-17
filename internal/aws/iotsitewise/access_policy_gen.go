@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // accessPolicyResourceType returns the Terraform awscc_iotsitewise_access_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::AccessPolicy resource type.
 func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"access_policy_arn": {
 			// Property: AccessPolicyArn
 			// CloudFormation resource type schema:
@@ -88,13 +87,13 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The identity for this access policy. Choose either an SSO user or group or an IAM user or role.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"iam_role": {
 						// Property: IamRole
 						Description: "Contains information for an IAM role identity in an access policy.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: arn
 									Description: "The ARN of the IAM role.",
@@ -108,8 +107,8 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"iam_user": {
 						// Property: IamUser
 						Description: "Contains information for an IAM user identity in an access policy.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: arn
 									Description: "The ARN of the IAM user.",
@@ -123,8 +122,8 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"user": {
 						// Property: User
 						Description: "Contains information for a user identity in an access policy.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"id": {
 									// Property: id
 									Description: "The AWS SSO ID of the user.",
@@ -183,13 +182,13 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"portal": {
 						// Property: Portal
 						Description: "A portal resource.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"id": {
 									// Property: id
 									Description: "The ID of the portal.",
@@ -203,8 +202,8 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"project": {
 						// Property: Project
 						Description: "A project resource.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"id": {
 									// Property: id
 									Description: "The ID of the project.",
@@ -222,13 +221,13 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::IoTSiteWise::AccessPolicy",
 		Version:     1,
 		Attributes:  attributes,

@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -22,7 +21,7 @@ func init() {
 // tableResourceType returns the Terraform awscc_cassandra_table resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Cassandra::Table resource type.
 func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"billing_mode": {
 			// Property: BillingMode
 			// CloudFormation resource type schema:
@@ -60,8 +59,8 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"mode": {
 						// Property: Mode
 						Description: "Capacity mode for the specified table",
@@ -71,8 +70,8 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"provisioned_throughput": {
 						// Property: ProvisionedThroughput
 						Description: "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"read_capacity_units": {
 									// Property: ReadCapacityUnits
 									Type:     types.NumberType,
@@ -135,12 +134,12 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Clustering key columns of the table",
 			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"column": {
 						// Property: Column
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"column_name": {
 									// Property: ColumnName
 									Type:     types.StringType,
@@ -161,7 +160,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -193,8 +192,8 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Represents the settings used to enable server-side encryption",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"encryption_type": {
 						// Property: EncryptionType
 						Description: "Server-side encryption type",
@@ -253,8 +252,8 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Partition key columns of the table",
 			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"column_name": {
 						// Property: ColumnName
 						Type:     types.StringType,
@@ -266,7 +265,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -312,7 +311,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Non-key columns of the table",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"column_name": {
 						// Property: ColumnName
 						Type:     types.StringType,
@@ -375,8 +374,8 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An array of key-value pairs to apply to this resource",
 			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -388,7 +387,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 50,
 				},
@@ -398,13 +397,13 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Cassandra::Table",
 		Version:     1,
 		Attributes:  attributes,

@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // topicRuleResourceType returns the Terraform awscc_iot_topic_rule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::TopicRule resource type.
 func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -64,8 +63,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -77,7 +76,7 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -1323,16 +1322,16 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"actions": {
 						// Property: Actions
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cloudwatch_alarm": {
 									// Property: CloudwatchAlarm
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"alarm_name": {
 												// Property: AlarmName
 												Type:     types.StringType,
@@ -1359,8 +1358,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"cloudwatch_logs": {
 									// Property: CloudwatchLogs
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"log_group_name": {
 												// Property: LogGroupName
 												Type:     types.StringType,
@@ -1377,8 +1376,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"cloudwatch_metric": {
 									// Property: CloudwatchMetric
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"metric_name": {
 												// Property: MetricName
 												Type:     types.StringType,
@@ -1415,8 +1414,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"dynamo_db": {
 									// Property: DynamoDB
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"hash_key_field": {
 												// Property: HashKeyField
 												Type:     types.StringType,
@@ -1468,12 +1467,12 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"dynamo_d_bv_2": {
 									// Property: DynamoDBv2
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"put_item": {
 												// Property: PutItem
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"table_name": {
 															// Property: TableName
 															Type:     types.StringType,
@@ -1494,8 +1493,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"elasticsearch": {
 									// Property: Elasticsearch
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"endpoint": {
 												// Property: Endpoint
 												Type:     types.StringType,
@@ -1527,8 +1526,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"firehose": {
 									// Property: Firehose
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"batch_mode": {
 												// Property: BatchMode
 												Type:     types.BoolType,
@@ -1555,16 +1554,16 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"http": {
 									// Property: Http
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"auth": {
 												// Property: Auth
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"sigv_4": {
 															// Property: Sigv4
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"role_arn": {
 																		// Property: RoleArn
 																		Type:     types.StringType,
@@ -1596,8 +1595,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"headers": {
 												// Property: Headers
 												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"key": {
 															// Property: Key
 															Type:     types.StringType,
@@ -1609,7 +1608,7 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
@@ -1624,8 +1623,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"iot_analytics": {
 									// Property: IotAnalytics
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"batch_mode": {
 												// Property: BatchMode
 												Type:     types.BoolType,
@@ -1647,8 +1646,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"iot_events": {
 									// Property: IotEvents
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"batch_mode": {
 												// Property: BatchMode
 												Type:     types.BoolType,
@@ -1675,13 +1674,13 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"iot_site_wise": {
 									// Property: IotSiteWise
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"put_asset_property_value_entries": {
 												// Property: PutAssetPropertyValueEntries
 												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"asset_id": {
 															// Property: AssetId
 															Type:     types.StringType,
@@ -1705,8 +1704,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"property_values": {
 															// Property: PropertyValues
 															// Ordered set.
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"quality": {
 																		// Property: Quality
 																		Type:     types.StringType,
@@ -1714,8 +1713,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	},
 																	"timestamp": {
 																		// Property: Timestamp
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"offset_in_nanos": {
 																					// Property: OffsetInNanos
 																					Type:     types.StringType,
@@ -1732,8 +1731,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	},
 																	"value": {
 																		// Property: Value
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"boolean_value": {
 																					// Property: BooleanValue
 																					Type:     types.StringType,
@@ -1759,12 +1758,12 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 											},
@@ -1779,8 +1778,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"kafka": {
 									// Property: Kafka
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"client_properties": {
 												// Property: ClientProperties
 												// Pattern: ""
@@ -1813,8 +1812,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"kinesis": {
 									// Property: Kinesis
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"partition_key": {
 												// Property: PartitionKey
 												Type:     types.StringType,
@@ -1836,8 +1835,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"lambda": {
 									// Property: Lambda
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"function_arn": {
 												// Property: FunctionArn
 												Type:     types.StringType,
@@ -1849,8 +1848,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"republish": {
 									// Property: Republish
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"qos": {
 												// Property: Qos
 												Type:     types.NumberType,
@@ -1872,8 +1871,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"s3": {
 									// Property: S3
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket_name": {
 												// Property: BucketName
 												Type:     types.StringType,
@@ -1900,8 +1899,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"sns": {
 									// Property: Sns
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"message_format": {
 												// Property: MessageFormat
 												Type:     types.StringType,
@@ -1923,8 +1922,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"sqs": {
 									// Property: Sqs
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"queue_url": {
 												// Property: QueueUrl
 												Type:     types.StringType,
@@ -1946,8 +1945,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"step_functions": {
 									// Property: StepFunctions
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"execution_name_prefix": {
 												// Property: ExecutionNamePrefix
 												Type:     types.StringType,
@@ -1969,8 +1968,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"timestream": {
 									// Property: Timestream
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"batch_mode": {
 												// Property: BatchMode
 												Type:     types.BoolType,
@@ -1983,8 +1982,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"dimensions": {
 												// Property: Dimensions
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"name": {
 															// Property: Name
 															Type:     types.StringType,
@@ -1996,7 +1995,7 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 1,
 														MaxItems: 128,
 													},
@@ -2015,8 +2014,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"timestamp": {
 												// Property: Timestamp
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"unit": {
 															// Property: Unit
 															Type:     types.StringType,
@@ -2036,7 +2035,7 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 					},
@@ -2052,12 +2051,12 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"error_action": {
 						// Property: ErrorAction
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cloudwatch_alarm": {
 									// Property: CloudwatchAlarm
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"alarm_name": {
 												// Property: AlarmName
 												Type:     types.StringType,
@@ -2084,8 +2083,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"cloudwatch_logs": {
 									// Property: CloudwatchLogs
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"log_group_name": {
 												// Property: LogGroupName
 												Type:     types.StringType,
@@ -2102,8 +2101,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"cloudwatch_metric": {
 									// Property: CloudwatchMetric
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"metric_name": {
 												// Property: MetricName
 												Type:     types.StringType,
@@ -2140,8 +2139,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"dynamo_db": {
 									// Property: DynamoDB
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"hash_key_field": {
 												// Property: HashKeyField
 												Type:     types.StringType,
@@ -2193,12 +2192,12 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"dynamo_d_bv_2": {
 									// Property: DynamoDBv2
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"put_item": {
 												// Property: PutItem
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"table_name": {
 															// Property: TableName
 															Type:     types.StringType,
@@ -2219,8 +2218,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"elasticsearch": {
 									// Property: Elasticsearch
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"endpoint": {
 												// Property: Endpoint
 												Type:     types.StringType,
@@ -2252,8 +2251,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"firehose": {
 									// Property: Firehose
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"batch_mode": {
 												// Property: BatchMode
 												Type:     types.BoolType,
@@ -2280,16 +2279,16 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"http": {
 									// Property: Http
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"auth": {
 												// Property: Auth
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"sigv_4": {
 															// Property: Sigv4
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"role_arn": {
 																		// Property: RoleArn
 																		Type:     types.StringType,
@@ -2321,8 +2320,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"headers": {
 												// Property: Headers
 												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"key": {
 															// Property: Key
 															Type:     types.StringType,
@@ -2334,7 +2333,7 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
@@ -2349,8 +2348,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"iot_analytics": {
 									// Property: IotAnalytics
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"batch_mode": {
 												// Property: BatchMode
 												Type:     types.BoolType,
@@ -2372,8 +2371,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"iot_events": {
 									// Property: IotEvents
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"batch_mode": {
 												// Property: BatchMode
 												Type:     types.BoolType,
@@ -2400,13 +2399,13 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"iot_site_wise": {
 									// Property: IotSiteWise
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"put_asset_property_value_entries": {
 												// Property: PutAssetPropertyValueEntries
 												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"asset_id": {
 															// Property: AssetId
 															Type:     types.StringType,
@@ -2430,8 +2429,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"property_values": {
 															// Property: PropertyValues
 															// Ordered set.
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"quality": {
 																		// Property: Quality
 																		Type:     types.StringType,
@@ -2439,8 +2438,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	},
 																	"timestamp": {
 																		// Property: Timestamp
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"offset_in_nanos": {
 																					// Property: OffsetInNanos
 																					Type:     types.StringType,
@@ -2457,8 +2456,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	},
 																	"value": {
 																		// Property: Value
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"boolean_value": {
 																					// Property: BooleanValue
 																					Type:     types.StringType,
@@ -2484,12 +2483,12 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 											},
@@ -2504,8 +2503,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"kafka": {
 									// Property: Kafka
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"client_properties": {
 												// Property: ClientProperties
 												// Pattern: ""
@@ -2538,8 +2537,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"kinesis": {
 									// Property: Kinesis
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"partition_key": {
 												// Property: PartitionKey
 												Type:     types.StringType,
@@ -2561,8 +2560,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"lambda": {
 									// Property: Lambda
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"function_arn": {
 												// Property: FunctionArn
 												Type:     types.StringType,
@@ -2574,8 +2573,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"republish": {
 									// Property: Republish
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"qos": {
 												// Property: Qos
 												Type:     types.NumberType,
@@ -2597,8 +2596,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"s3": {
 									// Property: S3
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket_name": {
 												// Property: BucketName
 												Type:     types.StringType,
@@ -2625,8 +2624,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"sns": {
 									// Property: Sns
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"message_format": {
 												// Property: MessageFormat
 												Type:     types.StringType,
@@ -2648,8 +2647,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"sqs": {
 									// Property: Sqs
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"queue_url": {
 												// Property: QueueUrl
 												Type:     types.StringType,
@@ -2671,8 +2670,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"step_functions": {
 									// Property: StepFunctions
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"execution_name_prefix": {
 												// Property: ExecutionNamePrefix
 												Type:     types.StringType,
@@ -2694,8 +2693,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"timestream": {
 									// Property: Timestream
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"batch_mode": {
 												// Property: BatchMode
 												Type:     types.BoolType,
@@ -2708,8 +2707,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"dimensions": {
 												// Property: Dimensions
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"name": {
 															// Property: Name
 															Type:     types.StringType,
@@ -2721,7 +2720,7 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 1,
 														MaxItems: 128,
 													},
@@ -2740,8 +2739,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"timestamp": {
 												// Property: Timestamp
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"unit": {
 															// Property: Unit
 															Type:     types.StringType,
@@ -2781,13 +2780,13 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::IoT::TopicRule",
 		Version:     1,
 		Attributes:  attributes,

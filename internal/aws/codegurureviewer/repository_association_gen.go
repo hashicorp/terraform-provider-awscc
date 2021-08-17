@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // repositoryAssociationResourceType returns the Terraform awscc_codegurureviewer_repository_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CodeGuruReviewer::RepositoryAssociation resource type.
 func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"association_arn": {
 			// Property: AssociationArn
 			// CloudFormation resource type schema:
@@ -132,8 +131,8 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "uniqueItems": false
 			// }
 			Description: "The tags associated with a repository association.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
@@ -147,7 +146,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -176,13 +175,13 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "This resource schema represents the RepositoryAssociation resource in the Amazon CodeGuru Reviewer service.",
 		Version:     1,
 		Attributes:  attributes,

@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // dBProxyTargetGroupResourceType returns the Terraform awscc_rds_db_proxy_target_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBProxyTargetGroup resource type.
 func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"connection_pool_configuration_info": {
 			// Property: ConnectionPoolConfigurationInfo
 			// CloudFormation resource type schema:
@@ -55,8 +54,8 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"connection_borrow_timeout": {
 						// Property: ConnectionBorrowTimeout
 						Description: "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
@@ -163,13 +162,13 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::RDS::DBProxyTargetGroup",
 		Version:     1,
 		Attributes:  attributes,

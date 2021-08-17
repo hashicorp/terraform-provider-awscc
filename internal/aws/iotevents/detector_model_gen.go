@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // detectorModelResourceType returns the Terraform awscc_iotevents_detector_model resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTEvents::DetectorModel resource type.
 func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"detector_model_definition": {
 			// Property: DetectorModelDefinition
 			// CloudFormation resource type schema:
@@ -2179,8 +2178,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "object"
 			// }
 			Description: "Information that defines how a detector operates.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"initial_state_name": {
 						// Property: InitialStateName
 						Description: "The state that is entered at the creation of each detector (instance).",
@@ -2190,28 +2189,28 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"states": {
 						// Property: States
 						Description: "Information about the states of the detector.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"on_enter": {
 									// Property: OnEnter
 									Description: "When entering this state, perform these `actions` if the `condition` is `TRUE`.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"events": {
 												// Property: Events
 												Description: "Specifies the `actions` that are performed when the state is entered and the `condition` is `TRUE`.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"actions": {
 															// Property: Actions
 															Description: "The actions to be performed.",
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"clear_timer": {
 																		// Property: ClearTimer
 																		Description: "Information needed to clear the timer.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"timer_name": {
 																					// Property: TimerName
 																					Type:     types.StringType,
@@ -2224,8 +2223,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"dynamo_db": {
 																		// Property: DynamoDB
 																		Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"hash_key_field": {
 																					// Property: HashKeyField
 																					Description: "The name of the hash key (also called the partition key).",
@@ -2253,8 +2252,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -2308,13 +2307,13 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"dynamo_d_bv_2": {
 																		// Property: DynamoDBv2
 																		Description: "Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.\n\nYou can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -2344,8 +2343,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"firehose": {
 																		// Property: Firehose
 																		Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"delivery_stream_name": {
 																					// Property: DeliveryStreamName
 																					Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
@@ -2355,8 +2354,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -2386,8 +2385,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"iot_events": {
 																		// Property: IotEvents
 																		Description: "Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"input_name": {
 																					// Property: InputName
 																					Description: "The name of the AWS IoT Events input where the data is sent.",
@@ -2397,8 +2396,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -2422,8 +2421,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"iot_site_wise": {
 																		// Property: IotSiteWise
 																		Description: "Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"asset_id": {
 																					// Property: AssetId
 																					Description: "The ID of the asset that has the specified property. You can specify an expression.",
@@ -2451,8 +2450,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"property_value": {
 																					// Property: PropertyValue
 																					Description: "A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"quality": {
 																								// Property: Quality
 																								Description: "The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.",
@@ -2462,8 +2461,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																							"timestamp": {
 																								// Property: Timestamp
 																								Description: "A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*.",
-																								Attributes: schema.SingleNestedAttributes(
-																									map[string]schema.Attribute{
+																								Attributes: tfsdk.SingleNestedAttributes(
+																									map[string]tfsdk.Attribute{
 																										"offset_in_nanos": {
 																											// Property: OffsetInNanos
 																											Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.",
@@ -2483,8 +2482,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																							"value": {
 																								// Property: Value
 																								Description: "A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*.",
-																								Attributes: schema.SingleNestedAttributes(
-																									map[string]schema.Attribute{
+																								Attributes: tfsdk.SingleNestedAttributes(
+																									map[string]tfsdk.Attribute{
 																										"boolean_value": {
 																											// Property: BooleanValue
 																											Description: "The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.",
@@ -2524,8 +2523,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"iot_topic_publish": {
 																		// Property: IotTopicPublish
 																		Description: "Information required to publish the MQTT message through the AWS IoT message broker.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"mqtt_topic": {
 																					// Property: MqttTopic
 																					Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
@@ -2535,8 +2534,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -2559,8 +2558,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	},
 																	"lambda": {
 																		// Property: Lambda
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"function_arn": {
 																					// Property: FunctionArn
 																					Description: "The ARN of the Lambda function that is executed.",
@@ -2570,8 +2569,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -2595,8 +2594,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"reset_timer": {
 																		// Property: ResetTimer
 																		Description: "Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"timer_name": {
 																					// Property: TimerName
 																					Description: "The name of the timer to reset.",
@@ -2610,8 +2609,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"set_timer": {
 																		// Property: SetTimer
 																		Description: "Information needed to set the timer.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"duration_expression": {
 																					// Property: DurationExpression
 																					Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
@@ -2637,8 +2636,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"set_variable": {
 																		// Property: SetVariable
 																		Description: "Information about the variable and its new value.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"value": {
 																					// Property: Value
 																					Description: "The new value of the variable.",
@@ -2658,13 +2657,13 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"sns": {
 																		// Property: Sns
 																		Description: "Information required to publish the Amazon SNS message.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -2693,13 +2692,13 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	},
 																	"sqs": {
 																		// Property: Sqs
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -2733,7 +2732,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		Optional: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
@@ -2750,7 +2749,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Required:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
@@ -2761,23 +2760,23 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 								"on_exit": {
 									// Property: OnExit
 									Description: "When exiting this state, perform these `actions` if the specified `condition` is `TRUE`.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"events": {
 												// Property: Events
 												Description: "Specifies the `actions` that are performed when the state is exited and the `condition` is `TRUE`.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"actions": {
 															// Property: Actions
 															Description: "The actions to be performed.",
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"clear_timer": {
 																		// Property: ClearTimer
 																		Description: "Information needed to clear the timer.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"timer_name": {
 																					// Property: TimerName
 																					Type:     types.StringType,
@@ -2790,8 +2789,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"dynamo_db": {
 																		// Property: DynamoDB
 																		Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"hash_key_field": {
 																					// Property: HashKeyField
 																					Description: "The name of the hash key (also called the partition key).",
@@ -2819,8 +2818,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -2874,13 +2873,13 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"dynamo_d_bv_2": {
 																		// Property: DynamoDBv2
 																		Description: "Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.\n\nYou can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -2910,8 +2909,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"firehose": {
 																		// Property: Firehose
 																		Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"delivery_stream_name": {
 																					// Property: DeliveryStreamName
 																					Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
@@ -2921,8 +2920,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -2952,8 +2951,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"iot_events": {
 																		// Property: IotEvents
 																		Description: "Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"input_name": {
 																					// Property: InputName
 																					Description: "The name of the AWS IoT Events input where the data is sent.",
@@ -2963,8 +2962,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -2988,8 +2987,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"iot_site_wise": {
 																		// Property: IotSiteWise
 																		Description: "Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"asset_id": {
 																					// Property: AssetId
 																					Description: "The ID of the asset that has the specified property. You can specify an expression.",
@@ -3017,8 +3016,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"property_value": {
 																					// Property: PropertyValue
 																					Description: "A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"quality": {
 																								// Property: Quality
 																								Description: "The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.",
@@ -3028,8 +3027,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																							"timestamp": {
 																								// Property: Timestamp
 																								Description: "A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*.",
-																								Attributes: schema.SingleNestedAttributes(
-																									map[string]schema.Attribute{
+																								Attributes: tfsdk.SingleNestedAttributes(
+																									map[string]tfsdk.Attribute{
 																										"offset_in_nanos": {
 																											// Property: OffsetInNanos
 																											Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.",
@@ -3049,8 +3048,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																							"value": {
 																								// Property: Value
 																								Description: "A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*.",
-																								Attributes: schema.SingleNestedAttributes(
-																									map[string]schema.Attribute{
+																								Attributes: tfsdk.SingleNestedAttributes(
+																									map[string]tfsdk.Attribute{
 																										"boolean_value": {
 																											// Property: BooleanValue
 																											Description: "The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.",
@@ -3090,8 +3089,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"iot_topic_publish": {
 																		// Property: IotTopicPublish
 																		Description: "Information required to publish the MQTT message through the AWS IoT message broker.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"mqtt_topic": {
 																					// Property: MqttTopic
 																					Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
@@ -3101,8 +3100,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3125,8 +3124,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	},
 																	"lambda": {
 																		// Property: Lambda
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"function_arn": {
 																					// Property: FunctionArn
 																					Description: "The ARN of the Lambda function that is executed.",
@@ -3136,8 +3135,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3161,8 +3160,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"reset_timer": {
 																		// Property: ResetTimer
 																		Description: "Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"timer_name": {
 																					// Property: TimerName
 																					Description: "The name of the timer to reset.",
@@ -3176,8 +3175,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"set_timer": {
 																		// Property: SetTimer
 																		Description: "Information needed to set the timer.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"duration_expression": {
 																					// Property: DurationExpression
 																					Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
@@ -3203,8 +3202,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"set_variable": {
 																		// Property: SetVariable
 																		Description: "Information about the variable and its new value.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"value": {
 																					// Property: Value
 																					Description: "The new value of the variable.",
@@ -3224,13 +3223,13 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"sns": {
 																		// Property: Sns
 																		Description: "Information required to publish the Amazon SNS message.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3259,13 +3258,13 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	},
 																	"sqs": {
 																		// Property: Sqs
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3299,7 +3298,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		Optional: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
@@ -3316,7 +3315,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Required:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
@@ -3327,23 +3326,23 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 								"on_input": {
 									// Property: OnInput
 									Description: "When an input is received and the `condition` is `TRUE`, perform the specified `actions`.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"events": {
 												// Property: Events
 												Description: "Specifies the `actions` performed when the `condition` evaluates to `TRUE`.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"actions": {
 															// Property: Actions
 															Description: "The actions to be performed.",
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"clear_timer": {
 																		// Property: ClearTimer
 																		Description: "Information needed to clear the timer.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"timer_name": {
 																					// Property: TimerName
 																					Type:     types.StringType,
@@ -3356,8 +3355,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"dynamo_db": {
 																		// Property: DynamoDB
 																		Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"hash_key_field": {
 																					// Property: HashKeyField
 																					Description: "The name of the hash key (also called the partition key).",
@@ -3385,8 +3384,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3440,13 +3439,13 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"dynamo_d_bv_2": {
 																		// Property: DynamoDBv2
 																		Description: "Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.\n\nYou can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3476,8 +3475,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"firehose": {
 																		// Property: Firehose
 																		Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"delivery_stream_name": {
 																					// Property: DeliveryStreamName
 																					Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
@@ -3487,8 +3486,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3518,8 +3517,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"iot_events": {
 																		// Property: IotEvents
 																		Description: "Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"input_name": {
 																					// Property: InputName
 																					Description: "The name of the AWS IoT Events input where the data is sent.",
@@ -3529,8 +3528,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3554,8 +3553,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"iot_site_wise": {
 																		// Property: IotSiteWise
 																		Description: "Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"asset_id": {
 																					// Property: AssetId
 																					Description: "The ID of the asset that has the specified property. You can specify an expression.",
@@ -3583,8 +3582,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"property_value": {
 																					// Property: PropertyValue
 																					Description: "A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"quality": {
 																								// Property: Quality
 																								Description: "The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.",
@@ -3594,8 +3593,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																							"timestamp": {
 																								// Property: Timestamp
 																								Description: "A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*.",
-																								Attributes: schema.SingleNestedAttributes(
-																									map[string]schema.Attribute{
+																								Attributes: tfsdk.SingleNestedAttributes(
+																									map[string]tfsdk.Attribute{
 																										"offset_in_nanos": {
 																											// Property: OffsetInNanos
 																											Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.",
@@ -3615,8 +3614,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																							"value": {
 																								// Property: Value
 																								Description: "A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*.",
-																								Attributes: schema.SingleNestedAttributes(
-																									map[string]schema.Attribute{
+																								Attributes: tfsdk.SingleNestedAttributes(
+																									map[string]tfsdk.Attribute{
 																										"boolean_value": {
 																											// Property: BooleanValue
 																											Description: "The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.",
@@ -3656,8 +3655,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"iot_topic_publish": {
 																		// Property: IotTopicPublish
 																		Description: "Information required to publish the MQTT message through the AWS IoT message broker.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"mqtt_topic": {
 																					// Property: MqttTopic
 																					Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
@@ -3667,8 +3666,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3691,8 +3690,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	},
 																	"lambda": {
 																		// Property: Lambda
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"function_arn": {
 																					// Property: FunctionArn
 																					Description: "The ARN of the Lambda function that is executed.",
@@ -3702,8 +3701,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3727,8 +3726,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"reset_timer": {
 																		// Property: ResetTimer
 																		Description: "Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"timer_name": {
 																					// Property: TimerName
 																					Description: "The name of the timer to reset.",
@@ -3742,8 +3741,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"set_timer": {
 																		// Property: SetTimer
 																		Description: "Information needed to set the timer.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"duration_expression": {
 																					// Property: DurationExpression
 																					Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
@@ -3769,8 +3768,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"set_variable": {
 																		// Property: SetVariable
 																		Description: "Information about the variable and its new value.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"value": {
 																					// Property: Value
 																					Description: "The new value of the variable.",
@@ -3790,13 +3789,13 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"sns": {
 																		// Property: Sns
 																		Description: "Information required to publish the Amazon SNS message.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3825,13 +3824,13 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	},
 																	"sqs": {
 																		// Property: Sqs
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3865,7 +3864,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		Optional: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
@@ -3882,25 +3881,25 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Required:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
 											"transition_events": {
 												// Property: TransitionEvents
 												Description: "Specifies the `actions` performed, and the next `state` entered, when a `condition` evaluates to `TRUE`.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"actions": {
 															// Property: Actions
 															Description: "The actions to be performed.",
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"clear_timer": {
 																		// Property: ClearTimer
 																		Description: "Information needed to clear the timer.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"timer_name": {
 																					// Property: TimerName
 																					Type:     types.StringType,
@@ -3913,8 +3912,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"dynamo_db": {
 																		// Property: DynamoDB
 																		Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"hash_key_field": {
 																					// Property: HashKeyField
 																					Description: "The name of the hash key (also called the partition key).",
@@ -3942,8 +3941,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -3997,13 +3996,13 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"dynamo_d_bv_2": {
 																		// Property: DynamoDBv2
 																		Description: "Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.\n\nYou can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -4033,8 +4032,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"firehose": {
 																		// Property: Firehose
 																		Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"delivery_stream_name": {
 																					// Property: DeliveryStreamName
 																					Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
@@ -4044,8 +4043,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -4075,8 +4074,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"iot_events": {
 																		// Property: IotEvents
 																		Description: "Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"input_name": {
 																					// Property: InputName
 																					Description: "The name of the AWS IoT Events input where the data is sent.",
@@ -4086,8 +4085,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -4111,8 +4110,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"iot_site_wise": {
 																		// Property: IotSiteWise
 																		Description: "Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"asset_id": {
 																					// Property: AssetId
 																					Description: "The ID of the asset that has the specified property. You can specify an expression.",
@@ -4140,8 +4139,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"property_value": {
 																					// Property: PropertyValue
 																					Description: "A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"quality": {
 																								// Property: Quality
 																								Description: "The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.",
@@ -4151,8 +4150,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																							"timestamp": {
 																								// Property: Timestamp
 																								Description: "A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*.",
-																								Attributes: schema.SingleNestedAttributes(
-																									map[string]schema.Attribute{
+																								Attributes: tfsdk.SingleNestedAttributes(
+																									map[string]tfsdk.Attribute{
 																										"offset_in_nanos": {
 																											// Property: OffsetInNanos
 																											Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between `1-31556889864403199`. You can also specify an expression.",
@@ -4172,8 +4171,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																							"value": {
 																								// Property: Value
 																								Description: "A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*.",
-																								Attributes: schema.SingleNestedAttributes(
-																									map[string]schema.Attribute{
+																								Attributes: tfsdk.SingleNestedAttributes(
+																									map[string]tfsdk.Attribute{
 																										"boolean_value": {
 																											// Property: BooleanValue
 																											Description: "The asset property value is a Boolean value that must be `TRUE` or `FALSE`. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.",
@@ -4213,8 +4212,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"iot_topic_publish": {
 																		// Property: IotTopicPublish
 																		Description: "Information required to publish the MQTT message through the AWS IoT message broker.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"mqtt_topic": {
 																					// Property: MqttTopic
 																					Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
@@ -4224,8 +4223,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -4248,8 +4247,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	},
 																	"lambda": {
 																		// Property: Lambda
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"function_arn": {
 																					// Property: FunctionArn
 																					Description: "The ARN of the Lambda function that is executed.",
@@ -4259,8 +4258,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -4284,8 +4283,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"reset_timer": {
 																		// Property: ResetTimer
 																		Description: "Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"timer_name": {
 																					// Property: TimerName
 																					Description: "The name of the timer to reset.",
@@ -4299,8 +4298,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"set_timer": {
 																		// Property: SetTimer
 																		Description: "Information needed to set the timer.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"duration_expression": {
 																					// Property: DurationExpression
 																					Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
@@ -4326,8 +4325,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"set_variable": {
 																		// Property: SetVariable
 																		Description: "Information about the variable and its new value.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"value": {
 																					// Property: Value
 																					Description: "The new value of the variable.",
@@ -4347,13 +4346,13 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	"sns": {
 																		// Property: Sns
 																		Description: "Information required to publish the Amazon SNS message.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -4382,13 +4381,13 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																	},
 																	"sqs": {
 																		// Property: Sqs
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"payload": {
 																					// Property: Payload
 																					Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
-																					Attributes: schema.SingleNestedAttributes(
-																						map[string]schema.Attribute{
+																					Attributes: tfsdk.SingleNestedAttributes(
+																						map[string]tfsdk.Attribute{
 																							"content_expression": {
 																								// Property: ContentExpression
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
@@ -4422,7 +4421,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																		Optional: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
@@ -4445,7 +4444,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Required:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
@@ -4460,7 +4459,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -4570,8 +4569,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "uniqueItems": false
 			// }
 			Description: "An array of key-value pairs to apply to this resource.\n\nFor more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "Key of the Tag.",
@@ -4585,20 +4584,20 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::IoTEvents::DetectorModel resource creates a detector model. You create a *detector model* (a model of your equipment or process) using *states*. For each state, you define conditional (Boolean) logic that evaluates the incoming inputs to detect significant events. When an event is detected, it can change the state or trigger custom-built or predefined actions using other AWS services. You can define additional events that trigger actions when entering or exiting a state and, optionally, when a condition is met. For more information, see [How to Use AWS IoT Events](https://docs.aws.amazon.com/iotevents/latest/developerguide/how-to-use-iotevents.html) in the *AWS IoT Events Developer Guide*.",
 		Version:     1,
 		Attributes:  attributes,

@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // accountAuditConfigurationResourceType returns the Terraform awscc_iot_account_audit_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::AccountAuditConfiguration resource type.
 func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"account_id": {
 			// Property: AccountId
 			// CloudFormation resource type schema:
@@ -201,13 +200,13 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//   "type": "object"
 			// }
 			Description: "Specifies which audit checks are enabled and disabled for this account.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"authenticated_cognito_role_overly_permissive_check": {
 						// Property: AuthenticatedCognitoRoleOverlyPermissiveCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -221,8 +220,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"ca_certificate_expiring_check": {
 						// Property: CaCertificateExpiringCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -236,8 +235,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"ca_certificate_key_quality_check": {
 						// Property: CaCertificateKeyQualityCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -251,8 +250,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"conflicting_client_ids_check": {
 						// Property: ConflictingClientIdsCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -266,8 +265,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"device_certificate_expiring_check": {
 						// Property: DeviceCertificateExpiringCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -281,8 +280,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"device_certificate_key_quality_check": {
 						// Property: DeviceCertificateKeyQualityCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -296,8 +295,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"device_certificate_shared_check": {
 						// Property: DeviceCertificateSharedCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -311,8 +310,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"iot_policy_overly_permissive_check": {
 						// Property: IotPolicyOverlyPermissiveCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -326,8 +325,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"iot_role_alias_allows_access_to_unused_services_check": {
 						// Property: IotRoleAliasAllowsAccessToUnusedServicesCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -341,8 +340,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"iot_role_alias_overly_permissive_check": {
 						// Property: IotRoleAliasOverlyPermissiveCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -356,8 +355,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"logging_disabled_check": {
 						// Property: LoggingDisabledCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -371,8 +370,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"revoked_ca_certificate_still_active_check": {
 						// Property: RevokedCaCertificateStillActiveCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -386,8 +385,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"revoked_device_certificate_still_active_check": {
 						// Property: RevokedDeviceCertificateStillActiveCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -401,8 +400,8 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 					"unauthenticated_cognito_role_overly_permissive_check": {
 						// Property: UnauthenticatedCognitoRoleOverlyPermissiveCheck
 						Description: "The configuration for a specific audit check.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if the check is enabled.",
@@ -449,12 +448,12 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//   "type": "object"
 			// }
 			Description: "Information about the targets to which audit notifications are sent.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"sns": {
 						// Property: Sns
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Description: "True if notifications to the target are enabled.",
@@ -497,13 +496,13 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Configures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.",
 		Version:     1,
 		Attributes:  attributes,

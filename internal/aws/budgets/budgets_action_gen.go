@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // budgetsActionResourceType returns the Terraform awscc_budgets_budgets_action resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Budgets::BudgetsAction resource type.
 func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"action_id": {
 			// Property: ActionId
 			// CloudFormation resource type schema:
@@ -54,8 +53,8 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"type": {
 						// Property: Type
 						Type:     types.StringType,
@@ -203,12 +202,12 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"iam_action_definition": {
 						// Property: IamActionDefinition
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"groups": {
 									// Property: Groups
 									Type:     types.ListType{ElemType: types.StringType},
@@ -235,8 +234,8 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"scp_action_definition": {
 						// Property: ScpActionDefinition
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"policy_id": {
 									// Property: PolicyId
 									Type:     types.StringType,
@@ -253,8 +252,8 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"ssm_action_definition": {
 						// Property: SsmActionDefinition
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"instance_ids": {
 									// Property: InstanceIds
 									Type:     types.ListType{ElemType: types.StringType},
@@ -328,8 +327,8 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "minItems": 1,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"address": {
 						// Property: Address
 						Type:     types.StringType,
@@ -341,7 +340,7 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 11,
 				},
@@ -351,13 +350,13 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
 		Attributes:  attributes,

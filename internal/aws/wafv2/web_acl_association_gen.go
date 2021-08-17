@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // webACLAssociationResourceType returns the Terraform awscc_wafv2_web_acl_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WAFv2::WebACLAssociation resource type.
 func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"resource_arn": {
 			// Property: ResourceArn
 			// CloudFormation resource type schema:
@@ -49,13 +48,13 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Associates WebACL to Application Load Balancer, CloudFront or API Gateway.",
 		Version:     1,
 		Attributes:  attributes,

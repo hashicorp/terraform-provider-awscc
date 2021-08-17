@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // samplingRuleResourceType returns the Terraform awscc_xray_sampling_rule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::XRay::SamplingRule resource type.
 func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"rule_arn": {
 			// Property: RuleARN
 			// CloudFormation resource type schema:
@@ -122,8 +121,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"attributes": {
 						// Property: Attributes
 						Description: "Matches attributes derived from the request.",
@@ -297,8 +296,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"created_at": {
 						// Property: CreatedAt
 						Description: "When the rule was created, in Unix time seconds.",
@@ -313,8 +312,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"sampling_rule": {
 						// Property: SamplingRule
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"attributes": {
 									// Property: Attributes
 									Description: "Matches attributes derived from the request.",
@@ -474,8 +473,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"attributes": {
 						// Property: Attributes
 						Description: "Matches attributes derived from the request.",
@@ -575,8 +574,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -588,20 +587,20 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "This schema provides construct and validation rules for AWS-XRay SamplingRule resource parameters.",
 		Version:     1,
 		Attributes:  attributes,

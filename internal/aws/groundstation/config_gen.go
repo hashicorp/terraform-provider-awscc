@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // configResourceType returns the Terraform awscc_groundstation_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GroundStation::Config resource type.
 func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -277,20 +276,20 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"antenna_downlink_config": {
 						// Property: AntennaDownlinkConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"spectrum_config": {
 									// Property: SpectrumConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bandwidth": {
 												// Property: Bandwidth
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"units": {
 															// Property: Units
 															Type:     types.StringType,
@@ -307,8 +306,8 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"center_frequency": {
 												// Property: CenterFrequency
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"units": {
 															// Property: Units
 															Type:     types.StringType,
@@ -338,12 +337,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"antenna_downlink_demod_decode_config": {
 						// Property: AntennaDownlinkDemodDecodeConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"decode_config": {
 									// Property: DecodeConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"unvalidated_json": {
 												// Property: UnvalidatedJSON
 												Type:     types.StringType,
@@ -355,8 +354,8 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"demodulation_config": {
 									// Property: DemodulationConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"unvalidated_json": {
 												// Property: UnvalidatedJSON
 												Type:     types.StringType,
@@ -368,12 +367,12 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"spectrum_config": {
 									// Property: SpectrumConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bandwidth": {
 												// Property: Bandwidth
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"units": {
 															// Property: Units
 															Type:     types.StringType,
@@ -390,8 +389,8 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"center_frequency": {
 												// Property: CenterFrequency
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"units": {
 															// Property: Units
 															Type:     types.StringType,
@@ -421,16 +420,16 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"antenna_uplink_config": {
 						// Property: AntennaUplinkConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"spectrum_config": {
 									// Property: SpectrumConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"center_frequency": {
 												// Property: CenterFrequency
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"units": {
 															// Property: Units
 															Type:     types.StringType,
@@ -456,8 +455,8 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"target_eirp": {
 									// Property: TargetEirp
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"units": {
 												// Property: Units
 												Type:     types.StringType,
@@ -483,8 +482,8 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"dataflow_endpoint_config": {
 						// Property: DataflowEndpointConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"dataflow_endpoint_name": {
 									// Property: DataflowEndpointName
 									Type:     types.StringType,
@@ -501,8 +500,8 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"s3_recording_config": {
 						// Property: S3RecordingConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"bucket_arn": {
 									// Property: BucketArn
 									Type:     types.StringType,
@@ -524,8 +523,8 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"tracking_config": {
 						// Property: TrackingConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"autotrack": {
 									// Property: Autotrack
 									Type:     types.StringType,
@@ -537,8 +536,8 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"uplink_echo_config": {
 						// Property: UplinkEchoConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"antenna_uplink_config_arn": {
 									// Property: AntennaUplinkConfigArn
 									Type:     types.StringType,
@@ -596,8 +595,8 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -609,7 +608,7 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -625,13 +624,13 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "AWS Ground Station config resource type for CloudFormation.",
 		Version:     1,
 		Attributes:  attributes,

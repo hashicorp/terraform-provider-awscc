@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // resourceCollectionResourceType returns the Terraform awscc_devopsguru_resource_collection resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DevOpsGuru::ResourceCollection resource type.
 func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"resource_collection_filter": {
 			// Property: ResourceCollectionFilter
 			// CloudFormation resource type schema:
@@ -52,13 +51,13 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "object"
 			// }
 			Description: "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"cloud_formation": {
 						// Property: CloudFormation
 						Description: "CloudFormation resource for DevOps Guru to monitor",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"stack_names": {
 									// Property: StackNames
 									Description: "An array of CloudFormation stack names.",
@@ -90,13 +89,13 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "This resource schema represents the ResourceCollection resource in the Amazon DevOps Guru.",
 		Version:     1,
 		Attributes:  attributes,
