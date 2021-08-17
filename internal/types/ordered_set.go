@@ -3,7 +3,6 @@ package types
 import (
 	"context"
 	"fmt"
-	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -41,36 +40,20 @@ func (t OrderedSetType) Validate(ctx context.Context, in tftypes.Value) []*tfpro
 		})
 	}
 
-	duplicatesMap := make(map[string]struct{})
-	valsMap := make(map[string]struct{})
-
-	// TODO
-	// TODO val.String() is dangerous as attribute names aren't sorted.
-	// TODO
-	for _, val := range vals {
-		if _, ok := valsMap[val.String()]; ok {
-			if _, ok := duplicatesMap[val.String()]; ok {
+	for i1, val1 := range vals {
+		for i2, val2 := range vals {
+			if i2 == i1 {
 				continue
 			}
 
-			duplicatesMap[val.String()] = struct{}{}
-			continue
+			if val1.Equal(val2) {
+				return append(diags, &tfprotov6.Diagnostic{
+					Severity: tfprotov6.DiagnosticSeverityError,
+					Summary:  "Duplicate Ordered Set Elements",
+					Detail:   "This attribute contains duplicate elements",
+				})
+			}
 		}
-		valsMap[val.String()] = struct{}{}
-	}
-
-	if len(duplicatesMap) > 0 {
-		var duplicates []string
-
-		for duplicate := range duplicatesMap {
-			duplicates = append(duplicates, duplicate)
-		}
-
-		return append(diags, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Duplicate Set Elements",
-			Detail:   fmt.Sprintf("This attribute contains duplicate elements of:\n\n%s", strings.Join(duplicates, "\n")),
-		})
 	}
 
 	return nil
