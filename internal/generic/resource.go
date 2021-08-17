@@ -98,6 +98,12 @@ func WithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
 	}
 }
 
+const (
+	resourceMaxWaitTimeCreate = 120 * time.Minute
+	resourceMaxWaitTimeUpdate = 120 * time.Minute
+	resourceMaxWaitTimeDelete = 120 * time.Minute
+)
+
 // WithCreateTimeoutInMinutes is a helper function to construct functional options
 // that set a resource type's create timeout (in minutes).
 // If multiple WithCreateTimeoutInMinutes calls are made, the last call overrides
@@ -107,7 +113,7 @@ func WithCreateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 		if v > 0 {
 			o.createTimeout = time.Duration(v) * time.Minute
 		} else {
-			o.createTimeout = 120 * time.Minute
+			o.createTimeout = resourceMaxWaitTimeCreate
 		}
 
 		return nil
@@ -123,7 +129,7 @@ func WithUpdateTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 		if v > 0 {
 			o.updateTimeout = time.Duration(v) * time.Minute
 		} else {
-			o.updateTimeout = 120 * time.Minute
+			o.updateTimeout = resourceMaxWaitTimeUpdate
 		}
 
 		return nil
@@ -139,7 +145,7 @@ func WithDeleteTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 		if v > 0 {
 			o.deleteTimeout = time.Duration(v) * time.Minute
 		} else {
-			o.deleteTimeout = 120 * time.Minute
+			o.deleteTimeout = resourceMaxWaitTimeDelete
 		}
 
 		return nil
@@ -227,7 +233,7 @@ type resourceType struct {
 
 // NewResourceType returns a new ResourceType from the specified varidaic list of functional options.
 // It's public as it's called from generated code.
-func NewResourceType(ctx context.Context, optFns ...ResourceTypeOptionsFunc) (tfsdk.ResourceType, error) {
+func NewResourceType(_ context.Context, optFns ...ResourceTypeOptionsFunc) (tfsdk.ResourceType, error) {
 	resourceType := &resourceType{}
 
 	for _, optFn := range optFns {

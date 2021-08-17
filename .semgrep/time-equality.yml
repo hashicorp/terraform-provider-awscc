@@ -1,0 +1,23 @@
+rules:
+  - id: time-equality
+    languages: [go]
+    message: Use time.Equal() instead of ==
+    patterns:
+      - pattern-either:
+          - pattern: |
+              aws.TimeValue($X) == $Y
+          - pattern: |
+              aws.TimeValue($X) != $Y
+          - pattern: |
+              ($X : time.Time) == $Y
+          - pattern: |
+              ($X : time.Time) != $Y
+          - pattern: |
+              $X == aws.TimeValue($Y)
+          - pattern: |
+              $X != aws.TimeValue($Y)
+          - pattern: |
+              $X == ($Y : time.Time)
+          - pattern: |
+              $X != ($Y : time.Time)
+    severity: ERROR

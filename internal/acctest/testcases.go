@@ -24,6 +24,7 @@ func (td TestData) runAcceptanceTest(t *testing.T, testCase resource.TestCase) {
 
 func (td TestData) providerFactories() map[string]func() (tfprotov6.ProviderServer, error) {
 	return map[string]func() (tfprotov6.ProviderServer, error){
+		// nolint: unparam
 		"cloudapi": func() (tfprotov6.ProviderServer, error) {
 			return tfsdk.NewProtocol6Server(td.provider), nil
 		},

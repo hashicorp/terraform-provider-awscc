@@ -1,0 +1,51 @@
+issues:
+  max-per-linter: 0
+  max-same-issues: 0
+
+linters:
+  disable-all: true
+  enable:
+    - deadcode
+    - errcheck
+    - errorlint
+    - goconst
+    - gofmt
+    - gomnd
+    - gosimple
+    - govet
+    - ineffassign
+    - makezero
+    - misspell
+    - nakedret
+    - nilerr
+    - nolintlint
+    - staticcheck
+    - structcheck
+    - unconvert
+    - unused
+    - unparam
+    - varcheck
+
+linters-settings:
+  errcheck:
+    # TODO: `ignore` is deprecated, but `exclude-functions` does not appear to work
+    ignore: fmt:.*,github.com/hashicorp/terraform-plugin-framework/tfsdk:SetAttribute
+    # exclude-functions:
+    #   - (*github.com/hashicorp/terraform-plugin-framework/tfsdk.State).SetAttribute
+  gomnd:
+    settings:
+      mnd:
+        checks:
+          - argument
+          - assign
+          - case
+          # - condition
+          - operation
+          - return
+        ignored-functions:
+          - os.Exit
+  unparam:
+    check-exported: true
+
+run:
+  timeout: 10m

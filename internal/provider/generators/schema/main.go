@@ -47,10 +47,6 @@ type ResourceSchema struct {
 	ResourceTypeName         string `hcl:"resource_type_name,label"`
 }
 
-type Source struct {
-	Url string `hcl:"url"`
-}
-
 var (
 	configFile        = flag.String("config", "", "configuration file; required")
 	generatedCodeRoot = flag.String("generated-code-root", "", "directory root for generated resource code")
@@ -282,7 +278,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 		schema = regexp.MustCompile(`(?m)^(\s+"pattern"\s*:\s*)".*"`).ReplaceAllString(schema, `$1""`)
 		schema = regexp.MustCompile(`(?m)^(\s+"patternProperties"\s*:\s*{\s*)".*?"`).ReplaceAllString(schema, `$1""`)
 
-		err = ioutil.WriteFile(dst, []byte(schema), 0644)
+		err = ioutil.WriteFile(dst, []byte(schema), 0644) //nolint:gomnd
 
 		if err != nil {
 			return "", "", fmt.Errorf("error writing schema to %q: %w", dst, err)
