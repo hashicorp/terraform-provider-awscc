@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 )
 
 // CopyValueAtPath copies the value at a specified path from source State to destination State.

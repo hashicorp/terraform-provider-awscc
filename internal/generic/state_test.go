@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 var testSimpleSchema = schema.Schema{

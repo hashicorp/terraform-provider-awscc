@@ -13,8 +13,8 @@ import (
 	"text/template"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/provider/generators/resource/codegen"
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/resource/codegen"
 	"github.com/mitchellh/cli"
 )
 
@@ -262,9 +262,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	{{ if .ImportInternalTypes }}providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"{{- end }}
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	{{ if .ImportInternalTypes }}providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"{{- end }}
 )
 
 func init() {
@@ -330,7 +330,7 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 {{ if .HasRequiredAttribute }}

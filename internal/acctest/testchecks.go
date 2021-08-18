@@ -9,8 +9,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	tfcloudformation "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/tfresource"
+	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 const (

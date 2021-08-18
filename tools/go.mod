@@ -1,4 +1,4 @@
-module github.com/hashicorp/terraform-provider-aws-cloudapi/tools
+module github.com/hashicorp/terraform-provider-awscc/tools
 
 go 1.16
 
