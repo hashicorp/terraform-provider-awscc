@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSSignerSigningProfile_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Signer::SigningProfile", "aws_signer_signing_profile", "test")
+	td := acctest.NewTestData(t, "AWS::Signer::SigningProfile", "awscc_signer_signing_profile", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

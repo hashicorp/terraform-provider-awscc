@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSMediaPackageChannel_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::MediaPackage::Channel", "aws_mediapackage_channel", "test")
+	td := acctest.NewTestData(t, "AWS::MediaPackage::Channel", "awscc_mediapackage_channel", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_codegurureviewer_repository_association", repositoryAssociationResourceType)
+	registry.AddResourceTypeFactory("awscc_codegurureviewer_repository_association", repositoryAssociationResourceType)
 }
 
-// repositoryAssociationResourceType returns the Terraform aws_codegurureviewer_repository_association resource type.
+// repositoryAssociationResourceType returns the Terraform awscc_codegurureviewer_repository_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CodeGuruReviewer::RepositoryAssociation resource type.
 func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -190,7 +190,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CodeGuruReviewer::RepositoryAssociation").WithTerraformTypeName("aws_codegurureviewer_repository_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CodeGuruReviewer::RepositoryAssociation").WithTerraformTypeName("awscc_codegurureviewer_repository_association").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -202,7 +202,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_codegurureviewer_repository_association", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_codegurureviewer_repository_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

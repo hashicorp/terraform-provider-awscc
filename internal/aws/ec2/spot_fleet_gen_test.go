@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSEC2SpotFleet_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EC2::SpotFleet", "aws_ec2_spot_fleet", "test")
+	td := acctest.NewTestData(t, "AWS::EC2::SpotFleet", "awscc_ec2_spot_fleet", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

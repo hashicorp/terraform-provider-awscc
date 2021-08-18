@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSS3OutpostsEndpoint_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::S3Outposts::Endpoint", "aws_s3outposts_endpoint", "test")
+	td := acctest.NewTestData(t, "AWS::S3Outposts::Endpoint", "awscc_s3outposts_endpoint", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

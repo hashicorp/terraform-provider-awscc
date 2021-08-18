@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSCustomerProfilesIntegration_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CustomerProfiles::Integration", "aws_customerprofiles_integration", "test")
+	td := acctest.NewTestData(t, "AWS::CustomerProfiles::Integration", "awscc_customerprofiles_integration", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

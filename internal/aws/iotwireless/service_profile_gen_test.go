@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIoTWirelessServiceProfile_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoTWireless::ServiceProfile", "aws_iotwireless_service_profile", "test")
+	td := acctest.NewTestData(t, "AWS::IoTWireless::ServiceProfile", "awscc_iotwireless_service_profile", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSIoTWirelessServiceProfile_basic(t *testing.T) {
 }
 
 func TestAccAWSIoTWirelessServiceProfile_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoTWireless::ServiceProfile", "aws_iotwireless_service_profile", "test")
+	td := acctest.NewTestData(t, "AWS::IoTWireless::ServiceProfile", "awscc_iotwireless_service_profile", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

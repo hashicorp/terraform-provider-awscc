@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSQLDBStream_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::QLDB::Stream", "aws_qldb_stream", "test")
+	td := acctest.NewTestData(t, "AWS::QLDB::Stream", "awscc_qldb_stream", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

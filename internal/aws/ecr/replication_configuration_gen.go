@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecr_replication_configuration", replicationConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_ecr_replication_configuration", replicationConfigurationResourceType)
 }
 
-// replicationConfigurationResourceType returns the Terraform aws_ecr_replication_configuration resource type.
+// replicationConfigurationResourceType returns the Terraform awscc_ecr_replication_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECR::ReplicationConfiguration resource type.
 func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -151,7 +151,7 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECR::ReplicationConfiguration").WithTerraformTypeName("aws_ecr_replication_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECR::ReplicationConfiguration").WithTerraformTypeName("awscc_ecr_replication_configuration").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -163,7 +163,7 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ecr_replication_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecr_replication_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

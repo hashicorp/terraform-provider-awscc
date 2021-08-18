@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSNetworkManagerSite_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::NetworkManager::Site", "aws_networkmanager_site", "test")
+	td := acctest.NewTestData(t, "AWS::NetworkManager::Site", "awscc_networkmanager_site", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

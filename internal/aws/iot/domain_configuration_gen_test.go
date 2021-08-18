@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIoTDomainConfiguration_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoT::DomainConfiguration", "aws_iot_domain_configuration", "test")
+	td := acctest.NewTestData(t, "AWS::IoT::DomainConfiguration", "awscc_iot_domain_configuration", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSIoTDomainConfiguration_basic(t *testing.T) {
 }
 
 func TestAccAWSIoTDomainConfiguration_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoT::DomainConfiguration", "aws_iot_domain_configuration", "test")
+	td := acctest.NewTestData(t, "AWS::IoT::DomainConfiguration", "awscc_iot_domain_configuration", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

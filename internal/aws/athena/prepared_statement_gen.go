@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_athena_prepared_statement", preparedStatementResourceType)
+	registry.AddResourceTypeFactory("awscc_athena_prepared_statement", preparedStatementResourceType)
 }
 
-// preparedStatementResourceType returns the Terraform aws_athena_prepared_statement resource type.
+// preparedStatementResourceType returns the Terraform awscc_athena_prepared_statement resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Athena::PreparedStatement resource type.
 func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -93,7 +93,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Athena::PreparedStatement").WithTerraformTypeName("aws_athena_prepared_statement").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Athena::PreparedStatement").WithTerraformTypeName("awscc_athena_prepared_statement").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -105,7 +105,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_athena_prepared_statement", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_athena_prepared_statement", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_greengrassv2_component_version", componentVersionResourceType)
+	registry.AddResourceTypeFactory("awscc_greengrassv2_component_version", componentVersionResourceType)
 }
 
-// componentVersionResourceType returns the Terraform aws_greengrassv2_component_version resource type.
+// componentVersionResourceType returns the Terraform awscc_greengrassv2_component_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GreengrassV2::ComponentVersion resource type.
 func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -515,7 +515,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::GreengrassV2::ComponentVersion").WithTerraformTypeName("aws_greengrassv2_component_version").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GreengrassV2::ComponentVersion").WithTerraformTypeName("awscc_greengrassv2_component_version").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/LambdaFunction",
@@ -531,7 +531,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_greengrassv2_component_version", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_greengrassv2_component_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

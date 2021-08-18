@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_appintegrations_event_integration", eventIntegrationResourceType)
+	registry.AddResourceTypeFactory("awscc_appintegrations_event_integration", eventIntegrationResourceType)
 }
 
-// eventIntegrationResourceType returns the Terraform aws_appintegrations_event_integration resource type.
+// eventIntegrationResourceType returns the Terraform awscc_appintegrations_event_integration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppIntegrations::EventIntegration resource type.
 func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -306,7 +306,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::AppIntegrations::EventIntegration").WithTerraformTypeName("aws_appintegrations_event_integration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::AppIntegrations::EventIntegration").WithTerraformTypeName("awscc_appintegrations_event_integration").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -318,7 +318,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_appintegrations_event_integration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_appintegrations_event_integration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

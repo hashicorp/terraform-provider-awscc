@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSAppIntegrationsEventIntegration_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::AppIntegrations::EventIntegration", "aws_appintegrations_event_integration", "test")
+	td := acctest.NewTestData(t, "AWS::AppIntegrations::EventIntegration", "awscc_appintegrations_event_integration", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

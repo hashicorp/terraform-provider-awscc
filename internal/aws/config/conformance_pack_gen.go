@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_config_conformance_pack", conformancePackResourceType)
+	registry.AddResourceTypeFactory("awscc_config_conformance_pack", conformancePackResourceType)
 }
 
-// conformancePackResourceType returns the Terraform aws_config_conformance_pack resource type.
+// conformancePackResourceType returns the Terraform awscc_config_conformance_pack resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::ConformancePack resource type.
 func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -163,7 +163,7 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Config::ConformancePack").WithTerraformTypeName("aws_config_conformance_pack").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Config::ConformancePack").WithTerraformTypeName("awscc_config_conformance_pack").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/TemplateBody",
@@ -179,7 +179,7 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_config_conformance_pack", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_config_conformance_pack", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSEC2EnclaveCertificateIamRoleAssociation_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EC2::EnclaveCertificateIamRoleAssociation", "aws_ec2_enclave_certificate_iam_role_association", "test")
+	td := acctest.NewTestData(t, "AWS::EC2::EnclaveCertificateIamRoleAssociation", "awscc_ec2_enclave_certificate_iam_role_association", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

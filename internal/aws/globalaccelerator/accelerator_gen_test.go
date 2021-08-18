@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSGlobalAcceleratorAccelerator_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::GlobalAccelerator::Accelerator", "aws_globalaccelerator_accelerator", "test")
+	td := acctest.NewTestData(t, "AWS::GlobalAccelerator::Accelerator", "awscc_globalaccelerator_accelerator", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

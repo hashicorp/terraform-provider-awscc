@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSNetworkManagerGlobalNetwork_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::NetworkManager::GlobalNetwork", "aws_networkmanager_global_network", "test")
+	td := acctest.NewTestData(t, "AWS::NetworkManager::GlobalNetwork", "awscc_networkmanager_global_network", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSNetworkManagerGlobalNetwork_basic(t *testing.T) {
 }
 
 func TestAccAWSNetworkManagerGlobalNetwork_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::NetworkManager::GlobalNetwork", "aws_networkmanager_global_network", "test")
+	td := acctest.NewTestData(t, "AWS::NetworkManager::GlobalNetwork", "awscc_networkmanager_global_network", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

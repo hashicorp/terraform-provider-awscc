@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudformation_module_version", moduleVersionResourceType)
+	registry.AddResourceTypeFactory("awscc_cloudformation_module_version", moduleVersionResourceType)
 }
 
-// moduleVersionResourceType returns the Terraform aws_cloudformation_module_version resource type.
+// moduleVersionResourceType returns the Terraform awscc_cloudformation_module_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::ModuleVersion resource type.
 func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -163,7 +163,7 @@ func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ModuleVersion").WithTerraformTypeName("aws_cloudformation_module_version").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ModuleVersion").WithTerraformTypeName("awscc_cloudformation_module_version").WithTerraformSchema(schema)
 
 	opts = opts.IsImmutableType(true)
 
@@ -178,7 +178,7 @@ func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_cloudformation_module_version", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudformation_module_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

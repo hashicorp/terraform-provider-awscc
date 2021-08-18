@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_macie_custom_data_identifier", customDataIdentifierResourceType)
+	registry.AddResourceTypeFactory("awscc_macie_custom_data_identifier", customDataIdentifierResourceType)
 }
 
-// customDataIdentifierResourceType returns the Terraform aws_macie_custom_data_identifier resource type.
+// customDataIdentifierResourceType returns the Terraform awscc_macie_custom_data_identifier resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Macie::CustomDataIdentifier resource type.
 func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -166,7 +166,7 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Macie::CustomDataIdentifier").WithTerraformTypeName("aws_macie_custom_data_identifier").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Macie::CustomDataIdentifier").WithTerraformTypeName("awscc_macie_custom_data_identifier").WithTerraformSchema(schema)
 
 	opts = opts.IsImmutableType(true)
 
@@ -178,7 +178,7 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_macie_custom_data_identifier", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_macie_custom_data_identifier", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

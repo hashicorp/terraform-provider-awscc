@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSElastiCacheGlobalReplicationGroup_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ElastiCache::GlobalReplicationGroup", "aws_elasticache_global_replication_group", "test")
+	td := acctest.NewTestData(t, "AWS::ElastiCache::GlobalReplicationGroup", "awscc_elasticache_global_replication_group", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

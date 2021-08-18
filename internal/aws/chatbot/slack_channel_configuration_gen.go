@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_chatbot_slack_channel_configuration", slackChannelConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_chatbot_slack_channel_configuration", slackChannelConfigurationResourceType)
 }
 
-// slackChannelConfigurationResourceType returns the Terraform aws_chatbot_slack_channel_configuration resource type.
+// slackChannelConfigurationResourceType returns the Terraform awscc_chatbot_slack_channel_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Chatbot::SlackChannelConfiguration resource type.
 func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -133,7 +133,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Chatbot::SlackChannelConfiguration").WithTerraformTypeName("aws_chatbot_slack_channel_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Chatbot::SlackChannelConfiguration").WithTerraformTypeName("awscc_chatbot_slack_channel_configuration").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -145,7 +145,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_chatbot_slack_channel_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_chatbot_slack_channel_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

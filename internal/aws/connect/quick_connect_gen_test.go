@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSConnectQuickConnect_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Connect::QuickConnect", "aws_connect_quick_connect", "test")
+	td := acctest.NewTestData(t, "AWS::Connect::QuickConnect", "awscc_connect_quick_connect", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

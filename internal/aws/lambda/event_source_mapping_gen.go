@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_lambda_event_source_mapping", eventSourceMappingResourceType)
+	registry.AddResourceTypeFactory("awscc_lambda_event_source_mapping", eventSourceMappingResourceType)
 }
 
-// eventSourceMappingResourceType returns the Terraform aws_lambda_event_source_mapping resource type.
+// eventSourceMappingResourceType returns the Terraform awscc_lambda_event_source_mapping resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Lambda::EventSourceMapping resource type.
 func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -423,7 +423,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Lambda::EventSourceMapping").WithTerraformTypeName("aws_lambda_event_source_mapping").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Lambda::EventSourceMapping").WithTerraformTypeName("awscc_lambda_event_source_mapping").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -435,7 +435,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_lambda_event_source_mapping", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_lambda_event_source_mapping", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

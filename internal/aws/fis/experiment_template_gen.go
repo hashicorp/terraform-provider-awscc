@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_fis_experiment_template", experimentTemplateResourceType)
+	registry.AddResourceTypeFactory("awscc_fis_experiment_template", experimentTemplateResourceType)
 }
 
-// experimentTemplateResourceType returns the Terraform aws_fis_experiment_template resource type.
+// experimentTemplateResourceType returns the Terraform awscc_fis_experiment_template resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FIS::ExperimentTemplate resource type.
 func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -365,7 +365,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::FIS::ExperimentTemplate").WithTerraformTypeName("aws_fis_experiment_template").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FIS::ExperimentTemplate").WithTerraformTypeName("awscc_fis_experiment_template").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -377,7 +377,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_fis_experiment_template", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_fis_experiment_template", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

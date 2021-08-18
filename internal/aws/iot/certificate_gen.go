@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_certificate", certificateResourceType)
+	registry.AddResourceTypeFactory("awscc_iot_certificate", certificateResourceType)
 }
 
-// certificateResourceType returns the Terraform aws_iot_certificate resource type.
+// certificateResourceType returns the Terraform awscc_iot_certificate resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::Certificate resource type.
 func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -127,7 +127,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::Certificate").WithTerraformTypeName("aws_iot_certificate").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::Certificate").WithTerraformTypeName("awscc_iot_certificate").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/CertificateSigningRequest",
@@ -143,7 +143,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iot_certificate", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_certificate", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

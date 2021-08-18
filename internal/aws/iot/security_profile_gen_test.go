@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIoTSecurityProfile_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoT::SecurityProfile", "aws_iot_security_profile", "test")
+	td := acctest.NewTestData(t, "AWS::IoT::SecurityProfile", "awscc_iot_security_profile", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSIoTSecurityProfile_basic(t *testing.T) {
 }
 
 func TestAccAWSIoTSecurityProfile_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoT::SecurityProfile", "aws_iot_security_profile", "test")
+	td := acctest.NewTestData(t, "AWS::IoT::SecurityProfile", "awscc_iot_security_profile", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

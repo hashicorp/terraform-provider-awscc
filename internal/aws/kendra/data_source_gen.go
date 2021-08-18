@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_kendra_data_source", dataSourceResourceType)
+	registry.AddResourceTypeFactory("awscc_kendra_data_source", dataSourceResourceType)
 }
 
-// dataSourceResourceType returns the Terraform aws_kendra_data_source resource type.
+// dataSourceResourceType returns the Terraform awscc_kendra_data_source resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Kendra::DataSource resource type.
 func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -2682,7 +2682,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Kendra::DataSource").WithTerraformTypeName("aws_kendra_data_source").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Kendra::DataSource").WithTerraformTypeName("awscc_kendra_data_source").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(720)
 
@@ -2694,7 +2694,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_kendra_data_source", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_kendra_data_source", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSEC2NetworkInsightsPath_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EC2::NetworkInsightsPath", "aws_ec2_network_insights_path", "test")
+	td := acctest.NewTestData(t, "AWS::EC2::NetworkInsightsPath", "awscc_ec2_network_insights_path", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

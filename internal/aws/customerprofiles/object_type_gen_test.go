@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSCustomerProfilesObjectType_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CustomerProfiles::ObjectType", "aws_customerprofiles_object_type", "test")
+	td := acctest.NewTestData(t, "AWS::CustomerProfiles::ObjectType", "awscc_customerprofiles_object_type", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

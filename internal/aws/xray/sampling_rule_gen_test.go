@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSXRaySamplingRule_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::XRay::SamplingRule", "aws_xray_sampling_rule", "test")
+	td := acctest.NewTestData(t, "AWS::XRay::SamplingRule", "awscc_xray_sampling_rule", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSXRaySamplingRule_basic(t *testing.T) {
 }
 
 func TestAccAWSXRaySamplingRule_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::XRay::SamplingRule", "aws_xray_sampling_rule", "test")
+	td := acctest.NewTestData(t, "AWS::XRay::SamplingRule", "awscc_xray_sampling_rule", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

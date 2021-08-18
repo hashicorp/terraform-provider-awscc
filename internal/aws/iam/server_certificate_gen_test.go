@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIAMServerCertificate_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IAM::ServerCertificate", "aws_iam_server_certificate", "test")
+	td := acctest.NewTestData(t, "AWS::IAM::ServerCertificate", "awscc_iam_server_certificate", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSIAMServerCertificate_basic(t *testing.T) {
 }
 
 func TestAccAWSIAMServerCertificate_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IAM::ServerCertificate", "aws_iam_server_certificate", "test")
+	td := acctest.NewTestData(t, "AWS::IAM::ServerCertificate", "awscc_iam_server_certificate", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

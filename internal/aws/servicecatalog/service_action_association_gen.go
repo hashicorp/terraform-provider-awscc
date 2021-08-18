@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_servicecatalog_service_action_association", serviceActionAssociationResourceType)
+	registry.AddResourceTypeFactory("awscc_servicecatalog_service_action_association", serviceActionAssociationResourceType)
 }
 
-// serviceActionAssociationResourceType returns the Terraform aws_servicecatalog_service_action_association resource type.
+// serviceActionAssociationResourceType returns the Terraform awscc_servicecatalog_service_action_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalog::ServiceActionAssociation resource type.
 func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -78,7 +78,7 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::ServiceActionAssociation").WithTerraformTypeName("aws_servicecatalog_service_action_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::ServiceActionAssociation").WithTerraformTypeName("awscc_servicecatalog_service_action_association").WithTerraformSchema(schema)
 
 	opts = opts.IsImmutableType(true)
 
@@ -90,7 +90,7 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_servicecatalog_service_action_association", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_servicecatalog_service_action_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

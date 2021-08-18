@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSCloudFrontCloudFrontOriginAccessIdentity_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CloudFront::CloudFrontOriginAccessIdentity", "aws_cloudfront_cloud_front_origin_access_identity", "test")
+	td := acctest.NewTestData(t, "AWS::CloudFront::CloudFrontOriginAccessIdentity", "awscc_cloudfront_cloud_front_origin_access_identity", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_egress_only_internet_gateway", egressOnlyInternetGatewayResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_egress_only_internet_gateway", egressOnlyInternetGatewayResourceType)
 }
 
-// egressOnlyInternetGatewayResourceType returns the Terraform aws_ec2_egress_only_internet_gateway resource type.
+// egressOnlyInternetGatewayResourceType returns the Terraform awscc_ec2_egress_only_internet_gateway resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::EgressOnlyInternetGateway resource type.
 func egressOnlyInternetGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -62,7 +62,7 @@ func egressOnlyInternetGatewayResourceType(ctx context.Context) (tfsdk.ResourceT
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::EgressOnlyInternetGateway").WithTerraformTypeName("aws_ec2_egress_only_internet_gateway").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::EgressOnlyInternetGateway").WithTerraformTypeName("awscc_ec2_egress_only_internet_gateway").WithTerraformSchema(schema)
 
 	opts = opts.IsImmutableType(true)
 
@@ -74,7 +74,7 @@ func egressOnlyInternetGatewayResourceType(ctx context.Context) (tfsdk.ResourceT
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_egress_only_internet_gateway", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_egress_only_internet_gateway", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

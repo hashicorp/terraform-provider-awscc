@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudwatch_metric_stream", metricStreamResourceType)
+	registry.AddResourceTypeFactory("awscc_cloudwatch_metric_stream", metricStreamResourceType)
 }
 
-// metricStreamResourceType returns the Terraform aws_cloudwatch_metric_stream resource type.
+// metricStreamResourceType returns the Terraform awscc_cloudwatch_metric_stream resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudWatch::MetricStream resource type.
 func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -282,7 +282,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::MetricStream").WithTerraformTypeName("aws_cloudwatch_metric_stream").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::MetricStream").WithTerraformTypeName("awscc_cloudwatch_metric_stream").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",
@@ -297,7 +297,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_cloudwatch_metric_stream", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudwatch_metric_stream", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

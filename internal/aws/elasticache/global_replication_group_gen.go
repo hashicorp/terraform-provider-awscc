@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_elasticache_global_replication_group", globalReplicationGroupResourceType)
+	registry.AddResourceTypeFactory("awscc_elasticache_global_replication_group", globalReplicationGroupResourceType)
 }
 
-// globalReplicationGroupResourceType returns the Terraform aws_elasticache_global_replication_group resource type.
+// globalReplicationGroupResourceType returns the Terraform awscc_elasticache_global_replication_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ElastiCache::GlobalReplicationGroup resource type.
 func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -295,7 +295,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::GlobalReplicationGroup").WithTerraformTypeName("aws_elasticache_global_replication_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::GlobalReplicationGroup").WithTerraformTypeName("awscc_elasticache_global_replication_group").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/GlobalReplicationGroupIdSuffix",
@@ -316,7 +316,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_elasticache_global_replication_group", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_elasticache_global_replication_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

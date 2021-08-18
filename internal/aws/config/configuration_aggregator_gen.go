@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_config_configuration_aggregator", configurationAggregatorResourceType)
+	registry.AddResourceTypeFactory("awscc_config_configuration_aggregator", configurationAggregatorResourceType)
 }
 
-// configurationAggregatorResourceType returns the Terraform aws_config_configuration_aggregator resource type.
+// configurationAggregatorResourceType returns the Terraform awscc_config_configuration_aggregator resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::ConfigurationAggregator resource type.
 func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -222,7 +222,7 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Config::ConfigurationAggregator").WithTerraformTypeName("aws_config_configuration_aggregator").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Config::ConfigurationAggregator").WithTerraformTypeName("awscc_config_configuration_aggregator").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -234,7 +234,7 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_config_configuration_aggregator", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_config_configuration_aggregator", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

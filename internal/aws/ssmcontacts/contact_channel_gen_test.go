@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSSSMContactsContactChannel_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::SSMContacts::ContactChannel", "aws_ssmcontacts_contact_channel", "test")
+	td := acctest.NewTestData(t, "AWS::SSMContacts::ContactChannel", "awscc_ssmcontacts_contact_channel", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSSSMContactsContactChannel_basic(t *testing.T) {
 }
 
 func TestAccAWSSSMContactsContactChannel_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::SSMContacts::ContactChannel", "aws_ssmcontacts_contact_channel", "test")
+	td := acctest.NewTestData(t, "AWS::SSMContacts::ContactChannel", "awscc_ssmcontacts_contact_channel", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

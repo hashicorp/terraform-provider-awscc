@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSGlueSchema_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Glue::Schema", "aws_glue_schema", "test")
+	td := acctest.NewTestData(t, "AWS::Glue::Schema", "awscc_glue_schema", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

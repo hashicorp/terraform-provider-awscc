@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSLocationGeofenceCollection_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Location::GeofenceCollection", "aws_location_geofence_collection", "test")
+	td := acctest.NewTestData(t, "AWS::Location::GeofenceCollection", "awscc_location_geofence_collection", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

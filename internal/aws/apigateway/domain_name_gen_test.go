@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSApiGatewayDomainName_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ApiGateway::DomainName", "aws_apigateway_domain_name", "test")
+	td := acctest.NewTestData(t, "AWS::ApiGateway::DomainName", "awscc_apigateway_domain_name", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSApiGatewayDomainName_basic(t *testing.T) {
 }
 
 func TestAccAWSApiGatewayDomainName_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ApiGateway::DomainName", "aws_apigateway_domain_name", "test")
+	td := acctest.NewTestData(t, "AWS::ApiGateway::DomainName", "awscc_apigateway_domain_name", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

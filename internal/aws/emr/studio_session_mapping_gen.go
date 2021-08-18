@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_emr_studio_session_mapping", studioSessionMappingResourceType)
+	registry.AddResourceTypeFactory("awscc_emr_studio_session_mapping", studioSessionMappingResourceType)
 }
 
-// studioSessionMappingResourceType returns the Terraform aws_emr_studio_session_mapping resource type.
+// studioSessionMappingResourceType returns the Terraform awscc_emr_studio_session_mapping resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EMR::StudioSessionMapping resource type.
 func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -92,7 +92,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EMR::StudioSessionMapping").WithTerraformTypeName("aws_emr_studio_session_mapping").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EMR::StudioSessionMapping").WithTerraformTypeName("awscc_emr_studio_session_mapping").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -104,7 +104,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_emr_studio_session_mapping", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_emr_studio_session_mapping", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

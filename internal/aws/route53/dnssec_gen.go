@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53_dnssec", dNSSECResourceType)
+	registry.AddResourceTypeFactory("awscc_route53_dnssec", dNSSECResourceType)
 }
 
-// dNSSECResourceType returns the Terraform aws_route53_dnssec resource type.
+// dNSSECResourceType returns the Terraform awscc_route53_dnssec resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53::DNSSEC resource type.
 func dNSSECResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -52,7 +52,7 @@ func dNSSECResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53::DNSSEC").WithTerraformTypeName("aws_route53_dnssec").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53::DNSSEC").WithTerraformTypeName("awscc_route53_dnssec").WithTerraformSchema(schema)
 
 	opts = opts.IsImmutableType(true)
 
@@ -64,7 +64,7 @@ func dNSSECResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53_dnssec", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53_dnssec", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

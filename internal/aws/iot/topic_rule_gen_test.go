@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIoTTopicRule_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoT::TopicRule", "aws_iot_topic_rule", "test")
+	td := acctest.NewTestData(t, "AWS::IoT::TopicRule", "awscc_iot_topic_rule", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

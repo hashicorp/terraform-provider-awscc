@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSCloudWatchCompositeAlarm_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CloudWatch::CompositeAlarm", "aws_cloudwatch_composite_alarm", "test")
+	td := acctest.NewTestData(t, "AWS::CloudWatch::CompositeAlarm", "awscc_cloudwatch_composite_alarm", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

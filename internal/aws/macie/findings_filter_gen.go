@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_macie_findings_filter", findingsFilterResourceType)
+	registry.AddResourceTypeFactory("awscc_macie_findings_filter", findingsFilterResourceType)
 }
 
-// findingsFilterResourceType returns the Terraform aws_macie_findings_filter resource type.
+// findingsFilterResourceType returns the Terraform awscc_macie_findings_filter resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Macie::FindingsFilter resource type.
 func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -238,7 +238,7 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Macie::FindingsFilter").WithTerraformTypeName("aws_macie_findings_filter").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Macie::FindingsFilter").WithTerraformTypeName("awscc_macie_findings_filter").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -250,7 +250,7 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_macie_findings_filter", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_macie_findings_filter", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

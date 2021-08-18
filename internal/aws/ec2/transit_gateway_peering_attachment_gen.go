@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_peering_attachment", transitGatewayPeeringAttachmentResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway_peering_attachment", transitGatewayPeeringAttachmentResourceType)
 }
 
-// transitGatewayPeeringAttachmentResourceType returns the Terraform aws_ec2_transit_gateway_peering_attachment resource type.
+// transitGatewayPeeringAttachmentResourceType returns the Terraform awscc_ec2_transit_gateway_peering_attachment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayPeeringAttachment resource type.
 func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -197,7 +197,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayPeeringAttachment").WithTerraformTypeName("aws_ec2_transit_gateway_peering_attachment").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayPeeringAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_peering_attachment").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -209,7 +209,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_transit_gateway_peering_attachment", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_transit_gateway_peering_attachment", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

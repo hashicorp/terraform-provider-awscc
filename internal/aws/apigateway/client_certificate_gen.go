@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_apigateway_client_certificate", clientCertificateResourceType)
+	registry.AddResourceTypeFactory("awscc_apigateway_client_certificate", clientCertificateResourceType)
 }
 
-// clientCertificateResourceType returns the Terraform aws_apigateway_client_certificate resource type.
+// clientCertificateResourceType returns the Terraform awscc_apigateway_client_certificate resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::ClientCertificate resource type.
 func clientCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -103,7 +103,7 @@ func clientCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::ClientCertificate").WithTerraformTypeName("aws_apigateway_client_certificate").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::ClientCertificate").WithTerraformTypeName("awscc_apigateway_client_certificate").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -115,7 +115,7 @@ func clientCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_apigateway_client_certificate", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_apigateway_client_certificate", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

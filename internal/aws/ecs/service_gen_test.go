@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSECSService_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ECS::Service", "aws_ecs_service", "test")
+	td := acctest.NewTestData(t, "AWS::ECS::Service", "awscc_ecs_service", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSECSService_basic(t *testing.T) {
 }
 
 func TestAccAWSECSService_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ECS::Service", "aws_ecs_service", "test")
+	td := acctest.NewTestData(t, "AWS::ECS::Service", "awscc_ecs_service", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

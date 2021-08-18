@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSImageBuilderComponent_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ImageBuilder::Component", "aws_imagebuilder_component", "test")
+	td := acctest.NewTestData(t, "AWS::ImageBuilder::Component", "awscc_imagebuilder_component", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

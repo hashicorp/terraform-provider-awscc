@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_groundstation_dataflow_endpoint_group", dataflowEndpointGroupResourceType)
+	registry.AddResourceTypeFactory("awscc_groundstation_dataflow_endpoint_group", dataflowEndpointGroupResourceType)
 }
 
-// dataflowEndpointGroupResourceType returns the Terraform aws_groundstation_dataflow_endpoint_group resource type.
+// dataflowEndpointGroupResourceType returns the Terraform awscc_groundstation_dataflow_endpoint_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GroundStation::DataflowEndpointGroup resource type.
 func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -221,7 +221,7 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::DataflowEndpointGroup").WithTerraformTypeName("aws_groundstation_dataflow_endpoint_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::DataflowEndpointGroup").WithTerraformTypeName("awscc_groundstation_dataflow_endpoint_group").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -233,7 +233,7 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_groundstation_dataflow_endpoint_group", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_groundstation_dataflow_endpoint_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_lookoutmetrics_alert", alertResourceType)
+	registry.AddResourceTypeFactory("awscc_lookoutmetrics_alert", alertResourceType)
 }
 
-// alertResourceType returns the Terraform aws_lookoutmetrics_alert resource type.
+// alertResourceType returns the Terraform awscc_lookoutmetrics_alert resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LookoutMetrics::Alert resource type.
 func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -203,7 +203,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::LookoutMetrics::Alert").WithTerraformTypeName("aws_lookoutmetrics_alert").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::LookoutMetrics::Alert").WithTerraformTypeName("awscc_lookoutmetrics_alert").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -215,7 +215,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_lookoutmetrics_alert", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_lookoutmetrics_alert", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

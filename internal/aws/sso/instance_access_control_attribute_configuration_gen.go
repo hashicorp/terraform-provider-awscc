@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sso_instance_access_control_attribute_configuration", instanceAccessControlAttributeConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_sso_instance_access_control_attribute_configuration", instanceAccessControlAttributeConfigurationResourceType)
 }
 
-// instanceAccessControlAttributeConfigurationResourceType returns the Terraform aws_sso_instance_access_control_attribute_configuration resource type.
+// instanceAccessControlAttributeConfigurationResourceType returns the Terraform awscc_sso_instance_access_control_attribute_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSO::InstanceAccessControlAttributeConfiguration resource type.
 func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -211,7 +211,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SSO::InstanceAccessControlAttributeConfiguration").WithTerraformTypeName("aws_sso_instance_access_control_attribute_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSO::InstanceAccessControlAttributeConfiguration").WithTerraformTypeName("awscc_sso_instance_access_control_attribute_configuration").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -223,7 +223,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_sso_instance_access_control_attribute_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sso_instance_access_control_attribute_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

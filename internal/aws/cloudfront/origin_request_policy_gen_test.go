@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSCloudFrontOriginRequestPolicy_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CloudFront::OriginRequestPolicy", "aws_cloudfront_origin_request_policy", "test")
+	td := acctest.NewTestData(t, "AWS::CloudFront::OriginRequestPolicy", "awscc_cloudfront_origin_request_policy", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

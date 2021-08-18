@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSSSMIncidentsReplicationSet_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::SSMIncidents::ReplicationSet", "aws_ssmincidents_replication_set", "test")
+	td := acctest.NewTestData(t, "AWS::SSMIncidents::ReplicationSet", "awscc_ssmincidents_replication_set", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

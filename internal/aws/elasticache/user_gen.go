@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_elasticache_user", userResourceType)
+	registry.AddResourceTypeFactory("awscc_elasticache_user", userResourceType)
 }
 
-// userResourceType returns the Terraform aws_elasticache_user resource type.
+// userResourceType returns the Terraform awscc_elasticache_user resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ElastiCache::User resource type.
 func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -143,7 +143,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::User").WithTerraformTypeName("aws_elasticache_user").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::User").WithTerraformTypeName("awscc_elasticache_user").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Passwords",
@@ -160,7 +160,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_elasticache_user", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_elasticache_user", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

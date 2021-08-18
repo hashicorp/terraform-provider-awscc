@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSCloudFormationPublisher_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CloudFormation::Publisher", "aws_cloudformation_publisher", "test")
+	td := acctest.NewTestData(t, "AWS::CloudFormation::Publisher", "awscc_cloudformation_publisher", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

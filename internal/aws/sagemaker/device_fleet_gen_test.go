@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSSageMakerDeviceFleet_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::SageMaker::DeviceFleet", "aws_sagemaker_device_fleet", "test")
+	td := acctest.NewTestData(t, "AWS::SageMaker::DeviceFleet", "awscc_sagemaker_device_fleet", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSEMRContainersVirtualCluster_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EMRContainers::VirtualCluster", "aws_emrcontainers_virtual_cluster", "test")
+	td := acctest.NewTestData(t, "AWS::EMRContainers::VirtualCluster", "awscc_emrcontainers_virtual_cluster", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

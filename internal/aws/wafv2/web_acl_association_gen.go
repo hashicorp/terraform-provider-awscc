@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_wafv2_web_acl_association", webACLAssociationResourceType)
+	registry.AddResourceTypeFactory("awscc_wafv2_web_acl_association", webACLAssociationResourceType)
 }
 
-// webACLAssociationResourceType returns the Terraform aws_wafv2_web_acl_association resource type.
+// webACLAssociationResourceType returns the Terraform awscc_wafv2_web_acl_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WAFv2::WebACLAssociation resource type.
 func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -63,7 +63,7 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::WebACLAssociation").WithTerraformTypeName("aws_wafv2_web_acl_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::WebACLAssociation").WithTerraformTypeName("awscc_wafv2_web_acl_association").WithTerraformSchema(schema)
 
 	opts = opts.IsImmutableType(true)
 
@@ -75,7 +75,7 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_wafv2_web_acl_association", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_wafv2_web_acl_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iam_server_certificate", serverCertificateResourceType)
+	registry.AddResourceTypeFactory("awscc_iam_server_certificate", serverCertificateResourceType)
 }
 
-// serverCertificateResourceType returns the Terraform aws_iam_server_certificate resource type.
+// serverCertificateResourceType returns the Terraform awscc_iam_server_certificate resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IAM::ServerCertificate resource type.
 func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -169,7 +169,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IAM::ServerCertificate").WithTerraformTypeName("aws_iam_server_certificate").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IAM::ServerCertificate").WithTerraformTypeName("awscc_iam_server_certificate").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -181,7 +181,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iam_server_certificate", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iam_server_certificate", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

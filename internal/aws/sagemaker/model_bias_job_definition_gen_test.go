@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSSageMakerModelBiasJobDefinition_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::SageMaker::ModelBiasJobDefinition", "aws_sagemaker_model_bias_job_definition", "test")
+	td := acctest.NewTestData(t, "AWS::SageMaker::ModelBiasJobDefinition", "awscc_sagemaker_model_bias_job_definition", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
