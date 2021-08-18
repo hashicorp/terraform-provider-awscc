@@ -6,7 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/tfresource"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 func TestOrderedSetTypeValidate(t *testing.T) {
