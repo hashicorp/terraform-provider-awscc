@@ -17,9 +17,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
-	tfcloudformation "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/tfresource"
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
+	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 	"github.com/mattbaird/jsonpatch"
 )
 

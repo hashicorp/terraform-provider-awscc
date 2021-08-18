@@ -13,19 +13,19 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func New() tfsdk.Provider {
-	return &awsCloudAPIProvider{}
+	return &awsCloudControlProvider{}
 }
 
-type awsCloudAPIProvider struct {
+type awsCloudControlProvider struct {
 	cfClient *cloudformation.Client
 	roleARN  string
 }
 
-func (p *awsCloudAPIProvider) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
+func (p *awsCloudControlProvider) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
 	return schema.Schema{
 		Version: 1,
 		Attributes: map[string]schema.Attribute{
@@ -98,7 +98,7 @@ type providerData struct {
 	Token                types.String `tfsdk:"token"`
 }
 
-func (p *awsCloudAPIProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
+func (p *awsCloudControlProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
 	var config providerData
 
 	err := request.Config.Get(ctx, &config)
@@ -183,7 +183,7 @@ func (p *awsCloudAPIProvider) Configure(ctx context.Context, request tfsdk.Confi
 	p.roleARN = config.RoleARN.Value
 }
 
-func (p *awsCloudAPIProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
+func (p *awsCloudControlProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
 	var diags []*tfprotov6.Diagnostic
 	resources := make(map[string]tfsdk.ResourceType)
 
@@ -206,15 +206,15 @@ func (p *awsCloudAPIProvider) GetResources(ctx context.Context) (map[string]tfsd
 	return resources, diags
 }
 
-func (p *awsCloudAPIProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
+func (p *awsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
 	return nil, nil
 }
 
-func (p *awsCloudAPIProvider) CloudFormationClient(_ context.Context) *cloudformation.Client {
+func (p *awsCloudControlProvider) CloudFormationClient(_ context.Context) *cloudformation.Client {
 	return p.cfClient
 }
 
-func (p *awsCloudAPIProvider) RoleARN(_ context.Context) string {
+func (p *awsCloudControlProvider) RoleARN(_ context.Context) string {
 	return p.roleARN
 }
 

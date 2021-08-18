@@ -1,17 +1,17 @@
 terraform {
   required_providers {
-    cloudapi = {
-      source = "hashicorp/aws-cloudapi"
+    awscc = {
+      source = "hashicorp/awscc"
     }
   }
 }
 
-provider "cloudapi" {
+provider "awscc" {
   region = "us-west-2"
 }
 
 resource "aws_kms_key" "test" {
-  provider = cloudapi
+  provider = awscc
 
   key_policy = jsonencode({
     Id = "kms-tf-1"

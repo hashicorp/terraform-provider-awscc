@@ -3,7 +3,7 @@ package naming_test
 import (
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 )
 
 func TestParseCloudFormationTypeName(t *testing.T) {

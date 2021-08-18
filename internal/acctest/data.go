@@ -6,7 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/provider"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider"
 )
 
 type TestData struct {
@@ -29,7 +29,7 @@ type TestData struct {
 func (td *TestData) EmptyConfig() string {
 	return fmt.Sprintf(`
 resource %[1]q %[2]q {
-  provider = cloudapi
+  provider = awscc
 }
 `, td.TerraformResourceType, td.ResourceLabel)
 }
