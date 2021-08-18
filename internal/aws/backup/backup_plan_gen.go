@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_backup_backup_plan", backupPlanResourceType)
+	registry.AddResourceTypeFactory("awscc_backup_backup_plan", backupPlanResourceType)
 }
 
-// backupPlanResourceType returns the Terraform aws_backup_backup_plan resource type.
+// backupPlanResourceType returns the Terraform awscc_backup_backup_plan resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Backup::BackupPlan resource type.
 func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -324,7 +324,7 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupPlan").WithTerraformTypeName("aws_backup_backup_plan").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupPlan").WithTerraformTypeName("awscc_backup_backup_plan").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -336,7 +336,7 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_backup_backup_plan", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_backup_backup_plan", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSLambdaEventSourceMapping_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Lambda::EventSourceMapping", "aws_lambda_event_source_mapping", "test")
+	td := acctest.NewTestData(t, "AWS::Lambda::EventSourceMapping", "awscc_lambda_event_source_mapping", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

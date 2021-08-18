@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_quicksight_dashboard", dashboardResourceType)
+	registry.AddResourceTypeFactory("awscc_quicksight_dashboard", dashboardResourceType)
 }
 
-// dashboardResourceType returns the Terraform aws_quicksight_dashboard resource type.
+// dashboardResourceType returns the Terraform awscc_quicksight_dashboard resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::QuickSight::Dashboard resource type.
 func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -918,7 +918,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Dashboard").WithTerraformTypeName("aws_quicksight_dashboard").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Dashboard").WithTerraformTypeName("awscc_quicksight_dashboard").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DashboardPublishOptions",
@@ -940,7 +940,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_quicksight_dashboard", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_quicksight_dashboard", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

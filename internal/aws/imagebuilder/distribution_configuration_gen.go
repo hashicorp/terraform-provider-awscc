@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_imagebuilder_distribution_configuration", distributionConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_imagebuilder_distribution_configuration", distributionConfigurationResourceType)
 }
 
-// distributionConfigurationResourceType returns the Terraform aws_imagebuilder_distribution_configuration resource type.
+// distributionConfigurationResourceType returns the Terraform awscc_imagebuilder_distribution_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::DistributionConfiguration resource type.
 func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -387,7 +387,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::DistributionConfiguration").WithTerraformTypeName("aws_imagebuilder_distribution_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::DistributionConfiguration").WithTerraformTypeName("awscc_imagebuilder_distribution_configuration").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -399,7 +399,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_imagebuilder_distribution_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_imagebuilder_distribution_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

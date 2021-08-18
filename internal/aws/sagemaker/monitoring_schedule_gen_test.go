@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSSageMakerMonitoringSchedule_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::SageMaker::MonitoringSchedule", "aws_sagemaker_monitoring_schedule", "test")
+	td := acctest.NewTestData(t, "AWS::SageMaker::MonitoringSchedule", "awscc_sagemaker_monitoring_schedule", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

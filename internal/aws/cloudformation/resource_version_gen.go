@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudformation_resource_version", resourceVersionResourceType)
+	registry.AddResourceTypeFactory("awscc_cloudformation_resource_version", resourceVersionResourceType)
 }
 
-// resourceVersionResourceType returns the Terraform aws_cloudformation_resource_version resource type.
+// resourceVersionResourceType returns the Terraform awscc_cloudformation_resource_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::ResourceVersion resource type.
 func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -198,7 +198,7 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ResourceVersion").WithTerraformTypeName("aws_cloudformation_resource_version").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ResourceVersion").WithTerraformTypeName("awscc_cloudformation_resource_version").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/SchemaHandlerPackage",
@@ -213,7 +213,7 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_cloudformation_resource_version", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudformation_resource_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

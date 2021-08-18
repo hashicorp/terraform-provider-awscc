@@ -10,16 +10,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_location_nfs", locationNFSResourceType)
+	registry.AddResourceTypeFactory("awscc_datasync_location_nfs", locationNFSResourceType)
 }
 
-// locationNFSResourceType returns the Terraform aws_datasync_location_nfs resource type.
+// locationNFSResourceType returns the Terraform awscc_datasync_location_nfs resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationNFS resource type.
 func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -224,7 +224,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationNFS").WithTerraformTypeName("aws_datasync_location_nfs").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationNFS").WithTerraformTypeName("awscc_datasync_location_nfs").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ServerHostname",
@@ -240,7 +240,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_datasync_location_nfs", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_nfs", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

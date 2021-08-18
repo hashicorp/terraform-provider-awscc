@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediapackage_packaging_configuration", packagingConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_mediapackage_packaging_configuration", packagingConfigurationResourceType)
 }
 
-// packagingConfigurationResourceType returns the Terraform aws_mediapackage_packaging_configuration resource type.
+// packagingConfigurationResourceType returns the Terraform awscc_mediapackage_packaging_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaPackage::PackagingConfiguration resource type.
 func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -1069,7 +1069,7 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingConfiguration").WithTerraformTypeName("aws_mediapackage_packaging_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingConfiguration").WithTerraformTypeName("awscc_mediapackage_packaging_configuration").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -1081,7 +1081,7 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_mediapackage_packaging_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mediapackage_packaging_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

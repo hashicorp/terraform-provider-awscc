@@ -34,7 +34,8 @@ type Config struct {
 }
 
 type Defaults struct {
-	SchemaCacheDirectory string `hcl:"schema_cache_directory"`
+	SchemaCacheDirectory    string `hcl:"schema_cache_directory"`
+	TerraformTypeNamePrefix string `hcl:"terraform_type_name_prefix,optional"`
 }
 
 type MetaSchema struct {
@@ -207,6 +208,8 @@ func (d *Downloader) ResourceSchemas() ([]*ResourceData, error) {
 		return nil, fmt.Errorf("CloudFormation Resource Provider Definition Schema not loaded")
 	}
 
+	terraformTypeNamePrefix := d.config.Defaults.TerraformTypeNamePrefix
+
 	resources := []*ResourceData{}
 
 	for _, schema := range d.config.ResourceSchemas {
@@ -230,6 +233,10 @@ func (d *Downloader) ResourceSchemas() ([]*ResourceData, error) {
 		if err != nil {
 			d.ui.Warn(fmt.Sprintf("incorrect format for Terraform resource type name: %s", tfResourceTypeName))
 			continue
+		}
+
+		if terraformTypeNamePrefix != "" {
+			tfResourceTypeName = naming.CreateTerraformTypeName(terraformTypeNamePrefix, svc, res)
 		}
 
 		resources = append(resources, &ResourceData{

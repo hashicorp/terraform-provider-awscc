@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSSageMakerProject_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::SageMaker::Project", "aws_sagemaker_project", "test")
+	td := acctest.NewTestData(t, "AWS::SageMaker::Project", "awscc_sagemaker_project", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

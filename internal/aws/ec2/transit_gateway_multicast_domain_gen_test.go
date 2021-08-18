@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSEC2TransitGatewayMulticastDomain_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EC2::TransitGatewayMulticastDomain", "aws_ec2_transit_gateway_multicast_domain", "test")
+	td := acctest.NewTestData(t, "AWS::EC2::TransitGatewayMulticastDomain", "awscc_ec2_transit_gateway_multicast_domain", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

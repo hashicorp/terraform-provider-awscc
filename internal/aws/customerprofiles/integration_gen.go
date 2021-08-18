@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_customerprofiles_integration", integrationResourceType)
+	registry.AddResourceTypeFactory("awscc_customerprofiles_integration", integrationResourceType)
 }
 
-// integrationResourceType returns the Terraform aws_customerprofiles_integration resource type.
+// integrationResourceType returns the Terraform awscc_customerprofiles_integration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CustomerProfiles::Integration resource type.
 func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -855,7 +855,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::Integration").WithTerraformTypeName("aws_customerprofiles_integration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::Integration").WithTerraformTypeName("awscc_customerprofiles_integration").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/FlowDefinition",
@@ -870,7 +870,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_customerprofiles_integration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_customerprofiles_integration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

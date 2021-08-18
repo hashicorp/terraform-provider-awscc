@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSApiGatewayDocumentationVersion_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ApiGateway::DocumentationVersion", "aws_apigateway_documentation_version", "test")
+	td := acctest.NewTestData(t, "AWS::ApiGateway::DocumentationVersion", "awscc_apigateway_documentation_version", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

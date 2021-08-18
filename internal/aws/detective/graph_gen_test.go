@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSDetectiveGraph_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Detective::Graph", "aws_detective_graph", "test")
+	td := acctest.NewTestData(t, "AWS::Detective::Graph", "awscc_detective_graph", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSDetectiveGraph_basic(t *testing.T) {
 }
 
 func TestAccAWSDetectiveGraph_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Detective::Graph", "aws_detective_graph", "test")
+	td := acctest.NewTestData(t, "AWS::Detective::Graph", "awscc_detective_graph", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

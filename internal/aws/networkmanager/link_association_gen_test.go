@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSNetworkManagerLinkAssociation_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::NetworkManager::LinkAssociation", "aws_networkmanager_link_association", "test")
+	td := acctest.NewTestData(t, "AWS::NetworkManager::LinkAssociation", "awscc_networkmanager_link_association", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

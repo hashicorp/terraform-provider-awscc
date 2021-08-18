@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_network_insights_analysis", networkInsightsAnalysisResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_network_insights_analysis", networkInsightsAnalysisResourceType)
 }
 
-// networkInsightsAnalysisResourceType returns the Terraform aws_ec2_network_insights_analysis resource type.
+// networkInsightsAnalysisResourceType returns the Terraform awscc_ec2_network_insights_analysis resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInsightsAnalysis resource type.
 func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -2816,7 +2816,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsAnalysis").WithTerraformTypeName("aws_ec2_network_insights_analysis").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsAnalysis").WithTerraformTypeName("awscc_ec2_network_insights_analysis").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -2828,7 +2828,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_network_insights_analysis", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_network_insights_analysis", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

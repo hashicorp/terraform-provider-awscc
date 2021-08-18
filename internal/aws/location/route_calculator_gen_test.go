@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSLocationRouteCalculator_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Location::RouteCalculator", "aws_location_route_calculator", "test")
+	td := acctest.NewTestData(t, "AWS::Location::RouteCalculator", "awscc_location_route_calculator", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSWAFv2WebACLAssociation_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::WAFv2::WebACLAssociation", "aws_wafv2_web_acl_association", "test")
+	td := acctest.NewTestData(t, "AWS::WAFv2::WebACLAssociation", "awscc_wafv2_web_acl_association", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

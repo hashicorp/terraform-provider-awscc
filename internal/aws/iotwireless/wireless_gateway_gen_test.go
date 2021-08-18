@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIoTWirelessWirelessGateway_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoTWireless::WirelessGateway", "aws_iotwireless_wireless_gateway", "test")
+	td := acctest.NewTestData(t, "AWS::IoTWireless::WirelessGateway", "awscc_iotwireless_wireless_gateway", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSGreengrassV2ComponentVersion_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::GreengrassV2::ComponentVersion", "aws_greengrassv2_component_version", "test")
+	td := acctest.NewTestData(t, "AWS::GreengrassV2::ComponentVersion", "awscc_greengrassv2_component_version", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSGreengrassV2ComponentVersion_basic(t *testing.T) {
 }
 
 func TestAccAWSGreengrassV2ComponentVersion_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::GreengrassV2::ComponentVersion", "aws_greengrassv2_component_version", "test")
+	td := acctest.NewTestData(t, "AWS::GreengrassV2::ComponentVersion", "awscc_greengrassv2_component_version", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

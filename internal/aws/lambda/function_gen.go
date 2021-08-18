@@ -10,16 +10,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_lambda_function", functionResourceType)
+	registry.AddResourceTypeFactory("awscc_lambda_function", functionResourceType)
 }
 
-// functionResourceType returns the Terraform aws_lambda_function resource type.
+// functionResourceType returns the Terraform awscc_lambda_function resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Lambda::Function resource type.
 func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -572,7 +572,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Lambda::Function").WithTerraformTypeName("aws_lambda_function").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Lambda::Function").WithTerraformTypeName("awscc_lambda_function").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Code",
@@ -587,7 +587,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_lambda_function", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_lambda_function", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -10,16 +10,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_mitigation_action", mitigationActionResourceType)
+	registry.AddResourceTypeFactory("awscc_iot_mitigation_action", mitigationActionResourceType)
 }
 
-// mitigationActionResourceType returns the Terraform aws_iot_mitigation_action resource type.
+// mitigationActionResourceType returns the Terraform awscc_iot_mitigation_action resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::MitigationAction resource type.
 func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -372,7 +372,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::MitigationAction").WithTerraformTypeName("aws_iot_mitigation_action").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::MitigationAction").WithTerraformTypeName("awscc_iot_mitigation_action").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -384,7 +384,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iot_mitigation_action", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_mitigation_action", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

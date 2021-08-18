@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIoTSiteWiseDashboard_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoTSiteWise::Dashboard", "aws_iotsitewise_dashboard", "test")
+	td := acctest.NewTestData(t, "AWS::IoTSiteWise::Dashboard", "awscc_iotsitewise_dashboard", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -10,16 +10,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_location_object_storage", locationObjectStorageResourceType)
+	registry.AddResourceTypeFactory("awscc_datasync_location_object_storage", locationObjectStorageResourceType)
 }
 
-// locationObjectStorageResourceType returns the Terraform aws_datasync_location_object_storage resource type.
+// locationObjectStorageResourceType returns the Terraform awscc_datasync_location_object_storage resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationObjectStorage resource type.
 func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -243,7 +243,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationObjectStorage").WithTerraformTypeName("aws_datasync_location_object_storage").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationObjectStorage").WithTerraformTypeName("awscc_datasync_location_object_storage").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/SecretKey",
@@ -261,7 +261,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_datasync_location_object_storage", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_object_storage", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

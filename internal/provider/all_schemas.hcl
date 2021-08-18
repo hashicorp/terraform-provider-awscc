@@ -1,5 +1,6 @@
 defaults {
-  schema_cache_directory = "../service/cloudformation/schemas"
+  schema_cache_directory     = "../service/cloudformation/schemas"
+  terraform_type_name_prefix = "awscc"
 }
 
 meta_schema {

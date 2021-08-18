@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSDataSyncLocationS3_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::DataSync::LocationS3", "aws_datasync_location_s3", "test")
+	td := acctest.NewTestData(t, "AWS::DataSync::LocationS3", "awscc_datasync_location_s3", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

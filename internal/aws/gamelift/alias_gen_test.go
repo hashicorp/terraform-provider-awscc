@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSGameLiftAlias_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::GameLift::Alias", "aws_gamelift_alias", "test")
+	td := acctest.NewTestData(t, "AWS::GameLift::Alias", "awscc_gamelift_alias", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

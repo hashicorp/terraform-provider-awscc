@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSFraudDetectorLabel_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::FraudDetector::Label", "aws_frauddetector_label", "test")
+	td := acctest.NewTestData(t, "AWS::FraudDetector::Label", "awscc_frauddetector_label", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

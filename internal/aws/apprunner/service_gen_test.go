@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSAppRunnerService_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::AppRunner::Service", "aws_apprunner_service", "test")
+	td := acctest.NewTestData(t, "AWS::AppRunner::Service", "awscc_apprunner_service", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

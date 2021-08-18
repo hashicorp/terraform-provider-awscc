@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIVSChannel_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IVS::Channel", "aws_ivs_channel", "test")
+	td := acctest.NewTestData(t, "AWS::IVS::Channel", "awscc_ivs_channel", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSIVSChannel_basic(t *testing.T) {
 }
 
 func TestAccAWSIVSChannel_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IVS::Channel", "aws_ivs_channel", "test")
+	td := acctest.NewTestData(t, "AWS::IVS::Channel", "awscc_ivs_channel", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSRDSGlobalCluster_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::RDS::GlobalCluster", "aws_rds_global_cluster", "test")
+	td := acctest.NewTestData(t, "AWS::RDS::GlobalCluster", "awscc_rds_global_cluster", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSRDSGlobalCluster_basic(t *testing.T) {
 }
 
 func TestAccAWSRDSGlobalCluster_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::RDS::GlobalCluster", "aws_rds_global_cluster", "test")
+	td := acctest.NewTestData(t, "AWS::RDS::GlobalCluster", "awscc_rds_global_cluster", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

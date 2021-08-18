@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIoTAccountAuditConfiguration_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoT::AccountAuditConfiguration", "aws_iot_account_audit_configuration", "test")
+	td := acctest.NewTestData(t, "AWS::IoT::AccountAuditConfiguration", "awscc_iot_account_audit_configuration", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

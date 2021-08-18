@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSConfigConformancePack_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Config::ConformancePack", "aws_config_conformance_pack", "test")
+	td := acctest.NewTestData(t, "AWS::Config::ConformancePack", "awscc_config_conformance_pack", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

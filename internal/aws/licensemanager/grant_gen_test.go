@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSLicenseManagerGrant_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::LicenseManager::Grant", "aws_licensemanager_grant", "test")
+	td := acctest.NewTestData(t, "AWS::LicenseManager::Grant", "awscc_licensemanager_grant", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSLicenseManagerGrant_basic(t *testing.T) {
 }
 
 func TestAccAWSLicenseManagerGrant_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::LicenseManager::Grant", "aws_licensemanager_grant", "test")
+	td := acctest.NewTestData(t, "AWS::LicenseManager::Grant", "awscc_licensemanager_grant", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

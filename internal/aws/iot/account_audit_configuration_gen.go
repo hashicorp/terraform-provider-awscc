@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_account_audit_configuration", accountAuditConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_iot_account_audit_configuration", accountAuditConfigurationResourceType)
 }
 
-// accountAuditConfigurationResourceType returns the Terraform aws_iot_account_audit_configuration resource type.
+// accountAuditConfigurationResourceType returns the Terraform awscc_iot_account_audit_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::AccountAuditConfiguration resource type.
 func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -511,7 +511,7 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::AccountAuditConfiguration").WithTerraformTypeName("aws_iot_account_audit_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::AccountAuditConfiguration").WithTerraformTypeName("awscc_iot_account_audit_configuration").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -523,7 +523,7 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iot_account_audit_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_account_audit_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

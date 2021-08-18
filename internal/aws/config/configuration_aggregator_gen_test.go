@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSConfigConfigurationAggregator_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Config::ConfigurationAggregator", "aws_config_configuration_aggregator", "test")
+	td := acctest.NewTestData(t, "AWS::Config::ConfigurationAggregator", "awscc_config_configuration_aggregator", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSConfigConfigurationAggregator_basic(t *testing.T) {
 }
 
 func TestAccAWSConfigConfigurationAggregator_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Config::ConfigurationAggregator", "aws_config_configuration_aggregator", "test")
+	td := acctest.NewTestData(t, "AWS::Config::ConfigurationAggregator", "awscc_config_configuration_aggregator", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

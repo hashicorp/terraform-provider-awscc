@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ssm_document", documentResourceType)
+	registry.AddResourceTypeFactory("awscc_ssm_document", documentResourceType)
 }
 
-// documentResourceType returns the Terraform aws_ssm_document resource type.
+// documentResourceType returns the Terraform awscc_ssm_document resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSM::Document resource type.
 func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -312,7 +312,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SSM::Document").WithTerraformTypeName("aws_ssm_document").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSM::Document").WithTerraformTypeName("awscc_ssm_document").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -324,7 +324,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ssm_document", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ssm_document", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

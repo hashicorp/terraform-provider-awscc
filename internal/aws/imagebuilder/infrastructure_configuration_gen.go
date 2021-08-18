@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_imagebuilder_infrastructure_configuration", infrastructureConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_imagebuilder_infrastructure_configuration", infrastructureConfigurationResourceType)
 }
 
-// infrastructureConfigurationResourceType returns the Terraform aws_imagebuilder_infrastructure_configuration resource type.
+// infrastructureConfigurationResourceType returns the Terraform awscc_imagebuilder_infrastructure_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::InfrastructureConfiguration resource type.
 func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -245,7 +245,7 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::InfrastructureConfiguration").WithTerraformTypeName("aws_imagebuilder_infrastructure_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::InfrastructureConfiguration").WithTerraformTypeName("awscc_imagebuilder_infrastructure_configuration").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -257,7 +257,7 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_imagebuilder_infrastructure_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_imagebuilder_infrastructure_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

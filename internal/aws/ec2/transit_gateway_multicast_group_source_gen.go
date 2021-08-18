@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_multicast_group_source", transitGatewayMulticastGroupSourceResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway_multicast_group_source", transitGatewayMulticastGroupSourceResourceType)
 }
 
-// transitGatewayMulticastGroupSourceResourceType returns the Terraform aws_ec2_transit_gateway_multicast_group_source resource type.
+// transitGatewayMulticastGroupSourceResourceType returns the Terraform awscc_ec2_transit_gateway_multicast_group_source resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastGroupSource resource type.
 func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -163,7 +163,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastGroupSource").WithTerraformTypeName("aws_ec2_transit_gateway_multicast_group_source").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastGroupSource").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_group_source").WithTerraformSchema(schema)
 
 	opts = opts.IsImmutableType(true)
 
@@ -175,7 +175,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_transit_gateway_multicast_group_source", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_transit_gateway_multicast_group_source", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

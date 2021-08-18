@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_transit_gateway_registration", transitGatewayRegistrationResourceType)
+	registry.AddResourceTypeFactory("awscc_networkmanager_transit_gateway_registration", transitGatewayRegistrationResourceType)
 }
 
-// transitGatewayRegistrationResourceType returns the Terraform aws_networkmanager_transit_gateway_registration resource type.
+// transitGatewayRegistrationResourceType returns the Terraform awscc_networkmanager_transit_gateway_registration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::TransitGatewayRegistration resource type.
 func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -63,7 +63,7 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::TransitGatewayRegistration").WithTerraformTypeName("aws_networkmanager_transit_gateway_registration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::TransitGatewayRegistration").WithTerraformTypeName("awscc_networkmanager_transit_gateway_registration").WithTerraformSchema(schema)
 
 	opts = opts.IsImmutableType(true)
 
@@ -75,7 +75,7 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_networkmanager_transit_gateway_registration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_networkmanager_transit_gateway_registration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

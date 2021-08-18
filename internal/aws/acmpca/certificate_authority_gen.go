@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_acmpca_certificate_authority", certificateAuthorityResourceType)
+	registry.AddResourceTypeFactory("awscc_acmpca_certificate_authority", certificateAuthorityResourceType)
 }
 
-// certificateAuthorityResourceType returns the Terraform aws_acmpca_certificate_authority resource type.
+// certificateAuthorityResourceType returns the Terraform awscc_acmpca_certificate_authority resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ACMPCA::CertificateAuthority resource type.
 func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -783,7 +783,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthority").WithTerraformTypeName("aws_acmpca_certificate_authority").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthority").WithTerraformTypeName("awscc_acmpca_certificate_authority").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Subject",
@@ -798,7 +798,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_acmpca_certificate_authority", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_acmpca_certificate_authority", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

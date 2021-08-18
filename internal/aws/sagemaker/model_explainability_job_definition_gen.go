@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_model_explainability_job_definition", modelExplainabilityJobDefinitionResourceType)
+	registry.AddResourceTypeFactory("awscc_sagemaker_model_explainability_job_definition", modelExplainabilityJobDefinitionResourceType)
 }
 
-// modelExplainabilityJobDefinitionResourceType returns the Terraform aws_sagemaker_model_explainability_job_definition resource type.
+// modelExplainabilityJobDefinitionResourceType returns the Terraform awscc_sagemaker_model_explainability_job_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelExplainabilityJobDefinition resource type.
 func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -729,7 +729,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelExplainabilityJobDefinition").WithTerraformTypeName("aws_sagemaker_model_explainability_job_definition").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelExplainabilityJobDefinition").WithTerraformTypeName("awscc_sagemaker_model_explainability_job_definition").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -741,7 +741,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_sagemaker_model_explainability_job_definition", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sagemaker_model_explainability_job_definition", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

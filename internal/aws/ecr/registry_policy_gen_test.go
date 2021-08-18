@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSECRRegistryPolicy_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ECR::RegistryPolicy", "aws_ecr_registry_policy", "test")
+	td := acctest.NewTestData(t, "AWS::ECR::RegistryPolicy", "awscc_ecr_registry_policy", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

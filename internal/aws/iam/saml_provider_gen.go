@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iam_saml_provider", sAMLProviderResourceType)
+	registry.AddResourceTypeFactory("awscc_iam_saml_provider", sAMLProviderResourceType)
 }
 
-// sAMLProviderResourceType returns the Terraform aws_iam_saml_provider resource type.
+// sAMLProviderResourceType returns the Terraform awscc_iam_saml_provider resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IAM::SAMLProvider resource type.
 func sAMLProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -126,7 +126,7 @@ func sAMLProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IAM::SAMLProvider").WithTerraformTypeName("aws_iam_saml_provider").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IAM::SAMLProvider").WithTerraformTypeName("awscc_iam_saml_provider").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -138,7 +138,7 @@ func sAMLProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iam_saml_provider", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iam_saml_provider", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

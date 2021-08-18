@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_domain_configuration", domainConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_iot_domain_configuration", domainConfigurationResourceType)
 }
 
-// domainConfigurationResourceType returns the Terraform aws_iot_domain_configuration resource type.
+// domainConfigurationResourceType returns the Terraform awscc_iot_domain_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::DomainConfiguration resource type.
 func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -273,7 +273,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::DomainConfiguration").WithTerraformTypeName("aws_iot_domain_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::DomainConfiguration").WithTerraformTypeName("awscc_iot_domain_configuration").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ServerCertificateArns",
@@ -288,7 +288,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iot_domain_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_domain_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSWorkSpacesConnectionAlias_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::WorkSpaces::ConnectionAlias", "aws_workspaces_connection_alias", "test")
+	td := acctest.NewTestData(t, "AWS::WorkSpaces::ConnectionAlias", "awscc_workspaces_connection_alias", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

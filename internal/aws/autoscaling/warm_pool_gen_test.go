@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSAutoScalingWarmPool_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::AutoScaling::WarmPool", "aws_autoscaling_warm_pool", "test")
+	td := acctest.NewTestData(t, "AWS::AutoScaling::WarmPool", "awscc_autoscaling_warm_pool", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

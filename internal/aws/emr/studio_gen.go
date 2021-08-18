@@ -10,16 +10,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_emr_studio", studioResourceType)
+	registry.AddResourceTypeFactory("awscc_emr_studio", studioResourceType)
 }
 
-// studioResourceType returns the Terraform aws_emr_studio resource type.
+// studioResourceType returns the Terraform awscc_emr_studio resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EMR::Studio resource type.
 func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -266,7 +266,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EMR::Studio").WithTerraformTypeName("aws_emr_studio").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EMR::Studio").WithTerraformTypeName("awscc_emr_studio").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -278,7 +278,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_emr_studio", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_emr_studio", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

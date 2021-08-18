@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecs_cluster_capacity_provider_associations", clusterCapacityProviderAssociationsResourceType)
+	registry.AddResourceTypeFactory("awscc_ecs_cluster_capacity_provider_associations", clusterCapacityProviderAssociationsResourceType)
 }
 
-// clusterCapacityProviderAssociationsResourceType returns the Terraform aws_ecs_cluster_capacity_provider_associations resource type.
+// clusterCapacityProviderAssociationsResourceType returns the Terraform awscc_ecs_cluster_capacity_provider_associations resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::ClusterCapacityProviderAssociations resource type.
 func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -120,7 +120,7 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECS::ClusterCapacityProviderAssociations").WithTerraformTypeName("aws_ecs_cluster_capacity_provider_associations").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::ClusterCapacityProviderAssociations").WithTerraformTypeName("awscc_ecs_cluster_capacity_provider_associations").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -132,7 +132,7 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ecs_cluster_capacity_provider_associations", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecs_cluster_capacity_provider_associations", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

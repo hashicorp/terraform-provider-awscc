@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSMediaPackageOriginEndpoint_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::MediaPackage::OriginEndpoint", "aws_mediapackage_origin_endpoint", "test")
+	td := acctest.NewTestData(t, "AWS::MediaPackage::OriginEndpoint", "awscc_mediapackage_origin_endpoint", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSQuickSightTemplate_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::QuickSight::Template", "aws_quicksight_template", "test")
+	td := acctest.NewTestData(t, "AWS::QuickSight::Template", "awscc_quicksight_template", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

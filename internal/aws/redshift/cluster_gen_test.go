@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSRedshiftCluster_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Redshift::Cluster", "aws_redshift_cluster", "test")
+	td := acctest.NewTestData(t, "AWS::Redshift::Cluster", "awscc_redshift_cluster", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

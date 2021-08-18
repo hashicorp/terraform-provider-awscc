@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSCloudFrontPublicKey_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CloudFront::PublicKey", "aws_cloudfront_public_key", "test")
+	td := acctest.NewTestData(t, "AWS::CloudFront::PublicKey", "awscc_cloudfront_public_key", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

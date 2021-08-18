@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_imagebuilder_image_pipeline", imagePipelineResourceType)
+	registry.AddResourceTypeFactory("awscc_imagebuilder_image_pipeline", imagePipelineResourceType)
 }
 
-// imagePipelineResourceType returns the Terraform aws_imagebuilder_image_pipeline resource type.
+// imagePipelineResourceType returns the Terraform awscc_imagebuilder_image_pipeline resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::ImagePipeline resource type.
 func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -240,7 +240,7 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::ImagePipeline").WithTerraformTypeName("aws_imagebuilder_image_pipeline").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::ImagePipeline").WithTerraformTypeName("awscc_imagebuilder_image_pipeline").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -252,7 +252,7 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_imagebuilder_image_pipeline", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_imagebuilder_image_pipeline", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

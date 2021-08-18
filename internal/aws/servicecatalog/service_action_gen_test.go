@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSServiceCatalogServiceAction_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ServiceCatalog::ServiceAction", "aws_servicecatalog_service_action", "test")
+	td := acctest.NewTestData(t, "AWS::ServiceCatalog::ServiceAction", "awscc_servicecatalog_service_action", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -10,16 +10,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_location_f_sx_windows", locationFSxWindowsResourceType)
+	registry.AddResourceTypeFactory("awscc_datasync_location_f_sx_windows", locationFSxWindowsResourceType)
 }
 
-// locationFSxWindowsResourceType returns the Terraform aws_datasync_location_f_sx_windows resource type.
+// locationFSxWindowsResourceType returns the Terraform awscc_datasync_location_f_sx_windows resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationFSxWindows resource type.
 func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -217,7 +217,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationFSxWindows").WithTerraformTypeName("aws_datasync_location_f_sx_windows").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationFSxWindows").WithTerraformTypeName("awscc_datasync_location_f_sx_windows").WithTerraformSchema(schema)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Password",
@@ -234,7 +234,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_datasync_location_f_sx_windows", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_f_sx_windows", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

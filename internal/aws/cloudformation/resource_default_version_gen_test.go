@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSCloudFormationResourceDefaultVersion_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CloudFormation::ResourceDefaultVersion", "aws_cloudformation_resource_default_version", "test")
+	td := acctest.NewTestData(t, "AWS::CloudFormation::ResourceDefaultVersion", "awscc_cloudformation_resource_default_version", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSCloudFormationResourceDefaultVersion_basic(t *testing.T) {
 }
 
 func TestAccAWSCloudFormationResourceDefaultVersion_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CloudFormation::ResourceDefaultVersion", "aws_cloudformation_resource_default_version", "test")
+	td := acctest.NewTestData(t, "AWS::CloudFormation::ResourceDefaultVersion", "awscc_cloudformation_resource_default_version", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

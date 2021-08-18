@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIVSStreamKey_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IVS::StreamKey", "aws_ivs_stream_key", "test")
+	td := acctest.NewTestData(t, "AWS::IVS::StreamKey", "awscc_ivs_stream_key", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

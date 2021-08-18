@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIoTTopicRuleDestination_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoT::TopicRuleDestination", "aws_iot_topic_rule_destination", "test")
+	td := acctest.NewTestData(t, "AWS::IoT::TopicRuleDestination", "awscc_iot_topic_rule_destination", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSIoTTopicRuleDestination_basic(t *testing.T) {
 }
 
 func TestAccAWSIoTTopicRuleDestination_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoT::TopicRuleDestination", "aws_iot_topic_rule_destination", "test")
+	td := acctest.NewTestData(t, "AWS::IoT::TopicRuleDestination", "awscc_iot_topic_rule_destination", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

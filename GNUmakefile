@@ -24,7 +24,7 @@ schemas:
 test:
 	go test $(TEST) $(TESTARGS) -timeout=5m
 
-# make testacc PKG_NAME=internal/aws/logs TESTARGS='-run=TestAccLogGroup_'
+# make testacc PKG_NAME=internal/aws/logs TESTARGS='-run=TestAccAWSLogsLogGroup_basic'
 testacc:
 	TF_ACC=1 go test ./$(PKG_NAME) -v -count $(TEST_COUNT) -parallel $(ACCTEST_PARALLELISM) $(TESTARGS) -timeout $(ACCTEST_TIMEOUT)
 

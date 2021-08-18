@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSServiceCatalogCloudFormationProvisionedProduct_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ServiceCatalog::CloudFormationProvisionedProduct", "aws_servicecatalog_cloud_formation_provisioned_product", "test")
+	td := acctest.NewTestData(t, "AWS::ServiceCatalog::CloudFormationProvisionedProduct", "awscc_servicecatalog_cloud_formation_provisioned_product", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSServiceCatalogCloudFormationProvisionedProduct_basic(t *testing.T
 }
 
 func TestAccAWSServiceCatalogCloudFormationProvisionedProduct_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ServiceCatalog::CloudFormationProvisionedProduct", "aws_servicecatalog_cloud_formation_provisioned_product", "test")
+	td := acctest.NewTestData(t, "AWS::ServiceCatalog::CloudFormationProvisionedProduct", "awscc_servicecatalog_cloud_formation_provisioned_product", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

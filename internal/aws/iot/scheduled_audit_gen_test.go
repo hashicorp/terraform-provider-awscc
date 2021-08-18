@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIoTScheduledAudit_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoT::ScheduledAudit", "aws_iot_scheduled_audit", "test")
+	td := acctest.NewTestData(t, "AWS::IoT::ScheduledAudit", "awscc_iot_scheduled_audit", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

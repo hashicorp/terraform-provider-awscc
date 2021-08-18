@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSLogsQueryDefinition_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Logs::QueryDefinition", "aws_logs_query_definition", "test")
+	td := acctest.NewTestData(t, "AWS::Logs::QueryDefinition", "awscc_logs_query_definition", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSWAFv2RegexPatternSet_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::WAFv2::RegexPatternSet", "aws_wafv2_regex_pattern_set", "test")
+	td := acctest.NewTestData(t, "AWS::WAFv2::RegexPatternSet", "awscc_wafv2_regex_pattern_set", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSLookoutMetricsAlert_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::LookoutMetrics::Alert", "aws_lookoutmetrics_alert", "test")
+	td := acctest.NewTestData(t, "AWS::LookoutMetrics::Alert", "awscc_lookoutmetrics_alert", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -10,16 +10,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_s3_storage_lens", storageLensResourceType)
+	registry.AddResourceTypeFactory("awscc_s3_storage_lens", storageLensResourceType)
 }
 
-// storageLensResourceType returns the Terraform aws_s3_storage_lens resource type.
+// storageLensResourceType returns the Terraform awscc_s3_storage_lens resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3::StorageLens resource type.
 func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -549,7 +549,7 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::S3::StorageLens").WithTerraformTypeName("aws_s3_storage_lens").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::S3::StorageLens").WithTerraformTypeName("awscc_s3_storage_lens").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -561,7 +561,7 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_s3_storage_lens", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_s3_storage_lens", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

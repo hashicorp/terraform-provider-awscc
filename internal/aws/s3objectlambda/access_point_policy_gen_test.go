@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSS3ObjectLambdaAccessPointPolicy_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::S3ObjectLambda::AccessPointPolicy", "aws_s3objectlambda_access_point_policy", "test")
+	td := acctest.NewTestData(t, "AWS::S3ObjectLambda::AccessPointPolicy", "awscc_s3objectlambda_access_point_policy", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

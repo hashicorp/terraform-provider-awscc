@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSQuickSightDataSet_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::QuickSight::DataSet", "aws_quicksight_data_set", "test")
+	td := acctest.NewTestData(t, "AWS::QuickSight::DataSet", "awscc_quicksight_data_set", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSQuickSightDataSet_basic(t *testing.T) {
 }
 
 func TestAccAWSQuickSightDataSet_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::QuickSight::DataSet", "aws_quicksight_data_set", "test")
+	td := acctest.NewTestData(t, "AWS::QuickSight::DataSet", "awscc_quicksight_data_set", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

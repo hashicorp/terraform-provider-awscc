@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSTimestreamDatabase_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Timestream::Database", "aws_timestream_database", "test")
+	td := acctest.NewTestData(t, "AWS::Timestream::Database", "awscc_timestream_database", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSTimestreamDatabase_basic(t *testing.T) {
 }
 
 func TestAccAWSTimestreamDatabase_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Timestream::Database", "aws_timestream_database", "test")
+	td := acctest.NewTestData(t, "AWS::Timestream::Database", "awscc_timestream_database", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

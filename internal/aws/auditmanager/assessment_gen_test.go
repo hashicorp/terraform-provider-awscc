@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSAuditManagerAssessment_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::AuditManager::Assessment", "aws_auditmanager_assessment", "test")
+	td := acctest.NewTestData(t, "AWS::AuditManager::Assessment", "awscc_auditmanager_assessment", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSAuditManagerAssessment_basic(t *testing.T) {
 }
 
 func TestAccAWSAuditManagerAssessment_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::AuditManager::Assessment", "aws_auditmanager_assessment", "test")
+	td := acctest.NewTestData(t, "AWS::AuditManager::Assessment", "awscc_auditmanager_assessment", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

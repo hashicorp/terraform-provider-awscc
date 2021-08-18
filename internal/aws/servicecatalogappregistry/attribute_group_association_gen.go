@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_servicecatalogappregistry_attribute_group_association", attributeGroupAssociationResourceType)
+	registry.AddResourceTypeFactory("awscc_servicecatalogappregistry_attribute_group_association", attributeGroupAssociationResourceType)
 }
 
-// attributeGroupAssociationResourceType returns the Terraform aws_servicecatalogappregistry_attribute_group_association resource type.
+// attributeGroupAssociationResourceType returns the Terraform awscc_servicecatalogappregistry_attribute_group_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation resource type.
 func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -96,7 +96,7 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation").WithTerraformTypeName("aws_servicecatalogappregistry_attribute_group_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation").WithTerraformTypeName("awscc_servicecatalogappregistry_attribute_group_association").WithTerraformSchema(schema)
 
 	opts = opts.IsImmutableType(true)
 
@@ -108,7 +108,7 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_servicecatalogappregistry_attribute_group_association", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_servicecatalogappregistry_attribute_group_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

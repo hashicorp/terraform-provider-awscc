@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSMediaConnectFlowSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::MediaConnect::FlowSource", "aws_mediaconnect_flow_source", "test")
+	td := acctest.NewTestData(t, "AWS::MediaConnect::FlowSource", "awscc_mediaconnect_flow_source", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

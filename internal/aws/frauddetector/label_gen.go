@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_frauddetector_label", labelResourceType)
+	registry.AddResourceTypeFactory("awscc_frauddetector_label", labelResourceType)
 }
 
-// labelResourceType returns the Terraform aws_frauddetector_label resource type.
+// labelResourceType returns the Terraform awscc_frauddetector_label resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FraudDetector::Label resource type.
 func labelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -151,7 +151,7 @@ func labelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::Label").WithTerraformTypeName("aws_frauddetector_label").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::Label").WithTerraformTypeName("awscc_frauddetector_label").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -163,7 +163,7 @@ func labelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_frauddetector_label", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_frauddetector_label", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

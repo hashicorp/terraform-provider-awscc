@@ -10,15 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_device_fleet", deviceFleetResourceType)
+	registry.AddResourceTypeFactory("awscc_sagemaker_device_fleet", deviceFleetResourceType)
 }
 
-// deviceFleetResourceType returns the Terraform aws_sagemaker_device_fleet resource type.
+// deviceFleetResourceType returns the Terraform awscc_sagemaker_device_fleet resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::DeviceFleet resource type.
 func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]schema.Attribute{
@@ -177,7 +177,7 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DeviceFleet").WithTerraformTypeName("aws_sagemaker_device_fleet").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DeviceFleet").WithTerraformTypeName("awscc_sagemaker_device_fleet").WithTerraformSchema(schema)
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -189,7 +189,7 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_sagemaker_device_fleet", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sagemaker_device_fleet", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

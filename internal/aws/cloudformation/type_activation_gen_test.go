@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSCloudFormationTypeActivation_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CloudFormation::TypeActivation", "aws_cloudformation_type_activation", "test")
+	td := acctest.NewTestData(t, "AWS::CloudFormation::TypeActivation", "awscc_cloudformation_type_activation", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSCloudFormationTypeActivation_basic(t *testing.T) {
 }
 
 func TestAccAWSCloudFormationTypeActivation_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CloudFormation::TypeActivation", "aws_cloudformation_type_activation", "test")
+	td := acctest.NewTestData(t, "AWS::CloudFormation::TypeActivation", "awscc_cloudformation_type_activation", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSSageMakerModelExplainabilityJobDefinition_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::SageMaker::ModelExplainabilityJobDefinition", "aws_sagemaker_model_explainability_job_definition", "test")
+	td := acctest.NewTestData(t, "AWS::SageMaker::ModelExplainabilityJobDefinition", "awscc_sagemaker_model_explainability_job_definition", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
