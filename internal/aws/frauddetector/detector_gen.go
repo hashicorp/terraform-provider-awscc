@@ -53,7 +53,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "The models to associate with this detector.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"arn": {
@@ -461,7 +460,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"entity_types": {
 						// Property: EntityTypes
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"arn": {
@@ -500,7 +498,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"tags": {
 									// Property: Tags
 									Description: "Tags associated with this entity type.",
-									// Multiset.
 									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"key": {
@@ -529,7 +526,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"event_variables": {
 						// Property: EventVariables
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"arn": {
@@ -583,7 +579,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"tags": {
 									// Property: Tags
 									Description: "Tags associated with this event variable.",
-									// Multiset.
 									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"key": {
@@ -622,7 +617,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"labels": {
 						// Property: Labels
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"arn": {
@@ -661,7 +655,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"tags": {
 									// Property: Tags
 									Description: "Tags associated with this label.",
-									// Multiset.
 									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"key": {
@@ -703,7 +696,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"tags": {
 						// Property: Tags
 						Description: "Tags associated with this event type.",
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"key": {
@@ -890,7 +882,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"arn": {
@@ -933,7 +924,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"outcomes": {
 						// Property: Outcomes
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"arn": {
@@ -972,7 +962,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"tags": {
 									// Property: Tags
 									Description: "Tags associated with this outcome.",
-									// Multiset.
 									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"key": {
@@ -1012,7 +1001,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"tags": {
 						// Property: Tags
 						Description: "Tags associated with this event type.",
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"key": {
@@ -1070,7 +1058,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "Tags associated with this detector.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

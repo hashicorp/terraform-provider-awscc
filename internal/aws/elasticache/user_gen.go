@@ -85,9 +85,8 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "Passwords used for this user account. You can create up to two passwords for each user.",
-			// Ordered set.
-			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-			Optional: true,
+			Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+			Optional:    true,
 			// Passwords is a write-only attribute.
 		},
 		"status": {

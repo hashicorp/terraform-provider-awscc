@@ -626,7 +626,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"partition_columns": {
 						// Property: PartitionColumns
-						// Ordered set.
 						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
@@ -1014,7 +1013,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

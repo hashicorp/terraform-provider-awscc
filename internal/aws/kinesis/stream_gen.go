@@ -149,7 +149,6 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "An arbitrary set of tags (key–value pairs) to associate with the Kinesis stream.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

@@ -98,24 +98,20 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"filter": {
 						// Property: Filter
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"contains": {
 									// Property: Contains
-									// Multiset.
-									Type:     types.ListType{ElemType: types.StringType},
+									Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
 									Optional: true,
 								},
 								"eq": {
 									// Property: Eq
-									// Multiset.
-									Type:     types.ListType{ElemType: types.StringType},
+									Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
 									Optional: true,
 								},
 								"exists": {
@@ -125,8 +121,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"neq": {
 									// Property: Neq
-									// Multiset.
-									Type:     types.ListType{ElemType: types.StringType},
+									Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
 									Optional: true,
 								},
 								"property": {

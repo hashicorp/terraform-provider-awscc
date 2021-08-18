@@ -506,7 +506,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"command": {
@@ -572,7 +571,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"environment": {
 						// Property: Environment
 						Description: "The environment variables to pass to a container",
-						// Ordered set.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"name": {
@@ -710,7 +708,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"links": {
 						// Property: Links
-						// Ordered set.
 						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
@@ -752,7 +749,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"permissions": {
 												// Property: Permissions
-												// Ordered set.
 												Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 												Optional: true,
 											},
@@ -860,7 +856,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"mount_points": {
 						// Property: MountPoints
-						// Ordered set.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"container_path": {
@@ -892,7 +887,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"port_mappings": {
 						// Property: PortMappings
 						Description: "Port mappings allow containers to access ports on the host container instance to send or receive traffic.",
-						// Ordered set.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"container_port": {
@@ -1041,7 +1035,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"volumes_from": {
 						// Property: VolumesFrom
-						// Ordered set.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"read_only": {
@@ -1148,7 +1141,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"device_name": {
@@ -1234,7 +1226,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"expression": {
@@ -1297,7 +1288,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"proxy_configuration_properties": {
 						// Property: ProxyConfigurationProperties
-						// Ordered set.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"name": {
@@ -1336,7 +1326,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
 			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 			Optional: true,
 			Computed: true,
@@ -1498,7 +1487,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"docker_volume_configuration": {

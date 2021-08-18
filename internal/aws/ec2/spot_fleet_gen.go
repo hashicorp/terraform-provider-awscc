@@ -598,12 +598,10 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"launch_specifications": {
 						// Property: LaunchSpecifications
-						// Ordered set.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"block_device_mappings": {
 									// Property: BlockDeviceMappings
-									// Ordered set.
 									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"device_name": {
@@ -717,7 +715,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"network_interfaces": {
 									// Property: NetworkInterfaces
-									// Ordered set.
 									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"associate_public_ip_address": {
@@ -742,7 +739,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"groups": {
 												// Property: Groups
-												// Ordered set.
 												Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 												Optional: true,
 											},
@@ -753,7 +749,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"ipv_6_addresses": {
 												// Property: Ipv6Addresses
-												// Ordered set.
 												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"ipv_6_address": {
@@ -773,7 +768,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"private_ip_addresses": {
 												// Property: PrivateIpAddresses
-												// Ordered set.
 												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"primary": {
@@ -836,7 +830,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"security_groups": {
 									// Property: SecurityGroups
-									// Ordered set.
 									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"group_id": {
@@ -861,7 +854,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"tag_specifications": {
 									// Property: TagSpecifications
-									// Ordered set.
 									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"resource_type": {
@@ -912,7 +904,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"launch_template_configs": {
 						// Property: LaunchTemplateConfigs
-						// Ordered set.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"launch_template_specification": {
@@ -940,7 +931,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"overrides": {
 									// Property: Overrides
-									// Ordered set.
 									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"availability_zone": {
@@ -990,7 +980,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"classic_load_balancers": {
 												// Property: ClassicLoadBalancers
-												// Ordered set.
 												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"name": {
@@ -1013,7 +1002,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"target_groups": {
 												// Property: TargetGroups
-												// Ordered set.
 												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"arn": {

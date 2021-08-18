@@ -314,7 +314,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "type": "array"
 			// }
 			Description: "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"json_body": {

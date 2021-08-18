@@ -1033,7 +1033,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "uniqueItems": true
 			// }
 			Description: "A collection of tags associated with a resource",
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

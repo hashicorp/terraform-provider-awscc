@@ -110,7 +110,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				map[string]tfsdk.Attribute{
 					"log_destination_configs": {
 						// Property: LogDestinationConfigs
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"log_destination": {

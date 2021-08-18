@@ -115,7 +115,6 @@ func apiKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "A list of stages to associate with this API key.",
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"rest_api_id": {

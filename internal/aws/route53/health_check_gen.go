@@ -162,8 +162,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"child_health_checks": {
 						// Property: ChildHealthChecks
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
+						Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
 					"enable_sni": {
@@ -215,8 +214,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"regions": {
 						// Property: Regions
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
+						Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
 					"request_interval": {

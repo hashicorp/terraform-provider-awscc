@@ -148,9 +148,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "(Streams) A list of response types supported by the function.",
-			// Ordered set.
-			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-			Optional: true,
+			Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+			Optional:    true,
 		},
 		"id": {
 			// Property: Id
@@ -227,9 +226,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "(ActiveMQ) A list of ActiveMQ queues.",
-			// Ordered set.
-			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-			Optional: true,
+			Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+			Optional:    true,
 		},
 		"self_managed_event_source": {
 			// Property: SelfManagedEventSource
@@ -273,9 +271,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 								"kafka_bootstrap_servers": {
 									// Property: KafkaBootstrapServers
 									Description: "A list of Kafka server endpoints.",
-									// Ordered set.
-									Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-									Optional: true,
+									Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+									Optional:    true,
 								},
 							},
 						),
@@ -324,7 +321,6 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "A list of SourceAccessConfiguration.",
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"type": {
@@ -391,9 +387,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "(Kafka) A list of Kafka topics.",
-			// Ordered set.
-			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-			Optional: true,
+			Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+			Optional:    true,
 		},
 		"tumbling_window_in_seconds": {
 			// Property: TumblingWindowInSeconds

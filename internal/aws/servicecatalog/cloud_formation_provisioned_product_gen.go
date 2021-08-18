@@ -58,7 +58,6 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
 			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 			Optional: true,
 			Computed: true,
@@ -261,7 +260,6 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				map[string]tfsdk.Attribute{
 					"stack_set_accounts": {
 						// Property: StackSetAccounts
-						// Ordered set.
 						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},
@@ -292,7 +290,6 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 					},
 					"stack_set_regions": {
 						// Property: StackSetRegions
-						// Ordered set.
 						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},

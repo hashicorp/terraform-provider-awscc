@@ -11,6 +11,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -109,7 +110,6 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array"
 			// }
 			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the DB proxy endpoint.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -168,9 +168,8 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array"
 			// }
 			Description: "VPC security group IDs to associate with the new DB proxy endpoint.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Optional:    true,
 		},
 		"vpc_subnet_ids": {
 			// Property: VpcSubnetIds
@@ -185,9 +184,8 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array"
 			// }
 			Description: "VPC subnet IDs to associate with the new DB proxy endpoint.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Required: true,
+			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Required:    true,
 			// VpcSubnetIds is a force-new attribute.
 		},
 	}

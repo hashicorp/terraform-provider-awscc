@@ -107,9 +107,8 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "array"
 			// }
 			Description: "The ARNs of the security groups that are to use to configure the FSx for Windows file system.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Required: true,
+			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Required:    true,
 			// SecurityGroupArns is a force-new attribute.
 		},
 		"subdirectory": {

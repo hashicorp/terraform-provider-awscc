@@ -137,7 +137,6 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   },
 			//   "type": "array"
 			// }
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

@@ -182,7 +182,6 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   "uniqueItems": true
 			// }
 			Description: "The tags for the configuration aggregator.",
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

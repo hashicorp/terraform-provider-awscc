@@ -60,9 +60,8 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"security_group_arns": {
 						// Property: SecurityGroupArns
 						Description: "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
-						Required: true,
+						Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+						Required:    true,
 					},
 					"subnet_arn": {
 						// Property: SubnetArn

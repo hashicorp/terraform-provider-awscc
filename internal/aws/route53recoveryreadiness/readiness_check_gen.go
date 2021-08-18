@@ -11,6 +11,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -92,7 +93,6 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array"
 			// }
 			Description: "A collection of tags associated with a resource.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -102,8 +102,7 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"value": {
 						// Property: Value
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
+						Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
 						Required: true,
 					},
 				},

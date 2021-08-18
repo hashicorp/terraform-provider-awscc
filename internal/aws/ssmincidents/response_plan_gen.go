@@ -110,7 +110,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "The list of actions.",
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"ssm_automation": {
@@ -142,7 +141,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"values": {
 												// Property: Values
-												// Ordered set.
 												Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 												Required: true,
 											},
@@ -215,7 +213,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"chatbot_sns": {
 						// Property: ChatbotSns
-						// Ordered set.
 						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
 						Optional: true,
 					},

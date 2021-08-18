@@ -11,6 +11,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -536,14 +537,12 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"dimension_list": {
 						// Property: DimensionList
 						Description: "Dimensions for this MetricSet.",
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+						Optional:    true,
 					},
 					"metric_list": {
 						// Property: MetricList
 						Description: "Metrics captured by this MetricSet.",
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"aggregation_function": {

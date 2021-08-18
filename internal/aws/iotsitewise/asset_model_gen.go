@@ -275,13 +275,11 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"composite_model_properties": {
 						// Property: CompositeModelProperties
 						Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"data_type": {
@@ -337,7 +335,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"variables": {
 															// Property: Variables
 															Description: "The list of variables used in the expression.",
-															// Multiset.
 															Attributes: tfsdk.ListNestedAttributes(
 																map[string]tfsdk.Attribute{
 																	"name": {
@@ -416,7 +413,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"variables": {
 															// Property: Variables
 															Description: "The list of variables used in the expression.",
-															// Multiset.
 															Attributes: tfsdk.ListNestedAttributes(
 																map[string]tfsdk.Attribute{
 																	"name": {
@@ -542,7 +538,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"child_asset_model_id": {
@@ -805,7 +800,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"data_type": {
@@ -861,7 +855,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"variables": {
 												// Property: Variables
 												Description: "The list of variables used in the expression.",
-												// Multiset.
 												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"name": {
@@ -940,7 +933,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"variables": {
 												// Property: Variables
 												Description: "The list of variables used in the expression.",
-												// Multiset.
 												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"name": {
@@ -1021,7 +1013,6 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

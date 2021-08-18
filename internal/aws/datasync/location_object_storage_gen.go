@@ -52,9 +52,8 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "type": "array"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Required: true,
+			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Required:    true,
 		},
 		"bucket_name": {
 			// Property: BucketName

@@ -209,7 +209,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"key_schema": {
 						// Property: KeySchema
-						// Ordered set.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"attribute_name": {
@@ -339,7 +338,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"attribute_name": {
@@ -435,7 +433,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"key_schema": {
 						// Property: KeySchema
-						// Ordered set.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"attribute_name": {

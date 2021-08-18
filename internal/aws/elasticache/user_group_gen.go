@@ -85,9 +85,8 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "List of users associated to this user group.",
-			// Ordered set.
-			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-			Optional: true,
+			Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+			Optional:    true,
 		},
 	}
 

@@ -11,6 +11,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -60,9 +61,8 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Regions.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Optional:    true,
 		},
 		"parent_readiness_scopes": {
 			// Property: ParentReadinessScopes
@@ -77,9 +77,8 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
+			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Computed:    true,
 		},
 		"tags": {
 			// Property: Tags
@@ -111,7 +110,6 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A collection of tags associated with a resource",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -121,8 +119,7 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"value": {
 						// Property: Value
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
+						Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
 						Required: true,
 					},
 				},

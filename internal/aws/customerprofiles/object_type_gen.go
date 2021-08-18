@@ -146,7 +146,6 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A list of the name and ObjectType field.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
@@ -242,7 +241,6 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A list of unique keys that can be used to map data to the profile.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
@@ -252,7 +250,6 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"object_type_key_list": {
 						// Property: ObjectTypeKeyList
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"field_names": {

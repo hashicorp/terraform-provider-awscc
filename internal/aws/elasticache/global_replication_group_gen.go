@@ -148,7 +148,6 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "uniqueItems": true
 			// }
 			Description: "The replication groups that comprise the Global Datastore.",
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"replication_group_id": {
@@ -222,7 +221,6 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "uniqueItems": true
 			// }
 			Description: "Describes the replication group IDs, the AWS regions where they are stored and the shard configuration for each that comprise the Global Datastore ",
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"replication_group_id": {
@@ -240,7 +238,6 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 					"resharding_configurations": {
 						// Property: ReshardingConfigurations
 						Description: "A list of PreferredAvailabilityZones objects that specifies the configuration of a node group in the resharded cluster. ",
-						// Ordered set.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"node_group_id": {

@@ -153,41 +153,43 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 				return 0, unsupportedTypeError(path, fmt.Sprintf("set of %s", itemType))
 			}
 		} else {
-			if arrayType == aggregateOrderedSet {
-				e.printf("// Ordered set.\n")
-				e.warnf("%s is of type: ordered set. Emitting a Terraform list", name)
-			}
-
-			if arrayType == aggregateMultiset {
-				e.printf("// Multiset.\n")
-				e.warnf("%s is of type: multiset. Emitting a Terraform list", name)
-			}
-
 			//
 			// List.
 			//
 			switch itemType := property.Items.Type.String(); itemType {
 			case cfschema.PropertyTypeBoolean:
-				if arrayType == aggregateOrderedSet {
+				switch arrayType {
+				case aggregateMultiset:
+					features |= UsesInternalTypes
+					e.printf("Type:providertypes.MultisetType{ListType:types.ListType{ElemType:types.BoolType}},\n")
+				case aggregateOrderedSet:
 					features |= UsesInternalTypes
 					e.printf("Type:providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.BoolType}},\n")
-				} else {
+				default:
 					e.printf("Type:types.ListType{ElemType:types.BoolType},\n")
 				}
 
 			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-				if arrayType == aggregateOrderedSet {
+				switch arrayType {
+				case aggregateMultiset:
+					features |= UsesInternalTypes
+					e.printf("Type:providertypes.MultisetType{ListType:types.ListType{ElemType:types.NumberType}},\n")
+				case aggregateOrderedSet:
 					features |= UsesInternalTypes
 					e.printf("Type:providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.NumberType}},\n")
-				} else {
+				default:
 					e.printf("Type:types.ListType{ElemType:types.NumberType},\n")
 				}
 
 			case cfschema.PropertyTypeString:
-				if arrayType == aggregateOrderedSet {
+				switch arrayType {
+				case aggregateMultiset:
+					features |= UsesInternalTypes
+					e.printf("Type:providertypes.MultisetType{ListType:types.ListType{ElemType:types.StringType}},\n")
+				case aggregateOrderedSet:
 					features |= UsesInternalTypes
 					e.printf("Type:providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.StringType}},\n")
-				} else {
+				default:
 					e.printf("Type:types.ListType{ElemType:types.StringType},\n")
 				}
 

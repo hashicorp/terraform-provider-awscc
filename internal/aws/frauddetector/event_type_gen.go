@@ -121,7 +121,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"arn": {
@@ -160,7 +159,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"tags": {
 						// Property: Tags
 						Description: "Tags associated with this event type.",
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"key": {
@@ -308,7 +306,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"arn": {
@@ -362,7 +359,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"tags": {
 						// Property: Tags
 						Description: "Tags associated with this event type.",
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"key": {
@@ -459,7 +455,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"arn": {
@@ -498,7 +493,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"tags": {
 						// Property: Tags
 						Description: "Tags associated with this event type.",
-						// Multiset.
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"key": {
@@ -582,7 +576,6 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "Tags associated with this event type.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

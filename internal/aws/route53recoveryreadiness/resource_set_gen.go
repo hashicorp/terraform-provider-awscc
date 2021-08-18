@@ -11,6 +11,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -149,7 +150,6 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A list of resource objects in the resource set.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"component_id": {
@@ -239,9 +239,8 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"readiness_scopes": {
 						// Property: ReadinessScopes
 						Description: "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+						Optional:    true,
 					},
 					"resource_arn": {
 						// Property: ResourceArn
@@ -287,7 +286,6 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A tag to associate with the parameters for a resource set.",
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -297,8 +295,7 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"value": {
 						// Property: Value
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
+						Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
 						Required: true,
 					},
 				},

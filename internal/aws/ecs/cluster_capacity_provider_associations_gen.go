@@ -35,9 +35,8 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			//   "uniqueItems": true
 			// }
 			Description: "List of capacity providers to associate with the cluster",
-			// Ordered set.
-			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-			Required: true,
+			Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+			Required:    true,
 		},
 		"cluster": {
 			// Property: Cluster

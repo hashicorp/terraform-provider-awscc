@@ -63,9 +63,8 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
+			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Computed:    true,
 		},
 		"error_code": {
 			// Property: ErrorCode
@@ -120,7 +119,6 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minItems": 0,
 			//   "type": "array"
 			// }
-			// Multiset.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"filter_type": {
@@ -434,9 +432,8 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
+			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Computed:    true,
 		},
 		"status": {
 			// Property: Status

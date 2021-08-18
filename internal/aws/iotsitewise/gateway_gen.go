@@ -48,7 +48,6 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "A list of gateway capability summaries that each contain a namespace and status.",
-			// Ordered set.
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"capability_configuration": {

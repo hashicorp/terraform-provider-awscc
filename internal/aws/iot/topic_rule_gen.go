@@ -1594,7 +1594,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"headers": {
 												// Property: Headers
-												// Ordered set.
 												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"key": {
@@ -1678,7 +1677,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"put_asset_property_value_entries": {
 												// Property: PutAssetPropertyValueEntries
-												// Ordered set.
 												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"asset_id": {
@@ -1703,7 +1701,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"property_values": {
 															// Property: PropertyValues
-															// Ordered set.
 															Attributes: tfsdk.ListNestedAttributes(
 																map[string]tfsdk.Attribute{
 																	"quality": {
@@ -2319,7 +2316,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"headers": {
 												// Property: Headers
-												// Ordered set.
 												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"key": {
@@ -2403,7 +2399,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"put_asset_property_value_entries": {
 												// Property: PutAssetPropertyValueEntries
-												// Ordered set.
 												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"asset_id": {
@@ -2428,7 +2423,6 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"property_values": {
 															// Property: PropertyValues
-															// Ordered set.
 															Attributes: tfsdk.ListNestedAttributes(
 																map[string]tfsdk.Attribute{
 																	"quality": {
