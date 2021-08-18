@@ -28,9 +28,7 @@ type TestData struct {
 // EmptyConfig returns an empty (no attributes) Terraform configuration for the resource.
 func (td *TestData) EmptyConfig() string {
 	return fmt.Sprintf(`
-resource %[1]q %[2]q {
-  provider = awscc
-}
+resource %[1]q %[2]q {}
 `, td.TerraformResourceType, td.ResourceLabel)
 }
 
