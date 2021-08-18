@@ -27,6 +27,10 @@ Each configuration file must contain a single `defaults` block.
 defaults {
   # Schema cache directory. Required.
   schema_cache_directory = "../service/cloudformation/schemas"
+
+  # Prefix for Terraform type names. Optional.
+  # The default is to use the label from the resource_schema block as the type name.
+  terraform_type_name_prefix = "awscc"
 }
 ```
 
