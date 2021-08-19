@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -307,13 +308,15 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"command": {
 						// Property: Command
 						Description: "Command.",
-						Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+						Type:        types.ListType{ElemType: types.StringType},
+						Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 						Optional:    true,
 					},
 					"entry_point": {
 						// Property: EntryPoint
 						Description: "EntryPoint.",
-						Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+						Type:        types.ListType{ElemType: types.StringType},
+						Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 						Optional:    true,
 					},
 					"working_directory": {

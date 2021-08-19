@@ -11,7 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -469,7 +470,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"type": {
 												// Property: Type
@@ -479,7 +481,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 							},
 						),
@@ -624,13 +627,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"security_group_ids": {
 									// Property: SecurityGroupIds
-									Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-									Required: true,
+									Type:       types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Required:   true,
 								},
 								"subnet_ids": {
 									// Property: SubnetIds
-									Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-									Required: true,
+									Type:       types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Required:   true,
 								},
 							},
 						),
@@ -1119,8 +1124,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																map[string]tfsdk.Attribute{
 																	"timestamp_formats": {
 																		// Property: TimestampFormats
-																		Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-																		Optional: true,
+																		Type:       types.ListType{ElemType: types.StringType},
+																		Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+																		Optional:   true,
 																	},
 																},
 															),
@@ -1177,8 +1183,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	},
 																	"bloom_filter_columns": {
 																		// Property: BloomFilterColumns
-																		Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-																		Optional: true,
+																		Type:       types.ListType{ElemType: types.StringType},
+																		Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+																		Optional:   true,
 																	},
 																	"bloom_filter_false_positive_probability": {
 																		// Property: BloomFilterFalsePositiveProbability
@@ -1378,7 +1385,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"type": {
 												// Property: Type
@@ -1388,7 +1396,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 							},
 						),
@@ -1866,7 +1875,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"type": {
 												// Property: Type
@@ -1876,7 +1886,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 							},
 						),
@@ -1906,7 +1917,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											MaxItems: 50,
 										},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 								"content_encoding": {
 									// Property: ContentEncoding
@@ -2502,7 +2514,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"type": {
 												// Property: Type
@@ -2512,7 +2525,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 							},
 						),
@@ -3222,7 +3236,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"type": {
 												// Property: Type
@@ -3232,7 +3247,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 							},
 						),

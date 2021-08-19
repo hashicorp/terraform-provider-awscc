@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -232,8 +234,9 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Optional: true,
-			Computed: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
+			Computed:   true,
 			// Tags is a force-new attribute.
 		},
 	}

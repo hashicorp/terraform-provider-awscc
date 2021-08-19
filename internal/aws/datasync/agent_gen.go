@@ -94,7 +94,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The ARNs of the security group used to protect your data transfer task subnets.",
-			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
 			// SecurityGroupArns is a force-new attribute.
@@ -113,7 +113,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The ARNs of the subnets in which DataSync will create elastic network interfaces for each data transfer task.",
-			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
 			// SubnetArns is a force-new attribute.

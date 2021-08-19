@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -1609,7 +1611,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"url": {
 												// Property: Url
@@ -1757,12 +1760,14 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																},
 																tfsdk.ListNestedAttributesOptions{},
 															),
-															Required: true,
+															Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+															Required:   true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Required: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Required:   true,
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -2331,7 +2336,8 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"url": {
 												// Property: Url
@@ -2479,12 +2485,14 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																},
 																tfsdk.ListNestedAttributesOptions{},
 															),
-															Required: true,
+															Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+															Required:   true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Required: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Required:   true,
 											},
 											"role_arn": {
 												// Property: RoleArn

@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -101,7 +102,8 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "An inline list of domains to use for this domain list.",
-			Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:        types.ListType{ElemType: types.StringType},
+			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Optional:    true,
 			// Domains is a write-only attribute.
 		},

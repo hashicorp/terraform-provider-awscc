@@ -106,12 +106,12 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"contains": {
 									// Property: Contains
-									Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"eq": {
 									// Property: Eq
-									Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"exists": {
@@ -121,7 +121,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"neq": {
 									// Property: Neq
-									Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"property": {

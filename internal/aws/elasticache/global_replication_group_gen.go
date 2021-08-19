@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -173,7 +175,8 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 					MinItems: 1,
 				},
 			),
-			Required: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Required:   true,
 		},
 		"regional_configurations": {
 			// Property: RegionalConfigurations
@@ -255,12 +258,14 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
-						Optional: true,
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 			// RegionalConfigurations is a write-only attribute.
 		},
 		"status": {

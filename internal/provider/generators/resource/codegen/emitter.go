@@ -19,6 +19,7 @@ const (
 	HasUpdatableProperty    Features = 1 << iota // At least one property can be updated.
 	UsesInternalTypes                            // Uses a type from the internal/types package.
 	HasRequiredRootProperty                      // At least one root property is required.
+	UsesValidation                               // Uses a type from the internal/validate package.
 )
 
 type Emitter struct {
@@ -158,40 +159,13 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 			//
 			switch itemType := property.Items.Type.String(); itemType {
 			case cfschema.PropertyTypeBoolean:
-				switch arrayType {
-				case aggregateMultiset:
-					features |= UsesInternalTypes
-					e.printf("Type:providertypes.MultisetType{ListType:types.ListType{ElemType:types.BoolType}},\n")
-				case aggregateOrderedSet:
-					features |= UsesInternalTypes
-					e.printf("Type:providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.BoolType}},\n")
-				default:
-					e.printf("Type:types.ListType{ElemType:types.BoolType},\n")
-				}
+				e.printf("Type:types.ListType{ElemType:types.BoolType},\n")
 
 			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-				switch arrayType {
-				case aggregateMultiset:
-					features |= UsesInternalTypes
-					e.printf("Type:providertypes.MultisetType{ListType:types.ListType{ElemType:types.NumberType}},\n")
-				case aggregateOrderedSet:
-					features |= UsesInternalTypes
-					e.printf("Type:providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.NumberType}},\n")
-				default:
-					e.printf("Type:types.ListType{ElemType:types.NumberType},\n")
-				}
+				e.printf("Type:types.ListType{ElemType:types.NumberType},\n")
 
 			case cfschema.PropertyTypeString:
-				switch arrayType {
-				case aggregateMultiset:
-					features |= UsesInternalTypes
-					e.printf("Type:providertypes.MultisetType{ListType:types.ListType{ElemType:types.StringType}},\n")
-				case aggregateOrderedSet:
-					features |= UsesInternalTypes
-					e.printf("Type:providertypes.OrderedSetType{ListType:types.ListType{ElemType:types.StringType}},\n")
-				default:
-					e.printf("Type:types.ListType{ElemType:types.StringType},\n")
-				}
+				e.printf("Type:types.ListType{ElemType:types.StringType},\n")
 
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
@@ -230,6 +204,11 @@ func (e *Emitter) emitAttribute(path []string, name string, property *cfschema.P
 
 			default:
 				return 0, unsupportedTypeError(path, fmt.Sprintf("list of %s", itemType))
+			}
+
+			if arrayType == aggregateOrderedSet {
+				features |= UsesValidation
+				e.printf("Validators:[]tfsdk.AttributeValidator{validate.UniqueItems()},\n")
 			}
 		}
 

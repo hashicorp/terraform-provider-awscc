@@ -11,7 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -58,9 +59,10 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-			Optional: true,
-			Computed: true,
+			Type:       types.ListType{ElemType: types.StringType},
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
+			Computed:   true,
 			// NotificationArns is a force-new attribute.
 		},
 		"outputs": {
@@ -260,8 +262,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				map[string]tfsdk.Attribute{
 					"stack_set_accounts": {
 						// Property: StackSetAccounts
-						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-						Optional: true,
+						Type:       types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:   true,
 					},
 					"stack_set_failure_tolerance_count": {
 						// Property: StackSetFailureToleranceCount
@@ -290,8 +293,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 					},
 					"stack_set_regions": {
 						// Property: StackSetRegions
-						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-						Optional: true,
+						Type:       types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:   true,
 					},
 				},
 			),

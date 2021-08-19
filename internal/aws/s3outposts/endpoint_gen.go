@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -139,7 +141,8 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Computed: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Computed:   true,
 		},
 		"outpost_id": {
 			// Property: OutpostId

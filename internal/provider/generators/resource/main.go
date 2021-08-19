@@ -153,6 +153,9 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	if codeFeatures&codegen.UsesInternalTypes > 0 {
 		templateData.ImportInternalTypes = true
 	}
+	if codeFeatures&codegen.UsesValidation > 0 {
+		templateData.ImportValidate = true
+	}
 
 	if description := resource.CfResource.Description; description != nil {
 		templateData.SchemaDescription = *description
@@ -239,6 +242,7 @@ type TemplateData struct {
 	HasRequiredAttribute         bool
 	HasUpdateMethod              bool
 	ImportInternalTypes          bool
+	ImportValidate               bool
 	PackageName                  string
 	RootPropertiesSchema         string
 	SchemaDescription            string
@@ -264,6 +268,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	{{ if .ImportInternalTypes }}providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"{{- end }}
+	{{ if .ImportValidate }}"github.com/hashicorp/terraform-provider-awscc/internal/validate"{{- end }}
 )
 
 func init() {

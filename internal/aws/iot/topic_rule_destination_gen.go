@@ -11,7 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -121,13 +122,15 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					},
 					"security_groups": {
 						// Property: SecurityGroups
-						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-						Optional: true,
+						Type:       types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:   true,
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
-						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-						Optional: true,
+						Type:       types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:   true,
 					},
 					"vpc_id": {
 						// Property: VpcId

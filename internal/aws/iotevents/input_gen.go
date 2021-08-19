@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -78,7 +80,8 @@ func inputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								MaxItems: 200,
 							},
 						),
-						Required: true,
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Required:   true,
 					},
 				},
 			),

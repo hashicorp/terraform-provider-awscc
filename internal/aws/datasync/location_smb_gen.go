@@ -38,7 +38,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.",
-			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
 		},
 		"domain": {

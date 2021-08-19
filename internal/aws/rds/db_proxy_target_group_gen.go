@@ -11,7 +11,6 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -84,7 +83,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					"session_pinning_filters": {
 						// Property: SessionPinningFilters
 						Description: "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
-						Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 					},
 				},
@@ -101,7 +100,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   },
 			//   "type": "array"
 			// }
-			Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 		},
 		"db_instance_identifiers": {
@@ -114,7 +113,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   },
 			//   "type": "array"
 			// }
-			Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 		},
 		"db_proxy_name": {

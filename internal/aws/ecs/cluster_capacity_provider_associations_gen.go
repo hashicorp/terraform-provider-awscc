@@ -11,7 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -35,7 +36,8 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			//   "uniqueItems": true
 			// }
 			Description: "List of capacity providers to associate with the cluster",
-			Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:        types.ListType{ElemType: types.StringType},
+			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Required:    true,
 		},
 		"cluster": {

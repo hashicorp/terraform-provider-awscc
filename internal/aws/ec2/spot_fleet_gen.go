@@ -11,7 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -660,7 +661,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 								"ebs_optimized": {
 									// Property: EbsOptimized
@@ -739,8 +741,9 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"groups": {
 												// Property: Groups
-												Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-												Optional: true,
+												Type:       types.ListType{ElemType: types.StringType},
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"ipv_6_address_count": {
 												// Property: Ipv6AddressCount
@@ -759,7 +762,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"network_interface_id": {
 												// Property: NetworkInterfaceId
@@ -783,7 +787,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"secondary_private_ip_address_count": {
 												// Property: SecondaryPrivateIpAddressCount
@@ -798,7 +803,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 								"placement": {
 									// Property: Placement
@@ -840,7 +846,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 								"spot_price": {
 									// Property: SpotPrice
@@ -883,7 +890,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 								"user_data": {
 									// Property: UserData
@@ -898,8 +906,9 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
-						Optional: true,
-						Computed: true,
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:   true,
+						Computed:   true,
 						// LaunchSpecifications is a force-new attribute.
 					},
 					"launch_template_configs": {
@@ -961,13 +970,15 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
-						Optional: true,
-						Computed: true,
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:   true,
+						Computed:   true,
 						// LaunchTemplateConfigs is a force-new attribute.
 					},
 					"load_balancers_config": {
@@ -990,7 +1001,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Required: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Required:   true,
 											},
 										},
 									),
@@ -1012,7 +1024,8 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Required: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Required:   true,
 											},
 										},
 									),

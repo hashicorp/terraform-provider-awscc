@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -227,7 +228,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								MaxItems: 2,
 							},
 						),
-						Required: true,
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Required:   true,
 					},
 					"projection": {
 						// Property: Projection
@@ -356,7 +358,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					MaxItems: 2,
 				},
 			),
-			Required: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Required:   true,
 			// KeySchema is a force-new attribute.
 		},
 		"local_secondary_indexes": {
@@ -450,7 +453,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								MaxItems: 2,
 							},
 						),
-						Required: true,
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Required:   true,
 					},
 					"projection": {
 						// Property: Projection

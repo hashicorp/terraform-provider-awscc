@@ -11,7 +11,6 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -266,7 +265,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "VPC security group IDs to associate with the new proxy.",
-			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 		},
 		"vpc_subnet_ids": {
@@ -282,7 +281,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "VPC subnet IDs to associate with the new proxy.",
-			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
 			// VpcSubnetIds is a force-new attribute.
 		},

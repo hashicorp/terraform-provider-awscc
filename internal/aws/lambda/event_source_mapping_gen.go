@@ -11,7 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -148,7 +149,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "(Streams) A list of response types supported by the function.",
-			Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:        types.ListType{ElemType: types.StringType},
+			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Optional:    true,
 		},
 		"id": {
@@ -226,7 +228,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "(ActiveMQ) A list of ActiveMQ queues.",
-			Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:        types.ListType{ElemType: types.StringType},
+			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Optional:    true,
 		},
 		"self_managed_event_source": {
@@ -271,7 +274,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 								"kafka_bootstrap_servers": {
 									// Property: KafkaBootstrapServers
 									Description: "A list of Kafka server endpoints.",
-									Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+									Type:        types.ListType{ElemType: types.StringType},
+									Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 									Optional:    true,
 								},
 							},
@@ -341,7 +345,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					MaxItems: 22,
 				},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 		"starting_position": {
 			// Property: StartingPosition
@@ -387,7 +392,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "(Kafka) A list of Kafka topics.",
-			Type:        providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:        types.ListType{ElemType: types.StringType},
+			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Optional:    true,
 		},
 		"tumbling_window_in_seconds": {

@@ -11,7 +11,6 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -76,7 +75,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "maxItems": 20,
 			//   "type": "array"
 			// }
-			Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 		},
 		"name": {

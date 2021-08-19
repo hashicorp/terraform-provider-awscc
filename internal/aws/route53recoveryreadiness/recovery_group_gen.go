@@ -11,7 +11,6 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -37,7 +36,7 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "array"
 			// }
 			Description: "A list of the cell Amazon Resource Names (ARNs) in the recovery group.",
-			Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 		},
 		"recovery_group_arn": {
@@ -106,7 +105,7 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"value": {
 						// Property: Value
-						Type:     providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 				},

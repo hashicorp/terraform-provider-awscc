@@ -112,7 +112,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"agent_arns": {
 						// Property: AgentArns
 						Description: "ARN(s) of the agent(s) to use for an NFS location.",
-						Type:        providertypes.MultisetType{ListType: types.ListType{ElemType: types.StringType}},
+						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
 					},
 				},

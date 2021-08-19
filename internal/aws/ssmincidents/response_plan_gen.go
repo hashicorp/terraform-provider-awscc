@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -141,8 +142,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"values": {
 												// Property: Values
-												Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-												Required: true,
+												Type:       types.ListType{ElemType: types.StringType},
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Required:   true,
 											},
 										},
 										providertypes.SetNestedAttributesOptions{
@@ -172,7 +174,8 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					MaxItems: 1,
 				},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 		"arn": {
 			// Property: Arn
@@ -213,8 +216,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"chatbot_sns": {
 						// Property: ChatbotSns
-						Type:     providertypes.OrderedSetType{ListType: types.ListType{ElemType: types.StringType}},
-						Optional: true,
+						Type:       types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:   true,
 					},
 				},
 			),

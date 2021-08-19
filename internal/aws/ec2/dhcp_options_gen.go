@@ -6,12 +6,13 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,7 +22,7 @@ func init() {
 // dHCPOptionsResourceType returns the Terraform awscc_ec2_dhcp_options resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::DHCPOptions resource type.
 func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"dhcp_options_id": {
 			// Property: DhcpOptionsId
 			// CloudFormation resource type schema:
@@ -56,10 +57,10 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.",
-			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
-			Computed: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:    true,
+			Computed:    true,
 			// DomainNameServers is a force-new attribute.
 		},
 		"netbios_name_servers": {
@@ -74,10 +75,10 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "The IPv4 addresses of up to four NetBIOS name servers.",
-			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
-			Computed: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:    true,
+			Computed:    true,
 			// NetbiosNameServers is a force-new attribute.
 		},
 		"netbios_node_type": {
@@ -139,8 +140,8 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "Any tags assigned to the DHCP options set.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -152,20 +153,20 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::EC2::DHCPOptions",
 		Version:     1,
 		Attributes:  attributes,
