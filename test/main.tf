@@ -1,45 +1,30 @@
 terraform {
   required_providers {
+
+    aws = {
+      source = "hashicorp/aws"
+    }
+
     awscc = {
       source = "hashicorp/awscc"
     }
   }
 }
 
-provider "awscc" {
-  region = "us-west-2"
-}
+provider "aws" {}
+provider "awscc" {}
 
-resource "aws_kms_key" "test" {
-  provider = awscc
+resource "awscc_ec2_dhcp_options" "test" {
+  domain_name          = "service.tf"
+  domain_name_servers  = ["127.0.0.1", "10.0.0.2"]
+  ntp_servers          = ["127.0.0.1"]
+  netbios_name_servers = ["127.0.0.1"]
+  netbios_node_type    = 2
 
-  key_policy = jsonencode({
-    Id = "kms-tf-1"
-    Statement = [
-      {
-        Action = "kms:*"
-        Effect = "Allow"
-        Principal = {
-          AWS = "*"
-        }
-
-        Resource = "*"
-        Sid      = "Enable IAM User Permissions"
-      },
-    ]
-    Version = "2012-10-17"
-  })
-
-  pending_window_in_days = 8
-
-  # tags = [
-  #   {
-  #     key   = "Name"
-  #     value = "Testing"
-  #   },
-  #   {
-  #     key   = "Env"
-  #     value = "dev"
-  #   }
-  # ]
+  tags = [
+    {
+      key   = "Name"
+      value = "AWS CC testing"
+    }
+  ]
 }
