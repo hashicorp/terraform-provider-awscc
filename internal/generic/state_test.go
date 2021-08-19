@@ -360,7 +360,7 @@ func TestGetCloudFormationResourceModelValue(t *testing.T) {
 				"identifier": tftypes.NewValue(tftypes.String, nil),
 				"name":       tftypes.NewValue(tftypes.String, "testing"),
 				"number":     tftypes.NewValue(tftypes.Number, 42),
-				"ports":      tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, nil),
+				"ports":      tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, []tftypes.Value{}),
 			}),
 		},
 		{
