@@ -285,10 +285,12 @@ resource_schema "aws_databrew_project" {
   cloudformation_type_name = "AWS::DataBrew::Project"
 }
 
-# Parameters property is 'anyOf', which we cannot yet handle.
-# resource_schema "aws_databrew_recipe" {
-#   cloudformation_type_name = "AWS::DataBrew::Recipe"
-# }
+resource_schema "aws_databrew_recipe" {
+  cloudformation_type_name = "AWS::DataBrew::Recipe"
+
+  # Parameters property is 'anyOf', which we cannot yet handle.
+  suppress_resource_generation = true
+}
 
 resource_schema "aws_databrew_schedule" {
   cloudformation_type_name = "AWS::DataBrew::Schedule"
@@ -502,15 +504,19 @@ resource_schema "aws_elasticache_user_group" {
   cloudformation_type_name = "AWS::ElastiCache::UserGroup"
 }
 
-# error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
-# resource_schema "aws_elasticloadbalancingv2_listener" {
-#  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
-# }
+resource_schema "aws_elasticloadbalancingv2_listener" {
+  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
 
-# error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
-# resource_schema "aws_elasticloadbalancingv2_listener_rule" {
-#   cloudformation_type_name = "AWS::ElasticLoadBalancingV2::ListenerRule"
-# }
+  # error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
+  suppress_resource_generation = true
+}
+
+resource_schema "aws_elasticloadbalancingv2_listener_rule" {
+  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::ListenerRule"
+
+  # error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
+  suppress_resource_generation = true
+}
 
 resource_schema "aws_eventschemas_registry_policy" {
   cloudformation_type_name = "AWS::EventSchemas::RegistryPolicy"
@@ -524,10 +530,12 @@ resource_schema "aws_events_archive" {
   cloudformation_type_name = "AWS::Events::Archive"
 }
 
-# error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
-# resource_schema "aws_events_connection" {
-#   cloudformation_type_name = "AWS::Events::Connection"
-# }
+resource_schema "aws_events_connection" {
+  cloudformation_type_name = "AWS::Events::Connection"
+
+  # error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
+  suppress_resource_generation = true
+}
 
 resource_schema "aws_fis_experiment_template" {
   cloudformation_type_name = "AWS::FIS::ExperimentTemplate"
@@ -1165,10 +1173,12 @@ resource_schema "aws_s3outposts_access_point" {
   cloudformation_type_name = "AWS::S3Outposts::AccessPoint"
 }
 
-# AndOperator property is 'oneOf', which we cannot yet handle.
-# resource_schema "aws_s3outposts_bucket" {
-#   cloudformation_type_name = "AWS::S3Outposts::Bucket"
-# }
+resource_schema "aws_s3outposts_bucket" {
+  cloudformation_type_name = "AWS::S3Outposts::Bucket"
+
+  # AndOperator property is 'oneOf', which we cannot yet handle.
+  suppress_resource_generation = true
+}
 
 resource_schema "aws_s3outposts_bucket_policy" {
   cloudformation_type_name = "AWS::S3Outposts::BucketPolicy"
@@ -1358,15 +1368,19 @@ resource_schema "aws_wafv2_regex_pattern_set" {
   cloudformation_type_name = "AWS::WAFv2::RegexPatternSet"
 }
 
-# Goes into infinite loop while generating code...
-# resource_schema "aws_wafv2_rule_group" {
-#   cloudformation_type_name = "AWS::WAFv2::RuleGroup"
-# }
+resource_schema "aws_wafv2_rule_group" {
+  cloudformation_type_name = "AWS::WAFv2::RuleGroup"
 
-# Goes into infinite loop while generating code...
-# resource_schema "aws_wafv2_web_acl" {
-#   cloudformation_type_name = "AWS::WAFv2::WebACL"
-# }
+  # Goes into infinite recursion while generating code...
+  suppress_resource_generation = true
+}
+
+resource_schema "aws_wafv2_web_acl" {
+  cloudformation_type_name = "AWS::WAFv2::WebACL"
+
+  # Goes into infinite recursion while generating code...
+  suppress_resource_generation = true
+}
 
 resource_schema "aws_wafv2_web_acl_association" {
   cloudformation_type_name = "AWS::WAFv2::WebACLAssociation"
