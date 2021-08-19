@@ -8,6 +8,7 @@ on:
   pull_request:
     paths:
       - .github/workflows/documentation-linters.yml
+      - .github/**.md
       - .markdownlint.yml
       - docs/**
       # - website/**
@@ -20,5 +21,5 @@ jobs:
 
       - uses: avto-dev/markdown-lint@v1
         with:
-          config: '.markdownlint.yml'
-          args: 'docs'
+          config: ".markdownlint.yml"
+          args: "docs .github/"
