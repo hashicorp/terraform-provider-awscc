@@ -1,0 +1,24 @@
+name: Documentation Linters
+
+on:
+  push:
+    branches:
+      - main
+      - "release/**"
+  pull_request:
+    paths:
+      - .github/workflows/documentation-linters.yml
+      - .markdownlint.yml
+      - docs/**
+      # - website/**
+
+jobs:
+  markdown-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: avto-dev/markdown-lint@v1
+        with:
+          config: '.markdownlint.yml'
+          args: 'docs'
