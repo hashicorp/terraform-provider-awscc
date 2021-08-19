@@ -39,6 +39,10 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 		return
 	}
 
+	if list.Null {
+		return
+	}
+
 	val, err := list.ToTerraformValue(ctx)
 
 	if err != nil {

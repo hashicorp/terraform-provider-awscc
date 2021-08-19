@@ -38,6 +38,10 @@ func TestUniqueItemsValidator(t *testing.T) {
 			f:           types.BoolType.ValueFromTerraform,
 			expectError: true,
 		},
+		"null list": {
+			val: tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, nil),
+			f:   types.ListType{ElemType: types.NumberType}.ValueFromTerraform,
+		},
 		"empty list": {
 			val: tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, []tftypes.Value{}),
 			f:   types.ListType{ElemType: types.NumberType}.ValueFromTerraform,
