@@ -60,5 +60,10 @@ resource_schema "aws_ec2_instance" {
   # Optional.
   # The default value combines the `defaults.schema_cache_directory` value with the CloudFormation type name.
   cloudformation_schema_path = "../service/cloudformation/schemas/ec2-instance.json"
+
+  # Whether or not to suppress Terraform resource generation.
+  # Optional.
+  # The default value is false - A Terraform resource is generated.
+  suppress_resource_generation = true
 }
 ```

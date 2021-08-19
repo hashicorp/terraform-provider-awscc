@@ -43,9 +43,10 @@ type MetaSchema struct {
 }
 
 type ResourceSchema struct {
-	CloudFormationSchemaPath string `hcl:"cloudformation_schema_path,optional"`
-	CloudFormationTypeName   string `hcl:"cloudformation_type_name"`
-	ResourceTypeName         string `hcl:"resource_type_name,label"`
+	CloudFormationSchemaPath   string `hcl:"cloudformation_schema_path,optional"`
+	CloudFormationTypeName     string `hcl:"cloudformation_type_name"`
+	ResourceTypeName           string `hcl:"resource_type_name,label"`
+	SuppressResourceGeneration bool   `hcl:"suppress_resource_generation,optional"`
 }
 
 var (
@@ -237,6 +238,11 @@ func (d *Downloader) ResourceSchemas() ([]*ResourceData, error) {
 
 		if terraformTypeNamePrefix != "" {
 			tfResourceTypeName = naming.CreateTerraformTypeName(terraformTypeNamePrefix, svc, res)
+		}
+
+		if schema.SuppressResourceGeneration {
+			d.ui.Info(fmt.Sprintf("generation of a Terraform resource schema for %s has been suppressed", tfResourceTypeName))
+			continue
 		}
 
 		resources = append(resources, &ResourceData{
