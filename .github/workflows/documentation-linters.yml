@@ -36,3 +36,31 @@ jobs:
         with:
           config: ".markdownlint.yml"
           args: "docs .github/"
+
+  misspell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - id: go-version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./.go-version
+
+      - uses: actions/setup-go@v2
+        with:
+          # TODO: Replace with go-version-from-file when it is supported
+          # https://github.com/actions/setup-go/pull/62
+          go-version: ${{ steps.go-version.outputs.content }}
+
+      - uses: actions/cache@v2
+        continue-on-error: true
+        id: cache-go-pkg-mod
+        timeout-minutes: 2
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-pkg-mod-${{ hashFiles('go.sum') }}
+
+      - run: cd tools && go install github.com/client9/misspell/cmd/misspell
+
+      - run: misspell -error -source text -locale US docs/ .github/
