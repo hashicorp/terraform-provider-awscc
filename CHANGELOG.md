@@ -1,5 +1,9 @@
 ## 0.1.0 (Unreleased)
 
+## [0.0.4](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.4) (August 19, 2021)
+
+Provider renamed to `terraform-provider-awscc`.
+
 ## [0.0.3](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.3) (August 16, 2021)
 
 Attempt to generate Terraform resources for all available CloudFormation resource types.
