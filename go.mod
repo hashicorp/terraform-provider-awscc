@@ -27,4 +27,4 @@ replace github.com/aws/aws-sdk-go-v2/service/cloudformation => github.com/hashic
 
 replace github.com/aws/aws-sdk-go-v2/credentials => github.com/gdavison/aws-sdk-go-v2/credentials v1.2.2-0.20210811194025-146c1ad6c3b2
 
-replace github.com/hashicorp/terraform-plugin-framework => github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210817202128-df415cfe9d4d
+replace github.com/hashicorp/terraform-plugin-framework => github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210819180457-8d4237d22bc2
