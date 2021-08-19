@@ -119,6 +119,8 @@ github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210817202128-df415cfe
 github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210817202128-df415cfe9d4d/go.mod h1:JcYLIMJDUnOrPRSdbjRsNaJcOExNuPdZ6MS+OIBHjyE=
 github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210819180457-8d4237d22bc2 h1:LRSMr1MtXX8U7O8yVSuyym8CF7VQo/JHq1ZmdvKJV38=
 github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210819180457-8d4237d22bc2/go.mod h1:JcYLIMJDUnOrPRSdbjRsNaJcOExNuPdZ6MS+OIBHjyE=
+github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210819181039-2719c4663d04 h1:EGx6IP1/9xctCWEpkIAt3a5LYdB9pDru9NFu6ux9wkM=
+github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210819181039-2719c4663d04/go.mod h1:JcYLIMJDUnOrPRSdbjRsNaJcOExNuPdZ6MS+OIBHjyE=
 github.com/fatih/color v1.7.0 h1:DkWD4oS2D8LGGgTQ6IvwJJXSL5Vp2ffcQg58nFV38Ys=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
 github.com/flynn/go-shlex v0.0.0-20150515145356-3f9db97f8568 h1:BHsljHzVlRcyQhjrss6TZTdY2VfCqZPbv5k3iBFa2ZQ=
