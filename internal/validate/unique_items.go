@@ -39,7 +39,7 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 		return
 	}
 
-	if list.Null {
+	if list.Null || list.Unknown {
 		return
 	}
 
