@@ -288,7 +288,7 @@ func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudforma
 		SkipMetadataApiCheck: pd.SkipMetadataApiCheck.Value,
 		Token:                pd.Token.Value,
 	}
-	if !pd.AssumeRole.RoleARN.Null {
+	if pd.AssumeRole != nil && !pd.AssumeRole.RoleARN.Null {
 		config.AssumeRoleARN = pd.AssumeRole.RoleARN.Value
 
 		if !pd.AssumeRole.DurationSeconds.Null {
