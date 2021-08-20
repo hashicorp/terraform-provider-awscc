@@ -6,9 +6,8 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/hashicorp/terraform-plugin-framework/internal/diagnostics"
 	"github.com/hashicorp/terraform-plugin-framework/internal/proto6"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
-
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	tf6server "github.com/hashicorp/terraform-plugin-go/tfprotov6/server"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -46,18 +45,6 @@ func Serve(ctx context.Context, factory func() Provider, opts ServeOpts) error {
 	}) // TODO: set up debug serving if the --debug flag is passed
 }
 
-func diagsHasErrors(in []*tfprotov6.Diagnostic) bool {
-	for _, diag := range in {
-		if diag == nil {
-			continue
-		}
-		if diag.Severity == tfprotov6.DiagnosticSeverityError {
-			return true
-		}
-	}
-	return false
-}
-
 func (s *server) registerContext(in context.Context) context.Context {
 	ctx, cancel := context.WithCancel(in)
 	s.contextCancelsMu.Lock()
@@ -77,7 +64,7 @@ func (s *server) cancelRegisteredContexts(ctx context.Context) {
 
 func (s *server) getResourceType(ctx context.Context, typ string) (ResourceType, []*tfprotov6.Diagnostic) {
 	resourceTypes, diags := s.p.GetResources(ctx)
-	if diagsHasErrors(diags) {
+	if diagnostics.DiagsHasErrors(diags) {
 		return nil, diags
 	}
 	resourceType, ok := resourceTypes[typ]
@@ -92,7 +79,7 @@ func (s *server) getResourceType(ctx context.Context, typ string) (ResourceType,
 
 func (s *server) getDataSourceType(ctx context.Context, typ string) (DataSourceType, []*tfprotov6.Diagnostic) {
 	dataSourceTypes, diags := s.p.GetDataSources(ctx)
-	if diagsHasErrors(diags) {
+	if diagnostics.DiagsHasErrors(diags) {
 		return nil, diags
 	}
 	dataSourceType, ok := dataSourceTypes[typ]
@@ -114,12 +101,12 @@ func (s *server) GetProviderSchema(ctx context.Context, _ *tfprotov6.GetProvider
 	providerSchema, diags := s.p.GetSchema(ctx)
 	if diags != nil {
 		resp.Diagnostics = append(resp.Diagnostics, diags...)
-		if diagsHasErrors(resp.Diagnostics) {
+		if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 			return resp, nil
 		}
 	}
 	// convert the provider schema to a *tfprotov6.Schema
-	provider6Schema, err := proto6.Schema(ctx, providerSchema)
+	provider6Schema, err := providerSchema.tfprotov6Schema(ctx)
 	if err != nil {
 		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
 			Severity: tfprotov6.DiagnosticSeverityError,
@@ -140,11 +127,11 @@ func (s *server) GetProviderSchema(ctx context.Context, _ *tfprotov6.GetProvider
 		providerMetaSchema, diags := pm.GetMetaSchema(ctx)
 		if diags != nil {
 			resp.Diagnostics = append(resp.Diagnostics, diags...)
-			if diagsHasErrors(resp.Diagnostics) {
+			if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 				return resp, nil
 			}
 		}
-		pm6Schema, err := proto6.Schema(ctx, providerMetaSchema)
+		pm6Schema, err := providerMetaSchema.tfprotov6Schema(ctx)
 		if err != nil {
 			resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
 				Severity: tfprotov6.DiagnosticSeverityError,
@@ -160,7 +147,7 @@ func (s *server) GetProviderSchema(ctx context.Context, _ *tfprotov6.GetProvider
 	resourceSchemas, diags := s.p.GetResources(ctx)
 	if diags != nil {
 		resp.Diagnostics = append(resp.Diagnostics, diags...)
-		if diagsHasErrors(resp.Diagnostics) {
+		if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 			return resp, nil
 		}
 	}
@@ -169,11 +156,11 @@ func (s *server) GetProviderSchema(ctx context.Context, _ *tfprotov6.GetProvider
 		schema, diags := v.GetSchema(ctx)
 		if diags != nil {
 			resp.Diagnostics = append(resp.Diagnostics, diags...)
-			if diagsHasErrors(resp.Diagnostics) {
+			if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 				return resp, nil
 			}
 		}
-		schema6, err := proto6.Schema(ctx, schema)
+		schema6, err := schema.tfprotov6Schema(ctx)
 		if err != nil {
 			resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
 				Severity: tfprotov6.DiagnosticSeverityError,
@@ -189,7 +176,7 @@ func (s *server) GetProviderSchema(ctx context.Context, _ *tfprotov6.GetProvider
 	dataSourceSchemas, diags := s.p.GetDataSources(ctx)
 	if diags != nil {
 		resp.Diagnostics = append(resp.Diagnostics, diags...)
-		if diagsHasErrors(resp.Diagnostics) {
+		if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 			return resp, nil
 		}
 	}
@@ -198,11 +185,11 @@ func (s *server) GetProviderSchema(ctx context.Context, _ *tfprotov6.GetProvider
 		schema, diags := v.GetSchema(ctx)
 		if diags != nil {
 			resp.Diagnostics = append(resp.Diagnostics, diags...)
-			if diagsHasErrors(resp.Diagnostics) {
+			if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 				return resp, nil
 			}
 		}
-		schema6, err := proto6.Schema(ctx, schema)
+		schema6, err := schema.tfprotov6Schema(ctx)
 		if err != nil {
 			resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
 				Severity: tfprotov6.DiagnosticSeverityError,
@@ -224,15 +211,82 @@ func (s *server) GetProviderSchema(ctx context.Context, _ *tfprotov6.GetProvider
 }
 
 func (s *server) ValidateProviderConfig(ctx context.Context, req *tfprotov6.ValidateProviderConfigRequest) (*tfprotov6.ValidateProviderConfigResponse, error) {
-	// uncomment when we implement this function
-	// ctx = s.registerContext(ctx)
-
-	// We don't actually do anything as part of this. In theory, we could
-	// validate the configuration for the provider block? Need to check in
-	// again with the core team about the goal of this RPC.
-	return &tfprotov6.ValidateProviderConfigResponse{
+	ctx = s.registerContext(ctx)
+	resp := &tfprotov6.ValidateProviderConfigResponse{
+		// This RPC allows a modified configuration to be returned. This was
+		// previously used to allow a "required" provider attribute (as defined
+		// by a schema) to still be "optional" with a default value, typically
+		// through an environment variable. Other tooling based on the provider
+		// schema information could not determine this implementation detail.
+		// To ensure accuracy going forward, this implementation is opinionated
+		// towards accurate provider schema definitions and optional values
+		// can be filled in or return errors during ConfigureProvider().
 		PreparedConfig: req.Config,
-	}, nil
+	}
+
+	schema, diags := s.p.GetSchema(ctx)
+	resp.Diagnostics = append(resp.Diagnostics, diags...)
+
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
+		return resp, nil
+	}
+
+	config, err := req.Config.Unmarshal(schema.TerraformType(ctx))
+
+	if err != nil {
+		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error parsing config",
+			Detail:   "The provider had a problem parsing the config. Report this to the provider developer:\n\n" + err.Error(),
+		})
+
+		return resp, nil
+	}
+
+	vpcReq := ValidateProviderConfigRequest{
+		Config: Config{
+			Raw:    config,
+			Schema: schema,
+		},
+	}
+
+	if provider, ok := s.p.(ProviderWithConfigValidators); ok {
+		for _, configValidator := range provider.ConfigValidators(ctx) {
+			vpcRes := &ValidateProviderConfigResponse{
+				Diagnostics: resp.Diagnostics,
+			}
+
+			configValidator.Validate(ctx, vpcReq, vpcRes)
+
+			resp.Diagnostics = vpcRes.Diagnostics
+		}
+	}
+
+	if provider, ok := s.p.(ProviderWithValidateConfig); ok {
+		vpcRes := &ValidateProviderConfigResponse{
+			Diagnostics: resp.Diagnostics,
+		}
+
+		provider.ValidateConfig(ctx, vpcReq, vpcRes)
+
+		resp.Diagnostics = vpcRes.Diagnostics
+	}
+
+	validateSchemaReq := ValidateSchemaRequest{
+		Config: Config{
+			Raw:    config,
+			Schema: schema,
+		},
+	}
+	validateSchemaResp := ValidateSchemaResponse{
+		Diagnostics: resp.Diagnostics,
+	}
+
+	schema.validate(ctx, validateSchemaReq, &validateSchemaResp)
+
+	resp.Diagnostics = validateSchemaResp.Diagnostics
+
+	return resp, nil
 }
 
 func (s *server) ConfigureProvider(ctx context.Context, req *tfprotov6.ConfigureProviderRequest) (*tfprotov6.ConfigureProviderResponse, error) {
@@ -242,7 +296,7 @@ func (s *server) ConfigureProvider(ctx context.Context, req *tfprotov6.Configure
 	schema, diags := s.p.GetSchema(ctx)
 	if diags != nil {
 		resp.Diagnostics = append(resp.Diagnostics, diags...)
-		if diagsHasErrors(resp.Diagnostics) {
+		if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 			return resp, nil
 		}
 	}
@@ -274,12 +328,93 @@ func (s *server) StopProvider(ctx context.Context, _ *tfprotov6.StopProviderRequ
 	return &tfprotov6.StopProviderResponse{}, nil
 }
 
-func (s *server) ValidateResourceConfig(ctx context.Context, _ *tfprotov6.ValidateResourceConfigRequest) (*tfprotov6.ValidateResourceConfigResponse, error) {
-	// uncomment when we implement this function
-	//ctx = s.registerContext(ctx)
+func (s *server) ValidateResourceConfig(ctx context.Context, req *tfprotov6.ValidateResourceConfigRequest) (*tfprotov6.ValidateResourceConfigResponse, error) {
+	ctx = s.registerContext(ctx)
+	resp := &tfprotov6.ValidateResourceConfigResponse{}
 
-	// TODO: support validation
-	return &tfprotov6.ValidateResourceConfigResponse{}, nil
+	// Get the type of resource, so we can get its schema and create an
+	// instance
+	resourceType, diags := s.getResourceType(ctx, req.TypeName)
+	resp.Diagnostics = append(resp.Diagnostics, diags...)
+
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
+		return resp, nil
+	}
+
+	// Get the schema from the resource type, so we can embed it in the
+	// config
+	resourceSchema, diags := resourceType.GetSchema(ctx)
+	resp.Diagnostics = append(resp.Diagnostics, diags...)
+
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
+		return resp, nil
+	}
+
+	// Create the resource instance, so we can call its methods and handle
+	// the request
+	resource, diags := resourceType.NewResource(ctx, s.p)
+	resp.Diagnostics = append(resp.Diagnostics, diags...)
+
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
+		return resp, nil
+	}
+
+	config, err := req.Config.Unmarshal(resourceSchema.TerraformType(ctx))
+
+	if err != nil {
+		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error parsing config",
+			Detail:   "The provider had a problem parsing the config. Report this to the provider developer:\n\n" + err.Error(),
+		})
+
+		return resp, nil
+	}
+
+	vrcReq := ValidateResourceConfigRequest{
+		Config: Config{
+			Raw:    config,
+			Schema: resourceSchema,
+		},
+	}
+
+	if resource, ok := resource.(ResourceWithConfigValidators); ok {
+		for _, configValidator := range resource.ConfigValidators(ctx) {
+			vrcRes := &ValidateResourceConfigResponse{
+				Diagnostics: resp.Diagnostics,
+			}
+
+			configValidator.Validate(ctx, vrcReq, vrcRes)
+
+			resp.Diagnostics = vrcRes.Diagnostics
+		}
+	}
+
+	if resource, ok := resource.(ResourceWithValidateConfig); ok {
+		vrcRes := &ValidateResourceConfigResponse{
+			Diagnostics: resp.Diagnostics,
+		}
+
+		resource.ValidateConfig(ctx, vrcReq, vrcRes)
+
+		resp.Diagnostics = vrcRes.Diagnostics
+	}
+
+	validateSchemaReq := ValidateSchemaRequest{
+		Config: Config{
+			Raw:    config,
+			Schema: resourceSchema,
+		},
+	}
+	validateSchemaResp := ValidateSchemaResponse{
+		Diagnostics: resp.Diagnostics,
+	}
+
+	resourceSchema.validate(ctx, validateSchemaReq, &validateSchemaResp)
+
+	resp.Diagnostics = validateSchemaResp.Diagnostics
+
+	return resp, nil
 }
 
 func (s *server) UpgradeResourceState(ctx context.Context, req *tfprotov6.UpgradeResourceStateRequest) (*tfprotov6.UpgradeResourceStateResponse, error) {
@@ -300,17 +435,17 @@ func (s *server) ReadResource(ctx context.Context, req *tfprotov6.ReadResourceRe
 
 	resourceType, diags := s.getResourceType(ctx, req.TypeName)
 	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagsHasErrors(resp.Diagnostics) {
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 		return resp, nil
 	}
 	resourceSchema, diags := resourceType.GetSchema(ctx)
 	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagsHasErrors(resp.Diagnostics) {
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 		return resp, nil
 	}
 	resource, diags := resourceType.NewResource(ctx, s.p)
 	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagsHasErrors(resp.Diagnostics) {
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 		return resp, nil
 	}
 	state, err := req.CurrentState.Unmarshal(resourceSchema.TerraformType(ctx))
@@ -332,7 +467,7 @@ func (s *server) ReadResource(ctx context.Context, req *tfprotov6.ReadResourceRe
 		pmSchema, diags := pm.GetMetaSchema(ctx)
 		if diags != nil {
 			resp.Diagnostics = append(resp.Diagnostics, diags...)
-			if diagsHasErrors(resp.Diagnostics) {
+			if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 				return resp, nil
 			}
 		}
@@ -379,14 +514,14 @@ func (s *server) ReadResource(ctx context.Context, req *tfprotov6.ReadResourceRe
 	return resp, nil
 }
 
-func markComputedNilsAsUnknown(ctx context.Context, resourceSchema schema.Schema) func(*tftypes.AttributePath, tftypes.Value) (tftypes.Value, error) {
+func markComputedNilsAsUnknown(ctx context.Context, resourceSchema Schema) func(*tftypes.AttributePath, tftypes.Value) (tftypes.Value, error) {
 	return func(path *tftypes.AttributePath, val tftypes.Value) (tftypes.Value, error) {
 		if !val.IsNull() {
 			return val, nil
 		}
 		attribute, err := resourceSchema.AttributeAtPath(path)
 		if err != nil {
-			if errors.Is(err, schema.ErrPathInsideAtomicAttribute) {
+			if errors.Is(err, ErrPathInsideAtomicAttribute) {
 				// ignore attributes/elements inside schema.Attributes, they have no schema of their own
 				return val, nil
 			}
@@ -407,7 +542,7 @@ func (s *server) PlanResourceChange(ctx context.Context, req *tfprotov6.PlanReso
 	// instance
 	resourceType, diags := s.getResourceType(ctx, req.TypeName)
 	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagsHasErrors(resp.Diagnostics) {
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 		return resp, nil
 	}
 
@@ -415,7 +550,17 @@ func (s *server) PlanResourceChange(ctx context.Context, req *tfprotov6.PlanReso
 	// config and plan
 	resourceSchema, diags := resourceType.GetSchema(ctx)
 	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagsHasErrors(resp.Diagnostics) {
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
+		return resp, nil
+	}
+
+	config, err := req.Config.Unmarshal(resourceSchema.TerraformType(ctx))
+	if err != nil {
+		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error parsing configuration",
+			Detail:   "An unexpected error was encountered trying to parse the configuration. This is always an error in the provider. Please report the following to the provider developer:\n\n" + err.Error(),
+		})
 		return resp, nil
 	}
 
@@ -429,11 +574,86 @@ func (s *server) PlanResourceChange(ctx context.Context, req *tfprotov6.PlanReso
 		return resp, nil
 	}
 
+	state, err := req.PriorState.Unmarshal(resourceSchema.TerraformType(ctx))
+	if err != nil {
+		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error parsing prior state",
+			Detail:   "An unexpected error was encountered trying to parse the prior state. This is always an error in the provider. Please report the following to the provider developer:\n\n" + err.Error(),
+		})
+		return resp, nil
+	}
+
 	if plan.IsNull() || !plan.IsKnown() {
 		// on null or unknown plans, just bail, we can't do anything
 		resp.PlannedState = req.ProposedNewState
 		return resp, nil
 	}
+
+	// create the resource instance, so we can call its methods and handle
+	// the request
+	resource, diags := resourceType.NewResource(ctx, s.p)
+	resp.Diagnostics = append(resp.Diagnostics, diags...)
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
+		return resp, nil
+	}
+
+	var modifyPlanResp ModifyResourcePlanResponse
+	if resource, ok := resource.(ResourceWithModifyPlan); ok {
+		modifyPlanReq := ModifyResourcePlanRequest{
+			Config: Config{
+				Schema: resourceSchema,
+				Raw:    config,
+			},
+			State: State{
+				Schema: resourceSchema,
+				Raw:    state,
+			},
+			Plan: Plan{
+				Schema: resourceSchema,
+				Raw:    plan,
+			},
+		}
+		if pm, ok := s.p.(ProviderWithProviderMeta); ok {
+			pmSchema, diags := pm.GetMetaSchema(ctx)
+			if diags != nil {
+				resp.Diagnostics = append(resp.Diagnostics, diags...)
+				if diagnostics.DiagsHasErrors(resp.Diagnostics) {
+					return resp, nil
+				}
+			}
+			modifyPlanReq.ProviderMeta = Config{
+				Schema: pmSchema,
+				Raw:    tftypes.NewValue(pmSchema.TerraformType(ctx), nil),
+			}
+
+			if req.ProviderMeta != nil {
+				pmValue, err := req.ProviderMeta.Unmarshal(pmSchema.TerraformType(ctx))
+				if err != nil {
+					resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
+						Severity: tfprotov6.DiagnosticSeverityError,
+						Summary:  "Error parsing provider_meta",
+						Detail:   "There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n" + err.Error(),
+					})
+					return resp, nil
+				}
+				modifyPlanReq.ProviderMeta.Raw = pmValue
+			}
+		}
+
+		modifyPlanResp = ModifyResourcePlanResponse{
+			Plan: Plan{
+				Schema: resourceSchema,
+				Raw:    plan,
+			},
+			RequiresReplace: []*tftypes.AttributePath{},
+			Diagnostics:     resp.Diagnostics,
+		}
+		resource.ModifyPlan(ctx, modifyPlanReq, &modifyPlanResp)
+		resp.Diagnostics = append(resp.Diagnostics, modifyPlanResp.Diagnostics...)
+		plan = modifyPlanResp.Plan.Raw
+	}
+
 	modifiedPlan, err := tftypes.Transform(plan, markComputedNilsAsUnknown(ctx, resourceSchema))
 	if err != nil {
 		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
@@ -454,9 +674,8 @@ func (s *server) PlanResourceChange(ctx context.Context, req *tfprotov6.PlanReso
 		return resp, nil
 	}
 	resp.PlannedState = &plannedState
+	resp.RequiresReplace = modifyPlanResp.RequiresReplace
 
-	// TODO: implement customizable plan modifications later
-	// TODO: implement RequiresReplace behavior later
 	return resp, nil
 }
 
@@ -468,11 +687,11 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 		NewState: req.PriorState,
 	}
 
-	// get the type of resource, so we can get its scheman and create an
+	// get the type of resource, so we can get its schema and create an
 	// instance
 	resourceType, diags := s.getResourceType(ctx, req.TypeName)
 	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagsHasErrors(resp.Diagnostics) {
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 		return resp, nil
 	}
 
@@ -480,7 +699,7 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 	// config and plan
 	resourceSchema, diags := resourceType.GetSchema(ctx)
 	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagsHasErrors(resp.Diagnostics) {
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 		return resp, nil
 	}
 
@@ -488,7 +707,7 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 	// the request
 	resource, diags := resourceType.NewResource(ctx, s.p)
 	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagsHasErrors(resp.Diagnostics) {
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 		return resp, nil
 	}
 
@@ -567,7 +786,7 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 			pmSchema, diags := pm.GetMetaSchema(ctx)
 			if diags != nil {
 				resp.Diagnostics = append(resp.Diagnostics, diags...)
-				if diagsHasErrors(resp.Diagnostics) {
+				if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 					return resp, nil
 				}
 			}
@@ -628,7 +847,7 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 			pmSchema, diags := pm.GetMetaSchema(ctx)
 			if diags != nil {
 				resp.Diagnostics = append(resp.Diagnostics, diags...)
-				if diagsHasErrors(resp.Diagnostics) {
+				if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 					return resp, nil
 				}
 			}
@@ -681,7 +900,7 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 			pmSchema, diags := pm.GetMetaSchema(ctx)
 			if diags != nil {
 				resp.Diagnostics = append(resp.Diagnostics, diags...)
-				if diagsHasErrors(resp.Diagnostics) {
+				if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 					return resp, nil
 				}
 			}
@@ -741,12 +960,93 @@ func (s *server) ImportResourceState(ctx context.Context, _ *tfprotov6.ImportRes
 	return &tfprotov6.ImportResourceStateResponse{}, nil
 }
 
-func (s *server) ValidateDataResourceConfig(ctx context.Context, _ *tfprotov6.ValidateDataResourceConfigRequest) (*tfprotov6.ValidateDataResourceConfigResponse, error) {
-	// uncomment when we implement this function
-	// ctx = s.registerContext(ctx)
+func (s *server) ValidateDataResourceConfig(ctx context.Context, req *tfprotov6.ValidateDataResourceConfigRequest) (*tfprotov6.ValidateDataResourceConfigResponse, error) {
+	ctx = s.registerContext(ctx)
+	resp := &tfprotov6.ValidateDataResourceConfigResponse{}
 
-	// TODO: support validation
-	return &tfprotov6.ValidateDataResourceConfigResponse{}, nil
+	// Get the type of data source, so we can get its schema and create an
+	// instance
+	dataSourceType, diags := s.getDataSourceType(ctx, req.TypeName)
+	resp.Diagnostics = append(resp.Diagnostics, diags...)
+
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
+		return resp, nil
+	}
+
+	// Get the schema from the data source type, so we can embed it in the
+	// config
+	dataSourceSchema, diags := dataSourceType.GetSchema(ctx)
+	resp.Diagnostics = append(resp.Diagnostics, diags...)
+
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
+		return resp, nil
+	}
+
+	// Create the data source instance, so we can call its methods and handle
+	// the request
+	dataSource, diags := dataSourceType.NewDataSource(ctx, s.p)
+	resp.Diagnostics = append(resp.Diagnostics, diags...)
+
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
+		return resp, nil
+	}
+
+	config, err := req.Config.Unmarshal(dataSourceSchema.TerraformType(ctx))
+
+	if err != nil {
+		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Error parsing config",
+			Detail:   "The provider had a problem parsing the config. Report this to the provider developer:\n\n" + err.Error(),
+		})
+
+		return resp, nil
+	}
+
+	vrcReq := ValidateDataSourceConfigRequest{
+		Config: Config{
+			Raw:    config,
+			Schema: dataSourceSchema,
+		},
+	}
+
+	if dataSource, ok := dataSource.(DataSourceWithConfigValidators); ok {
+		for _, configValidator := range dataSource.ConfigValidators(ctx) {
+			vrcRes := &ValidateDataSourceConfigResponse{
+				Diagnostics: resp.Diagnostics,
+			}
+
+			configValidator.Validate(ctx, vrcReq, vrcRes)
+
+			resp.Diagnostics = vrcRes.Diagnostics
+		}
+	}
+
+	if dataSource, ok := dataSource.(DataSourceWithValidateConfig); ok {
+		vrcRes := &ValidateDataSourceConfigResponse{
+			Diagnostics: resp.Diagnostics,
+		}
+
+		dataSource.ValidateConfig(ctx, vrcReq, vrcRes)
+
+		resp.Diagnostics = vrcRes.Diagnostics
+	}
+
+	validateSchemaReq := ValidateSchemaRequest{
+		Config: Config{
+			Raw:    config,
+			Schema: dataSourceSchema,
+		},
+	}
+	validateSchemaResp := ValidateSchemaResponse{
+		Diagnostics: resp.Diagnostics,
+	}
+
+	dataSourceSchema.validate(ctx, validateSchemaReq, &validateSchemaResp)
+
+	resp.Diagnostics = validateSchemaResp.Diagnostics
+
+	return resp, nil
 }
 
 func (s *server) ReadDataSource(ctx context.Context, req *tfprotov6.ReadDataSourceRequest) (*tfprotov6.ReadDataSourceResponse, error) {
@@ -755,17 +1055,17 @@ func (s *server) ReadDataSource(ctx context.Context, req *tfprotov6.ReadDataSour
 
 	dataSourceType, diags := s.getDataSourceType(ctx, req.TypeName)
 	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagsHasErrors(resp.Diagnostics) {
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 		return resp, nil
 	}
 	dataSourceSchema, diags := dataSourceType.GetSchema(ctx)
 	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagsHasErrors(resp.Diagnostics) {
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 		return resp, nil
 	}
 	dataSource, diags := dataSourceType.NewDataSource(ctx, s.p)
 	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagsHasErrors(resp.Diagnostics) {
+	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 		return resp, nil
 	}
 	config, err := req.Config.Unmarshal(dataSourceSchema.TerraformType(ctx))
@@ -787,7 +1087,7 @@ func (s *server) ReadDataSource(ctx context.Context, req *tfprotov6.ReadDataSour
 		pmSchema, diags := pm.GetMetaSchema(ctx)
 		if diags != nil {
 			resp.Diagnostics = append(resp.Diagnostics, diags...)
-			if diagsHasErrors(resp.Diagnostics) {
+			if diagnostics.DiagsHasErrors(resp.Diagnostics) {
 				return resp, nil
 			}
 		}
