@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // bucketPolicyResourceType returns the Terraform awscc_s3outposts_bucket_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3Outposts::BucketPolicy resource type.
 func bucketPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"bucket": {
 			// Property: Bucket
 			// CloudFormation resource type schema:
@@ -51,13 +50,13 @@ func bucketPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type Definition for AWS::S3Outposts::BucketPolicy",
 		Version:     1,
 		Attributes:  attributes,

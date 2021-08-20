@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // dBProxyEndpointResourceType returns the Terraform awscc_rds_db_proxy_endpoint resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBProxyEndpoint resource type.
 func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"db_proxy_endpoint_arn": {
 			// Property: DBProxyEndpointArn
 			// CloudFormation resource type schema:
@@ -110,9 +109,8 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array"
 			// }
 			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the DB proxy endpoint.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -124,7 +122,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -169,9 +167,8 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array"
 			// }
 			Description: "VPC security group IDs to associate with the new DB proxy endpoint.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 		},
 		"vpc_subnet_ids": {
 			// Property: VpcSubnetIds
@@ -186,21 +183,20 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array"
 			// }
 			Description: "VPC subnet IDs to associate with the new DB proxy endpoint.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Required: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Required:    true,
 			// VpcSubnetIds is a force-new attribute.
 		},
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::RDS::DBProxyEndpoint.",
 		Version:     1,
 		Attributes:  attributes,

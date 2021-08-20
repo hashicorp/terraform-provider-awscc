@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // monitoringScheduleResourceType returns the Terraform awscc_sagemaker_monitoring_schedule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::MonitoringSchedule resource type.
 func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
@@ -135,8 +134,8 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "object"
 			// }
 			Description: "Summary of information about monitoring job",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"creation_time": {
 						// Property: CreationTime
 						Description: "The time at which the monitoring job was created.",
@@ -584,23 +583,23 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "object"
 			// }
 			Description: "The configuration object that specifies the monitoring schedule and defines the monitoring job.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"monitoring_job_definition": {
 						// Property: MonitoringJobDefinition
 						Description: "Defines the monitoring job.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"baseline_config": {
 									// Property: BaselineConfig
 									Description: "Baseline configuration used to validate that the data conforms to the specified constraints and statistics.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"constraints_resource": {
 												// Property: ConstraintsResource
 												Description: "The baseline constraints resource for a monitoring job.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"s3_uri": {
 															// Property: S3Uri
 															Description: "The Amazon S3 URI.",
@@ -614,8 +613,8 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 											"statistics_resource": {
 												// Property: StatisticsResource
 												Description: "The baseline statistics resource for a monitoring job.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"s3_uri": {
 															// Property: S3Uri
 															Description: "The Amazon S3 URI.",
@@ -641,8 +640,8 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 								"monitoring_app_specification": {
 									// Property: MonitoringAppSpecification
 									Description: "Container image configuration object for the monitoring job.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"container_arguments": {
 												// Property: ContainerArguments
 												Description: "An array of arguments for the container used to run the monitoring job.",
@@ -680,13 +679,13 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 								"monitoring_inputs": {
 									// Property: MonitoringInputs
 									Description: "The array of inputs for the monitoring job.",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"endpoint_input": {
 												// Property: EndpointInput
 												Description: "The endpoint for a monitoring job.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"endpoint_name": {
 															// Property: EndpointName
 															Description: "The name of the endpoint used to run the monitoring job.",
@@ -716,7 +715,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 											MaxItems: 1,
 										},
@@ -726,8 +725,8 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 								"monitoring_output_config": {
 									// Property: MonitoringOutputConfig
 									Description: "The output configuration for monitoring jobs.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"kms_key_id": {
 												// Property: KmsKeyId
 												Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
@@ -737,13 +736,13 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 											"monitoring_outputs": {
 												// Property: MonitoringOutputs
 												Description: "Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"s3_output": {
 															// Property: S3Output
 															Description: "Information about where and how to store the results of a monitoring job.",
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"local_path": {
 																		// Property: LocalPath
 																		Description: "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
@@ -767,7 +766,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 											},
@@ -778,13 +777,13 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 								"monitoring_resources": {
 									// Property: MonitoringResources
 									Description: "Identifies the resources to deploy for a monitoring job.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"cluster_config": {
 												// Property: ClusterConfig
 												Description: "Configuration for the cluster used to run model monitoring jobs.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"instance_count": {
 															// Property: InstanceCount
 															Description: "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
@@ -820,8 +819,8 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 								"network_config": {
 									// Property: NetworkConfig
 									Description: "Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"enable_inter_container_traffic_encryption": {
 												// Property: EnableInterContainerTrafficEncryption
 												Description: "Whether to encrypt all communications between distributed processing jobs. Choose True to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.",
@@ -837,8 +836,8 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 											"vpc_config": {
 												// Property: VpcConfig
 												Description: "Specifies a VPC that your training jobs and hosted models have access to. Control access to and from your training and model containers by configuring the VPC.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"security_group_ids": {
 															// Property: SecurityGroupIds
 															Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
@@ -868,8 +867,8 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 								"stopping_condition": {
 									// Property: StoppingCondition
 									Description: "Specifies a time limit for how long the monitoring job is allowed to run.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"max_runtime_in_seconds": {
 												// Property: MaxRuntimeInSeconds
 												Description: "The maximum runtime allowed in seconds.",
@@ -899,8 +898,8 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					"schedule_config": {
 						// Property: ScheduleConfig
 						Description: "Configuration details about the monitoring schedule.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"schedule_expression": {
 									// Property: ScheduleExpression
 									Description: "A cron expression that describes details about the monitoring schedule.",
@@ -978,8 +977,8 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "array"
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -993,7 +992,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -1002,13 +1001,13 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::SageMaker::MonitoringSchedule",
 		Version:     1,
 		Attributes:  attributes,

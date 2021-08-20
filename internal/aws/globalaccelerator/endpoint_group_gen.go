@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // endpointGroupResourceType returns the Terraform awscc_globalaccelerator_endpoint_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GlobalAccelerator::EndpointGroup resource type.
 func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"endpoint_configurations": {
 			// Property: EndpointConfigurations
 			// CloudFormation resource type schema:
@@ -51,8 +50,8 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "array"
 			// }
 			Description: "The list of endpoint objects.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"client_ip_preservation_enabled": {
 						// Property: ClientIPPreservationEnabled
 						Description: "true if client ip should be preserved",
@@ -72,7 +71,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -185,8 +184,8 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"endpoint_port": {
 						// Property: EndpointPort
 						Description: "A network port number",
@@ -200,7 +199,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -229,13 +228,13 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::GlobalAccelerator::EndpointGroup",
 		Version:     1,
 		Attributes:  attributes,

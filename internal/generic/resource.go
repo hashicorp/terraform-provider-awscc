@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
@@ -42,7 +41,7 @@ func WithCloudFormationTypeName(v string) ResourceTypeOptionsFunc {
 // that set a resource type's Terraform schema.
 // If multiple WithTerraformSchema calls are made, the last call overrides
 // the previous calls' values.
-func WithTerraformSchema(v schema.Schema) ResourceTypeOptionsFunc {
+func WithTerraformSchema(v tfsdk.Schema) ResourceTypeOptionsFunc {
 	return func(o *resourceType) error {
 		o.tfSchema = v
 
@@ -167,7 +166,7 @@ func (opts ResourceTypeOptions) WithCloudFormationTypeName(v string) ResourceTyp
 // that set a resource type's Terraform schema, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceTypeOptions) WithTerraformSchema(v schema.Schema) ResourceTypeOptions {
+func (opts ResourceTypeOptions) WithTerraformSchema(v tfsdk.Schema) ResourceTypeOptions {
 	return append(opts, WithTerraformSchema(v))
 }
 
@@ -222,7 +221,7 @@ func (opts ResourceTypeOptions) WithDeleteTimeoutInMinutes(v int) ResourceTypeOp
 // resourceType implements tfsdk.ResourceType.
 type resourceType struct {
 	cfTypeName              string                   // CloudFormation type name for the resource type
-	tfSchema                schema.Schema            // Terraform schema for the resource type
+	tfSchema                tfsdk.Schema             // Terraform schema for the resource type
 	tfTypeName              string                   // Terraform type name for resource type
 	isImmutableType         bool                     // Resources cannot be updated and must be recreated
 	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
@@ -254,7 +253,7 @@ func NewResourceType(_ context.Context, optFns ...ResourceTypeOptionsFunc) (tfsd
 	return resourceType, nil
 }
 
-func (rt *resourceType) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
+func (rt *resourceType) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
 	return rt.tfSchema, nil
 }
 
@@ -595,10 +594,10 @@ func (r *resource) describe(ctx context.Context, conn *cloudformation.Client, id
 
 // getId returns the resource's primary identifier value from State.
 func (r *resource) getId(ctx context.Context, state *tfsdk.State) (string, error) {
-	val, err := state.GetAttribute(ctx, idAttributePath)
+	val, diags := state.GetAttribute(ctx, idAttributePath)
 
-	if err != nil {
-		return "", err
+	if tfresource.DiagsHasError(diags) {
+		return "", tfresource.DiagsError(diags)
 	}
 
 	if val, ok := val.(types.String); ok {
@@ -610,10 +609,10 @@ func (r *resource) getId(ctx context.Context, state *tfsdk.State) (string, error
 
 // setId sets the resource's primary identifier value in State.
 func (r *resource) setId(ctx context.Context, val string, state *tfsdk.State) error {
-	err := state.SetAttribute(ctx, idAttributePath, val)
+	diags := state.SetAttribute(ctx, idAttributePath, val)
 
-	if err != nil {
-		return err
+	if tfresource.DiagsHasError(diags) {
+		return tfresource.DiagsError(diags)
 	}
 
 	return nil

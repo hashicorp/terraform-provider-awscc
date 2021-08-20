@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // infrastructureConfigurationResourceType returns the Terraform awscc_imagebuilder_infrastructure_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::InfrastructureConfiguration resource type.
 func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -106,13 +105,13 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 			//   "type": "object"
 			// }
 			Description: "The logging configuration of the infrastructure configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"s3_logs": {
 						// Property: S3Logs
 						Description: "The S3 path in which to store the logs.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"s3_bucket_name": {
 									// Property: S3BucketName
 									Description: "S3BucketName",
@@ -231,13 +230,13 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::ImageBuilder::InfrastructureConfiguration",
 		Version:     1,
 		Attributes:  attributes,

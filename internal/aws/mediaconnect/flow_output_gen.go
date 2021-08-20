@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // flowOutputResourceType returns the Terraform awscc_mediaconnect_flow_output resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowOutput resource type.
 func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"cidr_allow_list": {
 			// Property: CidrAllowList
 			// CloudFormation resource type schema:
@@ -98,8 +97,8 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Information about the encryption of the flow.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"algorithm": {
 						// Property: Algorithm
 						Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
@@ -251,8 +250,8 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The settings for attaching a VPC interface to an output.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"vpc_interface_name": {
 						// Property: VpcInterfaceName
 						Description: "The name of the VPC interface to use for this output.",
@@ -266,13 +265,13 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MediaConnect::FlowOutput",
 		Version:     1,
 		Attributes:  attributes,

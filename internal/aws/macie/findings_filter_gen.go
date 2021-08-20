@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // findingsFilterResourceType returns the Terraform awscc_macie_findings_filter resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Macie::FindingsFilter resource type.
 func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"action": {
 			// Property: Action
 			// CloudFormation resource type schema:
@@ -104,14 +103,14 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"criterion": {
 						// Property: Criterion
 						Description: "Map of filter criteria.",
 						// Pattern: ""
-						Attributes: schema.MapNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.MapNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"eq": {
 									// Property: Eq
 									Type:     types.ListType{ElemType: types.StringType},
@@ -143,7 +142,7 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional: true,
 								},
 							},
-							schema.MapNestedAttributesOptions{},
+							tfsdk.MapNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -171,8 +170,8 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array"
 			// }
 			Description: "Findings filters list.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"id": {
 						// Property: Id
 						Type:     types.StringType,
@@ -184,7 +183,7 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -224,13 +223,13 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Macie FindingsFilter resource schema.",
 		Version:     1,
 		Attributes:  attributes,

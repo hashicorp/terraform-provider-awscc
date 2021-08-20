@@ -153,6 +153,9 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	if codeFeatures&codegen.UsesInternalTypes > 0 {
 		templateData.ImportInternalTypes = true
 	}
+	if codeFeatures&codegen.UsesValidation > 0 {
+		templateData.ImportValidate = true
+	}
 
 	if description := resource.CfResource.Description; description != nil {
 		templateData.SchemaDescription = *description
@@ -239,6 +242,7 @@ type TemplateData struct {
 	HasRequiredAttribute         bool
 	HasUpdateMethod              bool
 	ImportInternalTypes          bool
+	ImportValidate               bool
 	PackageName                  string
 	RootPropertiesSchema         string
 	SchemaDescription            string
@@ -258,13 +262,13 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	{{ if .ImportInternalTypes }}providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"{{- end }}
+	{{ if .ImportValidate }}"github.com/hashicorp/terraform-provider-awscc/internal/validate"{{- end }}
 )
 
 func init() {
@@ -277,13 +281,13 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 	attributes := {{ .RootPropertiesSchema }}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "{{ .SchemaDescription }}",
 		Version:     {{ .SchemaVersion }},
 		Attributes:  attributes,

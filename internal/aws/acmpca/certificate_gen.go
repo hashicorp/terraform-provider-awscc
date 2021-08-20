@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // certificateResourceType returns the Terraform awscc_acmpca_certificate resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ACMPCA::Certificate resource type.
 func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"api_passthrough": {
 			// Property: ApiPassthrough
 			// CloudFormation resource type schema:
@@ -301,17 +300,17 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Structure that specifies fields to be overridden in a certificate at the time of issuance. These requires an API Passthrough template be used or they will be ignored.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"extensions": {
 						// Property: Extensions
 						Description: "Structure that contains X.500 extensions for a Certificate.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"certificate_policies": {
 									// Property: CertificatePolicies
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"cert_policy_id": {
 												// Property: CertPolicyId
 												Description: "String that contains X.509 ObjectIdentifier information.",
@@ -320,8 +319,8 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"policy_qualifiers": {
 												// Property: PolicyQualifiers
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"policy_qualifier_id": {
 															// Property: PolicyQualifierId
 															Type:     types.StringType,
@@ -330,8 +329,8 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"qualifier": {
 															// Property: Qualifier
 															Description: "Structure that contains a X.509 policy qualifier.",
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"cps_uri": {
 																		// Property: CpsUri
 																		Type:     types.StringType,
@@ -342,19 +341,19 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
 								"extended_key_usage": {
 									// Property: ExtendedKeyUsage
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"extended_key_usage_object_identifier": {
 												// Property: ExtendedKeyUsageObjectIdentifier
 												Description: "String that contains X.509 ObjectIdentifier information.",
@@ -367,15 +366,15 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
 								"key_usage": {
 									// Property: KeyUsage
 									Description: "Structure that contains X.509 KeyUsage information.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"crl_sign": {
 												// Property: CRLSign
 												Type:     types.BoolType,
@@ -427,13 +426,13 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"subject_alternative_names": {
 									// Property: SubjectAlternativeNames
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"directory_name": {
 												// Property: DirectoryName
 												Description: "Structure that contains X.500 distinguished name information.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"common_name": {
 															// Property: CommonName
 															Type:     types.StringType,
@@ -517,8 +516,8 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"edi_party_name": {
 												// Property: EdiPartyName
 												Description: "Structure that contains X.509 EdiPartyName information.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"name_assigner": {
 															// Property: NameAssigner
 															Type:     types.StringType,
@@ -542,8 +541,8 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"other_name": {
 												// Property: OtherName
 												Description: "Structure that contains X.509 OtherName information.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"type_id": {
 															// Property: TypeId
 															Description: "String that contains X.509 ObjectIdentifier information.",
@@ -578,7 +577,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional:    true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -589,8 +588,8 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"subject": {
 						// Property: Subject
 						Description: "Structure that contains X.500 distinguished name information.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"common_name": {
 									// Property: CommonName
 									Type:     types.StringType,
@@ -762,8 +761,8 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Validity for a certificate.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"type": {
 						// Property: Type
 						Type:     types.StringType,
@@ -800,8 +799,8 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Validity for a certificate.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"type": {
 						// Property: Type
 						Type:     types.StringType,
@@ -821,13 +820,13 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A certificate issued via a private certificate authority",
 		Version:     1,
 		Attributes:  attributes,

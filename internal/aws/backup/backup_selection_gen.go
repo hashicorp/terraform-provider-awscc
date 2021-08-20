@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // backupSelectionResourceType returns the Terraform awscc_backup_backup_selection resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Backup::BackupSelection resource type.
 func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"backup_plan_id": {
 			// Property: BackupPlanId
 			// CloudFormation resource type schema:
@@ -82,8 +81,8 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"iam_role_arn": {
 						// Property: IamRoleArn
 						Type:     types.StringType,
@@ -91,8 +90,8 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"list_of_tags": {
 						// Property: ListOfTags
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"condition_key": {
 									// Property: ConditionKey
 									Type:     types.StringType,
@@ -109,7 +108,7 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -149,13 +148,13 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Backup::BackupSelection",
 		Version:     1,
 		Attributes:  attributes,

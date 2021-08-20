@@ -6,12 +6,13 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,7 +22,7 @@ func init() {
 // eventSourceMappingResourceType returns the Terraform awscc_lambda_event_source_mapping resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Lambda::EventSourceMapping resource type.
 func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"batch_size": {
 			// Property: BatchSize
 			// CloudFormation resource type schema:
@@ -69,13 +70,13 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "object"
 			// }
 			Description: "(Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"on_failure": {
 						// Property: OnFailure
 						Description: "A destination for events that failed processing.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"destination": {
 									// Property: Destination
 									Description: "The Amazon Resource Name (ARN) of the destination resource.",
@@ -148,9 +149,9 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "(Streams) A list of response types supported by the function.",
-			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:    true,
 		},
 		"id": {
 			// Property: Id
@@ -227,9 +228,9 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "(ActiveMQ) A list of ActiveMQ queues.",
-			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:    true,
 		},
 		"self_managed_event_source": {
 			// Property: SelfManagedEventSource
@@ -263,19 +264,19 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "object"
 			// }
 			Description: "The configuration used by AWS Lambda to access a self-managed event source.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"endpoints": {
 						// Property: Endpoints
 						Description: "The endpoints used by AWS Lambda to access a self-managed event source.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"kafka_bootstrap_servers": {
 									// Property: KafkaBootstrapServers
 									Description: "A list of Kafka server endpoints.",
-									// Ordered set.
-									Type:     types.ListType{ElemType: types.StringType},
-									Optional: true,
+									Type:        types.ListType{ElemType: types.StringType},
+									Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:    true,
 								},
 							},
 						),
@@ -324,9 +325,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "A list of SourceAccessConfiguration.",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"type": {
 						// Property: Type
 						Description: "The type of source access configuration.",
@@ -340,12 +340,13 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 22,
 				},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 		"starting_position": {
 			// Property: StartingPosition
@@ -391,9 +392,9 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "(Kafka) A list of Kafka topics.",
-			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:    true,
 		},
 		"tumbling_window_in_seconds": {
 			// Property: TumblingWindowInSeconds
@@ -409,13 +410,13 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Lambda::EventSourceMapping",
 		Version:     1,
 		Attributes:  attributes,

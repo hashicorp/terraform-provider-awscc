@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // anomalyDetectorResourceType returns the Terraform awscc_lookoutmetrics_anomaly_detector resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LookoutMetrics::AnomalyDetector resource type.
 func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"anomaly_detector_config": {
 			// Property: AnomalyDetectorConfig
 			// CloudFormation resource type schema:
@@ -44,8 +43,8 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"anomaly_detector_frequency": {
 						// Property: AnomalyDetectorFrequency
 						Description: "Frequency of anomaly detection",
@@ -532,21 +531,19 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array"
 			// }
 			Description: "List of metric sets for anomaly detection",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"dimension_list": {
 						// Property: DimensionList
 						Description: "Dimensions for this MetricSet.",
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Type:        types.ListType{ElemType: types.StringType},
+						Optional:    true,
 					},
 					"metric_list": {
 						// Property: MetricList
 						Description: "Metrics captured by this MetricSet.",
-						// Multiset.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"aggregation_function": {
 									// Property: AggregationFunction
 									Description: "Operator used to aggregate metric values",
@@ -565,7 +562,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -591,12 +588,12 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"metric_source": {
 						// Property: MetricSource
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"app_flow_config": {
 									// Property: AppFlowConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"flow_name": {
 												// Property: FlowName
 												Type:     types.StringType,
@@ -613,8 +610,8 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								},
 								"cloudwatch_config": {
 									// Property: CloudwatchConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"role_arn": {
 												// Property: RoleArn
 												Type:     types.StringType,
@@ -626,8 +623,8 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								},
 								"rds_source_config": {
 									// Property: RDSSourceConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"db_instance_identifier": {
 												// Property: DBInstanceIdentifier
 												Type:     types.StringType,
@@ -665,8 +662,8 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											},
 											"vpc_configuration": {
 												// Property: VpcConfiguration
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"security_group_id_list": {
 															// Property: SecurityGroupIdList
 															Type:     types.ListType{ElemType: types.StringType},
@@ -687,8 +684,8 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								},
 								"redshift_source_config": {
 									// Property: RedshiftSourceConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"cluster_identifier": {
 												// Property: ClusterIdentifier
 												Type:     types.StringType,
@@ -726,8 +723,8 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											},
 											"vpc_configuration": {
 												// Property: VpcConfiguration
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"security_group_id_list": {
 															// Property: SecurityGroupIdList
 															Type:     types.ListType{ElemType: types.StringType},
@@ -748,16 +745,16 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								},
 								"s3_source_config": {
 									// Property: S3SourceConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"file_format_descriptor": {
 												// Property: FileFormatDescriptor
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"csv_format_descriptor": {
 															// Property: CsvFormatDescriptor
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"charset": {
 																		// Property: Charset
 																		Type:     types.StringType,
@@ -794,8 +791,8 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 														},
 														"json_format_descriptor": {
 															// Property: JsonFormatDescriptor
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"charset": {
 																		// Property: Charset
 																		Type:     types.StringType,
@@ -845,8 +842,8 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"timestamp_column": {
 						// Property: TimestampColumn
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"column_format": {
 									// Property: ColumnFormat
 									Description: "A timestamp format for the timestamps in the dataset",
@@ -869,7 +866,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 1,
 				},
@@ -879,13 +876,13 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "An Amazon Lookout for Metrics Detector",
 		Version:     1,
 		Attributes:  attributes,

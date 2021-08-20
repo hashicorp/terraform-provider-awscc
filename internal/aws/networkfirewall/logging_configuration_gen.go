@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // loggingConfigurationResourceType returns the Terraform awscc_networkfirewall_logging_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkFirewall::LoggingConfiguration resource type.
 func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"firewall_arn": {
 			// Property: FirewallArn
 			// CloudFormation resource type schema:
@@ -107,13 +106,12 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"log_destination_configs": {
 						// Property: LogDestinationConfigs
-						// Multiset.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"log_destination": {
 									// Property: LogDestination
 									Description: "A key-value pair to configure the logDestinations.",
@@ -132,7 +130,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -145,13 +143,13 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource type definition for AWS::NetworkFirewall::LoggingConfiguration",
 		Version:     1,
 		Attributes:  attributes,

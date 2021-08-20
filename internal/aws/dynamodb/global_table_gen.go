@@ -6,13 +6,13 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -22,7 +22,7 @@ func init() {
 // globalTableResourceType returns the Terraform awscc_dynamodb_global_table resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DynamoDB::GlobalTable resource type.
 func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -60,7 +60,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"attribute_name": {
 						// Property: AttributeName
 						Type:     types.StringType,
@@ -202,7 +202,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"index_name": {
 						// Property: IndexName
 						Type:     types.StringType,
@@ -210,9 +210,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"key_schema": {
 						// Property: KeySchema
-						// Ordered set.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"attribute_name": {
 									// Property: AttributeName
 									Type:     types.StringType,
@@ -224,17 +223,18 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 								MaxItems: 2,
 							},
 						),
-						Required: true,
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Required:   true,
 					},
 					"projection": {
 						// Property: Projection
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"non_key_attributes": {
 									// Property: NonKeyAttributes
 									Type:     providertypes.SetType{ElemType: types.StringType},
@@ -251,12 +251,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"write_provisioned_throughput_settings": {
 						// Property: WriteProvisionedThroughputSettings
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"write_capacity_auto_scaling_settings": {
 									// Property: WriteCapacityAutoScalingSettings
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"max_capacity": {
 												// Property: MaxCapacity
 												Type:     types.NumberType,
@@ -274,8 +274,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"target_tracking_scaling_policy_configuration": {
 												// Property: TargetTrackingScalingPolicyConfiguration
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"disable_scale_in": {
 															// Property: DisableScaleIn
 															Type:     types.BoolType,
@@ -340,9 +340,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"attribute_name": {
 						// Property: AttributeName
 						Type:     types.StringType,
@@ -354,12 +353,13 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 2,
 				},
 			),
-			Required: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Required:   true,
 			// KeySchema is a force-new attribute.
 		},
 		"local_secondary_indexes": {
@@ -428,7 +428,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"index_name": {
 						// Property: IndexName
 						Type:     types.StringType,
@@ -436,9 +436,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"key_schema": {
 						// Property: KeySchema
-						// Ordered set.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"attribute_name": {
 									// Property: AttributeName
 									Type:     types.StringType,
@@ -450,16 +449,17 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MaxItems: 2,
 							},
 						),
-						Required: true,
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Required:   true,
 					},
 					"projection": {
 						// Property: Projection
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"non_key_attributes": {
 									// Property: NonKeyAttributes
 									Type:     providertypes.SetType{ElemType: types.StringType},
@@ -690,11 +690,11 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"contributor_insights_specification": {
 						// Property: ContributorInsightsSpecification
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -707,11 +707,11 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"global_secondary_indexes": {
 						// Property: GlobalSecondaryIndexes
 						Attributes: providertypes.SetNestedAttributes(
-							map[string]schema.Attribute{
+							map[string]tfsdk.Attribute{
 								"contributor_insights_specification": {
 									// Property: ContributorInsightsSpecification
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"enabled": {
 												// Property: Enabled
 												Type:     types.BoolType,
@@ -728,12 +728,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"read_provisioned_throughput_settings": {
 									// Property: ReadProvisionedThroughputSettings
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"read_capacity_auto_scaling_settings": {
 												// Property: ReadCapacityAutoScalingSettings
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"max_capacity": {
 															// Property: MaxCapacity
 															Type:     types.NumberType,
@@ -751,8 +751,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"target_tracking_scaling_policy_configuration": {
 															// Property: TargetTrackingScalingPolicyConfiguration
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"disable_scale_in": {
 																		// Property: DisableScaleIn
 																		Type:     types.BoolType,
@@ -797,8 +797,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"point_in_time_recovery_specification": {
 						// Property: PointInTimeRecoverySpecification
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"point_in_time_recovery_enabled": {
 									// Property: PointInTimeRecoveryEnabled
 									Type:     types.BoolType,
@@ -810,12 +810,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"read_provisioned_throughput_settings": {
 						// Property: ReadProvisionedThroughputSettings
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"read_capacity_auto_scaling_settings": {
 									// Property: ReadCapacityAutoScalingSettings
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"max_capacity": {
 												// Property: MaxCapacity
 												Type:     types.NumberType,
@@ -833,8 +833,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"target_tracking_scaling_policy_configuration": {
 												// Property: TargetTrackingScalingPolicyConfiguration
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"disable_scale_in": {
 															// Property: DisableScaleIn
 															Type:     types.BoolType,
@@ -879,8 +879,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"sse_specification": {
 						// Property: SSESpecification
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"kms_master_key_id": {
 									// Property: KMSMasterKeyId
 									Type:     types.StringType,
@@ -893,7 +893,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"tags": {
 						// Property: Tags
 						Attributes: providertypes.SetNestedAttributes(
-							map[string]schema.Attribute{
+							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
 									Type:     types.StringType,
@@ -934,8 +934,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"sse_enabled": {
 						// Property: SSEEnabled
 						Type:     types.BoolType,
@@ -974,8 +974,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"stream_view_type": {
 						// Property: StreamViewType
 						Type:     types.StringType,
@@ -1023,8 +1023,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"attribute_name": {
 						// Property: AttributeName
 						Type:     types.StringType,
@@ -1090,12 +1090,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"write_capacity_auto_scaling_settings": {
 						// Property: WriteCapacityAutoScalingSettings
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"max_capacity": {
 									// Property: MaxCapacity
 									Type:     types.NumberType,
@@ -1113,8 +1113,8 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"target_tracking_scaling_policy_configuration": {
 									// Property: TargetTrackingScalingPolicyConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"disable_scale_in": {
 												// Property: DisableScaleIn
 												Type:     types.BoolType,
@@ -1150,13 +1150,13 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Version: None. Resource Type definition for AWS::DynamoDB::GlobalTable",
 		Version:     1,
 		Attributes:  attributes,

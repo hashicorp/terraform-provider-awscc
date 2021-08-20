@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // requestValidatorResourceType returns the Terraform awscc_apigateway_request_validator resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::RequestValidator resource type.
 func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -83,13 +82,13 @@ func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::ApiGateway::RequestValidator",
 		Version:     1,
 		Attributes:  attributes,

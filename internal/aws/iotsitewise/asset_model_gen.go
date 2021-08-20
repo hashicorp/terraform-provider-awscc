@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // assetModelResourceType returns the Terraform awscc_iotsitewise_asset_model resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::AssetModel resource type.
 func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"asset_model_arn": {
 			// Property: AssetModelArn
 			// CloudFormation resource type schema:
@@ -276,15 +275,13 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"composite_model_properties": {
 						// Property: CompositeModelProperties
 						Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-						// Multiset.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"data_type": {
 									// Property: DataType
 									Type:     types.StringType,
@@ -310,12 +307,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"type": {
 									// Property: Type
 									Description: "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"attribute": {
 												// Property: Attribute
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"default_value": {
 															// Property: DefaultValue
 															Type:     types.StringType,
@@ -327,8 +324,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"metric": {
 												// Property: Metric
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"expression": {
 															// Property: Expression
 															Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
@@ -338,9 +335,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"variables": {
 															// Property: Variables
 															Description: "The list of variables used in the expression.",
-															// Multiset.
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"name": {
 																		// Property: Name
 																		Description: "The friendly name of the variable to be used in the expression.",
@@ -349,8 +345,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	},
 																	"value": {
 																		// Property: Value
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"hierarchy_logical_id": {
 																					// Property: HierarchyLogicalId
 																					Type:     types.StringType,
@@ -366,20 +362,20 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
 														},
 														"window": {
 															// Property: Window
 															Description: "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"tumbling": {
 																		// Property: Tumbling
 																		Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"interval": {
 																					// Property: Interval
 																					Description: "The time interval for the tumbling window.",
@@ -406,8 +402,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"transform": {
 												// Property: Transform
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"expression": {
 															// Property: Expression
 															Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
@@ -417,9 +413,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"variables": {
 															// Property: Variables
 															Description: "The list of variables used in the expression.",
-															// Multiset.
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"name": {
 																		// Property: Name
 																		Description: "The friendly name of the variable to be used in the expression.",
@@ -428,8 +423,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	},
 																	"value": {
 																		// Property: Value
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"hierarchy_logical_id": {
 																					// Property: HierarchyLogicalId
 																					Type:     types.StringType,
@@ -445,7 +440,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
 														},
@@ -469,7 +464,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -492,7 +487,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -543,9 +538,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"child_asset_model_id": {
 						// Property: ChildAssetModelId
 						Description: "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
@@ -565,7 +559,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -806,9 +800,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"data_type": {
 						// Property: DataType
 						Type:     types.StringType,
@@ -834,12 +827,12 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"type": {
 						// Property: Type
 						Description: "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"attribute": {
 									// Property: Attribute
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"default_value": {
 												// Property: DefaultValue
 												Type:     types.StringType,
@@ -851,8 +844,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"metric": {
 									// Property: Metric
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"expression": {
 												// Property: Expression
 												Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
@@ -862,9 +855,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"variables": {
 												// Property: Variables
 												Description: "The list of variables used in the expression.",
-												// Multiset.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"name": {
 															// Property: Name
 															Description: "The friendly name of the variable to be used in the expression.",
@@ -873,8 +865,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"value": {
 															// Property: Value
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"hierarchy_logical_id": {
 																		// Property: HierarchyLogicalId
 																		Type:     types.StringType,
@@ -890,20 +882,20 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 											},
 											"window": {
 												// Property: Window
 												Description: "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"tumbling": {
 															// Property: Tumbling
 															Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"interval": {
 																		// Property: Interval
 																		Description: "The time interval for the tumbling window.",
@@ -930,8 +922,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"transform": {
 									// Property: Transform
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"expression": {
 												// Property: Expression
 												Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
@@ -941,9 +933,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"variables": {
 												// Property: Variables
 												Description: "The list of variables used in the expression.",
-												// Multiset.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"name": {
 															// Property: Name
 															Description: "The friendly name of the variable to be used in the expression.",
@@ -952,8 +943,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"value": {
 															// Property: Value
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"hierarchy_logical_id": {
 																		// Property: HierarchyLogicalId
 																		Type:     types.StringType,
@@ -969,7 +960,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 											},
@@ -993,7 +984,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -1022,9 +1013,8 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -1036,20 +1026,20 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::IoTSiteWise::AssetModel",
 		Version:     1,
 		Attributes:  attributes,

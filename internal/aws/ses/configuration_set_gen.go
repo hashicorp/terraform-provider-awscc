@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // configurationSetResourceType returns the Terraform awscc_ses_configuration_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SES::ConfigurationSet resource type.
 func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -41,13 +40,13 @@ func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::SES::ConfigurationSet.",
 		Version:     1,
 		Attributes:  attributes,

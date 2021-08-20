@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // imagePipelineResourceType returns the Terraform awscc_imagebuilder_image_pipeline resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::ImagePipeline resource type.
 func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -107,8 +106,8 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "object"
 			// }
 			Description: "Image tests configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"image_tests_enabled": {
 						// Property: ImageTestsEnabled
 						Description: "Defines if tests should be executed when building this image.",
@@ -172,8 +171,8 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "object"
 			// }
 			Description: "The schedule of the image pipeline.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"pipeline_execution_start_condition": {
 						// Property: PipelineExecutionStartCondition
 						Description: "The condition configures when the pipeline should trigger a new image build.",
@@ -226,13 +225,13 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::ImageBuilder::ImagePipeline",
 		Version:     1,
 		Attributes:  attributes,

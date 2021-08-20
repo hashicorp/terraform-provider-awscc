@@ -6,12 +6,13 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,7 +22,7 @@ func init() {
 // packagingConfigurationResourceType returns the Terraform awscc_mediapackage_packaging_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaPackage::PackagingConfiguration resource type.
 func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -152,18 +153,18 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "type": "object"
 			// }
 			Description: "A CMAF packaging configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"encryption": {
 						// Property: Encryption
 						Description: "A CMAF encryption configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"role_arn": {
 												// Property: RoleArn
 												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
@@ -193,8 +194,8 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					"hls_manifests": {
 						// Property: HlsManifests
 						Description: "A list of HLS manifest configurations.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"ad_markers": {
 									// Property: AdMarkers
 									Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
@@ -228,8 +229,8 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 								"stream_selection": {
 									// Property: StreamSelection
 									Description: "A StreamSelection configuration.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"max_video_bits_per_second": {
 												// Property: MaxVideoBitsPerSecond
 												Description: "The maximum video bitrate (bps) to include in output.",
@@ -253,7 +254,7 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 					},
@@ -410,13 +411,13 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "type": "object"
 			// }
 			Description: "A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"dash_manifests": {
 						// Property: DashManifests
 						Description: "A list of DASH manifest configurations.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"manifest_layout": {
 									// Property: ManifestLayout
 									Description: "Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
@@ -444,8 +445,8 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 								"stream_selection": {
 									// Property: StreamSelection
 									Description: "A StreamSelection configuration.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"max_video_bits_per_second": {
 												// Property: MaxVideoBitsPerSecond
 												Description: "The maximum video bitrate (bps) to include in output.",
@@ -469,20 +470,20 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 					},
 					"encryption": {
 						// Property: Encryption
 						Description: "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"role_arn": {
 												// Property: RoleArn
 												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
@@ -668,13 +669,13 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "type": "object"
 			// }
 			Description: "An HTTP Live Streaming (HLS) packaging configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"encryption": {
 						// Property: Encryption
 						Description: "An HTTP Live Streaming (HLS) encryption configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"constant_initialization_vector": {
 									// Property: ConstantInitializationVector
 									Description: "An HTTP Live Streaming (HLS) encryption configuration.",
@@ -690,8 +691,8 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"role_arn": {
 												// Property: RoleArn
 												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
@@ -721,8 +722,8 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					"hls_manifests": {
 						// Property: HlsManifests
 						Description: "A list of HLS manifest configurations.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"ad_markers": {
 									// Property: AdMarkers
 									Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
@@ -756,8 +757,8 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 								"stream_selection": {
 									// Property: StreamSelection
 									Description: "A StreamSelection configuration.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"max_video_bits_per_second": {
 												// Property: MaxVideoBitsPerSecond
 												Description: "The maximum video bitrate (bps) to include in output.",
@@ -781,7 +782,7 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 					},
@@ -907,18 +908,18 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "type": "object"
 			// }
 			Description: "A Microsoft Smooth Streaming (MSS) PackagingConfiguration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"encryption": {
 						// Property: Encryption
 						Description: "A CMAF encryption configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"role_arn": {
 												// Property: RoleArn
 												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
@@ -948,8 +949,8 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					"mss_manifests": {
 						// Property: MssManifests
 						Description: "A list of MSS manifest configurations.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"manifest_name": {
 									// Property: ManifestName
 									Description: "An optional string to include in the name of the manifest.",
@@ -959,8 +960,8 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 								"stream_selection": {
 									// Property: StreamSelection
 									Description: "A StreamSelection configuration.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"max_video_bits_per_second": {
 												// Property: MaxVideoBitsPerSecond
 												Description: "The maximum video bitrate (bps) to include in output.",
@@ -984,7 +985,7 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 					},
@@ -1034,9 +1035,8 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "uniqueItems": true
 			// }
 			Description: "A collection of tags associated with a resource",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -1048,20 +1048,21 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MediaPackage::PackagingConfiguration",
 		Version:     1,
 		Attributes:  attributes,

@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // organizationConformancePackResourceType returns the Terraform awscc_config_organization_conformance_pack resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::OrganizationConformancePack resource type.
 func organizationConformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"conformance_pack_input_parameters": {
 			// Property: ConformancePackInputParameters
 			// CloudFormation resource type schema:
@@ -52,8 +51,8 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			//   "type": "array"
 			// }
 			Description: "A list of ConformancePackInputParameter objects.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"parameter_name": {
 						// Property: ParameterName
 						Type:     types.StringType,
@@ -65,7 +64,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 60,
 				},
@@ -161,13 +160,13 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Config::OrganizationConformancePack.",
 		Version:     1,
 		Attributes:  attributes,

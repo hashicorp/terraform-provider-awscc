@@ -6,12 +6,13 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,7 +22,7 @@ func init() {
 // jobResourceType returns the Terraform awscc_databrew_job resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataBrew::Job resource type.
 func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"data_catalog_outputs": {
 			// Property: DataCatalogOutputs
 			// CloudFormation resource type schema:
@@ -112,8 +113,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"catalog_id": {
 						// Property: CatalogId
 						Type:     types.StringType,
@@ -126,8 +127,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"database_options": {
 						// Property: DatabaseOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"table_name": {
 									// Property: TableName
 									Type:     types.StringType,
@@ -136,8 +137,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"temp_directory": {
 									// Property: TempDirectory
 									Description: "S3 Output location",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket": {
 												// Property: Bucket
 												Type:     types.StringType,
@@ -163,13 +164,13 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"s3_options": {
 						// Property: S3Options
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"location": {
 									// Property: Location
 									Description: "S3 Output location",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket": {
 												// Property: Bucket
 												Type:     types.StringType,
@@ -194,7 +195,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -256,12 +257,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"database_options": {
 						// Property: DatabaseOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"table_name": {
 									// Property: TableName
 									Type:     types.StringType,
@@ -270,8 +271,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"temp_directory": {
 									// Property: TempDirectory
 									Description: "S3 Output location",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket": {
 												// Property: Bucket
 												Type:     types.StringType,
@@ -303,7 +304,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -372,8 +373,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Job Sample",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"mode": {
 						// Property: Mode
 						Description: "Sample configuration mode for profile jobs.",
@@ -461,8 +462,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Output location",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"bucket": {
 						// Property: Bucket
 						Type:     types.StringType,
@@ -565,8 +566,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"compression_format": {
 						// Property: CompressionFormat
 						Type:     types.StringType,
@@ -580,13 +581,13 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"format_options": {
 						// Property: FormatOptions
 						Description: "Format options for job Output",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"csv": {
 									// Property: Csv
 									Description: "Output Csv options",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"delimiter": {
 												// Property: Delimiter
 												Type:     types.StringType,
@@ -603,8 +604,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"location": {
 						// Property: Location
 						Description: "S3 Output location",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"bucket": {
 									// Property: Bucket
 									Type:     types.StringType,
@@ -626,12 +627,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"partition_columns": {
 						// Property: PartitionColumns
-						// Ordered set.
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Type:       types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:   true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -794,16 +795,16 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"column_statistics_configurations": {
 						// Property: ColumnStatisticsConfigurations
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"selectors": {
 									// Property: Selectors
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"name": {
 												// Property: Name
 												Type:     types.StringType,
@@ -815,7 +816,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 										},
 									),
@@ -823,8 +824,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"statistics": {
 									// Property: Statistics
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"included_statistics": {
 												// Property: IncludedStatistics
 												Type:     types.ListType{ElemType: types.StringType},
@@ -832,8 +833,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"overrides": {
 												// Property: Overrides
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"parameters": {
 															// Property: Parameters
 															// Pattern: ""
@@ -846,7 +847,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 1,
 													},
 												),
@@ -857,7 +858,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -865,8 +866,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"dataset_statistics_configuration": {
 						// Property: DatasetStatisticsConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"included_statistics": {
 									// Property: IncludedStatistics
 									Type:     types.ListType{ElemType: types.StringType},
@@ -874,8 +875,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"overrides": {
 									// Property: Overrides
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"parameters": {
 												// Property: Parameters
 												// Pattern: ""
@@ -888,7 +889,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 										},
 									),
@@ -900,8 +901,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"profile_columns": {
 						// Property: ProfileColumns
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Type:     types.StringType,
@@ -913,7 +914,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -956,8 +957,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
 						Description: "Recipe name",
@@ -1014,9 +1015,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -1028,7 +1028,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -1064,13 +1064,13 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::DataBrew::Job.",
 		Version:     1,
 		Attributes:  attributes,

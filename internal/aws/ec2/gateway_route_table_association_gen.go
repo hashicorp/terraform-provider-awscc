@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // gatewayRouteTableAssociationResourceType returns the Terraform awscc_ec2_gateway_route_table_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::GatewayRouteTableAssociation resource type.
 func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"association_id": {
 			// Property: AssociationId
 			// CloudFormation resource type schema:
@@ -59,13 +58,13 @@ func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resour
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Associates a gateway with a route table. The gateway and route table must be in the same VPC. This association causes the incoming traffic to the gateway to be routed according to the routes in the route table.",
 		Version:     1,
 		Attributes:  attributes,

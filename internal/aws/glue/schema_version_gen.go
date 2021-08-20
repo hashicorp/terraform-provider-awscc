@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // schemaVersionResourceType returns the Terraform awscc_glue_schema_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Glue::SchemaVersion resource type.
 func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"schema": {
 			// Property: Schema
 			// CloudFormation resource type schema:
@@ -50,8 +49,8 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "object"
 			// }
 			Description: "Identifier for the schema where the schema version will be created.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"registry_name": {
 						// Property: RegistryName
 						Description: "Name of the registry to identify where the Schema is located.",
@@ -104,13 +103,13 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "This resource represents an individual schema version of a schema defined in Glue Schema Registry.",
 		Version:     1,
 		Attributes:  attributes,

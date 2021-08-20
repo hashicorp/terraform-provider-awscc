@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -22,7 +21,7 @@ func init() {
 // agentResourceType returns the Terraform awscc_datasync_agent resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::Agent resource type.
 func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"activation_key": {
 			// Property: ActivationKey
 			// CloudFormation resource type schema:
@@ -95,10 +94,9 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The ARNs of the security group used to protect your data transfer task subnets.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
-			Computed: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
+			Computed:    true,
 			// SecurityGroupArns is a force-new attribute.
 		},
 		"subnet_arns": {
@@ -115,10 +113,9 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The ARNs of the subnets in which DataSync will create elastic network interfaces for each data transfer task.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
-			Computed: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
+			Computed:    true,
 			// SubnetArns is a force-new attribute.
 		},
 		"tags": {
@@ -158,7 +155,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
@@ -195,13 +192,13 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::DataSync::Agent.",
 		Version:     1,
 		Attributes:  attributes,

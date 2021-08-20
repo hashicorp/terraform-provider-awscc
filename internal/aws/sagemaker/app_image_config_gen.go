@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // appImageConfigResourceType returns the Terraform awscc_sagemaker_app_image_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::AppImageConfig resource type.
 func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"app_image_config_arn": {
 			// Property: AppImageConfigArn
 			// CloudFormation resource type schema:
@@ -114,13 +113,13 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "object"
 			// }
 			Description: "The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"file_system_config": {
 						// Property: FileSystemConfig
 						Description: "The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"default_gid": {
 									// Property: DefaultGid
 									Description: "The default POSIX group ID (GID). If not specified, defaults to 100.",
@@ -146,8 +145,8 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"kernel_specs": {
 						// Property: KernelSpecs
 						Description: "The specification of the Jupyter kernels in the image.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"display_name": {
 									// Property: DisplayName
 									Description: "The display name of the kernel.",
@@ -161,7 +160,7 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 								MaxItems: 1,
 							},
@@ -203,8 +202,8 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "uniqueItems": false
 			// }
 			Description: "A list of tags to apply to the AppImageConfig.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -216,7 +215,7 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 50,
 				},
@@ -229,13 +228,13 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::SageMaker::AppImageConfig",
 		Version:     1,
 		Attributes:  attributes,

@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // flowEntitlementResourceType returns the Terraform awscc_mediaconnect_flow_entitlement resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowEntitlement resource type.
 func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"data_transfer_subscriber_fee_percent": {
 			// Property: DataTransferSubscriberFeePercent
 			// CloudFormation resource type schema:
@@ -106,8 +105,8 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "object"
 			// }
 			Description: "Information about the encryption of the flow.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"algorithm": {
 						// Property: Algorithm
 						Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
@@ -232,13 +231,13 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MediaConnect::FlowEntitlement",
 		Version:     1,
 		Attributes:  attributes,

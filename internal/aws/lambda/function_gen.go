@@ -6,13 +6,13 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -22,7 +22,7 @@ func init() {
 // functionResourceType returns the Terraform awscc_lambda_function resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Lambda::Function resource type.
 func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -70,8 +70,8 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"image_uri": {
 						// Property: ImageUri
 						Description: "ImageUri.",
@@ -135,8 +135,8 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The dead-letter queue for failed asynchronous invocations.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"target_arn": {
 						// Property: TargetArn
 						Description: "The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.",
@@ -180,8 +180,8 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "A function's environment variable settings.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"variables": {
 						// Property: Variables
 						Description: "Environment variable key-value pairs.",
@@ -224,8 +224,8 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an AWS::EFS::MountTarget resource, you must also specify a DependsOn attribute to ensure that the mount target is created or updated before the function.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"arn": {
 						// Property: Arn
 						Description: "The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.",
@@ -239,7 +239,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 1,
 				},
 			),
@@ -303,21 +303,21 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"command": {
 						// Property: Command
 						Description: "Command.",
-						// Ordered set.
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Type:        types.ListType{ElemType: types.StringType},
+						Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:    true,
 					},
 					"entry_point": {
 						// Property: EntryPoint
 						Description: "EntryPoint.",
-						// Ordered set.
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Type:        types.ListType{ElemType: types.StringType},
+						Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:    true,
 					},
 					"working_directory": {
 						// Property: WorkingDirectory
@@ -448,7 +448,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A list of tags to apply to the function.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -496,8 +496,8 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The function's AWS X-Ray tracing configuration. To sample and record incoming requests, set Mode to Active.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"mode": {
 						// Property: Mode
 						Description: "The tracing mode.",
@@ -537,8 +537,8 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The VPC security groups and subnets that are attached to a Lambda function. When you connect a function to a VPC, Lambda creates an elastic network interface for each combination of security group and subnet in the function's VPC configuration. The function can only access resources and the internet through that VPC.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"security_group_ids": {
 						// Property: SecurityGroupIds
 						Description: "A list of VPC security groups IDs.",
@@ -558,13 +558,13 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Lambda::Function",
 		Version:     1,
 		Attributes:  attributes,

@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // cloudFrontOriginAccessIdentityResourceType returns the Terraform awscc_cloudfront_cloud_front_origin_access_identity resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::CloudFrontOriginAccessIdentity resource type.
 func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"cloud_front_origin_access_identity_config": {
 			// Property: CloudFrontOriginAccessIdentityConfig
 			// CloudFormation resource type schema:
@@ -37,8 +36,8 @@ func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.Reso
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"comment": {
 						// Property: Comment
 						Type:     types.StringType,
@@ -69,13 +68,13 @@ func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.Reso
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::CloudFrontOriginAccessIdentity",
 		Version:     1,
 		Attributes:  attributes,

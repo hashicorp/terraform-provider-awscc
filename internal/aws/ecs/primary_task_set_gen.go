@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // primaryTaskSetResourceType returns the Terraform awscc_ecs_primary_task_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::PrimaryTaskSet resource type.
 func primaryTaskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"cluster": {
 			// Property: Cluster
 			// CloudFormation resource type schema:
@@ -60,13 +59,13 @@ func primaryTaskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A pseudo-resource that manages which of your ECS task sets is primary.",
 		Version:     1,
 		Attributes:  attributes,

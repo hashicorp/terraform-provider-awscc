@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // codeSigningConfigResourceType returns the Terraform awscc_lambda_code_signing_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Lambda::CodeSigningConfig resource type.
 func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"allowed_publishers": {
 			// Property: AllowedPublishers
 			// CloudFormation resource type schema:
@@ -48,8 +47,8 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "type": "object"
 			// }
 			Description: "When the CodeSigningConfig is later on attached to a function, the function code will be expected to be signed by profiles from this list",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"signing_profile_version_arns": {
 						// Property: SigningProfileVersionArns
 						Description: "List of Signing profile version Arns",
@@ -106,8 +105,8 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "type": "object"
 			// }
 			Description: "Policies to control how to act if a signature is invalid",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"untrusted_artifact_on_deployment": {
 						// Property: UntrustedArtifactOnDeployment
 						Description: "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
@@ -134,13 +133,13 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Lambda::CodeSigningConfig.",
 		Version:     1,
 		Attributes:  attributes,

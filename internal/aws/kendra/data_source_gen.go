@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // dataSourceResourceType returns the Terraform awscc_kendra_data_source resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Kendra::DataSource resource type.
 func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -1413,20 +1412,20 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"confluence_configuration": {
 						// Property: ConfluenceConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"attachment_configuration": {
 									// Property: AttachmentConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"attachment_field_mappings": {
 												// Property: AttachmentFieldMappings
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
@@ -1443,7 +1442,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 1,
 														MaxItems: 11,
 													},
@@ -1461,12 +1460,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"blog_configuration": {
 									// Property: BlogConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"blog_field_mappings": {
 												// Property: BlogFieldMappings
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
@@ -1483,7 +1482,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 1,
 														MaxItems: 9,
 													},
@@ -1506,12 +1505,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"page_configuration": {
 									// Property: PageConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"page_field_mappings": {
 												// Property: PageFieldMappings
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
@@ -1528,7 +1527,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 1,
 														MaxItems: 12,
 													},
@@ -1551,8 +1550,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"space_configuration": {
 									// Property: SpaceConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"crawl_archived_spaces": {
 												// Property: CrawlArchivedSpaces
 												Type:     types.BoolType,
@@ -1575,8 +1574,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"space_field_mappings": {
 												// Property: SpaceFieldMappings
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
@@ -1593,7 +1592,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 1,
 														MaxItems: 4,
 													},
@@ -1611,8 +1610,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"vpc_configuration": {
 									// Property: VpcConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"security_group_ids": {
 												// Property: SecurityGroupIds
 												Type:     types.ListType{ElemType: types.StringType},
@@ -1633,12 +1632,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"database_configuration": {
 						// Property: DatabaseConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"acl_configuration": {
 									// Property: AclConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"allowed_groups_column_name": {
 												// Property: AllowedGroupsColumnName
 												Type:     types.StringType,
@@ -1650,8 +1649,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"column_configuration": {
 									// Property: ColumnConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"change_detecting_columns": {
 												// Property: ChangeDetectingColumns
 												Type:     types.ListType{ElemType: types.StringType},
@@ -1674,8 +1673,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"field_mappings": {
 												// Property: FieldMappings
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
@@ -1692,7 +1691,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MaxItems: 100,
 													},
 												),
@@ -1704,8 +1703,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"connection_configuration": {
 									// Property: ConnectionConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"database_host": {
 												// Property: DatabaseHost
 												Type:     types.StringType,
@@ -1742,8 +1741,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"sql_configuration": {
 									// Property: SqlConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"query_identifiers_enclosing_option": {
 												// Property: QueryIdentifiersEnclosingOption
 												Type:     types.StringType,
@@ -1755,8 +1754,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"vpc_configuration": {
 									// Property: VpcConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"security_group_ids": {
 												// Property: SecurityGroupIds
 												Type:     types.ListType{ElemType: types.StringType},
@@ -1777,8 +1776,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"google_drive_configuration": {
 						// Property: GoogleDriveConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"exclude_mime_types": {
 									// Property: ExcludeMimeTypes
 									Type:     types.ListType{ElemType: types.StringType},
@@ -1801,8 +1800,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"field_mappings": {
 									// Property: FieldMappings
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"data_source_field_name": {
 												// Property: DataSourceFieldName
 												Type:     types.StringType,
@@ -1819,7 +1818,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MaxItems: 100,
 										},
 									),
@@ -1841,8 +1840,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"one_drive_configuration": {
 						// Property: OneDriveConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"disable_local_groups": {
 									// Property: DisableLocalGroups
 									Type:     types.BoolType,
@@ -1855,8 +1854,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"field_mappings": {
 									// Property: FieldMappings
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"data_source_field_name": {
 												// Property: DataSourceFieldName
 												Type:     types.StringType,
@@ -1873,7 +1872,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MaxItems: 100,
 										},
 									),
@@ -1886,8 +1885,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"one_drive_users": {
 									// Property: OneDriveUsers
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"one_drive_user_list": {
 												// Property: OneDriveUserList
 												Type:     types.ListType{ElemType: types.StringType},
@@ -1895,8 +1894,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"one_drive_user_s3_path": {
 												// Property: OneDriveUserS3Path
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"bucket": {
 															// Property: Bucket
 															Type:     types.StringType,
@@ -1932,12 +1931,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"s3_configuration": {
 						// Property: S3Configuration
 						Description: "S3 data source configuration",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"access_control_list_configuration": {
 									// Property: AccessControlListConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"key_path": {
 												// Property: KeyPath
 												Type:     types.StringType,
@@ -1954,8 +1953,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"documents_metadata_configuration": {
 									// Property: DocumentsMetadataConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"s3_prefix": {
 												// Property: S3Prefix
 												Type:     types.StringType,
@@ -1986,12 +1985,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"salesforce_configuration": {
 						// Property: SalesforceConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"chatter_feed_configuration": {
 									// Property: ChatterFeedConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"document_data_field_name": {
 												// Property: DocumentDataFieldName
 												Type:     types.StringType,
@@ -2004,8 +2003,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"field_mappings": {
 												// Property: FieldMappings
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
@@ -2022,7 +2021,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MaxItems: 100,
 													},
 												),
@@ -2054,12 +2053,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"knowledge_article_configuration": {
 									// Property: KnowledgeArticleConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"custom_knowledge_article_type_configurations": {
 												// Property: CustomKnowledgeArticleTypeConfigurations
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"document_data_field_name": {
 															// Property: DocumentDataFieldName
 															Type:     types.StringType,
@@ -2072,8 +2071,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"field_mappings": {
 															// Property: FieldMappings
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"data_source_field_name": {
 																		// Property: DataSourceFieldName
 																		Type:     types.StringType,
@@ -2090,7 +2089,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{
+																tfsdk.ListNestedAttributesOptions{
 																	MaxItems: 100,
 																},
 															),
@@ -2102,7 +2101,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 1,
 														MaxItems: 10,
 													},
@@ -2116,8 +2115,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"standard_knowledge_article_type_configuration": {
 												// Property: StandardKnowledgeArticleTypeConfiguration
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"document_data_field_name": {
 															// Property: DocumentDataFieldName
 															Type:     types.StringType,
@@ -2130,8 +2129,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"field_mappings": {
 															// Property: FieldMappings
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"data_source_field_name": {
 																		// Property: DataSourceFieldName
 																		Type:     types.StringType,
@@ -2148,7 +2147,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{
+																tfsdk.ListNestedAttributesOptions{
 																	MaxItems: 100,
 																},
 															),
@@ -2174,8 +2173,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"standard_object_attachment_configuration": {
 									// Property: StandardObjectAttachmentConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"document_title_field_name": {
 												// Property: DocumentTitleFieldName
 												Type:     types.StringType,
@@ -2183,8 +2182,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"field_mappings": {
 												// Property: FieldMappings
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
@@ -2201,7 +2200,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MaxItems: 100,
 													},
 												),
@@ -2213,8 +2212,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"standard_object_configurations": {
 									// Property: StandardObjectConfigurations
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"document_data_field_name": {
 												// Property: DocumentDataFieldName
 												Type:     types.StringType,
@@ -2227,8 +2226,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"field_mappings": {
 												// Property: FieldMappings
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
@@ -2245,7 +2244,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MaxItems: 100,
 													},
 												),
@@ -2257,7 +2256,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 											MaxItems: 17,
 										},
@@ -2270,8 +2269,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"service_now_configuration": {
 						// Property: ServiceNowConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"host_url": {
 									// Property: HostUrl
 									Type:     types.StringType,
@@ -2279,8 +2278,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"knowledge_article_configuration": {
 									// Property: KnowledgeArticleConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"crawl_attachments": {
 												// Property: CrawlAttachments
 												Type:     types.BoolType,
@@ -2303,8 +2302,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"field_mappings": {
 												// Property: FieldMappings
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
@@ -2321,7 +2320,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MaxItems: 100,
 													},
 												),
@@ -2343,8 +2342,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"service_catalog_configuration": {
 									// Property: ServiceCatalogConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"crawl_attachments": {
 												// Property: CrawlAttachments
 												Type:     types.BoolType,
@@ -2367,8 +2366,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"field_mappings": {
 												// Property: FieldMappings
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
@@ -2385,7 +2384,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MaxItems: 100,
 													},
 												),
@@ -2412,8 +2411,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"share_point_configuration": {
 						// Property: SharePointConfiguration
 						Description: "SharePoint configuration",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"crawl_attachments": {
 									// Property: CrawlAttachments
 									Type:     types.BoolType,
@@ -2436,8 +2435,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"field_mappings": {
 									// Property: FieldMappings
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"data_source_field_name": {
 												// Property: DataSourceFieldName
 												Type:     types.StringType,
@@ -2454,7 +2453,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MaxItems: 100,
 										},
 									),
@@ -2487,8 +2486,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"vpc_configuration": {
 									// Property: VpcConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"security_group_ids": {
 												// Property: SecurityGroupIds
 												Type:     types.ListType{ElemType: types.StringType},
@@ -2621,8 +2620,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "List of tags",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "A string used to identify this tag",
@@ -2636,7 +2635,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 200,
 				},
 			),
@@ -2668,13 +2667,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Kendra DataSource",
 		Version:     1,
 		Attributes:  attributes,

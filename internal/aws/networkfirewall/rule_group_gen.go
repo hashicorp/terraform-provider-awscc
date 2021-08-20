@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -22,7 +21,7 @@ func init() {
 // ruleGroupResourceType returns the Terraform awscc_networkfirewall_rule_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkFirewall::RuleGroup resource type.
 func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"capacity": {
 			// Property: Capacity
 			// CloudFormation resource type schema:
@@ -527,39 +526,39 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"rule_variables": {
 						// Property: RuleVariables
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"ip_sets": {
 									// Property: IPSets
 									// Pattern: ""
-									Attributes: schema.MapNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.MapNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"definition": {
 												// Property: Definition
 												Type:     providertypes.SetType{ElemType: types.StringType},
 												Optional: true,
 											},
 										},
-										schema.MapNestedAttributesOptions{},
+										tfsdk.MapNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
 								"port_sets": {
 									// Property: PortSets
 									// Pattern: ""
-									Attributes: schema.MapNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.MapNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"definition": {
 												// Property: Definition
 												Type:     providertypes.SetType{ElemType: types.StringType},
 												Optional: true,
 											},
 										},
-										schema.MapNestedAttributesOptions{},
+										tfsdk.MapNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -569,12 +568,12 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"rules_source": {
 						// Property: RulesSource
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"rules_source_list": {
 									// Property: RulesSourceList
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"generated_rules_type": {
 												// Property: GeneratedRulesType
 												Type:     types.StringType,
@@ -602,7 +601,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"stateful_rules": {
 									// Property: StatefulRules
 									Attributes: providertypes.SetNestedAttributes(
-										map[string]schema.Attribute{
+										map[string]tfsdk.Attribute{
 											"action": {
 												// Property: Action
 												Type:     types.StringType,
@@ -610,8 +609,8 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"header": {
 												// Property: Header
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"destination": {
 															// Property: Destination
 															Type:     types.StringType,
@@ -649,7 +648,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"rule_options": {
 												// Property: RuleOptions
 												Attributes: providertypes.SetNestedAttributes(
-													map[string]schema.Attribute{
+													map[string]tfsdk.Attribute{
 														"keyword": {
 															// Property: Keyword
 															Type:     types.StringType,
@@ -672,24 +671,24 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"stateless_rules_and_custom_actions": {
 									// Property: StatelessRulesAndCustomActions
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"custom_actions": {
 												// Property: CustomActions
 												Attributes: providertypes.SetNestedAttributes(
-													map[string]schema.Attribute{
+													map[string]tfsdk.Attribute{
 														"action_definition": {
 															// Property: ActionDefinition
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"publish_metric_action": {
 																		// Property: PublishMetricAction
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"dimensions": {
 																					// Property: Dimensions
 																					Attributes: providertypes.SetNestedAttributes(
-																						map[string]schema.Attribute{
+																						map[string]tfsdk.Attribute{
 																							"value": {
 																								// Property: Value
 																								Type:     types.StringType,
@@ -721,7 +720,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"stateless_rules": {
 												// Property: StatelessRules
 												Attributes: providertypes.SetNestedAttributes(
-													map[string]schema.Attribute{
+													map[string]tfsdk.Attribute{
 														"priority": {
 															// Property: Priority
 															Type:     types.NumberType,
@@ -729,8 +728,8 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"rule_definition": {
 															// Property: RuleDefinition
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"actions": {
 																		// Property: Actions
 																		Type:     providertypes.SetType{ElemType: types.StringType},
@@ -738,12 +737,12 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	},
 																	"match_attributes": {
 																		// Property: MatchAttributes
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"destination_ports": {
 																					// Property: DestinationPorts
 																					Attributes: providertypes.SetNestedAttributes(
-																						map[string]schema.Attribute{
+																						map[string]tfsdk.Attribute{
 																							"from_port": {
 																								// Property: FromPort
 																								Type:     types.NumberType,
@@ -762,7 +761,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																				"destinations": {
 																					// Property: Destinations
 																					Attributes: providertypes.SetNestedAttributes(
-																						map[string]schema.Attribute{
+																						map[string]tfsdk.Attribute{
 																							"address_definition": {
 																								// Property: AddressDefinition
 																								Type:     types.StringType,
@@ -781,7 +780,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																				"source_ports": {
 																					// Property: SourcePorts
 																					Attributes: providertypes.SetNestedAttributes(
-																						map[string]schema.Attribute{
+																						map[string]tfsdk.Attribute{
 																							"from_port": {
 																								// Property: FromPort
 																								Type:     types.NumberType,
@@ -800,7 +799,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																				"sources": {
 																					// Property: Sources
 																					Attributes: providertypes.SetNestedAttributes(
-																						map[string]schema.Attribute{
+																						map[string]tfsdk.Attribute{
 																							"address_definition": {
 																								// Property: AddressDefinition
 																								Type:     types.StringType,
@@ -814,7 +813,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																				"tcp_flags": {
 																					// Property: TCPFlags
 																					Attributes: providertypes.SetNestedAttributes(
-																						map[string]schema.Attribute{
+																						map[string]tfsdk.Attribute{
 																							"flags": {
 																								// Property: Flags
 																								Type:     providertypes.SetType{ElemType: types.StringType},
@@ -926,7 +925,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -959,13 +958,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource type definition for AWS::NetworkFirewall::RuleGroup",
 		Version:     1,
 		Attributes:  attributes,

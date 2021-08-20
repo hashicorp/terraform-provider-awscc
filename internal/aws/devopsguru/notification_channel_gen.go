@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // notificationChannelResourceType returns the Terraform awscc_devopsguru_notification_channel resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DevOpsGuru::NotificationChannel resource type.
 func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"config": {
 			// Property: Config
 			// CloudFormation resource type schema:
@@ -46,13 +45,13 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "type": "object"
 			// }
 			Description: "Information about notification channels you have configured with DevOps Guru.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"sns": {
 						// Property: Sns
 						Description: "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"topic_arn": {
 									// Property: TopicArn
 									Type:     types.StringType,
@@ -84,13 +83,13 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "This resource schema represents the NotificationChannel resource in the Amazon DevOps Guru.",
 		Version:     1,
 		Attributes:  attributes,

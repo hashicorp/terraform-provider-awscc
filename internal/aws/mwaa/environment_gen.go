@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // environmentResourceType returns the Terraform awscc_mwaa_environment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MWAA::Environment resource type.
 func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"airflow_configuration_options": {
 			// Property: AirflowConfigurationOptions
 			// CloudFormation resource type schema:
@@ -265,13 +264,13 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Logging configuration for the environment.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"dag_processing_logs": {
 						// Property: DagProcessingLogs
 						Description: "Logging configuration for a specific airflow component.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cloud_watch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
@@ -297,8 +296,8 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"scheduler_logs": {
 						// Property: SchedulerLogs
 						Description: "Logging configuration for a specific airflow component.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cloud_watch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
@@ -324,8 +323,8 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"task_logs": {
 						// Property: TaskLogs
 						Description: "Logging configuration for a specific airflow component.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cloud_watch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
@@ -351,8 +350,8 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"webserver_logs": {
 						// Property: WebserverLogs
 						Description: "Logging configuration for a specific airflow component.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cloud_watch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
@@ -378,8 +377,8 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"worker_logs": {
 						// Property: WorkerLogs
 						Description: "Logging configuration for a specific airflow component.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cloud_watch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
@@ -479,8 +478,8 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Configures the network resources of the environment.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"security_group_ids": {
 						// Property: SecurityGroupIds
 						Description: "A list of security groups to use for the environment.",
@@ -630,13 +629,13 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MWAA::Environment",
 		Version:     1,
 		Attributes:  attributes,

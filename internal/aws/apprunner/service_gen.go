@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // serviceResourceType returns the Terraform awscc_apprunner_service resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppRunner::Service resource type.
 func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"auto_scaling_configuration_arn": {
 			// Property: AutoScalingConfigurationArn
 			// CloudFormation resource type schema:
@@ -58,8 +57,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Encryption configuration (KMS key)",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"kms_key": {
 						// Property: KmsKey
 						Description: "The KMS Key",
@@ -111,8 +110,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Health check configuration",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"healthy_threshold": {
 						// Property: HealthyThreshold
 						Description: "Health check Healthy Threshold",
@@ -184,8 +183,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Instance Configuration",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"cpu": {
 						// Property: Cpu
 						Description: "CPU",
@@ -452,13 +451,13 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Source Code configuration",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"authentication_configuration": {
 						// Property: AuthenticationConfiguration
 						Description: "Authentication Configuration",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"access_role_arn": {
 									// Property: AccessRoleArn
 									Type:     types.StringType,
@@ -483,18 +482,18 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"code_repository": {
 						// Property: CodeRepository
 						Description: "Source Code Repository",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"code_configuration": {
 									// Property: CodeConfiguration
 									Description: "Code Configuration",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"code_configuration_values": {
 												// Property: CodeConfigurationValues
 												Description: "Code Configuration Values",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"build_command": {
 															// Property: BuildCommand
 															Description: "Build Command",
@@ -515,8 +514,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"runtime_environment_variables": {
 															// Property: RuntimeEnvironmentVariables
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"name": {
 																		// Property: Name
 																		Type:     types.StringType,
@@ -528,7 +527,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
@@ -561,8 +560,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"source_code_version": {
 									// Property: SourceCodeVersion
 									Description: "Source Code Version",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"type": {
 												// Property: Type
 												Description: "Source Code Version Type",
@@ -586,13 +585,13 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"image_repository": {
 						// Property: ImageRepository
 						Description: "Image Repository",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"image_configuration": {
 									// Property: ImageConfiguration
 									Description: "Image Configuration",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"port": {
 												// Property: Port
 												Description: "Port",
@@ -601,8 +600,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"runtime_environment_variables": {
 												// Property: RuntimeEnvironmentVariables
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"name": {
 															// Property: Name
 															Type:     types.StringType,
@@ -614,7 +613,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
@@ -677,8 +676,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -690,7 +689,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -700,13 +699,13 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::AppRunner::Service resource specifies an AppRunner Service.",
 		Version:     1,
 		Attributes:  attributes,

@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // eventIntegrationResourceType returns the Terraform awscc_appintegrations_event_integration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppIntegrations::EventIntegration resource type.
 func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"associations": {
 			// Property: Associations
 			// CloudFormation resource type schema:
@@ -90,13 +89,13 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "type": "array"
 			// }
 			Description: "The associations with the event integration.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"client_association_metadata": {
 						// Property: ClientAssociationMetadata
 						Description: "The metadata associated with the client.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
 									Description: "A key to identify the metadata.",
@@ -110,7 +109,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -139,7 +138,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 				},
 			),
@@ -192,8 +191,8 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"source": {
 						// Property: Source
 						Description: "The source of the events.",
@@ -267,8 +266,8 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "type": "array"
 			// }
 			Description: "The tags (keys and values) associated with the event integration.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "A key to identify the tag.",
@@ -282,7 +281,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 200,
 				},
@@ -292,13 +291,13 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::AppIntegrations::EventIntegration",
 		Version:     1,
 		Attributes:  attributes,

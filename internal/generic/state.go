@@ -7,25 +7,25 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 // CopyValueAtPath copies the value at a specified path from source State to destination State.
 func CopyValueAtPath(ctx context.Context, dst, src *tfsdk.State, path *tftypes.AttributePath) error {
-	val, err := src.GetAttribute(ctx, path)
+	val, diags := src.GetAttribute(ctx, path)
 
-	if err != nil {
-		return err
+	if tfresource.DiagsHasError(diags) {
+		return tfresource.DiagsError(diags)
 	}
 
-	err = dst.SetAttribute(ctx, path, val)
+	diags = dst.SetAttribute(ctx, path, val)
 
-	if err != nil {
-		return err
+	if tfresource.DiagsHasError(diags) {
+		return tfresource.DiagsError(diags)
 	}
 
 	return nil
@@ -92,10 +92,10 @@ func SetUnknownValuesFromCloudFormationResourceModelRaw(ctx context.Context, sta
 		}
 
 		// Set it in the Terraform State.
-		err = state.SetAttribute(ctx, path.InTerraformState, val)
+		diags := state.SetAttribute(ctx, path.InTerraformState, val)
 
-		if err != nil {
-			return fmt.Errorf("error setting value at %s: %w", path.InTerraformState, err)
+		if tfresource.DiagsHasError(diags) {
+			return fmt.Errorf("error setting value at %s: %w", path.InTerraformState, tfresource.DiagsError(diags))
 		}
 	}
 
@@ -103,7 +103,7 @@ func SetUnknownValuesFromCloudFormationResourceModelRaw(ctx context.Context, sta
 }
 
 // GetCloudFormationResourceModelValue returns the Terraform Value for the specified CloudFormation ResourceModel (string).
-func GetCloudFormationResourceModelValue(ctx context.Context, schema *schema.Schema, resourceModel string) (tftypes.Value, error) {
+func GetCloudFormationResourceModelValue(ctx context.Context, schema *tfsdk.Schema, resourceModel string) (tftypes.Value, error) {
 	var v interface{}
 
 	if err := json.Unmarshal([]byte(resourceModel), &v); err != nil {
@@ -118,11 +118,11 @@ func GetCloudFormationResourceModelValue(ctx context.Context, schema *schema.Sch
 }
 
 // GetCloudFormationResourceModelRawValue returns the Terraform Value for the specified CloudFormation ResourceModel (raw map[string]interface{}).
-func GetCloudFormationResourceModelRawValue(ctx context.Context, schema *schema.Schema, resourceModel map[string]interface{}) (tftypes.Value, error) {
+func GetCloudFormationResourceModelRawValue(ctx context.Context, schema *tfsdk.Schema, resourceModel map[string]interface{}) (tftypes.Value, error) {
 	return getCloudFormationResourceModelValue(ctx, schema, nil, resourceModel)
 }
 
-func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Schema, path *tftypes.AttributePath, v interface{}) (tftypes.Value, error) {
+func getCloudFormationResourceModelValue(ctx context.Context, schema *tfsdk.Schema, path *tftypes.AttributePath, v interface{}) (tftypes.Value, error) {
 	var typ tftypes.Type
 
 	if len(path.Steps()) == 0 {
@@ -168,12 +168,6 @@ func getCloudFormationResourceModelValue(ctx context.Context, schema *schema.Sch
 			}
 			vals = append(vals, val)
 			path = path.WithoutLastStep()
-		}
-		// TODO
-		// TODO This prevents a crash in Terraform Core, but is it correct?
-		// TODO
-		if len(vals) == 0 {
-			return tftypes.NewValue(typ, nil), nil
 		}
 		return tftypes.NewValue(typ, vals), nil
 

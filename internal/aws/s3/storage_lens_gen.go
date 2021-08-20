@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -22,7 +21,7 @@ func init() {
 // storageLensResourceType returns the Terraform awscc_s3_storage_lens resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3::StorageLens resource type.
 func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"storage_lens_configuration": {
 			// Property: StorageLensConfiguration
 			// CloudFormation resource type schema:
@@ -250,18 +249,18 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Specifies the details of Amazon S3 Storage Lens configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"account_level": {
 						// Property: AccountLevel
 						Description: "Account-level metrics configurations.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"activity_metrics": {
 									// Property: ActivityMetrics
 									Description: "Enables activity metrics.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"is_enabled": {
 												// Property: IsEnabled
 												Description: "Specifies whether activity metrics are enabled or disabled.",
@@ -275,13 +274,13 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"bucket_level": {
 									// Property: BucketLevel
 									Description: "Bucket-level metrics configurations.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"activity_metrics": {
 												// Property: ActivityMetrics
 												Description: "Enables activity metrics.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"is_enabled": {
 															// Property: IsEnabled
 															Description: "Specifies whether activity metrics are enabled or disabled.",
@@ -295,12 +294,12 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"prefix_level": {
 												// Property: PrefixLevel
 												Description: "Prefix-level metrics configurations.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"storage_metrics": {
 															// Property: StorageMetrics
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"is_enabled": {
 																		// Property: IsEnabled
 																		Description: "Specifies whether prefix-level storage metrics are enabled or disabled.",
@@ -310,8 +309,8 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	"selection_criteria": {
 																		// Property: SelectionCriteria
 																		Description: "Selection criteria for prefix-level metrics.",
-																		Attributes: schema.SingleNestedAttributes(
-																			map[string]schema.Attribute{
+																		Attributes: tfsdk.SingleNestedAttributes(
+																			map[string]tfsdk.Attribute{
 																				"delimiter": {
 																					// Property: Delimiter
 																					Description: "Delimiter to divide S3 key into hierarchy of prefixes.",
@@ -353,8 +352,8 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"aws_org": {
 						// Property: AwsOrg
 						Description: "The AWS Organizations ARN to use in the Amazon S3 Storage Lens configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Description: "The Amazon Resource Name (ARN) of the specified resource.",
@@ -368,13 +367,13 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"data_export": {
 						// Property: DataExport
 						Description: "Specifies how Amazon S3 Storage Lens metrics should be exported.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"s3_bucket_destination": {
 									// Property: S3BucketDestination
 									Description: "S3 bucket destination settings for the Amazon S3 Storage Lens metrics export.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"account_id": {
 												// Property: AccountId
 												Description: "The AWS account ID that owns the destination S3 bucket.",
@@ -422,8 +421,8 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"exclude": {
 						// Property: Exclude
 						Description: "S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"buckets": {
 									// Property: Buckets
 									Type:     providertypes.SetType{ElemType: types.StringType},
@@ -448,8 +447,8 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"include": {
 						// Property: Include
 						Description: "S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"buckets": {
 									// Property: Buckets
 									Type:     providertypes.SetType{ElemType: types.StringType},
@@ -514,7 +513,7 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A set of tags (key-value pairs) for this Amazon S3 Storage Lens configuration.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -535,13 +534,13 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::S3::StorageLens resource is an Amazon S3 resource type that you can use to create Storage Lens configurations.",
 		Version:     1,
 		Attributes:  attributes,

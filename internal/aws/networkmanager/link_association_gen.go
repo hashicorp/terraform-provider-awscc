@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // linkAssociationResourceType returns the Terraform awscc_networkmanager_link_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::LinkAssociation resource type.
 func linkAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"device_id": {
 			// Property: DeviceId
 			// CloudFormation resource type schema:
@@ -61,13 +60,13 @@ func linkAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::NetworkManager::LinkAssociation type associates a link to a device. The device and link must be in the same global network and the same site.",
 		Version:     1,
 		Attributes:  attributes,

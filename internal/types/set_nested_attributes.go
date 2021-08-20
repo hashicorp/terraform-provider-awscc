@@ -4,15 +4,15 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
+	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
-type nestedAttributes map[string]schema.Attribute
+type nestedAttributes map[string]tfsdk.Attribute
 
-func (n nestedAttributes) GetAttributes() map[string]schema.Attribute {
-	return map[string]schema.Attribute(n)
+func (n nestedAttributes) GetAttributes() map[string]tfsdk.Attribute {
+	return map[string]tfsdk.Attribute(n)
 }
 
 func (n nestedAttributes) ApplyTerraform5AttributePathStep(step tftypes.AttributePathStep) (interface{}, error) {
@@ -48,7 +48,7 @@ func (n nestedAttributes) AttributeType() attr.Type {
 // configuration, while requiring each group of values be unique. Minimum and
 // maximum numbers of times the group can appear in the configuration can be
 // set using `opts`.
-func SetNestedAttributes(attributes map[string]schema.Attribute, opts SetNestedAttributesOptions) schema.NestedAttributes {
+func SetNestedAttributes(attributes map[string]tfsdk.Attribute, opts SetNestedAttributesOptions) tfsdk.NestedAttributes {
 	return setNestedAttributes{
 		nestedAttributes: nestedAttributes(attributes),
 		min:              opts.MinItems,
@@ -69,11 +69,11 @@ type SetNestedAttributesOptions struct {
 	MaxItems int
 }
 
-func (s setNestedAttributes) GetNestingMode() schema.NestingMode {
-	return schema.NestingModeSet
+func (s setNestedAttributes) GetNestingMode() tfsdk.NestingMode {
+	return tfsdk.NestingModeSet
 }
 
-func (s setNestedAttributes) GetAttributes() map[string]schema.Attribute {
+func (s setNestedAttributes) GetAttributes() map[string]tfsdk.Attribute {
 	return s.nestedAttributes
 }
 
@@ -100,7 +100,7 @@ func (s setNestedAttributes) ApplyTerraform5AttributePathStep(step tftypes.Attri
 	return s.nestedAttributes, nil
 }
 
-func (s setNestedAttributes) Equal(o schema.NestedAttributes) bool {
+func (s setNestedAttributes) Equal(o tfsdk.NestedAttributes) bool {
 	other, ok := o.(setNestedAttributes)
 	if !ok {
 		return false

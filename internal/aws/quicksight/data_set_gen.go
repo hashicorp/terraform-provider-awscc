@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // dataSetResourceType returns the Terraform awscc_quicksight_data_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::QuickSight::DataSet resource type.
 func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -96,13 +95,13 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"geo_spatial_column_group": {
 						// Property: GeoSpatialColumnGroup
 						Description: "<p>Geospatial column group that denotes a hierarchy.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"columns": {
 									// Property: Columns
 									Description: "<p>Columns in this hierarchy.</p>",
@@ -125,7 +124,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 8,
 				},
@@ -159,8 +158,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minItems": 1,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"column_names": {
 						// Property: ColumnNames
 						Type:     types.ListType{ElemType: types.StringType},
@@ -172,7 +171,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -239,8 +238,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			// Pattern: ""
-			Attributes: schema.MapNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.MapNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"columns": {
 						// Property: Columns
 						Type:     types.ListType{ElemType: types.StringType},
@@ -252,7 +251,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.MapNestedAttributesOptions{},
+				tfsdk.MapNestedAttributesOptions{},
 			),
 			Optional: true,
 			// FieldFolders is a write-only attribute.
@@ -288,8 +287,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>Wait policy to use when creating/updating dataset. Default is to wait for SPICE ingestion to finish with timeout of 36 hours.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"ingestion_wait_time_in_hours": {
 						// Property: IngestionWaitTimeInHours
 						Description: "<p>The maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.</p>",
@@ -609,8 +608,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			// Pattern: ""
-			Attributes: schema.MapNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.MapNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"alias": {
 						// Property: Alias
 						Description: "<p>A display name for the logical table.</p>",
@@ -620,13 +619,13 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"data_transforms": {
 						// Property: DataTransforms
 						Description: "<p>Transform operations that act on this logical table.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cast_column_type_operation": {
 									// Property: CastColumnTypeOperation
 									Description: "<p>A transform operation that casts a column to a different type.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"column_name": {
 												// Property: ColumnName
 												Description: "<p>Column name.</p>",
@@ -651,13 +650,13 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"create_columns_operation": {
 									// Property: CreateColumnsOperation
 									Description: "<p>A transform operation that creates calculated columns. Columns created in one such\n            operation form a lexical closure.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"columns": {
 												// Property: Columns
 												Description: "<p>Calculated columns to create.</p>",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"column_id": {
 															// Property: ColumnId
 															Description: "<p>A unique ID to identify a calculated column. During a dataset update, if the column ID\n            of a calculated column matches that of an existing calculated column, Amazon QuickSight\n            preserves the existing calculated column.</p>",
@@ -677,7 +676,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 1,
 														MaxItems: 128,
 													},
@@ -691,8 +690,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"filter_operation": {
 									// Property: FilterOperation
 									Description: "<p>A transform operation that filters rows based on a condition.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"condition_expression": {
 												// Property: ConditionExpression
 												Description: "<p>An expression that must evaluate to a Boolean value. Rows for which the expression\n            evaluates to true are kept in the dataset.</p>",
@@ -706,8 +705,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"project_operation": {
 									// Property: ProjectOperation
 									Description: "<p>A transform operation that projects columns. Operations that come after a projection\n            can only refer to projected columns.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"projected_columns": {
 												// Property: ProjectedColumns
 												Description: "<p>Projected columns.</p>",
@@ -721,8 +720,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"rename_column_operation": {
 									// Property: RenameColumnOperation
 									Description: "<p>A transform operation that renames a column.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"column_name": {
 												// Property: ColumnName
 												Description: "<p>The name of the column to be renamed.</p>",
@@ -742,8 +741,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"tag_column_operation": {
 									// Property: TagColumnOperation
 									Description: "<p>A transform operation that tags a column with additional information.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"column_name": {
 												// Property: ColumnName
 												Description: "<p>The column that this operation acts on.</p>",
@@ -753,13 +752,13 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"tags": {
 												// Property: Tags
 												Description: "<p>The dataset column tag, currently only used for geospatial type tagging. .</p>\n        <note>\n            <p>This is not tags for the AWS tagging feature. .</p>\n        </note>",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"column_description": {
 															// Property: ColumnDescription
 															Description: "<p>Metadata that contains a description for a column.</p>",
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"text": {
 																		// Property: Text
 																		Description: "<p>The text of a description for a column.</p>",
@@ -776,7 +775,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 1,
 														MaxItems: 16,
 													},
@@ -788,7 +787,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 								MaxItems: 2048,
 							},
@@ -798,17 +797,17 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"source": {
 						// Property: Source
 						Description: "<p>Information about the source of a logical table. This is a variant type structure. For\n            this structure to be valid, only one of the attributes can be non-null.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"join_instruction": {
 									// Property: JoinInstruction
 									Description: "<p>Join instruction.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"left_join_key_properties": {
 												// Property: LeftJoinKeyProperties
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"unique_key": {
 															// Property: UniqueKey
 															Type:     types.BoolType,
@@ -832,8 +831,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"right_join_key_properties": {
 												// Property: RightJoinKeyProperties
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"unique_key": {
 															// Property: UniqueKey
 															Type:     types.BoolType,
@@ -869,7 +868,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.MapNestedAttributesOptions{},
+				tfsdk.MapNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -921,8 +920,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>The list of columns after all transforms. These columns are available in templates,\n            analyses, and dashboards.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"description": {
 						// Property: Description
 						Description: "<p>A description for a column.</p>",
@@ -941,7 +940,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -980,8 +979,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>A list of resource permissions on the dataset.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"actions": {
 						// Property: Actions
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
@@ -995,7 +994,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 64,
 				},
@@ -1231,18 +1230,18 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			// Pattern: ""
-			Attributes: schema.MapNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.MapNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"custom_sql": {
 						// Property: CustomSql
 						Description: "<p>A physical table type built from the results of the custom SQL query.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"columns": {
 									// Property: Columns
 									Description: "<p>The column schema from the SQL query result set.</p>",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"name": {
 												// Property: Name
 												Description: "<p>The name of this column in the underlying data source.</p>",
@@ -1255,7 +1254,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 											MaxItems: 2048,
 										},
@@ -1287,8 +1286,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"relational_table": {
 						// Property: RelationalTable
 						Description: "<p>A physical table type for relational data sources.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"catalog": {
 									// Property: Catalog
 									Type:     types.StringType,
@@ -1303,8 +1302,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"input_columns": {
 									// Property: InputColumns
 									Description: "<p>The column schema of the table.</p>",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"name": {
 												// Property: Name
 												Description: "<p>The name of this column in the underlying data source.</p>",
@@ -1317,7 +1316,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 											MaxItems: 2048,
 										},
@@ -1343,8 +1342,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"s3_source": {
 						// Property: S3Source
 						Description: "<p>A physical table type for as S3 data source.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"data_source_arn": {
 									// Property: DataSourceArn
 									Description: "<p>The amazon Resource Name (ARN) for the data source.</p>",
@@ -1354,8 +1353,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"input_columns": {
 									// Property: InputColumns
 									Description: "<p>A physical table type for as S3 data source.</p>",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"name": {
 												// Property: Name
 												Description: "<p>The name of this column in the underlying data source.</p>",
@@ -1368,7 +1367,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 											MaxItems: 2048,
 										},
@@ -1378,8 +1377,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"upload_settings": {
 									// Property: UploadSettings
 									Description: "<p>Information about the format for a source file or files.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"contains_header": {
 												// Property: ContainsHeader
 												Description: "<p>Whether the file has a header row, or the files each have a header row.</p>",
@@ -1417,7 +1416,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.MapNestedAttributesOptions{},
+				tfsdk.MapNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -1460,8 +1459,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>The row-level security configuration for the dataset.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"arn": {
 						// Property: Arn
 						Description: "<p>The Amazon Resource Name (ARN) of the permission dataset.</p>",
@@ -1520,8 +1519,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "<p>Tag key.</p>",
@@ -1535,7 +1534,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 200,
 				},
@@ -1545,13 +1544,13 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Definition of the AWS::QuickSight::DataSet Resource Type.",
 		Version:     1,
 		Attributes:  attributes,

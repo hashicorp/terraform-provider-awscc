@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // experimentTemplateResourceType returns the Terraform awscc_fis_experiment_template resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FIS::ExperimentTemplate resource type.
 func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"actions": {
 			// Property: Actions
 			// CloudFormation resource type schema:
@@ -84,8 +83,8 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The actions for the experiment.",
 			// Pattern: ""
-			Attributes: schema.MapNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.MapNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"action_id": {
 						// Property: ActionId
 						Description: "The ID of the action.",
@@ -119,7 +118,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Optional: true,
 					},
 				},
-				schema.MapNestedAttributesOptions{},
+				tfsdk.MapNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -182,8 +181,8 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "array"
 			// }
 			Description: "One or more stop conditions.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"source": {
 						// Property: Source
 						Type:     types.StringType,
@@ -195,7 +194,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 		},
@@ -296,12 +295,12 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The targets for the experiment.",
 			// Pattern: ""
-			Attributes: schema.MapNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.MapNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"filters": {
 						// Property: Filters
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"path": {
 									// Property: Path
 									Description: "The attribute path for the filter.",
@@ -315,7 +314,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -344,20 +343,20 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Optional:    true,
 					},
 				},
-				schema.MapNestedAttributesOptions{},
+				tfsdk.MapNestedAttributesOptions{},
 			),
 			Required: true,
 		},
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::FIS::ExperimentTemplate",
 		Version:     1,
 		Attributes:  attributes,

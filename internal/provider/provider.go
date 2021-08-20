@@ -8,12 +8,12 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	awsbase "github.com/hashicorp/aws-sdk-go-base"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 func New() tfsdk.Provider {
@@ -25,10 +25,10 @@ type awsCloudControlProvider struct {
 	roleARN  string
 }
 
-func (p *awsCloudControlProvider) GetSchema(ctx context.Context) (schema.Schema, []*tfprotov6.Diagnostic) {
-	return schema.Schema{
+func (p *awsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
+	return tfsdk.Schema{
 		Version: 1,
-		Attributes: map[string]schema.Attribute{
+		Attributes: map[string]tfsdk.Attribute{
 			"access_key": {
 				Type:        types.StringType,
 				Description: "The access key for API operations.",
@@ -101,14 +101,10 @@ type providerData struct {
 func (p *awsCloudControlProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
 	var config providerData
 
-	err := request.Config.Get(ctx, &config)
+	diags := request.Config.Get(ctx, &config)
 
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing provider configuration",
-			Detail:   fmt.Sprintf("Error parsing the provider configuration, this is an error in the provider.\n%s\n", err),
-		})
+	if tfresource.DiagsHasError(diags) {
+		response.Diagnostics = append(response.Diagnostics, diags...)
 
 		return
 	}

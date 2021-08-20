@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -22,7 +21,7 @@ func init() {
 // firewallPolicyResourceType returns the Terraform awscc_networkfirewall_firewall_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkFirewall::FirewallPolicy resource type.
 func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -166,12 +165,12 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"stateful_rule_group_references": {
 						// Property: StatefulRuleGroupReferences
 						Attributes: providertypes.SetNestedAttributes(
-							map[string]schema.Attribute{
+							map[string]tfsdk.Attribute{
 								"resource_arn": {
 									// Property: ResourceArn
 									Description: "A resource ARN.",
@@ -186,19 +185,19 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"stateless_custom_actions": {
 						// Property: StatelessCustomActions
 						Attributes: providertypes.SetNestedAttributes(
-							map[string]schema.Attribute{
+							map[string]tfsdk.Attribute{
 								"action_definition": {
 									// Property: ActionDefinition
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"publish_metric_action": {
 												// Property: PublishMetricAction
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"dimensions": {
 															// Property: Dimensions
 															Attributes: providertypes.SetNestedAttributes(
-																map[string]schema.Attribute{
+																map[string]tfsdk.Attribute{
 																	"value": {
 																		// Property: Value
 																		Type:     types.StringType,
@@ -240,7 +239,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"stateless_rule_group_references": {
 						// Property: StatelessRuleGroupReferences
 						Attributes: providertypes.SetNestedAttributes(
-							map[string]schema.Attribute{
+							map[string]tfsdk.Attribute{
 								"priority": {
 									// Property: Priority
 									Type:     types.NumberType,
@@ -332,7 +331,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -351,13 +350,13 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource type definition for AWS::NetworkFirewall::FirewallPolicy",
 		Version:     1,
 		Attributes:  attributes,

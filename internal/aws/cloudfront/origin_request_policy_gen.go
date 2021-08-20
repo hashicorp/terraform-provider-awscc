@@ -6,7 +6,6 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -21,7 +20,7 @@ func init() {
 // originRequestPolicyResourceType returns the Terraform awscc_cloudfront_origin_request_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::OriginRequestPolicy resource type.
 func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
@@ -121,8 +120,8 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"comment": {
 						// Property: Comment
 						Type:     types.StringType,
@@ -130,8 +129,8 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 					},
 					"cookies_config": {
 						// Property: CookiesConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cookie_behavior": {
 									// Property: CookieBehavior
 									Type:     types.StringType,
@@ -148,8 +147,8 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 					},
 					"headers_config": {
 						// Property: HeadersConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"header_behavior": {
 									// Property: HeaderBehavior
 									Type:     types.StringType,
@@ -171,8 +170,8 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 					},
 					"query_strings_config": {
 						// Property: QueryStringsConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"query_string_behavior": {
 									// Property: QueryStringBehavior
 									Type:     types.StringType,
@@ -194,13 +193,13 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 	}
 
 	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::OriginRequestPolicy",
 		Version:     1,
 		Attributes:  attributes,
