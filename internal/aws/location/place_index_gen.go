@@ -165,6 +165,18 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Location::PlaceIndex").WithTerraformTypeName("awscc_location_place_index").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                       "Arn",
+		"create_time":               "CreateTime",
+		"data_source":               "DataSource",
+		"data_source_configuration": "DataSourceConfiguration",
+		"description":               "Description",
+		"index_arn":                 "IndexArn",
+		"index_name":                "IndexName",
+		"intended_use":              "IntendedUse",
+		"pricing_plan":              "PricingPlan",
+		"update_time":               "UpdateTime",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

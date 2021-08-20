@@ -173,6 +173,18 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Signer::SigningProfile").WithTerraformTypeName("awscc_signer_signing_profile").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                       "Arn",
+		"key":                       "Key",
+		"platform_id":               "PlatformId",
+		"profile_name":              "ProfileName",
+		"profile_version":           "ProfileVersion",
+		"profile_version_arn":       "ProfileVersionArn",
+		"signature_validity_period": "SignatureValidityPeriod",
+		"tags":                      "Tags",
+		"type":                      "Type",
+		"value":                     "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -131,6 +131,14 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::RecoveryGroup").WithTerraformTypeName("awscc_route53recoveryreadiness_recovery_group").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cells":               "Cells",
+		"key":                 "Key",
+		"recovery_group_arn":  "RecoveryGroupArn",
+		"recovery_group_name": "RecoveryGroupName",
+		"tags":                "Tags",
+		"value":               "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

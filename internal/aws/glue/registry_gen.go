@@ -135,6 +135,14 @@ func registryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Glue::Registry").WithTerraformTypeName("awscc_glue_registry").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":         "Arn",
+		"description": "Description",
+		"key":         "Key",
+		"name":        "Name",
+		"tags":        "Tags",
+		"value":       "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",

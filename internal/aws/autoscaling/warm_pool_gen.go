@@ -76,6 +76,12 @@ func warmPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::WarmPool").WithTerraformTypeName("awscc_autoscaling_warm_pool").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"auto_scaling_group_name":     "AutoScalingGroupName",
+		"max_group_prepared_capacity": "MaxGroupPreparedCapacity",
+		"min_size":                    "MinSize",
+		"pool_state":                  "PoolState",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

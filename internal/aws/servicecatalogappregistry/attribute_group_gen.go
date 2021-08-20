@@ -111,6 +111,14 @@ func attributeGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroup").WithTerraformTypeName("awscc_servicecatalogappregistry_attribute_group").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":         "Arn",
+		"attributes":  "Attributes",
+		"description": "Description",
+		"id":          "Id",
+		"name":        "Name",
+		"tags":        "Tags",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

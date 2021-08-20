@@ -156,6 +156,16 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Config::StoredQuery").WithTerraformTypeName("awscc_config_stored_query").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"key":               "Key",
+		"query_arn":         "QueryArn",
+		"query_description": "QueryDescription",
+		"query_expression":  "QueryExpression",
+		"query_id":          "QueryId",
+		"query_name":        "QueryName",
+		"tags":              "Tags",
+		"value":             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

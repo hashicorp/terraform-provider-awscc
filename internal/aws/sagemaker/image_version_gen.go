@@ -122,6 +122,14 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ImageVersion").WithTerraformTypeName("awscc_sagemaker_image_version").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"base_image":        "BaseImage",
+		"container_image":   "ContainerImage",
+		"image_arn":         "ImageArn",
+		"image_name":        "ImageName",
+		"image_version_arn": "ImageVersionArn",
+		"version":           "Version",
+	})
 
 	opts = opts.IsImmutableType(true)
 

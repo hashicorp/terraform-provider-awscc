@@ -197,6 +197,21 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayPeeringAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_peering_attachment").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"code":                          "Code",
+		"creation_time":                 "CreationTime",
+		"key":                           "Key",
+		"message":                       "Message",
+		"peer_account_id":               "PeerAccountId",
+		"peer_region":                   "PeerRegion",
+		"peer_transit_gateway_id":       "PeerTransitGatewayId",
+		"state":                         "State",
+		"status":                        "Status",
+		"tags":                          "Tags",
+		"transit_gateway_attachment_id": "TransitGatewayAttachmentId",
+		"transit_gateway_id":            "TransitGatewayId",
+		"value":                         "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

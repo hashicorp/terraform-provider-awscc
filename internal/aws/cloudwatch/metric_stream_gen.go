@@ -284,6 +284,22 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::MetricStream").WithTerraformTypeName("awscc_cloudwatch_metric_stream").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":              "Arn",
+		"creation_date":    "CreationDate",
+		"exclude_filters":  "ExcludeFilters",
+		"firehose_arn":     "FirehoseArn",
+		"include_filters":  "IncludeFilters",
+		"key":              "Key",
+		"last_update_date": "LastUpdateDate",
+		"name":             "Name",
+		"namespace":        "Namespace",
+		"output_format":    "OutputFormat",
+		"role_arn":         "RoleArn",
+		"state":            "State",
+		"tags":             "Tags",
+		"value":            "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",

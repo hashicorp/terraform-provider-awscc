@@ -75,6 +75,12 @@ func registryPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EventSchemas::RegistryPolicy").WithTerraformTypeName("awscc_eventschemas_registry_policy").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"id":            "Id",
+		"policy":        "Policy",
+		"registry_name": "RegistryName",
+		"revision_id":   "RevisionId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

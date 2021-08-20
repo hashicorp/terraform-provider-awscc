@@ -157,6 +157,16 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::CompositeAlarm").WithTerraformTypeName("awscc_cloudwatch_composite_alarm").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"actions_enabled":           "ActionsEnabled",
+		"alarm_actions":             "AlarmActions",
+		"alarm_description":         "AlarmDescription",
+		"alarm_name":                "AlarmName",
+		"alarm_rule":                "AlarmRule",
+		"arn":                       "Arn",
+		"insufficient_data_actions": "InsufficientDataActions",
+		"ok_actions":                "OKActions",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

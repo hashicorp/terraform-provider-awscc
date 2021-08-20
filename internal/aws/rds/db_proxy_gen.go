@@ -303,6 +303,28 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxy").WithTerraformTypeName("awscc_rds_db_proxy").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"auth":                   "Auth",
+		"auth_scheme":            "AuthScheme",
+		"db_proxy_arn":           "DBProxyArn",
+		"db_proxy_name":          "DBProxyName",
+		"debug_logging":          "DebugLogging",
+		"description":            "Description",
+		"endpoint":               "Endpoint",
+		"engine_family":          "EngineFamily",
+		"iam_auth":               "IAMAuth",
+		"idle_client_timeout":    "IdleClientTimeout",
+		"key":                    "Key",
+		"require_tls":            "RequireTLS",
+		"role_arn":               "RoleArn",
+		"secret_arn":             "SecretArn",
+		"tags":                   "Tags",
+		"user_name":              "UserName",
+		"value":                  "Value",
+		"vpc_id":                 "VpcId",
+		"vpc_security_group_ids": "VpcSecurityGroupIds",
+		"vpc_subnet_ids":         "VpcSubnetIds",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

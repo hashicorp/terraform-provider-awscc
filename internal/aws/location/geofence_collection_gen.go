@@ -137,6 +137,16 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Location::GeofenceCollection").WithTerraformTypeName("awscc_location_geofence_collection").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"collection_arn":           "CollectionArn",
+		"collection_name":          "CollectionName",
+		"create_time":              "CreateTime",
+		"description":              "Description",
+		"kms_key_id":               "KmsKeyId",
+		"pricing_plan":             "PricingPlan",
+		"pricing_plan_data_source": "PricingPlanDataSource",
+		"update_time":              "UpdateTime",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

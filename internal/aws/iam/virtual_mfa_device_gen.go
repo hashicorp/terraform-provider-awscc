@@ -141,6 +141,15 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IAM::VirtualMFADevice").WithTerraformTypeName("awscc_iam_virtual_mfa_device").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"key":                     "Key",
+		"path":                    "Path",
+		"serial_number":           "SerialNumber",
+		"tags":                    "Tags",
+		"users":                   "Users",
+		"value":                   "Value",
+		"virtual_mfa_device_name": "VirtualMfaDeviceName",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

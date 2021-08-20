@@ -208,6 +208,18 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationS3").WithTerraformTypeName("awscc_datasync_location_s3").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"bucket_access_role_arn": "BucketAccessRoleArn",
+		"key":                    "Key",
+		"location_arn":           "LocationArn",
+		"location_uri":           "LocationUri",
+		"s3_bucket_arn":          "S3BucketArn",
+		"s3_config":              "S3Config",
+		"s3_storage_class":       "S3StorageClass",
+		"subdirectory":           "Subdirectory",
+		"tags":                   "Tags",
+		"value":                  "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Subdirectory",

@@ -189,6 +189,21 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::LaunchProfile").WithTerraformTypeName("awscc_nimblestudio_launch_profile").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"clipboard_mode":                   "ClipboardMode",
+		"description":                      "Description",
+		"ec_2_instance_types":              "Ec2InstanceTypes",
+		"ec_2_subnet_ids":                  "Ec2SubnetIds",
+		"launch_profile_id":                "LaunchProfileId",
+		"launch_profile_protocol_versions": "LaunchProfileProtocolVersions",
+		"max_session_length_in_minutes":    "MaxSessionLengthInMinutes",
+		"name":                             "Name",
+		"stream_configuration":             "StreamConfiguration",
+		"streaming_image_ids":              "StreamingImageIds",
+		"studio_component_ids":             "StudioComponentIds",
+		"studio_id":                        "StudioId",
+		"tags":                             "Tags",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -224,6 +224,19 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Config::ConfigurationAggregator").WithTerraformTypeName("awscc_config_configuration_aggregator").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_aggregation_sources":     "AccountAggregationSources",
+		"account_ids":                     "AccountIds",
+		"all_aws_regions":                 "AllAwsRegions",
+		"aws_regions":                     "AwsRegions",
+		"configuration_aggregator_arn":    "ConfigurationAggregatorArn",
+		"configuration_aggregator_name":   "ConfigurationAggregatorName",
+		"key":                             "Key",
+		"organization_aggregation_source": "OrganizationAggregationSource",
+		"role_arn":                        "RoleArn",
+		"tags":                            "Tags",
+		"value":                           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

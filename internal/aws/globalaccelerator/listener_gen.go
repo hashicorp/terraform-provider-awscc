@@ -135,6 +135,15 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GlobalAccelerator::Listener").WithTerraformTypeName("awscc_globalaccelerator_listener").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"accelerator_arn": "AcceleratorArn",
+		"client_affinity": "ClientAffinity",
+		"from_port":       "FromPort",
+		"listener_arn":    "ListenerArn",
+		"port_ranges":     "PortRanges",
+		"protocol":        "Protocol",
+		"to_port":         "ToPort",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

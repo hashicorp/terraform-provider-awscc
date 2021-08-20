@@ -168,6 +168,18 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Timestream::Table").WithTerraformTypeName("awscc_timestream_table").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":           "Arn",
+		"database_name": "DatabaseName",
+		"key":           "Key",
+		"magnetic_store_retention_period_in_days": "MagneticStoreRetentionPeriodInDays",
+		"memory_store_retention_period_in_hours":  "MemoryStoreRetentionPeriodInHours",
+		"name":                                    "Name",
+		"retention_properties":                    "RetentionProperties",
+		"table_name":                              "TableName",
+		"tags":                                    "Tags",
+		"value":                                   "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

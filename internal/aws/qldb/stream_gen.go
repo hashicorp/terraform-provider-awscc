@@ -199,6 +199,21 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::QLDB::Stream").WithTerraformTypeName("awscc_qldb_stream").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"aggregation_enabled":   "AggregationEnabled",
+		"arn":                   "Arn",
+		"exclusive_end_time":    "ExclusiveEndTime",
+		"id":                    "Id",
+		"inclusive_start_time":  "InclusiveStartTime",
+		"key":                   "Key",
+		"kinesis_configuration": "KinesisConfiguration",
+		"ledger_name":           "LedgerName",
+		"role_arn":              "RoleArn",
+		"stream_arn":            "StreamArn",
+		"stream_name":           "StreamName",
+		"tags":                  "Tags",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -243,6 +243,21 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationSMB").WithTerraformTypeName("awscc_datasync_location_smb").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"agent_arns":      "AgentArns",
+		"domain":          "Domain",
+		"key":             "Key",
+		"location_arn":    "LocationArn",
+		"location_uri":    "LocationUri",
+		"mount_options":   "MountOptions",
+		"password":        "Password",
+		"server_hostname": "ServerHostname",
+		"subdirectory":    "Subdirectory",
+		"tags":            "Tags",
+		"user":            "User",
+		"value":           "Value",
+		"version":         "Version",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Password",

@@ -179,6 +179,18 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverQueryLoggingConfig").WithTerraformTypeName("awscc_route53resolver_resolver_query_logging_config").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                "Arn",
+		"association_count":  "AssociationCount",
+		"creation_time":      "CreationTime",
+		"creator_request_id": "CreatorRequestId",
+		"destination_arn":    "DestinationArn",
+		"id":                 "Id",
+		"name":               "Name",
+		"owner_id":           "OwnerId",
+		"share_status":       "ShareStatus",
+		"status":             "Status",
+	})
 
 	opts = opts.IsImmutableType(true)
 

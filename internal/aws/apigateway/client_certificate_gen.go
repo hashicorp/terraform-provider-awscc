@@ -103,6 +103,13 @@ func clientCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::ClientCertificate").WithTerraformTypeName("awscc_apigateway_client_certificate").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"client_certificate_id": "ClientCertificateId",
+		"description":           "Description",
+		"key":                   "Key",
+		"tags":                  "Tags",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

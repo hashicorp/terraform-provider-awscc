@@ -104,6 +104,12 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::ResourceCollection").WithTerraformTypeName("awscc_devopsguru_resource_collection").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cloud_formation":            "CloudFormation",
+		"resource_collection_filter": "ResourceCollectionFilter",
+		"resource_collection_type":   "ResourceCollectionType",
+		"stack_names":                "StackNames",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

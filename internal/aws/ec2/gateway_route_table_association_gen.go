@@ -73,6 +73,11 @@ func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resour
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::GatewayRouteTableAssociation").WithTerraformTypeName("awscc_ec2_gateway_route_table_association").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"association_id": "AssociationId",
+		"gateway_id":     "GatewayId",
+		"route_table_id": "RouteTableId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

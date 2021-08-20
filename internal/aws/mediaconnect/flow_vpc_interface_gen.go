@@ -113,6 +113,14 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowVpcInterface").WithTerraformTypeName("awscc_mediaconnect_flow_vpc_interface").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"flow_arn":              "FlowArn",
+		"name":                  "Name",
+		"network_interface_ids": "NetworkInterfaceIds",
+		"role_arn":              "RoleArn",
+		"security_group_ids":    "SecurityGroupIds",
+		"subnet_id":             "SubnetId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

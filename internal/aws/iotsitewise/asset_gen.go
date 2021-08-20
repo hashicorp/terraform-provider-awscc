@@ -235,6 +235,21 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Asset").WithTerraformTypeName("awscc_iotsitewise_asset").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alias":              "Alias",
+		"asset_arn":          "AssetArn",
+		"asset_hierarchies":  "AssetHierarchies",
+		"asset_id":           "AssetId",
+		"asset_model_id":     "AssetModelId",
+		"asset_name":         "AssetName",
+		"asset_properties":   "AssetProperties",
+		"child_asset_id":     "ChildAssetId",
+		"key":                "Key",
+		"logical_id":         "LogicalId",
+		"notification_state": "NotificationState",
+		"tags":               "Tags",
+		"value":              "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

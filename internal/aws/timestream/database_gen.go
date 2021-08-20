@@ -120,6 +120,14 @@ func databaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Timestream::Database").WithTerraformTypeName("awscc_timestream_database").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":           "Arn",
+		"database_name": "DatabaseName",
+		"key":           "Key",
+		"kms_key_id":    "KmsKeyId",
+		"tags":          "Tags",
+		"value":         "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

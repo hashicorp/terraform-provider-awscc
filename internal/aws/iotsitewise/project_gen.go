@@ -138,6 +138,16 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Project").WithTerraformTypeName("awscc_iotsitewise_project").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"key":                 "Key",
+		"portal_id":           "PortalId",
+		"project_arn":         "ProjectArn",
+		"project_description": "ProjectDescription",
+		"project_id":          "ProjectId",
+		"project_name":        "ProjectName",
+		"tags":                "Tags",
+		"value":               "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

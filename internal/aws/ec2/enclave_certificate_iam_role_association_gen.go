@@ -102,6 +102,13 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EnclaveCertificateIamRoleAssociation").WithTerraformTypeName("awscc_ec2_enclave_certificate_iam_role_association").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"certificate_arn":            "CertificateArn",
+		"certificate_s3_bucket_name": "CertificateS3BucketName",
+		"certificate_s3_object_key":  "CertificateS3ObjectKey",
+		"encryption_kms_key_id":      "EncryptionKmsKeyId",
+		"role_arn":                   "RoleArn",
+	})
 
 	opts = opts.IsImmutableType(true)
 

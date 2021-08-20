@@ -143,6 +143,15 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IVS::PlaybackKeyPair").WithTerraformTypeName("awscc_ivs_playback_key_pair").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                 "Arn",
+		"fingerprint":         "Fingerprint",
+		"key":                 "Key",
+		"name":                "Name",
+		"public_key_material": "PublicKeyMaterial",
+		"tags":                "Tags",
+		"value":               "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

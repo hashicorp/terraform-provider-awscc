@@ -86,6 +86,12 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Resource").WithTerraformTypeName("awscc_apigateway_resource").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"parent_id":   "ParentId",
+		"path_part":   "PathPart",
+		"resource_id": "ResourceId",
+		"rest_api_id": "RestApiId",
+	})
 
 	opts = opts.IsImmutableType(true)
 

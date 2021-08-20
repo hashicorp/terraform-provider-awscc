@@ -134,6 +134,14 @@ func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataBrew::Schedule").WithTerraformTypeName("awscc_databrew_schedule").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cron_expression": "CronExpression",
+		"job_names":       "JobNames",
+		"key":             "Key",
+		"name":            "Name",
+		"tags":            "Tags",
+		"value":           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

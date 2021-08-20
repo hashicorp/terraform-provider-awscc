@@ -208,6 +208,22 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::OriginRequestPolicy").WithTerraformTypeName("awscc_cloudfront_origin_request_policy").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"comment":                      "Comment",
+		"cookie_behavior":              "CookieBehavior",
+		"cookies":                      "Cookies",
+		"cookies_config":               "CookiesConfig",
+		"header_behavior":              "HeaderBehavior",
+		"headers":                      "Headers",
+		"headers_config":               "HeadersConfig",
+		"id":                           "Id",
+		"last_modified_time":           "LastModifiedTime",
+		"name":                         "Name",
+		"origin_request_policy_config": "OriginRequestPolicyConfig",
+		"query_string_behavior":        "QueryStringBehavior",
+		"query_strings":                "QueryStrings",
+		"query_strings_config":         "QueryStringsConfig",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

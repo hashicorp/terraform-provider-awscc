@@ -221,6 +221,23 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::DataflowEndpointGroup").WithTerraformTypeName("awscc_groundstation_dataflow_endpoint_group").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"address":            "Address",
+		"arn":                "Arn",
+		"endpoint":           "Endpoint",
+		"endpoint_details":   "EndpointDetails",
+		"id":                 "Id",
+		"key":                "Key",
+		"mtu":                "Mtu",
+		"name":               "Name",
+		"port":               "Port",
+		"role_arn":           "RoleArn",
+		"security_details":   "SecurityDetails",
+		"security_group_ids": "SecurityGroupIds",
+		"subnet_ids":         "SubnetIds",
+		"tags":               "Tags",
+		"value":              "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

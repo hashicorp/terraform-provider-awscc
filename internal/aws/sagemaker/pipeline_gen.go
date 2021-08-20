@@ -144,6 +144,16 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Pipeline").WithTerraformTypeName("awscc_sagemaker_pipeline").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"key":                   "Key",
+		"pipeline_definition":   "PipelineDefinition",
+		"pipeline_description":  "PipelineDescription",
+		"pipeline_display_name": "PipelineDisplayName",
+		"pipeline_name":         "PipelineName",
+		"role_arn":              "RoleArn",
+		"tags":                  "Tags",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

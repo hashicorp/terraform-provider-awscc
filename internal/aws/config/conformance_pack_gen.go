@@ -163,6 +163,16 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Config::ConformancePack").WithTerraformTypeName("awscc_config_conformance_pack").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"conformance_pack_input_parameters": "ConformancePackInputParameters",
+		"conformance_pack_name":             "ConformancePackName",
+		"delivery_s3_bucket":                "DeliveryS3Bucket",
+		"delivery_s3_key_prefix":            "DeliveryS3KeyPrefix",
+		"parameter_name":                    "ParameterName",
+		"parameter_value":                   "ParameterValue",
+		"template_body":                     "TemplateBody",
+		"template_s3_uri":                   "TemplateS3Uri",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/TemplateBody",

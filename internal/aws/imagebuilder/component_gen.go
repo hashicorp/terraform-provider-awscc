@@ -222,6 +222,21 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::Component").WithTerraformTypeName("awscc_imagebuilder_component").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"change_description":    "ChangeDescription",
+		"data":                  "Data",
+		"description":           "Description",
+		"encrypted":             "Encrypted",
+		"kms_key_id":            "KmsKeyId",
+		"name":                  "Name",
+		"platform":              "Platform",
+		"supported_os_versions": "SupportedOsVersions",
+		"tags":                  "Tags",
+		"type":                  "Type",
+		"uri":                   "Uri",
+		"version":               "Version",
+	})
 
 	opts = opts.IsImmutableType(true)
 

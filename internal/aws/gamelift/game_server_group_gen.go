@@ -405,6 +405,32 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::GameServerGroup").WithTerraformTypeName("awscc_gamelift_game_server_group").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"auto_scaling_group_arn":        "AutoScalingGroupArn",
+		"auto_scaling_policy":           "AutoScalingPolicy",
+		"balancing_strategy":            "BalancingStrategy",
+		"delete_option":                 "DeleteOption",
+		"estimated_instance_warmup":     "EstimatedInstanceWarmup",
+		"game_server_group_arn":         "GameServerGroupArn",
+		"game_server_group_name":        "GameServerGroupName",
+		"game_server_protection_policy": "GameServerProtectionPolicy",
+		"instance_definitions":          "InstanceDefinitions",
+		"instance_type":                 "InstanceType",
+		"key":                           "Key",
+		"launch_template":               "LaunchTemplate",
+		"launch_template_id":            "LaunchTemplateId",
+		"launch_template_name":          "LaunchTemplateName",
+		"max_size":                      "MaxSize",
+		"min_size":                      "MinSize",
+		"role_arn":                      "RoleArn",
+		"tags":                          "Tags",
+		"target_tracking_configuration": "TargetTrackingConfiguration",
+		"target_value":                  "TargetValue",
+		"value":                         "Value",
+		"version":                       "Version",
+		"vpc_subnets":                   "VpcSubnets",
+		"weighted_capacity":             "WeightedCapacity",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DeleteOption",

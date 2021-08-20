@@ -223,6 +223,19 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationNFS").WithTerraformTypeName("awscc_datasync_location_nfs").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"agent_arns":      "AgentArns",
+		"key":             "Key",
+		"location_arn":    "LocationArn",
+		"location_uri":    "LocationUri",
+		"mount_options":   "MountOptions",
+		"on_prem_config":  "OnPremConfig",
+		"server_hostname": "ServerHostname",
+		"subdirectory":    "Subdirectory",
+		"tags":            "Tags",
+		"value":           "Value",
+		"version":         "Version",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ServerHostname",

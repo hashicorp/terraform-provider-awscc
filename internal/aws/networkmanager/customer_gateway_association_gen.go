@@ -88,6 +88,12 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::CustomerGatewayAssociation").WithTerraformTypeName("awscc_networkmanager_customer_gateway_association").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"customer_gateway_arn": "CustomerGatewayArn",
+		"device_id":            "DeviceId",
+		"global_network_id":    "GlobalNetworkId",
+		"link_id":              "LinkId",
+	})
 
 	opts = opts.IsImmutableType(true)
 

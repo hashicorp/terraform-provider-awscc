@@ -128,6 +128,14 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSO::Assignment").WithTerraformTypeName("awscc_sso_assignment").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"instance_arn":       "InstanceArn",
+		"permission_set_arn": "PermissionSetArn",
+		"principal_id":       "PrincipalId",
+		"principal_type":     "PrincipalType",
+		"target_id":          "TargetId",
+		"target_type":        "TargetType",
+	})
 
 	opts = opts.IsImmutableType(true)
 

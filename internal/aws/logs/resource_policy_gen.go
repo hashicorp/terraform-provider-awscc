@@ -68,6 +68,10 @@ func resourcePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::ResourcePolicy").WithTerraformTypeName("awscc_logs_resource_policy").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"policy_document": "PolicyDocument",
+		"policy_name":     "PolicyName",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

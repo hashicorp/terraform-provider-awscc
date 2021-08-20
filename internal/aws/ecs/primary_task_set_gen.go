@@ -74,6 +74,11 @@ func primaryTaskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::PrimaryTaskSet").WithTerraformTypeName("awscc_ecs_primary_task_set").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cluster":     "Cluster",
+		"service":     "Service",
+		"task_set_id": "TaskSetId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

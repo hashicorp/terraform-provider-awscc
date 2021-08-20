@@ -71,6 +71,11 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CertificateManager::Account").WithTerraformTypeName("awscc_certificatemanager_account").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_id":                  "AccountId",
+		"days_before_expiry":          "DaysBeforeExpiry",
+		"expiry_events_configuration": "ExpiryEventsConfiguration",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -375,6 +375,33 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::CloudFormationProvisionedProduct").WithTerraformTypeName("awscc_servicecatalog_cloud_formation_provisioned_product").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"accept_language":                        "AcceptLanguage",
+		"cloudformation_stack_arn":               "CloudformationStackArn",
+		"key":                                    "Key",
+		"notification_arns":                      "NotificationArns",
+		"outputs":                                "Outputs",
+		"path_id":                                "PathId",
+		"path_name":                              "PathName",
+		"product_id":                             "ProductId",
+		"product_name":                           "ProductName",
+		"provisioned_product_id":                 "ProvisionedProductId",
+		"provisioned_product_name":               "ProvisionedProductName",
+		"provisioning_artifact_id":               "ProvisioningArtifactId",
+		"provisioning_artifact_name":             "ProvisioningArtifactName",
+		"provisioning_parameters":                "ProvisioningParameters",
+		"provisioning_preferences":               "ProvisioningPreferences",
+		"record_id":                              "RecordId",
+		"stack_set_accounts":                     "StackSetAccounts",
+		"stack_set_failure_tolerance_count":      "StackSetFailureToleranceCount",
+		"stack_set_failure_tolerance_percentage": "StackSetFailureTolerancePercentage",
+		"stack_set_max_concurrency_count":        "StackSetMaxConcurrencyCount",
+		"stack_set_max_concurrency_percentage":   "StackSetMaxConcurrencyPercentage",
+		"stack_set_operation_type":               "StackSetOperationType",
+		"stack_set_regions":                      "StackSetRegions",
+		"tags":                                   "Tags",
+		"value":                                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(720).WithDeleteTimeoutInMinutes(0)
 

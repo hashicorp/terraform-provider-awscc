@@ -224,6 +224,24 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::Device").WithTerraformTypeName("awscc_networkmanager_device").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"address":           "Address",
+		"description":       "Description",
+		"device_arn":        "DeviceArn",
+		"device_id":         "DeviceId",
+		"global_network_id": "GlobalNetworkId",
+		"key":               "Key",
+		"latitude":          "Latitude",
+		"location":          "Location",
+		"longitude":         "Longitude",
+		"model":             "Model",
+		"serial_number":     "SerialNumber",
+		"site_id":           "SiteId",
+		"tags":              "Tags",
+		"type":              "Type",
+		"value":             "Value",
+		"vendor":            "Vendor",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

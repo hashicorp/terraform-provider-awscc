@@ -108,6 +108,14 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::ResourceAssociation").WithTerraformTypeName("awscc_servicecatalogappregistry_resource_association").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"application":     "Application",
+		"application_arn": "ApplicationArn",
+		"id":              "Id",
+		"resource":        "Resource",
+		"resource_arn":    "ResourceArn",
+		"resource_type":   "ResourceType",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

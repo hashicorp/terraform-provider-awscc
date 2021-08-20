@@ -212,6 +212,20 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CodeArtifact::Repository").WithTerraformTypeName("awscc_codeartifact_repository").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                         "Arn",
+		"description":                 "Description",
+		"domain_name":                 "DomainName",
+		"domain_owner":                "DomainOwner",
+		"external_connections":        "ExternalConnections",
+		"key":                         "Key",
+		"name":                        "Name",
+		"permissions_policy_document": "PermissionsPolicyDocument",
+		"repository_name":             "RepositoryName",
+		"tags":                        "Tags",
+		"upstreams":                   "Upstreams",
+		"value":                       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

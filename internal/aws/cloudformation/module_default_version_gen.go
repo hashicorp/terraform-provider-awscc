@@ -83,6 +83,11 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ModuleDefaultVersion").WithTerraformTypeName("awscc_cloudformation_module_default_version").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":         "Arn",
+		"module_name": "ModuleName",
+		"version_id":  "VersionId",
+	})
 
 	opts = opts.IsImmutableType(true)
 

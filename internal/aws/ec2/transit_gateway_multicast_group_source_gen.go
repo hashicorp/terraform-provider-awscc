@@ -163,6 +163,19 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastGroupSource").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_group_source").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"group_ip_address":                    "GroupIpAddress",
+		"group_member":                        "GroupMember",
+		"group_source":                        "GroupSource",
+		"member_type":                         "MemberType",
+		"network_interface_id":                "NetworkInterfaceId",
+		"resource_id":                         "ResourceId",
+		"resource_type":                       "ResourceType",
+		"source_type":                         "SourceType",
+		"subnet_id":                           "SubnetId",
+		"transit_gateway_attachment_id":       "TransitGatewayAttachmentId",
+		"transit_gateway_multicast_domain_id": "TransitGatewayMulticastDomainId",
+	})
 
 	opts = opts.IsImmutableType(true)
 

@@ -186,6 +186,18 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Kinesis::Stream").WithTerraformTypeName("awscc_kinesis_stream").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                    "Arn",
+		"encryption_type":        "EncryptionType",
+		"key":                    "Key",
+		"key_id":                 "KeyId",
+		"name":                   "Name",
+		"retention_period_hours": "RetentionPeriodHours",
+		"shard_count":            "ShardCount",
+		"stream_encryption":      "StreamEncryption",
+		"tags":                   "Tags",
+		"value":                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -123,6 +123,14 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::Publisher").WithTerraformTypeName("awscc_cloudformation_publisher").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"accept_terms_and_conditions": "AcceptTermsAndConditions",
+		"connection_arn":              "ConnectionArn",
+		"identity_provider":           "IdentityProvider",
+		"publisher_id":                "PublisherId",
+		"publisher_profile":           "PublisherProfile",
+		"publisher_status":            "PublisherStatus",
+	})
 
 	opts = opts.IsImmutableType(true)
 

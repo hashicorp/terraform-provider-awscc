@@ -233,6 +233,23 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::AccessPoint").WithTerraformTypeName("awscc_s3_access_point").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alias":                             "Alias",
+		"arn":                               "Arn",
+		"block_public_acls":                 "BlockPublicAcls",
+		"block_public_policy":               "BlockPublicPolicy",
+		"bucket":                            "Bucket",
+		"ignore_public_acls":                "IgnorePublicAcls",
+		"is_public":                         "IsPublic",
+		"name":                              "Name",
+		"network_origin":                    "NetworkOrigin",
+		"policy":                            "Policy",
+		"policy_status":                     "PolicyStatus",
+		"public_access_block_configuration": "PublicAccessBlockConfiguration",
+		"restrict_public_buckets":           "RestrictPublicBuckets",
+		"vpc_configuration":                 "VpcConfiguration",
+		"vpc_id":                            "VpcId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

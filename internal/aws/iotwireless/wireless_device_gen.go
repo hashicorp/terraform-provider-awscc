@@ -464,6 +464,39 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessDevice").WithTerraformTypeName("awscc_iotwireless_wireless_device").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"abp_v10_x":               "AbpV10x",
+		"abp_v11":                 "AbpV11",
+		"app_eui":                 "AppEui",
+		"app_key":                 "AppKey",
+		"app_s_key":               "AppSKey",
+		"arn":                     "Arn",
+		"description":             "Description",
+		"destination_name":        "DestinationName",
+		"dev_addr":                "DevAddr",
+		"dev_eui":                 "DevEui",
+		"device_profile_id":       "DeviceProfileId",
+		"f_nwk_s_int_key":         "FNwkSIntKey",
+		"id":                      "Id",
+		"join_eui":                "JoinEui",
+		"key":                     "Key",
+		"last_uplink_received_at": "LastUplinkReceivedAt",
+		"lo_ra_wan":               "LoRaWAN",
+		"name":                    "Name",
+		"nwk_key":                 "NwkKey",
+		"nwk_s_enc_key":           "NwkSEncKey",
+		"nwk_s_key":               "NwkSKey",
+		"otaa_v10_x":              "OtaaV10x",
+		"otaa_v11":                "OtaaV11",
+		"s_nwk_s_int_key":         "SNwkSIntKey",
+		"service_profile_id":      "ServiceProfileId",
+		"session_keys":            "SessionKeys",
+		"tags":                    "Tags",
+		"thing_arn":               "ThingArn",
+		"thing_name":              "ThingName",
+		"type":                    "Type",
+		"value":                   "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

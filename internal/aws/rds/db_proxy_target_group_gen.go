@@ -174,6 +174,19 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxyTargetGroup").WithTerraformTypeName("awscc_rds_db_proxy_target_group").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"connection_borrow_timeout":          "ConnectionBorrowTimeout",
+		"connection_pool_configuration_info": "ConnectionPoolConfigurationInfo",
+		"db_cluster_identifiers":             "DBClusterIdentifiers",
+		"db_instance_identifiers":            "DBInstanceIdentifiers",
+		"db_proxy_name":                      "DBProxyName",
+		"init_query":                         "InitQuery",
+		"max_connections_percent":            "MaxConnectionsPercent",
+		"max_idle_connections_percent":       "MaxIdleConnectionsPercent",
+		"session_pinning_filters":            "SessionPinningFilters",
+		"target_group_arn":                   "TargetGroupArn",
+		"target_group_name":                  "TargetGroupName",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

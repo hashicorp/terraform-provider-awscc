@@ -94,6 +94,12 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::KeySigningKey").WithTerraformTypeName("awscc_route53_key_signing_key").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"hosted_zone_id":             "HostedZoneId",
+		"key_management_service_arn": "KeyManagementServiceArn",
+		"name":                       "Name",
+		"status":                     "Status",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

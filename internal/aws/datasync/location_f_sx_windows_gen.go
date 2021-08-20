@@ -216,6 +216,19 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationFSxWindows").WithTerraformTypeName("awscc_datasync_location_f_sx_windows").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"domain":              "Domain",
+		"fsx_filesystem_arn":  "FsxFilesystemArn",
+		"key":                 "Key",
+		"location_arn":        "LocationArn",
+		"location_uri":        "LocationUri",
+		"password":            "Password",
+		"security_group_arns": "SecurityGroupArns",
+		"subdirectory":        "Subdirectory",
+		"tags":                "Tags",
+		"user":                "User",
+		"value":               "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Password",

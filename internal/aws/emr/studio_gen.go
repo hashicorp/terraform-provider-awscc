@@ -266,6 +266,24 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMR::Studio").WithTerraformTypeName("awscc_emr_studio").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                         "Arn",
+		"auth_mode":                   "AuthMode",
+		"default_s3_location":         "DefaultS3Location",
+		"description":                 "Description",
+		"engine_security_group_id":    "EngineSecurityGroupId",
+		"key":                         "Key",
+		"name":                        "Name",
+		"service_role":                "ServiceRole",
+		"studio_id":                   "StudioId",
+		"subnet_ids":                  "SubnetIds",
+		"tags":                        "Tags",
+		"url":                         "Url",
+		"user_role":                   "UserRole",
+		"value":                       "Value",
+		"vpc_id":                      "VpcId",
+		"workspace_security_group_id": "WorkspaceSecurityGroupId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

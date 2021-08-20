@@ -154,6 +154,15 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::CustomMetric").WithTerraformTypeName("awscc_iot_custom_metric").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"display_name": "DisplayName",
+		"key":          "Key",
+		"metric_arn":   "MetricArn",
+		"metric_name":  "MetricName",
+		"metric_type":  "MetricType",
+		"tags":         "Tags",
+		"value":        "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

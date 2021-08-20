@@ -80,6 +80,11 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Glue::SchemaVersionMetadata").WithTerraformTypeName("awscc_glue_schema_version_metadata").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"key":               "Key",
+		"schema_version_id": "SchemaVersionId",
+		"value":             "Value",
+	})
 
 	opts = opts.IsImmutableType(true)
 

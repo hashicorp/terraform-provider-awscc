@@ -1048,6 +1048,40 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::AssetModel").WithTerraformTypeName("awscc_iotsitewise_asset_model").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"asset_model_arn":              "AssetModelArn",
+		"asset_model_composite_models": "AssetModelCompositeModels",
+		"asset_model_description":      "AssetModelDescription",
+		"asset_model_hierarchies":      "AssetModelHierarchies",
+		"asset_model_id":               "AssetModelId",
+		"asset_model_name":             "AssetModelName",
+		"asset_model_properties":       "AssetModelProperties",
+		"attribute":                    "Attribute",
+		"child_asset_model_id":         "ChildAssetModelId",
+		"composite_model_properties":   "CompositeModelProperties",
+		"data_type":                    "DataType",
+		"data_type_spec":               "DataTypeSpec",
+		"default_value":                "DefaultValue",
+		"description":                  "Description",
+		"expression":                   "Expression",
+		"hierarchy_logical_id":         "HierarchyLogicalId",
+		"interval":                     "Interval",
+		"key":                          "Key",
+		"logical_id":                   "LogicalId",
+		"metric":                       "Metric",
+		"name":                         "Name",
+		"offset":                       "Offset",
+		"property_logical_id":          "PropertyLogicalId",
+		"tags":                         "Tags",
+		"transform":                    "Transform",
+		"tumbling":                     "Tumbling",
+		"type":                         "Type",
+		"type_name":                    "TypeName",
+		"unit":                         "Unit",
+		"value":                        "Value",
+		"variables":                    "Variables",
+		"window":                       "Window",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

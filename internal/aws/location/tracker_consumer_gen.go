@@ -64,6 +64,10 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Location::TrackerConsumer").WithTerraformTypeName("awscc_location_tracker_consumer").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"consumer_arn": "ConsumerArn",
+		"tracker_name": "TrackerName",
+	})
 
 	opts = opts.IsImmutableType(true)
 

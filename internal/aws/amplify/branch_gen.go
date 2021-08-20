@@ -292,6 +292,27 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Amplify::Branch").WithTerraformTypeName("awscc_amplify_branch").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"app_id":                        "AppId",
+		"arn":                           "Arn",
+		"basic_auth_config":             "BasicAuthConfig",
+		"branch_name":                   "BranchName",
+		"build_spec":                    "BuildSpec",
+		"description":                   "Description",
+		"enable_auto_build":             "EnableAutoBuild",
+		"enable_basic_auth":             "EnableBasicAuth",
+		"enable_performance_mode":       "EnablePerformanceMode",
+		"enable_pull_request_preview":   "EnablePullRequestPreview",
+		"environment_variables":         "EnvironmentVariables",
+		"key":                           "Key",
+		"name":                          "Name",
+		"password":                      "Password",
+		"pull_request_environment_name": "PullRequestEnvironmentName",
+		"stage":                         "Stage",
+		"tags":                          "Tags",
+		"username":                      "Username",
+		"value":                         "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/BasicAuthConfig",

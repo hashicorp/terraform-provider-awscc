@@ -118,6 +118,14 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Glue::SchemaVersion").WithTerraformTypeName("awscc_glue_schema_version").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"registry_name":     "RegistryName",
+		"schema":            "Schema",
+		"schema_arn":        "SchemaArn",
+		"schema_definition": "SchemaDefinition",
+		"schema_name":       "SchemaName",
+		"version_id":        "VersionId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

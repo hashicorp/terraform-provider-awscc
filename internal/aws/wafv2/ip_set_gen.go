@@ -178,6 +178,18 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::IPSet").WithTerraformTypeName("awscc_wafv2_ip_set").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"addresses":          "Addresses",
+		"arn":                "Arn",
+		"description":        "Description",
+		"id":                 "Id",
+		"ip_address_version": "IPAddressVersion",
+		"key":                "Key",
+		"name":               "Name",
+		"scope":              "Scope",
+		"tags":               "Tags",
+		"value":              "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

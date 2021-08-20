@@ -109,6 +109,15 @@ func publicKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::PublicKey").WithTerraformTypeName("awscc_cloudfront_public_key").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"caller_reference":  "CallerReference",
+		"comment":           "Comment",
+		"created_time":      "CreatedTime",
+		"encoded_key":       "EncodedKey",
+		"id":                "Id",
+		"name":              "Name",
+		"public_key_config": "PublicKeyConfig",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

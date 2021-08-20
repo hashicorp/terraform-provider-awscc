@@ -98,6 +98,13 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthorityActivation").WithTerraformTypeName("awscc_acmpca_certificate_authority_activation").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"certificate":                "Certificate",
+		"certificate_authority_arn":  "CertificateAuthorityArn",
+		"certificate_chain":          "CertificateChain",
+		"complete_certificate_chain": "CompleteCertificateChain",
+		"status":                     "Status",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Certificate",

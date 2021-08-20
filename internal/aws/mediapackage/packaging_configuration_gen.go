@@ -1071,6 +1071,45 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingConfiguration").WithTerraformTypeName("awscc_mediapackage_packaging_configuration").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"ad_markers":                     "AdMarkers",
+		"arn":                            "Arn",
+		"cmaf_package":                   "CmafPackage",
+		"constant_initialization_vector": "ConstantInitializationVector",
+		"dash_manifests":                 "DashManifests",
+		"dash_package":                   "DashPackage",
+		"encryption":                     "Encryption",
+		"encryption_method":              "EncryptionMethod",
+		"hls_manifests":                  "HlsManifests",
+		"hls_package":                    "HlsPackage",
+		"id":                             "Id",
+		"include_encoder_configuration_in_segments": "IncludeEncoderConfigurationInSegments",
+		"include_iframe_only_stream":                "IncludeIframeOnlyStream",
+		"key":                                       "Key",
+		"manifest_layout":                           "ManifestLayout",
+		"manifest_name":                             "ManifestName",
+		"max_video_bits_per_second":                 "MaxVideoBitsPerSecond",
+		"min_buffer_time_seconds":                   "MinBufferTimeSeconds",
+		"min_video_bits_per_second":                 "MinVideoBitsPerSecond",
+		"mss_manifests":                             "MssManifests",
+		"mss_package":                               "MssPackage",
+		"packaging_group_id":                        "PackagingGroupId",
+		"period_triggers":                           "PeriodTriggers",
+		"profile":                                   "Profile",
+		"program_date_time_interval_seconds":        "ProgramDateTimeIntervalSeconds",
+		"repeat_ext_x_key":                          "RepeatExtXKey",
+		"role_arn":                                  "RoleArn",
+		"segment_duration_seconds":                  "SegmentDurationSeconds",
+		"segment_template_format":                   "SegmentTemplateFormat",
+		"speke_key_provider":                        "SpekeKeyProvider",
+		"stream_order":                              "StreamOrder",
+		"stream_selection":                          "StreamSelection",
+		"system_ids":                                "SystemIds",
+		"tags":                                      "Tags",
+		"url":                                       "Url",
+		"use_audio_rendition_group":                 "UseAudioRenditionGroup",
+		"value":                                     "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

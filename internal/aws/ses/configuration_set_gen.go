@@ -55,6 +55,9 @@ func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::ConfigurationSet").WithTerraformTypeName("awscc_ses_configuration_set").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"name": "Name",
+	})
 
 	opts = opts.IsImmutableType(true)
 

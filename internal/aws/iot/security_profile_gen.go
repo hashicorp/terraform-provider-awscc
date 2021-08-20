@@ -636,6 +636,41 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::SecurityProfile").WithTerraformTypeName("awscc_iot_security_profile").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"additional_metrics_to_retain_v2": "AdditionalMetricsToRetainV2",
+		"alert_target_arn":                "AlertTargetArn",
+		"alert_targets":                   "AlertTargets",
+		"behaviors":                       "Behaviors",
+		"cidrs":                           "Cidrs",
+		"comparison_operator":             "ComparisonOperator",
+		"confidence_level":                "ConfidenceLevel",
+		"consecutive_datapoints_to_alarm": "ConsecutiveDatapointsToAlarm",
+		"consecutive_datapoints_to_clear": "ConsecutiveDatapointsToClear",
+		"count":                           "Count",
+		"criteria":                        "Criteria",
+		"dimension_name":                  "DimensionName",
+		"duration_seconds":                "DurationSeconds",
+		"key":                             "Key",
+		"metric":                          "Metric",
+		"metric_dimension":                "MetricDimension",
+		"ml_detection_config":             "MlDetectionConfig",
+		"name":                            "Name",
+		"number":                          "Number",
+		"numbers":                         "Numbers",
+		"operator":                        "Operator",
+		"ports":                           "Ports",
+		"role_arn":                        "RoleArn",
+		"security_profile_arn":            "SecurityProfileArn",
+		"security_profile_description":    "SecurityProfileDescription",
+		"security_profile_name":           "SecurityProfileName",
+		"statistic":                       "Statistic",
+		"statistical_threshold":           "StatisticalThreshold",
+		"strings":                         "Strings",
+		"suppress_alerts":                 "SuppressAlerts",
+		"tags":                            "Tags",
+		"target_arns":                     "TargetArns",
+		"value":                           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -219,6 +219,20 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3Outposts::Endpoint").WithTerraformTypeName("awscc_s3outposts_endpoint").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_type":               "AccessType",
+		"arn":                       "Arn",
+		"cidr_block":                "CidrBlock",
+		"creation_time":             "CreationTime",
+		"customer_owned_ipv_4_pool": "CustomerOwnedIpv4Pool",
+		"id":                        "Id",
+		"network_interface_id":      "NetworkInterfaceId",
+		"network_interfaces":        "NetworkInterfaces",
+		"outpost_id":                "OutpostId",
+		"security_group_id":         "SecurityGroupId",
+		"status":                    "Status",
+		"subnet_id":                 "SubnetId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

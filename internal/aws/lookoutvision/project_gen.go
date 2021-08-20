@@ -64,6 +64,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LookoutVision::Project").WithTerraformTypeName("awscc_lookoutvision_project").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":          "Arn",
+		"project_name": "ProjectName",
+	})
 
 	opts = opts.IsImmutableType(true)
 

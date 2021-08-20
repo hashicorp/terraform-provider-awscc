@@ -101,6 +101,13 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Detective::MemberInvitation").WithTerraformTypeName("awscc_detective_member_invitation").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"disable_email_notification": "DisableEmailNotification",
+		"graph_arn":                  "GraphArn",
+		"member_email_address":       "MemberEmailAddress",
+		"member_id":                  "MemberId",
+		"message":                    "Message",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

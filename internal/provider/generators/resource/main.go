@@ -123,7 +123,8 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	}
 
 	// Generate code for the CloudFormation root properties schema.
-	codeFeatures, err := codeEmitter.EmitRootPropertiesSchema()
+	attributeNameMap := make(map[string]string) // Terraform attribute name to CloudFormation property name.
+	codeFeatures, err := codeEmitter.EmitRootPropertiesSchema(attributeNameMap)
 
 	if err != nil {
 		return fmt.Errorf("emitting schema code: %w", err)
@@ -134,6 +135,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 
 	templateData := TemplateData{
 		AcceptanceTestFunctionPrefix: acceptanceTestFunctionPrefix,
+		AttributeNameMap:             attributeNameMap,
 		CloudFormationTypeName:       cfTypeName,
 		FactoryFunctionName:          factoryFunctionName,
 		HasRequiredAttribute:         true,
@@ -235,6 +237,7 @@ func (g *Generator) infof(format string, a ...interface{}) {
 
 type TemplateData struct {
 	AcceptanceTestFunctionPrefix string
+	AttributeNameMap             map[string]string
 	CloudFormationTypeName       string
 	CreateTimeoutInMinutes       int
 	DeleteTimeoutInMinutes       int
@@ -296,6 +299,11 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+{{- range $key, $value := .AttributeNameMap }}
+		"{{ $key }}": "{{ $value }}",
+{{- end }}
+	})
 {{ if not .HasUpdateMethod }}
 	opts = opts.IsImmutableType(true)
 {{- end }}

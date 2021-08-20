@@ -238,6 +238,19 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::FargateProfile").WithTerraformTypeName("awscc_eks_fargate_profile").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                    "Arn",
+		"cluster_name":           "ClusterName",
+		"fargate_profile_name":   "FargateProfileName",
+		"key":                    "Key",
+		"labels":                 "Labels",
+		"namespace":              "Namespace",
+		"pod_execution_role_arn": "PodExecutionRoleArn",
+		"selectors":              "Selectors",
+		"subnets":                "Subnets",
+		"tags":                   "Tags",
+		"value":                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

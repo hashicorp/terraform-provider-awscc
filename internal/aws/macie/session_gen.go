@@ -92,6 +92,12 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::Session").WithTerraformTypeName("awscc_macie_session").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"aws_account_id":               "AwsAccountId",
+		"finding_publishing_frequency": "FindingPublishingFrequency",
+		"service_role":                 "ServiceRole",
+		"status":                       "Status",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

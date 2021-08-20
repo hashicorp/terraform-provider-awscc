@@ -158,6 +158,17 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::RegexPatternSet").WithTerraformTypeName("awscc_wafv2_regex_pattern_set").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                     "Arn",
+		"description":             "Description",
+		"id":                      "Id",
+		"key":                     "Key",
+		"name":                    "Name",
+		"regular_expression_list": "RegularExpressionList",
+		"scope":                   "Scope",
+		"tags":                    "Tags",
+		"value":                   "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

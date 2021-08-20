@@ -181,6 +181,16 @@ func inputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTEvents::Input").WithTerraformTypeName("awscc_iotevents_input").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"attributes":        "Attributes",
+		"input_definition":  "InputDefinition",
+		"input_description": "InputDescription",
+		"input_name":        "InputName",
+		"json_path":         "JsonPath",
+		"key":               "Key",
+		"tags":              "Tags",
+		"value":             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

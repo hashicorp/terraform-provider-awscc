@@ -108,6 +108,13 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::UserGroup").WithTerraformTypeName("awscc_elasticache_user_group").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":           "Arn",
+		"engine":        "Engine",
+		"status":        "Status",
+		"user_group_id": "UserGroupId",
+		"user_ids":      "UserIds",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

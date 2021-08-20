@@ -538,6 +538,40 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::StackSet").WithTerraformTypeName("awscc_cloudformation_stack_set").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"accounts":                         "Accounts",
+		"administration_role_arn":          "AdministrationRoleARN",
+		"auto_deployment":                  "AutoDeployment",
+		"call_as":                          "CallAs",
+		"capabilities":                     "Capabilities",
+		"deployment_targets":               "DeploymentTargets",
+		"description":                      "Description",
+		"enabled":                          "Enabled",
+		"execution_role_name":              "ExecutionRoleName",
+		"failure_tolerance_count":          "FailureToleranceCount",
+		"failure_tolerance_percentage":     "FailureTolerancePercentage",
+		"key":                              "Key",
+		"max_concurrent_count":             "MaxConcurrentCount",
+		"max_concurrent_percentage":        "MaxConcurrentPercentage",
+		"operation_preferences":            "OperationPreferences",
+		"organizational_unit_ids":          "OrganizationalUnitIds",
+		"parameter_key":                    "ParameterKey",
+		"parameter_overrides":              "ParameterOverrides",
+		"parameter_value":                  "ParameterValue",
+		"parameters":                       "Parameters",
+		"permission_model":                 "PermissionModel",
+		"region_concurrency_type":          "RegionConcurrencyType",
+		"region_order":                     "RegionOrder",
+		"regions":                          "Regions",
+		"retain_stacks_on_account_removal": "RetainStacksOnAccountRemoval",
+		"stack_instances_group":            "StackInstancesGroup",
+		"stack_set_id":                     "StackSetId",
+		"stack_set_name":                   "StackSetName",
+		"tags":                             "Tags",
+		"template_body":                    "TemplateBody",
+		"template_url":                     "TemplateURL",
+		"value":                            "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/TemplateURL",

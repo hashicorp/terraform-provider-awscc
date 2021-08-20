@@ -175,6 +175,17 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::DHCPOptions").WithTerraformTypeName("awscc_ec2_dhcp_options").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"dhcp_options_id":      "DhcpOptionsId",
+		"domain_name":          "DomainName",
+		"domain_name_servers":  "DomainNameServers",
+		"key":                  "Key",
+		"netbios_name_servers": "NetbiosNameServers",
+		"netbios_node_type":    "NetbiosNodeType",
+		"ntp_servers":          "NtpServers",
+		"tags":                 "Tags",
+		"value":                "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

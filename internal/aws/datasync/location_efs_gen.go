@@ -206,6 +206,18 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationEFS").WithTerraformTypeName("awscc_datasync_location_efs").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"ec_2_config":         "Ec2Config",
+		"efs_filesystem_arn":  "EfsFilesystemArn",
+		"key":                 "Key",
+		"location_arn":        "LocationArn",
+		"location_uri":        "LocationUri",
+		"security_group_arns": "SecurityGroupArns",
+		"subdirectory":        "Subdirectory",
+		"subnet_arn":          "SubnetArn",
+		"tags":                "Tags",
+		"value":               "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/EfsFilesystemArn",

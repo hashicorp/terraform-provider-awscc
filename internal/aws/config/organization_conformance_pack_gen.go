@@ -175,6 +175,17 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Config::OrganizationConformancePack").WithTerraformTypeName("awscc_config_organization_conformance_pack").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"conformance_pack_input_parameters":  "ConformancePackInputParameters",
+		"delivery_s3_bucket":                 "DeliveryS3Bucket",
+		"delivery_s3_key_prefix":             "DeliveryS3KeyPrefix",
+		"excluded_accounts":                  "ExcludedAccounts",
+		"organization_conformance_pack_name": "OrganizationConformancePackName",
+		"parameter_name":                     "ParameterName",
+		"parameter_value":                    "ParameterValue",
+		"template_body":                      "TemplateBody",
+		"template_s3_uri":                    "TemplateS3Uri",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/TemplateBody",

@@ -372,6 +372,29 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::MitigationAction").WithTerraformTypeName("awscc_iot_mitigation_action").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"action":                                "Action",
+		"action_name":                           "ActionName",
+		"action_params":                         "ActionParams",
+		"add_things_to_thing_group_params":      "AddThingsToThingGroupParams",
+		"enable_io_t_logging_params":            "EnableIoTLoggingParams",
+		"key":                                   "Key",
+		"log_level":                             "LogLevel",
+		"mitigation_action_arn":                 "MitigationActionArn",
+		"mitigation_action_id":                  "MitigationActionId",
+		"override_dynamic_groups":               "OverrideDynamicGroups",
+		"publish_finding_to_sns_params":         "PublishFindingToSnsParams",
+		"replace_default_policy_version_params": "ReplaceDefaultPolicyVersionParams",
+		"role_arn":                              "RoleArn",
+		"role_arn_for_logging":                  "RoleArnForLogging",
+		"tags":                                  "Tags",
+		"template_name":                         "TemplateName",
+		"thing_group_names":                     "ThingGroupNames",
+		"topic_arn":                             "TopicArn",
+		"update_ca_certificate_params":          "UpdateCACertificateParams",
+		"update_device_certificate_params":      "UpdateDeviceCertificateParams",
+		"value":                                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

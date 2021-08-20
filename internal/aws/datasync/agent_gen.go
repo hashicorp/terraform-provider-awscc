@@ -207,6 +207,18 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::Agent").WithTerraformTypeName("awscc_datasync_agent").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"activation_key":      "ActivationKey",
+		"agent_arn":           "AgentArn",
+		"agent_name":          "AgentName",
+		"endpoint_type":       "EndpointType",
+		"key":                 "Key",
+		"security_group_arns": "SecurityGroupArns",
+		"subnet_arns":         "SubnetArns",
+		"tags":                "Tags",
+		"value":               "Value",
+		"vpc_endpoint_id":     "VpcEndpointId",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ActivationKey",

@@ -164,6 +164,16 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Image").WithTerraformTypeName("awscc_sagemaker_image").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"image_arn":          "ImageArn",
+		"image_description":  "ImageDescription",
+		"image_display_name": "ImageDisplayName",
+		"image_name":         "ImageName",
+		"image_role_arn":     "ImageRoleArn",
+		"key":                "Key",
+		"tags":               "Tags",
+		"value":              "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

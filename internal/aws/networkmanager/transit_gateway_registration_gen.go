@@ -63,6 +63,10 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::TransitGatewayRegistration").WithTerraformTypeName("awscc_networkmanager_transit_gateway_registration").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"global_network_id":   "GlobalNetworkId",
+		"transit_gateway_arn": "TransitGatewayArn",
+	})
 
 	opts = opts.IsImmutableType(true)
 

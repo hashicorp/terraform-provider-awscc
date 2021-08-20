@@ -94,6 +94,12 @@ func graphResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Detective::Graph").WithTerraformTypeName("awscc_detective_graph").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":   "Arn",
+		"key":   "Key",
+		"tags":  "Tags",
+		"value": "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

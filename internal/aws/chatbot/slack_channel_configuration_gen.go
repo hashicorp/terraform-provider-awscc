@@ -133,6 +133,15 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Chatbot::SlackChannelConfiguration").WithTerraformTypeName("awscc_chatbot_slack_channel_configuration").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                "Arn",
+		"configuration_name": "ConfigurationName",
+		"iam_role_arn":       "IamRoleArn",
+		"logging_level":      "LoggingLevel",
+		"slack_channel_id":   "SlackChannelId",
+		"slack_workspace_id": "SlackWorkspaceId",
+		"sns_topic_arns":     "SnsTopicArns",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -128,6 +128,15 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::CarrierGateway").WithTerraformTypeName("awscc_ec2_carrier_gateway").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"carrier_gateway_id": "CarrierGatewayId",
+		"key":                "Key",
+		"owner_id":           "OwnerId",
+		"state":              "State",
+		"tags":               "Tags",
+		"value":              "Value",
+		"vpc_id":             "VpcId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

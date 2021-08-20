@@ -83,6 +83,12 @@ func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.Reso
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::CloudFrontOriginAccessIdentity").WithTerraformTypeName("awscc_cloudfront_cloud_front_origin_access_identity").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cloud_front_origin_access_identity_config": "CloudFrontOriginAccessIdentityConfig",
+		"comment":              "Comment",
+		"id":                   "Id",
+		"s3_canonical_user_id": "S3CanonicalUserId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

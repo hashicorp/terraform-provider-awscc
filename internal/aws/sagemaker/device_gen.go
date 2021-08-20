@@ -165,6 +165,16 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Device").WithTerraformTypeName("awscc_sagemaker_device").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"description":       "Description",
+		"device":            "Device",
+		"device_fleet_name": "DeviceFleetName",
+		"device_name":       "DeviceName",
+		"iot_thing_name":    "IotThingName",
+		"key":               "Key",
+		"tags":              "Tags",
+		"value":             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

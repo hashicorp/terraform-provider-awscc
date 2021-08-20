@@ -124,6 +124,15 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Events::ApiDestination").WithTerraformTypeName("awscc_events_api_destination").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                              "Arn",
+		"connection_arn":                   "ConnectionArn",
+		"description":                      "Description",
+		"http_method":                      "HttpMethod",
+		"invocation_endpoint":              "InvocationEndpoint",
+		"invocation_rate_limit_per_second": "InvocationRateLimitPerSecond",
+		"name":                             "Name",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

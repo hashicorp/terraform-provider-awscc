@@ -150,6 +150,16 @@ func entityTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::EntityType").WithTerraformTypeName("awscc_frauddetector_entity_type").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":               "Arn",
+		"created_time":      "CreatedTime",
+		"description":       "Description",
+		"key":               "Key",
+		"last_updated_time": "LastUpdatedTime",
+		"name":              "Name",
+		"tags":              "Tags",
+		"value":             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

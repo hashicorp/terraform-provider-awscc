@@ -151,6 +151,13 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECR::ReplicationConfiguration").WithTerraformTypeName("awscc_ecr_replication_configuration").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"destinations":              "Destinations",
+		"region":                    "Region",
+		"registry_id":               "RegistryId",
+		"replication_configuration": "ReplicationConfiguration",
+		"rules":                     "Rules",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

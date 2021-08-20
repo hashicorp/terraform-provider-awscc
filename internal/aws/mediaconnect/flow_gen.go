@@ -389,6 +389,37 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::Flow").WithTerraformTypeName("awscc_mediaconnect_flow").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"algorithm":                      "Algorithm",
+		"availability_zone":              "AvailabilityZone",
+		"constant_initialization_vector": "ConstantInitializationVector",
+		"decryption":                     "Decryption",
+		"description":                    "Description",
+		"device_id":                      "DeviceId",
+		"entitlement_arn":                "EntitlementArn",
+		"flow_arn":                       "FlowArn",
+		"flow_availability_zone":         "FlowAvailabilityZone",
+		"ingest_ip":                      "IngestIp",
+		"ingest_port":                    "IngestPort",
+		"key_type":                       "KeyType",
+		"max_bitrate":                    "MaxBitrate",
+		"max_latency":                    "MaxLatency",
+		"name":                           "Name",
+		"protocol":                       "Protocol",
+		"recovery_window":                "RecoveryWindow",
+		"region":                         "Region",
+		"resource_id":                    "ResourceId",
+		"role_arn":                       "RoleArn",
+		"secret_arn":                     "SecretArn",
+		"source":                         "Source",
+		"source_arn":                     "SourceArn",
+		"source_failover_config":         "SourceFailoverConfig",
+		"state":                          "State",
+		"stream_id":                      "StreamId",
+		"url":                            "Url",
+		"vpc_interface_name":             "VpcInterfaceName",
+		"whitelist_cidr":                 "WhitelistCidr",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

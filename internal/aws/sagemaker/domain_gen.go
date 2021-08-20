@@ -614,6 +614,39 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Domain").WithTerraformTypeName("awscc_sagemaker_domain").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"app_image_config_name":        "AppImageConfigName",
+		"app_network_access_type":      "AppNetworkAccessType",
+		"auth_mode":                    "AuthMode",
+		"custom_images":                "CustomImages",
+		"default_resource_spec":        "DefaultResourceSpec",
+		"default_user_settings":        "DefaultUserSettings",
+		"domain_arn":                   "DomainArn",
+		"domain_id":                    "DomainId",
+		"domain_name":                  "DomainName",
+		"execution_role":               "ExecutionRole",
+		"home_efs_file_system_id":      "HomeEfsFileSystemId",
+		"image_name":                   "ImageName",
+		"image_version_number":         "ImageVersionNumber",
+		"instance_type":                "InstanceType",
+		"jupyter_server_app_settings":  "JupyterServerAppSettings",
+		"kernel_gateway_app_settings":  "KernelGatewayAppSettings",
+		"key":                          "Key",
+		"kms_key_id":                   "KmsKeyId",
+		"notebook_output_option":       "NotebookOutputOption",
+		"s3_kms_key_id":                "S3KmsKeyId",
+		"s3_output_path":               "S3OutputPath",
+		"sage_maker_image_arn":         "SageMakerImageArn",
+		"sage_maker_image_version_arn": "SageMakerImageVersionArn",
+		"security_groups":              "SecurityGroups",
+		"sharing_settings":             "SharingSettings",
+		"single_sign_on_managed_application_instance_id": "SingleSignOnManagedApplicationInstanceId",
+		"subnet_ids": "SubnetIds",
+		"tags":       "Tags",
+		"url":        "Url",
+		"value":      "Value",
+		"vpc_id":     "VpcId",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",

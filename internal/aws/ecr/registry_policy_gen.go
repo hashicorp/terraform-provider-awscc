@@ -64,6 +64,10 @@ func registryPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECR::RegistryPolicy").WithTerraformTypeName("awscc_ecr_registry_policy").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"policy_text": "PolicyText",
+		"registry_id": "RegistryId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

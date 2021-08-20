@@ -239,6 +239,23 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::Firewall").WithTerraformTypeName("awscc_networkfirewall_firewall").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"delete_protection":                 "DeleteProtection",
+		"description":                       "Description",
+		"endpoint_ids":                      "EndpointIds",
+		"firewall_arn":                      "FirewallArn",
+		"firewall_id":                       "FirewallId",
+		"firewall_name":                     "FirewallName",
+		"firewall_policy_arn":               "FirewallPolicyArn",
+		"firewall_policy_change_protection": "FirewallPolicyChangeProtection",
+		"key":                               "Key",
+		"subnet_change_protection":          "SubnetChangeProtection",
+		"subnet_id":                         "SubnetId",
+		"subnet_mappings":                   "SubnetMappings",
+		"tags":                              "Tags",
+		"value":                             "Value",
+		"vpc_id":                            "VpcId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

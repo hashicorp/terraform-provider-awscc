@@ -320,6 +320,27 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::ResourceSet").WithTerraformTypeName("awscc_route53recoveryreadiness_resource_set").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                 "Arn",
+		"component_id":        "ComponentId",
+		"dns_target_resource": "DnsTargetResource",
+		"domain_name":         "DomainName",
+		"hosted_zone_arn":     "HostedZoneArn",
+		"key":                 "Key",
+		"nlb_resource":        "NLBResource",
+		"r53_resource":        "R53Resource",
+		"readiness_scopes":    "ReadinessScopes",
+		"record_set_id":       "RecordSetId",
+		"record_type":         "RecordType",
+		"resource_arn":        "ResourceArn",
+		"resource_set_arn":    "ResourceSetArn",
+		"resource_set_name":   "ResourceSetName",
+		"resource_set_type":   "ResourceSetType",
+		"resources":           "Resources",
+		"tags":                "Tags",
+		"target_resource":     "TargetResource",
+		"value":               "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

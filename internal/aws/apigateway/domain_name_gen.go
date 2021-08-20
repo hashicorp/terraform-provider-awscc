@@ -214,6 +214,25 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::DomainName").WithTerraformTypeName("awscc_apigateway_domain_name").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"certificate_arn":                        "CertificateArn",
+		"distribution_domain_name":               "DistributionDomainName",
+		"distribution_hosted_zone_id":            "DistributionHostedZoneId",
+		"domain_name":                            "DomainName",
+		"endpoint_configuration":                 "EndpointConfiguration",
+		"key":                                    "Key",
+		"mutual_tls_authentication":              "MutualTlsAuthentication",
+		"ownership_verification_certificate_arn": "OwnershipVerificationCertificateArn",
+		"regional_certificate_arn":               "RegionalCertificateArn",
+		"regional_domain_name":                   "RegionalDomainName",
+		"regional_hosted_zone_id":                "RegionalHostedZoneId",
+		"security_policy":                        "SecurityPolicy",
+		"tags":                                   "Tags",
+		"truststore_uri":                         "TruststoreUri",
+		"truststore_version":                     "TruststoreVersion",
+		"types":                                  "Types",
+		"value":                                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

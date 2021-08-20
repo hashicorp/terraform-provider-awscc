@@ -113,6 +113,14 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CE::CostCategory").WithTerraformTypeName("awscc_ce_cost_category").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":             "Arn",
+		"default_value":   "DefaultValue",
+		"effective_start": "EffectiveStart",
+		"name":            "Name",
+		"rule_version":    "RuleVersion",
+		"rules":           "Rules",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

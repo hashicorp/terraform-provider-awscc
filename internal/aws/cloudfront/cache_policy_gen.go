@@ -269,6 +269,28 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::CachePolicy").WithTerraformTypeName("awscc_cloudfront_cache_policy").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cache_policy_config":           "CachePolicyConfig",
+		"comment":                       "Comment",
+		"cookie_behavior":               "CookieBehavior",
+		"cookies":                       "Cookies",
+		"cookies_config":                "CookiesConfig",
+		"default_ttl":                   "DefaultTTL",
+		"enable_accept_encoding_brotli": "EnableAcceptEncodingBrotli",
+		"enable_accept_encoding_gzip":   "EnableAcceptEncodingGzip",
+		"header_behavior":               "HeaderBehavior",
+		"headers":                       "Headers",
+		"headers_config":                "HeadersConfig",
+		"id":                            "Id",
+		"last_modified_time":            "LastModifiedTime",
+		"max_ttl":                       "MaxTTL",
+		"min_ttl":                       "MinTTL",
+		"name":                          "Name",
+		"parameters_in_cache_key_and_forwarded_to_origin": "ParametersInCacheKeyAndForwardedToOrigin",
+		"query_string_behavior":                           "QueryStringBehavior",
+		"query_strings":                                   "QueryStrings",
+		"query_strings_config":                            "QueryStringsConfig",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

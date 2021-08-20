@@ -209,6 +209,21 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::PrefixList").WithTerraformTypeName("awscc_ec2_prefix_list").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"address_family":   "AddressFamily",
+		"arn":              "Arn",
+		"cidr":             "Cidr",
+		"description":      "Description",
+		"entries":          "Entries",
+		"key":              "Key",
+		"max_entries":      "MaxEntries",
+		"owner_id":         "OwnerId",
+		"prefix_list_id":   "PrefixListId",
+		"prefix_list_name": "PrefixListName",
+		"tags":             "Tags",
+		"value":            "Value",
+		"version":          "Version",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

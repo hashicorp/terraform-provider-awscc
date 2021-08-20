@@ -549,6 +549,37 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::StorageLens").WithTerraformTypeName("awscc_s3_storage_lens").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_id":                   "AccountId",
+		"account_level":                "AccountLevel",
+		"activity_metrics":             "ActivityMetrics",
+		"arn":                          "Arn",
+		"aws_org":                      "AwsOrg",
+		"bucket_level":                 "BucketLevel",
+		"buckets":                      "Buckets",
+		"data_export":                  "DataExport",
+		"delimiter":                    "Delimiter",
+		"encryption":                   "Encryption",
+		"exclude":                      "Exclude",
+		"format":                       "Format",
+		"id":                           "Id",
+		"include":                      "Include",
+		"is_enabled":                   "IsEnabled",
+		"key":                          "Key",
+		"max_depth":                    "MaxDepth",
+		"min_storage_bytes_percentage": "MinStorageBytesPercentage",
+		"output_schema_version":        "OutputSchemaVersion",
+		"prefix":                       "Prefix",
+		"prefix_level":                 "PrefixLevel",
+		"regions":                      "Regions",
+		"s3_bucket_destination":        "S3BucketDestination",
+		"selection_criteria":           "SelectionCriteria",
+		"storage_lens_arn":             "StorageLensArn",
+		"storage_lens_configuration":   "StorageLensConfiguration",
+		"storage_metrics":              "StorageMetrics",
+		"tags":                         "Tags",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -165,6 +165,18 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Location::Map").WithTerraformTypeName("awscc_location_map").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":           "Arn",
+		"configuration": "Configuration",
+		"create_time":   "CreateTime",
+		"data_source":   "DataSource",
+		"description":   "Description",
+		"map_arn":       "MapArn",
+		"map_name":      "MapName",
+		"pricing_plan":  "PricingPlan",
+		"style":         "Style",
+		"update_time":   "UpdateTime",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

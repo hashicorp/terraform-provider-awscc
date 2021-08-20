@@ -161,6 +161,18 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::TopicRuleDestination").WithTerraformTypeName("awscc_iot_topic_rule_destination").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                 "Arn",
+		"confirmation_url":    "ConfirmationUrl",
+		"http_url_properties": "HttpUrlProperties",
+		"role_arn":            "RoleArn",
+		"security_groups":     "SecurityGroups",
+		"status":              "Status",
+		"status_reason":       "StatusReason",
+		"subnet_ids":          "SubnetIds",
+		"vpc_id":              "VpcId",
+		"vpc_properties":      "VpcProperties",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

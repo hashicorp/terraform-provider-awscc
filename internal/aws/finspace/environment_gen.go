@@ -272,6 +272,26 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::FinSpace::Environment").WithTerraformTypeName("awscc_finspace_environment").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"application_call_back_url":    "ApplicationCallBackURL",
+		"attribute_map":                "AttributeMap",
+		"aws_account_id":               "AwsAccountId",
+		"dedicated_service_account_id": "DedicatedServiceAccountId",
+		"description":                  "Description",
+		"environment_arn":              "EnvironmentArn",
+		"environment_id":               "EnvironmentId",
+		"environment_url":              "EnvironmentUrl",
+		"federation_mode":              "FederationMode",
+		"federation_parameters":        "FederationParameters",
+		"federation_provider_name":     "FederationProviderName",
+		"federation_urn":               "FederationURN",
+		"kms_key_id":                   "KmsKeyId",
+		"name":                         "Name",
+		"sage_maker_studio_domain_url": "SageMakerStudioDomainUrl",
+		"saml_metadata_document":       "SamlMetadataDocument",
+		"saml_metadata_url":            "SamlMetadataURL",
+		"status":                       "Status",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

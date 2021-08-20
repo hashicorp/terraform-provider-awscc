@@ -125,6 +125,14 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryControl::Cluster").WithTerraformTypeName("awscc_route53recoverycontrol_cluster").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cluster_arn":       "ClusterArn",
+		"cluster_endpoints": "ClusterEndpoints",
+		"endpoint":          "Endpoint",
+		"name":              "Name",
+		"region":            "Region",
+		"status":            "Status",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

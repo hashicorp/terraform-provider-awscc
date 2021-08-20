@@ -106,6 +106,13 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryControl::RoutingControl").WithTerraformTypeName("awscc_route53recoverycontrol_routing_control").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cluster_arn":         "ClusterArn",
+		"control_panel_arn":   "ControlPanelArn",
+		"name":                "Name",
+		"routing_control_arn": "RoutingControlArn",
+		"status":              "Status",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ClusterArn",

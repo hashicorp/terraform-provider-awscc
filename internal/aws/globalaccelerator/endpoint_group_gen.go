@@ -243,6 +243,24 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GlobalAccelerator::EndpointGroup").WithTerraformTypeName("awscc_globalaccelerator_endpoint_group").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"client_ip_preservation_enabled": "ClientIPPreservationEnabled",
+		"endpoint_configurations":        "EndpointConfigurations",
+		"endpoint_group_arn":             "EndpointGroupArn",
+		"endpoint_group_region":          "EndpointGroupRegion",
+		"endpoint_id":                    "EndpointId",
+		"endpoint_port":                  "EndpointPort",
+		"health_check_interval_seconds":  "HealthCheckIntervalSeconds",
+		"health_check_path":              "HealthCheckPath",
+		"health_check_port":              "HealthCheckPort",
+		"health_check_protocol":          "HealthCheckProtocol",
+		"listener_arn":                   "ListenerArn",
+		"listener_port":                  "ListenerPort",
+		"port_overrides":                 "PortOverrides",
+		"threshold_count":                "ThresholdCount",
+		"traffic_dial_percentage":        "TrafficDialPercentage",
+		"weight":                         "Weight",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

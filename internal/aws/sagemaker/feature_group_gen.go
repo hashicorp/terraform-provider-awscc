@@ -382,6 +382,31 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::FeatureGroup").WithTerraformTypeName("awscc_sagemaker_feature_group").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"catalog":                        "Catalog",
+		"data_catalog_config":            "DataCatalogConfig",
+		"database":                       "Database",
+		"description":                    "Description",
+		"disable_glue_table_creation":    "DisableGlueTableCreation",
+		"enable_online_store":            "EnableOnlineStore",
+		"event_time_feature_name":        "EventTimeFeatureName",
+		"feature_definitions":            "FeatureDefinitions",
+		"feature_group_name":             "FeatureGroupName",
+		"feature_name":                   "FeatureName",
+		"feature_type":                   "FeatureType",
+		"key":                            "Key",
+		"kms_key_id":                     "KmsKeyId",
+		"offline_store_config":           "OfflineStoreConfig",
+		"online_store_config":            "OnlineStoreConfig",
+		"record_identifier_feature_name": "RecordIdentifierFeatureName",
+		"role_arn":                       "RoleArn",
+		"s3_storage_config":              "S3StorageConfig",
+		"s3_uri":                         "S3Uri",
+		"security_config":                "SecurityConfig",
+		"table_name":                     "TableName",
+		"tags":                           "Tags",
+		"value":                          "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

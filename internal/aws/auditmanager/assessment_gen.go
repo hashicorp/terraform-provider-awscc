@@ -596,6 +596,37 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AuditManager::Assessment").WithTerraformTypeName("awscc_auditmanager_assessment").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                            "Arn",
+		"assessment_id":                  "AssessmentId",
+		"assessment_name":                "AssessmentName",
+		"assessment_reports_destination": "AssessmentReportsDestination",
+		"aws_account":                    "AwsAccount",
+		"aws_accounts":                   "AwsAccounts",
+		"aws_services":                   "AwsServices",
+		"comment":                        "Comment",
+		"control_set_id":                 "ControlSetId",
+		"created_by":                     "CreatedBy",
+		"creation_time":                  "CreationTime",
+		"delegations":                    "Delegations",
+		"description":                    "Description",
+		"destination":                    "Destination",
+		"destination_type":               "DestinationType",
+		"email_address":                  "EmailAddress",
+		"framework_id":                   "FrameworkId",
+		"id":                             "Id",
+		"key":                            "Key",
+		"last_updated":                   "LastUpdated",
+		"name":                           "Name",
+		"role_arn":                       "RoleArn",
+		"role_type":                      "RoleType",
+		"roles":                          "Roles",
+		"scope":                          "Scope",
+		"service_name":                   "ServiceName",
+		"status":                         "Status",
+		"tags":                           "Tags",
+		"value":                          "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Name",

@@ -96,6 +96,13 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation").WithTerraformTypeName("awscc_servicecatalogappregistry_attribute_group_association").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"application":         "Application",
+		"application_arn":     "ApplicationArn",
+		"attribute_group":     "AttributeGroup",
+		"attribute_group_arn": "AttributeGroupArn",
+		"id":                  "Id",
+	})
 
 	opts = opts.IsImmutableType(true)
 

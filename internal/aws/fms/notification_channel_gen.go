@@ -67,6 +67,10 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::FMS::NotificationChannel").WithTerraformTypeName("awscc_fms_notification_channel").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"sns_role_name": "SnsRoleName",
+		"sns_topic_arn": "SnsTopicArn",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

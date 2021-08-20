@@ -184,6 +184,20 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastDomain").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_domain").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"auto_accept_shared_associations":      "AutoAcceptSharedAssociations",
+		"creation_time":                        "CreationTime",
+		"igmpv_2_support":                      "Igmpv2Support",
+		"key":                                  "Key",
+		"options":                              "Options",
+		"state":                                "State",
+		"static_sources_support":               "StaticSourcesSupport",
+		"tags":                                 "Tags",
+		"transit_gateway_id":                   "TransitGatewayId",
+		"transit_gateway_multicast_domain_arn": "TransitGatewayMulticastDomainArn",
+		"transit_gateway_multicast_domain_id":  "TransitGatewayMulticastDomainId",
+		"value":                                "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

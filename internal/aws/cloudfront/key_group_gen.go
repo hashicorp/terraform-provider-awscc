@@ -104,6 +104,14 @@ func keyGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::KeyGroup").WithTerraformTypeName("awscc_cloudfront_key_group").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"comment":            "Comment",
+		"id":                 "Id",
+		"items":              "Items",
+		"key_group_config":   "KeyGroupConfig",
+		"last_modified_time": "LastModifiedTime",
+		"name":               "Name",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

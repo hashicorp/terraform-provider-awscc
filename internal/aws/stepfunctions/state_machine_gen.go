@@ -326,6 +326,30 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::StepFunctions::StateMachine").WithTerraformTypeName("awscc_stepfunctions_state_machine").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                        "Arn",
+		"bucket":                     "Bucket",
+		"cloud_watch_logs_log_group": "CloudWatchLogsLogGroup",
+		"definition":                 "Definition",
+		"definition_s3_location":     "DefinitionS3Location",
+		"definition_string":          "DefinitionString",
+		"definition_substitutions":   "DefinitionSubstitutions",
+		"destinations":               "Destinations",
+		"enabled":                    "Enabled",
+		"include_execution_data":     "IncludeExecutionData",
+		"key":                        "Key",
+		"level":                      "Level",
+		"log_group_arn":              "LogGroupArn",
+		"logging_configuration":      "LoggingConfiguration",
+		"name":                       "Name",
+		"role_arn":                   "RoleArn",
+		"state_machine_name":         "StateMachineName",
+		"state_machine_type":         "StateMachineType",
+		"tags":                       "Tags",
+		"tracing_configuration":      "TracingConfiguration",
+		"value":                      "Value",
+		"version":                    "Version",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

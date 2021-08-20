@@ -76,6 +76,11 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::DocumentationVersion").WithTerraformTypeName("awscc_apigateway_documentation_version").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"description":           "Description",
+		"documentation_version": "DocumentationVersion",
+		"rest_api_id":           "RestApiId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

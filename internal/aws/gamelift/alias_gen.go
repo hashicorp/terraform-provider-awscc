@@ -130,6 +130,15 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Alias").WithTerraformTypeName("awscc_gamelift_alias").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alias_id":         "AliasId",
+		"description":      "Description",
+		"fleet_id":         "FleetId",
+		"message":          "Message",
+		"name":             "Name",
+		"routing_strategy": "RoutingStrategy",
+		"type":             "Type",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

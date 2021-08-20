@@ -145,6 +145,16 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::User").WithTerraformTypeName("awscc_elasticache_user").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_string":        "AccessString",
+		"arn":                  "Arn",
+		"engine":               "Engine",
+		"no_password_required": "NoPasswordRequired",
+		"passwords":            "Passwords",
+		"status":               "Status",
+		"user_id":              "UserId",
+		"user_name":            "UserName",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Passwords",

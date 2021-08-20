@@ -220,6 +220,21 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::FlowLog").WithTerraformTypeName("awscc_ec2_flow_log").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"deliver_logs_permission_arn": "DeliverLogsPermissionArn",
+		"id":                          "Id",
+		"key":                         "Key",
+		"log_destination":             "LogDestination",
+		"log_destination_type":        "LogDestinationType",
+		"log_format":                  "LogFormat",
+		"log_group_name":              "LogGroupName",
+		"max_aggregation_interval":    "MaxAggregationInterval",
+		"resource_id":                 "ResourceId",
+		"resource_type":               "ResourceType",
+		"tags":                        "Tags",
+		"traffic_type":                "TrafficType",
+		"value":                       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

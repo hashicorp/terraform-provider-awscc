@@ -142,6 +142,15 @@ func dataCatalogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Athena::DataCatalog").WithTerraformTypeName("awscc_athena_data_catalog").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"description": "Description",
+		"key":         "Key",
+		"name":        "Name",
+		"parameters":  "Parameters",
+		"tags":        "Tags",
+		"type":        "Type",
+		"value":       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -234,6 +234,21 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSMContacts::Contact").WithTerraformTypeName("awscc_ssmcontacts_contact").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alias":                     "Alias",
+		"arn":                       "Arn",
+		"channel_id":                "ChannelId",
+		"channel_target_info":       "ChannelTargetInfo",
+		"contact_id":                "ContactId",
+		"contact_target_info":       "ContactTargetInfo",
+		"display_name":              "DisplayName",
+		"duration_in_minutes":       "DurationInMinutes",
+		"is_essential":              "IsEssential",
+		"plan":                      "Plan",
+		"retry_interval_in_minutes": "RetryIntervalInMinutes",
+		"targets":                   "Targets",
+		"type":                      "Type",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Plan",

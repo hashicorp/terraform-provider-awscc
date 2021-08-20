@@ -228,6 +228,21 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::HostedZone").WithTerraformTypeName("awscc_route53_hosted_zone").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cloud_watch_logs_log_group_arn": "CloudWatchLogsLogGroupArn",
+		"comment":                        "Comment",
+		"hosted_zone_config":             "HostedZoneConfig",
+		"hosted_zone_tags":               "HostedZoneTags",
+		"id":                             "Id",
+		"key":                            "Key",
+		"name":                           "Name",
+		"name_servers":                   "NameServers",
+		"query_logging_config":           "QueryLoggingConfig",
+		"value":                          "Value",
+		"vp_cs":                          "VPCs",
+		"vpc_id":                         "VPCId",
+		"vpc_region":                     "VPCRegion",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

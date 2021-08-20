@@ -127,6 +127,14 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::ReadinessCheck").WithTerraformTypeName("awscc_route53recoveryreadiness_readiness_check").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"key":                  "Key",
+		"readiness_check_arn":  "ReadinessCheckArn",
+		"readiness_check_name": "ReadinessCheckName",
+		"resource_set_name":    "ResourceSetName",
+		"tags":                 "Tags",
+		"value":                "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

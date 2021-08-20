@@ -150,6 +150,16 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::PublicTypeVersion").WithTerraformTypeName("awscc_cloudformation_public_type_version").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"log_delivery_bucket":   "LogDeliveryBucket",
+		"public_type_arn":       "PublicTypeArn",
+		"public_version_number": "PublicVersionNumber",
+		"publisher_id":          "PublisherId",
+		"type":                  "Type",
+		"type_name":             "TypeName",
+		"type_version_arn":      "TypeVersionArn",
+	})
 
 	opts = opts.IsImmutableType(true)
 

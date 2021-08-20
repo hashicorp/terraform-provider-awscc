@@ -65,6 +65,10 @@ func bucketPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3Outposts::BucketPolicy").WithTerraformTypeName("awscc_s3outposts_bucket_policy").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"bucket":          "Bucket",
+		"policy_document": "PolicyDocument",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

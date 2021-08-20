@@ -644,6 +644,40 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MWAA::Environment").WithTerraformTypeName("awscc_mwaa_environment").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"airflow_configuration_options":   "AirflowConfigurationOptions",
+		"airflow_version":                 "AirflowVersion",
+		"arn":                             "Arn",
+		"cloud_watch_log_group_arn":       "CloudWatchLogGroupArn",
+		"dag_processing_logs":             "DagProcessingLogs",
+		"dag_s3_path":                     "DagS3Path",
+		"enabled":                         "Enabled",
+		"environment_class":               "EnvironmentClass",
+		"execution_role_arn":              "ExecutionRoleArn",
+		"kms_key":                         "KmsKey",
+		"log_level":                       "LogLevel",
+		"logging_configuration":           "LoggingConfiguration",
+		"max_workers":                     "MaxWorkers",
+		"min_workers":                     "MinWorkers",
+		"name":                            "Name",
+		"network_configuration":           "NetworkConfiguration",
+		"plugins_s3_object_version":       "PluginsS3ObjectVersion",
+		"plugins_s3_path":                 "PluginsS3Path",
+		"requirements_s3_object_version":  "RequirementsS3ObjectVersion",
+		"requirements_s3_path":            "RequirementsS3Path",
+		"scheduler_logs":                  "SchedulerLogs",
+		"schedulers":                      "Schedulers",
+		"security_group_ids":              "SecurityGroupIds",
+		"source_bucket_arn":               "SourceBucketArn",
+		"subnet_ids":                      "SubnetIds",
+		"tags":                            "Tags",
+		"task_logs":                       "TaskLogs",
+		"webserver_access_mode":           "WebserverAccessMode",
+		"webserver_logs":                  "WebserverLogs",
+		"webserver_url":                   "WebserverUrl",
+		"weekly_maintenance_window_start": "WeeklyMaintenanceWindowStart",
+		"worker_logs":                     "WorkerLogs",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(180).WithDeleteTimeoutInMinutes(0)
 

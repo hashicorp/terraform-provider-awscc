@@ -93,6 +93,12 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Athena::PreparedStatement").WithTerraformTypeName("awscc_athena_prepared_statement").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"description":     "Description",
+		"query_statement": "QueryStatement",
+		"statement_name":  "StatementName",
+		"work_group":      "WorkGroup",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

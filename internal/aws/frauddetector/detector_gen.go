@@ -1095,6 +1095,36 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::Detector").WithTerraformTypeName("awscc_frauddetector_detector").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                     "Arn",
+		"associated_models":       "AssociatedModels",
+		"created_time":            "CreatedTime",
+		"data_source":             "DataSource",
+		"data_type":               "DataType",
+		"default_value":           "DefaultValue",
+		"description":             "Description",
+		"detector_id":             "DetectorId",
+		"detector_version_id":     "DetectorVersionId",
+		"detector_version_status": "DetectorVersionStatus",
+		"entity_types":            "EntityTypes",
+		"event_type":              "EventType",
+		"event_variables":         "EventVariables",
+		"expression":              "Expression",
+		"inline":                  "Inline",
+		"key":                     "Key",
+		"labels":                  "Labels",
+		"language":                "Language",
+		"last_updated_time":       "LastUpdatedTime",
+		"name":                    "Name",
+		"outcomes":                "Outcomes",
+		"rule_execution_mode":     "RuleExecutionMode",
+		"rule_id":                 "RuleId",
+		"rule_version":            "RuleVersion",
+		"rules":                   "Rules",
+		"tags":                    "Tags",
+		"value":                   "Value",
+		"variable_type":           "VariableType",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

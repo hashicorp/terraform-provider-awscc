@@ -238,6 +238,23 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::FindingsFilter").WithTerraformTypeName("awscc_macie_findings_filter").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"action":                     "Action",
+		"arn":                        "Arn",
+		"criterion":                  "Criterion",
+		"description":                "Description",
+		"eq":                         "Eq",
+		"finding_criteria":           "FindingCriteria",
+		"findings_filter_list_items": "FindingsFilterListItems",
+		"gt":                         "Gt",
+		"gte":                        "Gte",
+		"id":                         "Id",
+		"lt":                         "Lt",
+		"lte":                        "Lte",
+		"name":                       "Name",
+		"neq":                        "Neq",
+		"position":                   "Position",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -581,6 +581,46 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Kendra::Index").WithTerraformTypeName("awscc_kendra_index").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                                  "Arn",
+		"capacity_units":                       "CapacityUnits",
+		"claim_regex":                          "ClaimRegex",
+		"description":                          "Description",
+		"displayable":                          "Displayable",
+		"document_metadata_configurations":     "DocumentMetadataConfigurations",
+		"duration":                             "Duration",
+		"edition":                              "Edition",
+		"facetable":                            "Facetable",
+		"freshness":                            "Freshness",
+		"group_attribute_field":                "GroupAttributeField",
+		"id":                                   "Id",
+		"importance":                           "Importance",
+		"issuer":                               "Issuer",
+		"json_token_type_configuration":        "JsonTokenTypeConfiguration",
+		"jwt_token_type_configuration":         "JwtTokenTypeConfiguration",
+		"key":                                  "Key",
+		"key_location":                         "KeyLocation",
+		"kms_key_id":                           "KmsKeyId",
+		"name":                                 "Name",
+		"query_capacity_units":                 "QueryCapacityUnits",
+		"rank_order":                           "RankOrder",
+		"relevance":                            "Relevance",
+		"role_arn":                             "RoleArn",
+		"search":                               "Search",
+		"searchable":                           "Searchable",
+		"secret_manager_arn":                   "SecretManagerArn",
+		"server_side_encryption_configuration": "ServerSideEncryptionConfiguration",
+		"sortable":                             "Sortable",
+		"storage_capacity_units":               "StorageCapacityUnits",
+		"tags":                                 "Tags",
+		"type":                                 "Type",
+		"url":                                  "URL",
+		"user_context_policy":                  "UserContextPolicy",
+		"user_name_attribute_field":            "UserNameAttributeField",
+		"user_token_configurations":            "UserTokenConfigurations",
+		"value":                                "Value",
+		"value_importance_items":               "ValueImportanceItems",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(240).WithDeleteTimeoutInMinutes(720)
 

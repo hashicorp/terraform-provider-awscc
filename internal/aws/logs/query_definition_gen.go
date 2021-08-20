@@ -97,6 +97,12 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::QueryDefinition").WithTerraformTypeName("awscc_logs_query_definition").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"log_group_names":     "LogGroupNames",
+		"name":                "Name",
+		"query_definition_id": "QueryDefinitionId",
+		"query_string":        "QueryString",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

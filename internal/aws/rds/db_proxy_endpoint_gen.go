@@ -205,6 +205,20 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxyEndpoint").WithTerraformTypeName("awscc_rds_db_proxy_endpoint").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"db_proxy_endpoint_arn":  "DBProxyEndpointArn",
+		"db_proxy_endpoint_name": "DBProxyEndpointName",
+		"db_proxy_name":          "DBProxyName",
+		"endpoint":               "Endpoint",
+		"is_default":             "IsDefault",
+		"key":                    "Key",
+		"tags":                   "Tags",
+		"target_role":            "TargetRole",
+		"value":                  "Value",
+		"vpc_id":                 "VpcId",
+		"vpc_security_group_ids": "VpcSecurityGroupIds",
+		"vpc_subnet_ids":         "VpcSubnetIds",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

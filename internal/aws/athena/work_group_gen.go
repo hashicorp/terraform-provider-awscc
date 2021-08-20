@@ -490,6 +490,34 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Athena::WorkGroup").WithTerraformTypeName("awscc_athena_work_group").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"bytes_scanned_cutoff_per_query":        "BytesScannedCutoffPerQuery",
+		"creation_time":                         "CreationTime",
+		"description":                           "Description",
+		"effective_engine_version":              "EffectiveEngineVersion",
+		"encryption_configuration":              "EncryptionConfiguration",
+		"encryption_option":                     "EncryptionOption",
+		"enforce_work_group_configuration":      "EnforceWorkGroupConfiguration",
+		"engine_version":                        "EngineVersion",
+		"key":                                   "Key",
+		"kms_key":                               "KmsKey",
+		"name":                                  "Name",
+		"output_location":                       "OutputLocation",
+		"publish_cloud_watch_metrics_enabled":   "PublishCloudWatchMetricsEnabled",
+		"recursive_delete_option":               "RecursiveDeleteOption",
+		"remove_bytes_scanned_cutoff_per_query": "RemoveBytesScannedCutoffPerQuery",
+		"remove_encryption_configuration":       "RemoveEncryptionConfiguration",
+		"remove_output_location":                "RemoveOutputLocation",
+		"requester_pays_enabled":                "RequesterPaysEnabled",
+		"result_configuration":                  "ResultConfiguration",
+		"result_configuration_updates":          "ResultConfigurationUpdates",
+		"selected_engine_version":               "SelectedEngineVersion",
+		"state":                                 "State",
+		"tags":                                  "Tags",
+		"value":                                 "Value",
+		"work_group_configuration":              "WorkGroupConfiguration",
+		"work_group_configuration_updates":      "WorkGroupConfigurationUpdates",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

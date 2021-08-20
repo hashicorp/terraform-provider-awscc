@@ -217,6 +217,20 @@ func apiKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::ApiKey").WithTerraformTypeName("awscc_apigateway_api_key").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"api_key_id":           "APIKeyId",
+		"customer_id":          "CustomerId",
+		"description":          "Description",
+		"enabled":              "Enabled",
+		"generate_distinct_id": "GenerateDistinctId",
+		"key":                  "Key",
+		"name":                 "Name",
+		"rest_api_id":          "RestApiId",
+		"stage_keys":           "StageKeys",
+		"stage_name":           "StageName",
+		"tags":                 "Tags",
+		"value":                "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/GenerateDistinctId",

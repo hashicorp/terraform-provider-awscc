@@ -52,6 +52,9 @@ func dNSSECResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::DNSSEC").WithTerraformTypeName("awscc_route53_dnssec").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"hosted_zone_id": "HostedZoneId",
+	})
 
 	opts = opts.IsImmutableType(true)
 

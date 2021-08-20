@@ -164,6 +164,17 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GlobalAccelerator::Accelerator").WithTerraformTypeName("awscc_globalaccelerator_accelerator").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"accelerator_arn": "AcceleratorArn",
+		"dns_name":        "DnsName",
+		"enabled":         "Enabled",
+		"ip_address_type": "IpAddressType",
+		"ip_addresses":    "IpAddresses",
+		"key":             "Key",
+		"name":            "Name",
+		"tags":            "Tags",
+		"value":           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

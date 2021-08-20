@@ -157,6 +157,15 @@ func dimensionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::Dimension").WithTerraformTypeName("awscc_iot_dimension").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":           "Arn",
+		"key":           "Key",
+		"name":          "Name",
+		"string_values": "StringValues",
+		"tags":          "Tags",
+		"type":          "Type",
+		"value":         "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -98,6 +98,12 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::NotificationChannel").WithTerraformTypeName("awscc_devopsguru_notification_channel").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"config":    "Config",
+		"id":        "Id",
+		"sns":       "Sns",
+		"topic_arn": "TopicArn",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

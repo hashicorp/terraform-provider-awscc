@@ -75,6 +75,11 @@ func linkAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::LinkAssociation").WithTerraformTypeName("awscc_networkmanager_link_association").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"device_id":         "DeviceId",
+		"global_network_id": "GlobalNetworkId",
+		"link_id":           "LinkId",
+	})
 
 	opts = opts.IsImmutableType(true)
 

@@ -713,6 +713,39 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Analysis").WithTerraformTypeName("awscc_quicksight_analysis").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"actions":              "Actions",
+		"analysis_id":          "AnalysisId",
+		"arn":                  "Arn",
+		"aws_account_id":       "AwsAccountId",
+		"created_time":         "CreatedTime",
+		"data_set_arn":         "DataSetArn",
+		"data_set_arns":        "DataSetArns",
+		"data_set_placeholder": "DataSetPlaceholder",
+		"data_set_references":  "DataSetReferences",
+		"date_time_parameters": "DateTimeParameters",
+		"decimal_parameters":   "DecimalParameters",
+		"errors":               "Errors",
+		"integer_parameters":   "IntegerParameters",
+		"key":                  "Key",
+		"last_updated_time":    "LastUpdatedTime",
+		"message":              "Message",
+		"name":                 "Name",
+		"parameters":           "Parameters",
+		"permissions":          "Permissions",
+		"principal":            "Principal",
+		"sheet_id":             "SheetId",
+		"sheets":               "Sheets",
+		"source_entity":        "SourceEntity",
+		"source_template":      "SourceTemplate",
+		"status":               "Status",
+		"string_parameters":    "StringParameters",
+		"tags":                 "Tags",
+		"theme_arn":            "ThemeArn",
+		"type":                 "Type",
+		"value":                "Value",
+		"values":               "Values",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Parameters",

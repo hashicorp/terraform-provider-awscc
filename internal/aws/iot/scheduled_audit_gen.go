@@ -189,6 +189,17 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::ScheduledAudit").WithTerraformTypeName("awscc_iot_scheduled_audit").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"day_of_month":         "DayOfMonth",
+		"day_of_week":          "DayOfWeek",
+		"frequency":            "Frequency",
+		"key":                  "Key",
+		"scheduled_audit_arn":  "ScheduledAuditArn",
+		"scheduled_audit_name": "ScheduledAuditName",
+		"tags":                 "Tags",
+		"target_check_names":   "TargetCheckNames",
+		"value":                "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

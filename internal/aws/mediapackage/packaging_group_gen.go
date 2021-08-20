@@ -190,6 +190,19 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingGroup").WithTerraformTypeName("awscc_mediapackage_packaging_group").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"authorization":         "Authorization",
+		"cdn_identifier_secret": "CdnIdentifierSecret",
+		"domain_name":           "DomainName",
+		"egress_access_logs":    "EgressAccessLogs",
+		"id":                    "Id",
+		"key":                   "Key",
+		"log_group_name":        "LogGroupName",
+		"secrets_role_arn":      "SecretsRoleArn",
+		"tags":                  "Tags",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

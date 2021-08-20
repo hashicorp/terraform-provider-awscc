@@ -193,6 +193,21 @@ func linkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::Link").WithTerraformTypeName("awscc_networkmanager_link").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"bandwidth":         "Bandwidth",
+		"description":       "Description",
+		"download_speed":    "DownloadSpeed",
+		"global_network_id": "GlobalNetworkId",
+		"key":               "Key",
+		"link_arn":          "LinkArn",
+		"link_id":           "LinkId",
+		"provider":          "Provider",
+		"site_id":           "SiteId",
+		"tags":              "Tags",
+		"type":              "Type",
+		"upload_speed":      "UploadSpeed",
+		"value":             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

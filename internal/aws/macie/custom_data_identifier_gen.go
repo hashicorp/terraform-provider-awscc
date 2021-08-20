@@ -166,6 +166,18 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::CustomDataIdentifier").WithTerraformTypeName("awscc_macie_custom_data_identifier").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                    "Arn",
+		"created_at":             "CreatedAt",
+		"deleted":                "Deleted",
+		"description":            "Description",
+		"id":                     "Id",
+		"ignore_words":           "IgnoreWords",
+		"keywords":               "Keywords",
+		"maximum_match_distance": "MaximumMatchDistance",
+		"name":                   "Name",
+		"regex":                  "Regex",
+	})
 
 	opts = opts.IsImmutableType(true)
 

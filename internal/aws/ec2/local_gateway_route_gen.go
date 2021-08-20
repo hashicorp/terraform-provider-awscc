@@ -97,6 +97,13 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::LocalGatewayRoute").WithTerraformTypeName("awscc_ec2_local_gateway_route").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"destination_cidr_block":                   "DestinationCidrBlock",
+		"local_gateway_route_table_id":             "LocalGatewayRouteTableId",
+		"local_gateway_virtual_interface_group_id": "LocalGatewayVirtualInterfaceGroupId",
+		"state": "State",
+		"type":  "Type",
+	})
 
 	opts = opts.IsImmutableType(true)
 

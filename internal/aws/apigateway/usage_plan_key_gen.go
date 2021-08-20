@@ -89,6 +89,12 @@ func usagePlanKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::UsagePlanKey").WithTerraformTypeName("awscc_apigateway_usage_plan_key").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"id":            "Id",
+		"key_id":        "KeyId",
+		"key_type":      "KeyType",
+		"usage_plan_id": "UsagePlanId",
+	})
 
 	opts = opts.IsImmutableType(true)
 

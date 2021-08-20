@@ -251,6 +251,29 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::DeviceProfile").WithTerraformTypeName("awscc_iotwireless_device_profile").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"class_b_timeout":       "ClassBTimeout",
+		"class_c_timeout":       "ClassCTimeout",
+		"id":                    "Id",
+		"key":                   "Key",
+		"lo_ra_wan":             "LoRaWAN",
+		"mac_version":           "MacVersion",
+		"max_duty_cycle":        "MaxDutyCycle",
+		"max_eirp":              "MaxEirp",
+		"name":                  "Name",
+		"ping_slot_dr":          "PingSlotDr",
+		"ping_slot_freq":        "PingSlotFreq",
+		"ping_slot_period":      "PingSlotPeriod",
+		"reg_params_revision":   "RegParamsRevision",
+		"rf_region":             "RfRegion",
+		"supports_32_bit_f_cnt": "Supports32BitFCnt",
+		"supports_class_b":      "SupportsClassB",
+		"supports_class_c":      "SupportsClassC",
+		"supports_join":         "SupportsJoin",
+		"tags":                  "Tags",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -262,6 +262,23 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallDomainList").WithTerraformTypeName("awscc_route53resolver_firewall_domain_list").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                "Arn",
+		"creation_time":      "CreationTime",
+		"creator_request_id": "CreatorRequestId",
+		"domain_count":       "DomainCount",
+		"domain_file_url":    "DomainFileUrl",
+		"domains":            "Domains",
+		"id":                 "Id",
+		"key":                "Key",
+		"managed_owner_name": "ManagedOwnerName",
+		"modification_time":  "ModificationTime",
+		"name":               "Name",
+		"status":             "Status",
+		"status_message":     "StatusMessage",
+		"tags":               "Tags",
+		"value":              "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Domains",

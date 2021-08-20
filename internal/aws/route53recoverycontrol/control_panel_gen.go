@@ -114,6 +114,14 @@ func controlPanelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryControl::ControlPanel").WithTerraformTypeName("awscc_route53recoverycontrol_control_panel").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cluster_arn":           "ClusterArn",
+		"control_panel_arn":     "ControlPanelArn",
+		"default_control_panel": "DefaultControlPanel",
+		"name":                  "Name",
+		"routing_control_count": "RoutingControlCount",
+		"status":                "Status",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

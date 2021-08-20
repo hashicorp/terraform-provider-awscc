@@ -144,6 +144,15 @@ func oIDCProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IAM::OIDCProvider").WithTerraformTypeName("awscc_iam_oidc_provider").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":             "Arn",
+		"client_id_list":  "ClientIdList",
+		"key":             "Key",
+		"tags":            "Tags",
+		"thumbprint_list": "ThumbprintList",
+		"url":             "Url",
+		"value":           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

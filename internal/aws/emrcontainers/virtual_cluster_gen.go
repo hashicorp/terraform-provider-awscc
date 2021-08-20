@@ -214,6 +214,19 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMRContainers::VirtualCluster").WithTerraformTypeName("awscc_emrcontainers_virtual_cluster").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                "Arn",
+		"container_provider": "ContainerProvider",
+		"eks_info":           "EksInfo",
+		"id":                 "Id",
+		"info":               "Info",
+		"key":                "Key",
+		"name":               "Name",
+		"namespace":          "Namespace",
+		"tags":               "Tags",
+		"type":               "Type",
+		"value":              "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

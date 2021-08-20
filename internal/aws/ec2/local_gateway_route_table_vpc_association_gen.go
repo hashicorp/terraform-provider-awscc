@@ -140,6 +140,16 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::LocalGatewayRouteTableVPCAssociation").WithTerraformTypeName("awscc_ec2_local_gateway_route_table_vpc_association").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"key":                          "Key",
+		"local_gateway_id":             "LocalGatewayId",
+		"local_gateway_route_table_id": "LocalGatewayRouteTableId",
+		"local_gateway_route_table_vpc_association_id": "LocalGatewayRouteTableVpcAssociationId",
+		"state":  "State",
+		"tags":   "Tags",
+		"value":  "Value",
+		"vpc_id": "VpcId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -91,6 +91,13 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Signer::ProfilePermission").WithTerraformTypeName("awscc_signer_profile_permission").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"action":          "Action",
+		"principal":       "Principal",
+		"profile_name":    "ProfileName",
+		"profile_version": "ProfileVersion",
+		"statement_id":    "StatementId",
+	})
 
 	opts = opts.IsImmutableType(true)
 

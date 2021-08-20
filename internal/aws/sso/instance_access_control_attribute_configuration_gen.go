@@ -211,6 +211,14 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSO::InstanceAccessControlAttributeConfiguration").WithTerraformTypeName("awscc_sso_instance_access_control_attribute_configuration").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_control_attributes":                       "AccessControlAttributes",
+		"instance_access_control_attribute_configuration": "InstanceAccessControlAttributeConfiguration",
+		"instance_arn": "InstanceArn",
+		"key":          "Key",
+		"source":       "Source",
+		"value":        "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

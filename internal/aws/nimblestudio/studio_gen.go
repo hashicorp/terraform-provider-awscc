@@ -164,6 +164,20 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::Studio").WithTerraformTypeName("awscc_nimblestudio_studio").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"admin_role_arn":                  "AdminRoleArn",
+		"display_name":                    "DisplayName",
+		"home_region":                     "HomeRegion",
+		"key_arn":                         "KeyArn",
+		"key_type":                        "KeyType",
+		"sso_client_id":                   "SsoClientId",
+		"studio_encryption_configuration": "StudioEncryptionConfiguration",
+		"studio_id":                       "StudioId",
+		"studio_name":                     "StudioName",
+		"studio_url":                      "StudioUrl",
+		"tags":                            "Tags",
+		"user_role_arn":                   "UserRoleArn",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

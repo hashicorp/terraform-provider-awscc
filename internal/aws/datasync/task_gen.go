@@ -541,6 +541,40 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::Task").WithTerraformTypeName("awscc_datasync_task").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"atime":                              "Atime",
+		"bytes_per_second":                   "BytesPerSecond",
+		"cloud_watch_log_group_arn":          "CloudWatchLogGroupArn",
+		"destination_location_arn":           "DestinationLocationArn",
+		"destination_network_interface_arns": "DestinationNetworkInterfaceArns",
+		"error_code":                         "ErrorCode",
+		"error_detail":                       "ErrorDetail",
+		"excludes":                           "Excludes",
+		"filter_type":                        "FilterType",
+		"gid":                                "Gid",
+		"key":                                "Key",
+		"log_level":                          "LogLevel",
+		"mtime":                              "Mtime",
+		"name":                               "Name",
+		"options":                            "Options",
+		"overwrite_mode":                     "OverwriteMode",
+		"posix_permissions":                  "PosixPermissions",
+		"preserve_deleted_files":             "PreserveDeletedFiles",
+		"preserve_devices":                   "PreserveDevices",
+		"schedule":                           "Schedule",
+		"schedule_expression":                "ScheduleExpression",
+		"security_descriptor_copy_flags":     "SecurityDescriptorCopyFlags",
+		"source_location_arn":                "SourceLocationArn",
+		"source_network_interface_arns":      "SourceNetworkInterfaceArns",
+		"status":                             "Status",
+		"tags":                               "Tags",
+		"task_arn":                           "TaskArn",
+		"task_queueing":                      "TaskQueueing",
+		"transfer_mode":                      "TransferMode",
+		"uid":                                "Uid",
+		"value":                              "Value",
+		"verify_mode":                        "VerifyMode",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

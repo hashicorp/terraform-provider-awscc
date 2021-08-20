@@ -215,6 +215,21 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::KMS::Key").WithTerraformTypeName("awscc_kms_key").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                    "Arn",
+		"description":            "Description",
+		"enable_key_rotation":    "EnableKeyRotation",
+		"enabled":                "Enabled",
+		"key":                    "Key",
+		"key_id":                 "KeyId",
+		"key_policy":             "KeyPolicy",
+		"key_spec":               "KeySpec",
+		"key_usage":              "KeyUsage",
+		"multi_region":           "MultiRegion",
+		"pending_window_in_days": "PendingWindowInDays",
+		"tags":                   "Tags",
+		"value":                  "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/PendingWindowInDays",

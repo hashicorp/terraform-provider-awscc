@@ -127,6 +127,15 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::Certificate").WithTerraformTypeName("awscc_iot_certificate").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                         "Arn",
+		"ca_certificate_pem":          "CACertificatePem",
+		"certificate_mode":            "CertificateMode",
+		"certificate_pem":             "CertificatePem",
+		"certificate_signing_request": "CertificateSigningRequest",
+		"id":                          "Id",
+		"status":                      "Status",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/CertificateSigningRequest",

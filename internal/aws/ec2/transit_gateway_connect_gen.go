@@ -162,6 +162,18 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayConnect").WithTerraformTypeName("awscc_ec2_transit_gateway_connect").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"creation_time":                 "CreationTime",
+		"key":                           "Key",
+		"options":                       "Options",
+		"protocol":                      "Protocol",
+		"state":                         "State",
+		"tags":                          "Tags",
+		"transit_gateway_attachment_id": "TransitGatewayAttachmentId",
+		"transit_gateway_id":            "TransitGatewayId",
+		"transport_transit_gateway_attachment_id": "TransportTransitGatewayAttachmentId",
+		"value": "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

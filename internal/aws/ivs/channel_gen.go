@@ -195,6 +195,19 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IVS::Channel").WithTerraformTypeName("awscc_ivs_channel").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                         "Arn",
+		"authorized":                  "Authorized",
+		"ingest_endpoint":             "IngestEndpoint",
+		"key":                         "Key",
+		"latency_mode":                "LatencyMode",
+		"name":                        "Name",
+		"playback_url":                "PlaybackUrl",
+		"recording_configuration_arn": "RecordingConfigurationArn",
+		"tags":                        "Tags",
+		"type":                        "Type",
+		"value":                       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

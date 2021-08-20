@@ -241,6 +241,22 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTCoreDeviceAdvisor::SuiteDefinition").WithTerraformTypeName("awscc_iotcoredeviceadvisor_suite_definition").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"certificate_arn":                "CertificateArn",
+		"device_permission_role_arn":     "DevicePermissionRoleArn",
+		"devices":                        "Devices",
+		"intended_for_qualification":     "IntendedForQualification",
+		"key":                            "Key",
+		"root_group":                     "RootGroup",
+		"suite_definition_arn":           "SuiteDefinitionArn",
+		"suite_definition_configuration": "SuiteDefinitionConfiguration",
+		"suite_definition_id":            "SuiteDefinitionId",
+		"suite_definition_name":          "SuiteDefinitionName",
+		"suite_definition_version":       "SuiteDefinitionVersion",
+		"tags":                           "Tags",
+		"thing_arn":                      "ThingArn",
+		"value":                          "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

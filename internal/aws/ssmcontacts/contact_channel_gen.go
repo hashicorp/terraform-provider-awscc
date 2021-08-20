@@ -120,6 +120,14 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSMContacts::ContactChannel").WithTerraformTypeName("awscc_ssmcontacts_contact_channel").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":              "Arn",
+		"channel_address":  "ChannelAddress",
+		"channel_name":     "ChannelName",
+		"channel_type":     "ChannelType",
+		"contact_id":       "ContactId",
+		"defer_activation": "DeferActivation",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

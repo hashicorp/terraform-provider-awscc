@@ -65,6 +65,10 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3ObjectLambda::AccessPointPolicy").WithTerraformTypeName("awscc_s3objectlambda_access_point_policy").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"object_lambda_access_point": "ObjectLambdaAccessPoint",
+		"policy_document":            "PolicyDocument",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

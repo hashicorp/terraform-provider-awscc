@@ -97,6 +97,12 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverDNSSECConfig").WithTerraformTypeName("awscc_route53resolver_resolver_dnssec_config").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"id":                "Id",
+		"owner_id":          "OwnerId",
+		"resource_id":       "ResourceId",
+		"validation_status": "ValidationStatus",
+	})
 
 	opts = opts.IsImmutableType(true)
 

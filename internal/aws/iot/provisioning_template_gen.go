@@ -168,6 +168,20 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::ProvisioningTemplate").WithTerraformTypeName("awscc_iot_provisioning_template").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"description":           "Description",
+		"enabled":               "Enabled",
+		"key":                   "Key",
+		"payload_version":       "PayloadVersion",
+		"pre_provisioning_hook": "PreProvisioningHook",
+		"provisioning_role_arn": "ProvisioningRoleArn",
+		"tags":                  "Tags",
+		"target_arn":            "TargetArn",
+		"template_arn":          "TemplateArn",
+		"template_body":         "TemplateBody",
+		"template_name":         "TemplateName",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

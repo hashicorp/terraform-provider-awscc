@@ -406,6 +406,28 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::TaskDefinition").WithTerraformTypeName("awscc_iotwireless_task_definition").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                                 "Arn",
+		"auto_create_tasks":                   "AutoCreateTasks",
+		"current_version":                     "CurrentVersion",
+		"id":                                  "Id",
+		"key":                                 "Key",
+		"lo_ra_wan":                           "LoRaWAN",
+		"lo_ra_wan_update_gateway_task_entry": "LoRaWANUpdateGatewayTaskEntry",
+		"model":                               "Model",
+		"name":                                "Name",
+		"package_version":                     "PackageVersion",
+		"sig_key_crc":                         "SigKeyCrc",
+		"station":                             "Station",
+		"tags":                                "Tags",
+		"task_definition_type":                "TaskDefinitionType",
+		"update":                              "Update",
+		"update_data_role":                    "UpdateDataRole",
+		"update_data_source":                  "UpdateDataSource",
+		"update_signature":                    "UpdateSignature",
+		"update_version":                      "UpdateVersion",
+		"value":                               "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -384,6 +384,30 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::ObjectType").WithTerraformTypeName("awscc_customerprofiles_object_type").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"allow_profile_creation": "AllowProfileCreation",
+		"content_type":           "ContentType",
+		"created_at":             "CreatedAt",
+		"description":            "Description",
+		"domain_name":            "DomainName",
+		"encryption_key":         "EncryptionKey",
+		"expiration_days":        "ExpirationDays",
+		"field_names":            "FieldNames",
+		"fields":                 "Fields",
+		"key":                    "Key",
+		"keys":                   "Keys",
+		"last_updated_at":        "LastUpdatedAt",
+		"name":                   "Name",
+		"object_type_field":      "ObjectTypeField",
+		"object_type_key_list":   "ObjectTypeKeyList",
+		"object_type_name":       "ObjectTypeName",
+		"source":                 "Source",
+		"standard_identifiers":   "StandardIdentifiers",
+		"tags":                   "Tags",
+		"target":                 "Target",
+		"template_id":            "TemplateId",
+		"value":                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

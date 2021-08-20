@@ -108,6 +108,14 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastDomainAssociation").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_domain_association").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"resource_id":                         "ResourceId",
+		"resource_type":                       "ResourceType",
+		"state":                               "State",
+		"subnet_id":                           "SubnetId",
+		"transit_gateway_attachment_id":       "TransitGatewayAttachmentId",
+		"transit_gateway_multicast_domain_id": "TransitGatewayMulticastDomainId",
+	})
 
 	opts = opts.IsImmutableType(true)
 

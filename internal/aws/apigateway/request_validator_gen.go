@@ -97,6 +97,13 @@ func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::RequestValidator").WithTerraformTypeName("awscc_apigateway_request_validator").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"name":                        "Name",
+		"request_validator_id":        "RequestValidatorId",
+		"rest_api_id":                 "RestApiId",
+		"validate_request_body":       "ValidateRequestBody",
+		"validate_request_parameters": "ValidateRequestParameters",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -473,6 +473,39 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::ContainerRecipe").WithTerraformTypeName("awscc_imagebuilder_container_recipe").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                       "Arn",
+		"block_device_mappings":     "BlockDeviceMappings",
+		"component_arn":             "ComponentArn",
+		"components":                "Components",
+		"container_type":            "ContainerType",
+		"delete_on_termination":     "DeleteOnTermination",
+		"description":               "Description",
+		"device_name":               "DeviceName",
+		"dockerfile_template_data":  "DockerfileTemplateData",
+		"dockerfile_template_uri":   "DockerfileTemplateUri",
+		"ebs":                       "Ebs",
+		"encrypted":                 "Encrypted",
+		"image":                     "Image",
+		"image_os_version_override": "ImageOsVersionOverride",
+		"instance_configuration":    "InstanceConfiguration",
+		"iops":                      "Iops",
+		"kms_key_id":                "KmsKeyId",
+		"name":                      "Name",
+		"no_device":                 "NoDevice",
+		"parent_image":              "ParentImage",
+		"platform_override":         "PlatformOverride",
+		"repository_name":           "RepositoryName",
+		"service":                   "Service",
+		"snapshot_id":               "SnapshotId",
+		"tags":                      "Tags",
+		"target_repository":         "TargetRepository",
+		"version":                   "Version",
+		"virtual_name":              "VirtualName",
+		"volume_size":               "VolumeSize",
+		"volume_type":               "VolumeType",
+		"working_directory":         "WorkingDirectory",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DockerfileTemplateData",

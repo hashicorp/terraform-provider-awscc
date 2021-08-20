@@ -197,6 +197,22 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::MissionProfile").WithTerraformTypeName("awscc_groundstation_mission_profile").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                                "Arn",
+		"contact_post_pass_duration_seconds": "ContactPostPassDurationSeconds",
+		"contact_pre_pass_duration_seconds":  "ContactPrePassDurationSeconds",
+		"dataflow_edges":                     "DataflowEdges",
+		"destination":                        "Destination",
+		"id":                                 "Id",
+		"key":                                "Key",
+		"minimum_viable_contact_duration_seconds": "MinimumViableContactDurationSeconds",
+		"name":                "Name",
+		"region":              "Region",
+		"source":              "Source",
+		"tags":                "Tags",
+		"tracking_config_arn": "TrackingConfigArn",
+		"value":               "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

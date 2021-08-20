@@ -25,6 +25,18 @@ import (
 // ResourceTypeOptionsFunc is a type alias for a resource type functional option.
 type ResourceTypeOptionsFunc func(*resourceType) error
 
+// WithAttributeNameMap is a helper function to construct functional options
+// that set a resource type's attribute name map.
+// If multiple WithAttributeNameMap calls are made, the last call overrides
+// the previous calls' values.
+func WithAttributeNameMap(v map[string]string) ResourceTypeOptionsFunc {
+	return func(o *resourceType) error {
+		o.attributeNameMap = v
+
+		return nil
+	}
+}
+
 // WithCloudFormationTypeName is a helper function to construct functional options
 // that set a resource type's CloudFormation type name.
 // If multiple WithCloudFormationTypeName calls are made, the last call overrides
@@ -154,6 +166,14 @@ func WithDeleteTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 // ResourceTypeOptions is a type alias for a slice of resource type functional options.
 type ResourceTypeOptions []ResourceTypeOptionsFunc
 
+// WithAttributeNameMap is a helper function to construct functional options
+// that set a resource type's attribute name map, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithAttributeNameMap(v map[string]string) ResourceTypeOptions {
+	return append(opts, WithAttributeNameMap(v))
+}
+
 // WithCloudFormationTypeName is a helper function to construct functional options
 // that set a resource type's CloudFormation type name, append that function to the
 // current slice of functional options and return the new slice of options.
@@ -223,6 +243,7 @@ type resourceType struct {
 	cfTypeName              string                   // CloudFormation type name for the resource type
 	tfSchema                tfsdk.Schema             // Terraform schema for the resource type
 	tfTypeName              string                   // Terraform type name for resource type
+	attributeNameMap        map[string]string        // Map of Terraform attribute name to CloudFormation property name
 	isImmutableType         bool                     // Resources cannot be updated and must be recreated
 	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
 	createTimeout           time.Duration            // Maximum wait time for resource creation

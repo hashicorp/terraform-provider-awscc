@@ -168,6 +168,17 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CodeArtifact::Domain").WithTerraformTypeName("awscc_codeartifact_domain").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                         "Arn",
+		"domain_name":                 "DomainName",
+		"encryption_key":              "EncryptionKey",
+		"key":                         "Key",
+		"name":                        "Name",
+		"owner":                       "Owner",
+		"permissions_policy_document": "PermissionsPolicyDocument",
+		"tags":                        "Tags",
+		"value":                       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

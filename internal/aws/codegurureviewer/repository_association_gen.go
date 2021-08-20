@@ -190,6 +190,17 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 	var opts ResourceTypeOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CodeGuruReviewer::RepositoryAssociation").WithTerraformTypeName("awscc_codegurureviewer_repository_association").WithTerraformSchema(schema)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"association_arn": "AssociationArn",
+		"bucket_name":     "BucketName",
+		"connection_arn":  "ConnectionArn",
+		"key":             "Key",
+		"name":            "Name",
+		"owner":           "Owner",
+		"tags":            "Tags",
+		"type":            "Type",
+		"value":           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
