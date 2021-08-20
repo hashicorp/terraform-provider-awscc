@@ -430,7 +430,7 @@ func (e *Emitter) printf(format string, a ...interface{}) (int, error) {
 }
 
 // warnf emits a formatted warning message to the UI.
-func (e *Emitter) warnf(format string, a ...interface{}) {
+func (e *Emitter) warnf(format string, a ...interface{}) { //nolint:unused
 	e.Ui.Warn(fmt.Sprintf(format, a...))
 }
 
