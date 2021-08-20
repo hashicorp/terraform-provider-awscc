@@ -17,15 +17,15 @@ import (
 )
 
 func New() tfsdk.Provider {
-	return &awsCloudControlProvider{}
+	return &AwsCloudControlProvider{}
 }
 
-type awsCloudControlProvider struct {
+type AwsCloudControlProvider struct {
 	cfClient *cloudformation.Client
 	roleARN  string
 }
 
-func (p *awsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
+func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
 	return tfsdk.Schema{
 		Version: 1,
 		Attributes: map[string]tfsdk.Attribute{
@@ -82,23 +82,83 @@ func (p *awsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, 
 				Description: "Session token. A session token is only required if you are using temporary security credentials.",
 				Optional:    true,
 			},
+
+			"assume_role": {
+				Attributes: tfsdk.SingleNestedAttributes(
+					map[string]tfsdk.Attribute{
+						"role_arn": {
+							Type:        types.StringType,
+							Description: "Amazon Resource Name of the IAM role that your user assumes.",
+							Required:    true,
+						},
+						"duration_seconds": {
+							Type:        types.NumberType,
+							Description: "Duration role is assumed.",
+							Optional:    true,
+						},
+						"external_id": {
+							Type:        types.StringType,
+							Description: "External ID to assign to role.",
+							Optional:    true,
+						},
+						"session_name": {
+							Type:        types.StringType,
+							Description: "Name to assign to session.",
+							Optional:    true,
+						},
+						// "tags": {
+						// 	Description: "Tags to associate wit the session.",
+						// 	Attributes: schema.SetNestedAttributes(
+						// 		map[string]schema.Attribute{
+						// 			"key": {
+						// 				Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						// 				Type:        types.StringType,
+						// 				Required:    true,
+						// 			},
+						// 			"value": {
+						// 				Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						// 				Type:        types.StringType,
+						// 				Required:    true,
+						// 			},
+						// 		},
+						// 		schema.SetNestedAttributesOptions{},
+						// 	),
+						// 	Optional: true,
+						// },
+						// "transitive_tag_keys": {
+						// 	Description: "Set of tag keys that can be passed to subsequent roles",
+						// 	Type:        providertypes.SetType{ElemType: types.StringType},
+						// 	Optional:    true,
+						// },
+					},
+				),
+				Optional: true,
+			},
 		},
 	}, nil
 }
 
 type providerData struct {
-	AccessKey            types.String `tfsdk:"access_key"`
-	CredsFilename        types.String `tfsdk:"shared_credentials_file"`
-	Insecure             types.Bool   `tfsdk:"insecure"`
-	Profile              types.String `tfsdk:"profile"`
-	Region               types.String `tfsdk:"region"`
-	RoleARN              types.String `tfsdk:"role_arn"`
-	SecretKey            types.String `tfsdk:"secret_key"`
-	SkipMetadataApiCheck types.Bool   `tfsdk:"skip_medatadata_api_check"`
-	Token                types.String `tfsdk:"token"`
+	AccessKey            types.String    `tfsdk:"access_key"`
+	CredsFilename        types.String    `tfsdk:"shared_credentials_file"`
+	Insecure             types.Bool      `tfsdk:"insecure"`
+	Profile              types.String    `tfsdk:"profile"`
+	Region               types.String    `tfsdk:"region"`
+	RoleARN              types.String    `tfsdk:"role_arn"`
+	SecretKey            types.String    `tfsdk:"secret_key"`
+	SkipMetadataApiCheck types.Bool      `tfsdk:"skip_medatadata_api_check"`
+	Token                types.String    `tfsdk:"token"`
+	AssumeRole           *assumeRoleData `tfsdk:"assume_role"`
 }
 
-func (p *awsCloudControlProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
+type assumeRoleData struct {
+	RoleARN         types.String `tfsdk:"role_arn"`
+	DurationSeconds types.Number `tfsdk:"duration_seconds"`
+	ExternalID      types.String `tfsdk:"external_id"`
+	SessionName     types.String `tfsdk:"session_name"`
+}
+
+func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
 	var config providerData
 
 	diags := request.Config.Get(ctx, &config)
@@ -179,7 +239,7 @@ func (p *awsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 	p.roleARN = config.RoleARN.Value
 }
 
-func (p *awsCloudControlProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
+func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
 	var diags []*tfprotov6.Diagnostic
 	resources := make(map[string]tfsdk.ResourceType)
 
@@ -202,15 +262,15 @@ func (p *awsCloudControlProvider) GetResources(ctx context.Context) (map[string]
 	return resources, diags
 }
 
-func (p *awsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
+func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
 	return nil, nil
 }
 
-func (p *awsCloudControlProvider) CloudFormationClient(_ context.Context) *cloudformation.Client {
+func (p *AwsCloudControlProvider) CloudFormationClient(_ context.Context) *cloudformation.Client {
 	return p.cfClient
 }
 
-func (p *awsCloudControlProvider) RoleARN(_ context.Context) string {
+func (p *AwsCloudControlProvider) RoleARN(_ context.Context) string {
 	return p.roleARN
 }
 
@@ -227,6 +287,22 @@ func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudforma
 		SecretKey:            pd.SecretKey.Value,
 		SkipMetadataApiCheck: pd.SkipMetadataApiCheck.Value,
 		Token:                pd.Token.Value,
+	}
+	if pd.AssumeRole != nil && !pd.AssumeRole.RoleARN.Null {
+		config.AssumeRoleARN = pd.AssumeRole.RoleARN.Value
+
+		if !pd.AssumeRole.DurationSeconds.Null {
+			v, _ := pd.AssumeRole.DurationSeconds.Value.Int64()
+			config.AssumeRoleDurationSeconds = int(v)
+		}
+
+		if !pd.AssumeRole.ExternalID.Null {
+			config.AssumeRoleExternalID = pd.AssumeRole.ExternalID.Value
+		}
+
+		if !pd.AssumeRole.SessionName.Null {
+			config.AssumeRoleSessionName = pd.AssumeRole.SessionName.Value
+		}
 	}
 
 	cfg, err := awsbase.GetAwsConfig(ctx, &config)

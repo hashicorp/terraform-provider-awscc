@@ -1,6 +1,6 @@
 TEST?=./...
 TEST_COUNT?=1
-PKG_NAME=internal/provider
+PKG_NAME=internal/aws/...
 ACCTEST_TIMEOUT?=180m
 ACCTEST_PARALLELISM?=20
 

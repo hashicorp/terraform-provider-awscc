@@ -2,6 +2,7 @@ package acctest
 
 import (
 	"fmt"
+	"os"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -27,9 +28,20 @@ type TestData struct {
 
 // EmptyConfig returns an empty (no attributes) Terraform configuration for the resource.
 func (td *TestData) EmptyConfig() string {
-	return fmt.Sprintf(`
+	config := fmt.Sprintf(`
 resource %[1]q %[2]q {}
 `, td.TerraformResourceType, td.ResourceLabel)
+
+	if role := os.Getenv("TF_AWS_ASSUME_ROLE_ARN"); role != "" {
+		config = fmt.Sprintf(`
+provider "awscc" {
+  assume_role={
+    role_arn = %[1]q
+  }
+}
+`, role) + config
+	}
+	return config
 }
 
 // RandomName returns a new random name with the standard prefix `tf-acc-test`.
