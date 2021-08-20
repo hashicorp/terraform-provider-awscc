@@ -105,6 +105,55 @@ func TestUniqueItemsValidator(t *testing.T) {
 			f:           types.ListType{ElemType: objectElementAttrType}.ValueFromTerraform,
 			expectError: true,
 		},
+		"unique list of object with unknowns": {
+			val: tftypes.NewValue(
+				tftypes.List{ElementType: objectElementType},
+				[]tftypes.Value{
+					tftypes.NewValue(objectElementType, map[string]tftypes.Value{
+						"key": tftypes.NewValue(tftypes.String, "key1"),
+						"val": tftypes.NewValue(tftypes.String, "val1"),
+					}),
+					tftypes.NewValue(objectElementType, map[string]tftypes.Value{
+						"key": tftypes.NewValue(tftypes.String, "key1"),
+						"val": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+					}),
+					tftypes.NewValue(objectElementType, map[string]tftypes.Value{
+						"key": tftypes.NewValue(tftypes.String, "key1"),
+						"val": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+					}),
+					tftypes.NewValue(objectElementType, map[string]tftypes.Value{
+						"key": tftypes.NewValue(tftypes.String, "key2"),
+						"val": tftypes.NewValue(tftypes.String, "val2"),
+					}),
+				},
+			),
+			f: types.ListType{ElemType: objectElementAttrType}.ValueFromTerraform,
+		},
+		"duplicates in list of object with unknowns": {
+			val: tftypes.NewValue(
+				tftypes.List{ElementType: objectElementType},
+				[]tftypes.Value{
+					tftypes.NewValue(objectElementType, map[string]tftypes.Value{
+						"key": tftypes.NewValue(tftypes.String, "key1"),
+						"val": tftypes.NewValue(tftypes.String, "val1"),
+					}),
+					tftypes.NewValue(objectElementType, map[string]tftypes.Value{
+						"key": tftypes.NewValue(tftypes.String, "key2"),
+						"val": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+					}),
+					tftypes.NewValue(objectElementType, map[string]tftypes.Value{
+						"key": tftypes.NewValue(tftypes.String, "key2"),
+						"val": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+					}),
+					tftypes.NewValue(objectElementType, map[string]tftypes.Value{
+						"key": tftypes.NewValue(tftypes.String, "key1"),
+						"val": tftypes.NewValue(tftypes.String, "val1"),
+					}),
+				},
+			),
+			f:           types.ListType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			expectError: true,
+		},
 	}
 
 	for name, test := range tests {

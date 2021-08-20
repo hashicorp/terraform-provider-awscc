@@ -57,8 +57,16 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 
 	vals := val.([]tftypes.Value)
 	for i1, val1 := range vals {
+		if !val1.IsFullyKnown() {
+			continue
+		}
+
 		for i2, val2 := range vals {
 			if i2 == i1 {
+				continue
+			}
+
+			if !val2.IsFullyKnown() {
 				continue
 			}
 
