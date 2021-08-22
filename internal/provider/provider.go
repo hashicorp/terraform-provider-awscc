@@ -263,7 +263,26 @@ func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]
 }
 
 func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
-	return nil, nil
+	var diags []*tfprotov6.Diagnostic
+	dataSources := make(map[string]tfsdk.DataSourceType)
+
+	for name, factory := range registry.DataSourceFactories() {
+		dataSourceType, err := factory(ctx)
+
+		if err != nil {
+			diags = append(diags, &tfprotov6.Diagnostic{
+				Severity: tfprotov6.DiagnosticSeverityError,
+				Summary:  "Error getting Data Source",
+				Detail:   fmt.Sprintf("Error getting the %s Data Source, this is an error in the provider.\n%s\n", name, err),
+			})
+
+			continue
+		}
+
+		dataSources[name] = dataSourceType
+	}
+
+	return dataSources, diags
 }
 
 func (p *AwsCloudControlProvider) CloudFormationClient(_ context.Context) *cloudformation.Client {

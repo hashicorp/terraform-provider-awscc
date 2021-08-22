@@ -15,6 +15,11 @@ import (
 	"github.com/mitchellh/cli"
 )
 
+const (
+	PluralDataSource   = "plural"
+	SingularDataSource = "singular"
+)
+
 func main() {
 	ui := &cli.BasicUi{
 		Reader:      os.Stdin,
@@ -104,5 +109,36 @@ resource_schema %[1]q {
   cloudformation_type_name = %[2]q
 }`, tfTypeName, cfTypeName)
 		ui.Output(block)
+
+	}
+
+	// Data Sources
+	for _, cfTypeName := range cfTypeNames {
+		org, svc, res, err := naming.ParseCloudFormationTypeName(cfTypeName)
+
+		if err != nil {
+			ui.Error(fmt.Sprintf("error parsing CloudFormation type name (%s): %s", cfTypeName, err))
+			os.Exit(1)
+		}
+
+		tfTypeName := strings.Join([]string{strings.ToLower(org), strings.ToLower(svc), naming.CloudFormationPropertyToTerraformAttribute(res)}, "_")
+
+		types := []string{SingularDataSource}
+
+		// Plural Data Source (if supported)
+		input := &cloudformation.ListResourcesInput{
+			TypeName: aws.String(cfTypeName),
+		}
+
+		if _, err = client.ListResources(ctx, input); err == nil {
+			types = append(types, PluralDataSource)
+		}
+
+		dsBlock := fmt.Sprintf(`
+data_schema %[1]q {
+  cloudformation_type_name = %[2]q
+  data_source_types        = %[3]s
+}`, tfTypeName, cfTypeName, strings.Replace(fmt.Sprintf("%q", types), " ", ",", -1))
+		ui.Output(dsBlock)
 	}
 }
