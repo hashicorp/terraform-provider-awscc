@@ -31,6 +31,11 @@ type ResourceTypeOptionsFunc func(*resourceType) error
 // the previous calls' values.
 func WithAttributeNameMap(v map[string]string) ResourceTypeOptionsFunc {
 	return func(o *resourceType) error {
+		if _, ok := v["id"]; !ok {
+			// Synthesize a mapping for the reserved top-level "id" attribute.
+			v["id"] = "ID"
+		}
+
 		cfToTfNameMap := make(map[string]string, len(v))
 
 		for tfName, cfName := range v {
@@ -91,6 +96,18 @@ func WithTerraformTypeName(v string) ResourceTypeOptionsFunc {
 func IsImmutableType(v bool) ResourceTypeOptionsFunc {
 	return func(o *resourceType) error {
 		o.isImmutableType = v
+
+		return nil
+	}
+}
+
+// WithSyntheticIDAttribute is a helper function to construct functional options
+// that set a resource type's synthetic ID attribute flag.
+// If multiple WithSyntheticIDAttribute calls are made, the last call overrides
+// the previous calls' values.
+func WithSyntheticIDAttribute(v bool) ResourceTypeOptionsFunc {
+	return func(o *resourceType) error {
+		o.syntheticIDAttribute = v
 
 		return nil
 	}
@@ -217,6 +234,14 @@ func (opts ResourceTypeOptions) IsImmutableType(v bool) ResourceTypeOptions {
 	return append(opts, IsImmutableType(v))
 }
 
+// WithSyntheticIDAttribute is a helper function to construct functional options
+// that set a resource type's synthetic ID attribute flag, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithSyntheticIDAttribute(v bool) ResourceTypeOptions {
+	return append(opts, WithSyntheticIDAttribute(v))
+}
+
 // WithWriteOnlyPropertyPaths is a helper function to construct functional options
 // that set a resource type's write-only property paths, append that function to the
 // current slice of functional options and return the new slice of options.
@@ -257,6 +282,7 @@ type resourceType struct {
 	tfToCfNameMap           map[string]string        // Map of Terraform attribute name to CloudFormation property name
 	cfToTfNameMap           map[string]string        // Map of CloudFormation property name to Terraform attribute name
 	isImmutableType         bool                     // Resources cannot be updated and must be recreated
+	syntheticIDAttribute    bool                     // Resource type has a synthetic ID attribute
 	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
 	createTimeout           time.Duration            // Maximum wait time for resource creation
 	updateTimeout           time.Duration            // Maximum wait time for resource update
@@ -391,13 +417,15 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
-	// Set the "id" attribute.
-	err = r.setId(ctx, id, &response.State)
+	// Set the synthetic "id" attribute.
+	if r.resourceType.syntheticIDAttribute {
+		err = r.setId(ctx, id, &response.State)
 
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+		if err != nil {
+			response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
 
-		return
+			return
+		}
 	}
 
 	unknowns, err := Unknowns(ctx, response.State.Raw, r.resourceType.tfToCfNameMap)
@@ -501,12 +529,14 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	}
 
 	// Set the "id" attribute.
-	err = r.setId(ctx, id, &response.State)
+	if r.resourceType.syntheticIDAttribute {
+		err = r.setId(ctx, id, &response.State)
 
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+		if err != nil {
+			response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
 
-		return
+			return
+		}
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))

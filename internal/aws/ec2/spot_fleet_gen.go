@@ -1141,13 +1141,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::EC2::SpotFleet",
 		Version:     1,
@@ -1156,7 +1149,9 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::SpotFleet").WithTerraformTypeName("awscc_ec2_spot_fleet").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::SpotFleet").WithTerraformTypeName("awscc_ec2_spot_fleet")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allocation_strategy":                 "AllocationStrategy",
 		"arn":                                 "Arn",

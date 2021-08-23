@@ -1519,13 +1519,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::Distribution",
 		Version:     1,
@@ -1534,7 +1527,9 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::Distribution").WithTerraformTypeName("awscc_cloudfront_distribution").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::Distribution").WithTerraformTypeName("awscc_cloudfront_distribution")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"acm_certificate_arn":             "AcmCertificateArn",
 		"aliases":                         "Aliases",

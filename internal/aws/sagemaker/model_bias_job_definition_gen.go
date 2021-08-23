@@ -780,7 +780,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -795,7 +794,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelBiasJobDefinition").WithTerraformTypeName("awscc_sagemaker_model_bias_job_definition").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelBiasJobDefinition").WithTerraformTypeName("awscc_sagemaker_model_bias_job_definition")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"baselining_job_name":  "BaseliningJobName",
 		"cluster_config":       "ClusterConfig",

@@ -262,7 +262,6 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -277,7 +276,9 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Glue::Schema").WithTerraformTypeName("awscc_glue_schema").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Glue::Schema").WithTerraformTypeName("awscc_glue_schema")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                       "Arn",
 		"checkpoint_version":        "CheckpointVersion",

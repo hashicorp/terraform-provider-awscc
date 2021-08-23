@@ -3426,7 +3426,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -3441,7 +3440,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::KinesisFirehose::DeliveryStream").WithTerraformTypeName("awscc_kinesisfirehose_delivery_stream").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::KinesisFirehose::DeliveryStream").WithTerraformTypeName("awscc_kinesisfirehose_delivery_stream")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_key":           "AccessKey",
 		"arn":                  "Arn",

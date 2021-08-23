@@ -82,7 +82,6 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -97,7 +96,9 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthorityActivation").WithTerraformTypeName("awscc_acmpca_certificate_authority_activation").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthorityActivation").WithTerraformTypeName("awscc_acmpca_certificate_authority_activation")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"certificate":                "Certificate",
 		"certificate_authority_arn":  "CertificateAuthorityArn",

@@ -1609,7 +1609,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -1624,7 +1623,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ApplicationInsights::Application").WithTerraformTypeName("awscc_applicationinsights_application").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ApplicationInsights::Application").WithTerraformTypeName("awscc_applicationinsights_application")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"alarm_metric_name":                         "AlarmMetricName",
 		"alarm_metrics":                             "AlarmMetrics",

@@ -57,7 +57,6 @@ func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resour
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -72,7 +71,9 @@ func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resour
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::GatewayRouteTableAssociation").WithTerraformTypeName("awscc_ec2_gateway_route_table_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::GatewayRouteTableAssociation").WithTerraformTypeName("awscc_ec2_gateway_route_table_association")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"association_id": "AssociationId",
 		"gateway_id":     "GatewayId",

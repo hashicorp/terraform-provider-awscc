@@ -4590,7 +4590,6 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -4605,7 +4604,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTEvents::DetectorModel").WithTerraformTypeName("awscc_iotevents_detector_model").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTEvents::DetectorModel").WithTerraformTypeName("awscc_iotevents_detector_model")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"actions":                    "Actions",
 		"asset_id":                   "AssetId",

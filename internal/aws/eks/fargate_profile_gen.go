@@ -222,7 +222,6 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -237,7 +236,9 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EKS::FargateProfile").WithTerraformTypeName("awscc_eks_fargate_profile").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EKS::FargateProfile").WithTerraformTypeName("awscc_eks_fargate_profile")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                    "Arn",
 		"cluster_name":           "ClusterName",

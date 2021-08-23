@@ -1055,13 +1055,6 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MediaPackage::PackagingConfiguration",
 		Version:     1,
@@ -1070,7 +1063,9 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingConfiguration").WithTerraformTypeName("awscc_mediapackage_packaging_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingConfiguration").WithTerraformTypeName("awscc_mediapackage_packaging_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"ad_markers":                     "AdMarkers",
 		"arn":                            "Arn",

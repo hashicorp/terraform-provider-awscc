@@ -128,7 +128,6 @@ func oIDCProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -143,7 +142,9 @@ func oIDCProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IAM::OIDCProvider").WithTerraformTypeName("awscc_iam_oidc_provider").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IAM::OIDCProvider").WithTerraformTypeName("awscc_iam_oidc_provider")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":             "Arn",
 		"client_id_list":  "ClientIdList",

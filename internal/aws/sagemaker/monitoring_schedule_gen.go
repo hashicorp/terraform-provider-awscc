@@ -1000,7 +1000,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -1015,7 +1014,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::MonitoringSchedule").WithTerraformTypeName("awscc_sagemaker_monitoring_schedule").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::MonitoringSchedule").WithTerraformTypeName("awscc_sagemaker_monitoring_schedule")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"baseline_config":                           "BaselineConfig",
 		"cluster_config":                            "ClusterConfig",

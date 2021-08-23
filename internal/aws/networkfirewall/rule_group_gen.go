@@ -957,7 +957,6 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -972,7 +971,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::RuleGroup").WithTerraformTypeName("awscc_networkfirewall_rule_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::RuleGroup").WithTerraformTypeName("awscc_networkfirewall_rule_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action":                             "Action",
 		"action_definition":                  "ActionDefinition",

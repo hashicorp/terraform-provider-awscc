@@ -20,6 +20,7 @@ const (
 	UsesInternalTypes                            // Uses a type from the internal/types package.
 	HasRequiredRootProperty                      // At least one root property is required.
 	UsesValidation                               // Uses a type from the internal/validate package.
+	HasIDRootProperty                            // Has a root property named "id"
 )
 
 type Emitter struct {
@@ -49,9 +50,12 @@ func (e *Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (
 	}
 
 	for name := range cfResource.Properties {
+		if naming.CloudFormationPropertyToTerraformAttribute(name) == "id" {
+			features |= HasIDRootProperty
+		}
+
 		if cfResource.IsRequired(name) {
 			features |= HasRequiredRootProperty
-			break
 		}
 	}
 

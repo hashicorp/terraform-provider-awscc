@@ -147,7 +147,6 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -162,7 +161,9 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastGroupMember").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_group_member").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastGroupMember").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_group_member")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"group_ip_address":                    "GroupIpAddress",
 		"group_member":                        "GroupMember",

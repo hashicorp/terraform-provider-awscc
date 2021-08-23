@@ -488,13 +488,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
@@ -503,7 +496,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Redshift::Cluster").WithTerraformTypeName("awscc_redshift_cluster").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Redshift::Cluster").WithTerraformTypeName("awscc_redshift_cluster")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"address":                             "Address",
 		"allow_version_upgrade":               "AllowVersionUpgrade",

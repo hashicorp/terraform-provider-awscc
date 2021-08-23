@@ -376,13 +376,6 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::OpsWorksCM::Server",
 		Version:     1,
@@ -391,7 +384,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::OpsWorksCM::Server").WithTerraformTypeName("awscc_opsworkscm_server").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::OpsWorksCM::Server").WithTerraformTypeName("awscc_opsworkscm_server")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                          "Arn",
 		"associate_public_ip_address":  "AssociatePublicIpAddress",

@@ -52,7 +52,6 @@ func resourcePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -67,7 +66,9 @@ func resourcePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Logs::ResourcePolicy").WithTerraformTypeName("awscc_logs_resource_policy").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Logs::ResourcePolicy").WithTerraformTypeName("awscc_logs_resource_policy")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"policy_document": "PolicyDocument",
 		"policy_name":     "PolicyName",

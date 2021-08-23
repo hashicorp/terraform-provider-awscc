@@ -86,7 +86,6 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -101,7 +100,9 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::EnclaveCertificateIamRoleAssociation").WithTerraformTypeName("awscc_ec2_enclave_certificate_iam_role_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::EnclaveCertificateIamRoleAssociation").WithTerraformTypeName("awscc_ec2_enclave_certificate_iam_role_association")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"certificate_arn":            "CertificateArn",
 		"certificate_s3_bucket_name": "CertificateS3BucketName",

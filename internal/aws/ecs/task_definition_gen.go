@@ -1610,7 +1610,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -1625,7 +1624,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskDefinition").WithTerraformTypeName("awscc_ecs_task_definition").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskDefinition").WithTerraformTypeName("awscc_ecs_task_definition")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_point_id":                "AccessPointId",
 		"add":                            "Add",
