@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -53,7 +54,10 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLength(1, 4),
+			},
+			Required: true,
 		},
 		"bucket_name": {
 			// Property: BucketName

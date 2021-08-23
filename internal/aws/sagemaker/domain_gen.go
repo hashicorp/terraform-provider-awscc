@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -384,7 +386,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: SecurityGroups
 						Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(0, 5),
+						},
+						Optional: true,
 					},
 					"sharing_settings": {
 						// Property: SharingSettings
@@ -513,7 +518,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The VPC subnets that Studio uses for communication.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLength(1, 16),
+			},
+			Required: true,
 			// SubnetIds is a force-new attribute.
 		},
 		"tags": {

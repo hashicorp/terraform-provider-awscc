@@ -50,9 +50,11 @@ func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Type:       types.ListType{ElemType: types.StringType},
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Type: types.ListType{ElemType: types.StringType},
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
 		},
 		"name": {
 			// Property: Name

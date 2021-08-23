@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -484,14 +486,20 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: SecurityGroupIds
 						Description: "A list of security groups to use for the environment.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(1, 5),
+						},
+						Optional: true,
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
 						Description: "A list of subnets to use for the environment. These must be private subnets, in the same VPC, in two different availability zones.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(2, 2),
+						},
+						Optional: true,
+						Computed: true,
 						// SubnetIds is a force-new attribute.
 					},
 				},

@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -133,12 +135,18 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"sheet_indexes": {
 									// Property: SheetIndexes
-									Type:     types.ListType{ElemType: types.NumberType},
+									Type: types.ListType{ElemType: types.NumberType},
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 1),
+									},
 									Optional: true,
 								},
 								"sheet_names": {
 									// Property: SheetNames
-									Type:     types.ListType{ElemType: types.StringType},
+									Type: types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 1),
+									},
 									Optional: true,
 								},
 							},

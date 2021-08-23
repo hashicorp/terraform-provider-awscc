@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -334,7 +336,10 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"values": {
 						// Property: Values
-						Type:     types.ListType{ElemType: types.StringType},
+						Type: types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(0, 50),
+						},
 						Required: true,
 					},
 				},

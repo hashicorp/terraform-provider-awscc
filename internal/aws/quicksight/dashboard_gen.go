@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -488,7 +490,10 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Actions
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(1, 16),
+						},
+						Required: true,
 					},
 					"principal": {
 						// Property: Principal
@@ -802,7 +807,10 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: DataSetArns
 						Description: "<p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this\n            version of the dashboard.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(0, 100),
+						},
+						Optional: true,
 					},
 					"description": {
 						// Property: Description

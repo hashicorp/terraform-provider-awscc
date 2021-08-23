@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -82,7 +84,10 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Values
 						Description: "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(1, 1),
+						},
+						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -1653,7 +1655,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"change_detecting_columns": {
 												// Property: ChangeDetectingColumns
-												Type:     types.ListType{ElemType: types.StringType},
+												Type: types.ListType{ElemType: types.StringType},
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLength(1, 5),
+												},
 												Required: true,
 											},
 											"document_data_column_name": {
@@ -2110,7 +2115,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"included_states": {
 												// Property: IncludedStates
-												Type:     types.ListType{ElemType: types.StringType},
+												Type: types.ListType{ElemType: types.StringType},
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLength(1, 3),
+												},
 												Required: true,
 											},
 											"standard_knowledge_article_type_configuration": {

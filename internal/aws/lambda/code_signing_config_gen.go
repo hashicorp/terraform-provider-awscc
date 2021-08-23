@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -53,7 +55,10 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						// Property: SigningProfileVersionArns
 						Description: "List of Signing profile version Arns",
 						Type:        types.ListType{ElemType: types.StringType},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(1, 20),
+						},
+						Required: true,
 					},
 				},
 			),

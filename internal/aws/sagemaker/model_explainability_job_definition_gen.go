@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -590,13 +592,19 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									// Property: SecurityGroupIds
 									Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
 									Type:        types.ListType{ElemType: types.StringType},
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 5),
+									},
+									Required: true,
 								},
 								"subnets": {
 									// Property: Subnets
 									Description: "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
 									Type:        types.ListType{ElemType: types.StringType},
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 16),
+									},
+									Required: true,
 								},
 							},
 						),

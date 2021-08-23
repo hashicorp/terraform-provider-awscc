@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -813,7 +815,10 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											},
 											"historical_data_path_list": {
 												// Property: HistoricalDataPathList
-												Type:     types.ListType{ElemType: types.StringType},
+												Type: types.ListType{ElemType: types.StringType},
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLength(1, 1),
+												},
 												Optional: true,
 											},
 											"role_arn": {
@@ -823,7 +828,10 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											},
 											"templated_path_list": {
 												// Property: TemplatedPathList
-												Type:     types.ListType{ElemType: types.StringType},
+												Type: types.ListType{ElemType: types.StringType},
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLength(1, 1),
+												},
 												Optional: true,
 											},
 										},

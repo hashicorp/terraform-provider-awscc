@@ -162,15 +162,17 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 			//
 			// List.
 			//
+			var elementType string
+
 			switch itemType := property.Items.Type.String(); itemType {
 			case cfschema.PropertyTypeBoolean:
-				e.printf("Type:types.ListType{ElemType:types.BoolType},\n")
+				elementType = "types.BoolType"
 
 			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-				e.printf("Type:types.ListType{ElemType:types.NumberType},\n")
+				elementType = "types.NumberType"
 
 			case cfschema.PropertyTypeString:
-				e.printf("Type:types.ListType{ElemType:types.StringType},\n")
+				elementType = "types.StringType"
 
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
@@ -208,13 +210,32 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 				e.printf("},\n")
 				e.printf("),\n")
 
+				if arrayType == aggregateOrderedSet {
+					features |= UsesValidation
+					e.printf("Validators:[]tfsdk.AttributeValidator{validate.UniqueItems()},\n")
+				}
+
 			default:
 				return 0, unsupportedTypeError(path, fmt.Sprintf("list of %s", itemType))
 			}
 
-			if arrayType == aggregateOrderedSet {
-				features |= UsesValidation
-				e.printf("Validators:[]tfsdk.AttributeValidator{validate.UniqueItems()},\n")
+			if elementType != "" {
+				e.printf("Type:types.ListType{ElemType:%s},\n", elementType)
+
+				if arrayType == aggregateOrderedSet || (property.MinItems != nil && property.MaxItems != nil) {
+					features |= UsesValidation
+					e.printf("Validators:[]tfsdk.AttributeValidator{\n")
+
+					if property.MinItems != nil && property.MaxItems != nil {
+						e.printf("validate.ArrayLength(%d, %d),\n", *property.MinItems, *property.MaxItems)
+					}
+
+					if arrayType == aggregateOrderedSet {
+						e.printf("validate.UniqueItems(),\n")
+					}
+
+					e.printf("},\n")
+				}
 			}
 		}
 

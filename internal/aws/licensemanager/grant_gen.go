@@ -33,9 +33,11 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Type:       types.ListType{ElemType: types.StringType},
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Type: types.ListType{ElemType: types.StringType},
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
 			// AllowedOperations is a write-only attribute.
 		},
 		"grant_arn": {
@@ -91,9 +93,11 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Type:       types.ListType{ElemType: types.StringType},
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Type: types.ListType{ElemType: types.StringType},
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
 			// Principals is a write-only attribute.
 		},
 		"status": {

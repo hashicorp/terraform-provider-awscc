@@ -142,9 +142,12 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"values": {
 												// Property: Values
-												Type:       types.ListType{ElemType: types.StringType},
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Required:   true,
+												Type: types.ListType{ElemType: types.StringType},
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLength(1, 10),
+													validate.UniqueItems(),
+												},
+												Required: true,
 											},
 										},
 										providertypes.SetNestedAttributesOptions{
@@ -216,9 +219,11 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"chatbot_sns": {
 						// Property: ChatbotSns
-						Type:       types.ListType{ElemType: types.StringType},
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
+						Type: types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
+						Optional: true,
 					},
 				},
 			),

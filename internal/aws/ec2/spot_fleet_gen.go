@@ -741,9 +741,11 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"groups": {
 												// Property: Groups
-												Type:       types.ListType{ElemType: types.StringType},
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Optional:   true,
+												Type: types.ListType{ElemType: types.StringType},
+												Validators: []tfsdk.AttributeValidator{
+													validate.UniqueItems(),
+												},
+												Optional: true,
 											},
 											"ipv_6_address_count": {
 												// Property: Ipv6AddressCount

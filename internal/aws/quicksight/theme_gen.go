@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -275,7 +277,10 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Colors
 									Description: "<p>The hexadecimal codes for the colors.</p>",
 									Type:        types.ListType{ElemType: types.StringType},
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(0, 100),
+									},
+									Optional: true,
 								},
 								"empty_fill_color": {
 									// Property: EmptyFillColor
@@ -287,7 +292,10 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: MinMaxGradient
 									Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
 									Type:        types.ListType{ElemType: types.StringType},
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(0, 100),
+									},
+									Optional: true,
 								},
 							},
 						),
@@ -579,7 +587,10 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Actions
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(1, 16),
+						},
+						Required: true,
 					},
 					"principal": {
 						// Property: Principal
@@ -977,7 +988,10 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Colors
 												Description: "<p>The hexadecimal codes for the colors.</p>",
 												Type:        types.ListType{ElemType: types.StringType},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLength(0, 100),
+												},
+												Optional: true,
 											},
 											"empty_fill_color": {
 												// Property: EmptyFillColor
@@ -989,7 +1003,10 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: MinMaxGradient
 												Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
 												Type:        types.ListType{ElemType: types.StringType},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLength(0, 100),
+												},
+												Optional: true,
 											},
 										},
 									),

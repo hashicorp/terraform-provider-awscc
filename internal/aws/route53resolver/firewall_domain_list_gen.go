@@ -103,8 +103,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "An inline list of domains to use for this domain list.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
 			// Domains is a write-only attribute.
 		},
 		"id": {

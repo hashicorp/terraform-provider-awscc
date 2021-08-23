@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -39,7 +40,10 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLength(1, 4),
+			},
+			Required: true,
 		},
 		"domain": {
 			// Property: Domain

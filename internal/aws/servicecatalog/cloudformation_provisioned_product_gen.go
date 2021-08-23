@@ -59,10 +59,12 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Type:       types.ListType{ElemType: types.StringType},
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
-			Computed:   true,
+			Type: types.ListType{ElemType: types.StringType},
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
+			Computed: true,
 			// NotificationArns is a force-new attribute.
 		},
 		"outputs": {
@@ -262,9 +264,11 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				map[string]tfsdk.Attribute{
 					"stack_set_accounts": {
 						// Property: StackSetAccounts
-						Type:       types.ListType{ElemType: types.StringType},
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
+						Type: types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
+						Optional: true,
 					},
 					"stack_set_failure_tolerance_count": {
 						// Property: StackSetFailureToleranceCount
@@ -293,9 +297,11 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 					},
 					"stack_set_regions": {
 						// Property: StackSetRegions
-						Type:       types.ListType{ElemType: types.StringType},
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
+						Type: types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
+						Optional: true,
 					},
 				},
 			),

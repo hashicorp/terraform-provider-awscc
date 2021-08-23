@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -106,7 +108,10 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Columns
 									Description: "<p>Columns in this hierarchy.</p>",
 									Type:        types.ListType{ElemType: types.StringType},
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 16),
+									},
+									Required: true,
 								},
 								"country_code": {
 									// Property: CountryCode
@@ -167,7 +172,10 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"principals": {
 						// Property: Principals
-						Type:     types.ListType{ElemType: types.StringType},
+						Type: types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(1, 100),
+						},
 						Optional: true,
 					},
 				},
@@ -242,7 +250,10 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"columns": {
 						// Property: Columns
-						Type:     types.ListType{ElemType: types.StringType},
+						Type: types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(0, 5000),
+						},
 						Optional: true,
 					},
 					"description": {
@@ -711,7 +722,10 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: ProjectedColumns
 												Description: "<p>Projected columns.</p>",
 												Type:        types.ListType{ElemType: types.StringType},
-												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLength(1, 2000),
+												},
+												Required: true,
 											},
 										},
 									),
@@ -985,7 +999,10 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Actions
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(1, 16),
+						},
+						Required: true,
 					},
 					"principal": {
 						// Property: Principal

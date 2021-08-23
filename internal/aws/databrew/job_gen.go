@@ -627,9 +627,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"partition_columns": {
 						// Property: PartitionColumns
-						Type:       types.ListType{ElemType: types.StringType},
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
+						Type: types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
+						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

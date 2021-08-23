@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -84,7 +86,10 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "<p>The ARNs of the datasets of the analysis.</p>",
 			Type:        types.ListType{ElemType: types.StringType},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLength(0, 100),
+			},
+			Computed: true,
 		},
 		"errors": {
 			// Property: Errors
@@ -445,7 +450,10 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Actions
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(1, 16),
+						},
+						Required: true,
 					},
 					"principal": {
 						// Property: Principal

@@ -710,9 +710,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"links": {
 						// Property: Links
-						Type:       types.ListType{ElemType: types.StringType},
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
+						Type: types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
+						Optional: true,
 					},
 					"linux_parameters": {
 						// Property: LinuxParameters
@@ -752,9 +754,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"permissions": {
 												// Property: Permissions
-												Type:       types.ListType{ElemType: types.StringType},
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Optional:   true,
+												Type: types.ListType{ElemType: types.StringType},
+												Validators: []tfsdk.AttributeValidator{
+													validate.UniqueItems(),
+												},
+												Optional: true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -1337,10 +1341,12 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Type:       types.ListType{ElemType: types.StringType},
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
-			Computed:   true,
+			Type: types.ListType{ElemType: types.StringType},
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
+			Computed: true,
 			// RequiresCompatibilities is a force-new attribute.
 		},
 		"tags": {

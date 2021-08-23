@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -111,7 +113,10 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			// }
 			Description: "A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLength(0, 1000),
+			},
+			Optional: true,
 		},
 		"organization_conformance_pack_name": {
 			// Property: OrganizationConformancePackName

@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -113,7 +114,10 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: AgentArns
 						Description: "ARN(s) of the agent(s) to use for an NFS location.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLength(1, 4),
+						},
+						Required: true,
 					},
 				},
 			),

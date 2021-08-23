@@ -309,15 +309,19 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Command
 						Description: "Command.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
+						Optional: true,
 					},
 					"entry_point": {
 						// Property: EntryPoint
 						Description: "EntryPoint.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
+						Optional: true,
 					},
 					"working_directory": {
 						// Property: WorkingDirectory

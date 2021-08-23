@@ -150,8 +150,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) A list of response types supported by the function.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
 		},
 		"id": {
 			// Property: Id
@@ -229,8 +231,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(ActiveMQ) A list of ActiveMQ queues.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLength(1, 1),
+				validate.UniqueItems(),
+			},
+			Optional: true,
 		},
 		"self_managed_event_source": {
 			// Property: SelfManagedEventSource
@@ -275,8 +280,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									// Property: KafkaBootstrapServers
 									Description: "A list of Kafka server endpoints.",
 									Type:        types.ListType{ElemType: types.StringType},
-									Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 10),
+										validate.UniqueItems(),
+									},
+									Optional: true,
 								},
 							},
 						),
@@ -393,8 +401,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Kafka) A list of Kafka topics.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLength(1, 1),
+				validate.UniqueItems(),
+			},
+			Optional: true,
 		},
 		"tumbling_window_in_seconds": {
 			// Property: TumblingWindowInSeconds

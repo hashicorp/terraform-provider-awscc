@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -132,7 +134,10 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "minItems": 0,
 			//   "type": "array"
 			// }
-			Type:     types.ListType{ElemType: types.StringType},
+			Type: types.ListType{ElemType: types.StringType},
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLength(0, 1),
+			},
 			Optional: true,
 			Computed: true,
 			// ServerCertificateArns is a force-new attribute.

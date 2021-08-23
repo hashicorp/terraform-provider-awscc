@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -210,7 +212,10 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 							map[string]tfsdk.Attribute{
 								"groups": {
 									// Property: Groups
-									Type:     types.ListType{ElemType: types.StringType},
+									Type: types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 100),
+									},
 									Optional: true,
 								},
 								"policy_arn": {
@@ -220,12 +225,18 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 								},
 								"roles": {
 									// Property: Roles
-									Type:     types.ListType{ElemType: types.StringType},
+									Type: types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 100),
+									},
 									Optional: true,
 								},
 								"users": {
 									// Property: Users
-									Type:     types.ListType{ElemType: types.StringType},
+									Type: types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 100),
+									},
 									Optional: true,
 								},
 							},
@@ -243,7 +254,10 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 								},
 								"target_ids": {
 									// Property: TargetIds
-									Type:     types.ListType{ElemType: types.StringType},
+									Type: types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 100),
+									},
 									Required: true,
 								},
 							},
@@ -256,7 +270,10 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 							map[string]tfsdk.Attribute{
 								"instance_ids": {
 									// Property: InstanceIds
-									Type:     types.ListType{ElemType: types.StringType},
+									Type: types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 100),
+									},
 									Required: true,
 								},
 								"region": {

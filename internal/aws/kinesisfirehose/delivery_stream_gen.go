@@ -627,15 +627,21 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"security_group_ids": {
 									// Property: SecurityGroupIds
-									Type:       types.ListType{ElemType: types.StringType},
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Required:   true,
+									Type: types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 5),
+										validate.UniqueItems(),
+									},
+									Required: true,
 								},
 								"subnet_ids": {
 									// Property: SubnetIds
-									Type:       types.ListType{ElemType: types.StringType},
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Required:   true,
+									Type: types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLength(1, 16),
+										validate.UniqueItems(),
+									},
+									Required: true,
 								},
 							},
 						),
@@ -1124,9 +1130,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																map[string]tfsdk.Attribute{
 																	"timestamp_formats": {
 																		// Property: TimestampFormats
-																		Type:       types.ListType{ElemType: types.StringType},
-																		Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-																		Optional:   true,
+																		Type: types.ListType{ElemType: types.StringType},
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.UniqueItems(),
+																		},
+																		Optional: true,
 																	},
 																},
 															),
@@ -1183,9 +1191,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	},
 																	"bloom_filter_columns": {
 																		// Property: BloomFilterColumns
-																		Type:       types.ListType{ElemType: types.StringType},
-																		Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-																		Optional:   true,
+																		Type: types.ListType{ElemType: types.StringType},
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.UniqueItems(),
+																		},
+																		Optional: true,
 																	},
 																	"bloom_filter_false_positive_probability": {
 																		// Property: BloomFilterFalsePositiveProbability

@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -385,7 +387,10 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLength(1, 20),
+			},
+			Optional: true,
 		},
 	}
 

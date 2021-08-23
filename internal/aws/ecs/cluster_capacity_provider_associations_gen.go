@@ -37,8 +37,10 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			// }
 			Description: "List of capacity providers to associate with the cluster",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Required: true,
 		},
 		"cluster": {
 			// Property: Cluster
