@@ -54,9 +54,17 @@ func TestPropertyPathToAttributePath(t *testing.T) {
 		},
 	}
 
+	rt := resourceType{
+		cfToTfNameMap: map[string]string{
+			"BasicAuthParameters": "basic_auth_parameters",
+			"Password":            "password",
+			"Tags":                "tags",
+		},
+	}
+
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			attributePath, err := propertyPathToAttributePath(testCase.PropertyPath)
+			attributePath, err := rt.propertyPathToAttributePath(testCase.PropertyPath)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error from propertyPathToAttributePath")
