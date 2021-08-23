@@ -56,42 +56,6 @@ func CloudFormationPropertyToTerraformAttribute(propertyName string) string {
 	return attributeName.String()
 }
 
-// TerraformAttributeToCloudFormationProperty converts a Terraform attribute name to a CloudFormation property name.
-// For example `global_replication_group_description` -> `GlobalReplicationGroupDescription`.
-func TerraformAttributeToCloudFormationProperty(attributeName string) string {
-	attributeName = strings.TrimSpace(attributeName)
-
-	if attributeName == "" {
-		return attributeName
-	}
-
-	capNext := true // Start with a capital letter.
-	propertyName := strings.Builder{}
-
-	for _, ch := range []byte(attributeName) {
-		isCap := isCapitalLetter(ch)
-		isLow := isLowercaseLetter(ch)
-		isDig := isNumeric(ch)
-
-		if capNext {
-			if isLow {
-				ch = toUppercaseLetter(ch)
-			}
-		}
-		if isCap || isLow {
-			propertyName.WriteByte(ch)
-			capNext = false
-		} else if isDig {
-			propertyName.WriteByte(ch)
-			capNext = true
-		} else {
-			capNext = true
-		}
-	}
-
-	return propertyName.String()
-}
-
 func isCapitalLetter(ch byte) bool {
 	return ch >= 'A' && ch <= 'Z'
 }
@@ -107,11 +71,5 @@ func isNumeric(ch byte) bool {
 func toLowercaseLetter(ch byte) byte {
 	ch += 'a'
 	ch -= 'A'
-	return ch
-}
-
-func toUppercaseLetter(ch byte) byte {
-	ch += 'A'
-	ch -= 'a'
 	return ch
 }

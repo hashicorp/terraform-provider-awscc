@@ -16,7 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 	"github.com/mattbaird/jsonpatch"
@@ -122,7 +121,7 @@ func WithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
 		writeOnlyAttributePaths := make([]*tftypes.AttributePath, 0)
 
 		for _, writeOnlyPropertyPath := range v {
-			writeOnlyAttributePath, err := propertyPathToAttributePath(writeOnlyPropertyPath)
+			writeOnlyAttributePath, err := o.propertyPathToAttributePath(writeOnlyPropertyPath)
 
 			if err != nil {
 				return fmt.Errorf("error creating write-only attribute path (%s): %w", writeOnlyPropertyPath, err)
@@ -318,6 +317,41 @@ func (rt *resourceType) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfproto
 
 func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider) (tfsdk.Resource, []*tfprotov6.Diagnostic) {
 	return newGenericResource(provider, rt), nil
+}
+
+// propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
+func (rt *resourceType) propertyPathToAttributePath(propertyPath string) (*tftypes.AttributePath, error) {
+	segments := strings.Split(propertyPath, "/")
+
+	if got, expected := len(segments), 3; got < expected {
+		return nil, fmt.Errorf("expected at least %d property path segments, got: %d", expected, got)
+	}
+
+	if got, expected := segments[0], ""; got != expected {
+		return nil, fmt.Errorf("expected %q for the initial property path segment, got: %q", expected, got)
+	}
+
+	if got, expected := segments[1], "properties"; got != expected {
+		return nil, fmt.Errorf("expected %q for the second property path segment, got: %q", expected, got)
+	}
+
+	attributePath := tftypes.NewAttributePath()
+
+	for _, segment := range segments[2:] {
+		switch segment {
+		case "", "*":
+			return nil, fmt.Errorf("invalid property path segment: %q", segment)
+
+		default:
+			attributeName, ok := rt.cfToTfNameMap[segment]
+			if !ok {
+				return nil, fmt.Errorf("attribute name mapping not found: %s", segment)
+			}
+			attributePath = attributePath.WithAttributeName(attributeName)
+		}
+	}
+
+	return attributePath, nil
 }
 
 // Implements tfsdk.Resource.
@@ -711,35 +745,4 @@ func patchDocument(old, new string) (string, error) {
 	}
 
 	return string(b), nil
-}
-
-// propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
-func propertyPathToAttributePath(propertyPath string) (*tftypes.AttributePath, error) {
-	segments := strings.Split(propertyPath, "/")
-
-	if got, expected := len(segments), 3; got < expected {
-		return nil, fmt.Errorf("expected at least %d property path segments, got: %d", expected, got)
-	}
-
-	if got, expected := segments[0], ""; got != expected {
-		return nil, fmt.Errorf("expected %q for the initial property path segment, got: %q", expected, got)
-	}
-
-	if got, expected := segments[1], "properties"; got != expected {
-		return nil, fmt.Errorf("expected %q for the second property path segment, got: %q", expected, got)
-	}
-
-	attributePath := tftypes.NewAttributePath()
-
-	for _, segment := range segments[2:] {
-		switch segment {
-		case "", "*":
-			return nil, fmt.Errorf("invalid property path segment: %q", segment)
-
-		default:
-			attributePath = attributePath.WithAttributeName(naming.CloudFormationPropertyToTerraformAttribute(segment))
-		}
-	}
-
-	return attributePath, nil
 }
