@@ -53,7 +53,7 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
-					"cloud_formation": {
+					"cloudformation": {
 						// Property: CloudFormation
 						Description: "CloudFormation resource for DevOps Guru to monitor",
 						Attributes: tfsdk.SingleNestedAttributes(
@@ -106,7 +106,7 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"cloud_formation":            "CloudFormation",
+		"cloudformation":             "CloudFormation",
 		"resource_collection_filter": "ResourceCollectionFilter",
 		"resource_collection_type":   "ResourceCollectionType",
 		"stack_names":                "StackNames",

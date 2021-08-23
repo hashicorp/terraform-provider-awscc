@@ -397,7 +397,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						),
 						Optional: true,
 					},
-					"cloud_watch_logging_options": {
+					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
@@ -538,7 +538,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									),
 									Optional: true,
 								},
-								"cloud_watch_logging_options": {
+								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
@@ -1073,7 +1073,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						),
 						Optional: true,
 					},
-					"cloud_watch_logging_options": {
+					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
@@ -1435,7 +1435,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									),
 									Optional: true,
 								},
-								"cloud_watch_logging_options": {
+								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
@@ -1799,7 +1799,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						),
 						Optional: true,
 					},
-					"cloud_watch_logging_options": {
+					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
@@ -1979,7 +1979,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									),
 									Optional: true,
 								},
-								"cloud_watch_logging_options": {
+								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
@@ -2428,7 +2428,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
-					"cloud_watch_logging_options": {
+					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
@@ -2577,7 +2577,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									),
 									Optional: true,
 								},
-								"cloud_watch_logging_options": {
+								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
@@ -2682,7 +2682,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									),
 									Optional: true,
 								},
-								"cloud_watch_logging_options": {
+								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
@@ -2885,7 +2885,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						),
 						Optional: true,
 					},
-					"cloud_watch_logging_options": {
+					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
@@ -3163,7 +3163,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
-					"cloud_watch_logging_options": {
+					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
@@ -3299,7 +3299,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									),
 									Optional: true,
 								},
-								"cloud_watch_logging_options": {
+								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
@@ -3456,7 +3456,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"buffering_hints":                          "BufferingHints",
 		"case_insensitive":                         "CaseInsensitive",
 		"catalog_id":                               "CatalogId",
-		"cloud_watch_logging_options":              "CloudWatchLoggingOptions",
+		"cloudwatch_logging_options":               "CloudWatchLoggingOptions",
 		"cluster_endpoint":                         "ClusterEndpoint",
 		"cluster_jdbcurl":                          "ClusterJDBCURL",
 		"column_to_json_key_mappings":              "ColumnToJsonKeyMappings",

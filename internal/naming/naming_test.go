@@ -42,6 +42,11 @@ func TestCloudFormationPropertyToTerraformAttribute(t *testing.T) {
 			Value:         "AWS99Thing",
 			ExpectedValue: "aws99_thing",
 		},
+		{
+			TestName:      "including replacement",
+			Value:         "CloudWatchLogsLogGroupArn",
+			ExpectedValue: "cloudwatch_logs_log_group_arn",
+		},
 	}
 
 	for _, testCase := range testCases {

@@ -152,12 +152,12 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The session logging configuration for ExecuteCommand.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
-											"cloud_watch_encryption_enabled": {
+											"cloudwatch_encryption_enabled": {
 												// Property: CloudWatchEncryptionEnabled
 												Type:     types.BoolType,
 												Optional: true,
 											},
-											"cloud_watch_log_group_name": {
+											"cloudwatch_log_group_name": {
 												// Property: CloudWatchLogGroupName
 												Type:     types.StringType,
 												Optional: true,
@@ -296,8 +296,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"base":                               "Base",
 		"capacity_provider":                  "CapacityProvider",
 		"capacity_providers":                 "CapacityProviders",
-		"cloud_watch_encryption_enabled":     "CloudWatchEncryptionEnabled",
-		"cloud_watch_log_group_name":         "CloudWatchLogGroupName",
+		"cloudwatch_encryption_enabled":      "CloudWatchEncryptionEnabled",
+		"cloudwatch_log_group_name":          "CloudWatchLogGroupName",
 		"cluster_name":                       "ClusterName",
 		"cluster_settings":                   "ClusterSettings",
 		"configuration":                      "Configuration",

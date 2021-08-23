@@ -119,7 +119,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     providertypes.SetType{ElemType: types.StringType},
 						Optional: true,
 					},
-					"cloud_watch_metrics_enabled": {
+					"cloudwatch_metrics_enabled": {
 						// Property: CloudWatchMetricsEnabled
 						Type:     types.BoolType,
 						Optional: true,
@@ -259,7 +259,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"arn":                               "Arn",
 		"block_public_acls":                 "BlockPublicAcls",
 		"block_public_policy":               "BlockPublicPolicy",
-		"cloud_watch_metrics_enabled":       "CloudWatchMetricsEnabled",
+		"cloudwatch_metrics_enabled":        "CloudWatchMetricsEnabled",
 		"content_transformation":            "ContentTransformation",
 		"creation_date":                     "CreationDate",
 		"ignore_public_acls":                "IgnorePublicAcls",

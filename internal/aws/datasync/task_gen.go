@@ -22,7 +22,7 @@ func init() {
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::Task resource type.
 func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
-		"cloud_watch_log_group_arn": {
+		"cloudwatch_log_group_arn": {
 			// Property: CloudWatchLogGroupArn
 			// CloudFormation resource type schema:
 			// {
@@ -545,7 +545,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"atime":                              "Atime",
 		"bytes_per_second":                   "BytesPerSecond",
-		"cloud_watch_log_group_arn":          "CloudWatchLogGroupArn",
+		"cloudwatch_log_group_arn":           "CloudWatchLogGroupArn",
 		"destination_location_arn":           "DestinationLocationArn",
 		"destination_network_interface_arns": "DestinationNetworkInterfaceArns",
 		"error_code":                         "ErrorCode",

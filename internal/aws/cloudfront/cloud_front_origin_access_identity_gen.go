@@ -21,7 +21,7 @@ func init() {
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::CloudFrontOriginAccessIdentity resource type.
 func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
-		"cloud_front_origin_access_identity_config": {
+		"cloudfront_origin_access_identity_config": {
 			// Property: CloudFrontOriginAccessIdentityConfig
 			// CloudFormation resource type schema:
 			// {
@@ -79,7 +79,7 @@ func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.Reso
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"cloud_front_origin_access_identity_config": "CloudFrontOriginAccessIdentityConfig",
+		"cloudfront_origin_access_identity_config": "CloudFrontOriginAccessIdentityConfig",
 		"comment":              "Comment",
 		"id":                   "Id",
 		"s3_canonical_user_id": "S3CanonicalUserId",

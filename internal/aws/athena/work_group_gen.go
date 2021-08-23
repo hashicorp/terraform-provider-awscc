@@ -234,7 +234,7 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						),
 						Optional: true,
 					},
-					"publish_cloud_watch_metrics_enabled": {
+					"publish_cloudwatch_metrics_enabled": {
 						// Property: PublishCloudWatchMetricsEnabled
 						Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
 						Type:        types.BoolType,
@@ -404,7 +404,7 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						),
 						Optional: true,
 					},
-					"publish_cloud_watch_metrics_enabled": {
+					"publish_cloudwatch_metrics_enabled": {
 						// Property: PublishCloudWatchMetricsEnabled
 						Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
 						Type:        types.BoolType,
@@ -504,7 +504,7 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"kms_key":                               "KmsKey",
 		"name":                                  "Name",
 		"output_location":                       "OutputLocation",
-		"publish_cloud_watch_metrics_enabled":   "PublishCloudWatchMetricsEnabled",
+		"publish_cloudwatch_metrics_enabled":    "PublishCloudWatchMetricsEnabled",
 		"recursive_delete_option":               "RecursiveDeleteOption",
 		"remove_bytes_scanned_cutoff_per_query": "RemoveBytesScannedCutoffPerQuery",
 		"remove_encryption_configuration":       "RemoveEncryptionConfiguration",

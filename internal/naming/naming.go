@@ -4,6 +4,15 @@ import (
 	"strings"
 )
 
+var (
+	// Replace all occuurences of these strings in the property name.
+	propertyNameReplacements = map[string]string{
+		"CloudFormation": "Cloudformation",
+		"CloudFront":     "Cloudfront",
+		"CloudWatch":     "Cloudwatch",
+	}
+)
+
 // CloudFormationPropertyToTerraformAttribute converts a CloudFormation property name to a Terraform attribute name.
 // For example `GlobalReplicationGroupDescription` -> `global_replication_group_description`.
 func CloudFormationPropertyToTerraformAttribute(propertyName string) string {
@@ -11,6 +20,10 @@ func CloudFormationPropertyToTerraformAttribute(propertyName string) string {
 
 	if propertyName == "" {
 		return propertyName
+	}
+
+	for old, new := range propertyNameReplacements {
+		propertyName = strings.ReplaceAll(propertyName, old, new)
 	}
 
 	attributeName := strings.Builder{}

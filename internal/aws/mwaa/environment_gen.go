@@ -271,7 +271,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Logging configuration for a specific airflow component.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
-								"cloud_watch_log_group_arn": {
+								"cloudwatch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
@@ -298,7 +298,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Logging configuration for a specific airflow component.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
-								"cloud_watch_log_group_arn": {
+								"cloudwatch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
@@ -325,7 +325,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Logging configuration for a specific airflow component.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
-								"cloud_watch_log_group_arn": {
+								"cloudwatch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
@@ -352,7 +352,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Logging configuration for a specific airflow component.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
-								"cloud_watch_log_group_arn": {
+								"cloudwatch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
@@ -379,7 +379,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Logging configuration for a specific airflow component.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
-								"cloud_watch_log_group_arn": {
+								"cloudwatch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
@@ -649,7 +649,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"airflow_configuration_options":   "AirflowConfigurationOptions",
 		"airflow_version":                 "AirflowVersion",
 		"arn":                             "Arn",
-		"cloud_watch_log_group_arn":       "CloudWatchLogGroupArn",
+		"cloudwatch_log_group_arn":        "CloudWatchLogGroupArn",
 		"dag_processing_logs":             "DagProcessingLogs",
 		"dag_s3_path":                     "DagS3Path",
 		"enabled":                         "Enabled",
