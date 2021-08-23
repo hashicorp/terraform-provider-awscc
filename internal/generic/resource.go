@@ -26,12 +26,23 @@ import (
 type ResourceTypeOptionsFunc func(*resourceType) error
 
 // WithAttributeNameMap is a helper function to construct functional options
-// that set a resource type's attribute name map.
+// that set a resource type's attribute name maps.
 // If multiple WithAttributeNameMap calls are made, the last call overrides
 // the previous calls' values.
 func WithAttributeNameMap(v map[string]string) ResourceTypeOptionsFunc {
 	return func(o *resourceType) error {
-		o.attributeNameMap = v
+		cfToTfNameMap := make(map[string]string, len(v))
+
+		for tfName, cfName := range v {
+			_, ok := cfToTfNameMap[cfName]
+			if ok {
+				return fmt.Errorf("duplicate attribute name mapping for CloudFormation property %s", cfName)
+			}
+			cfToTfNameMap[cfName] = tfName
+		}
+
+		o.tfToCfNameMap = v
+		o.cfToTfNameMap = cfToTfNameMap
 
 		return nil
 	}
@@ -243,7 +254,8 @@ type resourceType struct {
 	cfTypeName              string                   // CloudFormation type name for the resource type
 	tfSchema                tfsdk.Schema             // Terraform schema for the resource type
 	tfTypeName              string                   // Terraform type name for resource type
-	attributeNameMap        map[string]string        // Map of Terraform attribute name to CloudFormation property name
+	tfToCfNameMap           map[string]string        // Map of Terraform attribute name to CloudFormation property name
+	cfToTfNameMap           map[string]string        // Map of CloudFormation property name to Terraform attribute name
 	isImmutableType         bool                     // Resources cannot be updated and must be recreated
 	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
 	createTimeout           time.Duration            // Maximum wait time for resource creation
