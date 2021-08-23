@@ -453,8 +453,9 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		return
 	}
 
+	translator := toTerraform{cfToTfNameMap: r.resourceType.cfToTfNameMap}
 	schema := &currentState.Schema
-	val, err := GetCloudFormationResourceModelValue(ctx, schema, aws.ToString(description.ResourceModel))
+	val, err := translator.FromString(ctx, schema, aws.ToString(description.ResourceModel))
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{

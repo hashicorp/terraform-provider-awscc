@@ -8,7 +8,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
@@ -99,128 +98,6 @@ func SetUnknownValuesFromCloudFormationResourceModelRaw(ctx context.Context, sta
 	}
 
 	return nil
-}
-
-// GetCloudFormationResourceModelValue returns the Terraform Value for the specified CloudFormation ResourceModel (string).
-func GetCloudFormationResourceModelValue(ctx context.Context, schema *tfsdk.Schema, resourceModel string) (tftypes.Value, error) {
-	var v interface{}
-
-	if err := json.Unmarshal([]byte(resourceModel), &v); err != nil {
-		return tftypes.Value{}, err
-	}
-
-	if v, ok := v.(map[string]interface{}); ok {
-		return GetCloudFormationResourceModelRawValue(ctx, schema, v)
-	}
-
-	return tftypes.Value{}, fmt.Errorf("CloudFormation ResourceModel value produced unexpected raw type: %T", v)
-}
-
-// GetCloudFormationResourceModelRawValue returns the Terraform Value for the specified CloudFormation ResourceModel (raw map[string]interface{}).
-func GetCloudFormationResourceModelRawValue(ctx context.Context, schema *tfsdk.Schema, resourceModel map[string]interface{}) (tftypes.Value, error) {
-	return getCloudFormationResourceModelValue(ctx, schema, nil, resourceModel)
-}
-
-func getCloudFormationResourceModelValue(ctx context.Context, schema *tfsdk.Schema, path *tftypes.AttributePath, v interface{}) (tftypes.Value, error) {
-	var typ tftypes.Type
-
-	if len(path.Steps()) == 0 {
-		typ = schema.AttributeType().TerraformType(ctx)
-	} else {
-		attrType, err := schema.AttributeTypeAtPath(path)
-
-		if err != nil {
-			return tftypes.Value{}, fmt.Errorf("error getting attribute type at %s: %w", path, err)
-		}
-
-		typ = attrType.TerraformType(ctx)
-	}
-
-	switch v := v.(type) {
-	//
-	// Primitive types.
-	//
-	case bool:
-		return tftypes.NewValue(tftypes.Bool, v), nil
-
-	case float64:
-		return tftypes.NewValue(tftypes.Number, v), nil
-
-	case string:
-		return tftypes.NewValue(tftypes.String, v), nil
-
-	//
-	// Complex types.
-	//
-	case []interface{}:
-		var vals []tftypes.Value
-		for idx, v := range v {
-			if typ.Is(tftypes.Set{}) {
-				// No need to worry about a specific value here.
-				path = path.WithElementKeyValue(tftypes.NewValue(typ.(tftypes.Set).ElementType, nil))
-			} else {
-				path = path.WithElementKeyInt(int64(idx))
-			}
-			val, err := getCloudFormationResourceModelValue(ctx, schema, path, v)
-			if err != nil {
-				return tftypes.Value{}, err
-			}
-			vals = append(vals, val)
-			path = path.WithoutLastStep()
-		}
-		return tftypes.NewValue(typ, vals), nil
-
-	case map[string]interface{}:
-		if typ.Is(tftypes.String) {
-			// Value is JSON string.
-			val, err := json.Marshal(v)
-
-			if err != nil {
-				return tftypes.Value{}, err
-			}
-
-			return tftypes.NewValue(typ, string(val)), nil
-		}
-
-		isObject := typ.Is(tftypes.Object{})
-		vals := make(map[string]tftypes.Value)
-		for key, v := range v {
-			if isObject {
-				// In the Terraform Value attribute names are snake cased.
-				path = path.WithAttributeName(naming.CloudFormationPropertyToTerraformAttribute(key))
-			} else {
-				path = path.WithElementKeyString(key)
-			}
-			val, err := getCloudFormationResourceModelValue(ctx, schema, path, v)
-			if err != nil {
-				if isObject {
-					tflog.Info(ctx, "not found in Terraform schema", "key", key, "path", path, "error", err.Error())
-					path = path.WithoutLastStep()
-					continue
-				}
-				return tftypes.Value{}, err
-			}
-			if isObject {
-				// In the Terraform Value attribute names are snake cased.
-				vals[naming.CloudFormationPropertyToTerraformAttribute(key)] = val
-			} else {
-				vals[key] = val
-			}
-			path = path.WithoutLastStep()
-		}
-		if isObject {
-			// Set any missing attributes to Null.
-			for k, t := range typ.(tftypes.Object).AttributeTypes {
-				if _, ok := vals[k]; !ok {
-					vals[k] = tftypes.NewValue(t, nil)
-				}
-			}
-		}
-		return tftypes.NewValue(typ, vals), nil
-
-	default:
-		return tftypes.Value{}, fmt.Errorf("unsupported raw type: %T", v)
-	}
 }
 
 // UnknownValuePath represents the path to an unknown (!val.IsKnown()) value.
