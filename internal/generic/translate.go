@@ -18,7 +18,7 @@ type toCloudFormation struct {
 
 // AsRaw returns the raw map[string]interface{} representing CloudFormation DesiredState from a Terraform Value.
 func (t toCloudFormation) AsRaw(ctx context.Context, val tftypes.Value) (map[string]interface{}, error) {
-	v, err := t.rawFromValue(val)
+	v, err := t.rawFromValue(ctx, val)
 
 	if err != nil {
 		return nil, err
@@ -54,7 +54,7 @@ func (t toCloudFormation) AsString(ctx context.Context, val tftypes.Value) (stri
 
 // rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
 // Terraform attribute names are mapped to CloudFormation property names.
-func (t toCloudFormation) rawFromValue(val tftypes.Value) (interface{}, error) {
+func (t toCloudFormation) rawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) {
 	if val.IsNull() || !val.IsKnown() {
 		return nil, nil
 	}
@@ -96,7 +96,7 @@ func (t toCloudFormation) rawFromValue(val tftypes.Value) (interface{}, error) {
 		}
 		vs := make([]interface{}, 0)
 		for _, val := range vals {
-			v, err := t.rawFromValue(val)
+			v, err := t.rawFromValue(ctx, val)
 			if err != nil {
 				return nil, err
 			}
@@ -117,7 +117,7 @@ func (t toCloudFormation) rawFromValue(val tftypes.Value) (interface{}, error) {
 		}
 		vs := make(map[string]interface{})
 		for name, val := range vals {
-			v, err := t.rawFromValue(val)
+			v, err := t.rawFromValue(ctx, val)
 			if err != nil {
 				return nil, err
 			}

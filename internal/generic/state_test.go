@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -257,123 +256,6 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 	})
 }
 
-func TestGetUnknownValuePaths(t *testing.T) {
-	testCases := []struct {
-		TestName      string
-		Value         tftypes.Value
-		ExpectedError bool
-		ExpectedPaths []UnknownValuePath
-	}{
-		{
-			TestName: "simple State",
-			Value:    makeSimpleValueWithUnknowns(),
-			ExpectedPaths: []UnknownValuePath{
-				{
-					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("arn"),
-					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("Arn"),
-				},
-				{
-					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("identifier"),
-					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("Identifier"),
-				},
-			},
-		},
-		{
-			TestName: "complex State",
-			Value:    makeComplexValueWithUnknowns(),
-			ExpectedPaths: []UnknownValuePath{
-				{
-					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("identifier"),
-					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("Identifier"),
-				},
-			},
-		},
-	}
-
-	opts := cmp.Options{
-		cmpopts.SortSlices(func(i, j UnknownValuePath) bool {
-			return i.InCloudFormationResourceModel.String() < j.InCloudFormationResourceModel.String()
-		}),
-	}
-
-	for _, testCase := range testCases {
-		t.Run(testCase.TestName, func(t *testing.T) {
-			got, err := GetUnknownValuePaths(context.TODO(), testCase.Value)
-
-			if err == nil && testCase.ExpectedError {
-				t.Fatalf("expected error from GetUnknownValuePaths")
-			}
-
-			if err != nil && !testCase.ExpectedError {
-				t.Fatalf("unexpected error from GetUnknownValuePaths: %s", err)
-			}
-
-			if err == nil {
-				if diff := cmp.Diff(got, testCase.ExpectedPaths, opts); diff != "" {
-					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
-				}
-			}
-		})
-	}
-}
-
-func TestSetUnknownValuesFromCloudFormationResourceModel(t *testing.T) {
-	testCases := []struct {
-		TestName      string
-		State         tfsdk.State
-		ResourceModel map[string]interface{}
-		ExpectedError bool
-		ExpectedState tfsdk.State
-	}{
-		{
-			TestName: "simple State",
-			State: tfsdk.State{
-				Raw:    makeSimpleValueWithUnknowns(),
-				Schema: testSimpleSchema,
-			},
-			ResourceModel: map[string]interface{}{
-				"Arn": "arn:aws:test:::test",
-			},
-			ExpectedState: tfsdk.State{
-				Raw: tftypes.NewValue(tftypes.Object{
-					AttributeTypes: map[string]tftypes.Type{
-						"arn":        tftypes.String,
-						"identifier": tftypes.String,
-						"name":       tftypes.String,
-						"number":     tftypes.Number,
-					},
-				}, map[string]tftypes.Value{
-					"arn":        tftypes.NewValue(tftypes.String, "arn:aws:test:::test"),
-					"identifier": tftypes.NewValue(tftypes.String, nil),
-					"name":       tftypes.NewValue(tftypes.String, "testing"),
-					"number":     tftypes.NewValue(tftypes.Number, 42),
-				}),
-				Schema: testSimpleSchema,
-			},
-		},
-	}
-
-	for _, testCase := range testCases {
-		t.Run(testCase.TestName, func(t *testing.T) {
-			err := SetUnknownValuesFromCloudFormationResourceModelRaw(context.TODO(), &testCase.State, testCase.ResourceModel)
-
-			if err == nil && testCase.ExpectedError {
-				t.Fatalf("expected error from SetUnknownValuesFromCloudFormationResourceModelRaw")
-			}
-
-			if err != nil && !testCase.ExpectedError {
-				t.Fatalf("unexpected error from SetUnknownValuesFromCloudFormationResourceModelRaw: %s", err)
-			}
-
-			if err == nil {
-				if diff := cmp.Diff(testCase.State, testCase.ExpectedState); diff != "" {
-					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
-				}
-			}
-		})
-	}
-}
-
 func TestCopyValueAtPath(t *testing.T) {
 	testCases := []struct {
 		TestName      string
@@ -613,8 +495,10 @@ func makeSimpleTestPlan() tfsdk.Plan {
 }
 
 var simpleTfToCfNameMap = map[string]string{
-	"name":   "Name",
-	"number": "Number",
+	"arn":        "Arn",
+	"identifier": "Identifier",
+	"name":       "Name",
+	"number":     "Number",
 }
 
 func makeSimpleTestPlanWithOptionalPopulated() tfsdk.Plan {
@@ -699,6 +583,7 @@ var complexTfToCfNameMap = map[string]string{
 	"delete_with_instance": "DeleteWithInstance",
 	"disks":                "Disks",
 	"id":                   "Id",
+	"identifier":           "Identifier",
 	"interface":            "Interface",
 	"machine_type":         "MachineType",
 	"name":                 "Name",

@@ -400,7 +400,19 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	err = SetUnknownValuesFromCloudFormationResourceModel(ctx, &response.State, aws.ToString(description.ResourceModel))
+	unknowns, err := Unknowns(ctx, response.State.Raw, r.resourceType.tfToCfNameMap)
+
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Creation Of Terraform State Unsuccessful",
+			Detail:   fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		})
+
+		return
+	}
+
+	err = unknowns.SetValuesFromString(ctx, &response.State, aws.ToString(description.ResourceModel))
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
