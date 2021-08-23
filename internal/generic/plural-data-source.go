@@ -15,7 +15,7 @@ import (
 	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
 )
 
-// PluralDataSourceTypeOptionsFunc is a type alias for a dataSource type functional option.
+// PluralDataSourceTypeOptionsFunc is a type alias for a PluralDataSource type functional option.
 type PluralDataSourceTypeOptionsFunc func(*PluralDataSourceType) error
 
 type PluralDataSourceTypeOptions []PluralDataSourceTypeOptionsFunc
@@ -23,8 +23,8 @@ type PluralDataSourceTypeOptions []PluralDataSourceTypeOptionsFunc
 // PluralDataSourceType implements tfsdk.DataSourceType
 type PluralDataSourceType struct {
 	cfTypeName string       // CloudFormation type name for the resource type
-	tfSchema   tfsdk.Schema // Terraform schema for the resource type
-	tfTypeName string       // Terraform type name for resource type
+	tfSchema   tfsdk.Schema // Terraform schema for the data source type
+	tfTypeName string       // Terraform type name for data source type
 }
 
 func FromCloudFormationAndTerraform(cfTypeName, tfTypeName string, schema tfsdk.Schema) PluralDataSourceTypeOptionsFunc {
@@ -40,27 +40,28 @@ func (opts PluralDataSourceTypeOptions) FromCloudFormationAndTerraform(cfTypeNam
 	return append(opts, FromCloudFormationAndTerraform(cfTypeName, tfTypeName, schema))
 }
 
-// NewPluralDataSourceType returns a new DataSourceType from the specified varidaic list of functional options.
+// NewPluralDataSourceType returns a new PluralDataSourceType from the specified variadic list of functional options.
 // It's public as it's called from generated code.
 func NewPluralDataSourceType(_ context.Context, optFns ...PluralDataSourceTypeOptionsFunc) (tfsdk.DataSourceType, error) {
-	dataSourceType := &PluralDataSourceType{}
+	pluralDataSourceType := &PluralDataSourceType{}
 
 	for _, optFn := range optFns {
-		err := optFn(dataSourceType)
+		err := optFn(pluralDataSourceType)
 
 		if err != nil {
 			return nil, err
 		}
 	}
 
-	if dataSourceType.cfTypeName == "" {
+	if pluralDataSourceType.cfTypeName == "" {
 		return nil, fmt.Errorf("no CloudFormation type name specified")
 	}
-	if dataSourceType.tfTypeName == "" {
+
+	if pluralDataSourceType.tfTypeName == "" {
 		return nil, fmt.Errorf("no Terraform type name specified")
 	}
 
-	return dataSourceType, nil
+	return pluralDataSourceType, nil
 }
 
 func (pdt *PluralDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
@@ -119,7 +120,7 @@ func (pd *pluralDataSource) describe(ctx context.Context, conn *cloudformation.C
 	return tfcloudformation.ListResourcesByTypeName(ctx, conn, pd.provider.RoleARN(ctx), pd.dataSourceType.cfTypeName)
 }
 
-// GetCloudFormationResourceModelValue returns the Terraform Value for the specified CloudFormation ResourceModel (string).
+// GetCloudFormationResourceDescriptionsValue returns the Terraform Value for the specified CloudFormation ResourceDescriptions.
 func GetCloudFormationResourceDescriptionsValue(id string, descriptions []cftypes.ResourceDescription) tftypes.Value {
 	m := map[string]tftypes.Value{
 		"id": tftypes.NewValue(tftypes.String, id),
