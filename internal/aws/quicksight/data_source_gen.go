@@ -2898,7 +2898,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -2913,7 +2912,65 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::DataSource").WithTerraformTypeName("awscc_quicksight_data_source").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::DataSource").WithTerraformTypeName("awscc_quicksight_data_source")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"actions":                          "Actions",
+		"alternate_data_source_parameters": "AlternateDataSourceParameters",
+		"amazon_elasticsearch_parameters":  "AmazonElasticsearchParameters",
+		"arn":                              "Arn",
+		"athena_parameters":                "AthenaParameters",
+		"aurora_parameters":                "AuroraParameters",
+		"aurora_postgre_sql_parameters":    "AuroraPostgreSqlParameters",
+		"aws_account_id":                   "AwsAccountId",
+		"bucket":                           "Bucket",
+		"catalog":                          "Catalog",
+		"cluster_id":                       "ClusterId",
+		"copy_source_arn":                  "CopySourceArn",
+		"created_time":                     "CreatedTime",
+		"credential_pair":                  "CredentialPair",
+		"credentials":                      "Credentials",
+		"data_source_id":                   "DataSourceId",
+		"data_source_parameters":           "DataSourceParameters",
+		"database":                         "Database",
+		"disable_ssl":                      "DisableSsl",
+		"domain":                           "Domain",
+		"error_info":                       "ErrorInfo",
+		"host":                             "Host",
+		"instance_id":                      "InstanceId",
+		"key":                              "Key",
+		"last_updated_time":                "LastUpdatedTime",
+		"manifest_file_location":           "ManifestFileLocation",
+		"maria_db_parameters":              "MariaDbParameters",
+		"message":                          "Message",
+		"my_sql_parameters":                "MySqlParameters",
+		"name":                             "Name",
+		"oracle_parameters":                "OracleParameters",
+		"password":                         "Password",
+		"permissions":                      "Permissions",
+		"port":                             "Port",
+		"postgre_sql_parameters":           "PostgreSqlParameters",
+		"presto_parameters":                "PrestoParameters",
+		"principal":                        "Principal",
+		"rds_parameters":                   "RdsParameters",
+		"redshift_parameters":              "RedshiftParameters",
+		"s3_parameters":                    "S3Parameters",
+		"snowflake_parameters":             "SnowflakeParameters",
+		"spark_parameters":                 "SparkParameters",
+		"sql_server_parameters":            "SqlServerParameters",
+		"ssl_properties":                   "SslProperties",
+		"status":                           "Status",
+		"tags":                             "Tags",
+		"teradata_parameters":              "TeradataParameters",
+		"type":                             "Type",
+		"username":                         "Username",
+		"value":                            "Value",
+		"vpc_connection_arn":               "VpcConnectionArn",
+		"vpc_connection_properties":        "VpcConnectionProperties",
+		"warehouse":                        "Warehouse",
+		"work_group":                       "WorkGroup",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Credentials",

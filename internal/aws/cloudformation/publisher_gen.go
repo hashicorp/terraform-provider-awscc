@@ -107,7 +107,6 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -122,7 +121,17 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::Publisher").WithTerraformTypeName("awscc_cloudformation_publisher").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::Publisher").WithTerraformTypeName("awscc_cloudformation_publisher")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"accept_terms_and_conditions": "AcceptTermsAndConditions",
+		"connection_arn":              "ConnectionArn",
+		"identity_provider":           "IdentityProvider",
+		"publisher_id":                "PublisherId",
+		"publisher_profile":           "PublisherProfile",
+		"publisher_status":            "PublisherStatus",
+	})
 
 	opts = opts.IsImmutableType(true)
 

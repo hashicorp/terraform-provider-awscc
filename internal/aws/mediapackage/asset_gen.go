@@ -191,13 +191,6 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MediaPackage::Asset",
 		Version:     1,
@@ -206,7 +199,24 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::Asset").WithTerraformTypeName("awscc_mediapackage_asset").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::Asset").WithTerraformTypeName("awscc_mediapackage_asset")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                        "Arn",
+		"created_at":                 "CreatedAt",
+		"egress_endpoints":           "EgressEndpoints",
+		"id":                         "Id",
+		"key":                        "Key",
+		"packaging_configuration_id": "PackagingConfigurationId",
+		"packaging_group_id":         "PackagingGroupId",
+		"resource_id":                "ResourceId",
+		"source_arn":                 "SourceArn",
+		"source_role_arn":            "SourceRoleArn",
+		"tags":                       "Tags",
+		"url":                        "Url",
+		"value":                      "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -349,7 +349,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -364,7 +363,30 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::FirewallPolicy").WithTerraformTypeName("awscc_networkfirewall_firewall_policy").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::FirewallPolicy").WithTerraformTypeName("awscc_networkfirewall_firewall_policy")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"action_definition":                  "ActionDefinition",
+		"action_name":                        "ActionName",
+		"description":                        "Description",
+		"dimensions":                         "Dimensions",
+		"firewall_policy":                    "FirewallPolicy",
+		"firewall_policy_arn":                "FirewallPolicyArn",
+		"firewall_policy_id":                 "FirewallPolicyId",
+		"firewall_policy_name":               "FirewallPolicyName",
+		"key":                                "Key",
+		"priority":                           "Priority",
+		"publish_metric_action":              "PublishMetricAction",
+		"resource_arn":                       "ResourceArn",
+		"stateful_rule_group_references":     "StatefulRuleGroupReferences",
+		"stateless_custom_actions":           "StatelessCustomActions",
+		"stateless_default_actions":          "StatelessDefaultActions",
+		"stateless_fragment_default_actions": "StatelessFragmentDefaultActions",
+		"stateless_rule_group_references":    "StatelessRuleGroupReferences",
+		"tags":                               "Tags",
+		"value":                              "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

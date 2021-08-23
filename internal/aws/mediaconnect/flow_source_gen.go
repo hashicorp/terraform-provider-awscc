@@ -293,7 +293,6 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -308,7 +307,34 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowSource").WithTerraformTypeName("awscc_mediaconnect_flow_source").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowSource").WithTerraformTypeName("awscc_mediaconnect_flow_source")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"algorithm":                      "Algorithm",
+		"constant_initialization_vector": "ConstantInitializationVector",
+		"decryption":                     "Decryption",
+		"description":                    "Description",
+		"device_id":                      "DeviceId",
+		"entitlement_arn":                "EntitlementArn",
+		"flow_arn":                       "FlowArn",
+		"ingest_ip":                      "IngestIp",
+		"ingest_port":                    "IngestPort",
+		"key_type":                       "KeyType",
+		"max_bitrate":                    "MaxBitrate",
+		"max_latency":                    "MaxLatency",
+		"name":                           "Name",
+		"protocol":                       "Protocol",
+		"region":                         "Region",
+		"resource_id":                    "ResourceId",
+		"role_arn":                       "RoleArn",
+		"secret_arn":                     "SecretArn",
+		"source_arn":                     "SourceArn",
+		"stream_id":                      "StreamId",
+		"url":                            "Url",
+		"vpc_interface_name":             "VpcInterfaceName",
+		"whitelist_cidr":                 "WhitelistCidr",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

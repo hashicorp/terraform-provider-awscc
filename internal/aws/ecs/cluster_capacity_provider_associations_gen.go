@@ -106,7 +106,6 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -121,7 +120,17 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECS::ClusterCapacityProviderAssociations").WithTerraformTypeName("awscc_ecs_cluster_capacity_provider_associations").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::ClusterCapacityProviderAssociations").WithTerraformTypeName("awscc_ecs_cluster_capacity_provider_associations")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"base":                               "Base",
+		"capacity_provider":                  "CapacityProvider",
+		"capacity_providers":                 "CapacityProviders",
+		"cluster":                            "Cluster",
+		"default_capacity_provider_strategy": "DefaultCapacityProviderStrategy",
+		"weight":                             "Weight",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

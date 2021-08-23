@@ -70,7 +70,6 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -85,7 +84,15 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Resource").WithTerraformTypeName("awscc_apigateway_resource").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Resource").WithTerraformTypeName("awscc_apigateway_resource")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"parent_id":   "ParentId",
+		"path_part":   "PathPart",
+		"resource_id": "ResourceId",
+		"rest_api_id": "RestApiId",
+	})
 
 	opts = opts.IsImmutableType(true)
 

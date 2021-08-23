@@ -220,7 +220,6 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -235,7 +234,23 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::AccessPolicy").WithTerraformTypeName("awscc_iotsitewise_access_policy").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::AccessPolicy").WithTerraformTypeName("awscc_iotsitewise_access_policy")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_policy_arn":        "AccessPolicyArn",
+		"access_policy_id":         "AccessPolicyId",
+		"access_policy_identity":   "AccessPolicyIdentity",
+		"access_policy_permission": "AccessPolicyPermission",
+		"access_policy_resource":   "AccessPolicyResource",
+		"arn":                      "arn",
+		"iam_role":                 "IamRole",
+		"iam_user":                 "IamUser",
+		"id":                       "id",
+		"portal":                   "Portal",
+		"project":                  "Project",
+		"user":                     "User",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

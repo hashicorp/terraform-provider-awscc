@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 343 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 344 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name = "AWS::ACMPCA::Certificate"
@@ -185,7 +185,7 @@ resource_schema "aws_cloudfront_cache_policy" {
   cloudformation_type_name = "AWS::CloudFront::CachePolicy"
 }
 
-resource_schema "aws_cloudfront_cloud_front_origin_access_identity" {
+resource_schema "aws_cloudfront_cloudfront_origin_access_identity" {
   cloudformation_type_name = "AWS::CloudFront::CloudFrontOriginAccessIdentity"
 }
 
@@ -239,6 +239,10 @@ resource_schema "aws_codegurureviewer_repository_association" {
 
 resource_schema "aws_codestarconnections_connection" {
   cloudformation_type_name = "AWS::CodeStarConnections::Connection"
+}
+
+resource_schema "aws_codestarnotifications_notification_rule" {
+  cloudformation_type_name = "AWS::CodeStarNotifications::NotificationRule"
 }
 
 resource_schema "aws_config_configuration_aggregator" {
@@ -1308,7 +1312,7 @@ resource_schema "aws_sagemaker_user_profile" {
   cloudformation_type_name = "AWS::SageMaker::UserProfile"
 }
 
-resource_schema "aws_servicecatalog_cloud_formation_provisioned_product" {
+resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {
   cloudformation_type_name = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
 }
 

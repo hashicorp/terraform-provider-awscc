@@ -142,7 +142,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -157,7 +156,18 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::LoggingConfiguration").WithTerraformTypeName("awscc_networkfirewall_logging_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::LoggingConfiguration").WithTerraformTypeName("awscc_networkfirewall_logging_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"firewall_arn":            "FirewallArn",
+		"firewall_name":           "FirewallName",
+		"log_destination":         "LogDestination",
+		"log_destination_configs": "LogDestinationConfigs",
+		"log_destination_type":    "LogDestinationType",
+		"log_type":                "LogType",
+		"logging_configuration":   "LoggingConfiguration",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

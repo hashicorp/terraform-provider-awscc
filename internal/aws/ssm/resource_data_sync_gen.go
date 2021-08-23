@@ -273,7 +273,6 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -288,7 +287,26 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SSM::ResourceDataSync").WithTerraformTypeName("awscc_ssm_resource_data_sync").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSM::ResourceDataSync").WithTerraformTypeName("awscc_ssm_resource_data_sync")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"aws_organizations_source": "AwsOrganizationsSource",
+		"bucket_name":              "BucketName",
+		"bucket_prefix":            "BucketPrefix",
+		"bucket_region":            "BucketRegion",
+		"include_future_regions":   "IncludeFutureRegions",
+		"kms_key_arn":              "KMSKeyArn",
+		"organization_source_type": "OrganizationSourceType",
+		"organizational_units":     "OrganizationalUnits",
+		"s3_destination":           "S3Destination",
+		"source_regions":           "SourceRegions",
+		"source_type":              "SourceType",
+		"sync_format":              "SyncFormat",
+		"sync_name":                "SyncName",
+		"sync_source":              "SyncSource",
+		"sync_type":                "SyncType",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

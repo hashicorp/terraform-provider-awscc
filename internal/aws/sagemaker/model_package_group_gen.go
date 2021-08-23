@@ -159,7 +159,6 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -174,7 +173,20 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelPackageGroup").WithTerraformTypeName("awscc_sagemaker_model_package_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelPackageGroup").WithTerraformTypeName("awscc_sagemaker_model_package_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"creation_time":                   "CreationTime",
+		"key":                             "Key",
+		"model_package_group_arn":         "ModelPackageGroupArn",
+		"model_package_group_description": "ModelPackageGroupDescription",
+		"model_package_group_name":        "ModelPackageGroupName",
+		"model_package_group_policy":      "ModelPackageGroupPolicy",
+		"model_package_group_status":      "ModelPackageGroupStatus",
+		"tags":                            "Tags",
+		"value":                           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

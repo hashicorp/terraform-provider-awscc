@@ -106,7 +106,6 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -121,7 +120,17 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Athena::NamedQuery").WithTerraformTypeName("awscc_athena_named_query").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Athena::NamedQuery").WithTerraformTypeName("awscc_athena_named_query")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"database":       "Database",
+		"description":    "Description",
+		"name":           "Name",
+		"named_query_id": "NamedQueryId",
+		"query_string":   "QueryString",
+		"work_group":     "WorkGroup",
+	})
 
 	opts = opts.IsImmutableType(true)
 

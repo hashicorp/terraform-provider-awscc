@@ -281,7 +281,6 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -296,7 +295,28 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::GlobalReplicationGroup").WithTerraformTypeName("awscc_elasticache_global_replication_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::GlobalReplicationGroup").WithTerraformTypeName("awscc_elasticache_global_replication_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"automatic_failover_enabled":           "AutomaticFailoverEnabled",
+		"cache_node_type":                      "CacheNodeType",
+		"cache_parameter_group_name":           "CacheParameterGroupName",
+		"engine_version":                       "EngineVersion",
+		"global_node_group_count":              "GlobalNodeGroupCount",
+		"global_replication_group_description": "GlobalReplicationGroupDescription",
+		"global_replication_group_id":          "GlobalReplicationGroupId",
+		"global_replication_group_id_suffix":   "GlobalReplicationGroupIdSuffix",
+		"members":                              "Members",
+		"node_group_id":                        "NodeGroupId",
+		"preferred_availability_zones":         "PreferredAvailabilityZones",
+		"regional_configurations":              "RegionalConfigurations",
+		"replication_group_id":                 "ReplicationGroupId",
+		"replication_group_region":             "ReplicationGroupRegion",
+		"resharding_configurations":            "ReshardingConfigurations",
+		"role":                                 "Role",
+		"status":                               "Status",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/GlobalReplicationGroupIdSuffix",

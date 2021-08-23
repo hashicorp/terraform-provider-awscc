@@ -212,13 +212,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "A Kendra FAQ resource",
 		Version:     1,
@@ -227,7 +220,23 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Kendra::Faq").WithTerraformTypeName("awscc_kendra_faq").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Kendra::Faq").WithTerraformTypeName("awscc_kendra_faq")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":         "Arn",
+		"bucket":      "Bucket",
+		"description": "Description",
+		"file_format": "FileFormat",
+		"id":          "Id",
+		"index_id":    "IndexId",
+		"key":         "Key",
+		"name":        "Name",
+		"role_arn":    "RoleArn",
+		"s3_path":     "S3Path",
+		"tags":        "Tags",
+		"value":       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

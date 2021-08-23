@@ -205,13 +205,6 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "AWS Ground Station DataflowEndpointGroup schema for CloudFormation",
 		Version:     1,
@@ -220,7 +213,26 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::DataflowEndpointGroup").WithTerraformTypeName("awscc_groundstation_dataflow_endpoint_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::DataflowEndpointGroup").WithTerraformTypeName("awscc_groundstation_dataflow_endpoint_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"address":            "Address",
+		"arn":                "Arn",
+		"endpoint":           "Endpoint",
+		"endpoint_details":   "EndpointDetails",
+		"id":                 "Id",
+		"key":                "Key",
+		"mtu":                "Mtu",
+		"name":               "Name",
+		"port":               "Port",
+		"role_arn":           "RoleArn",
+		"security_details":   "SecurityDetails",
+		"security_group_ids": "SecurityGroupIds",
+		"subnet_ids":         "SubnetIds",
+		"tags":               "Tags",
+		"value":              "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

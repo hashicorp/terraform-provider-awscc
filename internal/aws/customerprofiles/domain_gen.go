@@ -148,7 +148,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -163,7 +162,20 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::Domain").WithTerraformTypeName("awscc_customerprofiles_domain").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::Domain").WithTerraformTypeName("awscc_customerprofiles_domain")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"created_at":              "CreatedAt",
+		"dead_letter_queue_url":   "DeadLetterQueueUrl",
+		"default_encryption_key":  "DefaultEncryptionKey",
+		"default_expiration_days": "DefaultExpirationDays",
+		"domain_name":             "DomainName",
+		"key":                     "Key",
+		"last_updated_at":         "LastUpdatedAt",
+		"tags":                    "Tags",
+		"value":                   "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

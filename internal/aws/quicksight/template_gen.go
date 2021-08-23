@@ -720,7 +720,6 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -735,7 +734,49 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Template").WithTerraformTypeName("awscc_quicksight_template").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Template").WithTerraformTypeName("awscc_quicksight_template")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"actions":                         "Actions",
+		"arn":                             "Arn",
+		"aws_account_id":                  "AwsAccountId",
+		"column_group_column_schema_list": "ColumnGroupColumnSchemaList",
+		"column_group_schema_list":        "ColumnGroupSchemaList",
+		"column_schema_list":              "ColumnSchemaList",
+		"created_time":                    "CreatedTime",
+		"data_set_arn":                    "DataSetArn",
+		"data_set_configurations":         "DataSetConfigurations",
+		"data_set_placeholder":            "DataSetPlaceholder",
+		"data_set_references":             "DataSetReferences",
+		"data_set_schema":                 "DataSetSchema",
+		"data_type":                       "DataType",
+		"description":                     "Description",
+		"errors":                          "Errors",
+		"geographic_role":                 "GeographicRole",
+		"key":                             "Key",
+		"last_updated_time":               "LastUpdatedTime",
+		"message":                         "Message",
+		"name":                            "Name",
+		"permissions":                     "Permissions",
+		"placeholder":                     "Placeholder",
+		"principal":                       "Principal",
+		"sheet_id":                        "SheetId",
+		"sheets":                          "Sheets",
+		"source_analysis":                 "SourceAnalysis",
+		"source_entity":                   "SourceEntity",
+		"source_entity_arn":               "SourceEntityArn",
+		"source_template":                 "SourceTemplate",
+		"status":                          "Status",
+		"tags":                            "Tags",
+		"template_id":                     "TemplateId",
+		"theme_arn":                       "ThemeArn",
+		"type":                            "Type",
+		"value":                           "Value",
+		"version":                         "Version",
+		"version_description":             "VersionDescription",
+		"version_number":                  "VersionNumber",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/VersionDescription",

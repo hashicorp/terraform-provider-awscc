@@ -170,7 +170,6 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -185,7 +184,22 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::WorkSpaces::ConnectionAlias").WithTerraformTypeName("awscc_workspaces_connection_alias").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::WorkSpaces::ConnectionAlias").WithTerraformTypeName("awscc_workspaces_connection_alias")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alias_id":               "AliasId",
+		"associated_account_id":  "AssociatedAccountId",
+		"association_status":     "AssociationStatus",
+		"associations":           "Associations",
+		"connection_alias_state": "ConnectionAliasState",
+		"connection_identifier":  "ConnectionIdentifier",
+		"connection_string":      "ConnectionString",
+		"key":                    "Key",
+		"resource_id":            "ResourceId",
+		"tags":                   "Tags",
+		"value":                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

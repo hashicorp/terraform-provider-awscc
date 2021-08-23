@@ -182,7 +182,6 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -197,7 +196,23 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ResourceVersion").WithTerraformTypeName("awscc_cloudformation_resource_version").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ResourceVersion").WithTerraformTypeName("awscc_cloudformation_resource_version")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                    "Arn",
+		"execution_role_arn":     "ExecutionRoleArn",
+		"is_default_version":     "IsDefaultVersion",
+		"log_group_name":         "LogGroupName",
+		"log_role_arn":           "LogRoleArn",
+		"logging_config":         "LoggingConfig",
+		"provisioning_type":      "ProvisioningType",
+		"schema_handler_package": "SchemaHandlerPackage",
+		"type_arn":               "TypeArn",
+		"type_name":              "TypeName",
+		"version_id":             "VersionId",
+		"visibility":             "Visibility",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/SchemaHandlerPackage",

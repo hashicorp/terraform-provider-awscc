@@ -593,7 +593,6 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -608,7 +607,32 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::XRay::SamplingRule").WithTerraformTypeName("awscc_xray_sampling_rule").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::XRay::SamplingRule").WithTerraformTypeName("awscc_xray_sampling_rule")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"attributes":           "Attributes",
+		"created_at":           "CreatedAt",
+		"fixed_rate":           "FixedRate",
+		"host":                 "Host",
+		"http_method":          "HTTPMethod",
+		"key":                  "Key",
+		"modified_at":          "ModifiedAt",
+		"priority":             "Priority",
+		"reservoir_size":       "ReservoirSize",
+		"resource_arn":         "ResourceARN",
+		"rule_arn":             "RuleARN",
+		"rule_name":            "RuleName",
+		"sampling_rule":        "SamplingRule",
+		"sampling_rule_record": "SamplingRuleRecord",
+		"sampling_rule_update": "SamplingRuleUpdate",
+		"service_name":         "ServiceName",
+		"service_type":         "ServiceType",
+		"tags":                 "Tags",
+		"url_path":             "URLPath",
+		"value":                "Value",
+		"version":              "Version",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

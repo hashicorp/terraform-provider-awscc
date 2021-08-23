@@ -2034,7 +2034,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -2049,7 +2048,76 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::AppFlow::Flow").WithTerraformTypeName("awscc_appflow_flow").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::AppFlow::Flow").WithTerraformTypeName("awscc_appflow_flow")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"aggregation_config":               "AggregationConfig",
+		"aggregation_type":                 "AggregationType",
+		"amplitude":                        "Amplitude",
+		"bucket_name":                      "BucketName",
+		"bucket_prefix":                    "BucketPrefix",
+		"connector_operator":               "ConnectorOperator",
+		"connector_profile_name":           "ConnectorProfileName",
+		"connector_type":                   "ConnectorType",
+		"data_pull_mode":                   "DataPullMode",
+		"datadog":                          "Datadog",
+		"datetime_type_field_name":         "DatetimeTypeFieldName",
+		"description":                      "Description",
+		"destination_connector_properties": "DestinationConnectorProperties",
+		"destination_field":                "DestinationField",
+		"destination_flow_config_list":     "DestinationFlowConfigList",
+		"dynatrace":                        "Dynatrace",
+		"enable_dynamic_field_update":      "EnableDynamicFieldUpdate",
+		"error_handling_config":            "ErrorHandlingConfig",
+		"event_bridge":                     "EventBridge",
+		"fail_on_first_error":              "FailOnFirstError",
+		"file_type":                        "FileType",
+		"flow_arn":                         "FlowArn",
+		"flow_name":                        "FlowName",
+		"google_analytics":                 "GoogleAnalytics",
+		"id_field_names":                   "IdFieldNames",
+		"include_deleted_records":          "IncludeDeletedRecords",
+		"incremental_pull_config":          "IncrementalPullConfig",
+		"infor_nexus":                      "InforNexus",
+		"intermediate_bucket_name":         "IntermediateBucketName",
+		"key":                              "Key",
+		"kms_arn":                          "KMSArn",
+		"lookout_metrics":                  "LookoutMetrics",
+		"marketo":                          "Marketo",
+		"object":                           "Object",
+		"prefix_config":                    "PrefixConfig",
+		"prefix_format":                    "PrefixFormat",
+		"prefix_type":                      "PrefixType",
+		"redshift":                         "Redshift",
+		"s3":                               "S3",
+		"s3_output_format_config":          "S3OutputFormatConfig",
+		"salesforce":                       "Salesforce",
+		"schedule_end_time":                "ScheduleEndTime",
+		"schedule_expression":              "ScheduleExpression",
+		"schedule_start_time":              "ScheduleStartTime",
+		"service_now":                      "ServiceNow",
+		"singular":                         "Singular",
+		"slack":                            "Slack",
+		"snowflake":                        "Snowflake",
+		"source_connector_properties":      "SourceConnectorProperties",
+		"source_fields":                    "SourceFields",
+		"source_flow_config":               "SourceFlowConfig",
+		"tags":                             "Tags",
+		"task_properties":                  "TaskProperties",
+		"task_type":                        "TaskType",
+		"tasks":                            "Tasks",
+		"time_zone":                        "TimeZone",
+		"trendmicro":                       "Trendmicro",
+		"trigger_config":                   "TriggerConfig",
+		"trigger_properties":               "TriggerProperties",
+		"trigger_type":                     "TriggerType",
+		"upsolver":                         "Upsolver",
+		"value":                            "Value",
+		"veeva":                            "Veeva",
+		"write_operation_type":             "WriteOperationType",
+		"zendesk":                          "Zendesk",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

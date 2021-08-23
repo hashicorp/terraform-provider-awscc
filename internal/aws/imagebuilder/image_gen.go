@@ -176,7 +176,6 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -191,7 +190,23 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::Image").WithTerraformTypeName("awscc_imagebuilder_image").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::Image").WithTerraformTypeName("awscc_imagebuilder_image")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                              "Arn",
+		"container_recipe_arn":             "ContainerRecipeArn",
+		"distribution_configuration_arn":   "DistributionConfigurationArn",
+		"enhanced_image_metadata_enabled":  "EnhancedImageMetadataEnabled",
+		"image_id":                         "ImageId",
+		"image_recipe_arn":                 "ImageRecipeArn",
+		"image_tests_configuration":        "ImageTestsConfiguration",
+		"image_tests_enabled":              "ImageTestsEnabled",
+		"infrastructure_configuration_arn": "InfrastructureConfigurationArn",
+		"name":                             "Name",
+		"tags":                             "Tags",
+		"timeout_minutes":                  "TimeoutMinutes",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(720).WithDeleteTimeoutInMinutes(0)
 

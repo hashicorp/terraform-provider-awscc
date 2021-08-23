@@ -79,7 +79,6 @@ func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -94,7 +93,17 @@ func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Events::Archive").WithTerraformTypeName("awscc_events_archive").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Events::Archive").WithTerraformTypeName("awscc_events_archive")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"archive_name":   "ArchiveName",
+		"arn":            "Arn",
+		"description":    "Description",
+		"event_pattern":  "EventPattern",
+		"retention_days": "RetentionDays",
+		"source_arn":     "SourceArn",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

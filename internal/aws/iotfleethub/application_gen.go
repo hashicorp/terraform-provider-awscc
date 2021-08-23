@@ -217,7 +217,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -232,7 +231,25 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTFleetHub::Application").WithTerraformTypeName("awscc_iotfleethub_application").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTFleetHub::Application").WithTerraformTypeName("awscc_iotfleethub_application")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"application_arn":              "ApplicationArn",
+		"application_creation_date":    "ApplicationCreationDate",
+		"application_description":      "ApplicationDescription",
+		"application_id":               "ApplicationId",
+		"application_last_update_date": "ApplicationLastUpdateDate",
+		"application_name":             "ApplicationName",
+		"application_state":            "ApplicationState",
+		"application_url":              "ApplicationUrl",
+		"error_message":                "ErrorMessage",
+		"key":                          "Key",
+		"role_arn":                     "RoleArn",
+		"sso_client_id":                "SsoClientId",
+		"tags":                         "Tags",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

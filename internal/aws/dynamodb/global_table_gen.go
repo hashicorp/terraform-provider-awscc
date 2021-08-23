@@ -1149,7 +1149,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -1164,7 +1163,56 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DynamoDB::GlobalTable").WithTerraformTypeName("awscc_dynamodb_global_table").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DynamoDB::GlobalTable").WithTerraformTypeName("awscc_dynamodb_global_table")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                                  "Arn",
+		"attribute_definitions":                "AttributeDefinitions",
+		"attribute_name":                       "AttributeName",
+		"attribute_type":                       "AttributeType",
+		"billing_mode":                         "BillingMode",
+		"contributor_insights_specification":   "ContributorInsightsSpecification",
+		"disable_scale_in":                     "DisableScaleIn",
+		"enabled":                              "Enabled",
+		"global_secondary_indexes":             "GlobalSecondaryIndexes",
+		"index_name":                           "IndexName",
+		"key":                                  "Key",
+		"key_schema":                           "KeySchema",
+		"key_type":                             "KeyType",
+		"kms_master_key_id":                    "KMSMasterKeyId",
+		"local_secondary_indexes":              "LocalSecondaryIndexes",
+		"max_capacity":                         "MaxCapacity",
+		"min_capacity":                         "MinCapacity",
+		"non_key_attributes":                   "NonKeyAttributes",
+		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
+		"point_in_time_recovery_specification": "PointInTimeRecoverySpecification",
+		"projection":                           "Projection",
+		"projection_type":                      "ProjectionType",
+		"read_capacity_auto_scaling_settings":  "ReadCapacityAutoScalingSettings",
+		"read_capacity_units":                  "ReadCapacityUnits",
+		"read_provisioned_throughput_settings": "ReadProvisionedThroughputSettings",
+		"region":                               "Region",
+		"replicas":                             "Replicas",
+		"scale_in_cooldown":                    "ScaleInCooldown",
+		"scale_out_cooldown":                   "ScaleOutCooldown",
+		"seed_capacity":                        "SeedCapacity",
+		"sse_enabled":                          "SSEEnabled",
+		"sse_specification":                    "SSESpecification",
+		"sse_type":                             "SSEType",
+		"stream_arn":                           "StreamArn",
+		"stream_specification":                 "StreamSpecification",
+		"stream_view_type":                     "StreamViewType",
+		"table_id":                             "TableId",
+		"table_name":                           "TableName",
+		"tags":                                 "Tags",
+		"target_tracking_scaling_policy_configuration": "TargetTrackingScalingPolicyConfiguration",
+		"target_value":                          "TargetValue",
+		"time_to_live_specification":            "TimeToLiveSpecification",
+		"value":                                 "Value",
+		"write_capacity_auto_scaling_settings":  "WriteCapacityAutoScalingSettings",
+		"write_provisioned_throughput_settings": "WriteProvisionedThroughputSettings",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

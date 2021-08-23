@@ -495,7 +495,6 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -510,7 +509,32 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::AccountAuditConfiguration").WithTerraformTypeName("awscc_iot_account_audit_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::AccountAuditConfiguration").WithTerraformTypeName("awscc_iot_account_audit_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_id":                                            "AccountId",
+		"audit_check_configurations":                            "AuditCheckConfigurations",
+		"audit_notification_target_configurations":              "AuditNotificationTargetConfigurations",
+		"authenticated_cognito_role_overly_permissive_check":    "AuthenticatedCognitoRoleOverlyPermissiveCheck",
+		"ca_certificate_expiring_check":                         "CaCertificateExpiringCheck",
+		"ca_certificate_key_quality_check":                      "CaCertificateKeyQualityCheck",
+		"conflicting_client_ids_check":                          "ConflictingClientIdsCheck",
+		"device_certificate_expiring_check":                     "DeviceCertificateExpiringCheck",
+		"device_certificate_key_quality_check":                  "DeviceCertificateKeyQualityCheck",
+		"device_certificate_shared_check":                       "DeviceCertificateSharedCheck",
+		"enabled":                                               "Enabled",
+		"iot_policy_overly_permissive_check":                    "IotPolicyOverlyPermissiveCheck",
+		"iot_role_alias_allows_access_to_unused_services_check": "IotRoleAliasAllowsAccessToUnusedServicesCheck",
+		"iot_role_alias_overly_permissive_check":                "IotRoleAliasOverlyPermissiveCheck",
+		"logging_disabled_check":                                "LoggingDisabledCheck",
+		"revoked_ca_certificate_still_active_check":             "RevokedCaCertificateStillActiveCheck",
+		"revoked_device_certificate_still_active_check":         "RevokedDeviceCertificateStillActiveCheck",
+		"role_arn":   "RoleArn",
+		"sns":        "Sns",
+		"target_arn": "TargetArn",
+		"unauthenticated_cognito_role_overly_permissive_check": "UnauthenticatedCognitoRoleOverlyPermissiveCheck",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

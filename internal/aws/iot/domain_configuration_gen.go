@@ -257,7 +257,6 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -272,7 +271,29 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::DomainConfiguration").WithTerraformTypeName("awscc_iot_domain_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::DomainConfiguration").WithTerraformTypeName("awscc_iot_domain_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"allow_authorizer_override":        "AllowAuthorizerOverride",
+		"arn":                              "Arn",
+		"authorizer_config":                "AuthorizerConfig",
+		"default_authorizer_name":          "DefaultAuthorizerName",
+		"domain_configuration_name":        "DomainConfigurationName",
+		"domain_configuration_status":      "DomainConfigurationStatus",
+		"domain_name":                      "DomainName",
+		"domain_type":                      "DomainType",
+		"key":                              "Key",
+		"server_certificate_arn":           "ServerCertificateArn",
+		"server_certificate_arns":          "ServerCertificateArns",
+		"server_certificate_status":        "ServerCertificateStatus",
+		"server_certificate_status_detail": "ServerCertificateStatusDetail",
+		"server_certificates":              "ServerCertificates",
+		"service_type":                     "ServiceType",
+		"tags":                             "Tags",
+		"validation_certificate_arn":       "ValidationCertificateArn",
+		"value":                            "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ServerCertificateArns",

@@ -698,7 +698,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -713,7 +712,55 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::Service").WithTerraformTypeName("awscc_apprunner_service").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::Service").WithTerraformTypeName("awscc_apprunner_service")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_role_arn":                "AccessRoleArn",
+		"authentication_configuration":   "AuthenticationConfiguration",
+		"auto_deployments_enabled":       "AutoDeploymentsEnabled",
+		"auto_scaling_configuration_arn": "AutoScalingConfigurationArn",
+		"build_command":                  "BuildCommand",
+		"code_configuration":             "CodeConfiguration",
+		"code_configuration_values":      "CodeConfigurationValues",
+		"code_repository":                "CodeRepository",
+		"configuration_source":           "ConfigurationSource",
+		"connection_arn":                 "ConnectionArn",
+		"cpu":                            "Cpu",
+		"encryption_configuration":       "EncryptionConfiguration",
+		"health_check_configuration":     "HealthCheckConfiguration",
+		"healthy_threshold":              "HealthyThreshold",
+		"image_configuration":            "ImageConfiguration",
+		"image_identifier":               "ImageIdentifier",
+		"image_repository":               "ImageRepository",
+		"image_repository_type":          "ImageRepositoryType",
+		"instance_configuration":         "InstanceConfiguration",
+		"instance_role_arn":              "InstanceRoleArn",
+		"interval":                       "Interval",
+		"key":                            "Key",
+		"kms_key":                        "KmsKey",
+		"memory":                         "Memory",
+		"name":                           "Name",
+		"path":                           "Path",
+		"port":                           "Port",
+		"protocol":                       "Protocol",
+		"repository_url":                 "RepositoryUrl",
+		"runtime":                        "Runtime",
+		"runtime_environment_variables":  "RuntimeEnvironmentVariables",
+		"service_arn":                    "ServiceArn",
+		"service_id":                     "ServiceId",
+		"service_name":                   "ServiceName",
+		"service_url":                    "ServiceUrl",
+		"source_code_version":            "SourceCodeVersion",
+		"source_configuration":           "SourceConfiguration",
+		"start_command":                  "StartCommand",
+		"status":                         "Status",
+		"tags":                           "Tags",
+		"timeout":                        "Timeout",
+		"type":                           "Type",
+		"unhealthy_threshold":            "UnhealthyThreshold",
+		"value":                          "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",

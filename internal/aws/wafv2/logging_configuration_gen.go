@@ -410,7 +410,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -425,7 +424,36 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::LoggingConfiguration").WithTerraformTypeName("awscc_wafv2_logging_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::LoggingConfiguration").WithTerraformTypeName("awscc_wafv2_logging_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"action":                      "Action",
+		"action_condition":            "ActionCondition",
+		"all":                         "All",
+		"behavior":                    "Behavior",
+		"conditions":                  "Conditions",
+		"default_behavior":            "DefaultBehavior",
+		"filters":                     "Filters",
+		"included_paths":              "IncludedPaths",
+		"invalid_fallback_behavior":   "InvalidFallbackBehavior",
+		"json_body":                   "JsonBody",
+		"label_name":                  "LabelName",
+		"label_name_condition":        "LabelNameCondition",
+		"log_destination_configs":     "LogDestinationConfigs",
+		"logging_filter":              "LoggingFilter",
+		"managed_by_firewall_manager": "ManagedByFirewallManager",
+		"match_pattern":               "MatchPattern",
+		"match_scope":                 "MatchScope",
+		"method":                      "Method",
+		"name":                        "Name",
+		"query_string":                "QueryString",
+		"redacted_fields":             "RedactedFields",
+		"requirement":                 "Requirement",
+		"resource_arn":                "ResourceArn",
+		"single_header":               "SingleHeader",
+		"uri_path":                    "UriPath",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

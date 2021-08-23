@@ -499,7 +499,6 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -514,7 +513,49 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::GreengrassV2::ComponentVersion").WithTerraformTypeName("awscc_greengrassv2_component_version").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GreengrassV2::ComponentVersion").WithTerraformTypeName("awscc_greengrassv2_component_version")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"add_group_owner":             "AddGroupOwner",
+		"arn":                         "Arn",
+		"attributes":                  "Attributes",
+		"component_dependencies":      "ComponentDependencies",
+		"component_lambda_parameters": "ComponentLambdaParameters",
+		"component_name":              "ComponentName",
+		"component_platforms":         "ComponentPlatforms",
+		"component_version":           "ComponentVersion",
+		"container_params":            "ContainerParams",
+		"dependency_type":             "DependencyType",
+		"destination_path":            "DestinationPath",
+		"devices":                     "Devices",
+		"environment_variables":       "EnvironmentVariables",
+		"event_sources":               "EventSources",
+		"exec_args":                   "ExecArgs",
+		"inline_recipe":               "InlineRecipe",
+		"input_payload_encoding_type": "InputPayloadEncodingType",
+		"isolation_mode":              "IsolationMode",
+		"lambda_arn":                  "LambdaArn",
+		"lambda_function":             "LambdaFunction",
+		"linux_process_params":        "LinuxProcessParams",
+		"max_idle_time_in_seconds":    "MaxIdleTimeInSeconds",
+		"max_instances_count":         "MaxInstancesCount",
+		"max_queue_size":              "MaxQueueSize",
+		"memory_size_in_kb":           "MemorySizeInKB",
+		"mount_ro_sysfs":              "MountROSysfs",
+		"name":                        "Name",
+		"path":                        "Path",
+		"permission":                  "Permission",
+		"pinned":                      "Pinned",
+		"source_path":                 "SourcePath",
+		"status_timeout_in_seconds":   "StatusTimeoutInSeconds",
+		"tags":                        "Tags",
+		"timeout_in_seconds":          "TimeoutInSeconds",
+		"topic":                       "Topic",
+		"type":                        "Type",
+		"version_requirement":         "VersionRequirement",
+		"volumes":                     "Volumes",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/LambdaFunction",

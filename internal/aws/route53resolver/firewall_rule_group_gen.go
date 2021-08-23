@@ -341,13 +341,6 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::FirewallRuleGroup.",
 		Version:     1,
@@ -356,7 +349,33 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroup").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroup").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"action":                  "Action",
+		"arn":                     "Arn",
+		"block_override_dns_type": "BlockOverrideDnsType",
+		"block_override_domain":   "BlockOverrideDomain",
+		"block_override_ttl":      "BlockOverrideTtl",
+		"block_response":          "BlockResponse",
+		"creation_time":           "CreationTime",
+		"creator_request_id":      "CreatorRequestId",
+		"firewall_domain_list_id": "FirewallDomainListId",
+		"firewall_rules":          "FirewallRules",
+		"id":                      "Id",
+		"key":                     "Key",
+		"modification_time":       "ModificationTime",
+		"name":                    "Name",
+		"owner_id":                "OwnerId",
+		"priority":                "Priority",
+		"rule_count":              "RuleCount",
+		"share_status":            "ShareStatus",
+		"status":                  "Status",
+		"status_message":          "StatusMessage",
+		"tags":                    "Tags",
+		"value":                   "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

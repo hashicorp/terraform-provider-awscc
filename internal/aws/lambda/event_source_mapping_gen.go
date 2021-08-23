@@ -409,13 +409,6 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Lambda::EventSourceMapping",
 		Version:     1,
@@ -424,7 +417,36 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Lambda::EventSourceMapping").WithTerraformTypeName("awscc_lambda_event_source_mapping").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Lambda::EventSourceMapping").WithTerraformTypeName("awscc_lambda_event_source_mapping")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"batch_size":                         "BatchSize",
+		"bisect_batch_on_function_error":     "BisectBatchOnFunctionError",
+		"destination":                        "Destination",
+		"destination_config":                 "DestinationConfig",
+		"enabled":                            "Enabled",
+		"endpoints":                          "Endpoints",
+		"event_source_arn":                   "EventSourceArn",
+		"function_name":                      "FunctionName",
+		"function_response_types":            "FunctionResponseTypes",
+		"id":                                 "Id",
+		"kafka_bootstrap_servers":            "KafkaBootstrapServers",
+		"maximum_batching_window_in_seconds": "MaximumBatchingWindowInSeconds",
+		"maximum_record_age_in_seconds":      "MaximumRecordAgeInSeconds",
+		"maximum_retry_attempts":             "MaximumRetryAttempts",
+		"on_failure":                         "OnFailure",
+		"parallelization_factor":             "ParallelizationFactor",
+		"queues":                             "Queues",
+		"self_managed_event_source":          "SelfManagedEventSource",
+		"source_access_configurations":       "SourceAccessConfigurations",
+		"starting_position":                  "StartingPosition",
+		"starting_position_timestamp":        "StartingPositionTimestamp",
+		"topics":                             "Topics",
+		"tumbling_window_in_seconds":         "TumblingWindowInSeconds",
+		"type":                               "Type",
+		"uri":                                "URI",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

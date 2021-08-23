@@ -650,7 +650,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -665,7 +664,49 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Fleet").WithTerraformTypeName("awscc_gamelift_fleet").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Fleet").WithTerraformTypeName("awscc_gamelift_fleet")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"build_id":                  "BuildId",
+		"certificate_configuration": "CertificateConfiguration",
+		"certificate_type":          "CertificateType",
+		"concurrent_executions":     "ConcurrentExecutions",
+		"description":               "Description",
+		"desired_ec2_instances":     "DesiredEC2Instances",
+		"ec2_inbound_permissions":   "EC2InboundPermissions",
+		"ec2_instance_type":         "EC2InstanceType",
+		"fleet_id":                  "FleetId",
+		"fleet_type":                "FleetType",
+		"from_port":                 "FromPort",
+		"game_session_activation_timeout_seconds": "GameSessionActivationTimeoutSeconds",
+		"instance_role_arn":                       "InstanceRoleARN",
+		"ip_range":                                "IpRange",
+		"launch_path":                             "LaunchPath",
+		"location":                                "Location",
+		"location_capacity":                       "LocationCapacity",
+		"locations":                               "Locations",
+		"log_paths":                               "LogPaths",
+		"max_concurrent_game_session_activations": "MaxConcurrentGameSessionActivations",
+		"max_size":                           "MaxSize",
+		"metric_groups":                      "MetricGroups",
+		"min_size":                           "MinSize",
+		"name":                               "Name",
+		"new_game_session_protection_policy": "NewGameSessionProtectionPolicy",
+		"new_game_sessions_per_creator":      "NewGameSessionsPerCreator",
+		"parameters":                         "Parameters",
+		"peer_vpc_aws_account_id":            "PeerVpcAwsAccountId",
+		"peer_vpc_id":                        "PeerVpcId",
+		"policy_period_in_minutes":           "PolicyPeriodInMinutes",
+		"protocol":                           "Protocol",
+		"resource_creation_limit_policy":     "ResourceCreationLimitPolicy",
+		"runtime_configuration":              "RuntimeConfiguration",
+		"script_id":                          "ScriptId",
+		"server_launch_parameters":           "ServerLaunchParameters",
+		"server_launch_path":                 "ServerLaunchPath",
+		"server_processes":                   "ServerProcesses",
+		"to_port":                            "ToPort",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

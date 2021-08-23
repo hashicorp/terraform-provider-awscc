@@ -253,13 +253,6 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::CachePolicy",
 		Version:     1,
@@ -268,7 +261,31 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::CachePolicy").WithTerraformTypeName("awscc_cloudfront_cache_policy").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::CachePolicy").WithTerraformTypeName("awscc_cloudfront_cache_policy")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cache_policy_config":           "CachePolicyConfig",
+		"comment":                       "Comment",
+		"cookie_behavior":               "CookieBehavior",
+		"cookies":                       "Cookies",
+		"cookies_config":                "CookiesConfig",
+		"default_ttl":                   "DefaultTTL",
+		"enable_accept_encoding_brotli": "EnableAcceptEncodingBrotli",
+		"enable_accept_encoding_gzip":   "EnableAcceptEncodingGzip",
+		"header_behavior":               "HeaderBehavior",
+		"headers":                       "Headers",
+		"headers_config":                "HeadersConfig",
+		"id":                            "Id",
+		"last_modified_time":            "LastModifiedTime",
+		"max_ttl":                       "MaxTTL",
+		"min_ttl":                       "MinTTL",
+		"name":                          "Name",
+		"parameters_in_cache_key_and_forwarded_to_origin": "ParametersInCacheKeyAndForwardedToOrigin",
+		"query_string_behavior":                           "QueryStringBehavior",
+		"query_strings":                                   "QueryStrings",
+		"query_strings_config":                            "QueryStringsConfig",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

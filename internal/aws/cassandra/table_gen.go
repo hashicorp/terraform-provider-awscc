@@ -397,7 +397,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -412,7 +411,32 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Table").WithTerraformTypeName("awscc_cassandra_table").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Table").WithTerraformTypeName("awscc_cassandra_table")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"billing_mode":                   "BillingMode",
+		"clustering_key_columns":         "ClusteringKeyColumns",
+		"column":                         "Column",
+		"column_name":                    "ColumnName",
+		"column_type":                    "ColumnType",
+		"encryption_specification":       "EncryptionSpecification",
+		"encryption_type":                "EncryptionType",
+		"key":                            "Key",
+		"keyspace_name":                  "KeyspaceName",
+		"kms_key_identifier":             "KmsKeyIdentifier",
+		"mode":                           "Mode",
+		"order_by":                       "OrderBy",
+		"partition_key_columns":          "PartitionKeyColumns",
+		"point_in_time_recovery_enabled": "PointInTimeRecoveryEnabled",
+		"provisioned_throughput":         "ProvisionedThroughput",
+		"read_capacity_units":            "ReadCapacityUnits",
+		"regular_columns":                "RegularColumns",
+		"table_name":                     "TableName",
+		"tags":                           "Tags",
+		"value":                          "Value",
+		"write_capacity_units":           "WriteCapacityUnits",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

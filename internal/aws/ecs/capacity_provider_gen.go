@@ -170,7 +170,6 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -185,7 +184,24 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECS::CapacityProvider").WithTerraformTypeName("awscc_ecs_capacity_provider").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::CapacityProvider").WithTerraformTypeName("awscc_ecs_capacity_provider")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"auto_scaling_group_arn":         "AutoScalingGroupArn",
+		"auto_scaling_group_provider":    "AutoScalingGroupProvider",
+		"instance_warmup_period":         "InstanceWarmupPeriod",
+		"key":                            "Key",
+		"managed_scaling":                "ManagedScaling",
+		"managed_termination_protection": "ManagedTerminationProtection",
+		"maximum_scaling_step_size":      "MaximumScalingStepSize",
+		"minimum_scaling_step_size":      "MinimumScalingStepSize",
+		"name":                           "Name",
+		"status":                         "Status",
+		"tags":                           "Tags",
+		"target_capacity":                "TargetCapacity",
+		"value":                          "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

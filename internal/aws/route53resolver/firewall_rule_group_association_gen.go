@@ -250,13 +250,6 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::FirewallRuleGroupAssociation.",
 		Version:     1,
@@ -265,7 +258,27 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroupAssociation").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroupAssociation").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group_association")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                    "Arn",
+		"creation_time":          "CreationTime",
+		"creator_request_id":     "CreatorRequestId",
+		"firewall_rule_group_id": "FirewallRuleGroupId",
+		"id":                     "Id",
+		"key":                    "Key",
+		"managed_owner_name":     "ManagedOwnerName",
+		"modification_time":      "ModificationTime",
+		"mutation_protection":    "MutationProtection",
+		"name":                   "Name",
+		"priority":               "Priority",
+		"status":                 "Status",
+		"status_message":         "StatusMessage",
+		"tags":                   "Tags",
+		"value":                  "Value",
+		"vpc_id":                 "VpcId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

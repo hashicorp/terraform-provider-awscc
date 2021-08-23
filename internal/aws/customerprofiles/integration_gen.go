@@ -839,7 +839,6 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -854,7 +853,58 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::Integration").WithTerraformTypeName("awscc_customerprofiles_integration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::Integration").WithTerraformTypeName("awscc_customerprofiles_integration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"bucket_name":                 "BucketName",
+		"bucket_prefix":               "BucketPrefix",
+		"connector_operator":          "ConnectorOperator",
+		"connector_profile_name":      "ConnectorProfileName",
+		"connector_type":              "ConnectorType",
+		"created_at":                  "CreatedAt",
+		"data_pull_mode":              "DataPullMode",
+		"datetime_type_field_name":    "DatetimeTypeFieldName",
+		"description":                 "Description",
+		"destination_field":           "DestinationField",
+		"domain_name":                 "DomainName",
+		"enable_dynamic_field_update": "EnableDynamicFieldUpdate",
+		"first_execution_from":        "FirstExecutionFrom",
+		"flow_definition":             "FlowDefinition",
+		"flow_name":                   "FlowName",
+		"include_deleted_records":     "IncludeDeletedRecords",
+		"incremental_pull_config":     "IncrementalPullConfig",
+		"key":                         "Key",
+		"kms_arn":                     "KmsArn",
+		"last_updated_at":             "LastUpdatedAt",
+		"marketo":                     "Marketo",
+		"object":                      "Object",
+		"object_type_name":            "ObjectTypeName",
+		"operator_property_key":       "OperatorPropertyKey",
+		"property":                    "Property",
+		"s3":                          "S3",
+		"salesforce":                  "Salesforce",
+		"schedule_end_time":           "ScheduleEndTime",
+		"schedule_expression":         "ScheduleExpression",
+		"schedule_offset":             "ScheduleOffset",
+		"schedule_start_time":         "ScheduleStartTime",
+		"scheduled":                   "Scheduled",
+		"service_now":                 "ServiceNow",
+		"source_connector_properties": "SourceConnectorProperties",
+		"source_fields":               "SourceFields",
+		"source_flow_config":          "SourceFlowConfig",
+		"tags":                        "Tags",
+		"task_properties":             "TaskProperties",
+		"task_type":                   "TaskType",
+		"tasks":                       "Tasks",
+		"timezone":                    "Timezone",
+		"trigger_config":              "TriggerConfig",
+		"trigger_properties":          "TriggerProperties",
+		"trigger_type":                "TriggerType",
+		"uri":                         "Uri",
+		"value":                       "Value",
+		"zendesk":                     "Zendesk",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/FlowDefinition",

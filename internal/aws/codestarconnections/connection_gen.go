@@ -154,7 +154,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -169,7 +168,20 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CodeStarConnections::Connection").WithTerraformTypeName("awscc_codestarconnections_connection").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CodeStarConnections::Connection").WithTerraformTypeName("awscc_codestarconnections_connection")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"connection_arn":    "ConnectionArn",
+		"connection_name":   "ConnectionName",
+		"connection_status": "ConnectionStatus",
+		"host_arn":          "HostArn",
+		"key":               "Key",
+		"owner_account_id":  "OwnerAccountId",
+		"provider_type":     "ProviderType",
+		"tags":              "Tags",
+		"value":             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

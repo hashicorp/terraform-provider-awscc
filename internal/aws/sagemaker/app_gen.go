@@ -236,7 +236,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -251,7 +250,23 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::App").WithTerraformTypeName("awscc_sagemaker_app").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::App").WithTerraformTypeName("awscc_sagemaker_app")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"app_arn":                      "AppArn",
+		"app_name":                     "AppName",
+		"app_type":                     "AppType",
+		"domain_id":                    "DomainId",
+		"instance_type":                "InstanceType",
+		"key":                          "Key",
+		"resource_spec":                "ResourceSpec",
+		"sage_maker_image_arn":         "SageMakerImageArn",
+		"sage_maker_image_version_arn": "SageMakerImageVersionArn",
+		"tags":                         "Tags",
+		"user_profile_name":            "UserProfileName",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",

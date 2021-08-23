@@ -16,10 +16,10 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_servicecatalog_cloud_formation_provisioned_product", cloudFormationProvisionedProductResourceType)
+	registry.AddResourceTypeFactory("awscc_servicecatalog_cloudformation_provisioned_product", cloudFormationProvisionedProductResourceType)
 }
 
-// cloudFormationProvisionedProductResourceType returns the Terraform awscc_servicecatalog_cloud_formation_provisioned_product resource type.
+// cloudFormationProvisionedProductResourceType returns the Terraform awscc_servicecatalog_cloudformation_provisioned_product resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalog::CloudFormationProvisionedProduct resource type.
 func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
@@ -359,7 +359,6 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -374,7 +373,36 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::CloudFormationProvisionedProduct").WithTerraformTypeName("awscc_servicecatalog_cloud_formation_provisioned_product").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::CloudFormationProvisionedProduct").WithTerraformTypeName("awscc_servicecatalog_cloudformation_provisioned_product")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"accept_language":                        "AcceptLanguage",
+		"cloudformation_stack_arn":               "CloudformationStackArn",
+		"key":                                    "Key",
+		"notification_arns":                      "NotificationArns",
+		"outputs":                                "Outputs",
+		"path_id":                                "PathId",
+		"path_name":                              "PathName",
+		"product_id":                             "ProductId",
+		"product_name":                           "ProductName",
+		"provisioned_product_id":                 "ProvisionedProductId",
+		"provisioned_product_name":               "ProvisionedProductName",
+		"provisioning_artifact_id":               "ProvisioningArtifactId",
+		"provisioning_artifact_name":             "ProvisioningArtifactName",
+		"provisioning_parameters":                "ProvisioningParameters",
+		"provisioning_preferences":               "ProvisioningPreferences",
+		"record_id":                              "RecordId",
+		"stack_set_accounts":                     "StackSetAccounts",
+		"stack_set_failure_tolerance_count":      "StackSetFailureToleranceCount",
+		"stack_set_failure_tolerance_percentage": "StackSetFailureTolerancePercentage",
+		"stack_set_max_concurrency_count":        "StackSetMaxConcurrencyCount",
+		"stack_set_max_concurrency_percentage":   "StackSetMaxConcurrencyPercentage",
+		"stack_set_operation_type":               "StackSetOperationType",
+		"stack_set_regions":                      "StackSetRegions",
+		"tags":                                   "Tags",
+		"value":                                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(720).WithDeleteTimeoutInMinutes(0)
 
@@ -386,7 +414,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_servicecatalog_cloud_formation_provisioned_product", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_servicecatalog_cloudformation_provisioned_product", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

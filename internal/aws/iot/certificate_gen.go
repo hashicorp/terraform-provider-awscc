@@ -111,13 +111,6 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Use the AWS::IoT::Certificate resource to declare an AWS IoT X.509 certificate.",
 		Version:     1,
@@ -126,7 +119,18 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::Certificate").WithTerraformTypeName("awscc_iot_certificate").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::Certificate").WithTerraformTypeName("awscc_iot_certificate")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                         "Arn",
+		"ca_certificate_pem":          "CACertificatePem",
+		"certificate_mode":            "CertificateMode",
+		"certificate_pem":             "CertificatePem",
+		"certificate_signing_request": "CertificateSigningRequest",
+		"id":                          "Id",
+		"status":                      "Status",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/CertificateSigningRequest",

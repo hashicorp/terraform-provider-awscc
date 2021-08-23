@@ -76,7 +76,6 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -91,7 +90,15 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EMR::StudioSessionMapping").WithTerraformTypeName("awscc_emr_studio_session_mapping").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EMR::StudioSessionMapping").WithTerraformTypeName("awscc_emr_studio_session_mapping")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"identity_name":      "IdentityName",
+		"identity_type":      "IdentityType",
+		"session_policy_arn": "SessionPolicyArn",
+		"studio_id":          "StudioId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

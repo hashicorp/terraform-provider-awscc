@@ -123,7 +123,8 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	}
 
 	// Generate code for the CloudFormation root properties schema.
-	codeFeatures, err := codeEmitter.EmitRootPropertiesSchema()
+	attributeNameMap := make(map[string]string) // Terraform attribute name to CloudFormation property name.
+	codeFeatures, err := codeEmitter.EmitRootPropertiesSchema(attributeNameMap)
 
 	if err != nil {
 		return fmt.Errorf("emitting schema code: %w", err)
@@ -134,6 +135,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 
 	templateData := TemplateData{
 		AcceptanceTestFunctionPrefix: acceptanceTestFunctionPrefix,
+		AttributeNameMap:             attributeNameMap,
 		CloudFormationTypeName:       cfTypeName,
 		FactoryFunctionName:          factoryFunctionName,
 		HasRequiredAttribute:         true,
@@ -141,6 +143,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 		PackageName:                  packageName,
 		RootPropertiesSchema:         rootPropertiesSchema,
 		SchemaVersion:                1,
+		SyntheticIDAttribute:         true,
 		TerraformTypeName:            resource.TfType,
 	}
 
@@ -155,6 +158,9 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	}
 	if codeFeatures&codegen.UsesValidation > 0 {
 		templateData.ImportValidate = true
+	}
+	if codeFeatures&codegen.HasIDRootProperty > 0 {
+		templateData.SyntheticIDAttribute = false
 	}
 
 	if description := resource.CfResource.Description; description != nil {
@@ -235,6 +241,7 @@ func (g *Generator) infof(format string, a ...interface{}) {
 
 type TemplateData struct {
 	AcceptanceTestFunctionPrefix string
+	AttributeNameMap             map[string]string
 	CloudFormationTypeName       string
 	CreateTimeoutInMinutes       int
 	DeleteTimeoutInMinutes       int
@@ -247,6 +254,7 @@ type TemplateData struct {
 	RootPropertiesSchema         string
 	SchemaDescription            string
 	SchemaVersion                int64
+	SyntheticIDAttribute         bool
 	TerraformTypeName            string
 	UpdateTimeoutInMinutes       int
 	WriteOnlyPropertyPaths       []string
@@ -280,12 +288,13 @@ func init() {
 func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := {{ .RootPropertiesSchema }}
 
-	// Required for acceptance testing.
+{{ if .SyntheticIDAttribute }}
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
+{{- end }}
 
 	schema := tfsdk.Schema{
 		Description: "{{ .SchemaDescription }}",
@@ -295,7 +304,14 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute({{ .SyntheticIDAttribute }})
+	opts = opts.WithAttributeNameMap(map[string]string{
+{{- range $key, $value := .AttributeNameMap }}
+		"{{ $key }}": "{{ $value }}",
+{{- end }}
+	})
 {{ if not .HasUpdateMethod }}
 	opts = opts.IsImmutableType(true)
 {{- end }}

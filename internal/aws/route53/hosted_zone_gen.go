@@ -152,7 +152,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A complex type that contains information about a configuration for DNS query logging.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
-					"cloud_watch_logs_log_group_arn": {
+					"cloudwatch_logs_log_group_arn": {
 						// Property: CloudWatchLogsLogGroupArn
 						Description: "The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.",
 						Type:        types.StringType,
@@ -212,13 +212,6 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Route53::HostedZone.",
 		Version:     1,
@@ -227,7 +220,24 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53::HostedZone").WithTerraformTypeName("awscc_route53_hosted_zone").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53::HostedZone").WithTerraformTypeName("awscc_route53_hosted_zone")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cloudwatch_logs_log_group_arn": "CloudWatchLogsLogGroupArn",
+		"comment":                       "Comment",
+		"hosted_zone_config":            "HostedZoneConfig",
+		"hosted_zone_tags":              "HostedZoneTags",
+		"id":                            "Id",
+		"key":                           "Key",
+		"name":                          "Name",
+		"name_servers":                  "NameServers",
+		"query_logging_config":          "QueryLoggingConfig",
+		"value":                         "Value",
+		"vp_cs":                         "VPCs",
+		"vpc_id":                        "VPCId",
+		"vpc_region":                    "VPCRegion",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

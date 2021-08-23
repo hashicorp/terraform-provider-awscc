@@ -296,7 +296,6 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -311,7 +310,24 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SSM::Document").WithTerraformTypeName("awscc_ssm_document").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSM::Document").WithTerraformTypeName("awscc_ssm_document")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"attachments":     "Attachments",
+		"content":         "Content",
+		"document_format": "DocumentFormat",
+		"document_type":   "DocumentType",
+		"key":             "Key",
+		"name":            "Name",
+		"requires":        "Requires",
+		"tags":            "Tags",
+		"target_type":     "TargetType",
+		"value":           "Value",
+		"values":          "Values",
+		"version":         "Version",
+		"version_name":    "VersionName",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

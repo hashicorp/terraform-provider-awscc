@@ -713,7 +713,6 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -728,7 +727,54 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelExplainabilityJobDefinition").WithTerraformTypeName("awscc_sagemaker_model_explainability_job_definition").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelExplainabilityJobDefinition").WithTerraformTypeName("awscc_sagemaker_model_explainability_job_definition")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"baselining_job_name":  "BaseliningJobName",
+		"cluster_config":       "ClusterConfig",
+		"config_uri":           "ConfigUri",
+		"constraints_resource": "ConstraintsResource",
+		"creation_time":        "CreationTime",
+		"enable_inter_container_traffic_encryption": "EnableInterContainerTrafficEncryption",
+		"enable_network_isolation":                  "EnableNetworkIsolation",
+		"endpoint_input":                            "EndpointInput",
+		"endpoint_name":                             "EndpointName",
+		"environment":                               "Environment",
+		"features_attribute":                        "FeaturesAttribute",
+		"image_uri":                                 "ImageUri",
+		"inference_attribute":                       "InferenceAttribute",
+		"instance_count":                            "InstanceCount",
+		"instance_type":                             "InstanceType",
+		"job_definition_arn":                        "JobDefinitionArn",
+		"job_definition_name":                       "JobDefinitionName",
+		"job_resources":                             "JobResources",
+		"key":                                       "Key",
+		"kms_key_id":                                "KmsKeyId",
+		"local_path":                                "LocalPath",
+		"max_runtime_in_seconds":                    "MaxRuntimeInSeconds",
+		"model_explainability_app_specification":    "ModelExplainabilityAppSpecification",
+		"model_explainability_baseline_config":      "ModelExplainabilityBaselineConfig",
+		"model_explainability_job_input":            "ModelExplainabilityJobInput",
+		"model_explainability_job_output_config":    "ModelExplainabilityJobOutputConfig",
+		"monitoring_outputs":                        "MonitoringOutputs",
+		"network_config":                            "NetworkConfig",
+		"probability_attribute":                     "ProbabilityAttribute",
+		"role_arn":                                  "RoleArn",
+		"s3_data_distribution_type":                 "S3DataDistributionType",
+		"s3_input_mode":                             "S3InputMode",
+		"s3_output":                                 "S3Output",
+		"s3_upload_mode":                            "S3UploadMode",
+		"s3_uri":                                    "S3Uri",
+		"security_group_ids":                        "SecurityGroupIds",
+		"stopping_condition":                        "StoppingCondition",
+		"subnets":                                   "Subnets",
+		"tags":                                      "Tags",
+		"value":                                     "Value",
+		"volume_kms_key_id":                         "VolumeKmsKeyId",
+		"volume_size_in_gb":                         "VolumeSizeInGB",
+		"vpc_config":                                "VpcConfig",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

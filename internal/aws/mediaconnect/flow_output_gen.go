@@ -264,7 +264,6 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -279,7 +278,30 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowOutput").WithTerraformTypeName("awscc_mediaconnect_flow_output").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowOutput").WithTerraformTypeName("awscc_mediaconnect_flow_output")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"algorithm":                "Algorithm",
+		"cidr_allow_list":          "CidrAllowList",
+		"description":              "Description",
+		"destination":              "Destination",
+		"encryption":               "Encryption",
+		"flow_arn":                 "FlowArn",
+		"key_type":                 "KeyType",
+		"max_latency":              "MaxLatency",
+		"name":                     "Name",
+		"output_arn":               "OutputArn",
+		"port":                     "Port",
+		"protocol":                 "Protocol",
+		"remote_id":                "RemoteId",
+		"role_arn":                 "RoleArn",
+		"secret_arn":               "SecretArn",
+		"smoothing_latency":        "SmoothingLatency",
+		"stream_id":                "StreamId",
+		"vpc_interface_attachment": "VpcInterfaceAttachment",
+		"vpc_interface_name":       "VpcInterfaceName",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

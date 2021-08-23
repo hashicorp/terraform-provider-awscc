@@ -134,7 +134,6 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -149,7 +148,20 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Location::Tracker").WithTerraformTypeName("awscc_location_tracker").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Location::Tracker").WithTerraformTypeName("awscc_location_tracker")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                      "Arn",
+		"create_time":              "CreateTime",
+		"description":              "Description",
+		"kms_key_id":               "KmsKeyId",
+		"pricing_plan":             "PricingPlan",
+		"pricing_plan_data_source": "PricingPlanDataSource",
+		"tracker_arn":              "TrackerArn",
+		"tracker_name":             "TrackerName",
+		"update_time":              "UpdateTime",
+	})
 
 	opts = opts.IsImmutableType(true)
 

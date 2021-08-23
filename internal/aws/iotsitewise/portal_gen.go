@@ -217,7 +217,6 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -232,7 +231,27 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Portal").WithTerraformTypeName("awscc_iotsitewise_portal").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Portal").WithTerraformTypeName("awscc_iotsitewise_portal")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alarm_role_arn":            "AlarmRoleArn",
+		"alarms":                    "Alarms",
+		"key":                       "Key",
+		"notification_lambda_arn":   "NotificationLambdaArn",
+		"notification_sender_email": "NotificationSenderEmail",
+		"portal_arn":                "PortalArn",
+		"portal_auth_mode":          "PortalAuthMode",
+		"portal_client_id":          "PortalClientId",
+		"portal_contact_email":      "PortalContactEmail",
+		"portal_description":        "PortalDescription",
+		"portal_id":                 "PortalId",
+		"portal_name":               "PortalName",
+		"portal_start_url":          "PortalStartUrl",
+		"role_arn":                  "RoleArn",
+		"tags":                      "Tags",
+		"value":                     "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",

@@ -555,7 +555,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -570,7 +569,45 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Amplify::App").WithTerraformTypeName("awscc_amplify_app").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Amplify::App").WithTerraformTypeName("awscc_amplify_app")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_token":                  "AccessToken",
+		"app_id":                        "AppId",
+		"app_name":                      "AppName",
+		"arn":                           "Arn",
+		"auto_branch_creation_config":   "AutoBranchCreationConfig",
+		"auto_branch_creation_patterns": "AutoBranchCreationPatterns",
+		"basic_auth_config":             "BasicAuthConfig",
+		"build_spec":                    "BuildSpec",
+		"condition":                     "Condition",
+		"custom_headers":                "CustomHeaders",
+		"custom_rules":                  "CustomRules",
+		"default_domain":                "DefaultDomain",
+		"description":                   "Description",
+		"enable_auto_branch_creation":   "EnableAutoBranchCreation",
+		"enable_auto_build":             "EnableAutoBuild",
+		"enable_basic_auth":             "EnableBasicAuth",
+		"enable_branch_auto_deletion":   "EnableBranchAutoDeletion",
+		"enable_performance_mode":       "EnablePerformanceMode",
+		"enable_pull_request_preview":   "EnablePullRequestPreview",
+		"environment_variables":         "EnvironmentVariables",
+		"iam_service_role":              "IAMServiceRole",
+		"key":                           "Key",
+		"name":                          "Name",
+		"oauth_token":                   "OauthToken",
+		"password":                      "Password",
+		"pull_request_environment_name": "PullRequestEnvironmentName",
+		"repository":                    "Repository",
+		"source":                        "Source",
+		"stage":                         "Stage",
+		"status":                        "Status",
+		"tags":                          "Tags",
+		"target":                        "Target",
+		"username":                      "Username",
+		"value":                         "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AccessToken",

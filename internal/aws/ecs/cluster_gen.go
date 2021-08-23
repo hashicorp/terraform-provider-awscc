@@ -152,12 +152,12 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The session logging configuration for ExecuteCommand.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
-											"cloud_watch_encryption_enabled": {
+											"cloudwatch_encryption_enabled": {
 												// Property: CloudWatchEncryptionEnabled
 												Type:     types.BoolType,
 												Optional: true,
 											},
-											"cloud_watch_log_group_name": {
+											"cloudwatch_log_group_name": {
 												// Property: CloudWatchLogGroupName
 												Type:     types.StringType,
 												Optional: true,
@@ -274,7 +274,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -289,7 +288,33 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECS::Cluster").WithTerraformTypeName("awscc_ecs_cluster").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::Cluster").WithTerraformTypeName("awscc_ecs_cluster")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                                "Arn",
+		"base":                               "Base",
+		"capacity_provider":                  "CapacityProvider",
+		"capacity_providers":                 "CapacityProviders",
+		"cloudwatch_encryption_enabled":      "CloudWatchEncryptionEnabled",
+		"cloudwatch_log_group_name":          "CloudWatchLogGroupName",
+		"cluster_name":                       "ClusterName",
+		"cluster_settings":                   "ClusterSettings",
+		"configuration":                      "Configuration",
+		"default_capacity_provider_strategy": "DefaultCapacityProviderStrategy",
+		"execute_command_configuration":      "ExecuteCommandConfiguration",
+		"key":                                "Key",
+		"kms_key_id":                         "KmsKeyId",
+		"log_configuration":                  "LogConfiguration",
+		"logging":                            "Logging",
+		"name":                               "Name",
+		"s3_bucket_name":                     "S3BucketName",
+		"s3_encryption_enabled":              "S3EncryptionEnabled",
+		"s3_key_prefix":                      "S3KeyPrefix",
+		"tags":                               "Tags",
+		"value":                              "Value",
+		"weight":                             "Weight",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

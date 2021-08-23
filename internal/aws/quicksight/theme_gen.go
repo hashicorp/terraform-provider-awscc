@@ -1268,7 +1268,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -1283,7 +1282,64 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Theme").WithTerraformTypeName("awscc_quicksight_theme").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Theme").WithTerraformTypeName("awscc_quicksight_theme")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"accent":               "Accent",
+		"accent_foreground":    "AccentForeground",
+		"actions":              "Actions",
+		"arn":                  "Arn",
+		"aws_account_id":       "AwsAccountId",
+		"base_theme_id":        "BaseThemeId",
+		"border":               "Border",
+		"colors":               "Colors",
+		"configuration":        "Configuration",
+		"created_time":         "CreatedTime",
+		"danger":               "Danger",
+		"danger_foreground":    "DangerForeground",
+		"data_color_palette":   "DataColorPalette",
+		"description":          "Description",
+		"dimension":            "Dimension",
+		"dimension_foreground": "DimensionForeground",
+		"empty_fill_color":     "EmptyFillColor",
+		"errors":               "Errors",
+		"font_families":        "FontFamilies",
+		"font_family":          "FontFamily",
+		"gutter":               "Gutter",
+		"key":                  "Key",
+		"last_updated_time":    "LastUpdatedTime",
+		"margin":               "Margin",
+		"measure":              "Measure",
+		"measure_foreground":   "MeasureForeground",
+		"message":              "Message",
+		"min_max_gradient":     "MinMaxGradient",
+		"name":                 "Name",
+		"permissions":          "Permissions",
+		"primary_background":   "PrimaryBackground",
+		"primary_foreground":   "PrimaryForeground",
+		"principal":            "Principal",
+		"secondary_background": "SecondaryBackground",
+		"secondary_foreground": "SecondaryForeground",
+		"sheet":                "Sheet",
+		"show":                 "Show",
+		"status":               "Status",
+		"success":              "Success",
+		"success_foreground":   "SuccessForeground",
+		"tags":                 "Tags",
+		"theme_id":             "ThemeId",
+		"tile":                 "Tile",
+		"tile_layout":          "TileLayout",
+		"type":                 "Type",
+		"typography":           "Typography",
+		"ui_color_palette":     "UIColorPalette",
+		"value":                "Value",
+		"version":              "Version",
+		"version_description":  "VersionDescription",
+		"version_number":       "VersionNumber",
+		"warning":              "Warning",
+		"warning_foreground":   "WarningForeground",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/VersionDescription",

@@ -1063,7 +1063,6 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -1078,7 +1077,62 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataBrew::Job").WithTerraformTypeName("awscc_databrew_job").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataBrew::Job").WithTerraformTypeName("awscc_databrew_job")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"bucket":                           "Bucket",
+		"catalog_id":                       "CatalogId",
+		"column_statistics_configurations": "ColumnStatisticsConfigurations",
+		"compression_format":               "CompressionFormat",
+		"csv":                              "Csv",
+		"data_catalog_outputs":             "DataCatalogOutputs",
+		"database_name":                    "DatabaseName",
+		"database_options":                 "DatabaseOptions",
+		"database_output_mode":             "DatabaseOutputMode",
+		"database_outputs":                 "DatabaseOutputs",
+		"dataset_name":                     "DatasetName",
+		"dataset_statistics_configuration": "DatasetStatisticsConfiguration",
+		"delimiter":                        "Delimiter",
+		"encryption_key_arn":               "EncryptionKeyArn",
+		"encryption_mode":                  "EncryptionMode",
+		"format":                           "Format",
+		"format_options":                   "FormatOptions",
+		"glue_connection_name":             "GlueConnectionName",
+		"included_statistics":              "IncludedStatistics",
+		"job_sample":                       "JobSample",
+		"key":                              "Key",
+		"location":                         "Location",
+		"log_subscription":                 "LogSubscription",
+		"max_capacity":                     "MaxCapacity",
+		"max_retries":                      "MaxRetries",
+		"mode":                             "Mode",
+		"name":                             "Name",
+		"output_location":                  "OutputLocation",
+		"outputs":                          "Outputs",
+		"overrides":                        "Overrides",
+		"overwrite":                        "Overwrite",
+		"parameters":                       "Parameters",
+		"partition_columns":                "PartitionColumns",
+		"profile_columns":                  "ProfileColumns",
+		"profile_configuration":            "ProfileConfiguration",
+		"project_name":                     "ProjectName",
+		"recipe":                           "Recipe",
+		"regex":                            "Regex",
+		"role_arn":                         "RoleArn",
+		"s3_options":                       "S3Options",
+		"selectors":                        "Selectors",
+		"size":                             "Size",
+		"statistic":                        "Statistic",
+		"statistics":                       "Statistics",
+		"table_name":                       "TableName",
+		"tags":                             "Tags",
+		"temp_directory":                   "TempDirectory",
+		"timeout":                          "Timeout",
+		"type":                             "Type",
+		"value":                            "Value",
+		"version":                          "Version",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

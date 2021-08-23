@@ -207,7 +207,6 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -222,7 +221,24 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::TypeActivation").WithTerraformTypeName("awscc_cloudformation_type_activation").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::TypeActivation").WithTerraformTypeName("awscc_cloudformation_type_activation")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                "Arn",
+		"auto_update":        "AutoUpdate",
+		"execution_role_arn": "ExecutionRoleArn",
+		"log_group_name":     "LogGroupName",
+		"log_role_arn":       "LogRoleArn",
+		"logging_config":     "LoggingConfig",
+		"major_version":      "MajorVersion",
+		"public_type_arn":    "PublicTypeArn",
+		"publisher_id":       "PublisherId",
+		"type":               "Type",
+		"type_name":          "TypeName",
+		"type_name_alias":    "TypeNameAlias",
+		"version_bump":       "VersionBump",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

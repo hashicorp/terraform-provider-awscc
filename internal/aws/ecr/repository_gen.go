@@ -259,7 +259,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -274,7 +273,27 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECR::Repository").WithTerraformTypeName("awscc_ecr_repository").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECR::Repository").WithTerraformTypeName("awscc_ecr_repository")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                          "Arn",
+		"encryption_configuration":     "EncryptionConfiguration",
+		"encryption_type":              "EncryptionType",
+		"image_scanning_configuration": "ImageScanningConfiguration",
+		"image_tag_mutability":         "ImageTagMutability",
+		"key":                          "Key",
+		"kms_key":                      "KmsKey",
+		"lifecycle_policy":             "LifecyclePolicy",
+		"lifecycle_policy_text":        "LifecyclePolicyText",
+		"registry_id":                  "RegistryId",
+		"repository_name":              "RepositoryName",
+		"repository_policy_text":       "RepositoryPolicyText",
+		"repository_uri":               "RepositoryUri",
+		"scan_on_push":                 "ScanOnPush",
+		"tags":                         "Tags",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

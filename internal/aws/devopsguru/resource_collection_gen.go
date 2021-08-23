@@ -53,7 +53,7 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
-					"cloud_formation": {
+					"cloudformation": {
 						// Property: CloudFormation
 						Description: "CloudFormation resource for DevOps Guru to monitor",
 						Attributes: tfsdk.SingleNestedAttributes(
@@ -88,7 +88,6 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -103,7 +102,15 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::ResourceCollection").WithTerraformTypeName("awscc_devopsguru_resource_collection").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::ResourceCollection").WithTerraformTypeName("awscc_devopsguru_resource_collection")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cloudformation":             "CloudFormation",
+		"resource_collection_filter": "ResourceCollectionFilter",
+		"resource_collection_type":   "ResourceCollectionType",
+		"stack_names":                "StackNames",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

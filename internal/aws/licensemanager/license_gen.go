@@ -384,7 +384,6 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -399,7 +398,38 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::LicenseManager::License").WithTerraformTypeName("awscc_licensemanager_license").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::LicenseManager::License").WithTerraformTypeName("awscc_licensemanager_license")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"allow_check_in":              "AllowCheckIn",
+		"allow_early_check_in":        "AllowEarlyCheckIn",
+		"begin":                       "Begin",
+		"beneficiary":                 "Beneficiary",
+		"borrow_configuration":        "BorrowConfiguration",
+		"consumption_configuration":   "ConsumptionConfiguration",
+		"end":                         "End",
+		"entitlements":                "Entitlements",
+		"home_region":                 "HomeRegion",
+		"issuer":                      "Issuer",
+		"license_arn":                 "LicenseArn",
+		"license_metadata":            "LicenseMetadata",
+		"license_name":                "LicenseName",
+		"max_count":                   "MaxCount",
+		"max_time_to_live_in_minutes": "MaxTimeToLiveInMinutes",
+		"name":                        "Name",
+		"overage":                     "Overage",
+		"product_name":                "ProductName",
+		"product_sku":                 "ProductSKU",
+		"provisional_configuration":   "ProvisionalConfiguration",
+		"renew_type":                  "RenewType",
+		"sign_key":                    "SignKey",
+		"status":                      "Status",
+		"unit":                        "Unit",
+		"validity":                    "Validity",
+		"value":                       "Value",
+		"version":                     "Version",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Status",

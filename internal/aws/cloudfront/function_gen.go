@@ -128,7 +128,6 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -143,7 +142,20 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::Function").WithTerraformTypeName("awscc_cloudfront_function").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::Function").WithTerraformTypeName("awscc_cloudfront_function")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"auto_publish":      "AutoPublish",
+		"comment":           "Comment",
+		"function_arn":      "FunctionARN",
+		"function_code":     "FunctionCode",
+		"function_config":   "FunctionConfig",
+		"function_metadata": "FunctionMetadata",
+		"name":              "Name",
+		"runtime":           "Runtime",
+		"stage":             "Stage",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AutoPublish",

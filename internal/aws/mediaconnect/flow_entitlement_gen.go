@@ -230,7 +230,6 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -245,7 +244,28 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowEntitlement").WithTerraformTypeName("awscc_mediaconnect_flow_entitlement").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowEntitlement").WithTerraformTypeName("awscc_mediaconnect_flow_entitlement")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"algorithm":                            "Algorithm",
+		"constant_initialization_vector":       "ConstantInitializationVector",
+		"data_transfer_subscriber_fee_percent": "DataTransferSubscriberFeePercent",
+		"description":                          "Description",
+		"device_id":                            "DeviceId",
+		"encryption":                           "Encryption",
+		"entitlement_arn":                      "EntitlementArn",
+		"entitlement_status":                   "EntitlementStatus",
+		"flow_arn":                             "FlowArn",
+		"key_type":                             "KeyType",
+		"name":                                 "Name",
+		"region":                               "Region",
+		"resource_id":                          "ResourceId",
+		"role_arn":                             "RoleArn",
+		"secret_arn":                           "SecretArn",
+		"subscribers":                          "Subscribers",
+		"url":                                  "Url",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

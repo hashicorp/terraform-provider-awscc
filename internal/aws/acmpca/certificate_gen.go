@@ -819,7 +819,6 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -834,7 +833,69 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::Certificate").WithTerraformTypeName("awscc_acmpca_certificate").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::Certificate").WithTerraformTypeName("awscc_acmpca_certificate")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"api_passthrough":                      "ApiPassthrough",
+		"arn":                                  "Arn",
+		"cert_policy_id":                       "CertPolicyId",
+		"certificate":                          "Certificate",
+		"certificate_authority_arn":            "CertificateAuthorityArn",
+		"certificate_policies":                 "CertificatePolicies",
+		"certificate_signing_request":          "CertificateSigningRequest",
+		"common_name":                          "CommonName",
+		"country":                              "Country",
+		"cps_uri":                              "CpsUri",
+		"crl_sign":                             "CRLSign",
+		"data_encipherment":                    "DataEncipherment",
+		"decipher_only":                        "DecipherOnly",
+		"digital_signature":                    "DigitalSignature",
+		"directory_name":                       "DirectoryName",
+		"distinguished_name_qualifier":         "DistinguishedNameQualifier",
+		"dns_name":                             "DnsName",
+		"edi_party_name":                       "EdiPartyName",
+		"encipher_only":                        "EncipherOnly",
+		"extended_key_usage":                   "ExtendedKeyUsage",
+		"extended_key_usage_object_identifier": "ExtendedKeyUsageObjectIdentifier",
+		"extended_key_usage_type":              "ExtendedKeyUsageType",
+		"extensions":                           "Extensions",
+		"generation_qualifier":                 "GenerationQualifier",
+		"given_name":                           "GivenName",
+		"initials":                             "Initials",
+		"ip_address":                           "IpAddress",
+		"key_agreement":                        "KeyAgreement",
+		"key_cert_sign":                        "KeyCertSign",
+		"key_encipherment":                     "KeyEncipherment",
+		"key_usage":                            "KeyUsage",
+		"locality":                             "Locality",
+		"name_assigner":                        "NameAssigner",
+		"non_repudiation":                      "NonRepudiation",
+		"organization":                         "Organization",
+		"organizational_unit":                  "OrganizationalUnit",
+		"other_name":                           "OtherName",
+		"party_name":                           "PartyName",
+		"policy_qualifier_id":                  "PolicyQualifierId",
+		"policy_qualifiers":                    "PolicyQualifiers",
+		"pseudonym":                            "Pseudonym",
+		"qualifier":                            "Qualifier",
+		"registered_id":                        "RegisteredId",
+		"rfc_822_name":                         "Rfc822Name",
+		"serial_number":                        "SerialNumber",
+		"signing_algorithm":                    "SigningAlgorithm",
+		"state":                                "State",
+		"subject":                              "Subject",
+		"subject_alternative_names":            "SubjectAlternativeNames",
+		"surname":                              "Surname",
+		"template_arn":                         "TemplateArn",
+		"title":                                "Title",
+		"type":                                 "Type",
+		"type_id":                              "TypeId",
+		"uniform_resource_identifier":          "UniformResourceIdentifier",
+		"validity":                             "Validity",
+		"validity_not_before":                  "ValidityNotBefore",
+		"value":                                "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ApiPassthrough",

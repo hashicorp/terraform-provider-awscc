@@ -488,13 +488,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
@@ -503,7 +496,47 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Redshift::Cluster").WithTerraformTypeName("awscc_redshift_cluster").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Redshift::Cluster").WithTerraformTypeName("awscc_redshift_cluster")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"address":                             "Address",
+		"allow_version_upgrade":               "AllowVersionUpgrade",
+		"automated_snapshot_retention_period": "AutomatedSnapshotRetentionPeriod",
+		"availability_zone":                   "AvailabilityZone",
+		"bucket_name":                         "BucketName",
+		"cluster_identifier":                  "ClusterIdentifier",
+		"cluster_parameter_group_name":        "ClusterParameterGroupName",
+		"cluster_security_groups":             "ClusterSecurityGroups",
+		"cluster_subnet_group_name":           "ClusterSubnetGroupName",
+		"cluster_type":                        "ClusterType",
+		"cluster_version":                     "ClusterVersion",
+		"db_name":                             "DBName",
+		"elastic_ip":                          "ElasticIp",
+		"encrypted":                           "Encrypted",
+		"endpoint":                            "Endpoint",
+		"hsm_client_certificate_identifier":   "HsmClientCertificateIdentifier",
+		"hsm_configuration_identifier":        "HsmConfigurationIdentifier",
+		"iam_roles":                           "IamRoles",
+		"id":                                  "Id",
+		"key":                                 "Key",
+		"kms_key_id":                          "KmsKeyId",
+		"logging_properties":                  "LoggingProperties",
+		"master_user_password":                "MasterUserPassword",
+		"master_username":                     "MasterUsername",
+		"node_type":                           "NodeType",
+		"number_of_nodes":                     "NumberOfNodes",
+		"owner_account":                       "OwnerAccount",
+		"port":                                "Port",
+		"preferred_maintenance_window":        "PreferredMaintenanceWindow",
+		"publicly_accessible":                 "PubliclyAccessible",
+		"s3_key_prefix":                       "S3KeyPrefix",
+		"snapshot_cluster_identifier":         "SnapshotClusterIdentifier",
+		"snapshot_identifier":                 "SnapshotIdentifier",
+		"tags":                                "Tags",
+		"value":                               "Value",
+		"vpc_security_group_ids":              "VpcSecurityGroupIds",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/MasterUserPassword",

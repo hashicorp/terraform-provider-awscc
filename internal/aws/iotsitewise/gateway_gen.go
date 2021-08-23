@@ -187,7 +187,6 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -202,7 +201,22 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Gateway").WithTerraformTypeName("awscc_iotsitewise_gateway").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Gateway").WithTerraformTypeName("awscc_iotsitewise_gateway")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"capability_configuration":     "CapabilityConfiguration",
+		"capability_namespace":         "CapabilityNamespace",
+		"gateway_capability_summaries": "GatewayCapabilitySummaries",
+		"gateway_id":                   "GatewayId",
+		"gateway_name":                 "GatewayName",
+		"gateway_platform":             "GatewayPlatform",
+		"greengrass":                   "Greengrass",
+		"group_arn":                    "GroupArn",
+		"key":                          "Key",
+		"tags":                         "Tags",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

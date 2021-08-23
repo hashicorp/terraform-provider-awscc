@@ -290,7 +290,6 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -305,7 +304,26 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::AppIntegrations::EventIntegration").WithTerraformTypeName("awscc_appintegrations_event_integration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::AppIntegrations::EventIntegration").WithTerraformTypeName("awscc_appintegrations_event_integration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"associations":                      "Associations",
+		"client_association_metadata":       "ClientAssociationMetadata",
+		"client_id":                         "ClientId",
+		"description":                       "Description",
+		"event_bridge_bus":                  "EventBridgeBus",
+		"event_bridge_rule_name":            "EventBridgeRuleName",
+		"event_filter":                      "EventFilter",
+		"event_integration_arn":             "EventIntegrationArn",
+		"event_integration_association_arn": "EventIntegrationAssociationArn",
+		"event_integration_association_id":  "EventIntegrationAssociationId",
+		"key":                               "Key",
+		"name":                              "Name",
+		"source":                            "Source",
+		"tags":                              "Tags",
+		"value":                             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

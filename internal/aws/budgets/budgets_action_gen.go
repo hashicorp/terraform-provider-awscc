@@ -349,7 +349,6 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -364,7 +363,35 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Budgets::BudgetsAction").WithTerraformTypeName("awscc_budgets_budgets_action").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Budgets::BudgetsAction").WithTerraformTypeName("awscc_budgets_budgets_action")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"action_id":             "ActionId",
+		"action_threshold":      "ActionThreshold",
+		"action_type":           "ActionType",
+		"address":               "Address",
+		"approval_model":        "ApprovalModel",
+		"budget_name":           "BudgetName",
+		"definition":            "Definition",
+		"execution_role_arn":    "ExecutionRoleArn",
+		"groups":                "Groups",
+		"iam_action_definition": "IamActionDefinition",
+		"instance_ids":          "InstanceIds",
+		"notification_type":     "NotificationType",
+		"policy_arn":            "PolicyArn",
+		"policy_id":             "PolicyId",
+		"region":                "Region",
+		"roles":                 "Roles",
+		"scp_action_definition": "ScpActionDefinition",
+		"ssm_action_definition": "SsmActionDefinition",
+		"subscribers":           "Subscribers",
+		"subtype":               "Subtype",
+		"target_ids":            "TargetIds",
+		"type":                  "Type",
+		"users":                 "Users",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

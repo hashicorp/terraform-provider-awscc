@@ -161,7 +161,6 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -176,7 +175,20 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DeviceFleet").WithTerraformTypeName("awscc_sagemaker_device_fleet").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DeviceFleet").WithTerraformTypeName("awscc_sagemaker_device_fleet")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"description":        "Description",
+		"device_fleet_name":  "DeviceFleetName",
+		"key":                "Key",
+		"kms_key_id":         "KmsKeyId",
+		"output_config":      "OutputConfig",
+		"role_arn":           "RoleArn",
+		"s3_output_location": "S3OutputLocation",
+		"tags":               "Tags",
+		"value":              "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

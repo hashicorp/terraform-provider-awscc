@@ -314,7 +314,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -329,7 +328,28 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Project").WithTerraformTypeName("awscc_sagemaker_project").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Project").WithTerraformTypeName("awscc_sagemaker_project")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"creation_time":                      "CreationTime",
+		"key":                                "Key",
+		"path_id":                            "PathId",
+		"product_id":                         "ProductId",
+		"project_arn":                        "ProjectArn",
+		"project_description":                "ProjectDescription",
+		"project_id":                         "ProjectId",
+		"project_name":                       "ProjectName",
+		"project_status":                     "ProjectStatus",
+		"provisioned_product_id":             "ProvisionedProductId",
+		"provisioned_product_status_message": "ProvisionedProductStatusMessage",
+		"provisioning_artifact_id":           "ProvisioningArtifactId",
+		"provisioning_parameters":            "ProvisioningParameters",
+		"service_catalog_provisioned_product_details": "ServiceCatalogProvisionedProductDetails",
+		"service_catalog_provisioning_details":        "ServiceCatalogProvisioningDetails",
+		"tags":                                        "Tags",
+		"value":                                       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

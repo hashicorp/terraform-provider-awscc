@@ -278,7 +278,6 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -293,7 +292,27 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Connect::QuickConnect").WithTerraformTypeName("awscc_connect_quick_connect").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Connect::QuickConnect").WithTerraformTypeName("awscc_connect_quick_connect")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"contact_flow_arn":     "ContactFlowArn",
+		"description":          "Description",
+		"instance_arn":         "InstanceArn",
+		"key":                  "Key",
+		"name":                 "Name",
+		"phone_config":         "PhoneConfig",
+		"phone_number":         "PhoneNumber",
+		"queue_arn":            "QueueArn",
+		"queue_config":         "QueueConfig",
+		"quick_connect_arn":    "QuickConnectArn",
+		"quick_connect_config": "QuickConnectConfig",
+		"quick_connect_type":   "QuickConnectType",
+		"tags":                 "Tags",
+		"user_arn":             "UserArn",
+		"user_config":          "UserConfig",
+		"value":                "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

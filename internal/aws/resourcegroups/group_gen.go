@@ -262,7 +262,6 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -277,7 +276,27 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ResourceGroups::Group").WithTerraformTypeName("awscc_resourcegroups_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ResourceGroups::Group").WithTerraformTypeName("awscc_resourcegroups_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"configuration":         "Configuration",
+		"description":           "Description",
+		"key":                   "Key",
+		"name":                  "Name",
+		"parameters":            "Parameters",
+		"query":                 "Query",
+		"resource_query":        "ResourceQuery",
+		"resource_type_filters": "ResourceTypeFilters",
+		"resources":             "Resources",
+		"stack_identifier":      "StackIdentifier",
+		"tag_filters":           "TagFilters",
+		"tags":                  "Tags",
+		"type":                  "Type",
+		"value":                 "Value",
+		"values":                "Values",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

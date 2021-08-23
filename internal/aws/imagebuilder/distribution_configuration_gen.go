@@ -371,7 +371,6 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -386,7 +385,34 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::DistributionConfiguration").WithTerraformTypeName("awscc_imagebuilder_distribution_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::DistributionConfiguration").WithTerraformTypeName("awscc_imagebuilder_distribution_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_id":                           "AccountId",
+		"ami_distribution_configuration":       "AmiDistributionConfiguration",
+		"ami_tags":                             "AmiTags",
+		"arn":                                  "Arn",
+		"container_distribution_configuration": "ContainerDistributionConfiguration",
+		"container_tags":                       "ContainerTags",
+		"description":                          "Description",
+		"distributions":                        "Distributions",
+		"kms_key_id":                           "KmsKeyId",
+		"launch_permission_configuration":      "LaunchPermissionConfiguration",
+		"launch_template_configurations":       "LaunchTemplateConfigurations",
+		"launch_template_id":                   "LaunchTemplateId",
+		"license_configuration_arns":           "LicenseConfigurationArns",
+		"name":                                 "Name",
+		"region":                               "Region",
+		"repository_name":                      "RepositoryName",
+		"service":                              "Service",
+		"set_default_version":                  "SetDefaultVersion",
+		"tags":                                 "Tags",
+		"target_account_ids":                   "TargetAccountIds",
+		"target_repository":                    "TargetRepository",
+		"user_groups":                          "UserGroups",
+		"user_ids":                             "UserIds",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

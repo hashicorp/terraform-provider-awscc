@@ -150,13 +150,6 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Macie CustomDataIdentifier resource schema",
 		Version:     1,
@@ -165,7 +158,21 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Macie::CustomDataIdentifier").WithTerraformTypeName("awscc_macie_custom_data_identifier").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Macie::CustomDataIdentifier").WithTerraformTypeName("awscc_macie_custom_data_identifier")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                    "Arn",
+		"created_at":             "CreatedAt",
+		"deleted":                "Deleted",
+		"description":            "Description",
+		"id":                     "Id",
+		"ignore_words":           "IgnoreWords",
+		"keywords":               "Keywords",
+		"maximum_match_distance": "MaximumMatchDistance",
+		"name":                   "Name",
+		"regex":                  "Regex",
+	})
 
 	opts = opts.IsImmutableType(true)
 

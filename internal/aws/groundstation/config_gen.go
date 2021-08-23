@@ -623,13 +623,6 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "AWS Ground Station config resource type for CloudFormation.",
 		Version:     1,
@@ -638,7 +631,44 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::Config").WithTerraformTypeName("awscc_groundstation_config").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::Config").WithTerraformTypeName("awscc_groundstation_config")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"antenna_downlink_config":              "AntennaDownlinkConfig",
+		"antenna_downlink_demod_decode_config": "AntennaDownlinkDemodDecodeConfig",
+		"antenna_uplink_config":                "AntennaUplinkConfig",
+		"antenna_uplink_config_arn":            "AntennaUplinkConfigArn",
+		"arn":                                  "Arn",
+		"autotrack":                            "Autotrack",
+		"bandwidth":                            "Bandwidth",
+		"bucket_arn":                           "BucketArn",
+		"center_frequency":                     "CenterFrequency",
+		"config_data":                          "ConfigData",
+		"dataflow_endpoint_config":             "DataflowEndpointConfig",
+		"dataflow_endpoint_name":               "DataflowEndpointName",
+		"dataflow_endpoint_region":             "DataflowEndpointRegion",
+		"decode_config":                        "DecodeConfig",
+		"demodulation_config":                  "DemodulationConfig",
+		"enabled":                              "Enabled",
+		"id":                                   "Id",
+		"key":                                  "Key",
+		"name":                                 "Name",
+		"polarization":                         "Polarization",
+		"prefix":                               "Prefix",
+		"role_arn":                             "RoleArn",
+		"s3_recording_config":                  "S3RecordingConfig",
+		"spectrum_config":                      "SpectrumConfig",
+		"tags":                                 "Tags",
+		"target_eirp":                          "TargetEirp",
+		"tracking_config":                      "TrackingConfig",
+		"transmit_disabled":                    "TransmitDisabled",
+		"type":                                 "Type",
+		"units":                                "Units",
+		"unvalidated_json":                     "UnvalidatedJSON",
+		"uplink_echo_config":                   "UplinkEchoConfig",
+		"value":                                "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

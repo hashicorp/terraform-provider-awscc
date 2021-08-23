@@ -204,13 +204,6 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Specifies a VPC flow log, which enables you to capture IP traffic for a specific network interface, subnet, or VPC.",
 		Version:     1,
@@ -219,7 +212,24 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::FlowLog").WithTerraformTypeName("awscc_ec2_flow_log").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::FlowLog").WithTerraformTypeName("awscc_ec2_flow_log")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"deliver_logs_permission_arn": "DeliverLogsPermissionArn",
+		"id":                          "Id",
+		"key":                         "Key",
+		"log_destination":             "LogDestination",
+		"log_destination_type":        "LogDestinationType",
+		"log_format":                  "LogFormat",
+		"log_group_name":              "LogGroupName",
+		"max_aggregation_interval":    "MaxAggregationInterval",
+		"resource_id":                 "ResourceId",
+		"resource_type":               "ResourceType",
+		"tags":                        "Tags",
+		"traffic_type":                "TrafficType",
+		"value":                       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

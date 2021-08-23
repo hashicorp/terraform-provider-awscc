@@ -203,13 +203,6 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource Type Definition for AWS::S3Outposts::Endpoint",
 		Version:     1,
@@ -218,7 +211,23 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::S3Outposts::Endpoint").WithTerraformTypeName("awscc_s3outposts_endpoint").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::S3Outposts::Endpoint").WithTerraformTypeName("awscc_s3outposts_endpoint")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_type":               "AccessType",
+		"arn":                       "Arn",
+		"cidr_block":                "CidrBlock",
+		"creation_time":             "CreationTime",
+		"customer_owned_ipv_4_pool": "CustomerOwnedIpv4Pool",
+		"id":                        "Id",
+		"network_interface_id":      "NetworkInterfaceId",
+		"network_interfaces":        "NetworkInterfaces",
+		"outpost_id":                "OutpostId",
+		"security_group_id":         "SecurityGroupId",
+		"status":                    "Status",
+		"subnet_id":                 "SubnetId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

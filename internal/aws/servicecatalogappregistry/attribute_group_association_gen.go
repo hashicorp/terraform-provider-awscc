@@ -80,13 +80,6 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource Schema for AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation.",
 		Version:     1,
@@ -95,7 +88,16 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation").WithTerraformTypeName("awscc_servicecatalogappregistry_attribute_group_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation").WithTerraformTypeName("awscc_servicecatalogappregistry_attribute_group_association")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"application":         "Application",
+		"application_arn":     "ApplicationArn",
+		"attribute_group":     "AttributeGroup",
+		"attribute_group_arn": "AttributeGroupArn",
+		"id":                  "Id",
+	})
 
 	opts = opts.IsImmutableType(true)
 

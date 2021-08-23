@@ -134,7 +134,6 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -149,7 +148,20 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::RealtimeLogConfig").WithTerraformTypeName("awscc_cloudfront_realtime_log_config").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::RealtimeLogConfig").WithTerraformTypeName("awscc_cloudfront_realtime_log_config")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"end_points":            "EndPoints",
+		"fields":                "Fields",
+		"kinesis_stream_config": "KinesisStreamConfig",
+		"name":                  "Name",
+		"role_arn":              "RoleArn",
+		"sampling_rate":         "SamplingRate",
+		"stream_arn":            "StreamArn",
+		"stream_type":           "StreamType",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

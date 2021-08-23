@@ -828,7 +828,6 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -843,7 +842,61 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelQualityJobDefinition").WithTerraformTypeName("awscc_sagemaker_model_quality_job_definition").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelQualityJobDefinition").WithTerraformTypeName("awscc_sagemaker_model_quality_job_definition")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"baselining_job_name":                       "BaseliningJobName",
+		"cluster_config":                            "ClusterConfig",
+		"constraints_resource":                      "ConstraintsResource",
+		"container_arguments":                       "ContainerArguments",
+		"container_entrypoint":                      "ContainerEntrypoint",
+		"creation_time":                             "CreationTime",
+		"enable_inter_container_traffic_encryption": "EnableInterContainerTrafficEncryption",
+		"enable_network_isolation":                  "EnableNetworkIsolation",
+		"end_time_offset":                           "EndTimeOffset",
+		"endpoint_input":                            "EndpointInput",
+		"endpoint_name":                             "EndpointName",
+		"environment":                               "Environment",
+		"ground_truth_s3_input":                     "GroundTruthS3Input",
+		"image_uri":                                 "ImageUri",
+		"inference_attribute":                       "InferenceAttribute",
+		"instance_count":                            "InstanceCount",
+		"instance_type":                             "InstanceType",
+		"job_definition_arn":                        "JobDefinitionArn",
+		"job_definition_name":                       "JobDefinitionName",
+		"job_resources":                             "JobResources",
+		"key":                                       "Key",
+		"kms_key_id":                                "KmsKeyId",
+		"local_path":                                "LocalPath",
+		"max_runtime_in_seconds":                    "MaxRuntimeInSeconds",
+		"model_quality_app_specification":           "ModelQualityAppSpecification",
+		"model_quality_baseline_config":             "ModelQualityBaselineConfig",
+		"model_quality_job_input":                   "ModelQualityJobInput",
+		"model_quality_job_output_config":           "ModelQualityJobOutputConfig",
+		"monitoring_outputs":                        "MonitoringOutputs",
+		"network_config":                            "NetworkConfig",
+		"post_analytics_processor_source_uri":       "PostAnalyticsProcessorSourceUri",
+		"probability_attribute":                     "ProbabilityAttribute",
+		"probability_threshold_attribute":           "ProbabilityThresholdAttribute",
+		"problem_type":                              "ProblemType",
+		"record_preprocessor_source_uri":            "RecordPreprocessorSourceUri",
+		"role_arn":                                  "RoleArn",
+		"s3_data_distribution_type":                 "S3DataDistributionType",
+		"s3_input_mode":                             "S3InputMode",
+		"s3_output":                                 "S3Output",
+		"s3_upload_mode":                            "S3UploadMode",
+		"s3_uri":                                    "S3Uri",
+		"security_group_ids":                        "SecurityGroupIds",
+		"start_time_offset":                         "StartTimeOffset",
+		"stopping_condition":                        "StoppingCondition",
+		"subnets":                                   "Subnets",
+		"tags":                                      "Tags",
+		"value":                                     "Value",
+		"volume_kms_key_id":                         "VolumeKmsKeyId",
+		"volume_size_in_gb":                         "VolumeSizeInGB",
+		"vpc_config":                                "VpcConfig",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

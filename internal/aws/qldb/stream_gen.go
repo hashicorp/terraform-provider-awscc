@@ -183,13 +183,6 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::QLDB::Stream.",
 		Version:     1,
@@ -198,7 +191,24 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::QLDB::Stream").WithTerraformTypeName("awscc_qldb_stream").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::QLDB::Stream").WithTerraformTypeName("awscc_qldb_stream")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"aggregation_enabled":   "AggregationEnabled",
+		"arn":                   "Arn",
+		"exclusive_end_time":    "ExclusiveEndTime",
+		"id":                    "Id",
+		"inclusive_start_time":  "InclusiveStartTime",
+		"key":                   "Key",
+		"kinesis_configuration": "KinesisConfiguration",
+		"ledger_name":           "LedgerName",
+		"role_arn":              "RoleArn",
+		"stream_arn":            "StreamArn",
+		"stream_name":           "StreamName",
+		"tags":                  "Tags",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

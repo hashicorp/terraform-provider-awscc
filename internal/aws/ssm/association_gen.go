@@ -356,7 +356,6 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -371,7 +370,34 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SSM::Association").WithTerraformTypeName("awscc_ssm_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSM::Association").WithTerraformTypeName("awscc_ssm_association")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"apply_only_at_cron_interval":      "ApplyOnlyAtCronInterval",
+		"association_id":                   "AssociationId",
+		"association_name":                 "AssociationName",
+		"automation_target_parameter_name": "AutomationTargetParameterName",
+		"calendar_names":                   "CalendarNames",
+		"compliance_severity":              "ComplianceSeverity",
+		"document_version":                 "DocumentVersion",
+		"instance_id":                      "InstanceId",
+		"key":                              "Key",
+		"max_concurrency":                  "MaxConcurrency",
+		"max_errors":                       "MaxErrors",
+		"name":                             "Name",
+		"output_location":                  "OutputLocation",
+		"output_s3_bucket_name":            "OutputS3BucketName",
+		"output_s3_key_prefix":             "OutputS3KeyPrefix",
+		"output_s3_region":                 "OutputS3Region",
+		"parameters":                       "Parameters",
+		"s3_location":                      "S3Location",
+		"schedule_expression":              "ScheduleExpression",
+		"sync_compliance":                  "SyncCompliance",
+		"targets":                          "Targets",
+		"values":                           "Values",
+		"wait_for_success_timeout_seconds": "WaitForSuccessTimeoutSeconds",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

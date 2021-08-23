@@ -226,7 +226,6 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -241,7 +240,24 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationObjectStorage").WithTerraformTypeName("awscc_datasync_location_object_storage").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationObjectStorage").WithTerraformTypeName("awscc_datasync_location_object_storage")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_key":      "AccessKey",
+		"agent_arns":      "AgentArns",
+		"bucket_name":     "BucketName",
+		"key":             "Key",
+		"location_arn":    "LocationArn",
+		"location_uri":    "LocationUri",
+		"secret_key":      "SecretKey",
+		"server_hostname": "ServerHostname",
+		"server_port":     "ServerPort",
+		"server_protocol": "ServerProtocol",
+		"subdirectory":    "Subdirectory",
+		"tags":            "Tags",
+		"value":           "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/SecretKey",

@@ -47,7 +47,6 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -62,7 +61,13 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::TransitGatewayRegistration").WithTerraformTypeName("awscc_networkmanager_transit_gateway_registration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::TransitGatewayRegistration").WithTerraformTypeName("awscc_networkmanager_transit_gateway_registration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"global_network_id":   "GlobalNetworkId",
+		"transit_gateway_arn": "TransitGatewayArn",
+	})
 
 	opts = opts.IsImmutableType(true)
 

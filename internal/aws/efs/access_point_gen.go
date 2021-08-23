@@ -249,7 +249,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -264,7 +263,28 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EFS::AccessPoint").WithTerraformTypeName("awscc_efs_access_point").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EFS::AccessPoint").WithTerraformTypeName("awscc_efs_access_point")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_point_id":   "AccessPointId",
+		"access_point_tags": "AccessPointTags",
+		"arn":               "Arn",
+		"client_token":      "ClientToken",
+		"creation_info":     "CreationInfo",
+		"file_system_id":    "FileSystemId",
+		"gid":               "Gid",
+		"key":               "Key",
+		"owner_gid":         "OwnerGid",
+		"owner_uid":         "OwnerUid",
+		"path":              "Path",
+		"permissions":       "Permissions",
+		"posix_user":        "PosixUser",
+		"root_directory":    "RootDirectory",
+		"secondary_gids":    "SecondaryGids",
+		"uid":               "Uid",
+		"value":             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

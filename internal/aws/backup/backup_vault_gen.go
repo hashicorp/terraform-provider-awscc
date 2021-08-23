@@ -118,7 +118,6 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -133,7 +132,19 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupVault").WithTerraformTypeName("awscc_backup_backup_vault").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupVault").WithTerraformTypeName("awscc_backup_backup_vault")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_policy":       "AccessPolicy",
+		"backup_vault_arn":    "BackupVaultArn",
+		"backup_vault_events": "BackupVaultEvents",
+		"backup_vault_name":   "BackupVaultName",
+		"backup_vault_tags":   "BackupVaultTags",
+		"encryption_key_arn":  "EncryptionKeyArn",
+		"notifications":       "Notifications",
+		"sns_topic_arn":       "SNSTopicArn",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

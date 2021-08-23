@@ -62,7 +62,6 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -77,7 +76,14 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::ServiceActionAssociation").WithTerraformTypeName("awscc_servicecatalog_service_action_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::ServiceActionAssociation").WithTerraformTypeName("awscc_servicecatalog_service_action_association")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"product_id":               "ProductId",
+		"provisioning_artifact_id": "ProvisioningArtifactId",
+		"service_action_id":        "ServiceActionId",
+	})
 
 	opts = opts.IsImmutableType(true)
 

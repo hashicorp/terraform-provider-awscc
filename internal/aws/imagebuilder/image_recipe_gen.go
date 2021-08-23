@@ -405,7 +405,6 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -420,7 +419,38 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::ImageRecipe").WithTerraformTypeName("awscc_imagebuilder_image_recipe").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::ImageRecipe").WithTerraformTypeName("awscc_imagebuilder_image_recipe")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"additional_instance_configuration": "AdditionalInstanceConfiguration",
+		"arn":                               "Arn",
+		"block_device_mappings":             "BlockDeviceMappings",
+		"component_arn":                     "ComponentArn",
+		"components":                        "Components",
+		"delete_on_termination":             "DeleteOnTermination",
+		"description":                       "Description",
+		"device_name":                       "DeviceName",
+		"ebs":                               "Ebs",
+		"encrypted":                         "Encrypted",
+		"iops":                              "Iops",
+		"kms_key_id":                        "KmsKeyId",
+		"name":                              "Name",
+		"no_device":                         "NoDevice",
+		"parameters":                        "Parameters",
+		"parent_image":                      "ParentImage",
+		"snapshot_id":                       "SnapshotId",
+		"systems_manager_agent":             "SystemsManagerAgent",
+		"tags":                              "Tags",
+		"uninstall_after_build":             "UninstallAfterBuild",
+		"user_data_override":                "UserDataOverride",
+		"value":                             "Value",
+		"version":                           "Version",
+		"virtual_name":                      "VirtualName",
+		"volume_size":                       "VolumeSize",
+		"volume_type":                       "VolumeType",
+		"working_directory":                 "WorkingDirectory",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

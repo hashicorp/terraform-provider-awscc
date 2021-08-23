@@ -105,7 +105,6 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -120,7 +119,17 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::RDS::GlobalCluster").WithTerraformTypeName("awscc_rds_global_cluster").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::RDS::GlobalCluster").WithTerraformTypeName("awscc_rds_global_cluster")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"deletion_protection":          "DeletionProtection",
+		"engine":                       "Engine",
+		"engine_version":               "EngineVersion",
+		"global_cluster_identifier":    "GlobalClusterIdentifier",
+		"source_db_cluster_identifier": "SourceDBClusterIdentifier",
+		"storage_encrypted":            "StorageEncrypted",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

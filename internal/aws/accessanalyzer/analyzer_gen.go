@@ -230,7 +230,6 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -245,7 +244,25 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::AccessAnalyzer::Analyzer").WithTerraformTypeName("awscc_accessanalyzer_analyzer").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::AccessAnalyzer::Analyzer").WithTerraformTypeName("awscc_accessanalyzer_analyzer")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"analyzer_name": "AnalyzerName",
+		"archive_rules": "ArchiveRules",
+		"arn":           "Arn",
+		"contains":      "Contains",
+		"eq":            "Eq",
+		"exists":        "Exists",
+		"filter":        "Filter",
+		"key":           "Key",
+		"neq":           "Neq",
+		"property":      "Property",
+		"rule_name":     "RuleName",
+		"tags":          "Tags",
+		"type":          "Type",
+		"value":         "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

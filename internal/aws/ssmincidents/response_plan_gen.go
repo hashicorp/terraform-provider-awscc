@@ -431,7 +431,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -446,7 +445,35 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SSMIncidents::ResponsePlan").WithTerraformTypeName("awscc_ssmincidents_response_plan").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSMIncidents::ResponsePlan").WithTerraformTypeName("awscc_ssmincidents_response_plan")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"actions":              "Actions",
+		"arn":                  "Arn",
+		"chat_channel":         "ChatChannel",
+		"chatbot_sns":          "ChatbotSns",
+		"dedupe_string":        "DedupeString",
+		"display_name":         "DisplayName",
+		"document_name":        "DocumentName",
+		"document_version":     "DocumentVersion",
+		"engagements":          "Engagements",
+		"impact":               "Impact",
+		"incident_template":    "IncidentTemplate",
+		"key":                  "Key",
+		"name":                 "Name",
+		"notification_targets": "NotificationTargets",
+		"parameters":           "Parameters",
+		"role_arn":             "RoleArn",
+		"sns_topic_arn":        "SnsTopicArn",
+		"ssm_automation":       "SsmAutomation",
+		"summary":              "Summary",
+		"tags":                 "Tags",
+		"target_account":       "TargetAccount",
+		"title":                "Title",
+		"value":                "Value",
+		"values":               "Values",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -73,13 +73,6 @@ func usagePlanKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::ApiGateway::UsagePlanKey",
 		Version:     1,
@@ -88,7 +81,15 @@ func usagePlanKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::UsagePlanKey").WithTerraformTypeName("awscc_apigateway_usage_plan_key").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::UsagePlanKey").WithTerraformTypeName("awscc_apigateway_usage_plan_key")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"id":            "Id",
+		"key_id":        "KeyId",
+		"key_type":      "KeyType",
+		"usage_plan_id": "UsagePlanId",
+	})
 
 	opts = opts.IsImmutableType(true)
 

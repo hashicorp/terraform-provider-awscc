@@ -310,7 +310,6 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -325,7 +324,35 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53::HealthCheck").WithTerraformTypeName("awscc_route53_health_check").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53::HealthCheck").WithTerraformTypeName("awscc_route53_health_check")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alarm_identifier":                "AlarmIdentifier",
+		"child_health_checks":             "ChildHealthChecks",
+		"enable_sni":                      "EnableSNI",
+		"failure_threshold":               "FailureThreshold",
+		"fully_qualified_domain_name":     "FullyQualifiedDomainName",
+		"health_check_config":             "HealthCheckConfig",
+		"health_check_id":                 "HealthCheckId",
+		"health_check_tags":               "HealthCheckTags",
+		"health_threshold":                "HealthThreshold",
+		"insufficient_data_health_status": "InsufficientDataHealthStatus",
+		"inverted":                        "Inverted",
+		"ip_address":                      "IPAddress",
+		"key":                             "Key",
+		"measure_latency":                 "MeasureLatency",
+		"name":                            "Name",
+		"port":                            "Port",
+		"region":                          "Region",
+		"regions":                         "Regions",
+		"request_interval":                "RequestInterval",
+		"resource_path":                   "ResourcePath",
+		"routing_control_arn":             "RoutingControlArn",
+		"search_string":                   "SearchString",
+		"type":                            "Type",
+		"value":                           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

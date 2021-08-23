@@ -42,60 +42,16 @@ func TestCloudFormationPropertyToTerraformAttribute(t *testing.T) {
 			Value:         "AWS99Thing",
 			ExpectedValue: "aws99_thing",
 		},
+		{
+			TestName:      "including replacement",
+			Value:         "CloudWatchLogsLogGroupArn",
+			ExpectedValue: "cloudwatch_logs_log_group_arn",
+		},
 	}
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
 			got := naming.CloudFormationPropertyToTerraformAttribute(testCase.Value)
-
-			if got != testCase.ExpectedValue {
-				t.Errorf("expected: %s, got: %s", testCase.ExpectedValue, got)
-			}
-		})
-	}
-}
-
-func TestTerraformAttributeToCloudFormationProperty(t *testing.T) {
-	testCases := []struct {
-		TestName      string
-		Value         string
-		ExpectedValue string
-	}{
-		{
-			TestName:      "empty string",
-			Value:         "",
-			ExpectedValue: "",
-		},
-		{
-			TestName:      "whitespace string",
-			Value:         "  ",
-			ExpectedValue: "",
-		},
-		{
-			TestName:      "short property name",
-			Value:         "arn",
-			ExpectedValue: "Arn",
-		},
-		{
-			TestName:      "long property name",
-			Value:         "global_replication_group_description",
-			ExpectedValue: "GlobalReplicationGroupDescription",
-		},
-		{
-			TestName:      "including digit",
-			Value:         "s3_bucket",
-			ExpectedValue: "S3Bucket",
-		},
-		{
-			TestName:      "including multiple digits",
-			Value:         "aws99_thing",
-			ExpectedValue: "Aws99Thing",
-		},
-	}
-
-	for _, testCase := range testCases {
-		t.Run(testCase.TestName, func(t *testing.T) {
-			got := naming.TerraformAttributeToCloudFormationProperty(testCase.Value)
 
 			if got != testCase.ExpectedValue {
 				t.Errorf("expected: %s, got: %s", testCase.ExpectedValue, got)

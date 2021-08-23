@@ -174,13 +174,6 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MediaPackage::PackagingGroup",
 		Version:     1,
@@ -189,7 +182,22 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingGroup").WithTerraformTypeName("awscc_mediapackage_packaging_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingGroup").WithTerraformTypeName("awscc_mediapackage_packaging_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"authorization":         "Authorization",
+		"cdn_identifier_secret": "CdnIdentifierSecret",
+		"domain_name":           "DomainName",
+		"egress_access_logs":    "EgressAccessLogs",
+		"id":                    "Id",
+		"key":                   "Key",
+		"log_group_name":        "LogGroupName",
+		"secrets_role_arn":      "SecretsRoleArn",
+		"tags":                  "Tags",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

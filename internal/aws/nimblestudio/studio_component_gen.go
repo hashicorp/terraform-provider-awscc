@@ -381,7 +381,6 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -396,7 +395,41 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::StudioComponent").WithTerraformTypeName("awscc_nimblestudio_studio_component").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::StudioComponent").WithTerraformTypeName("awscc_nimblestudio_studio_component")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"active_directory_configuration":         "ActiveDirectoryConfiguration",
+		"active_directory_user":                  "ActiveDirectoryUser",
+		"compute_farm_configuration":             "ComputeFarmConfiguration",
+		"computer_attributes":                    "ComputerAttributes",
+		"configuration":                          "Configuration",
+		"description":                            "Description",
+		"directory_id":                           "DirectoryId",
+		"ec_2_security_group_ids":                "Ec2SecurityGroupIds",
+		"endpoint":                               "Endpoint",
+		"file_system_id":                         "FileSystemId",
+		"initialization_scripts":                 "InitializationScripts",
+		"key":                                    "Key",
+		"launch_profile_protocol_version":        "LaunchProfileProtocolVersion",
+		"license_service_configuration":          "LicenseServiceConfiguration",
+		"linux_mount_point":                      "LinuxMountPoint",
+		"name":                                   "Name",
+		"organizational_unit_distinguished_name": "OrganizationalUnitDistinguishedName",
+		"platform":                               "Platform",
+		"run_context":                            "RunContext",
+		"script":                                 "Script",
+		"script_parameters":                      "ScriptParameters",
+		"share_name":                             "ShareName",
+		"shared_file_system_configuration":       "SharedFileSystemConfiguration",
+		"studio_component_id":                    "StudioComponentId",
+		"studio_id":                              "StudioId",
+		"subtype":                                "Subtype",
+		"tags":                                   "Tags",
+		"type":                                   "Type",
+		"value":                                  "Value",
+		"windows_mount_drive":                    "WindowsMountDrive",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

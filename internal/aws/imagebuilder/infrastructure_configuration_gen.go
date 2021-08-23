@@ -229,7 +229,6 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -244,7 +243,27 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::InfrastructureConfiguration").WithTerraformTypeName("awscc_imagebuilder_infrastructure_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::InfrastructureConfiguration").WithTerraformTypeName("awscc_imagebuilder_infrastructure_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                           "Arn",
+		"description":                   "Description",
+		"instance_profile_name":         "InstanceProfileName",
+		"instance_types":                "InstanceTypes",
+		"key_pair":                      "KeyPair",
+		"logging":                       "Logging",
+		"name":                          "Name",
+		"resource_tags":                 "ResourceTags",
+		"s3_bucket_name":                "S3BucketName",
+		"s3_key_prefix":                 "S3KeyPrefix",
+		"s3_logs":                       "S3Logs",
+		"security_group_ids":            "SecurityGroupIds",
+		"sns_topic_arn":                 "SnsTopicArn",
+		"subnet_id":                     "SubnetId",
+		"tags":                          "Tags",
+		"terminate_instance_on_failure": "TerminateInstanceOnFailure",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

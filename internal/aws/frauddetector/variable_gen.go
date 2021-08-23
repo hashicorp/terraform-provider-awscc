@@ -221,7 +221,6 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -236,7 +235,23 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::Variable").WithTerraformTypeName("awscc_frauddetector_variable").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::Variable").WithTerraformTypeName("awscc_frauddetector_variable")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":               "Arn",
+		"created_time":      "CreatedTime",
+		"data_source":       "DataSource",
+		"data_type":         "DataType",
+		"default_value":     "DefaultValue",
+		"description":       "Description",
+		"key":               "Key",
+		"last_updated_time": "LastUpdatedTime",
+		"name":              "Name",
+		"tags":              "Tags",
+		"value":             "Value",
+		"variable_type":     "VariableType",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

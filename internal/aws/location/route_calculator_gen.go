@@ -119,7 +119,6 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -134,7 +133,19 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Location::RouteCalculator").WithTerraformTypeName("awscc_location_route_calculator").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Location::RouteCalculator").WithTerraformTypeName("awscc_location_route_calculator")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":             "Arn",
+		"calculator_arn":  "CalculatorArn",
+		"calculator_name": "CalculatorName",
+		"create_time":     "CreateTime",
+		"data_source":     "DataSource",
+		"description":     "Description",
+		"pricing_plan":    "PricingPlan",
+		"update_time":     "UpdateTime",
+	})
 
 	opts = opts.IsImmutableType(true)
 

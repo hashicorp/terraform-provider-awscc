@@ -342,13 +342,6 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Creates an AWS Firewall Manager policy.",
 		Version:     1,
@@ -357,7 +350,30 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::FMS::Policy").WithTerraformTypeName("awscc_fms_policy").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FMS::Policy").WithTerraformTypeName("awscc_fms_policy")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"account":                      "ACCOUNT",
+		"arn":                          "Arn",
+		"delete_all_policy_resources":  "DeleteAllPolicyResources",
+		"exclude_map":                  "ExcludeMap",
+		"exclude_resource_tags":        "ExcludeResourceTags",
+		"id":                           "Id",
+		"include_map":                  "IncludeMap",
+		"key":                          "Key",
+		"managed_service_data":         "ManagedServiceData",
+		"orgunit":                      "ORGUNIT",
+		"policy_name":                  "PolicyName",
+		"remediation_enabled":          "RemediationEnabled",
+		"resource_tags":                "ResourceTags",
+		"resource_type":                "ResourceType",
+		"resource_type_list":           "ResourceTypeList",
+		"security_service_policy_data": "SecurityServicePolicyData",
+		"tags":                         "Tags",
+		"type":                         "Type",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DeleteAllPolicyResources",

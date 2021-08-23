@@ -349,13 +349,6 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::FIS::ExperimentTemplate",
 		Version:     1,
@@ -364,7 +357,30 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::FIS::ExperimentTemplate").WithTerraformTypeName("awscc_fis_experiment_template").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FIS::ExperimentTemplate").WithTerraformTypeName("awscc_fis_experiment_template")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"action_id":       "ActionId",
+		"actions":         "Actions",
+		"description":     "Description",
+		"filters":         "Filters",
+		"id":              "Id",
+		"parameters":      "Parameters",
+		"path":            "Path",
+		"resource_arns":   "ResourceArns",
+		"resource_tags":   "ResourceTags",
+		"resource_type":   "ResourceType",
+		"role_arn":        "RoleArn",
+		"selection_mode":  "SelectionMode",
+		"source":          "Source",
+		"start_after":     "StartAfter",
+		"stop_conditions": "StopConditions",
+		"tags":            "Tags",
+		"targets":         "Targets",
+		"value":           "Value",
+		"values":          "Values",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

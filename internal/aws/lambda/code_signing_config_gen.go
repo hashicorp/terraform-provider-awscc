@@ -132,7 +132,6 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -147,7 +146,18 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Lambda::CodeSigningConfig").WithTerraformTypeName("awscc_lambda_code_signing_config").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Lambda::CodeSigningConfig").WithTerraformTypeName("awscc_lambda_code_signing_config")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"allowed_publishers":               "AllowedPublishers",
+		"code_signing_config_arn":          "CodeSigningConfigArn",
+		"code_signing_config_id":           "CodeSigningConfigId",
+		"code_signing_policies":            "CodeSigningPolicies",
+		"description":                      "Description",
+		"signing_profile_version_arns":     "SigningProfileVersionArns",
+		"untrusted_artifact_on_deployment": "UntrustedArtifactOnDeployment",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

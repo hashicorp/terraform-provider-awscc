@@ -172,7 +172,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -187,7 +186,23 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Amplify::Domain").WithTerraformTypeName("awscc_amplify_domain").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Amplify::Domain").WithTerraformTypeName("awscc_amplify_domain")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"app_id":                            "AppId",
+		"arn":                               "Arn",
+		"auto_sub_domain_creation_patterns": "AutoSubDomainCreationPatterns",
+		"auto_sub_domain_iam_role":          "AutoSubDomainIAMRole",
+		"branch_name":                       "BranchName",
+		"certificate_record":                "CertificateRecord",
+		"domain_name":                       "DomainName",
+		"domain_status":                     "DomainStatus",
+		"enable_auto_sub_domain":            "EnableAutoSubDomain",
+		"prefix":                            "Prefix",
+		"status_reason":                     "StatusReason",
+		"sub_domain_settings":               "SubDomainSettings",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

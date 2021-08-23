@@ -16,7 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 	"github.com/mattbaird/jsonpatch"
@@ -24,6 +23,34 @@ import (
 
 // ResourceTypeOptionsFunc is a type alias for a resource type functional option.
 type ResourceTypeOptionsFunc func(*resourceType) error
+
+// WithAttributeNameMap is a helper function to construct functional options
+// that set a resource type's attribute name maps.
+// If multiple WithAttributeNameMap calls are made, the last call overrides
+// the previous calls' values.
+func WithAttributeNameMap(v map[string]string) ResourceTypeOptionsFunc {
+	return func(o *resourceType) error {
+		if _, ok := v["id"]; !ok {
+			// Synthesize a mapping for the reserved top-level "id" attribute.
+			v["id"] = "ID"
+		}
+
+		cfToTfNameMap := make(map[string]string, len(v))
+
+		for tfName, cfName := range v {
+			_, ok := cfToTfNameMap[cfName]
+			if ok {
+				return fmt.Errorf("duplicate attribute name mapping for CloudFormation property %s", cfName)
+			}
+			cfToTfNameMap[cfName] = tfName
+		}
+
+		o.tfToCfNameMap = v
+		o.cfToTfNameMap = cfToTfNameMap
+
+		return nil
+	}
+}
 
 // WithCloudFormationTypeName is a helper function to construct functional options
 // that set a resource type's CloudFormation type name.
@@ -73,6 +100,18 @@ func IsImmutableType(v bool) ResourceTypeOptionsFunc {
 	}
 }
 
+// WithSyntheticIDAttribute is a helper function to construct functional options
+// that set a resource type's synthetic ID attribute flag.
+// If multiple WithSyntheticIDAttribute calls are made, the last call overrides
+// the previous calls' values.
+func WithSyntheticIDAttribute(v bool) ResourceTypeOptionsFunc {
+	return func(o *resourceType) error {
+		o.syntheticIDAttribute = v
+
+		return nil
+	}
+}
+
 // WithWriteOnlyPropertyPaths is a helper function to construct functional options
 // that set a resource type's write-only property paths (JSON Pointer).
 // If multiple WithWriteOnlyPropertyPaths calls are made, the last call overrides
@@ -82,7 +121,7 @@ func WithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
 		writeOnlyAttributePaths := make([]*tftypes.AttributePath, 0)
 
 		for _, writeOnlyPropertyPath := range v {
-			writeOnlyAttributePath, err := propertyPathToAttributePath(writeOnlyPropertyPath)
+			writeOnlyAttributePath, err := o.propertyPathToAttributePath(writeOnlyPropertyPath)
 
 			if err != nil {
 				return fmt.Errorf("error creating write-only attribute path (%s): %w", writeOnlyPropertyPath, err)
@@ -154,6 +193,14 @@ func WithDeleteTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 // ResourceTypeOptions is a type alias for a slice of resource type functional options.
 type ResourceTypeOptions []ResourceTypeOptionsFunc
 
+// WithAttributeNameMap is a helper function to construct functional options
+// that set a resource type's attribute name map, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithAttributeNameMap(v map[string]string) ResourceTypeOptions {
+	return append(opts, WithAttributeNameMap(v))
+}
+
 // WithCloudFormationTypeName is a helper function to construct functional options
 // that set a resource type's CloudFormation type name, append that function to the
 // current slice of functional options and return the new slice of options.
@@ -184,6 +231,14 @@ func (opts ResourceTypeOptions) WithTerraformTypeName(v string) ResourceTypeOpti
 // It is intended to be chained with other similar helper functions in a builder pattern.
 func (opts ResourceTypeOptions) IsImmutableType(v bool) ResourceTypeOptions {
 	return append(opts, IsImmutableType(v))
+}
+
+// WithSyntheticIDAttribute is a helper function to construct functional options
+// that set a resource type's synthetic ID attribute flag, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithSyntheticIDAttribute(v bool) ResourceTypeOptions {
+	return append(opts, WithSyntheticIDAttribute(v))
 }
 
 // WithWriteOnlyPropertyPaths is a helper function to construct functional options
@@ -223,7 +278,10 @@ type resourceType struct {
 	cfTypeName              string                   // CloudFormation type name for the resource type
 	tfSchema                tfsdk.Schema             // Terraform schema for the resource type
 	tfTypeName              string                   // Terraform type name for resource type
+	tfToCfNameMap           map[string]string        // Map of Terraform attribute name to CloudFormation property name
+	cfToTfNameMap           map[string]string        // Map of CloudFormation property name to Terraform attribute name
 	isImmutableType         bool                     // Resources cannot be updated and must be recreated
+	syntheticIDAttribute    bool                     // Resource type has a synthetic ID attribute
 	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
 	createTimeout           time.Duration            // Maximum wait time for resource creation
 	updateTimeout           time.Duration            // Maximum wait time for resource update
@@ -261,6 +319,41 @@ func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider
 	return newGenericResource(provider, rt), nil
 }
 
+// propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
+func (rt *resourceType) propertyPathToAttributePath(propertyPath string) (*tftypes.AttributePath, error) {
+	segments := strings.Split(propertyPath, "/")
+
+	if got, expected := len(segments), 3; got < expected {
+		return nil, fmt.Errorf("expected at least %d property path segments, got: %d", expected, got)
+	}
+
+	if got, expected := segments[0], ""; got != expected {
+		return nil, fmt.Errorf("expected %q for the initial property path segment, got: %q", expected, got)
+	}
+
+	if got, expected := segments[1], "properties"; got != expected {
+		return nil, fmt.Errorf("expected %q for the second property path segment, got: %q", expected, got)
+	}
+
+	attributePath := tftypes.NewAttributePath()
+
+	for _, segment := range segments[2:] {
+		switch segment {
+		case "", "*":
+			return nil, fmt.Errorf("invalid property path segment: %q", segment)
+
+		default:
+			attributeName, ok := rt.cfToTfNameMap[segment]
+			if !ok {
+				return nil, fmt.Errorf("attribute name mapping not found: %s", segment)
+			}
+			attributePath = attributePath.WithAttributeName(attributeName)
+		}
+	}
+
+	return attributePath, nil
+}
+
 // Implements tfsdk.Resource.
 type resource struct {
 	provider     tfcloudformation.Provider
@@ -286,13 +379,14 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Debug(ctx, "Resource.Create enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Create enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudFormationClient(ctx)
 
 	tflog.Debug(ctx, "Request.Plan.Raw", "value", hclog.Fmt("%v", request.Plan.Raw))
 
-	desiredState, err := GetCloudFormationDesiredState(ctx, request.Plan.Raw)
+	translator := toCloudFormation{tfToCfNameMap: r.resourceType.tfToCfNameMap}
+	desiredState, err := translator.AsString(ctx, request.Plan.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))
@@ -357,16 +451,30 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
-	// Set the "id" attribute.
-	err = r.setId(ctx, id, &response.State)
+	// Set the synthetic "id" attribute.
+	if r.resourceType.syntheticIDAttribute {
+		err = r.setId(ctx, id, &response.State)
+
+		if err != nil {
+			response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+
+			return
+		}
+	}
+
+	unknowns, err := Unknowns(ctx, response.State.Raw, r.resourceType.tfToCfNameMap)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Creation Of Terraform State Unsuccessful",
+			Detail:   fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		})
 
 		return
 	}
 
-	err = SetUnknownValuesFromCloudFormationResourceModel(ctx, &response.State, aws.ToString(description.ResourceModel))
+	err = unknowns.SetValuesFromString(ctx, &response.State, aws.ToString(description.ResourceModel))
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -380,7 +488,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
 
-	tflog.Debug(ctx, "Resource.Create exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Create exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
@@ -389,7 +497,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Debug(ctx, "Resource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	tflog.Debug(ctx, "Request.State.Raw", "value", hclog.Fmt("%v", request.State.Raw))
 
@@ -419,8 +527,9 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		return
 	}
 
+	translator := toTerraform{cfToTfNameMap: r.resourceType.cfToTfNameMap}
 	schema := &currentState.Schema
-	val, err := GetCloudFormationResourceModelValue(ctx, schema, aws.ToString(description.ResourceModel))
+	val, err := translator.FromString(ctx, schema, aws.ToString(description.ResourceModel))
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -454,17 +563,19 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	}
 
 	// Set the "id" attribute.
-	err = r.setId(ctx, id, &response.State)
+	if r.resourceType.syntheticIDAttribute {
+		err = r.setId(ctx, id, &response.State)
 
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+		if err != nil {
+			response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
 
-		return
+			return
+		}
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
 
-	tflog.Debug(ctx, "Resource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
@@ -473,7 +584,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Debug(ctx, "Resource.Update enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Update enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudFormationClient(ctx)
 
@@ -486,7 +597,8 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	currentDesiredState, err := GetCloudFormationDesiredState(ctx, currentState.Raw)
+	translator := toCloudFormation{tfToCfNameMap: r.resourceType.tfToCfNameMap}
+	currentDesiredState, err := translator.AsString(ctx, currentState.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Prior State", err))
@@ -494,7 +606,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	plannedDesiredState, err := GetCloudFormationDesiredState(ctx, request.Plan.Raw)
+	plannedDesiredState, err := translator.AsString(ctx, request.Plan.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))
@@ -553,7 +665,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	// On Update there should be nothing unknown in the planned state...
 	response.State.Raw = request.Plan.Raw
 
-	tflog.Debug(ctx, "Resource.Update exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Update exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceRequest, response *tfsdk.DeleteResourceResponse) {
@@ -562,7 +674,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Debug(ctx, "Resource.Delete enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Delete enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudFormationClient(ctx)
 
@@ -584,7 +696,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 
 	response.State.RemoveResource(ctx)
 
-	tflog.Debug(ctx, "Resource.Delete exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Delete exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 // describe returns the live state of the specified resource.
@@ -633,35 +745,4 @@ func patchDocument(old, new string) (string, error) {
 	}
 
 	return string(b), nil
-}
-
-// propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
-func propertyPathToAttributePath(propertyPath string) (*tftypes.AttributePath, error) {
-	segments := strings.Split(propertyPath, "/")
-
-	if got, expected := len(segments), 3; got < expected {
-		return nil, fmt.Errorf("expected at least %d property path segments, got: %d", expected, got)
-	}
-
-	if got, expected := segments[0], ""; got != expected {
-		return nil, fmt.Errorf("expected %q for the initial property path segment, got: %q", expected, got)
-	}
-
-	if got, expected := segments[1], "properties"; got != expected {
-		return nil, fmt.Errorf("expected %q for the second property path segment, got: %q", expected, got)
-	}
-
-	attributePath := tftypes.NewAttributePath()
-
-	for _, segment := range segments[2:] {
-		switch segment {
-		case "", "*":
-			return nil, fmt.Errorf("invalid property path segment: %q", segment)
-
-		default:
-			attributePath = attributePath.WithAttributeName(naming.CloudFormationPropertyToTerraformAttribute(segment))
-		}
-	}
-
-	return attributePath, nil
 }

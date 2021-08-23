@@ -356,13 +356,6 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.htmlin the Amazon Elastic Container Service Developer Guide.",
 		Version:     1,
@@ -371,7 +364,34 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskSet").WithTerraformTypeName("awscc_ecs_task_set").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskSet").WithTerraformTypeName("awscc_ecs_task_set")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"assign_public_ip":      "AssignPublicIp",
+		"aws_vpc_configuration": "AwsVpcConfiguration",
+		"cluster":               "Cluster",
+		"container_name":        "ContainerName",
+		"container_port":        "ContainerPort",
+		"external_id":           "ExternalId",
+		"id":                    "Id",
+		"launch_type":           "LaunchType",
+		"load_balancer_name":    "LoadBalancerName",
+		"load_balancers":        "LoadBalancers",
+		"network_configuration": "NetworkConfiguration",
+		"platform_version":      "PlatformVersion",
+		"port":                  "Port",
+		"registry_arn":          "RegistryArn",
+		"scale":                 "Scale",
+		"security_groups":       "SecurityGroups",
+		"service":               "Service",
+		"service_registries":    "ServiceRegistries",
+		"subnets":               "Subnets",
+		"target_group_arn":      "TargetGroupArn",
+		"task_definition":       "TaskDefinition",
+		"unit":                  "Unit",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

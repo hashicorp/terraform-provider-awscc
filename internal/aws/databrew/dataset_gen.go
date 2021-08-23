@@ -800,7 +800,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -815,7 +814,54 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataBrew::Dataset").WithTerraformTypeName("awscc_databrew_dataset").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataBrew::Dataset").WithTerraformTypeName("awscc_databrew_dataset")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"bucket":                        "Bucket",
+		"catalog_id":                    "CatalogId",
+		"create_column":                 "CreateColumn",
+		"csv":                           "Csv",
+		"data_catalog_input_definition": "DataCatalogInputDefinition",
+		"database_input_definition":     "DatabaseInputDefinition",
+		"database_name":                 "DatabaseName",
+		"database_table_name":           "DatabaseTableName",
+		"dataset_parameter":             "DatasetParameter",
+		"datetime_options":              "DatetimeOptions",
+		"delimiter":                     "Delimiter",
+		"excel":                         "Excel",
+		"expression":                    "Expression",
+		"files_limit":                   "FilesLimit",
+		"filter":                        "Filter",
+		"format":                        "Format",
+		"format_options":                "FormatOptions",
+		"glue_connection_name":          "GlueConnectionName",
+		"header_row":                    "HeaderRow",
+		"input":                         "Input",
+		"json":                          "Json",
+		"key":                           "Key",
+		"last_modified_date_condition":  "LastModifiedDateCondition",
+		"locale_code":                   "LocaleCode",
+		"max_files":                     "MaxFiles",
+		"multi_line":                    "MultiLine",
+		"name":                          "Name",
+		"order":                         "Order",
+		"ordered_by":                    "OrderedBy",
+		"parameters":                    "Parameters",
+		"path_options":                  "PathOptions",
+		"path_parameter_name":           "PathParameterName",
+		"s3_input_definition":           "S3InputDefinition",
+		"sheet_indexes":                 "SheetIndexes",
+		"sheet_names":                   "SheetNames",
+		"table_name":                    "TableName",
+		"tags":                          "Tags",
+		"temp_directory":                "TempDirectory",
+		"timezone_offset":               "TimezoneOffset",
+		"type":                          "Type",
+		"value":                         "Value",
+		"value_reference":               "ValueReference",
+		"values_map":                    "ValuesMap",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

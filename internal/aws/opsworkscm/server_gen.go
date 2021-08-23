@@ -376,13 +376,6 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::OpsWorksCM::Server",
 		Version:     1,
@@ -391,7 +384,38 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::OpsWorksCM::Server").WithTerraformTypeName("awscc_opsworkscm_server").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::OpsWorksCM::Server").WithTerraformTypeName("awscc_opsworkscm_server")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                          "Arn",
+		"associate_public_ip_address":  "AssociatePublicIpAddress",
+		"backup_id":                    "BackupId",
+		"backup_retention_count":       "BackupRetentionCount",
+		"custom_certificate":           "CustomCertificate",
+		"custom_domain":                "CustomDomain",
+		"custom_private_key":           "CustomPrivateKey",
+		"disable_automated_backup":     "DisableAutomatedBackup",
+		"endpoint":                     "Endpoint",
+		"engine":                       "Engine",
+		"engine_attributes":            "EngineAttributes",
+		"engine_model":                 "EngineModel",
+		"engine_version":               "EngineVersion",
+		"id":                           "Id",
+		"instance_profile_arn":         "InstanceProfileArn",
+		"instance_type":                "InstanceType",
+		"key":                          "Key",
+		"key_pair":                     "KeyPair",
+		"name":                         "Name",
+		"preferred_backup_window":      "PreferredBackupWindow",
+		"preferred_maintenance_window": "PreferredMaintenanceWindow",
+		"security_group_ids":           "SecurityGroupIds",
+		"server_name":                  "ServerName",
+		"service_role_arn":             "ServiceRoleArn",
+		"subnet_ids":                   "SubnetIds",
+		"tags":                         "Tags",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/CustomPrivateKey",

@@ -902,7 +902,6 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -917,7 +916,54 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Dashboard").WithTerraformTypeName("awscc_quicksight_dashboard").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Dashboard").WithTerraformTypeName("awscc_quicksight_dashboard")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"actions":                   "Actions",
+		"ad_hoc_filtering_option":   "AdHocFilteringOption",
+		"arn":                       "Arn",
+		"availability_status":       "AvailabilityStatus",
+		"aws_account_id":            "AwsAccountId",
+		"created_time":              "CreatedTime",
+		"dashboard_id":              "DashboardId",
+		"dashboard_publish_options": "DashboardPublishOptions",
+		"data_set_arn":              "DataSetArn",
+		"data_set_arns":             "DataSetArns",
+		"data_set_placeholder":      "DataSetPlaceholder",
+		"data_set_references":       "DataSetReferences",
+		"date_time_parameters":      "DateTimeParameters",
+		"decimal_parameters":        "DecimalParameters",
+		"description":               "Description",
+		"errors":                    "Errors",
+		"export_to_csv_option":      "ExportToCSVOption",
+		"integer_parameters":        "IntegerParameters",
+		"key":                       "Key",
+		"last_published_time":       "LastPublishedTime",
+		"last_updated_time":         "LastUpdatedTime",
+		"message":                   "Message",
+		"name":                      "Name",
+		"parameters":                "Parameters",
+		"permissions":               "Permissions",
+		"principal":                 "Principal",
+		"sheet_controls_option":     "SheetControlsOption",
+		"sheet_id":                  "SheetId",
+		"sheets":                    "Sheets",
+		"source_entity":             "SourceEntity",
+		"source_entity_arn":         "SourceEntityArn",
+		"source_template":           "SourceTemplate",
+		"status":                    "Status",
+		"string_parameters":         "StringParameters",
+		"tags":                      "Tags",
+		"theme_arn":                 "ThemeArn",
+		"type":                      "Type",
+		"value":                     "Value",
+		"values":                    "Values",
+		"version":                   "Version",
+		"version_description":       "VersionDescription",
+		"version_number":            "VersionNumber",
+		"visibility_state":          "VisibilityState",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DashboardPublishOptions",

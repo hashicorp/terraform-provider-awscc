@@ -272,13 +272,6 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
@@ -287,7 +280,37 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::ServiceProfile").WithTerraformTypeName("awscc_iotwireless_service_profile").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::ServiceProfile").WithTerraformTypeName("awscc_iotwireless_service_profile")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"add_gw_metadata":           "AddGwMetadata",
+		"arn":                       "Arn",
+		"channel_mask":              "ChannelMask",
+		"dev_status_req_freq":       "DevStatusReqFreq",
+		"dl_bucket_size":            "DlBucketSize",
+		"dl_rate":                   "DlRate",
+		"dl_rate_policy":            "DlRatePolicy",
+		"dr_max":                    "DrMax",
+		"dr_min":                    "DrMin",
+		"hr_allowed":                "HrAllowed",
+		"id":                        "Id",
+		"key":                       "Key",
+		"lo_ra_wan":                 "LoRaWAN",
+		"min_gw_diversity":          "MinGwDiversity",
+		"name":                      "Name",
+		"nwk_geo_loc":               "NwkGeoLoc",
+		"pr_allowed":                "PrAllowed",
+		"ra_allowed":                "RaAllowed",
+		"report_dev_status_battery": "ReportDevStatusBattery",
+		"report_dev_status_margin":  "ReportDevStatusMargin",
+		"tags":                      "Tags",
+		"target_per":                "TargetPer",
+		"ul_bucket_size":            "UlBucketSize",
+		"ul_rate":                   "UlRate",
+		"ul_rate_policy":            "UlRatePolicy",
+		"value":                     "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

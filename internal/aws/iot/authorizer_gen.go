@@ -143,7 +143,6 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -158,7 +157,21 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::Authorizer").WithTerraformTypeName("awscc_iot_authorizer").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::Authorizer").WithTerraformTypeName("awscc_iot_authorizer")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                       "Arn",
+		"authorizer_function_arn":   "AuthorizerFunctionArn",
+		"authorizer_name":           "AuthorizerName",
+		"key":                       "Key",
+		"signing_disabled":          "SigningDisabled",
+		"status":                    "Status",
+		"tags":                      "Tags",
+		"token_key_name":            "TokenKeyName",
+		"token_signing_public_keys": "TokenSigningPublicKeys",
+		"value":                     "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

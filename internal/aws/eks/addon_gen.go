@@ -154,7 +154,6 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -169,7 +168,20 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EKS::Addon").WithTerraformTypeName("awscc_eks_addon").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EKS::Addon").WithTerraformTypeName("awscc_eks_addon")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"addon_name":               "AddonName",
+		"addon_version":            "AddonVersion",
+		"arn":                      "Arn",
+		"cluster_name":             "ClusterName",
+		"key":                      "Key",
+		"resolve_conflicts":        "ResolveConflicts",
+		"service_account_role_arn": "ServiceAccountRoleArn",
+		"tags":                     "Tags",
+		"value":                    "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ResolveConflicts",

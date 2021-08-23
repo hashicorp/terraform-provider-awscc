@@ -202,7 +202,6 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -217,7 +216,22 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CodeGuruProfiler::ProfilingGroup").WithTerraformTypeName("awscc_codeguruprofiler_profiling_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CodeGuruProfiler::ProfilingGroup").WithTerraformTypeName("awscc_codeguruprofiler_profiling_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"agent_permissions":                            "AgentPermissions",
+		"anomaly_detection_notification_configuration": "AnomalyDetectionNotificationConfiguration",
+		"arn":                  "Arn",
+		"channel_id":           "channelId",
+		"channel_uri":          "channelUri",
+		"compute_platform":     "ComputePlatform",
+		"key":                  "Key",
+		"principals":           "Principals",
+		"profiling_group_name": "ProfilingGroupName",
+		"tags":                 "Tags",
+		"value":                "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

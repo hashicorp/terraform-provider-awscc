@@ -119,7 +119,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     providertypes.SetType{ElemType: types.StringType},
 						Optional: true,
 					},
-					"cloud_watch_metrics_enabled": {
+					"cloudwatch_metrics_enabled": {
 						// Property: CloudWatchMetricsEnabled
 						Type:     types.BoolType,
 						Optional: true,
@@ -236,7 +236,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -251,7 +250,28 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::S3ObjectLambda::AccessPoint").WithTerraformTypeName("awscc_s3objectlambda_access_point").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::S3ObjectLambda::AccessPoint").WithTerraformTypeName("awscc_s3objectlambda_access_point")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"actions":                           "Actions",
+		"allowed_features":                  "AllowedFeatures",
+		"arn":                               "Arn",
+		"block_public_acls":                 "BlockPublicAcls",
+		"block_public_policy":               "BlockPublicPolicy",
+		"cloudwatch_metrics_enabled":        "CloudWatchMetricsEnabled",
+		"content_transformation":            "ContentTransformation",
+		"creation_date":                     "CreationDate",
+		"ignore_public_acls":                "IgnorePublicAcls",
+		"is_public":                         "IsPublic",
+		"name":                              "Name",
+		"object_lambda_configuration":       "ObjectLambdaConfiguration",
+		"policy_status":                     "PolicyStatus",
+		"public_access_block_configuration": "PublicAccessBlockConfiguration",
+		"restrict_public_buckets":           "RestrictPublicBuckets",
+		"supporting_access_point":           "SupportingAccessPoint",
+		"transformation_configurations":     "TransformationConfigurations",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -94,13 +94,6 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "The AWS::NetworkManager::GlobalNetwork type specifies a global network of the user's account",
 		Version:     1,
@@ -109,7 +102,17 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::GlobalNetwork").WithTerraformTypeName("awscc_networkmanager_global_network").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::GlobalNetwork").WithTerraformTypeName("awscc_networkmanager_global_network")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":         "Arn",
+		"description": "Description",
+		"id":          "Id",
+		"key":         "Key",
+		"tags":        "Tags",
+		"value":       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

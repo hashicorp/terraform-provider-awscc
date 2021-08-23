@@ -455,13 +455,6 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Synthetics::Canary",
 		Version:     1,
@@ -470,7 +463,46 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Synthetics::Canary").WithTerraformTypeName("awscc_synthetics_canary").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Synthetics::Canary").WithTerraformTypeName("awscc_synthetics_canary")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"active_tracing":              "ActiveTracing",
+		"artifact_s3_location":        "ArtifactS3Location",
+		"base_canary_run_id":          "BaseCanaryRunId",
+		"base_screenshots":            "BaseScreenshots",
+		"code":                        "Code",
+		"duration_in_seconds":         "DurationInSeconds",
+		"environment_variables":       "EnvironmentVariables",
+		"execution_role_arn":          "ExecutionRoleArn",
+		"expression":                  "Expression",
+		"failure_retention_period":    "FailureRetentionPeriod",
+		"handler":                     "Handler",
+		"id":                          "Id",
+		"ignore_coordinates":          "IgnoreCoordinates",
+		"key":                         "Key",
+		"memory_in_mb":                "MemoryInMB",
+		"name":                        "Name",
+		"run_config":                  "RunConfig",
+		"runtime_version":             "RuntimeVersion",
+		"s3_bucket":                   "S3Bucket",
+		"s3_key":                      "S3Key",
+		"s3_object_version":           "S3ObjectVersion",
+		"schedule":                    "Schedule",
+		"screenshot_name":             "ScreenshotName",
+		"script":                      "Script",
+		"security_group_ids":          "SecurityGroupIds",
+		"start_canary_after_creation": "StartCanaryAfterCreation",
+		"state":                       "State",
+		"subnet_ids":                  "SubnetIds",
+		"success_retention_period":    "SuccessRetentionPeriod",
+		"tags":                        "Tags",
+		"timeout_in_seconds":          "TimeoutInSeconds",
+		"value":                       "Value",
+		"visual_reference":            "VisualReference",
+		"vpc_config":                  "VPCConfig",
+		"vpc_id":                      "VpcId",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Code/S3Bucket",

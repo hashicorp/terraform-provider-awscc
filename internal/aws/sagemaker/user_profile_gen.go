@@ -510,7 +510,6 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -525,7 +524,36 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::UserProfile").WithTerraformTypeName("awscc_sagemaker_user_profile").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::UserProfile").WithTerraformTypeName("awscc_sagemaker_user_profile")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"app_image_config_name":          "AppImageConfigName",
+		"custom_images":                  "CustomImages",
+		"default_resource_spec":          "DefaultResourceSpec",
+		"domain_id":                      "DomainId",
+		"execution_role":                 "ExecutionRole",
+		"image_name":                     "ImageName",
+		"image_version_number":           "ImageVersionNumber",
+		"instance_type":                  "InstanceType",
+		"jupyter_server_app_settings":    "JupyterServerAppSettings",
+		"kernel_gateway_app_settings":    "KernelGatewayAppSettings",
+		"key":                            "Key",
+		"notebook_output_option":         "NotebookOutputOption",
+		"s3_kms_key_id":                  "S3KmsKeyId",
+		"s3_output_path":                 "S3OutputPath",
+		"sage_maker_image_arn":           "SageMakerImageArn",
+		"sage_maker_image_version_arn":   "SageMakerImageVersionArn",
+		"security_groups":                "SecurityGroups",
+		"sharing_settings":               "SharingSettings",
+		"single_sign_on_user_identifier": "SingleSignOnUserIdentifier",
+		"single_sign_on_user_value":      "SingleSignOnUserValue",
+		"tags":                           "Tags",
+		"user_profile_arn":               "UserProfileArn",
+		"user_profile_name":              "UserProfileName",
+		"user_settings":                  "UserSettings",
+		"value":                          "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",

@@ -198,13 +198,6 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
 	schema := tfsdk.Schema{
 		Description: "Resource Schema of AWS::EMRContainers::VirtualCluster Type",
 		Version:     1,
@@ -213,7 +206,22 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EMRContainers::VirtualCluster").WithTerraformTypeName("awscc_emrcontainers_virtual_cluster").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EMRContainers::VirtualCluster").WithTerraformTypeName("awscc_emrcontainers_virtual_cluster")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                "Arn",
+		"container_provider": "ContainerProvider",
+		"eks_info":           "EksInfo",
+		"id":                 "Id",
+		"info":               "Info",
+		"key":                "Key",
+		"name":               "Name",
+		"namespace":          "Namespace",
+		"tags":               "Tags",
+		"type":               "Type",
+		"value":              "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

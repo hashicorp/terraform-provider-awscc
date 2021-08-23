@@ -225,7 +225,6 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
 	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
@@ -240,7 +239,28 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EFS::FileSystem").WithTerraformTypeName("awscc_efs_file_system").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EFS::FileSystem").WithTerraformTypeName("awscc_efs_file_system")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                                "Arn",
+		"availability_zone_name":             "AvailabilityZoneName",
+		"backup_policy":                      "BackupPolicy",
+		"bypass_policy_lockout_safety_check": "BypassPolicyLockoutSafetyCheck",
+		"encrypted":                          "Encrypted",
+		"file_system_id":                     "FileSystemId",
+		"file_system_policy":                 "FileSystemPolicy",
+		"file_system_tags":                   "FileSystemTags",
+		"key":                                "Key",
+		"kms_key_id":                         "KmsKeyId",
+		"lifecycle_policies":                 "LifecyclePolicies",
+		"performance_mode":                   "PerformanceMode",
+		"provisioned_throughput_in_mibps":    "ProvisionedThroughputInMibps",
+		"status":                             "Status",
+		"throughput_mode":                    "ThroughputMode",
+		"transition_to_ia":                   "TransitionToIA",
+		"value":                              "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/BypassPolicyLockoutSafetyCheck",
