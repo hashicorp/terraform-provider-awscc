@@ -16,10 +16,10 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_servicecatalog_cloud_formation_provisioned_product", cloudFormationProvisionedProductResourceType)
+	registry.AddResourceTypeFactory("awscc_servicecatalog_cloudformation_provisioned_product", cloudFormationProvisionedProductResourceType)
 }
 
-// cloudFormationProvisionedProductResourceType returns the Terraform awscc_servicecatalog_cloud_formation_provisioned_product resource type.
+// cloudFormationProvisionedProductResourceType returns the Terraform awscc_servicecatalog_cloudformation_provisioned_product resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalog::CloudFormationProvisionedProduct resource type.
 func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
@@ -373,7 +373,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::CloudFormationProvisionedProduct").WithTerraformTypeName("awscc_servicecatalog_cloud_formation_provisioned_product")
+	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::CloudFormationProvisionedProduct").WithTerraformTypeName("awscc_servicecatalog_cloudformation_provisioned_product")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
@@ -414,7 +414,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_servicecatalog_cloud_formation_provisioned_product", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_servicecatalog_cloudformation_provisioned_product", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

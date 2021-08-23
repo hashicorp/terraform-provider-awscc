@@ -14,10 +14,10 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_cloudfront_cloud_front_origin_access_identity", cloudFrontOriginAccessIdentityResourceType)
+	registry.AddResourceTypeFactory("awscc_cloudfront_cloudfront_origin_access_identity", cloudFrontOriginAccessIdentityResourceType)
 }
 
-// cloudFrontOriginAccessIdentityResourceType returns the Terraform awscc_cloudfront_cloud_front_origin_access_identity resource type.
+// cloudFrontOriginAccessIdentityResourceType returns the Terraform awscc_cloudfront_cloudfront_origin_access_identity resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::CloudFrontOriginAccessIdentity resource type.
 func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
@@ -75,7 +75,7 @@ func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.Reso
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::CloudFrontOriginAccessIdentity").WithTerraformTypeName("awscc_cloudfront_cloud_front_origin_access_identity")
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::CloudFrontOriginAccessIdentity").WithTerraformTypeName("awscc_cloudfront_cloudfront_origin_access_identity")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
@@ -95,7 +95,7 @@ func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.Reso
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudfront_cloud_front_origin_access_identity", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudfront_cloudfront_origin_access_identity", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

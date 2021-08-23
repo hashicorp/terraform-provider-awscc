@@ -10,7 +10,7 @@ import (
 )
 
 func TestAccAWSServiceCatalogCloudFormationProvisionedProduct_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ServiceCatalog::CloudFormationProvisionedProduct", "awscc_servicecatalog_cloud_formation_provisioned_product", "test")
+	td := acctest.NewTestData(t, "AWS::ServiceCatalog::CloudFormationProvisionedProduct", "awscc_servicecatalog_cloudformation_provisioned_product", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSServiceCatalogCloudFormationProvisionedProduct_basic(t *testing.T
 }
 
 func TestAccAWSServiceCatalogCloudFormationProvisionedProduct_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ServiceCatalog::CloudFormationProvisionedProduct", "awscc_servicecatalog_cloud_formation_provisioned_product", "test")
+	td := acctest.NewTestData(t, "AWS::ServiceCatalog::CloudFormationProvisionedProduct", "awscc_servicecatalog_cloudformation_provisioned_product", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
