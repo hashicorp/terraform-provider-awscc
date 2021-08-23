@@ -319,13 +319,14 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Debug(ctx, "Resource.Create enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Create enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudFormationClient(ctx)
 
 	tflog.Debug(ctx, "Request.Plan.Raw", "value", hclog.Fmt("%v", request.Plan.Raw))
 
-	desiredState, err := GetCloudFormationDesiredState(ctx, request.Plan.Raw)
+	translator := toCloudFormation{tfToCfNameMap: r.resourceType.tfToCfNameMap}
+	desiredState, err := translator.AsString(ctx, request.Plan.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))
@@ -413,7 +414,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
 
-	tflog.Debug(ctx, "Resource.Create exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Create exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
@@ -422,7 +423,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Debug(ctx, "Resource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	tflog.Debug(ctx, "Request.State.Raw", "value", hclog.Fmt("%v", request.State.Raw))
 
@@ -497,7 +498,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
 
-	tflog.Debug(ctx, "Resource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
@@ -506,7 +507,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Debug(ctx, "Resource.Update enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Update enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudFormationClient(ctx)
 
@@ -519,7 +520,8 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	currentDesiredState, err := GetCloudFormationDesiredState(ctx, currentState.Raw)
+	translator := toCloudFormation{tfToCfNameMap: r.resourceType.tfToCfNameMap}
+	currentDesiredState, err := translator.AsString(ctx, currentState.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Prior State", err))
@@ -527,7 +529,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	plannedDesiredState, err := GetCloudFormationDesiredState(ctx, request.Plan.Raw)
+	plannedDesiredState, err := translator.AsString(ctx, request.Plan.Raw)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))
@@ -586,7 +588,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	// On Update there should be nothing unknown in the planned state...
 	response.State.Raw = request.Plan.Raw
 
-	tflog.Debug(ctx, "Resource.Update exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Update exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceRequest, response *tfsdk.DeleteResourceResponse) {
@@ -595,7 +597,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Debug(ctx, "Resource.Delete enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Delete enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudFormationClient(ctx)
 
@@ -617,7 +619,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 
 	response.State.RemoveResource(ctx)
 
-	tflog.Debug(ctx, "Resource.Delete exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Trace(ctx, "Resource.Delete exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 // describe returns the live state of the specified resource.

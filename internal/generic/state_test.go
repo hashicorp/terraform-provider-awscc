@@ -886,6 +886,11 @@ func makeSimpleTestPlan() tfsdk.Plan {
 	}
 }
 
+var simpleTfToCfNameMap = map[string]string{
+	"name":   "Name",
+	"number": "Number",
+}
+
 func makeSimpleTestPlanWithOptionalPopulated() tfsdk.Plan {
 	return tfsdk.Plan{
 		Raw: tftypes.NewValue(tftypes.Object{
@@ -963,74 +968,15 @@ func makeComplexTestPlan() tfsdk.Plan {
 	}
 }
 
-func TestPlanGetCloudFormationDesiredState(t *testing.T) {
-	testCases := []struct {
-		TestName      string
-		Plan          tfsdk.Plan
-		ExpectedError bool
-		ExpectedState map[string]interface{}
-	}{
-		{
-			TestName: "simple Plan",
-			Plan:     makeSimpleTestPlan(),
-			ExpectedState: map[string]interface{}{
-				"Name": "testing",
-			},
-		},
-		{
-			TestName: "simple Plan with Optional",
-			Plan:     makeSimpleTestPlanWithOptionalPopulated(),
-			ExpectedState: map[string]interface{}{
-				"Name":   "testing",
-				"Number": float64(42),
-			},
-		},
-		{
-			TestName: "complex Plan",
-			Plan:     makeComplexTestPlan(),
-			ExpectedState: map[string]interface{}{
-				"Name":        "hello, world",
-				"MachineType": "e2-medium",
-				"Ports":       []interface{}{float64(80), float64(443)},
-				"Tags":        []interface{}{"red", "blue", "green"},
-				"Disks": []interface{}{
-					map[string]interface{}{
-						"Id":                 "disk0",
-						"DeleteWithInstance": true,
-					},
-					map[string]interface{}{
-						"Id":                 "disk1",
-						"DeleteWithInstance": false,
-					},
-				},
-				"BootDisk": map[string]interface{}{
-					"Id":                 "bootdisk",
-					"DeleteWithInstance": true,
-				},
-				"ScratchDisk": map[string]interface{}{
-					"Interface": "SCSI",
-				},
-			},
-		},
-	}
-
-	for _, testCase := range testCases {
-		t.Run(testCase.TestName, func(t *testing.T) {
-			got, err := GetCloudFormationDesiredStateRaw(context.TODO(), testCase.Plan.Raw)
-
-			if err == nil && testCase.ExpectedError {
-				t.Fatalf("expected error")
-			}
-
-			if err != nil && !testCase.ExpectedError {
-				t.Fatalf("unexpected error: %s", err)
-			}
-
-			if err == nil {
-				if diff := cmp.Diff(got, testCase.ExpectedState); diff != "" {
-					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
-				}
-			}
-		})
-	}
+var complexTfToCfNameMap = map[string]string{
+	"boot_disk":            "BootDisk",
+	"delete_with_instance": "DeleteWithInstance",
+	"disks":                "Disks",
+	"id":                   "Id",
+	"interface":            "Interface",
+	"machine_type":         "MachineType",
+	"name":                 "Name",
+	"ports":                "Ports",
+	"scratch_disk":         "ScratchDisk",
+	"tags":                 "Tags",
 }
