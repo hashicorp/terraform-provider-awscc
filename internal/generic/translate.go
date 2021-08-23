@@ -54,7 +54,7 @@ func (t toCloudFormation) AsString(ctx context.Context, val tftypes.Value) (stri
 
 // rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
 // Terraform attribute names are mapped to CloudFormation property names.
-func (t toCloudFormation) rawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) {
+func (t toCloudFormation) rawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) { //nolint:unparam
 	if val.IsNull() || !val.IsKnown() {
 		return nil, nil
 	}

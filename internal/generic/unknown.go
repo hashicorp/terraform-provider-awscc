@@ -32,7 +32,7 @@ func Unknowns(ctx context.Context, val tftypes.Value, tfToCfNameMap map[string]s
 }
 
 // unknownValuePaths returns all the unknownValuePaths for the specified Terraform Value.
-func unknownValuePaths(ctx context.Context, inTerraformState, inCloudFormationResourceModel *tftypes.AttributePath, val tftypes.Value, tfToCfNameMap map[string]string) ([]unknownValuePath, error) {
+func unknownValuePaths(ctx context.Context, inTerraformState, inCloudFormationResourceModel *tftypes.AttributePath, val tftypes.Value, tfToCfNameMap map[string]string) ([]unknownValuePath, error) { //nolint:unparam
 	if !val.IsKnown() {
 		return []unknownValuePath{
 			{
