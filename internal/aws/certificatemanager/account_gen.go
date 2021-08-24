@@ -50,11 +50,11 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"days_before_expiry": {
 						// Property: DaysBeforeExpiry
-						Type: types.NumberType,
+						Type:     types.NumberType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 45),
 						},
-						Optional: true,
 					},
 				},
 			),

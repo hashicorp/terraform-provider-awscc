@@ -442,10 +442,10 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Id
 						Description: "The ID that identifies the Amazon S3 Storage Lens configuration.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 64),
 						},
-						Required: true,
 						// Id is a force-new attribute.
 					},
 					"include": {
@@ -520,19 +520,19 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 127),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
 						},
-						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

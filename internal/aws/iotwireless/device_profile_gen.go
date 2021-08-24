@@ -44,10 +44,10 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "Service profile Id. Returned after successful create.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			Computed: true,
 		},
 		"lo_ra_wan": {
 			// Property: LoRaWAN
@@ -121,83 +121,83 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]tfsdk.Attribute{
 					"class_b_timeout": {
 						// Property: ClassBTimeout
-						Type: types.NumberType,
+						Type:     types.NumberType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 1000),
 						},
-						Optional: true,
 					},
 					"class_c_timeout": {
 						// Property: ClassCTimeout
-						Type: types.NumberType,
+						Type:     types.NumberType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 1000),
 						},
-						Optional: true,
 					},
 					"mac_version": {
 						// Property: MacVersion
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 64),
 						},
-						Optional: true,
 					},
 					"max_duty_cycle": {
 						// Property: MaxDutyCycle
-						Type: types.NumberType,
+						Type:     types.NumberType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100),
 						},
-						Optional: true,
 					},
 					"max_eirp": {
 						// Property: MaxEirp
-						Type: types.NumberType,
+						Type:     types.NumberType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 15),
 						},
-						Optional: true,
 					},
 					"ping_slot_dr": {
 						// Property: PingSlotDr
-						Type: types.NumberType,
+						Type:     types.NumberType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 15),
 						},
-						Optional: true,
 					},
 					"ping_slot_freq": {
 						// Property: PingSlotFreq
-						Type: types.NumberType,
+						Type:     types.NumberType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1000000, 16700000),
 						},
-						Optional: true,
 					},
 					"ping_slot_period": {
 						// Property: PingSlotPeriod
-						Type: types.NumberType,
+						Type:     types.NumberType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(128, 4096),
 						},
-						Optional: true,
 					},
 					"reg_params_revision": {
 						// Property: RegParamsRevision
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 64),
 						},
-						Optional: true,
 					},
 					"rf_region": {
 						// Property: RfRegion
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 64),
 						},
-						Optional: true,
 					},
 					"supports_32_bit_f_cnt": {
 						// Property: Supports32BitFCnt
@@ -233,10 +233,10 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "Name of service profile",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -269,19 +269,19 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Optional: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

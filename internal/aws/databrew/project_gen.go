@@ -34,10 +34,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Dataset name",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			Required: true,
 		},
 		"name": {
 			// Property: Name
@@ -50,10 +50,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Project name",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			Required: true,
 			// Name is a force-new attribute.
 		},
 		"recipe_name": {
@@ -67,10 +67,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Recipe name",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			Required: true,
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -115,10 +115,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Size
 						Description: "Sample size",
 						Type:        types.NumberType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(1),
 						},
-						Optional: true,
 					},
 					"type": {
 						// Property: Type
@@ -163,19 +163,19 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

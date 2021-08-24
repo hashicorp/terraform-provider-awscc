@@ -34,10 +34,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The maximum number of items to retrieve in a single batch.",
 			Type:        types.NumberType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 10000),
 			},
-			Optional: true,
 		},
 		"bisect_batch_on_function_error": {
 			// Property: BisectBatchOnFunctionError
@@ -86,10 +86,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									// Property: Destination
 									Description: "The Amazon Resource Name (ARN) of the destination resource.",
 									Type:        types.StringType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(12, 1024),
 									},
-									Optional: true,
 								},
 							},
 						),
@@ -122,11 +122,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The Amazon Resource Name (ARN) of the event source.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 1024),
 			},
-			Optional: true,
-			Computed: true,
 			// EventSourceArn is a force-new attribute.
 		},
 		"function_name": {
@@ -141,10 +141,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The name of the Lambda function.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 140),
 			},
-			Required: true,
 		},
 		"function_response_types": {
 			// Property: FunctionResponseTypes
@@ -164,10 +164,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) A list of response types supported by the function.",
 			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
 		},
 		"id": {
 			// Property: Id
@@ -181,10 +181,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "Event Source Mapping Identifier UUID.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(36, 36),
 			},
-			Computed: true,
 		},
 		"maximum_batching_window_in_seconds": {
 			// Property: MaximumBatchingWindowInSeconds
@@ -197,10 +197,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) The maximum amount of time to gather records before invoking the function, in seconds.",
 			Type:        types.NumberType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 300),
 			},
-			Optional: true,
 		},
 		"maximum_record_age_in_seconds": {
 			// Property: MaximumRecordAgeInSeconds
@@ -213,10 +213,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) The maximum age of a record that Lambda sends to a function for processing.",
 			Type:        types.NumberType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(-1, 604800),
 			},
-			Optional: true,
 		},
 		"maximum_retry_attempts": {
 			// Property: MaximumRetryAttempts
@@ -229,10 +229,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) The maximum number of times to retry when the function returns an error.",
 			Type:        types.NumberType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(-1, 10000),
 			},
-			Optional: true,
 		},
 		"parallelization_factor": {
 			// Property: ParallelizationFactor
@@ -245,10 +245,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) The number of batches to process from each shard concurrently.",
 			Type:        types.NumberType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 10),
 			},
-			Optional: true,
 		},
 		"queues": {
 			// Property: Queues
@@ -268,11 +268,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(ActiveMQ) A list of ActiveMQ queues.",
 			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 1),
 				validate.UniqueItems(),
 			},
-			Optional: true,
 		},
 		"self_managed_event_source": {
 			// Property: SelfManagedEventSource
@@ -317,11 +317,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									// Property: KafkaBootstrapServers
 									Description: "A list of Kafka server endpoints.",
 									Type:        types.ListType{ElemType: types.StringType},
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 10),
 										validate.UniqueItems(),
 									},
-									Optional: true,
 								},
 							},
 						),
@@ -382,10 +382,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Property: URI
 						Description: "The URI for the source access configuration resource.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 200),
 						},
-						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -393,10 +393,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					MaxItems: 22,
 				},
 			),
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
 		},
 		"starting_position": {
 			// Property: StartingPosition
@@ -410,11 +410,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(6, 12),
 			},
-			Optional: true,
-			Computed: true,
 			// StartingPosition is a force-new attribute.
 		},
 		"starting_position_timestamp": {
@@ -446,11 +446,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Kafka) A list of Kafka topics.",
 			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 1),
 				validate.UniqueItems(),
 			},
-			Optional: true,
 		},
 		"tumbling_window_in_seconds": {
 			// Property: TumblingWindowInSeconds
@@ -463,10 +463,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.",
 			Type:        types.NumberType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 900),
 			},
-			Optional: true,
 		},
 	}
 

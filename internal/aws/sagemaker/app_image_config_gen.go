@@ -35,10 +35,10 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The Amazon Resource Name (ARN) of the AppImageConfig.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Computed: true,
 		},
 		"app_image_config_name": {
 			// Property: AppImageConfigName
@@ -52,10 +52,10 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The Name of the AppImageConfig.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			Required: true,
 			// AppImageConfigName is a force-new attribute.
 		},
 		"kernel_gateway_image_config": {
@@ -136,28 +136,28 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: DefaultGid
 									Description: "The default POSIX group ID (GID). If not specified, defaults to 100.",
 									Type:        types.NumberType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 65535),
 									},
-									Optional: true,
 								},
 								"default_uid": {
 									// Property: DefaultUid
 									Description: "The default POSIX user ID (UID). If not specified, defaults to 1000.",
 									Type:        types.NumberType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 65535),
 									},
-									Optional: true,
 								},
 								"mount_path": {
 									// Property: MountPath
 									Description: "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
 									Type:        types.StringType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1024),
 									},
-									Optional: true,
 								},
 							},
 						),
@@ -172,19 +172,19 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: DisplayName
 									Description: "The display name of the kernel.",
 									Type:        types.StringType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1024),
 									},
-									Optional: true,
 								},
 								"name": {
 									// Property: Name
 									Description: "The name of the kernel.",
 									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1024),
 									},
-									Required: true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -233,19 +233,19 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

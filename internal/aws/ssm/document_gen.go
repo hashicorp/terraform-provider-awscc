@@ -78,19 +78,19 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Name
 						Description: "The name of the document attachment file.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Optional: true,
 					},
 					"values": {
 						// Property: Values
 						Description: "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
 						Type:        types.ListType{ElemType: types.StringType},
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 1),
 						},
-						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -207,19 +207,19 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Name
 						Description: "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 200),
 						},
-						Optional: true,
 					},
 					"version": {
 						// Property: Version
 						Description: "The document version required by the current document.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 8),
 						},
-						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -265,19 +265,19 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The name of the tag.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value of the tag.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

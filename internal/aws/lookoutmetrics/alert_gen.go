@@ -83,19 +83,19 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"lambda_arn": {
 									// Property: LambdaArn
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 									},
-									Required: true,
 								},
 								"role_arn": {
 									// Property: RoleArn
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 									},
-									Required: true,
 								},
 							},
 						),
@@ -108,19 +108,19 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"role_arn": {
 									// Property: RoleArn
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 									},
-									Required: true,
 								},
 								"sns_topic_arn": {
 									// Property: SnsTopicArn
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 									},
-									Required: true,
 								},
 							},
 						),
@@ -142,11 +142,11 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A description for the alert.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			Optional: true,
-			Computed: true,
 			// AlertDescription is a force-new attribute.
 		},
 		"alert_name": {
@@ -161,11 +161,11 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the alert. If not provided, a name is generated automatically.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			Optional: true,
-			Computed: true,
 			// AlertName is a force-new attribute.
 		},
 		"alert_sensitivity_threshold": {
@@ -179,10 +179,10 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
 			Type:        types.NumberType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 100),
 			},
-			Required: true,
 			// AlertSensitivityThreshold is a force-new attribute.
 		},
 		"anomaly_detector_arn": {
@@ -196,10 +196,10 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			Required: true,
 			// AnomalyDetectorArn is a force-new attribute.
 		},
 		"arn": {
@@ -210,11 +210,11 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			Computed: true,
 		},
 	}
 

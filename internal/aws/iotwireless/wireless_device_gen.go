@@ -44,10 +44,10 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Wireless device description",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 2048),
 			},
-			Optional: true,
 		},
 		"destination_name": {
 			// Property: DestinationName
@@ -59,10 +59,10 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Wireless device destination name",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
 			},
-			Required: true,
 		},
 		"id": {
 			// Property: Id
@@ -74,10 +74,10 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Wireless device Id. Returned after successful create.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			Computed: true,
 		},
 		"last_uplink_received_at": {
 			// Property: LastUplinkReceivedAt
@@ -308,11 +308,11 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"device_profile_id": {
 						// Property: DeviceProfileId
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Optional: true,
 					},
 					"otaa_v10_x": {
 						// Property: OtaaV10x
@@ -357,11 +357,11 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"service_profile_id": {
 						// Property: ServiceProfileId
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Optional: true,
 					},
 				},
 			),
@@ -377,10 +377,10 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Wireless device name",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -413,19 +413,19 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Optional: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

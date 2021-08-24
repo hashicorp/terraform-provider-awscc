@@ -46,10 +46,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the Project.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
-			Computed: true,
 		},
 		"project_description": {
 			// Property: ProjectDescription
@@ -62,11 +62,11 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The description of the project.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
 			},
-			Optional: true,
-			Computed: true,
 			// ProjectDescription is a force-new attribute.
 		},
 		"project_id": {
@@ -80,10 +80,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Project Id.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 20),
 			},
-			Computed: true,
 		},
 		"project_name": {
 			// Property: ProjectName
@@ -97,10 +97,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the project.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 32),
 			},
-			Required: true,
 			// ProjectName is a force-new attribute.
 		},
 		"project_status": {
@@ -150,10 +150,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ProvisionedProductId
 						Description: "The identifier of the provisioning artifact (also known as a version).",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 100),
 						},
-						Optional: true,
 					},
 					"provisioned_product_status_message": {
 						// Property: ProvisionedProductStatusMessage
@@ -232,28 +232,28 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: PathId
 						Description: "The path identifier of the product.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 100),
 						},
-						Optional: true,
 					},
 					"product_id": {
 						// Property: ProductId
 						Description: "Service Catalog product identifier.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 100),
 						},
-						Required: true,
 					},
 					"provisioning_artifact_id": {
 						// Property: ProvisioningArtifactId
 						Description: "The identifier of the provisioning artifact (also known as a version).",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 100),
 						},
-						Required: true,
 					},
 					"provisioning_parameters": {
 						// Property: ProvisioningParameters
@@ -264,19 +264,19 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Key
 									Description: "The parameter key.",
 									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1000),
 									},
-									Required: true,
 								},
 								"value": {
 									// Property: Value
 									Description: "The parameter value.",
 									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 4096),
 									},
-									Required: true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
@@ -327,19 +327,19 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

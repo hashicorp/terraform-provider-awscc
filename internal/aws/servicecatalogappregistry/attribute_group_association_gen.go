@@ -35,10 +35,10 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// }
 			Description: "The name or the Id of the Application.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Required: true,
 		},
 		"application_arn": {
 			// Property: ApplicationArn
@@ -62,10 +62,10 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// }
 			Description: "The name or the Id of the AttributeGroup.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Required: true,
 		},
 		"attribute_group_arn": {
 			// Property: AttributeGroupArn

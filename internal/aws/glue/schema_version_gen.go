@@ -57,10 +57,10 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: RegistryName
 						Description: "Name of the registry to identify where the Schema is located.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
 						},
-						Optional: true,
 					},
 					"schema_arn": {
 						// Property: SchemaArn
@@ -72,10 +72,10 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: SchemaName
 						Description: "Name of the schema. This parameter requires RegistryName to be provided.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
 						},
-						Optional: true,
 					},
 				},
 			),
@@ -93,10 +93,10 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "Complete definition of the schema in plain-text.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 170000),
 			},
-			Required: true,
 			// SchemaDefinition is a force-new attribute.
 		},
 		"version_id": {

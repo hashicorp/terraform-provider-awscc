@@ -47,10 +47,10 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The KeyManagementServiceArn must be unique for each key signing key (KSK) in a single hosted zone.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Required: true,
 			// KeyManagementServiceArn is a force-new attribute.
 		},
 		"name": {

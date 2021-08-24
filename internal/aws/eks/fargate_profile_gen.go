@@ -42,10 +42,10 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Name of the Cluster",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			Required: true,
 			// ClusterName is a force-new attribute.
 		},
 		"fargate_profile_name": {
@@ -58,11 +58,11 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Name of FargateProfile",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			Optional: true,
-			Computed: true,
 			// FargateProfileName is a force-new attribute.
 		},
 		"pod_execution_role_arn": {
@@ -75,10 +75,10 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The IAM policy arn for pods",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			Required: true,
 			// PodExecutionRoleArn is a force-new attribute.
 		},
 		"selectors": {
@@ -137,19 +137,19 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: Key
 									Description: "The key name of the label.",
 									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 127),
 									},
-									Required: true,
 								},
 								"value": {
 									// Property: Value
 									Description: "The value for the label. ",
 									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 255),
 									},
-									Required: true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
@@ -158,11 +158,11 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"namespace": {
 						// Property: Namespace
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtLeast(1),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -224,27 +224,27 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 127),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
 		},
 	}
 

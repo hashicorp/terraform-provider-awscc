@@ -95,19 +95,19 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: FromPort
 						Description: "A network port number",
 						Type:        types.NumberType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 65535),
 						},
-						Required: true,
 					},
 					"to_port": {
 						// Property: ToPort
 						Description: "A network port number",
 						Type:        types.NumberType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 65535),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

@@ -35,10 +35,10 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the specified AccessPoint.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			Computed: true,
 		},
 		"bucket": {
 			// Property: Bucket
@@ -52,10 +52,10 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			Required: true,
 			// Bucket is a force-new attribute.
 		},
 		"name": {
@@ -70,10 +70,10 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A name for the AccessPoint.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 50),
 			},
-			Required: true,
 			// Name is a force-new attribute.
 		},
 		"policy": {
@@ -108,10 +108,10 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: VpcId
 						Description: "Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1024),
 						},
-						Optional: true,
 					},
 				},
 			),

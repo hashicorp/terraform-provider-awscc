@@ -47,10 +47,10 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The description of the contact list.",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 500),
 			},
-			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -86,19 +86,19 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -160,19 +160,19 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "The description of the topic.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 500),
 						},
-						Optional: true,
 					},
 					"display_name": {
 						// Property: DisplayName
 						Description: "The display name of the topic.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 128),
 						},
-						Required: true,
 					},
 					"topic_name": {
 						// Property: TopicName

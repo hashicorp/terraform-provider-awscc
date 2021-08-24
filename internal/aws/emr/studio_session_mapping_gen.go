@@ -73,10 +73,10 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Description: "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(4, 256),
 			},
-			Required: true,
 			// StudioId is a force-new attribute.
 		},
 	}

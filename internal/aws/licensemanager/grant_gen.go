@@ -33,11 +33,11 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Type: types.ListType{ElemType: types.StringType},
+			Type:     types.ListType{ElemType: types.StringType},
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
 			// AllowedOperations is a write-only attribute.
 		},
 		"grant_arn": {
@@ -47,11 +47,11 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 2048,
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 2048),
 			},
-			Computed: true,
 		},
 		"grant_name": {
 			// Property: GrantName
@@ -82,11 +82,11 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 2048,
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 2048),
 			},
-			Optional: true,
 		},
 		"principals": {
 			// Property: Principals
@@ -99,11 +99,11 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Type: types.ListType{ElemType: types.StringType},
+			Type:     types.ListType{ElemType: types.StringType},
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
 			// Principals is a write-only attribute.
 		},
 		"status": {

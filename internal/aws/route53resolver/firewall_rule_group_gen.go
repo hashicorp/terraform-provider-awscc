@@ -34,10 +34,10 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "Arn",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 600),
 			},
-			Computed: true,
 		},
 		"creation_time": {
 			// Property: CreationTime
@@ -50,10 +50,10 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 40),
 			},
-			Computed: true,
 		},
 		"creator_request_id": {
 			// Property: CreatorRequestId
@@ -66,10 +66,10 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			Computed: true,
 		},
 		"firewall_rules": {
 			// Property: FirewallRules
@@ -158,19 +158,19 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						// Property: BlockOverrideDomain
 						Description: "BlockOverrideDomain",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
 						},
-						Optional: true,
 					},
 					"block_override_ttl": {
 						// Property: BlockOverrideTtl
 						Description: "BlockOverrideTtl",
 						Type:        types.NumberType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 604800),
 						},
-						Optional: true,
 					},
 					"block_response": {
 						// Property: BlockResponse
@@ -182,10 +182,10 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						// Property: FirewallDomainListId
 						Description: "ResourceId",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 64),
 						},
-						Required: true,
 					},
 					"priority": {
 						// Property: Priority
@@ -209,10 +209,10 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "ResourceId",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			Computed: true,
 		},
 		"modification_time": {
 			// Property: ModificationTime
@@ -225,10 +225,10 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 40),
 			},
-			Computed: true,
 		},
 		"name": {
 			// Property: Name
@@ -242,11 +242,11 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "FirewallRuleGroupName",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			Optional: true,
-			Computed: true,
 			// Name is a force-new attribute.
 		},
 		"owner_id": {
@@ -260,10 +260,10 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "AccountId",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 32),
 			},
-			Computed: true,
 		},
 		"rule_count": {
 			// Property: RuleCount
@@ -359,19 +359,19 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 127),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 255),
 						},
-						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},

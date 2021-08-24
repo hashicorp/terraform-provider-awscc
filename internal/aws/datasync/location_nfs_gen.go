@@ -34,10 +34,10 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the NFS location.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
 			},
-			Computed: true,
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -50,10 +50,10 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The URL of the NFS location that was described.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 4356),
 			},
-			Computed: true,
 		},
 		"mount_options": {
 			// Property: MountOptions
@@ -120,10 +120,10 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: AgentArns
 						Description: "ARN(s) of the agent(s) to use for an NFS location.",
 						Type:        types.ListType{ElemType: types.StringType},
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 4),
 						},
-						Required: true,
 					},
 				},
 			),
@@ -140,10 +140,10 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the NFS server. This value is the IP address or DNS name of the NFS server.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 255),
 			},
-			Required: true,
 			// ServerHostname is a force-new attribute.
 			// ServerHostname is a write-only attribute.
 		},
@@ -158,10 +158,10 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 4096),
 			},
-			Required: true,
 			// Subdirectory is a write-only attribute.
 		},
 		"tags": {
@@ -206,19 +206,19 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

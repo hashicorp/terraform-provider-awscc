@@ -46,10 +46,10 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The Amazon Resource Name (ARN) of the model package group.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Computed: true,
 		},
 		"model_package_group_description": {
 			// Property: ModelPackageGroupDescription
@@ -62,11 +62,11 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The description of the model package group.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
 			},
-			Optional: true,
-			Computed: true,
 			// ModelPackageGroupDescription is a force-new attribute.
 		},
 		"model_package_group_name": {
@@ -80,10 +80,10 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The name of the model package group.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 63),
 			},
-			Required: true,
 			// ModelPackageGroupName is a force-new attribute.
 		},
 		"model_package_group_policy": {
@@ -153,19 +153,19 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

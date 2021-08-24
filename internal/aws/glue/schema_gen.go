@@ -68,10 +68,10 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: VersionNumber
 						Description: "Indicates the version number in the schema to update.",
 						Type:        types.NumberType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 100000),
 						},
-						Optional: true,
 					},
 				},
 			),
@@ -125,10 +125,10 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A description of the schema. If description is not provided, there will not be any default value for this.",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
 			},
-			Optional: true,
 		},
 		"initial_schema_version_id": {
 			// Property: InitialSchemaVersionId
@@ -153,10 +153,10 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of the schema.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			Required: true,
 			// Name is a force-new attribute.
 		},
 		"registry": {
@@ -193,10 +193,10 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Name
 						Description: "Name of the registry in which the schema will be created.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
 						},
-						Optional: true,
 					},
 				},
 			),
@@ -215,10 +215,10 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Definition for the initial schema version in plain-text.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 170000),
 			},
-			Required: true,
 			// SchemaDefinition is a force-new attribute.
 			// SchemaDefinition is a write-only attribute.
 		},
@@ -260,19 +260,19 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "A key to identify the tag.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "Corresponding tag value for the key.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

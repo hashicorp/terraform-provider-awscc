@@ -101,11 +101,11 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			// }
 			Description: "The name of the aggregator.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Optional: true,
-			Computed: true,
 			// ConfigurationAggregatorName is a force-new attribute.
 		},
 		"organization_aggregation_source": {
@@ -193,29 +193,29 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
 		},
 	}
 

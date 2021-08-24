@@ -91,19 +91,19 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Property: ActionId
 						Description: "The ID of the action.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 64),
 						},
-						Optional: true,
 					},
 					"description": {
 						// Property: Description
 						Description: "A description for the action.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 512),
 						},
-						Optional: true,
 					},
 					"parameters": {
 						// Property: Parameters
@@ -140,10 +140,10 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "A description for the experiment template.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 512),
 			},
-			Required: true,
 		},
 		"id": {
 			// Property: Id
@@ -164,10 +164,10 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1224),
 			},
-			Required: true,
 		},
 		"stop_conditions": {
 			// Property: StopConditions
@@ -199,19 +199,19 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				map[string]tfsdk.Attribute{
 					"source": {
 						// Property: Source
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 64),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 2048),
 						},
-						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -325,10 +325,10 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									// Property: Path
 									Description: "The attribute path for the filter.",
 									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 									},
-									Required: true,
 								},
 								"values": {
 									// Property: Values
@@ -357,19 +357,19 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Property: ResourceType
 						Description: "The AWS resource type. The resource type must be supported for the specified action.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 64),
 						},
-						Optional: true,
 					},
 					"selection_mode": {
 						// Property: SelectionMode
 						Description: "Scopes the identified resources to a specific number of the resources at random, or a percentage of the resources.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 64),
 						},
-						Optional: true,
 					},
 				},
 				tfsdk.MapNestedAttributesOptions{},

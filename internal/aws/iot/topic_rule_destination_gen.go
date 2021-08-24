@@ -122,19 +122,19 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					},
 					"security_groups": {
 						// Property: SecurityGroups
-						Type: types.ListType{ElemType: types.StringType},
+						Type:     types.ListType{ElemType: types.StringType},
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 						},
-						Optional: true,
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
-						Type: types.ListType{ElemType: types.StringType},
+						Type:     types.ListType{ElemType: types.StringType},
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 						},
-						Optional: true,
 					},
 					"vpc_id": {
 						// Property: VpcId

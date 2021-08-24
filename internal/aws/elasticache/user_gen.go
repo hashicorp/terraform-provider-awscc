@@ -87,10 +87,10 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Passwords used for this user account. You can create up to two passwords for each user.",
 			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
 			// Passwords is a write-only attribute.
 		},
 		"status": {

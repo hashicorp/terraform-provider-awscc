@@ -45,10 +45,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The URL of the SQS dead letter queue",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 255),
 			},
-			Optional: true,
 		},
 		"default_encryption_key": {
 			// Property: DefaultEncryptionKey
@@ -61,10 +61,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The default encryption key",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 255),
 			},
-			Optional: true,
 		},
 		"default_expiration_days": {
 			// Property: DefaultExpirationDays
@@ -77,10 +77,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The default number of days until the data within the domain expires.",
 			Type:        types.NumberType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 1098),
 			},
-			Optional: true,
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -94,10 +94,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The unique name of the domain.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			Required: true,
 			// DomainName is a force-new attribute.
 		},
 		"last_updated_at": {
@@ -146,19 +146,19 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

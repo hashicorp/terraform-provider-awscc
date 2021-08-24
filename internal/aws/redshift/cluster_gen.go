@@ -68,11 +68,11 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 63),
 			},
-			Optional: true,
-			Computed: true,
 			// ClusterIdentifier is a force-new attribute.
 		},
 		"cluster_parameter_group_name": {
@@ -85,10 +85,10 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the parameter group to be associated with this cluster.",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 255),
 			},
-			Optional: true,
 		},
 		"cluster_security_groups": {
 			// Property: ClusterSecurityGroups
@@ -244,11 +244,11 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request",
 			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 10),
 				validate.UniqueItems(),
 			},
-			Optional: true,
 		},
 		"id": {
 			// Property: Id
@@ -316,10 +316,10 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The password associated with the master user account for the cluster that is being created. Password must be between 8 and 64 characters in length, should have at least one uppercase letter.Must contain at least one lowercase letter.Must contain one number.Can be any printable ASCII character.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 64),
 			},
-			Required: true,
 			// MasterUserPassword is a write-only attribute.
 		},
 		"master_username": {
@@ -332,10 +332,10 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The user name associated with the master user account for the cluster that is being created. The user name can't be PUBLIC and first character must be a letter.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
 			},
-			Required: true,
 			// MasterUsername is a force-new attribute.
 		},
 		"node_type": {
@@ -471,19 +471,19 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 127),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

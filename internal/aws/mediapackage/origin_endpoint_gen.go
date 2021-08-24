@@ -281,10 +281,10 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: ConstantInitializationVector
 									Description: "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
 									Type:        types.StringType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(32, 32),
 									},
-									Optional: true,
 								},
 								"key_rotation_interval_seconds": {
 									// Property: KeyRotationIntervalSeconds
@@ -1142,10 +1142,10 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The ID of the OriginEndpoint.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Required: true,
 			// Id is a force-new attribute.
 		},
 		"manifest_name": {
@@ -1407,10 +1407,10 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
 		},
 		"time_delay_seconds": {
 			// Property: TimeDelaySeconds

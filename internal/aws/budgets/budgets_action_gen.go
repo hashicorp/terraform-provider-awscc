@@ -212,11 +212,11 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 							map[string]tfsdk.Attribute{
 								"groups": {
 									// Property: Groups
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 100),
 									},
-									Optional: true,
 								},
 								"policy_arn": {
 									// Property: PolicyArn
@@ -225,19 +225,19 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 								},
 								"roles": {
 									// Property: Roles
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 100),
 									},
-									Optional: true,
 								},
 								"users": {
 									// Property: Users
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 100),
 									},
-									Optional: true,
 								},
 							},
 						),
@@ -254,11 +254,11 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 								},
 								"target_ids": {
 									// Property: TargetIds
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 100),
 									},
-									Required: true,
 								},
 							},
 						),
@@ -270,11 +270,11 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 							map[string]tfsdk.Attribute{
 								"instance_ids": {
 									// Property: InstanceIds
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 100),
 									},
-									Required: true,
 								},
 								"region": {
 									// Property: Region

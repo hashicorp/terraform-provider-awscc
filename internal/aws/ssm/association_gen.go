@@ -68,11 +68,11 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 50),
 			},
-			Optional: true,
 		},
 		"calendar_names": {
 			// Property: CalendarNames
@@ -224,27 +224,27 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"output_s3_bucket_name": {
 									// Property: OutputS3BucketName
-									Type: types.StringType,
+									Type:     types.StringType,
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 63),
 									},
-									Optional: true,
 								},
 								"output_s3_key_prefix": {
 									// Property: OutputS3KeyPrefix
-									Type: types.StringType,
+									Type:     types.StringType,
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
 									},
-									Optional: true,
 								},
 								"output_s3_region": {
 									// Property: OutputS3Region
-									Type: types.StringType,
+									Type:     types.StringType,
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 20),
 									},
-									Optional: true,
 								},
 							},
 						),
@@ -292,10 +292,10 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A Cron or Rate expression that specifies when the association is applied to the target.",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Optional: true,
 		},
 		"sync_compliance": {
 			// Property: SyncCompliance
@@ -351,11 +351,11 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"values": {
 						// Property: Values
-						Type: types.ListType{ElemType: types.StringType},
+						Type:     types.ListType{ElemType: types.StringType},
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 50),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -373,11 +373,11 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minimum": 15,
 			//   "type": "integer"
 			// }
-			Type: types.NumberType,
+			Type:     types.NumberType,
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(15, 172800),
 			},
-			Optional: true,
 		},
 	}
 

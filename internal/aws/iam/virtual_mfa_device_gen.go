@@ -32,12 +32,12 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
 			},
-			Optional: true,
-			Computed: true,
 			// Path is a force-new attribute.
 		},
 		"serial_number": {
@@ -49,11 +49,11 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(9, 256),
 			},
-			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -91,19 +91,19 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -132,12 +132,12 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 226),
 			},
-			Optional: true,
-			Computed: true,
 			// VirtualMfaDeviceName is a force-new attribute.
 		},
 	}

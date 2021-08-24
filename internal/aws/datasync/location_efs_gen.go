@@ -62,19 +62,19 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: SecurityGroupArns
 						Description: "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
 						Type:        types.ListType{ElemType: types.StringType},
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 5),
 						},
-						Required: true,
 					},
 					"subnet_arn": {
 						// Property: SubnetArn
 						Description: "The ARN of the subnet that DataSync uses to access the target EFS file system.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 128),
 						},
-						Required: true,
 					},
 				},
 			),
@@ -92,10 +92,10 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
 			},
-			Required: true,
 			// EfsFilesystemArn is a force-new attribute.
 			// EfsFilesystemArn is a write-only attribute.
 		},
@@ -110,10 +110,10 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
 			},
-			Computed: true,
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -126,10 +126,10 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The URL of the EFS location that was described.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 4356),
 			},
-			Computed: true,
 		},
 		"subdirectory": {
 			// Property: Subdirectory
@@ -142,11 +142,11 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 4096),
 			},
-			Optional: true,
-			Computed: true,
 			// Subdirectory is a force-new attribute.
 			// Subdirectory is a write-only attribute.
 		},
@@ -192,19 +192,19 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

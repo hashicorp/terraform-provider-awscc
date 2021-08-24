@@ -30,11 +30,11 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 1000,
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
 			},
-			Computed: true,
 		},
 		"capacity_units": {
 			// Property: CapacityUnits
@@ -61,19 +61,19 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"query_capacity_units": {
 						// Property: QueryCapacityUnits
-						Type: types.NumberType,
+						Type:     types.NumberType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
 						},
-						Required: true,
 					},
 					"storage_capacity_units": {
 						// Property: StorageCapacityUnits
-						Type: types.NumberType,
+						Type:     types.NumberType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
 						},
-						Required: true,
 					},
 				},
 			),
@@ -86,11 +86,11 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 1000,
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
 			},
-			Optional: true,
 		},
 		"document_metadata_configurations": {
 			// Property: DocumentMetadataConfigurations
@@ -191,11 +191,11 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 30),
 						},
-						Required: true,
 					},
 					"relevance": {
 						// Property: Relevance
@@ -203,11 +203,11 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"duration": {
 									// Property: Duration
-									Type: types.StringType,
+									Type:     types.StringType,
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 10),
 									},
-									Optional: true,
 								},
 								"freshness": {
 									// Property: Freshness
@@ -216,11 +216,11 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"importance": {
 									// Property: Importance
-									Type: types.NumberType,
+									Type:     types.NumberType,
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 10),
 									},
-									Optional: true,
 								},
 								"rank_order": {
 									// Property: RankOrder
@@ -233,19 +233,19 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
-												Type: types.StringType,
+												Type:     types.StringType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 50),
 												},
-												Optional: true,
 											},
 											"value": {
 												// Property: Value
-												Type: types.NumberType,
+												Type:     types.NumberType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 10),
 												},
-												Optional: true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -323,10 +323,10 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Unique ID of index",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(36, 36),
 			},
-			Computed: true,
 		},
 		"name": {
 			// Property: Name
@@ -339,10 +339,10 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of index",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1000),
 			},
-			Required: true,
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -356,10 +356,10 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Role Arn",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1284),
 			},
-			Required: true,
 		},
 		"server_side_encryption_configuration": {
 			// Property: ServerSideEncryptionConfiguration
@@ -379,11 +379,11 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"kms_key_id": {
 						// Property: KmsKeyId
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
 						},
-						Optional: true,
 					},
 				},
 			),
@@ -429,19 +429,19 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "A string used to identify this tag",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "A string containing the value for the tag",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -553,19 +553,19 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"group_attribute_field": {
 									// Property: GroupAttributeField
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 100),
 									},
-									Required: true,
 								},
 								"user_name_attribute_field": {
 									// Property: UserNameAttributeField
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 100),
 									},
-									Required: true,
 								},
 							},
 						),
@@ -577,27 +577,27 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"claim_regex": {
 									// Property: ClaimRegex
-									Type: types.StringType,
+									Type:     types.StringType,
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 100),
 									},
-									Optional: true,
 								},
 								"group_attribute_field": {
 									// Property: GroupAttributeField
-									Type: types.StringType,
+									Type:     types.StringType,
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 100),
 									},
-									Optional: true,
 								},
 								"issuer": {
 									// Property: Issuer
-									Type: types.StringType,
+									Type:     types.StringType,
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 65),
 									},
-									Optional: true,
 								},
 								"key_location": {
 									// Property: KeyLocation
@@ -608,26 +608,26 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SecretManagerArn
 									Description: "Role Arn",
 									Type:        types.StringType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1284),
 									},
-									Optional: true,
 								},
 								"url": {
 									// Property: URL
-									Type: types.StringType,
+									Type:     types.StringType,
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 2048),
 									},
-									Optional: true,
 								},
 								"user_name_attribute_field": {
 									// Property: UserNameAttributeField
-									Type: types.StringType,
+									Type:     types.StringType,
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 100),
 									},
-									Optional: true,
 								},
 							},
 						),

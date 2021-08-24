@@ -32,11 +32,11 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(13, 68),
 			},
-			Computed: true,
 		},
 		"associations": {
 			// Property: Associations
@@ -91,19 +91,19 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"connection_identifier": {
 						// Property: ConnectionIdentifier
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 20),
 						},
-						Optional: true,
 					},
 					"resource_id": {
 						// Property: ResourceId
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1000),
 						},
-						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -133,11 +133,11 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			Required: true,
 			// ConnectionString is a force-new attribute.
 		},
 		"tags": {

@@ -36,10 +36,10 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			Computed: true,
 		},
 		"auto_scaling_policy": {
 			// Property: AutoScalingPolicy
@@ -150,10 +150,10 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A generated unique ID for the game server group.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Computed: true,
 		},
 		"game_server_group_name": {
 			// Property: GameServerGroupName
@@ -168,10 +168,10 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "An identifier for the new game server group.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			Required: true,
 		},
 		"game_server_protection_policy": {
 			// Property: GameServerProtectionPolicy
@@ -331,10 +331,10 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Required: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -401,10 +401,10 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
 			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 20),
 			},
-			Optional: true,
 		},
 	}
 

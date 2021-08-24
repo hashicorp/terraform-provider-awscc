@@ -80,19 +80,19 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"cidr": {
 						// Property: Cidr
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 46),
 						},
-						Required: true,
 					},
 					"description": {
 						// Property: Description
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 255),
 						},
-						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -109,10 +109,10 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Max Entries of Prefix List.",
 			Type:        types.NumberType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(1),
 			},
-			Required: true,
 		},
 		"owner_id": {
 			// Property: OwnerId
@@ -147,10 +147,10 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of Prefix List.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			Required: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -182,19 +182,19 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

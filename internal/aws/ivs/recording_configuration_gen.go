@@ -35,10 +35,10 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			// }
 			Description: "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			Computed: true,
 		},
 		"destination_configuration": {
 			// Property: DestinationConfiguration
@@ -79,11 +79,11 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 							map[string]tfsdk.Attribute{
 								"bucket_name": {
 									// Property: BucketName
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 63),
 									},
-									Required: true,
 									// BucketName is a force-new attribute.
 								},
 							},
@@ -108,11 +108,11 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			// }
 			Description: "Recording Configuration Name.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
 			},
-			Optional: true,
-			Computed: true,
 			// Name is a force-new attribute.
 		},
 		"state": {
@@ -166,19 +166,19 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

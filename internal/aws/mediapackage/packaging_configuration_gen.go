@@ -1050,10 +1050,10 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
 		},
 	}
 

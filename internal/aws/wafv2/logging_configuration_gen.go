@@ -344,10 +344,10 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												// Property: IncludedPaths
 												Description: "Match only the specified include paths. See also MatchScope in JsonBody.",
 												Type:        types.ListType{ElemType: types.StringType},
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
 												},
-												Optional: true,
 											},
 										},
 									),

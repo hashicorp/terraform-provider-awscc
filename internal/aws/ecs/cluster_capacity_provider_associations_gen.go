@@ -37,10 +37,10 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			// }
 			Description: "List of capacity providers to associate with the cluster",
 			Type:        types.ListType{ElemType: types.StringType},
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Required: true,
 		},
 		"cluster": {
 			// Property: Cluster
@@ -53,10 +53,10 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			// }
 			Description: "The name of the cluster",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
-			Required: true,
 			// Cluster is a force-new attribute.
 		},
 		"default_capacity_provider_strategy": {
@@ -94,11 +94,11 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 				map[string]tfsdk.Attribute{
 					"base": {
 						// Property: Base
-						Type: types.NumberType,
+						Type:     types.NumberType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100000),
 						},
-						Optional: true,
 					},
 					"capacity_provider": {
 						// Property: CapacityProvider
@@ -108,11 +108,11 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 					},
 					"weight": {
 						// Property: Weight
-						Type: types.NumberType,
+						Type:     types.NumberType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 1000),
 						},
-						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

@@ -587,10 +587,10 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 						},
-						Optional: true,
 					},
 					"environment_files": {
 						// Property: EnvironmentFiles
@@ -712,11 +712,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"links": {
 						// Property: Links
-						Type: types.ListType{ElemType: types.StringType},
+						Type:     types.ListType{ElemType: types.StringType},
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 						},
-						Optional: true,
 					},
 					"linux_parameters": {
 						// Property: LinuxParameters
@@ -756,11 +756,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"permissions": {
 												// Property: Permissions
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.UniqueItems(),
 												},
-												Optional: true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -886,10 +886,10 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 						},
-						Optional: true,
 					},
 					"name": {
 						// Property: Name
@@ -920,10 +920,10 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 						},
-						Optional: true,
 					},
 					"privileged": {
 						// Property: Privileged
@@ -1066,10 +1066,10 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 						},
-						Optional: true,
 					},
 					"working_directory": {
 						// Property: WorkingDirectory
@@ -1079,11 +1079,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
-			Computed: true,
 			// ContainerDefinitions is a force-new attribute.
 		},
 		"cpu": {
@@ -1178,11 +1178,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
-			Computed: true,
 			// InferenceAccelerators is a force-new attribute.
 		},
 		"ipc_mode": {
@@ -1266,11 +1266,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
-			Computed: true,
 			// PlacementConstraints is a force-new attribute.
 		},
 		"proxy_configuration": {
@@ -1331,10 +1331,10 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 						},
-						Optional: true,
 					},
 					"type": {
 						// Property: Type
@@ -1357,12 +1357,12 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Type: types.ListType{ElemType: types.StringType},
+			Type:     types.ListType{ElemType: types.StringType},
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
-			Computed: true,
 			// RequiresCompatibilities is a force-new attribute.
 		},
 		"tags": {
@@ -1625,11 +1625,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
-			Computed: true,
 			// Volumes is a force-new attribute.
 		},
 	}

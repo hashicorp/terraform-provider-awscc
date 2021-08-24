@@ -30,11 +30,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 1000,
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
 			},
-			Computed: true,
 		},
 		"data_source_configuration": {
 			// Property: DataSourceConfiguration
@@ -1440,19 +1440,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
-															Type: types.StringType,
+															Type:     types.StringType,
+															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
 															},
-															Optional: true,
 														},
 														"index_field_name": {
 															// Property: IndexFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 															},
-															Required: true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -1486,19 +1486,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
-															Type: types.StringType,
+															Type:     types.StringType,
+															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
 															},
-															Optional: true,
 														},
 														"index_field_name": {
 															// Property: IndexFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 															},
-															Required: true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -1514,19 +1514,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"exclusion_patterns": {
 									// Property: ExclusionPatterns
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 								"inclusion_patterns": {
 									// Property: InclusionPatterns
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 								"page_configuration": {
 									// Property: PageConfiguration
@@ -1543,19 +1543,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
-															Type: types.StringType,
+															Type:     types.StringType,
+															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
 															},
-															Optional: true,
 														},
 														"index_field_name": {
 															// Property: IndexFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 															},
-															Required: true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -1571,19 +1571,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"secret_arn": {
 									// Property: SecretArn
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1284),
 									},
-									Required: true,
 								},
 								"server_url": {
 									// Property: ServerUrl
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 2048),
 									},
-									Required: true,
 								},
 								"space_configuration": {
 									// Property: SpaceConfiguration
@@ -1601,19 +1601,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"exclude_spaces": {
 												// Property: ExcludeSpaces
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
 												},
-												Optional: true,
 											},
 											"include_spaces": {
 												// Property: IncludeSpaces
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
 												},
-												Optional: true,
 											},
 											"space_field_mappings": {
 												// Property: SpaceFieldMappings
@@ -1626,19 +1626,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
-															Type: types.StringType,
+															Type:     types.StringType,
+															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
 															},
-															Optional: true,
 														},
 														"index_field_name": {
 															// Property: IndexFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 															},
-															Required: true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -1663,19 +1663,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"security_group_ids": {
 												// Property: SecurityGroupIds
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 10),
 												},
-												Required: true,
 											},
 											"subnet_ids": {
 												// Property: SubnetIds
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 6),
 												},
-												Required: true,
 											},
 										},
 									),
@@ -1695,11 +1695,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"allowed_groups_column_name": {
 												// Property: AllowedGroupsColumnName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Required: true,
 											},
 										},
 									),
@@ -1711,35 +1711,35 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"change_detecting_columns": {
 												// Property: ChangeDetectingColumns
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 5),
 												},
-												Required: true,
 											},
 											"document_data_column_name": {
 												// Property: DocumentDataColumnName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Required: true,
 											},
 											"document_id_column_name": {
 												// Property: DocumentIdColumnName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Required: true,
 											},
 											"document_title_column_name": {
 												// Property: DocumentTitleColumnName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Optional: true,
 											},
 											"field_mappings": {
 												// Property: FieldMappings
@@ -1747,27 +1747,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
 															},
-															Required: true,
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
-															Type: types.StringType,
+															Type:     types.StringType,
+															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
 															},
-															Optional: true,
 														},
 														"index_field_name": {
 															// Property: IndexFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 															},
-															Required: true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -1786,43 +1786,43 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"database_host": {
 												// Property: DatabaseHost
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 253),
 												},
-												Required: true,
 											},
 											"database_name": {
 												// Property: DatabaseName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Required: true,
 											},
 											"database_port": {
 												// Property: DatabasePort
-												Type: types.NumberType,
+												Type:     types.NumberType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 65535),
 												},
-												Required: true,
 											},
 											"secret_arn": {
 												// Property: SecretArn
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 1284),
 												},
-												Required: true,
 											},
 											"table_name": {
 												// Property: TableName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Required: true,
 											},
 										},
 									),
@@ -1852,19 +1852,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"security_group_ids": {
 												// Property: SecurityGroupIds
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 10),
 												},
-												Required: true,
 											},
 											"subnet_ids": {
 												// Property: SubnetIds
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 6),
 												},
-												Required: true,
 											},
 										},
 									),
@@ -1895,11 +1895,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"exclusion_patterns": {
 									// Property: ExclusionPatterns
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 								"field_mappings": {
 									// Property: FieldMappings
@@ -1907,27 +1907,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"data_source_field_name": {
 												// Property: DataSourceFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Required: true,
 											},
 											"date_field_format": {
 												// Property: DateFieldFormat
-												Type: types.StringType,
+												Type:     types.StringType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(4, 40),
 												},
-												Optional: true,
 											},
 											"index_field_name": {
 												// Property: IndexFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 30),
 												},
-												Required: true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -1938,19 +1938,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"inclusion_patterns": {
 									// Property: InclusionPatterns
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 								"secret_arn": {
 									// Property: SecretArn
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1284),
 									},
-									Required: true,
 								},
 							},
 						),
@@ -1967,11 +1967,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"exclusion_patterns": {
 									// Property: ExclusionPatterns
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 								"field_mappings": {
 									// Property: FieldMappings
@@ -1979,27 +1979,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"data_source_field_name": {
 												// Property: DataSourceFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Required: true,
 											},
 											"date_field_format": {
 												// Property: DateFieldFormat
-												Type: types.StringType,
+												Type:     types.StringType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(4, 40),
 												},
-												Optional: true,
 											},
 											"index_field_name": {
 												// Property: IndexFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 30),
 												},
-												Required: true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -2010,11 +2010,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"inclusion_patterns": {
 									// Property: InclusionPatterns
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 								"one_drive_users": {
 									// Property: OneDriveUsers
@@ -2031,19 +2031,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"bucket": {
 															// Property: Bucket
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(3, 63),
 															},
-															Required: true,
 														},
 														"key": {
 															// Property: Key
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 1024),
 															},
-															Required: true,
 														},
 													},
 												),
@@ -2055,19 +2055,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"secret_arn": {
 									// Property: SecretArn
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1284),
 									},
-									Required: true,
 								},
 								"tenant_domain": {
 									// Property: TenantDomain
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 256),
 									},
-									Required: true,
 								},
 							},
 						),
@@ -2084,11 +2084,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"key_path": {
 												// Property: KeyPath
-												Type: types.StringType,
+												Type:     types.StringType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 1024),
 												},
-												Optional: true,
 											},
 										},
 									),
@@ -2096,11 +2096,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"bucket_name": {
 									// Property: BucketName
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 63),
 									},
-									Required: true,
 								},
 								"documents_metadata_configuration": {
 									// Property: DocumentsMetadataConfiguration
@@ -2108,11 +2108,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"s3_prefix": {
 												// Property: S3Prefix
-												Type: types.StringType,
+												Type:     types.StringType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 1024),
 												},
-												Optional: true,
 											},
 										},
 									),
@@ -2120,27 +2120,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"exclusion_patterns": {
 									// Property: ExclusionPatterns
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 								"inclusion_patterns": {
 									// Property: InclusionPatterns
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 								"inclusion_prefixes": {
 									// Property: InclusionPrefixes
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 							},
 						),
@@ -2156,19 +2156,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"document_data_field_name": {
 												// Property: DocumentDataFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Required: true,
 											},
 											"document_title_field_name": {
 												// Property: DocumentTitleFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Optional: true,
 											},
 											"field_mappings": {
 												// Property: FieldMappings
@@ -2176,27 +2176,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
 															},
-															Required: true,
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
-															Type: types.StringType,
+															Type:     types.StringType,
+															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
 															},
-															Optional: true,
 														},
 														"index_field_name": {
 															// Property: IndexFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 															},
-															Required: true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -2221,19 +2221,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"exclude_attachment_file_patterns": {
 									// Property: ExcludeAttachmentFilePatterns
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 								"include_attachment_file_patterns": {
 									// Property: IncludeAttachmentFilePatterns
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 								"knowledge_article_configuration": {
 									// Property: KnowledgeArticleConfiguration
@@ -2245,19 +2245,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"document_data_field_name": {
 															// Property: DocumentDataFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
 															},
-															Required: true,
 														},
 														"document_title_field_name": {
 															// Property: DocumentTitleFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
 															},
-															Optional: true,
 														},
 														"field_mappings": {
 															// Property: FieldMappings
@@ -2265,27 +2265,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																map[string]tfsdk.Attribute{
 																	"data_source_field_name": {
 																		// Property: DataSourceFieldName
-																		Type: types.StringType,
+																		Type:     types.StringType,
+																		Required: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 100),
 																		},
-																		Required: true,
 																	},
 																	"date_field_format": {
 																		// Property: DateFieldFormat
-																		Type: types.StringType,
+																		Type:     types.StringType,
+																		Optional: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(4, 40),
 																		},
-																		Optional: true,
 																	},
 																	"index_field_name": {
 																		// Property: IndexFieldName
-																		Type: types.StringType,
+																		Type:     types.StringType,
+																		Required: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 30),
 																		},
-																		Required: true,
 																	},
 																},
 																tfsdk.ListNestedAttributesOptions{
@@ -2296,11 +2296,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"name": {
 															// Property: Name
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
 															},
-															Required: true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -2312,11 +2312,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"included_states": {
 												// Property: IncludedStates
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 3),
 												},
-												Required: true,
 											},
 											"standard_knowledge_article_type_configuration": {
 												// Property: StandardKnowledgeArticleTypeConfiguration
@@ -2324,19 +2324,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"document_data_field_name": {
 															// Property: DocumentDataFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
 															},
-															Required: true,
 														},
 														"document_title_field_name": {
 															// Property: DocumentTitleFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
 															},
-															Optional: true,
 														},
 														"field_mappings": {
 															// Property: FieldMappings
@@ -2344,27 +2344,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																map[string]tfsdk.Attribute{
 																	"data_source_field_name": {
 																		// Property: DataSourceFieldName
-																		Type: types.StringType,
+																		Type:     types.StringType,
+																		Required: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 100),
 																		},
-																		Required: true,
 																	},
 																	"date_field_format": {
 																		// Property: DateFieldFormat
-																		Type: types.StringType,
+																		Type:     types.StringType,
+																		Optional: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(4, 40),
 																		},
-																		Optional: true,
 																	},
 																	"index_field_name": {
 																		// Property: IndexFieldName
-																		Type: types.StringType,
+																		Type:     types.StringType,
+																		Required: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 30),
 																		},
-																		Required: true,
 																	},
 																},
 																tfsdk.ListNestedAttributesOptions{
@@ -2383,19 +2383,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"secret_arn": {
 									// Property: SecretArn
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1284),
 									},
-									Required: true,
 								},
 								"server_url": {
 									// Property: ServerUrl
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 2048),
 									},
-									Required: true,
 								},
 								"standard_object_attachment_configuration": {
 									// Property: StandardObjectAttachmentConfiguration
@@ -2403,11 +2403,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"document_title_field_name": {
 												// Property: DocumentTitleFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Optional: true,
 											},
 											"field_mappings": {
 												// Property: FieldMappings
@@ -2415,27 +2415,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
 															},
-															Required: true,
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
-															Type: types.StringType,
+															Type:     types.StringType,
+															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
 															},
-															Optional: true,
 														},
 														"index_field_name": {
 															// Property: IndexFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 															},
-															Required: true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -2454,19 +2454,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"document_data_field_name": {
 												// Property: DocumentDataFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Required: true,
 											},
 											"document_title_field_name": {
 												// Property: DocumentTitleFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Optional: true,
 											},
 											"field_mappings": {
 												// Property: FieldMappings
@@ -2474,27 +2474,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
 															},
-															Required: true,
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
-															Type: types.StringType,
+															Type:     types.StringType,
+															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
 															},
-															Optional: true,
 														},
 														"index_field_name": {
 															// Property: IndexFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 															},
-															Required: true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -2526,11 +2526,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"host_url": {
 									// Property: HostUrl
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 2048),
 									},
-									Required: true,
 								},
 								"knowledge_article_configuration": {
 									// Property: KnowledgeArticleConfiguration
@@ -2543,27 +2543,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"document_data_field_name": {
 												// Property: DocumentDataFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Required: true,
 											},
 											"document_title_field_name": {
 												// Property: DocumentTitleFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Optional: true,
 											},
 											"exclude_attachment_file_patterns": {
 												// Property: ExcludeAttachmentFilePatterns
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 100),
 												},
-												Optional: true,
 											},
 											"field_mappings": {
 												// Property: FieldMappings
@@ -2571,27 +2571,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
 															},
-															Required: true,
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
-															Type: types.StringType,
+															Type:     types.StringType,
+															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
 															},
-															Optional: true,
 														},
 														"index_field_name": {
 															// Property: IndexFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 															},
-															Required: true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -2602,11 +2602,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"include_attachment_file_patterns": {
 												// Property: IncludeAttachmentFilePatterns
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 100),
 												},
-												Optional: true,
 											},
 										},
 									),
@@ -2614,11 +2614,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"secret_arn": {
 									// Property: SecretArn
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1284),
 									},
-									Required: true,
 								},
 								"service_catalog_configuration": {
 									// Property: ServiceCatalogConfiguration
@@ -2631,27 +2631,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"document_data_field_name": {
 												// Property: DocumentDataFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Required: true,
 											},
 											"document_title_field_name": {
 												// Property: DocumentTitleFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Optional: true,
 											},
 											"exclude_attachment_file_patterns": {
 												// Property: ExcludeAttachmentFilePatterns
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 100),
 												},
-												Optional: true,
 											},
 											"field_mappings": {
 												// Property: FieldMappings
@@ -2659,27 +2659,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"data_source_field_name": {
 															// Property: DataSourceFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 100),
 															},
-															Required: true,
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
-															Type: types.StringType,
+															Type:     types.StringType,
+															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 40),
 															},
-															Optional: true,
 														},
 														"index_field_name": {
 															// Property: IndexFieldName
-															Type: types.StringType,
+															Type:     types.StringType,
+															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
 															},
-															Required: true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -2690,11 +2690,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"include_attachment_file_patterns": {
 												// Property: IncludeAttachmentFilePatterns
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 100),
 												},
-												Optional: true,
 											},
 										},
 									),
@@ -2726,19 +2726,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"document_title_field_name": {
 									// Property: DocumentTitleFieldName
-									Type: types.StringType,
+									Type:     types.StringType,
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 100),
 									},
-									Optional: true,
 								},
 								"exclusion_patterns": {
 									// Property: ExclusionPatterns
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 								"field_mappings": {
 									// Property: FieldMappings
@@ -2746,27 +2746,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"data_source_field_name": {
 												// Property: DataSourceFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
 												},
-												Required: true,
 											},
 											"date_field_format": {
 												// Property: DateFieldFormat
-												Type: types.StringType,
+												Type:     types.StringType,
+												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(4, 40),
 												},
-												Optional: true,
 											},
 											"index_field_name": {
 												// Property: IndexFieldName
-												Type: types.StringType,
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 30),
 												},
-												Required: true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -2777,19 +2777,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"inclusion_patterns": {
 									// Property: InclusionPatterns
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Optional: true,
 								},
 								"secret_arn": {
 									// Property: SecretArn
-									Type: types.StringType,
+									Type:     types.StringType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1284),
 									},
-									Required: true,
 								},
 								"share_point_version": {
 									// Property: SharePointVersion
@@ -2798,11 +2798,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"urls": {
 									// Property: Urls
-									Type: types.ListType{ElemType: types.StringType},
+									Type:     types.ListType{ElemType: types.StringType},
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
 									},
-									Required: true,
 								},
 								"use_change_log": {
 									// Property: UseChangeLog
@@ -2815,19 +2815,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"security_group_ids": {
 												// Property: SecurityGroupIds
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 10),
 												},
-												Required: true,
 											},
 											"subnet_ids": {
 												// Property: SubnetIds
-												Type: types.ListType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 6),
 												},
-												Required: true,
 											},
 										},
 									),
@@ -2852,10 +2852,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Description of data source",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1000),
 			},
-			Optional: true,
 		},
 		"id": {
 			// Property: Id
@@ -2868,10 +2868,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "ID of data source",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			Computed: true,
 		},
 		"index_id": {
 			// Property: IndexId
@@ -2884,10 +2884,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "ID of Index",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(36, 36),
 			},
-			Required: true,
 		},
 		"name": {
 			// Property: Name
@@ -2900,10 +2900,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of data source",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1000),
 			},
-			Required: true,
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -2917,10 +2917,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Role ARN",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1284),
 			},
-			Optional: true,
 		},
 		"schedule": {
 			// Property: Schedule
@@ -2932,10 +2932,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Schedule",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
 			},
-			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -2975,19 +2975,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "A string used to identify this tag",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "A string containing the value for the tag",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

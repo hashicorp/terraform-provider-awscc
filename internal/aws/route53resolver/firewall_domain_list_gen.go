@@ -34,10 +34,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "Arn",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 600),
 			},
-			Computed: true,
 		},
 		"creation_time": {
 			// Property: CreationTime
@@ -50,10 +50,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 40),
 			},
-			Computed: true,
 		},
 		"creator_request_id": {
 			// Property: CreatorRequestId
@@ -66,10 +66,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			Computed: true,
 		},
 		"domain_count": {
 			// Property: DomainCount
@@ -81,10 +81,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "Count",
 			Type:        types.NumberType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(0),
 			},
-			Computed: true,
 		},
 		"domain_file_url": {
 			// Property: DomainFileUrl
@@ -97,10 +97,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "S3 URL to import domains from.",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			Optional: true,
 			// DomainFileUrl is a write-only attribute.
 		},
 		"domains": {
@@ -119,10 +119,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "An inline list of domains to use for this domain list.",
 			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
 			// Domains is a write-only attribute.
 		},
 		"id": {
@@ -136,10 +136,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "ResourceId",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			Computed: true,
 		},
 		"managed_owner_name": {
 			// Property: ManagedOwnerName
@@ -152,10 +152,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "ServicePrincipal",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
 			},
-			Computed: true,
 		},
 		"modification_time": {
 			// Property: ModificationTime
@@ -168,10 +168,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 40),
 			},
-			Computed: true,
 		},
 		"name": {
 			// Property: Name
@@ -185,11 +185,11 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "FirewallDomainListName",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			Optional: true,
-			Computed: true,
 			// Name is a force-new attribute.
 		},
 		"status": {
@@ -261,19 +261,19 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 127),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 255),
 						},
-						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},

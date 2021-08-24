@@ -83,10 +83,10 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The ARN (Amazon resource name) of the scheduled audit.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			Computed: true,
 		},
 		"scheduled_audit_name": {
 			// Property: ScheduledAuditName
@@ -100,11 +100,11 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The name you want to give to the scheduled audit.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			Optional: true,
-			Computed: true,
 			// ScheduledAuditName is a force-new attribute.
 		},
 		"tags": {
@@ -147,19 +147,19 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Key
 						Description: "The tag's key.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The tag's value.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

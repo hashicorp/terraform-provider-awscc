@@ -35,10 +35,10 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 45),
 			},
-			Required: true,
 			// ObjectLambdaAccessPoint is a force-new attribute.
 		},
 		"policy_document": {

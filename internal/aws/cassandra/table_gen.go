@@ -77,19 +77,19 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"read_capacity_units": {
 									// Property: ReadCapacityUnits
-									Type: types.NumberType,
+									Type:     types.NumberType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(1),
 									},
-									Required: true,
 								},
 								"write_capacity_units": {
 									// Property: WriteCapacityUnits
-									Type: types.NumberType,
+									Type:     types.NumberType,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(1),
 									},
-									Required: true,
 								},
 							},
 						),
@@ -170,11 +170,11 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
-			Computed: true,
 			// ClusteringKeyColumns is a force-new attribute.
 		},
 		"encryption_specification": {
@@ -279,10 +279,10 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					MinItems: 1,
 				},
 			),
+			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Required: true,
 			// PartitionKeyColumns is a force-new attribute.
 		},
 		"point_in_time_recovery_enabled": {
@@ -390,19 +390,19 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -410,10 +410,10 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					MaxItems: 50,
 				},
 			),
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			Optional: true,
 		},
 	}
 

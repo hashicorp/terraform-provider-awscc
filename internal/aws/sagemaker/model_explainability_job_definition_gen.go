@@ -45,10 +45,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Description: "The Amazon Resource Name (ARN) of job definition.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Computed: true,
 		},
 		"job_definition_name": {
 			// Property: JobDefinitionName
@@ -61,11 +61,11 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Description: "The name of the job definition.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 63),
 			},
-			Optional: true,
-			Computed: true,
 			// JobDefinitionName is a force-new attribute.
 		},
 		"job_resources": {
@@ -127,10 +127,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									// Property: InstanceCount
 									Description: "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
 									Type:        types.NumberType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 100),
 									},
-									Required: true,
 								},
 								"instance_type": {
 									// Property: InstanceType
@@ -148,10 +148,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									// Property: VolumeSizeInGB
 									Description: "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
 									Type:        types.NumberType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 16384),
 									},
-									Required: true,
 								},
 							},
 						),
@@ -211,10 +211,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						// Property: ConfigUri
 						Description: "The S3 URI to an analysis configuration file",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 255),
 						},
-						Required: true,
 					},
 					"environment": {
 						// Property: Environment
@@ -228,10 +228,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						// Property: ImageUri
 						Description: "The container image to be run by the monitoring job.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 255),
 						},
-						Required: true,
 					},
 				},
 			),
@@ -275,10 +275,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						// Property: BaseliningJobName
 						Description: "The name of a processing job",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 63),
 						},
-						Optional: true,
 					},
 					"constraints_resource": {
 						// Property: ConstraintsResource
@@ -289,10 +289,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									// Property: S3Uri
 									Description: "The Amazon S3 URI.",
 									Type:        types.StringType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1024),
 									},
-									Optional: true,
 								},
 							},
 						),
@@ -383,46 +383,46 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									// Property: EndpointName
 									Description: "The name of the endpoint used to run the monitoring job.",
 									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 63),
 									},
-									Required: true,
 								},
 								"features_attribute": {
 									// Property: FeaturesAttribute
 									Description: "JSONpath to locate features in JSONlines dataset",
 									Type:        types.StringType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 									},
-									Optional: true,
 								},
 								"inference_attribute": {
 									// Property: InferenceAttribute
 									Description: "Index or JSONpath to locate predicted label(s)",
 									Type:        types.StringType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 									},
-									Optional: true,
 								},
 								"local_path": {
 									// Property: LocalPath
 									Description: "Path to the filesystem where the endpoint data is available to the container.",
 									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 									},
-									Required: true,
 								},
 								"probability_attribute": {
 									// Property: ProbabilityAttribute
 									Description: "Index or JSONpath to locate probabilities",
 									Type:        types.StringType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 									},
-									Optional: true,
 								},
 								"s3_data_distribution_type": {
 									// Property: S3DataDistributionType
@@ -518,10 +518,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						// Property: KmsKeyId
 						Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 2048),
 						},
-						Optional: true,
 					},
 					"monitoring_outputs": {
 						// Property: MonitoringOutputs
@@ -537,10 +537,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 												// Property: LocalPath
 												Description: "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
 												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(0, 256),
 												},
-												Required: true,
 											},
 											"s3_upload_mode": {
 												// Property: S3UploadMode
@@ -552,10 +552,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 												// Property: S3Uri
 												Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
 												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(0, 512),
 												},
-												Required: true,
 											},
 										},
 									),
@@ -646,19 +646,19 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									// Property: SecurityGroupIds
 									Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
 									Type:        types.ListType{ElemType: types.StringType},
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 5),
 									},
-									Required: true,
 								},
 								"subnets": {
 									// Property: Subnets
 									Description: "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
 									Type:        types.ListType{ElemType: types.StringType},
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 16),
 									},
-									Required: true,
 								},
 							},
 						),
@@ -682,10 +682,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			Required: true,
 			// RoleArn is a force-new attribute.
 		},
 		"stopping_condition": {
@@ -714,10 +714,10 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						// Property: MaxRuntimeInSeconds
 						Description: "The maximum runtime allowed in seconds.",
 						Type:        types.NumberType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 86400),
 						},
-						Required: true,
 					},
 				},
 			),
@@ -764,19 +764,19 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

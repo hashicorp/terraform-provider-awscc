@@ -127,10 +127,10 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: TimeoutMinutes
 						Description: "TimeoutMinutes",
 						Type:        types.NumberType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(60, 1440),
 						},
-						Optional: true,
 					},
 				},
 			),

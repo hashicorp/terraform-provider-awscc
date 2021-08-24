@@ -47,10 +47,10 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// }
 			Description: "The name of the configuration",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			Required: true,
 			// ConfigurationName is a force-new attribute.
 		},
 		"iam_role_arn": {
@@ -89,10 +89,10 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// }
 			Description: "The id of the Slack channel",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Required: true,
 		},
 		"slack_workspace_id": {
 			// Property: SlackWorkspaceId
@@ -105,10 +105,10 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// }
 			Description: "The id of the Slack workspace",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Required: true,
 			// SlackWorkspaceId is a force-new attribute.
 		},
 		"sns_topic_arns": {

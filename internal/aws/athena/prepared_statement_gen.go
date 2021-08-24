@@ -34,10 +34,10 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The description of the prepared statement.",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			Optional: true,
 		},
 		"query_statement": {
 			// Property: QueryStatement
@@ -50,10 +50,10 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The query string for the prepared statement.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 262144),
 			},
-			Required: true,
 		},
 		"statement_name": {
 			// Property: StatementName
@@ -66,10 +66,10 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The name of the prepared statement.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Required: true,
 			// StatementName is a force-new attribute.
 		},
 		"work_group": {
@@ -83,10 +83,10 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The name of the workgroup to which the prepared statement belongs.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			Required: true,
 			// WorkGroup is a force-new attribute.
 		},
 	}

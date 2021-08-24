@@ -59,11 +59,11 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 					},
 					"default_authorizer_name": {
 						// Property: DefaultAuthorizerName
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Optional: true,
 					},
 				},
 			),
@@ -78,12 +78,12 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			Optional: true,
-			Computed: true,
 			// DomainConfigurationName is a force-new attribute.
 		},
 		"domain_configuration_status": {
@@ -107,12 +107,12 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 253),
 			},
-			Optional: true,
-			Computed: true,
 			// DomainName is a force-new attribute.
 		},
 		"domain_type": {
@@ -143,12 +143,12 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "minItems": 0,
 			//   "type": "array"
 			// }
-			Type: types.ListType{ElemType: types.StringType},
+			Type:     types.ListType{ElemType: types.StringType},
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 1),
 			},
-			Optional: true,
-			Computed: true,
 			// ServerCertificateArns is a force-new attribute.
 			// ServerCertificateArns is a write-only attribute.
 		},
@@ -184,11 +184,11 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				map[string]tfsdk.Attribute{
 					"server_certificate_arn": {
 						// Property: ServerCertificateArn
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
 						},
-						Optional: true,
 					},
 					"server_certificate_status": {
 						// Property: ServerCertificateStatus

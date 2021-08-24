@@ -77,10 +77,10 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 40),
 			},
-			Computed: true,
 		},
 		"publisher_profile": {
 			// Property: PublisherProfile
@@ -93,10 +93,10 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The URL to the publisher's profile with the identity provider.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
 			},
-			Computed: true,
 		},
 		"publisher_status": {
 			// Property: PublisherStatus

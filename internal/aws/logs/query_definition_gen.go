@@ -53,10 +53,10 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A name for the saved query definition",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			Required: true,
 		},
 		"query_definition_id": {
 			// Property: QueryDefinitionId
@@ -69,10 +69,10 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "Unique identifier of a query definition",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			Computed: true,
 		},
 		"query_string": {
 			// Property: QueryString
@@ -85,10 +85,10 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "The query string to use for this definition",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 10000),
 			},
-			Required: true,
 		},
 	}
 

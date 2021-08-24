@@ -46,10 +46,10 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "The identifier for the DB proxy endpoint. This name must be unique for all DB proxy endpoints owned by your AWS account in the specified AWS Region.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 64),
 			},
-			Required: true,
 			// DBProxyEndpointName is a force-new attribute.
 		},
 		"db_proxy_name": {
@@ -63,10 +63,10 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 64),
 			},
-			Required: true,
 			// DBProxyName is a force-new attribute.
 		},
 		"endpoint": {
@@ -79,10 +79,10 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			Computed: true,
 		},
 		"is_default": {
 			// Property: IsDefault
@@ -124,19 +124,19 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 128),
 						},
-						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 128),
 						},
-						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -185,10 +185,10 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "VPC security group IDs to associate with the new DB proxy endpoint.",
 			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
 			},
-			Optional: true,
 		},
 		"vpc_subnet_ids": {
 			// Property: VpcSubnetIds
@@ -204,10 +204,10 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "VPC subnet IDs to associate with the new DB proxy endpoint.",
 			Type:        types.ListType{ElemType: types.StringType},
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(2),
 			},
-			Required: true,
 			// VpcSubnetIds is a force-new attribute.
 		},
 	}

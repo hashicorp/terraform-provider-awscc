@@ -171,10 +171,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: FederationProviderName
 						Description: "Federation provider name to link with the Environment",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 32),
 						},
-						Optional: true,
 					},
 					"federation_urn": {
 						// Property: FederationURN
@@ -186,10 +186,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: SamlMetadataDocument
 						Description: "SAML metadata document to link the federation provider to the Environment",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1000, 10000000),
 						},
-						Optional: true,
 					},
 					"saml_metadata_url": {
 						// Property: SamlMetadataURL

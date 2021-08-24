@@ -35,10 +35,10 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The registry path of the container image on which this image version is based.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			Required: true,
 			// BaseImage is a force-new attribute.
 		},
 		"container_image": {
@@ -53,10 +53,10 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The registry path of the container image that contains this image version.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			Computed: true,
 		},
 		"image_arn": {
 			// Property: ImageArn
@@ -70,10 +70,10 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the parent image.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Computed: true,
 		},
 		"image_name": {
 			// Property: ImageName
@@ -87,10 +87,10 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the image this version belongs to.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			Required: true,
 			// ImageName is a force-new attribute.
 		},
 		"image_version_arn": {
@@ -105,10 +105,10 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the image version.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Computed: true,
 		},
 		"version": {
 			// Property: Version
@@ -120,10 +120,10 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The version number of the image version.",
 			Type:        types.NumberType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(1),
 			},
-			Computed: true,
 		},
 	}
 

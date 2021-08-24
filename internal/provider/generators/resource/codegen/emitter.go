@@ -415,15 +415,6 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 		return 0, unsupportedTypeError(path, propertyType)
 	}
 
-	if len(validators) > 0 {
-		features |= UsesValidation
-		e.printf("Validators:[]tfsdk.AttributeValidator{\n")
-		for _, validator := range validators {
-			e.printf("%s,\n", validator)
-		}
-		e.printf("},\n")
-	}
-
 	createOnly := e.CfResource.CreateOnlyProperties.ContainsPath(path)
 	readOnly := e.CfResource.ReadOnlyProperties.ContainsPath(path)
 	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
@@ -436,6 +427,15 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 
 	if (readOnly || createOnly) && !required {
 		e.printf("Computed:true,\n")
+	}
+
+	if len(validators) > 0 {
+		features |= UsesValidation
+		e.printf("Validators:[]tfsdk.AttributeValidator{\n")
+		for _, validator := range validators {
+			e.printf("%s,\n", validator)
+		}
+		e.printf("},\n")
 	}
 
 	if createOnly {

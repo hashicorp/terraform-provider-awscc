@@ -35,10 +35,10 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The permission set description.",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 700),
 			},
-			Optional: true,
 		},
 		"inline_policy": {
 			// Property: InlinePolicy
@@ -63,10 +63,10 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The sso instance arn that the permission set is owned.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 1224),
 			},
-			Required: true,
 			// InstanceArn is a force-new attribute.
 		},
 		"managed_policies": {
@@ -83,11 +83,11 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "maxItems": 20,
 			//   "type": "array"
 			// }
-			Type: types.ListType{ElemType: types.StringType},
+			Type:     types.ListType{ElemType: types.StringType},
+			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 20),
 			},
-			Optional: true,
 		},
 		"name": {
 			// Property: Name
@@ -101,10 +101,10 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The name you want to assign to this permission set.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 32),
 			},
-			Required: true,
 			// Name is a force-new attribute.
 		},
 		"permission_set_arn": {
@@ -119,10 +119,10 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The permission set that the policy will be attached to",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 1224),
 			},
-			Computed: true,
 		},
 		"relay_state_type": {
 			// Property: RelayStateType
@@ -136,10 +136,10 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The relay state URL that redirect links to any service in the AWS Management Console.",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 240),
 			},
-			Optional: true,
 		},
 		"session_duration": {
 			// Property: SessionDuration
@@ -153,10 +153,10 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The length of time that a user can be signed in to an AWS account.",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -193,19 +193,19 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

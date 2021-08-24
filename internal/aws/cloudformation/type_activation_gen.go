@@ -87,19 +87,19 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: LogGroupName
 						Description: "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
 						},
-						Optional: true,
 					},
 					"log_role_arn": {
 						// Property: LogRoleArn
 						Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.",
 						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Optional: true,
 					},
 				},
 			),
@@ -118,10 +118,10 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The Major Version of the type you want to enable",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100000),
 			},
-			Optional: true,
 		},
 		"public_type_arn": {
 			// Property: PublicTypeArn
@@ -134,11 +134,11 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
 			},
-			Optional: true,
-			Computed: true,
 			// PublicTypeArn is a force-new attribute.
 		},
 		"publisher_id": {
@@ -153,11 +153,11 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 40),
 			},
-			Optional: true,
-			Computed: true,
 			// PublisherId is a force-new attribute.
 		},
 		"type": {
@@ -203,11 +203,11 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "An alias to assign to the public extension in this account and region. If you specify an alias for the extension, you must then use the alias to refer to the extension in your templates.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 204),
 			},
-			Optional: true,
-			Computed: true,
 			// TypeNameAlias is a force-new attribute.
 		},
 		"version_bump": {

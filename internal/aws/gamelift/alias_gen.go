@@ -45,10 +45,10 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A human-readable description of the alias.",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			Optional: true,
 		},
 		"name": {
 			// Property: Name
@@ -62,10 +62,10 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			Required: true,
 		},
 		"routing_strategy": {
 			// Property: RoutingStrategy

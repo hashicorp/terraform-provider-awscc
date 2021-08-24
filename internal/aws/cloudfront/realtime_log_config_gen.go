@@ -112,11 +112,11 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Type: types.ListType{ElemType: types.StringType},
+			Type:     types.ListType{ElemType: types.StringType},
+			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
 			},
-			Required: true,
 		},
 		"name": {
 			// Property: Name

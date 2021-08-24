@@ -31,11 +31,11 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1600),
 			},
-			Computed: true,
 		},
 		"configuration": {
 			// Property: Configuration
@@ -59,11 +59,11 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"style": {
 						// Property: Style
-						Type: types.StringType,
+						Type:     types.StringType,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 100),
 						},
-						Required: true,
 					},
 				},
 			),
@@ -99,12 +99,12 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
 			},
-			Optional: true,
-			Computed: true,
 			// Description is a force-new attribute.
 		},
 		"map_arn": {
@@ -115,11 +115,11 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1600),
 			},
-			Computed: true,
 		},
 		"map_name": {
 			// Property: MapName
@@ -130,11 +130,11 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			Required: true,
 			// MapName is a force-new attribute.
 		},
 		"pricing_plan": {

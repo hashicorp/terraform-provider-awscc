@@ -40,12 +40,12 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 65536),
 			},
-			Optional: true,
-			Computed: true,
 			// CACertificatePem is a force-new attribute.
 			// CACertificatePem is a write-only attribute.
 		},
@@ -72,12 +72,12 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 65536),
 			},
-			Optional: true,
-			Computed: true,
 			// CertificatePem is a force-new attribute.
 		},
 		"certificate_signing_request": {

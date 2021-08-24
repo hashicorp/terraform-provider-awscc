@@ -35,10 +35,10 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The Amazon Resource Name (ARN) of the repository association.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			Computed: true,
 		},
 		"bucket_name": {
 			// Property: BucketName
@@ -52,11 +52,11 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 63),
 			},
-			Optional: true,
-			Computed: true,
 			// BucketName is a force-new attribute.
 		},
 		"connection_arn": {
@@ -71,11 +71,11 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			Optional: true,
-			Computed: true,
 			// ConnectionArn is a force-new attribute.
 		},
 		"name": {
@@ -90,10 +90,10 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "Name of the repository to be associated.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			Required: true,
 			// Name is a force-new attribute.
 		},
 		"owner": {
@@ -108,11 +108,11 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			Optional: true,
-			Computed: true,
 			// Owner is a force-new attribute.
 		},
 		"tags": {
@@ -154,19 +154,19 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

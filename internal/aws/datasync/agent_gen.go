@@ -34,10 +34,10 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Activation key of the Agent.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 29),
 			},
-			Required: true,
 			// ActivationKey is a force-new attribute.
 			// ActivationKey is a write-only attribute.
 		},
@@ -52,10 +52,10 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The DataSync Agent ARN.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
 			},
-			Computed: true,
 		},
 		"agent_name": {
 			// Property: AgentName
@@ -69,10 +69,10 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name configured for the agent. Text reference used to identify the agent in the console.",
 			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			Optional: true,
 		},
 		"endpoint_type": {
 			// Property: EndpointType
@@ -170,19 +170,19 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

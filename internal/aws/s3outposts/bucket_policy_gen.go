@@ -35,10 +35,10 @@ func bucketPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
 			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			Required: true,
 			// Bucket is a force-new attribute.
 		},
 		"policy_document": {

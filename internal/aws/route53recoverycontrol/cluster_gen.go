@@ -34,10 +34,10 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the cluster.",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
-			Computed: true,
 		},
 		"cluster_endpoints": {
 			// Property: ClusterEndpoints
@@ -68,19 +68,19 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"endpoint": {
 						// Property: Endpoint
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Optional: true,
 					},
 					"region": {
 						// Property: Region
-						Type: types.StringType,
+						Type:     types.StringType,
+						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 32),
 						},
-						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -98,11 +98,11 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of a Cluster. You can use any non-white space character in the name",
 			Type:        types.StringType,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			Optional: true,
-			Computed: true,
 			// Name is a force-new attribute.
 		},
 		"status": {

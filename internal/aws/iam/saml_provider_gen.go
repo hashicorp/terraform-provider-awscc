@@ -34,10 +34,10 @@ func sAMLProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Amazon Resource Name (ARN) of the SAML provider",
 			Type:        types.StringType,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1600),
 			},
-			Computed: true,
 		},
 		"name": {
 			// Property: Name
@@ -48,12 +48,12 @@ func sAMLProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			Optional: true,
-			Computed: true,
 			// Name is a force-new attribute.
 		},
 		"saml_metadata_document": {
@@ -64,11 +64,11 @@ func sAMLProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1000,
 			//   "type": "string"
 			// }
-			Type: types.StringType,
+			Type:     types.StringType,
+			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1000, 10000000),
 			},
-			Required: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -106,19 +106,19 @@ func sAMLProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
-						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
 						},
-						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
