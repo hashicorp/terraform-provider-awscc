@@ -43,8 +43,10 @@ func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A description of the CMK. Use a description that helps you to distinguish this CMK from others in the account, such as its intended use.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 8192)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 8192),
+			},
+			Optional: true,
 		},
 		"enabled": {
 			// Property: Enabled
@@ -82,6 +84,8 @@ func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
+			//   "maximum": 30,
+			//   "minimum": 7,
 			//   "type": "integer"
 			// }
 			Description: "Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
@@ -100,8 +104,10 @@ func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Identifies the primary CMK to create a replica of. Specify the Amazon Resource Name (ARN) of the CMK. You cannot specify an alias or key ID. For help finding the ARN, see Finding the Key ID and ARN in the AWS Key Management Service Developer Guide.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
+			Required: true,
 			// PrimaryKeyArn is a force-new attribute.
 		},
 		"tags": {
@@ -143,15 +149,19 @@ func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
+						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},

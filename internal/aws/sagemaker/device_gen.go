@@ -63,22 +63,28 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "Description of the device",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 40)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 40),
+						},
+						Optional: true,
 					},
 					"device_name": {
 						// Property: DeviceName
 						Description: "The name of the device",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 63),
+						},
+						Required: true,
 					},
 					"iot_thing_name": {
 						// Property: IotThingName
 						Description: "AWS Internet of Things (IoT) object name.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 128),
+						},
+						Optional: true,
 					},
 				},
 			),
@@ -98,8 +104,10 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the edge device fleet",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
+			Required: true,
 			// DeviceFleetName is a force-new attribute.
 		},
 		"tags": {
@@ -140,15 +148,19 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

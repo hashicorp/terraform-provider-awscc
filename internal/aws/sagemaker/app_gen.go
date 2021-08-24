@@ -35,8 +35,10 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the app.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
+			Computed: true,
 		},
 		"app_name": {
 			// Property: AppName
@@ -50,8 +52,10 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the app.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
+			Required: true,
 			// AppName is a force-new attribute.
 		},
 		"app_type": {
@@ -81,8 +85,10 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The domain ID.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
+			Required: true,
 			// DomainId is a force-new attribute.
 		},
 		"resource_spec": {
@@ -158,15 +164,19 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: SageMakerImageArn
 						Description: "The ARN of the SageMaker image that the image version belongs to.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Optional: true,
 					},
 					"sage_maker_image_version_arn": {
 						// Property: SageMakerImageVersionArn
 						Description: "The ARN of the image version created on the instance.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Optional: true,
 					},
 				},
 			),
@@ -207,15 +217,19 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -240,8 +254,10 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The user profile name.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
+			Required: true,
 			// UserProfileName is a force-new attribute.
 		},
 	}

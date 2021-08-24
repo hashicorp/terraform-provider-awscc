@@ -32,9 +32,11 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 20)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 20),
+			},
+			Required: true,
 			// AppId is a force-new attribute.
 		},
 		"arn": {
@@ -45,9 +47,11 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
+			Computed: true,
 		},
 		"auto_sub_domain_creation_patterns": {
 			// Property: AutoSubDomainCreationPatterns
@@ -73,9 +77,11 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-			Optional:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
+			Optional: true,
 		},
 		"certificate_record": {
 			// Property: CertificateRecord
@@ -84,9 +90,11 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 1000,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
+			Computed: true,
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -96,9 +104,11 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 255),
+			},
+			Required: true,
 			// DomainName is a force-new attribute.
 		},
 		"domain_status": {
@@ -126,9 +136,11 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 1000,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
+			Computed: true,
 		},
 		"sub_domain_settings": {
 			// Property: SubDomainSettings
@@ -163,15 +175,19 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"branch_name": {
 						// Property: BranchName
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
+						Required: true,
 					},
 					"prefix": {
 						// Property: Prefix
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

@@ -30,9 +30,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 10000,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
+			Computed: true,
 		},
 		"associate_public_ip_address": {
 			// Property: AssociatePublicIpAddress
@@ -53,10 +55,12 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 79)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 79),
+			},
+			Optional: true,
+			Computed: true,
 			// BackupId is a force-new attribute.
 		},
 		"backup_retention_count": {
@@ -77,10 +81,12 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2097152)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2097152),
+			},
+			Optional: true,
+			Computed: true,
 			// CustomCertificate is a force-new attribute.
 		},
 		"custom_domain": {
@@ -91,10 +97,12 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 253)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 253),
+			},
+			Optional: true,
+			Computed: true,
 			// CustomDomain is a force-new attribute.
 		},
 		"custom_private_key": {
@@ -105,10 +113,12 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 4096),
+			},
+			Optional: true,
+			Computed: true,
 			// CustomPrivateKey is a force-new attribute.
 			// CustomPrivateKey is a write-only attribute.
 		},
@@ -128,9 +138,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 10000,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
+			Computed: true,
 		},
 		"engine": {
 			// Property: Engine
@@ -139,10 +151,12 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 10000,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
+			Optional: true,
+			Computed: true,
 			// Engine is a force-new attribute.
 			// Engine is a write-only attribute.
 		},
@@ -173,15 +187,19 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 10000),
+						},
+						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 10000),
+						},
+						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -196,10 +214,12 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 10000,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
+			Optional: true,
+			Computed: true,
 			// EngineModel is a force-new attribute.
 		},
 		"engine_version": {
@@ -209,10 +229,12 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 10000,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
+			Optional: true,
+			Computed: true,
 			// EngineVersion is a force-new attribute.
 		},
 		"id": {
@@ -222,9 +244,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 10000,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
+			Computed: true,
 		},
 		"instance_profile_arn": {
 			// Property: InstanceProfileArn
@@ -234,9 +258,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
+			Required: true,
 			// InstanceProfileArn is a force-new attribute.
 		},
 		"instance_type": {
@@ -246,9 +272,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 10000,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
+			Required: true,
 			// InstanceType is a force-new attribute.
 		},
 		"key_pair": {
@@ -259,10 +287,12 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
+			Optional: true,
+			Computed: true,
 			// KeyPair is a force-new attribute.
 		},
 		"preferred_backup_window": {
@@ -273,9 +303,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-			Optional:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
+			Optional: true,
 		},
 		"preferred_maintenance_window": {
 			// Property: PreferredMaintenanceWindow
@@ -285,9 +317,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-			Optional:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
+			Optional: true,
 		},
 		"security_group_ids": {
 			// Property: SecurityGroupIds
@@ -314,10 +348,12 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 40)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 40),
+			},
+			Optional: true,
+			Computed: true,
 			// ServerName is a force-new attribute.
 		},
 		"service_role_arn": {
@@ -328,9 +364,11 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10000)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
+			Required: true,
 			// ServiceRoleArn is a force-new attribute.
 		},
 		"subnet_ids": {
@@ -382,15 +420,19 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

@@ -30,9 +30,11 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 1000,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
+			Computed: true,
 		},
 		"description": {
 			// Property: Description
@@ -45,9 +47,11 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Description of the FAQ",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1000)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1000),
+			},
+			Optional: true,
+			Computed: true,
 			// Description is a force-new attribute.
 		},
 		"file_format": {
@@ -79,8 +83,10 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Unique ID of the FAQ",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
+			Computed: true,
 		},
 		"index_id": {
 			// Property: IndexId
@@ -93,8 +99,10 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Unique ID of Index",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(36, 36)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(36, 36),
+			},
+			Required: true,
 			// IndexId is a force-new attribute.
 		},
 		"name": {
@@ -105,9 +113,11 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
+			Required: true,
 			// Name is a force-new attribute.
 		},
 		"role_arn": {
@@ -119,9 +129,11 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1284)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1284),
+			},
+			Required: true,
 			// RoleArn is a force-new attribute.
 		},
 		"s3_path": {
@@ -152,15 +164,19 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"bucket": {
 						// Property: Bucket
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(3, 63),
+						},
+						Required: true,
 					},
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 1024),
+						},
+						Required: true,
 					},
 				},
 			),
@@ -205,15 +221,19 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "A string used to identify this tag",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "A string containing the value for the tag",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

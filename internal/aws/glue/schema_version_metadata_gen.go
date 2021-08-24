@@ -34,8 +34,10 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "Metadata key",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
+			Required: true,
 			// Key is a force-new attribute.
 		},
 		"schema_version_id": {
@@ -62,8 +64,10 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "Metadata value",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
+			Required: true,
 			// Value is a force-new attribute.
 		},
 	}

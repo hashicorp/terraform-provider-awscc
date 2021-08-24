@@ -34,8 +34,10 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "Amazon Resource Name (ARN) of the server certificate",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1600)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1600),
+			},
+			Computed: true,
 		},
 		"certificate_body": {
 			// Property: CertificateBody
@@ -46,10 +48,12 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 16384)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 16384),
+			},
+			Optional: true,
+			Computed: true,
 			// CertificateBody is a force-new attribute.
 		},
 		"certificate_chain": {
@@ -61,10 +65,12 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2097152)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2097152),
+			},
+			Optional: true,
+			Computed: true,
 			// CertificateChain is a force-new attribute.
 		},
 		"path": {
@@ -76,9 +82,11 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
-			Optional:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 512),
+			},
+			Optional: true,
 		},
 		"private_key": {
 			// Property: PrivateKey
@@ -89,10 +97,12 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 16384)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 16384),
+			},
+			Optional: true,
+			Computed: true,
 			// PrivateKey is a force-new attribute.
 		},
 		"server_certificate_name": {
@@ -104,10 +114,12 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
+			Optional: true,
+			Computed: true,
 			// ServerCertificateName is a force-new attribute.
 		},
 		"tags": {
@@ -146,15 +158,19 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

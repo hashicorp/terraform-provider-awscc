@@ -31,12 +31,15 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "string"
 			//     },
 			//     "DefaultTTL": {
+			//       "minimum": 0,
 			//       "type": "number"
 			//     },
 			//     "MaxTTL": {
+			//       "minimum": 0,
 			//       "type": "number"
 			//     },
 			//     "MinTTL": {
+			//       "minimum": 0,
 			//       "type": "number"
 			//     },
 			//     "Name": {

@@ -45,8 +45,10 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The workgroup description.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
+			Optional: true,
 		},
 		"name": {
 			// Property: Name
@@ -60,8 +62,10 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The workGroup name.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
+			Required: true,
 			// Name is a force-new attribute.
 		},
 		"recursive_delete_option": {
@@ -119,15 +123,19 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -142,6 +150,7 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "BytesScannedCutoffPerQuery": {
 			//       "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 			//       "format": "int64",
+			//       "minimum": 10000000,
 			//       "type": "integer"
 			//     },
 			//     "EnforceWorkGroupConfiguration": {
@@ -301,6 +310,7 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "BytesScannedCutoffPerQuery": {
 			//       "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 			//       "format": "int64",
+			//       "minimum": 10000000,
 			//       "type": "integer"
 			//     },
 			//     "EnforceWorkGroupConfiguration": {

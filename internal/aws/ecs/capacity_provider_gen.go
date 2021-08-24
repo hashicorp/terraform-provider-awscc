@@ -157,15 +157,19 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenAtLeast(1),
+						},
+						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenAtLeast(1),
+						},
+						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

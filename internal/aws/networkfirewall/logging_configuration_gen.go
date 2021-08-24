@@ -35,8 +35,10 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Description: "A resource ARN.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
+			Required: true,
 			// FirewallArn is a force-new attribute.
 		},
 		"firewall_name": {
@@ -48,10 +50,12 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
+			Optional: true,
+			Computed: true,
 			// FirewallName is a force-new attribute.
 		},
 		"logging_configuration": {

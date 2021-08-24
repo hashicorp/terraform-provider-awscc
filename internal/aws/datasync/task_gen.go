@@ -34,8 +34,10 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 562)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 562),
+			},
+			Optional: true,
 		},
 		"destination_location_arn": {
 			// Property: DestinationLocationArn
@@ -48,8 +50,10 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of an AWS storage resource's location.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
+			Required: true,
 			// DestinationLocationArn is a force-new attribute.
 		},
 		"destination_network_interface_arns": {
@@ -131,15 +135,19 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: FilterType
 						Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 128),
+						},
+						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 409600)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 409600),
+						},
+						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -161,8 +169,10 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of a task. This value is a text reference that is used to identify the task in the console.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
+			Optional: true,
 		},
 		"options": {
 			// Property: Options
@@ -182,6 +192,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "BytesPerSecond": {
 			//       "description": "A value that limits the bandwidth used by AWS DataSync.",
 			//       "format": "int64",
+			//       "minimum": -1,
 			//       "type": "integer"
 			//     },
 			//     "Gid": {
@@ -407,8 +418,10 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ScheduleExpression
 						Description: "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
+						Required: true,
 					},
 				},
 			),
@@ -425,8 +438,10 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the source location for the task.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
+			Required: true,
 			// SourceLocationArn is a force-new attribute.
 		},
 		"source_network_interface_arns": {
@@ -509,15 +524,19 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{
@@ -537,8 +556,10 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the task.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
+			Computed: true,
 		},
 	}
 

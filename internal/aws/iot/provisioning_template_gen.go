@@ -30,9 +30,11 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "maxLength": 500,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 500)},
-			Optional:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 500),
+			},
+			Optional: true,
 		},
 		"enabled": {
 			// Property: Enabled
@@ -148,10 +150,12 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 36)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 36),
+			},
+			Optional: true,
+			Computed: true,
 			// TemplateName is a force-new attribute.
 		},
 	}

@@ -122,15 +122,19 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: DocumentName
 									Description: "The document name to use when starting the SSM automation document.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 128),
+									},
+									Required: true,
 								},
 								"document_version": {
 									// Property: DocumentVersion
 									Description: "The version of the document to use when starting the SSM automation document.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 128),
+									},
+									Optional: true,
 								},
 								"parameters": {
 									// Property: Parameters
@@ -139,9 +143,11 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 50)},
-												Required:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 50),
+												},
+												Required: true,
 											},
 											"values": {
 												// Property: Values
@@ -163,8 +169,10 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: RoleArn
 									Description: "The role ARN to use when starting the SSM automation document.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1000),
+									},
+									Required: true,
 								},
 								"target_account": {
 									// Property: TargetAccount
@@ -181,8 +189,10 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					MaxItems: 1,
 				},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
 		},
 		"arn": {
 			// Property: Arn
@@ -195,8 +205,10 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the response plan.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
+			Computed: true,
 		},
 		"chat_channel": {
 			// Property: ChatChannel
@@ -245,8 +257,10 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The display name of the response plan.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 200)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 200),
+			},
+			Optional: true,
 		},
 		"engagements": {
 			// Property: Engagements
@@ -284,6 +298,8 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "Impact": {
 			//       "description": "The impact value.",
+			//       "maximum": 5,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "NotificationTargets": {
@@ -329,8 +345,10 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: DedupeString
 						Description: "The deduplication string.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1000)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 1000),
+						},
+						Optional: true,
 					},
 					"impact": {
 						// Property: Impact
@@ -347,8 +365,10 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SnsTopicArn
 									Description: "The ARN of the Chatbot SNS topic.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1000),
+									},
+									Optional: true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -361,15 +381,19 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Summary
 						Description: "The summary string.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4000)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 4000),
+						},
+						Optional: true,
 					},
 					"title": {
 						// Property: Title
 						Description: "The title string.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 200)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 200),
+						},
+						Required: true,
 					},
 				},
 			),
@@ -387,8 +411,10 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the response plan.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 200)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 200),
+			},
+			Required: true,
 			// Name is a force-new attribute.
 		},
 		"tags": {
@@ -429,15 +455,19 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

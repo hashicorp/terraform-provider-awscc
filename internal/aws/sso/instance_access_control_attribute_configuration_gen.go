@@ -69,9 +69,11 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
@@ -157,9 +159,11 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-									Required:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 128),
+									},
+									Required: true,
 								},
 								"value": {
 									// Property: Value
@@ -200,8 +204,10 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			// }
 			Description: "The ARN of the AWS SSO instance under which the operation will be executed.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(10, 1224)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(10, 1224),
+			},
+			Required: true,
 			// InstanceArn is a force-new attribute.
 		},
 	}

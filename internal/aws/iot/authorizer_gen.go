@@ -50,10 +50,12 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
+			Optional: true,
+			Computed: true,
 			// AuthorizerName is a force-new attribute.
 		},
 		"signing_disabled": {

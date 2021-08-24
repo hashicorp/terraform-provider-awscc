@@ -34,8 +34,10 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 40)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 40),
+			},
+			Computed: true,
 		},
 		"error": {
 			// Property: Error
@@ -75,8 +77,10 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			// }
 			Description: "Id",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Computed: true,
 		},
 		"resolver_query_log_config_id": {
 			// Property: ResolverQueryLogConfigId
@@ -89,9 +93,11 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			// }
 			Description: "ResolverQueryLogConfigId",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Optional: true,
+			Computed: true,
 			// ResolverQueryLogConfigId is a force-new attribute.
 		},
 		"resource_id": {
@@ -105,9 +111,11 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			// }
 			Description: "ResourceId",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Optional: true,
+			Computed: true,
 			// ResourceId is a force-new attribute.
 		},
 		"status": {

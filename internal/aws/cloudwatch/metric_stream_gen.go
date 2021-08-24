@@ -34,8 +34,10 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Amazon Resource Name of the metric stream.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
+			Computed: true,
 		},
 		"creation_date": {
 			// Property: CreationDate
@@ -81,16 +83,20 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Namespace
 						Description: "Only metrics with Namespace matching this value will be streamed.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 1000,
 				},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
 		},
 		"firehose_arn": {
 			// Property: FirehoseArn
@@ -103,8 +109,10 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the Kinesis Firehose where to stream the data.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
+			Required: true,
 		},
 		"include_filters": {
 			// Property: IncludeFilters
@@ -138,16 +146,20 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Namespace
 						Description: "Only metrics with Namespace matching this value will be streamed.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 1000,
 				},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
 		},
 		"last_update_date": {
 			// Property: LastUpdateDate
@@ -172,9 +184,11 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of the metric stream.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Optional: true,
+			Computed: true,
 			// Name is a force-new attribute.
 		},
 		"output_format": {
@@ -188,8 +202,10 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The output format of the data streamed to the Kinesis Firehose.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Required: true,
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -202,8 +218,10 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the role that provides access to the Kinesis Firehose.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
+			Required: true,
 		},
 		"state": {
 			// Property: State
@@ -216,8 +234,10 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Displays the state of the Metric Stream.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Computed: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -257,23 +277,29 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "A unique identifier for the tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "An optional string, which you can use to describe or define the tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
 			// Tags is a write-only attribute.
 		},
 	}

@@ -35,8 +35,10 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Alias of the contact. String value with 20 to 256 characters. Only alphabetical, numeric characters, dash, or underscore allowed.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Required: true,
 			// Alias is a force-new attribute.
 		},
 		"arn": {
@@ -62,8 +64,10 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of the contact. String value with 3 to 256 characters. Only alphabetical, space, numeric characters, dash, or underscore allowed.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Required: true,
 		},
 		"plan": {
 			// Property: Plan

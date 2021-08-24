@@ -78,8 +78,10 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Name
 						Description: "The name of the document attachment file.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Optional: true,
 					},
 					"values": {
 						// Property: Values
@@ -205,15 +207,19 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Name
 						Description: "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 200)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 200),
+						},
+						Optional: true,
 					},
 					"version": {
 						// Property: Version
 						Description: "The document version required by the current document.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 8)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 8),
+						},
+						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -259,15 +265,19 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The name of the tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Optional: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value of the tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

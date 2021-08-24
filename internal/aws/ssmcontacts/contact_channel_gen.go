@@ -57,8 +57,10 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The device name. String of 6 to 50 alphabetical, numeric, dash, and underscore characters.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Optional: true,
 		},
 		"channel_type": {
 			// Property: ChannelType
@@ -90,9 +92,11 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "ARN of the contact resource",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
+			Optional: true,
+			Computed: true,
 			// ContactId is a force-new attribute.
 		},
 		"defer_activation": {

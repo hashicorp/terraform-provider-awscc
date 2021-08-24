@@ -31,9 +31,11 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1600)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1600),
+			},
+			Computed: true,
 		},
 		"create_time": {
 			// Property: CreateTime
@@ -55,10 +57,12 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
+			Optional: true,
+			Computed: true,
 			// Description is a force-new attribute.
 		},
 		"kms_key_id": {
@@ -69,10 +73,12 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
+			Optional: true,
+			Computed: true,
 			// KmsKeyId is a force-new attribute.
 		},
 		"pricing_plan": {
@@ -109,9 +115,11 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1600)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1600),
+			},
+			Computed: true,
 		},
 		"tracker_name": {
 			// Property: TrackerName
@@ -122,9 +130,11 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
+			Required: true,
 			// TrackerName is a force-new attribute.
 		},
 		"update_time": {

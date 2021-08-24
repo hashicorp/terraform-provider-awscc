@@ -35,8 +35,10 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(8, 200)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(8, 200),
+			},
+			Optional: true,
 		},
 		"agent_arns": {
 			// Property: AgentArns
@@ -72,8 +74,10 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The name of the bucket on the self-managed object storage server.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(3, 63),
+			},
+			Required: true,
 			// BucketName is a force-new attribute.
 			// BucketName is a write-only attribute.
 		},
@@ -88,8 +92,10 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The Amazon Resource Name (ARN) of the location that is created.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
+			Computed: true,
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -102,8 +108,10 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The URL of the object storage location that was described.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4356)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 4356),
+			},
+			Computed: true,
 		},
 		"secret_key": {
 			// Property: SecretKey
@@ -117,8 +125,10 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(8, 200)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(8, 200),
+			},
+			Optional: true,
 			// SecretKey is a write-only attribute.
 		},
 		"server_hostname": {
@@ -132,8 +142,10 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 255),
+			},
+			Required: true,
 			// ServerHostname is a force-new attribute.
 			// ServerHostname is a write-only attribute.
 		},
@@ -142,6 +154,8 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The port that your self-managed server accepts inbound network traffic on.",
+			//   "maximum": 65536,
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "The port that your self-managed server accepts inbound network traffic on.",
@@ -174,8 +188,10 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The subdirectory in the self-managed object storage server that is used to read data from.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 4096),
+			},
+			Optional: true,
 			// Subdirectory is a write-only attribute.
 		},
 		"tags": {
@@ -220,15 +236,19 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

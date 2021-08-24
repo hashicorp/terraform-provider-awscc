@@ -53,8 +53,10 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			// }
 			Description: "The name of the cluster",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
+			Required: true,
 			// Cluster is a force-new attribute.
 		},
 		"default_capacity_provider_strategy": {
@@ -66,6 +68,8 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Base": {
+			//         "maximum": 100000,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       },
 			//       "CapacityProvider": {
@@ -73,6 +77,8 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			//         "type": "string"
 			//       },
 			//       "Weight": {
+			//         "maximum": 1000,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       }
 			//     },

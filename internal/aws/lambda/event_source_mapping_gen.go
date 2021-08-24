@@ -28,6 +28,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The maximum number of items to retrieve in a single batch.",
+			//   "maximum": 10000,
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "The maximum number of items to retrieve in a single batch.",
@@ -81,8 +83,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									// Property: Destination
 									Description: "The Amazon Resource Name (ARN) of the destination resource.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(12, 1024)},
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(12, 1024),
+									},
+									Optional: true,
 								},
 							},
 						),
@@ -115,9 +119,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The Amazon Resource Name (ARN) of the event source.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(12, 1024)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(12, 1024),
+			},
+			Optional: true,
+			Computed: true,
 			// EventSourceArn is a force-new attribute.
 		},
 		"function_name": {
@@ -132,8 +138,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The name of the Lambda function.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 140)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 140),
+			},
+			Required: true,
 		},
 		"function_response_types": {
 			// Property: FunctionResponseTypes
@@ -170,14 +178,18 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "Event Source Mapping Identifier UUID.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(36, 36)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(36, 36),
+			},
+			Computed: true,
 		},
 		"maximum_batching_window_in_seconds": {
 			// Property: MaximumBatchingWindowInSeconds
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "(Streams) The maximum amount of time to gather records before invoking the function, in seconds.",
+			//   "maximum": 300,
+			//   "minimum": 0,
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The maximum amount of time to gather records before invoking the function, in seconds.",
@@ -189,6 +201,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "(Streams) The maximum age of a record that Lambda sends to a function for processing.",
+			//   "maximum": 604800,
+			//   "minimum": -1,
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The maximum age of a record that Lambda sends to a function for processing.",
@@ -200,6 +214,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "(Streams) The maximum number of times to retry when the function returns an error.",
+			//   "maximum": 10000,
+			//   "minimum": -1,
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The maximum number of times to retry when the function returns an error.",
@@ -211,6 +227,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "(Streams) The number of batches to process from each shard concurrently.",
+			//   "maximum": 10,
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The number of batches to process from each shard concurrently.",
@@ -349,8 +367,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Property: URI
 						Description: "The URI for the source access configuration resource.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 200)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 200),
+						},
+						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -358,8 +378,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					MaxItems: 22,
 				},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
 		},
 		"starting_position": {
 			// Property: StartingPosition
@@ -373,9 +395,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(6, 12)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(6, 12),
+			},
+			Optional: true,
+			Computed: true,
 			// StartingPosition is a force-new attribute.
 		},
 		"starting_position_timestamp": {
@@ -418,6 +442,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "(Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.",
+			//   "maximum": 900,
+			//   "minimum": 0,
 			//   "type": "integer"
 			// }
 			Description: "(Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.",

@@ -66,6 +66,7 @@ func (e *Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (
 // and emits the generated code to the emitter's Writer. Code features are returned.
 func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required bool) (Features, error) {
 	var features Features
+	var validators []string
 
 	e.printf("{\n")
 	e.printf("// Property: %s\n", name)
@@ -95,16 +96,14 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 		e.printf("Type:types.StringType,\n")
 
 		if property.MinLength != nil && property.MaxLength == nil {
-			features |= UsesValidation
-			e.printf("Validators:[]tfsdk.AttributeValidator{validate.StringLenAtLeast(%d)},\n", *property.MinLength)
+			validators = append(validators, fmt.Sprintf("validate.StringLenAtLeast(%d)", *property.MinLength))
 		}
 		if property.MaxLength != nil {
-			features |= UsesValidation
 			minLength := 0
 			if property.MinLength != nil {
 				minLength = *property.MinLength
 			}
-			e.printf("Validators:[]tfsdk.AttributeValidator{validate.StringLenBetween(%d,%d)},\n", minLength, *property.MaxLength)
+			validators = append(validators, fmt.Sprintf("validate.StringLenBetween(%d,%d)", minLength, *property.MaxLength))
 		}
 
 	//
@@ -224,8 +223,7 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 				e.printf("),\n")
 
 				if arrayType == aggregateOrderedSet {
-					features |= UsesValidation
-					e.printf("Validators:[]tfsdk.AttributeValidator{validate.UniqueItems()},\n")
+					validators = append(validators, "validate.UniqueItems()")
 				}
 
 			default:
@@ -235,26 +233,19 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 			if elementType != "" {
 				e.printf("Type:types.ListType{ElemType:%s},\n", elementType)
 
-				if arrayType == aggregateOrderedSet || (property.MinItems != nil || property.MaxItems != nil) {
-					features |= UsesValidation
-					e.printf("Validators:[]tfsdk.AttributeValidator{\n")
-
-					if property.MinItems != nil && property.MaxItems == nil {
-						e.printf("validate.ArrayLenAtLeast(%d),\n", *property.MinItems)
+				if property.MinItems != nil && property.MaxItems == nil {
+					validators = append(validators, fmt.Sprintf("validate.ArrayLenAtLeast(%d)", *property.MinItems))
+				}
+				if property.MaxItems != nil {
+					minItems := 0
+					if property.MinItems != nil {
+						minItems = *property.MinItems
 					}
-					if property.MaxItems != nil {
-						minItems := 0
-						if property.MinItems != nil {
-							minItems = *property.MinItems
-						}
-						e.printf("validate.ArrayLenBetween(%d,%d),\n", minItems, *property.MaxItems)
-					}
+					validators = append(validators, fmt.Sprintf("validate.ArrayLenBetween(%d,%d)", minItems, *property.MaxItems))
+				}
 
-					if arrayType == aggregateOrderedSet {
-						e.printf("validate.UniqueItems(),\n")
-					}
-
-					e.printf("},\n")
+				if arrayType == aggregateOrderedSet {
+					validators = append(validators, "validate.UniqueItems()")
 				}
 			}
 		}
@@ -408,6 +399,15 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 
 	default:
 		return 0, unsupportedTypeError(path, propertyType)
+	}
+
+	if len(validators) > 0 {
+		features |= UsesValidation
+		e.printf("Validators:[]tfsdk.AttributeValidator{\n")
+		for _, validator := range validators {
+			e.printf("%s,\n", validator)
+		}
+		e.printf("},\n")
 	}
 
 	createOnly := e.CfResource.CreateOnlyProperties.ContainsPath(path)

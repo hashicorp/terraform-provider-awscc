@@ -35,8 +35,10 @@ func resourcePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The policy document",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 5120)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 5120),
+			},
+			Required: true,
 		},
 		"policy_name": {
 			// Property: PolicyName
@@ -50,8 +52,10 @@ func resourcePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "A name for resource policy",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Required: true,
 			// PolicyName is a force-new attribute.
 		},
 	}

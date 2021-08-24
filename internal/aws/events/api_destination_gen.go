@@ -52,9 +52,11 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "maxLength": 512,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
-			Optional:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 512),
+			},
+			Optional: true,
 		},
 		"http_method": {
 			// Property: HttpMethod
@@ -89,6 +91,7 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// Property: InvocationRateLimitPerSecond
 			// CloudFormation resource type schema:
 			// {
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Type:     types.NumberType,
@@ -105,9 +108,11 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Name of the apiDestination.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Optional: true,
+			Computed: true,
 			// Name is a force-new attribute.
 		},
 	}

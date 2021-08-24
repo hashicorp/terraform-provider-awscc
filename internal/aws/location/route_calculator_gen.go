@@ -31,9 +31,11 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1600)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1600),
+			},
+			Computed: true,
 		},
 		"calculator_arn": {
 			// Property: CalculatorArn
@@ -43,9 +45,11 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1600)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1600),
+			},
+			Computed: true,
 		},
 		"calculator_name": {
 			// Property: CalculatorName
@@ -56,9 +60,11 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
+			Required: true,
 			// CalculatorName is a force-new attribute.
 		},
 		"create_time": {
@@ -91,10 +97,12 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
+			Optional: true,
+			Computed: true,
 			// Description is a force-new attribute.
 		},
 		"pricing_plan": {

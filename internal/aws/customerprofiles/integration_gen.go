@@ -46,8 +46,10 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The unique name of the domain.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Required: true,
 			// DomainName is a force-new attribute.
 		},
 		"flow_definition": {
@@ -425,6 +427,8 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "type": "string"
 			//                 },
 			//                 "ScheduleOffset": {
+			//                   "maximum": 36000,
+			//                   "minimum": 0,
 			//                   "type": "integer"
 			//                 },
 			//                 "ScheduleStartTime": {
@@ -472,21 +476,27 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"description": {
 						// Property: Description
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 2048),
+						},
+						Optional: true,
 					},
 					"flow_name": {
 						// Property: FlowName
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
+						Required: true,
 					},
 					"kms_arn": {
 						// Property: KmsArn
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(20, 2048),
+						},
+						Required: true,
 					},
 					"source_flow_config": {
 						// Property: SourceFlowConfig
@@ -494,9 +504,11 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"connector_profile_name": {
 									// Property: ConnectorProfileName
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+									},
+									Optional: true,
 								},
 								"connector_type": {
 									// Property: ConnectorType
@@ -509,9 +521,11 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"datetime_type_field_name": {
 												// Property: DatetimeTypeFieldName
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-												Optional:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
+												Optional: true,
 											},
 										},
 									),
@@ -527,9 +541,11 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"object": {
 															// Property: Object
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
+															Required: true,
 														},
 													},
 												),
@@ -541,15 +557,19 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"bucket_name": {
 															// Property: BucketName
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(3, 63),
+															},
+															Required: true,
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
-															Optional:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
+															Optional: true,
 														},
 													},
 												),
@@ -571,9 +591,11 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"object": {
 															// Property: Object
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
+															Required: true,
 														},
 													},
 												),
@@ -585,9 +607,11 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"object": {
 															// Property: Object
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
+															Required: true,
 														},
 													},
 												),
@@ -599,9 +623,11 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"object": {
 															// Property: Object
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
+															Required: true,
 														},
 													},
 												),
@@ -654,9 +680,11 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"destination_field": {
 									// Property: DestinationField
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+									},
+									Optional: true,
 								},
 								"source_fields": {
 									// Property: SourceFields
@@ -674,9 +702,11 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"property": {
 												// Property: Property
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
-												Required:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 2048),
+												},
+												Required: true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -722,9 +752,11 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"schedule_expression": {
 															// Property: ScheduleExpression
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 256),
+															},
+															Required: true,
 														},
 														"schedule_offset": {
 															// Property: ScheduleOffset
@@ -738,9 +770,11 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"timezone": {
 															// Property: Timezone
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-															Optional:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 256),
+															},
+															Optional: true,
 														},
 													},
 												),
@@ -787,8 +821,10 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the ObjectType defined for the 3rd party data in Profile Service",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Required: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -825,15 +861,19 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -854,9 +894,11 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The URI of the S3 bucket or any other type of data source.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Optional: true,
+			Computed: true,
 			// Uri is a force-new attribute.
 		},
 	}

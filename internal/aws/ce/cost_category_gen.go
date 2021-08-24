@@ -46,8 +46,10 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The default value for the cost category",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 50)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 50),
+			},
+			Optional: true,
 		},
 		"effective_start": {
 			// Property: EffectiveStart
@@ -61,8 +63,10 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "ISO 8601 date time with offset format",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 25)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 25),
+			},
+			Computed: true,
 		},
 		"name": {
 			// Property: Name
@@ -72,9 +76,11 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 50)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 50),
+			},
+			Required: true,
 			// Name is a force-new attribute.
 		},
 		"rule_version": {

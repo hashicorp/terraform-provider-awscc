@@ -116,21 +116,27 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"model": {
 									// Property: Model
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4096)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 4096),
+									},
+									Optional: true,
 								},
 								"package_version": {
 									// Property: PackageVersion
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 32)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 32),
+									},
+									Optional: true,
 								},
 								"station": {
 									// Property: Station
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4096)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 4096),
+									},
+									Optional: true,
 								},
 							},
 						),
@@ -142,21 +148,27 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"model": {
 									// Property: Model
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4096)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 4096),
+									},
+									Optional: true,
 								},
 								"package_version": {
 									// Property: PackageVersion
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 32)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 32),
+									},
+									Optional: true,
 								},
 								"station": {
 									// Property: Station
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4096)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 4096),
+									},
+									Optional: true,
 								},
 							},
 						),
@@ -177,8 +189,10 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The name of the new resource.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
+			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -211,15 +225,19 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 127)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
+						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
+						Optional: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{
@@ -330,21 +348,27 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"model": {
 												// Property: Model
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4096)},
-												Optional:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 4096),
+												},
+												Optional: true,
 											},
 											"package_version": {
 												// Property: PackageVersion
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 32)},
-												Optional:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 32),
+												},
+												Optional: true,
 											},
 											"station": {
 												// Property: Station
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4096)},
-												Optional:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 4096),
+												},
+												Optional: true,
 											},
 										},
 									),
@@ -357,9 +381,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"update_signature": {
 									// Property: UpdateSignature
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4096)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 4096),
+									},
+									Optional: true,
 								},
 								"update_version": {
 									// Property: UpdateVersion
@@ -367,21 +393,27 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"model": {
 												// Property: Model
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4096)},
-												Optional:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 4096),
+												},
+												Optional: true,
 											},
 											"package_version": {
 												// Property: PackageVersion
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 32)},
-												Optional:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 32),
+												},
+												Optional: true,
 											},
 											"station": {
 												// Property: Station
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4096)},
-												Optional:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 4096),
+												},
+												Optional: true,
 											},
 										},
 									),
@@ -393,15 +425,19 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"update_data_role": {
 						// Property: UpdateDataRole
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 2048),
+						},
+						Optional: true,
 					},
 					"update_data_source": {
 						// Property: UpdateDataSource
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4096)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 4096),
+						},
+						Optional: true,
 					},
 				},
 			),

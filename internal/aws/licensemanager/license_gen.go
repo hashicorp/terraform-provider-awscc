@@ -186,8 +186,10 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Required:   true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Required: true,
 		},
 		"home_region": {
 			// Property: HomeRegion
@@ -241,9 +243,11 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 2048,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2048),
+			},
+			Computed: true,
 		},
 		"license_metadata": {
 			// Property: LicenseMetadata
@@ -283,8 +287,10 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
 		},
 		"license_name": {
 			// Property: LicenseName
@@ -319,8 +325,10 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "ProductSKU of the license.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
+			Optional: true,
 		},
 		"status": {
 			// Property: Status

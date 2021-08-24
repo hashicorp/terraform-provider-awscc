@@ -39,10 +39,14 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//     },
 			//     "MaxConnectionsPercent": {
 			//       "description": "The maximum size of the connection pool for each target in a target group.",
+			//       "maximum": 100,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "MaxIdleConnectionsPercent": {
 			//       "description": "Controls how actively the proxy closes idle database connections in the connection pool.",
+			//       "maximum": 100,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "SessionPinningFilters": {
@@ -129,8 +133,10 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The identifier for the proxy.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 64),
+			},
+			Required: true,
 			// DBProxyName is a force-new attribute.
 		},
 		"target_group_arn": {

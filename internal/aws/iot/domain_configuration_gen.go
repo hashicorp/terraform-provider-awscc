@@ -59,9 +59,11 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 					},
 					"default_authorizer_name": {
 						// Property: DefaultAuthorizerName
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Optional: true,
 					},
 				},
 			),
@@ -76,10 +78,12 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
+			Optional: true,
+			Computed: true,
 			// DomainConfigurationName is a force-new attribute.
 		},
 		"domain_configuration_status": {
@@ -103,10 +107,12 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 253)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 253),
+			},
+			Optional: true,
+			Computed: true,
 			// DomainName is a force-new attribute.
 		},
 		"domain_type": {
@@ -178,9 +184,11 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				map[string]tfsdk.Attribute{
 					"server_certificate_arn": {
 						// Property: ServerCertificateArn
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 2048),
+						},
+						Optional: true,
 					},
 					"server_certificate_status": {
 						// Property: ServerCertificateStatus

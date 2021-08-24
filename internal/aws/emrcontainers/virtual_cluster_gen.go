@@ -87,8 +87,10 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Id
 						Description: "The ID of the container cluster",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 100),
+						},
+						Required: true,
 					},
 					"info": {
 						// Property: Info
@@ -100,9 +102,11 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"namespace": {
 												// Property: Namespace
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
-												Required:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 63),
+												},
+												Required: true,
 											},
 										},
 									),
@@ -134,8 +138,10 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Id of the virtual cluster.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Computed: true,
 		},
 		"name": {
 			// Property: Name
@@ -149,8 +155,10 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Name of the virtual cluster.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Required: true,
 			// Name is a force-new attribute.
 		},
 		"tags": {

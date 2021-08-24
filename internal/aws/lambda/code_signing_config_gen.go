@@ -133,8 +133,10 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "A description of the CodeSigningConfig",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
+			Optional: true,
 		},
 	}
 

@@ -132,6 +132,8 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// Property: SamplingRate
 			// CloudFormation resource type schema:
 			// {
+			//   "maximum": 100,
+			//   "minimum": 1,
 			//   "type": "number"
 			// }
 			Type:     types.NumberType,

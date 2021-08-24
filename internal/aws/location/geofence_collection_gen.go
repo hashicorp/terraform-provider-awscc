@@ -31,9 +31,11 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1600)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1600),
+			},
+			Computed: true,
 		},
 		"collection_name": {
 			// Property: CollectionName
@@ -44,9 +46,11 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
+			Required: true,
 			// CollectionName is a force-new attribute.
 		},
 		"create_time": {
@@ -69,10 +73,12 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
+			Optional: true,
+			Computed: true,
 			// Description is a force-new attribute.
 		},
 		"kms_key_id": {
@@ -83,9 +89,11 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
-			Optional:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
+			Optional: true,
 		},
 		"pricing_plan": {
 			// Property: PricingPlan

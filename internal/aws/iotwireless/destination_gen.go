@@ -44,8 +44,10 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Destination description",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2048),
+			},
+			Optional: true,
 		},
 		"expression": {
 			// Property: Expression
@@ -84,8 +86,10 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Unique name of destination",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
+			Required: true,
 			// Name is a force-new attribute.
 		},
 		"role_arn": {
@@ -99,8 +103,10 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "AWS role ARN that grants access",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
+			Required: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -133,15 +139,19 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 127)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
+						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
+						Optional: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

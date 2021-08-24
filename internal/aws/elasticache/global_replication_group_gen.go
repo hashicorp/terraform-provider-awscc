@@ -175,8 +175,10 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 					MinItems: 1,
 				},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Required:   true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Required: true,
 		},
 		"regional_configurations": {
 			// Property: RegionalConfigurations
@@ -258,14 +260,18 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
+						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Optional: true,
 			// RegionalConfigurations is a write-only attribute.
 		},
 		"status": {

@@ -47,9 +47,11 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 2048,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2048),
+			},
+			Computed: true,
 		},
 		"grant_name": {
 			// Property: GrantName
@@ -80,9 +82,11 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 2048,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
-			Optional:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2048),
+			},
+			Optional: true,
 		},
 		"principals": {
 			// Property: Principals

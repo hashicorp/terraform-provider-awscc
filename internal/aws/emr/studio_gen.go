@@ -61,8 +61,10 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(6, 10280)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(6, 10280),
+			},
+			Required: true,
 		},
 		"description": {
 			// Property: Description
@@ -75,8 +77,10 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A detailed description of the Studio.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
+			Optional: true,
 		},
 		"engine_security_group_id": {
 			// Property: EngineSecurityGroupId
@@ -90,8 +94,10 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by VpcId.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(4, 256)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(4, 256),
+			},
+			Required: true,
 			// EngineSecurityGroupId is a force-new attribute.
 		},
 		"name": {
@@ -106,8 +112,10 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A descriptive name for the Amazon EMR Studio.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
+			Required: true,
 		},
 		"service_role": {
 			// Property: ServiceRole
@@ -132,8 +140,10 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the EMR Studio.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(4, 256)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(4, 256),
+			},
+			Computed: true,
 		},
 		"subnet_ids": {
 			// Property: SubnetIds
@@ -194,15 +204,19 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
+						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},
@@ -220,8 +234,10 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The unique Studio access URL.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 4096),
+			},
+			Computed: true,
 		},
 		"user_role": {
 			// Property: UserRole

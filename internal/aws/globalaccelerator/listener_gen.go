@@ -68,10 +68,14 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "properties": {
 			//       "FromPort": {
 			//         "description": "A network port number",
+			//         "maximum": 65535,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       },
 			//       "ToPort": {
 			//         "description": "A network port number",
+			//         "maximum": 65535,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       }
 			//     },

@@ -63,6 +63,8 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "boolean"
 			//     },
 			//     "FailureThreshold": {
+			//       "maximum": 10,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "FullyQualifiedDomainName": {
@@ -70,6 +72,8 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "string"
 			//     },
 			//     "HealthThreshold": {
+			//       "maximum": 256,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "IPAddress": {
@@ -92,6 +96,8 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "boolean"
 			//     },
 			//     "Port": {
+			//       "maximum": 65535,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "Regions": {
@@ -103,6 +109,8 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "array"
 			//     },
 			//     "RequestInterval": {
+			//       "maximum": 30,
+			//       "minimum": 10,
 			//       "type": "integer"
 			//     },
 			//     "ResourcePath": {
@@ -149,8 +157,10 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Name
 									Description: "The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 256),
+									},
+									Required: true,
 								},
 								"region": {
 									// Property: Region
@@ -182,9 +192,11 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"fully_qualified_domain_name": {
 						// Property: FullyQualifiedDomainName
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
+						Optional: true,
 					},
 					"health_threshold": {
 						// Property: HealthThreshold
@@ -193,9 +205,11 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"ip_address": {
 						// Property: IPAddress
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 45)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 45),
+						},
+						Optional: true,
 					},
 					"insufficient_data_health_status": {
 						// Property: InsufficientDataHealthStatus
@@ -236,21 +250,27 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"resource_path": {
 						// Property: ResourcePath
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
+						Optional: true,
 					},
 					"routing_control_arn": {
 						// Property: RoutingControlArn
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
+						Optional: true,
 					},
 					"search_string": {
 						// Property: SearchString
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
+						Optional: true,
 					},
 					"type": {
 						// Property: Type
@@ -308,15 +328,19 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
+						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},

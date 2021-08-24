@@ -37,6 +37,8 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "DaysBeforeExpiry": {
+			//       "maximum": 45,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     }
 			//   },

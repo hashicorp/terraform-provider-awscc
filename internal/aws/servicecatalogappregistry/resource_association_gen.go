@@ -35,8 +35,10 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Description: "The name or the Id of the Application.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
+			Required: true,
 		},
 		"application_arn": {
 			// Property: ApplicationArn

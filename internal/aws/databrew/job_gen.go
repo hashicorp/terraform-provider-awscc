@@ -117,15 +117,19 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"catalog_id": {
 						// Property: CatalogId
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
+						Optional: true,
 					},
 					"database_name": {
 						// Property: DatabaseName
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
+						Required: true,
 					},
 					"database_options": {
 						// Property: DatabaseOptions
@@ -133,9 +137,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"table_name": {
 									// Property: TableName
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-									Required:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 255),
+									},
+									Required: true,
 								},
 								"temp_directory": {
 									// Property: TempDirectory
@@ -194,9 +200,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"table_name": {
 						// Property: TableName
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -269,9 +277,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"table_name": {
 									// Property: TableName
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-									Required:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 255),
+									},
+									Required: true,
 								},
 								"temp_directory": {
 									// Property: TempDirectory
@@ -324,8 +334,10 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Dataset name",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Optional: true,
 		},
 		"encryption_key_arn": {
 			// Property: EncryptionKeyArn
@@ -338,8 +350,10 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Encryption Key Arn",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
+			Optional: true,
 		},
 		"encryption_mode": {
 			// Property: EncryptionMode
@@ -446,8 +460,10 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Job name",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Required: true,
 			// Name is a force-new attribute.
 		},
 		"output_location": {
@@ -598,9 +614,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"delimiter": {
 												// Property: Delimiter
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1)},
-												Optional:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 1),
+												},
+												Optional: true,
 											},
 										},
 									),
@@ -818,15 +836,19 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"name": {
 												// Property: Name
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-												Optional:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 255),
+												},
+												Optional: true,
 											},
 											"regex": {
 												// Property: Regex
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-												Optional:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 255),
+												},
+												Optional: true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -859,9 +881,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"statistic": {
 															// Property: Statistic
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 128),
+															},
+															Required: true,
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -905,9 +929,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"statistic": {
 												// Property: Statistic
-												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-												Required:   true,
+												Type: types.StringType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 128),
+												},
+												Required: true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -926,15 +952,19 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 255),
+									},
+									Optional: true,
 								},
 								"regex": {
 									// Property: Regex
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 255),
+									},
+									Optional: true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -958,8 +988,10 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Project name",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Optional: true,
 		},
 		"recipe": {
 			// Property: Recipe
@@ -1043,15 +1075,19 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

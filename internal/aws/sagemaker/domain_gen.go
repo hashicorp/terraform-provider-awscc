@@ -157,6 +157,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               },
 			//               "ImageVersionNumber": {
 			//                 "description": "The version number of the CustomImage.",
+			//                 "minimum": 0,
 			//                 "type": "integer"
 			//               }
 			//             },
@@ -279,8 +280,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ExecutionRole
 						Description: "The user profile Amazon Resource Name (ARN).",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(20, 2048),
+						},
+						Optional: true,
 					},
 					"jupyter_server_app_settings": {
 						// Property: JupyterServerAppSettings
@@ -301,15 +304,19 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: SageMakerImageArn
 												Description: "The ARN of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
+												Optional: true,
 											},
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
 												Description: "The ARN of the image version created on the instance.",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
+												Optional: true,
 											},
 										},
 									),
@@ -333,15 +340,19 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: AppImageConfigName
 												Description: "The Name of the AppImageConfig.",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 63)},
-												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 63),
+												},
+												Required: true,
 											},
 											"image_name": {
 												// Property: ImageName
 												Description: "The name of the CustomImage. Must be unique to your account.",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 63)},
-												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 63),
+												},
+												Required: true,
 											},
 											"image_version_number": {
 												// Property: ImageVersionNumber
@@ -371,15 +382,19 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: SageMakerImageArn
 												Description: "The ARN of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
+												Optional: true,
 											},
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
 												Description: "The ARN of the image version created on the instance.",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
+												Optional: true,
 											},
 										},
 									),
@@ -413,15 +428,19 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: S3KmsKeyId
 									Description: "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 2048),
+									},
+									Optional: true,
 								},
 								"s3_output_path": {
 									// Property: S3OutputPath
 									Description: "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
+									Optional: true,
 								},
 							},
 						),
@@ -442,8 +461,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the created domain.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
+			Computed: true,
 		},
 		"domain_id": {
 			// Property: DomainId
@@ -456,8 +477,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The domain name.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 63)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 63),
+			},
+			Computed: true,
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -470,8 +493,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A name for the domain.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 63)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 63),
+			},
+			Required: true,
 			// DomainName is a force-new attribute.
 		},
 		"home_efs_file_system_id": {
@@ -484,8 +509,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the Amazon Elastic File System (EFS) managed by this Domain.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 32)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 32),
+			},
+			Computed: true,
 		},
 		"kms_key_id": {
 			// Property: KmsKeyId
@@ -498,9 +525,11 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2048),
+			},
+			Optional: true,
+			Computed: true,
 			// KmsKeyId is a force-new attribute.
 		},
 		"single_sign_on_managed_application_instance_id": {
@@ -513,8 +542,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The SSO managed application instance ID.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
+			Computed: true,
 		},
 		"subnet_ids": {
 			// Property: SubnetIds
@@ -574,15 +605,19 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -605,8 +640,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The URL to the created domain.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
+			Computed: true,
 		},
 		"vpc_id": {
 			// Property: VpcId
@@ -619,8 +656,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 32)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 32),
+			},
+			Required: true,
 			// VpcId is a force-new attribute.
 		},
 	}

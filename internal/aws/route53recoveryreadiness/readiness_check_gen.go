@@ -33,8 +33,10 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The Amazon Resource Name (ARN) of the readiness check.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
+			Computed: true,
 		},
 		"readiness_check_name": {
 			// Property: ReadinessCheckName
@@ -48,8 +50,10 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Name of the ReadinessCheck to create.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Required: true,
 			// ReadinessCheckName is a force-new attribute.
 		},
 		"resource_set_name": {
@@ -64,8 +68,10 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The name of the resource set to check.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Optional: true,
 		},
 		"tags": {
 			// Property: Tags

@@ -54,8 +54,10 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "A collection of tags associated with a resource.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
+			Computed: true,
 		},
 		"recovery_group_name": {
 			// Property: RecoveryGroupName
@@ -69,8 +71,10 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The name of the recovery group to create.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Required: true,
 			// RecoveryGroupName is a force-new attribute.
 		},
 		"tags": {

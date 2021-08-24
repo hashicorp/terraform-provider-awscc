@@ -34,8 +34,10 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The ARN of the ReplicationSet.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
+			Computed: true,
 		},
 		"deletion_protected": {
 			// Property: DeletionProtected
@@ -97,8 +99,10 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: SseKmsKeyId
 									Description: "The ARN of the ReplicationSet.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1000),
+									},
+									Required: true,
 								},
 							},
 						),
@@ -108,8 +112,10 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: RegionName
 						Description: "The AWS region name.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 20)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 20),
+						},
+						Optional: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

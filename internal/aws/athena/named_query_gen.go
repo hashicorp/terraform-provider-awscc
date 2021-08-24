@@ -34,8 +34,10 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The database to which the query belongs.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
+			Required: true,
 			// Database is a force-new attribute.
 		},
 		"description": {
@@ -49,9 +51,11 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The query description.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
+			Optional: true,
+			Computed: true,
 			// Description is a force-new attribute.
 		},
 		"name": {
@@ -65,8 +69,10 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The query name.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
+			Computed: true,
 			// Name is a force-new attribute.
 		},
 		"named_query_id": {
@@ -91,8 +97,10 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The contents of the query with all query statements.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 262144)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 262144),
+			},
+			Required: true,
 			// QueryString is a force-new attribute.
 		},
 		"work_group": {
@@ -106,9 +114,11 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the workgroup that contains the named query.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
+			Optional: true,
+			Computed: true,
 			// WorkGroup is a force-new attribute.
 		},
 	}

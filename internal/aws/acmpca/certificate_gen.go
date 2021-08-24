@@ -715,8 +715,10 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The certificate signing request (CSR) for the Certificate.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
+			Required: true,
 			// CertificateSigningRequest is a force-new attribute.
 			// CertificateSigningRequest is a write-only attribute.
 		},

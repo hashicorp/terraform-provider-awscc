@@ -100,6 +100,8 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//     },
 			//     "TimeoutMinutes": {
 			//       "description": "The maximum time in minutes that tests are permitted to run.",
+			//       "maximum": 1440,
+			//       "minimum": 60,
 			//       "type": "integer"
 			//     }
 			//   },

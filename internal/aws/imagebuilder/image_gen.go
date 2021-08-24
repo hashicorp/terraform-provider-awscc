@@ -105,6 +105,8 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "TimeoutMinutes": {
 			//       "description": "TimeoutMinutes",
+			//       "maximum": 1440,
+			//       "minimum": 60,
 			//       "type": "integer"
 			//     }
 			//   },

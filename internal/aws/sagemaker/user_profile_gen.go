@@ -34,8 +34,10 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the associated Domain.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
+			Required: true,
 			// DomainId is a force-new attribute.
 		},
 		"single_sign_on_user_identifier": {
@@ -63,9 +65,11 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The username of the associated AWS Single Sign-On User for this UserProfile. If the Domain's AuthMode is SSO, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not SSO, this field cannot be specified.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
+			Optional: true,
+			Computed: true,
 			// SingleSignOnUserValue is a force-new attribute.
 		},
 		"tags": {
@@ -103,15 +107,19 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -135,8 +143,10 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The user profile Amazon Resource Name (ARN).",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
+			Computed: true,
 		},
 		"user_profile_name": {
 			// Property: UserProfileName
@@ -149,8 +159,10 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A name for the UserProfile.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
+			Required: true,
 			// UserProfileName is a force-new attribute.
 		},
 		"user_settings": {
@@ -254,6 +266,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               },
 			//               "ImageVersionNumber": {
 			//                 "description": "The version number of the CustomImage.",
+			//                 "minimum": 0,
 			//                 "type": "integer"
 			//               }
 			//             },
@@ -376,8 +389,10 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ExecutionRole
 						Description: "The user profile Amazon Resource Name (ARN).",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(20, 2048),
+						},
+						Optional: true,
 					},
 					"jupyter_server_app_settings": {
 						// Property: JupyterServerAppSettings
@@ -398,15 +413,19 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: SageMakerImageArn
 												Description: "The ARN of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
+												Optional: true,
 											},
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
 												Description: "The ARN of the image version created on the instance.",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
+												Optional: true,
 											},
 										},
 									),
@@ -430,15 +449,19 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: AppImageConfigName
 												Description: "The Name of the AppImageConfig.",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 63)},
-												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 63),
+												},
+												Required: true,
 											},
 											"image_name": {
 												// Property: ImageName
 												Description: "The name of the CustomImage. Must be unique to your account.",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 63)},
-												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 63),
+												},
+												Required: true,
 											},
 											"image_version_number": {
 												// Property: ImageVersionNumber
@@ -468,15 +491,19 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: SageMakerImageArn
 												Description: "The ARN of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
+												Optional: true,
 											},
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
 												Description: "The ARN of the image version created on the instance.",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
+												Optional: true,
 											},
 										},
 									),
@@ -510,15 +537,19 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: S3KmsKeyId
 									Description: "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 2048),
+									},
+									Optional: true,
 								},
 								"s3_output_path": {
 									// Property: S3OutputPath
 									Description: "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
+									Optional: true,
 								},
 							},
 						),

@@ -70,9 +70,11 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Required: true,
 		},
 		"resource": {
 			// Property: Resource

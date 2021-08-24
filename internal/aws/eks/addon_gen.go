@@ -33,8 +33,10 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of Addon",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
+			Required: true,
 			// AddonName is a force-new attribute.
 		},
 		"addon_version": {
@@ -47,8 +49,10 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Version of Addon",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
+			Optional: true,
 		},
 		"arn": {
 			// Property: Arn
@@ -71,8 +75,10 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of Cluster",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
+			Required: true,
 			// ClusterName is a force-new attribute.
 		},
 		"resolve_conflicts": {
@@ -89,8 +95,10 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Resolve parameter value conflicts",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
+			Optional: true,
 			// ResolveConflicts is a write-only attribute.
 		},
 		"service_account_role_arn": {
@@ -103,8 +111,10 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "IAM role to bind to the add-on's service account",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
+			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -145,15 +155,19 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 127)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
+						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},

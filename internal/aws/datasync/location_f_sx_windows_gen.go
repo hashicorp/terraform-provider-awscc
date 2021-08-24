@@ -34,9 +34,11 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The name of the Windows domain that the FSx for Windows server belongs to.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 253)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 253),
+			},
+			Optional: true,
+			Computed: true,
 			// Domain is a force-new attribute.
 		},
 		"fsx_filesystem_arn": {
@@ -50,8 +52,10 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
+			Required: true,
 			// FsxFilesystemArn is a force-new attribute.
 			// FsxFilesystemArn is a write-only attribute.
 		},
@@ -66,8 +70,10 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
+			Computed: true,
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -80,8 +86,10 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The URL of the FSx for Windows location that was described.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4356)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 4356),
+			},
+			Computed: true,
 		},
 		"password": {
 			// Property: Password
@@ -94,8 +102,10 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 104)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 104),
+			},
+			Required: true,
 			// Password is a force-new attribute.
 			// Password is a write-only attribute.
 		},
@@ -128,9 +138,11 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "A subdirectory in the location's path.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 4096),
+			},
+			Optional: true,
+			Computed: true,
 			// Subdirectory is a force-new attribute.
 			// Subdirectory is a write-only attribute.
 		},
@@ -176,15 +188,19 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{
@@ -204,8 +220,10 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The user who has the permissions to access files and folders in the FSx for Windows file system.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 104)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 104),
+			},
+			Required: true,
 			// User is a force-new attribute.
 		},
 	}

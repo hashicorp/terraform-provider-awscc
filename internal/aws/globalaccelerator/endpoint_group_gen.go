@@ -39,6 +39,8 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//       },
 			//       "Weight": {
 			//         "description": "The weight for the endpoint.",
+			//         "maximum": 255,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       }
 			//     },
@@ -125,6 +127,8 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
+			//   "maximum": 65535,
+			//   "minimum": -1,
 			//   "type": "integer"
 			// }
 			Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
@@ -169,10 +173,14 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//     "properties": {
 			//       "EndpointPort": {
 			//         "description": "A network port number",
+			//         "maximum": 65535,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       },
 			//       "ListenerPort": {
 			//         "description": "A network port number",
+			//         "maximum": 65535,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       }
 			//     },
@@ -219,6 +227,8 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The percentage of traffic to sent to an AWS Region",
+			//   "maximum": 100,
+			//   "minimum": 0,
 			//   "type": "number"
 			// }
 			Description: "The percentage of traffic to sent to an AWS Region",

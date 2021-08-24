@@ -44,8 +44,10 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Service profile Id. Returned after successful create.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
+			Computed: true,
 		},
 		"lo_ra_wan": {
 			// Property: LoRaWAN
@@ -224,8 +226,10 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Name of service profile",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
+			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -258,15 +262,19 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Optional: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Optional: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

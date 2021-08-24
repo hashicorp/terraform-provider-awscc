@@ -52,8 +52,10 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the endpoint.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(5, 500)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(5, 500),
+			},
+			Computed: true,
 		},
 		"cidr_block": {
 			// Property: CidrBlock
@@ -66,8 +68,10 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The VPC CIDR committed by this endpoint.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 20)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 20),
+			},
+			Computed: true,
 		},
 		"creation_time": {
 			// Property: CreationTime
@@ -107,8 +111,10 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the endpoint.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(5, 500)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(5, 500),
+			},
+			Computed: true,
 		},
 		"network_interfaces": {
 			// Property: NetworkInterfaces
@@ -138,15 +144,19 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"network_interface_id": {
 						// Property: NetworkInterfaceId
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 100),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Computed:   true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+			Computed: true,
 		},
 		"outpost_id": {
 			// Property: OutpostId
@@ -173,8 +183,10 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the security group to use with the endpoint.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
+			Required: true,
 			// SecurityGroupId is a force-new attribute.
 		},
 		"status": {
@@ -203,8 +215,10 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the subnet in the selected VPC. The subnet must belong to the Outpost.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
+			Required: true,
 			// SubnetId is a force-new attribute.
 		},
 	}

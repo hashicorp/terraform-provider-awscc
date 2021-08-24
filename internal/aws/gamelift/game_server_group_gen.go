@@ -36,8 +36,10 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
+			Computed: true,
 		},
 		"auto_scaling_policy": {
 			// Property: AutoScalingPolicy
@@ -148,8 +150,10 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A generated unique ID for the game server group.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
+			Computed: true,
 		},
 		"game_server_group_name": {
 			// Property: GameServerGroupName
@@ -164,8 +168,10 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "An identifier for the new game server group.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
+			Required: true,
 		},
 		"game_server_protection_policy": {
 			// Property: GameServerProtectionPolicy
@@ -292,6 +298,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// {
 			//   "additionalProperties": false,
 			//   "description": "The maximum number of instances allowed in the EC2 Auto Scaling group.",
+			//   "minimum": 1,
 			//   "type": "number"
 			// }
 			Description: "The maximum number of instances allowed in the EC2 Auto Scaling group.",
@@ -304,6 +311,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// {
 			//   "additionalProperties": false,
 			//   "description": "The minimum number of instances allowed in the EC2 Auto Scaling group.",
+			//   "minimum": 0,
 			//   "type": "number"
 			// }
 			Description: "The minimum number of instances allowed in the EC2 Auto Scaling group.",
@@ -323,8 +331,10 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
+			Required: true,
 		},
 		"tags": {
 			// Property: Tags

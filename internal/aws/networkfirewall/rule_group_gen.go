@@ -42,9 +42,11 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
-			Optional:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 512),
+			},
+			Optional: true,
 		},
 		"rule_group": {
 			// Property: RuleGroup
@@ -337,6 +339,8 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "additionalProperties": false,
 			//                 "properties": {
 			//                   "Priority": {
+			//                     "maximum": 65535,
+			//                     "minimum": 1,
 			//                     "type": "integer"
 			//                   },
 			//                   "RuleDefinition": {
@@ -359,9 +363,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                               "additionalProperties": false,
 			//                               "properties": {
 			//                                 "FromPort": {
+			//                                   "maximum": 65535,
+			//                                   "minimum": 0,
 			//                                   "type": "integer"
 			//                                 },
 			//                                 "ToPort": {
+			//                                   "maximum": 65535,
+			//                                   "minimum": 0,
 			//                                   "type": "integer"
 			//                                 }
 			//                               },
@@ -397,6 +405,8 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                           "Protocols": {
 			//                             "insertionOrder": false,
 			//                             "items": {
+			//                               "maximum": 255,
+			//                               "minimum": 0,
 			//                               "type": "integer"
 			//                             },
 			//                             "type": "array",
@@ -408,9 +418,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                               "additionalProperties": false,
 			//                               "properties": {
 			//                                 "FromPort": {
+			//                                   "maximum": 65535,
+			//                                   "minimum": 0,
 			//                                   "type": "integer"
 			//                                 },
 			//                                 "ToPort": {
+			//                                   "maximum": 65535,
+			//                                   "minimum": 0,
 			//                                   "type": "integer"
 			//                                 }
 			//                               },
@@ -597,9 +611,11 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"rules_string": {
 									// Property: RulesString
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000000)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1000000),
+									},
+									Optional: true,
 								},
 								"stateful_rules": {
 									// Property: StatefulRules
@@ -616,15 +632,19 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"destination": {
 															// Property: Destination
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 1024),
+															},
+															Required: true,
 														},
 														"destination_port": {
 															// Property: DestinationPort
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 1024),
+															},
+															Required: true,
 														},
 														"direction": {
 															// Property: Direction
@@ -638,15 +658,19 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"source": {
 															// Property: Source
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 1024),
+															},
+															Required: true,
 														},
 														"source_port": {
 															// Property: SourcePort
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 1024),
+															},
+															Required: true,
 														},
 													},
 												),
@@ -658,9 +682,11 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"keyword": {
 															// Property: Keyword
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 128),
+															},
+															Required: true,
 														},
 														"settings": {
 															// Property: Settings
@@ -699,9 +725,11 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																						map[string]tfsdk.Attribute{
 																							"value": {
 																								// Property: Value
-																								Type:       types.StringType,
-																								Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-																								Required:   true,
+																								Type: types.StringType,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenBetween(1, 128),
+																								},
+																								Required: true,
 																							},
 																						},
 																						providertypes.SetNestedAttributesOptions{},
@@ -718,9 +746,11 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"action_name": {
 															// Property: ActionName
-															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-															Required:   true,
+															Type: types.StringType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 128),
+															},
+															Required: true,
 														},
 													},
 													providertypes.SetNestedAttributesOptions{},
@@ -774,9 +804,11 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																						map[string]tfsdk.Attribute{
 																							"address_definition": {
 																								// Property: AddressDefinition
-																								Type:       types.StringType,
-																								Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-																								Required:   true,
+																								Type: types.StringType,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenBetween(1, 255),
+																								},
+																								Required: true,
 																							},
 																						},
 																						providertypes.SetNestedAttributesOptions{},
@@ -813,9 +845,11 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																						map[string]tfsdk.Attribute{
 																							"address_definition": {
 																								// Property: AddressDefinition
-																								Type:       types.StringType,
-																								Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
-																								Required:   true,
+																								Type: types.StringType,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenBetween(1, 255),
+																								},
+																								Required: true,
 																							},
 																						},
 																						providertypes.SetNestedAttributesOptions{},
@@ -879,8 +913,10 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A resource ARN.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
+			Computed: true,
 		},
 		"rule_group_id": {
 			// Property: RuleGroupId
@@ -891,9 +927,11 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(36, 36)},
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(36, 36),
+			},
+			Computed: true,
 		},
 		"rule_group_name": {
 			// Property: RuleGroupName
@@ -904,9 +942,11 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
+			Required: true,
 			// RuleGroupName is a force-new attribute.
 		},
 		"tags": {
@@ -943,15 +983,19 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
+						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},

@@ -31,10 +31,12 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
+			Optional: true,
+			Computed: true,
 			// BucketName is a force-new attribute.
 		},
 		"bucket_prefix": {
@@ -45,10 +47,12 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 64),
+			},
+			Optional: true,
+			Computed: true,
 			// BucketPrefix is a force-new attribute.
 		},
 		"bucket_region": {
@@ -59,10 +63,12 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Optional: true,
+			Computed: true,
 			// BucketRegion is a force-new attribute.
 		},
 		"kms_key_arn": {
@@ -73,10 +79,12 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 512),
+			},
+			Optional: true,
+			Computed: true,
 			// KMSKeyArn is a force-new attribute.
 		},
 		"s3_destination": {
@@ -122,33 +130,43 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				map[string]tfsdk.Attribute{
 					"bucket_name": {
 						// Property: BucketName
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 2048),
+						},
+						Required: true,
 					},
 					"bucket_prefix": {
 						// Property: BucketPrefix
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Optional: true,
 					},
 					"bucket_region": {
 						// Property: BucketRegion
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 64),
+						},
+						Required: true,
 					},
 					"kms_key_arn": {
 						// Property: KMSKeyArn
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
-						Optional:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
+						Optional: true,
 					},
 					"sync_format": {
 						// Property: SyncFormat
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 1024),
+						},
+						Required: true,
 					},
 				},
 			),
@@ -164,10 +182,12 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
+			Optional: true,
+			Computed: true,
 			// SyncFormat is a force-new attribute.
 		},
 		"sync_name": {
@@ -178,9 +198,11 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Required:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Required: true,
 			// SyncName is a force-new attribute.
 		},
 		"sync_source": {
@@ -240,9 +262,11 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 							map[string]tfsdk.Attribute{
 								"organization_source_type": {
 									// Property: OrganizationSourceType
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-									Required:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 64),
+									},
+									Required: true,
 								},
 								"organizational_units": {
 									// Property: OrganizationalUnits
@@ -265,9 +289,11 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					},
 					"source_type": {
 						// Property: SourceType
-						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-						Required:   true,
+						Type: types.StringType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 64),
+						},
+						Required: true,
 					},
 				},
 			),
@@ -281,10 +307,12 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
-			Optional:   true,
-			Computed:   true,
+			Type: types.StringType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
+			Optional: true,
+			Computed: true,
 			// SyncType is a force-new attribute.
 		},
 	}

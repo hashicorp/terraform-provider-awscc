@@ -81,8 +81,10 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: Metric
 						Description: "What is measured by the behavior.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"metric_dimension": {
 						// Property: MetricDimension
@@ -93,8 +95,10 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									// Property: DimensionName
 									Description: "A unique identifier for the dimension.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 128),
+									},
+									Required: true,
 								},
 								"operator": {
 									// Property: Operator
@@ -151,15 +155,19 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: AlertTargetArn
 						Description: "The ARN of the notification target to which alerts are sent.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 2048),
+						},
+						Optional: true,
 					},
 					"role_arn": {
 						// Property: RoleArn
 						Description: "The ARN of the role that grants permission to send alerts to the notification target.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(20, 2048),
+						},
+						Optional: true,
 					},
 				},
 				tfsdk.MapNestedAttributesOptions{},
@@ -198,10 +206,14 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//           },
 			//           "ConsecutiveDatapointsToAlarm": {
 			//             "description": "If a device is in violation of the behavior for the specified number of consecutive datapoints, an alarm occurs. If not specified, the default is 1.",
+			//             "maximum": 10,
+			//             "minimum": 1,
 			//             "type": "integer"
 			//           },
 			//           "ConsecutiveDatapointsToClear": {
 			//             "description": "If an alarm has occurred and the offending device is no longer in violation of the behavior for the specified number of consecutive datapoints, the alarm is cleared. If not specified, the default is 1.",
+			//             "maximum": 10,
+			//             "minimum": 1,
 			//             "type": "integer"
 			//           },
 			//           "DurationSeconds": {
@@ -264,6 +276,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//               },
 			//               "Count": {
 			//                 "description": "If the ComparisonOperator calls for a numeric value, use this to specify that (integer) numeric value to be compared with the metric.",
+			//                 "minimum": 0,
 			//                 "type": "string"
 			//               },
 			//               "Number": {
@@ -283,6 +296,8 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//                 "description": "If the ComparisonOperator calls for a set of ports, use this to specify that set to be compared with the metric.",
 			//                 "insertionOrder": false,
 			//                 "items": {
+			//                   "maximum": 65535,
+			//                   "minimum": 0,
 			//                   "type": "integer"
 			//                 },
 			//                 "type": "array",
@@ -471,8 +486,10 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: Metric
 						Description: "What is measured by the behavior.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Optional: true,
 					},
 					"metric_dimension": {
 						// Property: MetricDimension
@@ -483,8 +500,10 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									// Property: DimensionName
 									Description: "A unique identifier for the dimension.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 128),
+									},
+									Required: true,
 								},
 								"operator": {
 									// Property: Operator
@@ -500,8 +519,10 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: Name
 						Description: "The name for the behavior.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"suppress_alerts": {
 						// Property: SuppressAlerts
@@ -535,8 +556,10 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A description of the security profile.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
+			Optional: true,
 		},
 		"security_profile_name": {
 			// Property: SecurityProfileName
@@ -550,9 +573,11 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A unique identifier for the security profile.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-			Optional:    true,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
+			Optional: true,
+			Computed: true,
 			// SecurityProfileName is a force-new attribute.
 		},
 		"tags": {
@@ -595,15 +620,19 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: Key
 						Description: "The tag's key.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+						Required: true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The tag's value.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
+						Required: true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

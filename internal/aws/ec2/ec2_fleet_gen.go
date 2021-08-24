@@ -157,9 +157,11 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"launch_template_name": {
 									// Property: LaunchTemplateName
-									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 128)},
-									Optional:   true,
+									Type: types.StringType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(3, 128),
+									},
+									Optional: true,
 								},
 								"version": {
 									// Property: Version
