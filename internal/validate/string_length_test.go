@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
-func TestStringLengthValidator(t *testing.T) {
+func TestStringLenBetweenValidator(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
@@ -76,7 +76,7 @@ func TestStringLengthValidator(t *testing.T) {
 				AttributeConfig: val,
 			}
 			response := tfsdk.ValidateAttributeResponse{}
-			StringLength(test.minLength, test.maxLength).Validate(ctx, request, &response)
+			StringLenBetween(test.minLength, test.maxLength).Validate(ctx, request, &response)
 
 			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
 				t.Fatal("expected error, got no error")

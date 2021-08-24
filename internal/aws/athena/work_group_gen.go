@@ -45,7 +45,7 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The workgroup description.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 			Optional:    true,
 		},
 		"name": {
@@ -60,7 +60,7 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The workGroup name.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -120,13 +120,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:   true,
 					},
 				},

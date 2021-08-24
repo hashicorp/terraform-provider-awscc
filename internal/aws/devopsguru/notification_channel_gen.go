@@ -57,7 +57,7 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 								"topic_arn": {
 									// Property: TopicArn
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(36, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(36, 1024)},
 									Optional:   true,
 								},
 							},
@@ -81,7 +81,7 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Description: "The ID of a notification channel.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(36, 36)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(36, 36)},
 			Computed:    true,
 		},
 	}

@@ -59,7 +59,7 @@ func logGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 			Optional:    true,
 			Computed:    true,
 			// LogGroupName is a force-new attribute.

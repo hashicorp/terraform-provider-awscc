@@ -115,7 +115,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "ARN(s) of the agent(s) to use for an NFS location.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLength(1, 4),
+							validate.ArrayLenBetween(1, 4),
 						},
 						Required: true,
 					},
@@ -194,14 +194,14 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 				},

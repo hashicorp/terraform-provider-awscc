@@ -58,7 +58,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "Contains the reason a monitoring job failed, if it failed.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 			Optional:    true,
 		},
 		"last_modified_time": {
@@ -202,7 +202,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The Amazon Resource Name (ARN) of the monitoring schedule.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Computed:    true,
 		},
 		"monitoring_schedule_config": {
@@ -847,7 +847,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
 															Type:        types.ListType{ElemType: types.StringType},
 															Validators: []tfsdk.AttributeValidator{
-																validate.ArrayLength(1, 5),
+																validate.ArrayLenBetween(1, 5),
 															},
 															Required: true,
 														},
@@ -856,7 +856,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Description: "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
 															Type:        types.ListType{ElemType: types.StringType},
 															Validators: []tfsdk.AttributeValidator{
-																validate.ArrayLength(1, 16),
+																validate.ArrayLenBetween(1, 16),
 															},
 															Required: true,
 														},
@@ -872,7 +872,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									// Property: RoleArn
 									Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 									Required:    true,
 								},
 								"stopping_condition": {
@@ -898,7 +898,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Property: MonitoringJobDefinitionName
 						Description: "Name of the job definition",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
 						Optional:    true,
 					},
 					"monitoring_type": {
@@ -916,7 +916,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									// Property: ScheduleExpression
 									Description: "A cron expression that describes details about the monitoring schedule.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 							},
@@ -996,7 +996,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {

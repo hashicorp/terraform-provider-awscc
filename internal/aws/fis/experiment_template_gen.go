@@ -193,7 +193,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 						Optional:   true,
 					},
 				},

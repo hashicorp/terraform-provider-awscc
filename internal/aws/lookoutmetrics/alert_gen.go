@@ -146,7 +146,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the alert. If not provided, a name is generated automatically.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
 			Optional:    true,
 			Computed:    true,
 			// AlertName is a force-new attribute.

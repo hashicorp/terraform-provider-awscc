@@ -33,7 +33,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 			Optional:   true,
 		},
 		"firewall_policy": {
@@ -177,7 +177,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: ResourceArn
 									Description: "A resource ARN.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 							},
@@ -204,7 +204,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	"value": {
 																		// Property: Value
 																		Type:       types.StringType,
-																		Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+																		Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 																		Required:   true,
 																	},
 																},
@@ -223,7 +223,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"action_name": {
 									// Property: ActionName
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:   true,
 								},
 							},
@@ -254,7 +254,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: ResourceArn
 									Description: "A resource ARN.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 							},
@@ -279,7 +279,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "A resource ARN.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Computed:    true,
 		},
 		"firewall_policy_id": {
@@ -292,7 +292,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(36, 36)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(36, 36)},
 			Computed:   true,
 		},
 		"firewall_policy_name": {
@@ -305,7 +305,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Required:   true,
 			// FirewallPolicyName is a force-new attribute.
 		},
@@ -344,13 +344,13 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 255)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
 						Required:   true,
 					},
 				},

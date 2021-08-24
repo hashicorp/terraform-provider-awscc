@@ -929,7 +929,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"launch_template_name": {
 												// Property: LaunchTemplateName
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 128)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 128)},
 												Optional:   true,
 											},
 											"version": {

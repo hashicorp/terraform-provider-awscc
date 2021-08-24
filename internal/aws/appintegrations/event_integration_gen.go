@@ -102,14 +102,14 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									// Property: Key
 									Description: "A key to identify the metadata.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 									Required:    true,
 								},
 								"value": {
 									// Property: Value
 									Description: "Corresponding metadata value for the key.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 									Required:    true,
 								},
 							},
@@ -121,21 +121,21 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						// Property: ClientId
 						Description: "The identifier for the client that is associated with the event integration.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 						Optional:    true,
 					},
 					"event_bridge_rule_name": {
 						// Property: EventBridgeRuleName
 						Description: "The name of the Eventbridge rule.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 						Optional:    true,
 					},
 					"event_integration_association_arn": {
 						// Property: EventIntegrationAssociationArn
 						Description: "The Amazon Resource Name (ARN) for the event integration association.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 						Optional:    true,
 					},
 					"event_integration_association_id": {
@@ -162,7 +162,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Description: "The event integration description.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1000)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1000)},
 			Optional:    true,
 		},
 		"event_bridge_bus": {
@@ -177,7 +177,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Description: "The Amazon Eventbridge bus for the event integration.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Required:    true,
 			// EventBridgeBus is a force-new attribute.
 		},
@@ -206,7 +206,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						// Property: Source
 						Description: "The source of the events.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 				},
@@ -226,7 +226,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Description: "The Amazon Resource Name (ARN) of the event integration.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 			Computed:    true,
 		},
 		"name": {
@@ -241,7 +241,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Description: "The name of the event integration.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -284,14 +284,14 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						// Property: Key
 						Description: "A key to identify the tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "Corresponding tag value for the key.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:    true,
 					},
 				},

@@ -776,7 +776,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ComponentARN
 						Description: "The ARN of the compnonent.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 300)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 300)},
 						Optional:    true,
 					},
 					"component_configuration_mode": {
@@ -789,7 +789,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ComponentName
 						Description: "The name of the component.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Optional:    true,
 					},
 					"custom_component_configuration": {
@@ -827,7 +827,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: AlarmName
 															Description: "The name of the CloudWatch alarm to be monitored for the component.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 															Required:    true,
 														},
 														"severity": {
@@ -883,14 +883,14 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: LogGroupName
 															Description: "The CloudWatch log group name to be associated to the monitored log.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 															Optional:    true,
 														},
 														"log_path": {
 															// Property: LogPath
 															Description: "The path of the logs to be monitored.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 260)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 260)},
 															Optional:    true,
 														},
 														"log_type": {
@@ -903,7 +903,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: PatternSet
 															Description: "The name of the log pattern set.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 30)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 30)},
 															Optional:    true,
 														},
 													},
@@ -926,21 +926,21 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: EventName
 															Description: "The type of Windows Events to log.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 260)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 260)},
 															Required:    true,
 														},
 														"log_group_name": {
 															// Property: LogGroupName
 															Description: "The CloudWatch log group name to be associated to the monitored log.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 															Required:    true,
 														},
 														"pattern_set": {
 															// Property: PatternSet
 															Description: "The name of the log pattern set.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 30)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 30)},
 															Optional:    true,
 														},
 													},
@@ -993,14 +993,14 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: LogGroupName
 																		Description: "The CloudWatch log group name to be associated to the monitored log.",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 																		Optional:    true,
 																	},
 																	"log_path": {
 																		// Property: LogPath
 																		Description: "The path of the logs to be monitored.",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 260)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 260)},
 																		Optional:    true,
 																	},
 																	"log_type": {
@@ -1013,7 +1013,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: PatternSet
 																		Description: "The name of the log pattern set.",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 30)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 30)},
 																		Optional:    true,
 																	},
 																},
@@ -1036,21 +1036,21 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: EventName
 																		Description: "The type of Windows Events to log.",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 260)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 260)},
 																		Required:    true,
 																	},
 																	"log_group_name": {
 																		// Property: LogGroupName
 																		Description: "The CloudWatch log group name to be associated to the monitored log.",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 																		Required:    true,
 																	},
 																	"pattern_set": {
 																		// Property: PatternSet
 																		Description: "The name of the log pattern set.",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 30)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 30)},
 																		Optional:    true,
 																	},
 																},
@@ -1114,7 +1114,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: AlarmName
 															Description: "The name of the CloudWatch alarm to be monitored for the component.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 															Required:    true,
 														},
 														"severity": {
@@ -1170,14 +1170,14 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: LogGroupName
 															Description: "The CloudWatch log group name to be associated to the monitored log.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 															Optional:    true,
 														},
 														"log_path": {
 															// Property: LogPath
 															Description: "The path of the logs to be monitored.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 260)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 260)},
 															Optional:    true,
 														},
 														"log_type": {
@@ -1190,7 +1190,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: PatternSet
 															Description: "The name of the log pattern set.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 30)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 30)},
 															Optional:    true,
 														},
 													},
@@ -1213,21 +1213,21 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: EventName
 															Description: "The type of Windows Events to log.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 260)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 260)},
 															Required:    true,
 														},
 														"log_group_name": {
 															// Property: LogGroupName
 															Description: "The CloudWatch log group name to be associated to the monitored log.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 															Required:    true,
 														},
 														"pattern_set": {
 															// Property: PatternSet
 															Description: "The name of the log pattern set.",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 30)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 30)},
 															Optional:    true,
 														},
 													},
@@ -1280,14 +1280,14 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: LogGroupName
 																		Description: "The CloudWatch log group name to be associated to the monitored log.",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 																		Optional:    true,
 																	},
 																	"log_path": {
 																		// Property: LogPath
 																		Description: "The path of the logs to be monitored.",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 260)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 260)},
 																		Optional:    true,
 																	},
 																	"log_type": {
@@ -1300,7 +1300,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: PatternSet
 																		Description: "The name of the log pattern set.",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 30)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 30)},
 																		Optional:    true,
 																	},
 																},
@@ -1323,21 +1323,21 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: EventName
 																		Description: "The type of Windows Events to log.",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 260)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 260)},
 																		Required:    true,
 																	},
 																	"log_group_name": {
 																		// Property: LogGroupName
 																		Description: "The CloudWatch log group name to be associated to the monitored log.",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 																		Required:    true,
 																	},
 																	"pattern_set": {
 																		// Property: PatternSet
 																		Description: "The name of the log pattern set.",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 30)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 30)},
 																		Optional:    true,
 																	},
 																},
@@ -1423,7 +1423,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ComponentName
 						Description: "The name of the component.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"resource_list": {
@@ -1511,14 +1511,14 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Pattern
 									Description: "The log pattern.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 50)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 50)},
 									Required:    true,
 								},
 								"pattern_name": {
 									// Property: PatternName
 									Description: "The name of the log pattern.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 50)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 50)},
 									Required:    true,
 								},
 								"rank": {
@@ -1538,7 +1538,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: PatternSetName
 						Description: "The name of the log pattern set.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 30)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 30)},
 						Required:    true,
 					},
 				},
@@ -1571,7 +1571,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The SNS topic provided to Application Insights that is associated to the created opsItem.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 300)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 300)},
 			Optional:    true,
 		},
 		"resource_group_name": {
@@ -1586,7 +1586,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the resource group.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Required:    true,
 			// ResourceGroupName is a force-new attribute.
 		},
@@ -1628,14 +1628,14 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:    true,
 					},
 				},

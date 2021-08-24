@@ -41,7 +41,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 65536)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 65536)},
 			Optional:   true,
 			Computed:   true,
 			// CACertificatePem is a force-new attribute.
@@ -71,7 +71,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 65536)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 65536)},
 			Optional:   true,
 			Computed:   true,
 			// CertificatePem is a force-new attribute.

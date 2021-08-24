@@ -138,14 +138,14 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"key": {
 												// Property: Key
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 50)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 50)},
 												Required:   true,
 											},
 											"values": {
 												// Property: Values
 												Type: types.ListType{ElemType: types.StringType},
 												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayLength(1, 10),
+													validate.ArrayLenBetween(1, 10),
 													validate.UniqueItems(),
 												},
 												Required: true,
@@ -241,7 +241,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The display name of the response plan.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 200)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 200)},
 			Optional:    true,
 		},
 		"engagements": {
@@ -325,7 +325,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: DedupeString
 						Description: "The deduplication string.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1000)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1000)},
 						Optional:    true,
 					},
 					"impact": {
@@ -356,7 +356,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Summary
 						Description: "The summary string.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 4000)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4000)},
 						Optional:    true,
 					},
 					"title": {
@@ -381,7 +381,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the response plan.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 200)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 200)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -424,13 +424,13 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:   true,
 					},
 				},

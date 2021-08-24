@@ -35,7 +35,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the image.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Computed:    true,
 		},
 		"image_description": {
@@ -50,7 +50,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A description of the image.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 			Optional:    true,
 		},
 		"image_display_name": {
@@ -65,7 +65,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The display name of the image.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Optional:    true,
 		},
 		"image_name": {
@@ -80,7 +80,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the image.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
 			Required:    true,
 			// ImageName is a force-new attribute.
 		},
@@ -96,7 +96,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on behalf of the customer.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Required:    true,
 		},
 		"tags": {
@@ -137,7 +137,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {

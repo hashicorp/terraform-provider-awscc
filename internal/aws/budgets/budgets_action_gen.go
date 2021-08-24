@@ -214,7 +214,7 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									// Property: Groups
 									Type: types.ListType{ElemType: types.StringType},
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLength(1, 100),
+										validate.ArrayLenBetween(1, 100),
 									},
 									Optional: true,
 								},
@@ -227,7 +227,7 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									// Property: Roles
 									Type: types.ListType{ElemType: types.StringType},
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLength(1, 100),
+										validate.ArrayLenBetween(1, 100),
 									},
 									Optional: true,
 								},
@@ -235,7 +235,7 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									// Property: Users
 									Type: types.ListType{ElemType: types.StringType},
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLength(1, 100),
+										validate.ArrayLenBetween(1, 100),
 									},
 									Optional: true,
 								},
@@ -256,7 +256,7 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									// Property: TargetIds
 									Type: types.ListType{ElemType: types.StringType},
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLength(1, 100),
+										validate.ArrayLenBetween(1, 100),
 									},
 									Required: true,
 								},
@@ -272,7 +272,7 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									// Property: InstanceIds
 									Type: types.ListType{ElemType: types.StringType},
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLength(1, 100),
+										validate.ArrayLenBetween(1, 100),
 									},
 									Required: true,
 								},

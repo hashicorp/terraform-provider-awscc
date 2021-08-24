@@ -84,13 +84,13 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:   true,
 					},
 				},
@@ -153,14 +153,14 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "The description of the topic.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 500)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 500)},
 						Optional:    true,
 					},
 					"display_name": {
 						// Property: DisplayName
 						Description: "The display name of the topic.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 						Required:    true,
 					},
 					"topic_name": {

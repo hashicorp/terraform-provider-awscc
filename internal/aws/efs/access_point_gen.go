@@ -61,13 +61,13 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Optional:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Optional:   true,
 					},
 				},
@@ -240,7 +240,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Path
 						Description: "Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationInfo.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
 						Optional:    true,
 						Computed:    true,
 						// Path is a force-new attribute.

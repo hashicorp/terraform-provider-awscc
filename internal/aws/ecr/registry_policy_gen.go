@@ -46,7 +46,7 @@ func registryPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The registry id.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(12, 12)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(12, 12)},
 			Computed:    true,
 		},
 	}

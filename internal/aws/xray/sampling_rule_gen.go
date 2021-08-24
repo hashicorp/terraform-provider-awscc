@@ -45,7 +45,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 32)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 32)},
 			Optional:    true,
 		},
 		"sampling_rule": {
@@ -179,7 +179,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: RuleName
 						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 32)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 32)},
 						Optional:    true,
 					},
 					"service_name": {
@@ -371,7 +371,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: RuleName
 									Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 32)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 32)},
 									Optional:    true,
 								},
 								"service_name": {
@@ -533,7 +533,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: RuleName
 						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 32)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 32)},
 						Optional:    true,
 					},
 					"service_name": {

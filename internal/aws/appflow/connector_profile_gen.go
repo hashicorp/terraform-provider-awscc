@@ -1108,7 +1108,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											"bucket_name": {
 												// Property: BucketName
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 												Required:   true,
 											},
 											"bucket_prefix": {
@@ -1186,7 +1186,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											"bucket_name": {
 												// Property: BucketName
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 												Required:   true,
 											},
 											"bucket_prefix": {
@@ -1319,7 +1319,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 			Optional:    true,
 			Computed:    true,
 			// KMSArn is a force-new attribute.

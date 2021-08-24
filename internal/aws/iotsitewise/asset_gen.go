@@ -75,7 +75,7 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: LogicalId
 						Description: "The LogicalID of a hierarchy in the parent asset's model.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 				},
@@ -164,7 +164,7 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: LogicalId
 						Description: "Customer provided ID for property.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 					"notification_state": {

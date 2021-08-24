@@ -34,7 +34,7 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the resource set.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Computed:    true,
 		},
 		"resource_set_name": {

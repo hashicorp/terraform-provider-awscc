@@ -32,7 +32,7 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 			Computed:   true,
 		},
 		"definition": {
@@ -96,7 +96,7 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 1048576)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1048576)},
 			Optional:   true,
 		},
 		"definition_substitutions": {
@@ -170,7 +170,7 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"log_group_arn": {
 												// Property: LogGroupArn
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 												Optional:   true,
 											},
 										},
@@ -207,7 +207,7 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 80)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 80)},
 			Computed:   true,
 		},
 		"role_arn": {
@@ -219,7 +219,7 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Required:   true,
 		},
 		"state_machine_name": {
@@ -231,7 +231,7 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 80)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 80)},
 			Optional:   true,
 			Computed:   true,
 			// StateMachineName is a force-new attribute.
@@ -281,13 +281,13 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:   true,
 					},
 				},

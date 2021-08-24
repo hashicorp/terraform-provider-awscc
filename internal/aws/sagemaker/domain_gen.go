@@ -279,7 +279,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ExecutionRole
 						Description: "The user profile Amazon Resource Name (ARN).",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 						Optional:    true,
 					},
 					"jupyter_server_app_settings": {
@@ -388,7 +388,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLength(0, 5),
+							validate.ArrayLenBetween(0, 5),
 						},
 						Optional: true,
 					},
@@ -520,7 +520,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The VPC subnets that Studio uses for communication.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLength(1, 16),
+				validate.ArrayLenBetween(1, 16),
 			},
 			Required: true,
 			// SubnetIds is a force-new attribute.
@@ -561,13 +561,13 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 				},

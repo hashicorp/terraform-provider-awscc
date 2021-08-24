@@ -34,7 +34,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Dataset name",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Required:    true,
 		},
 		"name": {
@@ -48,7 +48,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Project name",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -63,7 +63,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Recipe name",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Required:    true,
 		},
 		"role_arn": {
@@ -154,13 +154,13 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:   true,
 					},
 				},

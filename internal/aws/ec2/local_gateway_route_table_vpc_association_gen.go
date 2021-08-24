@@ -99,13 +99,13 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 127)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 127)},
 						Optional:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 						Optional:   true,
 					},
 				},

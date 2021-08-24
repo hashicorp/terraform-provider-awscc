@@ -67,7 +67,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: LogGroupName
 						Description: "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Optional:    true,
 					},
 				},
@@ -164,7 +164,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the Channel.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Required:    true,
 			// Id is a force-new attribute.
 		},
@@ -190,7 +190,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: LogGroupName
 						Description: "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Optional:    true,
 					},
 				},

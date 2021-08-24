@@ -34,7 +34,7 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Description: "Id",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Computed:    true,
 		},
 		"owner_id": {
@@ -48,7 +48,7 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Description: "AccountId",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(12, 32)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(12, 32)},
 			Computed:    true,
 		},
 		"resource_id": {
@@ -62,7 +62,7 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Description: "ResourceId",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Optional:    true,
 			Computed:    true,
 			// ResourceId is a force-new attribute.

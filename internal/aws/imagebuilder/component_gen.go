@@ -58,7 +58,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The data of the component.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 16000)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 16000)},
 			Optional:    true,
 			Computed:    true,
 			// Data is a force-new attribute.

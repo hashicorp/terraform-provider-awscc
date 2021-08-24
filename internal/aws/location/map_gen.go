@@ -57,7 +57,7 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"style": {
 						// Property: Style
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
 						Required:   true,
 					},
 				},
@@ -95,7 +95,7 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1000)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
 			Optional:   true,
 			Computed:   true,
 			// Description is a force-new attribute.
@@ -121,7 +121,7 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
 			Required:   true,
 			// MapName is a force-new attribute.
 		},

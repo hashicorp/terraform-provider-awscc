@@ -81,13 +81,13 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"cidr": {
 						// Property: Cidr
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 46)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 46)},
 						Required:   true,
 					},
 					"description": {
 						// Property: Description
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 255)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
 						Optional:   true,
 					},
 				},
@@ -139,7 +139,7 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of Prefix List.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Required:    true,
 		},
 		"tags": {
@@ -173,7 +173,7 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {

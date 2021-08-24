@@ -62,7 +62,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"key_arn": {
 						// Property: KeyARN
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Optional:   true,
 					},
 					"key_type": {
@@ -84,7 +84,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Optional:   true,
 			Computed:   true,
 			// DeliveryStreamName is a force-new attribute.
@@ -425,19 +425,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"cluster_endpoint": {
 						// Property: ClusterEndpoint
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Optional:   true,
 					},
 					"domain_arn": {
 						// Property: DomainARN
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Optional:   true,
 					},
 					"index_name": {
 						// Property: IndexName
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 80)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 80)},
 						Required:   true,
 					},
 					"index_rotation_period": {
@@ -509,7 +509,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"role_arn": {
 						// Property: RoleARN
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Required:   true,
 					},
 					"s3_backup_mode": {
@@ -524,7 +524,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"bucket_arn": {
 									// Property: BucketARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 									Required:   true,
 								},
 								"buffering_hints": {
@@ -602,19 +602,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:   true,
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:   true,
 								},
 								"role_arn": {
 									// Property: RoleARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 									Required:   true,
 								},
 							},
@@ -624,7 +624,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"type_name": {
 						// Property: TypeName
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 100)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 100)},
 						Optional:   true,
 					},
 					"vpc_configuration": {
@@ -634,14 +634,14 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"role_arn": {
 									// Property: RoleARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 									Required:   true,
 								},
 								"security_group_ids": {
 									// Property: SecurityGroupIds
 									Type: types.ListType{ElemType: types.StringType},
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLength(1, 5),
+										validate.ArrayLenBetween(1, 5),
 										validate.UniqueItems(),
 									},
 									Required: true,
@@ -650,7 +650,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: SubnetIds
 									Type: types.ListType{ElemType: types.StringType},
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLength(1, 16),
+										validate.ArrayLenBetween(1, 16),
 										validate.UniqueItems(),
 									},
 									Required: true,
@@ -1071,7 +1071,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"bucket_arn": {
 						// Property: BucketARN
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 						Required:   true,
 					},
 					"buffering_hints": {
@@ -1322,7 +1322,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											"role_arn": {
 												// Property: RoleARN
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 												Optional:   true,
 											},
 											"table_name": {
@@ -1372,13 +1372,13 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"error_output_prefix": {
 						// Property: ErrorOutputPrefix
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 						Optional:   true,
 					},
 					"prefix": {
 						// Property: Prefix
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 						Optional:   true,
 					},
 					"processing_configuration": {
@@ -1432,7 +1432,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"role_arn": {
 						// Property: RoleARN
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Required:   true,
 					},
 					"s3_backup_configuration": {
@@ -1442,7 +1442,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"bucket_arn": {
 									// Property: BucketARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 									Required:   true,
 								},
 								"buffering_hints": {
@@ -1520,19 +1520,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:   true,
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:   true,
 								},
 								"role_arn": {
 									// Property: RoleARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 									Required:   true,
 								},
 							},
@@ -1860,19 +1860,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"access_key": {
 									// Property: AccessKey
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 4096)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
 									Optional:   true,
 								},
 								"name": {
 									// Property: Name
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Optional:   true,
 								},
 								"url": {
 									// Property: Url
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 1000)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1000)},
 									Required:   true,
 								},
 							},
@@ -1938,13 +1938,13 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											"attribute_name": {
 												// Property: AttributeName
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 												Required:   true,
 											},
 											"attribute_value": {
 												// Property: AttributeValue
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 												Required:   true,
 											},
 										},
@@ -1981,7 +1981,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"role_arn": {
 						// Property: RoleARN
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Optional:   true,
 					},
 					"s3_backup_mode": {
@@ -1996,7 +1996,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"bucket_arn": {
 									// Property: BucketARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 									Required:   true,
 								},
 								"buffering_hints": {
@@ -2074,19 +2074,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:   true,
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:   true,
 								},
 								"role_arn": {
 									// Property: RoleARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 									Required:   true,
 								},
 							},
@@ -2127,13 +2127,13 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"kinesis_stream_arn": {
 						// Property: KinesisStreamARN
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Required:   true,
 					},
 					"role_arn": {
 						// Property: RoleARN
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Required:   true,
 					},
 				},
@@ -2497,7 +2497,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"cluster_jdbcurl": {
 						// Property: ClusterJDBCURL
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Required:   true,
 					},
 					"copy_command": {
@@ -2507,19 +2507,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"copy_options": {
 									// Property: CopyOptions
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 204800)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 204800)},
 									Optional:   true,
 								},
 								"data_table_columns": {
 									// Property: DataTableColumns
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 204800)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 204800)},
 									Optional:   true,
 								},
 								"data_table_name": {
 									// Property: DataTableName
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 									Required:   true,
 								},
 							},
@@ -2529,7 +2529,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"password": {
 						// Property: Password
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(6, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(6, 512)},
 						Required:   true,
 					},
 					"processing_configuration": {
@@ -2596,7 +2596,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"role_arn": {
 						// Property: RoleARN
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Required:   true,
 					},
 					"s3_backup_configuration": {
@@ -2606,7 +2606,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"bucket_arn": {
 									// Property: BucketARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 									Required:   true,
 								},
 								"buffering_hints": {
@@ -2684,19 +2684,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:   true,
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:   true,
 								},
 								"role_arn": {
 									// Property: RoleARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 									Required:   true,
 								},
 							},
@@ -2715,7 +2715,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"bucket_arn": {
 									// Property: BucketARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 									Required:   true,
 								},
 								"buffering_hints": {
@@ -2793,19 +2793,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:   true,
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:   true,
 								},
 								"role_arn": {
 									// Property: RoleARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 									Required:   true,
 								},
 							},
@@ -2815,7 +2815,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"username": {
 						// Property: Username
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Required:   true,
 					},
 				},
@@ -2923,7 +2923,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"bucket_arn": {
 						// Property: BucketARN
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 						Required:   true,
 					},
 					"buffering_hints": {
@@ -3001,19 +3001,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"error_output_prefix": {
 						// Property: ErrorOutputPrefix
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 						Optional:   true,
 					},
 					"prefix": {
 						// Property: Prefix
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 						Optional:   true,
 					},
 					"role_arn": {
 						// Property: RoleARN
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Required:   true,
 					},
 				},
@@ -3256,7 +3256,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"hec_endpoint": {
 						// Property: HECEndpoint
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 2048)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
 						Required:   true,
 					},
 					"hec_endpoint_type": {
@@ -3267,7 +3267,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"hec_token": {
 						// Property: HECToken
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 2048)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
 						Required:   true,
 					},
 					"processing_configuration": {
@@ -3343,7 +3343,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"bucket_arn": {
 									// Property: BucketARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 									Required:   true,
 								},
 								"buffering_hints": {
@@ -3421,19 +3421,19 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"error_output_prefix": {
 									// Property: ErrorOutputPrefix
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:   true,
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:   true,
 								},
 								"role_arn": {
 									// Property: RoleARN
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 									Required:   true,
 								},
 							},
@@ -3477,13 +3477,13 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Optional:   true,
 					},
 				},

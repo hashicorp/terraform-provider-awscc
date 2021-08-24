@@ -43,7 +43,7 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The description of the Pipeline.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 3072)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 3072)},
 			Optional:    true,
 		},
 		"pipeline_display_name": {
@@ -58,7 +58,7 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The display name of the Pipeline.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Optional:    true,
 		},
 		"pipeline_name": {
@@ -73,7 +73,7 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the Pipeline.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Required:    true,
 			// PipelineName is a force-new attribute.
 		},
@@ -89,7 +89,7 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Role Arn",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 			Required:    true,
 		},
 		"tags": {

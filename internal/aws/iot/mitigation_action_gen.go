@@ -35,7 +35,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Description: "A unique identifier for the mitigation action.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Optional:    true,
 			Computed:    true,
 			// ActionName is a force-new attribute.
@@ -207,7 +207,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									// Property: RoleArnForLogging
 									Description: " The ARN of the IAM role used for logging.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 									Required:    true,
 								},
 							},
@@ -223,7 +223,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									// Property: TopicArn
 									Description: "The ARN of the topic to which you want to publish the findings.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 									Required:    true,
 								},
 							},
@@ -343,14 +343,14 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						// Property: Key
 						Description: "The tag's key.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The tag's value.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 				},

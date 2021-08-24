@@ -10,25 +10,25 @@ import (
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
-// arrayLengthValidator validates that an array (List/Set) Attribute's length is valid.
-type arrayLengthValidator struct {
+// arrayLenBetweenValidator validates that an array (List/Set) Attribute's length is in a range.
+type arrayLenBetweenValidator struct {
 	tfsdk.AttributeValidator
 
 	minItems, maxItems int
 }
 
 // Description describes the validation in plain text formatting.
-func (v arrayLengthValidator) Description(_ context.Context) string {
+func (v arrayLenBetweenValidator) Description(_ context.Context) string {
 	return fmt.Sprintf("array length must be between %d and %d", v.minItems, v.maxItems)
 }
 
 // MarkdownDescription describes the validation in Markdown formatting.
-func (v arrayLengthValidator) MarkdownDescription(ctx context.Context) string {
+func (v arrayLenBetweenValidator) MarkdownDescription(ctx context.Context) string {
 	return v.Description(ctx)
 }
 
 // Validate performs the validation.
-func (v arrayLengthValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+func (v arrayLenBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
 	var l int
 	list, ok := request.AttributeConfig.(types.List)
 
@@ -67,13 +67,13 @@ func (v arrayLengthValidator) Validate(ctx context.Context, request tfsdk.Valida
 	}
 }
 
-// ArrayLength returns a new array length validator.
-func ArrayLength(minItems, maxItems int) tfsdk.AttributeValidator {
+// ArrayLenBetween returns a new array length between validator.
+func ArrayLenBetween(minItems, maxItems int) tfsdk.AttributeValidator {
 	if minItems < 0 || maxItems < 0 || minItems > maxItems {
 		return nil
 	}
 
-	return arrayLengthValidator{
+	return arrayLenBetweenValidator{
 		minItems: minItems,
 		maxItems: maxItems,
 	}

@@ -46,7 +46,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the Kinesis stream.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Optional:    true,
 			Computed:    true,
 			// Name is a force-new attribute.
@@ -113,7 +113,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: KeyId
 						Description: "The GUID for the customer-managed AWS KMS key to use for encryption. This value can be a globally unique identifier, a fully specified Amazon Resource Name (ARN) to either an alias or a key, or an alias name prefixed by \"alias/\".You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 						Required:    true,
 					},
 				},
@@ -159,14 +159,14 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 255)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
 						Required:    true,
 					},
 				},

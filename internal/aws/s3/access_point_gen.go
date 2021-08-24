@@ -35,7 +35,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The alias of this Access Point. This alias can be used for compatibility purposes with other AWS services and third-party applications.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 			Computed:    true,
 		},
 		"arn": {
@@ -60,7 +60,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the bucket that you want to associate this Access Point with.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(3, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(3, 255)},
 			Required:    true,
 			// Bucket is a force-new attribute.
 		},
@@ -76,7 +76,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name you want to assign to this Access Point. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the access point name.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(3, 50)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(3, 50)},
 			Computed:    true,
 			// Name is a force-new attribute.
 		},
@@ -212,7 +212,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: VpcId
 						Description: "If this field is specified, this access point will only allow connections from the specified VPC ID.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 						Optional:    true,
 					},
 				},

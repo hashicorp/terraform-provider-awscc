@@ -69,7 +69,7 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 50)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 50)},
 			Optional:   true,
 		},
 		"calendar_names": {
@@ -223,7 +223,7 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"output_s3_bucket_name": {
 									// Property: OutputS3BucketName
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 									Optional:   true,
 								},
 								"output_s3_key_prefix": {
@@ -234,7 +234,7 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"output_s3_region": {
 									// Property: OutputS3Region
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 20)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 20)},
 									Optional:   true,
 								},
 							},
@@ -283,7 +283,7 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A Cron or Rate expression that specifies when the association is applied to the target.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Optional:    true,
 		},
 		"sync_compliance": {
@@ -342,7 +342,7 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Values
 						Type: types.ListType{ElemType: types.StringType},
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLength(0, 50),
+							validate.ArrayLenBetween(0, 50),
 						},
 						Required: true,
 					},

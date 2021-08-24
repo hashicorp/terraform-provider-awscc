@@ -148,7 +148,7 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 36)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 36)},
 			Optional:   true,
 			Computed:   true,
 			// TemplateName is a force-new attribute.

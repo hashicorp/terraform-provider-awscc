@@ -47,7 +47,7 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Name of the ReadinessCheck to create.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Required:    true,
 			// ReadinessCheckName is a force-new attribute.
 		},
@@ -63,7 +63,7 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The name of the resource set to check.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Optional:    true,
 		},
 		"tags": {

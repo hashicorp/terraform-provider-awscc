@@ -34,7 +34,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			// }
 			Description: "Arn",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 600)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 600)},
 			Computed:    true,
 		},
 		"creation_time": {
@@ -48,7 +48,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 40)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 40)},
 			Computed:    true,
 		},
 		"creator_request_id": {
@@ -62,7 +62,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			// }
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Computed:    true,
 		},
 		"firewall_rule_group_id": {
@@ -76,7 +76,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			// }
 			Description: "FirewallRuleGroupId",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Required:    true,
 			// FirewallRuleGroupId is a force-new attribute.
 		},
@@ -91,7 +91,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			// }
 			Description: "Id",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Computed:    true,
 		},
 		"managed_owner_name": {
@@ -105,7 +105,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			// }
 			Description: "ServicePrincipal",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 			Computed:    true,
 		},
 		"modification_time": {
@@ -119,7 +119,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 40)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 40)},
 			Computed:    true,
 		},
 		"mutation_protection": {
@@ -149,7 +149,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			// }
 			Description: "FirewallRuleGroupAssociationName",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 			Optional:    true,
 		},
 		"priority": {
@@ -230,14 +230,14 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 127)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 127)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 255)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
 						Required:    true,
 					},
 				},
@@ -256,7 +256,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			// }
 			Description: "VpcId",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Required:    true,
 			// VpcId is a force-new attribute.
 		},

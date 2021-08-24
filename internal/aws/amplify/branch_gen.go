@@ -33,7 +33,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 20)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 20)},
 			Required:   true,
 			// AppId is a force-new attribute.
 		},
@@ -84,13 +84,13 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"password": {
 						// Property: Password
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 						Required:   true,
 					},
 					"username": {
 						// Property: Username
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 						Required:   true,
 					},
 				},
@@ -108,7 +108,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Required:   true,
 			// BranchName is a force-new attribute.
 		},
@@ -122,7 +122,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 25000)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 25000)},
 			Optional:   true,
 		},
 		"description": {
@@ -269,13 +269,13 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:   true,
 					},
 				},

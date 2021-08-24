@@ -35,7 +35,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The sso instance that the permission set is owned.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(10, 1224)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(10, 1224)},
 			Required:    true,
 			// InstanceArn is a force-new attribute.
 		},
@@ -51,7 +51,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The permission set that the assignemt will be assigned",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(10, 1224)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(10, 1224)},
 			Required:    true,
 			// PermissionSetArn is a force-new attribute.
 		},
@@ -67,7 +67,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The assignee's identifier, user id/group id",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 47)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 47)},
 			Required:    true,
 			// PrincipalId is a force-new attribute.
 		},

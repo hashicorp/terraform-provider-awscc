@@ -77,7 +77,7 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 40)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 40)},
 			Computed:    true,
 		},
 		"publisher_profile": {

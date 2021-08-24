@@ -35,7 +35,7 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "Key-pair identifier.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Computed:    true,
 		},
 		"fingerprint": {
@@ -61,7 +61,7 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Optional:    true,
 			Computed:    true,
 			// Name is a force-new attribute.
@@ -114,13 +114,13 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:   true,
 					},
 				},

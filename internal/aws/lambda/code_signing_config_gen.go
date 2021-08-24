@@ -56,7 +56,7 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Description: "List of Signing profile version Arns",
 						Type:        types.ListType{ElemType: types.StringType},
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLength(1, 20),
+							validate.ArrayLenBetween(1, 20),
 						},
 						Required: true,
 					},
@@ -133,7 +133,7 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "A description of the CodeSigningConfig",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 			Optional:    true,
 		},
 	}

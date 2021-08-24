@@ -449,7 +449,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Domain
 									Description: "<p>The Amazon Elasticsearch Service domain.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 									Required:    true,
 								},
 							},
@@ -465,7 +465,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: WorkGroup
 									Description: "<p>The workgroup that Amazon Athena uses.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Optional:    true,
 								},
 							},
@@ -481,14 +481,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -510,14 +510,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -539,14 +539,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -568,14 +568,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -595,13 +595,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"database": {
 									// Property: Database
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:   true,
 								},
 								"host": {
 									// Property: Host
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:   true,
 								},
 								"port": {
@@ -622,14 +622,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -651,14 +651,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Catalog
 									Description: "<p>Catalog.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -680,14 +680,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"instance_id": {
 									// Property: InstanceId
 									Description: "<p>Instance ID.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 									Required:    true,
 								},
 							},
@@ -703,21 +703,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ClusterId
 									Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 									Optional:    true,
 								},
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Optional:    true,
 								},
 								"port": {
@@ -744,14 +744,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Bucket
 												Description: "<p>Amazon S3 bucket.</p>",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 												Required:    true,
 											},
 											"key": {
 												// Property: Key
 												Description: "<p>Amazon S3 key that identifies an object.</p>",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 												Required:    true,
 											},
 										},
@@ -771,21 +771,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"warehouse": {
 									// Property: Warehouse
 									Description: "<p>Warehouse.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 									Required:    true,
 								},
 							},
@@ -801,7 +801,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -823,14 +823,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -852,14 +852,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -901,7 +901,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(12, 12)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(12, 12)},
 			Optional:   true,
 			Computed:   true,
 			// AwsAccountId is a force-new attribute.
@@ -1393,7 +1393,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Domain
 															Description: "<p>The Amazon Elasticsearch Service domain.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 															Required:    true,
 														},
 													},
@@ -1409,7 +1409,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: WorkGroup
 															Description: "<p>The workgroup that Amazon Athena uses.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 															Optional:    true,
 														},
 													},
@@ -1425,14 +1425,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Database
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 															Required:    true,
 														},
 														"host": {
 															// Property: Host
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 															Required:    true,
 														},
 														"port": {
@@ -1454,14 +1454,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Database
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 															Required:    true,
 														},
 														"host": {
 															// Property: Host
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 															Required:    true,
 														},
 														"port": {
@@ -1483,14 +1483,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Database
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 															Required:    true,
 														},
 														"host": {
 															// Property: Host
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 															Required:    true,
 														},
 														"port": {
@@ -1512,14 +1512,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Database
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 															Required:    true,
 														},
 														"host": {
 															// Property: Host
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 															Required:    true,
 														},
 														"port": {
@@ -1539,13 +1539,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"database": {
 															// Property: Database
 															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 															Required:   true,
 														},
 														"host": {
 															// Property: Host
 															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 															Required:   true,
 														},
 														"port": {
@@ -1566,14 +1566,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Database
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 															Required:    true,
 														},
 														"host": {
 															// Property: Host
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 															Required:    true,
 														},
 														"port": {
@@ -1595,14 +1595,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Catalog
 															Description: "<p>Catalog.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 															Required:    true,
 														},
 														"host": {
 															// Property: Host
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 															Required:    true,
 														},
 														"port": {
@@ -1624,14 +1624,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Database
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 															Required:    true,
 														},
 														"instance_id": {
 															// Property: InstanceId
 															Description: "<p>Instance ID.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 															Required:    true,
 														},
 													},
@@ -1647,21 +1647,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: ClusterId
 															Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 															Optional:    true,
 														},
 														"database": {
 															// Property: Database
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 															Required:    true,
 														},
 														"host": {
 															// Property: Host
 															Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 															Optional:    true,
 														},
 														"port": {
@@ -1688,14 +1688,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: Bucket
 																		Description: "<p>Amazon S3 bucket.</p>",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 																		Required:    true,
 																	},
 																	"key": {
 																		// Property: Key
 																		Description: "<p>Amazon S3 key that identifies an object.</p>",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 																		Required:    true,
 																	},
 																},
@@ -1715,21 +1715,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Database
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 															Required:    true,
 														},
 														"host": {
 															// Property: Host
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 															Required:    true,
 														},
 														"warehouse": {
 															// Property: Warehouse
 															Description: "<p>Warehouse.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 															Required:    true,
 														},
 													},
@@ -1745,7 +1745,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Host
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 															Required:    true,
 														},
 														"port": {
@@ -1767,14 +1767,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Database
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 															Required:    true,
 														},
 														"host": {
 															// Property: Host
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 															Required:    true,
 														},
 														"port": {
@@ -1796,14 +1796,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Database
 															Description: "<p>Database.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 															Required:    true,
 														},
 														"host": {
 															// Property: Host
 															Description: "<p>Host.</p>",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 															Required:    true,
 														},
 														"port": {
@@ -1828,14 +1828,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Password
 									Description: "<p>Password.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 									Required:    true,
 								},
 								"username": {
 									// Property: Username
 									Description: "<p>User name.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 									Required:    true,
 								},
 							},
@@ -2278,7 +2278,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Domain
 									Description: "<p>The Amazon Elasticsearch Service domain.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 									Required:    true,
 								},
 							},
@@ -2294,7 +2294,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: WorkGroup
 									Description: "<p>The workgroup that Amazon Athena uses.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Optional:    true,
 								},
 							},
@@ -2310,14 +2310,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -2339,14 +2339,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -2368,14 +2368,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -2397,14 +2397,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -2424,13 +2424,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"database": {
 									// Property: Database
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:   true,
 								},
 								"host": {
 									// Property: Host
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:   true,
 								},
 								"port": {
@@ -2451,14 +2451,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -2480,14 +2480,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Catalog
 									Description: "<p>Catalog.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -2509,14 +2509,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"instance_id": {
 									// Property: InstanceId
 									Description: "<p>Instance ID.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 									Required:    true,
 								},
 							},
@@ -2532,21 +2532,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ClusterId
 									Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 									Optional:    true,
 								},
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Optional:    true,
 								},
 								"port": {
@@ -2573,14 +2573,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Bucket
 												Description: "<p>Amazon S3 bucket.</p>",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 												Required:    true,
 											},
 											"key": {
 												// Property: Key
 												Description: "<p>Amazon S3 key that identifies an object.</p>",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 												Required:    true,
 											},
 										},
@@ -2600,21 +2600,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"warehouse": {
 									// Property: Warehouse
 									Description: "<p>Warehouse.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 									Required:    true,
 								},
 							},
@@ -2630,7 +2630,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -2652,14 +2652,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -2681,14 +2681,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Database
 									Description: "<p>Database.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"port": {
@@ -2772,7 +2772,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "<p>A display name for the data source.</p>",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Optional:    true,
 		},
 		"permissions": {
@@ -2817,7 +2817,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLength(1, 16),
+							validate.ArrayLenBetween(1, 16),
 						},
 						Required: true,
 					},
@@ -2825,7 +2825,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Principal
 						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 				},
@@ -2918,14 +2918,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "<p>Tag key.</p>",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "<p>Tag value.</p>",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 				},

@@ -46,7 +46,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The unique name of the domain.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Required:    true,
 			// DomainName is a force-new attribute.
 		},
@@ -483,7 +483,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"kms_arn": {
 						// Property: KmsArn
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 						Required:   true,
 					},
 					"source_flow_config": {
@@ -537,7 +537,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"bucket_name": {
 															// Property: BucketName
 															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 															Required:   true,
 														},
 														"bucket_prefix": {
@@ -774,7 +774,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the ObjectType defined for the 3rd party data in Profile Service",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Required:    true,
 		},
 		"tags": {
@@ -813,13 +813,13 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:   true,
 					},
 				},
@@ -841,7 +841,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The URI of the S3 bucket or any other type of data source.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Optional:    true,
 			Computed:    true,
 			// Uri is a force-new attribute.

@@ -59,7 +59,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "ARN for the MWAA environment.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1224)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1224)},
 			Computed:    true,
 		},
 		"dag_s3_path": {
@@ -86,7 +86,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Templated configuration for airflow processes and backing infrastructure.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 			Optional:    true,
 		},
 		"execution_role_arn": {
@@ -443,7 +443,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Customer-defined identifier for the environment, unique per customer region.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 80)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 80)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -490,7 +490,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A list of security groups to use for the environment.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLength(1, 5),
+							validate.ArrayLenBetween(1, 5),
 						},
 						Optional: true,
 					},
@@ -499,7 +499,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A list of subnets to use for the environment. These must be private subnets, in the same VPC, in two different availability zones.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLength(2, 2),
+							validate.ArrayLenBetween(2, 2),
 						},
 						Optional: true,
 						Computed: true,
@@ -582,7 +582,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1224)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1224)},
 			Optional:    true,
 		},
 		"tags": {
@@ -623,7 +623,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Url endpoint for the environment's Airflow UI.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Computed:    true,
 		},
 		"weekly_maintenance_window_start": {

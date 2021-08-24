@@ -45,7 +45,7 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the group that was generated on creation.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 400)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 400)},
 			Computed:    true,
 		},
 		"group_name": {
@@ -59,7 +59,7 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The case-sensitive name of the new group. Names must be unique.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 32)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 32)},
 			Optional:    true,
 		},
 		"insights_configuration": {

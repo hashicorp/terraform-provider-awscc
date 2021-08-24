@@ -65,7 +65,7 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Description: "An array of CloudFormation stack names.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLength(1, 200),
+										validate.ArrayLenBetween(1, 200),
 									},
 									Optional: true,
 								},

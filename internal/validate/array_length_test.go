@@ -12,7 +12,7 @@ import (
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
-func TestArrayLengthValidator(t *testing.T) {
+func TestArrayLenBetweenValidator(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
@@ -139,7 +139,7 @@ func TestArrayLengthValidator(t *testing.T) {
 				AttributeConfig: val,
 			}
 			response := tfsdk.ValidateAttributeResponse{}
-			ArrayLength(test.minItems, test.maxItems).Validate(ctx, request, &response)
+			ArrayLenBetween(test.minItems, test.maxItems).Validate(ctx, request, &response)
 
 			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
 				t.Fatal("expected error, got no error")

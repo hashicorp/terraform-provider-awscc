@@ -74,7 +74,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The version number of a public third-party extension",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(5, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(5, 64)},
 			Optional:    true,
 			Computed:    true,
 			// PublicVersionNumber is a force-new attribute.
@@ -91,7 +91,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 40)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 40)},
 			Computed:    true,
 		},
 		"type": {

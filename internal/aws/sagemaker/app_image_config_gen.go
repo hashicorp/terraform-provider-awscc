@@ -35,7 +35,7 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The Amazon Resource Name (ARN) of the AppImageConfig.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Computed:    true,
 		},
 		"app_image_config_name": {
@@ -50,7 +50,7 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The Name of the AppImageConfig.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
 			Required:    true,
 			// AppImageConfigName is a force-new attribute.
 		},
@@ -140,7 +140,7 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: MountPath
 									Description: "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 									Optional:    true,
 								},
 							},
@@ -156,14 +156,14 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: DisplayName
 									Description: "The display name of the kernel.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 									Optional:    true,
 								},
 								"name": {
 									// Property: Name
 									Description: "The name of the kernel.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 									Required:    true,
 								},
 							},
@@ -214,13 +214,13 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 				},

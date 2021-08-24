@@ -149,7 +149,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Name
 									Description: "The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:    true,
 								},
 								"region": {
@@ -234,7 +234,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"routing_control_arn": {
 						// Property: RoutingControlArn
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 						Optional:   true,
 					},
 					"search_string": {

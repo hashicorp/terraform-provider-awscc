@@ -67,7 +67,7 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 1000)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1000)},
 						Required:   true,
 					},
 					"value": {
@@ -111,7 +111,7 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
 			Computed:   true,
 		},
 		"name": {
@@ -123,7 +123,7 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Required:   true,
 		},
 	}

@@ -113,7 +113,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"delimiter": {
 									// Property: Delimiter
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 1)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1)},
 									Optional:   true,
 								},
 								"header_row": {
@@ -138,7 +138,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SheetIndexes
 									Type: types.ListType{ElemType: types.NumberType},
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLength(1, 1),
+										validate.ArrayLenBetween(1, 1),
 									},
 									Optional: true,
 								},
@@ -146,7 +146,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SheetNames
 									Type: types.ListType{ElemType: types.StringType},
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLength(1, 1),
+										validate.ArrayLenBetween(1, 1),
 									},
 									Optional: true,
 								},
@@ -383,7 +383,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Dataset name",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -629,7 +629,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Expression
 									Description: "Filtering expression for a parameter",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(4, 1024)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(4, 1024)},
 									Required:    true,
 								},
 								"values_map": {
@@ -639,14 +639,14 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"value": {
 												// Property: Value
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 												Required:   true,
 											},
 											"value_reference": {
 												// Property: ValueReference
 												Description: "Variable name",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLength(2, 128)},
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(2, 128)},
 												Required:    true,
 											},
 										},
@@ -680,21 +680,21 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Format
 															Description: "Date/time format of a date parameter",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(2, 100)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(2, 100)},
 															Required:    true,
 														},
 														"locale_code": {
 															// Property: LocaleCode
 															Description: "Locale code for a date parameter",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(2, 100)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(2, 100)},
 															Optional:    true,
 														},
 														"timezone_offset": {
 															// Property: TimezoneOffset
 															Description: "Timezone offset",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 6)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 6)},
 															Optional:    true,
 														},
 													},
@@ -709,7 +709,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Expression
 															Description: "Filtering expression for a parameter",
 															Type:        types.StringType,
-															Validators:  []tfsdk.AttributeValidator{validate.StringLength(4, 1024)},
+															Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(4, 1024)},
 															Required:    true,
 														},
 														"values_map": {
@@ -719,14 +719,14 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	"value": {
 																		// Property: Value
 																		Type:       types.StringType,
-																		Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+																		Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 																		Required:   true,
 																	},
 																	"value_reference": {
 																		// Property: ValueReference
 																		Description: "Variable name",
 																		Type:        types.StringType,
-																		Validators:  []tfsdk.AttributeValidator{validate.StringLength(2, 128)},
+																		Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(2, 128)},
 																		Required:    true,
 																	},
 																},
@@ -742,7 +742,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Name
 												Description: "Parameter name",
 												Type:        types.StringType,
-												Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 												Required:    true,
 											},
 											"type": {
@@ -759,7 +759,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: PathParameterName
 									Description: "Parameter name",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 									Required:    true,
 								},
 							},
@@ -805,13 +805,13 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:   true,
 					},
 				},

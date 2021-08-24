@@ -60,7 +60,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 					"default_authorizer_name": {
 						// Property: DefaultAuthorizerName
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Optional:   true,
 					},
 				},
@@ -77,7 +77,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Optional:   true,
 			Computed:   true,
 			// DomainConfigurationName is a force-new attribute.
@@ -104,7 +104,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 253)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 253)},
 			Optional:   true,
 			Computed:   true,
 			// DomainName is a force-new attribute.
@@ -139,7 +139,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type: types.ListType{ElemType: types.StringType},
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLength(0, 1),
+				validate.ArrayLenBetween(0, 1),
 			},
 			Optional: true,
 			Computed: true,
@@ -179,7 +179,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 					"server_certificate_arn": {
 						// Property: ServerCertificateArn
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 						Optional:   true,
 					},
 					"server_certificate_status": {

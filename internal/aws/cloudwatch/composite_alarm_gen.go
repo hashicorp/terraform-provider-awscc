@@ -63,7 +63,7 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The description of the alarm",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 			Optional:    true,
 		},
 		"alarm_name": {
@@ -77,7 +77,7 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The name of the Composite Alarm",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Required:    true,
 			// AlarmName is a force-new attribute.
 		},
@@ -92,7 +92,7 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Expression which aggregates the state of other Alarms (Metric or Composite Alarms)",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 10240)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 10240)},
 			Required:    true,
 		},
 		"arn": {
@@ -106,7 +106,7 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Amazon Resource Name (ARN) of the alarm",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1600)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1600)},
 			Computed:    true,
 		},
 		"insufficient_data_actions": {

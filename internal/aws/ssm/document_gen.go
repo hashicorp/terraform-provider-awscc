@@ -78,7 +78,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Name
 						Description: "The name of the document attachment file.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Optional:    true,
 					},
 					"values": {
@@ -86,7 +86,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLength(1, 1),
+							validate.ArrayLenBetween(1, 1),
 						},
 						Optional: true,
 					},
@@ -257,14 +257,14 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The name of the tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Optional:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value of the tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Optional:    true,
 					},
 				},

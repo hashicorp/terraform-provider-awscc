@@ -46,7 +46,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Computed:   true,
 		},
 		"notification_arns": {
@@ -95,7 +95,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
 			Optional:   true,
 		},
 		"path_name": {
@@ -107,7 +107,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
 			Optional:   true,
 		},
 		"product_id": {
@@ -119,7 +119,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
 			Optional:   true,
 		},
 		"product_name": {
@@ -131,7 +131,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Optional:   true,
 		},
 		"provisioned_product_id": {
@@ -143,7 +143,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 50)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 50)},
 			Computed:   true,
 		},
 		"provisioned_product_name": {
@@ -155,7 +155,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Optional:   true,
 			Computed:   true,
 			// ProvisionedProductName is a force-new attribute.
@@ -169,7 +169,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100)},
 			Optional:   true,
 		},
 		"provisioning_artifact_name": {
@@ -211,7 +211,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 1000)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1000)},
 						Required:   true,
 					},
 					"value": {
@@ -325,7 +325,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 50)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 50)},
 			Computed:   true,
 		},
 		"tags": {
@@ -361,13 +361,13 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:   true,
 					},
 				},

@@ -106,7 +106,7 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: LogGroupName
 						Description: "Sets a custom AWS CloudWatch log group name for egress logs. If a log group name isn't specified, the default name is used: /aws/MediaPackage/VodEgressAccessLogs.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Optional:    true,
 					},
 				},
@@ -125,7 +125,7 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The ID of the PackagingGroup.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Required:    true,
 			// Id is a force-new attribute.
 		},

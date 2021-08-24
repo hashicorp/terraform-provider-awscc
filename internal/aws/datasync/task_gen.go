@@ -154,7 +154,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of a task. This value is a text reference that is used to identify the task in the console.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Optional:    true,
 		},
 		"options": {
@@ -497,14 +497,14 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 				},

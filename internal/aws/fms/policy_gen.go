@@ -35,7 +35,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A resource ARN.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 			Computed:    true,
 		},
 		"delete_all_policy_resources": {
@@ -113,7 +113,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(36, 36)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(36, 36)},
 			Computed:   true,
 		},
 		"include_map": {
@@ -172,7 +172,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 			Required:   true,
 		},
 		"remediation_enabled": {
@@ -214,7 +214,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
@@ -239,7 +239,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An AWS resource type",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Required:    true,
 		},
 		"resource_type_list": {
@@ -292,7 +292,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"managed_service_data": {
 						// Property: ManagedServiceData
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 4096)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4096)},
 						Optional:   true,
 					},
 					"type": {
@@ -336,7 +336,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {

@@ -34,7 +34,7 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// }
 			Description: "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(12, 12)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(12, 12)},
 			Required:    true,
 			// AccountId is a force-new attribute.
 		},
@@ -467,7 +467,7 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 									// Property: RoleArn
 									Description: "The ARN of the role that grants permission to send notifications to the target.",
 									Type:        types.StringType,
-									Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 									Optional:    true,
 								},
 								"target_arn": {
@@ -495,7 +495,7 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// }
 			Description: "The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 			Required:    true,
 		},
 	}

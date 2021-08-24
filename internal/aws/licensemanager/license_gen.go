@@ -318,7 +318,7 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "ProductSKU of the license.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1024)},
 			Optional:    true,
 		},
 		"status": {

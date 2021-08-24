@@ -32,7 +32,7 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 500)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 500)},
 			Computed:   true,
 		},
 		"query_description": {
@@ -45,7 +45,7 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 			Optional:   true,
 		},
 		"query_expression": {
@@ -58,7 +58,7 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 4096)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 4096)},
 			Required:   true,
 		},
 		"query_id": {
@@ -71,7 +71,7 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 36)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 36)},
 			Computed:   true,
 		},
 		"query_name": {
@@ -84,7 +84,7 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Required:   true,
 			// QueryName is a force-new attribute.
 		},
@@ -127,14 +127,14 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:    true,
 					},
 				},

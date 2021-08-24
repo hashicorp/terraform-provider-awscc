@@ -45,7 +45,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The URL of the SQS dead letter queue",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
 			Optional:    true,
 		},
 		"default_encryption_key": {
@@ -59,7 +59,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The default encryption key",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
 			Optional:    true,
 		},
 		"default_expiration_days": {
@@ -85,7 +85,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The unique name of the domain.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Required:    true,
 			// DomainName is a force-new attribute.
 		},
@@ -136,13 +136,13 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:   true,
 					},
 				},

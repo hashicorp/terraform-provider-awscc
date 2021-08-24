@@ -170,14 +170,14 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 				},

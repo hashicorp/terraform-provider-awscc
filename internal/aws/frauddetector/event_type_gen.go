@@ -56,7 +56,7 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The description of the event type.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Optional:    true,
 		},
 		"entity_types": {
@@ -141,7 +141,7 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "The description.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Optional:    true,
 					},
 					"inline": {
@@ -168,13 +168,13 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"key": {
 									// Property: Key
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:   true,
 								},
 								"value": {
 									// Property: Value
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 									Required:   true,
 								},
 							},
@@ -344,7 +344,7 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "The description.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Optional:    true,
 					},
 					"inline": {
@@ -371,13 +371,13 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"key": {
 									// Property: Key
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:   true,
 								},
 								"value": {
 									// Property: Value
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 									Required:   true,
 								},
 							},
@@ -481,7 +481,7 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "The description.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Optional:    true,
 					},
 					"inline": {
@@ -508,13 +508,13 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"key": {
 									// Property: Key
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 									Required:   true,
 								},
 								"value": {
 									// Property: Value
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 									Required:   true,
 								},
 							},
@@ -554,7 +554,7 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name for the event type",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -594,13 +594,13 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:   true,
 					},
 				},

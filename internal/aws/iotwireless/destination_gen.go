@@ -97,7 +97,7 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "AWS role ARN that grants access",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 			Required:    true,
 		},
 		"tags": {
@@ -132,13 +132,13 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 127)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 127)},
 						Optional:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 						Optional:   true,
 					},
 				},

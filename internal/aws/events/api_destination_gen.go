@@ -104,7 +104,7 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Name of the apiDestination.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Optional:    true,
 			Computed:    true,
 			// Name is a force-new attribute.

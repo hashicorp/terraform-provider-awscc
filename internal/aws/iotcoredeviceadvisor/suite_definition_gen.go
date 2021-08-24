@@ -34,7 +34,7 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "The Amazon Resource name for the suite definition.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 			Computed:    true,
 		},
 		"suite_definition_configuration": {
@@ -100,7 +100,7 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: DevicePermissionRoleArn
 						Description: "The device permission role arn of the test suite.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 						Required:    true,
 					},
 					"devices": {
@@ -111,13 +111,13 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								"certificate_arn": {
 									// Property: CertificateArn
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 									Optional:   true,
 								},
 								"thing_arn": {
 									// Property: ThingArn
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 									Optional:   true,
 								},
 							},
@@ -138,14 +138,14 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: RootGroup
 						Description: "The root group of the test suite.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 						Required:    true,
 					},
 					"suite_definition_name": {
 						// Property: SuiteDefinitionName
 						Description: "The Name of the suite definition.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Optional:    true,
 					},
 				},
@@ -163,7 +163,7 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "The unique identifier for the suite definition.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(12, 36)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(12, 36)},
 			Computed:    true,
 		},
 		"suite_definition_version": {
@@ -177,7 +177,7 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "The suite definition version of a test suite.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(2, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(2, 255)},
 			Computed:    true,
 		},
 		"tags": {
@@ -219,14 +219,14 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:    true,
 					},
 				},

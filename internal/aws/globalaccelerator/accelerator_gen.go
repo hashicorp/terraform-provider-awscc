@@ -99,7 +99,7 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of accelerator.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Required:    true,
 		},
 		"tags": {
@@ -136,14 +136,14 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "Key of the tag. Value can be 1 to 127 characters.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 127)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 127)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "Value for the tag. Value can be 1 to 255 characters.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 						Required:    true,
 					},
 				},

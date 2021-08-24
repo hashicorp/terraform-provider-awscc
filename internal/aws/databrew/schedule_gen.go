@@ -34,7 +34,7 @@ func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Schedule cron",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 			Required:    true,
 		},
 		"job_names": {
@@ -68,7 +68,7 @@ func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Schedule Name",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -106,13 +106,13 @@ func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:   true,
 					},
 				},

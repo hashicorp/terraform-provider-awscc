@@ -35,7 +35,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			// }
 			Description: "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Computed:    true,
 		},
 		"destination_configuration": {
@@ -78,7 +78,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 								"bucket_name": {
 									// Property: BucketName
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 									Required:   true,
 									// BucketName is a force-new attribute.
 								},
@@ -104,7 +104,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			// }
 			Description: "Recording Configuration Name.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Optional:    true,
 			Computed:    true,
 			// Name is a force-new attribute.
@@ -161,13 +161,13 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:   true,
 					},
 				},

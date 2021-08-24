@@ -65,7 +65,7 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The name of the recovery group to create.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Required:    true,
 			// RecoveryGroupName is a force-new attribute.
 		},

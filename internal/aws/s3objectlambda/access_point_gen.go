@@ -56,7 +56,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name you want to assign to this Object lambda Access Point.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(3, 45)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(3, 45)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -129,7 +129,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"supporting_access_point": {
 						// Property: SupportingAccessPoint
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 						Required:   true,
 					},
 					"transformation_configurations": {

@@ -94,9 +94,13 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 	case cfschema.PropertyTypeString:
 		e.printf("Type:types.StringType,\n")
 
+		// if (property.MinLength != nil && property.MaxLength == nil) || (property.MinLength == nil && property.MaxLength != nil) {
+		// 	return 0, fmt.Errorf("%s has only one of MinLength and MaxLength specified", strings.Join(path, "/"))
+		// }
+
 		if property.MinLength != nil && property.MaxLength != nil {
 			features |= UsesValidation
-			e.printf("Validators:[]tfsdk.AttributeValidator{validate.StringLength(%d, %d)},\n", *property.MinLength, *property.MaxLength)
+			e.printf("Validators:[]tfsdk.AttributeValidator{validate.StringLenBetween(%d, %d)},\n", *property.MinLength, *property.MaxLength)
 		}
 
 	//
@@ -227,12 +231,16 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 			if elementType != "" {
 				e.printf("Type:types.ListType{ElemType:%s},\n", elementType)
 
+				// if (property.MinItems != nil && property.MaxItems == nil) || (property.MinItems == nil && property.MaxItems != nil) {
+				// 	return 0, fmt.Errorf("%s has only one of MinItems and MaxItems specified", strings.Join(path, "/"))
+				// }
+
 				if arrayType == aggregateOrderedSet || (property.MinItems != nil && property.MaxItems != nil) {
 					features |= UsesValidation
 					e.printf("Validators:[]tfsdk.AttributeValidator{\n")
 
 					if property.MinItems != nil && property.MaxItems != nil {
-						e.printf("validate.ArrayLength(%d, %d),\n", *property.MinItems, *property.MaxItems)
+						e.printf("validate.ArrayLenBetween(%d, %d),\n", *property.MinItems, *property.MaxItems)
 					}
 
 					if arrayType == aggregateOrderedSet {

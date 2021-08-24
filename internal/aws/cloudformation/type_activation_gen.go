@@ -87,14 +87,14 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: LogGroupName
 						Description: "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 512)},
 						Optional:    true,
 					},
 					"log_role_arn": {
 						// Property: LogRoleArn
 						Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Optional:    true,
 					},
 				},
@@ -114,7 +114,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The Major Version of the type you want to enable",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 100000)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 100000)},
 			Optional:    true,
 		},
 		"public_type_arn": {
@@ -144,7 +144,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 40)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 40)},
 			Optional:    true,
 			Computed:    true,
 			// PublisherId is a force-new attribute.
@@ -192,7 +192,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "An alias to assign to the public extension in this account and region. If you specify an alias for the extension, you must then use the alias to refer to the extension in your templates.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(10, 204)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(10, 204)},
 			Optional:    true,
 			Computed:    true,
 			// TypeNameAlias is a force-new attribute.

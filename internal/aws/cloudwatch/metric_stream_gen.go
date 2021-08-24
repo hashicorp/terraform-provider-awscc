@@ -34,7 +34,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Amazon Resource Name of the metric stream.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 			Computed:    true,
 		},
 		"creation_date": {
@@ -81,7 +81,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Namespace
 						Description: "Only metrics with Namespace matching this value will be streamed.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 						Required:    true,
 					},
 				},
@@ -103,7 +103,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the Kinesis Firehose where to stream the data.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 			Required:    true,
 		},
 		"include_filters": {
@@ -138,7 +138,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Namespace
 						Description: "Only metrics with Namespace matching this value will be streamed.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 						Required:    true,
 					},
 				},
@@ -172,7 +172,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of the metric stream.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Optional:    true,
 			Computed:    true,
 			// Name is a force-new attribute.
@@ -188,7 +188,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The output format of the data streamed to the Kinesis Firehose.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Required:    true,
 		},
 		"role_arn": {
@@ -202,7 +202,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the role that provides access to the Kinesis Firehose.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 			Required:    true,
 		},
 		"state": {
@@ -216,7 +216,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Displays the state of the Metric Stream.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 			Computed:    true,
 		},
 		"tags": {
@@ -257,14 +257,14 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "A unique identifier for the tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "An optional string, which you can use to describe or define the tag.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Optional:    true,
 					},
 				},

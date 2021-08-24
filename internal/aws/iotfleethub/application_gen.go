@@ -35,7 +35,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the application.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1600)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1600)},
 			Computed:    true,
 		},
 		"application_creation_date": {
@@ -61,7 +61,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Application Description, should be between 1 and 2048 characters.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 2048)},
 			Optional:    true,
 		},
 		"application_id": {
@@ -76,7 +76,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the application.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(36, 36)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(36, 36)},
 			Computed:    true,
 		},
 		"application_last_update_date": {
@@ -102,7 +102,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Application Name, should be between 1 and 256 characters.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Required:    true,
 		},
 		"application_state": {
@@ -150,7 +150,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the role that the web application assumes when it interacts with AWS IoT Core. For more info on configuring this attribute, see https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_CreateApplication.html#API_iotfleethub_CreateApplication_RequestSyntax",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1600)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 1600)},
 			Required:    true,
 		},
 		"sso_client_id": {
@@ -205,14 +205,14 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:    true,
 					},
 				},

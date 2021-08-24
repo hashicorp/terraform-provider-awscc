@@ -35,7 +35,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Channel ARN is automatically generated on creation and assigned as the unique identifier.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 			Computed:    true,
 		},
 		"authorized": {
@@ -87,7 +87,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Channel",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Optional:    true,
 		},
 		"playback_url": {
@@ -113,7 +113,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 128)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Optional:    true,
 		},
 		"tags": {
@@ -152,13 +152,13 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"key": {
 						// Property: Key
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:   true,
 					},
 					"value": {
 						// Property: Value
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 						Required:   true,
 					},
 				},

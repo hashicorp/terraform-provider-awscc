@@ -33,7 +33,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:       types.StringType,
-			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 20)},
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 20)},
 			Required:   true,
 			// AppId is a force-new attribute.
 		},
@@ -159,7 +159,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"branch_name": {
 						// Property: BranchName
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 						Required:   true,
 					},
 					"prefix": {

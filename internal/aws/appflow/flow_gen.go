@@ -490,7 +490,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"bucket_name": {
 															// Property: BucketName
 															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 															Optional:   true,
 														},
 														"bucket_prefix": {
@@ -545,7 +545,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"bucket_name": {
 															// Property: BucketName
 															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 															Optional:   true,
 														},
 														"bucket_prefix": {
@@ -565,7 +565,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"intermediate_bucket_name": {
 												// Property: IntermediateBucketName
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 												Required:   true,
 											},
 											"object": {
@@ -584,7 +584,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"bucket_name": {
 												// Property: BucketName
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 												Required:   true,
 											},
 											"bucket_prefix": {
@@ -651,7 +651,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"bucket_name": {
 															// Property: BucketName
 															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 															Optional:   true,
 														},
 														"bucket_prefix": {
@@ -704,7 +704,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"bucket_name": {
 															// Property: BucketName
 															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 															Optional:   true,
 														},
 														"bucket_prefix": {
@@ -724,7 +724,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"intermediate_bucket_name": {
 												// Property: IntermediateBucketName
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 												Required:   true,
 											},
 											"object": {
@@ -743,7 +743,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"bucket_name": {
 												// Property: BucketName
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(16, 63)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(16, 63)},
 												Required:   true,
 											},
 											"bucket_prefix": {
@@ -810,7 +810,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"bucket_name": {
 															// Property: BucketName
 															Type:       types.StringType,
-															Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 															Optional:   true,
 														},
 														"bucket_prefix": {
@@ -881,7 +881,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of the flow.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Required:    true,
 			// FlowName is a force-new attribute.
 		},
@@ -897,7 +897,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 			Optional:    true,
 			Computed:    true,
 			// KMSArn is a force-new attribute.
@@ -1290,7 +1290,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"bucket_name": {
 												// Property: BucketName
 												Type:       types.StringType,
-												Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(3, 63)},
 												Required:   true,
 											},
 											"bucket_prefix": {
@@ -1448,14 +1448,14 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "A string used to identify this tag",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "A string containing the value for the tag",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:    true,
 					},
 				},
@@ -2023,7 +2023,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"schedule_expression": {
 									// Property: ScheduleExpression
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 									Required:   true,
 								},
 								"schedule_start_time": {

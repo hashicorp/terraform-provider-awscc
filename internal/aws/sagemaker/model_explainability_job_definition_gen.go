@@ -45,7 +45,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Description: "The Amazon Resource Name (ARN) of job definition.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 256)},
 			Computed:    true,
 		},
 		"job_definition_name": {
@@ -252,7 +252,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						// Property: BaseliningJobName
 						Description: "The name of a processing job",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 63)},
 						Optional:    true,
 					},
 					"constraints_resource": {
@@ -595,7 +595,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLength(1, 5),
+										validate.ArrayLenBetween(1, 5),
 									},
 									Required: true,
 								},
@@ -604,7 +604,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									Description: "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLength(1, 16),
+										validate.ArrayLenBetween(1, 16),
 									},
 									Required: true,
 								},
@@ -630,7 +630,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 			Required:    true,
 			// RoleArn is a force-new attribute.
 		},
@@ -705,7 +705,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
-						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 128)},
 						Required:    true,
 					},
 					"value": {

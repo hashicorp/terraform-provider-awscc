@@ -49,7 +49,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Event Time Feature Name.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Required:    true,
 			// EventTimeFeatureName is a force-new attribute.
 		},
@@ -93,7 +93,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"feature_name": {
 						// Property: FeatureName
 						Type:       types.StringType,
-						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 						Required:   true,
 					},
 					"feature_type": {
@@ -122,7 +122,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Name of the FeatureGroup.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Required:    true,
 			// FeatureGroupName is a force-new attribute.
 		},
@@ -197,19 +197,19 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"catalog": {
 									// Property: Catalog
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 									Required:   true,
 								},
 								"database": {
 									// Property: Database
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 									Required:   true,
 								},
 								"table_name": {
 									// Property: TableName
 									Type:       types.StringType,
-									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(1, 255)},
 									Required:   true,
 								},
 							},
@@ -305,7 +305,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Record Identifier Feature Name.",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(1, 64)},
 			Required:    true,
 			// RecordIdentifierFeatureName is a force-new attribute.
 		},
@@ -321,7 +321,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Role Arn",
 			Type:        types.StringType,
-			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(20, 2048)},
 			Optional:    true,
 			Computed:    true,
 			// RoleArn is a force-new attribute.
