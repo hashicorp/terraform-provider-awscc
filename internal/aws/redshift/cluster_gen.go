@@ -239,6 +239,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request",
 			Type:        types.ListType{ElemType: types.StringType},
 			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 10),
 				validate.UniqueItems(),
 			},
 			Optional: true,

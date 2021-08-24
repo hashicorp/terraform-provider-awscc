@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -198,13 +200,19 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SecurityGroups
 									Description: "The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used. There is a limit of 5 security groups that can be specified per AwsVpcConfiguration.",
 									Type:        types.ListType{ElemType: types.StringType},
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 5),
+									},
+									Optional: true,
 								},
 								"subnets": {
 									// Property: Subnets
 									Description: "The subnets associated with the task or service. There is a limit of 16 subnets that can be specified per AwsVpcConfiguration.",
 									Type:        types.ListType{ElemType: types.StringType},
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 16),
+									},
+									Required: true,
 								},
 							},
 						),

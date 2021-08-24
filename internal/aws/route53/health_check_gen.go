@@ -164,7 +164,10 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"child_health_checks": {
 						// Property: ChildHealthChecks
-						Type:     types.ListType{ElemType: types.StringType},
+						Type: types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 256),
+						},
 						Optional: true,
 					},
 					"enable_sni": {
@@ -216,7 +219,10 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"regions": {
 						// Property: Regions
-						Type:     types.ListType{ElemType: types.StringType},
+						Type: types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 64),
+						},
 						Optional: true,
 					},
 					"request_interval": {

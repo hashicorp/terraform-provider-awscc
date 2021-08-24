@@ -920,7 +920,10 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: EventLevels
 															Description: "The levels of event to log. ",
 															Type:        types.ListType{ElemType: types.StringType},
-															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.ArrayLenAtLeast(1),
+															},
+															Required: true,
 														},
 														"event_name": {
 															// Property: EventName
@@ -1030,7 +1033,10 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: EventLevels
 																		Description: "The levels of event to log. ",
 																		Type:        types.ListType{ElemType: types.StringType},
-																		Required:    true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.ArrayLenAtLeast(1),
+																		},
+																		Required: true,
 																	},
 																	"event_name": {
 																		// Property: EventName
@@ -1207,7 +1213,10 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: EventLevels
 															Description: "The levels of event to log. ",
 															Type:        types.ListType{ElemType: types.StringType},
-															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.ArrayLenAtLeast(1),
+															},
+															Required: true,
 														},
 														"event_name": {
 															// Property: EventName
@@ -1317,7 +1326,10 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: EventLevels
 																		Description: "The levels of event to log. ",
 																		Type:        types.ListType{ElemType: types.StringType},
-																		Required:    true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.ArrayLenAtLeast(1),
+																		},
+																		Required: true,
 																	},
 																	"event_name": {
 																		// Property: EventName
@@ -1430,7 +1442,10 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ResourceList
 						Description: "The list of resource ARNs that belong to the component.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

@@ -169,7 +169,10 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"column_names": {
 						// Property: ColumnNames
-						Type:     types.ListType{ElemType: types.StringType},
+						Type: types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 						Optional: true,
 					},
 					"principals": {

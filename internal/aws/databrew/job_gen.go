@@ -841,7 +841,10 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"included_statistics": {
 												// Property: IncludedStatistics
-												Type:     types.ListType{ElemType: types.StringType},
+												Type: types.ListType{ElemType: types.StringType},
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenAtLeast(1),
+												},
 												Optional: true,
 											},
 											"overrides": {
@@ -884,7 +887,10 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"included_statistics": {
 									// Property: IncludedStatistics
-									Type:     types.ListType{ElemType: types.StringType},
+									Type: types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+									},
 									Optional: true,
 								},
 								"overrides": {

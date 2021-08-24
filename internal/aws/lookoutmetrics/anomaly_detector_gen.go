@@ -541,7 +541,10 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: DimensionList
 						Description: "Dimensions for this MetricSet.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(0),
+						},
+						Optional: true,
 					},
 					"metric_list": {
 						// Property: MetricList

@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -61,7 +63,10 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Regions.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 5),
+			},
+			Optional: true,
 		},
 		"parent_readiness_scopes": {
 			// Property: ParentReadinessScopes
@@ -77,7 +82,10 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 5),
+			},
+			Computed: true,
 		},
 		"tags": {
 			// Property: Tags

@@ -150,7 +150,10 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A list of up to 5 subnet IDs to associate with the Studio. The subnets must belong to the VPC specified by VpcId. Studio users can create a Workspace in any of the specified subnets.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
+			Required: true,
 		},
 		"tags": {
 			// Property: Tags

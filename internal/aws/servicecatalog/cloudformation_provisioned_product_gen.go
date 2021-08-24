@@ -62,6 +62,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type: types.ListType{ElemType: types.StringType},
 			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 5),
 				validate.UniqueItems(),
 			},
 			Optional: true,

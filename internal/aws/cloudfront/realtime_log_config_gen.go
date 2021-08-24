@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -110,7 +112,10 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Type:     types.ListType{ElemType: types.StringType},
+			Type: types.ListType{ElemType: types.StringType},
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 			Required: true,
 		},
 		"name": {

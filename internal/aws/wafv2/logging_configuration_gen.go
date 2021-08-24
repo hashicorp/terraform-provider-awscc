@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -342,7 +344,10 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												// Property: IncludedPaths
 												Description: "Match only the specified include paths. See also MatchScope in JsonBody.",
 												Type:        types.ListType{ElemType: types.StringType},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenAtLeast(1),
+												},
+												Optional: true,
 											},
 										},
 									),

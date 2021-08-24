@@ -79,7 +79,10 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "maxItems": 20,
 			//   "type": "array"
 			// }
-			Type:     types.ListType{ElemType: types.StringType},
+			Type: types.ListType{ElemType: types.StringType},
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 20),
+			},
 			Optional: true,
 		},
 		"name": {

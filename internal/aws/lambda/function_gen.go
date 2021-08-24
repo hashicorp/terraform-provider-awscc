@@ -313,6 +313,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Command.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 1500),
 							validate.UniqueItems(),
 						},
 						Optional: true,
@@ -322,6 +323,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "EntryPoint.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 1500),
 							validate.UniqueItems(),
 						},
 						Optional: true,
@@ -552,13 +554,19 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: SecurityGroupIds
 						Description: "A list of VPC security groups IDs.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 5),
+						},
+						Optional: true,
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
 						Description: "A list of VPC subnet IDs.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 16),
+						},
+						Optional: true,
 					},
 				},
 			),

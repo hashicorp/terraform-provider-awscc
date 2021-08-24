@@ -78,3 +78,71 @@ func ArrayLenBetween(minItems, maxItems int) tfsdk.AttributeValidator {
 		maxItems: maxItems,
 	}
 }
+
+// arrayLenAtLeastValidator validates that an array (List/Set) Attribute's length is at least a certain value.
+type arrayLenAtLeastValidator struct {
+	tfsdk.AttributeValidator
+
+	minItems int
+}
+
+// Description describes the validation in plain text formatting.
+func (v arrayLenAtLeastValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("array length must be at least %d", v.minItems)
+}
+
+// MarkdownDescription describes the validation in Markdown formatting.
+func (v arrayLenAtLeastValidator) MarkdownDescription(ctx context.Context) string {
+	return v.Description(ctx)
+}
+
+// Validate performs the validation.
+func (v arrayLenAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+	var l int
+	list, ok := request.AttributeConfig.(types.List)
+
+	if ok {
+		if list.Unknown || list.Null {
+			return
+		}
+
+		l = len(list.Elems)
+	} else {
+		set, ok := request.AttributeConfig.(providertypes.Set)
+
+		if !ok {
+			response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+				Severity: tfprotov6.DiagnosticSeverityError,
+				Summary:  "Invalid value type",
+				Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
+			})
+		}
+
+		if set.Unknown || set.Null {
+			return
+		}
+
+		l = len(set.Elems)
+	}
+
+	if l < v.minItems {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Invalid length",
+			Detail:   fmt.Sprintf("expected length of %s to be at least %d, got %d", request.AttributePath, v.minItems, l),
+		})
+
+		return
+	}
+}
+
+// ArrayLenAtLeast returns a new array length at least validator.
+func ArrayLenAtLeast(minItems int) tfsdk.AttributeValidator {
+	if minItems < 0 {
+		return nil
+	}
+
+	return arrayLenAtLeastValidator{
+		minItems: minItems,
+	}
+}

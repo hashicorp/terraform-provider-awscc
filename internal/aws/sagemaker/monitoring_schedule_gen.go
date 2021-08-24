@@ -650,13 +650,19 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												// Property: ContainerArguments
 												Description: "An array of arguments for the container used to run the monitoring job.",
 												Type:        types.ListType{ElemType: types.StringType},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenBetween(0, 50),
+												},
+												Optional: true,
 											},
 											"container_entrypoint": {
 												// Property: ContainerEntrypoint
 												Description: "Specifies the entrypoint for a container used to run the monitoring job.",
 												Type:        types.ListType{ElemType: types.StringType},
-												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenBetween(0, 100),
+												},
+												Optional: true,
 											},
 											"image_uri": {
 												// Property: ImageUri

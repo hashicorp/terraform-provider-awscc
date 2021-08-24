@@ -79,7 +79,10 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 							map[string]tfsdk.Attribute{
 								"source": {
 									// Property: Source
-									Type:     types.ListType{ElemType: types.StringType},
+									Type: types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 1),
+									},
 									Required: true,
 								},
 							},
@@ -164,7 +167,10 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 										map[string]tfsdk.Attribute{
 											"source": {
 												// Property: Source
-												Type:     types.ListType{ElemType: types.StringType},
+												Type: types.ListType{ElemType: types.StringType},
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenBetween(0, 1),
+												},
 												Required: true,
 											},
 										},
