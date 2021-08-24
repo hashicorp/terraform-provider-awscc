@@ -34,6 +34,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket location.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Computed:    true,
 		},
 		"location_uri": {
@@ -47,6 +48,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The URL of the S3 location that was described.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4356)},
 			Computed:    true,
 		},
 		"s3_bucket_arn": {
@@ -60,6 +62,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 156)},
 			Required:    true,
 			// S3BucketArn is a force-new attribute.
 			// S3BucketArn is a write-only attribute.
@@ -90,6 +93,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: BucketAccessRoleArn
 						Description: "The ARN of the IAM role of the Amazon S3 bucket.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
 						Required:    true,
 					},
 				},
@@ -129,6 +133,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
 			Optional:    true,
 			Computed:    true,
 			// Subdirectory is a force-new attribute.

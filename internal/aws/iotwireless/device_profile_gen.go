@@ -44,6 +44,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "Service profile Id. Returned after successful create.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 			Computed:    true,
 		},
 		"lo_ra_wan": {
@@ -114,8 +115,9 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"mac_version": {
 						// Property: MacVersion
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
+						Optional:   true,
 					},
 					"max_duty_cycle": {
 						// Property: MaxDutyCycle
@@ -144,13 +146,15 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"reg_params_revision": {
 						// Property: RegParamsRevision
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
+						Optional:   true,
 					},
 					"rf_region": {
 						// Property: RfRegion
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
+						Optional:   true,
 					},
 					"supports_32_bit_f_cnt": {
 						// Property: Supports32BitFCnt
@@ -186,6 +190,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "Name of service profile",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 			Optional:    true,
 		},
 		"tags": {

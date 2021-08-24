@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -127,6 +129,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The identifier for the proxy.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 			Required:    true,
 			// DBProxyName is a force-new attribute.
 		},

@@ -34,6 +34,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 562)},
 			Optional:    true,
 		},
 		"destination_location_arn": {
@@ -47,6 +48,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of an AWS storage resource's location.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Required:    true,
 			// DestinationLocationArn is a force-new attribute.
 		},
@@ -129,12 +131,14 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: FilterType
 						Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 						Optional:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 409600)},
 						Optional:    true,
 					},
 				},
@@ -403,6 +407,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ScheduleExpression
 						Description: "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:    true,
 					},
 				},
@@ -420,6 +425,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the source location for the task.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Required:    true,
 			// SourceLocationArn is a force-new attribute.
 		},
@@ -531,6 +537,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the task.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Computed:    true,
 		},
 	}

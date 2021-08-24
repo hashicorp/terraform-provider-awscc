@@ -70,8 +70,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
+			Computed:   true,
 		},
 		"auto_branch_creation_config": {
 			// Property: AutoBranchCreationConfig
@@ -230,13 +231,15 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
+									Required:   true,
 								},
 								"value": {
 									// Property: Value
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 5500)},
+									Required:   true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
@@ -245,8 +248,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"pull_request_environment_name": {
 						// Property: PullRequestEnvironmentName
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 20)},
+						Optional:   true,
 					},
 					"stage": {
 						// Property: Stage
@@ -422,8 +426,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
+			Optional:   true,
 		},
 		"enable_branch_auto_deletion": {
 			// Property: EnableBranchAutoDeletion
@@ -465,13 +470,15 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 5500)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -512,8 +519,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
+			Optional:   true,
 			// OauthToken is a write-only attribute.
 		},
 		"repository": {

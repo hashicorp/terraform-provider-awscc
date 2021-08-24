@@ -30,8 +30,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 1000,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
+			Computed:   true,
 		},
 		"project_name": {
 			// Property: ProjectName

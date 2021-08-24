@@ -47,6 +47,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A text description of the repository.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
 			Optional:    true,
 		},
 		"domain_name": {

@@ -52,6 +52,7 @@ func attributeGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The description of the attribute group. ",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 			Optional:    true,
 		},
 		"id": {

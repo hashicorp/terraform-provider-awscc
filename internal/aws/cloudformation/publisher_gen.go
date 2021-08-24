@@ -91,6 +91,7 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The URL to the publisher's profile with the identity provider.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 			Computed:    true,
 		},
 		"publisher_status": {

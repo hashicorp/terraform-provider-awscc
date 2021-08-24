@@ -217,8 +217,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

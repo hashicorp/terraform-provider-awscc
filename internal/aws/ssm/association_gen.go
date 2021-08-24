@@ -228,8 +228,9 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"output_s3_key_prefix": {
 									// Property: OutputS3KeyPrefix
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
+									Optional:   true,
 								},
 								"output_s3_region": {
 									// Property: OutputS3Region

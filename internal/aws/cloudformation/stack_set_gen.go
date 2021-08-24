@@ -438,6 +438,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name to associate with the stack set. The name must be unique in the Region where you create your stack set.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Required:    true,
 			// StackSetName is a force-new attribute.
 		},

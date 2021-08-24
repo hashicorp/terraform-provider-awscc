@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -42,6 +44,7 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Description: "The version identifier of the API documentation snapshot.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
 			Required:    true,
 			// DocumentationVersion is a force-new attribute.
 		},
@@ -55,6 +58,7 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Description: "The identifier of the API.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
 			Required:    true,
 			// RestApiId is a force-new attribute.
 		},

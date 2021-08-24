@@ -30,8 +30,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 1000,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
+			Computed:   true,
 		},
 		"data_source_configuration": {
 			// Property: DataSourceConfiguration
@@ -2756,6 +2757,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Schedule",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
 			Optional:    true,
 		},
 		"tags": {

@@ -143,12 +143,14 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: HTTPMethod
 						Description: "Matches the HTTP method from a request URL.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10)},
 						Optional:    true,
 					},
 					"host": {
 						// Property: Host
 						Description: "Matches the hostname from a request URL.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 						Optional:    true,
 					},
 					"priority": {
@@ -167,6 +169,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ResourceARN
 						Description: "Matches the ARN of the AWS resource on which the service runs.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 500)},
 						Optional:    true,
 					},
 					"rule_arn": {
@@ -186,18 +189,21 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ServiceName
 						Description: "Matches the name that the service uses to identify itself in segments.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 						Optional:    true,
 					},
 					"service_type": {
 						// Property: ServiceType
 						Description: "Matches the origin that the service uses to identify its type in segments.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 						Optional:    true,
 					},
 					"url_path": {
 						// Property: URLPath
 						Description: "Matches the path from a request URL.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 						Optional:    true,
 					},
 					"version": {
@@ -335,12 +341,14 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: HTTPMethod
 									Description: "Matches the HTTP method from a request URL.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10)},
 									Optional:    true,
 								},
 								"host": {
 									// Property: Host
 									Description: "Matches the hostname from a request URL.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 									Optional:    true,
 								},
 								"priority": {
@@ -359,6 +367,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ResourceARN
 									Description: "Matches the ARN of the AWS resource on which the service runs.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 500)},
 									Optional:    true,
 								},
 								"rule_arn": {
@@ -378,18 +387,21 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ServiceName
 									Description: "Matches the name that the service uses to identify itself in segments.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 									Optional:    true,
 								},
 								"service_type": {
 									// Property: ServiceType
 									Description: "Matches the origin that the service uses to identify its type in segments.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 									Optional:    true,
 								},
 								"url_path": {
 									// Property: URLPath
 									Description: "Matches the path from a request URL.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 									Optional:    true,
 								},
 								"version": {
@@ -497,12 +509,14 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: HTTPMethod
 						Description: "Matches the HTTP method from a request URL.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 10)},
 						Optional:    true,
 					},
 					"host": {
 						// Property: Host
 						Description: "Matches the hostname from a request URL.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 						Optional:    true,
 					},
 					"priority": {
@@ -521,6 +535,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ResourceARN
 						Description: "Matches the ARN of the AWS resource on which the service runs.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 500)},
 						Optional:    true,
 					},
 					"rule_arn": {
@@ -540,18 +555,21 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ServiceName
 						Description: "Matches the name that the service uses to identify itself in segments.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 						Optional:    true,
 					},
 					"service_type": {
 						// Property: ServiceType
 						Description: "Matches the origin that the service uses to identify its type in segments.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 						Optional:    true,
 					},
 					"url_path": {
 						// Property: URLPath
 						Description: "Matches the path from a request URL.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 						Optional:    true,
 					},
 				},

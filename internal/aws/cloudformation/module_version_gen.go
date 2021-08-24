@@ -59,6 +59,7 @@ func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The URL of a page providing detailed documentation for this module.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
 			Computed:    true,
 		},
 		"is_default_version": {

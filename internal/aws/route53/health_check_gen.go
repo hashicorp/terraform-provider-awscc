@@ -182,8 +182,9 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"fully_qualified_domain_name": {
 						// Property: FullyQualifiedDomainName
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
+						Optional:   true,
 					},
 					"health_threshold": {
 						// Property: HealthThreshold
@@ -192,8 +193,9 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"ip_address": {
 						// Property: IPAddress
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 45)},
+						Optional:   true,
 					},
 					"insufficient_data_health_status": {
 						// Property: InsufficientDataHealthStatus
@@ -234,8 +236,9 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"resource_path": {
 						// Property: ResourcePath
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
+						Optional:   true,
 					},
 					"routing_control_arn": {
 						// Property: RoutingControlArn
@@ -245,8 +248,9 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"search_string": {
 						// Property: SearchString
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
+						Optional:   true,
 					},
 					"type": {
 						// Property: Type
@@ -304,12 +308,14 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:    true,
 					},
 				},

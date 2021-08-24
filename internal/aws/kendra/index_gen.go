@@ -30,8 +30,9 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 1000,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
+			Computed:   true,
 		},
 		"capacity_units": {
 			// Property: CapacityUnits
@@ -75,8 +76,9 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 1000,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
+			Optional:   true,
 		},
 		"document_metadata_configurations": {
 			// Property: DocumentMetadataConfigurations

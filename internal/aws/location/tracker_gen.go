@@ -31,8 +31,9 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1600)},
+			Computed:   true,
 		},
 		"create_time": {
 			// Property: CreateTime
@@ -108,8 +109,9 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1600)},
+			Computed:   true,
 		},
 		"tracker_name": {
 			// Property: TrackerName

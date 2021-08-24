@@ -122,12 +122,14 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: DocumentName
 									Description: "The document name to use when starting the SSM automation document.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 									Required:    true,
 								},
 								"document_version": {
 									// Property: DocumentVersion
 									Description: "The version of the document to use when starting the SSM automation document.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 									Optional:    true,
 								},
 								"parameters": {
@@ -161,6 +163,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: RoleArn
 									Description: "The role ARN to use when starting the SSM automation document.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
 									Required:    true,
 								},
 								"target_account": {
@@ -192,6 +195,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ARN of the response plan.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
 			Computed:    true,
 		},
 		"chat_channel": {
@@ -343,6 +347,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SnsTopicArn
 									Description: "The ARN of the Chatbot SNS topic.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
 									Optional:    true,
 								},
 							},
@@ -363,6 +368,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Title
 						Description: "The title string.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 200)},
 						Required:    true,
 					},
 				},

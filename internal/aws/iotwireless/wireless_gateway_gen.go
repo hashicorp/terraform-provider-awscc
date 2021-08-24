@@ -44,6 +44,7 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "Description of Wireless Gateway.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
 			Optional:    true,
 		},
 		"id": {
@@ -56,6 +57,7 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "Id for Wireless Gateway. Returned upon successful create.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 			Computed:    true,
 		},
 		"last_uplink_received_at": {
@@ -100,8 +102,9 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"rf_region": {
 						// Property: RfRegion
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
+						Required:   true,
 					},
 				},
 			),
@@ -117,6 +120,7 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "Name of Wireless Gateway.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 			Optional:    true,
 		},
 		"tags": {

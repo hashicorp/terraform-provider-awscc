@@ -44,6 +44,7 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Destination description",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
 			Optional:    true,
 		},
 		"expression": {
@@ -83,6 +84,7 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Unique name of destination",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},

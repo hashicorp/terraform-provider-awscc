@@ -128,6 +128,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 			Optional:    true,
 			Computed:    true,
 			// PublicTypeArn is a force-new attribute.

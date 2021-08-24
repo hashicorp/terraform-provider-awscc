@@ -94,13 +94,17 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 	case cfschema.PropertyTypeString:
 		e.printf("Type:types.StringType,\n")
 
-		// if (property.MinLength != nil && property.MaxLength == nil) || (property.MinLength == nil && property.MaxLength != nil) {
-		// 	return 0, fmt.Errorf("%s has only one of MinLength and MaxLength specified", strings.Join(path, "/"))
-		// }
-
-		if property.MinLength != nil && property.MaxLength != nil {
+		if property.MinLength != nil && property.MaxLength == nil {
 			features |= UsesValidation
-			e.printf("Validators:[]tfsdk.AttributeValidator{validate.StringLenBetween(%d,%d)},\n", *property.MinLength, *property.MaxLength)
+			e.printf("Validators:[]tfsdk.AttributeValidator{validate.StringLenAtLeast(%d)},\n", *property.MinLength)
+		}
+		if property.MaxLength != nil {
+			features |= UsesValidation
+			minLength := 0
+			if property.MinLength != nil {
+				minLength = *property.MinLength
+			}
+			e.printf("Validators:[]tfsdk.AttributeValidator{validate.StringLenBetween(%d,%d)},\n", minLength, *property.MaxLength)
 		}
 
 	//

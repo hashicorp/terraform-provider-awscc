@@ -72,8 +72,9 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -99,8 +100,9 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "maxLength": 1024,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
+			Optional:   true,
 		},
 		"id": {
 			// Property: Id

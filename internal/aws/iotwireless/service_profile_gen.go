@@ -44,6 +44,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Service profile Id. Returned after successful create.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 			Computed:    true,
 		},
 		"lo_ra_wan": {
@@ -223,6 +224,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Name of service profile",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 			Optional:    true,
 		},
 		"tags": {

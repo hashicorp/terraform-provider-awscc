@@ -33,6 +33,7 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the cell.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 			Computed:    true,
 		},
 		"cell_name": {
@@ -46,6 +47,7 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the cell to create.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 			Required:    true,
 			// CellName is a force-new attribute.
 		},

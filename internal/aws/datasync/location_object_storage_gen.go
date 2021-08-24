@@ -88,6 +88,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The Amazon Resource Name (ARN) of the location that is created.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Computed:    true,
 		},
 		"location_uri": {
@@ -101,6 +102,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The URL of the object storage location that was described.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4356)},
 			Computed:    true,
 		},
 		"secret_key": {
@@ -130,6 +132,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
 			Required:    true,
 			// ServerHostname is a force-new attribute.
 			// ServerHostname is a write-only attribute.
@@ -171,6 +174,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The subdirectory in the self-managed object storage server that is used to read data from.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
 			Optional:    true,
 			// Subdirectory is a write-only attribute.
 		},

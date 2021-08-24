@@ -33,6 +33,7 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of Addon",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
 			Required:    true,
 			// AddonName is a force-new attribute.
 		},
@@ -46,6 +47,7 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Version of Addon",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
 			Optional:    true,
 		},
 		"arn": {
@@ -69,6 +71,7 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of Cluster",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
 			Required:    true,
 			// ClusterName is a force-new attribute.
 		},
@@ -86,6 +89,7 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Resolve parameter value conflicts",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
 			Optional:    true,
 			// ResolveConflicts is a write-only attribute.
 		},
@@ -99,6 +103,7 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "IAM role to bind to the add-on's service account",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
 			Optional:    true,
 		},
 		"tags": {

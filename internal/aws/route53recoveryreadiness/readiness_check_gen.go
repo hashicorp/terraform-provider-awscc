@@ -33,6 +33,7 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The Amazon Resource Name (ARN) of the readiness check.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 			Computed:    true,
 		},
 		"readiness_check_name": {

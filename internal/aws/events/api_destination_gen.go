@@ -52,8 +52,9 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "maxLength": 512,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
+			Optional:   true,
 		},
 		"http_method": {
 			// Property: HttpMethod

@@ -160,6 +160,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A description of the function.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 			Optional:    true,
 		},
 		"environment": {
@@ -233,12 +234,14 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Arn
 						Description: "The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 200)},
 						Required:    true,
 					},
 					"local_mount_path": {
 						// Property: LocalMountPath
 						Description: "The path where the function can access the file system, starting with /mnt/.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 160)},
 						Required:    true,
 					},
 				},
@@ -258,6 +261,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the Lambda function, up to 64 characters in length. If you don't specify a name, AWS CloudFormation generates one.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
 			Optional:    true,
 			Computed:    true,
 			// FunctionName is a force-new attribute.
@@ -273,6 +277,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Optional:    true,
 		},
 		"image_config": {

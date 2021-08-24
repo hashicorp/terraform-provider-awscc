@@ -220,6 +220,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The unique Studio access URL.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
 			Computed:    true,
 		},
 		"user_role": {

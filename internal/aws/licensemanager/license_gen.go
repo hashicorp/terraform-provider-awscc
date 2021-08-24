@@ -241,8 +241,9 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 2048,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
+			Computed:   true,
 		},
 		"license_metadata": {
 			// Property: LicenseMetadata

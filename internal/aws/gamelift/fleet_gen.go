@@ -239,6 +239,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, and daemons (background processes). Create a role or look up a role's ARN from the IAM dashboard in the AWS Management Console.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
 			Optional:    true,
 			Computed:    true,
 			// InstanceRoleARN is a force-new attribute.

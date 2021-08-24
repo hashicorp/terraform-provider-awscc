@@ -77,6 +77,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: IotThingName
 						Description: "AWS Internet of Things (IoT) object name.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 						Optional:    true,
 					},
 				},

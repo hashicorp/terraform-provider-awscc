@@ -34,6 +34,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Activation key of the Agent.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 29)},
 			Required:    true,
 			// ActivationKey is a force-new attribute.
 			// ActivationKey is a write-only attribute.
@@ -49,6 +50,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The DataSync Agent ARN.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Computed:    true,
 		},
 		"agent_name": {

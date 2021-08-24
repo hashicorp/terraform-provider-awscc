@@ -472,13 +472,15 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"description": {
 						// Property: Description
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
+						Optional:   true,
 					},
 					"flow_name": {
 						// Property: FlowName
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
+						Required:   true,
 					},
 					"kms_arn": {
 						// Property: KmsArn
@@ -492,8 +494,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"connector_profile_name": {
 									// Property: ConnectorProfileName
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
+									Optional:   true,
 								},
 								"connector_type": {
 									// Property: ConnectorType
@@ -506,8 +509,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"datetime_type_field_name": {
 												// Property: DatetimeTypeFieldName
-												Type:     types.StringType,
-												Optional: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
+												Optional:   true,
 											},
 										},
 									),
@@ -523,8 +527,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"object": {
 															// Property: Object
-															Type:     types.StringType,
-															Required: true,
+															Type:       types.StringType,
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
+															Required:   true,
 														},
 													},
 												),
@@ -542,8 +547,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
-															Type:     types.StringType,
-															Optional: true,
+															Type:       types.StringType,
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
+															Optional:   true,
 														},
 													},
 												),
@@ -565,8 +571,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"object": {
 															// Property: Object
-															Type:     types.StringType,
-															Required: true,
+															Type:       types.StringType,
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
+															Required:   true,
 														},
 													},
 												),
@@ -578,8 +585,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"object": {
 															// Property: Object
-															Type:     types.StringType,
-															Required: true,
+															Type:       types.StringType,
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
+															Required:   true,
 														},
 													},
 												),
@@ -591,8 +599,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"object": {
 															// Property: Object
-															Type:     types.StringType,
-															Required: true,
+															Type:       types.StringType,
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
+															Required:   true,
 														},
 													},
 												),
@@ -645,8 +654,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"destination_field": {
 									// Property: DestinationField
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
+									Optional:   true,
 								},
 								"source_fields": {
 									// Property: SourceFields
@@ -664,8 +674,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"property": {
 												// Property: Property
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
+												Required:   true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -711,8 +722,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"schedule_expression": {
 															// Property: ScheduleExpression
-															Type:     types.StringType,
-															Required: true,
+															Type:       types.StringType,
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
+															Required:   true,
 														},
 														"schedule_offset": {
 															// Property: ScheduleOffset
@@ -726,8 +738,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"timezone": {
 															// Property: Timezone
-															Type:     types.StringType,
-															Optional: true,
+															Type:       types.StringType,
+															Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
+															Optional:   true,
 														},
 													},
 												),

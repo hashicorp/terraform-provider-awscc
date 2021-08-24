@@ -205,12 +205,14 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Name
 						Description: "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 200)},
 						Optional:    true,
 					},
 					"version": {
 						// Property: Version
 						Description: "The document version required by the current document.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 8)},
 						Optional:    true,
 					},
 				},

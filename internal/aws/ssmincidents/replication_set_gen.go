@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +34,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The ARN of the ReplicationSet.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
 			Computed:    true,
 		},
 		"deletion_protected": {
@@ -95,6 +97,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: SseKmsKeyId
 									Description: "The ARN of the ReplicationSet.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
 									Required:    true,
 								},
 							},
@@ -105,6 +108,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: RegionName
 						Description: "The AWS region name.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 20)},
 						Optional:    true,
 					},
 				},

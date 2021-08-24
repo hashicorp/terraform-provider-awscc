@@ -474,6 +474,7 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 									// Property: TargetArn
 									Description: "The ARN of the target (SNS topic) to which audit notifications are sent.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
 									Optional:    true,
 								},
 							},

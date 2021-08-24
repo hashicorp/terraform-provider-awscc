@@ -31,8 +31,9 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1600)},
+			Required:   true,
 			// ConsumerArn is a force-new attribute.
 		},
 		"tracker_name": {

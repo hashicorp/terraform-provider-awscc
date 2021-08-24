@@ -71,6 +71,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: SubnetArn
 						Description: "The ARN of the subnet that DataSync uses to access the target EFS file system.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 						Required:    true,
 					},
 				},
@@ -89,6 +90,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Required:    true,
 			// EfsFilesystemArn is a force-new attribute.
 			// EfsFilesystemArn is a write-only attribute.
@@ -104,6 +106,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Computed:    true,
 		},
 		"location_uri": {
@@ -117,6 +120,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The URL of the EFS location that was described.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4356)},
 			Computed:    true,
 		},
 		"subdirectory": {
@@ -130,6 +134,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
 			Optional:    true,
 			Computed:    true,
 			// Subdirectory is a force-new attribute.

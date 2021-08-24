@@ -31,8 +31,9 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1600)},
+			Computed:   true,
 		},
 		"calculator_arn": {
 			// Property: CalculatorArn
@@ -42,8 +43,9 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1600)},
+			Computed:   true,
 		},
 		"calculator_name": {
 			// Property: CalculatorName

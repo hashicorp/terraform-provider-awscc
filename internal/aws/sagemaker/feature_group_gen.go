@@ -33,6 +33,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Description about the FeatureGroup.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Optional:    true,
 			Computed:    true,
 			// Description is a force-new attribute.
@@ -227,13 +228,15 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"kms_key_id": {
 									// Property: KmsKeyId
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
+									Optional:   true,
 								},
 								"s3_uri": {
 									// Property: S3Uri
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
+									Required:   true,
 								},
 							},
 						),
@@ -280,8 +283,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"kms_key_id": {
 									// Property: KmsKeyId
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
+									Optional:   true,
 								},
 							},
 						),

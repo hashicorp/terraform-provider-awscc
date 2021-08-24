@@ -268,6 +268,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Comment
 						Description: "The comment related to the delegation.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 350)},
 						Optional:    true,
 					},
 					"control_set_id": {

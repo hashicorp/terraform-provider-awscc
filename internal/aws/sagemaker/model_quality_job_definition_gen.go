@@ -59,6 +59,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			// }
 			Description: "The name of the job definition.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 63)},
 			Optional:    true,
 			Computed:    true,
 			// JobDefinitionName is a force-new attribute.
@@ -255,12 +256,14 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 						// Property: ImageUri
 						Description: "The container image to be run by the monitoring job.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 255)},
 						Required:    true,
 					},
 					"post_analytics_processor_source_uri": {
 						// Property: PostAnalyticsProcessorSourceUri
 						Description: "The Amazon S3 URI.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 						Optional:    true,
 					},
 					"problem_type": {
@@ -273,6 +276,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 						// Property: RecordPreprocessorSourceUri
 						Description: "The Amazon S3 URI.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 						Optional:    true,
 					},
 				},
@@ -329,6 +333,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 									// Property: S3Uri
 									Description: "The Amazon S3 URI.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:    true,
 								},
 							},
@@ -457,24 +462,28 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 									// Property: EndpointName
 									Description: "The name of the endpoint used to run the monitoring job.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 63)},
 									Required:    true,
 								},
 								"inference_attribute": {
 									// Property: InferenceAttribute
 									Description: "Index or JSONpath to locate predicted label(s)",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 									Optional:    true,
 								},
 								"local_path": {
 									// Property: LocalPath
 									Description: "Path to the filesystem where the endpoint data is available to the container.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 									Required:    true,
 								},
 								"probability_attribute": {
 									// Property: ProbabilityAttribute
 									Description: "Index or JSONpath to locate probabilities",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 									Optional:    true,
 								},
 								"probability_threshold_attribute": {
@@ -514,6 +523,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 									// Property: S3Uri
 									Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
 									Required:    true,
 								},
 							},
@@ -598,6 +608,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 						// Property: KmsKeyId
 						Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
 						Optional:    true,
 					},
 					"monitoring_outputs": {
@@ -614,6 +625,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 												// Property: LocalPath
 												Description: "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
 												Type:        types.StringType,
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 												Required:    true,
 											},
 											"s3_upload_mode": {
@@ -626,6 +638,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 												// Property: S3Uri
 												Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
 												Type:        types.StringType,
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 512)},
 												Required:    true,
 											},
 										},
@@ -835,6 +848,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:    true,
 					},
 				},

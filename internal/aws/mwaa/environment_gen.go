@@ -45,6 +45,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Version of airflow to deploy to the environment.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 32)},
 			Optional:    true,
 		},
 		"arn": {
@@ -73,6 +74,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 			Optional:    true,
 		},
 		"environment_class": {
@@ -100,6 +102,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "IAM role to be used by tasks.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1224)},
 			Optional:    true,
 		},
 		"kms_key": {
@@ -113,6 +116,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for MWAA data encryption.\n\n    You can specify the CMK using any of the following:\n\n    Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.\n\n    Key alias. For example, alias/ExampleAlias.\n\n    Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.\n\n    Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.\n\n    AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1224)},
 			Optional:    true,
 			Computed:    true,
 			// KmsKey is a force-new attribute.
@@ -279,6 +283,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1224)},
 									Computed:    true,
 								},
 								"enabled": {
@@ -306,6 +311,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1224)},
 									Computed:    true,
 								},
 								"enabled": {
@@ -333,6 +339,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1224)},
 									Computed:    true,
 								},
 								"enabled": {
@@ -360,6 +367,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1224)},
 									Computed:    true,
 								},
 								"enabled": {
@@ -387,6 +395,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1224)},
 									Computed:    true,
 								},
 								"enabled": {
@@ -519,6 +528,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Represents an version ID for an S3 object.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 			Optional:    true,
 		},
 		"plugins_s3_path": {
@@ -532,6 +542,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 			Optional:    true,
 		},
 		"requirements_s3_object_version": {
@@ -544,6 +555,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Represents an version ID for an S3 object.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 			Optional:    true,
 		},
 		"requirements_s3_path": {
@@ -557,6 +569,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 			Optional:    true,
 		},
 		"schedulers": {
@@ -637,6 +650,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Start time for the weekly maintenance window.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 9)},
 			Optional:    true,
 		},
 	}

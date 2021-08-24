@@ -33,6 +33,7 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Field represents a friendly name in the console for the custom metric; it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated once defined.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
 			Optional:    true,
 		},
 		"metric_arn": {

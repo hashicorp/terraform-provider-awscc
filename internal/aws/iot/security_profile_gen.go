@@ -151,6 +151,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: AlertTargetArn
 						Description: "The ARN of the notification target to which alerts are sent.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
 						Optional:    true,
 					},
 					"role_arn": {
@@ -534,6 +535,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A description of the security profile.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1000)},
 			Optional:    true,
 		},
 		"security_profile_name": {

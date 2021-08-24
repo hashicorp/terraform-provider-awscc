@@ -67,3 +67,61 @@ func StringLenBetween(minLength, maxLength int) tfsdk.AttributeValidator {
 		maxLength: maxLength,
 	}
 }
+
+// stringLenAtLeastValidator validates that a string Attribute's length is at least a certain value.
+type stringLenAtLeastValidator struct {
+	tfsdk.AttributeValidator
+
+	minLength int
+}
+
+// Description describes the validation in plain text formatting.
+func (v stringLenAtLeastValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("string length must be at least %d", v.minLength)
+}
+
+// MarkdownDescription describes the validation in Markdown formatting.
+func (v stringLenAtLeastValidator) MarkdownDescription(ctx context.Context) string {
+	return v.Description(ctx)
+}
+
+// Validate performs the validation.
+func (v stringLenAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+	var l int
+	s, ok := request.AttributeConfig.(types.String)
+
+	if !ok {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Invalid value type",
+			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
+		})
+	}
+
+	if s.Unknown || s.Null {
+		return
+	}
+
+	l = len(s.Value)
+
+	if l < v.minLength {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Invalid length",
+			Detail:   fmt.Sprintf("expected length of %s to be at least %d, got %d", request.AttributePath, v.minLength, l),
+		})
+
+		return
+	}
+}
+
+// StringLenAtLeast returns a new string length at least validator.
+func StringLenAtLeast(minLength int) tfsdk.AttributeValidator {
+	if minLength < 0 {
+		return nil
+	}
+
+	return stringLenAtLeastValidator{
+		minLength: minLength,
+	}
+}

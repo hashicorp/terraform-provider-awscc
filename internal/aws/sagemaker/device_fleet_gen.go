@@ -92,6 +92,7 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: S3OutputLocation
 						Description: "The Amazon Simple Storage (S3) bucket URI",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 						Required:    true,
 					},
 				},

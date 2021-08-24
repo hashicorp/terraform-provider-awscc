@@ -135,6 +135,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The user profile Amazon Resource Name (ARN).",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 			Computed:    true,
 		},
 		"user_profile_name": {
@@ -397,12 +398,14 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: SageMakerImageArn
 												Description: "The ARN of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 												Optional:    true,
 											},
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
 												Description: "The ARN of the image version created on the instance.",
 												Type:        types.StringType,
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 												Optional:    true,
 											},
 										},
@@ -427,12 +430,14 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: AppImageConfigName
 												Description: "The Name of the AppImageConfig.",
 												Type:        types.StringType,
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 63)},
 												Required:    true,
 											},
 											"image_name": {
 												// Property: ImageName
 												Description: "The name of the CustomImage. Must be unique to your account.",
 												Type:        types.StringType,
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 63)},
 												Required:    true,
 											},
 											"image_version_number": {
@@ -463,12 +468,14 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: SageMakerImageArn
 												Description: "The ARN of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 												Optional:    true,
 											},
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
 												Description: "The ARN of the image version created on the instance.",
 												Type:        types.StringType,
+												Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 												Optional:    true,
 											},
 										},
@@ -503,12 +510,14 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: S3KmsKeyId
 									Description: "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 2048)},
 									Optional:    true,
 								},
 								"s3_output_path": {
 									// Property: S3OutputPath
 									Description: "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 									Optional:    true,
 								},
 							},

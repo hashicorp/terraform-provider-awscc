@@ -127,6 +127,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 64)},
 			Required:    true,
 			// DBProxyName is a force-new attribute.
 		},
@@ -230,13 +231,15 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
+						Optional:   true,
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenBetween(0, 128)},
+						Optional:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

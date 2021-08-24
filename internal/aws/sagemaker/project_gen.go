@@ -60,6 +60,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The description of the project.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 1024)},
 			Optional:    true,
 			Computed:    true,
 			// ProjectDescription is a force-new attribute.
@@ -75,6 +76,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Project Id.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 20)},
 			Computed:    true,
 		},
 		"project_name": {
@@ -140,6 +142,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ProvisionedProductId
 						Description: "The identifier of the provisioning artifact (also known as a version).",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 100)},
 						Optional:    true,
 					},
 					"provisioned_product_status_message": {
@@ -219,18 +222,21 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: PathId
 						Description: "The path identifier of the product.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 100)},
 						Optional:    true,
 					},
 					"product_id": {
 						// Property: ProductId
 						Description: "Service Catalog product identifier.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 100)},
 						Required:    true,
 					},
 					"provisioning_artifact_id": {
 						// Property: ProvisioningArtifactId
 						Description: "The identifier of the provisioning artifact (also known as a version).",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 100)},
 						Required:    true,
 					},
 					"provisioning_parameters": {
@@ -249,6 +255,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Value
 									Description: "The parameter value.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 4096)},
 									Required:    true,
 								},
 							},
@@ -307,6 +314,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLenBetween(0, 256)},
 						Required:    true,
 					},
 				},

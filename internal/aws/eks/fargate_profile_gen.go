@@ -42,6 +42,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Name of the Cluster",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
 			Required:    true,
 			// ClusterName is a force-new attribute.
 		},
@@ -55,6 +56,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Name of FargateProfile",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
 			Optional:    true,
 			Computed:    true,
 			// FargateProfileName is a force-new attribute.
@@ -69,6 +71,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The IAM policy arn for pods",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
 			Required:    true,
 			// PodExecutionRoleArn is a force-new attribute.
 		},
@@ -145,8 +148,9 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"namespace": {
 						// Property: Namespace
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLenAtLeast(1)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
