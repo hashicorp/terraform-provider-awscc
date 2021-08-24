@@ -103,8 +103,20 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 			validators = append(validators, fmt.Sprintf("validate.IntBetween(%d,%d)", *property.Minimum, *property.Maximum))
 		}
 
+		if property.Format != nil {
+			if format := *property.Format; format != "int64" {
+				return 0, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
+			}
+		}
+
 	case cfschema.PropertyTypeNumber:
 		e.printf("Type:types.NumberType,\n")
+
+		if property.Format != nil {
+			if format := *property.Format; format != "double" {
+				return 0, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
+			}
+		}
 
 	case cfschema.PropertyTypeString:
 		e.printf("Type:types.StringType,\n")
