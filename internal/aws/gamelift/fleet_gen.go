@@ -161,7 +161,10 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: FromPort
 						Description: "A starting value for a range of allowed port numbers.",
 						Type:        types.NumberType,
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 60000),
+						},
+						Required: true,
 					},
 					"ip_range": {
 						// Property: IpRange
@@ -179,7 +182,10 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ToPort
 						Description: "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
 						Type:        types.NumberType,
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 60000),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -599,13 +605,19 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: GameSessionActivationTimeoutSeconds
 						Description: "The maximum amount of time (in seconds) that a game session can remain in status ACTIVATING. If the game session is not active before the timeout, activation is terminated and the game session status is changed to TERMINATED.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 600),
+						},
+						Optional: true,
 					},
 					"max_concurrent_game_session_activations": {
 						// Property: MaxConcurrentGameSessionActivations
 						Description: "The maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously. This setting limits the amount of instance resources that can be used for new game activations at any one time.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 2147483647),
+						},
+						Optional: true,
 					},
 					"server_processes": {
 						// Property: ServerProcesses

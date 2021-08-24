@@ -2670,7 +2670,10 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
 																					Type:        types.NumberType,
-																					Optional:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.IntBetween(60, 31622400),
+																					},
+																					Optional: true,
 																				},
 																				"timer_name": {
 																					// Property: TimerName
@@ -3296,7 +3299,10 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
 																					Type:        types.NumberType,
-																					Optional:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.IntBetween(60, 31622400),
+																					},
+																					Optional: true,
 																				},
 																				"timer_name": {
 																					// Property: TimerName
@@ -3922,7 +3928,10 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
 																					Type:        types.NumberType,
-																					Optional:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.IntBetween(60, 31622400),
+																					},
+																					Optional: true,
 																				},
 																				"timer_name": {
 																					// Property: TimerName
@@ -4539,7 +4548,10 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
 																					Type:        types.NumberType,
-																					Optional:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.IntBetween(60, 31622400),
+																					},
+																					Optional: true,
 																				},
 																				"timer_name": {
 																					// Property: TimerName

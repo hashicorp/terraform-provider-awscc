@@ -1802,7 +1802,10 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"database_port": {
 												// Property: DatabasePort
-												Type:     types.NumberType,
+												Type: types.NumberType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntBetween(1, 65535),
+												},
 												Required: true,
 											},
 											"secret_arn": {

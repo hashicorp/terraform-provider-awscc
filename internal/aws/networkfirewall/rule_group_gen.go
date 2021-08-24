@@ -763,7 +763,10 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"priority": {
 															// Property: Priority
-															Type:     types.NumberType,
+															Type: types.NumberType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.IntBetween(1, 65535),
+															},
 															Required: true,
 														},
 														"rule_definition": {
@@ -785,12 +788,18 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																						map[string]tfsdk.Attribute{
 																							"from_port": {
 																								// Property: FromPort
-																								Type:     types.NumberType,
+																								Type: types.NumberType,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.IntBetween(0, 65535),
+																								},
 																								Required: true,
 																							},
 																							"to_port": {
 																								// Property: ToPort
-																								Type:     types.NumberType,
+																								Type: types.NumberType,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.IntBetween(0, 65535),
+																								},
 																								Required: true,
 																							},
 																						},
@@ -826,12 +835,18 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																						map[string]tfsdk.Attribute{
 																							"from_port": {
 																								// Property: FromPort
-																								Type:     types.NumberType,
+																								Type: types.NumberType,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.IntBetween(0, 65535),
+																								},
 																								Required: true,
 																							},
 																							"to_port": {
 																								// Property: ToPort
-																								Type:     types.NumberType,
+																								Type: types.NumberType,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.IntBetween(0, 65535),
+																								},
 																								Required: true,
 																							},
 																						},

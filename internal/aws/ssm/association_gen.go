@@ -373,7 +373,10 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minimum": 15,
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type: types.NumberType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(15, 172800),
+			},
 			Optional: true,
 		},
 	}

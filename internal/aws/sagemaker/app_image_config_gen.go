@@ -136,13 +136,19 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: DefaultGid
 									Description: "The default POSIX group ID (GID). If not specified, defaults to 100.",
 									Type:        types.NumberType,
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(0, 65535),
+									},
+									Optional: true,
 								},
 								"default_uid": {
 									// Property: DefaultUid
 									Description: "The default POSIX user ID (UID). If not specified, defaults to 1000.",
 									Type:        types.NumberType,
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(0, 65535),
+									},
+									Optional: true,
 								},
 								"mount_path": {
 									// Property: MountPath

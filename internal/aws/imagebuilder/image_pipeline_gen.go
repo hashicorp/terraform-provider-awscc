@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -120,7 +122,10 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: TimeoutMinutes
 						Description: "The maximum time in minutes that tests are permitted to run.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(60, 1440),
+						},
+						Optional: true,
 					},
 				},
 			),

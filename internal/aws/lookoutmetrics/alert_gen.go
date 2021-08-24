@@ -179,7 +179,10 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
 			Type:        types.NumberType,
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(0, 100),
+			},
+			Required: true,
 			// AlertSensitivityThreshold is a force-new attribute.
 		},
 		"anomaly_detector_arn": {

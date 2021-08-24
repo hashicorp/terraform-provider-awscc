@@ -130,7 +130,10 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: HealthyThreshold
 						Description: "Health check Healthy Threshold",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 20),
+						},
+						Optional: true,
 					},
 					"interval": {
 						// Property: Interval
@@ -154,13 +157,19 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Timeout
 						Description: "Health check Timeout",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 20),
+						},
+						Optional: true,
 					},
 					"unhealthy_threshold": {
 						// Property: UnhealthyThreshold
 						Description: "Health check Unhealthy Threshold",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 20),
+						},
+						Optional: true,
 					},
 				},
 			),

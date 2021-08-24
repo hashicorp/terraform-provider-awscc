@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -93,13 +95,19 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: FromPort
 						Description: "A network port number",
 						Type:        types.NumberType,
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 65535),
+						},
+						Required: true,
 					},
 					"to_port": {
 						// Property: ToPort
 						Description: "A network port number",
 						Type:        types.NumberType,
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 65535),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

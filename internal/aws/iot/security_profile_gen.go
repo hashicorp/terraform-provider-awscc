@@ -389,13 +389,19 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									// Property: ConsecutiveDatapointsToAlarm
 									Description: "If a device is in violation of the behavior for the specified number of consecutive datapoints, an alarm occurs. If not specified, the default is 1.",
 									Type:        types.NumberType,
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(1, 10),
+									},
+									Optional: true,
 								},
 								"consecutive_datapoints_to_clear": {
 									// Property: ConsecutiveDatapointsToClear
 									Description: "If an alarm has occurred and the offending device is no longer in violation of the behavior for the specified number of consecutive datapoints, the alarm is cleared. If not specified, the default is 1.",
 									Type:        types.NumberType,
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(1, 10),
+									},
+									Optional: true,
 								},
 								"duration_seconds": {
 									// Property: DurationSeconds

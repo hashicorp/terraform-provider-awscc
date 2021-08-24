@@ -760,7 +760,10 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"schedule_offset": {
 															// Property: ScheduleOffset
-															Type:     types.NumberType,
+															Type: types.NumberType,
+															Validators: []tfsdk.AttributeValidator{
+																validate.IntBetween(0, 36000),
+															},
 															Optional: true,
 														},
 														"schedule_start_time": {

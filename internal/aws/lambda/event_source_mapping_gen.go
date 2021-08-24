@@ -34,7 +34,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The maximum number of items to retrieve in a single batch.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(1, 10000),
+			},
+			Optional: true,
 		},
 		"bisect_batch_on_function_error": {
 			// Property: BisectBatchOnFunctionError
@@ -194,7 +197,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) The maximum amount of time to gather records before invoking the function, in seconds.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(0, 300),
+			},
+			Optional: true,
 		},
 		"maximum_record_age_in_seconds": {
 			// Property: MaximumRecordAgeInSeconds
@@ -207,7 +213,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) The maximum age of a record that Lambda sends to a function for processing.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(-1, 604800),
+			},
+			Optional: true,
 		},
 		"maximum_retry_attempts": {
 			// Property: MaximumRetryAttempts
@@ -220,7 +229,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) The maximum number of times to retry when the function returns an error.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(-1, 10000),
+			},
+			Optional: true,
 		},
 		"parallelization_factor": {
 			// Property: ParallelizationFactor
@@ -233,7 +245,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) The number of batches to process from each shard concurrently.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(1, 10),
+			},
+			Optional: true,
 		},
 		"queues": {
 			// Property: Queues
@@ -448,7 +463,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(0, 900),
+			},
+			Optional: true,
 		},
 	}
 

@@ -354,7 +354,10 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Impact
 						Description: "The impact value.",
 						Type:        types.NumberType,
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 5),
+						},
+						Required: true,
 					},
 					"notification_targets": {
 						// Property: NotificationTargets

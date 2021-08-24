@@ -160,7 +160,10 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The port that your self-managed server accepts inbound network traffic on.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(1, 65536),
+			},
+			Optional: true,
 		},
 		"server_protocol": {
 			// Property: ServerProtocol

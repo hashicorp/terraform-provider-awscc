@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -125,7 +127,10 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: TimeoutMinutes
 						Description: "TimeoutMinutes",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(60, 1440),
+						},
+						Optional: true,
 					},
 				},
 			),

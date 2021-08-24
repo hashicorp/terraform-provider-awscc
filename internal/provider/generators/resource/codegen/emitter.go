@@ -89,7 +89,14 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 	case cfschema.PropertyTypeBoolean:
 		e.printf("Type:types.BoolType,\n")
 
-	case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+	case cfschema.PropertyTypeInteger:
+		e.printf("Type:types.NumberType,\n")
+
+		if property.Minimum != nil && property.Maximum != nil {
+			validators = append(validators, fmt.Sprintf("validate.IntBetween(%d,%d)", *property.Minimum, *property.Maximum))
+		}
+
+	case cfschema.PropertyTypeNumber:
 		e.printf("Type:types.NumberType,\n")
 
 	case cfschema.PropertyTypeString:

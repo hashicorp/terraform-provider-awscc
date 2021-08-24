@@ -169,7 +169,10 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Priority
 						Description: "The priority of the sampling rule.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 9999),
+						},
+						Optional: true,
 					},
 					"reservoir_size": {
 						// Property: ReservoirSize
@@ -387,7 +390,10 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Priority
 									Description: "The priority of the sampling rule.",
 									Type:        types.NumberType,
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(1, 9999),
+									},
+									Optional: true,
 								},
 								"reservoir_size": {
 									// Property: ReservoirSize
@@ -574,7 +580,10 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Priority
 						Description: "The priority of the sampling rule.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 9999),
+						},
+						Optional: true,
 					},
 					"reservoir_size": {
 						// Property: ReservoirSize

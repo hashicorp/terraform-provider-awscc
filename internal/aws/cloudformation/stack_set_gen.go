@@ -195,7 +195,10 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"failure_tolerance_percentage": {
 						// Property: FailureTolerancePercentage
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 100),
+						},
 						Optional: true,
 					},
 					"max_concurrent_count": {
@@ -205,7 +208,10 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"max_concurrent_percentage": {
 						// Property: MaxConcurrentPercentage
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 100),
+						},
 						Optional: true,
 					},
 					"region_concurrency_type": {

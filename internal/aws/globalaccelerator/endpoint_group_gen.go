@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -70,7 +72,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: Weight
 						Description: "The weight for the endpoint.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 255),
+						},
+						Optional: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -133,7 +138,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(-1, 65535),
+			},
+			Optional: true,
 		},
 		"health_check_protocol": {
 			// Property: HealthCheckProtocol
@@ -198,13 +206,19 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: EndpointPort
 						Description: "A network port number",
 						Type:        types.NumberType,
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 65535),
+						},
+						Required: true,
 					},
 					"listener_port": {
 						// Property: ListenerPort
 						Description: "A network port number",
 						Type:        types.NumberType,
-						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 65535),
+						},
+						Required: true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

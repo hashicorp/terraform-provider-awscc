@@ -121,12 +121,18 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]tfsdk.Attribute{
 					"class_b_timeout": {
 						// Property: ClassBTimeout
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 1000),
+						},
 						Optional: true,
 					},
 					"class_c_timeout": {
 						// Property: ClassCTimeout
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 1000),
+						},
 						Optional: true,
 					},
 					"mac_version": {
@@ -139,27 +145,42 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"max_duty_cycle": {
 						// Property: MaxDutyCycle
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 100),
+						},
 						Optional: true,
 					},
 					"max_eirp": {
 						// Property: MaxEirp
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 15),
+						},
 						Optional: true,
 					},
 					"ping_slot_dr": {
 						// Property: PingSlotDr
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 15),
+						},
 						Optional: true,
 					},
 					"ping_slot_freq": {
 						// Property: PingSlotFreq
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1000000, 16700000),
+						},
 						Optional: true,
 					},
 					"ping_slot_period": {
 						// Property: PingSlotPeriod
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(128, 4096),
+						},
 						Optional: true,
 					},
 					"reg_params_revision": {

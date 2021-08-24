@@ -187,7 +187,10 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"failure_threshold": {
 						// Property: FailureThreshold
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 10),
+						},
 						Optional: true,
 					},
 					"fully_qualified_domain_name": {
@@ -200,7 +203,10 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"health_threshold": {
 						// Property: HealthThreshold
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 256),
+						},
 						Optional: true,
 					},
 					"ip_address": {
@@ -230,7 +236,10 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"port": {
 						// Property: Port
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 65535),
+						},
 						Optional: true,
 					},
 					"regions": {
@@ -243,7 +252,10 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"request_interval": {
 						// Property: RequestInterval
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(10, 30),
+						},
 						Optional: true,
 						Computed: true,
 						// RequestInterval is a force-new attribute.

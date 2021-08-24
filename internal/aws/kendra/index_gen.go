@@ -210,7 +210,10 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"importance": {
 									// Property: Importance
-									Type:     types.NumberType,
+									Type: types.NumberType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(1, 10),
+									},
 									Optional: true,
 								},
 								"rank_order": {
@@ -232,7 +235,10 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"value": {
 												// Property: Value
-												Type:     types.NumberType,
+												Type: types.NumberType,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntBetween(1, 10),
+												},
 												Optional: true,
 											},
 										},

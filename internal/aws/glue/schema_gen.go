@@ -68,7 +68,10 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: VersionNumber
 						Description: "Indicates the version number in the schema to update.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 100000),
+						},
+						Optional: true,
 					},
 				},
 			),

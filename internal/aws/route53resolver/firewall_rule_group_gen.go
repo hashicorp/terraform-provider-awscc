@@ -167,7 +167,10 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						// Property: BlockOverrideTtl
 						Description: "BlockOverrideTtl",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 604800),
+						},
+						Optional: true,
 					},
 					"block_response": {
 						// Property: BlockResponse

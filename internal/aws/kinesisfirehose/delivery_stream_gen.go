@@ -3374,7 +3374,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"hec_acknowledgment_timeout_in_seconds": {
 						// Property: HECAcknowledgmentTimeoutInSeconds
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(180, 600),
+						},
 						Optional: true,
 					},
 					"hec_endpoint": {

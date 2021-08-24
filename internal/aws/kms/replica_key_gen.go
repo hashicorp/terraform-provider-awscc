@@ -90,7 +90,10 @@ func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(7, 30),
+			},
+			Optional: true,
 			// PendingWindowInDays is a write-only attribute.
 		},
 		"primary_key_arn": {
