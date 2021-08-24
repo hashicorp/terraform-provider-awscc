@@ -31,13 +31,13 @@ func TestArrayLengthValidator(t *testing.T) {
 		"unknown list": {
 			val:      tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, tftypes.UnknownValue),
 			f:        types.ListType{ElemType: types.NumberType}.ValueFromTerraform,
-			minItems: 0,
+			minItems: 1,
 			maxItems: 3,
 		},
 		"null list": {
 			val:      tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, nil),
 			f:        types.ListType{ElemType: types.NumberType}.ValueFromTerraform,
-			minItems: 0,
+			minItems: 1,
 			maxItems: 3,
 		},
 		"valid empty list": {

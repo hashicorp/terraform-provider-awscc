@@ -33,13 +33,11 @@ func (v arrayLengthValidator) Validate(ctx context.Context, request tfsdk.Valida
 	list, ok := request.AttributeConfig.(types.List)
 
 	if ok {
-		if list.Unknown {
+		if list.Unknown || list.Null {
 			return
 		}
 
-		if !list.Null {
-			l = len(list.Elems)
-		}
+		l = len(list.Elems)
 	} else {
 		set, ok := request.AttributeConfig.(providertypes.Set)
 
@@ -51,20 +49,18 @@ func (v arrayLengthValidator) Validate(ctx context.Context, request tfsdk.Valida
 			})
 		}
 
-		if set.Unknown {
+		if set.Unknown || set.Null {
 			return
 		}
 
-		if !set.Null {
-			l = len(set.Elems)
-		}
+		l = len(set.Elems)
 	}
 
 	if l < v.minItems || l > v.maxItems {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
 			Severity: tfprotov6.DiagnosticSeverityError,
 			Summary:  "Invalid length",
-			Detail:   fmt.Sprintf("invalid array length: %d", l),
+			Detail:   fmt.Sprintf("expected length of %s to be in the range [%d, %d], got %d", request.AttributePath, v.minItems, v.maxItems, l),
 		})
 
 		return
