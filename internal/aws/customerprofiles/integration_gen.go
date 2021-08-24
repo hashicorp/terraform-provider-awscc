@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +46,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The unique name of the domain.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Required:    true,
 			// DomainName is a force-new attribute.
 		},
@@ -479,8 +482,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"kms_arn": {
 						// Property: KmsArn
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+						Required:   true,
 					},
 					"source_flow_config": {
 						// Property: SourceFlowConfig
@@ -532,8 +536,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"bucket_name": {
 															// Property: BucketName
-															Type:     types.StringType,
-															Required: true,
+															Type:       types.StringType,
+															Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+															Required:   true,
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
@@ -769,6 +774,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the ObjectType defined for the 3rd party data in Profile Service",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
 			Required:    true,
 		},
 		"tags": {
@@ -806,13 +812,15 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -833,6 +841,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The URI of the S3 bucket or any other type of data source.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
 			Optional:    true,
 			Computed:    true,
 			// Uri is a force-new attribute.

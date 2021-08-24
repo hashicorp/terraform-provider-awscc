@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -296,6 +298,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: LogicalId
 									Description: "Customer provided ID for property.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 									Required:    true,
 								},
 								"name": {
@@ -349,13 +352,15 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																			map[string]tfsdk.Attribute{
 																				"hierarchy_logical_id": {
 																					// Property: HierarchyLogicalId
-																					Type:     types.StringType,
-																					Optional: true,
+																					Type:       types.StringType,
+																					Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+																					Optional:   true,
 																				},
 																				"property_logical_id": {
 																					// Property: PropertyLogicalId
-																					Type:     types.StringType,
-																					Required: true,
+																					Type:       types.StringType,
+																					Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+																					Required:   true,
 																				},
 																			},
 																		),
@@ -427,13 +432,15 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																			map[string]tfsdk.Attribute{
 																				"hierarchy_logical_id": {
 																					// Property: HierarchyLogicalId
-																					Type:     types.StringType,
-																					Optional: true,
+																					Type:       types.StringType,
+																					Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+																					Optional:   true,
 																				},
 																				"property_logical_id": {
 																					// Property: PropertyLogicalId
-																					Type:     types.StringType,
-																					Required: true,
+																					Type:       types.StringType,
+																					Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+																					Required:   true,
 																				},
 																			},
 																		),
@@ -550,6 +557,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: LogicalId
 						Description: "Customer provided ID for hierarchy.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Required:    true,
 					},
 					"name": {
@@ -816,6 +824,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: LogicalId
 						Description: "Customer provided ID for property.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Required:    true,
 					},
 					"name": {
@@ -869,13 +878,15 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																map[string]tfsdk.Attribute{
 																	"hierarchy_logical_id": {
 																		// Property: HierarchyLogicalId
-																		Type:     types.StringType,
-																		Optional: true,
+																		Type:       types.StringType,
+																		Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+																		Optional:   true,
 																	},
 																	"property_logical_id": {
 																		// Property: PropertyLogicalId
-																		Type:     types.StringType,
-																		Required: true,
+																		Type:       types.StringType,
+																		Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+																		Required:   true,
 																	},
 																},
 															),
@@ -947,13 +958,15 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																map[string]tfsdk.Attribute{
 																	"hierarchy_logical_id": {
 																		// Property: HierarchyLogicalId
-																		Type:     types.StringType,
-																		Optional: true,
+																		Type:       types.StringType,
+																		Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+																		Optional:   true,
 																	},
 																	"property_logical_id": {
 																		// Property: PropertyLogicalId
-																		Type:     types.StringType,
-																		Required: true,
+																		Type:       types.StringType,
+																		Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+																		Required:   true,
 																	},
 																},
 															),

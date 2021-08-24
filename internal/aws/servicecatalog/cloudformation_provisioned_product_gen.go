@@ -45,8 +45,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Computed:   true,
 		},
 		"notification_arns": {
 			// Property: NotificationArns
@@ -93,8 +94,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Optional:   true,
 		},
 		"path_name": {
 			// Property: PathName
@@ -104,8 +106,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Optional:   true,
 		},
 		"product_id": {
 			// Property: ProductId
@@ -115,8 +118,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Optional:   true,
 		},
 		"product_name": {
 			// Property: ProductName
@@ -126,8 +130,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Optional:   true,
 		},
 		"provisioned_product_id": {
 			// Property: ProvisionedProductId
@@ -137,8 +142,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 50)},
+			Computed:   true,
 		},
 		"provisioned_product_name": {
 			// Property: ProvisionedProductName
@@ -148,9 +154,10 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Optional:   true,
+			Computed:   true,
 			// ProvisionedProductName is a force-new attribute.
 		},
 		"provisioning_artifact_id": {
@@ -161,8 +168,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Optional:   true,
 		},
 		"provisioning_artifact_name": {
 			// Property: ProvisioningArtifactName
@@ -202,8 +210,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 1000)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value
@@ -315,8 +324,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 50)},
+			Computed:   true,
 		},
 		"tags": {
 			// Property: Tags
@@ -350,13 +360,15 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

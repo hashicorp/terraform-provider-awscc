@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -81,6 +83,7 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Description: "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1000)},
 			Optional:    true,
 		},
 	}

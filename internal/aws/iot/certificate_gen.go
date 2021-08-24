@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -38,9 +40,10 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 65536)},
+			Optional:   true,
+			Computed:   true,
 			// CACertificatePem is a force-new attribute.
 			// CACertificatePem is a write-only attribute.
 		},
@@ -67,9 +70,10 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 65536)},
+			Optional:   true,
+			Computed:   true,
 			// CertificatePem is a force-new attribute.
 		},
 		"certificate_signing_request": {

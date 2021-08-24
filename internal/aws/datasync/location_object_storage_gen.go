@@ -35,6 +35,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(8, 200)},
 			Optional:    true,
 		},
 		"agent_arns": {
@@ -71,6 +72,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "The name of the bucket on the self-managed object storage server.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
 			Required:    true,
 			// BucketName is a force-new attribute.
 			// BucketName is a write-only attribute.
@@ -113,6 +115,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Description: "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(8, 200)},
 			Optional:    true,
 			// SecretKey is a write-only attribute.
 		},
@@ -213,12 +216,14 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Required:    true,
 					},
 				},

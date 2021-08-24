@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -155,8 +157,9 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"launch_template_name": {
 									// Property: LaunchTemplateName
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 128)},
+									Optional:   true,
 								},
 								"version": {
 									// Property: Version

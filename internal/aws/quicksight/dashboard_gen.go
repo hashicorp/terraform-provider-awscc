@@ -43,8 +43,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(12, 12)},
+			Required:   true,
 			// AwsAccountId is a force-new attribute.
 		},
 		"created_time": {
@@ -69,8 +70,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+			Required:   true,
 			// DashboardId is a force-new attribute.
 		},
 		"dashboard_publish_options": {
@@ -212,6 +214,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "<p>The display name of the dashboard.</p>",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 			Optional:    true,
 		},
 		"parameters": {
@@ -499,6 +502,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Principal
 						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Required:    true,
 					},
 				},
@@ -645,12 +649,14 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "<p>Tag key.</p>",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "<p>Tag value.</p>",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Required:    true,
 					},
 				},
@@ -816,6 +822,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "<p>Description.</p>",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
 						Optional:    true,
 					},
 					"errors": {
@@ -856,6 +863,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SheetId
 									Description: "<p>The unique identifier associated with a sheet.</p>",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 									Optional:    true,
 								},
 							},
@@ -905,6 +913,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "<p>A description for the first version of the dashboard being created.</p>",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
 			Optional:    true,
 			// VersionDescription is a write-only attribute.
 		},

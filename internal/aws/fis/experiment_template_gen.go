@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -190,8 +192,9 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
+						Optional:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

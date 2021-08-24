@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -82,6 +83,7 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The ARN (Amazon resource name) of the scheduled audit.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
 			Computed:    true,
 		},
 		"scheduled_audit_name": {
@@ -96,6 +98,7 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The name you want to give to the scheduled audit.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 			Optional:    true,
 			Computed:    true,
 			// ScheduledAuditName is a force-new attribute.
@@ -140,12 +143,14 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Key
 						Description: "The tag's key.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The tag's value.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Required:    true,
 					},
 				},

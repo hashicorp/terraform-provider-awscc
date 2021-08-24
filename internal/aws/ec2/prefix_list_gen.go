@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -78,13 +80,15 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"cidr": {
 						// Property: Cidr
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 46)},
+						Required:   true,
 					},
 					"description": {
 						// Property: Description
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 255)},
+						Optional:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -135,6 +139,7 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Name of Prefix List.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
 			Required:    true,
 		},
 		"tags": {
@@ -167,8 +172,9 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value

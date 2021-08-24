@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the specified AccessPoint.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
 			Computed:    true,
 		},
 		"bucket": {
@@ -47,6 +50,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
 			Required:    true,
 			// Bucket is a force-new attribute.
 		},
@@ -62,6 +66,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A name for the AccessPoint.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(3, 50)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -97,6 +102,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: VpcId
 						Description: "Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 						Optional:    true,
 					},
 				},

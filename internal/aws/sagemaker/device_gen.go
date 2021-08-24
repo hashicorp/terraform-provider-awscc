@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -61,12 +63,14 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "Description of the device",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 40)},
 						Optional:    true,
 					},
 					"device_name": {
 						// Property: DeviceName
 						Description: "The name of the device",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
 						Required:    true,
 					},
 					"iot_thing_name": {
@@ -93,6 +97,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the edge device fleet",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
 			Required:    true,
 			// DeviceFleetName is a force-new attribute.
 		},
@@ -134,12 +139,14 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
 						Required:    true,
 					},
 				},

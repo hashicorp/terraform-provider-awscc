@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -32,6 +34,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 40)},
 			Computed:    true,
 		},
 		"error": {
@@ -72,6 +75,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			// }
 			Description: "Id",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Computed:    true,
 		},
 		"resolver_query_log_config_id": {
@@ -85,6 +89,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			// }
 			Description: "ResolverQueryLogConfigId",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Optional:    true,
 			Computed:    true,
 			// ResolverQueryLogConfigId is a force-new attribute.
@@ -100,6 +105,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			// }
 			Description: "ResourceId",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Optional:    true,
 			Computed:    true,
 			// ResourceId is a force-new attribute.

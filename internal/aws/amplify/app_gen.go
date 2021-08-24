@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -29,8 +31,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Optional:   true,
 			// AccessToken is a write-only attribute.
 		},
 		"app_id": {
@@ -42,8 +45,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 20)},
+			Computed:   true,
 		},
 		"app_name": {
 			// Property: AppName
@@ -54,8 +58,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Computed:   true,
 		},
 		"arn": {
 			// Property: Arn
@@ -179,13 +184,15 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"password": {
 									// Property: Password
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Optional:   true,
 								},
 								"username": {
 									// Property: Username
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Optional:   true,
 								},
 							},
 						),
@@ -193,8 +200,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"build_spec": {
 						// Property: BuildSpec
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 25000)},
+						Optional:   true,
 					},
 					"enable_auto_branch_creation": {
 						// Property: EnableAutoBranchCreation
@@ -281,13 +289,15 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"password": {
 						// Property: Password
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Optional:   true,
 					},
 					"username": {
 						// Property: Username
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Optional:   true,
 					},
 				},
 			),
@@ -303,8 +313,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 25000)},
+			Optional:   true,
 		},
 		"custom_headers": {
 			// Property: CustomHeaders
@@ -315,8 +326,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 25000)},
+			Optional:   true,
 		},
 		"custom_rules": {
 			// Property: CustomRules
@@ -363,23 +375,27 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"condition": {
 						// Property: Condition
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 2048)},
+						Optional:   true,
 					},
 					"source": {
 						// Property: Source
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+						Required:   true,
 					},
 					"status": {
 						// Property: Status
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 7)},
+						Optional:   true,
 					},
 					"target": {
 						// Property: Target
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -394,8 +410,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1000)},
+			Computed:   true,
 		},
 		"description": {
 			// Property: Description
@@ -470,8 +487,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 1000)},
+			Optional:   true,
 		},
 		"name": {
 			// Property: Name
@@ -482,8 +500,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+			Required:   true,
 		},
 		"oauth_token": {
 			// Property: OauthToken
@@ -540,13 +559,15 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

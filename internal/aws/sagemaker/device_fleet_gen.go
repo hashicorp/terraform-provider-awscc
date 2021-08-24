@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,7 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Description for the edge device fleet",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 800)},
 			Optional:    true,
 		},
 		"device_fleet_name": {
@@ -47,6 +50,7 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the edge device fleet",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
 			Required:    true,
 			// DeviceFleetName is a force-new attribute.
 		},
@@ -81,6 +85,7 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: KmsKeyId
 						Description: "The KMS key id used for encryption on the S3 bucket",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 						Optional:    true,
 					},
 					"s3_output_location": {
@@ -105,6 +110,7 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Role associated with the device fleet",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
 			Required:    true,
 		},
 		"tags": {
@@ -146,12 +152,14 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
 						Required:    true,
 					},
 				},

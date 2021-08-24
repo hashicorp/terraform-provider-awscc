@@ -82,6 +82,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "Name for the Amazon Lookout for Metrics Anomaly Detector",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
 			Optional:    true,
 			Computed:    true,
 			// AnomalyDetectorName is a force-new attribute.
@@ -109,6 +110,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "KMS key used to encrypt the AnomalyDetector data",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
 			Optional:    true,
 		},
 		"metric_set_list": {
@@ -556,12 +558,14 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									// Property: MetricName
 									Description: "Name of a column in the data.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
 									Required:    true,
 								},
 								"namespace": {
 									// Property: Namespace
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Optional:   true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -586,6 +590,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: MetricSetName
 						Description: "The name of the MetricSet.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
 						Required:    true,
 					},
 					"metric_source": {
@@ -629,18 +634,21 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 										map[string]tfsdk.Attribute{
 											"db_instance_identifier": {
 												// Property: DBInstanceIdentifier
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
+												Required:   true,
 											},
 											"database_host": {
 												// Property: DatabaseHost
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 253)},
+												Required:   true,
 											},
 											"database_name": {
 												// Property: DatabaseName
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+												Required:   true,
 											},
 											"database_port": {
 												// Property: DatabasePort
@@ -659,8 +667,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											},
 											"table_name": {
 												// Property: TableName
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+												Required:   true,
 											},
 											"vpc_configuration": {
 												// Property: VpcConfiguration
@@ -690,18 +699,21 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 										map[string]tfsdk.Attribute{
 											"cluster_identifier": {
 												// Property: ClusterIdentifier
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
+												Required:   true,
 											},
 											"database_host": {
 												// Property: DatabaseHost
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 253)},
+												Required:   true,
 											},
 											"database_name": {
 												// Property: DatabaseName
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+												Required:   true,
 											},
 											"database_port": {
 												// Property: DatabasePort
@@ -720,8 +732,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											},
 											"table_name": {
 												// Property: TableName
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+												Required:   true,
 											},
 											"vpc_configuration": {
 												// Property: VpcConfiguration
@@ -862,6 +875,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									// Property: ColumnName
 									Description: "Name of a column in the data.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
 									Optional:    true,
 								},
 							},

@@ -53,6 +53,7 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			// }
 			Description: "The name of the cluster",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 			Required:    true,
 			// Cluster is a force-new attribute.
 		},

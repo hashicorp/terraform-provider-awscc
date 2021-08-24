@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -1105,8 +1107,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"bucket_name": {
 												// Property: BucketName
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+												Required:   true,
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
@@ -1182,8 +1185,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											},
 											"bucket_name": {
 												// Property: BucketName
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
+												Required:   true,
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
@@ -1315,6 +1319,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
 			Optional:    true,
 			Computed:    true,
 			// KMSArn is a force-new attribute.

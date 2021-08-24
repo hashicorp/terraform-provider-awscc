@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -73,6 +75,7 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: LogicalId
 						Description: "The LogicalID of a hierarchy in the parent asset's model.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Required:    true,
 					},
 				},
@@ -161,6 +164,7 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: LogicalId
 						Description: "Customer provided ID for property.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Required:    true,
 					},
 					"notification_state": {

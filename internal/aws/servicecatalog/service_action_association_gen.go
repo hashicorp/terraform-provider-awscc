@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -30,8 +32,9 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Required:   true,
 			// ProductId is a force-new attribute.
 		},
 		"provisioning_artifact_id": {
@@ -43,8 +46,9 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Required:   true,
 			// ProvisioningArtifactId is a force-new attribute.
 		},
 		"service_action_id": {
@@ -56,8 +60,9 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Required:   true,
 			// ServiceActionId is a force-new attribute.
 		},
 	}

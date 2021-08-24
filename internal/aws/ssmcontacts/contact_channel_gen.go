@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -55,6 +57,7 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The device name. String of 6 to 50 alphabetical, numeric, dash, and underscore characters.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
 			Optional:    true,
 		},
 		"channel_type": {
@@ -87,6 +90,7 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "ARN of the contact resource",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 			Optional:    true,
 			Computed:    true,
 			// ContactId is a force-new attribute.

@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -47,6 +49,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Event Time Feature Name.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Required:    true,
 			// EventTimeFeatureName is a force-new attribute.
 		},
@@ -89,8 +92,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"feature_name": {
 						// Property: FeatureName
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+						Required:   true,
 					},
 					"feature_type": {
 						// Property: FeatureType
@@ -118,6 +122,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Name of the FeatureGroup.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Required:    true,
 			// FeatureGroupName is a force-new attribute.
 		},
@@ -191,18 +196,21 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"catalog": {
 									// Property: Catalog
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Required:   true,
 								},
 								"database": {
 									// Property: Database
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Required:   true,
 								},
 								"table_name": {
 									// Property: TableName
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Required:   true,
 								},
 							},
 						),
@@ -297,6 +305,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Record Identifier Feature Name.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Required:    true,
 			// RecordIdentifierFeatureName is a force-new attribute.
 		},
@@ -312,6 +321,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Role Arn",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
 			Optional:    true,
 			Computed:    true,
 			// RoleArn is a force-new attribute.

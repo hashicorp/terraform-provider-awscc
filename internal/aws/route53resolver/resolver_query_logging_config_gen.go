@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -32,6 +34,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			// }
 			Description: "Arn",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 600)},
 			Computed:    true,
 		},
 		"association_count": {
@@ -56,6 +59,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 40)},
 			Computed:    true,
 		},
 		"creator_request_id": {
@@ -69,6 +73,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			// }
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
 			Computed:    true,
 		},
 		"destination_arn": {
@@ -82,6 +87,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			// }
 			Description: "destination arn",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 600)},
 			Optional:    true,
 			Computed:    true,
 			// DestinationArn is a force-new attribute.
@@ -97,6 +103,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			// }
 			Description: "ResourceId",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Computed:    true,
 		},
 		"name": {
@@ -111,6 +118,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			// }
 			Description: "ResolverQueryLogConfigName",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Optional:    true,
 			Computed:    true,
 			// Name is a force-new attribute.
@@ -126,6 +134,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			// }
 			Description: "AccountId",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(12, 32)},
 			Computed:    true,
 		},
 		"share_status": {

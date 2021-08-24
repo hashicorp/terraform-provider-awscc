@@ -34,6 +34,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the associated Domain.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
 			Required:    true,
 			// DomainId is a force-new attribute.
 		},
@@ -62,6 +63,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The username of the associated AWS Single Sign-On User for this UserProfile. If the Domain's AuthMode is SSO, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not SSO, this field cannot be specified.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 			Optional:    true,
 			Computed:    true,
 			// SingleSignOnUserValue is a force-new attribute.
@@ -101,13 +103,15 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -144,6 +148,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A name for the UserProfile.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
 			Required:    true,
 			// UserProfileName is a force-new attribute.
 		},
@@ -370,6 +375,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ExecutionRole
 						Description: "The user profile Amazon Resource Name (ARN).",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
 						Optional:    true,
 					},
 					"jupyter_server_app_settings": {

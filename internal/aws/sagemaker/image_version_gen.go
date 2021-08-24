@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The registry path of the container image on which this image version is based.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
 			Required:    true,
 			// BaseImage is a force-new attribute.
 		},
@@ -48,6 +51,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The registry path of the container image that contains this image version.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
 			Computed:    true,
 		},
 		"image_arn": {
@@ -62,6 +66,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the parent image.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 			Computed:    true,
 		},
 		"image_name": {
@@ -76,6 +81,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the image this version belongs to.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
 			Required:    true,
 			// ImageName is a force-new attribute.
 		},
@@ -91,6 +97,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the image version.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 			Computed:    true,
 		},
 		"version": {

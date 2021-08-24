@@ -52,6 +52,7 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The Amazon Resource Name (ARN) of the endpoint.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(5, 500)},
 			Computed:    true,
 		},
 		"cidr_block": {
@@ -65,6 +66,7 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The VPC CIDR committed by this endpoint.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 20)},
 			Computed:    true,
 		},
 		"creation_time": {
@@ -105,6 +107,7 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the endpoint.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(5, 500)},
 			Computed:    true,
 		},
 		"network_interfaces": {
@@ -135,8 +138,9 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"network_interface_id": {
 						// Property: NetworkInterfaceId
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -169,6 +173,7 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the security group to use with the endpoint.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
 			Required:    true,
 			// SecurityGroupId is a force-new attribute.
 		},
@@ -198,6 +203,7 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the subnet in the selected VPC. The subnet must belong to the Outpost.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
 			Required:    true,
 			// SubnetId is a force-new attribute.
 		},

@@ -94,6 +94,11 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 	case cfschema.PropertyTypeString:
 		e.printf("Type:types.StringType,\n")
 
+		if property.MinLength != nil && property.MaxLength != nil {
+			features |= UsesValidation
+			e.printf("Validators:[]tfsdk.AttributeValidator{validate.StringLength(%d, %d)},\n", *property.MinLength, *property.MaxLength)
+		}
+
 	//
 	// Complex types.
 	//

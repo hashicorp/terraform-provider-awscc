@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -71,6 +73,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Description: "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(4, 256)},
 			Required:    true,
 			// StudioId is a force-new attribute.
 		},

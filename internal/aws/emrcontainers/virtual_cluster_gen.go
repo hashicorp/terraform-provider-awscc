@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -86,6 +87,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Id
 						Description: "The ID of the container cluster",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
 						Required:    true,
 					},
 					"info": {
@@ -98,8 +100,9 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"namespace": {
 												// Property: Namespace
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
+												Required:   true,
 											},
 										},
 									),
@@ -131,6 +134,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Id of the virtual cluster.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Computed:    true,
 		},
 		"name": {
@@ -145,6 +149,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "Name of the virtual cluster.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},

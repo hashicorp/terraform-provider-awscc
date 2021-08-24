@@ -45,6 +45,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			// }
 			Description: "The Amazon Resource Name (ARN) of job definition.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 			Computed:    true,
 		},
 		"job_definition_name": {
@@ -251,6 +252,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 						// Property: BaseliningJobName
 						Description: "The name of a processing job",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 63)},
 						Optional:    true,
 					},
 					"constraints_resource": {
@@ -388,6 +390,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 									// Property: EndTimeOffset
 									Description: "The time offsets in ISO duration format",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 15)},
 									Optional:    true,
 								},
 								"endpoint_name": {
@@ -441,6 +444,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 									// Property: StartTimeOffset
 									Description: "The time offsets in ISO duration format",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 15)},
 									Optional:    true,
 								},
 							},
@@ -695,6 +699,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			// }
 			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
 			Required:    true,
 			// RoleArn is a force-new attribute.
 		},
@@ -769,6 +774,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 						Required:    true,
 					},
 					"value": {

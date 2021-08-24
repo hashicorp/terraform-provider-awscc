@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -169,6 +171,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: FederationProviderName
 						Description: "Federation provider name to link with the Environment",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 32)},
 						Optional:    true,
 					},
 					"federation_urn": {
@@ -181,6 +184,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: SamlMetadataDocument
 						Description: "SAML metadata document to link the federation provider to the Environment",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1000, 10000000)},
 						Optional:    true,
 					},
 					"saml_metadata_url": {

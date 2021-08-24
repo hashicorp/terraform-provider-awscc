@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,7 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 			// }
 			Description: "The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1283)},
 			Required:    true,
 			// CertificateArn is a force-new attribute.
 		},
@@ -81,6 +84,7 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 			// }
 			Description: "The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1283)},
 			Required:    true,
 			// RoleArn is a force-new attribute.
 		},

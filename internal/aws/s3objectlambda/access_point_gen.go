@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -55,6 +56,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name you want to assign to this Object lambda Access Point.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(3, 45)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -126,8 +128,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"supporting_access_point": {
 						// Property: SupportingAccessPoint
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+						Required:   true,
 					},
 					"transformation_configurations": {
 						// Property: TransformationConfigurations

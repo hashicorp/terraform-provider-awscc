@@ -57,13 +57,15 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 				map[string]tfsdk.Attribute{
 					"parameter_name": {
 						// Property: ParameterName
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 255)},
+						Required:   true,
 					},
 					"parameter_value": {
 						// Property: ParameterValue
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 4096)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -84,6 +86,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			// }
 			Description: "AWS Config stores intermediate files while processing conformance pack template.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 63)},
 			Optional:    true,
 		},
 		"delivery_s3_key_prefix": {
@@ -97,6 +100,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			// }
 			Description: "The prefix for the delivery S3 bucket.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 1024)},
 			Optional:    true,
 		},
 		"excluded_accounts": {
@@ -130,6 +134,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			// }
 			Description: "The name of the organization conformance pack.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 			Required:    true,
 			// OrganizationConformancePackName is a force-new attribute.
 		},
@@ -144,6 +149,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			// }
 			Description: "A string containing full conformance pack template body.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 51200)},
 			Optional:    true,
 			// TemplateBody is a write-only attribute.
 		},
@@ -159,6 +165,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			// }
 			Description: "Location of file containing the template body.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 			Optional:    true,
 			// TemplateS3Uri is a write-only attribute.
 		},

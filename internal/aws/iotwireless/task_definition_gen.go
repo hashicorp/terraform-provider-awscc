@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -115,18 +116,21 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"model": {
 									// Property: Model
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 4096)},
+									Optional:   true,
 								},
 								"package_version": {
 									// Property: PackageVersion
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 32)},
+									Optional:   true,
 								},
 								"station": {
 									// Property: Station
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 4096)},
+									Optional:   true,
 								},
 							},
 						),
@@ -138,18 +142,21 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"model": {
 									// Property: Model
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 4096)},
+									Optional:   true,
 								},
 								"package_version": {
 									// Property: PackageVersion
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 32)},
+									Optional:   true,
 								},
 								"station": {
 									// Property: Station
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 4096)},
+									Optional:   true,
 								},
 							},
 						),
@@ -170,6 +177,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The name of the new resource.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 			Optional:    true,
 		},
 		"tags": {
@@ -203,13 +211,15 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 127)},
+						Optional:   true,
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Optional:   true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{
@@ -320,18 +330,21 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"model": {
 												// Property: Model
-												Type:     types.StringType,
-												Optional: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 4096)},
+												Optional:   true,
 											},
 											"package_version": {
 												// Property: PackageVersion
-												Type:     types.StringType,
-												Optional: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 32)},
+												Optional:   true,
 											},
 											"station": {
 												// Property: Station
-												Type:     types.StringType,
-												Optional: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 4096)},
+												Optional:   true,
 											},
 										},
 									),
@@ -344,8 +357,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"update_signature": {
 									// Property: UpdateSignature
-									Type:     types.StringType,
-									Optional: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 4096)},
+									Optional:   true,
 								},
 								"update_version": {
 									// Property: UpdateVersion
@@ -353,18 +367,21 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"model": {
 												// Property: Model
-												Type:     types.StringType,
-												Optional: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 4096)},
+												Optional:   true,
 											},
 											"package_version": {
 												// Property: PackageVersion
-												Type:     types.StringType,
-												Optional: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 32)},
+												Optional:   true,
 											},
 											"station": {
 												// Property: Station
-												Type:     types.StringType,
-												Optional: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 4096)},
+												Optional:   true,
 											},
 										},
 									),
@@ -376,13 +393,15 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"update_data_role": {
 						// Property: UpdateDataRole
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+						Optional:   true,
 					},
 					"update_data_source": {
 						// Property: UpdateDataSource
-						Type:     types.StringType,
-						Optional: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 4096)},
+						Optional:   true,
 					},
 				},
 			),

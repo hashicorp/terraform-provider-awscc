@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +34,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "Arn",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 600)},
 			Computed:    true,
 		},
 		"creation_time": {
@@ -46,6 +48,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 40)},
 			Computed:    true,
 		},
 		"creator_request_id": {
@@ -59,6 +62,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
 			Computed:    true,
 		},
 		"firewall_rules": {
@@ -146,6 +150,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						// Property: BlockOverrideDomain
 						Description: "BlockOverrideDomain",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
 						Optional:    true,
 					},
 					"block_override_ttl": {
@@ -164,6 +169,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						// Property: FirewallDomainListId
 						Description: "ResourceId",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 						Required:    true,
 					},
 					"priority": {
@@ -188,6 +194,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "ResourceId",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Computed:    true,
 		},
 		"modification_time": {
@@ -201,6 +208,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 40)},
 			Computed:    true,
 		},
 		"name": {
@@ -215,6 +223,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "FirewallRuleGroupName",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Optional:    true,
 			Computed:    true,
 			// Name is a force-new attribute.
@@ -230,6 +239,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "AccountId",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(12, 32)},
 			Computed:    true,
 		},
 		"rule_count": {
@@ -326,12 +336,14 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 127)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 255)},
 						Required:    true,
 					},
 				},

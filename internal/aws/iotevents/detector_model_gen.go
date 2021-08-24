@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -2184,6 +2186,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: InitialStateName
 						Description: "The state that is entered at the creation of each detector (instance).",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 						Required:    true,
 					},
 					"states": {
@@ -2213,8 +2216,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																			map[string]tfsdk.Attribute{
 																				"timer_name": {
 																					// Property: TimerName
-																					Type:     types.StringType,
-																					Required: true,
+																					Type:       types.StringType,
+																					Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+																					Required:   true,
 																				},
 																			},
 																		),
@@ -2391,6 +2395,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: InputName
 																					Description: "The name of the AWS IoT Events input where the data is sent.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																				"payload": {
@@ -2529,6 +2534,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: MqttTopic
 																					Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																				"payload": {
@@ -2564,6 +2570,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: FunctionArn
 																					Description: "The ARN of the Lambda function that is executed.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 																					Required:    true,
 																				},
 																				"payload": {
@@ -2600,6 +2607,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TimerName
 																					Description: "The name of the timer to reset.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																			},
@@ -2615,6 +2623,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: DurationExpression
 																					Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 																					Optional:    true,
 																				},
 																				"seconds": {
@@ -2627,6 +2636,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TimerName
 																					Description: "The name of the timer.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																			},
@@ -2642,12 +2652,14 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: Value
 																					Description: "The new value of the variable.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 																					Required:    true,
 																				},
 																				"variable_name": {
 																					// Property: VariableName
 																					Description: "The name of the variable.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																			},
@@ -2684,6 +2696,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TargetArn
 																					Description: "The ARN of the Amazon SNS target where the message is sent.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 																					Required:    true,
 																				},
 																			},
@@ -2779,8 +2792,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																			map[string]tfsdk.Attribute{
 																				"timer_name": {
 																					// Property: TimerName
-																					Type:     types.StringType,
-																					Required: true,
+																					Type:       types.StringType,
+																					Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+																					Required:   true,
 																				},
 																			},
 																		),
@@ -2957,6 +2971,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: InputName
 																					Description: "The name of the AWS IoT Events input where the data is sent.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																				"payload": {
@@ -3095,6 +3110,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: MqttTopic
 																					Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																				"payload": {
@@ -3130,6 +3146,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: FunctionArn
 																					Description: "The ARN of the Lambda function that is executed.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 																					Required:    true,
 																				},
 																				"payload": {
@@ -3166,6 +3183,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TimerName
 																					Description: "The name of the timer to reset.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																			},
@@ -3181,6 +3199,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: DurationExpression
 																					Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 																					Optional:    true,
 																				},
 																				"seconds": {
@@ -3193,6 +3212,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TimerName
 																					Description: "The name of the timer.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																			},
@@ -3208,12 +3228,14 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: Value
 																					Description: "The new value of the variable.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 																					Required:    true,
 																				},
 																				"variable_name": {
 																					// Property: VariableName
 																					Description: "The name of the variable.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																			},
@@ -3250,6 +3272,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TargetArn
 																					Description: "The ARN of the Amazon SNS target where the message is sent.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 																					Required:    true,
 																				},
 																			},
@@ -3345,8 +3368,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																			map[string]tfsdk.Attribute{
 																				"timer_name": {
 																					// Property: TimerName
-																					Type:     types.StringType,
-																					Required: true,
+																					Type:       types.StringType,
+																					Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+																					Required:   true,
 																				},
 																			},
 																		),
@@ -3523,6 +3547,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: InputName
 																					Description: "The name of the AWS IoT Events input where the data is sent.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																				"payload": {
@@ -3661,6 +3686,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: MqttTopic
 																					Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																				"payload": {
@@ -3696,6 +3722,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: FunctionArn
 																					Description: "The ARN of the Lambda function that is executed.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 																					Required:    true,
 																				},
 																				"payload": {
@@ -3732,6 +3759,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TimerName
 																					Description: "The name of the timer to reset.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																			},
@@ -3747,6 +3775,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: DurationExpression
 																					Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 																					Optional:    true,
 																				},
 																				"seconds": {
@@ -3759,6 +3788,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TimerName
 																					Description: "The name of the timer.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																			},
@@ -3774,12 +3804,14 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: Value
 																					Description: "The new value of the variable.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 																					Required:    true,
 																				},
 																				"variable_name": {
 																					// Property: VariableName
 																					Description: "The name of the variable.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																			},
@@ -3816,6 +3848,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TargetArn
 																					Description: "The ARN of the Amazon SNS target where the message is sent.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 																					Required:    true,
 																				},
 																			},
@@ -3902,8 +3935,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																			map[string]tfsdk.Attribute{
 																				"timer_name": {
 																					// Property: TimerName
-																					Type:     types.StringType,
-																					Required: true,
+																					Type:       types.StringType,
+																					Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+																					Required:   true,
 																				},
 																			},
 																		),
@@ -4080,6 +4114,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: InputName
 																					Description: "The name of the AWS IoT Events input where the data is sent.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																				"payload": {
@@ -4218,6 +4253,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: MqttTopic
 																					Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																				"payload": {
@@ -4253,6 +4289,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: FunctionArn
 																					Description: "The ARN of the Lambda function that is executed.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 																					Required:    true,
 																				},
 																				"payload": {
@@ -4289,6 +4326,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TimerName
 																					Description: "The name of the timer to reset.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																			},
@@ -4304,6 +4342,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: DurationExpression
 																					Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 																					Optional:    true,
 																				},
 																				"seconds": {
@@ -4316,6 +4355,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TimerName
 																					Description: "The name of the timer.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																			},
@@ -4331,12 +4371,14 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: Value
 																					Description: "The new value of the variable.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 																					Required:    true,
 																				},
 																				"variable_name": {
 																					// Property: VariableName
 																					Description: "The name of the variable.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 																					Required:    true,
 																				},
 																			},
@@ -4373,6 +4415,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TargetArn
 																					Description: "The ARN of the Amazon SNS target where the message is sent.",
 																					Type:        types.StringType,
+																					Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 																					Required:    true,
 																				},
 																			},
@@ -4435,12 +4478,14 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															// Property: EventName
 															Description: "The name of the event.",
 															Type:        types.StringType,
+															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 															Required:    true,
 														},
 														"next_state": {
 															// Property: NextState
 															Description: "The next state to enter.",
 															Type:        types.StringType,
+															Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 															Required:    true,
 														},
 													},
@@ -4456,6 +4501,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									// Property: StateName
 									Description: "The name of the state.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 									Required:    true,
 								},
 							},
@@ -4493,6 +4539,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The name of the detector model.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 			Optional:    true,
 			Computed:    true,
 			// DetectorModelName is a force-new attribute.
@@ -4524,6 +4571,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The value used to identify a detector instance. When a device or system sends input, a new detector instance with a unique key value is created. AWS IoT Events can continue to route input to its corresponding detector instance based on this identifying information.\n\nThis parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct detector instance, the device must send a message payload that contains the same attribute-value.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 			Optional:    true,
 			Computed:    true,
 			// Key is a force-new attribute.
@@ -4539,6 +4587,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "The ARN of the role that grants permission to AWS IoT Events to perform its operations.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 			Required:    true,
 		},
 		"tags": {

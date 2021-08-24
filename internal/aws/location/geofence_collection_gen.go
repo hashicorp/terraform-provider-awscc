@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -41,8 +43,9 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Required:   true,
 			// CollectionName is a force-new attribute.
 		},
 		"create_time": {
@@ -65,9 +68,10 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1000)},
+			Optional:   true,
+			Computed:   true,
 			// Description is a force-new attribute.
 		},
 		"kms_key_id": {
@@ -78,8 +82,9 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+			Optional:   true,
 		},
 		"pricing_plan": {
 			// Property: PricingPlan

@@ -81,6 +81,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									// Property: Destination
 									Description: "The Amazon Resource Name (ARN) of the destination resource.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(12, 1024)},
 									Optional:    true,
 								},
 							},
@@ -114,6 +115,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The Amazon Resource Name (ARN) of the event source.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(12, 1024)},
 			Optional:    true,
 			Computed:    true,
 			// EventSourceArn is a force-new attribute.
@@ -130,6 +132,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The name of the Lambda function.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 140)},
 			Required:    true,
 		},
 		"function_response_types": {
@@ -167,6 +170,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "Event Source Mapping Identifier UUID.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(36, 36)},
 			Computed:    true,
 		},
 		"maximum_batching_window_in_seconds": {
@@ -345,6 +349,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						// Property: URI
 						Description: "The URI for the source access configuration resource.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 200)},
 						Optional:    true,
 					},
 				},
@@ -368,6 +373,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(6, 12)},
 			Optional:    true,
 			Computed:    true,
 			// StartingPosition is a force-new attribute.

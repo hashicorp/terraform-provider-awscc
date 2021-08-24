@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The sso instance that the permission set is owned.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(10, 1224)},
 			Required:    true,
 			// InstanceArn is a force-new attribute.
 		},
@@ -48,6 +51,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The permission set that the assignemt will be assigned",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(10, 1224)},
 			Required:    true,
 			// PermissionSetArn is a force-new attribute.
 		},
@@ -63,6 +67,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The assignee's identifier, user id/group id",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 47)},
 			Required:    true,
 			// PrincipalId is a force-new attribute.
 		},

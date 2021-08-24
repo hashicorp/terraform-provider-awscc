@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -51,6 +53,7 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A name for the saved query definition",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
 			Required:    true,
 		},
 		"query_definition_id": {
@@ -64,6 +67,7 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "Unique identifier of a query definition",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
 			Computed:    true,
 		},
 		"query_string": {
@@ -77,6 +81,7 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "The query string to use for this definition",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 10000)},
 			Required:    true,
 		},
 	}

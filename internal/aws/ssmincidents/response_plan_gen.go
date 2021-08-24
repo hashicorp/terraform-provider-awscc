@@ -137,8 +137,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 50)},
+												Required:   true,
 											},
 											"values": {
 												// Property: Values
@@ -240,6 +241,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The display name of the response plan.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 200)},
 			Optional:    true,
 		},
 		"engagements": {
@@ -323,6 +325,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: DedupeString
 						Description: "The deduplication string.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1000)},
 						Optional:    true,
 					},
 					"impact": {
@@ -353,6 +356,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Summary
 						Description: "The summary string.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 4000)},
 						Optional:    true,
 					},
 					"title": {
@@ -377,6 +381,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the response plan.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 200)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -418,13 +423,15 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Required:   true,
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

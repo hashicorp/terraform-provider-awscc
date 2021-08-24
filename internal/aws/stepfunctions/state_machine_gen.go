@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -29,8 +31,9 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+			Computed:   true,
 		},
 		"definition": {
 			// Property: Definition
@@ -92,8 +95,9 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 1048576)},
+			Optional:   true,
 		},
 		"definition_substitutions": {
 			// Property: DefinitionSubstitutions
@@ -165,8 +169,9 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"log_group_arn": {
 												// Property: LogGroupArn
-												Type:     types.StringType,
-												Optional: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+												Optional:   true,
 											},
 										},
 									),
@@ -201,8 +206,9 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 80)},
+			Computed:   true,
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -212,8 +218,9 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Required:   true,
 		},
 		"state_machine_name": {
 			// Property: StateMachineName
@@ -223,9 +230,10 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 80)},
+			Optional:   true,
+			Computed:   true,
 			// StateMachineName is a force-new attribute.
 		},
 		"state_machine_type": {
@@ -272,13 +280,15 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

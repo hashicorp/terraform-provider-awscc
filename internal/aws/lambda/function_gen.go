@@ -82,18 +82,21 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: S3Bucket
 						Description: "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(3, 63)},
 						Optional:    true,
 					},
 					"s3_key": {
 						// Property: S3Key
 						Description: "The Amazon S3 key of the deployment package.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 						Optional:    true,
 					},
 					"s3_object_version": {
 						// Property: S3ObjectVersion
 						Description: "For versioned objects, the version of the deployment package object to use.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 						Optional:    true,
 					},
 					"zip_file": {
@@ -457,12 +460,14 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
 						Optional:    true,
 					},
 				},

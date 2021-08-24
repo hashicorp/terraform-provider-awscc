@@ -43,8 +43,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(12, 12)},
+			Required:   true,
 			// AwsAccountId is a force-new attribute.
 		},
 		"base_theme_id": {
@@ -59,6 +60,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "<p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of\n\t\t\tthe starting themes defined by Amazon QuickSight. For a list of the starting themes, use\n\t\t\t\t<code>ListThemes</code> or choose <b>Themes</b> from\n\t\t\twithin a QuickSight analysis. </p>",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 			Optional:    true,
 			// BaseThemeId is a write-only attribute.
 		},
@@ -543,6 +545,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "<p>A display name for the theme.</p>",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 			Optional:    true,
 		},
 		"permissions": {
@@ -596,6 +599,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Principal
 						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Required:    true,
 					},
 				},
@@ -645,12 +649,14 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Description: "<p>Tag key.</p>",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 						Required:    true,
 					},
 					"value": {
 						// Property: Value
 						Description: "<p>Tag value.</p>",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Required:    true,
 					},
 				},
@@ -670,8 +676,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
+			Required:   true,
 			// ThemeId is a force-new attribute.
 		},
 		"type": {
@@ -972,6 +979,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: BaseThemeId
 						Description: "<p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default QuickSight theme.</p>",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 2048)},
 						Optional:    true,
 					},
 					"configuration": {
@@ -1228,6 +1236,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "<p>The description of the theme.</p>",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
 						Optional:    true,
 					},
 					"errors": {
@@ -1280,6 +1289,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "<p>A description of the first version of the theme that you're creating. Every time\n\t\t\t\t<code>UpdateTheme</code> is called, a new version is created. Each version of the\n\t\t\ttheme has a description of the version in the <code>VersionDescription</code>\n\t\t\tfield.</p>",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
 			Optional:    true,
 			// VersionDescription is a write-only attribute.
 		},

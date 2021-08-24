@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -54,8 +56,9 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"style": {
 						// Property: Style
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+						Required:   true,
 					},
 				},
 			),
@@ -91,9 +94,10 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 1000)},
+			Optional:   true,
+			Computed:   true,
 			// Description is a force-new attribute.
 		},
 		"map_arn": {
@@ -116,8 +120,9 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Required:   true,
 			// MapName is a force-new attribute.
 		},
 		"pricing_plan": {

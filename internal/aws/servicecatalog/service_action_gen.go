@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -64,8 +66,9 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 1000)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value
@@ -107,8 +110,9 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 100)},
+			Computed:   true,
 		},
 		"name": {
 			// Property: Name
@@ -118,8 +122,9 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
+			Required:   true,
 		},
 	}
 

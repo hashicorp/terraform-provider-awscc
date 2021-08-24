@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -83,6 +85,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A human-readable description of a fleet.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 			Optional:    true,
 		},
 		"desired_ec2_instances": {
@@ -297,8 +300,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"location": {
 						// Property: Location
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
+						Required:   true,
 					},
 					"location_capacity": {
 						// Property: LocationCapacity
@@ -404,6 +408,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A descriptive label that is associated with a fleet. Fleet names do not need to be unique.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 			Optional:    true,
 		},
 		"new_game_session_protection_policy": {
@@ -435,6 +440,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A unique identifier for the AWS account with the VPC that you want to peer your Amazon GameLift fleet with. You can find your account ID in the AWS Management Console under account settings.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 			Optional:    true,
 			Computed:    true,
 			// PeerVpcAwsAccountId is a force-new attribute.
@@ -452,6 +458,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID, use the VPC Dashboard in the AWS Management Console.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 			Optional:    true,
 			Computed:    true,
 			// PeerVpcId is a force-new attribute.
@@ -582,12 +589,14 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: LaunchPath
 									Description: "The location of the server executable in a custom game build or the name of the Realtime script file that contains the Init() function. Game builds and Realtime scripts are installed on instances at the root:\n\nWindows (for custom game builds only): C:\\game. Example: \"C:\\game\\MyGame\\server.exe\"\n\nLinux: /local/game. Examples: \"/local/game/MyGame/server.exe\" or \"/local/game/MyRealtimeScript.js\"",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 									Required:    true,
 								},
 								"parameters": {
 									// Property: Parameters
 									Description: "An optional list of parameters to pass to the server executable or Realtime script on launch.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 									Optional:    true,
 								},
 							},
@@ -628,6 +637,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "This parameter is no longer used but is retained for backward compatibility. Instead, specify server launch parameters in the RuntimeConfiguration parameter. A request must specify either a runtime configuration or values for both ServerLaunchParameters and ServerLaunchPath.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 			Optional:    true,
 			Computed:    true,
 			// ServerLaunchParameters is a force-new attribute.
@@ -644,6 +654,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "This parameter is no longer used. Instead, specify a server launch path using the RuntimeConfiguration parameter. Requests that specify a server launch path and launch parameters instead of a runtime configuration will continue to work.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 			Optional:    true,
 			Computed:    true,
 			// ServerLaunchPath is a force-new attribute.

@@ -279,6 +279,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ExecutionRole
 						Description: "The user profile Amazon Resource Name (ARN).",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 2048)},
 						Optional:    true,
 					},
 					"jupyter_server_app_settings": {
@@ -559,13 +560,15 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

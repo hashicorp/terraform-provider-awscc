@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,7 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(3, 45)},
 			Required:    true,
 			// ObjectLambdaAccessPoint is a force-new attribute.
 		},

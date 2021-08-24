@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +46,7 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The default value for the cost category",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 50)},
 			Optional:    true,
 		},
 		"effective_start": {
@@ -58,6 +61,7 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "ISO 8601 date time with offset format",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(20, 25)},
 			Computed:    true,
 		},
 		"name": {
@@ -68,8 +72,9 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 50)},
+			Required:   true,
 			// Name is a force-new attribute.
 		},
 		"rule_version": {

@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Description: "A resource ARN.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 			Required:    true,
 			// FirewallArn is a force-new attribute.
 		},
@@ -45,9 +48,10 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
+			Type:       types.StringType,
+			Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+			Optional:   true,
+			Computed:   true,
 			// FirewallName is a force-new attribute.
 		},
 		"logging_configuration": {

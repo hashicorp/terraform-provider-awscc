@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -43,6 +45,7 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A human-readable description of the alias.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 			Optional:    true,
 		},
 		"name": {
@@ -57,6 +60,7 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 			Required:    true,
 		},
 		"routing_strategy": {

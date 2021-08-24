@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -89,6 +91,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The description of the detector.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 			Optional:    true,
 		},
 		"detector_id": {
@@ -103,6 +106,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The ID of the detector",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Required:    true,
 			// DetectorId is a force-new attribute.
 		},
@@ -456,6 +460,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "The description of the event type.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 						Optional:    true,
 					},
 					"entity_types": {
@@ -477,6 +482,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Description
 									Description: "The description.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 									Optional:    true,
 								},
 								"inline": {
@@ -502,13 +508,15 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+												Required:   true,
 											},
 											"value": {
 												// Property: Value
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+												Required:   true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -558,6 +566,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Description
 									Description: "The description.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 									Optional:    true,
 								},
 								"inline": {
@@ -583,13 +592,15 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+												Required:   true,
 											},
 											"value": {
 												// Property: Value
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+												Required:   true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -634,6 +645,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Description
 									Description: "The description.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 									Optional:    true,
 								},
 								"inline": {
@@ -659,13 +671,15 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+												Required:   true,
 											},
 											"value": {
 												// Property: Value
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+												Required:   true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -691,6 +705,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Name
 						Description: "The name for the event type",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 						Optional:    true,
 					},
 					"tags": {
@@ -700,13 +715,15 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Required:   true,
 								},
 								"value": {
 									// Property: Value
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+									Required:   true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -899,6 +916,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "The description.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Optional:    true,
 					},
 					"detector_id": {
@@ -941,6 +959,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Description
 									Description: "The description.",
 									Type:        types.StringType,
+									Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 									Optional:    true,
 								},
 								"inline": {
@@ -966,13 +985,15 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+												Required:   true,
 											},
 											"value": {
 												// Property: Value
-												Type:     types.StringType,
-												Required: true,
+												Type:       types.StringType,
+												Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+												Required:   true,
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -1005,13 +1026,15 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Required:   true,
 								},
 								"value": {
 									// Property: Value
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+									Required:   true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -1062,13 +1085,15 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

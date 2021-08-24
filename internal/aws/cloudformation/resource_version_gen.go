@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -85,12 +87,14 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: LogGroupName
 						Description: "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 512)},
 						Optional:    true,
 					},
 					"log_role_arn": {
 						// Property: LogRoleArn
 						Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Optional:    true,
 					},
 				},

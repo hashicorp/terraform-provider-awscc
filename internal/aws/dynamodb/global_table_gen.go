@@ -63,8 +63,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"attribute_name": {
 						// Property: AttributeName
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Required:   true,
 					},
 					"attribute_type": {
 						// Property: AttributeType
@@ -205,8 +206,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"index_name": {
 						// Property: IndexName
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 255)},
+						Required:   true,
 					},
 					"key_schema": {
 						// Property: KeySchema
@@ -214,8 +216,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"attribute_name": {
 									// Property: AttributeName
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Required:   true,
 								},
 								"key_type": {
 									// Property: KeyType
@@ -344,8 +347,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"attribute_name": {
 						// Property: AttributeName
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+						Required:   true,
 					},
 					"key_type": {
 						// Property: KeyType
@@ -431,8 +435,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"index_name": {
 						// Property: IndexName
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 255)},
+						Required:   true,
 					},
 					"key_schema": {
 						// Property: KeySchema
@@ -440,8 +445,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"attribute_name": {
 									// Property: AttributeName
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 255)},
+									Required:   true,
 								},
 								"key_type": {
 									// Property: KeyType
@@ -723,8 +729,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"index_name": {
 									// Property: IndexName
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(3, 255)},
+									Required:   true,
 								},
 								"read_provisioned_throughput_settings": {
 									// Property: ReadProvisionedThroughputSettings

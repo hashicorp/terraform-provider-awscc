@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -32,6 +34,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The description of the prepared statement.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 1024)},
 			Optional:    true,
 		},
 		"query_statement": {
@@ -45,6 +48,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The query string for the prepared statement.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 262144)},
 			Required:    true,
 		},
 		"statement_name": {
@@ -58,6 +62,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The name of the prepared statement.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 			Required:    true,
 			// StatementName is a force-new attribute.
 		},
@@ -72,6 +77,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The name of the workgroup to which the prepared statement belongs.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 			Required:    true,
 			// WorkGroup is a force-new attribute.
 		},

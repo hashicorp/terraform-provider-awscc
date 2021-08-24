@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -54,6 +56,7 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The description of the event type.",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
 			Optional:    true,
 		},
 		"entity_types": {
@@ -138,6 +141,7 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "The description.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Optional:    true,
 					},
 					"inline": {
@@ -163,13 +167,15 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Required:   true,
 								},
 								"value": {
 									// Property: Value
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+									Required:   true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -338,6 +344,7 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "The description.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Optional:    true,
 					},
 					"inline": {
@@ -363,13 +370,15 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Required:   true,
 								},
 								"value": {
 									// Property: Value
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+									Required:   true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -472,6 +481,7 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Description
 						Description: "The description.",
 						Type:        types.StringType,
+						Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 256)},
 						Optional:    true,
 					},
 					"inline": {
@@ -497,13 +507,15 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+									Required:   true,
 								},
 								"value": {
 									// Property: Value
-									Type:     types.StringType,
-									Required: true,
+									Type:       types.StringType,
+									Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+									Required:   true,
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -542,6 +554,7 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name for the event type",
 			Type:        types.StringType,
+			Validators:  []tfsdk.AttributeValidator{validate.StringLength(1, 64)},
 			Required:    true,
 			// Name is a force-new attribute.
 		},
@@ -580,13 +593,15 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(1, 128)},
+						Required:   true,
 					},
 					"value": {
 						// Property: Value
-						Type:     types.StringType,
-						Required: true,
+						Type:       types.StringType,
+						Validators: []tfsdk.AttributeValidator{validate.StringLength(0, 256)},
+						Required:   true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
