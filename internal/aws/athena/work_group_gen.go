@@ -220,7 +220,10 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: BytesScannedCutoffPerQuery
 						Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(10000000),
+						},
+						Optional: true,
 					},
 					"enforce_work_group_configuration": {
 						// Property: EnforceWorkGroupConfiguration
@@ -391,7 +394,10 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: BytesScannedCutoffPerQuery
 						Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(10000000),
+						},
+						Optional: true,
 					},
 					"enforce_work_group_configuration": {
 						// Property: EnforceWorkGroupConfiguration

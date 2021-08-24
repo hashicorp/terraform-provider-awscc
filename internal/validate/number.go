@@ -82,3 +82,71 @@ func IntBetween(min, max int) tfsdk.AttributeValidator {
 		max: max,
 	}
 }
+
+// intAtLeastValidator validates that an integer Attribute's value is at least a certain value.
+type intAtLeastValidator struct {
+	tfsdk.AttributeValidator
+
+	min int
+}
+
+// Description describes the validation in plain text formatting.
+func (v intAtLeastValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("value must be at least %d", v.min)
+}
+
+// MarkdownDescription describes the validation in Markdown formatting.
+func (v intAtLeastValidator) MarkdownDescription(ctx context.Context) string {
+	return v.Description(ctx)
+}
+
+// Validate performs the validation.
+func (v intAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+	n, ok := request.AttributeConfig.(types.Number)
+
+	if !ok {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Invalid value type",
+			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
+		})
+
+		return
+	}
+
+	if n.Unknown || n.Null {
+		return
+	}
+
+	val := n.Value
+
+	if !val.IsInt() {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Invalid value",
+			Detail:   fmt.Sprintf("invalid value (%s) at path: %s", request.AttributeConfig, request.AttributePath),
+		})
+
+		return
+	}
+
+	var i big.Int
+	_, _ = val.Int(&i)
+
+	if i := i.Int64(); i < int64(v.min) {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Invalid length",
+			Detail:   fmt.Sprintf("expected %s to be at least %d, got %d", request.AttributePath, v.min, i),
+		})
+
+		return
+	}
+}
+
+// IntAtLeast returns a new integer value at least validator.
+func IntAtLeast(min int) tfsdk.AttributeValidator {
+	return intAtLeastValidator{
+		min: min,
+	}
+}

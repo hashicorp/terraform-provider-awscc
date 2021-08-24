@@ -101,7 +101,10 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "[DEPRECATED] The number of EC2 instances that you want this fleet to host. When creating a new fleet, GameLift automatically sets this value to \"1\" and initiates a single instance. Once the fleet is active, update this value to trigger GameLift to add or remove instances from the fleet.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(0),
+			},
+			Optional: true,
 		},
 		"ec2_inbound_permissions": {
 			// Property: EC2InboundPermissions
@@ -334,19 +337,28 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: DesiredEC2Instances
 									Description: "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
 									Type:        types.NumberType,
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(0),
+									},
+									Required: true,
 								},
 								"max_size": {
 									// Property: MaxSize
 									Description: "The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
 									Type:        types.NumberType,
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(0),
+									},
+									Required: true,
 								},
 								"min_size": {
 									// Property: MinSize
 									Description: "The minimum value allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
 									Type:        types.NumberType,
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(0),
+									},
+									Required: true,
 								},
 							},
 						),
@@ -388,7 +400,10 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "[DEPRECATED] The maximum value that is allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(0),
+			},
+			Optional: true,
 		},
 		"metric_groups": {
 			// Property: MetricGroups
@@ -420,7 +435,10 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "[DEPRECATED] The minimum value allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(0),
+			},
+			Optional: true,
 		},
 		"name": {
 			// Property: Name
@@ -524,13 +542,19 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: NewGameSessionsPerCreator
 						Description: "The maximum number of game sessions that an individual can create during the policy period.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(0),
+						},
+						Optional: true,
 					},
 					"policy_period_in_minutes": {
 						// Property: PolicyPeriodInMinutes
 						Description: "The time span used in evaluating the resource creation limit policy.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(0),
+						},
+						Optional: true,
 					},
 				},
 			),
@@ -628,7 +652,10 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ConcurrentExecutions
 									Description: "The number of server processes that use this configuration to run concurrently on an instance.",
 									Type:        types.NumberType,
-									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(1),
+									},
+									Required: true,
 								},
 								"launch_path": {
 									// Property: LaunchPath

@@ -63,7 +63,10 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The number of hours for the data records that are stored in shards to remain accessible.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(24),
+			},
+			Optional: true,
 		},
 		"shard_count": {
 			// Property: ShardCount
@@ -75,7 +78,10 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The number of shards that the stream uses.",
 			Type:        types.NumberType,
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
+			Required: true,
 		},
 		"stream_encryption": {
 			// Property: StreamEncryption

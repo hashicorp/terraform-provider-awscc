@@ -94,7 +94,10 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "minimum": 1,
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type: types.NumberType,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
 			Optional: true,
 		},
 		"name": {

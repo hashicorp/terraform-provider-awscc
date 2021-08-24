@@ -422,7 +422,10 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The number of simultaneous executions to reserve for the function.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(0),
+			},
+			Optional: true,
 		},
 		"role": {
 			// Property: Role
@@ -513,7 +516,10 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
+			Optional: true,
 		},
 		"tracing_config": {
 			// Property: TracingConfig

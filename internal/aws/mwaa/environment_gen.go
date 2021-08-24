@@ -450,7 +450,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Maximum worker compute units.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
+			Optional: true,
 		},
 		"min_workers": {
 			// Property: MinWorkers
@@ -462,7 +465,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Minimum worker compute units.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
+			Optional: true,
 		},
 		"name": {
 			// Property: Name
@@ -616,7 +622,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Scheduler compute units.",
 			Type:        types.NumberType,
-			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
+			Optional: true,
 		},
 		"source_bucket_arn": {
 			// Property: SourceBucketArn

@@ -77,12 +77,18 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"read_capacity_units": {
 									// Property: ReadCapacityUnits
-									Type:     types.NumberType,
+									Type: types.NumberType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(1),
+									},
 									Required: true,
 								},
 								"write_capacity_units": {
 									// Property: WriteCapacityUnits
-									Type:     types.NumberType,
+									Type: types.NumberType,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(1),
+									},
 									Required: true,
 								},
 							},

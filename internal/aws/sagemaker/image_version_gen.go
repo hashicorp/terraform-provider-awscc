@@ -120,7 +120,10 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The version number of the image version.",
 			Type:        types.NumberType,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
+			Computed: true,
 		},
 	}
 

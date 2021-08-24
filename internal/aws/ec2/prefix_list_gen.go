@@ -109,7 +109,10 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Max Entries of Prefix List.",
 			Type:        types.NumberType,
-			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
+			Required: true,
 		},
 		"owner_id": {
 			// Property: OwnerId

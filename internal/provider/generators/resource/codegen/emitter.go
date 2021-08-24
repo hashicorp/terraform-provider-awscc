@@ -92,6 +92,13 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 	case cfschema.PropertyTypeInteger:
 		e.printf("Type:types.NumberType,\n")
 
+		if property.Minimum == nil && property.Maximum != nil {
+			return 0, fmt.Errorf("%s has Maximum but no Minimum", strings.Join(path, "/"))
+		}
+
+		if property.Minimum != nil && property.Maximum == nil {
+			validators = append(validators, fmt.Sprintf("validate.IntAtLeast(%d)", *property.Minimum))
+		}
 		if property.Minimum != nil && property.Maximum != nil {
 			validators = append(validators, fmt.Sprintf("validate.IntBetween(%d,%d)", *property.Minimum, *property.Maximum))
 		}

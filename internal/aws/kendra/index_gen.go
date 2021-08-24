@@ -61,12 +61,18 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"query_capacity_units": {
 						// Property: QueryCapacityUnits
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(0),
+						},
 						Required: true,
 					},
 					"storage_capacity_units": {
 						// Property: StorageCapacityUnits
-						Type:     types.NumberType,
+						Type: types.NumberType,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(0),
+						},
 						Required: true,
 					},
 				},

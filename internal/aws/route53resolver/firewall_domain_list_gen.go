@@ -81,7 +81,10 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "Count",
 			Type:        types.NumberType,
-			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(0),
+			},
+			Computed: true,
 		},
 		"domain_file_url": {
 			// Property: DomainFileUrl

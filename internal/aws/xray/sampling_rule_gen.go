@@ -178,7 +178,10 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ReservoirSize
 						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(0),
+						},
+						Optional: true,
 					},
 					"resource_arn": {
 						// Property: ResourceARN
@@ -235,7 +238,10 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Version
 						Description: "The version of the sampling rule format (1)",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(1),
+						},
+						Optional: true,
 					},
 				},
 			),
@@ -399,7 +405,10 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ReservoirSize
 									Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 									Type:        types.NumberType,
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(0),
+									},
+									Optional: true,
 								},
 								"resource_arn": {
 									// Property: ResourceARN
@@ -456,7 +465,10 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Version
 									Description: "The version of the sampling rule format (1)",
 									Type:        types.NumberType,
-									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(1),
+									},
+									Optional: true,
 								},
 							},
 						),
@@ -589,7 +601,10 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ReservoirSize
 						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(0),
+						},
+						Optional: true,
 					},
 					"resource_arn": {
 						// Property: ResourceARN

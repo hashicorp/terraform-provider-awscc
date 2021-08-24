@@ -314,7 +314,10 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: BytesPerSecond
 						Description: "A value that limits the bandwidth used by AWS DataSync.",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(-1),
+						},
+						Optional: true,
 					},
 					"gid": {
 						// Property: Gid

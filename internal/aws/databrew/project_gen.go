@@ -115,7 +115,10 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Size
 						Description: "Sample size",
 						Type:        types.NumberType,
-						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(1),
+						},
+						Optional: true,
 					},
 					"type": {
 						// Property: Type
