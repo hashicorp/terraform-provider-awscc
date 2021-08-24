@@ -93,9 +93,6 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The Amazon Resource Name (ARN) of the location that is created.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
-			},
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -109,9 +106,6 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The URL of the object storage location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 4356),
-			},
 		},
 		"secret_key": {
 			// Property: SecretKey

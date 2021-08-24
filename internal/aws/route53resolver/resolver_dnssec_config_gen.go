@@ -35,9 +35,6 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "Id",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 64),
-			},
 		},
 		"owner_id": {
 			// Property: OwnerId
@@ -51,9 +48,6 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "AccountId",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(12, 32),
-			},
 		},
 		"resource_id": {
 			// Property: ResourceId

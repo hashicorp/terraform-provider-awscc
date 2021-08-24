@@ -32,9 +32,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
-			},
 		},
 		"data_source_configuration": {
 			// Property: DataSourceConfiguration
@@ -2869,9 +2866,6 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "ID of data source",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 100),
-			},
 		},
 		"index_id": {
 			// Property: IndexId

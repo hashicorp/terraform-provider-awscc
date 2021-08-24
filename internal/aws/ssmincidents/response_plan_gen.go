@@ -206,9 +206,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the response plan.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
-			},
 		},
 		"chat_channel": {
 			// Property: ChatChannel

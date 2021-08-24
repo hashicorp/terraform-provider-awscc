@@ -35,9 +35,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the repository.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 2048),
-			},
 		},
 		"description": {
 			// Property: Description
@@ -112,9 +109,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the repository. This is used for GetAtt",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(2, 100),
-			},
 		},
 		"permissions_policy_document": {
 			// Property: PermissionsPolicyDocument

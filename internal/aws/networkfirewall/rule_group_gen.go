@@ -929,9 +929,6 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-			},
 		},
 		"rule_group_id": {
 			// Property: RuleGroupId
@@ -944,9 +941,6 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(36, 36),
-			},
 		},
 		"rule_group_name": {
 			// Property: RuleGroupName

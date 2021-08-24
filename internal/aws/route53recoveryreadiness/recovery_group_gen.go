@@ -55,9 +55,6 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "A collection of tags associated with a resource.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
-			},
 		},
 		"recovery_group_name": {
 			// Property: RecoveryGroupName

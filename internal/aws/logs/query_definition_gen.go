@@ -70,9 +70,6 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Unique identifier of a query definition",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
-			},
 		},
 		"query_string": {
 			// Property: QueryString

@@ -36,9 +36,6 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The Amazon Resource Name (ARN) of the repository association.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
-			},
 		},
 		"bucket_name": {
 			// Property: BucketName

@@ -36,9 +36,6 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The Amazon Resource Name (ARN) of the AppImageConfig.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-			},
 		},
 		"app_image_config_name": {
 			// Property: AppImageConfigName

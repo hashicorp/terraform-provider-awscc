@@ -50,9 +50,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "Unique identifier for connector profile resources",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 512),
-			},
 		},
 		"connector_profile_config": {
 			// Property: ConnectorProfileConfig
@@ -1475,9 +1472,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "A unique Arn for Connector-Profile resource",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 512),
-			},
 		},
 		"kms_arn": {
 			// Property: KMSArn

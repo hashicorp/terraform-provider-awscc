@@ -32,9 +32,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
-			},
 		},
 		"capacity_units": {
 			// Property: CapacityUnits
@@ -324,9 +321,6 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Unique ID of index",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(36, 36),
-			},
 		},
 		"name": {
 			// Property: Name

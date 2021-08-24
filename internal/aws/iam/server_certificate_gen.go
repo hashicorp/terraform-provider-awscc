@@ -35,9 +35,6 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "Amazon Resource Name (ARN) of the server certificate",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1600),
-			},
 		},
 		"certificate_body": {
 			// Property: CertificateBody

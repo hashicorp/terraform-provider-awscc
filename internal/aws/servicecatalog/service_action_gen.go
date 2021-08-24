@@ -120,9 +120,6 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 100),
-			},
 		},
 		"name": {
 			// Property: Name

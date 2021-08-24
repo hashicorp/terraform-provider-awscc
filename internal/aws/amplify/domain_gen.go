@@ -49,9 +49,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
-			},
 		},
 		"auto_sub_domain_creation_patterns": {
 			// Property: AutoSubDomainCreationPatterns
@@ -92,9 +89,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
-			},
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -138,9 +132,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
-			},
 		},
 		"sub_domain_settings": {
 			// Property: SubDomainSettings

@@ -36,9 +36,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the application.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1600),
-			},
 		},
 		"application_creation_date": {
 			// Property: ApplicationCreationDate
@@ -81,9 +78,6 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the application.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(36, 36),
-			},
 		},
 		"application_last_update_date": {
 			// Property: ApplicationLastUpdateDate

@@ -36,9 +36,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the  connection. The ARN is used as the connection reference when the connection is shared between AWS services.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
-			},
 		},
 		"connection_name": {
 			// Property: ConnectionName
@@ -100,9 +97,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(12, 12),
-			},
 		},
 		"provider_type": {
 			// Property: ProviderType

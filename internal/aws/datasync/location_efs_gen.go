@@ -111,9 +111,6 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
-			},
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -127,9 +124,6 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The URL of the EFS location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 4356),
-			},
 		},
 		"subdirectory": {
 			// Property: Subdirectory

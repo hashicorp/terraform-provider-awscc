@@ -35,9 +35,6 @@ func oIDCProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Amazon Resource Name (ARN) of the OIDC provider",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 2048),
-			},
 		},
 		"client_id_list": {
 			// Property: ClientIdList

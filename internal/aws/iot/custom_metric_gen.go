@@ -50,9 +50,6 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Number (ARN) of the custom metric.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 2048),
-			},
 		},
 		"metric_name": {
 			// Property: MetricName

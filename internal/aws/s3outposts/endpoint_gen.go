@@ -53,9 +53,6 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the endpoint.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(5, 500),
-			},
 		},
 		"cidr_block": {
 			// Property: CidrBlock
@@ -69,9 +66,6 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The VPC CIDR committed by this endpoint.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 20),
-			},
 		},
 		"creation_time": {
 			// Property: CreationTime
@@ -112,9 +106,6 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the endpoint.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(5, 500),
-			},
 		},
 		"network_interfaces": {
 			// Property: NetworkInterfaces
@@ -154,9 +145,6 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
 		},
 		"outpost_id": {
 			// Property: OutpostId

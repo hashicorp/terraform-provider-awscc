@@ -937,9 +937,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "ARN identifier of the flow.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 512),
-			},
 		},
 		"flow_name": {
 			// Property: FlowName

@@ -47,9 +47,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the Project.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 2048),
-			},
 		},
 		"project_description": {
 			// Property: ProjectDescription
@@ -81,9 +78,6 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Project Id.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 20),
-			},
 		},
 		"project_name": {
 			// Property: ProjectName

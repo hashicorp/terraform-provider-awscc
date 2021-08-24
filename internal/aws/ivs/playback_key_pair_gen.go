@@ -36,9 +36,6 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Key-pair identifier.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-			},
 		},
 		"fingerprint": {
 			// Property: Fingerprint

@@ -36,9 +36,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The alias of this Access Point. This alias can be used for compatibility purposes with other AWS services and third-party applications.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(3, 63),
-			},
 		},
 		"arn": {
 			// Property: Arn
@@ -81,9 +78,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name you want to assign to this Access Point. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the access point name.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(3, 50),
-			},
 			// Name is a force-new attribute.
 		},
 		"network_origin": {

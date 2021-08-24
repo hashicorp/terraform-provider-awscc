@@ -33,9 +33,6 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1600),
-			},
 		},
 		"create_time": {
 			// Property: CreateTime
@@ -114,9 +111,6 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1600),
-			},
 		},
 		"index_name": {
 			// Property: IndexName

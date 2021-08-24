@@ -35,9 +35,6 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "Arn",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 600),
-			},
 		},
 		"association_count": {
 			// Property: AssociationCount
@@ -62,9 +59,6 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 40),
-			},
 		},
 		"creator_request_id": {
 			// Property: CreatorRequestId
@@ -78,9 +72,6 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-			},
 		},
 		"destination_arn": {
 			// Property: DestinationArn
@@ -112,9 +103,6 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "ResourceId",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 64),
-			},
 		},
 		"name": {
 			// Property: Name
@@ -147,9 +135,6 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "AccountId",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(12, 32),
-			},
 		},
 		"share_status": {
 			// Property: ShareStatus

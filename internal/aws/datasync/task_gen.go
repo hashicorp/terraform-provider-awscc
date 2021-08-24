@@ -72,9 +72,6 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 128),
-			},
 		},
 		"error_code": {
 			// Property: ErrorCode
@@ -463,9 +460,6 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 128),
-			},
 		},
 		"status": {
 			// Property: Status
@@ -560,9 +554,6 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the task.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
-			},
 		},
 	}
 

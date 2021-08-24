@@ -64,9 +64,6 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "ISO 8601 date time with offset format",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 25),
-			},
 		},
 		"name": {
 			// Property: Name

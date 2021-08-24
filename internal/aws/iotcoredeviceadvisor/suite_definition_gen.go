@@ -35,9 +35,6 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The Amazon Resource name for the suite definition.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 2048),
-			},
 		},
 		"suite_definition_configuration": {
 			// Property: SuiteDefinitionConfiguration
@@ -176,9 +173,6 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The unique identifier for the suite definition.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(12, 36),
-			},
 		},
 		"suite_definition_version": {
 			// Property: SuiteDefinitionVersion
@@ -192,9 +186,6 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The suite definition version of a test suite.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(2, 255),
-			},
 		},
 		"tags": {
 			// Property: Tags

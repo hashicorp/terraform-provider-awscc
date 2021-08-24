@@ -62,9 +62,6 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
-			},
 		},
 		"public_version_number": {
 			// Property: PublicVersionNumber
@@ -97,9 +94,6 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 40),
-			},
 		},
 		"type": {
 			// Property: Type

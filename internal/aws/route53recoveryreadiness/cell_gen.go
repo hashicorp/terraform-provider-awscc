@@ -34,9 +34,6 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the cell.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
-			},
 		},
 		"cell_name": {
 			// Property: CellName
@@ -89,9 +86,6 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 5),
-			},
 		},
 		"tags": {
 			// Property: Tags

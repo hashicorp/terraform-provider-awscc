@@ -32,9 +32,6 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 10000),
-			},
 		},
 		"associate_public_ip_address": {
 			// Property: AssociatePublicIpAddress
@@ -140,9 +137,6 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 10000),
-			},
 		},
 		"engine": {
 			// Property: Engine
@@ -246,9 +240,6 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 10000),
-			},
 		},
 		"instance_profile_arn": {
 			// Property: InstanceProfileArn

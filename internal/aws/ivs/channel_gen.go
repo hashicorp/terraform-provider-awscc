@@ -36,9 +36,6 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Channel ARN is automatically generated on creation and assigned as the unique identifier.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-			},
 		},
 		"authorized": {
 			// Property: Authorized

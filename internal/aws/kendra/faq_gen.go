@@ -32,9 +32,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
-			},
 		},
 		"description": {
 			// Property: Description
@@ -84,9 +81,6 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Unique ID of the FAQ",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 100),
-			},
 		},
 		"index_id": {
 			// Property: IndexId

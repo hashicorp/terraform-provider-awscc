@@ -35,9 +35,6 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "Arn",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 600),
-			},
 		},
 		"creation_time": {
 			// Property: CreationTime
@@ -51,9 +48,6 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 40),
-			},
 		},
 		"creator_request_id": {
 			// Property: CreatorRequestId
@@ -67,9 +61,6 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-			},
 		},
 		"firewall_rules": {
 			// Property: FirewallRules
@@ -210,9 +201,6 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "ResourceId",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 64),
-			},
 		},
 		"modification_time": {
 			// Property: ModificationTime
@@ -226,9 +214,6 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 40),
-			},
 		},
 		"name": {
 			// Property: Name
@@ -261,9 +246,6 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "AccountId",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(12, 32),
-			},
 		},
 		"rule_count": {
 			// Property: RuleCount

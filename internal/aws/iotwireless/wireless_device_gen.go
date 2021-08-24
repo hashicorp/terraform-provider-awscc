@@ -75,9 +75,6 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Wireless device Id. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
-			},
 		},
 		"last_uplink_received_at": {
 			// Property: LastUplinkReceivedAt

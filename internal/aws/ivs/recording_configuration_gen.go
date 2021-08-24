@@ -36,9 +36,6 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-			},
 		},
 		"destination_configuration": {
 			// Property: DestinationConfiguration

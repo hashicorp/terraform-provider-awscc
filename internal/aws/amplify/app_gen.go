@@ -49,9 +49,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 20),
-			},
 		},
 		"app_name": {
 			// Property: AppName
@@ -64,9 +61,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-			},
 		},
 		"arn": {
 			// Property: Arn
@@ -78,9 +72,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
-			},
 		},
 		"auto_branch_creation_config": {
 			// Property: AutoBranchCreationConfig
@@ -452,9 +443,6 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
-			},
 		},
 		"description": {
 			// Property: Description

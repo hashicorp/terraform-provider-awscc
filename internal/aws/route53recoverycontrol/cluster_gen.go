@@ -35,9 +35,6 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the cluster.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 2048),
-			},
 		},
 		"cluster_endpoints": {
 			// Property: ClusterEndpoints

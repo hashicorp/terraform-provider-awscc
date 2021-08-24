@@ -295,9 +295,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-			},
 		},
 		"firewall_policy_id": {
 			// Property: FirewallPolicyId
@@ -310,9 +307,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(36, 36),
-			},
 		},
 		"firewall_policy_name": {
 			// Property: FirewallPolicyName

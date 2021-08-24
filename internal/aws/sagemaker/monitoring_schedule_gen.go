@@ -220,9 +220,6 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The Amazon Resource Name (ARN) of the monitoring schedule.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-			},
 		},
 		"monitoring_schedule_config": {
 			// Property: MonitoringScheduleConfig

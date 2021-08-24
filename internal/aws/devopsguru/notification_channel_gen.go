@@ -84,9 +84,6 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Description: "The ID of a notification channel.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(36, 36),
-			},
 		},
 	}
 

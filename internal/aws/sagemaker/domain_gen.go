@@ -465,9 +465,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the created domain.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
-			},
 		},
 		"domain_id": {
 			// Property: DomainId
@@ -481,9 +478,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The domain name.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 63),
-			},
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -513,9 +507,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the Amazon Elastic File System (EFS) managed by this Domain.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 32),
-			},
 		},
 		"kms_key_id": {
 			// Property: KmsKeyId
@@ -546,9 +537,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The SSO managed application instance ID.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
-			},
 		},
 		"subnet_ids": {
 			// Property: SubnetIds
@@ -644,9 +632,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The URL to the created domain.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
-			},
 		},
 		"vpc_id": {
 			// Property: VpcId

@@ -33,9 +33,6 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1600),
-			},
 		},
 		"collection_name": {
 			// Property: CollectionName

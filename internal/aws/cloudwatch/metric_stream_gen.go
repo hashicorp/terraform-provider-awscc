@@ -35,9 +35,6 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Amazon Resource Name of the metric stream.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 2048),
-			},
 		},
 		"creation_date": {
 			// Property: CreationDate
@@ -235,9 +232,6 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Displays the state of the Metric Stream.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-			},
 		},
 		"tags": {
 			// Property: Tags

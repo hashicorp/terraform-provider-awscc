@@ -182,9 +182,6 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Event Source Mapping Identifier UUID.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(36, 36),
-			},
 		},
 		"maximum_batching_window_in_seconds": {
 			// Property: MaximumBatchingWindowInSeconds

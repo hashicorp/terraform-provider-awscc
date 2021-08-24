@@ -46,9 +46,6 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "The Amazon Resource Name (ARN) of job definition.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-			},
 		},
 		"job_definition_name": {
 			// Property: JobDefinitionName

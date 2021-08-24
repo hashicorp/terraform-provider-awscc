@@ -49,9 +49,6 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 2048),
-			},
 		},
 		"grant_name": {
 			// Property: GrantName

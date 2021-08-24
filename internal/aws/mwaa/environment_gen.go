@@ -63,9 +63,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "ARN for the MWAA environment.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1224),
-			},
 		},
 		"dag_s3_path": {
 			// Property: DagS3Path
@@ -296,9 +293,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1224),
-									},
 								},
 								"enabled": {
 									// Property: Enabled
@@ -326,9 +320,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1224),
-									},
 								},
 								"enabled": {
 									// Property: Enabled
@@ -356,9 +347,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1224),
-									},
 								},
 								"enabled": {
 									// Property: Enabled
@@ -386,9 +374,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1224),
-									},
 								},
 								"enabled": {
 									// Property: Enabled
@@ -416,9 +401,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1224),
-									},
 								},
 								"enabled": {
 									// Property: Enabled
@@ -683,9 +665,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Url endpoint for the environment's Airflow UI.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-			},
 		},
 		"weekly_maintenance_window_start": {
 			// Property: WeeklyMaintenanceWindowStart

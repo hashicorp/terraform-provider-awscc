@@ -54,9 +54,6 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The registry path of the container image that contains this image version.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-			},
 		},
 		"image_arn": {
 			// Property: ImageArn
@@ -71,9 +68,6 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the parent image.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-			},
 		},
 		"image_name": {
 			// Property: ImageName
@@ -106,9 +100,6 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the image version.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-			},
 		},
 		"version": {
 			// Property: Version
@@ -121,9 +112,6 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The version number of the image version.",
 			Type:        types.NumberType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.IntAtLeast(1),
-			},
 		},
 	}
 

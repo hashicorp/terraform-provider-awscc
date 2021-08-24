@@ -33,9 +33,6 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 500),
-			},
 		},
 		"query_description": {
 			// Property: QueryDescription
@@ -78,9 +75,6 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 36),
-			},
 		},
 		"query_name": {
 			// Property: QueryName

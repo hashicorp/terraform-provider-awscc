@@ -163,9 +163,6 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Amazon Resource Name (ARN) of the analyzer",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1600),
-			},
 		},
 		"tags": {
 			// Property: Tags

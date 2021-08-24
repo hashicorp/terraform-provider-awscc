@@ -53,9 +53,6 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The DataSync Agent ARN.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
-			},
 		},
 		"agent_name": {
 			// Property: AgentName

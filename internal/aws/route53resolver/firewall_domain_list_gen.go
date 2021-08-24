@@ -35,9 +35,6 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Arn",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 600),
-			},
 		},
 		"creation_time": {
 			// Property: CreationTime
@@ -51,9 +48,6 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 40),
-			},
 		},
 		"creator_request_id": {
 			// Property: CreatorRequestId
@@ -67,9 +61,6 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-			},
 		},
 		"domain_count": {
 			// Property: DomainCount
@@ -82,9 +73,6 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Count",
 			Type:        types.NumberType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.IntAtLeast(0),
-			},
 		},
 		"domain_file_url": {
 			// Property: DomainFileUrl
@@ -137,9 +125,6 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "ResourceId",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 64),
-			},
 		},
 		"managed_owner_name": {
 			// Property: ManagedOwnerName
@@ -153,9 +138,6 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "ServicePrincipal",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 512),
-			},
 		},
 		"modification_time": {
 			// Property: ModificationTime
@@ -169,9 +151,6 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 40),
-			},
 		},
 		"name": {
 			// Property: Name

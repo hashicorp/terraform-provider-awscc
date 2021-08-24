@@ -141,9 +141,6 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the EMR Studio.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(4, 256),
-			},
 		},
 		"subnet_ids": {
 			// Property: SubnetIds
@@ -235,9 +232,6 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The unique Studio access URL.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 4096),
-			},
 		},
 		"user_role": {
 			// Property: UserRole

@@ -84,9 +84,6 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The ARN (Amazon resource name) of the scheduled audit.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 2048),
-			},
 		},
 		"scheduled_audit_name": {
 			// Property: ScheduledAuditName

@@ -47,9 +47,6 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-			},
 		},
 		"notification_arns": {
 			// Property: NotificationArns
@@ -155,9 +152,6 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 50),
-			},
 		},
 		"provisioned_product_name": {
 			// Property: ProvisionedProductName
@@ -366,9 +360,6 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 50),
-			},
 		},
 		"tags": {
 			// Property: Tags

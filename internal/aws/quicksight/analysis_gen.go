@@ -93,9 +93,6 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The ARNs of the datasets of the analysis.</p>",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 100),
-			},
 		},
 		"errors": {
 			// Property: Errors

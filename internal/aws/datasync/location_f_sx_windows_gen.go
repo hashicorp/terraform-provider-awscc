@@ -71,9 +71,6 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
-			},
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -87,9 +84,6 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The URL of the FSx for Windows location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 4356),
-			},
 		},
 		"password": {
 			// Property: Password

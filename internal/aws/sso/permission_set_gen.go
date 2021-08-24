@@ -120,9 +120,6 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The permission set that the policy will be attached to",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(10, 1224),
-			},
 		},
 		"relay_state_type": {
 			// Property: RelayStateType

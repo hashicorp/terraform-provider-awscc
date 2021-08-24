@@ -70,9 +70,6 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The query name.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-			},
 			// Name is a force-new attribute.
 		},
 		"named_query_id": {

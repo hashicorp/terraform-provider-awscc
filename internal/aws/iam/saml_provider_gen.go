@@ -35,9 +35,6 @@ func sAMLProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Amazon Resource Name (ARN) of the SAML provider",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1600),
-			},
 		},
 		"name": {
 			// Property: Name

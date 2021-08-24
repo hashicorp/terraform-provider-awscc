@@ -47,9 +47,6 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The Amazon Resource Name (ARN) of the model package group.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-			},
 		},
 		"model_package_group_description": {
 			// Property: ModelPackageGroupDescription

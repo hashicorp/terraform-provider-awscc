@@ -35,9 +35,6 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 40),
-			},
 		},
 		"error": {
 			// Property: Error
@@ -78,9 +75,6 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Description: "Id",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 64),
-			},
 		},
 		"resolver_query_log_config_id": {
 			// Property: ResolverQueryLogConfigId

@@ -33,9 +33,6 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1600),
-			},
 		},
 		"configuration": {
 			// Property: Configuration
@@ -117,9 +114,6 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1600),
-			},
 		},
 		"map_name": {
 			// Property: MapName

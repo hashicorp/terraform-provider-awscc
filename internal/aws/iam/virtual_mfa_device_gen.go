@@ -51,9 +51,6 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(9, 256),
-			},
 		},
 		"tags": {
 			// Property: Tags

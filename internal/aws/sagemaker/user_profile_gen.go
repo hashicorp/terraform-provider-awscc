@@ -144,9 +144,6 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The user profile Amazon Resource Name (ARN).",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
-			},
 		},
 		"user_profile_name": {
 			// Property: UserProfileName

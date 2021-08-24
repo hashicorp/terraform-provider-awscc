@@ -35,9 +35,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the domain.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 2048),
-			},
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -82,9 +79,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the domain. This field is used for GetAtt",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(2, 50),
-			},
 		},
 		"owner": {
 			// Property: Owner

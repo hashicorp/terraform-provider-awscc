@@ -419,23 +419,30 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 	readOnly := e.CfResource.ReadOnlyProperties.ContainsPath(path)
 	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
 
+	var optional, computed bool
+
 	if required {
 		e.printf("Required:true,\n")
 	} else if !readOnly {
+		optional = true
 		e.printf("Optional:true,\n")
 	}
 
 	if (readOnly || createOnly) && !required {
+		computed = true
 		e.printf("Computed:true,\n")
 	}
 
-	if len(validators) > 0 {
-		features |= UsesValidation
-		e.printf("Validators:[]tfsdk.AttributeValidator{\n")
-		for _, validator := range validators {
-			e.printf("%s,\n", validator)
+	// Don't emit validators for Computed-only attributes.
+	if !computed || optional {
+		if len(validators) > 0 {
+			features |= UsesValidation
+			e.printf("Validators:[]tfsdk.AttributeValidator{\n")
+			for _, validator := range validators {
+				e.printf("%s,\n", validator)
+			}
+			e.printf("},\n")
 		}
-		e.printf("},\n")
 	}
 
 	if createOnly {

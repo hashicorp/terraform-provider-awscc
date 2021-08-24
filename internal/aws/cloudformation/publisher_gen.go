@@ -11,8 +11,6 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -78,9 +76,6 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 40),
-			},
 		},
 		"publisher_profile": {
 			// Property: PublisherProfile
@@ -94,9 +89,6 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The URL to the publisher's profile with the identity provider.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
-			},
 		},
 		"publisher_status": {
 			// Property: PublisherStatus

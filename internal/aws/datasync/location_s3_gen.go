@@ -35,9 +35,6 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket location.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
-			},
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -51,9 +48,6 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The URL of the S3 location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 4356),
-			},
 		},
 		"s3_bucket_arn": {
 			// Property: S3BucketArn

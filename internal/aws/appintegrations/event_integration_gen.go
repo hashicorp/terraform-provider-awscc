@@ -243,9 +243,6 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "The Amazon Resource Name (ARN) of the event integration.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 2048),
-			},
 		},
 		"name": {
 			// Property: Name

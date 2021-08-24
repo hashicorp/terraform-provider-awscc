@@ -73,9 +73,6 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the SMB location that is created.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
-			},
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -89,9 +86,6 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The URL of the SMB location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 4356),
-			},
 		},
 		"mount_options": {
 			// Property: MountOptions

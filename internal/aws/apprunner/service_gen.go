@@ -251,9 +251,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the AppRunner Service.",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1011),
-			},
 		},
 		"service_id": {
 			// Property: ServiceId
@@ -267,9 +264,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The AppRunner Service Id",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(32, 32),
-			},
 		},
 		"service_name": {
 			// Property: ServiceName

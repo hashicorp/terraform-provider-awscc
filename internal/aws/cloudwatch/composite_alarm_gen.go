@@ -116,9 +116,6 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Amazon Resource Name (ARN) of the alarm",
 			Type:        types.StringType,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1600),
-			},
 		},
 		"insufficient_data_actions": {
 			// Property: InsufficientDataActions
