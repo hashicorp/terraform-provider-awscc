@@ -37,6 +37,8 @@ func (v stringLenBetweenValidator) Validate(ctx context.Context, request tfsdk.V
 			Summary:  "Invalid value type",
 			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
 		})
+
+		return
 	}
 
 	if s.Unknown || s.Null {
@@ -96,6 +98,8 @@ func (v stringLenAtLeastValidator) Validate(ctx context.Context, request tfsdk.V
 			Summary:  "Invalid value type",
 			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
 		})
+
+		return
 	}
 
 	if s.Unknown || s.Null {
