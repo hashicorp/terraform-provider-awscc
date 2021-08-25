@@ -109,6 +109,17 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 			}
 		}
 
+		if len(property.Enum) > 0 {
+			sb := strings.Builder{}
+			sb.WriteString("validate.IntInSlice([]int{\n")
+			for _, enum := range property.Enum {
+				sb.WriteString(fmt.Sprintf("%d", int(enum.(float64))))
+				sb.WriteString(",\n")
+			}
+			sb.WriteString("})")
+			validators = append(validators, sb.String())
+		}
+
 	case cfschema.PropertyTypeNumber:
 		e.printf("Type:types.NumberType,\n")
 
@@ -127,6 +138,10 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 			if format := *property.Format; format != "double" {
 				return 0, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
 			}
+		}
+
+		if len(property.Enum) > 0 {
+			return 0, fmt.Errorf("%s has enumerated values", strings.Join(path, "/"))
 		}
 
 	case cfschema.PropertyTypeString:
